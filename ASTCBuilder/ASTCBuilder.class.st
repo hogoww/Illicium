@@ -47,7 +47,7 @@ ASTCBuilder class >> prefix [
 	^'ASTC'
 ]
 
-{ #category : #actions }
+{ #category : #definition }
 ASTCBuilder >> defineClasses [
 	super defineClasses.
 	
@@ -81,7 +81,7 @@ ASTCBuilder >> defineClasses [
 	declarationContainerTrait:=builder newTraitNamed:#DeclarationContainer.
 ]
 
-{ #category : #actions }
+{ #category : #definition }
 ASTCBuilder >> defineHierarchy [ 
 	super defineHierarchy.
 	
@@ -129,7 +129,7 @@ ASTCBuilder >> defineHierarchy [
 	
 ]
 
-{ #category : #actions }
+{ #category : #definition }
 ASTCBuilder >> defineProperties [ 
 	super defineProperties.
 
@@ -143,7 +143,7 @@ ASTCBuilder >> defineProperties [
 	type property: #type type: #String.
 ]
 
-{ #category : #actions }
+{ #category : #definition }
 ASTCBuilder >> defineRelations [ 
 	super defineRelations.
 	
