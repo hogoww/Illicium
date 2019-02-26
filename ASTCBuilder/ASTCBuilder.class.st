@@ -76,9 +76,9 @@ ASTCBuilder >> defineClasses [
 		block:=builder newClassNamed:#Block.
 		
 	"Stateful Trait for multiple aggregation"
-	expressionContainerTrait:=builder newTraitNamed:#ExpressionContainer.
-	statementContainerTrait:=builder newTraitNamed:#StatementContainer.
-	declarationContainerTrait:=builder newTraitNamed:#DeclarationContainer.
+	expressionContainerTrait:=builder newTraitNamed:#ExpressionsContainer.
+	statementContainerTrait:=builder newTraitNamed:#StatementsContainer.
+	declarationContainerTrait:=builder newTraitNamed:#DeclarationsContainer.
 ]
 
 { #category : #definition }

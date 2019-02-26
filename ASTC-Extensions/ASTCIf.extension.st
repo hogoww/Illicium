@@ -34,9 +34,14 @@ ASTCIf class >> if: anExpression then: thenStatement [
 { #category : #'*ASTC-Extensions' }
 ASTCIf >> if: anExpression then: thenStatement else:elseStatement [
 	"initialization for an If object"
-	self predicate:anExpression;
+	
+	expressions add:anExpression.
+	statements add:thenStatement;
+				  add:elseStatement.
+	
+	"self predicate:anExpression;
 		  then:thenStatement;
-		  else:elseStatement.
+		  else:elseStatement."
 	^self
 ]
 
@@ -48,13 +53,9 @@ ASTCIf class >> if: anExpression then: thenStatement else: elseStatement [
 		thenStatement;
 	else
 		elsestatement;"
-	^self basicNew if:anExpression then:thenStatement else:elseStatement.
-]
-
-{ #category : #'*ASTC-Extensions' }
-ASTCIf class >> new [
-	"block to force constructions through the #if:then:else: (and family) message."
-	^self error:'As an If, I need at least an expression and a statement to be instanciated.'.
+	^self new
+		if:anExpression then:thenStatement else:elseStatement;
+		yourself.
 ]
 
 { #category : #'*ASTC-Extensions' }
