@@ -18,9 +18,9 @@ Class {
 		'if',
 		'block',
 		'operator',
-		'expressionContainerTrait',
-		'statementContainerTrait',
-		'declarationContainerTrait'
+		'expressionsContainerTrait',
+		'statementsContainerTrait',
+		'declarationsContainerTrait'
 	],
 	#category : #ASTCBuilder
 }
@@ -76,9 +76,10 @@ ASTCBuilder >> defineClasses [
 		block:=builder newClassNamed:#Block.
 		
 	"Stateful Trait for multiple aggregation"
-	expressionContainerTrait:=builder newTraitNamed:#ExpressionsContainer.
-	statementContainerTrait:=builder newTraitNamed:#StatementsContainer.
-	declarationContainerTrait:=builder newTraitNamed:#DeclarationsContainer.
+	expressionsContainerTrait:=builder newTraitNamed:#ExpressionsContainer.
+	declarationsContainerTrait:=builder newTraitNamed:#DeclarationsContainer.
+	statementsContainerTrait:=builder newTraitNamed:#StatementsContainer.
+
 ]
 
 { #category : #definition }
@@ -111,21 +112,21 @@ ASTCBuilder >> defineHierarchy [
 	"Traits users for multi aggregations (0..*)"
 
 	"Declarations"
-	functionDefinition --|> declarationContainerTrait.
-	block --|> declarationContainerTrait.
+	functionDefinition --|> declarationsContainerTrait.
+	block --|> declarationsContainerTrait.
 	
 	
 	"Statements"
-	block --|> statementContainerTrait.
-	if --|> statementContainerTrait.
+	block --|> statementsContainerTrait.
+	if --|> statementsContainerTrait.
 	
 	"Expressions"
-	if --|> expressionContainerTrait .
-	return  --|> expressionContainerTrait .
-	expressionStatement --|> expressionContainerTrait .
-	functionCall	 --|> expressionContainerTrait .
-	operator --|> expressionContainerTrait .
-	declaration --|> expressionContainerTrait .
+	if --|> expressionsContainerTrait .
+	return  --|> expressionsContainerTrait .
+	expressionStatement --|> expressionsContainerTrait .
+	functionCall	 --|> expressionsContainerTrait .
+	operator --|> expressionsContainerTrait .
+	declaration --|> expressionsContainerTrait .
 	
 ]
 
@@ -151,18 +152,21 @@ ASTCBuilder >> defineRelations [
 	
 	"General"
 	(project property:#compilationUnit) <>-* (compilationUnit property:#project).
-	(compilationUnit property:#functionsDefinitions) - (functionDefinition  property:#compilationUnit).
+	(compilationUnit property:#functionsDefinitions) <>-* (functionDefinition  property:#compilationUnit).
 	
 		"Nodes"
-		(functionDefinition property:#returnType) *- (type property:#functionReturn).
+		(functionDefinition property:#returnType) -* (type property:#functionReturn).
 		(functionDefinition property:#id) - (identifier property:#functionID).
 		(functionDefinition property:#body) <>- (block property:#funcBody).
+
+		(declaration property:#declarationId) - (identifier property:#idDeclaration).
+		(declaration property:#declarationType) - (type property:#declarationType) .
 		
 		"Expressions"
 		(functionCall property:#funcName) - (identifier property:#funcCallId).		
-				
+		
 	"Stateful Traits"
-	(expressionContainerTrait property:#expressions) <>-* (expression property:#container).
-	(statementContainerTrait property:#statements) <>-* (statement property:#container).
-	(declarationContainerTrait property:#declarations) <>-* (declaration property:#container).
+	(expressionsContainerTrait property:#expressions) <>-* (expression property:#container).
+	(statementsContainerTrait property:#statements) <>-* (statement property:#container).
+	(declarationsContainerTrait property:#declarations) <>-* (declaration property:#container).
 ]
