@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCBuilder,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'project',
 		'compilationUnit',
@@ -87,9 +87,9 @@ ASTCBuilder >> defineHierarchy [
 	super defineHierarchy.
 	
 	"Famix system subClasses"
-	project --|> namedEntity.
+	"project --|> namedEntity.
 	compilationUnit --|> namedEntity.
-	node --|> entity.
+	node --|> entity."
 
 		"Node Direct SubClasses"
 		functionDefinition  --|> node.
