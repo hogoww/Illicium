@@ -151,7 +151,7 @@ ASTCBuilder >> defineRelations [
 	(block property:#declarations) <>-* (declaration property:#blockDecl).
 	(block property:#statements) <>-* (statement property:#blockStatement).
 	
-	(declaration property:#id) <>-* (identifier property:#declId).
+	(declaration property:#ids) <>-* (identifier property:#declId).
 	(declaration property:#type) <>- (identifier property:#declType).
 	(declaration property:#init) <>- (identifier property:#declExp).
 
