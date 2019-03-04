@@ -1,8 +1,9 @@
+"
+Meta model old version (with mistakes) for FamixNG builder. See ASTCBuilder for current generation.
+"
 Class {
-	#name : #ASTCBuilder,
+	#name : #ASTCBuilderOld,
 	#superclass : #FamixMetamodelGenerator,
-	#traits : 'MetaModelPrintingTrait',
-	#classTraits : 'MetaModelPrintingTrait classTrait',
 	#instVars : [
 		'project',
 		'compilationUnit',
@@ -24,21 +25,36 @@ Class {
 		'statementsContainerTrait',
 		'declarationsContainerTrait'
 	],
+	#classVars : [
+		'cmpt'
+	],
 	#category : #ASTCBuilder
 }
 
+{ #category : #actions }
+ASTCBuilderOld class >> generate [
+	"syntax sugar to generate the project" 
+	self new generate.
+]
+
+{ #category : #actions }
+ASTCBuilderOld class >> generateClean [ 
+	"syntax sugar to generate the project" 
+	self new generateWithCleaning.
+]
+
 { #category : #accessing }
-ASTCBuilder class >> packageName [
+ASTCBuilderOld class >> packageName [
 	^'ASTC-gen'
 ]
 
 { #category : #accessing }
-ASTCBuilder class >> prefix [
+ASTCBuilderOld class >> prefix [
 	^'ASTC'
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineClasses [
+ASTCBuilderOld >> defineClasses [
 	super defineClasses.
 	
 	"general"
@@ -65,11 +81,10 @@ ASTCBuilder >> defineClasses [
 		if:=builder newClassNamed:#If.
 		block:=builder newClassNamed:#Block.
 		
-
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineHierarchy [ 
+ASTCBuilderOld >> defineHierarchy [
 	super defineHierarchy.
 	
 	"Famix system subClasses"
@@ -88,19 +103,17 @@ ASTCBuilder >> defineHierarchy [
 			literal --|> expression.
 			functionCall  --|> expression.
 			operator --|> expression.
-			identifier --|> expression.
 			
 			"Statement direct SubClasses"
 			expressionStatement --|> statement.
 			return --|> statement.
 			if  --|> statement.
 			block --|> statement.
-			
 
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineProperties [ 
+ASTCBuilderOld >> defineProperties [ 
 	super defineProperties.
 
 	identifier property: #id type: #String.	
@@ -114,41 +127,24 @@ ASTCBuilder >> defineProperties [
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineRelations [ 
+ASTCBuilderOld >> defineRelations [ 
 	super defineRelations.
 	
 	"Not much relationships to define, they mostly go through Traits since they are multiple compostions."
 	
-	self flag:#comment.
-	"Right properties name will be IGNORED."
-	
 	"General"
 	(project property:#compilationUnit) <>-* (compilationUnit property:#project).
-	(compilationUnit property:#functionDefinitions) <>-* (functionDefinition property:#compilationUnit).
-	"Reflexive node"
-	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
-	(node property:#parent) -<> (node property:#parent).	
-
-	"FunctionDefinition"
-	(functionDefinition property:#id) <>- (identifier property:#id).
-	(functionDefinition property:#type) <>- (type property:#type).
-	(functionDefinition property:#declarations) <>-* (declaration property:#funcDeclaration).
-	(functionDefinition property:#body) <>- (block property:#parent).
+	(compilationUnit property:#functionsDefinitions) <>-* (functionDefinition  property:#compilationUnit).
 	
-	(if property:#predicate) <>- (expression property:#predicateIf).
-	(if property:#then) <>- (statement property:#thenStatement).
-	(if property:#else) <>- (statement property:#elseStatement).
-	
-	(return property:#expression) <>- (expression property:#returnExp).
+		"Nodes"
+		(functionDefinition property:#returnType) -* (type property:#functionReturn).
+		(functionDefinition property:#funcId) -* (identifier property:#id).
+		(functionDefinition property:#body) <>- (block property:#funcBody).
 
-	(expressionStatement property:#expression) <>- (expression property:#expStatement).
-
-	(operator property:#operands) <>-* (expression property:#operatorOperand).
-	
-	(functionCall property:#id) <>-* (identifier property:#id).
-	(functionCall property:#arguments) <>-* (expression property:#funcCallArg).
-	(block property:#declarations) <>-* (declaration property:#blockDecl).
-	(block property:#statements) <>-* (statement property:#blockStatement).
-	
-
+		(declaration property:#declarationId) -* (identifier property:#id).
+		(declaration property:#declarationType) - (type property:#declarationType) .
+		
+		"Expressions"
+		(functionCall property:#funcName) - (identifier property:#funcCallId).		
+		
 ]
