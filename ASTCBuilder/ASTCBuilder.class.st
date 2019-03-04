@@ -123,17 +123,17 @@ ASTCBuilder >> defineRelations [
 	"Right properties name will be IGNORED."
 	
 	"General"
-	(project property:#compilationUnit) <>-* (compilationUnit property:#project).
+	(project property:#compilationUnits) <>-* (compilationUnit property:#project).
 	(compilationUnit property:#functionDefinitions) <>-* (functionDefinition property:#compilationUnit).
 	"Reflexive node"
 	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
 	(node property:#parent) -<> (node property:#parent).	
 
 	"FunctionDefinition"
-	(functionDefinition property:#id) <>- (identifier property:#id).
+	(functionDefinition property:#id) <>- (identifier property:#funcDefId).
 	(functionDefinition property:#type) <>- (type property:#type).
 	(functionDefinition property:#declarations) <>-* (declaration property:#funcDeclaration).
-	(functionDefinition property:#body) <>- (block property:#parent).
+	(functionDefinition property:#body) <>- (block property:#funcDefBody).
 	
 	(if property:#predicate) <>- (expression property:#predicateIf).
 	(if property:#then) <>- (statement property:#thenStatement).
@@ -145,10 +145,14 @@ ASTCBuilder >> defineRelations [
 
 	(operator property:#operands) <>-* (expression property:#operatorOperand).
 	
-	(functionCall property:#id) <>-* (identifier property:#id).
+	(functionCall property:#id) <>- (identifier property:#FunCallId).
 	(functionCall property:#arguments) <>-* (expression property:#funcCallArg).
+	
 	(block property:#declarations) <>-* (declaration property:#blockDecl).
 	(block property:#statements) <>-* (statement property:#blockStatement).
 	
+	(declaration property:#id) <>-* (identifier property:#declId).
+	(declaration property:#type) <>- (identifier property:#declType).
+	(declaration property:#init) <>- (identifier property:#declExp).
 
 ]

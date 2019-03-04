@@ -7,7 +7,7 @@ Trait {
 MetaModelPrintingTrait >> toText [
 	| visitor visitableBuilder |
 	visitor:= FmxMBPrintVisitor new.
-	visitableBuilder:=self builder builderWithDefinitions.
+	visitableBuilder:=self class builderWithDefinitions.
 	visitableBuilder acceptVisitor: visitor.
 ]
 
@@ -15,6 +15,7 @@ MetaModelPrintingTrait >> toText [
 MetaModelPrintingTrait >> toUML [
 	| visitor visitableBuilder |
 	visitor:= FmxMBPlantTextVisitor new.
-	visitableBuilder:=self builder builderWithDefinitions.
+	visitableBuilder:=self class builderWithDefinitions.
 	visitableBuilder acceptVisitor: visitor.
+	^visitor contents.
 ]

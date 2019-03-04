@@ -248,5 +248,6 @@ ASTCGenerator >> visitTrait: aTrait [
 
 { #category : #visiting }
 ASTCGenerator >> visitTypedProperty: aTypedProperty [
-	"self add:aTypedProperty."
+	self addProperty:aTypedProperty name isMany: false.
+	
 ]
