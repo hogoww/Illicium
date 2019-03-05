@@ -21,7 +21,7 @@ ASTCGenerator class >> generate [
 	^self new generate.
 ]
 
-{ #category : #visiting }
+{ #category : #'generating-attributes' }
 ASTCGenerator >> addAccessors: aSymbol isMany: aBoolean [
 
 	self addAccessors: aSymbol on:currentClass isMany: aBoolean. 
@@ -29,7 +29,7 @@ ASTCGenerator >> addAccessors: aSymbol isMany: aBoolean [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'generating-attributes' }
 ASTCGenerator >> addAccessors: aSymbol on: aClass isMany: aBoolean [
 	| methodBody propertyName |
 	
@@ -49,51 +49,19 @@ propertyName,': ', (aBoolean ifFalse:['anObject'] ifTrue:['aCollection']),'
 	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
 	
 	aBoolean ifTrue:[
-		self addInitialize: aSymbol .
+		self addPropertyInitialize: aSymbol .
 		].
 ]
 
-{ #category : #visiting }
-ASTCGenerator >> addCurrentClassAbstractVisitor [
-	| methodBody className |
-	className := currentClass asString.
-	methodBody:='visit',className asString,':',(className first isVowel ifTrue:['an']ifFalse:['a']),className.
-	self addMethod: methodBody on: astVisitorClass withProtocol:'visit'.
-]
-
-{ #category : #visiting }
-ASTCGenerator >> addInitialize [
-	self flag:#refactorName.
-	self addInitializeOn:currentClass
+{ #category : #'generation-initialize' }
+ASTCGenerator >> addClassInitialize [
+	self addClassInitializeOn:currentClass
 	
 ]
 
-{ #category : #visiting }
-ASTCGenerator >> addInitialize: aSymbol [ 
-	self flag:#refactorName.
-	self addInitialize:  aSymbol On: currentClass.
-]
-
-{ #category : #visiting }
-ASTCGenerator >> addInitialize: aSymbol On: aClass [
-	| methodBody propertyName |
-	
-	self flag:#refactorName.
-	
-	propertyName:= aSymbol asString.
-	
-	methodBody :=
-('initialize ',propertyName) asCamelCase ,'
-	',propertyName,':=',collectionsType asString,' new.'.
-
-	
-	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
-]
-
-{ #category : #visiting }
-ASTCGenerator >> addInitializeOn: aClass [
+{ #category : #'generation-initialize' }
+ASTCGenerator >> addClassInitializeOn: aClass [
 	| methodBody methodstoLaunch|
-	self flag:#refactorName.
 	methodstoLaunch := aClass selectors select:[:selector| 'initialize*' match:selector ]. 
 	
 	methodstoLaunch ifEmpty:[^self].
@@ -109,13 +77,21 @@ ASTCGenerator >> addInitializeOn: aClass [
 	
 ]
 
-{ #category : #visiting }
+{ #category : #'generation-visitor' }
+ASTCGenerator >> addCurrentClassAbstractVisitor [
+	| methodBody className |
+	className := currentClass asString.
+	methodBody:='visit',className asString,':',(className first isVowel ifTrue:['an']ifFalse:['a']),className.
+	self addMethod: methodBody on: astVisitorClass withProtocol:'visit'.
+]
+
+{ #category : #'creation-system' }
 ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
 
 	aClass compile: aBodyAsString classified: aProtocolAsString
 ]
 
-{ #category : #visiting }
+{ #category : #'generation-initialize' }
 ASTCGenerator >> addProperty: aString isMany: isManyBoolean [
 "	self haltOnCount:24. self flag:#wat."
 	(currentClass allSlots
@@ -128,13 +104,32 @@ ASTCGenerator >> addProperty: aString isMany: isManyBoolean [
 	
 ]
 
-{ #category : #visiting }
+{ #category : #'generation-initialize' }
+ASTCGenerator >> addPropertyInitialize: aPropertyAsSymbol [
+	self addPropertyInitialize:  aPropertyAsSymbol On: currentClass.
+]
+
+{ #category : #'generation-initialize' }
+ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
+	| methodBody propertyName |
+	
+	propertyName:= aSymbol asString.
+	
+	methodBody :=
+'initialize',propertyName asCamelCase ,'
+	',propertyName,':=',collectionsType asString,' new.'.
+
+	
+	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
+]
+
+{ #category : #'generation-visitor' }
 ASTCGenerator >> addVisitor [
 	self addCurrentClassAbstractVisitor.
 	self addVisitor:currentClass.
 ]
 
-{ #category : #visiting }
+{ #category : #'generation-visitor' }
 ASTCGenerator >> addVisitor:aClass [
 
 	self addMethod:(
@@ -146,7 +141,7 @@ ASTCGenerator >> addVisitor:aClass [
 	
 ]
 
-{ #category : #visiting }
+{ #category : #'generation-visitor' }
 ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolean [
 	| methodBody variableName |
 	self flag:#changeName."change the name of the iterator to feel less generic"
@@ -163,16 +158,15 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
 	
 ]
 
-{ #category : #visiting }
+{ #category : #'generation-visitor' }
 ASTCGenerator >> addWalkingOverride [
 	self addWalkingOverrideFor:currentClass.
 ]
 
-{ #category : #visiting }
+{ #category : #'generation-visitor' }
 ASTCGenerator >> addWalkingOverrideFor: aClass [
 	| methodBody methodstoLaunch pattern className|
 	
-	self flag:#refactorName.
 	className:=aClass asString.
 	pattern:='walk',className,'*'.
 	methodstoLaunch := astVisitorWalkerClass  selectors select:[:selector| pattern match:selector ]. 
@@ -199,7 +193,7 @@ ASTCGenerator >> clean [
 	self removePackageNamed:packageName.
 ]
 
-{ #category : #visiting }
+{ #category : #'creation-system' }
 ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString [
 	^(ShSmalltalkGlobalsEnvironment new classNamed: superclassAsString ifAbsent:Object)
 		subclass: classNameAsSymbol
@@ -247,7 +241,6 @@ ASTCGenerator >> initialize [
 { #category : #initialization }
 ASTCGenerator >> initializeDefault [
 	self flag:#addConfig.
-	self flag:#Fun. "to remove"
 	parentPropertyName:='parent'.
 	collectionsType:=ASTCContainer.
 	
@@ -274,13 +267,13 @@ ASTCGenerator >> packageName: aString [
 	
 ]
 
-{ #category : #visiting }
+{ #category : #accessing }
 ASTCGenerator >> parentPropertyName [
 	^parentPropertyName
 	
 ]
 
-{ #category : #visiting }
+{ #category : #accessing }
 ASTCGenerator >> parentPropertyName: aString [
 	parentPropertyName:=aString.
 	^aString
@@ -319,7 +312,7 @@ ASTCGenerator >> visitClass: aClass [
 	
 	self addCurrentClassAbstractVisitor.
 	self addVisitor.
-	self addInitialize.
+	self addClassInitialize.
 	self addWalkingOverride.
 
 ]
