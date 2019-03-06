@@ -1,4 +1,6 @@
 "
+/!\ In this package until the PR on famix comes in production.
+
 I implement a simple visitor walk of the tree starting in aBuilder.
 
 Use me if you don't want to think about the order the builder should be walked in, by calling my methods whenever you want a node to visit his children.
@@ -13,7 +15,7 @@ visitClass: aClass
 Class {
 	#name : #FmxMBWalkerVisitor,
 	#superclass : #FmxMBVisitor,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : #ASTCBuilder
 }
 
 { #category : #visiting }
