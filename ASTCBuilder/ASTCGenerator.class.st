@@ -51,7 +51,7 @@ ASTCGenerator >> addAccessors: aSymbol isMany: aBoolean isProperty:isPropertyBoo
 
 { #category : #'generating-attributes' }
 ASTCGenerator >> addAccessors: aSymbol on: aClass isMany: isManyBoolean isProperty:isPropertyBoolean [
-	| methodBody propertyName |
+	| methodBody propertyName variableName |
 	
 	propertyName:=aSymbol asString.
 	"getter"
@@ -62,9 +62,16 @@ propertyName,'
 	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
 	
 	"setter"	
+	variableName:=isManyBoolean ifFalse:['anObject'] ifTrue:['aCollection'].
 	methodBody :=
-propertyName,': ', (isManyBoolean ifFalse:['anObject'] ifTrue:['aCollection']),'
-	',propertyName,':=',(isManyBoolean ifFalse:['anObject'] ifTrue:['aCollection']).
+propertyName,': ', variableName,'
+	',propertyName,':=',variableName,'.
+	',((isPropertyBoolean or:['parent' match:propertyName]) ifFalse:[
+		variableName,' parent:self.
+	'
+		]ifTrue:['']
+	),
+	'^',variableName,'.'.
 	
 	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
 	
@@ -115,15 +122,16 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitor [
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	| methodBody |
 	methodBody:=(self visitClassSignatureFor: aClass asString withPrefix: 'visit'),'
-	Transcript cr.
+	stream nextPutAll:''
+''.
 	self printTabCount: currentDepth.
-	Transcript show:''(', (self aClassAsVariable: aClass asString),'''.
+	stream nextPutAll:''(', (self aClassAsVariable: aClass asString),'''.
 	currentDepth:=currentDepth+1.
 	
 	super visit',aClass asString,':', (self aClassAsVariable:aClass asString),'.
 	
 	currentDepth:=currentDepth-1.
-	Transcript show:'')''.
+	stream nextPutAll:'')''.
 '.
 	self addMethod: methodBody on: astPrinterVisitor withProtocol: 'visiting'.	
 	
@@ -133,6 +141,22 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
 
 	aClass compile: aBodyAsString classified: aProtocolAsString
+]
+
+{ #category : #'generation-visitor' }
+ASTCGenerator >> addPrinterVisitorsMethod [
+	self addMethod: 'initialize
+	stream := String new writeStream.
+	currentDepth:=0.' on: astPrinterVisitor withProtocol: 'initialization'.
+	self addMethod: 'printTabCount: aNumber
+		1 to: aNumber do:[:i| stream tab.]' on: astPrinterVisitor withProtocol:'printing'.
+	self addMethod: 'stream
+	^stream' on:astPrinterVisitor  withProtocol: 'accessing'.
+	self addMethod:'printOn:aStream
+	^aStream nextPutAll: self stream contents.' on:astPrinterVisitor withProtocol:'printing'.
+	self addMethod:'toTranscript
+	Transcript show:self ;cr.' on:astPrinterVisitor withProtocol:'printing'.
+	
 ]
 
 { #category : #'generating-attributes' }
@@ -166,7 +190,7 @@ ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 	
 	methodBody :=
 'initialize',propertyName asCamelCase ,'
-	',propertyName,':=',collectionsType asString,' new.'.
+	',propertyName,':=',collectionsType asString,' new parent:self; yourself.'.
 
 	
 	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
@@ -293,12 +317,8 @@ ASTCGenerator >> generateVisitorsClasses [
 
 	previousClassSymbol := classSymbol.
 	classSymbol:=(self prefix,'PrinterVisitor') asSymbol.
-	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth'.
-	self addMethod: 'initialize
-	currentDepth:=0.' on: astPrinterVisitor withProtocol: 'initialization'.
-	#self flag:#refactor."should go through streams"
-	self addMethod: 'printTabCount: aNumber
-		1 to: aNumber do:[:i| Transcript tab.]' on: astPrinterVisitor withProtocol:'printing'.
+	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth stream'.
+	self addPrinterVisitorsMethod.
 	
 ]
 

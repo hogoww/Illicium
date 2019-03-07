@@ -9,12 +9,23 @@ Class {
 }
 
 { #category : #accessing }
+ASTCSmallInteger >> * anotherSmallInteger [
+	|res|
+	res:=ASTCOperator new 
+		symbol:'-';
+		yourself.
+	res operands add:(self myself acceptVisitor: self visitor).
+	res operands add:(anotherSmallInteger acceptVisitor: self visitor).
+	^res.
+		
+]
+
+{ #category : #accessing }
 ASTCSmallInteger >> - anotherSmallInteger [
 	|res|
 	res:=ASTCOperator new 
 		symbol:'-';
 		yourself.
-	self myself crLog; logCr;crLog.
 	res operands add:(self myself acceptVisitor: self visitor).
 	res operands add:(anotherSmallInteger acceptVisitor: self visitor).
 	^res.
@@ -35,7 +46,14 @@ ASTCSmallInteger >> = anotherSmallInteger [
 
 { #category : #accessing }
 ASTCSmallInteger >> doesNotUnderstand: aMessage [
-	Transcript show: self; show: ' didn''t understand : ' ; show: aMessage selector; cr.
+	self flag:#missingArguments.
+	^ASTCFunctionCall new
+		id: (ASTCIdentifier new id: aMessage selector; yourself) ;
+		arguments: (ASTCContainer new);
+		yourself.
+
+	
+	"Transcript show: self; show: ' didn''t understand : ' ; show: aMessage selector; cr."
 ]
 
 { #category : #accessing }
@@ -58,10 +76,10 @@ ASTCSmallInteger >> myself: anObject [
 
 { #category : #accessing }
 ASTCSmallInteger >> printOn: aStream [
-	aStream 	nextPutAll: self class asString; 
-				space;
-				nextPutAll: self myself asString.
-		
+	aStream 	<< self class asString; 
+				<<'(';
+				<< self myself asString;
+				<<')'.
 ]
 
 { #category : #accessing }

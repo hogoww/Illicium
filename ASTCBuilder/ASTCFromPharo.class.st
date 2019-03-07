@@ -38,9 +38,12 @@ ASTCFromPharo >> initialize [
 
 { #category : #visiting }
 ASTCFromPharo >> visitArgumentNode: anArgumentNode [
+	self flag:#todo. "shoulg be a declaration"
 	^ASTCIdentifier new
 			id: anArgumentNode name;
 			yourself.
+			
+		
 ]
 
 { #category : #visiting }
@@ -63,8 +66,10 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
 	^ASTCFunctionDefinition  new
-		id: (ASTCIdentifier new id:(aMethodNode selector));
-		type: (ASTCType new type: ASTCSmallInteger);
+		id: (ASTCIdentifier new id:(aMethodNode selector); 
+										yourself);
+		type: (ASTCType new type: ASTCSmallInteger ;
+								  yourself);
 		body:(self visitNode: aMethodNode body);
 		yourself.
 

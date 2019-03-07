@@ -37,6 +37,7 @@ ASTCContainer >> collection [
 { #category : #initialization }
 ASTCContainer >> collection:aCollection [
 	collection:=aCollection.
+	collection do:[:each | each parent:self.].
 	^aCollection.
 ]
 
