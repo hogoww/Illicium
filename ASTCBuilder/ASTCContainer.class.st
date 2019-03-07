@@ -23,6 +23,13 @@ ASTCContainer >> at: index put: anObject [
 ]
 
 { #category : #initialization }
+ASTCContainer >> atLastPut:anObject [
+	collection atLast:0 put:anObject.
+	anObject parent:self.
+	^anObject.
+]
+
+{ #category : #initialization }
 ASTCContainer >> collection [
 	^collection
 ]
@@ -34,12 +41,16 @@ ASTCContainer >> collection:aCollection [
 ]
 
 { #category : #initialization }
+ASTCContainer >> doesNotUnderstand: aMessage [
+	^aMessage sendTo:collection
+]
+
+{ #category : #initialization }
 ASTCContainer >> initialize [
 	self flag:#modularity.
 	
-	collection:=Array new.
+	collection:=LinkedList new.
 	parent:=nil.
-	
 ]
 
 { #category : #initialization }

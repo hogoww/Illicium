@@ -1,10 +1,14 @@
 Class {
 	#name : #ASTCFromPharo,
 	#superclass : #RBProgramNodeVisitor,
+	#classVars : [
+		'ClassDictionary',
+		'classDictionary'
+	],
 	#category : #ASTCBuilder
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests-manual' }
 ASTCFromPharo class >> factorialRTest [
 	self flag:#transcript.
 	Transcript clear.
@@ -12,15 +16,58 @@ ASTCFromPharo class >> factorialRTest [
 ]
 
 { #category : #visiting }
+ASTCFromPharo >> classDictionary [
+	^ClassDictionary
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> classDictionary:aCollection [
+	ClassDictionary:=aCollection.
+	^aCollection
+]
+
+{ #category : #'reflective operations' }
+ASTCFromPharo >> doesNotUnderstand:aMessage [
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> initialize [
+	ClassDictionary := Dictionary new.
+	ClassDictionary at:'SmallInteger' put: ASTCSmallInteger.
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> visitArgumentNode: anArgumentNode [
+	^ASTCIdentifier new
+			id: anArgumentNode name;
+			yourself.
+]
+
+{ #category : #visiting }
 ASTCFromPharo >> visitLiteralNode: aLiteralNode [
-	aLiteralNode crLog.
+	
+	^ASTCLiteral new
+		value: aLiteralNode value;
+		yourself.	
 ]
 
 { #category : #visiting }
 ASTCFromPharo >> visitMessageNode: aMessageNode [
-	aMessageNode selector perform.
+		^(ClassDictionary at:'SmallInteger') new
+			myself: aMessageNode receiver;
+			visitor: self;
+			perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
+	
+]
 
-	super visitMessageNode: aMessageNode.
+{ #category : #visiting }
+ASTCFromPharo >> visitMethodNode: aMethodNode [
+	^ASTCFunctionDefinition  new
+		id: (ASTCIdentifier new id:(aMethodNode selector));
+		type: (ASTCType new type: ASTCSmallInteger);
+		body:(self visitNode: aMethodNode body);
+		yourself.
+
 ]
 
 { #category : #visiting }
@@ -29,4 +76,14 @@ ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 	methodAST:=(aClass compiledMethodAt:aSelector) ast.
 	^methodAST acceptVisitor: self.
 	
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> visitSequenceNode: aSequenceNode [
+	| res |
+	res:=ASTCBlock new.
+	
+	aSequenceNode statements do: [:each | res statements add: (self visitNode: each)].
+
+	^res.
 ]

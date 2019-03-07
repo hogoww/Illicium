@@ -12,7 +12,8 @@ Class {
 		'astVisitorClass',
 		'collectionsType',
 		'astWalkerVisitorClass',
-		'astPrinterVisitor'
+		'astPrinterVisitor',
+		'classDictionary'
 	],
 	#category : #ASTCBuilder
 }
@@ -36,20 +37,20 @@ ASTCGenerator >> addAcceptMethodOn:aClass [
 	aVisitor visit',currentClass asString,':self.'
 		)
 		on: aClass
-		withProtocol:'visit'.
+		withProtocol:'visiting'.
 	
 ]
 
 { #category : #'generating-attributes' }
-ASTCGenerator >> addAccessors: aSymbol isMany: aBoolean [
+ASTCGenerator >> addAccessors: aSymbol isMany: aBoolean isProperty:isPropertyBoolean [
 
-	self addAccessors: aSymbol on:currentClass isMany: aBoolean. 
+	self addAccessors: aSymbol on:currentClass isMany: aBoolean isProperty:isPropertyBoolean. 
 	
 
 ]
 
 { #category : #'generating-attributes' }
-ASTCGenerator >> addAccessors: aSymbol on: aClass isMany: aBoolean [
+ASTCGenerator >> addAccessors: aSymbol on: aClass isMany: isManyBoolean isProperty:isPropertyBoolean [
 	| methodBody propertyName |
 	
 	propertyName:=aSymbol asString.
@@ -62,12 +63,12 @@ propertyName,'
 	
 	"setter"	
 	methodBody :=
-propertyName,': ', (aBoolean ifFalse:['anObject'] ifTrue:['aCollection']),'
-	',propertyName,':=',(aBoolean ifFalse:['anObject'] ifTrue:['aCollection']).
+propertyName,': ', (isManyBoolean ifFalse:['anObject'] ifTrue:['aCollection']),'
+	',propertyName,':=',(isManyBoolean ifFalse:['anObject'] ifTrue:['aCollection']).
 	
 	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
 	
-	aBoolean ifTrue:[
+	isManyBoolean ifTrue:[
 		self addPropertyInitialize: aSymbol .
 		].
 ]
@@ -100,7 +101,7 @@ ASTCGenerator >> addClassInitializeOn: aClass [
 ASTCGenerator >> addCurrentClassVisitToAbstractVisitor [
 	^self addMethod: (self visitClassSignatureFor: currentClass asString withPrefix: 'visit' ) 
 		  on: astVisitorClass 
-		  withProtocol:'visit'.
+		  withProtocol:'visiting'
 ]
 
 { #category : #'generation-visitor' }
@@ -114,16 +115,17 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitor [
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	| methodBody |
 	methodBody:=(self visitClassSignatureFor: aClass asString withPrefix: 'visit'),'
-	| resString |
-	resString:=$(,',aClass asString,'.
+	Transcript cr.
+	self printTabCount: currentDepth.
+	Transcript show:''(', (self aClassAsVariable: aClass asString),'''.
 	currentDepth:=currentDepth+1.
-	resString:=resString,super visit',aClass asString,':', (self aClassAsVariable:aClass asString),'.
-	currentDepth:=currentDepth-1.
-	resString:=resString,$).
-	^resString
-'.
-	self addMethod: methodBody on: astPrinterVisitor withProtocol: 'visit'.
 	
+	super visit',aClass asString,':', (self aClassAsVariable:aClass asString),'.
+	
+	currentDepth:=currentDepth-1.
+	Transcript show:'')''.
+'.
+	self addMethod: methodBody on: astPrinterVisitor withProtocol: 'visiting'.	
 	
 ]
 
@@ -133,17 +135,22 @@ ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsSt
 	aClass compile: aBodyAsString classified: aProtocolAsString
 ]
 
-{ #category : #'generation-initialize' }
+{ #category : #'generating-attributes' }
 ASTCGenerator >> addProperty: aString isMany: isManyBoolean [
-"	self haltOnCount:24. self flag:#wat."
+	self addProperty:aString isMany: isManyBoolean isProperty:false.
+	
+]
+
+{ #category : #'generating-attributes' }
+ASTCGenerator >> addProperty: aString isMany: isManyBoolean isProperty:isPropertyBoolean [
 	(currentClass allSlots
 		anySatisfy: [ :each | each name = aString ])
 		ifTrue: [ ^ self ].	"we check if the slot already exists"
 
 	currentClass addInstVarNamed: aString.
-	self addAccessors: aString isMany: isManyBoolean.
-	self addWalkerProperty:aString for:currentClass isMany: isManyBoolean.
-	
+
+	self addAccessors: aString isMany: isManyBoolean isProperty:isPropertyBoolean.
+	self addWalkerProperty: aString for: currentClass  isMany: isManyBoolean isProperty:isPropertyBoolean
 ]
 
 { #category : #'generation-initialize' }
@@ -172,16 +179,43 @@ ASTCGenerator >> addVisitor [
 ]
 
 { #category : #'generation-visitor' }
-ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolean [
+ASTCGenerator >> addWalkerMethodFor: aClass [ 
+	| methodBody methodstoCall pattern className|
+	
+	className:=aClass asString.
+	pattern:='walk',className,'*'.
+	methodstoCall := astWalkerVisitorClass selectors select:[:selector| pattern match:selector ]. 
+	
+	methodstoCall ifEmpty:[^self].
+
+	methodBody :=String streamContents: [:s | 
+		s nextPutAll:(self visitClassSignatureFor: className withPrefix:'walk'); nextPutAll:'
+	'.
+		methodstoCall do: [:method |
+			s nextPutAll: 'self ';
+			  nextPutAll:method;
+			  nextPutAll: (self aClassAsVariable: aClass asString);
+			nextPutAll:'.
+	'.] 
+	].
+	
+	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visiting'.
+]
+
+{ #category : #'generation-visitor' }
+ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolean isProperty: isPropertyBoolean [
 	| methodBody className |
 	self flag:#changeName."change the name of the iterator to feel less generic"
-
-	className:=aClass asString.
-	methodBody:=(self visitClassSignatureFor: className withPrefix: 'walk'),'
-	',(self aClassAsVariable: className),' ',aPropertyName.
 	
-	methodBody:=methodBody,(isManyBoolean ifTrue:[' do:[:child| child acceptVisitor:self].']
+	className:=aClass asString.
+	methodBody:='walk',className,aPropertyName capitalized,':',(self aClassAsVariable:className),'
+  '.
+
+	isPropertyBoolean ifFalse:[
+		methodBody:=methodBody,'^',(self aClassAsVariable: className),' ',aPropertyName.
+		methodBody:=methodBody,(isManyBoolean ifTrue:[' do:[:child| child acceptVisitor:self].']
 				     ifFalse:[' acceptVisitor:self.']).
+				].
 	
 	self addMethod: methodBody on: astWalkerVisitorClass withProtocol: 'walking'
 	
@@ -194,26 +228,22 @@ ASTCGenerator >> addWalkingOverride [
 
 { #category : #'generation-visitor' }
 ASTCGenerator >> addWalkingOverrideFor: aClass [
-	| methodBody methodstoCall pattern className|
+	| methodBody className|
 	
 	className:=aClass asString.
-	pattern:='walk',className,'*'.
-	methodstoCall := astWalkerVisitorClass  selectors select:[:selector| pattern match:selector ]. 
-	
-	methodstoCall ifEmpty:[^self].
 
 	methodBody :=String streamContents: [:s | 
 		s nextPutAll:(self visitClassSignatureFor: className withPrefix:'visit'); nextPutAll:'
-'.
-		methodstoCall do: [:method |
-			s nextPutAll: 'self ';
-			  nextPutAll:method;
-			  nextPutAll: (self aClassAsVariable: aClass asString);
+	'.
+		s 	nextPutAll:'self walk';
+			nextPutAll:className;
+			nextPutAll:': ';
+			nextPutAll: (self aClassAsVariable: className);
 			nextPutAll:'.
-' ] 
+			'.
 	].
 	
-	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visit'.
+	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visiting'.
 ]
 
 { #category : #actions }
@@ -264,7 +294,12 @@ ASTCGenerator >> generateVisitorsClasses [
 	previousClassSymbol := classSymbol.
 	classSymbol:=(self prefix,'PrinterVisitor') asSymbol.
 	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth'.
-
+	self addMethod: 'initialize
+	currentDepth:=0.' on: astPrinterVisitor withProtocol: 'initialization'.
+	#self flag:#refactor."should go through streams"
+	self addMethod: 'printTabCount: aNumber
+		1 to: aNumber do:[:i| Transcript tab.]' on: astPrinterVisitor withProtocol:'printing'.
+	
 ]
 
 { #category : #initialization }
@@ -283,9 +318,6 @@ ASTCGenerator >> initialize [
 	builder:=builderClass builderWithDefinitions.	
 	prefix:= builderClass prefix.
 	packageName:=builderClass packageName.
-
-	
-	
 ]
 
 { #category : #initialization }
@@ -363,6 +395,7 @@ ASTCGenerator >> visitClass: aClass [
 	self addCurrentClassVisitToAbstractVisitor.
 	self addVisitor.
 	self addClassInitialize.
+	self addWalkerMethodFor: currentClass.
 	self addWalkingOverride.
 	self addCurrentClassVisitToPrinterVisitor.
 
@@ -406,6 +439,6 @@ ASTCGenerator >> visitRelationSide: aRelationSide [
 
 { #category : #visiting }
 ASTCGenerator >> visitTypedProperty: aTypedProperty [
-	self addProperty:aTypedProperty name isMany: false.
+	self addProperty:aTypedProperty name isMany: false isProperty:true.
 	
 ]
