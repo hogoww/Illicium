@@ -68,10 +68,16 @@ propertyName,'
 propertyName,': ', variableName,'
 	',propertyName,':=',variableName,'.
 	',((isPropertyBoolean or:['parent' match:propertyName]) ifFalse:[
-		variableName,' parent:self.
-	'
-		]ifTrue:['']
-	),
+		(isManyBoolean 
+		ifTrue:[
+			'self ',propertyName, ' do:[:each| each parent:self].
+			'.
+			]
+		ifFalse:[
+			variableName,' parent:self.
+	'	])
+	]ifTrue:['']),
+
 	'^',variableName,'.'.
 	
 	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
@@ -100,7 +106,8 @@ ASTCGenerator >> addClassInitializeOn: aClass [
 	super initialize.
 '.
 		methodstoCall do: [:method | s nextPutAll:'	self ' ;nextPutAll: method; nextPutAll:'.' ] 
-	].
+		separatedBy:[s cr;tab]
+		].
 	
 	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
 	
@@ -238,7 +245,6 @@ ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 	| methodBody propertyName |
 	
 	propertyName:= aSymbol asString.
-	
 	methodBody :=
 'initialize',propertyName asCamelCase ,'
 	',propertyName,':=',collectionsType asString,' new parent:self; yourself.'.

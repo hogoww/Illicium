@@ -12,7 +12,7 @@ Class {
 ASTCSmallInteger >> * anotherSmallInteger [
 	|res|
 	res:=ASTCOperator new 
-		symbol:'-';
+		symbol:'*';
 		yourself.
 	res operands add:(self myself acceptVisitor: self visitor).
 	res operands add:(anotherSmallInteger acceptVisitor: self visitor).
@@ -46,7 +46,7 @@ ASTCSmallInteger >> = anotherSmallInteger [
 
 { #category : #accessing }
 ASTCSmallInteger >> asString [
-	^self myself value.
+	^self myself asString .
 ]
 
 { #category : #accessing }
@@ -66,7 +66,7 @@ ASTCSmallInteger >> ifTrue: trueBlock ifFalse: falseBlock [
 	^ASTCIf new
 		predicate:(self myself acceptVisitor:self visitor);
 		then: (trueBlock acceptVisitor: self visitor);
-		else: (falseBlock acceptVisitor: self visitor)
+		else: (falseBlock acceptVisitor: self visitor);
 		yourself.
 ]
 
@@ -82,9 +82,9 @@ ASTCSmallInteger >> myself: anObject [
 
 { #category : #accessing }
 ASTCSmallInteger >> printOn: aStream [
-	aStream 	<< self class asString; 
-				<<'(';
-				<< self asString;
+	aStream 	<< (self class asString)
+				<<'('
+				<< (self asString)
 				<<')'.
 ]
 

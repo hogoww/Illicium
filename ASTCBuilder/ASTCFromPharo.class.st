@@ -47,8 +47,7 @@ ASTCFromPharo >> visitBlockNode: aBlockNode [
 	| res |
 	res:=ASTCBlock new.
 	
-
-	aBlockNode statements do: [:each | res statements add: (self visitNode: each)].
+	res statements: (aBlockNode statements collect: [:each | self visitNode: each]).
 
 	^res.
 ]
@@ -63,10 +62,10 @@ ASTCFromPharo >> visitLiteralNode: aLiteralNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMessageNode: aMessageNode [
-		^(ClassDictionary at:'SmallInteger') new
-			myself: aMessageNode receiver;
-			visitor: self;
-			perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
+	^(ClassDictionary at:'SmallInteger') new
+		myself: aMessageNode receiver;
+		visitor: self;
+		perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 	
 ]
 
@@ -95,8 +94,6 @@ ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	| res |
 	res:=ASTCBlock new.
 	
-
-	aSequenceNode statements do: [:each | res statements add: (self visitNode: each)].
-
+	res statements: (aSequenceNode statements collect: [:each | self visitNode: each]).
 	^res.
 ]
