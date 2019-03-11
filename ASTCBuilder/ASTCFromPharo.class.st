@@ -35,6 +35,7 @@ ASTCFromPharo >> initialize [
 { #category : #visiting }
 ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 	self flag:#todo. "shoulg be a declaration"
+	anArgumentNode parent crLog.
 	^ASTCIdentifier new
 			id: anArgumentNode name;
 			yourself.

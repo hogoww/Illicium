@@ -1,3 +1,36 @@
+"
+I represent a (partial) metamodel for the C language.
+
+I only represent the metamodel, I don't define any behavior on it.
+I use a Trait that offer the possibilities to see me as text (in the Transcript) or as a UML Diagram with PlantUML.
+You could also generate me with the FmxMB classes by using the following message:
+ASTCBuilder new generate. 
+(which won't work in the current state of this program, since we use a slightly different semantic to be used with another generator. See ASTGenerator.)
+
+You can interact with me with a visitor, by subclassing FmxMBVisitor (cf for documentation).
+ 
+These instances variables are there to keep the references to the classes we create along the way, by using FmxNG
+    Instance Variables
+	block:		<Object>
+	compilationUnit:		<Object>
+	declaration:		<Object>
+	declarationsContainerTrait:		<Object>
+	expression:		<Object>
+	expressionStatement:		<Object>
+	expressionsContainerTrait:		<Object>
+	functionCall:		<Object>
+	functionDefinition:		<Object>
+	identifier:		<Object>
+	if:		<Object>
+	literal:		<Object>
+	node:		<Object>
+	operator:		<Object>
+	project:		<Object>
+	return:		<Object>
+	statement:		<Object>
+	statementsContainerTrait:		<Object>
+	type:		<Object>
+"
 Class {
 	#name : #ASTCBuilder,
 	#superclass : #FamixMetamodelGenerator,
@@ -29,16 +62,19 @@ Class {
 
 { #category : #accessing }
 ASTCBuilder class >> packageName [
+	"Override. Define the name of the package"
 	^'ASTC-gen'
 ]
 
 { #category : #accessing }
 ASTCBuilder class >> prefix [
+	"override, defines the prefdix we'll find in front of the generated classes"
 	^'ASTC'
 ]
 
 { #category : #definition }
 ASTCBuilder >> defineClasses [
+	"define the classes that appear in the metamodel, and put them in instances variables, following the FmxNG syntax."
 	super defineClasses.
 	
 	"general"
@@ -72,11 +108,8 @@ ASTCBuilder >> defineClasses [
 ASTCBuilder >> defineHierarchy [ 
 	super defineHierarchy.
 	
-	"Famix system subClasses"
-	"project --|> namedEntity.
-	compilationUnit --|> namedEntity.
-	node --|> entity."
-
+	"Define the inheritance links between the classes defined in #defineClasses, following the FmxNG syntax."
+	
 		"Node Direct SubClasses"
 		functionDefinition  --|> node.
 		expression --|> node.
@@ -102,6 +135,8 @@ ASTCBuilder >> defineHierarchy [
 { #category : #definition }
 ASTCBuilder >> defineProperties [ 
 	super defineProperties.
+	
+	"define the properties of the classes following the FmxNG syntax."
 
 	identifier property: #id type: #String.	
 	operator property: #symbol type: #String.
@@ -116,6 +151,7 @@ ASTCBuilder >> defineProperties [
 { #category : #definition }
 ASTCBuilder >> defineRelations [ 
 	super defineRelations.
+	"Define the relationships between the classes, following the FmxNG syntax."
 	
 	"Not much relationships to define, they mostly go through Traits since they are multiple compostions."
 	

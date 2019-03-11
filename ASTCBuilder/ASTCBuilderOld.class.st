@@ -1,5 +1,7 @@
 "
-Meta model old version (with mistakes) for FamixNG builder. See ASTCBuilder for current generation.
+Meta model old version (which won't be updated) for FamixNG builder. 
+See ASTCBuilder for current generation.
+
 "
 Class {
 	#name : #ASTCBuilderOld,
