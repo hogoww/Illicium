@@ -45,6 +45,11 @@ ASTCSmallInteger >> = anotherSmallInteger [
 ]
 
 { #category : #accessing }
+ASTCSmallInteger >> asString [
+	^self myself value.
+]
+
+{ #category : #accessing }
 ASTCSmallInteger >> doesNotUnderstand: aMessage [
 	self flag:#missingArguments.
 	^ASTCFunctionCall new
@@ -58,10 +63,11 @@ ASTCSmallInteger >> doesNotUnderstand: aMessage [
 
 { #category : #accessing }
 ASTCSmallInteger >> ifTrue: trueBlock ifFalse: falseBlock [
-	^ASTCIf new 
+	^ASTCIf new
 		predicate:(self myself acceptVisitor:self visitor);
 		then: (trueBlock acceptVisitor: self visitor);
-		else: (falseBlock acceptVisitor: self visitor).
+		else: (falseBlock acceptVisitor: self visitor)
+		yourself.
 ]
 
 { #category : #accessing }
@@ -78,7 +84,7 @@ ASTCSmallInteger >> myself: anObject [
 ASTCSmallInteger >> printOn: aStream [
 	aStream 	<< self class asString; 
 				<<'(';
-				<< self myself asString;
+				<< self asString;
 				<<')'.
 ]
 

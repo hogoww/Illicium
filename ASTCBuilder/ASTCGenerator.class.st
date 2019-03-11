@@ -26,10 +26,11 @@ ASTCGenerator class >> generate [
 { #category : #'name-formating' }
 ASTCGenerator >> aClassAsVariable: aClassNameAsString [
 	self flag:#wrongClass."should be on String, But I'm trying to do a self sustaining package."
-	^(aClassNameAsString first isVowel ifTrue:['an']ifFalse:['a']),aClassNameAsString.
+	self flag:#rename.
+	^(aClassNameAsString first isVowel ifTrue:['an']ifFalse:['a']),aClassNameAsString capitalized.
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor' }
 ASTCGenerator >> addAcceptMethodOn:aClass [
 
 	self addMethod:(
@@ -80,15 +81,16 @@ propertyName,': ', variableName,'
 		].
 ]
 
-{ #category : #'generation-initialize' }
+{ #category : #'generating-initialize' }
 ASTCGenerator >> addClassInitialize [
 	self addClassInitializeOn:currentClass
 	
 ]
 
-{ #category : #'generation-initialize' }
+{ #category : #'generating-initialize' }
 ASTCGenerator >> addClassInitializeOn: aClass [
 	| methodBody methodstoCall|
+	self flag:#duplication."duplication with printer/walker"
 	methodstoCall := aClass selectors select:[:selector| 'initialize*' match:selector ]. 
 	
 	methodstoCall ifEmpty:[^self].
@@ -104,28 +106,28 @@ ASTCGenerator >> addClassInitializeOn: aClass [
 	
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor' }
 ASTCGenerator >> addCurrentClassVisitToAbstractVisitor [
-	^self addMethod: (self visitClassSignatureFor: currentClass asString withPrefix: 'visit' ) 
+	^self addMethod: (self methodClassSignatureFor: currentClass asString withPrefix: 'visit' ) 
 		  on: astVisitorClass 
 		  withProtocol:'visiting'
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor-printer' }
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitor [
 	self addCurrentClassVisitToPrinterVisitorOn: currentClass.
 	
-	
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor-printer' }
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	| methodBody |
-	methodBody:=(self visitClassSignatureFor: aClass asString withPrefix: 'visit'),'
+	methodBody:=(self methodClassSignatureFor: aClass asString withPrefix: 'visit'),'
 	stream nextPutAll:''
 ''.
 	self printTabCount: currentDepth.
 	stream nextPutAll:''(', (self aClassAsVariable: aClass asString),'''.
+	stream <<(',(self aClassAsVariable: aClass asString),' printProperties).
 	currentDepth:=currentDepth+1.
 	
 	super visit',aClass asString,':', (self aClassAsVariable:aClass asString),'.
@@ -143,8 +145,54 @@ ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsSt
 	aClass compile: aBodyAsString classified: aProtocolAsString
 ]
 
-{ #category : #'generation-visitor' }
-ASTCGenerator >> addPrinterVisitorsMethod [
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrintPropertiesOn: aClass [
+	| methodBody methodstoCall|
+	self flag:#duplication."duplication with initialize/walker"
+	methodstoCall := aClass selectors select:[:selector| '*AsString' match:selector ]. 
+
+	methodBody:='printProperties
+	'.	
+
+	methodBody := methodBody,
+		(methodstoCall 
+			ifEmpty:['^''''']
+			ifNotEmpty:[	
+			(String streamContents: [:s | 
+		s <<'^String streamContents:[:s |
+	'.
+	methodstoCall do: [:method | s <<'s << '' '' << self ' ;<< method; <<'.'. ] separatedBy:[s cr;tab.].
+	s<<'].'.
+		]).
+	]).
+	
+	self addMethod: methodBody on: aClass withProtocol: 'print'.
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrinterProperties [
+	self addPrintPropertiesOn: currentClass.
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrinterProperty: aProperty [
+	^self addPrinterProperty: aProperty on: currentClass.
+	
+	
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrinterProperty: aProperty on: aClass [
+	| methodBody |
+	methodBody:=
+aProperty,'AsString
+	^',aProperty asString,' asString.'.
+	
+	self addMethod: methodBody on: aClass withProtocol: 'printing'.
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrinterVisitorsMethods [
 	self addMethod: 'initialize
 	stream := String new writeStream.
 	currentDepth:=0.' on: astPrinterVisitor withProtocol: 'initialization'.
@@ -174,15 +222,18 @@ ASTCGenerator >> addProperty: aString isMany: isManyBoolean isProperty:isPropert
 	currentClass addInstVarNamed: aString.
 
 	self addAccessors: aString isMany: isManyBoolean isProperty:isPropertyBoolean.
-	self addWalkerProperty: aString for: currentClass  isMany: isManyBoolean isProperty:isPropertyBoolean
+	self addWalkerProperty: aString for: currentClass  isMany: isManyBoolean isProperty:isPropertyBoolean.
+	isPropertyBoolean ifTrue:[
+		self addPrinterProperty: aString.
+	]
 ]
 
-{ #category : #'generation-initialize' }
+{ #category : #'generating-initialize' }
 ASTCGenerator >> addPropertyInitialize: aPropertyAsSymbol [
 	self addPropertyInitialize:  aPropertyAsSymbol On: currentClass.
 ]
 
-{ #category : #'generation-initialize' }
+{ #category : #'generating-initialize' }
 ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 	| methodBody propertyName |
 	
@@ -196,15 +247,16 @@ ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor' }
 ASTCGenerator >> addVisitor [
 	self addCurrentClassVisitToAbstractVisitor.
 	self addAcceptMethodOn:currentClass.
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerMethodFor: aClass [ 
 	| methodBody methodstoCall pattern className|
+	self flag:#duplication."duplication with initialize/printer"
 	
 	className:=aClass asString.
 	pattern:='walk',className,'*'.
@@ -213,7 +265,7 @@ ASTCGenerator >> addWalkerMethodFor: aClass [
 	methodstoCall ifEmpty:[^self].
 
 	methodBody :=String streamContents: [:s | 
-		s nextPutAll:(self visitClassSignatureFor: className withPrefix:'walk'); nextPutAll:'
+		s nextPutAll:(self methodClassSignatureFor: className withPrefix:'walk'); nextPutAll:'
 	'.
 		methodstoCall do: [:method |
 			s nextPutAll: 'self ';
@@ -226,7 +278,7 @@ ASTCGenerator >> addWalkerMethodFor: aClass [
 	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visiting'.
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolean isProperty: isPropertyBoolean [
 	| methodBody className |
 	self flag:#changeName."change the name of the iterator to feel less generic"
@@ -245,19 +297,19 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
 	
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkingOverride [
 	self addWalkingOverrideFor:currentClass.
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkingOverrideFor: aClass [
 	| methodBody className|
 	
 	className:=aClass asString.
 
 	methodBody :=String streamContents: [:s | 
-		s nextPutAll:(self visitClassSignatureFor: className withPrefix:'visit'); nextPutAll:'
+		s nextPutAll:(self methodClassSignatureFor: className withPrefix:'visit'); nextPutAll:'
 	'.
 		s 	nextPutAll:'self walk';
 			nextPutAll:className;
@@ -303,7 +355,7 @@ ASTCGenerator >> generate [
 	
 ]
 
-{ #category : #'generation-visitor' }
+{ #category : #'generating-visitor' }
 ASTCGenerator >> generateVisitorsClasses [
 	| previousClassSymbol classSymbol |
 	
@@ -318,7 +370,7 @@ ASTCGenerator >> generateVisitorsClasses [
 	previousClassSymbol := classSymbol.
 	classSymbol:=(self prefix,'PrinterVisitor') asSymbol.
 	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth stream'.
-	self addPrinterVisitorsMethod.
+	self addPrinterVisitorsMethods.
 	
 ]
 
@@ -352,6 +404,16 @@ ASTCGenerator >> initializeDefault [
 ASTCGenerator >> makePackage [
 	"Create the package of the builder"
 	self addPackageNamed: packageName.
+]
+
+{ #category : #'name-formating' }
+ASTCGenerator >> methodClassSignatureFor: aClassNameAsString withPrefix: aPrefix [
+	^String streamContents:[:s|
+		s nextPutAll:aPrefix;
+		nextPutAll: aClassNameAsString capitalized;
+		nextPutAll:': ';
+		nextPutAll: (self aClassAsVariable: aClassNameAsString).
+		].
 ]
 
 { #category : #accessing }
@@ -418,17 +480,8 @@ ASTCGenerator >> visitClass: aClass [
 	self addWalkerMethodFor: currentClass.
 	self addWalkingOverride.
 	self addCurrentClassVisitToPrinterVisitor.
+	self addPrinterProperties.
 
-]
-
-{ #category : #'name-formating' }
-ASTCGenerator >> visitClassSignatureFor: aClassNameAsString withPrefix: aPrefix [
-	^String streamContents:[:s|
-		s nextPutAll:aPrefix;
-		nextPutAll: aClassNameAsString;
-		nextPutAll:': ';
-		nextPutAll: (self aClassAsVariable: aClassNameAsString).
-		].
 ]
 
 { #category : #visiting }

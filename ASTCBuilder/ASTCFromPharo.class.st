@@ -26,10 +26,6 @@ ASTCFromPharo >> classDictionary:aCollection [
 	^aCollection
 ]
 
-{ #category : #'reflective operations' }
-ASTCFromPharo >> doesNotUnderstand:aMessage [
-]
-
 { #category : #visiting }
 ASTCFromPharo >> initialize [
 	ClassDictionary := Dictionary new.
@@ -44,6 +40,17 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 			yourself.
 			
 		
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> visitBlockNode: aBlockNode [
+	| res |
+	res:=ASTCBlock new.
+	
+
+	aBlockNode statements do: [:each | res statements add: (self visitNode: each)].
+
+	^res.
 ]
 
 { #category : #visiting }
@@ -88,6 +95,7 @@ ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	| res |
 	res:=ASTCBlock new.
 	
+
 	aSequenceNode statements do: [:each | res statements add: (self visitNode: each)].
 
 	^res.
