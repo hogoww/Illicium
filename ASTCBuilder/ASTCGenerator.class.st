@@ -25,6 +25,9 @@ ASTCGenerator class >> generate [
 
 { #category : #'name-formating' }
 ASTCGenerator >> aClassAsVariable: aClassNameAsString [
+	"returns a string (given as a String) with the following format to the classic arguments names: aClass, anObject [...]"
+	"self new aClassAsVariable: self class asString>>>'anASTCGenerator'" 
+	self flag:#testInComment.
 	self flag:#wrongClass."should be on String, But I'm trying to do a self sustaining package."
 	self flag:#rename.
 	^(aClassNameAsString first isVowel ifTrue:['an']ifFalse:['a']),aClassNameAsString capitalized.
@@ -32,7 +35,7 @@ ASTCGenerator >> aClassAsVariable: aClassNameAsString [
 
 { #category : #'generating-visitor' }
 ASTCGenerator >> addAcceptMethodOn:aClass [
-
+	"Add the #accept method selector on aClass."	
 	self addMethod:(
 'acceptVisitor: aVisitor
 	aVisitor visit',currentClass asString,':self.'
@@ -44,7 +47,7 @@ ASTCGenerator >> addAcceptMethodOn:aClass [
 
 { #category : #'generating-attributes' }
 ASTCGenerator >> addAccessors: aSymbol isMany: aBoolean isProperty:isPropertyBoolean [
-
+	"indirection on the currentClass Instance Variable"
 	self addAccessors: aSymbol on:currentClass isMany: aBoolean isProperty:isPropertyBoolean. 
 	
 
@@ -53,6 +56,12 @@ ASTCGenerator >> addAccessors: aSymbol isMany: aBoolean isProperty:isPropertyBoo
 { #category : #'generating-attributes' }
 ASTCGenerator >> addAccessors: aSymbol on: aClass isMany: isManyBoolean isProperty:isPropertyBoolean [
 	| methodBody propertyName variableName |
+	"Add the accessors for the instance variable aSymbol, on aClass"
+	"The isManyBoolean represent a * side of a relation in the model, and means that we have to put a collection instead of an Object in the setter."
+	self flag:#improvement." isPropertyBoolean ifTrue:[We have a property which, by our semantic means that it's not a type from ASTC. Should be improved ]
+															ifFalse:[It's a link with another class of the ASTC, meaning that we'll have to update the parent of the given property in the setter.]"
+
+	self flag:#FIXNEEDED."aSelector should notify his parent before getting adopted by someone else." 
 	
 	propertyName:=aSymbol asString.
 	"getter"
@@ -89,6 +98,7 @@ propertyName,': ', variableName,'
 
 { #category : #'generating-initialize' }
 ASTCGenerator >> addClassInitialize [
+	"indirection on the currentClass Instance Variable"
 	self addClassInitializeOn:currentClass
 	
 ]
@@ -122,6 +132,7 @@ ASTCGenerator >> addCurrentClassVisitToAbstractVisitor [
 
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitor [
+	"indirection on the currentClass Instance Variable"
 	self addCurrentClassVisitToPrinterVisitorOn: currentClass.
 	
 ]
@@ -148,7 +159,6 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 
 { #category : #'creation-system' }
 ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
-
 	aClass compile: aBodyAsString classified: aProtocolAsString
 ]
 
@@ -178,11 +188,13 @@ ASTCGenerator >> addPrintPropertiesOn: aClass [
 
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrinterProperties [
+	"indirection on the currentClass Instance Variable"
 	self addPrintPropertiesOn: currentClass.
 ]
 
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrinterProperty: aProperty [
+	"indirection on the currentClass Instance Variable"
 	^self addPrinterProperty: aProperty on: currentClass.
 	
 	
@@ -216,6 +228,7 @@ ASTCGenerator >> addPrinterVisitorsMethods [
 
 { #category : #'generating-attributes' }
 ASTCGenerator >> addProperty: aString isMany: isManyBoolean [
+	"shortcut for properties"
 	self addProperty:aString isMany: isManyBoolean isProperty:false.
 	
 ]
@@ -237,6 +250,7 @@ ASTCGenerator >> addProperty: aString isMany: isManyBoolean isProperty:isPropert
 
 { #category : #'generating-initialize' }
 ASTCGenerator >> addPropertyInitialize: aPropertyAsSymbol [
+	"indirection on the currentClass Instance Variable"
 	self addPropertyInitialize:  aPropertyAsSymbol On: currentClass.
 ]
 
@@ -305,6 +319,7 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
 
 { #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkingOverride [
+	"indirection on the currentClass Instance Variable"
 	self addWalkingOverrideFor:currentClass.
 ]
 
@@ -337,6 +352,7 @@ ASTCGenerator >> clean [
 
 { #category : #'creation-system' }
 ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString [
+	"shortcut for classes with no IVs."
 	^self createClass:classNameAsSymbol superclass:superclassAsString withIVs:''.
 ]
 
@@ -439,12 +455,14 @@ ASTCGenerator >> packageName: aString [
 
 { #category : #accessing }
 ASTCGenerator >> parentPropertyName [
+	"simple accessor"
 	^parentPropertyName
 	
 ]
 
 { #category : #accessing }
 ASTCGenerator >> parentPropertyName: aString [
+	"simple Accessor"
 	parentPropertyName:=aString.
 	^aString
 	

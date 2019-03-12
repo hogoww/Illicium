@@ -1,3 +1,29 @@
+"
+I represent a transformer from a Pharo AST to a C AST.
+
+I'm responsible to ouput a correct AST of the C language for an AST of the Pharo language.
+I visit the Pharo AST, and create/fillup classes accordingly.
+/!\
+I need for the C AST classes to be generated already, using ASTCGenerator. Their names are hardcoded for now. I also need to have the ASTC Kernel to be able to translate some functions call, depending on the receiver's type.
+/!\
+
+I interact with the ASTCkernel (directly), as well as with RBAST (via a visitor)
+
+Public API and Key Messages
+
+- visitMethodSelector: aSelector fromClass: aClass - Used to launch the process from a symbol, on aClass. will return an ASTC
+
+run me! 
+ASTCFromPharo factorialRTest.""ctrl+i""
+
+try me in the playground! 
+visitor:=ASTCPrinterVisitor new.""should be generated with the ASTC classes""
+(ASTCFromPharo factorialRTest acceptVisitor: visitor).""fill up the stream""
+visitor toTranscript.""print the stream on the transcript""
+
+ 
+Principle of the translation is to infer the type of the receiver (NOT DONE YET. COMMENT SHOULD BE UPDATED WHEN WE GO FURTHER), and send the message to the corresponding ASTCkernel/userclass. Those will implements all the known special operation (such as #ifTrue:ifFalse:) and do the special operations for those. Other operations will be treated as a simple functionCall, through a #doesNotUnderstand indirection
+"
 Class {
 	#name : #ASTCFromPharo,
 	#superclass : #RBProgramNodeVisitor,
@@ -22,18 +48,23 @@ ASTCFromPharo >> classDictionary [
 
 { #category : #visiting }
 ASTCFromPharo >> classDictionary:aCollection [
+	"accessor"
 	ClassDictionary:=aCollection.
 	^aCollection
 ]
 
 { #category : #visiting }
 ASTCFromPharo >> initialize [
+	"initialize.
+	We fill up the ClassDictionnary with the known possible receivers."
+	self flag:#hardcode."harcoded names, bad"
 	ClassDictionary := Dictionary new.
 	ClassDictionary at:'SmallInteger' put: ASTCSmallInteger.
 ]
 
 { #category : #visiting }
 ASTCFromPharo >> visitArgumentNode: anArgumentNode [
+	self flag:#comment.
 	self flag:#todo. "shoulg be a declaration"
 	anArgumentNode parent crLog.
 	^ASTCIdentifier new
@@ -46,6 +77,7 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 { #category : #visiting }
 ASTCFromPharo >> visitBlockNode: aBlockNode [
 	| res |
+	self flag:#comment.
 	res:=ASTCBlock new.
 	
 	res statements: (aBlockNode statements collect: [:each | self visitNode: each]).
@@ -55,7 +87,7 @@ ASTCFromPharo >> visitBlockNode: aBlockNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitLiteralNode: aLiteralNode [
-	
+	self flag:#comment.
 	^ASTCLiteral new
 		value: aLiteralNode value;
 		yourself.	
@@ -63,6 +95,7 @@ ASTCFromPharo >> visitLiteralNode: aLiteralNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMessageNode: aMessageNode [
+	"We (will) infer the type and redirect the message on the class of the receiver. So far we just forward it to the only known type: SmallInteger. each of them will handle the messages thrown to them."
 	^(ClassDictionary at:'SmallInteger') new
 		myself: aMessageNode receiver;
 		visitor: self;
@@ -72,6 +105,7 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
+	self flag:#comment.
 	^ASTCFunctionDefinition  new
 		id: (ASTCIdentifier new id:(aMethodNode selector); 
 										yourself);
@@ -85,6 +119,7 @@ ASTCFromPharo >> visitMethodNode: aMethodNode [
 { #category : #visiting }
 ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 	| methodAST|
+	"shortcut to visit a selector in a known class."
 	methodAST:=(aClass compiledMethodAt:aSelector) ast.
 	^methodAST acceptVisitor: self.
 	
@@ -93,6 +128,7 @@ ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 { #category : #visiting }
 ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	| res |
+	self flag:#comment.
 	res:=ASTCBlock new.
 	
 	res statements: (aSequenceNode statements collect: [:each | self visitNode: each]).
