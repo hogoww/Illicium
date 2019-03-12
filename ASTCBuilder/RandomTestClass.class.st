@@ -1,3 +1,8 @@
+"
+I am a random test class.
+
+My selectors are used by ASTCFromPharo as toy translations.
+"
 Class {
 	#name : #RandomTestClass,
 	#superclass : #Object,

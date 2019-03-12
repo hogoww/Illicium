@@ -10,38 +10,32 @@ Class {
 
 { #category : #accessing }
 ASTCSmallInteger >> * anotherSmallInteger [
-	|res|
-	res:=ASTCOperator new 
-		symbol:'*';
-		yourself.
-	res operands add:(self myself acceptVisitor: self visitor).
-	res operands add:(anotherSmallInteger acceptVisitor: self visitor).
-	^res.
-		
+
+	^ self newBinaryOperatorNamed: '*' withArgument: anotherSmallInteger
+]
+
+{ #category : #accessing }
+ASTCSmallInteger >> + anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '+' withArgument: anotherSmallInteger
 ]
 
 { #category : #accessing }
 ASTCSmallInteger >> - anotherSmallInteger [
-	|res|
-	res:=ASTCOperator new 
-		symbol:'-';
-		yourself.
-	res operands add:(self myself acceptVisitor: self visitor).
-	res operands add:(anotherSmallInteger acceptVisitor: self visitor).
-	^res.
-		
+
+	^ self newBinaryOperatorNamed: '-' withArgument: anotherSmallInteger
+]
+
+{ #category : #accessing }
+ASTCSmallInteger >> / anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '/' withArgument: anotherSmallInteger
 ]
 
 { #category : #accessing }
 ASTCSmallInteger >> = anotherSmallInteger [
-	|res|
-	res:=ASTCOperator new 
-		symbol:'=';
-		yourself.
-	res operands add:(self myself acceptVisitor: self visitor).
-	res operands add:(anotherSmallInteger acceptVisitor: self visitor).
-	^res.
-		
+	
+	^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
 ]
 
 { #category : #accessing }
@@ -78,6 +72,18 @@ ASTCSmallInteger >> myself [
 { #category : #accessing }
 ASTCSmallInteger >> myself: anObject [
 	myself := anObject
+]
+
+{ #category : #accessing }
+ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
+	|res|
+	res:=ASTCOperator new 
+		symbol: operator;
+		yourself.
+	res operands add:(self myself acceptVisitor: self visitor).
+	res operands add:(anArgument acceptVisitor: self visitor).
+	^res.
+		
 ]
 
 { #category : #accessing }

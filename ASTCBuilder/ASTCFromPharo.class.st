@@ -36,13 +36,15 @@ Class {
 
 { #category : #'tests-manual' }
 ASTCFromPharo class >> factorialRTest [
-	self flag:#transcript.
+	"Shortcut for a test that's used a lot"
+	self flag:#transcriptClear.
 	Transcript clear.
 	^self new visitMethodSelector: #factorialR: fromClass: RandomTestClass .
 ]
 
 { #category : #visiting }
 ASTCFromPharo >> classDictionary [
+	"accessor"
 	^ClassDictionary
 ]
 
@@ -133,4 +135,12 @@ ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	
 	res statements: (aSequenceNode statements collect: [:each | self visitNode: each]).
 	^res.
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> visitVariableNode: aVariableNode [
+	
+	^ ASTCIdentifier new
+		id: aVariableNode name;
+		yourself
 ]

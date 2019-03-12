@@ -105,7 +105,9 @@ ASTCGenerator >> addClassInitialize [
 
 { #category : #'generating-initialize' }
 ASTCGenerator >> addClassInitializeOn: aClass [
-	| methodBody methodstoCall|
+	| methodBody methodstoCall |
+	"generate an initialized that will call every property initializer already on the target class."
+	"The result will be UNORDERED."
 	self flag:#duplication."duplication with printer/walker"
 	methodstoCall := aClass selectors select:[:selector| 'initialize*' match:selector ]. 
 	
@@ -166,6 +168,8 @@ ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsSt
 ASTCGenerator >> addPrintPropertiesOn: aClass [
 	| methodBody methodstoCall|
 	self flag:#duplication."duplication with initialize/walker"
+	"generate an #print that will call every property printer already on the target class."
+	"The result will be UNORDERED."
 	methodstoCall := aClass selectors select:[:selector| '*AsString' match:selector ]. 
 
 	methodBody:='printProperties
@@ -276,6 +280,8 @@ ASTCGenerator >> addVisitor [
 { #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerMethodFor: aClass [ 
 	| methodBody methodstoCall pattern className|
+	"generate a walker that will call every property walker already on the target class."
+	"The result will be UNORDERED."
 	self flag:#duplication."duplication with initialize/printer"
 	
 	className:=aClass asString.
@@ -440,14 +446,14 @@ ASTCGenerator >> methodClassSignatureFor: aClassNameAsString withPrefix: aPrefix
 
 { #category : #accessing }
 ASTCGenerator >> packageName [
-	"Simple accessor"
+	"simple accessor"
 	^packageName
 	
 ]
 
 { #category : #accessing }
 ASTCGenerator >> packageName: aString [
-	"Simple accessor"
+	"simple accessor"
 	packageName:=aString.
 	^aString
 	
@@ -462,7 +468,7 @@ ASTCGenerator >> parentPropertyName [
 
 { #category : #accessing }
 ASTCGenerator >> parentPropertyName: aString [
-	"simple Accessor"
+	"simple accessor"
 	parentPropertyName:=aString.
 	^aString
 	
@@ -470,7 +476,7 @@ ASTCGenerator >> parentPropertyName: aString [
 
 { #category : #accessing }
 ASTCGenerator >> prefix [
-	"Simple accessor"
+	"simple accessor"
 	^prefix
 	
 	
@@ -478,7 +484,7 @@ ASTCGenerator >> prefix [
 
 { #category : #accessing }
 ASTCGenerator >> prefix: aString [
-	"Simple accessor"
+	"simple accessor"
 	prefix:=aString.
 	^aString
 	
