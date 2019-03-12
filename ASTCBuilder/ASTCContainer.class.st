@@ -35,6 +35,12 @@ Class {
 	#category : #ASTCBuilder
 }
 
+{ #category : #comparing }
+ASTCContainer >> = anotherContainer [
+	^ (anotherContainer isKindOf: self class)
+		and:[ self collection = anotherContainer collection]
+]
+
 { #category : #initialization }
 ASTCContainer >> add:anObject [
 	"add an object to the end of the collection, and set it's parent to self."
@@ -78,6 +84,11 @@ ASTCContainer >> doesNotUnderstand: aMessage [
 	"indirection of the message to my collection. Should be removed when the interface will be good enough"
 	self flag:#toRemove.
 	^aMessage sendTo:collection
+]
+
+{ #category : #comparing }
+ASTCContainer >> hash [
+	^ collection hash
 ]
 
 { #category : #initialization }

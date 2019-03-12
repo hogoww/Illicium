@@ -178,6 +178,55 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	
 ]
 
+{ #category : #'generating-equality' }
+ASTCGenerator >> addEqualityMethods [
+
+	| properties |
+	properties := self propertiesOfClass: currentClass.
+	1haltIf: [ currentClass name == #ASTCOperator ].
+	self addEqualsOn: currentClass withPropertiesNamed: properties.
+	self addHashOn: currentClass withPropertiesNamed: properties.
+]
+
+{ #category : #'generating-equality' }
+ASTCGenerator >> addEqualsOn: aClass withPropertiesNamed: properties [
+	| methodBody |
+	
+	methodBody :=String streamContents: [:s | 
+		s << '= anotherNode
+	(anotherNode isKindOf: self class)
+	ifFalse: [ ^ false ].
+'.
+		properties do: [ :each |
+			s << '
+	self ' << each << ' = anotherNode ' << each << '
+		ifFalse: [ ^ false ].
+'  ].
+
+	s << '
+	^ true' ].
+	
+	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
+]
+
+{ #category : #'generating-equality' }
+ASTCGenerator >> addHashOn: aClass withPropertiesNamed: properties [
+	| methodBody |
+	
+	methodBody :=String streamContents: [:s | 
+		s << 'hash
+	| hash |
+	hash := self identityHash.
+'.
+		properties do: [ :each |
+			s << 'hash := hash + self ' << each << '.'  ].
+
+	s << '
+	^ hash' ].
+	
+	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
+]
+
 { #category : #'creation-system' }
 ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
 	aClass compile: aBodyAsString classified: aProtocolAsString
@@ -509,6 +558,14 @@ ASTCGenerator >> prefix: aString [
 	
 ]
 
+{ #category : #'generating-equality' }
+ASTCGenerator >> propertiesOfClass: aClass [
+
+	^ currentClass selectors
+		select: [:selector| 'initialize.+' asRegex matches: selector ]
+		thenCollect: [ :selector | (selector allButFirst: 'initialize' size) uncapitalized ]
+]
+
 { #category : #visiting }
 ASTCGenerator >> visitClass: aClass [
 	"Visit a class, build it, and deploy it on the system."
@@ -531,7 +588,7 @@ ASTCGenerator >> visitClass: aClass [
 	self addCurrentClassVisitToPrinterVisitor.
 	self addPrinterProperties.
 	self addClassTester.
-
+	self addEqualityMethods
 ]
 
 { #category : #visiting }
