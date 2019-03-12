@@ -125,6 +125,25 @@ ASTCGenerator >> addClassInitializeOn: aClass [
 	
 ]
 
+{ #category : #'generating-class-testing' }
+ASTCGenerator >> addClassTester [
+	"indirection on currentClass"
+	self addClassTesterOn: currentClass.
+]
+
+{ #category : #'generating-class-testing' }
+ASTCGenerator >> addClassTesterOn:aClass [
+	| methodBody |	
+		
+	methodBody := String 
+		streamContents: [:s|
+s << 'is' << aClass asString <<'
+	^true.'
+		].
+	
+	self addMethod: methodBody on: aClass withProtocol: 'testing'.
+]
+
 { #category : #'generating-visitor' }
 ASTCGenerator >> addCurrentClassVisitToAbstractVisitor [
 	^self addMethod: (self methodClassSignatureFor: currentClass asString withPrefix: 'visit' ) 
@@ -143,17 +162,17 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitor [
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	| methodBody |
 	methodBody:=(self methodClassSignatureFor: aClass asString withPrefix: 'visit'),'
-	stream nextPutAll:''
+	stream << ''
 ''.
 	self printTabCount: currentDepth.
-	stream nextPutAll:''(', (self aClassAsVariable: aClass asString),'''.
-	stream <<(',(self aClassAsVariable: aClass asString),' printProperties).
-	currentDepth:=currentDepth+1.
+	stream << ''(', (self aClassAsVariable: aClass asString),'''.
+	stream << (',(self aClassAsVariable: aClass asString),' printProperties).
+	currentDepth := currentDepth+1.
 	
 	super visit',aClass asString,':', (self aClassAsVariable:aClass asString),'.
 	
-	currentDepth:=currentDepth-1.
-	stream nextPutAll:'')''.
+	currentDepth := currentDepth-1.
+	stream << '')''.
 '.
 	self addMethod: methodBody on: astPrinterVisitor withProtocol: 'visiting'.	
 	
@@ -511,6 +530,7 @@ ASTCGenerator >> visitClass: aClass [
 	self addWalkingOverride.
 	self addCurrentClassVisitToPrinterVisitor.
 	self addPrinterProperties.
+	self addClassTester.
 
 ]
 
