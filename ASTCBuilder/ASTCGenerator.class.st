@@ -183,7 +183,6 @@ ASTCGenerator >> addEqualityMethods [
 
 	| properties |
 	properties := self propertiesOfClass: currentClass.
-	1haltIf: [ currentClass name == #ASTCOperator ].
 	self addEqualsOn: currentClass withPropertiesNamed: properties.
 	self addHashOn: currentClass withPropertiesNamed: properties.
 ]
@@ -219,12 +218,30 @@ ASTCGenerator >> addHashOn: aClass withPropertiesNamed: properties [
 	hash := self identityHash.
 '.
 		properties do: [ :each |
-			s << 'hash := hash + self ' << each << '.'  ].
+			s << 
+'	hash := hash + self ' << each << '.'  ].
 
 	s << '
 	^ hash' ].
 	
 	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addInspectorHookOnRootNode [
+	| methodBody |
+	self flag:#modularity."should hardcode Node Should be the root of all nodes."
+	methodBody:=
+'gtInspectorASTDumpIn: composite
+	<gtInspectorPresentationOrder: 50>
+	|visitor|
+	^ composite pharoMethod
+		title: [ ''AST Dump'' translated ];
+			display: [ 
+			visitor:=ASTCPrinterVisitor new.
+			self acceptVisitor: visitor.
+			visitor.]'.
+	self addMethod: methodBody on: ASTCNode withProtocol: 'inspector' .
 ]
 
 { #category : #'creation-system' }
@@ -449,6 +466,8 @@ ASTCGenerator >> generate [
 	
 	builder acceptVisitor:self.
 	
+	self flag:#postGen."shouldn't have to do something post generation"
+	self addInspectorHookOnRootNode.
 ]
 
 { #category : #'generating-visitor' }
