@@ -1,0 +1,132 @@
+Class {
+	#name : #ASTCPrettyPrint,
+	#superclass : #ASTCVisitor,
+	#instVars : [
+		'stream',
+		'indentation'
+	],
+	#category : #'ASTC-Extensions-pretty-print'
+}
+
+{ #category : #'as yet unclassified' }
+ASTCPrettyPrint class >> defaultIndentation [
+	^ '    '
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> << chars [
+	stream << chars
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> <<< chars [
+	stream << indentation << chars
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> enterBlock [
+	self indent
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> indent [
+	self indent
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> initialize [
+	stream := String new writeStream.
+	indentation := ''.
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> leaveBlock [
+	self unindent
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> printOn: aStream [
+	^ aStream nextPutAll: self stream contents
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> spaces [
+	self <<< ''
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> stream [
+	^ stream
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> unindent [
+	indentation := indentation allButFirst: (self class defaultIndentation size).
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTBinaryOperator: anOperator [
+	(anOperator operands at: 1) acceptVisitor: self.
+	self << ' ' << anOperator symbol << ' '.
+	(anOperator operands at: 2) acceptVisitor: self
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCBlock: aBlock [
+	self <<< '{' << Character cr.
+	self enterBlock.
+	aBlock statements
+		do: [ :each | 
+			self spaces.
+			each acceptVisitor: self.
+			self << ';' << Character cr ].
+	self leaveBlock.
+	self << '}'
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCIdentifier: anIdentifier [
+	self << anIdentifier id
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCIf: anIf [
+	self << 'if ('.
+	(anIf predicate acceptVisitor: self).
+	self << ') '.
+	(anIf then acceptVisitor: self).
+	self << ' else '.
+	(anIf else acceptVisitor: self).
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCLiteral: aLiteral [
+	self << aLiteral value
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCOperator: anOperator [
+	| nbOperands |
+	nbOperands := anOperator operands size.
+	nbOperands == 1
+		ifTrue: [ ^ self visitASTUnaryOperator: anOperator ].
+	nbOperands == 2
+		ifTrue: [ ^ self visitASTBinaryOperator: anOperator ].
+	nbOperands == 3
+		ifTrue: [ ^ self visitASTTernaryOperator: anOperator ]
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTTernaryOperator: anOperator [
+	(anOperator operands at: 1) acceptVisitor: self.
+	self << ' ' << '?' << ' '.
+	(anOperator operands at: 2) acceptVisitor: self.
+	self << ' ' << ':' << ' '.
+	(anOperator operands at: 3) acceptVisitor: self
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTUnaryOperator: anOperator [
+	self << anOperator symbol.
+	(anOperator operands at: 1) acceptVisitor: self
+]
