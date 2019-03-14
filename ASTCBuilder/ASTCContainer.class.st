@@ -50,6 +50,11 @@ ASTCContainer >> add:anObject [
 ]
 
 { #category : #initialization }
+ASTCContainer >> at: anIndex [
+	^ collection at: anIndex 
+]
+
+{ #category : #initialization }
 ASTCContainer >> at: index put: anObject [
 	"put anobject to the index given in the collection, and set it's parent to self."
 	self collection at:index put:anObject.	
@@ -111,4 +116,9 @@ ASTCContainer >> parent:aNode [
 	"accessor"
 	parent:=aNode.
 	^parent.
+]
+
+{ #category : #initialization }
+ASTCContainer >> size [
+	^ self collection size
 ]
