@@ -8,6 +8,11 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
+{ #category : #converting }
+ASTCSmallInteger class >> asType [
+	^'int'
+]
+
 { #category : #accessing }
 ASTCSmallInteger >> * anotherSmallInteger [
 
@@ -41,6 +46,11 @@ ASTCSmallInteger >> = anotherSmallInteger [
 { #category : #accessing }
 ASTCSmallInteger >> asString [
 	^self myself asString .
+]
+
+{ #category : #'as yet unclassified' }
+ASTCSmallInteger >> asType [
+	^'int'
 ]
 
 { #category : #accessing }

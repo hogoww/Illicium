@@ -104,12 +104,21 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCFunctionCall: aFunctionCall [
+	aFunctionCall id acceptVisitor: self.
+	self << '('.
+	aFunctionCall arguments do:[:each |
+		each acceptVisitor:self.
+		] separatedBy:[ self << ',' ].
+	self << ')'.
+	
 ]
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
 	self flag:#todo."declarations"
-	self << (aFunctionDefinition type type asString) << Character space << aFunctionDefinition id id.
+	aFunctionDefinition type type asType.
+	self << Character space.
+	aFunctionDefinition id acceptVisitor:self.
 	self << $( << ''"declaration here" << $).
 	aFunctionDefinition body acceptVisitor: self.
 	
@@ -117,7 +126,7 @@ ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCIdentifier: anIdentifier [
-	self << anIdentifier id
+	self << anIdentifier id 
 ]
 
 { #category : #accessing }
