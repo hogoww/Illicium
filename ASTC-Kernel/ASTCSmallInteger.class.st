@@ -46,10 +46,9 @@ ASTCSmallInteger >> asString [
 { #category : #accessing }
 ASTCSmallInteger >> doesNotUnderstand: aMessage [
 	self flag:#missingArguments.
-	self halt.
 	^ASTCFunctionCall new
 		id: (ASTCIdentifier new id: aMessage selector; yourself) ;
-		arguments: (ASTCContainer new);
+		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
 		yourself.
 
 	
@@ -89,10 +88,11 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 
 { #category : #accessing }
 ASTCSmallInteger >> printOn: aStream [
-	aStream 	<< (self class asString)
+	aStream << self asString.
+	"aStream 	<< (self class asString)
 				<<'('
 				<< (self asString)
-				<<')'.
+				<<')'."
 ]
 
 { #category : #accessing }

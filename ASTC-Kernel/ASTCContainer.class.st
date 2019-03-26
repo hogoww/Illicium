@@ -32,7 +32,7 @@ Class {
 		'collection',
 		'parent'
 	],
-	#category : #'ASTC-Extensions'
+	#category : #'ASTC-Kernel'
 }
 
 { #category : #comparing }
@@ -121,4 +121,13 @@ ASTCContainer >> parent:aNode [
 { #category : #initialization }
 ASTCContainer >> size [
 	^ self collection size
+]
+
+{ #category : #initialization }
+ASTCContainer >> visitArgs: someArguments with: aVisitor [
+	self collection: 
+		(someArguments collect:[:each| 
+			each acceptVisitor: aVisitor.
+		]).
+	^self
 ]

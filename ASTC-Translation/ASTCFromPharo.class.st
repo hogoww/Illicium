@@ -55,6 +55,17 @@ ASTCFromPharo >> classDictionary:aCollection [
 	^aCollection
 ]
 
+{ #category : #formatting }
+ASTCFromPharo >> formatSelector: aSelector [
+	| functionName | 
+	functionName:=aSelector asString.
+	1 to:functionName size do:[:index | 
+		(functionName at: index)=$: 
+		ifTrue:[ functionName at:index put: Character space]
+		].
+	^functionName asCamelCase 
+]
+
 { #category : #visiting }
 ASTCFromPharo >> initialize [
 	"initialize.
@@ -67,7 +78,6 @@ ASTCFromPharo >> initialize [
 { #category : #visiting }
 ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 	self flag:#comment.
-	self flag:#todo. "shoulg be a declaration"
 	^ASTCIdentifier new
 			id: anArgumentNode name;
 			yourself.
@@ -81,6 +91,7 @@ ASTCFromPharo >> visitBlockNode: aBlockNode [
 	self flag:#comment.
 	res:=ASTCBlock new.
 	
+	res declarations: (aBlockNode arguments collect:[:each | self visitNode: each]).
 	res statements: (aBlockNode statements collect: [:each | self visitNode: each]).
 
 	^res.
@@ -90,7 +101,7 @@ ASTCFromPharo >> visitBlockNode: aBlockNode [
 ASTCFromPharo >> visitLiteralNode: aLiteralNode [
 	self flag:#comment.
 	^ASTCLiteral new
-		value: aLiteralNode value;
+		value: (ASTCSmallInteger new myself:aLiteralNode value;yourself);
 		yourself.	
 ]
 
@@ -107,9 +118,10 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
 	self flag:#comment.
-	self flag:#arguments.
+	self flag:#todo."arguments)"
+	self flag:#type.
 	^ASTCFunctionDefinition new
-		id: (ASTCIdentifier new id:(aMethodNode selector); 
+		id: (ASTCIdentifier new id:( self formatSelector:(aMethodNode selector)); 
 										yourself);
 		type: (ASTCType new type: ASTCSmallInteger ;
 								  yourself);

@@ -10,7 +10,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCPrettyPrint class >> defaultIndentation [
-	^ '    '
+	^ '  '
 ]
 
 { #category : #accessing }
@@ -30,7 +30,9 @@ ASTCPrettyPrint >> enterBlock [
 
 { #category : #accessing }
 ASTCPrettyPrint >> indent [
-	self indent
+	indentation:=indentation , (String streamContents:[:s| 
+		1 to: (self class defaultIndentation size) do:[:i | s << Character space].
+	]).
 ]
 
 { #category : #accessing }
@@ -44,9 +46,17 @@ ASTCPrettyPrint >> leaveBlock [
 	self unindent
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 ASTCPrettyPrint >> printOn: aStream [
-	^ aStream nextPutAll: self stream contents
+	super printOn: aStream.
+	aStream << Character cr.
+	aStream << self.
+	^aStream.
+]
+
+{ #category : #printing }
+ASTCPrettyPrint >> printString [
+	^self stream contents
 ]
 
 { #category : #accessing }
@@ -59,9 +69,14 @@ ASTCPrettyPrint >> stream [
 	^ stream
 ]
 
+{ #category : #printing }
+ASTCPrettyPrint >> toTranscript [
+	Transcript show:self ; cr.
+]
+
 { #category : #accessing }
 ASTCPrettyPrint >> unindent [
-	indentation := indentation allButFirst: (self class defaultIndentation size).
+	indentation := indentation allButLast: (self class defaultIndentation size).
 ]
 
 { #category : #accessing }
@@ -73,7 +88,7 @@ ASTCPrettyPrint >> visitASTBinaryOperator: anOperator [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCBlock: aBlock [
-	self <<< '{' << Character cr.
+	self << '{' << Character cr.
 	self enterBlock.
 	aBlock statements
 		do: [ :each | 
@@ -81,7 +96,23 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 			each acceptVisitor: self.
 			self << ';' << Character cr ].
 	self leaveBlock.
-	self << '}'
+	self spaces.
+	self << '}'.
+
+
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCFunctionCall: aFunctionCall [
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
+	self flag:#todo."declarations"
+	self << (aFunctionDefinition type type asString) << Character space << aFunctionDefinition id id.
+	self << $( << ''"declaration here" << $).
+	aFunctionDefinition body acceptVisitor: self.
+	
 ]
 
 { #category : #accessing }
@@ -101,7 +132,7 @@ ASTCPrettyPrint >> visitASTCIf: anIf [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCLiteral: aLiteral [
-	self << aLiteral value
+	self << aLiteral value asString
 ]
 
 { #category : #accessing }
