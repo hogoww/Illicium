@@ -21,14 +21,39 @@ GenerationTest >> testASTCIdentifier [
 ]
 
 { #category : #tests }
+GenerationTest >> testASTCIf [
+	| astPharo visitor astC expectedC|
+	astPharo := RBParser parseExpression: '1=2 ifTrue:[] ifFalse:[]'.
+	visitor := ASTCFromPharo new.
+	astC := astPharo acceptVisitor: visitor.
+	
+	expectedC := ASTCIf new 
+		predicate: (ASTCOperator new
+			symbol:'=';
+			operands: (ASTCContainer new 
+				add:(ASTCLiteral new value:1 ; yourself);
+				add:(ASTCLiteral new value:2 ; yourself);
+				yourself);
+			yourself);
+		then:(ASTCBlock new);
+		else:(ASTCBlock new);
+		yourself.	
+	
+	self assert: astC isASTCIf.
+	self assert: astC then isASTCBlock.
+	self assert: astC else isASTCBlock.
+	self assert: astC equals: expectedC.
+]
+
+{ #category : #tests }
 GenerationTest >> testASTCOperatorBinary [
 	| astPharo visitor astC expectedC|
-	astPharo := RBParser parseExpression: 'c+6'.
+	astPharo := RBParser parseExpression: 'c=6'.
 	visitor := ASTCFromPharo new.
 	astC := astPharo acceptVisitor: visitor.
 	
 	expectedC := ASTCOperator new
-		symbol:'+';
+		symbol:'==';
 		operands: (ASTCContainer new
 			add:(ASTCIdentifier new id:'c' ; yourself);
 			add:(ASTCLiteral new value:6 ; yourself);
@@ -36,7 +61,7 @@ GenerationTest >> testASTCOperatorBinary [
 		yourself.
 	
 	self assert: astC isASTCOperator.
-	self assert: astC symbol equals: '+'.
+	self assert: astC symbol equals: '=='.
 	self assert: astC operands first id equals: 'c'.
 	self assert: astC operands second value equals: 6.
 	self assert: astC equals: expectedC.

@@ -107,7 +107,8 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
 	self flag:#comment.
-	^ASTCFunctionDefinition  new
+	self flag:#arguments.
+	^ASTCFunctionDefinition new
 		id: (ASTCIdentifier new id:(aMethodNode selector); 
 										yourself);
 		type: (ASTCType new type: ASTCSmallInteger ;
@@ -133,6 +134,7 @@ ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	res:=ASTCBlock new.
 	
 	res statements: (aSequenceNode statements collect: [:each | self visitNode: each]).
+	
 	^res.
 ]
 
