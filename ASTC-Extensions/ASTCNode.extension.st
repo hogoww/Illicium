@@ -11,8 +11,8 @@ ASTCNode >> debugASTCStructure [
 ASTCNode >> isStructuralyValidAST [
 	| validationVisitor |
 	validationVisitor := ASTCValidation new.
-	self acceptVisitor: validationVisitor.
-	^validationVisitor isItValid.
+	^self acceptVisitor: validationVisitor.
+
 ]
 
 { #category : #'*ASTC-Extensions' }

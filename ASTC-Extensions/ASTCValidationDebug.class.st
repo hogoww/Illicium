@@ -147,7 +147,6 @@ ASTCValidationDebug >> visitASTCStatement: anASTCStatement [
 
 { #category : #visiting }
 ASTCValidationDebug >> visitASTCType: anASTCType [
-	self flag:#todo."add Metaclass"
 	self visitASTCNode: anASTCType.
 
 	self assert: anASTCType type isClass.
