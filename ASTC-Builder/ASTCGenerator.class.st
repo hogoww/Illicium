@@ -273,23 +273,6 @@ ASTCGenerator >> addHashOn: aClass withPropertiesNamed: properties [
 	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
 ]
 
-{ #category : #'generating-visitor-printer' }
-ASTCGenerator >> addInspectorHookOnRootNode [
-	| methodBody |
-	self flag:#modularity."should hardcode Node Should be the root of all nodes."
-	methodBody:=
-'gtInspectorASTDumpIn: composite
-	<gtInspectorPresentationOrder: 50>
-	|visitor|
-	^ composite pharoMethod
-		title: [ ''AST Dump'' translated ];
-			display: [ 
-			visitor:=ASTCPrinterVisitor new.
-			self acceptVisitor: visitor.
-			visitor.]'.
-	self addMethod: methodBody on: ASTCNode withProtocol: 'inspector' .
-]
-
 { #category : #'creation-system' }
 ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
 	"Shortcut to a system method, in case it changes."
@@ -432,7 +415,7 @@ ASTCGenerator >> addWalkerMethodFor: aClass [
 	self flag:#duplication."duplication with initialize/printer"
 	
 	className:=aClass asString.
-	pattern:='walk',className,'.*'.
+	pattern:='walk',className,'*'.
 	methodstoCall := astWalkerVisitorClass selectors select:[:selector| pattern match:selector ]. 
 	
 
@@ -532,8 +515,6 @@ ASTCGenerator >> generate [
 	
 	builder acceptVisitor:self.
 	
-	self flag:#postGen."shouldn't have to do something post generation"
-	self addInspectorHookOnRootNode.
 ]
 
 { #category : #'generating-visitor' }
