@@ -68,24 +68,20 @@ ASTCFromPharo >> initialize [
 { #category : #visiting }
 ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 	| argIdentifier |
-	self flag:#type.
-	
-	argIdentifier := ASTCIdentifier new id: anArgumentNode name.
-	
-	^anArgumentNode parent isMethod 
-	ifTrue:[
-			ASTCDeclaration new 
-				ids: argIdentifier;
-				type: ASTCSmallInteger;
-				yourself.
-		]
-	ifFalse:[
-		ASTCIdentifier new
-			id: argIdentifier;
-			yourself.
-		].
-			
-		
+	self flag: #type.
+	argIdentifier := ASTCIdentifier new
+		id: anArgumentNode name;
+		yourself.
+	^ anArgumentNode parent isMethod
+		ifTrue: [ ASTCDeclaration new
+				id: argIdentifier;
+				type:
+					(ASTCType new
+						type: ASTCSmallInteger;
+						yourself);
+				yourself ]
+		ifFalse: [ argIdentifier
+				yourself ]
 ]
 
 { #category : #visiting }
@@ -102,7 +98,6 @@ ASTCFromPharo >> visitBlockNode: aBlockNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitLiteralNode: aLiteralNode [
-	self flag:#comment.
 	^ASTCLiteral new
 		value: (ASTCSmallInteger new myself:aLiteralNode value;yourself);
 		yourself.	

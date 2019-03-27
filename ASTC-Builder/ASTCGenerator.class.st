@@ -266,7 +266,7 @@ ASTCGenerator >> addHashOn: aClass withPropertiesNamed: properties [
 '.
 		properties do: [ :each |
 			s << 
-'	hash := hash + self ' << each << '.'  ].
+'	hash := hash + self ' << each << 'hash.'  ].
 
 	s << '
 	^ hash' ].

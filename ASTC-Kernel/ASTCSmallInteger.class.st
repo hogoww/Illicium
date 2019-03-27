@@ -41,8 +41,11 @@ ASTCSmallInteger >> / anotherSmallInteger [
 
 { #category : #accessing }
 ASTCSmallInteger >> = anotherSmallInteger [
+	visitor class = ASTCFromPharo ifTrue:[
+		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
+		].
 	
-	^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
+	^self myself=anotherSmallInteger 
 ]
 
 { #category : #accessing }

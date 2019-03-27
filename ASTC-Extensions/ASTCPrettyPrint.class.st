@@ -99,17 +99,29 @@ ASTCPrettyPrint >> visitASTBinaryOperator: anOperator [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCBlock: aBlock [
+	self flag:#Declarations.
 	self << '{' << Character cr.
 	self enterBlock.
 	aBlock statements
 		do: [ :each | 
 			each acceptVisitor: self.
-			self << Character cr ].
+			self << $; << Character cr ].
 	self leaveBlock.
 	self spaces.
 	self << '}'.
 
 
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCDeclaration: aDeclaration [
+	aDeclaration type acceptVisitor:self.
+	self << Character space.
+	aDeclaration id acceptVisitor:self.
+	aDeclaration init ifNotNil:[:init| 
+		self << '='.
+		init acceptVisitor:self.
+		].
 ]
 
 { #category : #accessing }
@@ -130,7 +142,7 @@ ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
 	self << Character space.
 	aFunctionDefinition id acceptVisitor:self.
 	self << $(.
-	aFunctionDefinition parameters do:[:each| each acceptVisitor:self].
+	aFunctionDefinition parameters do:[:each| each acceptVisitor:self] separatedBy:[ self << $,].
 	self << $).
 	aFunctionDefinition body acceptVisitor: self.
 	
@@ -172,7 +184,6 @@ ASTCPrettyPrint >> visitASTCOperator: anOperator [
 ASTCPrettyPrint >> visitASTCReturn: aReturn [
 	self <<< 'return '.
 	aReturn expression acceptVisitor: self.
-	self << ';'
 ]
 
 { #category : #accessing }

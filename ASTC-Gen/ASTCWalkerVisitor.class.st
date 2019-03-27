@@ -136,15 +136,15 @@ ASTCWalkerVisitor >> walkASTCCompilationUnitParent:anASTCCompilationUnit [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCDeclaration: anASTCDeclaration [
-	self walkASTCDeclarationIds:anASTCDeclaration.
 	self walkASTCDeclarationInit:anASTCDeclaration.
+	self walkASTCDeclarationId:anASTCDeclaration.
 	self walkASTCDeclarationType:anASTCDeclaration.
 	
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCDeclarationIds:anASTCDeclaration [
-  ^anASTCDeclaration ids do:[:child| child acceptVisitor:self].
+ASTCWalkerVisitor >> walkASTCDeclarationId:anASTCDeclaration [
+  ^anASTCDeclaration id acceptVisitor:self.
 ]
 
 { #category : #walking }

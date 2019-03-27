@@ -56,7 +56,7 @@ GenerationTest >> testASTCOperatorBinary [
 		symbol:'==';
 		operands: (ASTCContainer new
 			add:(ASTCIdentifier new id:'c' ; yourself);
-			add:(ASTCLiteral new value:6 ; yourself);
+			add:(ASTCLiteral new value: (ASTCSmallInteger new myself:6;yourself) ; yourself);
 			yourself);
 		yourself.
 	
@@ -76,5 +76,8 @@ GenerationTest >> testASTCSmallIntegerIsLiteral [
 	
 	self assert: astC isASTCLiteral.
 	self assert: astC value equals: 5.
-	self assert: astC equals: (ASTCLiteral new value:5; yourself).
+	self assert: astC equals: 
+		(ASTCLiteral new value: 
+			(ASTCSmallInteger new myself:5;yourself) ;
+		yourself).
 ]

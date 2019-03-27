@@ -2,7 +2,7 @@ Class {
 	#name : #ASTCDeclaration,
 	#superclass : #ASTCNode,
 	#instVars : [
-		'ids',
+		'id',
 		'type',
 		'init'
 	],
@@ -13,9 +13,6 @@ Class {
 ASTCDeclaration >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
-
-	self ids = anotherNode ids
-		ifFalse: [ ^ false ].
 
 	^ true
 ]
@@ -29,20 +26,20 @@ ASTCDeclaration >> acceptVisitor: aVisitor [
 ASTCDeclaration >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self ids.
+
 	^ hash
 ]
 
 { #category : #accessors }
-ASTCDeclaration >> ids [
-	^ids
+ASTCDeclaration >> id [
+	^id
 ]
 
 { #category : #accessors }
-ASTCDeclaration >> ids: aCollection [
-	ids:=aCollection.
-	self ids do:[:each| each parent:self].
-			^aCollection.
+ASTCDeclaration >> id: anObject [
+	id:=anObject.
+	anObject parent:self.
+	^anObject.
 ]
 
 { #category : #accessors }
@@ -55,17 +52,6 @@ ASTCDeclaration >> init: anObject [
 	init:=anObject.
 	anObject parent:self.
 	^anObject.
-]
-
-{ #category : #initialize }
-ASTCDeclaration >> initialize [
-	super initialize.
-	self initializeIds.
-]
-
-{ #category : #initialize }
-ASTCDeclaration >> initializeIds [
-	ids:=ASTCContainer new parent:self; yourself.
 ]
 
 { #category : #testing }
