@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'id',
 		'type',
-		'declarations',
+		'parameters',
 		'body'
 	],
 	#category : #'ASTC-Gen'
@@ -15,7 +15,7 @@ ASTCFunctionDefinition >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self declarations = anotherNode declarations
+	self parameters = anotherNode parameters
 		ifFalse: [ ^ false ].
 
 	^ true
@@ -38,23 +38,11 @@ ASTCFunctionDefinition >> body: anObject [
 	^anObject.
 ]
 
-{ #category : #accessors }
-ASTCFunctionDefinition >> declarations [
-	^declarations
-]
-
-{ #category : #accessors }
-ASTCFunctionDefinition >> declarations: aCollection [
-	declarations:=aCollection.
-	self declarations do:[:each| each parent:self].
-			^aCollection.
-]
-
 { #category : #comparing }
 ASTCFunctionDefinition >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self declarations.
+	hash := hash + self parameters.
 	^ hash
 ]
 
@@ -73,17 +61,29 @@ ASTCFunctionDefinition >> id: anObject [
 { #category : #initialize }
 ASTCFunctionDefinition >> initialize [
 	super initialize.
-	self initializeDeclarations.
+	self initializeParameters.
 ]
 
 { #category : #initialize }
-ASTCFunctionDefinition >> initializeDeclarations [
-	declarations:=ASTCContainer new parent:self; yourself.
+ASTCFunctionDefinition >> initializeParameters [
+	parameters:=ASTCContainer new parent:self; yourself.
 ]
 
 { #category : #testing }
 ASTCFunctionDefinition >> isASTCFunctionDefinition [
 	^true.
+]
+
+{ #category : #accessors }
+ASTCFunctionDefinition >> parameters [
+	^parameters
+]
+
+{ #category : #accessors }
+ASTCFunctionDefinition >> parameters: aCollection [
+	parameters:=aCollection.
+	self parameters do:[:each| each parent:self].
+			^aCollection.
 ]
 
 { #category : #print }

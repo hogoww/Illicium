@@ -50,7 +50,7 @@ ASTCSmallInteger >> asString [
 	^self myself asString .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #format }
 ASTCSmallInteger >> asType [
 	^'int'
 ]

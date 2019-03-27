@@ -168,7 +168,7 @@ ASTCBuilder >> defineRelations [
 	"FunctionDefinition"
 	(functionDefinition property:#id) <>- (identifier property:#funcDefId).
 	(functionDefinition property:#type) <>- (type property:#type).
-	(functionDefinition property:#declarations) <>-* (declaration property:#funcDeclaration).
+	(functionDefinition property:#parameters) <>-* (declaration property:#funcDeclaration).
 	(functionDefinition property:#body) <>- (block property:#funcDefBody).
 	
 	(if property:#predicate) <>- (expression property:#predicateIf).

@@ -130,7 +130,7 @@ ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
 	self << Character space.
 	aFunctionDefinition id acceptVisitor:self.
 	self << $(.
-	aFunctionDefinition declarations do:[:each| each acceptVisitor:self].
+	aFunctionDefinition parameters do:[:each| each acceptVisitor:self].
 	self << $).
 	aFunctionDefinition body acceptVisitor: self.
 	

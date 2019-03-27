@@ -190,7 +190,7 @@ ASTCWalkerVisitor >> walkASTCFunctionDefinition: anASTCFunctionDefinition [
 	self walkASTCFunctionDefinitionId:anASTCFunctionDefinition.
 	self walkASTCFunctionDefinitionBody:anASTCFunctionDefinition.
 	self walkASTCFunctionDefinitionType:anASTCFunctionDefinition.
-	self walkASTCFunctionDefinitionDeclarations:anASTCFunctionDefinition.
+	self walkASTCFunctionDefinitionParameters:anASTCFunctionDefinition.
 	
 ]
 
@@ -200,13 +200,13 @@ ASTCWalkerVisitor >> walkASTCFunctionDefinitionBody:anASTCFunctionDefinition [
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDefinitionDeclarations:anASTCFunctionDefinition [
-  ^anASTCFunctionDefinition declarations do:[:child| child acceptVisitor:self].
+ASTCWalkerVisitor >> walkASTCFunctionDefinitionId:anASTCFunctionDefinition [
+  ^anASTCFunctionDefinition id acceptVisitor:self.
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDefinitionId:anASTCFunctionDefinition [
-  ^anASTCFunctionDefinition id acceptVisitor:self.
+ASTCWalkerVisitor >> walkASTCFunctionDefinitionParameters:anASTCFunctionDefinition [
+  ^anASTCFunctionDefinition parameters do:[:child| child acceptVisitor:self].
 ]
 
 { #category : #walking }
