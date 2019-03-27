@@ -17,7 +17,7 @@ ASTCType >> = anotherNode [
 
 { #category : #visiting }
 ASTCType >> acceptVisitor: aVisitor [
-	aVisitor visitASTCType:self.
+	^aVisitor visitASTCType:self.
 ]
 
 { #category : #comparing }

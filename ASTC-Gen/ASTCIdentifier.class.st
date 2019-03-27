@@ -17,7 +17,7 @@ ASTCIdentifier >> = anotherNode [
 
 { #category : #visiting }
 ASTCIdentifier >> acceptVisitor: aVisitor [
-	aVisitor visitASTCIdentifier:self.
+	^aVisitor visitASTCIdentifier:self.
 ]
 
 { #category : #comparing }

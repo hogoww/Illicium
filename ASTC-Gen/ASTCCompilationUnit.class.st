@@ -21,7 +21,7 @@ ASTCCompilationUnit >> = anotherNode [
 
 { #category : #visiting }
 ASTCCompilationUnit >> acceptVisitor: aVisitor [
-	aVisitor visitASTCCompilationUnit:self.
+	^aVisitor visitASTCCompilationUnit:self.
 ]
 
 { #category : #accessors }

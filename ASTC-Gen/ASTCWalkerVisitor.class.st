@@ -102,8 +102,6 @@ ASTCWalkerVisitor >> visitASTCType: anASTCType [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCBlock: anASTCBlock [
-	self walkASTCBlockDeclarations:anASTCBlock.
-	self walkASTCBlockStatements:anASTCBlock.
 	
 ]
 
@@ -121,8 +119,6 @@ ASTCWalkerVisitor >> walkASTCBlockStatements:anASTCBlock [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCCompilationUnit: anASTCCompilationUnit [
-	self walkASTCCompilationUnitFunctionDefinitions:anASTCCompilationUnit.
-	self walkASTCCompilationUnitParent:anASTCCompilationUnit.
 	
 ]
 
@@ -140,9 +136,6 @@ ASTCWalkerVisitor >> walkASTCCompilationUnitParent:anASTCCompilationUnit [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCDeclaration: anASTCDeclaration [
-	self walkASTCDeclarationId:anASTCDeclaration.
-	self walkASTCDeclarationInit:anASTCDeclaration.
-	self walkASTCDeclarationType:anASTCDeclaration.
 	
 ]
 
@@ -171,7 +164,6 @@ ASTCWalkerVisitor >> walkASTCExpression: anASTCExpression [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCExpressionStatement: anASTCExpressionStatement [
-	self walkASTCExpressionStatementExpression:anASTCExpressionStatement.
 	
 ]
 
@@ -183,8 +175,6 @@ ASTCWalkerVisitor >> walkASTCExpressionStatementExpression:anASTCExpressionState
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCFunctionCall: anASTCFunctionCall [
-	self walkASTCFunctionCallId:anASTCFunctionCall.
-	self walkASTCFunctionCallArguments:anASTCFunctionCall.
 	
 ]
 
@@ -202,10 +192,6 @@ ASTCWalkerVisitor >> walkASTCFunctionCallId:anASTCFunctionCall [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCFunctionDefinition: anASTCFunctionDefinition [
-	self walkASTCFunctionDefinitionId:anASTCFunctionDefinition.
-	self walkASTCFunctionDefinitionBody:anASTCFunctionDefinition.
-	self walkASTCFunctionDefinitionType:anASTCFunctionDefinition.
-	self walkASTCFunctionDefinitionParameters:anASTCFunctionDefinition.
 	
 ]
 
@@ -235,7 +221,6 @@ ASTCWalkerVisitor >> walkASTCFunctionDefinitionType:anASTCFunctionDefinition [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCIdentifier: anASTCIdentifier [
-	self walkASTCIdentifierId:anASTCIdentifier.
 	
 ]
 
@@ -246,9 +231,6 @@ ASTCWalkerVisitor >> walkASTCIdentifierId:anASTCIdentifier [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCIf: anASTCIf [
-	self walkASTCIfElse:anASTCIf.
-	self walkASTCIfPredicate:anASTCIf.
-	self walkASTCIfThen:anASTCIf.
 	
 ]
 
@@ -272,7 +254,6 @@ ASTCWalkerVisitor >> walkASTCIfThen:anASTCIf [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCLiteral: anASTCLiteral [
-	self walkASTCLiteralValue:anASTCLiteral.
 	
 ]
 
@@ -283,14 +264,11 @@ ASTCWalkerVisitor >> walkASTCLiteralValue:anASTCLiteral [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCNode: anASTCNode [
-	self walkASTCNodeParent:anASTCNode.
 	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCOperator: anASTCOperator [
-	self walkASTCOperatorSymbol:anASTCOperator.
-	self walkASTCOperatorOperands:anASTCOperator.
 	
 ]
 
@@ -307,7 +285,6 @@ ASTCWalkerVisitor >> walkASTCOperatorSymbol:anASTCOperator [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCProject: anASTCProject [
-	self walkASTCProjectCompilationUnits:anASTCProject.
 	
 ]
 
@@ -319,7 +296,6 @@ ASTCWalkerVisitor >> walkASTCProjectCompilationUnits:anASTCProject [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCReturn: anASTCReturn [
-	self walkASTCReturnExpression:anASTCReturn.
 	
 ]
 
@@ -336,7 +312,6 @@ ASTCWalkerVisitor >> walkASTCStatement: anASTCStatement [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCType: anASTCType [
-	self walkASTCTypeType:anASTCType.
 	
 ]
 

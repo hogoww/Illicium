@@ -20,7 +20,7 @@ ASTCProject >> = anotherNode [
 
 { #category : #visiting }
 ASTCProject >> acceptVisitor: aVisitor [
-	aVisitor visitASTCProject:self.
+	^aVisitor visitASTCProject:self.
 ]
 
 { #category : #accessors }

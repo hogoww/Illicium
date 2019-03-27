@@ -24,7 +24,7 @@ ASTCBlock >> = anotherNode [
 
 { #category : #visiting }
 ASTCBlock >> acceptVisitor: aVisitor [
-	aVisitor visitASTCBlock:self.
+	^aVisitor visitASTCBlock:self.
 ]
 
 { #category : #accessors }

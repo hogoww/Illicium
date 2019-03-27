@@ -17,7 +17,7 @@ ASTCReturn >> = anotherNode [
 
 { #category : #visiting }
 ASTCReturn >> acceptVisitor: aVisitor [
-	aVisitor visitASTCReturn:self.
+	^aVisitor visitASTCReturn:self.
 ]
 
 { #category : #accessors }

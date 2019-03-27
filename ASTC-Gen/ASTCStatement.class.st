@@ -14,7 +14,7 @@ ASTCStatement >> = anotherNode [
 
 { #category : #visiting }
 ASTCStatement >> acceptVisitor: aVisitor [
-	aVisitor visitASTCStatement:self.
+	^aVisitor visitASTCStatement:self.
 ]
 
 { #category : #comparing }

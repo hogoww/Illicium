@@ -19,7 +19,7 @@ ASTCIf >> = anotherNode [
 
 { #category : #visiting }
 ASTCIf >> acceptVisitor: aVisitor [
-	aVisitor visitASTCIf:self.
+	^aVisitor visitASTCIf:self.
 ]
 
 { #category : #accessors }

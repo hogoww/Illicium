@@ -21,7 +21,7 @@ ASTCOperator >> = anotherNode [
 
 { #category : #visiting }
 ASTCOperator >> acceptVisitor: aVisitor [
-	aVisitor visitASTCOperator:self.
+	^aVisitor visitASTCOperator:self.
 ]
 
 { #category : #comparing }

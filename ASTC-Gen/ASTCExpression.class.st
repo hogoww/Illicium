@@ -14,7 +14,7 @@ ASTCExpression >> = anotherNode [
 
 { #category : #visiting }
 ASTCExpression >> acceptVisitor: aVisitor [
-	aVisitor visitASTCExpression:self.
+	^aVisitor visitASTCExpression:self.
 ]
 
 { #category : #comparing }

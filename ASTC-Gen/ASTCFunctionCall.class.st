@@ -21,7 +21,7 @@ ASTCFunctionCall >> = anotherNode [
 
 { #category : #visiting }
 ASTCFunctionCall >> acceptVisitor: aVisitor [
-	aVisitor visitASTCFunctionCall:self.
+	^aVisitor visitASTCFunctionCall:self.
 ]
 
 { #category : #accessors }

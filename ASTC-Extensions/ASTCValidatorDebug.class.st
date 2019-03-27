@@ -9,13 +9,13 @@ I enforce types on the AST C by implementing a visitor that flags every type bug
 
 "
 Class {
-	#name : #ASTCValidationDebug,
+	#name : #ASTCValidatorDebug,
 	#superclass : #ASTCWalkerVisitor,
 	#category : #'ASTC-Extensions-validation'
 }
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCBlock: anASTCBlock [
+ASTCValidatorDebug >> visitASTCBlock: anASTCBlock [
 	self visitASTCStatement:anASTCBlock.
 	
 	anASTCBlock declarations do:[:each | self assert: each isASTCDeclaration.].
@@ -26,7 +26,7 @@ ASTCValidationDebug >> visitASTCBlock: anASTCBlock [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCCompilationUnit: anASTCCompilationUnit [
+ASTCValidatorDebug >> visitASTCCompilationUnit: anASTCCompilationUnit [
 	anASTCCompilationUnit compilationUnits allSatisfy:[:each|
 		each assert: each isASTCFunctionDefinition.
 		].
@@ -35,7 +35,7 @@ ASTCValidationDebug >> visitASTCCompilationUnit: anASTCCompilationUnit [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCDeclaration: anASTCDeclaration [
+ASTCValidatorDebug >> visitASTCDeclaration: anASTCDeclaration [
 	self visitASTCNode: anASTCDeclaration.
 
 	self assert: anASTCDeclaration type isASTCType.
@@ -50,7 +50,7 @@ ASTCValidationDebug >> visitASTCDeclaration: anASTCDeclaration [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCExpression: anASTCExpression [
+ASTCValidatorDebug >> visitASTCExpression: anASTCExpression [
 	self visitASTCNode: anASTCExpression.
 		
 	super visitASTCExpression: anASTCExpression.
@@ -58,7 +58,7 @@ ASTCValidationDebug >> visitASTCExpression: anASTCExpression [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCExpressionStatement: anASTCExpressionStatement [
+ASTCValidatorDebug >> visitASTCExpressionStatement: anASTCExpressionStatement [
 	self visitASTCStatement: anASTCExpressionStatement.
 	
 	self assert: anASTCExpressionStatement expression isASTCExpression.
@@ -67,7 +67,7 @@ ASTCValidationDebug >> visitASTCExpressionStatement: anASTCExpressionStatement [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCFunctionCall: anASTCFunctionCall [
+ASTCValidatorDebug >> visitASTCFunctionCall: anASTCFunctionCall [
 	self visitASTCExpression: anASTCFunctionCall.
 	
 	self assert: anASTCFunctionCall id isASTCIdentifier.
@@ -78,7 +78,7 @@ ASTCValidationDebug >> visitASTCFunctionCall: anASTCFunctionCall [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
+ASTCValidatorDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 	self visitASTCNode:anASTCFunctionDefinition.
 
 	self assert: anASTCFunctionDefinition type isASTCType.
@@ -90,7 +90,7 @@ ASTCValidationDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCIdentifier: anASTCIdentifier [
+ASTCValidatorDebug >> visitASTCIdentifier: anASTCIdentifier [
 	self visitASTCExpression: anASTCIdentifier.
 	
 	self flag:#todo. "Check that it's a valid format with regex."
@@ -99,7 +99,7 @@ ASTCValidationDebug >> visitASTCIdentifier: anASTCIdentifier [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCIf: anASTCIf [
+ASTCValidatorDebug >> visitASTCIf: anASTCIf [
 	self visitASTCStatement:anASTCIf.
 
 	self assert: anASTCIf predicate isASTCExpression.
@@ -110,7 +110,7 @@ ASTCValidationDebug >> visitASTCIf: anASTCIf [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCOperator: anASTCOperator [
+ASTCValidatorDebug >> visitASTCOperator: anASTCOperator [
 	self visitASTCExpression: anASTCOperator.
 	
 	anASTCOperator operands do:[:each|
@@ -121,7 +121,7 @@ ASTCValidationDebug >> visitASTCOperator: anASTCOperator [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCProject: anASTCProject [
+ASTCValidatorDebug >> visitASTCProject: anASTCProject [
 	anASTCProject compilationUnits do:[:each|
 		each assert: each isCompilationUnit.
 		].
@@ -130,7 +130,7 @@ ASTCValidationDebug >> visitASTCProject: anASTCProject [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCReturn: anASTCReturn [
+ASTCValidatorDebug >> visitASTCReturn: anASTCReturn [
 	self visitASTCStatement: anASTCReturn.
 	
 	self assert: anASTCReturn expression isASTCExpression.
@@ -139,14 +139,14 @@ ASTCValidationDebug >> visitASTCReturn: anASTCReturn [
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCStatement: anASTCStatement [
+ASTCValidatorDebug >> visitASTCStatement: anASTCStatement [
 	self visitASTCNode:anASTCStatement.
 
 	super visitASTCStatement:anASTCStatement.
 ]
 
 { #category : #visiting }
-ASTCValidationDebug >> visitASTCType: anASTCType [
+ASTCValidatorDebug >> visitASTCType: anASTCType [
 	self visitASTCNode: anASTCType.
 
 	self assert: anASTCType type isClass.

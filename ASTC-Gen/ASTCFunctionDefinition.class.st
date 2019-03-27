@@ -23,7 +23,7 @@ ASTCFunctionDefinition >> = anotherNode [
 
 { #category : #visiting }
 ASTCFunctionDefinition >> acceptVisitor: aVisitor [
-	aVisitor visitASTCFunctionDefinition:self.
+	^aVisitor visitASTCFunctionDefinition:self.
 ]
 
 { #category : #accessors }

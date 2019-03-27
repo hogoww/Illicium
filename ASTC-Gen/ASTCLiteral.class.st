@@ -17,7 +17,7 @@ ASTCLiteral >> = anotherNode [
 
 { #category : #visiting }
 ASTCLiteral >> acceptVisitor: aVisitor [
-	aVisitor visitASTCLiteral:self.
+	^aVisitor visitASTCLiteral:self.
 ]
 
 { #category : #comparing }

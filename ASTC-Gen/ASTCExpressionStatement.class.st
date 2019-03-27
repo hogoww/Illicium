@@ -17,7 +17,7 @@ ASTCExpressionStatement >> = anotherNode [
 
 { #category : #visiting }
 ASTCExpressionStatement >> acceptVisitor: aVisitor [
-	aVisitor visitASTCExpressionStatement:self.
+	^aVisitor visitASTCExpressionStatement:self.
 ]
 
 { #category : #accessors }
