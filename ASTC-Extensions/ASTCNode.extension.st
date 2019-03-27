@@ -18,7 +18,6 @@ ASTCNode >> debugASTCStructure [
 { #category : #'*ASTC-Extensions' }
 ASTCNode >> gtInspectorASTDumpIn: composite [
 	<gtInspectorPresentationOrder: 50>
-	|visitor|
 	^ composite pharoMethod
 		title: [ 'AST Dump' translated ];
 			display: [ 
@@ -29,7 +28,6 @@ ASTCNode >> gtInspectorASTDumpIn: composite [
 { #category : #'*ASTC-Extensions' }
 ASTCNode >> gtInspectorCPrettyPrint: composite [
 	<gtInspectorPresentationOrder: 50>
-	|visitor|
 	^ composite pharoMethod
 		title: [ 'AST C pretty print' translated ];
 			display: [ 
