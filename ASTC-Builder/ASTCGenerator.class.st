@@ -432,6 +432,7 @@ ASTCGenerator >> addWalkerMethodFor: aClass [
 	"The result will be UNORDERED."
 	self flag:#duplication."duplication with initialize/printer"
 	
+	
 	className:=aClass asString.
 	pattern:='walk',className,'*'.
 	methodstoCall := astWalkerVisitorClass selectors select:[:selector| pattern match:selector ]. 
@@ -462,7 +463,8 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
   '.
 
 	isPropertyBoolean ifFalse:[
-		methodBody:=methodBody,(self aClassAsVariableName: className),' ',aPropertyName,' ifNil:[^self]'.
+		methodBody:=methodBody,(self aClassAsVariableName: className),' ',aPropertyName,' ifNil:[^self].
+		'.
 		methodBody:=methodBody,(self aClassAsVariableName: className),' ',aPropertyName,
 		(isManyBoolean 
 			ifTrue:[' do:[:child| child acceptVisitor:self].']

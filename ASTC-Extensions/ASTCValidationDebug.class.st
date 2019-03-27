@@ -1,0 +1,144 @@
+"
+I represent a validation visitor for the AST C, in debug mode.
+
+I enforce types on the AST C by implementing a visitor that flags every type bug.
+
+- anASTCNode acceptVisitor.
+
+
+"
+Class {
+	#name : #ASTCValidationDebug,
+	#superclass : #ASTCWalkerVisitor,
+	#category : #'ASTC-Extensions-validation'
+}
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCBlock: anASTCBlock [
+	self visitASTCStatement:anASTCBlock.
+	
+	anASTCBlock declarations do:[:each | self assert: each isASTCDeclaration.].
+	anASTCBlock statements do:[:each | self assert: each isASTCStatement.].
+	
+	super visitASTCBlock: anASTCBlock.
+			
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCCompilationUnit: anASTCCompilationUnit [
+	anASTCCompilationUnit compilationUnits allSatisfy:[:each|
+		each assert: each isASTCFunctionDefinition.
+		].
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCDeclaration: anASTCDeclaration [
+	self visitASTCNode: anASTCDeclaration.
+
+	self assert: anASTCDeclaration type isASTCType.
+	self assert: anASTCDeclaration id isASTCIdentifier.
+	anASTCDeclaration init ifNotNil:[:init| self assert:init isASTCExpression].
+	
+	super visitASTCDeclaration: anASTCDeclaration.
+			
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCExpression: anASTCExpression [
+	self visitASTCNode: anASTCExpression.
+		
+	super visitASTCExpression: anASTCExpression.
+			
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCExpressionStatement: anASTCExpressionStatement [
+	self visitASTCStatement: anASTCExpressionStatement.
+	
+	self assert: anASTCExpressionStatement expression isASTCExpression.
+	
+	super visitASTCExpressionStatement: anASTCExpressionStatement.
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCFunctionCall: anASTCFunctionCall [
+	self visitASTCExpression: anASTCFunctionCall.
+	
+	self assert: anASTCFunctionCall id isIdentifier.
+	anASTCFunctionCall arguments do:[:each| self assert: each isASTCExpression ].
+	
+	super visitASTCFunctionCall: anASTCFunctionCall.
+			
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
+	self assert: anASTCFunctionDefinition type isASTCType.
+	self assert: anASTCFunctionDefinition id isASTCIdentifier.
+	anASTCFunctionDefinition arguments do:[:each| self assert: each isASTCDeclaration].
+	self assert: anASTCFunctionDefinition body isASTCBlock.
+	
+	super visitASTCFunctionDefinition: anASTCFunctionDefinition. 
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCIdentifier: anASTCIdentifier [
+	self flag:#todo. "Check that it's a valid format with regex."
+	super visitASTCIdentifier: anASTCIdentifier.
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCIf: anASTCIf [
+	self visitASTCStatement:anASTCIf.
+
+	self assert: anASTCIf predicate isExpressions.
+	self assert: anASTCIf then isStatement.
+	self assert: anASTCIf else isStatement.
+	
+	super visitASTCIf: anASTCIf.
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCOperator: anASTCOperator [
+	self visitASTCExpression: anASTCOperator.
+	
+	anASTCOperator arguments do:[:each|
+		self assert: each isStatement.
+		].
+	
+	super visitASTCOperator:anASTCOperator. 
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCProject: anASTCProject [
+	anASTCProject compilationUnits do:[:each|
+		each assert: each isCompilationUnit.
+		].
+	
+	super visitASTCProject: anASTCProject.
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCReturn: anASTCReturn [
+	self visitASTCStatement: anASTCReturn.
+	
+	self assert: anASTCReturn expression isASTCExpression.
+
+	super visitASTCReturn: anASTCReturn.
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCStatement: anASTCStatement [
+	self visitASTCNode:anASTCStatement.
+
+	super visitASTCStatement:anASTCStatement.
+]
+
+{ #category : #visiting }
+ASTCValidationDebug >> visitASTCType: anASTCType [
+	self visitASTCNode: anASTCType.
+
+	self assert: anASTCType class class equals: Metaclass.
+	
+	super visitASTCType: anASTCType.
+]

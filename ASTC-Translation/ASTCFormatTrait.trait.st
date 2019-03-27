@@ -9,7 +9,7 @@ ASTCFormatTrait >> formatSelector: aSelector [
 	functionName:=aSelector asString.
 	1 to:functionName size do:[:index | 
 		(functionName at: index)=$: 
-		ifTrue:[ functionName at:index put: Character space]
+		ifTrue:[ functionName at:index put: $ ]
 		].
 	functionName:=functionName asCamelCase.
 	^functionName uncapitalized.

@@ -39,7 +39,7 @@ ASTCProject >> compilationUnits: aCollection [
 ASTCProject >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self compilationUnits.
+	hash := hash + self compilationUnitshash.
 	^ hash
 ]
 

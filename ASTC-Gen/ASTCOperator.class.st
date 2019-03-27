@@ -28,7 +28,7 @@ ASTCOperator >> acceptVisitor: aVisitor [
 ASTCOperator >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self operands.
+	hash := hash + self operandshash.
 	^ hash
 ]
 

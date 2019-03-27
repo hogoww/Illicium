@@ -40,7 +40,7 @@ ASTCFunctionCall >> arguments: aCollection [
 ASTCFunctionCall >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self arguments.
+	hash := hash + self argumentshash.
 	^ hash
 ]
 
