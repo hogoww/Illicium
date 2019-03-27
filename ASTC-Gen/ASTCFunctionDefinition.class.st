@@ -42,8 +42,8 @@ ASTCFunctionDefinition >> body: anObject [
 ASTCFunctionDefinition >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self parametershash.
-	^ hash
+	hash := hash + self parameters hash.
+ hash
 ]
 
 { #category : #accessors }

@@ -165,6 +165,11 @@ ASTCWalkerVisitor >> walkASTCDeclarationType:anASTCDeclaration [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> walkASTCExpression: anASTCExpression [
+	
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> walkASTCExpressionStatement: anASTCExpressionStatement [
 	self walkASTCExpressionStatementExpression:anASTCExpressionStatement.
 	
@@ -282,12 +287,6 @@ ASTCWalkerVisitor >> walkASTCNode: anASTCNode [
 	
 ]
 
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCNodeParent:anASTCNode [
-  anASTCNode parent ifNil:[^self].
-		anASTCNode parent acceptVisitor:self.
-]
-
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCOperator: anASTCOperator [
 	self walkASTCOperatorSymbol:anASTCOperator.
@@ -328,6 +327,11 @@ ASTCWalkerVisitor >> walkASTCReturn: anASTCReturn [
 ASTCWalkerVisitor >> walkASTCReturnExpression:anASTCReturn [
   anASTCReturn expression ifNil:[^self].
 		anASTCReturn expression acceptVisitor:self.
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCStatement: anASTCStatement [
+	
 ]
 
 { #category : #visiting }

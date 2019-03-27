@@ -24,8 +24,7 @@ ASTCLiteral >> acceptVisitor: aVisitor [
 ASTCLiteral >> hash [
 	| hash |
 	hash := self identityHash.
-
-	^ hash
+ hash
 ]
 
 { #category : #testing }

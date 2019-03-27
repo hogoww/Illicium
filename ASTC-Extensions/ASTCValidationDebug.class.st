@@ -3,7 +3,8 @@ I represent a validation visitor for the AST C, in debug mode.
 
 I enforce types on the AST C by implementing a visitor that flags every type bug.
 
-- anASTCNode acceptVisitor.
+
+-anASTCNode acceptVisitor: ASTCValidationDebug new.
 
 
 "
@@ -29,6 +30,8 @@ ASTCValidationDebug >> visitASTCCompilationUnit: anASTCCompilationUnit [
 	anASTCCompilationUnit compilationUnits allSatisfy:[:each|
 		each assert: each isASTCFunctionDefinition.
 		].
+	
+	super visitASTCCompilationUnit: anASTCCompilationUnit.
 ]
 
 { #category : #visiting }
@@ -37,7 +40,10 @@ ASTCValidationDebug >> visitASTCDeclaration: anASTCDeclaration [
 
 	self assert: anASTCDeclaration type isASTCType.
 	self assert: anASTCDeclaration id isASTCIdentifier.
-	anASTCDeclaration init ifNotNil:[:init| self assert:init isASTCExpression].
+	anASTCDeclaration init 
+	ifNotNil:[:init| 
+		self assert:init isASTCExpression
+	].
 	
 	super visitASTCDeclaration: anASTCDeclaration.
 			
@@ -64,7 +70,7 @@ ASTCValidationDebug >> visitASTCExpressionStatement: anASTCExpressionStatement [
 ASTCValidationDebug >> visitASTCFunctionCall: anASTCFunctionCall [
 	self visitASTCExpression: anASTCFunctionCall.
 	
-	self assert: anASTCFunctionCall id isIdentifier.
+	self assert: anASTCFunctionCall id isASTCIdentifier.
 	anASTCFunctionCall arguments do:[:each| self assert: each isASTCExpression ].
 	
 	super visitASTCFunctionCall: anASTCFunctionCall.
@@ -73,9 +79,11 @@ ASTCValidationDebug >> visitASTCFunctionCall: anASTCFunctionCall [
 
 { #category : #visiting }
 ASTCValidationDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
+	self visitASTCNode:anASTCFunctionDefinition.
+
 	self assert: anASTCFunctionDefinition type isASTCType.
 	self assert: anASTCFunctionDefinition id isASTCIdentifier.
-	anASTCFunctionDefinition arguments do:[:each| self assert: each isASTCDeclaration].
+	anASTCFunctionDefinition parameters do:[:each| self assert: each isASTCDeclaration].
 	self assert: anASTCFunctionDefinition body isASTCBlock.
 	
 	super visitASTCFunctionDefinition: anASTCFunctionDefinition. 
@@ -83,7 +91,10 @@ ASTCValidationDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 
 { #category : #visiting }
 ASTCValidationDebug >> visitASTCIdentifier: anASTCIdentifier [
+	self visitASTCExpression: anASTCIdentifier.
+	
 	self flag:#todo. "Check that it's a valid format with regex."
+	
 	super visitASTCIdentifier: anASTCIdentifier.
 ]
 
@@ -91,9 +102,9 @@ ASTCValidationDebug >> visitASTCIdentifier: anASTCIdentifier [
 ASTCValidationDebug >> visitASTCIf: anASTCIf [
 	self visitASTCStatement:anASTCIf.
 
-	self assert: anASTCIf predicate isExpressions.
-	self assert: anASTCIf then isStatement.
-	self assert: anASTCIf else isStatement.
+	self assert: anASTCIf predicate isASTCExpression.
+	self assert: anASTCIf then isASTCStatement.
+	self assert: anASTCIf else isASTCStatement.
 	
 	super visitASTCIf: anASTCIf.
 ]
@@ -102,8 +113,8 @@ ASTCValidationDebug >> visitASTCIf: anASTCIf [
 ASTCValidationDebug >> visitASTCOperator: anASTCOperator [
 	self visitASTCExpression: anASTCOperator.
 	
-	anASTCOperator arguments do:[:each|
-		self assert: each isStatement.
+	anASTCOperator operands do:[:each|
+		self assert: each isASTCExpression.
 		].
 	
 	super visitASTCOperator:anASTCOperator. 
@@ -136,9 +147,10 @@ ASTCValidationDebug >> visitASTCStatement: anASTCStatement [
 
 { #category : #visiting }
 ASTCValidationDebug >> visitASTCType: anASTCType [
+	self flag:#todo."add Metaclass"
 	self visitASTCNode: anASTCType.
 
-	self assert: anASTCType class class equals: Metaclass.
-	
+	self assert: anASTCType type class class equals: TraitedMetaclass.
+
 	super visitASTCType: anASTCType.
 ]

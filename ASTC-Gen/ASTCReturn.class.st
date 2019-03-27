@@ -36,8 +36,7 @@ ASTCReturn >> expression: anObject [
 ASTCReturn >> hash [
 	| hash |
 	hash := self identityHash.
-
-	^ hash
+ hash
 ]
 
 { #category : #testing }

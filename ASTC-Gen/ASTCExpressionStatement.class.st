@@ -36,8 +36,7 @@ ASTCExpressionStatement >> expression: anObject [
 ASTCExpressionStatement >> hash [
 	| hash |
 	hash := self identityHash.
-
-	^ hash
+ hash
 ]
 
 { #category : #testing }

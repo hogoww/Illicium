@@ -6,7 +6,7 @@ Class {
 
 { #category : #tests }
 GenerationTest >> testASTCIdentifier [
-	| astPharo visitor astC expectedC|
+	| astPharo visitor astC expectedC validationVisitor |
 	astPharo := RBParser parseExpression: 'c'.
 	visitor := ASTCFromPharo new.
 	astC := astPharo acceptVisitor: visitor.
@@ -15,9 +15,14 @@ GenerationTest >> testASTCIdentifier [
 		id: 'c';
 		yourself.
 	
+	
 	self assert: astC isASTCIdentifier.
 	self assert: astC id equals: 'c'.
 	self assert: astC equals: expectedC.
+	validationVisitor := ASTCValidationDebug new.
+
+	astC acceptVisitor: validationVisitor.
+	expectedC acceptVisitor: validationVisitor.
 ]
 
 { #category : #tests }

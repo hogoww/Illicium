@@ -24,8 +24,7 @@ ASTCIdentifier >> acceptVisitor: aVisitor [
 ASTCIdentifier >> hash [
 	| hash |
 	hash := self identityHash.
-
-	^ hash
+ hash
 ]
 
 { #category : #accessors }

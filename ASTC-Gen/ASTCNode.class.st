@@ -36,8 +36,7 @@ ASTCNode >> gtInspectorASTDumpIn: composite [
 ASTCNode >> hash [
 	| hash |
 	hash := self identityHash.
-
-	^ hash
+ hash
 ]
 
 { #category : #testing }

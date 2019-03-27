@@ -26,8 +26,7 @@ ASTCDeclaration >> acceptVisitor: aVisitor [
 ASTCDeclaration >> hash [
 	| hash |
 	hash := self identityHash.
-
-	^ hash
+ hash
 ]
 
 { #category : #accessors }

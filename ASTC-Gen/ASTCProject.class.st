@@ -39,8 +39,8 @@ ASTCProject >> compilationUnits: aCollection [
 ASTCProject >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self compilationUnitshash.
-	^ hash
+	hash := hash + self compilationUnits hash.
+ hash
 ]
 
 { #category : #initialize }

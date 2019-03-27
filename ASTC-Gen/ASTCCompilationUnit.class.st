@@ -40,8 +40,8 @@ ASTCCompilationUnit >> functionDefinitions: aCollection [
 ASTCCompilationUnit >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self functionDefinitionshash.
-	^ hash
+	hash := hash + self functionDefinitions hash.
+ hash
 ]
 
 { #category : #initialize }

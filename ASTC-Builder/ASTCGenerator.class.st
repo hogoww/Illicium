@@ -431,21 +431,19 @@ ASTCGenerator >> addWalkerMethodFor: aClass [
 	"The result will be UNORDERED."
 	self flag:#duplication."duplication with initialize/printer"
 	
-	
 	className:=aClass asString.
-	pattern:='walk',className,'*'.
+	pattern:='walk',className,'.*'.
 	methodstoCall := astWalkerVisitorClass selectors select:[:selector| pattern match:selector ]. 
 	
-	methodstoCall ifEmpty:[^self].
 
 	methodBody :=String streamContents: [:s | 
-		s nextPutAll:(self methodClassSignatureFor: className withPrefix:'walk'); nextPutAll:'
+		s << (self methodClassSignatureFor: className withPrefix:'walk'); << '
 	'.
 		methodstoCall do: [:method |
-			s nextPutAll: 'self ';
-			  nextPutAll:method;
-			  nextPutAll: (self aClassAsVariableName: aClass asString);
-			nextPutAll:'.
+			s <<  'self ';
+			  << method;
+			  <<  (self aClassAsVariableName: aClass asString);
+			<< '.
 	'.] 
 	].
 	

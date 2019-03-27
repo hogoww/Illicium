@@ -28,8 +28,8 @@ ASTCOperator >> acceptVisitor: aVisitor [
 ASTCOperator >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self operandshash.
-	^ hash
+	hash := hash + self operands hash.
+ hash
 ]
 
 { #category : #initialize }

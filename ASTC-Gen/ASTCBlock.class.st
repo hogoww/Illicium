@@ -43,8 +43,9 @@ ASTCBlock >> declarations: aCollection [
 ASTCBlock >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self declarationshash.	hash := hash + self statementshash.
-	^ hash
+	hash := hash + self declarations hash.
+	hash := hash + self statements hash.
+ hash
 ]
 
 { #category : #initialize }
