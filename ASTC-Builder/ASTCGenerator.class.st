@@ -266,10 +266,9 @@ ASTCGenerator >> addHashOn: aClass withPropertiesNamed: properties [
 '.
 		properties do: [ :each |
 			s << 
-'	hash := hash + self ' << each << 'hash.'  ].
+'	hash := hash + self ' << each << ' hash.' << Character cr.  ].
 
-	s << '
-	^ hash' ].
+	s << ' hash' ].
 	
 	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
 ]
