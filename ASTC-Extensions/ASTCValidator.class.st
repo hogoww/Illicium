@@ -1,3 +1,15 @@
+"
+I represent a visitor that validate the types of the nodes use in an AST C.
+
+I just answer if the AST C use the corrects types. To debug an AST, use my superClass ASTCValidatorDebug
+
+
+- anASTCNode acceptVisitor: ASTCValidator new.
+
+
+ Implementation Points
+	I simply use my super class's visit, and catch any exception to return false. If the visit goes till the end, the AST is valid, and i return true.
+"
 Class {
 	#name : #ASTCValidator,
 	#superclass : #ASTCValidatorDebug,
