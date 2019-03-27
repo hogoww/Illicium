@@ -1,6 +1,8 @@
 Class {
 	#name : #ASTCSmallInteger,
 	#superclass : #Object,
+	#traits : 'ASTCFormatTrait',
+	#classTraits : 'ASTCFormatTrait classTrait',
 	#instVars : [
 		'myself',
 		'visitor'
@@ -57,7 +59,7 @@ ASTCSmallInteger >> asType [
 ASTCSmallInteger >> doesNotUnderstand: aMessage [
 	self flag:#missingArguments.
 	^ASTCFunctionCall new
-		id: (ASTCIdentifier new id: aMessage selector; yourself) ;
+		id: (ASTCIdentifier new id: (self formatSelector:(aMessage selector)); yourself) ;
 		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
 		yourself.
 

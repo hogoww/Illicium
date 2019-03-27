@@ -29,6 +29,17 @@ ASTCPrettyPrint >> enterBlock [
 ]
 
 { #category : #accessing }
+ASTCPrettyPrint >> formatSelector: aSelector [
+	| functionName | 
+	functionName:=aSelector asString.
+	1 to:functionName size do:[:index | 
+		(functionName at: index)=$: 
+		ifTrue:[ functionName at:index put: Character space]
+		].
+	^functionName asCamelCase 
+]
+
+{ #category : #accessing }
 ASTCPrettyPrint >> indent [
 	indentation:=indentation , (String streamContents:[:s| 
 		1 to: (self class defaultIndentation size) do:[:i | s << Character space].
@@ -92,9 +103,8 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 	self enterBlock.
 	aBlock statements
 		do: [ :each | 
-			self spaces.
 			each acceptVisitor: self.
-			self << ';' << Character cr ].
+			self << Character cr ].
 	self leaveBlock.
 	self spaces.
 	self << '}'.
@@ -116,22 +126,24 @@ ASTCPrettyPrint >> visitASTCFunctionCall: aFunctionCall [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
 	self flag:#todo."declarations"
-	aFunctionDefinition type type asType.
+	aFunctionDefinition type acceptVisitor: self.
 	self << Character space.
 	aFunctionDefinition id acceptVisitor:self.
-	self << $( << ''"declaration here" << $).
+	self << $(.
+	aFunctionDefinition declarations do:[:each| each acceptVisitor:self].
+	self << $).
 	aFunctionDefinition body acceptVisitor: self.
 	
 ]
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCIdentifier: anIdentifier [
-	self << anIdentifier id 
+	self << anIdentifier id
 ]
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCIf: anIf [
-	self << 'if ('.
+	self <<< 'if ('.
 	(anIf predicate acceptVisitor: self).
 	self << ') '.
 	(anIf then acceptVisitor: self).
@@ -154,6 +166,18 @@ ASTCPrettyPrint >> visitASTCOperator: anOperator [
 		ifTrue: [ ^ self visitASTBinaryOperator: anOperator ].
 	nbOperands == 3
 		ifTrue: [ ^ self visitASTTernaryOperator: anOperator ]
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCReturn: aReturn [
+	self <<< 'return '.
+	aReturn expression acceptVisitor: self.
+	self << ';'
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCType: aType [
+	self << aType type asType.
 ]
 
 { #category : #accessing }

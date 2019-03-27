@@ -27,9 +27,10 @@ Principle of the translation is to infer the type of the receiver (NOT DONE YET.
 Class {
 	#name : #ASTCFromPharo,
 	#superclass : #RBProgramNodeVisitor,
+	#traits : 'ASTCFormatTrait',
+	#classTraits : 'ASTCFormatTrait classTrait',
 	#classVars : [
-		'ClassDictionary',
-		'classDictionary'
+		'ClassDictionary'
 	],
 	#category : #'ASTC-Translation'
 }
@@ -53,17 +54,6 @@ ASTCFromPharo >> classDictionary:aCollection [
 	"accessor"
 	ClassDictionary:=aCollection.
 	^aCollection
-]
-
-{ #category : #formatting }
-ASTCFromPharo >> formatSelector: aSelector [
-	| functionName | 
-	functionName:=aSelector asString.
-	1 to:functionName size do:[:index | 
-		(functionName at: index)=$: 
-		ifTrue:[ functionName at:index put: Character space]
-		].
-	^functionName asCamelCase 
 ]
 
 { #category : #visiting }
@@ -117,14 +107,14 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
-	self flag:#comment.
 	self flag:#todo."arguments)"
 	self flag:#type.
 	^ASTCFunctionDefinition new
-		id: (ASTCIdentifier new id:( self formatSelector:(aMethodNode selector)); 
+		id: (ASTCIdentifier new id:(self formatSelector:(aMethodNode selector)); 
 										yourself);
 		type: (ASTCType new type: ASTCSmallInteger ;
 								  yourself);
+		declarations: (ASTCContainer new visitArgs: aMethodNode arguments with: self;yourself);
 		body:(self visitNode: aMethodNode body);
 		yourself.
 
@@ -140,13 +130,16 @@ ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 ]
 
 { #category : #visiting }
+ASTCFromPharo >> visitReturnNode: aReturnNode [
+	
+	^ASTCReturn new expression: (aReturnNode value acceptVisitor:self);yourself. 
+]
+
+{ #category : #visiting }
 ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	| res |
-	self flag:#comment.
 	res:=ASTCBlock new.
-	
 	res statements: (aSequenceNode statements collect: [:each | self visitNode: each]).
-	
 	^res.
 ]
 

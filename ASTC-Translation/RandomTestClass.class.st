@@ -6,7 +6,7 @@ My selectors are used by ASTCFromPharo as toy translations.
 Class {
 	#name : #RandomTestClass,
 	#superclass : #Object,
-	#category : #'ASTC-Builder'
+	#category : #'ASTC-Translation'
 }
 
 { #category : #'as yet unclassified' }
