@@ -81,7 +81,7 @@ ASTCGenerator >> addAcceptMethodOn:aClass [
 	"Add the #accept method selector on aClass."	
 	self addMethod:(
 'acceptVisitor: aVisitor
-	aVisitor visit',currentClass asString,':self.'
+	^aVisitor visit',currentClass asString,':self.'
 		)
 		on: aClass
 		withProtocol:'visiting'.

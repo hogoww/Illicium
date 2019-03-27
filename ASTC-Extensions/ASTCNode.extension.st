@@ -9,8 +9,10 @@ ASTCNode >> debugASTCStructure [
 
 { #category : #'*ASTC-Extensions' }
 ASTCNode >> isStructuralyValidAST [
-	self flag:#todo.
-	
+	| validationVisitor |
+	validationVisitor := ASTCValidation new.
+	self acceptVisitor: validationVisitor.
+	^validationVisitor isItValid.
 ]
 
 { #category : #'*ASTC-Extensions' }

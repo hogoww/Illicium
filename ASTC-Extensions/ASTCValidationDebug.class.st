@@ -150,7 +150,7 @@ ASTCValidationDebug >> visitASTCType: anASTCType [
 	self flag:#todo."add Metaclass"
 	self visitASTCNode: anASTCType.
 
-	self assert: anASTCType type class class equals: TraitedMetaclass.
+	self assert: anASTCType type isClass.
 
 	super visitASTCType: anASTCType.
 ]
