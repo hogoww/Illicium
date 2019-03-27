@@ -462,10 +462,12 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
   '.
 
 	isPropertyBoolean ifFalse:[
-		methodBody:=methodBody,'^',(self aClassAsVariableName: className),' ',aPropertyName.
-		methodBody:=methodBody,(isManyBoolean ifTrue:[' do:[:child| child acceptVisitor:self].']
-				     ifFalse:[' acceptVisitor:self.']).
-				].
+		methodBody:=methodBody,(self aClassAsVariableName: className),' ',aPropertyName,' ifNil:[^self]'.
+		methodBody:=methodBody,(self aClassAsVariableName: className),' ',aPropertyName,
+		(isManyBoolean 
+			ifTrue:[' do:[:child| child acceptVisitor:self].']
+			ifFalse:[' acceptVisitor:self.']).
+		].
 	
 	self addMethod: methodBody on: astWalkerVisitorClass withProtocol: 'walking'
 	
