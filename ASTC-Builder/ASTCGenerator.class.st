@@ -154,7 +154,7 @@ ASTCGenerator >> addClassInitializeOn: aClass [
 	methodBody :=String streamContents: [:s | 
 		s nextPutAll:'initialize
 	super initialize.
-'.
+	'.
 		methodstoCall do: [:method | s nextPutAll:'	self ' ;nextPutAll: method; nextPutAll:'.' ] 
 		separatedBy:[s cr;tab]
 		].

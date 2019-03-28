@@ -13,10 +13,10 @@ ASTCBlock >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self statements = anotherNode statements
+	self declarations = anotherNode declarations
 		ifFalse: [ ^ false ].
 
-	self declarations = anotherNode declarations
+	self statements = anotherNode statements
 		ifFalse: [ ^ false ].
 
 	^ true
@@ -35,24 +35,24 @@ ASTCBlock >> declarations [
 { #category : #accessors }
 ASTCBlock >> declarations: aCollection [
 	declarations:=aCollection.
-	self declarations do:[:each| each parent:self].
-			^aCollection.
+	aCollection parent:self.
+	^aCollection.
 ]
 
 { #category : #comparing }
 ASTCBlock >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self statements hash.
 	hash := hash + self declarations hash.
+	hash := hash + self statements hash.
  hash
 ]
 
 { #category : #initialize }
 ASTCBlock >> initialize [
 	super initialize.
-	self initializeStatements.
-		self initializeDeclarations.
+	self initializeDeclarations.
+		self initializeStatements.
 ]
 
 { #category : #initialize }
@@ -83,6 +83,6 @@ ASTCBlock >> statements [
 { #category : #accessors }
 ASTCBlock >> statements: aCollection [
 	statements:=aCollection.
-	self statements do:[:each| each parent:self].
-			^aCollection.
+	aCollection parent:self.
+	^aCollection.
 ]

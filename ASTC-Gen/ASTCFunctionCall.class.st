@@ -32,8 +32,8 @@ ASTCFunctionCall >> arguments [
 { #category : #accessors }
 ASTCFunctionCall >> arguments: aCollection [
 	arguments:=aCollection.
-	self arguments do:[:each| each parent:self].
-			^aCollection.
+	aCollection parent:self.
+	^aCollection.
 ]
 
 { #category : #comparing }

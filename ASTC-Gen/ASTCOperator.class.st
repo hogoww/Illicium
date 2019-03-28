@@ -56,8 +56,8 @@ ASTCOperator >> operands [
 { #category : #accessors }
 ASTCOperator >> operands: aCollection [
 	operands:=aCollection.
-	self operands do:[:each| each parent:self].
-			^aCollection.
+	aCollection parent:self.
+	^aCollection.
 ]
 
 { #category : #print }

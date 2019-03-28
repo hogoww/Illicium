@@ -73,25 +73,26 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 		id: anArgumentNode name;
 		yourself.
 	^ anArgumentNode parent isMethod
-		ifTrue: [ ASTCDeclaration new
+		ifTrue: [ 
+			ASTCDeclaration new
 				id: argIdentifier;
 				type:
 					(ASTCType new
 						type: ASTCSmallInteger;
 						yourself);
-				yourself ]
-		ifFalse: [ argIdentifier
-				yourself ]
+				yourself.
+			]
+		ifFalse: [ 
+			argIdentifier yourself 
+			]
 ]
 
 { #category : #visiting }
 ASTCFromPharo >> visitBlockNode: aBlockNode [
 	| res |
-	self flag:#comment.
 	res:=ASTCBlock new.
-	
-	res declarations: (aBlockNode arguments collect:[:each | self visitNode: each]).
-	res statements: (aBlockNode statements collect: [:each | self visitNode: each]).
+	res declarations: (aBlockNode arguments collect:[:each | self visitNode: each] into: ASTCContainer new).
+	res statements: (aBlockNode statements collect: [:each | self visitNode: each] into: ASTCContainer new).
 
 	^res.
 ]
@@ -147,7 +148,7 @@ ASTCFromPharo >> visitReturnNode: aReturnNode [
 ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	| res |
 	res:=ASTCBlock new.
-	res statements: (aSequenceNode statements collect: [:each | self visitNode: each]).
+	res statements: (aSequenceNode statements collect: [:each | self visitNode: each] into: ASTCContainer new).
 	^res.
 ]
 

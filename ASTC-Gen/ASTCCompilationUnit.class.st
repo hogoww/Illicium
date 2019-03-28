@@ -32,8 +32,8 @@ ASTCCompilationUnit >> functionDefinitions [
 { #category : #accessors }
 ASTCCompilationUnit >> functionDefinitions: aCollection [
 	functionDefinitions:=aCollection.
-	self functionDefinitions do:[:each| each parent:self].
-			^aCollection.
+	aCollection parent:self.
+	^aCollection.
 ]
 
 { #category : #comparing }

@@ -91,6 +91,13 @@ ASTCContainer >> doesNotUnderstand: aMessage [
 	^aMessage sendTo:collection
 ]
 
+{ #category : #initialization }
+ASTCContainer >> fillFrom: aCollection with: aBlock [
+	self flag:#bad. "0(2n), instead of o(n)..."
+	self collection: (self collection fillFrom: aCollection with: aBlock).
+	^self.
+]
+
 { #category : #comparing }
 ASTCContainer >> hash [
 	^ collection hash
@@ -102,7 +109,7 @@ ASTCContainer >> initialize [
 	"Initialize for ASTCContainer."
 
 	collection:=LinkedList new."A linked list so far, could be changed."
-	parent:=nil."parent will be set by my future parent"
+
 ]
 
 { #category : #initialization }
@@ -128,6 +135,6 @@ ASTCContainer >> visitArgs: someArguments with: aVisitor [
 	self collection: 
 		(someArguments collect:[:each| 
 			each acceptVisitor: aVisitor.
-		]).
+		] into: ASTCContainer new).
 	^self
 ]

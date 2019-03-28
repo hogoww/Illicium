@@ -82,8 +82,8 @@ ASTCFunctionDefinition >> parameters [
 { #category : #accessors }
 ASTCFunctionDefinition >> parameters: aCollection [
 	parameters:=aCollection.
-	self parameters do:[:each| each parent:self].
-			^aCollection.
+	aCollection parent:self.
+	^aCollection.
 ]
 
 { #category : #print }

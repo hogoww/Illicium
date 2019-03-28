@@ -31,8 +31,8 @@ ASTCProject >> compilationUnits [
 { #category : #accessors }
 ASTCProject >> compilationUnits: aCollection [
 	compilationUnits:=aCollection.
-	self compilationUnits do:[:each| each parent:self].
-			^aCollection.
+	aCollection parent:self.
+	^aCollection.
 ]
 
 { #category : #comparing }
