@@ -561,7 +561,7 @@ ASTCGenerator >> allTypedProperties: aClass [
 ]
 
 { #category : #generating }
-ASTCGenerator >> classStuffOnCurrentClass. [
+ASTCGenerator >> classStuffOnCurrentClass [
 	"dispatcher for everything that needs to be added on currentClass"
 	self addCurrentClassVisitToAbstractVisitor.
 	self addVisitor.
