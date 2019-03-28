@@ -13,26 +13,8 @@ I just answer if the AST C use the corrects types. To debug an AST, use my super
 Class {
 	#name : #ASTCValidator,
 	#superclass : #ASTCValidatorDebug,
-	#instVars : [
-		'isItValid'
-	],
 	#category : #'ASTC-Extensions-validation'
 }
-
-{ #category : #visiting }
-ASTCValidator >> initialize [ 
-	isItValid:=true.
-]
-
-{ #category : #visiting }
-ASTCValidator >> isItValid [
-	^isItValid
-]
-
-{ #category : #visiting }
-ASTCValidator >> isItValid: aBoolean [
-	isItValid:=aBoolean
-]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCBlock: anASTCBlock [
