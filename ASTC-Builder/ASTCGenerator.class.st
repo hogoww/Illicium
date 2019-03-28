@@ -560,6 +560,17 @@ ASTCGenerator >> allTypedProperties: aClass [
 	^res
 ]
 
+{ #category : #generating }
+ASTCGenerator >> classStuffOnCurrentClass. [
+	"dispatcher for everything that needs to be added on currentClass"
+	self addCurrentClassVisitToAbstractVisitor.
+	self addVisitor.
+	self addClassInitialize.
+	self addPrinterProperties.
+	self addClassTester.
+	self addEqualityMethods.
+]
+
 { #category : #actions }
 ASTCGenerator >> clean [
 	"remove the package created by a previous generation, and the contained classes"
