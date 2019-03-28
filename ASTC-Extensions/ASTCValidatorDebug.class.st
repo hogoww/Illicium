@@ -93,7 +93,7 @@ ASTCValidatorDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 ASTCValidatorDebug >> visitASTCIdentifier: anASTCIdentifier [
 	self visitASTCExpression: anASTCIdentifier.
 	
-	self flag:#todo. "Check that it's a valid format with regex."
+	anASTCIdentifier value isLiteral.
 	
 	super visitASTCIdentifier: anASTCIdentifier.
 ]

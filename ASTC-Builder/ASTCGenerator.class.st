@@ -119,15 +119,10 @@ propertyName,'
 	methodBody :=
 propertyName,': ', variableName,'
 	',propertyName,':=',variableName,'.
-	',((isPropertyBoolean or:['parent' match:propertyName]) ifFalse:[
-		(isManyBoolean 
-		ifTrue:[
-			'self ',propertyName, ' do:[:each| each parent:self].
-			'.
-			]
+	',((isPropertyBoolean or:['parent' match:propertyName]) 
 		ifFalse:[
-			variableName,' parent:self.
-	'	])
+				variableName,' parent:self.
+	'		
 	]ifTrue:['']),
 
 	'^',variableName,'.'.
