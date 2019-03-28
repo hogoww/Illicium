@@ -129,7 +129,7 @@ ASTCPrettyPrint >> visitASTCDeclaration: aDeclaration [
 ASTCPrettyPrint >> visitASTCExpressionStatement: anExpressionStatement [
 	self spaces.
 	anExpressionStatement expression acceptVisitor: self.
-	self << $;.
+	self << $;. 
 ]
 
 { #category : #accessing }
