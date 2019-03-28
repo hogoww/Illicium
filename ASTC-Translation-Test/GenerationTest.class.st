@@ -34,7 +34,7 @@ GenerationTest >> testASTCIf [
 	
 	expectedC := ASTCIf new 
 		predicate: (ASTCOperator new
-			symbol:'=';
+			symbol:'==';
 			operands: (ASTCContainer new 
 				add:(ASTCLiteral new value:1 ; yourself);
 				add:(ASTCLiteral new value:2 ; yourself);

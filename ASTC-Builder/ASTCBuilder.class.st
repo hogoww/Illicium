@@ -166,8 +166,8 @@ ASTCBuilder >> defineRelations [
 	(node property:#parent) -<> (node property:#parent).	
 
 	"FunctionDefinition"
-	(functionDefinition property:#id) <>- (identifier property:#funcDefId).
 	(functionDefinition property:#type) <>- (type property:#type).
+	(functionDefinition property:#id) <>- (identifier property:#funcDefId).
 	(functionDefinition property:#parameters) <>-* (declaration property:#funcDeclaration).
 	(functionDefinition property:#body) <>- (block property:#funcDefBody).
 	
@@ -187,8 +187,8 @@ ASTCBuilder >> defineRelations [
 	(block property:#declarations) <>-* (declaration property:#blockDecl).
 	(block property:#statements) <>-* (statement property:#blockStatement).
 	
-	(declaration property:#id) <>- (identifier property:#declId).
 	(declaration property:#type) <>- (identifier property:#declType).
+	(declaration property:#id) <>- (identifier property:#declId).
 	(declaration property:#init) <>- (identifier property:#declExp).
 
 ]

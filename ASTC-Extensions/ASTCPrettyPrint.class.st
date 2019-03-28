@@ -105,7 +105,7 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 	aBlock statements
 		do: [ :each | 
 			each acceptVisitor: self.
-			self << $; << Character cr ].
+			self << Character cr ].
 	self leaveBlock.
 	self spaces.
 	self << '}'.
@@ -119,9 +119,17 @@ ASTCPrettyPrint >> visitASTCDeclaration: aDeclaration [
 	self << Character space.
 	aDeclaration id acceptVisitor:self.
 	aDeclaration init ifNotNil:[:init| 
-		self << '='.
+		self << $=.
 		init acceptVisitor:self.
 		].
+	self << $;
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCExpressionStatement: anExpressionStatement [
+	self spaces.
+	anExpressionStatement expression acceptVisitor: self.
+	self << $;.
 ]
 
 { #category : #accessing }
@@ -184,6 +192,7 @@ ASTCPrettyPrint >> visitASTCOperator: anOperator [
 ASTCPrettyPrint >> visitASTCReturn: aReturn [
 	self <<< 'return '.
 	aReturn expression acceptVisitor: self.
+	self << $;.
 ]
 
 { #category : #accessing }

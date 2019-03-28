@@ -146,7 +146,8 @@ ASTCGenerator >> addClassInitialize [
 { #category : #'generating-initialize' }
 ASTCGenerator >> addClassInitializeOn: aClass forProperties: aCollection [
 	| methodBody |
-	
+	"Add initialization for a class with many properties (*-<>) in the metamodel)"
+	"The result will keep the order of the definitions in the metamodel"
 	aCollection ifEmpty:[^self]. 
 	
 	methodBody :=String streamContents: [:s | 
@@ -300,11 +301,9 @@ ASTCGenerator >> addPrintPropertiesOn: aClass [
 
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrintPropertiesOn: aClass forAttributes:aCollectionOfProperties [
-	| methodBody methodstoCall|
-	self flag:#duplication."duplication with initialize/walker"
-	"generate a #print that will call every property printer already on the target class."
-	"The result will be UNORDERED."
-
+	| methodBody |
+	"generate a #printProperties selector that will call every property asString"
+	"The result will keep the order of the definitions in the metamodel"
 	methodBody:='printProperties
 	'.	
 
@@ -429,8 +428,7 @@ ASTCGenerator >> addWalkerMethod [
 ASTCGenerator >> addWalkerMethodFor: aClass [ 
 	| methodBody methodstoCall pattern className|
 	"generate a walker that will call every property walker already on the target class."
-	"The result will be UNORDERED."
-	self flag:#duplication."duplication with initialize/printer"
+	"The result will keep the order of the definitions in the metamodel"
 	
 	className:=aClass asString.
 	pattern:='walk',className,'*'.
