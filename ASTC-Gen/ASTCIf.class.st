@@ -14,6 +14,15 @@ ASTCIf >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self predicate = anotherNode predicate
+		ifFalse: [ ^ false ].
+
+	self then = anotherNode then
+		ifFalse: [ ^ false ].
+
+	self else = anotherNode else
+		ifFalse: [ ^ false ].
+
 	^ true
 ]
 
@@ -38,6 +47,9 @@ ASTCIf >> else: anObject [
 ASTCIf >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self predicate hash.
+	hash := hash + self then hash.
+	hash := hash + self else hash.
  hash
 ]
 

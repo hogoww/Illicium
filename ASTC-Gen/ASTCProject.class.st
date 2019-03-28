@@ -46,7 +46,7 @@ ASTCProject >> hash [
 { #category : #initialize }
 ASTCProject >> initialize [
 	super initialize.
-	self initializeCompilationUnits.
+		self initializeCompilationUnits.
 ]
 
 { #category : #initialize }

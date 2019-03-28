@@ -13,6 +13,9 @@ ASTCFunctionCall >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self id = anotherNode id
+		ifFalse: [ ^ false ].
+
 	self arguments = anotherNode arguments
 		ifFalse: [ ^ false ].
 
@@ -40,6 +43,7 @@ ASTCFunctionCall >> arguments: aCollection [
 ASTCFunctionCall >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self id hash.
 	hash := hash + self arguments hash.
  hash
 ]
@@ -59,7 +63,7 @@ ASTCFunctionCall >> id: anObject [
 { #category : #initialize }
 ASTCFunctionCall >> initialize [
 	super initialize.
-	self initializeArguments.
+		self initializeArguments.
 ]
 
 { #category : #initialize }

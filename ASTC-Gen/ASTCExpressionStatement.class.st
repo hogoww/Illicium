@@ -12,6 +12,9 @@ ASTCExpressionStatement >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self expression = anotherNode expression
+		ifFalse: [ ^ false ].
+
 	^ true
 ]
 
@@ -36,6 +39,7 @@ ASTCExpressionStatement >> expression: anObject [
 ASTCExpressionStatement >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self expression hash.
  hash
 ]
 

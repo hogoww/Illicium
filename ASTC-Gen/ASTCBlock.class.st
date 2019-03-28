@@ -13,6 +13,9 @@ ASTCBlock >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self parent = anotherNode parent
+		ifFalse: [ ^ false ].
+
 	self declarations = anotherNode declarations
 		ifFalse: [ ^ false ].
 
@@ -43,6 +46,7 @@ ASTCBlock >> declarations: aCollection [
 ASTCBlock >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self parent hash.
 	hash := hash + self declarations hash.
 	hash := hash + self statements hash.
  hash
@@ -51,7 +55,7 @@ ASTCBlock >> hash [
 { #category : #initialize }
 ASTCBlock >> initialize [
 	super initialize.
-	self initializeDeclarations.
+		self initializeDeclarations.
 		self initializeStatements.
 ]
 

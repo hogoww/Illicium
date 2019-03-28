@@ -14,6 +14,21 @@ ASTCDeclaration >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self parent = anotherNode parent
+		ifFalse: [ ^ false ].
+
+	self parent = anotherNode parent
+		ifFalse: [ ^ false ].
+
+	self id = anotherNode id
+		ifFalse: [ ^ false ].
+
+	self type = anotherNode type
+		ifFalse: [ ^ false ].
+
+	self init = anotherNode init
+		ifFalse: [ ^ false ].
+
 	^ true
 ]
 
@@ -26,6 +41,11 @@ ASTCDeclaration >> acceptVisitor: aVisitor [
 ASTCDeclaration >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self parent hash.
+	hash := hash + self parent hash.
+	hash := hash + self id hash.
+	hash := hash + self type hash.
+	hash := hash + self init hash.
  hash
 ]
 

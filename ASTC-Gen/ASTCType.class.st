@@ -12,6 +12,9 @@ ASTCType >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self type = anotherNode type
+		ifFalse: [ ^ false ].
+
 	^ true
 ]
 
@@ -24,6 +27,7 @@ ASTCType >> acceptVisitor: aVisitor [
 ASTCType >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self type hash.
  hash
 ]
 

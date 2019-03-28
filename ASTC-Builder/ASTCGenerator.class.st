@@ -47,6 +47,8 @@ Class {
 		'prefix',
 		'builder',
 		'currentClass',
+		'currentRelationshipSides',
+		'currentTypedProperties',
 		'parentPropertyName',
 		'astVisitorClass',
 		'collectionsType',
@@ -64,7 +66,7 @@ ASTCGenerator class >> generate [
 { #category : #'name-formating' }
 ASTCGenerator >> aClassAsVariableName: aClassNameAsString [
 	"returns a string (given as a String) with the following format to the classic arguments names: aClass, anObject [...]"
-	"self new aClassAsVariable: self class asString>>>'anASTCGenerator'" 
+	"ASTCGenerator new aClassAsVariableName: self class asString>>>'anASTCGenerator'" 
 	self flag:#testInComment.
 	self flag:#wrongClass."should be on String, But I'm trying to do a self sustaining package."
 	^(aClassNameAsString first isVowel ifTrue:['an']ifFalse:['a']),aClassNameAsString capitalized.
@@ -104,7 +106,7 @@ ASTCGenerator >> addAccessors: aSymbol on: aClass isMany: isManyBoolean isProper
 	self flag:#improvement." isPropertyBoolean ifTrue:[We have a property which, by our semantic means that it's not a type from ASTC. Should be improved ]
 															ifFalse:[It's a link with another class of the ASTC, meaning that we'll have to update the parent of the given property in the setter.]"
 
-	self flag:#FIXNEEDED."aSelector should notify his parent before getting adopted by someone else." 
+	self flag:#todo."aSelector should notify his parent before getting adopted by someone else." 
 	
 	propertyName:=aSymbol asString.
 	"getter"
@@ -130,32 +132,28 @@ propertyName,': ', variableName,'
 	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
 	
 	isManyBoolean ifTrue:[
-		self addPropertyInitialize: aSymbol .
+		self addPropertyInitialize: aSymbol.
 		].
 ]
 
 { #category : #'generating-initialize' }
 ASTCGenerator >> addClassInitialize [
 	"shortcut for the currentClass Instance Variable"
-	self addClassInitializeOn:currentClass
+	self addClassInitializeOn:currentClass forProperties: self allInitializedPropertiesOfCurrentClass.
 	
 ]
 
 { #category : #'generating-initialize' }
-ASTCGenerator >> addClassInitializeOn: aClass [
-	| methodBody methodstoCall |
-	"generate an initialized that will call every property initializer already on the target class."
-	"The result will be UNORDERED."
-	self flag:#duplication."duplication with printer/walker"
-	methodstoCall := aClass selectors select:[:selector| 'initialize*' match:selector ]. 
+ASTCGenerator >> addClassInitializeOn: aClass forProperties: aCollection [
+	| methodBody |
 	
-	methodstoCall ifEmpty:[^self].
+	aCollection ifEmpty:[^self]. 
 	
 	methodBody :=String streamContents: [:s | 
-		s nextPutAll:'initialize
+		s << 'initialize
 	super initialize.
 	'.
-		methodstoCall do: [:method | s nextPutAll:'	self ' ;nextPutAll: method; nextPutAll:'.' ] 
+		aCollection do: [:propertyName | s << '	self ' ; << 'initialize' ; << propertyName capitalized ; << '.' ] 
 		separatedBy:[s cr;tab]
 		].
 	
@@ -301,6 +299,31 @@ ASTCGenerator >> addPrintPropertiesOn: aClass [
 ]
 
 { #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrintPropertiesOn: aClass forAttributes:aCollectionOfProperties [
+	| methodBody methodstoCall|
+	self flag:#duplication."duplication with initialize/walker"
+	"generate a #print that will call every property printer already on the target class."
+	"The result will be UNORDERED."
+
+	methodBody:='printProperties
+	'.	
+
+	methodBody := methodBody,
+		(aCollectionOfProperties
+			ifEmpty:['^''''']
+			ifNotEmpty:[	
+			(String streamContents: [:s | 
+		s <<'^String streamContents:[:s |
+	'.
+	aCollectionOfProperties do: [:aProperty | s <<'s << '' '' << self ' ;<< aProperty ;<< 'asString.'. ] separatedBy:[s cr;tab.].
+	s<<'].'.
+		]).
+	]).
+	
+	self addMethod: methodBody on: aClass withProtocol: 'print'.
+]
+
+{ #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrinterProperties [
 	"shortcut for currentClass Instance Variable"
 	self addPrintPropertiesOn: currentClass.
@@ -399,7 +422,7 @@ ASTCGenerator >> addVisitor [
 { #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerMethod [
 	"shortcut for the currentClass IV"
-	self addWalkerMethodFor:currentClass.
+	self addWalkerMethodFor:currentClass forProperties: (self allPropertiesOfClass: currentClass).
 ]
 
 { #category : #'generating-visitor-walker' }
@@ -426,6 +449,31 @@ ASTCGenerator >> addWalkerMethodFor: aClass [
 	].
 	
 	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visiting'.
+]
+
+{ #category : #'generating-visitor-walker' }
+ASTCGenerator >> addWalkerMethodFor: aClass forProperties: aCollectionOfProperties [
+	| methodBody className |
+	className := aClass asString.
+	methodBody := String
+		streamContents: [ :s | 
+			s	<< (self methodClassSignatureFor: className withPrefix: 'walk');
+				cr.
+			aCollectionOfProperties
+				do: [ :aProperty | 
+					s tab
+						<< 'self walk';
+						<< className;
+						<< aProperty capitalized;
+						<< $:;
+						space;
+						<< (self aClassAsVariableName: aClass asString);
+						<< '.';
+						cr ] ].
+	self
+		addMethod: methodBody
+		on: astWalkerVisitorClass
+		withProtocol: 'visiting'
 ]
 
 { #category : #'generating-visitor-walker' }
@@ -475,6 +523,52 @@ ASTCGenerator >> addWalkingOverrideFor: aClass [
 	].
 	
 	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visiting'.
+]
+
+{ #category : #generating }
+ASTCGenerator >> allInitializedPropertiesOfCurrentClass [
+	| res |
+	res := LinkedList new.
+	currentRelationshipSides do:[:aRelationSide |
+		aRelationSide isMany 
+		ifTrue:[ res add:aRelationSide name asString ]
+	].
+	^res
+]
+
+{ #category : #generating }
+ASTCGenerator >> allPropertiesOfClass: aClass [
+	| res |
+	res := LinkedList new.
+	currentRelationshipSides do:[:aRelationSide |
+		aRelationSide isContainer 
+		ifFalse:[ res add: aRelationSide name asString ]].
+
+	
+	currentTypedProperties collect:[:aTypedProperty | aTypedProperty name] into: res.
+	
+	^res
+]
+
+{ #category : #generating }
+ASTCGenerator >> allTypedProperties: aClass [
+	| res |
+	res := LinkedList new.
+
+	currentTypedProperties collect:[:aTypedProperty | aTypedProperty name] into: res.
+	
+	^res
+]
+
+{ #category : #generating }
+ASTCGenerator >> classStuffOnCurrentClass. [
+	"dispatcher for everything that needs to be added on currentClass"
+	self addCurrentClassVisitToAbstractVisitor.
+	self addVisitor.
+	self addClassInitialize.
+	self addPrinterProperties.
+	self addClassTester.
+	self addEqualityMethods.
 ]
 
 { #category : #actions }
@@ -619,12 +713,37 @@ ASTCGenerator >> prefix: aString [
 	
 ]
 
-{ #category : #'generating-equality' }
+{ #category : #generating }
 ASTCGenerator >> propertiesOfClass: aClass [
-	self flag:#FALSE." that way doesn't get every properties, because they don't always have initializers"
-	^ currentClass selectors
-		select: [:selector| 'initialize.+' asRegex matches: selector ]
-		thenCollect: [ :selector | (selector allButFirst: 'initialize' size) uncapitalized ]
+	| res |
+	res := LinkedList new.
+	currentRelationshipSides collect:[:aRelationSide |
+		aRelationSide isContainer 
+		ifTrue:[	self parentPropertyName ]
+		ifFalse:[ aRelationSide name asString ]
+		] into: res.
+	
+	currentTypedProperties collect:[:aTypedProperty | aTypedProperty name] into: res.
+	
+	^res
+]
+
+{ #category : #generating }
+ASTCGenerator >> relationSideStuff [
+	currentRelationshipSides do:[:aRelationSide|
+		aRelationSide isContainer 
+		ifTrue:[
+			self addProperty: self parentPropertyName isMany: false.
+			]
+		ifFalse:[
+			self addProperty: aRelationSide name asString isMany: aRelationSide isMany.
+		].
+	].
+]
+
+{ #category : #generating }
+ASTCGenerator >> typedPropertiesStuff [
+	currentTypedProperties do:[:aTypedProperty| self addProperty:aTypedProperty name isMany: false isProperty:true.].
 ]
 
 { #category : #visiting }
@@ -636,17 +755,18 @@ ASTCGenerator >> visitClass: aClass [
 	className := (prefix,aClass name) asSymbol."we get the new class name and format it"
 	
 	"And we create it"
-	currentClass:=self createClass: className superclass: superclass.
+	currentClass := self createClass: className superclass: superclass.
+	currentRelationshipSides := LinkedList new.
+	currentTypedProperties := LinkedList new.
 	
 	currentClass crLog.
 	super visitClass:aClass."fill up with property and properties methods, such as accessors"
 	
-	self addCurrentClassVisitToAbstractVisitor.
-	self addVisitor.
-	self addClassInitialize.
-	self addPrinterProperties.
-	self addClassTester.
-	self addEqualityMethods
+	self typedPropertiesStuff.	
+	self relationSideStuff.
+	self classStuffOnCurrentClass.
+
+
 ]
 
 { #category : #visiting }
@@ -664,19 +784,21 @@ ASTCGenerator >> visitRelationSide: aRelationSide [
 	show:((oppositeRelationSide isMany) ifTrue:['*']ifFalse:[ oppositeRelationSide isContainer ifTrue:['<>']ifFalse:['']]);
 	space ;
 	show: oppositeRelationSide name."
-	
 
-	aRelationSide isContainer 
+	currentRelationshipSides add:aRelationSide.
+	
+	"aRelationSide isContainer 
 	ifTrue:[
 		self addProperty: self parentPropertyName isMany: false.
 		]
 	ifFalse:[
 		self addProperty: aRelationSide name asString isMany: aRelationSide isMany.
-	].
+	]."
 ]
 
 { #category : #visiting }
 ASTCGenerator >> visitTypedProperty: aTypedProperty [
-	self addProperty:aTypedProperty name isMany: false isProperty:true.
+	currentTypedProperties add:aTypedProperty.
+	"self addProperty:aTypedProperty name isMany: false isProperty:true."
 	
 ]

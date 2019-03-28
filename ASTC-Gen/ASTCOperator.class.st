@@ -16,6 +16,9 @@ ASTCOperator >> = anotherNode [
 	self operands = anotherNode operands
 		ifFalse: [ ^ false ].
 
+	self symbol = anotherNode symbol
+		ifFalse: [ ^ false ].
+
 	^ true
 ]
 
@@ -29,13 +32,14 @@ ASTCOperator >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self operands hash.
+	hash := hash + self symbol hash.
  hash
 ]
 
 { #category : #initialize }
 ASTCOperator >> initialize [
 	super initialize.
-	self initializeOperands.
+		self initializeOperands.
 ]
 
 { #category : #initialize }

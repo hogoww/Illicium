@@ -12,6 +12,9 @@ ASTCReturn >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self expression = anotherNode expression
+		ifFalse: [ ^ false ].
+
 	^ true
 ]
 
@@ -36,6 +39,7 @@ ASTCReturn >> expression: anObject [
 ASTCReturn >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self expression hash.
  hash
 ]
 

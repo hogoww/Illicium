@@ -12,6 +12,9 @@ ASTCLiteral >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
+	self value = anotherNode value
+		ifFalse: [ ^ false ].
+
 	^ true
 ]
 
@@ -24,6 +27,7 @@ ASTCLiteral >> acceptVisitor: aVisitor [
 ASTCLiteral >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self value hash.
  hash
 ]
 
