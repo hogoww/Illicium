@@ -2,8 +2,8 @@ Class {
 	#name : #ASTCFunctionDefinition,
 	#superclass : #ASTCNode,
 	#instVars : [
-		'id',
 		'type',
+		'id',
 		'parameters',
 		'body'
 	],
@@ -15,13 +15,10 @@ ASTCFunctionDefinition >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self parent = anotherNode parent
+	self type = anotherNode type
 		ifFalse: [ ^ false ].
 
 	self id = anotherNode id
-		ifFalse: [ ^ false ].
-
-	self type = anotherNode type
 		ifFalse: [ ^ false ].
 
 	self parameters = anotherNode parameters
@@ -54,9 +51,8 @@ ASTCFunctionDefinition >> body: anObject [
 ASTCFunctionDefinition >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self parent hash.
-	hash := hash + self id hash.
 	hash := hash + self type hash.
+	hash := hash + self id hash.
 	hash := hash + self parameters hash.
 	hash := hash + self body hash.
  hash

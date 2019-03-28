@@ -221,7 +221,7 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 ASTCGenerator >> addEqualityMethods [
 
 	| properties |
-	properties := self propertiesOfClass: currentClass.
+	properties := self allPropertiesOfClass: currentClass.
 	self addEqualsOn: currentClass withPropertiesNamed: properties.
 	self addHashOn: currentClass withPropertiesNamed: properties.
 ]
@@ -425,31 +425,6 @@ ASTCGenerator >> addWalkerMethod [
 ]
 
 { #category : #'generating-visitor-walker' }
-ASTCGenerator >> addWalkerMethodFor: aClass [ 
-	| methodBody methodstoCall pattern className|
-	"generate a walker that will call every property walker already on the target class."
-	"The result will keep the order of the definitions in the metamodel"
-	
-	className:=aClass asString.
-	pattern:='walk',className,'*'.
-	methodstoCall := astWalkerVisitorClass selectors select:[:selector| pattern match:selector ]. 
-	
-
-	methodBody :=String streamContents: [:s | 
-		s << (self methodClassSignatureFor: className withPrefix:'walk'); << '
-	'.
-		methodstoCall do: [:method |
-			s <<  'self ';
-			  << method;
-			  <<  (self aClassAsVariableName: aClass asString);
-			<< '.
-	'.] 
-	].
-	
-	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visiting'.
-]
-
-{ #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerMethodFor: aClass forProperties: aCollectionOfProperties [
 	| methodBody className |
 	className := aClass asString.
@@ -542,7 +517,6 @@ ASTCGenerator >> allPropertiesOfClass: aClass [
 		aRelationSide isContainer 
 		ifFalse:[ res add: aRelationSide name asString ]].
 
-	
 	currentTypedProperties collect:[:aTypedProperty | aTypedProperty name] into: res.
 	
 	^res
@@ -709,21 +683,6 @@ ASTCGenerator >> prefix: aString [
 	prefix:=aString.
 	^aString
 	
-]
-
-{ #category : #generating }
-ASTCGenerator >> propertiesOfClass: aClass [
-	| res |
-	res := LinkedList new.
-	currentRelationshipSides collect:[:aRelationSide |
-		aRelationSide isContainer 
-		ifTrue:[	self parentPropertyName ]
-		ifFalse:[ aRelationSide name asString ]
-		] into: res.
-	
-	currentTypedProperties collect:[:aTypedProperty | aTypedProperty name] into: res.
-	
-	^res
 ]
 
 { #category : #generating }

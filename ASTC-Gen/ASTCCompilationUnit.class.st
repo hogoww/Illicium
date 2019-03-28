@@ -13,9 +13,6 @@ ASTCCompilationUnit >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self parent = anotherNode parent
-		ifFalse: [ ^ false ].
-
 	self functionDefinitions = anotherNode functionDefinitions
 		ifFalse: [ ^ false ].
 
@@ -43,7 +40,6 @@ ASTCCompilationUnit >> functionDefinitions: aCollection [
 ASTCCompilationUnit >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self parent hash.
 	hash := hash + self functionDefinitions hash.
  hash
 ]

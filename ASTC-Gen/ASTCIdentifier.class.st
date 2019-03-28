@@ -12,21 +12,6 @@ ASTCIdentifier >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self parent = anotherNode parent
-		ifFalse: [ ^ false ].
-
-	self parent = anotherNode parent
-		ifFalse: [ ^ false ].
-
-	self parent = anotherNode parent
-		ifFalse: [ ^ false ].
-
-	self parent = anotherNode parent
-		ifFalse: [ ^ false ].
-
-	self parent = anotherNode parent
-		ifFalse: [ ^ false ].
-
 	self id = anotherNode id
 		ifFalse: [ ^ false ].
 
@@ -42,11 +27,6 @@ ASTCIdentifier >> acceptVisitor: aVisitor [
 ASTCIdentifier >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self parent hash.
-	hash := hash + self parent hash.
-	hash := hash + self parent hash.
-	hash := hash + self parent hash.
-	hash := hash + self parent hash.
 	hash := hash + self id hash.
  hash
 ]

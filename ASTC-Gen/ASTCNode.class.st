@@ -12,9 +12,6 @@ ASTCNode >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self parent = anotherNode parent
-		ifFalse: [ ^ false ].
-
 	^ true
 ]
 
@@ -27,7 +24,6 @@ ASTCNode >> acceptVisitor: aVisitor [
 ASTCNode >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self parent hash.
  hash
 ]
 

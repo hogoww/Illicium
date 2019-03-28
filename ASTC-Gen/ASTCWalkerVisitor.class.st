@@ -139,8 +139,8 @@ ASTCWalkerVisitor >> walkASTCCompilationUnitParent:anASTCCompilationUnit [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCDeclaration: anASTCDeclaration [
-	self walkASTCDeclarationId: anASTCDeclaration.
 	self walkASTCDeclarationType: anASTCDeclaration.
+	self walkASTCDeclarationId: anASTCDeclaration.
 	self walkASTCDeclarationInit: anASTCDeclaration.
 
 ]
@@ -201,8 +201,8 @@ ASTCWalkerVisitor >> walkASTCFunctionCallId:anASTCFunctionCall [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCFunctionDefinition: anASTCFunctionDefinition [
-	self walkASTCFunctionDefinitionId: anASTCFunctionDefinition.
 	self walkASTCFunctionDefinitionType: anASTCFunctionDefinition.
+	self walkASTCFunctionDefinitionId: anASTCFunctionDefinition.
 	self walkASTCFunctionDefinitionParameters: anASTCFunctionDefinition.
 	self walkASTCFunctionDefinitionBody: anASTCFunctionDefinition.
 
