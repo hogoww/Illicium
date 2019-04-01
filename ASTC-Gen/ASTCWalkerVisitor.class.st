@@ -23,6 +23,12 @@ ASTCWalkerVisitor >> visitASTCDeclaration: anASTCDeclaration [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+	self walkASTCDeclarationStatement: anASTCDeclarationStatement.
+			
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitASTCExpression: anASTCExpression [
 	self walkASTCExpression: anASTCExpression.
 			
@@ -155,6 +161,18 @@ ASTCWalkerVisitor >> walkASTCDeclarationId:anASTCDeclaration [
 ASTCWalkerVisitor >> walkASTCDeclarationInit:anASTCDeclaration [
   anASTCDeclaration init ifNil:[^self].
 		anASTCDeclaration init acceptVisitor:self.
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCDeclarationStatement: anASTCDeclarationStatement [
+	self walkASTCDeclarationStatementDeclaration: anASTCDeclarationStatement.
+
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCDeclarationStatementDeclaration:anASTCDeclarationStatement [
+  anASTCDeclarationStatement declaration ifNil:[^self].
+		anASTCDeclarationStatement declaration acceptVisitor:self.
 ]
 
 { #category : #walking }

@@ -17,6 +17,10 @@ ASTCVisitor >> visitASTCDeclaration: anASTCDeclaration [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitASTCExpression: anASTCExpression [
 ]
 

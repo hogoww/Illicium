@@ -61,7 +61,7 @@ GenerationTest >> testASTCOperatorBinary [
 		symbol:'==';
 		operands: (ASTCContainer new
 			add:(ASTCIdentifier new id:'c' ; yourself);
-			add:(ASTCLiteral new value: (ASTCSmallInteger new myself:6;yourself) ; yourself);
+			add:(ASTCLiteral new value: (ASTCSmallInteger new myself:6 ; yourself) ; yourself);
 			yourself);
 		yourself.
 	

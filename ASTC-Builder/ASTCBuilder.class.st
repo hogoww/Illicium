@@ -55,7 +55,8 @@ Class {
 		'operator',
 		'expressionsContainerTrait',
 		'statementsContainerTrait',
-		'declarationsContainerTrait'
+		'declarationsContainerTrait',
+		'declarationStatement'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -97,6 +98,7 @@ ASTCBuilder >> defineClasses [
 		
 		"Statement"
 		expressionStatement:=builder newClassNamed:#ExpressionStatement.
+		declarationStatement := builder newClassNamed:#DeclarationStatement.
 		return:=builder newClassNamed:#Return.
 		if:=builder newClassNamed:#If.
 		block:=builder newClassNamed:#Block.
@@ -125,6 +127,7 @@ ASTCBuilder >> defineHierarchy [
 			
 			"Statement direct SubClasses"
 			expressionStatement --|> statement.
+			declarationStatement --|> statement.
 			return --|> statement.
 			if  --|> statement.
 			block --|> statement.
@@ -178,6 +181,7 @@ ASTCBuilder >> defineRelations [
 	(return property:#expression) <>- (expression property:#returnExp).
 
 	(expressionStatement property:#expression) <>- (expression property:#expStatement).
+	(declarationStatement property:#declaration) <>-(declaration property:#declStatement).
 
 	(operator property:#operands) <>-* (expression property:#operatorOperand).
 	

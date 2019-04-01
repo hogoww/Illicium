@@ -43,6 +43,14 @@ ASTCFromPharo class >> factorialRTest [
 	^self new visitMethodSelector: #factorialR: fromClass: RandomTestClass .
 ]
 
+{ #category : #'tests-manual' }
+ASTCFromPharo class >> factorialRTest2 [
+	"Shortcut for a test that's used a lot"
+	self flag:#transcriptClear.
+	Transcript clear.
+	^self new visitMethodSelector: #factorialR:anotherArgument: fromClass: RandomTestClass .
+]
+
 { #category : #visiting }
 ASTCFromPharo >> classDictionary [
 	"accessor"
@@ -83,8 +91,26 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 				yourself.
 			]
 		ifFalse: [ 
-			argIdentifier yourself 
+				argIdentifier.
 			]
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> visitAssignmentNode: anAssignementNode [
+	self flag:#type.
+	^ASTCDeclarationStatement new
+		declaration:
+			(ASTCDeclaration new 
+				type:
+					(ASTCType new
+					type:ASTCSmallInteger;
+					yourself);
+				id:
+					(anAssignementNode variable acceptVisitor: self);
+				init: 
+					(anAssignementNode value acceptVisitor:self);
+				yourself);
+		yourself.
 ]
 
 { #category : #visiting }

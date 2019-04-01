@@ -17,7 +17,7 @@ Class {
 { #category : #visiting }
 ASTCValidatorDebug >> visitASTCBlock: anASTCBlock [
 	self visitASTCStatement:anASTCBlock.
-	
+	self flag:#declaration.
 	anASTCBlock declarations do:[:each | self assert: each isASTCDeclaration.].
 	anASTCBlock statements do:[:each | self assert: each isASTCStatement.].
 	

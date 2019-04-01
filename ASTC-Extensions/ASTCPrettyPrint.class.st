@@ -104,6 +104,7 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 	self enterBlock.
 	aBlock statements
 		do: [ :each | 
+			self spaces.
 			each acceptVisitor: self.
 			self << Character cr ].
 	self leaveBlock.
@@ -122,6 +123,12 @@ ASTCPrettyPrint >> visitASTCDeclaration: aDeclaration [
 		self << $=.
 		init acceptVisitor:self.
 		].
+
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCDeclarationStatement: aDeclaration [
+	aDeclaration declaration acceptVisitor: self.
 	self << $;
 ]
 
@@ -163,7 +170,7 @@ ASTCPrettyPrint >> visitASTCIdentifier: anIdentifier [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCIf: anIf [
-	self <<< 'if ('.
+	self << 'if ('.
 	(anIf predicate acceptVisitor: self).
 	self << ') '.
 	(anIf then acceptVisitor: self).
@@ -190,7 +197,7 @@ ASTCPrettyPrint >> visitASTCOperator: anOperator [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCReturn: aReturn [
-	self <<< 'return '.
+	self << 'return '.
 	aReturn expression acceptVisitor: self.
 	self << $;.
 ]

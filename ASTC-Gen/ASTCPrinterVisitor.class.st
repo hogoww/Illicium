@@ -83,6 +83,22 @@ ASTCPrinterVisitor >> visitASTCDeclaration: anASTCDeclaration [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCDeclarationStatement'.
+	stream << (anASTCDeclarationStatement printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCDeclarationStatement:anASTCDeclarationStatement.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitASTCExpression: anASTCExpression [
 	stream << '
 '.

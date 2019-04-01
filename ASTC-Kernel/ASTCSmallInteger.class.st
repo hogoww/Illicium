@@ -59,6 +59,11 @@ ASTCSmallInteger >> asType [
 ]
 
 { #category : #accessing }
+ASTCSmallInteger >> defaultValue [
+	^0
+]
+
+{ #category : #accessing }
 ASTCSmallInteger >> doesNotUnderstand: aMessage [
 	self flag:#missingArguments.
 	^ASTCFunctionCall new

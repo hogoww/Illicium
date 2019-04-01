@@ -9,7 +9,7 @@ Class {
 	#category : #'ASTC-Translation'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 RandomTestClass >> factorialR: n [
 	"basic toy function"
 	n=0
@@ -20,4 +20,19 @@ RandomTestClass >> factorialR: n [
 		^n*(self factorialR:(n-1))
 		]
 	
+]
+
+{ #category : #tests }
+RandomTestClass >> factorialR: n anotherArgument: n2 [
+	"basic toy function"
+	| res |
+	res:=0.
+	n=0
+	ifTrue:[
+		res:=1
+		]
+	ifFalse:[
+		res:=n*(self factorialR:(n-1))
+		].
+	^res.
 ]

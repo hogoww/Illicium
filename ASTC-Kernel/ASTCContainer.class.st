@@ -37,6 +37,7 @@ Class {
 
 { #category : #comparing }
 ASTCContainer >> = anotherContainer [
+	self halt.
 	^ (anotherContainer class = self class)
 		and:[ self collection = anotherContainer collection]
 ]
