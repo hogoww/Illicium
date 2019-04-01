@@ -15,54 +15,57 @@ ASTCSmallInteger class >> asType [
 	^'int'
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> * anotherSmallInteger [
 
 	^ self newBinaryOperatorNamed: '*' withArgument: anotherSmallInteger
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> + anotherSmallInteger [
 	
 	^ self newBinaryOperatorNamed: '+' withArgument: anotherSmallInteger
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> - anotherSmallInteger [
 
 	^ self newBinaryOperatorNamed: '-' withArgument: anotherSmallInteger
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> / anotherSmallInteger [
 	
 	^ self newBinaryOperatorNamed: '/' withArgument: anotherSmallInteger
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> = anotherSmallInteger [
+	"Act as translator only if it's the translator visitor that calls it."
+	"That allow assert equal to be functionnal."
+
 	visitor class = ASTCFromPharo ifTrue:[
 		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
 		].
 	^self myself=anotherSmallInteger myself.
 ]
 
-{ #category : #accessing }
+{ #category : #converting }
 ASTCSmallInteger >> asString [
-	^self myself asString .
+	^self myself asString.
 ]
 
-{ #category : #format }
+{ #category : #converting }
 ASTCSmallInteger >> asType [
 	^'int'
 ]
 
-{ #category : #accessing }
+{ #category : #default }
 ASTCSmallInteger >> defaultValue [
 	^0
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> doesNotUnderstand: aMessage [
 	self flag:#missingArguments.
 	^ASTCFunctionCall new
@@ -74,7 +77,7 @@ ASTCSmallInteger >> doesNotUnderstand: aMessage [
 	"Transcript show: self; show: ' didn''t understand : ' ; show: aMessage selector; cr."
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> ifTrue: trueBlock ifFalse: falseBlock [
 	^ASTCIf new
 		predicate:(self myself acceptVisitor:self visitor);
@@ -93,7 +96,7 @@ ASTCSmallInteger >> myself: anObject [
 	myself := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	|res|
 	res:=ASTCOperator new 
@@ -105,7 +108,7 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 		
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 ASTCSmallInteger >> printOn: aStream [
 	aStream << self asString.
 	"aStream 	<< (self class asString)
