@@ -12,12 +12,12 @@ GenerationTest >> testASTCIdentifier [
 	astC := astPharo acceptVisitor: visitor.
 	
 	expectedC := ASTCIdentifier new
-		id: 'c';
+		id: #c;
 		yourself.
 	
 	
 	self assert: astC isASTCIdentifier.
-	self assert: astC id equals: 'c'.
+	self assert: astC id equals: #c.
 	self assert: astC equals: expectedC.
 	validationVisitor := ASTCValidatorDebug new.
 
@@ -36,17 +36,19 @@ GenerationTest >> testASTCIf [
 		predicate: (ASTCOperator new
 			symbol:'==';
 			operands: (ASTCContainer new 
-				add:(ASTCLiteral new value:1 ; yourself);
-				add:(ASTCLiteral new value:2 ; yourself);
+				add:
+					(ASTCLiteral new value:	(ASTCSmallInteger new myself:1 ; yourself);
+					 yourself);
+				add:
+					(ASTCLiteral new value:	(ASTCSmallInteger new myself:2 ; yourself);
+					 yourself);
 				yourself);
 			yourself);
 		then:(ASTCBlock new);
 		else:(ASTCBlock new);
 		yourself.	
 	
-	self assert: astC isASTCIf.
-	self assert: astC then isASTCBlock.
-	self assert: astC else isASTCBlock.
+	self assert: astC isStructuralyValidAST.
 	self assert: astC equals: expectedC.
 ]
 
@@ -60,15 +62,17 @@ GenerationTest >> testASTCOperatorBinary [
 	expectedC := ASTCOperator new
 		symbol:'==';
 		operands: (ASTCContainer new
-			add:(ASTCIdentifier new id:'c' ; yourself);
-			add:(ASTCLiteral new value: (ASTCSmallInteger new myself:6 ; yourself) ; yourself);
+			add:(ASTCIdentifier new id:#c ; yourself);
+			add:(ASTCLiteral new value: 
+				(ASTCSmallInteger new myself:6 ; yourself) ;
+				yourself);
 			yourself);
 		yourself.
 	
 	self assert: astC isASTCOperator.
 	self assert: astC symbol equals: '=='.
-	self assert: astC operands first id equals: 'c'.
-	self assert: astC operands second value equals: 6.
+	self assert: astC operands first id equals: #c.
+	self assert: astC operands second value myself equals: 6.
 	self assert: astC equals: expectedC.
 ]
 
@@ -80,7 +84,7 @@ GenerationTest >> testASTCSmallIntegerIsLiteral [
 	astC := astPharo acceptVisitor: visitor.
 	
 	self assert: astC isASTCLiteral.
-	self assert: astC value equals: 5.
+	self assert: astC value myself equals: 5.
 	self assert: astC equals: 
 		(ASTCLiteral new value: 
 			(ASTCSmallInteger new myself:5;yourself) ;
