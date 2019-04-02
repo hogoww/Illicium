@@ -80,14 +80,23 @@ ASTCGenerator >> addAcceptMethod [
 
 { #category : #'generating-visitor' }
 ASTCGenerator >> addAcceptMethodOn:aClass [
-	"Add the #accept method selector on aClass."	
-	self addMethod:(
-'acceptVisitor: aVisitor
-	^aVisitor visit',currentClass asString,':self.'
-		)
+	"Add the #acceptVisitor and #acceptMultipleVisitor methods selector on aClass."	
+	
+	| methodBody |
+	methodBody:=String streamContents:[:s| s << 'acceptVisitor: aVisitor' ; cr ;
+	tab ; << '^aVisitor visit' ; << currentClass asString ; << ':self.'.].
+
+	self addMethod: methodBody
 		on: aClass
 		withProtocol:'visiting'.
-	
+
+	methodBody:=String streamContents:[:s| s << 'acceptMultipleVisitor: aCollectionOfIndependentVisitor' ; cr ;
+	tab ; << 'aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visit' ; << currentClass asString ; << ':self.].'.].
+
+	self addMethod: methodBody
+		on: aClass
+		withProtocol:'visiting'.
+
 ]
 
 { #category : #'generating-attributes' }
@@ -575,6 +584,8 @@ ASTCGenerator >> generate [
 	
 	builder acceptVisitor:self.
 	
+	"reload packages that depends on the generated code"
+	self reloadExtentions.
 ]
 
 { #category : #'generating-visitor' }
@@ -695,6 +706,25 @@ ASTCGenerator >> relationSideStuff [
 			self addProperty: aRelationSide name asString isMany: aRelationSide isMany.
 		].
 	].
+]
+
+{ #category : #actions }
+ASTCGenerator >> reloadExtentions [
+	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
+
+	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC'].
+
+	listOfPackageNameToReload:= OrderedCollection new.
+	listOfPackageNameToReload add: 'ASTC-Extensions' .
+	listOfPackageNameToReload add: 'ASTC-Extensions-Tests' .
+	listOfPackageToReload:= OrderedCollection new.
+
+	listOfPackageNameToReload do:[:aPackageName| 
+		icebergRepo loadedPackages do:[:aPackage| 
+			aPackageName = aPackage name ifTrue:[listOfPackageToReload add: aPackage] ]
+		].
+
+	listOfPackageToReload do:[:aPackage| aPackage reload.].
 ]
 
 { #category : #generating }

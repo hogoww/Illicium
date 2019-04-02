@@ -19,6 +19,11 @@ ASTCReturn >> = anotherNode [
 ]
 
 { #category : #visiting }
+ASTCReturn >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCReturn:self.].
+]
+
+{ #category : #visiting }
 ASTCReturn >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCReturn:self.
 ]

@@ -23,6 +23,11 @@ ASTCFunctionCall >> = anotherNode [
 ]
 
 { #category : #visiting }
+ASTCFunctionCall >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCFunctionCall:self.].
+]
+
+{ #category : #visiting }
 ASTCFunctionCall >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCFunctionCall:self.
 ]

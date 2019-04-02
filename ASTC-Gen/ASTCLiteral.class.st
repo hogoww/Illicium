@@ -19,6 +19,11 @@ ASTCLiteral >> = anotherNode [
 ]
 
 { #category : #visiting }
+ASTCLiteral >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCLiteral:self.].
+]
+
+{ #category : #visiting }
 ASTCLiteral >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCLiteral:self.
 ]

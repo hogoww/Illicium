@@ -23,6 +23,11 @@ ASTCBlock >> = anotherNode [
 ]
 
 { #category : #visiting }
+ASTCBlock >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCBlock:self.].
+]
+
+{ #category : #visiting }
 ASTCBlock >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCBlock:self.
 ]

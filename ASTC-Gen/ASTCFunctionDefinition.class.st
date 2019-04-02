@@ -31,6 +31,11 @@ ASTCFunctionDefinition >> = anotherNode [
 ]
 
 { #category : #visiting }
+ASTCFunctionDefinition >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCFunctionDefinition:self.].
+]
+
+{ #category : #visiting }
 ASTCFunctionDefinition >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCFunctionDefinition:self.
 ]

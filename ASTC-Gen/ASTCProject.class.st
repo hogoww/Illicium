@@ -19,6 +19,11 @@ ASTCProject >> = anotherNode [
 ]
 
 { #category : #visiting }
+ASTCProject >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCProject:self.].
+]
+
+{ #category : #visiting }
 ASTCProject >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCProject:self.
 ]
