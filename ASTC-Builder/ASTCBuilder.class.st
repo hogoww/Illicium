@@ -53,9 +53,6 @@ Class {
 		'if',
 		'block',
 		'operator',
-		'expressionsContainerTrait',
-		'statementsContainerTrait',
-		'declarationsContainerTrait',
 		'declarationStatement'
 	],
 	#category : #'ASTC-Builder'

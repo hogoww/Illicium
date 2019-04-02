@@ -262,7 +262,7 @@ ASTCGenerator >> addHashOn: aClass withPropertiesNamed: properties [
 			s << 
 '	hash := hash + self ' << each << ' hash.' << Character cr.  ].
 
-	s << ' hash' ].
+	s << ' ^hash' ].
 	
 	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
 ]
@@ -405,7 +405,7 @@ ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 	',propertyName,':=',collectionsType asString,' new parent:self; yourself.'.
 
 	
-	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
+	self addMethod: methodBody on: aClass withProtocol: 'initialization'.
 ]
 
 { #category : #'generating-visitor' }
