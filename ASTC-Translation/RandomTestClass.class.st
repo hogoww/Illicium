@@ -10,6 +10,21 @@ Class {
 }
 
 { #category : #tests }
+RandomTestClass >> factorialR [
+	"random function without arguments to test type inference"
+	| res |
+	res:=0.
+	res=0
+	ifTrue:[
+		res:=1
+		]
+	ifFalse:[
+		res:=1*(self factorialR:(0-1))
+		]
+	
+]
+
+{ #category : #tests }
 RandomTestClass >> factorialR: n [
 	"basic toy function"
 	n=0
