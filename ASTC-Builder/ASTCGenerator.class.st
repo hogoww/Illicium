@@ -90,7 +90,7 @@ ASTCGenerator >> addAcceptMethodOn:aClass [
 		on: aClass
 		withProtocol:'visiting'.
 
-	methodBody:=String streamContents:[:s| s << 'acceptMultipleVisitor: aCollectionOfIndependentVisitor' ; cr ;
+	methodBody:=String streamContents:[:s| s << 'acceptMultipleVisitors: aCollectionOfIndependentVisitor' ; cr ;
 	tab ; << 'aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visit' ; << currentClass asString ; << ':self.].'.].
 
 	self addMethod: methodBody

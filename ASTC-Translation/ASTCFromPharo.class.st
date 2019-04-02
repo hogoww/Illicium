@@ -157,9 +157,14 @@ ASTCFromPharo >> visitMethodNode: aMethodNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
-	| methodAST|
+	| methodAST annotatorVisitors |
 	"shortcut to visit a selector in a known class."
-	methodAST:=(aClass compiledMethodAt:aSelector) ast.
+	annotatorVisitors := Collection new.
+	annotatorVisitors add: ASTCRBArgumentNodeAnnotationVisitor new.
+	
+	methodAST:=(aClass compiledMethodAt:aSelector) ast copy.
+	methodAST acceptMultipleVisitors: annotatorVisitors."pre translation visits"
+	
 	^methodAST acceptVisitor: self.
 	
 ]
