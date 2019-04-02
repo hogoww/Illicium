@@ -41,16 +41,16 @@ ASTCCompilationUnit >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self functionDefinitions hash.
- hash
+	^hash
 ]
 
 { #category : #initialize }
 ASTCCompilationUnit >> initialize [
 	super initialize.
-		self initializeFunctionDefinitions.
+	self initializeFunctionDefinitions.
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ASTCCompilationUnit >> initializeFunctionDefinitions [
 	functionDefinitions:=ASTCContainer new parent:self; yourself.
 ]

@@ -55,7 +55,7 @@ ASTCFunctionDefinition >> hash [
 	hash := hash + self id hash.
 	hash := hash + self parameters hash.
 	hash := hash + self body hash.
- hash
+	^hash
 ]
 
 { #category : #accessors }
@@ -73,10 +73,10 @@ ASTCFunctionDefinition >> id: anObject [
 { #category : #initialize }
 ASTCFunctionDefinition >> initialize [
 	super initialize.
-		self initializeParameters.
+	self initializeParameters.
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ASTCFunctionDefinition >> initializeParameters [
 	parameters:=ASTCContainer new parent:self; yourself.
 ]

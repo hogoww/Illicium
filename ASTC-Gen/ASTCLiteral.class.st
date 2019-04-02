@@ -28,7 +28,7 @@ ASTCLiteral >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self value hash.
- hash
+	^hash
 ]
 
 { #category : #testing }

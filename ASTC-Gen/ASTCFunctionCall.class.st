@@ -45,7 +45,7 @@ ASTCFunctionCall >> hash [
 	hash := self identityHash.
 	hash := hash + self id hash.
 	hash := hash + self arguments hash.
- hash
+	^hash
 ]
 
 { #category : #accessors }
@@ -63,10 +63,10 @@ ASTCFunctionCall >> id: anObject [
 { #category : #initialize }
 ASTCFunctionCall >> initialize [
 	super initialize.
-		self initializeArguments.
+	self initializeArguments.
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ASTCFunctionCall >> initializeArguments [
 	arguments:=ASTCContainer new parent:self; yourself.
 ]

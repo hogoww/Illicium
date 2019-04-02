@@ -28,7 +28,7 @@ ASTCIdentifier >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self id hash.
- hash
+	^hash
 ]
 
 { #category : #accessors }

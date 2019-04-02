@@ -33,16 +33,16 @@ ASTCOperator >> hash [
 	hash := self identityHash.
 	hash := hash + self operands hash.
 	hash := hash + self symbol hash.
- hash
+	^hash
 ]
 
 { #category : #initialize }
 ASTCOperator >> initialize [
 	super initialize.
-		self initializeOperands.
+	self initializeOperands.
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ASTCOperator >> initializeOperands [
 	operands:=ASTCContainer new parent:self; yourself.
 ]

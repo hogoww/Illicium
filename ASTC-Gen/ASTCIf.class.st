@@ -50,7 +50,7 @@ ASTCIf >> hash [
 	hash := hash + self predicate hash.
 	hash := hash + self then hash.
 	hash := hash + self else hash.
- hash
+	^hash
 ]
 
 { #category : #testing }

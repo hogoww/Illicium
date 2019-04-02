@@ -21,7 +21,7 @@ ASTCStatement >> acceptVisitor: aVisitor [
 ASTCStatement >> hash [
 	| hash |
 	hash := self identityHash.
- hash
+	^hash
 ]
 
 { #category : #testing }

@@ -38,7 +38,7 @@ ASTCDeclaration >> hash [
 	hash := hash + self type hash.
 	hash := hash + self id hash.
 	hash := hash + self init hash.
- hash
+	^hash
 ]
 
 { #category : #accessors }

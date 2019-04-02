@@ -40,7 +40,7 @@ ASTCReturn >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self expression hash.
- hash
+	^hash
 ]
 
 { #category : #testing }

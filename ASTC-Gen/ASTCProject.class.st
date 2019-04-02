@@ -40,16 +40,16 @@ ASTCProject >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self compilationUnits hash.
- hash
+	^hash
 ]
 
 { #category : #initialize }
 ASTCProject >> initialize [
 	super initialize.
-		self initializeCompilationUnits.
+	self initializeCompilationUnits.
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ASTCProject >> initializeCompilationUnits [
 	compilationUnits:=ASTCContainer new parent:self; yourself.
 ]

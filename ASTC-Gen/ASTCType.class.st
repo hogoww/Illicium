@@ -28,7 +28,7 @@ ASTCType >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self type hash.
- hash
+	^hash
 ]
 
 { #category : #testing }

@@ -21,7 +21,7 @@ ASTCExpression >> acceptVisitor: aVisitor [
 ASTCExpression >> hash [
 	| hash |
 	hash := self identityHash.
- hash
+	^hash
 ]
 
 { #category : #testing }

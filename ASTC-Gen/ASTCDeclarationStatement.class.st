@@ -40,7 +40,7 @@ ASTCDeclarationStatement >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self declaration hash.
- hash
+	^hash
 ]
 
 { #category : #testing }

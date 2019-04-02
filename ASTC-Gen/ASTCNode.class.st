@@ -24,7 +24,7 @@ ASTCNode >> acceptVisitor: aVisitor [
 ASTCNode >> hash [
 	| hash |
 	hash := self identityHash.
- hash
+	^hash
 ]
 
 { #category : #testing }

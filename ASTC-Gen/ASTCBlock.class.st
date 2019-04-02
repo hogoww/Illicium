@@ -45,22 +45,22 @@ ASTCBlock >> hash [
 	hash := self identityHash.
 	hash := hash + self declarations hash.
 	hash := hash + self statements hash.
- hash
+	^hash
 ]
 
 { #category : #initialize }
 ASTCBlock >> initialize [
 	super initialize.
-		self initializeDeclarations.
-		self initializeStatements.
+	self initializeDeclarations.
+	self initializeStatements.
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ASTCBlock >> initializeDeclarations [
 	declarations:=ASTCContainer new parent:self; yourself.
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ASTCBlock >> initializeStatements [
 	statements:=ASTCContainer new parent:self; yourself.
 ]

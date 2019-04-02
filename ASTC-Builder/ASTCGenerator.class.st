@@ -151,11 +151,10 @@ ASTCGenerator >> addClassInitializeOn: aClass forProperties: aCollection [
 	aCollection ifEmpty:[^self]. 
 	
 	methodBody :=String streamContents: [:s | 
-		s << 'initialize
-	super initialize.
-	'.
-		aCollection do: [:propertyName | s << '	self ' ; << 'initialize' ; << propertyName capitalized ; << '.' ] 
-		separatedBy:[s cr;tab]
+		s << 'initialize' ;cr;tab;
+		  << 'super initialize.'; cr;tab.
+		aCollection do: [:propertyName | s << 'self ' ; << 'initialize' ; << propertyName capitalized ; << '.' ] 
+		separatedBy:[s cr tab]
 		].
 	
 	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
@@ -262,7 +261,7 @@ ASTCGenerator >> addHashOn: aClass withPropertiesNamed: properties [
 			s << 
 '	hash := hash + self ' << each << ' hash.' << Character cr.  ].
 
-	s << ' ^hash' ].
+	s << '	^hash' ].
 	
 	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
 ]
