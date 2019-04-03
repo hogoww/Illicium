@@ -27,7 +27,7 @@ ASTCIf >> = anotherNode [
 ]
 
 { #category : #visiting }
-ASTCIf >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+ASTCIf >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCIf:self.].
 ]
 

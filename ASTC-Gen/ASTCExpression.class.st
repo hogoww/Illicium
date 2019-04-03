@@ -13,7 +13,7 @@ ASTCExpression >> = anotherNode [
 ]
 
 { #category : #visiting }
-ASTCExpression >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+ASTCExpression >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCExpression:self.].
 ]
 

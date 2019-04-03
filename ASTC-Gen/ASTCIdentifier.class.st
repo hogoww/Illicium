@@ -19,7 +19,7 @@ ASTCIdentifier >> = anotherNode [
 ]
 
 { #category : #visiting }
-ASTCIdentifier >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+ASTCIdentifier >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCIdentifier:self.].
 ]
 

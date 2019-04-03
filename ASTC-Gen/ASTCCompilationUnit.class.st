@@ -20,7 +20,7 @@ ASTCCompilationUnit >> = anotherNode [
 ]
 
 { #category : #visiting }
-ASTCCompilationUnit >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+ASTCCompilationUnit >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCCompilationUnit:self.].
 ]
 

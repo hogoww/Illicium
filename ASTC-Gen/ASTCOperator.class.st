@@ -23,7 +23,7 @@ ASTCOperator >> = anotherNode [
 ]
 
 { #category : #visiting }
-ASTCOperator >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+ASTCOperator >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCOperator:self.].
 ]
 

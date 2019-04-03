@@ -19,7 +19,7 @@ ASTCDeclarationStatement >> = anotherNode [
 ]
 
 { #category : #visiting }
-ASTCDeclarationStatement >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+ASTCDeclarationStatement >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCDeclarationStatement:self.].
 ]
 

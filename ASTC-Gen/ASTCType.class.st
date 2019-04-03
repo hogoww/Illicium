@@ -19,7 +19,7 @@ ASTCType >> = anotherNode [
 ]
 
 { #category : #visiting }
-ASTCType >> acceptMultipleVisitor: aCollectionOfIndependentVisitor [
+ASTCType >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCType:self.].
 ]
 

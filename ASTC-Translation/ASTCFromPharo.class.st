@@ -96,9 +96,10 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 ]
 
 { #category : #visiting }
-ASTCFromPharo >> visitAssignmentNode: anAssignementNode [
+ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 	self flag:#type.
-	^ASTCDeclarationStatement new
+	^(anAssignmentNode propertyAt: 'firstOccurence') ifTrue:[
+	ASTCDeclarationStatement new
 		declaration:
 			(ASTCDeclaration new 
 				type:
@@ -106,11 +107,23 @@ ASTCFromPharo >> visitAssignmentNode: anAssignementNode [
 					type:ASTCSmallInteger;
 					yourself);
 				id:
-					(anAssignementNode variable acceptVisitor: self);
+					(anAssignmentNode variable acceptVisitor: self);
 				init: 
-					(anAssignementNode value acceptVisitor:self);
+					(anAssignmentNode value acceptVisitor:self);
 				yourself);
 		yourself.
+		]
+	ifFalse:[
+		ASTCOperator new
+			symbol:'=';
+			operands: 
+				(ASTCContainer new 
+					add: (anAssignmentNode variable acceptVisitor:self);
+					add: (anAssignmentNode value acceptVisitor:self);
+					yourself);
+			yourself.
+		].
+
 ]
 
 { #category : #visiting }
@@ -159,8 +172,8 @@ ASTCFromPharo >> visitMethodNode: aMethodNode [
 ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 	| methodAST annotatorVisitors |
 	"shortcut to visit a selector in a known class."
-	annotatorVisitors := Collection new.
-	annotatorVisitors add: ASTCRBArgumentNodeAnnotationVisitor new.
+	annotatorVisitors := OrderedCollection new.
+	annotatorVisitors add: ASTCRBFirstAssignementOccurence new.
 	
 	methodAST:=(aClass compiledMethodAt:aSelector) ast copy.
 	methodAST acceptMultipleVisitors: annotatorVisitors."pre translation visits"
@@ -185,8 +198,7 @@ ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitVariableNode: aVariableNode [
-	
-	^ ASTCIdentifier new
-		id: aVariableNode name;
-		yourself
+	^ASTCIdentifier new
+			id: aVariableNode name;
+			yourself.
 ]
