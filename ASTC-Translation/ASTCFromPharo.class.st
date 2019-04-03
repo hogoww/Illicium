@@ -98,7 +98,7 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 { #category : #visiting }
 ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 	self flag:#type.
-	^(anAssignmentNode propertyAt: 'firstOccurence') ifTrue:[
+	^(anAssignmentNode propertyAt: IsItTheFirstAssignmentChecker property) ifTrue:[
 	ASTCDeclarationStatement new
 		declaration:
 			(ASTCDeclaration new 
@@ -155,14 +155,17 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
-	self flag:#todo."arguments)"
 	self flag:#type.
 	^ASTCFunctionDefinition new
-		id: (ASTCIdentifier new id:(self formatSelector:(aMethodNode selector)); 
-										yourself);
-		type: (ASTCType new type: ASTCSmallInteger ;
-								  yourself);
-		parameters: (ASTCContainer new visitArgs: aMethodNode arguments with: self;yourself);
+		id: (ASTCIdentifier new 
+			id: (self formatSelector:(aMethodNode selector)); 
+			yourself);
+		type: (ASTCType new 
+			type: ASTCSmallInteger ;
+			yourself);
+		parameters: (ASTCContainer new 
+			visitArgs: aMethodNode arguments with: self;
+			yourself);
 		body:(self visitNode: aMethodNode body);
 		yourself.
 
@@ -173,7 +176,7 @@ ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 	| methodAST annotatorVisitors |
 	"shortcut to visit a selector in a known class."
 	annotatorVisitors := OrderedCollection new.
-	annotatorVisitors add: ASTCRBFirstAssignementOccurence new.
+	annotatorVisitors add: IsItTheFirstAssignmentChecker new.
 	
 	methodAST:=(aClass compiledMethodAt:aSelector) ast copy.
 	methodAST acceptMultipleVisitors: annotatorVisitors."pre translation visits"
