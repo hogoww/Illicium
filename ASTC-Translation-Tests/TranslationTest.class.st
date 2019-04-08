@@ -1,11 +1,11 @@
 Class {
-	#name : #GenerationTest,
+	#name : #TranslationTest,
 	#superclass : #TestCase,
-	#category : #'ASTC-Translation-Test'
+	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }
-GenerationTest >> testASTCIdentifier [
+TranslationTest >> testASTCIdentifier [
 	| astPharo visitor astC expectedC validationVisitor |
 	astPharo := RBParser parseExpression: 'c'.
 	visitor := ASTCFromPharo new.
@@ -26,7 +26,7 @@ GenerationTest >> testASTCIdentifier [
 ]
 
 { #category : #tests }
-GenerationTest >> testASTCIf [
+TranslationTest >> testASTCIf [
 	| astPharo visitor astC expectedC|
 	astPharo := RBParser parseExpression: '1=2 ifTrue:[] ifFalse:[]'.
 	visitor := ASTCFromPharo new.
@@ -53,7 +53,7 @@ GenerationTest >> testASTCIf [
 ]
 
 { #category : #tests }
-GenerationTest >> testASTCOperatorBinary [
+TranslationTest >> testASTCOperatorBinary [
 	| astPharo visitor astC expectedC|
 	astPharo := RBParser parseExpression: 'c=6'.
 	visitor := ASTCFromPharo new.
@@ -77,7 +77,7 @@ GenerationTest >> testASTCOperatorBinary [
 ]
 
 { #category : #tests }
-GenerationTest >> testASTCSmallIntegerIsLiteral [
+TranslationTest >> testASTCSmallIntegerIsLiteral [
 	| astPharo visitor astC |
 	astPharo := RBParser parseExpression: '5'.
 	visitor := ASTCFromPharo new.
