@@ -20,8 +20,8 @@ RandomTestClass >> factorialR [
 		]
 	ifFalse:[
 		res:=1*(self factorialR:(0-1))
-		]
-	
+		].
+	^res
 ]
 
 { #category : #tests }
@@ -47,7 +47,13 @@ RandomTestClass >> factorialR: n anotherArgument: n2 [
 		res:=1
 		]
 	ifFalse:[
-		res:=n*(self factorialR:(n-1))
+		res:=n*(self factorialR:(n-1) anotherArgument:n2)
 		].
 	^res.
+]
+
+{ #category : #tests }
+RandomTestClass >> simpleReturnInteger [
+
+	^ 1
 ]

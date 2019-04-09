@@ -1,18 +1,14 @@
 Class {
 	#name : #ASTCSmallInteger,
-	#superclass : #Object,
+	#superclass : #ASTCKernelClasses,
 	#traits : 'ASTCFormatTrait',
 	#classTraits : 'ASTCFormatTrait classTrait',
-	#instVars : [
-		'myself',
-		'visitor'
-	],
 	#category : #'ASTC-Kernel'
 }
 
 { #category : #converting }
-ASTCSmallInteger class >> asType [
-	^'int'
+ASTCSmallInteger class >> asCType [
+	^#int
 ]
 
 { #category : #translation }
@@ -50,31 +46,19 @@ ASTCSmallInteger >> = anotherSmallInteger [
 	^self myself=anotherSmallInteger myself.
 ]
 
+{ #category : #'as yet unclassified' }
+ASTCSmallInteger >> asCType [
+	^#int
+]
+
 { #category : #converting }
 ASTCSmallInteger >> asString [
 	^self myself asString.
 ]
 
-{ #category : #converting }
-ASTCSmallInteger >> asType [
-	^'int'
-]
-
 { #category : #default }
 ASTCSmallInteger >> defaultValue [
 	^0
-]
-
-{ #category : #translation }
-ASTCSmallInteger >> doesNotUnderstand: aMessage [
-	self flag:#missingArguments.
-	^ASTCFunctionCall new
-		id: (ASTCIdentifier new id: (self formatSelector:(aMessage selector)); yourself) ;
-		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
-		yourself.
-
-	
-	"Transcript show: self; show: ' didn''t understand : ' ; show: aMessage selector; cr."
 ]
 
 { #category : #translation }

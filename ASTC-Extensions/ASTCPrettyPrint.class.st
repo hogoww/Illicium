@@ -204,7 +204,7 @@ ASTCPrettyPrint >> visitASTCReturn: aReturn [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCType: aType [
-	self << aType type asType.
+	self << aType type asCType.
 ]
 
 { #category : #accessing }

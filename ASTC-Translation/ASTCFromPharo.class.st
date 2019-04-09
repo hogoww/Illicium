@@ -29,14 +29,22 @@ Class {
 	#superclass : #RBProgramNodeVisitor,
 	#traits : 'ASTCFormatTrait',
 	#classTraits : 'ASTCFormatTrait classTrait',
-	#classVars : [
-		'ClassDictionary'
+	#instVars : [
+		'typeDictionary'
 	],
 	#category : #'ASTC-Translation'
 }
 
 { #category : #'tests-manual' }
-ASTCFromPharo class >> factorialRTest [
+ASTCFromPharo class >> factorialRTest0 [
+	"Shortcut for a test that's used a lot"
+	self flag:#transcriptClear.
+	Transcript clear.
+	^self new visitMethodSelector: #factorialR fromClass: RandomTestClass .
+]
+
+{ #category : #'tests-manual' }
+ASTCFromPharo class >> factorialRTest1 [
 	"Shortcut for a test that's used a lot"
 	self flag:#transcriptClear.
 	Transcript clear.
@@ -54,14 +62,29 @@ ASTCFromPharo class >> factorialRTest2 [
 { #category : #visiting }
 ASTCFromPharo >> classDictionary [
 	"accessor"
-	^ClassDictionary
+	^typeDictionary
 ]
 
 { #category : #visiting }
 ASTCFromPharo >> classDictionary:aCollection [
 	"accessor"
-	ClassDictionary:=aCollection.
+	typeDictionary:=aCollection.
 	^aCollection
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> getTypeOf:aNode [
+	"Even if it's not a visit, for coherence purpose"
+	| concreteType translationType |
+	self flag:#type."add object types, or user defined types"
+	self flag:#ERROR. "care to replace by an error when possible. For now everything that isn't recognize is an int."
+	concreteType:=(aNode propertyAt:ASTCTypeAnnotationAST property 
+			ifPresent: [:value| value concreteType concreteClass. ]
+			ifAbsent:[self error: 'Phineas couldn''t figure out the type of', aNode asString ]).
+	
+	translationType := typeDictionary at: concreteType ifAbsent:['UnknownType for now.'].
+
+	^translationType.
 ]
 
 { #category : #visiting }
@@ -69,8 +92,10 @@ ASTCFromPharo >> initialize [
 	"initialize.
 	We fill up the ClassDictionnary with the known possible receivers."
 	self flag:#hardcode."harcoded names, bad"
-	ClassDictionary := Dictionary new.
-	ClassDictionary at:'SmallInteger' put: ASTCSmallInteger.
+	typeDictionary := Dictionary new.
+	typeDictionary at: SmallInteger put: ASTCSmallInteger.
+	typeDictionary at: Boolean put: ASTCBoolean.
+	typeDictionary at: ASTCVoid put: ASTCVoid 
 ]
 
 { #category : #visiting }
@@ -86,7 +111,7 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 				id: argIdentifier;
 				type:
 					(ASTCType new
-						type: ASTCSmallInteger;
+						type: (self visitType: anArgumentNode);
 						yourself);
 				yourself.
 			]
@@ -99,19 +124,22 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 	self flag:#type.
 	^(anAssignmentNode propertyAt: IsItTheFirstAssignmentChecker property) ifTrue:[
-	ASTCDeclarationStatement new
-		declaration:
-			(ASTCDeclaration new 
-				type:
-					(ASTCType new
-					type:ASTCSmallInteger;
+		"type checking"
+		
+		"creation of the return thingy."	
+		ASTCDeclarationStatement new
+			declaration:
+				(ASTCDeclaration new 
+					type:
+						(ASTCType new
+						type: (self visitType: anAssignmentNode);
+						yourself);
+					id:
+						(anAssignmentNode variable acceptVisitor: self);
+					init: 
+						(anAssignmentNode value acceptVisitor:self);
 					yourself);
-				id:
-					(anAssignmentNode variable acceptVisitor: self);
-				init: 
-					(anAssignmentNode value acceptVisitor:self);
-				yourself);
-		yourself.
+			yourself.
 		]
 	ifFalse:[
 		ASTCOperator new
@@ -146,7 +174,7 @@ ASTCFromPharo >> visitLiteralNode: aLiteralNode [
 { #category : #visiting }
 ASTCFromPharo >> visitMessageNode: aMessageNode [
 	"We (will) infer the type and redirect the message on the class of the receiver. So far we just forward it to the only known type: SmallInteger. each of them will handle the messages thrown to them."
-	^(ClassDictionary at:'SmallInteger') new
+	^(self getTypeOf: aMessageNode) new
 		myself: aMessageNode receiver;
 		visitor: self;
 		perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
@@ -161,7 +189,7 @@ ASTCFromPharo >> visitMethodNode: aMethodNode [
 			id: (self formatSelector:(aMethodNode selector)); 
 			yourself);
 		type: (ASTCType new 
-			type: ASTCSmallInteger ;
+			type: (self visitType: aMethodNode);
 			yourself);
 		parameters: (ASTCContainer new 
 			visitArgs: aMethodNode arguments with: self;
@@ -173,22 +201,44 @@ ASTCFromPharo >> visitMethodNode: aMethodNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
-	| methodAST annotatorVisitors |
+	| methodAST |
 	"shortcut to visit a selector in a known class."
-	annotatorVisitors := OrderedCollection new.
-	annotatorVisitors add: IsItTheFirstAssignmentChecker new.
-	
 	methodAST:=(aClass compiledMethodAt:aSelector) ast copy.
-	methodAST acceptMultipleVisitors: annotatorVisitors."pre translation visits"
+
+	self visitPreTranslationFor: methodAST.
 	
 	^methodAST acceptVisitor: self.
 	
 ]
 
 { #category : #visiting }
+ASTCFromPharo >> visitPreTranslationFor: aMethodAST [
+	| annotatorVisitors |
+	PhineasInferer new inferAST: aMethodAST."bit of a special visitor, to annotate types"
+
+	aMethodAST propertyAt: ASTCTypeAnnotationAST property
+	ifPresent:[:value|
+		value crLog.
+		]
+	ifAbsent:[
+		ASTCTypeAnnotationAST new 
+			atNewPropertyPut: (PIVariableType new addType:ASTCVoid;yourself)
+			for: aMethodAST.
+	].	
+
+	annotatorVisitors := OrderedCollection new.
+	annotatorVisitors add: IsItTheFirstAssignmentChecker new.
+	
+
+	aMethodAST acceptMultipleVisitors: annotatorVisitors."pre translation visits"
+
+	^aMethodAST	
+]
+
+{ #category : #visiting }
 ASTCFromPharo >> visitReturnNode: aReturnNode [
 	
-	^ASTCReturn new expression: (aReturnNode value acceptVisitor:self);yourself. 
+	^ASTCReturn new expression: (aReturnNode value acceptVisitor:self) ; yourself. 
 ]
 
 { #category : #visiting }
@@ -197,6 +247,12 @@ ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	res:=ASTCBlock new.
 	res statements: (aSequenceNode statements collect: [:each | self visitNode: each] into: ASTCContainer new).
 	^res.
+]
+
+{ #category : #visiting }
+ASTCFromPharo >> visitType: aNode [
+	^ASTCType new
+	 	type: (self getTypeOf: aNode).
 ]
 
 { #category : #visiting }
