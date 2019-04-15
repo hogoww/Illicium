@@ -7,7 +7,7 @@ Class {
 	#category : #'ASTC-Extensions-Tests-validation'
 }
 
-{ #category : #running }
+{ #category : #tests }
 ASTCValidatorTest >> testVisitASTCReturnBad [
 	| astc |
 	astc:=	ASTCReturn new
@@ -18,7 +18,7 @@ ASTCValidatorTest >> testVisitASTCReturnBad [
 	self deny: astc isStructuralyValidAST.
 ]
 
-{ #category : #running }
+{ #category : #tests }
 ASTCValidatorTest >> testVisitASTCReturnGood [
 	| astc |
 	astc:=	ASTCReturn new
@@ -31,7 +31,7 @@ ASTCValidatorTest >> testVisitASTCReturnGood [
 	self assert: astc isStructuralyValidAST.
 ]
 
-{ #category : #running }
+{ #category : #tests }
 ASTCValidatorTest >> testVisitASTCTypeBad [
 	| astc |
 	astc:=	ASTCType new
@@ -41,7 +41,7 @@ ASTCValidatorTest >> testVisitASTCTypeBad [
 	self deny: astc isStructuralyValidAST.
 ]
 
-{ #category : #running }
+{ #category : #tests }
 ASTCValidatorTest >> testVisitASTCTypeGood [
 	| astc |
 	astc:=	ASTCType new

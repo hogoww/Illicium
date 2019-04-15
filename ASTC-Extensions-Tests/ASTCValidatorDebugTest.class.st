@@ -8,6 +8,51 @@ Class {
 }
 
 { #category : #test }
+ASTCValidatorDebugTest >> aRandomExpressionFactory [
+	|anExpression|
+	anExpression:=ASTCOperator new
+		symbol: '-';
+		operands:(ASTCContainer new
+			add:(ASTCIdentifier new);
+			yourself);
+		yourself.
+	self assert: anExpression isStructuralyValidAST. "It'll be checked twice, but better that than giving a wrong statment"
+	^anExpression
+]
+
+{ #category : #test }
+ASTCValidatorDebugTest >> aRandomStatmentFactory [
+	|aStatment|
+	aStatment:=ASTCReturn new
+		expression:self aRandomExpressionFactory;
+		yourself.
+	self assert: aStatment isStructuralyValidAST. "It'll be checked twice, but better that than giving a wrong statment"
+	^aStatment
+]
+
+{ #category : #test }
+ASTCValidatorDebugTest >> testVisitASTCExpressionStatementBad [
+	| astc |
+	astc:=	ASTCExpressionStatement new 
+		expression: self aRandomStatmentFactory;
+		yourself.
+	self should:[ astc debugASTCStructure ] raise: Error.
+
+
+]
+
+{ #category : #test }
+ASTCValidatorDebugTest >> testVisitASTCExpressionStatementGood [
+	| astc |
+	astc:=	ASTCExpressionStatement new 
+		expression: self aRandomExpressionFactory;
+		yourself.
+	"self shouldnt:[" astc debugASTCStructure "] raise: Error."
+
+
+]
+
+{ #category : #tests }
 ASTCValidatorDebugTest >> testVisitASTCReturnBad [
 	| astc |
 	astc:=	ASTCReturn new
@@ -19,7 +64,7 @@ ASTCValidatorDebugTest >> testVisitASTCReturnBad [
 
 ]
 
-{ #category : #test }
+{ #category : #tests }
 ASTCValidatorDebugTest >> testVisitASTCReturnGood [
 	| astc |
 	astc:=	ASTCReturn new
@@ -33,7 +78,7 @@ ASTCValidatorDebugTest >> testVisitASTCReturnGood [
 
 ]
 
-{ #category : #test }
+{ #category : #tests }
 ASTCValidatorDebugTest >> testVisitASTCTypeBad [
 	| astc |
 	astc:=	ASTCType new
@@ -43,7 +88,7 @@ ASTCValidatorDebugTest >> testVisitASTCTypeBad [
 	self should: [ astc debugASTCStructure ] raise: Error.
 ]
 
-{ #category : #test }
+{ #category : #tests }
 ASTCValidatorDebugTest >> testVisitASTCTypeGood [
 	| astc |
 	astc := ASTCType new

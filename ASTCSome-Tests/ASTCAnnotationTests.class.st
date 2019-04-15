@@ -42,6 +42,7 @@ ASTCAnnotationTests >> testMethodTypeIsReturnTypeInPhineas [
 ASTCAnnotationTests >> testReturnIsSmallIntegerInRecursiveMethod [
 	| methodAST |
 	methodAST := self inferWithPhineas: (RandomTestClass compiledMethodAt:#factorialR).
+	self halt.
 	self assertTypeOf: methodAST equals: SmallInteger. 
 
 ]
