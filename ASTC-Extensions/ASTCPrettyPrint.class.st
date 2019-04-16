@@ -99,7 +99,6 @@ ASTCPrettyPrint >> visitASTBinaryOperator: anOperator [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCBlock: aBlock [
-	self flag:#Declarations.
 	self << '{' << Character cr.
 	self enterBlock.
 	aBlock statements
@@ -152,7 +151,6 @@ ASTCPrettyPrint >> visitASTCFunctionCall: aFunctionCall [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
-	self flag:#todo."declarations"
 	aFunctionDefinition type acceptVisitor: self.
 	self << Character space.
 	aFunctionDefinition id acceptVisitor:self.

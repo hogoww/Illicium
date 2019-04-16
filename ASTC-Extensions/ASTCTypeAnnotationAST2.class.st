@@ -30,8 +30,22 @@ ASTCTypeAnnotationAST2 >> visitMessageNode: aMessageNode [
 	| type |
 	type:= inferer getTypeForMessageNode: aMessageNode.
 	self atNewPropertyPut: type
-	 for: aMessageNode.
+		for: aMessageNode.
 	super visitMessageNode: aMessageNode.
-	type crLog.
 	^aMessageNode.
+]
+
+{ #category : #visiting }
+ASTCTypeAnnotationAST2 >> visitTemporaryNode: aTemporaryNode [
+	| type |
+	self flag:#wrongData."PIVariableType: (PIMessageType(RBMessageNode(1 * (self factorialR: 0 - 1)), PIConcreteType(SmallInteger) ) PIConcreteType(SmallInteger) ) is put in the node. need to find how to access it the underlying type"
+	type:= inferer getTypeForAVariableNode: aTemporaryNode.
+	self atNewPropertyPut: type
+		for: aTemporaryNode.
+	super visitTemporaryNode: aTemporaryNode.
+
+	(aTemporaryNode propertyAt:self class property ifAbsent:[self error: 'fuck']) crLog.
+
+	^aTemporaryNode.
+	
 ]

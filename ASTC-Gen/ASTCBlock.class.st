@@ -2,7 +2,6 @@ Class {
 	#name : #ASTCBlock,
 	#superclass : #ASTCStatement,
 	#instVars : [
-		'declarations',
 		'statements'
 	],
 	#category : #'ASTC-Gen'
@@ -12,9 +11,6 @@ Class {
 ASTCBlock >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
-
-	self declarations = anotherNode declarations
-		ifFalse: [ ^ false ].
 
 	self statements = anotherNode statements
 		ifFalse: [ ^ false ].
@@ -32,23 +28,10 @@ ASTCBlock >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCBlock:self.
 ]
 
-{ #category : #accessors }
-ASTCBlock >> declarations [
-	^declarations
-]
-
-{ #category : #accessors }
-ASTCBlock >> declarations: aCollection [
-	declarations:=aCollection.
-	aCollection parent:self.
-	^aCollection.
-]
-
 { #category : #comparing }
 ASTCBlock >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self declarations hash.
 	hash := hash + self statements hash.
 	^hash
 ]
@@ -56,13 +39,7 @@ ASTCBlock >> hash [
 { #category : #initialize }
 ASTCBlock >> initialize [
 	super initialize.
-	self initializeDeclarations.
 	self initializeStatements.
-]
-
-{ #category : #initialization }
-ASTCBlock >> initializeDeclarations [
-	declarations:=ASTCContainer new parent:self; yourself.
 ]
 
 { #category : #initialization }

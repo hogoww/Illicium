@@ -108,15 +108,8 @@ ASTCWalkerVisitor >> visitASTCType: anASTCType [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCBlock: anASTCBlock [
-	self walkASTCBlockDeclarations: anASTCBlock.
 	self walkASTCBlockStatements: anASTCBlock.
 
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCBlockDeclarations:anASTCBlock [
-  anASTCBlock declarations ifNil:[^self].
-		anASTCBlock declarations do:[:child| child acceptVisitor:self].
 ]
 
 { #category : #walking }
@@ -165,14 +158,7 @@ ASTCWalkerVisitor >> walkASTCDeclarationInit:anASTCDeclaration [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCDeclarationStatement: anASTCDeclarationStatement [
-	self walkASTCDeclarationStatementDeclaration: anASTCDeclarationStatement.
 
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCDeclarationStatementDeclaration:anASTCDeclarationStatement [
-  anASTCDeclarationStatement declaration ifNil:[^self].
-		anASTCDeclarationStatement declaration acceptVisitor:self.
 ]
 
 { #category : #walking }

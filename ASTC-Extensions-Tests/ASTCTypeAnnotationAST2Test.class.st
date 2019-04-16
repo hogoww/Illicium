@@ -19,7 +19,7 @@ ASTCTypeAnnotationAST2Test >> inferMethodSelector: aSelector for:aClass [
 
 	inferer inferAST: aMethodAST.
 	aMethodAST acceptVisitor: visitor.
-
+	
 	^aMethodAST
 ]
 
@@ -35,10 +35,45 @@ ASTCTypeAnnotationAST2Test >> setUp [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitArgumentNode [
+	self flag:#todo."Needs to know how to pass arguments for a method first..."
+	
+	self assert: false.
+]
+
+{ #category : #test }
 ASTCTypeAnnotationAST2Test >> testVisitMessageNode [
 	| ast |
 	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
 	ast nodesDo: [ :aNode | 
 			aNode isMessage
+				ifTrue: [ self assert: (aNode hasProperty: propertyName) ]. ].
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitMethodNode [
+	| ast |
+	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	ast nodesDo: [ :aNode | 
+			aNode isVariable
+				ifTrue: [ self assert: (aNode hasProperty: propertyName) ]. ].
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitTemporaryNode [
+	| ast |
+	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	self halt.
+	ast nodesDo: [ :aNode | 
+			aNode isTemp
+				ifTrue: [ self crLog. self assert: (aNode hasProperty: propertyName) ]. ].
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitVariableNode [
+	| ast |
+	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	ast nodesDo: [ :aNode | 
+			aNode isVariable
 				ifTrue: [ self assert: (aNode hasProperty: propertyName) ]. ].
 ]

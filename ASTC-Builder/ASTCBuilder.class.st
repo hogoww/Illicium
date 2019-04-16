@@ -178,14 +178,13 @@ ASTCBuilder >> defineRelations [
 	(return property:#expression) <>- (expression property:#returnExp).
 
 	(expressionStatement property:#expression) <>- (expression property:#expStatement).
-	(declarationStatement property:#declaration) <>-(declaration property:#declStatement).
+
 
 	(operator property:#operands) <>-* (expression property:#operatorOperand).
 	
 	(functionCall property:#id) <>- (identifier property:#FunCallId).
 	(functionCall property:#arguments) <>-* (expression property:#funcCallArg).
 	
-	(block property:#declarations) <>-* (declaration property:#blockDecl).
 	(block property:#statements) <>-* (statement property:#blockStatement).
 	
 	(declaration property:#type) <>- (type property:#declType).
