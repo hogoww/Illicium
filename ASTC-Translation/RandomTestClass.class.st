@@ -19,7 +19,7 @@ RandomTestClass >> factorialR [
 		res:=1
 		]
 	ifFalse:[
-		res:=1*(self factorialR:(0-1))
+		res:=1*(self factorialR:(1-1))
 		].
 	^res
 ]

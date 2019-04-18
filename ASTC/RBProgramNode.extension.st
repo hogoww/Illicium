@@ -2,7 +2,8 @@ Extension { #name : #RBProgramNode }
 
 { #category : #'*ASTC' }
 RBProgramNode >> inferedConcreteClass [
- ^ self type concreteClasses
+	self halt.
+	 ^ self type concreteClasses
 ]
 
 { #category : #'*ASTC' }

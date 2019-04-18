@@ -8,14 +8,19 @@ Class {
 		'A'
 	],
 	#classInstVars : [
-		'B'
+		'b'
 	],
 	#category : #'ASTC-Extensions-Tests-RBAnnotations'
 }
 
 { #category : #'as yet unclassified' }
-ASTCTypeAnnotationAST2TestMethods class >> aMethodWithAClassInstanceVariable [
-	B.
+ASTCTypeAnnotationAST2TestMethods class >> aMethodWithAClassVariable [
+	b:=1
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2TestMethods >> aMethodThatReturnAMessageThatReturnsAnInt [
+	^1+2.
 ]
 
 { #category : #'as yet unclassified' }
@@ -25,7 +30,7 @@ ASTCTypeAnnotationAST2TestMethods >> aMethodWithAClassVariable [
 
 { #category : #'as yet unclassified' }
 ASTCTypeAnnotationAST2TestMethods >> aMethodWithAGlobalVariable [
-	Smalltalk.
+	ASTCExpression.
 ]
 
 { #category : #test }

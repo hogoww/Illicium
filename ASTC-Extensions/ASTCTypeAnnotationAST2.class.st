@@ -22,10 +22,12 @@ ASTCTypeAnnotationAST2 >> getMethodTypeType [
 { #category : #typing }
 ASTCTypeAnnotationAST2 >> getTypeForAGlobalNode: aGlobalNode [
 	| type |
-	[type:=self getTypeForInstanceVariableNode: aGlobalNode] on:Error do:[
-		type:= inferer infer: aGlobalNode name.
-	].
-	^type.
+	"Works only for classes so far."
+	"Globals variables such as Smalltalk / Transcript can't be supported so far."
+	
+	type := inferer inferGlobalNode: aGlobalNode.
+
+	^type concreteClasses.
 ]
 
 { #category : #typing }
@@ -34,12 +36,12 @@ ASTCTypeAnnotationAST2 >> getTypeForAMethodNode: aMethodNode [
 		methodTypes 
 			detect:[:aMethodType|
 					aMethodType node isMethod and:[aMethodType selector = aMethodNode selector]].
-	^methodType returnType.
+	^methodType returnType concreteClasses.
 ]
 
 { #category : #typing }
 ASTCTypeAnnotationAST2 >> getTypeForASelfNode: aRBSelfNode [ 
-	^self getMethodTypeType.
+	^self getMethodTypeType concreteClasses.
 ]
 
 { #category : #actions }
@@ -47,39 +49,26 @@ ASTCTypeAnnotationAST2 >> getTypeForATemporaryNode: aRBTemporaryNode [
 	| selector method |
 	selector:=aRBTemporaryNode methodNode selector.
 	method:=inferer types methodTypes detect:[:aMethod| aMethod node selector = selector].
-	^method variableAt: aRBTemporaryNode name asSymbol
-		ifAbsent:[self error: 'Phineas couldn''t type the temporary variable : ', aRBTemporaryNode name asSymbol ].
+	^(method variableAt: aRBTemporaryNode name asSymbol 
+		ifAbsent:[self error: 'Phineas couldn''t type the temporary variable : ', aRBTemporaryNode name asSymbol ]) 
+			ifNotNil:[:aVariable| aVariable concreteClasses].
 ]
 
 { #category : #typing }
 ASTCTypeAnnotationAST2 >> getTypeForArgumentNode: anArgumentNode [
-	self getTypeForATemporaryNode: anArgumentNode.
+	^self getTypeForATemporaryNode: anArgumentNode.
 ]
 
 { #category : #typing }
 ASTCTypeAnnotationAST2 >> getTypeForInstanceVariableNode: aInstanceVariableNode [ 
-	methodType receiver instanceVariable: aInstanceVariableNode name.
+	^(methodType receiver instanceVariable: aInstanceVariableNode name) concreteClasses.
 ]
 
 { #category : #typing }
 ASTCTypeAnnotationAST2 >> getTypeForMessageNode: aRBMessageNode [ 	
 	| aNode |
 	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
-	^aNode concreteClass.
-]
-
-{ #category : #actions }
-ASTCTypeAnnotationAST2 >> inferBlock: aBlock [
-	| aMethodAST |
-
-	inferer infer: aBlock.
-
-	inferer types methodTypes do:[:each| each isBlock ifTrue:[inferer types methodTypes remove:each] ].
-
-	aMethodAST acceptVisitor: self.
-	
-	
-	^aMethodAST
+	^aNode concreteClasses.
 ]
 
 { #category : #actions }
@@ -95,24 +84,14 @@ ASTCTypeAnnotationAST2 >> inferMethodSelector: aSelector for:aClass [
 ]
 
 { #category : #actions }
-ASTCTypeAnnotationAST2 >> inferMethodSelector: aSelector for:aClass using:aBlock [
-	| aMethodAST |
-	aMethodAST := (aClass >> aSelector) ast copy.
-
-	inferer infer: aBlock.
-
-	aMethodAST acceptVisitor: self.
-	
-	^aMethodAST
-]
-
-{ #category : #actions }
 ASTCTypeAnnotationAST2 >> inferMethodSelector: aSelector for: aClass usingBlock: aBlock [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 
 	inferer infer: aBlock.
-	inferer types methodTypes detect:[:aMethodType| aMethodType node isBlock ] ifFound:[:aMethodType| inferer types methodTypes remove:aMethodType].	
+	"This removes the block used as an entry point of the inference"
+	"This would cause problem for resolution for the methodType otherwise."
+	inferer types methodTypes detect:[:aMethodType| aMethodType node isBlock ] ifFound:[:aMethodType| inferer types methodTypes remove:aMethodType].
 	aMethodAST acceptVisitor: self.
 	
 	^aMethodAST
@@ -148,7 +127,7 @@ ASTCTypeAnnotationAST2 >> visitArgumentNode: anArgumentNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST2 >> visitGlobalNode: aGlobalNode [
 	| type |
-	type:= self getTypeForAGlobalNode: aGlobalNode.
+	type := self getTypeForAGlobalNode: aGlobalNode.
 	self atNewPropertyPut: type
 		for: aGlobalNode.
 	super visitGlobalNode: aGlobalNode.
@@ -169,7 +148,7 @@ ASTCTypeAnnotationAST2 >> visitInstanceVariableNode: aInstanceVariableNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST2 >> visitMessageNode: aMessageNode [
 	| type |
-	type:= self getTypeForMessageNode: aMessageNode.
+	type := self getTypeForMessageNode: aMessageNode.
 	self atNewPropertyPut: type
 		for: aMessageNode.
 	super visitMessageNode: aMessageNode.
@@ -179,7 +158,7 @@ ASTCTypeAnnotationAST2 >> visitMessageNode: aMessageNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST2 >> visitMethodNode: aMethodNode [
 	| type |
-	type:= self getTypeForAMethodNode:aMethodNode.
+	type := self getTypeForAMethodNode:aMethodNode.
 	self atNewPropertyPut: type
 		for: aMethodNode.
 	super visitMethodNode: aMethodNode.
@@ -189,7 +168,7 @@ ASTCTypeAnnotationAST2 >> visitMethodNode: aMethodNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST2 >> visitSelfNode: aSelfNode [
 	| type |
-	type:= self getTypeForASelfNode:aSelfNode.
+	type := self getTypeForASelfNode:aSelfNode.
 	self atNewPropertyPut: type
 		for: aSelfNode.
 	super visitSelfNode: aSelfNode.
@@ -199,14 +178,10 @@ ASTCTypeAnnotationAST2 >> visitSelfNode: aSelfNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST2 >> visitTemporaryNode: aTemporaryNode [
 	| type |
-	self flag:#wrongData."PIVariableType: (PIMessageType(RBMessageNode(1 * (self factorialR: 0 - 1)), PIConcreteType(SmallInteger) ) PIConcreteType(SmallInteger) ) is put in the node. need to find how to access it the underlying type"
-	
-	self flag:#OoO. "Out of Order. waiting for Marcus answer on RBAST behavior"
-	type:= self getTypeForATemporaryNode: aTemporaryNode.
+	type := self getTypeForATemporaryNode: aTemporaryNode.
 	self atNewPropertyPut: type
 		for: aTemporaryNode.
 	super visitTemporaryNode: aTemporaryNode.
-
 	^aTemporaryNode.
 	
 ]
