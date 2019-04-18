@@ -13,67 +13,136 @@ Class {
 }
 
 { #category : #running }
-ASTCTypeAnnotationAST2Test >> inferMethodSelector: aSelector for:aClass [
-	| aMethodAST |
-	aMethodAST := (aClass >> aSelector) ast copy.
-
-	inferer inferAST: aMethodAST.
-	aMethodAST acceptVisitor: visitor.
-	
-	^aMethodAST
-]
-
-{ #category : #running }
 ASTCTypeAnnotationAST2Test >> setUp [
 	super setUp.
-	inferer:=PhineasInferer new.
-	visitor:=ASTCTypeAnnotationAST2 new 
-		inferer:inferer;
-		yourself.
-		
+	visitor:=ASTCTypeAnnotationAST2 new.		
 	propertyName := ASTCTypeAnnotationAST2 property.
 ]
 
 { #category : #test }
 ASTCTypeAnnotationAST2Test >> testVisitArgumentNode [
-	self flag:#todo."Needs to know how to pass arguments for a method first..."
+	| ast |
+	ast := visitor inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
+	ast nodesDo: [ :aNode | 
+			aNode isArgument
+				ifTrue: [ self assert: (aNode hasProperty: propertyName) ]. ].
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeClassVariable [
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #aMethodWithAClassVariable for: ASTCTypeAnnotationAST2TestMethods.
+	ast nodesDo: [ :aNode | 
+		(aNode isVariable and:[aNode isGlobal])
+			ifTrue: [ 
+				counter := counter +1.
+				self assert: (aNode hasProperty: propertyName) 
+				].].
+	self assert: counter equals:1.
 	
-	self assert: false.
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeGlobal [
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #aMethodWithAGlobalVariable for: ASTCTypeAnnotationAST2TestMethods.
+	ast nodesDo: [ :aNode | 
+		(aNode isVariable and:[aNode isGlobal])
+			ifTrue: [ 
+				counter := counter +1.
+				self assert: (aNode hasProperty: propertyName).
+				(aNode propertyAt: propertyName) crLog.
+				].].
+	self assert: counter equals:1.
+	
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeSharedPoolVariable [
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #aMethodWithAClassInstanceVariable for: ASTCTypeAnnotationAST2TestMethods class.
+	ast nodesDo: [ :aNode | 
+		(aNode isVariable and:[aNode isGlobal])
+			ifTrue: [ 
+				counter := counter + 1.
+				self assert: (aNode hasProperty: propertyName) 
+				].].
+	self assert: counter equals:1.
+	
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitInstanceVariableNode [
+	| ast counter |
+	counter:=0.
+	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationAST2TestMethods .
+	ast nodesDo: [ :aNode | 
+		(aNode isVariable and:[ aNode isInstance ])
+			ifTrue: [ 
+				counter := counter + 1.
+				self assert: (aNode hasProperty: propertyName). 
+				].].
+	self assert: counter equals: 1.
 ]
 
 { #category : #test }
 ASTCTypeAnnotationAST2Test >> testVisitMessageNode [
-	| ast |
-	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
 	ast nodesDo: [ :aNode | 
-			aNode isMessage
-				ifTrue: [ self assert: (aNode hasProperty: propertyName) ]. ].
+		aNode isMessage
+			ifTrue: [ 
+				counter := counter +1.
+				self assert: (aNode hasProperty: propertyName) 
+				].].
+	self assert: counter equals: 5.
 ]
 
 { #category : #test }
 ASTCTypeAnnotationAST2Test >> testVisitMethodNode [
-	| ast |
-	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
 	ast nodesDo: [ :aNode | 
-			aNode isVariable
-				ifTrue: [ self assert: (aNode hasProperty: propertyName) ]. ].
+		aNode isMethod
+			ifTrue: [ 
+				counter := counter +1.
+				self assert: (aNode hasProperty: propertyName).
+				].].
+	self assert: counter equals:1.
+
+]
+
+{ #category : #test }
+ASTCTypeAnnotationAST2Test >> testVisitSelfNode [
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #aMethodWithSelf for: ASTCTypeAnnotationAST2TestMethods.
+	ast nodesDo: [ :aNode | 
+		aNode isSelf
+			ifTrue: [ 
+				counter := counter +1.
+				self assert: (aNode hasProperty: propertyName).
+				].].
+	self assert: counter equals:1.
+
 ]
 
 { #category : #test }
 ASTCTypeAnnotationAST2Test >> testVisitTemporaryNode [
-	| ast |
-	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
-	self halt.
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #aMethodWithATemporaryVariable  for: ASTCTypeAnnotationAST2TestMethods.
 	ast nodesDo: [ :aNode | 
-			aNode isTemp
-				ifTrue: [ self crLog. self assert: (aNode hasProperty: propertyName) ]. ].
-]
-
-{ #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitVariableNode [
-	| ast |
-	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
-	ast nodesDo: [ :aNode | 
-			aNode isVariable
-				ifTrue: [ self assert: (aNode hasProperty: propertyName) ]. ].
+		aNode isTemp
+			ifTrue: [ 
+				counter := counter +1.
+				self assert: (aNode hasProperty: propertyName) 
+				].].
+	self assert: counter equals:2.
+	
 ]
