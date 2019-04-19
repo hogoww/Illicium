@@ -2,7 +2,7 @@
 An ASTCTypeAnnotationAST2Test is a test class for testing the behavior of ASTCTypeAnnotationAST2
 "
 Class {
-	#name : #ASTCTypeAnnotationAST2Test,
+	#name : #ASTCTypeAnnotationASTTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'visitor',
@@ -12,23 +12,24 @@ Class {
 }
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> assertTypeOf: aNode is: aClass [
+ASTCTypeAnnotationASTTest >> assertTypeOf: aNode is: aClass [
+	self halt.
 	^self assert: (aNode propertyAt: propertyName) asArray equals: {aClass} .
 ]
 
 { #category : #running }
-ASTCTypeAnnotationAST2Test >> setUp [
+ASTCTypeAnnotationASTTest >> setUp [
 	super setUp.
-	visitor:=ASTCTypeAnnotationAST2 new.		
-	propertyName := ASTCTypeAnnotationAST2 property.
+	visitor:=ASTCTypeAnnotationAST new.		
+	propertyName := ASTCTypeAnnotationAST property.
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForAGlobalNodeClassVariable [
+ASTCTypeAnnotationASTTest >> testGetTypeForAGlobalNodeClassVariable [
 	| ast counter |
 	<expectedFailure>"Phineas returns {SmallInteger + Undefined object. Weird}"
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithAClassVariable for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithAClassVariable for: ASTCTypeAnnotationASTTestMethods.
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[aNode isGlobal])
 			ifTrue: [ 
@@ -41,9 +42,9 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForAGlobalNodeClassVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForAGlobalNodeGlobal [
+ASTCTypeAnnotationASTTest >> testGetTypeForAGlobalNodeGlobal [
 	| ast counter|
-	ast := visitor inferMethodSelector: #aMethodWithAGlobalVariable for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithAGlobalVariable for: ASTCTypeAnnotationASTTestMethods.
 	counter:=0.
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[aNode isGlobal])
@@ -56,7 +57,7 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForAGlobalNodeGlobal [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForAGlobalNodeSharedPoolVariable [
+ASTCTypeAnnotationASTTest >> testGetTypeForAGlobalNodeSharedPoolVariable [
 	"waiting for a better understanding of SharedPool variables"
 	<expectedFailure>
 	self flag: #toImplement.
@@ -64,7 +65,7 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForAGlobalNodeSharedPoolVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForAMethodNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForAMethodNode [
 	| ast counter |
 	counter := 0.
 	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
@@ -79,25 +80,25 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForAMethodNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForASelfNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForASelfNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithSelf for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithSelf for: ASTCTypeAnnotationASTTestMethods.
 	ast nodesDo: [ :aNode | 
 		aNode isSelf
 			ifTrue: [ 
 				counter := counter + 1.
-				self assertTypeOf: aNode is: ASTCTypeAnnotationAST2TestMethods.
+				self assertTypeOf: aNode is: ASTCTypeAnnotationASTTestMethods.
 			].].
 	self assert: counter equals:1.
 
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForATemporaryNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForATemporaryNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithATemporaryVariable for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithATemporaryVariable for: ASTCTypeAnnotationASTTestMethods.
 	ast nodesDo: [ :aNode | 
 		aNode isTemp
 			ifTrue: [ 
@@ -108,7 +109,7 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForATemporaryNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForArgumentNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForArgumentNode [
 	| ast counter |
 	counter := 0.
 	ast := visitor inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
@@ -122,10 +123,10 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForArgumentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForInstanceVariableNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForInstanceVariableNode [
 	| ast counter |
 	counter:=0.
-	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationAST2TestMethods .
+	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationASTTestMethods .
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[ aNode isInstance ])
 			ifTrue: [ 
@@ -137,10 +138,10 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForInstanceVariableNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testGetTypeForMessageNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForMessageNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: ASTCTypeAnnotationAST2TestMethods .
+	ast := visitor inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: ASTCTypeAnnotationASTTestMethods .
 	ast nodesDo: [ :aNode | 
 		aNode isMessage
 			ifTrue: [ 
@@ -152,7 +153,7 @@ ASTCTypeAnnotationAST2Test >> testGetTypeForMessageNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitArgumentNode [
+ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
 	ast := visitor inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
@@ -166,10 +167,10 @@ ASTCTypeAnnotationAST2Test >> testVisitArgumentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeClassVariable [
+ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithAClassVariable for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithAClassVariable for: ASTCTypeAnnotationASTTestMethods.
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[aNode isGlobal])
 			ifTrue: [ 
@@ -181,10 +182,10 @@ ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeClassVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeGlobal [
+ASTCTypeAnnotationASTTest >> testVisitGlobalNodeGlobal [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithAGlobalVariable for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithAGlobalVariable for: ASTCTypeAnnotationASTTestMethods.
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[aNode isGlobal])
 			ifTrue: [ 
@@ -196,7 +197,7 @@ ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeGlobal [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeSharedPoolVariable [
+ASTCTypeAnnotationASTTest >> testVisitGlobalNodeSharedPoolVariable [
 	| ast counter |
 	<expectedFailure>
 	self flag:#todo."waiting to have a better understanding"
@@ -205,10 +206,10 @@ ASTCTypeAnnotationAST2Test >> testVisitGlobalNodeSharedPoolVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitInstanceVariableNode [
+ASTCTypeAnnotationASTTest >> testVisitInstanceVariableNode [
 	| ast counter |
 	counter:=0.
-	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationAST2TestMethods .
+	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationASTTestMethods .
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[ aNode isInstance ])
 			ifTrue: [ 
@@ -219,7 +220,7 @@ ASTCTypeAnnotationAST2Test >> testVisitInstanceVariableNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitMessageNode [
+ASTCTypeAnnotationASTTest >> testVisitMessageNode [
 	| ast counter |
 	counter := 0.
 	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
@@ -233,7 +234,7 @@ ASTCTypeAnnotationAST2Test >> testVisitMessageNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitMethodNode [
+ASTCTypeAnnotationASTTest >> testVisitMethodNode [
 	| ast counter |
 	counter := 0.
 	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
@@ -248,10 +249,10 @@ ASTCTypeAnnotationAST2Test >> testVisitMethodNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitSelfNode [
+ASTCTypeAnnotationASTTest >> testVisitSelfNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithSelf for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithSelf for: ASTCTypeAnnotationASTTestMethods.
 	ast nodesDo: [ :aNode | 
 		aNode isSelf
 			ifTrue: [ 
@@ -263,10 +264,10 @@ ASTCTypeAnnotationAST2Test >> testVisitSelfNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationAST2Test >> testVisitTemporaryNode [
+ASTCTypeAnnotationASTTest >> testVisitTemporaryNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithATemporaryVariable  for: ASTCTypeAnnotationAST2TestMethods.
+	ast := visitor inferMethodSelector: #aMethodWithATemporaryVariable  for: ASTCTypeAnnotationASTTestMethods.
 	ast nodesDo: [ :aNode | 
 		aNode isTemp
 			ifTrue: [ 

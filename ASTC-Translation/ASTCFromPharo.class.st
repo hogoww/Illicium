@@ -77,9 +77,9 @@ ASTCFromPharo >> getTypeOf:aNode [
 	"Even if it's not a visit, for coherence purpose"
 	| concreteType translationType |
 	self flag:#type."add object types, or user defined types"
-	self flag:#ERROR. "care to replace by an error when possible. For now everything that isn't recognize is an int."
-	concreteType:=(aNode propertyAt:ASTCTypeAnnotationAST property 
-			ifPresent: [:value| value concreteType concreteClass. ]
+	
+	concreteType:=(aNode propertyAt:ASTCTypeAnnotationASTOld property 
+			ifPresent: [:value| value anyOne. ]
 			ifAbsent:[self error: 'Phineas couldn''t figure out the type of', aNode asString ]).
 	
 	translationType := typeDictionary at: concreteType ifAbsent:['UnknownType for now.'].
@@ -216,12 +216,12 @@ ASTCFromPharo >> visitPreTranslationFor: aMethodAST [
 	| annotatorVisitors |
 	PhineasInferer new inferAST: aMethodAST."bit of a special visitor, to annotate types"
 
-	aMethodAST propertyAt: ASTCTypeAnnotationAST property
+	aMethodAST propertyAt: ASTCTypeAnnotationASTOld property
 	ifPresent:[:value|
 		value crLog.
 		]
 	ifAbsent:[
-		ASTCTypeAnnotationAST new 
+		ASTCTypeAnnotationASTOld new 
 			atNewPropertyPut: (PIVariableType new addType:ASTCVoid;yourself)
 			for: aMethodAST.
 	].	

@@ -1,133 +1,185 @@
 Class {
 	#name : #ASTCTypeAnnotationAST,
-	#superclass : #PIVisitor,
+	#superclass : #ASTCAbstractCheckVisitor,
+	#instVars : [
+		'inferer',
+		'methodType'
+	],
 	#category : #'ASTC-Extensions-RBAnnotations'
 }
 
 { #category : #accessing }
-ASTCTypeAnnotationAST class >> property [ 
+ASTCTypeAnnotationAST class >> property [
+	"should return a symbol with the name of the property"
 	^#type
 ]
 
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitArgumentNode: aRBArgumentNode [ 
-	^self atNewPropertyPut: (super visitArgumentNode: aRBArgumentNode)
-		for: aRBArgumentNode
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getMethodTypeType [
+	^methodType receiver
 ]
 
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitArrayNode: aArrayNode [
-	^self atNewPropertyPut: (super visitArrayNode: aArrayNode)
-		for: aArrayNode 
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForAGlobalNode: aGlobalNode [
+	| type |
+	"Works only for classes so far."
+	"Globals variables such as Smalltalk / Transcript can't be supported so far."
+	type := inferer inferGlobalNode: aGlobalNode.
+	^type concreteClasses.
 ]
 
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitAssignmentNode: anAssignmentNode [ 
-	^self atNewPropertyPut: (super visitAssignmentNode: anAssignmentNode )
-		for: anAssignmentNode 
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForAMethodNode: aMethodNode [ 
+	methodType:= inferer types 
+		methodTypes 
+			detect:[:aMethodType|
+					aMethodType node isMethod and:[aMethodType selector = aMethodNode selector]].
+	^methodType returnType concreteClasses.
 ]
 
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitBlockNode: aBlockNode [ 
-	^self atNewPropertyPut: (super visitBlockNode: aBlockNode)
-		for: aBlockNode
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForASelfNode: aRBSelfNode [ 
+	^self getMethodTypeType concreteClasses.
 ]
 
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitCascadeNode: aCascadeNode [ 	
+{ #category : #actions }
+ASTCTypeAnnotationAST >> getTypeForATemporaryNode: aRBTemporaryNode [ 
+	| selector method |
+	selector:=aRBTemporaryNode methodNode selector.
+	method:=inferer types methodTypes detect:[:aMethod| aMethod node selector = selector].
+	^(method variableAt: aRBTemporaryNode name asSymbol 
+		ifAbsent:[self error: 'Phineas couldn''t type the temporary variable : ', aRBTemporaryNode name asSymbol ]) 
+			ifNotNil:[:aVariable| aVariable concreteClasses].
+]
+
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForArgumentNode: anArgumentNode [
+	^self getTypeForATemporaryNode: anArgumentNode.
+]
+
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForInstanceVariableNode: aInstanceVariableNode [ 
+	^(methodType receiver instanceVariable: aInstanceVariableNode name) concreteClasses.
+]
+
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForMessageNode: aRBMessageNode [ 	
+	| aNode |
+	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
+	^aNode concreteClasses.
+]
+
+{ #category : #actions }
+ASTCTypeAnnotationAST >> inferMethodSelector: aSelector for:aClass [
+	| aMethodAST |
+	aMethodAST := (aClass >> aSelector) ast copy.
+
+	inferer inferAST: aMethodAST.
+
+	aMethodAST acceptVisitor: self.
 	
-	^self atNewPropertyPut: (super visitCascadeNode: aCascadeNode)
-		for: aCascadeNode 
+	^aMethodAST
 ]
 
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitGlobalNode: aNode [ 
-	^self atNewPropertyPut: (super visitGlobalNode: aNode)
-		for: aNode
-]
+{ #category : #actions }
+ASTCTypeAnnotationAST >> inferMethodSelector: aSelector for: aClass usingBlock: aBlock [
+	| aMethodAST |
+	aMethodAST := (aClass >> aSelector) ast copy.
 
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitInstanceVariableNode: anInstanceVariableNode [ 
-	^self atNewPropertyPut: (super visitInstanceVariableNode: anInstanceVariableNode )
-		for: anInstanceVariableNode 
-]
-
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitLiteralArrayNode: node [
-	^self atNewPropertyPut: (super visitLiteralArrayNode: node)
-		for: node
-]
-
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitLiteralNode: node [ 
-	^self atNewPropertyPut: (super visitLiteralNode: node)
-		for: node
-]
-
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [ 
-	^self atNewPropertyPut: (super visitMessageNode: aMessageNode )
-		for: aMessageNode 
-]
-
-{ #category : #visiting }
-ASTCTypeAnnotationAST >> visitMethodNode:aMethodNode [
-	"If no type is found (hence, if there's no return) we assume that it doesn't return anything, so a void. We express that by UndefinedObject."
-	super visitMethodNode:aMethodNode.
+	inferer infer: aBlock.
+	"This removes the block used as an entry point of the inference"
+	"This would cause problem for resolution for the methodType otherwise."
+	inferer types methodTypes detect:[:aMethodType| aMethodType node isBlock ] ifFound:[:aMethodType| inferer types methodTypes remove:aMethodType].
+	aMethodAST acceptVisitor: self.
 	
-	aMethodNode propertyAt: self class property
-		ifPresent:[:value|
-			value crLog.
-			]
-		ifAbsent:[
-			self atNewPropertyPut: ASTCVoid
-				for: aMethodNode.
-				(aMethodNode propertyAt: self class property) crLog.
-		].
+	^aMethodAST
+]
+
+{ #category : #accessing }
+ASTCTypeAnnotationAST >> inferer [
+	^inferer
+	
+]
+
+{ #category : #accessing }
+ASTCTypeAnnotationAST >> inferer: aPhineasInferer [
+	inferer:=aPhineasInferer.
+	
+]
+
+{ #category : #initialization }
+ASTCTypeAnnotationAST >> initialize [
+	inferer := PhineasInferer new.
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitReturnNode: aReturnNode [
-	| type context |
-	context := super visitReturnNode: aReturnNode.
-		
-	type := inferer stack top returnType.
-	
+ASTCTypeAnnotationAST >> visitArgumentNode: anArgumentNode [
+	| type |
+	type := self getTypeForArgumentNode: anArgumentNode.
 	self atNewPropertyPut: type
-		for: aReturnNode.
+		for: anArgumentNode.
+	super visitArgumentNode: anArgumentNode.
+	^anArgumentNode.
+]
 
+{ #category : #visiting }
+ASTCTypeAnnotationAST >> visitGlobalNode: aGlobalNode [
+	| type |
+	type := self getTypeForAGlobalNode: aGlobalNode.
 	self atNewPropertyPut: type
-		for: aReturnNode methodNode.
-		
-	^ context
+		for: aGlobalNode.
+	super visitGlobalNode: aGlobalNode.
+	^aGlobalNode.
+	
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitSelfNode: aSelfNode [ 
-	^self atNewPropertyPut: (super visitSelfNode: aSelfNode)
-		for: aSelfNode
+ASTCTypeAnnotationAST >> visitInstanceVariableNode: aInstanceVariableNode [
+	| type |
+	type := self getTypeForInstanceVariableNode: aInstanceVariableNode.
+	self atNewPropertyPut: type
+		for: aInstanceVariableNode.
+	super visitInstanceVariableNode: aInstanceVariableNode.
+	^aInstanceVariableNode.
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitSequenceNode: aSequenceNode [
-	^self atNewPropertyPut: (super visitSequenceNode: aSequenceNode )
-		for: aSequenceNode 
+ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
+	| type |
+	type := self getTypeForMessageNode: aMessageNode.
+	self atNewPropertyPut: type
+		for: aMessageNode.
+	super visitMessageNode: aMessageNode.
+	^aMessageNode.
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitSuperNode: aRBSuperNode [ 
-	^self atNewPropertyPut: (super visitSuperNode: aRBSuperNode )
-		for: aRBSuperNode 
+ASTCTypeAnnotationAST >> visitMethodNode: aMethodNode [
+	| type |
+	type := self getTypeForAMethodNode:aMethodNode.
+	self atNewPropertyPut: type
+		for: aMethodNode.
+	super visitMethodNode: aMethodNode.
+	^aMethodNode.
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitTemporaryNode: aTemporaryNode [ 
-	^self atNewPropertyPut: (super visitTemporaryNode: aTemporaryNode )
-		for: aTemporaryNode 
+ASTCTypeAnnotationAST >> visitSelfNode: aSelfNode [
+	| type |
+	type := self getTypeForASelfNode:aSelfNode.
+	self atNewPropertyPut: type
+		for: aSelfNode.
+	super visitSelfNode: aSelfNode.
+	^aSelfNode.
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitVariableNode: aRBVariableNode [ 
-	^self atNewPropertyPut: (super visitVariableNode: aRBVariableNode)
-		for: aRBVariableNode 
+ASTCTypeAnnotationAST >> visitTemporaryNode: aTemporaryNode [
+	| type |
+	type := self getTypeForATemporaryNode: aTemporaryNode.
+	self atNewPropertyPut: type
+		for: aTemporaryNode.
+	super visitTemporaryNode: aTemporaryNode.
+	^aTemporaryNode.
+	
 ]

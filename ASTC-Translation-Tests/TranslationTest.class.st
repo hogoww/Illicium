@@ -28,7 +28,7 @@ TranslationTest >> testASTCIdentifier [
 { #category : #tests }
 TranslationTest >> testASTCIf [
 	| astPharo visitor astC expectedC|
-	astPharo := RBParser parseExpression: '1=2 ifTrue:[] ifFalse:[]'.
+	astPharo := RBParser parseExpression: '1=2 ifTrue:[1] ifFalse:[2]'.
 	visitor := ASTCFromPharo new.
 	astC := astPharo acceptVisitor: visitor.
 	
