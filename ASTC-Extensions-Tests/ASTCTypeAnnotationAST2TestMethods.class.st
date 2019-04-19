@@ -23,12 +23,12 @@ ASTCTypeAnnotationAST2TestMethods >> aMethodThatReturnAMessageThatReturnsAnInt [
 	^1+2.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #test }
 ASTCTypeAnnotationAST2TestMethods >> aMethodWithAClassVariable [
-	A.
+	A:=3.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #test }
 ASTCTypeAnnotationAST2TestMethods >> aMethodWithAGlobalVariable [
 	ASTCExpression.
 ]

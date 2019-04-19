@@ -24,9 +24,7 @@ ASTCTypeAnnotationAST2 >> getTypeForAGlobalNode: aGlobalNode [
 	| type |
 	"Works only for classes so far."
 	"Globals variables such as Smalltalk / Transcript can't be supported so far."
-	
 	type := inferer inferGlobalNode: aGlobalNode.
-
 	^type concreteClasses.
 ]
 
