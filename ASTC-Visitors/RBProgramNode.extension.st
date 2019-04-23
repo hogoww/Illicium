@@ -1,6 +1,6 @@
 Extension { #name : #RBProgramNode }
 
-{ #category : #'*ASTC-Extensions' }
+{ #category : #'*ASTC-Visitors' }
 RBProgramNode >> acceptMultipleVisitors: aCollectionOfProgramNodeVisitors [ 
 	aCollectionOfProgramNodeVisitors do:[:aProgramNodeVisitor| self acceptVisitor: aProgramNodeVisitor  ].
 	^aCollectionOfProgramNodeVisitors.

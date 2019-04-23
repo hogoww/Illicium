@@ -214,9 +214,7 @@ ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 { #category : #visiting }
 ASTCFromPharo >> visitPreTranslationFor: aMethodAST [
 	| annotatorVisitors |
-	PhineasInferer new inferAST: aMethodAST."bit of a special visitor, to annotate types"
-
-	aMethodAST propertyAt: ASTCTypeAnnotationASTOld property
+"	aMethodAST propertyAt: ASTCTypeAnnotationASTOld property
 	ifPresent:[:value|
 		value crLog.
 		]
@@ -224,7 +222,7 @@ ASTCFromPharo >> visitPreTranslationFor: aMethodAST [
 		ASTCTypeAnnotationASTOld new 
 			atNewPropertyPut: (PIVariableType new addType:ASTCVoid;yourself)
 			for: aMethodAST.
-	].	
+	].	"
 
 	annotatorVisitors := OrderedCollection new.
 	annotatorVisitors add: IsItTheFirstAssignmentChecker new.

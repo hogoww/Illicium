@@ -8,12 +8,11 @@ Class {
 		'visitor',
 		'propertyName'
 	],
-	#category : #'ASTC-Extensions-Tests-RBAnnotations'
+	#category : #'ASTC-Visitors-Tests-RBAnnotations'
 }
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> assertTypeOf: aNode is: aClass [
-	self halt.
 	^self assert: (aNode propertyAt: propertyName) asArray equals: {aClass} .
 ]
 

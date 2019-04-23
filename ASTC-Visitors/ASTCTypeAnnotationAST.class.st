@@ -5,7 +5,7 @@ Class {
 		'inferer',
 		'methodType'
 	],
-	#category : #'ASTC-Extensions-RBAnnotations'
+	#category : #'ASTC-Visitors-RBAnnotations'
 }
 
 { #category : #accessing }

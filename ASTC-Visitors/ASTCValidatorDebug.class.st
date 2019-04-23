@@ -11,7 +11,7 @@ I enforce types on the AST C by implementing a visitor that flags every type bug
 Class {
 	#name : #ASTCValidatorDebug,
 	#superclass : #ASTCWalkerVisitor,
-	#category : #'ASTC-Extensions-validation'
+	#category : #'ASTC-Visitors-validation'
 }
 
 { #category : #visiting }
