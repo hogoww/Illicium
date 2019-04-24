@@ -158,7 +158,14 @@ ASTCWalkerVisitor >> walkASTCDeclarationInit:anASTCDeclaration [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCDeclarationStatement: anASTCDeclarationStatement [
+	self walkASTCDeclarationStatementDeclaration: anASTCDeclarationStatement.
 
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCDeclarationStatementDeclaration:anASTCDeclarationStatement [
+  anASTCDeclarationStatement declaration ifNil:[^self].
+		anASTCDeclarationStatement declaration acceptVisitor:self.
 ]
 
 { #category : #walking }

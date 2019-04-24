@@ -715,8 +715,8 @@ ASTCGenerator >> reloadExtentions [
 	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC'].
 
 	listOfPackageNameToReload:= OrderedCollection new.
-	listOfPackageNameToReload add: 'ASTC-Extensions' ;
-		add: 'ASTC-Extensions-Tests';
+	listOfPackageNameToReload add: 'ASTC-Visitors' ;
+		add: 'ASTC-Visitors-Tests';
 		add: 'ASTC-Kernel';
 		add: 'ASTC-Translation';
 		add: 'ASTC-Translation-Tests'.
