@@ -132,7 +132,7 @@ ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 				(ASTCDeclaration new 
 					type:
 						(ASTCType new
-						type: (self visitType: anAssignmentNode);
+						type: (self visitType: anAssignmentNode variable);
 						yourself);
 					id:
 						(anAssignmentNode variable acceptVisitor: self);
@@ -182,6 +182,14 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 ]
 
 { #category : #visiting }
+ASTCFromPharo >> visitMethodAST: aMethodAST [
+	self visitPreTranslationFor: aMethodAST.
+	
+	^aMethodAST acceptVisitor: self.
+	
+]
+
+{ #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
 	self flag:#type.
 	^ASTCFunctionDefinition new
@@ -201,13 +209,8 @@ ASTCFromPharo >> visitMethodNode: aMethodNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
-	| methodAST |
 	"shortcut to visit a selector in a known class."
-	methodAST:=(aClass compiledMethodAt:aSelector) ast copy.
-
-	self visitPreTranslationFor: methodAST.
-	
-	^methodAST acceptVisitor: self.
+	^self visitMethodAST:(aClass >> aSelector) ast.
 	
 ]
 

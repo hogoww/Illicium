@@ -19,7 +19,8 @@ ASTCTypeAnnotationASTTest >> assertTypeOf: aNode is: aClass [
 { #category : #running }
 ASTCTypeAnnotationASTTest >> setUp [
 	super setUp.
-	visitor:=ASTCTypeAnnotationAST new.		
+	visitor:=ASTCTypeAnnotationAST new 
+		inferer: PhineasInferer new.		
 	propertyName := ASTCTypeAnnotationAST property.
 ]
 
