@@ -1,7 +1,6 @@
 Class {
 	#name : #ASTCKernelClasses,
 	#superclass : #ASTCObject,
-	#classTraits : 'ASTCFormatTrait classTrait',
 	#instVars : [
 		'visitor',
 		'value'
@@ -16,7 +15,7 @@ ASTCKernelClasses class >> asCType [
 
 { #category : #'reflective operations' }
 ASTCKernelClasses >> doesNotUnderstand: aMessage [
-	^ASTCFunctionCall new
+	^ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (self formatSelector:(aMessage selector)); yourself) ;
 		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
 		yourself.
