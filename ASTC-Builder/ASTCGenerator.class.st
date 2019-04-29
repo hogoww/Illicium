@@ -463,18 +463,18 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
 	self flag:#changeName."change the name of the iterator to feel less generic"
 	
 	className:=aClass asString.
-	methodBody:='walk',className,aPropertyName capitalized,':',(self aClassAsVariableName:className),'
-  '.
+	methodBody:=String streamContents:[:stream | 
+		stream << 'walk' << className << aPropertyName capitalized << $: << (self aClassAsVariableName:className) << Character cr.
 
 	isPropertyBoolean ifFalse:[
-		methodBody:=methodBody,(self aClassAsVariableName: className),' ',aPropertyName,' ifNil:[^self].
-		'.
-		methodBody:=methodBody,(self aClassAsVariableName: className),' ',aPropertyName,
+		stream << Character tab << (self aClassAsVariableName: className) << Character space  << aPropertyName << ' ifNil:[]' << Character cr.
+		stream << (self aClassAsVariableName: className) << ' ' << aPropertyName.
 		(isManyBoolean 
-			ifTrue:[' do:[:child| child acceptVisitor:self].']
-			ifFalse:[' acceptVisitor:self.']).
-		].
-	
+			ifTrue:[ stream << ' do:[:' << '| child acceptVisitor:self].']
+			ifFalse:[ stream << ' acceptVisitor:self.'])
+		]].
+
+
 	self addMethod: methodBody on: astWalkerVisitorClass withProtocol: 'walking'
 	
 ]

@@ -38,6 +38,13 @@ ASTCValidator >> visitASTCDeclaration: anASTCDeclaration [
 ]
 
 { #category : #visiting }
+ASTCValidator >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+
+	[super visitASTCFunctionCall: anASTCDeclarationStatement ] on: Error do:[^false].
+	^true
+]
+
+{ #category : #visiting }
 ASTCValidator >> visitASTCExpression: anASTCExpression [
 
 	[super visitASTCExpression: anASTCExpression] on: Error do:[^false].

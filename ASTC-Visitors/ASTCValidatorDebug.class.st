@@ -18,7 +18,9 @@ Class {
 ASTCValidatorDebug >> visitASTCBlock: anASTCBlock [
 	self visitASTCStatement:anASTCBlock.
 
-	anASTCBlock statements do:[:each | self assert: each isASTCStatement.].
+	anASTCBlock statements do:[:each | 
+		self assert: each isASTCStatement.
+		].
 	
 	super visitASTCBlock: anASTCBlock.
 			
@@ -45,6 +47,16 @@ ASTCValidatorDebug >> visitASTCDeclaration: anASTCDeclaration [
 	].
 	
 	super visitASTCDeclaration: anASTCDeclaration.
+			
+]
+
+{ #category : #visiting }
+ASTCValidatorDebug >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+	self visitASTCNode: anASTCDeclarationStatement.
+
+	self assert: anASTCDeclarationStatement declaration isASTCDeclaration.
+
+	super visitASTCDeclaration: anASTCDeclarationStatement.
 			
 ]
 
