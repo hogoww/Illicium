@@ -35,6 +35,22 @@ ASTCPrinterVisitor >> toTranscript [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCAbstractWhile'.
+	stream << (anASTCAbstractWhile printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCAbstractWhile:anASTCAbstractWhile.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitASTCBlock: anASTCBlock [
 	stream << '
 '.
@@ -99,6 +115,22 @@ ASTCPrinterVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement 
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitASTCDoWhile: anASTCDoWhile [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCDoWhile'.
+	stream << (anASTCDoWhile printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCDoWhile:anASTCDoWhile.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitASTCExpression: anASTCExpression [
 	stream << '
 '.
@@ -124,6 +156,22 @@ ASTCPrinterVisitor >> visitASTCExpressionStatement: anASTCExpressionStatement [
 	currentDepth := currentDepth+1.
 	
 	super visitASTCExpressionStatement:anASTCExpressionStatement.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitASTCFor: anASTCFor [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCFor'.
+	stream << (anASTCFor printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCFor:anASTCFor.
 	
 	currentDepth := currentDepth-1.
 	stream << ')'.
@@ -204,6 +252,22 @@ ASTCPrinterVisitor >> visitASTCLiteral: anASTCLiteral [
 	currentDepth := currentDepth+1.
 	
 	super visitASTCLiteral:anASTCLiteral.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitASTCLoop: anASTCLoop [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCLoop'.
+	stream << (anASTCLoop printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCLoop:anASTCLoop.
 	
 	currentDepth := currentDepth-1.
 	stream << ')'.
@@ -300,6 +364,22 @@ ASTCPrinterVisitor >> visitASTCType: anASTCType [
 	currentDepth := currentDepth+1.
 	
 	super visitASTCType:anASTCType.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitASTCWhile: anASTCWhile [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCWhile'.
+	stream << (anASTCWhile printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCWhile:anASTCWhile.
 	
 	currentDepth := currentDepth-1.
 	stream << ')'.

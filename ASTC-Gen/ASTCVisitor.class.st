@@ -5,6 +5,10 @@ Class {
 }
 
 { #category : #visiting }
+ASTCVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitASTCBlock: anASTCBlock [
 ]
 
@@ -21,11 +25,19 @@ ASTCVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitASTCDoWhile: anASTCDoWhile [
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitASTCExpression: anASTCExpression [
 ]
 
 { #category : #visiting }
 ASTCVisitor >> visitASTCExpressionStatement: anASTCExpressionStatement [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCFor: anASTCFor [
 ]
 
 { #category : #visiting }
@@ -46,6 +58,10 @@ ASTCVisitor >> visitASTCIf: anASTCIf [
 
 { #category : #visiting }
 ASTCVisitor >> visitASTCLiteral: anASTCLiteral [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCLoop: anASTCLoop [
 ]
 
 { #category : #visiting }
@@ -70,4 +86,8 @@ ASTCVisitor >> visitASTCStatement: anASTCStatement [
 
 { #category : #visiting }
 ASTCVisitor >> visitASTCType: anASTCType [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCWhile: anASTCWhile [
 ]

@@ -53,7 +53,12 @@ Class {
 		'if',
 		'block',
 		'operator',
-		'declarationStatement'
+		'declarationStatement',
+		'loop',
+		'while',
+		'for',
+		'abstractWhile',
+		'doWhile'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -99,6 +104,12 @@ ASTCBuilder >> defineClasses [
 		return:=builder newClassNamed:#Return.
 		if:=builder newClassNamed:#If.
 		block:=builder newClassNamed:#Block.
+		loop:=builder newClassNamed:#Loop.
+			for:=builder newClassNamed:#For.
+			abstractWhile:=builder newClassNamed:#AbstractWhile.
+				while:=builder newClassNamed:#While.
+				doWhile:=builder newClassNamed:#DoWhile.
+
 		
 
 ]
@@ -128,8 +139,14 @@ ASTCBuilder >> defineHierarchy [
 			return --|> statement.
 			if  --|> statement.
 			block --|> statement.
+			loop --|> statement.
+				
+				"Loops"
+				for --|> loop.				
+				abstractWhile --|> loop.
+					while --|> abstractWhile.
+					doWhile --|> abstractWhile.
 			
-
 ]
 
 { #category : #definition }
@@ -190,5 +207,10 @@ ASTCBuilder >> defineRelations [
 	(declaration property:#type) <>- (type property:#declType).
 	(declaration property:#id) <>- (identifier property:#declId).
 	(declaration property:#init) <>- (expression property:#declExp).
+	
+	(loop property:#condition) <>- (expression property:#loopCond).
+	(loop property:#body) <>- (block property:#loopBody).
+	
+	
 
 ]

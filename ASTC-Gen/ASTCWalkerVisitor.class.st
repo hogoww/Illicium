@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
+	self walkASTCAbstractWhile: anASTCAbstractWhile.
+			
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitASTCBlock: anASTCBlock [
 	self walkASTCBlock: anASTCBlock.
 			
@@ -29,6 +35,12 @@ ASTCWalkerVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitASTCDoWhile: anASTCDoWhile [
+	self walkASTCDoWhile: anASTCDoWhile.
+			
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitASTCExpression: anASTCExpression [
 	self walkASTCExpression: anASTCExpression.
 			
@@ -37,6 +49,12 @@ ASTCWalkerVisitor >> visitASTCExpression: anASTCExpression [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitASTCExpressionStatement: anASTCExpressionStatement [
 	self walkASTCExpressionStatement: anASTCExpressionStatement.
+			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitASTCFor: anASTCFor [
+	self walkASTCFor: anASTCFor.
 			
 ]
 
@@ -67,6 +85,12 @@ ASTCWalkerVisitor >> visitASTCIf: anASTCIf [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitASTCLiteral: anASTCLiteral [
 	self walkASTCLiteral: anASTCLiteral.
+			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitASTCLoop: anASTCLoop [
+	self walkASTCLoop: anASTCLoop.
 			
 ]
 
@@ -104,6 +128,17 @@ ASTCWalkerVisitor >> visitASTCStatement: anASTCStatement [
 ASTCWalkerVisitor >> visitASTCType: anASTCType [
 	self walkASTCType: anASTCType.
 			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitASTCWhile: anASTCWhile [
+	self walkASTCWhile: anASTCWhile.
+			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCAbstractWhile: anASTCAbstractWhile [
+
 ]
 
 { #category : #visiting }
@@ -184,6 +219,11 @@ ASTCWalkerVisitor >> walkASTCDeclarationType:anASTCDeclaration [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> walkASTCDoWhile: anASTCDoWhile [
+
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> walkASTCExpression: anASTCExpression [
 
 ]
@@ -199,6 +239,11 @@ ASTCWalkerVisitor >> walkASTCExpressionStatementExpression:anASTCExpressionState
 	anASTCExpressionStatement expression
 		ifNotNil:[ :expression | expression acceptVisitor:self.
 		]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCFor: anASTCFor [
+
 ]
 
 { #category : #visiting }
@@ -313,6 +358,27 @@ ASTCWalkerVisitor >> walkASTCLiteralValue:anASTCLiteral [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> walkASTCLoop: anASTCLoop [
+	self walkASTCLoopCondition: anASTCLoop.
+	self walkASTCLoopBody: anASTCLoop.
+
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCLoopBody:anASTCLoop [
+	anASTCLoop body
+		ifNotNil:[ :body | body acceptVisitor:self.
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCLoopCondition:anASTCLoop [
+	anASTCLoop condition
+		ifNotNil:[ :condition | condition acceptVisitor:self.
+		]
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> walkASTCNode: anASTCNode [
 
 ]
@@ -377,5 +443,10 @@ ASTCWalkerVisitor >> walkASTCType: anASTCType [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCTypeType:anASTCType [
+
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCWhile: anASTCWhile [
 
 ]
