@@ -18,9 +18,9 @@ Class {
 ASTCValidatorDebug >> visitASTCBlock: anASTCBlock [
 	self visitASTCStatement:anASTCBlock.
 
-	anASTCBlock statements do:[:each | 
-		self assert: each isASTCStatement.
-		].
+	self assert: (anASTCBlock statements allSatisfy:[:each | 
+		each isASTCStatement.
+		]).
 	
 	super visitASTCBlock: anASTCBlock.
 			
@@ -28,9 +28,9 @@ ASTCValidatorDebug >> visitASTCBlock: anASTCBlock [
 
 { #category : #visiting }
 ASTCValidatorDebug >> visitASTCCompilationUnit: anASTCCompilationUnit [
-	anASTCCompilationUnit compilationUnits allSatisfy:[:each|
-		each assert: each isASTCFunctionDefinition.
-		].
+	self assert: (anASTCCompilationUnit compilationUnits allSatisfy:[:each |
+		each isASTCFunctionDefinition
+		]).
 	
 	super visitASTCCompilationUnit: anASTCCompilationUnit.
 ]
@@ -82,7 +82,9 @@ ASTCValidatorDebug >> visitASTCFunctionCall: anASTCFunctionCall [
 	self visitASTCExpression: anASTCFunctionCall.
 	
 	self assert: anASTCFunctionCall id isASTCIdentifier.
-	anASTCFunctionCall arguments do:[:each| self assert: each isASTCExpression ].
+	self assert: (anASTCFunctionCall arguments allSatisfy:[:each|
+		each isASTCExpression 
+		]).
 	
 	super visitASTCFunctionCall: anASTCFunctionCall.
 			
@@ -94,7 +96,9 @@ ASTCValidatorDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 
 	self assert: anASTCFunctionDefinition type isASTCType.
 	self assert: anASTCFunctionDefinition id isASTCIdentifier.
-	anASTCFunctionDefinition parameters do:[:each| self assert: each isASTCDeclaration].
+	self assert: (anASTCFunctionDefinition parameters allSatisfy:[:each|
+		each isASTCDeclaration
+		]).
 	self assert: anASTCFunctionDefinition body isASTCBlock.
 	
 	super visitASTCFunctionDefinition: anASTCFunctionDefinition. 
@@ -104,7 +108,7 @@ ASTCValidatorDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 ASTCValidatorDebug >> visitASTCIdentifier: anASTCIdentifier [
 	self visitASTCExpression: anASTCIdentifier.
 	
-	anASTCIdentifier value isLiteral.
+	self assert: anASTCIdentifier value isASTCIdentifier.
 	
 	super visitASTCIdentifier: anASTCIdentifier.
 ]
@@ -124,18 +128,16 @@ ASTCValidatorDebug >> visitASTCIf: anASTCIf [
 ASTCValidatorDebug >> visitASTCOperator: anASTCOperator [
 	self visitASTCExpression: anASTCOperator.
 	
-	anASTCOperator operands do:[:each|
-		self assert: each isASTCExpression.
-		].
+	self assert: (anASTCOperator operands allSatisfy: [:each |
+		each isASTCExpression
+		]).
 	
 	super visitASTCOperator:anASTCOperator. 
 ]
 
 { #category : #visiting }
 ASTCValidatorDebug >> visitASTCProject: anASTCProject [
-	anASTCProject compilationUnits do:[:each|
-		each assert: each isCompilationUnit.
-		].
+	self assert:(anASTCProject compilationUnits allSatisfy:[:each| each isCompilationUnit]).
 	
 	super visitASTCProject: anASTCProject.
 ]

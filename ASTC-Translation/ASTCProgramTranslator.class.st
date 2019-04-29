@@ -6,8 +6,13 @@ Class {
 
 { #category : #post }
 ASTCProgramTranslator >> checkStructure: aCollectionOfASTCMethods [
-	aCollectionOfASTCMethods allSatisfy:[:each | each isStructuralyValidAST ].
+	self flag:#comment.
+	aCollectionOfASTCMethods do:[:aMethodAST | 
+		self assert: aMethodAST isStructuralyValidAST.
 
+		"on: AssertionFailure do the following to debug
+			aMethodAST debugASTCStructure"
+		].
 	
 ]
 

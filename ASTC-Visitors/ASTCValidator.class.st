@@ -13,124 +13,108 @@ I just answer if the AST C use the corrects types. To debug an AST, use my super
 Class {
 	#name : #ASTCValidator,
 	#superclass : #ASTCValidatorDebug,
+	#instVars : [
+		'errors'
+	],
 	#category : #'ASTC-Visitors-validation'
 }
 
 { #category : #visiting }
+ASTCValidator >> errors [ 
+	^errors
+]
+
+{ #category : #visiting }
+ASTCValidator >> initialize [
+	errors:=0.
+]
+
+{ #category : #visiting }
+ASTCValidator >> isValidAst [
+	^errors = 0
+]
+
+{ #category : #visiting }
 ASTCValidator >> visitASTCBlock: anASTCBlock [
-	
-	[super visitASTCBlock: anASTCBlock] on: Error do:[^false].
-	^true
+	[super visitASTCBlock: anASTCBlock] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCCompilationUnit: anASTCCompilationUnit [
-
-	[super visitASTCCompilationUnit: anASTCCompilationUnit] on: Error do:[^false].
-	^true
+	[super visitASTCCompilationUnit: anASTCCompilationUnit] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDeclaration: anASTCDeclaration [
-
-	[super visitASTCDeclaration: anASTCDeclaration] on: Error do:[^false].
-	^true
+	[super visitASTCDeclaration: anASTCDeclaration] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
-
-	[super visitASTCFunctionCall: anASTCDeclarationStatement ] on: Error do:[^false].
-	^true
+	[super visitASTCFunctionCall: anASTCDeclarationStatement ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCExpression: anASTCExpression [
-
-	[super visitASTCExpression: anASTCExpression] on: Error do:[^false].
-	^true
+	[super visitASTCExpression: anASTCExpression] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCExpressionStatement: anASTCExpressionStatement [
-
-	[super visitASTCExpressionStatement: anASTCExpressionStatement ] on: Error do:[^false].
-	^true
+	[super visitASTCExpressionStatement: anASTCExpressionStatement ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCFunctionCall: anASTCFunctionCall [
-
-	[super visitASTCFunctionCall: anASTCFunctionCall ] on: Error do:[^false].
-	^true
+	[super visitASTCFunctionCall: anASTCFunctionCall ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
-
-	[super visitASTCFunctionDefinition: anASTCFunctionDefinition ] on: Error do:[^false].
-	^true
+	[super visitASTCFunctionDefinition: anASTCFunctionDefinition ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCIdentifier: anASTCIdentifier [
-
-	[super visitASTCIdentifier: anASTCIdentifier] on: Error do:[^false].
-	^true
+	[super visitASTCIdentifier: anASTCIdentifier] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCIf: anASTCIf [
-
-	[super visitASTCIf: anASTCIf] on: Error do:[^false].
-	^true
+	[super visitASTCIf: anASTCIf] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCLiteral: anASTCLiteral [
-
-	[super visitASTCLiteral: anASTCLiteral] on: Error do:[^false].
-	^true
+	[super visitASTCLiteral: anASTCLiteral] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCNode: anASTCNode [
-
-	[super visitASTCNode: anASTCNode] on: Error do:[^false].
-	^true
+	[super visitASTCNode: anASTCNode] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCOperator: anASTCOperator [
-	
-	[super visitASTCOperator: anASTCOperator] on: Error do:[^false].
-	^true
+	[super visitASTCOperator: anASTCOperator] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCProject: anASTCProject [
-
-	[super visitASTCProject: anASTCProject] on: Error do:[^false].
-	^true
+	[super visitASTCProject: anASTCProject] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCReturn: anASTCReturn [
-
-	[super visitASTCReturn: anASTCReturn ] on: Error do:[^false].
-	^true
+	[super visitASTCReturn: anASTCReturn ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCStatement: anASTCStatement [
-
-	[super visitASTCStatement: anASTCStatement] on: Error do:[^false].
-	^true
+	[super visitASTCStatement: anASTCStatement] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCType: anASTCType [
-
-	[super visitASTCType: anASTCType] on: Error do:[^false].
-	^true
+	[super visitASTCType: anASTCType] on: Error do:[errors:= errors +1].
 ]

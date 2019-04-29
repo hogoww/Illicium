@@ -51,7 +51,7 @@ ASTCSmallInteger >> asString [
 	^String streamContents:[:stream|
 		stream << (self class asString)
 			<<'('
-			<< value
+			<< value printString
 			<<')'.
 		].
 ]

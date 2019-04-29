@@ -36,11 +36,19 @@ ASTCNode >> gtInspectorCPrettyPrint: composite [
 ]
 
 { #category : #'*ASTC-Visitors' }
+ASTCNode >> howMuchStructuralError [
+	| validationVisitor |
+	validationVisitor := ASTCValidator new.
+	self acceptVisitor: validationVisitor.
+	^validationVisitor errors
+]
+
+{ #category : #'*ASTC-Visitors' }
 ASTCNode >> isStructuralyValidAST [
 	| validationVisitor |
 	validationVisitor := ASTCValidator new.
-	^self acceptVisitor: validationVisitor.
-
+	self acceptVisitor: validationVisitor.
+	^validationVisitor isValidAst
 ]
 
 { #category : #'*ASTC-Visitors' }
