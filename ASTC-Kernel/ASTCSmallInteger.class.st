@@ -1,8 +1,6 @@
 Class {
 	#name : #ASTCSmallInteger,
 	#superclass : #ASTCKernelClasses,
-	#traits : 'ASTCFormatTrait',
-	#classTraits : 'ASTCFormatTrait classTrait',
 	#category : #'ASTC-Kernel'
 }
 
