@@ -4,12 +4,31 @@ Class {
 	#category : #'ASTC-Translation'
 }
 
+{ #category : #post }
+ASTCProgramTranslator >> checkStructure: aCollectionOfASTCMethods [
+	aCollectionOfASTCMethods allSatisfy:[:each | each isStructuralyValidAST ].
+
+	
+]
+
+{ #category : #post }
+ASTCProgramTranslator >> postGenerationMethodAnalysisFor: aCollectionOfASTCMethods [
+	self checkStructure: aCollectionOfASTCMethods 
+
+	
+]
+
 { #category : #'as yet unclassified' }
 ASTCProgramTranslator >> translateProgramMethods: aCollectionOfMethodTypes [
-	| translationVisitor |
+	| translationVisitor methodTypeDispatcher res |
 	translationVisitor := ASTCFromPharo new.
- 
-	^aCollectionOfMethodTypes collect:[:aMethodType|translationVisitor visitMethodAST:aMethodType node ]
+ 	methodTypeDispatcher := PIIsMethodTypeInterpreted new.
+	res:=OrderedCollection new.
+	aCollectionOfMethodTypes do:[:aMethodType | 
+		(aMethodType accept: methodTypeDispatcher)
+		ifTrue:[	res add:(translationVisitor visitMethodAST:aMethodType node)]].
+	^res.	
+	
 ]
 
 { #category : #'as yet unclassified' }
@@ -21,12 +40,13 @@ ASTCProgramTranslator >> translateStartingFrom: aSelector from: aClass [
 	self typeProgramAsts: inferer.
 	
 	translatedMethod:=self translateProgramMethods: inferer types methodTypes.
+	self postGenerationMethodAnalysisFor: translatedMethod.
 	self halt.
 ]
 
 { #category : #'as yet unclassified' }
 ASTCProgramTranslator >> typeProgram: anEntryPointAst [
-	| inferer |
+	|inferer|
 	inferer := PhineasInferer new.
 	inferer inferAST: anEntryPointAst.
 	^inferer.

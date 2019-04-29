@@ -34,6 +34,11 @@ ASTCTypeAnnotationASTTestMethods >> aMethodWithAGlobalVariable [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationASTTestMethods >> aMethodWithALiteralNode [
+	1.
+]
+
+{ #category : #test }
 ASTCTypeAnnotationASTTestMethods >> aMethodWithATemporaryVariable [
 	| t |
 	t:=3.

@@ -77,12 +77,12 @@ ASTCFromPharo >> getTypeOf:aNode [
 	"Even if it's not a visit, for coherence purpose"
 	| concreteType translationType |
 	self flag:#type."add object types, or user defined types"
-	
+
 	concreteType:=(aNode propertyAt:ASTCTypeAnnotationASTOld property 
 			ifPresent: [:value| value anyOne. ]
-			ifAbsent:[self error: 'Phineas couldn''t figure out the type of', aNode asString ]).
+			ifAbsent:[self error: 'The type inferencer couldn''t figure out the type of ', aNode asString ]).
 	
-	translationType := typeDictionary at: concreteType ifAbsent:['UnknownType for now.'].
+	translationType := typeDictionary at: concreteType ifAbsent:[ ^ASTCVoid ]."unknown type for now"
 
 	^translationType.
 ]
@@ -92,10 +92,12 @@ ASTCFromPharo >> initialize [
 	"initialize.
 	We fill up the ClassDictionnary with the known possible receivers."
 	self flag:#hardcode."harcoded names, bad"
-	typeDictionary := Dictionary new.
-	typeDictionary at: SmallInteger put: ASTCSmallInteger.
-	typeDictionary at: Boolean put: ASTCBoolean.
-	typeDictionary at: ASTCVoid put: ASTCVoid 
+	typeDictionary := Dictionary new
+		at: SmallInteger put: ASTCSmallInteger;
+		at: Boolean put: ASTCBoolean;
+		at: ASTCVoid put: ASTCVoid;
+		yourself.
+
 ]
 
 { #category : #visiting }
@@ -158,7 +160,6 @@ ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 ASTCFromPharo >> visitBlockNode: aBlockNode [
 	| res |
 	res:=ASTCBlock new.
-	res declarations: (aBlockNode arguments collect:[:each | self visitNode: each] into: ASTCContainer new).
 	res statements: (aBlockNode statements collect: [:each | self visitNode: each] into: ASTCContainer new).
 
 	^res.
@@ -167,18 +168,29 @@ ASTCFromPharo >> visitBlockNode: aBlockNode [
 { #category : #visiting }
 ASTCFromPharo >> visitLiteralNode: aLiteralNode [
 	^ASTCLiteral new
-		value: (ASTCSmallInteger new myself:aLiteralNode value;yourself);
+		value: (ASTCSmallInteger new value:aLiteralNode value;yourself);
 		yourself.	
 ]
 
 { #category : #visiting }
 ASTCFromPharo >> visitMessageNode: aMessageNode [
 	"We (will) infer the type and redirect the message on the class of the receiver. So far we just forward it to the only known type: SmallInteger. each of them will handle the messages thrown to them."
-	^(self getTypeOf: aMessageNode) new
-		myself: aMessageNode receiver;
+	| aReceiver funCall methodOrBlock |
+	self flag:#comment.
+	aReceiver:=(self getTypeOf: aMessageNode receiver) new
+		value: aMessageNode receiver;
 		visitor: self;
-		perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
+		yourself.
+	funCall := aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 	
+	methodOrBlock:=aMessageNode parent parent.
+	(methodOrBlock isMethod or:[methodOrBlock isBlock])
+	ifTrue:[
+		funCall:=ASTCExpressionStatement new 
+			expression: funCall;
+			yourself.
+		].
+	^funCall
 ]
 
 { #category : #visiting }

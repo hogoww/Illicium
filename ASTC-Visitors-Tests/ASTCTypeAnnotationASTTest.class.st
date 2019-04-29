@@ -138,6 +138,21 @@ ASTCTypeAnnotationASTTest >> testGetTypeForInstanceVariableNode [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationASTTest >> testGetTypeForLiteralNode [
+	| ast counter |
+	counter:=0.
+	ast := visitor inferMethodSelector: #aMethodWithALiteralNode for: ASTCTypeAnnotationASTTestMethods .
+	ast nodesDo: [ :aNode | 
+		(aNode isLiteralNode and:[ aNode isValue ])
+			ifTrue: [ 
+				counter := counter + 1.
+				self assertTypeOf: aNode is: SmallInteger.
+			].].
+	self assert: counter equals: 1.
+
+]
+
+{ #category : #test }
 ASTCTypeAnnotationASTTest >> testGetTypeForMessageNode [
 	| ast counter |
 	counter := 0.
@@ -215,6 +230,20 @@ ASTCTypeAnnotationASTTest >> testVisitInstanceVariableNode [
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName). 
+			].].
+	self assert: counter equals: 1.
+]
+
+{ #category : #test }
+ASTCTypeAnnotationASTTest >> testVisitLiteralNode [
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #aMethodWithALiteralNode for: ASTCTypeAnnotationASTTestMethods.
+	ast nodesDo: [ :aNode | 
+		(aNode isLiteralNode and:[ aNode isValue ])
+			ifTrue: [ 
+				counter := counter + 1.
+				self assert: (aNode hasProperty: propertyName) 
 			].].
 	self assert: counter equals: 1.
 ]

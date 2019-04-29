@@ -70,6 +70,12 @@ ASTCTypeAnnotationAST >> getTypeForInstanceVariableNode: aInstanceVariableNode [
 ]
 
 { #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForLiteralNode: aLiteralNode [ 
+	^{aLiteralNode value class}
+
+]
+
+{ #category : #typing }
 ASTCTypeAnnotationAST >> getTypeForMessageNode: aRBMessageNode [
 	| aNode |
 	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
@@ -114,9 +120,9 @@ ASTCTypeAnnotationAST >> inferer: aPhineasInferer [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 ASTCTypeAnnotationAST >> initialize [
-	methodTypeDispatcher:= PIGetMethodTypeDispatcher new.
+	methodTypeDispatcher:= PIIsMethodTypeInterpreted new.
 ]
 
 { #category : #visiting }
@@ -148,6 +154,16 @@ ASTCTypeAnnotationAST >> visitInstanceVariableNode: aInstanceVariableNode [
 		for: aInstanceVariableNode.
 	super visitInstanceVariableNode: aInstanceVariableNode.
 	^aInstanceVariableNode.
+]
+
+{ #category : #visiting }
+ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
+	| type |
+	type := self getTypeForLiteralNode: aLiteralNode.
+	self atNewPropertyPut: type
+		for: aLiteralNode .
+	super visitLiteralNode: aLiteralNode.
+	^aLiteralNode.
 ]
 
 { #category : #visiting }

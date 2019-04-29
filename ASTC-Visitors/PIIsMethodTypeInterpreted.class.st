@@ -1,29 +1,29 @@
 Class {
-	#name : #PIGetMethodTypeDispatcher,
+	#name : #PIIsMethodTypeInterpreted,
 	#superclass : #PIAbstractMethodTypeDispatcher,
 	#category : #'ASTC-Visitors-RBAnnotations'
 }
 
 { #category : #visiting }
-PIGetMethodTypeDispatcher >> visitFFIMethodType: aFFIMethodType [
+PIIsMethodTypeInterpreted >> visitFFIMethodType: aFFIMethodType [
 	self flag:#todo.
 	^true
 ]
 
 { #category : #visiting }
-PIGetMethodTypeDispatcher >> visitIfTrueIfFalseMethodType: anIfTrueIfFalseMethodType [
+PIIsMethodTypeInterpreted >> visitIfTrueIfFalseMethodType: anIfTrueIfFalseMethodType [
 	"Phineas Doesn't interpret that MethodNode, no typing for the AST"
 	^false
 ]
 
 { #category : #visiting }
-PIGetMethodTypeDispatcher >> visitMethodType: aMethodType [
+PIIsMethodTypeInterpreted >> visitMethodType: aMethodType [
 	self flag:#todo.
 	^true
 ]
 
 { #category : #visiting }
-PIGetMethodTypeDispatcher >> visitPrimitiveMethodType: aPrimitiveMethodType [
+PIIsMethodTypeInterpreted >> visitPrimitiveMethodType: aPrimitiveMethodType [
 	"Phineas's heuristic is to say that the return type of the method is the same as the primitive one, and doesn't interpret it.
 	Therefore the messages won't appear in anInferer types messagesTypes.
 	So, in our case, we can't type a primitiveMethodType's AST."
@@ -31,13 +31,13 @@ PIGetMethodTypeDispatcher >> visitPrimitiveMethodType: aPrimitiveMethodType [
 ]
 
 { #category : #visiting }
-PIGetMethodTypeDispatcher >> visitSmallIntegerMethodType: aSmallIntegerMethodType [
+PIIsMethodTypeInterpreted >> visitSmallIntegerMethodType: aSmallIntegerMethodType [
 	"See visitPrimitiveMethodType"
 	^aSmallIntegerMethodType isPrimitive not
 ]
 
 { #category : #visiting }
-PIGetMethodTypeDispatcher >> visitSmalltalkMethodType: aSmalltalkMethodType [
+PIIsMethodTypeInterpreted >> visitSmalltalkMethodType: aSmalltalkMethodType [
 	"We still want to visit every message node under this"
 	^true
 ]
