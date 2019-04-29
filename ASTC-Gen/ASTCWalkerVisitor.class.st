@@ -114,8 +114,8 @@ ASTCWalkerVisitor >> walkASTCBlock: anASTCBlock [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCBlockStatements:anASTCBlock [
-  anASTCBlock statements ifNil:[^self].
-		anASTCBlock statements do:[:child| child acceptVisitor:self].
+	anASTCBlock statements ifNil:[].
+	anASTCBlock statements do:[ :aStatement | aStatement acceptVisitor:self].
 ]
 
 { #category : #visiting }
@@ -126,14 +126,14 @@ ASTCWalkerVisitor >> walkASTCCompilationUnit: anASTCCompilationUnit [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCCompilationUnitFunctionDefinitions:anASTCCompilationUnit [
-  anASTCCompilationUnit functionDefinitions ifNil:[^self].
-		anASTCCompilationUnit functionDefinitions do:[:child| child acceptVisitor:self].
+	anASTCCompilationUnit functionDefinitions ifNil:[].
+	anASTCCompilationUnit functionDefinitions do:[ :aFunctionDefinition | aFunctionDefinition acceptVisitor:self].
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCCompilationUnitParent:anASTCCompilationUnit [
-  anASTCCompilationUnit parent ifNil:[^self].
-		anASTCCompilationUnit parent acceptVisitor:self.
+	anASTCCompilationUnit parent ifNil:[].
+	anASTCCompilationUnit parent acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -146,14 +146,14 @@ ASTCWalkerVisitor >> walkASTCDeclaration: anASTCDeclaration [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCDeclarationId:anASTCDeclaration [
-  anASTCDeclaration id ifNil:[^self].
-		anASTCDeclaration id acceptVisitor:self.
+	anASTCDeclaration id ifNil:[].
+	anASTCDeclaration id acceptVisitor:self.
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCDeclarationInit:anASTCDeclaration [
-  anASTCDeclaration init ifNil:[^self].
-		anASTCDeclaration init acceptVisitor:self.
+	anASTCDeclaration init ifNil:[].
+	anASTCDeclaration init acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -164,14 +164,14 @@ ASTCWalkerVisitor >> walkASTCDeclarationStatement: anASTCDeclarationStatement [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCDeclarationStatementDeclaration:anASTCDeclarationStatement [
-  anASTCDeclarationStatement declaration ifNil:[^self].
-		anASTCDeclarationStatement declaration acceptVisitor:self.
+	anASTCDeclarationStatement declaration ifNil:[].
+	anASTCDeclarationStatement declaration acceptVisitor:self.
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCDeclarationType:anASTCDeclaration [
-  anASTCDeclaration type ifNil:[^self].
-		anASTCDeclaration type acceptVisitor:self.
+	anASTCDeclaration type ifNil:[].
+	anASTCDeclaration type acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -187,8 +187,8 @@ ASTCWalkerVisitor >> walkASTCExpressionStatement: anASTCExpressionStatement [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCExpressionStatementExpression:anASTCExpressionStatement [
-  anASTCExpressionStatement expression ifNil:[^self].
-		anASTCExpressionStatement expression acceptVisitor:self.
+	anASTCExpressionStatement expression ifNil:[].
+	anASTCExpressionStatement expression acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -200,14 +200,14 @@ ASTCWalkerVisitor >> walkASTCFunctionCall: anASTCFunctionCall [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCFunctionCallArguments:anASTCFunctionCall [
-  anASTCFunctionCall arguments ifNil:[^self].
-		anASTCFunctionCall arguments do:[:child| child acceptVisitor:self].
+	anASTCFunctionCall arguments ifNil:[].
+	anASTCFunctionCall arguments do:[ :anArgument | anArgument acceptVisitor:self].
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCFunctionCallId:anASTCFunctionCall [
-  anASTCFunctionCall id ifNil:[^self].
-		anASTCFunctionCall id acceptVisitor:self.
+	anASTCFunctionCall id ifNil:[].
+	anASTCFunctionCall id acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -221,26 +221,26 @@ ASTCWalkerVisitor >> walkASTCFunctionDefinition: anASTCFunctionDefinition [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCFunctionDefinitionBody:anASTCFunctionDefinition [
-  anASTCFunctionDefinition body ifNil:[^self].
-		anASTCFunctionDefinition body acceptVisitor:self.
+	anASTCFunctionDefinition body ifNil:[].
+	anASTCFunctionDefinition body acceptVisitor:self.
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCFunctionDefinitionId:anASTCFunctionDefinition [
-  anASTCFunctionDefinition id ifNil:[^self].
-		anASTCFunctionDefinition id acceptVisitor:self.
+	anASTCFunctionDefinition id ifNil:[].
+	anASTCFunctionDefinition id acceptVisitor:self.
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCFunctionDefinitionParameters:anASTCFunctionDefinition [
-  anASTCFunctionDefinition parameters ifNil:[^self].
-		anASTCFunctionDefinition parameters do:[:child| child acceptVisitor:self].
+	anASTCFunctionDefinition parameters ifNil:[].
+	anASTCFunctionDefinition parameters do:[ :aParameter | aParameter acceptVisitor:self].
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCFunctionDefinitionType:anASTCFunctionDefinition [
-  anASTCFunctionDefinition type ifNil:[^self].
-		anASTCFunctionDefinition type acceptVisitor:self.
+	anASTCFunctionDefinition type ifNil:[].
+	anASTCFunctionDefinition type acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -251,7 +251,7 @@ ASTCWalkerVisitor >> walkASTCIdentifier: anASTCIdentifier [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCIdentifierId:anASTCIdentifier [
-  
+
 ]
 
 { #category : #visiting }
@@ -264,20 +264,20 @@ ASTCWalkerVisitor >> walkASTCIf: anASTCIf [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCIfElse:anASTCIf [
-  anASTCIf else ifNil:[^self].
-		anASTCIf else acceptVisitor:self.
+	anASTCIf else ifNil:[].
+	anASTCIf else acceptVisitor:self.
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCIfPredicate:anASTCIf [
-  anASTCIf predicate ifNil:[^self].
-		anASTCIf predicate acceptVisitor:self.
+	anASTCIf predicate ifNil:[].
+	anASTCIf predicate acceptVisitor:self.
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCIfThen:anASTCIf [
-  anASTCIf then ifNil:[^self].
-		anASTCIf then acceptVisitor:self.
+	anASTCIf then ifNil:[].
+	anASTCIf then acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -288,7 +288,7 @@ ASTCWalkerVisitor >> walkASTCLiteral: anASTCLiteral [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCLiteralValue:anASTCLiteral [
-  
+
 ]
 
 { #category : #visiting }
@@ -305,13 +305,13 @@ ASTCWalkerVisitor >> walkASTCOperator: anASTCOperator [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCOperatorOperands:anASTCOperator [
-  anASTCOperator operands ifNil:[^self].
-		anASTCOperator operands do:[:child| child acceptVisitor:self].
+	anASTCOperator operands ifNil:[].
+	anASTCOperator operands do:[ :anOperand | anOperand acceptVisitor:self].
 ]
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCOperatorSymbol:anASTCOperator [
-  
+
 ]
 
 { #category : #visiting }
@@ -322,8 +322,8 @@ ASTCWalkerVisitor >> walkASTCProject: anASTCProject [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCProjectCompilationUnits:anASTCProject [
-  anASTCProject compilationUnits ifNil:[^self].
-		anASTCProject compilationUnits do:[:child| child acceptVisitor:self].
+	anASTCProject compilationUnits ifNil:[].
+	anASTCProject compilationUnits do:[ :aCompilationUnit | aCompilationUnit acceptVisitor:self].
 ]
 
 { #category : #visiting }
@@ -334,8 +334,8 @@ ASTCWalkerVisitor >> walkASTCReturn: anASTCReturn [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCReturnExpression:anASTCReturn [
-  anASTCReturn expression ifNil:[^self].
-		anASTCReturn expression acceptVisitor:self.
+	anASTCReturn expression ifNil:[].
+	anASTCReturn expression acceptVisitor:self.
 ]
 
 { #category : #visiting }
@@ -351,5 +351,5 @@ ASTCWalkerVisitor >> walkASTCType: anASTCType [
 
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCTypeType:anASTCType [
-  
+
 ]

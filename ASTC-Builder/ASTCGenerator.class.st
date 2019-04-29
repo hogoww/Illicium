@@ -459,7 +459,7 @@ ASTCGenerator >> addWalkerMethodFor: aClass forProperties: aCollectionOfProperti
 
 { #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolean isProperty: isPropertyBoolean [
-	| methodBody className |
+	| methodBody className propertyIteratorName |
 	self flag:#changeName."change the name of the iterator to feel less generic"
 	
 	className:=aClass asString.
@@ -467,10 +467,12 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
 		stream << 'walk' << className << aPropertyName capitalized << $: << (self aClassAsVariableName:className) << Character cr.
 
 	isPropertyBoolean ifFalse:[
-		stream << Character tab << (self aClassAsVariableName: className) << Character space  << aPropertyName << ' ifNil:[]' << Character cr.
-		stream << (self aClassAsVariableName: className) << ' ' << aPropertyName.
+		stream << Character tab << (self aClassAsVariableName: className) << Character space  << aPropertyName << ' ifNil:[].' << Character cr.
+		stream << Character tab << (self aClassAsVariableName: className) << ' ' << aPropertyName.
 		(isManyBoolean 
-			ifTrue:[ stream << ' do:[:' << '| child acceptVisitor:self].']
+			ifTrue:[ 
+				propertyIteratorName := self aClassAsVariableName:(aPropertyName withoutSuffix: 's') .
+				stream << ' do:[ :' << propertyIteratorName <<  ' | ' << propertyIteratorName << ' acceptVisitor:self].']
 			ifFalse:[ stream << ' acceptVisitor:self.'])
 		]].
 
