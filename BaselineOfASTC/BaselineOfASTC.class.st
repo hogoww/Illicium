@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTBaseline,
+	#name : #BaselineOfASTC,
 	#superclass : #BaselineOf,
-	#category : #ASTCBaseline
+	#category : #BaselineOfASTC
 }
 
 { #category : #accessing }
-ASTBaseline >> baseline: spec [
+BaselineOfASTC >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
@@ -25,6 +25,6 @@ ASTBaseline >> baseline: spec [
 ]
 
 { #category : #accessing }
-ASTBaseline >> projectClass [
+BaselineOfASTC >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]
