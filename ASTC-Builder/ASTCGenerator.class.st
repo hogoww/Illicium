@@ -460,20 +460,21 @@ ASTCGenerator >> addWalkerMethodFor: aClass forProperties: aCollectionOfProperti
 { #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolean isProperty: isPropertyBoolean [
 	| methodBody className propertyIteratorName |
-	self flag:#changeName."change the name of the iterator to feel less generic"
 	
 	className:=aClass asString.
 	methodBody:=String streamContents:[:stream | 
 		stream << 'walk' << className << aPropertyName capitalized << $: << (self aClassAsVariableName:className) << Character cr.
 
 	isPropertyBoolean ifFalse:[
-		stream << Character tab << (self aClassAsVariableName: className) << Character space  << aPropertyName << ' ifNil:[].' << Character cr.
-		stream << Character tab << (self aClassAsVariableName: className) << ' ' << aPropertyName.
+		stream << Character tab << (self aClassAsVariableName: className) << Character space  << aPropertyName << Character cr.
+		stream << Character tab << Character tab << 'ifNotNil:[ :'<< aPropertyName << ' | ' << aPropertyName .
 		(isManyBoolean 
 			ifTrue:[ 
-				propertyIteratorName := self aClassAsVariableName:(aPropertyName withoutSuffix: 's') .
-				stream << ' do:[ :' << propertyIteratorName <<  ' | ' << propertyIteratorName << ' acceptVisitor:self].']
-			ifFalse:[ stream << ' acceptVisitor:self.'])
+				propertyIteratorName := self aClassAsVariableName:(aPropertyName withoutSuffix: 's').
+				stream << Character cr.
+				stream << Character tab << Character tab << Character tab << 'do:[ :' << propertyIteratorName << ' | ' << propertyIteratorName << ' acceptVisitor:self ]']
+			ifFalse:[ stream << ' acceptVisitor:self.']).
+			stream << Character cr << Character tab << Character tab << $].
 		]].
 
 
@@ -579,6 +580,8 @@ ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString w
 
 { #category : #actions }
 ASTCGenerator >> generate [
+	Warning signal: (String streamContents:[:s| s << 'You''re about to delete everything in ' << packageName << '. Make sure you saved everything depending on it (extentions, class references,  [...]) .' ]).
+		
 	"recreate a clean package, and generate the classes"
 	self clean.
 	self makePackage.
@@ -713,7 +716,7 @@ ASTCGenerator >> relationSideStuff [
 { #category : #actions }
 ASTCGenerator >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
-
+	
 	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC'].
 
 	listOfPackageNameToReload:= OrderedCollection new.
