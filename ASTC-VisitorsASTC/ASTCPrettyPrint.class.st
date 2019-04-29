@@ -5,7 +5,7 @@ Class {
 		'stream',
 		'indentation'
 	],
-	#category : #'ASTC-Visitors-pretty-print'
+	#category : #'ASTC-VisitorsASTC-PrettyPrint'
 }
 
 { #category : #'as yet unclassified' }

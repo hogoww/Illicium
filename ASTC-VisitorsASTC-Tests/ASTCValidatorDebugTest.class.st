@@ -4,7 +4,7 @@ An ASTCValidatorDebugTest is a test class for testing the behavior of ASTCValida
 Class {
 	#name : #ASTCValidatorDebugTest,
 	#superclass : #TestCase,
-	#category : #'ASTC-Visitors-Tests-validation'
+	#category : #'ASTC-VisitorsASTC-Tests-Validation'
 }
 
 { #category : #test }

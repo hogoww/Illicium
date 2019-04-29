@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCAbstractCheckVisitor,
 	#superclass : #RBProgramNodeVisitor,
-	#category : #'ASTC-Visitors-RBAnnotations'
+	#category : #'ASTC-VisitorsRB'
 }
 
 { #category : #accessing }

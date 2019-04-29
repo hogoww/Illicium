@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'argumentTracker'
 	],
-	#category : #'ASTC-Visitors-RBAnnotations'
+	#category : #'ASTC-VisitorsRB'
 }
 
 { #category : #accessing }

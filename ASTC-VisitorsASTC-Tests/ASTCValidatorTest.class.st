@@ -4,7 +4,7 @@ An ASTCValidatorTest is a test class for testing the behavior of ASTCValidator
 Class {
 	#name : #ASTCValidatorTest,
 	#superclass : #TestCase,
-	#category : #'ASTC-Visitors-Tests-validation'
+	#category : #'ASTC-VisitorsASTC-Tests-Validation'
 }
 
 { #category : #tests }

@@ -16,7 +16,7 @@ Class {
 	#instVars : [
 		'errors'
 	],
-	#category : #'ASTC-Visitors-validation'
+	#category : #'ASTC-VisitorsASTC-Validation'
 }
 
 { #category : #visiting }

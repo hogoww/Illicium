@@ -8,7 +8,7 @@ Class {
 		'visitor',
 		'propertyName'
 	],
-	#category : #'ASTC-Visitors-Tests-RBAnnotations'
+	#category : #'ASTC-VisitorsRB-Tests-Typing'
 }
 
 { #category : #test }

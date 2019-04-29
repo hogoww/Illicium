@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCTypeAnnotationASTOld,
 	#superclass : #PIVisitor,
-	#category : #'ASTC-Visitors-RBAnnotations'
+	#category : #'ASTC-VisitorsRB-Typing'
 }
 
 { #category : #accessing }

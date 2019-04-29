@@ -10,7 +10,7 @@ Class {
 	#classInstVars : [
 		'b'
 	],
-	#category : #'ASTC-Visitors-Tests-RBAnnotations'
+	#category : #'ASTC-VisitorsRB-Tests-Typing'
 }
 
 { #category : #'as yet unclassified' }

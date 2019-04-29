@@ -6,7 +6,7 @@ Class {
 		'methodType',
 		'methodTypeDispatcher'
 	],
-	#category : #'ASTC-Visitors-RBAnnotations'
+	#category : #'ASTC-VisitorsRB-Typing'
 }
 
 { #category : #accessing }
