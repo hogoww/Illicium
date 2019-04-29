@@ -11,7 +11,7 @@ BaselineOfASTC >> baseline: spec [
 		for: #common
 		do: [
 			spec
-				package: 'ASTC-Builder' with:[ spec requires:#('Famix-MetamodelBuilder-Core')];
+				package: 'ASTC-Builder';
 				package: 'ASTC-Gen';
 				package: 'ASTC-Gen-Extension' with:[ spec requires:#('ASTC-Gen')];
 				package: 'ASTC-Kernel' with:[ spec requires:#('ASTC-Gen')];
@@ -19,7 +19,7 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-Translation-test' with:[spec requires:#('ASTC-Translation')];
 				package: 'ASTC-VisitorsASTC' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-VisitorsASTC-Tests' with:[ spec requires:#('ASTC-VisitorsASTC') ];
-				package: 'ASTC-VisitorsRB' with:[ spec requires:#('Phineas') ];
+				package: 'ASTC-VisitorsRB';
 				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ].
 		].
 ]
