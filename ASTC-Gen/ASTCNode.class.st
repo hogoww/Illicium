@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'parent'
 	],
-	#category : #'ASTC-Gen-Extensions'
+	#category : #'ASTC-Gen'
 }
 
 { #category : #comparing }
