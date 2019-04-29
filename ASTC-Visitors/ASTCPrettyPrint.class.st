@@ -116,7 +116,6 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCDeclaration: aDeclaration [
 	aDeclaration type acceptVisitor:self.
-	self << Character space.
 	aDeclaration id acceptVisitor:self.
 	aDeclaration init ifNotNil:[:init| 
 		self << $=.
@@ -133,7 +132,6 @@ ASTCPrettyPrint >> visitASTCDeclarationStatement: aDeclaration [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCExpressionStatement: anExpressionStatement [
-	self spaces.
 	anExpressionStatement expression acceptVisitor: self.
 	self << $;. 
 ]
