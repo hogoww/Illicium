@@ -13,7 +13,7 @@ I just answer if the AST C use the corrects types. To debug an AST, use my super
 Class {
 	#name : #ASTCValidator,
 	#superclass : #ASTCValidatorDebug,
-	#category : #'ASTC-Extensions-validation'
+	#category : #'ASTC-Visitors-validation'
 }
 
 { #category : #visiting }

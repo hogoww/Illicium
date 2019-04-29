@@ -3,15 +3,26 @@ Class {
 	#superclass : #ASTCAbstractCheckVisitor,
 	#instVars : [
 		'inferer',
-		'methodType'
+		'methodType',
+		'methodTypeDispatcher'
 	],
-	#category : #'ASTC-Extensions-RBAnnotations'
+	#category : #'ASTC-Visitors-RBAnnotations'
 }
 
 { #category : #accessing }
 ASTCTypeAnnotationAST class >> property [
 	"should return a symbol with the name of the property"
 	^#type
+]
+
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getMethodNodeForAMethodNode: aMethodNode [ 
+
+	methodType := inferer types 
+		methodTypes 
+			detect:[:aMethodType|
+					aMethodType node isMethod and:[aMethodType selector = aMethodNode selector] ].
+	^methodType.
 ]
 
 { #category : #typing }
@@ -30,11 +41,7 @@ ASTCTypeAnnotationAST >> getTypeForAGlobalNode: aGlobalNode [
 
 { #category : #typing }
 ASTCTypeAnnotationAST >> getTypeForAMethodNode: aMethodNode [ 
-	methodType:= inferer types 
-		methodTypes 
-			detect:[:aMethodType|
-					aMethodType node isMethod and:[aMethodType selector = aMethodNode selector]].
-	^methodType returnType concreteClasses.
+	^(self getMethodNodeForAMethodNode: aMethodNode) returnType concreteClasses.
 ]
 
 { #category : #typing }
@@ -63,7 +70,13 @@ ASTCTypeAnnotationAST >> getTypeForInstanceVariableNode: aInstanceVariableNode [
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForMessageNode: aRBMessageNode [ 	
+ASTCTypeAnnotationAST >> getTypeForLiteralNode: aLiteralNode [ 
+	^{aLiteralNode value class}
+
+]
+
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForMessageNode: aRBMessageNode [
 	| aNode |
 	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
 	^aNode concreteClasses.
@@ -109,7 +122,7 @@ ASTCTypeAnnotationAST >> inferer: aPhineasInferer [
 
 { #category : #initialization }
 ASTCTypeAnnotationAST >> initialize [
-	inferer := PhineasInferer new.
+	methodTypeDispatcher:= PIIsMethodTypeInterpreted new.
 ]
 
 { #category : #visiting }
@@ -144,6 +157,16 @@ ASTCTypeAnnotationAST >> visitInstanceVariableNode: aInstanceVariableNode [
 ]
 
 { #category : #visiting }
+ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
+	| type |
+	type := self getTypeForLiteralNode: aLiteralNode.
+	self atNewPropertyPut: type
+		for: aLiteralNode .
+	super visitLiteralNode: aLiteralNode.
+	^aLiteralNode.
+]
+
+{ #category : #visiting }
 ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
 	| type |
 	type := self getTypeForMessageNode: aMessageNode.
@@ -159,7 +182,10 @@ ASTCTypeAnnotationAST >> visitMethodNode: aMethodNode [
 	type := self getTypeForAMethodNode:aMethodNode.
 	self atNewPropertyPut: type
 		for: aMethodNode.
-	super visitMethodNode: aMethodNode.
+	
+	((self getMethodNodeForAMethodNode: aMethodNode) accept: methodTypeDispatcher) ifTrue:[
+		super visitMethodNode: aMethodNode.
+	].
 	^aMethodNode.
 ]
 

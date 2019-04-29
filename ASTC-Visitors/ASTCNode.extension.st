@@ -1,6 +1,6 @@
 Extension { #name : #ASTCNode }
 
-{ #category : #'*ASTC-Extensions' }
+{ #category : #'*ASTC-Visitors' }
 ASTCNode >> astDump [
 	| visitor |
 	visitor:=ASTCPrinterVisitor new.
@@ -8,14 +8,14 @@ ASTCNode >> astDump [
 	^visitor.
 ]
 
-{ #category : #'*ASTC-Extensions' }
+{ #category : #'*ASTC-Visitors' }
 ASTCNode >> debugASTCStructure [
 	| validationVisitor |
 	validationVisitor := ASTCValidatorDebug new.
 	self acceptVisitor: validationVisitor.
 ]
 
-{ #category : #'*ASTC-Extensions' }
+{ #category : #'*ASTC-Visitors' }
 ASTCNode >> gtInspectorASTDumpIn: composite [
 	<gtInspectorPresentationOrder: 50>
 	^ composite pharoMethod
@@ -25,7 +25,7 @@ ASTCNode >> gtInspectorASTDumpIn: composite [
 				]
 ]
 
-{ #category : #'*ASTC-Extensions' }
+{ #category : #'*ASTC-Visitors' }
 ASTCNode >> gtInspectorCPrettyPrint: composite [
 	<gtInspectorPresentationOrder: 50>
 	^ composite pharoMethod
@@ -35,7 +35,7 @@ ASTCNode >> gtInspectorCPrettyPrint: composite [
 				]
 ]
 
-{ #category : #'*ASTC-Extensions' }
+{ #category : #'*ASTC-Visitors' }
 ASTCNode >> isStructuralyValidAST [
 	| validationVisitor |
 	validationVisitor := ASTCValidator new.
@@ -43,7 +43,7 @@ ASTCNode >> isStructuralyValidAST [
 
 ]
 
-{ #category : #'*ASTC-Extensions' }
+{ #category : #'*ASTC-Visitors' }
 ASTCNode >> prettyPrint [
 	| prettyPrintVisitor |
 	prettyPrintVisitor:=ASTCPrettyPrint new.

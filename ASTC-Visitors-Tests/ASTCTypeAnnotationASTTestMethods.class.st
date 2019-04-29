@@ -10,7 +10,7 @@ Class {
 	#classInstVars : [
 		'b'
 	],
-	#category : #'ASTC-Extensions-Tests-RBAnnotations'
+	#category : #'ASTC-Visitors-Tests-RBAnnotations'
 }
 
 { #category : #'as yet unclassified' }
@@ -31,6 +31,11 @@ ASTCTypeAnnotationASTTestMethods >> aMethodWithAClassVariable [
 { #category : #test }
 ASTCTypeAnnotationASTTestMethods >> aMethodWithAGlobalVariable [
 	ASTCExpression.
+]
+
+{ #category : #test }
+ASTCTypeAnnotationASTTestMethods >> aMethodWithALiteralNode [
+	1.
 ]
 
 { #category : #test }

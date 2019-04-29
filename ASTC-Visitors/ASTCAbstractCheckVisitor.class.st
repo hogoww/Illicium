@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCAbstractCheckVisitor,
 	#superclass : #RBProgramNodeVisitor,
-	#category : #'ASTC-Extensions-RBAnnotations'
+	#category : #'ASTC-Visitors-RBAnnotations'
 }
 
 { #category : #accessing }
@@ -16,8 +16,8 @@ ASTCAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for:anArgumentN
 
 	(anArgumentNode propertyAt: aProperty
 		ifPresent:[:assoc|
-			 self error:
-				(String streamContents:[:s| s << ' visitor property conflict. ''' << aProperty << ''' already exists for instance of ' << anArgumentNode class name])]
+			 "self error:
+				(String streamContents:[:s| s << ' visitor property conflict. ''' << aProperty << ''' already exists for instance of ' << anArgumentNode class name])"]
 		ifAbsent: [ anArgumentNode propertyAt: aProperty put: aValue. ] ).
 		
 	^aValue

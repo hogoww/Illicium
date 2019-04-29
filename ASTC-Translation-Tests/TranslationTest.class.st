@@ -15,7 +15,6 @@ TranslationTest >> testASTCIdentifier [
 		id: #c;
 		yourself.
 	
-	
 	self assert: astC isASTCIdentifier.
 	self assert: astC id equals: #c.
 	self assert: astC equals: expectedC.
@@ -37,10 +36,10 @@ TranslationTest >> testASTCIf [
 			symbol:'==';
 			operands: (ASTCContainer new 
 				add:
-					(ASTCLiteral new value:	(ASTCSmallInteger new myself:1 ; yourself);
+					(ASTCLiteral new value:	(ASTCSmallInteger new value:1 ; yourself);
 					 yourself);
 				add:
-					(ASTCLiteral new value:	(ASTCSmallInteger new myself:2 ; yourself);
+					(ASTCLiteral new value:	(ASTCSmallInteger new value:2 ; yourself);
 					 yourself);
 				yourself);
 			yourself);
@@ -64,7 +63,7 @@ TranslationTest >> testASTCOperatorBinary [
 		operands: (ASTCContainer new
 			add:(ASTCIdentifier new id:#c ; yourself);
 			add:(ASTCLiteral new value: 
-				(ASTCSmallInteger new myself:6 ; yourself) ;
+				(ASTCSmallInteger new value:6 ; yourself) ;
 				yourself);
 			yourself);
 		yourself.
@@ -72,7 +71,7 @@ TranslationTest >> testASTCOperatorBinary [
 	self assert: astC isASTCOperator.
 	self assert: astC symbol equals: '=='.
 	self assert: astC operands first id equals: #c.
-	self assert: astC operands second value myself equals: 6.
+	self assert: astC operands second value value equals: 6.
 	self assert: astC equals: expectedC.
 ]
 
@@ -84,9 +83,9 @@ TranslationTest >> testASTCSmallIntegerIsLiteral [
 	astC := astPharo acceptVisitor: visitor.
 	
 	self assert: astC isASTCLiteral.
-	self assert: astC value myself equals: 5.
+	self assert: astC value value equals: 5.
 	self assert: astC equals: 
 		(ASTCLiteral new value: 
-			(ASTCSmallInteger new myself:5;yourself) ;
+			(ASTCSmallInteger new value:5;yourself) ;
 		yourself).
 ]

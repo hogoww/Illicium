@@ -5,7 +5,7 @@ Class {
 		'stream',
 		'indentation'
 	],
-	#category : #'ASTC-Extensions-pretty-print'
+	#category : #'ASTC-Visitors-pretty-print'
 }
 
 { #category : #'as yet unclassified' }
@@ -178,7 +178,7 @@ ASTCPrettyPrint >> visitASTCIf: anIf [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCLiteral: aLiteral [
-	self << aLiteral value asString
+	self << aLiteral value value
 ]
 
 { #category : #accessing }

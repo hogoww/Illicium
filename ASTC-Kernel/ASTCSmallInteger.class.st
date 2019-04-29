@@ -43,17 +43,17 @@ ASTCSmallInteger >> = anotherSmallInteger [
 	visitor class = ASTCFromPharo ifTrue:[
 		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
 		].
-	^self myself=anotherSmallInteger myself.
-]
-
-{ #category : #'as yet unclassified' }
-ASTCSmallInteger >> asCType [
-	^#int
+	^self value = anotherSmallInteger value.
 ]
 
 { #category : #converting }
 ASTCSmallInteger >> asString [
-	^self myself asString.
+	^String streamContents:[:stream|
+		stream << (self class asString)
+			<<'('
+			<< value
+			<<')'.
+		].
 ]
 
 { #category : #default }
@@ -62,31 +62,12 @@ ASTCSmallInteger >> defaultValue [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> ifTrue: trueBlock ifFalse: falseBlock [
-	^ASTCIf new
-		predicate:(self myself acceptVisitor:self visitor);
-		then: (trueBlock acceptVisitor: self visitor);
-		else: (falseBlock acceptVisitor: self visitor);
-		yourself.
-]
-
-{ #category : #accessing }
-ASTCSmallInteger >> myself [
-	^ myself
-]
-
-{ #category : #accessing }
-ASTCSmallInteger >> myself: anObject [
-	myself := anObject
-]
-
-{ #category : #translation }
 ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	|res|
 	res:=ASTCOperator new 
 		symbol: operator;
 		yourself.
-	res operands add:(self myself acceptVisitor: self visitor).
+	res operands add:(self value acceptVisitor: self visitor).
 	res operands add:(anArgument acceptVisitor: self visitor).
 	^res.
 		
@@ -95,18 +76,5 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 { #category : #printing }
 ASTCSmallInteger >> printOn: aStream [
 	aStream << self asString.
-	"aStream 	<< (self class asString)
-				<<'('
-				<< (self asString)
-				<<')'."
-]
 
-{ #category : #accessing }
-ASTCSmallInteger >> visitor [
-	^ visitor
-]
-
-{ #category : #accessing }
-ASTCSmallInteger >> visitor: anObject [
-	visitor := anObject
 ]

@@ -178,7 +178,7 @@ ASTCBuilder >> defineRelations [
 	(return property:#expression) <>- (expression property:#returnExp).
 
 	(expressionStatement property:#expression) <>- (expression property:#expStatement).
-
+	(declarationStatement property:#declaration) <>- (declaration property:#declStatement).	
 
 	(operator property:#operands) <>-* (expression property:#operatorOperand).
 	
