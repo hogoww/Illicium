@@ -184,12 +184,17 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 	funCall := aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 	
 	methodOrBlock:=aMessageNode parent parent.
-	(methodOrBlock isMethod or:[methodOrBlock isBlock])
-	ifTrue:[
-		funCall:=ASTCExpressionStatement new 
-			expression: funCall;
-			yourself.
+	
+	(ASTCStatement allSubclasses anySatisfy:[:aStatementSubclass| aStatementSubclass = funCall class])
+	ifFalse:["If the message is actually a Statement in C (such as If), it's already ready "
+		(methodOrBlock isMethod or:[methodOrBlock isBlock])
+		ifTrue:["If the message isn't an inner message, it then need to be wrapped up. "
+			funCall:=ASTCExpressionStatement new 
+				expression: funCall;
+				yourself.
+			]
 		].
+	
 	^funCall
 ]
 
