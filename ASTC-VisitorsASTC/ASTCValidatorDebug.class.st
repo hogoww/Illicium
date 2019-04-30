@@ -44,17 +44,8 @@ ASTCValidatorDebug >> visitASTCCompilationUnit: anASTCCompilationUnit [
 
 { #category : #visiting }
 ASTCValidatorDebug >> visitASTCDeclaration: anASTCDeclaration [
-	self visitASTCNode: anASTCDeclaration.
-
-	self assert: anASTCDeclaration type isASTCType.
-	self assert: anASTCDeclaration id isASTCIdentifier.
-	anASTCDeclaration init 
-	ifNotNil:[:init| 
-		self assert:init isASTCExpression
-	].
-	
-	super visitASTCDeclaration: anASTCDeclaration.
-			
+	self flag:#todo.
+	^ShouldBeImplemented 
 ]
 
 { #category : #visiting }
@@ -65,6 +56,12 @@ ASTCValidatorDebug >> visitASTCDeclarationStatement: anASTCDeclarationStatement 
 
 	super visitASTCDeclaration: anASTCDeclarationStatement.
 			
+]
+
+{ #category : #visiting }
+ASTCValidatorDebug >> visitASTCDefinition: anASTCDefinition [
+	self flag:#todo.
+	^ShouldBeImplemented 
 ]
 
 { #category : #visiting }
@@ -105,8 +102,16 @@ ASTCValidatorDebug >> visitASTCFunctionCall: anASTCFunctionCall [
 ]
 
 { #category : #visiting }
+ASTCValidatorDebug >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
+	self flag:#todo.
+	^ShouldBeImplemented 
+]
+
+{ #category : #visiting }
 ASTCValidatorDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
-	self visitASTCNode:anASTCFunctionDefinition.
+	self flag:#todo.
+	^ShouldBeImplemented 
+"	self visitASTCNode:anASTCFunctionDefinition.
 
 	self assert: anASTCFunctionDefinition type isASTCType.
 	self assert: anASTCFunctionDefinition id isASTCIdentifier.
@@ -115,7 +120,7 @@ ASTCValidatorDebug >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 		]).
 	self assert: anASTCFunctionDefinition body isASTCBlock.
 	
-	super visitASTCFunctionDefinition: anASTCFunctionDefinition. 
+	super visitASTCFunctionDefinition: anASTCFunctionDefinition. "
 ]
 
 { #category : #visiting }
@@ -186,6 +191,42 @@ ASTCValidatorDebug >> visitASTCType: anASTCType [
 	self assert: anASTCType type isClass.
 
 	super visitASTCType: anASTCType.
+]
+
+{ #category : #visiting }
+ASTCValidatorDebug >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
+	self flag:#todo.
+	^ShouldBeImplemented 
+	
+	"self visitASTCNode: anASTCVariableDeclaration.
+
+	self assert: anASTCVariableDeclaration type isASTCType.
+	self assert: anASTCVariableDeclaration id isASTCIdentifier.
+	anASTCVariableDeclaration init 
+	ifNotNil:[:init| 
+		self assert:init isASTCExpression
+	].
+	
+	super visitASTCVariableDeclaration: anASTCVariableDeclaration.
+			"
+]
+
+{ #category : #visiting }
+ASTCValidatorDebug >> visitASTCVariableDefinition: anASTCVariableDefinition [
+	self flag:#todo.
+	^ShouldBeImplemented 
+	
+	"self visitASTCNode: anASTCDeclaration.
+
+	self assert: anASTCDeclaration type isASTCType.
+	self assert: anASTCDeclaration id isASTCIdentifier.
+	anASTCDeclaration init 
+	ifNotNil:[:init| 
+		self assert:init isASTCExpression
+	].
+	
+	super visitASTCDeclaration: anASTCDeclaration.
+			"
 ]
 
 { #category : #visiting }

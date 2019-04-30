@@ -90,8 +90,8 @@ ASTCBuilder >> defineClasses [
 	node:=builder newClassNamed:#Node.
 	
 		"Node Subclasses"
-		definition:=builder newClassNamed:#definition.
-		declaration:=builder newClassNamed:#declaration.
+		definition:=builder newClassNamed:#Definition.
+		declaration:=builder newClassNamed:#Declaration.
 		
 		expression:=builder newClassNamed:#Expression.
 		statement:=builder newClassNamed:#Statement.

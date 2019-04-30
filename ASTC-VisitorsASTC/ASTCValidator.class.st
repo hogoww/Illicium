@@ -51,12 +51,17 @@ ASTCValidator >> visitASTCCompilationUnit: anASTCCompilationUnit [
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDeclaration: anASTCDeclaration [
-	[super visitASTCDeclaration: anASTCDeclaration] on: Error do:[errors:= errors +1].
+	[super visitASTCDeclaration: anASTCDeclaration ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 	[super visitASTCFunctionCall: anASTCDeclarationStatement ] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
+ASTCValidator >> visitASTCDefinition: anASTCDefinition [
+	[super visitASTCDefinition: anASTCDefinition ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
@@ -77,6 +82,11 @@ ASTCValidator >> visitASTCExpressionStatement: anASTCExpressionStatement [
 { #category : #visiting }
 ASTCValidator >> visitASTCFunctionCall: anASTCFunctionCall [
 	[super visitASTCFunctionCall: anASTCFunctionCall ] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
+ASTCValidator >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
+	[super visitASTCFunctionDeclaration: anASTCFunctionDeclaration ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
@@ -132,6 +142,16 @@ ASTCValidator >> visitASTCStatement: anASTCStatement [
 { #category : #visiting }
 ASTCValidator >> visitASTCType: anASTCType [
 	[super visitASTCType: anASTCType] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
+ASTCValidator >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
+	[super visitASTCDeclaration: anASTCVariableDeclaration] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
+ASTCValidator >> visitASTCVariableDefinition: anASTCVariableDefinition [
+	[super visitASTCDeclaration: anASTCVariableDefinition] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
