@@ -15,6 +15,13 @@ Class {
 }
 
 { #category : #visiting }
+ASTCValidatorDebug >> visitASTCAbstractWhile: anAbstractWhile [
+	self visitASTCLoop: anAbstractWhile.
+	
+	super visitASTCAbstractWhile: anAbstractWhile.
+]
+
+{ #category : #visiting }
 ASTCValidatorDebug >> visitASTCBlock: anASTCBlock [
 	self visitASTCStatement:anASTCBlock.
 
@@ -58,6 +65,13 @@ ASTCValidatorDebug >> visitASTCDeclarationStatement: anASTCDeclarationStatement 
 
 	super visitASTCDeclaration: anASTCDeclarationStatement.
 			
+]
+
+{ #category : #visiting }
+ASTCValidatorDebug >> visitASTCDoWhile: aDoWhile [
+	self visitASTCAbstractWhile: aDoWhile.
+	
+	super visitASTCDoWhile: aDoWhile.
 ]
 
 { #category : #visiting }
@@ -126,7 +140,9 @@ ASTCValidatorDebug >> visitASTCIf: anASTCIf [
 
 { #category : #visiting }
 ASTCValidatorDebug >> visitASTCLoop: aLoop [
-	self flag:#todo.
+	self visitASTCStatement: aLoop.
+	
+	super visitASTCLoop: aLoop.
 ]
 
 { #category : #visiting }
@@ -170,4 +186,11 @@ ASTCValidatorDebug >> visitASTCType: anASTCType [
 	self assert: anASTCType type isClass.
 
 	super visitASTCType: anASTCType.
+]
+
+{ #category : #visiting }
+ASTCValidatorDebug >> visitASTCWhile: aWhile [
+	self visitASTCAbstractWhile: aWhile.
+
+	super visitASTCWhile: aWhile
 ]

@@ -35,6 +35,11 @@ ASTCValidator >> isValidAst [
 ]
 
 { #category : #visiting }
+ASTCValidator >> visitASTCAbstractWhile: anAbstractWhile [
+	[super visitASTCAbstractWhile: anAbstractWhile ] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
 ASTCValidator >> visitASTCBlock: anASTCBlock [
 	[super visitASTCBlock: anASTCBlock] on: Error do:[errors:= errors +1].
 ]
@@ -52,6 +57,11 @@ ASTCValidator >> visitASTCDeclaration: anASTCDeclaration [
 { #category : #visiting }
 ASTCValidator >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 	[super visitASTCFunctionCall: anASTCDeclarationStatement ] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
+ASTCValidator >> visitASTCDoWhile: aDoWhile [
+	[super visitASTCDoWhile: aDoWhile ] on: Error do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
@@ -90,6 +100,11 @@ ASTCValidator >> visitASTCLiteral: anASTCLiteral [
 ]
 
 { #category : #visiting }
+ASTCValidator >> visitASTCLoop: aLoop [
+	[super visitASTCLoop: aLoop] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
 ASTCValidator >> visitASTCNode: anASTCNode [
 	[super visitASTCNode: anASTCNode] on: Error do:[errors:= errors +1].
 ]
@@ -117,4 +132,9 @@ ASTCValidator >> visitASTCStatement: anASTCStatement [
 { #category : #visiting }
 ASTCValidator >> visitASTCType: anASTCType [
 	[super visitASTCType: anASTCType] on: Error do:[errors:= errors +1].
+]
+
+{ #category : #visiting }
+ASTCValidator >> visitASTCWhile: aWhile [
+	[super visitASTCWhile: aWhile] on: Error do:[errors:= errors +1].
 ]
