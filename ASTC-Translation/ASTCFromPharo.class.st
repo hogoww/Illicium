@@ -129,13 +129,16 @@ ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 		"creation of the return thingy."	
 		ASTCDeclarationStatement new
 			declaration:
-				(ASTCVariableDeclaration new 
-					type:
-						(ASTCType new
-						type: (self visitType: anAssignmentNode variable);
-						yourself);
-					id:
-						(anAssignmentNode variable acceptVisitor: self);
+				(ASTCVariableDefinition new 
+					declaration:
+						(ASTCVariableDeclaration new 
+						type:
+							(ASTCType new
+							type: (self visitType: anAssignmentNode variable);
+							yourself);
+						id:
+							(anAssignmentNode variable acceptVisitor: self);
+							yourself);
 					init: 
 						(anAssignmentNode value acceptVisitor:self);
 					yourself);
@@ -206,22 +209,20 @@ ASTCFromPharo >> visitMethodAST: aMethodAST [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
-	self flag:#todo.
-	^ShouldBeImplemented 
-	
-	"^ASTCFunctionDefinition new
-		id: (ASTCIdentifier new 
-			id: (self formatSelector:(aMethodNode selector)); 
-			yourself);
-		type: (ASTCType new 
-			type: (self visitType: aMethodNode);
-			yourself);
-		parameters: (ASTCContainer new 
-			visitArgs: aMethodNode arguments with: self;
+	^ASTCFunctionDefinition new
+		declaration:(ASTCFunctionDeclaration new
+			id: (ASTCIdentifier new 
+				id: (self formatSelector:(aMethodNode selector)); 
+				yourself);
+			type: (ASTCType new 
+				type: (self visitType: aMethodNode);
+				yourself);
+			parameters: (ASTCContainer new 
+				visitArgs: aMethodNode arguments with: self;
+				yourself);
 			yourself);
 		body:(self visitNode: aMethodNode body);
 		yourself.
-"
 ]
 
 { #category : #visiting }

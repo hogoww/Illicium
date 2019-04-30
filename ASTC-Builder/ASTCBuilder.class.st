@@ -206,15 +206,15 @@ ASTCBuilder >> defineRelations [
 
 	(functionDeclaration property:#type) <>- (type property:#type).
 	(functionDeclaration property:#id) <>- (identifier property:#id).
-	(functionDeclaration property:#parameters) <>-* (declaration property:#arguments).
+	(functionDeclaration property:#parameters) <>-* (variableDeclaration property:#arguments).
 	
-	(functionDefinition property:#declaration) <>- (functionDeclaration property:#funcDeclaration).
+	(functionDefinition property:#declaration) <>- (functionDeclaration property:#funcDefinition).
 	(functionDefinition property:#body) <>- (block property:#funcDefBody).
 
 	(variableDeclaration property:#type) <>- (type property:#declType).
 	(variableDeclaration property:#id) <>- (identifier property:#declId).
 
-	(variableDefinition property:#declaration) <>- (variableDefinition property:#definition).
+	(variableDefinition property:#declaration) <>- (variableDeclaration property:#definition).
 	(variableDefinition property:#init) <>- (expression property:#initialization).
 	
 	(if property:#condition) <>- (expression property:#conditionIf).
@@ -224,7 +224,7 @@ ASTCBuilder >> defineRelations [
 	(return property:#expression) <>- (expression property:#returnExp).
 
 	(expressionStatement property:#expression) <>- (expression property:#expStatement).
-	(declarationStatement property:#declaration) <>- (declaration property:#declStatement).	
+	(declarationStatement property:#declaration) <>- (variableDeclaration property:#declStatement).	
 
 	(operator property:#operands) <>-* (expression property:#operatorOperand).
 	
@@ -236,7 +236,7 @@ ASTCBuilder >> defineRelations [
 	
 	(loop property:#condition) <>- (expression property:#condition).
 	(loop property:#body) <>- (statement property:#body).
-		(for property:#iteratorDecl) <>- (declaration property:#declIterator).
+		(for property:#iteratorDecl) <>- (variableDeclaration property:#declIterator).
 		(for property:#iteratorModification) <>- (expression property:#modifIterator).
 		
 		

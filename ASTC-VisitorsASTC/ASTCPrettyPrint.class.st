@@ -114,18 +114,6 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 ]
 
 { #category : #accessing }
-ASTCPrettyPrint >> visitASTCDeclaration: aDeclaration [
-	aDeclaration type acceptVisitor:self.
-	self << Character space.
-	aDeclaration id acceptVisitor:self.
-	aDeclaration init ifNotNil:[:init| 
-		self << $=.
-		init acceptVisitor:self.
-		].
-
-]
-
-{ #category : #accessing }
 ASTCPrettyPrint >> visitASTCDeclarationStatement: aDeclaration [
 	aDeclaration declaration acceptVisitor: self.
 	self << $;
@@ -171,13 +159,18 @@ ASTCPrettyPrint >> visitASTCFunctionCall: aFunctionCall [
 ]
 
 { #category : #accessing }
-ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
-	aFunctionDefinition type acceptVisitor: self.
+ASTCPrettyPrint >> visitASTCFunctionDeclaration: aFunctionDeclaration [
+	aFunctionDeclaration type acceptVisitor: self.
 	self << Character space.
-	aFunctionDefinition id acceptVisitor:self.
+	aFunctionDeclaration id acceptVisitor:self.
 	self << $(.
-	aFunctionDefinition parameters do:[:each| each acceptVisitor:self] separatedBy:[ self << $,].
+	aFunctionDeclaration parameters do:[:each| each acceptVisitor:self] separatedBy:[ self << $,].
 	self << $).
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
+	aFunctionDefinition declaration acceptVisitor:self.
 	aFunctionDefinition body acceptVisitor: self.
 	
 ]
@@ -226,6 +219,23 @@ ASTCPrettyPrint >> visitASTCReturn: aReturn [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCType: aType [
 	self << aType type asCType.
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCVariableDeclaration: aVariableDeclaration [
+	aVariableDeclaration type acceptVisitor:self.
+	self << Character space.
+	aVariableDeclaration id acceptVisitor:self.
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCVariableDefinition: aVariableDefinition [
+	aVariableDefinition declaration acceptVisitor: self.
+	aVariableDefinition init ifNotNil:[:init| 
+		self << $=.
+		init acceptVisitor:self.
+		].
+
 ]
 
 { #category : #accessing }

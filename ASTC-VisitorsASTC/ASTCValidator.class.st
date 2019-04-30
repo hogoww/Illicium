@@ -151,7 +151,7 @@ ASTCValidator >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
 
 { #category : #visiting }
 ASTCValidator >> visitASTCVariableDefinition: anASTCVariableDefinition [
-	[super visitASTCDeclaration: anASTCVariableDefinition] on: Error do:[errors:= errors +1].
+	[super visitASTCDeclaration: anASTCVariableDefinition] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
