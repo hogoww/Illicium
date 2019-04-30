@@ -58,7 +58,11 @@ Class {
 		'while',
 		'for',
 		'abstractWhile',
-		'doWhile'
+		'doWhile',
+		'definition',
+		'functionDeclaration',
+		'variableDeclaration',
+		'variableDefinition'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -86,12 +90,20 @@ ASTCBuilder >> defineClasses [
 	node:=builder newClassNamed:#Node.
 	
 		"Node Subclasses"
-		functionDefinition:=builder newClassNamed:#FunctionDefinition.
+		definition:=builder newClassNamed:#definition.
+		declaration:=builder newClassNamed:#declaration.
+		
 		expression:=builder newClassNamed:#Expression.
 		statement:=builder newClassNamed:#Statement.
-		declaration:=builder newClassNamed:#Declaration.
 		type:=builder newClassNamed:#Type.
 		
+			"Definition/declaration"
+			functionDeclaration:=builder newClassNamed:#FunctionDeclaration.
+			functionDefinition:=builder newClassNamed:#FunctionDefinition.
+	
+			variableDeclaration:=builder newClassNamed:#VariableDeclaration.
+			variableDefinition:=builder newClassNamed:#VariableDefinition.
+			
 		"Expressions"
 		literal:=builder newClassNamed:#Literal.
 		functionCall:=builder newClassNamed:#FunctionCall.
@@ -109,7 +121,7 @@ ASTCBuilder >> defineClasses [
 			abstractWhile:=builder newClassNamed:#AbstractWhile.
 				while:=builder newClassNamed:#While.
 				doWhile:=builder newClassNamed:#DoWhile.
-
+ 
 		
 
 ]
@@ -119,21 +131,29 @@ ASTCBuilder >> defineHierarchy [
 	super defineHierarchy.
 	
 	"Define the inheritance links between the classes defined in #defineClasses, following the FmxNG syntax."
-	
+		
 		"Node Direct SubClasses"
 		functionDefinition  --|> node.
 		expression --|> node.
 		statement --|> node.
 		declaration --|> node.
+		definition --|> node.
 		type --|> node.
 		
-			"Expression direct SubClasses"
+			"Definition/declaration directSubclasses"
+			functionDeclaration --|> declaration.
+			functionDefinition --|> definition.
+	
+			variableDeclaration --|> declaration.
+			variableDefinition  --|> definition.
+		
+			"Expression direct Subclasses"
 			literal --|> expression.
 			functionCall  --|> expression.
 			operator --|> expression.
 			identifier --|> expression.
 			
-			"Statement direct SubClasses"
+			"Statement direct Subclasses"
 			expressionStatement --|> statement.
 			declarationStatement --|> statement.
 			return --|> statement.
@@ -175,18 +195,27 @@ ASTCBuilder >> defineRelations [
 	self flag:#comment.
 	"Right properties name will be IGNORED."
 	
-	"General"
+	"General nodes"
 	(project property:#compilationUnits) <>-* (compilationUnit property:#project).
-	(compilationUnit property:#functionDefinitions) <>-* (functionDefinition property:#compilationUnit).
-	"Reflexive node"
+	(compilationUnit property:#definitions) <>-* (definition property:#compilationUnit).
+	(compilationUnit property:#declarations) <>-* (declaration property:#compilationUnit).
+
+	"Reflexive nodes"
 	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
 	(node property:#parent) -<> (node property:#parent).	
 
-	"FunctionDefinition"
-	(functionDefinition property:#type) <>- (type property:#type).
-	(functionDefinition property:#id) <>- (identifier property:#funcDefId).
-	(functionDefinition property:#parameters) <>-* (declaration property:#funcDeclaration).
+	(functionDeclaration property:#type) <>- (type property:#type).
+	(functionDeclaration property:#id) <>- (identifier property:#id).
+	(functionDeclaration property:#parameters) <>-* (declaration property:#arguments).
+	
+	(functionDefinition property:#declaration) <>- (functionDeclaration property:#funcDeclaration).
 	(functionDefinition property:#body) <>- (block property:#funcDefBody).
+
+	(variableDeclaration property:#type) <>- (type property:#declType).
+	(variableDeclaration property:#id) <>- (identifier property:#declId).
+
+	(variableDefinition property:#declaration) <>- (variableDefinition property:#definition).
+	(variableDefinition property:#init) <>- (expression property:#initialization).
 	
 	(if property:#condition) <>- (expression property:#conditionIf).
 	(if property:#then) <>- (statement property:#thenStatement).
@@ -204,14 +233,11 @@ ASTCBuilder >> defineRelations [
 	
 	(block property:#statements) <>-* (statement property:#blockStatement).
 	
-	(declaration property:#type) <>- (type property:#declType).
-	(declaration property:#id) <>- (identifier property:#declId).
-	(declaration property:#init) <>- (expression property:#declExp).
 	
-	(loop property:#condition) <>- (expression property:#loopCond).
-	(loop property:#body) <>- (statement property:#loopBody).
+	(loop property:#condition) <>- (expression property:#condition).
+	(loop property:#body) <>- (statement property:#body).
 		(for property:#iteratorDecl) <>- (declaration property:#declIterator).
-		(for property:#iteratorModification) <>- (expression property:#modifIter).
+		(for property:#iteratorModification) <>- (expression property:#modifIterator).
 		
 		
 ]
