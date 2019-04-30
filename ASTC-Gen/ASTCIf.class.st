@@ -2,7 +2,7 @@ Class {
 	#name : #ASTCIf,
 	#superclass : #ASTCStatement,
 	#instVars : [
-		'predicate',
+		'condition',
 		'then',
 		'else'
 	],
@@ -14,7 +14,7 @@ ASTCIf >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self predicate = anotherNode predicate
+	self condition = anotherNode condition
 		ifFalse: [ ^ false ].
 
 	self then = anotherNode then
@@ -37,6 +37,18 @@ ASTCIf >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessors }
+ASTCIf >> condition [
+	^condition
+]
+
+{ #category : #accessors }
+ASTCIf >> condition: anObject [
+	condition:=anObject.
+	anObject parent:self.
+	^anObject.
+]
+
+{ #category : #accessors }
 ASTCIf >> else [
 	^else
 ]
@@ -52,7 +64,7 @@ ASTCIf >> else: anObject [
 ASTCIf >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self predicate hash.
+	hash := hash + self condition hash.
 	hash := hash + self then hash.
 	hash := hash + self else hash.
 	^hash
@@ -61,18 +73,6 @@ ASTCIf >> hash [
 { #category : #testing }
 ASTCIf >> isASTCIf [
 	^true.
-]
-
-{ #category : #accessors }
-ASTCIf >> predicate [
-	^predicate
-]
-
-{ #category : #accessors }
-ASTCIf >> predicate: anObject [
-	predicate:=anObject.
-	anObject parent:self.
-	^anObject.
 ]
 
 { #category : #print }

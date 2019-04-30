@@ -131,7 +131,7 @@ ASTCValidatorDebug >> visitASTCIdentifier: anASTCIdentifier [
 ASTCValidatorDebug >> visitASTCIf: anASTCIf [
 	self visitASTCStatement:anASTCIf.
 
-	self assert: anASTCIf predicate isASTCExpression.
+	self assert: anASTCIf condition isASTCExpression.
 	self assert: anASTCIf then isASTCStatement.
 	self assert: anASTCIf else isASTCStatement.
 	

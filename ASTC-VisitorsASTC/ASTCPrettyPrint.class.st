@@ -182,7 +182,7 @@ ASTCPrettyPrint >> visitASTCIdentifier: anIdentifier [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCIf: anIf [
 	self << 'if ('.
-	(anIf predicate acceptVisitor: self).
+	(anIf condition acceptVisitor: self).
 	self << ') '.
 	(anIf then acceptVisitor: self).
 	self << ' else '.

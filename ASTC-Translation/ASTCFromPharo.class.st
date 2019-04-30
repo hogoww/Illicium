@@ -78,7 +78,7 @@ ASTCFromPharo >> getTypeOf:aNode [
 	| concreteType translationType |
 	self flag:#type."add object types, or user defined types"
 
-	concreteType:=(aNode propertyAt:ASTCTypeAnnotationASTOld property 
+	concreteType:=(aNode propertyAt:ASTCTypeAnnotationAST property 
 			ifPresent: [:value| value anyOne. ]
 			ifAbsent:[self error: 'The type inferencer couldn''t figure out the type of ', aNode asString ]).
 	

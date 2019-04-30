@@ -243,7 +243,23 @@ ASTCWalkerVisitor >> walkASTCExpressionStatementExpression:anASTCExpressionState
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCFor: anASTCFor [
+	self walkASTCForIteratorDecl: anASTCFor.
+	self walkASTCForIteratorModification: anASTCFor.
 
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCForIteratorDecl:anASTCFor [
+	anASTCFor iteratorDecl
+		ifNotNil:[ :iteratorDecl | iteratorDecl acceptVisitor:self.
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCForIteratorModification:anASTCFor [
+	anASTCFor iteratorModification
+		ifNotNil:[ :iteratorModification | iteratorModification acceptVisitor:self.
+		]
 ]
 
 { #category : #visiting }
@@ -319,23 +335,23 @@ ASTCWalkerVisitor >> walkASTCIdentifierId:anASTCIdentifier [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCIf: anASTCIf [
-	self walkASTCIfPredicate: anASTCIf.
+	self walkASTCIfCondition: anASTCIf.
 	self walkASTCIfThen: anASTCIf.
 	self walkASTCIfElse: anASTCIf.
 
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCIfElse:anASTCIf [
-	anASTCIf else
-		ifNotNil:[ :else | else acceptVisitor:self.
+ASTCWalkerVisitor >> walkASTCIfCondition:anASTCIf [
+	anASTCIf condition
+		ifNotNil:[ :condition | condition acceptVisitor:self.
 		]
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCIfPredicate:anASTCIf [
-	anASTCIf predicate
-		ifNotNil:[ :predicate | predicate acceptVisitor:self.
+ASTCWalkerVisitor >> walkASTCIfElse:anASTCIf [
+	anASTCIf else
+		ifNotNil:[ :else | else acceptVisitor:self.
 		]
 ]
 

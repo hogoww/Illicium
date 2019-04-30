@@ -188,7 +188,7 @@ ASTCBuilder >> defineRelations [
 	(functionDefinition property:#parameters) <>-* (declaration property:#funcDeclaration).
 	(functionDefinition property:#body) <>- (block property:#funcDefBody).
 	
-	(if property:#predicate) <>- (expression property:#predicateIf).
+	(if property:#condition) <>- (expression property:#conditionIf).
 	(if property:#then) <>- (statement property:#thenStatement).
 	(if property:#else) <>- (statement property:#elseStatement).
 	
@@ -209,8 +209,9 @@ ASTCBuilder >> defineRelations [
 	(declaration property:#init) <>- (expression property:#declExp).
 	
 	(loop property:#condition) <>- (expression property:#loopCond).
-	(loop property:#body) <>- (block property:#loopBody).
-	
-	
-
+	(loop property:#body) <>- (statement property:#loopBody).
+		(for property:#iteratorDecl) <>- (declaration property:#declIterator).
+		(for property:#iteratorModification) <>- (expression property:#modifIter).
+		
+		
 ]

@@ -580,7 +580,7 @@ ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString w
 
 { #category : #actions }
 ASTCGenerator >> generate [
-	Warning signal: (String streamContents:[:s| s << 'You''re about to delete everything in ' << packageName << '. Make sure you saved everything depending on it (extentions, class references,  [...]) .' ]).
+	Warning signal: (String streamContents:[:s| s << 'You''re about to delete everything in ' << packageName << '. Make sure you saved everything depending on it (extensions, class references,  [...]) .' ]).
 		
 	"recreate a clean package, and generate the classes"
 	self clean.
