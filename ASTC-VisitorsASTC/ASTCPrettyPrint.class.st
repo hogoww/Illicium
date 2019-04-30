@@ -32,7 +32,7 @@ ASTCPrettyPrint >> enterBlock [
 ASTCPrettyPrint >> formatSelector: aSelector [
 	| functionName | 
 	functionName:=aSelector asString.
-	1 to:functionName size do:[:index | 
+	functionName size timesRepeat:[:index | 
 		(functionName at: index)=$: 
 		ifTrue:[ functionName at:index put: Character space]
 		].
@@ -136,7 +136,7 @@ ASTCPrettyPrint >> visitASTCDoWhile: aDoWhile [
 	self << 'do' << Character cr.
 	aDoWhile body acceptVisitor: self.
 	self << 'while('.
-	aDoWhile condition acceptVisitor: self.
+	aDoWhile condition ifNotNil:[:aCondition| aCondition acceptVisitor: self].
 	self << ');'.
 
 ]
@@ -149,7 +149,14 @@ ASTCPrettyPrint >> visitASTCExpressionStatement: anExpressionStatement [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCFor: aFor [
-	self flag:#todo.
+	self << 'for('.
+	aFor iteratorDecl ifNotNil:[:anIteratorDecl| anIteratorDecl acceptVisitor:self].
+	self << $;.
+	aFor condition ifNotNil:[:aCondition| aCondition acceptVisitor:self].
+	self << $;.
+	aFor iteratorModification ifNotNil:[:anIteratorModification | anIteratorModification acceptVisitor:self].
+	self << ')'.
+	aFor body acceptVisitor:self.
 ]
 
 { #category : #accessing }
@@ -183,11 +190,13 @@ ASTCPrettyPrint >> visitASTCIdentifier: anIdentifier [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCIf: anIf [
 	self << 'if ('.
-	(anIf condition acceptVisitor: self).
+	anIf condition acceptVisitor: self.
 	self << ') '.
-	(anIf then acceptVisitor: self).
-	self << ' else '.
-	(anIf else acceptVisitor: self).
+	anIf then acceptVisitor: self.
+	anIf else ifNotNil:[:anElse|
+		self << ' else '.
+		anElse acceptVisitor: self.
+		].
 ]
 
 { #category : #accessing }
@@ -210,7 +219,7 @@ ASTCPrettyPrint >> visitASTCOperator: anOperator [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCReturn: aReturn [
 	self << 'return '.
-	aReturn expression acceptVisitor: self.
+	aReturn expression ifNotNil:[:anExpression| anExpression acceptVisitor: self].
 	self << $;.
 ]
 
@@ -222,7 +231,7 @@ ASTCPrettyPrint >> visitASTCType: aType [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCWhile: aWhile [
 	self << 'while('.
-	aWhile condition acceptVisitor: self.
+	aWhile condition ifNotNil:[:aCondition| aCondition acceptVisitor: self].
 	self << ')'.
 	aWhile body acceptVisitor: self.
 ]
