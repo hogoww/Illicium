@@ -131,9 +131,24 @@ ASTCPrettyPrint >> visitASTCDeclarationStatement: aDeclaration [
 ]
 
 { #category : #accessing }
+ASTCPrettyPrint >> visitASTCDoWhile: aDoWhile [
+	self << 'do' << Character cr.
+	aDoWhile body acceptVisitor: self.
+	self << 'while('.
+	aDoWhile condition acceptVisitor: self.
+	self << ');'.
+
+]
+
+{ #category : #accessing }
 ASTCPrettyPrint >> visitASTCExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	self << $;. 
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCFor: aFor [
+	self flag:#todo.
 ]
 
 { #category : #accessing }
@@ -201,6 +216,14 @@ ASTCPrettyPrint >> visitASTCReturn: aReturn [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCType: aType [
 	self << aType type asCType.
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> visitASTCWhile: aWhile [
+	self << 'while('.
+	aWhile condition acceptVisitor: self.
+	self << ')'.
+	aWhile body acceptVisitor: self.
 ]
 
 { #category : #accessing }

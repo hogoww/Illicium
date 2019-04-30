@@ -76,7 +76,7 @@ ASTCValidator >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
 
 { #category : #visiting }
 ASTCValidator >> visitASTCIdentifier: anASTCIdentifier [
-	[super visitASTCIdentifier: anASTCIdentifier] on: Error do:[errors:= errors +1].
+	[super visitASTCIdentifier: anASTCIdentifier] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }

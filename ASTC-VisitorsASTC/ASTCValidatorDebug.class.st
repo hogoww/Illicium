@@ -125,6 +125,11 @@ ASTCValidatorDebug >> visitASTCIf: anASTCIf [
 ]
 
 { #category : #visiting }
+ASTCValidatorDebug >> visitASTCLoop: aLoop [
+	self flag:#todo.
+]
+
+{ #category : #visiting }
 ASTCValidatorDebug >> visitASTCOperator: anASTCOperator [
 	self visitASTCExpression: anASTCOperator.
 	
