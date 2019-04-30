@@ -6,7 +6,7 @@ Class {
 		'definitions',
 		'declarations'
 	],
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }

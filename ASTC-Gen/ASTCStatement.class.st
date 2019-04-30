@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCStatement,
 	#superclass : #ASTCNode,
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }

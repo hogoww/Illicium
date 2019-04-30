@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'type'
 	],
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }

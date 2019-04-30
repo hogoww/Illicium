@@ -36,62 +36,62 @@ ASTCValidator >> isValidAst [
 
 { #category : #visiting }
 ASTCValidator >> visitASTCAbstractWhile: anAbstractWhile [
-	[super visitASTCAbstractWhile: anAbstractWhile ] on: Error do:[errors:= errors +1].
+	[super visitASTCAbstractWhile: anAbstractWhile ] on: AssertionFailure do:[errors:= errors +1]. 
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCBlock: anASTCBlock [
-	[super visitASTCBlock: anASTCBlock] on: Error do:[errors:= errors +1].
+	[super visitASTCBlock: anASTCBlock] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCCompilationUnit: anASTCCompilationUnit [
-	[super visitASTCCompilationUnit: anASTCCompilationUnit] on: Error do:[errors:= errors +1].
+	[super visitASTCCompilationUnit: anASTCCompilationUnit] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDeclaration: anASTCDeclaration [
-	[super visitASTCDeclaration: anASTCDeclaration ] on: Error do:[errors:= errors +1].
+	[super visitASTCDeclaration: anASTCDeclaration ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
-	[super visitASTCFunctionCall: anASTCDeclarationStatement ] on: Error do:[errors:= errors +1].
+	[super visitASTCFunctionCall: anASTCDeclarationStatement ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDefinition: anASTCDefinition [
-	[super visitASTCDefinition: anASTCDefinition ] on: Error do:[errors:= errors +1].
+	[super visitASTCDefinition: anASTCDefinition ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCDoWhile: aDoWhile [
-	[super visitASTCDoWhile: aDoWhile ] on: Error do:[errors:= errors +1].
+	[super visitASTCDoWhile: aDoWhile ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCExpression: anASTCExpression [
-	[super visitASTCExpression: anASTCExpression] on: Error do:[errors:= errors +1].
+	[super visitASTCExpression: anASTCExpression] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCExpressionStatement: anASTCExpressionStatement [
-	[super visitASTCExpressionStatement: anASTCExpressionStatement ] on: Error do:[errors:= errors +1].
+	[super visitASTCExpressionStatement: anASTCExpressionStatement ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCFunctionCall: anASTCFunctionCall [
-	[super visitASTCFunctionCall: anASTCFunctionCall ] on: Error do:[errors:= errors +1].
+	[super visitASTCFunctionCall: anASTCFunctionCall ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
-	[super visitASTCFunctionDeclaration: anASTCFunctionDeclaration ] on: Error do:[errors:= errors +1].
+	[super visitASTCFunctionDeclaration: anASTCFunctionDeclaration ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
-	[super visitASTCFunctionDefinition: anASTCFunctionDefinition ] on: Error do:[errors:= errors +1].
+	[super visitASTCFunctionDefinition: anASTCFunctionDefinition ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
@@ -101,52 +101,52 @@ ASTCValidator >> visitASTCIdentifier: anASTCIdentifier [
 
 { #category : #visiting }
 ASTCValidator >> visitASTCIf: anASTCIf [
-	[super visitASTCIf: anASTCIf] on: Error do:[errors:= errors +1].
+	[super visitASTCIf: anASTCIf] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCLiteral: anASTCLiteral [
-	[super visitASTCLiteral: anASTCLiteral] on: Error do:[errors:= errors +1].
+	[super visitASTCLiteral: anASTCLiteral] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCLoop: aLoop [
-	[super visitASTCLoop: aLoop] on: Error do:[errors:= errors +1].
+	[super visitASTCLoop: aLoop] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCNode: anASTCNode [
-	[super visitASTCNode: anASTCNode] on: Error do:[errors:= errors +1].
+	[super visitASTCNode: anASTCNode] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCOperator: anASTCOperator [
-	[super visitASTCOperator: anASTCOperator] on: Error do:[errors:= errors +1].
+	[super visitASTCOperator: anASTCOperator] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCProject: anASTCProject [
-	[super visitASTCProject: anASTCProject] on: Error do:[errors:= errors +1].
+	[super visitASTCProject: anASTCProject] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCReturn: anASTCReturn [
-	[super visitASTCReturn: anASTCReturn ] on: Error do:[errors:= errors +1].
+	[super visitASTCReturn: anASTCReturn ] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCStatement: anASTCStatement [
-	[super visitASTCStatement: anASTCStatement] on: Error do:[errors:= errors +1].
+	[super visitASTCStatement: anASTCStatement] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCType: anASTCType [
-	[super visitASTCType: anASTCType] on: Error do:[errors:= errors +1].
+	[super visitASTCType: anASTCType] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
 ASTCValidator >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
-	[super visitASTCDeclaration: anASTCVariableDeclaration] on: Error do:[errors:= errors +1].
+	[super visitASTCDeclaration: anASTCVariableDeclaration] on: AssertionFailure do:[errors:= errors +1].
 ]
 
 { #category : #visiting }
@@ -156,5 +156,5 @@ ASTCValidator >> visitASTCVariableDefinition: anASTCVariableDefinition [
 
 { #category : #visiting }
 ASTCValidator >> visitASTCWhile: aWhile [
-	[super visitASTCWhile: aWhile] on: Error do:[errors:= errors +1].
+	[super visitASTCWhile: aWhile] on: AssertionFailure do:[errors:= errors +1].
 ]

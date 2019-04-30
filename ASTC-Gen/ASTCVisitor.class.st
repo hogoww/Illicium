@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCVisitor,
 	#superclass : #Object,
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-visitor'
 }
 
 { #category : #visiting }

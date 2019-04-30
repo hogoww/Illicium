@@ -5,7 +5,7 @@ Class {
 		'declaration',
 		'init'
 	],
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }

@@ -18,13 +18,16 @@ Trait {
 { #category : #adding }
 PackageManagementTrait >> addPackageNamed: aString [
 	"add aString as the name of a new package of the environement."
-	self flag:#isThisRight.
 	RPackageOrganizer new registerPackageNamed: aString.
+]
+
+{ #category : #adding }
+PackageManagementTrait >> getPackageNamed: aName [
+	^aName asPackageIfAbsent: [ nil ]
 ]
 
 { #category : #removing }
 PackageManagementTrait >> removePackageNamed: aString [
-	self flag:#isThisRight.
 	"remove the package named aString from the system"
 	(aString asPackageIfAbsent: [ nil ]) 
 		ifNotNil: [:aPackage | aPackage removeFromSystem ].

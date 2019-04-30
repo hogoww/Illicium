@@ -5,7 +5,7 @@ Class {
 		'currentDepth',
 		'stream'
 	],
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-visitor'
 }
 
 { #category : #initialization }

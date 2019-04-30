@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'compilationUnits'
 	],
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }

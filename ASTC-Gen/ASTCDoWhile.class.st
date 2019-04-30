@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCDoWhile,
 	#superclass : #ASTCAbstractWhile,
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }
