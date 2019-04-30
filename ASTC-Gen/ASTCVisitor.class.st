@@ -17,7 +17,15 @@ ASTCVisitor >> visitASTCCompilationUnit: anASTCCompilationUnit [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitASTCDeclaration: anASTCDeclaration [
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCDefinition: anASTCDefinition [
 ]
 
 { #category : #visiting }
@@ -98,12 +106,4 @@ ASTCVisitor >> visitASTCVariableDefinition: anASTCVariableDefinition [
 
 { #category : #visiting }
 ASTCVisitor >> visitASTCWhile: anASTCWhile [
-]
-
-{ #category : #visiting }
-ASTCVisitor >> visitASTCdeclaration: anASTCdeclaration [
-]
-
-{ #category : #visiting }
-ASTCVisitor >> visitASTCdefinition: anASTCdefinition [
 ]

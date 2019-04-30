@@ -23,8 +23,20 @@ ASTCWalkerVisitor >> visitASTCCompilationUnit: anASTCCompilationUnit [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitASTCDeclaration: anASTCDeclaration [
+	self walkASTCDeclaration: anASTCDeclaration.
+			
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 	self walkASTCDeclarationStatement: anASTCDeclarationStatement.
+			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitASTCDefinition: anASTCDefinition [
+	self walkASTCDefinition: anASTCDefinition.
 			
 ]
 
@@ -149,18 +161,6 @@ ASTCWalkerVisitor >> visitASTCWhile: anASTCWhile [
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCdeclaration: anASTCdeclaration [
-	self walkASTCdeclaration: anASTCdeclaration.
-			
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> visitASTCdefinition: anASTCdefinition [
-	self walkASTCdefinition: anASTCdefinition.
-			
-]
-
-{ #category : #visiting }
 ASTCWalkerVisitor >> walkASTCAbstractWhile: anASTCAbstractWhile [
 
 ]
@@ -210,6 +210,11 @@ ASTCWalkerVisitor >> walkASTCCompilationUnitParent:anASTCCompilationUnit [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> walkASTCDeclaration: anASTCDeclaration [
+
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> walkASTCDeclarationStatement: anASTCDeclarationStatement [
 	self walkASTCDeclarationStatementDeclaration: anASTCDeclarationStatement.
 
@@ -220,6 +225,11 @@ ASTCWalkerVisitor >> walkASTCDeclarationStatementDeclaration:anASTCDeclarationSt
 	anASTCDeclarationStatement declaration
 		ifNotNil:[ :declaration | declaration acceptVisitor:self.
 		]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCDefinition: anASTCDefinition [
+
 ]
 
 { #category : #visiting }
@@ -523,15 +533,5 @@ ASTCWalkerVisitor >> walkASTCVariableDefinitionInit:anASTCVariableDefinition [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCWhile: anASTCWhile [
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCdeclaration: anASTCdeclaration [
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCdefinition: anASTCdefinition [
 
 ]

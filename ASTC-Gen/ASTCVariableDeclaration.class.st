@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCVariableDeclaration,
-	#superclass : #ASTCdeclaration,
+	#superclass : #ASTCDeclaration,
 	#instVars : [
 		'type',
 		'id'

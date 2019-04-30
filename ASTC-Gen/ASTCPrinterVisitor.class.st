@@ -83,6 +83,22 @@ ASTCPrinterVisitor >> visitASTCCompilationUnit: anASTCCompilationUnit [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitASTCDeclaration: anASTCDeclaration [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCDeclaration'.
+	stream << (anASTCDeclaration printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCDeclaration:anASTCDeclaration.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 	stream << '
 '.
@@ -92,6 +108,22 @@ ASTCPrinterVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement 
 	currentDepth := currentDepth+1.
 	
 	super visitASTCDeclarationStatement:anASTCDeclarationStatement.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitASTCDefinition: anASTCDefinition [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCDefinition'.
+	stream << (anASTCDefinition printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCDefinition:anASTCDefinition.
 	
 	currentDepth := currentDepth-1.
 	stream << ')'.
@@ -412,38 +444,6 @@ ASTCPrinterVisitor >> visitASTCWhile: anASTCWhile [
 	currentDepth := currentDepth+1.
 	
 	super visitASTCWhile:anASTCWhile.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
-]
-
-{ #category : #visiting }
-ASTCPrinterVisitor >> visitASTCdeclaration: anASTCdeclaration [
-	stream << '
-'.
-	self printTabCount: currentDepth.
-	stream << '(anASTCdeclaration'.
-	stream << (anASTCdeclaration printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCdeclaration:anASTCdeclaration.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
-]
-
-{ #category : #visiting }
-ASTCPrinterVisitor >> visitASTCdefinition: anASTCdefinition [
-	stream << '
-'.
-	self printTabCount: currentDepth.
-	stream << '(anASTCdefinition'.
-	stream << (anASTCdefinition printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCdefinition:anASTCdefinition.
 	
 	currentDepth := currentDepth-1.
 	stream << ')'.

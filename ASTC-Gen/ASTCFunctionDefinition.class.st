@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCFunctionDefinition,
-	#superclass : #ASTCdefinition,
+	#superclass : #ASTCDefinition,
 	#instVars : [
 		'declaration',
 		'body'

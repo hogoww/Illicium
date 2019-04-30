@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCVariableDefinition,
-	#superclass : #ASTCdefinition,
+	#superclass : #ASTCDefinition,
 	#instVars : [
 		'declaration',
 		'init'
