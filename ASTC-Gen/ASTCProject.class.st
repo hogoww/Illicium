@@ -66,5 +66,5 @@ ASTCProject >> isASTCProject [
 
 { #category : #print }
 ASTCProject >> printProperties [
-	^''
+	^ ''
 ]

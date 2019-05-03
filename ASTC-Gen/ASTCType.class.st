@@ -7,17 +7,6 @@ Class {
 	#category : #'ASTC-Gen-Node'
 }
 
-{ #category : #comparing }
-ASTCType >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self type = anotherNode type
-		ifFalse: [ ^ false ].
-
-	^ true
-]
-
 { #category : #visiting }
 ASTCType >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCType:self.].
@@ -26,25 +15,6 @@ ASTCType >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
 { #category : #visiting }
 ASTCType >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCType:self.
-]
-
-{ #category : #comparing }
-ASTCType >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self type hash.
-	^hash
-]
-
-{ #category : #testing }
-ASTCType >> isASTCType [
-	^true.
-]
-
-{ #category : #print }
-ASTCType >> printProperties [
-	^String streamContents:[:s |
-	s << ' ' << self typeAsString.].
 ]
 
 { #category : #accessors }

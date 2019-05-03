@@ -36,5 +36,5 @@ ASTCExpression >> isASTCExpression [
 
 { #category : #print }
 ASTCExpression >> printProperties [
-	^''
+	^ ''
 ]

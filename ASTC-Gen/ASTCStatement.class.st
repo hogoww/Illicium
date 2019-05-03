@@ -36,5 +36,5 @@ ASTCStatement >> isASTCStatement [
 
 { #category : #print }
 ASTCStatement >> printProperties [
-	^''
+	^ ''
 ]

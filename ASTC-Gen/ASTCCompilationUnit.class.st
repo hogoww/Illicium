@@ -101,5 +101,5 @@ ASTCCompilationUnit >> parent: anObject [
 
 { #category : #print }
 ASTCCompilationUnit >> printProperties [
-	^''
+	^ ''
 ]

@@ -36,5 +36,5 @@ ASTCDefinition >> isASTCDefinition [
 
 { #category : #print }
 ASTCDefinition >> printProperties [
-	^''
+	^ ''
 ]

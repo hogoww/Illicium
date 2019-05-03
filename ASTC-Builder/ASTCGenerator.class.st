@@ -308,28 +308,28 @@ ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsSt
 
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrintPropertiesOn: aClass [
-	| methodBody methodstoCall|
+	| methodBody methodSelector methodsToCall method |
 	self flag:#duplication."duplication with initialize/walker"
 	"generate an #print that will call every property printer already on the target class."
 	"The result will be UNORDERED."
-	methodstoCall := aClass selectors select:[:selector| '*AsString' match:selector ]. 
+	methodsToCall := aClass selectors select:[:selector| '*AsString' match:selector ]. 
+	methodSelector:= #printProperties.
 
-	methodBody:='printProperties
-	'.	
-
-	methodBody := methodBody,
-		(methodstoCall 
-			ifEmpty:['^''''']
-			ifNotEmpty:[	
-			(String streamContents: [:s | 
-		s <<'^String streamContents:[:s |
-	'.
-	methodstoCall do: [:method | s <<'s << '' '' << self ' ;<< method; <<'.'. ] separatedBy:[s cr;tab.].
-	s<<'].'.
-		]).
-	]).
+	methodBody:=methodsToCall ifEmpty:[
+			[
+			^''
+		].
+	]
+	ifNotEmpty:[
+		[ String streamContents:[:s|
+			s << self << methodsToCall
+			]
+		]
+	].
+	self haltIf:methodsToCall isNotEmpty.
+	method:=PlainCodeGeneration new generateCode: methodSelector withBody: methodBody.
 	
-	self addMethod: methodBody on: aClass withProtocol: 'print'.
+	self addMethod: method asString on: aClass withProtocol: 'print'.
 ]
 
 { #category : #'generating-visitor-printer' }
@@ -353,6 +353,32 @@ ASTCGenerator >> addPrintPropertiesOn: aClass forAttributes:aCollectionOfPropert
 	]).
 	
 	self addMethod: methodBody on: aClass withProtocol: 'print'.
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrintPropertiesOnString: aClass [
+	| methodBody methodstoCall|
+	self flag:#duplication."duplication with initialize/walker"
+	"generate an #print that will call every property printer already on the target class."
+	"The result will be UNORDERED."
+	methodstoCall := aClass selectors select:[:selector| '*AsString' match:selector ]. 
+
+	methodBody:='printProperties
+	'.	
+
+	methodBody := methodBody,
+		(methodstoCall 
+			ifEmpty:['^''''']
+			ifNotEmpty:[	
+			(String streamContents: [:s | 
+		s <<'^String streamContents:[:s |
+	'.
+	methodstoCall do: [:method | s <<'s << '' '' << self ' ;<< method; <<'.'. ] separatedBy:[s cr;tab.].
+	s<<'].'.
+		]).
+	]).
+	
+	self addMethod: methodBody asString on: aClass withProtocol: 'print'.
 ]
 
 { #category : #'generating-visitor-printer' }
