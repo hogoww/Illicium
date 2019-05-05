@@ -232,21 +232,26 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitor [
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	"Add the printer method for aClass on the PrinterVisitor class"
-	| methodBody |
-	methodBody:=(self methodClassSignatureFor: aClass asString withPrefix: 'visit'),'
-	stream << ''
-''.
-	self printTabCount: currentDepth.
-	stream << ''(', (self aClassAsVariableName: aClass asString),'''.
-	stream << (',(self aClassAsVariableName: aClass asString),' printProperties).
-	currentDepth := currentDepth+1.
+	| methodBody classAsVariableName visitSomething stream currentDepth stringifiedClassAsVariableName |
+	classAsVariableName := (self aClassAsVariableName: aClass asString).
+	stringifiedClassAsVariableName:= '''',classAsVariableName,''''.
+	visitSomething := 'visit' , aClass asString,':'.
 	
-	super visit',aClass asString,':', (self aClassAsVariableName:aClass asString),'.
 	
-	currentDepth := currentDepth-1.
-	stream << '')''.
-'.
-	self addMethod: methodBody on: astPrinterVisitor withProtocol: 'visiting'.	
+	methodBody := PlainCodeGeneration new generateCode: visitSomething withBody:[
+		stream cr.
+	
+		self printTabCount: currentDepth.
+		stream << $( << stringifiedClassAsVariableName .
+		stream << classAsVariableName printProperties.
+		currentDepth := currentDepth+1.
+	
+		super visitSomething:{classAsVariableName}.
+	
+		currentDepth := currentDepth-1.
+		stream << ')'.
+	].
+	self addMethod: methodBody asString on: astPrinterVisitor withProtocol: 'visiting'.	
 	
 ]
 
@@ -315,44 +320,41 @@ ASTCGenerator >> addPrintPropertiesOn: aClass [
 	methodsToCall := aClass selectors select:[:selector| '*AsString' match:selector ]. 
 	methodSelector:= #printProperties.
 
-	methodBody:=methodsToCall ifEmpty:[
+	methodBody:=methodsToCall isEmpty ifTrue:[
 			[
 			^''
 		].
 	]
-	ifNotEmpty:[
-		[ String streamContents:[:s|
-			s << self << methodsToCall
+	ifFalse:[
+		[
+		String streamContents:[:s|
+			s << self << self methodsToCall.
 			]
-		]
+		].
 	].
-	self haltIf:methodsToCall isNotEmpty.
+
 	method:=PlainCodeGeneration new generateCode: methodSelector withBody: methodBody.
-	
 	self addMethod: method asString on: aClass withProtocol: 'print'.
 ]
 
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrintPropertiesOn: aClass forAttributes:aCollectionOfProperties [
-	| methodBody |
+	| method body |
 	"generate a #printProperties selector that will call every property asString"
 	"The result will keep the order of the definitions in the metamodel"
-	methodBody:='printProperties
-	'.	
 
-	methodBody := methodBody,
-		(aCollectionOfProperties
-			ifEmpty:['^''''']
-			ifNotEmpty:[	
-			(String streamContents: [:s | 
-		s <<'^String streamContents:[:s |
-	'.
-	aCollectionOfProperties do: [:aProperty | s <<'s << '' '' << self ' ;<< aProperty ;<< 'asString.'. ] separatedBy:[s cr;tab.].
-	s<<'].'.
-		]).
-	]).
-	
-	self addMethod: methodBody on: aClass withProtocol: 'print'.
+	aCollectionOfProperties do:[:each| each,'asString'].
+	body:=aCollectionOfProperties isEmpty
+	ifTrue:[ [^''] ]
+	ifFalse:[	
+		[
+		^String streamContents:[:s |
+			s << ' ' << self aCollectionOfProperties.
+		]]
+	].
+
+	method:=PlainCodeGeneration new generateCode: #printProperties withBody: body.	
+	self addMethod: method asString on: aClass withProtocol: 'print'.
 ]
 
 { #category : #'generating-visitor-printer' }
@@ -382,6 +384,29 @@ ASTCGenerator >> addPrintPropertiesOnString: aClass [
 ]
 
 { #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrintPropertiesOnString: aClass forAttributes:aCollectionOfProperties [
+	| methodBody |
+	"generate a #printProperties selector that will call every property asString"
+	"The result will keep the order of the definitions in the metamodel"
+	methodBody:='printProperties
+	'.	
+
+	methodBody := methodBody,
+		(aCollectionOfProperties
+			ifEmpty:['^''''']
+			ifNotEmpty:[	
+			(String streamContents: [:s | 
+		s <<'^String streamContents:[:s |
+	'.
+	aCollectionOfProperties do: [:aProperty | s <<'s << '' '' << self ' ;<< aProperty ;<< 'asString.'. ] separatedBy:[s cr;tab.].
+	s<<'].'.
+		]).
+	]).
+	
+	self addMethod: methodBody on: aClass withProtocol: 'print'.
+]
+
+{ #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrinterProperties [
 	"shortcut for currentClass Instance Variable"
 	self addPrintPropertiesOn: currentClass.
@@ -397,6 +422,18 @@ ASTCGenerator >> addPrinterProperty: aProperty [
 
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addPrinterProperty: aProperty on: aClass [
+	"add a method on aClass that stringify a property. Used in the generated PrinterVisitor"
+	| method |
+
+	method:=PlainCodeGeneration new generateCode: aProperty,'AsString' withBody:[.
+		^aProperty asString.
+	].
+	
+	self addMethod: method asString on: aClass withProtocol: 'printing'.
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGenerator >> addPrinterPropertyString: aProperty on: aClass [
 	"add a method on aClass that stringify a property. Used in the generated PrinterVisitor"
 	| methodBody |
 	methodBody:=
