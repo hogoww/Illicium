@@ -35,8 +35,8 @@ ASTCPrinterVisitor >> toTranscript [
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCAbstractWhile:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCAbstractWhile'.
 	stream << anASTCAbstractWhile printProperties.
@@ -47,8 +47,8 @@ ASTCPrinterVisitor >> visitASTCAbstractWhile:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCBlock:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCBlock: anASTCBlock [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCBlock'.
 	stream << anASTCBlock printProperties.
@@ -59,8 +59,8 @@ ASTCPrinterVisitor >> visitASTCBlock:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCCompilationUnit:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCCompilationUnit: anASTCCompilationUnit [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCCompilationUnit'.
 	stream << anASTCCompilationUnit printProperties.
@@ -71,8 +71,8 @@ ASTCPrinterVisitor >> visitASTCCompilationUnit:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDeclaration:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCDeclaration: anASTCDeclaration [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCDeclaration'.
 	stream << anASTCDeclaration printProperties.
@@ -83,8 +83,8 @@ ASTCPrinterVisitor >> visitASTCDeclaration:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDeclarationStatement:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCDeclarationStatement'.
 	stream << anASTCDeclarationStatement printProperties.
@@ -95,8 +95,8 @@ ASTCPrinterVisitor >> visitASTCDeclarationStatement:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDefinition:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCDefinition: anASTCDefinition [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCDefinition'.
 	stream << anASTCDefinition printProperties.
@@ -107,8 +107,8 @@ ASTCPrinterVisitor >> visitASTCDefinition:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDoWhile:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCDoWhile: anASTCDoWhile [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCDoWhile'.
 	stream << anASTCDoWhile printProperties.
@@ -119,8 +119,8 @@ ASTCPrinterVisitor >> visitASTCDoWhile:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCExpression:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCExpression: anASTCExpression [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCExpression'.
 	stream << anASTCExpression printProperties.
@@ -131,8 +131,8 @@ ASTCPrinterVisitor >> visitASTCExpression:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCExpressionStatement:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCExpressionStatement: anASTCExpressionStatement [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCExpressionStatement'.
 	stream << anASTCExpressionStatement printProperties.
@@ -143,8 +143,8 @@ ASTCPrinterVisitor >> visitASTCExpressionStatement:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFor:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCFor: anASTCFor [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCFor'.
 	stream << anASTCFor printProperties.
@@ -155,8 +155,8 @@ ASTCPrinterVisitor >> visitASTCFor:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFunctionCall:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCFunctionCall: anASTCFunctionCall [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCFunctionCall'.
 	stream << anASTCFunctionCall printProperties.
@@ -167,8 +167,8 @@ ASTCPrinterVisitor >> visitASTCFunctionCall:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFunctionDeclaration:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCFunctionDeclaration'.
 	stream << anASTCFunctionDeclaration printProperties.
@@ -179,8 +179,8 @@ ASTCPrinterVisitor >> visitASTCFunctionDeclaration:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFunctionDefinition:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCFunctionDefinition'.
 	stream << anASTCFunctionDefinition printProperties.
@@ -191,8 +191,8 @@ ASTCPrinterVisitor >> visitASTCFunctionDefinition:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCIdentifier:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCIdentifier: anASTCIdentifier [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCIdentifier'.
 	stream << anASTCIdentifier printProperties.
@@ -203,8 +203,8 @@ ASTCPrinterVisitor >> visitASTCIdentifier:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCIf:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCIf: anASTCIf [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCIf'.
 	stream << anASTCIf printProperties.
@@ -215,8 +215,8 @@ ASTCPrinterVisitor >> visitASTCIf:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCLiteral:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCLiteral: anASTCLiteral [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCLiteral'.
 	stream << anASTCLiteral printProperties.
@@ -227,8 +227,8 @@ ASTCPrinterVisitor >> visitASTCLiteral:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCLoop:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCLoop: anASTCLoop [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCLoop'.
 	stream << anASTCLoop printProperties.
@@ -239,8 +239,8 @@ ASTCPrinterVisitor >> visitASTCLoop:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCNode:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCNode: anASTCNode [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCNode'.
 	stream << anASTCNode printProperties.
@@ -251,8 +251,8 @@ ASTCPrinterVisitor >> visitASTCNode:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCOperator:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCOperator: anASTCOperator [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCOperator'.
 	stream << anASTCOperator printProperties.
@@ -263,8 +263,8 @@ ASTCPrinterVisitor >> visitASTCOperator:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCProject:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCProject: anASTCProject [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCProject'.
 	stream << anASTCProject printProperties.
@@ -275,8 +275,8 @@ ASTCPrinterVisitor >> visitASTCProject:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCReturn:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCReturn: anASTCReturn [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCReturn'.
 	stream << anASTCReturn printProperties.
@@ -287,8 +287,8 @@ ASTCPrinterVisitor >> visitASTCReturn:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCStatement:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCStatement: anASTCStatement [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCStatement'.
 	stream << anASTCStatement printProperties.
@@ -299,8 +299,8 @@ ASTCPrinterVisitor >> visitASTCStatement:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCType:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCType: anASTCType [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCType'.
 	stream << anASTCType printProperties.
@@ -311,8 +311,8 @@ ASTCPrinterVisitor >> visitASTCType:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCVariableDeclaration:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCVariableDeclaration'.
 	stream << anASTCVariableDeclaration printProperties.
@@ -323,8 +323,8 @@ ASTCPrinterVisitor >> visitASTCVariableDeclaration:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCVariableDefinition:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCVariableDefinition: anASTCVariableDefinition [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCVariableDefinition'.
 	stream << anASTCVariableDefinition printProperties.
@@ -335,8 +335,8 @@ ASTCPrinterVisitor >> visitASTCVariableDefinition:
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCWhile:
-	stream [ cr.
+ASTCPrinterVisitor >> visitASTCWhile: anASTCWhile [
+	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anASTCWhile'.
 	stream << anASTCWhile printProperties.

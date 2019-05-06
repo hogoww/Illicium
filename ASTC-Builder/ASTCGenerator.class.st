@@ -232,13 +232,13 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitor [
 { #category : #'generating-visitor-printer' }
 ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	"Add the printer method for aClass on the PrinterVisitor class"
-	| methodBody classAsVariableName visitSomething stream currentDepth stringifiedClassAsVariableName |
+	| methodBody classAsVariableName visitAKindOfNode stream currentDepth stringifiedClassAsVariableName |
 	classAsVariableName := (self aClassAsVariableName: aClass asString).
 	stringifiedClassAsVariableName:= '''',classAsVariableName,''''.
-	visitSomething := 'visit' , aClass asString,':'.
+	visitAKindOfNode := 'visit' , aClass asString,':'.
 	
 	
-	methodBody := PlainCodeGeneration new generateCode: visitSomething withBody:[
+	methodBody := PlainCodeVisitor new generateCode: visitAKindOfNode withBody:[:aKindOfNode|
 		stream cr.
 	
 		self printTabCount: currentDepth.
@@ -246,11 +246,11 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 		stream << classAsVariableName printProperties.
 		currentDepth := currentDepth+1.
 	
-		super visitSomething:{classAsVariableName}.
+		super visitAKindOfNode:{classAsVariableName}.
 	
 		currentDepth := currentDepth-1.
 		stream << ')'.
-	].
+	] andArguments: (Dictionary new add: 'aKindOfNode' -> classAsVariableName ; yourself).
 	self addMethod: methodBody asString on: astPrinterVisitor withProtocol: 'visiting'.	
 	
 ]
@@ -333,7 +333,7 @@ ASTCGenerator >> addPrintPropertiesOn: aClass [
 		].
 	].
 
-	method:=PlainCodeGeneration new generateCode: methodSelector withBody: methodBody.
+	method:=PlainCodeVisitor new generateCode: methodSelector withBody: methodBody.
 	self addMethod: method asString on: aClass withProtocol: 'print'.
 ]
 
@@ -353,7 +353,7 @@ ASTCGenerator >> addPrintPropertiesOn: aClass forAttributes:aCollectionOfPropert
 		]]
 	].
 
-	method:=PlainCodeGeneration new generateCode: #printProperties withBody: body.	
+	method:=PlainCodeVisitor new generateCode: #printProperties withBody: body.	
 	self addMethod: method asString on: aClass withProtocol: 'print'.
 ]
 
@@ -425,9 +425,9 @@ ASTCGenerator >> addPrinterProperty: aProperty on: aClass [
 	"add a method on aClass that stringify a property. Used in the generated PrinterVisitor"
 	| method |
 
-	method:=PlainCodeGeneration new generateCode: aProperty,'AsString' withBody:[.
+	method:=[
 		^aProperty asString.
-	].
+	] asMethod: aProperty,'AsString'.
 	
 	self addMethod: method asString on: aClass withProtocol: 'printing'.
 ]
