@@ -6,7 +6,7 @@ Class {
 		'then',
 		'else'
 	],
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }

@@ -103,13 +103,12 @@ ASTCFromPharo >> initialize [
 { #category : #visiting }
 ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 	| argIdentifier |
-	self flag: #type.
 	argIdentifier := ASTCIdentifier new
 		id: anArgumentNode name;
 		yourself.
 	^ anArgumentNode parent isMethod
 		ifTrue: [ 
-			ASTCDeclaration new
+			ASTCVariableDeclaration new
 				id: argIdentifier;
 				type:
 					(ASTCType new
@@ -124,20 +123,22 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
-	self flag:#type.
 	^(anAssignmentNode propertyAt: IsItTheFirstAssignmentChecker property) ifTrue:[
 		"type checking"
 		
 		"creation of the return thingy."	
 		ASTCDeclarationStatement new
 			declaration:
-				(ASTCDeclaration new 
-					type:
-						(ASTCType new
-						type: (self visitType: anAssignmentNode variable);
-						yourself);
-					id:
-						(anAssignmentNode variable acceptVisitor: self);
+				(ASTCVariableDefinition new 
+					declaration:
+						(ASTCVariableDeclaration new 
+						type:
+							(ASTCType new
+							type: (self visitType: anAssignmentNode variable);
+							yourself);
+						id:
+							(anAssignmentNode variable acceptVisitor: self);
+							yourself);
 					init: 
 						(anAssignmentNode value acceptVisitor:self);
 					yourself);
@@ -185,7 +186,7 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 	
 	methodOrBlock:=aMessageNode parent parent.
 	
-	(ASTCStatement allSubclasses anySatisfy:[:aStatementSubclass| aStatementSubclass = funCall class])
+	(funCall class isKindOf: ASTCStatement)"To change, when generation will generate every tester rather than have errors thrown around"
 	ifFalse:["If the message is actually a Statement in C (such as If), it's already ready "
 		(methodOrBlock isMethod or:[methodOrBlock isBlock])
 		ifTrue:["If the message isn't an inner message, it then need to be wrapped up. "
@@ -208,20 +209,20 @@ ASTCFromPharo >> visitMethodAST: aMethodAST [
 
 { #category : #visiting }
 ASTCFromPharo >> visitMethodNode: aMethodNode [
-	self flag:#type.
 	^ASTCFunctionDefinition new
-		id: (ASTCIdentifier new 
-			id: (self formatSelector:(aMethodNode selector)); 
-			yourself);
-		type: (ASTCType new 
-			type: (self visitType: aMethodNode);
-			yourself);
-		parameters: (ASTCContainer new 
-			visitArgs: aMethodNode arguments with: self;
+		declaration:(ASTCFunctionDeclaration new
+			id: (ASTCIdentifier new 
+				id: (self formatSelector:(aMethodNode selector)); 
+				yourself);
+			type: (ASTCType new 
+				type: (self visitType: aMethodNode);
+				yourself);
+			parameters: (ASTCContainer new 
+				visitArgs: aMethodNode arguments with: self;
+				yourself);
 			yourself);
 		body:(self visitNode: aMethodNode body);
 		yourself.
-
 ]
 
 { #category : #visiting }

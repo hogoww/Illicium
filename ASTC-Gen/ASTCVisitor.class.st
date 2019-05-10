@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCVisitor,
 	#superclass : #Object,
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-visitor'
 }
 
 { #category : #visiting }
@@ -25,6 +25,10 @@ ASTCVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitASTCDefinition: anASTCDefinition [
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitASTCDoWhile: anASTCDoWhile [
 ]
 
@@ -42,6 +46,10 @@ ASTCVisitor >> visitASTCFor: anASTCFor [
 
 { #category : #visiting }
 ASTCVisitor >> visitASTCFunctionCall: anASTCFunctionCall [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
 ]
 
 { #category : #visiting }
@@ -86,6 +94,14 @@ ASTCVisitor >> visitASTCStatement: anASTCStatement [
 
 { #category : #visiting }
 ASTCVisitor >> visitASTCType: anASTCType [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCVariableDefinition: anASTCVariableDefinition [
 ]
 
 { #category : #visiting }

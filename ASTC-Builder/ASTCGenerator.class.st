@@ -145,6 +145,31 @@ propertyName,': ', variableName,'
 		].
 ]
 
+{ #category : #'generating-class-testing' }
+ASTCGenerator >> addAllClassTesterOn:aClass [
+	| generatedPackage methodBody |
+	generatedPackage:=self getPackageNamed:packageName.
+	(generatedPackage classTagNamed: 'Node') classes do:[:aNodeClass |
+		methodBody:=String streamContents: [:s|
+			s << 'is' << aNodeClass asString << Character cr.
+			s << Character tab.
+			aNodeClass = aClass ifFalse:[
+				 s << '^false'
+				]
+			ifTrue:[
+				s << '^true'
+				].
+			].
+		self addMethod: methodBody on: aClass withProtocol: 'testing'
+		]
+]
+
+{ #category : #'generating-class-testing' }
+ASTCGenerator >> addAllClassTesterOnNode [
+	self flag:#modularity.
+	self addAllClassTesterOn: ASTCNode.
+]
+
 { #category : #'generating-initialize' }
 ASTCGenerator >> addClassInitialize [
 	"shortcut for the currentClass Instance Variable"
@@ -182,8 +207,8 @@ ASTCGenerator >> addClassTesterOn:aClass [
 		"add the current class tester so it understand the selector #isAClass. it still won't understand #isAnotherClass"
 	methodBody := String 
 		streamContents: [:s|
-s << 'is' << aClass asString <<'
-	^true.'
+			s << 'is' << aClass asString << Character cr.
+			s << Character tab << '^true.'
 		].
 	
 	self addMethod: methodBody on: aClass withProtocol: 'testing'.
@@ -564,30 +589,38 @@ ASTCGenerator >> clean [
 { #category : #'creation-system' }
 ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString [
 	"shortcut for classes with no IVs."
-	^self createClass:classNameAsSymbol superclass:superclassAsString withIVs:''.
+	^self createClass:classNameAsSymbol superclass:superclassAsString withIVs:'' withTag: ''.
 ]
 
 { #category : #'creation-system' }
 ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString withIVs: aStringOfIVs [
+	self createClass: classNameAsSymbol superclass: superclassAsString withIVs: aStringOfIVs	withTag:''.
+]
+
+{ #category : #'creation-system' }
+ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString withIVs: aStringOfIVs withTag: aTag [
 	"indirection for class creation, in case that changes."
 	^(ShSmalltalkGlobalsEnvironment new classNamed: superclassAsString ifAbsent:Object)
 		subclass: classNameAsSymbol
 		instanceVariableNames: aStringOfIVs
 		classVariableNames: ''
-		package: self packageName
+		package: (self makePackageNameWith:aTag)
 		
+]
+
+{ #category : #'creation-system' }
+ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString withTag: aTag [
+	"shortcut for classes with no IVs."
+	^self createClass:classNameAsSymbol superclass:superclassAsString withIVs:'' withTag: aTag.
 ]
 
 { #category : #actions }
 ASTCGenerator >> generate [
 	Warning signal: (String streamContents:[:s| s << 'You''re about to delete everything in ' << packageName << '. Make sure you saved everything depending on it (extensions, class references,  [...]) .' ]).
 		
-	"recreate a clean package, and generate the classes"
-	self clean.
-	self makePackage.
-	self generateVisitorsClasses.
-	
+	self preGen.	
 	builder acceptVisitor:self.
+	self postGen.
 	
 	"reload packages that depends on the generated code"
 	self reloadExtentions.
@@ -599,15 +632,15 @@ ASTCGenerator >> generateVisitorsClasses [
 	
 	previousClassSymbol := #Object.
 	classSymbol:= (self prefix,'Visitor') asSymbol.
-	astVisitorClass := self createClass: classSymbol superclass:previousClassSymbol.
+	astVisitorClass := self createClass: classSymbol superclass:previousClassSymbol withTag: 'visitor'.
 	
 	previousClassSymbol := classSymbol.
 	classSymbol:=(self prefix,'WalkerVisitor') asSymbol.	
-	astWalkerVisitorClass := self createClass: classSymbol superclass:previousClassSymbol.
+	astWalkerVisitorClass := self createClass: classSymbol superclass:previousClassSymbol withTag: 'visitor'.
 
 	previousClassSymbol := classSymbol.
 	classSymbol:=(self prefix,'PrinterVisitor') asSymbol.
-	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth stream'.
+	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth stream' withTag: 'visitor'.
 	self addPrinterVisitorsMethods.
 	
 ]
@@ -642,6 +675,15 @@ ASTCGenerator >> initializeDefault [
 ASTCGenerator >> makePackage [
 	"Create the package for the generated classes"
 	self addPackageNamed: packageName.
+]
+
+{ #category : #'creation-system' }
+ASTCGenerator >> makePackageNameWith:aTag [
+	^String streamContents:[:s| 
+		s << packageName. 
+		aTag ifNotEmpty:[:tag| s << $- << aTag ]
+		]
+		
 ]
 
 { #category : #'name-formating' }
@@ -682,6 +724,20 @@ ASTCGenerator >> parentPropertyName: aString [
 	parentPropertyName:=aString.
 	^aString
 	
+]
+
+{ #category : #actions }
+ASTCGenerator >> postGen [
+	self addAllClassTesterOnNode.
+]
+
+{ #category : #actions }
+ASTCGenerator >> preGen [
+	"recreate a clean package, and generate the classes"
+	self clean.
+	self makePackage.
+	self generateVisitorsClasses.
+
 ]
 
 { #category : #accessing }
@@ -742,7 +798,7 @@ ASTCGenerator >> reloadExtentions [
 
 { #category : #generating }
 ASTCGenerator >> typedPropertiesStuff [
-	currentTypedProperties do:[:aTypedProperty| self addProperty:aTypedProperty name isMany: false isProperty:true.].
+	currentTypedProperties do:[:aTypedProperty| self addProperty:aTypedProperty name isMany: false isProperty:true ].
 ]
 
 { #category : #visiting }
@@ -754,7 +810,7 @@ ASTCGenerator >> visitClass: aClass [
 	className := (prefix,aClass name) asSymbol."we get the new class name and format it"
 	
 	"And we create it"
-	currentClass := self createClass: className superclass: superclass.
+	currentClass := self createClass: className superclass: superclass withTag: 'Node'.
 	currentRelationshipSides := LinkedList new.
 	currentTypedProperties := LinkedList new.
 	

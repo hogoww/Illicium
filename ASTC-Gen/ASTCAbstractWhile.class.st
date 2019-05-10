@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCAbstractWhile,
 	#superclass : #ASTCLoop,
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }

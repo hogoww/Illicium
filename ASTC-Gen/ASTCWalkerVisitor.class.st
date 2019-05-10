@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCWalkerVisitor,
 	#superclass : #ASTCVisitor,
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-visitor'
 }
 
 { #category : #visiting }
@@ -35,6 +35,12 @@ ASTCWalkerVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitASTCDefinition: anASTCDefinition [
+	self walkASTCDefinition: anASTCDefinition.
+			
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitASTCDoWhile: anASTCDoWhile [
 	self walkASTCDoWhile: anASTCDoWhile.
 			
@@ -61,6 +67,12 @@ ASTCWalkerVisitor >> visitASTCFor: anASTCFor [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitASTCFunctionCall: anASTCFunctionCall [
 	self walkASTCFunctionCall: anASTCFunctionCall.
+			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
+	self walkASTCFunctionDeclaration: anASTCFunctionDeclaration.
 			
 ]
 
@@ -131,6 +143,18 @@ ASTCWalkerVisitor >> visitASTCType: anASTCType [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
+	self walkASTCVariableDeclaration: anASTCVariableDeclaration.
+			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitASTCVariableDefinition: anASTCVariableDefinition [
+	self walkASTCVariableDefinition: anASTCVariableDefinition.
+			
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitASTCWhile: anASTCWhile [
 	self walkASTCWhile: anASTCWhile.
 			
@@ -157,15 +181,24 @@ ASTCWalkerVisitor >> walkASTCBlockStatements:anASTCBlock [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCCompilationUnit: anASTCCompilationUnit [
-	self walkASTCCompilationUnitFunctionDefinitions: anASTCCompilationUnit.
+	self walkASTCCompilationUnitDefinitions: anASTCCompilationUnit.
+	self walkASTCCompilationUnitDeclarations: anASTCCompilationUnit.
 
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCCompilationUnitFunctionDefinitions:anASTCCompilationUnit [
-	anASTCCompilationUnit functionDefinitions
-		ifNotNil:[ :functionDefinitions | functionDefinitions
-			do:[ :aFunctionDefinition | aFunctionDefinition acceptVisitor:self ]
+ASTCWalkerVisitor >> walkASTCCompilationUnitDeclarations:anASTCCompilationUnit [
+	anASTCCompilationUnit declarations
+		ifNotNil:[ :declarations | declarations
+			do:[ :aDeclaration | aDeclaration acceptVisitor:self ]
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCCompilationUnitDefinitions:anASTCCompilationUnit [
+	anASTCCompilationUnit definitions
+		ifNotNil:[ :definitions | definitions
+			do:[ :aDefinition | aDefinition acceptVisitor:self ]
 		]
 ]
 
@@ -178,24 +211,7 @@ ASTCWalkerVisitor >> walkASTCCompilationUnitParent:anASTCCompilationUnit [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCDeclaration: anASTCDeclaration [
-	self walkASTCDeclarationType: anASTCDeclaration.
-	self walkASTCDeclarationId: anASTCDeclaration.
-	self walkASTCDeclarationInit: anASTCDeclaration.
 
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCDeclarationId:anASTCDeclaration [
-	anASTCDeclaration id
-		ifNotNil:[ :id | id acceptVisitor:self.
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCDeclarationInit:anASTCDeclaration [
-	anASTCDeclaration init
-		ifNotNil:[ :init | init acceptVisitor:self.
-		]
 ]
 
 { #category : #visiting }
@@ -211,11 +227,9 @@ ASTCWalkerVisitor >> walkASTCDeclarationStatementDeclaration:anASTCDeclarationSt
 		]
 ]
 
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCDeclarationType:anASTCDeclaration [
-	anASTCDeclaration type
-		ifNotNil:[ :type | type acceptVisitor:self.
-		]
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCDefinition: anASTCDefinition [
+
 ]
 
 { #category : #visiting }
@@ -285,10 +299,38 @@ ASTCWalkerVisitor >> walkASTCFunctionCallId:anASTCFunctionCall [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> walkASTCFunctionDeclaration: anASTCFunctionDeclaration [
+	self walkASTCFunctionDeclarationType: anASTCFunctionDeclaration.
+	self walkASTCFunctionDeclarationId: anASTCFunctionDeclaration.
+	self walkASTCFunctionDeclarationParameters: anASTCFunctionDeclaration.
+
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCFunctionDeclarationId:anASTCFunctionDeclaration [
+	anASTCFunctionDeclaration id
+		ifNotNil:[ :id | id acceptVisitor:self.
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCFunctionDeclarationParameters:anASTCFunctionDeclaration [
+	anASTCFunctionDeclaration parameters
+		ifNotNil:[ :parameters | parameters
+			do:[ :aParameter | aParameter acceptVisitor:self ]
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCFunctionDeclarationType:anASTCFunctionDeclaration [
+	anASTCFunctionDeclaration type
+		ifNotNil:[ :type | type acceptVisitor:self.
+		]
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> walkASTCFunctionDefinition: anASTCFunctionDefinition [
-	self walkASTCFunctionDefinitionType: anASTCFunctionDefinition.
-	self walkASTCFunctionDefinitionId: anASTCFunctionDefinition.
-	self walkASTCFunctionDefinitionParameters: anASTCFunctionDefinition.
+	self walkASTCFunctionDefinitionDeclaration: anASTCFunctionDefinition.
 	self walkASTCFunctionDefinitionBody: anASTCFunctionDefinition.
 
 ]
@@ -301,24 +343,9 @@ ASTCWalkerVisitor >> walkASTCFunctionDefinitionBody:anASTCFunctionDefinition [
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDefinitionId:anASTCFunctionDefinition [
-	anASTCFunctionDefinition id
-		ifNotNil:[ :id | id acceptVisitor:self.
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDefinitionParameters:anASTCFunctionDefinition [
-	anASTCFunctionDefinition parameters
-		ifNotNil:[ :parameters | parameters
-			do:[ :aParameter | aParameter acceptVisitor:self ]
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDefinitionType:anASTCFunctionDefinition [
-	anASTCFunctionDefinition type
-		ifNotNil:[ :type | type acceptVisitor:self.
+ASTCWalkerVisitor >> walkASTCFunctionDefinitionDeclaration:anASTCFunctionDefinition [
+	anASTCFunctionDefinition declaration
+		ifNotNil:[ :declaration | declaration acceptVisitor:self.
 		]
 ]
 
@@ -460,6 +487,48 @@ ASTCWalkerVisitor >> walkASTCType: anASTCType [
 { #category : #walking }
 ASTCWalkerVisitor >> walkASTCTypeType:anASTCType [
 
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCVariableDeclaration: anASTCVariableDeclaration [
+	self walkASTCVariableDeclarationType: anASTCVariableDeclaration.
+	self walkASTCVariableDeclarationId: anASTCVariableDeclaration.
+
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCVariableDeclarationId:anASTCVariableDeclaration [
+	anASTCVariableDeclaration id
+		ifNotNil:[ :id | id acceptVisitor:self.
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCVariableDeclarationType:anASTCVariableDeclaration [
+	anASTCVariableDeclaration type
+		ifNotNil:[ :type | type acceptVisitor:self.
+		]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCVariableDefinition: anASTCVariableDefinition [
+	self walkASTCVariableDefinitionDeclaration: anASTCVariableDefinition.
+	self walkASTCVariableDefinitionInit: anASTCVariableDefinition.
+
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCVariableDefinitionDeclaration:anASTCVariableDefinition [
+	anASTCVariableDefinition declaration
+		ifNotNil:[ :declaration | declaration acceptVisitor:self.
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCVariableDefinitionInit:anASTCVariableDefinition [
+	anASTCVariableDefinition init
+		ifNotNil:[ :init | init acceptVisitor:self.
+		]
 ]
 
 { #category : #visiting }

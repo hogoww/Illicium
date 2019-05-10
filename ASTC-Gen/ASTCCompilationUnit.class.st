@@ -3,9 +3,10 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'parent',
-		'functionDefinitions'
+		'definitions',
+		'declarations'
 	],
-	#category : #'ASTC-Gen'
+	#category : #'ASTC-Gen-Node'
 }
 
 { #category : #comparing }
@@ -13,7 +14,10 @@ ASTCCompilationUnit >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self functionDefinitions = anotherNode functionDefinitions
+	self definitions = anotherNode definitions
+		ifFalse: [ ^ false ].
+
+	self declarations = anotherNode declarations
 		ifFalse: [ ^ false ].
 
 	^ true
@@ -30,13 +34,25 @@ ASTCCompilationUnit >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessors }
-ASTCCompilationUnit >> functionDefinitions [
-	^functionDefinitions
+ASTCCompilationUnit >> declarations [
+	^declarations
 ]
 
 { #category : #accessors }
-ASTCCompilationUnit >> functionDefinitions: aCollection [
-	functionDefinitions:=aCollection.
+ASTCCompilationUnit >> declarations: aCollection [
+	declarations:=aCollection.
+	aCollection parent:self.
+	^aCollection.
+]
+
+{ #category : #accessors }
+ASTCCompilationUnit >> definitions [
+	^definitions
+]
+
+{ #category : #accessors }
+ASTCCompilationUnit >> definitions: aCollection [
+	definitions:=aCollection.
 	aCollection parent:self.
 	^aCollection.
 ]
@@ -45,19 +61,26 @@ ASTCCompilationUnit >> functionDefinitions: aCollection [
 ASTCCompilationUnit >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self functionDefinitions hash.
+	hash := hash + self definitions hash.
+	hash := hash + self declarations hash.
 	^hash
 ]
 
 { #category : #initialize }
 ASTCCompilationUnit >> initialize [
 	super initialize.
-	self initializeFunctionDefinitions.
+	self initializeDefinitions.
+	self initializeDeclarations.
 ]
 
 { #category : #initialization }
-ASTCCompilationUnit >> initializeFunctionDefinitions [
-	functionDefinitions:=ASTCContainer new parent:self; yourself.
+ASTCCompilationUnit >> initializeDeclarations [
+	declarations:=ASTCContainer new parent:self; yourself.
+]
+
+{ #category : #initialization }
+ASTCCompilationUnit >> initializeDefinitions [
+	definitions:=ASTCContainer new parent:self; yourself.
 ]
 
 { #category : #testing }
