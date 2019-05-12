@@ -62,7 +62,9 @@ Class {
 		'definition',
 		'functionDeclaration',
 		'variableDeclaration',
-		'variableDefinition'
+		'variableDefinition',
+		'structureDeclaration',
+		'structureDefinition'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -103,6 +105,9 @@ ASTCBuilder >> defineClasses [
 	
 			variableDeclaration:=builder newClassNamed:#VariableDeclaration.
 			variableDefinition:=builder newClassNamed:#VariableDefinition.
+	
+			structureDeclaration:=builder newClassNamed:#StructureDeclaration.
+			structureDefinition:=builder newClassNamed:#StructureDefinition.
 			
 		"Expressions"
 		literal:=builder newClassNamed:#Literal.
@@ -146,6 +151,9 @@ ASTCBuilder >> defineHierarchy [
 	
 			variableDeclaration --|> declaration.
 			variableDefinition  --|> definition.
+			
+			structureDeclaration --|> declaration.
+			structureDefinition  --|> definition.
 		
 			"Expression direct Subclasses"
 			literal --|> expression.
@@ -216,7 +224,13 @@ ASTCBuilder >> defineRelations [
 
 	(variableDefinition property:#declaration) <>- (variableDeclaration property:#definition).
 	(variableDefinition property:#init) <>- (expression property:#initialization).
+
+	(structureDeclaration property:#id) <>- (identifier property:#structId).
 	
+	(structureDefinition property:#declaration) <>- (structureDeclaration property:#structureDeclaration).
+	(structureDefinition property:#members) <>-* (variableDeclaration property:#structureMembers).
+	
+	"statement"
 	(if property:#condition) <>- (expression property:#conditionIf).
 	(if property:#then) <>- (statement property:#thenStatement).
 	(if property:#else) <>- (statement property:#elseStatement).

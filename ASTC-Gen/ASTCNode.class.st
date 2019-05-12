@@ -143,6 +143,16 @@ ASTCNode >> isASTCStatement [
 ]
 
 { #category : #testing }
+ASTCNode >> isASTCStructureDeclaration [
+	^false
+]
+
+{ #category : #testing }
+ASTCNode >> isASTCStructureDefinition [
+	^false
+]
+
+{ #category : #testing }
 ASTCNode >> isASTCType [
 	^false
 ]

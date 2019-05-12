@@ -18,6 +18,7 @@ PIIsMethodTypeInterpreted >> visitIfTrueIfFalseMethodType: anIfTrueIfFalseMethod
 
 { #category : #visiting }
 PIIsMethodTypeInterpreted >> visitMethodType: aMethodType [
+	"visiting"
 	self flag:#todo.
 	^true
 	
