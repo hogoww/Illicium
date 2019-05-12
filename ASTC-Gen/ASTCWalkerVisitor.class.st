@@ -137,6 +137,18 @@ ASTCWalkerVisitor >> visitASTCStatement: anASTCStatement [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitASTCStructureDeclaration: anASTCStructureDeclaration [
+	self walkASTCStructureDeclaration: anASTCStructureDeclaration.
+			
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitASTCStructureDefinition: anASTCStructureDefinition [
+	self walkASTCStructureDefinition: anASTCStructureDefinition.
+			
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitASTCType: anASTCType [
 	self walkASTCType: anASTCType.
 			
@@ -476,6 +488,41 @@ ASTCWalkerVisitor >> walkASTCReturnExpression:anASTCReturn [
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCStatement: anASTCStatement [
 
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCStructureDeclaration: anASTCStructureDeclaration [
+	self walkASTCStructureDeclarationId: anASTCStructureDeclaration.
+
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCStructureDeclarationId:anASTCStructureDeclaration [
+	anASTCStructureDeclaration id
+		ifNotNil:[ :id | id acceptVisitor:self.
+		]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> walkASTCStructureDefinition: anASTCStructureDefinition [
+	self walkASTCStructureDefinitionDeclaration: anASTCStructureDefinition.
+	self walkASTCStructureDefinitionMembers: anASTCStructureDefinition.
+
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCStructureDefinitionDeclaration:anASTCStructureDefinition [
+	anASTCStructureDefinition declaration
+		ifNotNil:[ :declaration | declaration acceptVisitor:self.
+		]
+]
+
+{ #category : #walking }
+ASTCWalkerVisitor >> walkASTCStructureDefinitionMembers:anASTCStructureDefinition [
+	anASTCStructureDefinition members
+		ifNotNil:[ :members | members
+			do:[ :aMember | aMember acceptVisitor:self ]
+		]
 ]
 
 { #category : #visiting }

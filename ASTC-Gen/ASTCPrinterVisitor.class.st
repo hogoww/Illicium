@@ -387,6 +387,38 @@ ASTCPrinterVisitor >> visitASTCStatement: anASTCStatement [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitASTCStructureDeclaration: anASTCStructureDeclaration [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCStructureDeclaration'.
+	stream << (anASTCStructureDeclaration printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCStructureDeclaration:anASTCStructureDeclaration.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitASTCStructureDefinition: anASTCStructureDefinition [
+	stream << '
+'.
+	self printTabCount: currentDepth.
+	stream << '(anASTCStructureDefinition'.
+	stream << (anASTCStructureDefinition printProperties).
+	currentDepth := currentDepth+1.
+	
+	super visitASTCStructureDefinition:anASTCStructureDefinition.
+	
+	currentDepth := currentDepth-1.
+	stream << ')'.
+
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitASTCType: anASTCType [
 	stream << '
 '.

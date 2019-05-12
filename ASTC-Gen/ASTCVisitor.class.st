@@ -93,6 +93,14 @@ ASTCVisitor >> visitASTCStatement: anASTCStatement [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitASTCStructureDeclaration: anASTCStructureDeclaration [
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitASTCStructureDefinition: anASTCStructureDefinition [
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitASTCType: anASTCType [
 ]
 
