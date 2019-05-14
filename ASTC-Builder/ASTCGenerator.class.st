@@ -53,7 +53,9 @@ Class {
 		'astVisitorClass',
 		'collectionsType',
 		'astWalkerVisitorClass',
-		'astPrinterVisitor'
+		'astPrinterVisitor',
+		'astDebugStructureVisitor',
+		'astStructureValidatorVisitor'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -441,6 +443,20 @@ ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 	self addMethod: methodBody on: aClass withProtocol: 'initialization'.
 ]
 
+{ #category : #'generating-visitor-structure-validation' }
+ASTCGenerator >> addStructureValidationFor:aClass [
+	| visitAClass instanceOfAClass argumentReplacement errors |
+	visitAClass := ('visit',aClass,$:) asSymbol.
+	instanceOfAClass := self aClassAsVariableName: aClass.
+	
+	argumentReplacement:=Dictionary new add: #anInstanceOfAClass -> instanceOfAClass ; yourself.	
+	[:anInstanceOfAClass|
+		[ super visitAClass:{anInstanceOfAClass} ]
+		on: AssertionFailure do:[errors:= errors + 1]]
+		asMethod: visitAClass withArgs:#e.
+
+]
+
 { #category : #'generating-visitor' }
 ASTCGenerator >> addVisitor [
 	self addCurrentClassVisitToAbstractVisitor.
@@ -628,21 +644,50 @@ ASTCGenerator >> generate [
 
 { #category : #'generating-visitor' }
 ASTCGenerator >> generateVisitorsClasses [
-	| previousClassSymbol classSymbol |
-	
-	previousClassSymbol := #Object.
-	classSymbol:= (self prefix,'Visitor') asSymbol.
-	astVisitorClass := self createClass: classSymbol superclass:previousClassSymbol withTag: 'visitor'.
-	
-	previousClassSymbol := classSymbol.
-	classSymbol:=(self prefix,'WalkerVisitor') asSymbol.	
-	astWalkerVisitorClass := self createClass: classSymbol superclass:previousClassSymbol withTag: 'visitor'.
+	| superclass classSymbol |
+	"AbstractVisitor"
+	superclass := #Object.
+	classSymbol := (self prefix , 'Visitor') asSymbol.
+	astVisitorClass := self
+		createClass: classSymbol
+		superclass: superclass
+		withTag: 'visitor'.
 
-	previousClassSymbol := classSymbol.
-	classSymbol:=(self prefix,'PrinterVisitor') asSymbol.
-	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth stream' withTag: 'visitor'.
-	self addPrinterVisitorsMethods.
-	
+		"CallSuperVisitor --|> abstractVisitor"
+
+		"WalkerVisitor --|> AbstractVisitor"
+		superclass := classSymbol.
+		classSymbol := (self prefix , 'WalkerVisitor') asSymbol.
+		astWalkerVisitorClass := self
+			createClass: classSymbol
+			superclass: superclass
+			withTag: 'visitor'.
+
+			"Printer visitor --|> WalkerVisitor"
+			superclass := classSymbol.
+			classSymbol := (self prefix , 'PrinterVisitor') asSymbol.
+			astPrinterVisitor := self
+				createClass: classSymbol
+				superclass: superclass
+				withIVs: 'currentDepth stream'
+				withTag: 'visitor'.
+			self addPrinterVisitorsMethods.
+
+		"DebugStructureVisitor --|> WalkerVisitor"
+		classSymbol := (self prefix , 'DebugStructureVisitor') asSymbol.
+		astDebugStructureVisitor := self
+			createClass: classSymbol
+			superclass: superclass
+			withTag: 'visitor'.
+
+			"StructureValidatorVisitor --|> DebugStructureVisitor"
+			superclass := classSymbol.
+			classSymbol := (self prefix , 'StructureValidatorVisitor') asSymbol.
+			astStructureValidatorVisitor := self
+				createClass: classSymbol
+				superclass: superclass
+				withIVs:'errors'
+				withTag: 'visitor'
 ]
 
 { #category : #initialization }
