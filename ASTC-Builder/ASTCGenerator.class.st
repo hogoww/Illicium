@@ -55,7 +55,9 @@ Class {
 		'astWalkerVisitorClass',
 		'astPrinterVisitor',
 		'astDebugStructureVisitor',
-		'astStructureValidatorVisitor'
+		'astStructureValidatorVisitor',
+		'currentSuperclass',
+		'aProperty'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -250,6 +252,24 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 '.
 	self addMethod: methodBody on: astPrinterVisitor withProtocol: 'visiting'.	
 	
+]
+
+{ #category : #'generating-visitor-structure-validation' }
+ASTCGenerator >> addDebugStructureForCurrentClass [
+	| aClass  visitSuperClass visitAClass |
+	aClass:= prefix,currentClass asString.
+	visitSuperClass:='visit',currentSuperclass,':'.
+	visitAClass:='visit',currentClass,':'.
+	
+	aProperty := 1.
+
+	[:anInstanceOfAClass |
+		self visitSuperclass:{anInstanceOfAClass}.
+		
+		self assert:{(aClass aProperty isAProperty)}.
+		
+		super visitAClass:{anInstanceOfAClass}.
+	] asMethod:visitAClass.
 ]
 
 { #category : #'generating-equality' }
@@ -452,8 +472,8 @@ ASTCGenerator >> addStructureValidationFor:aClass [
 	argumentReplacement:=Dictionary new add: #anInstanceOfAClass -> instanceOfAClass ; yourself.	
 	[:anInstanceOfAClass|
 		[ super visitAClass:{anInstanceOfAClass} ]
-		on: AssertionFailure do:[errors:= errors + 1]]
-		asMethod: visitAClass withArgs:#e.
+		on: AssertionFailure do:[ errors:= errors + 1 ]
+	] asMethod: visitAClass withArgs:argumentReplacement.
 
 ]
 
@@ -849,13 +869,13 @@ ASTCGenerator >> typedPropertiesStuff [
 { #category : #visiting }
 ASTCGenerator >> visitClass: aClass [
 	"Visit a class, build it, and deploy it on the system."
-	| superclass className |
+	| className |
 	
-	superclass := (aClass classGeneralization ifNotNil:[ :class| prefix,class name ] ifNil:['Object']) asSymbol. "we get a symbol of the Superclass"
+	currentSuperclass := (aClass classGeneralization ifNotNil:[ :class| prefix,class name ] ifNil:['Object']) asSymbol. "we get a symbol of the Superclass"
 	className := (prefix,aClass name) asSymbol."we get the new class name and format it"
 	
 	"And we create it"
-	currentClass := self createClass: className superclass: superclass withTag: 'Node'.
+	currentClass := self createClass: className superclass: currentSuperclass withTag: 'Node'.
 	currentRelationshipSides := LinkedList new.
 	currentTypedProperties := LinkedList new.
 	
