@@ -23,6 +23,17 @@ ASTCProgramTranslator >> postGenerationMethodAnalysisFor: aCollectionOfASTCMetho
 	
 ]
 
+{ #category : #'As yet unclassified' }
+ASTCProgramTranslator >> printTranslatedMethods: aCollection [ 
+	| printer |
+	printer:=ASTCFilePrinter new
+		fileName: 'aFile.c' ;
+		classDictionary: aCollection ;
+		yourself.
+	
+	printer printInFile.
+]
+
 { #category : #'as yet unclassified' }
 ASTCProgramTranslator >> translateProgramMethods: aCollectionOfMethodTypes [
 	| translationVisitor methodTypeDispatcher res |
@@ -38,14 +49,19 @@ ASTCProgramTranslator >> translateProgramMethods: aCollectionOfMethodTypes [
 
 { #category : #'as yet unclassified' }
 ASTCProgramTranslator >> translateStartingFrom: aSelector from: aClass [
-	| mainAst inferer translatedMethod |
+	| mainAst inferer translatedMethods |
 	mainAst := (aClass >> aSelector) ast.
 	
 	inferer := self typeProgram: mainAst.
 	self typeProgramAsts: inferer.
 	
-	translatedMethod:=self translateProgramMethods: inferer types methodTypes.
-	self postGenerationMethodAnalysisFor: translatedMethod.
+	translatedMethods:=self translateProgramMethods: inferer types methodTypes.
+	self postGenerationMethodAnalysisFor: translatedMethods.
+
+	
+	self inferer.
+	
+	self printTranslatedMethods: translatedMethods.
 	self halt.
 ]
 

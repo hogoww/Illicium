@@ -49,6 +49,5 @@ ASTCNode >> prettyPrint [
 	| prettyPrintVisitor |
 	prettyPrintVisitor:=ASTCPrettyPrint new.
 	self acceptVisitor: prettyPrintVisitor.
-	^prettyPrintVisitor.
-			
+	^prettyPrintVisitor stream contents.
 ]
