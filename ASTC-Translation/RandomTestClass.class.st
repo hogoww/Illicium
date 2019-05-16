@@ -55,7 +55,7 @@ RandomTestClass >> factorialR: n anotherArgument: n2 [
 { #category : #tests }
 RandomTestClass >> main [ 
 	self factorialR:2.
-	^self
+	^0
 ]
 
 { #category : #tests }
