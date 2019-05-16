@@ -35,6 +35,8 @@ ASTCFilePrinter >> printInFile [
 	file:= file / 'gen.c'.
 
 	file writeStreamDo:[:stream |
-		classDictionary do:[:each | stream << each prettyPrint. stream cr].
+		classDictionary do:[:each| stream << (ASTCDeclarationStatement new declaration: each declaration ; yourself) prettyPrint. stream cr.].
+		stream cr cr.
+		classDictionary do:[:each | stream << each prettyPrint. stream cr cr].
 	].
 ]

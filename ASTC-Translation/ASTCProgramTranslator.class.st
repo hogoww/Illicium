@@ -59,8 +59,6 @@ ASTCProgramTranslator >> translateStartingFrom: aSelector from: aClass [
 	self postGenerationMethodAnalysisFor: translatedMethods.
 
 	
-	self inferer.
-	
 	self printTranslatedMethods: translatedMethods.
 	self halt.
 ]
