@@ -6,8 +6,17 @@ My selectors are used by ASTCFromPharo as toy translations.
 Class {
 	#name : #RandomTestClass,
 	#superclass : #Object,
+	#traits : 'ASTCVirtualMachineAPI',
+	#classTraits : 'ASTCVirtualMachineAPI classTrait',
 	#category : #'ASTC-Translation'
 }
+
+{ #category : #tests }
+RandomTestClass >> factorialPrimitive: aSmallInteger [ 
+	"unsuccessful so far"
+	<primitive: 'primitiveTest' module:'ATestPlugin'> 
+	^self error  
+]
 
 { #category : #tests }
 RandomTestClass >> factorialR [
@@ -54,7 +63,7 @@ RandomTestClass >> factorialR: n anotherArgument: n2 [
 
 { #category : #tests }
 RandomTestClass >> main [ 
-	self factorialR:2.
+	interpreterProxy  push:(interpreterProxy integerObjectOf:(self factorialR:2)).
 	^0
 ]
 

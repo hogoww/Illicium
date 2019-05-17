@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'fileName',
-		'classDictionary'
+		'classDictionary',
+		'isPrimitive'
 	],
 	#category : #'ASTC-Translation'
 }
@@ -28,24 +29,59 @@ ASTCFilePrinter >> fileName: aString [
 	fileName := aString
 ]
 
+{ #category : #accessing }
+ASTCFilePrinter >> isPrimitive [
+	^isPrimitive
+]
+
+{ #category : #accessing }
+ASTCFilePrinter >> isPrimitive: aBoolean [
+	^isPrimitive := aBoolean
+]
+
 { #category : #printing }
 ASTCFilePrinter >> printInFile [
 	| file |
 	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
-	file:= file / 'gen.c'.
+	file:= file / (fileName,'.c').
 	file exists ifTrue:[file delete].
 	file writeStreamDo:[:stream |
-		self printPluginStuff:stream withMethods: classDictionary .
+		isPrimitive ifTrue:[	self printPrePluginStuff:stream withMethods: classDictionary ].
 
 		classDictionary do:[:each| stream << (ASTCDeclarationStatement new declaration: each declaration ; yourself) prettyPrint. stream cr.].
 		stream cr cr.
 		classDictionary do:[:each | stream << each prettyPrint. stream cr cr].
-		
+
+		isPrimitive ifTrue:[self printPostPluginStuff:stream withMethods: classDictionary ].
 	].
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> printPluginStuff: aStream withMethods: collectionOfMethods [
+ASTCFilePrinter >> printPostPluginStuff: aStream withMethods: collectionOfMethods [
+	self flag:'internalPlugin'. "not needed for external plugin, so ignored for now"
+	true ifTrue:[^self].
+	
+	
+	aStream << 
+'static char _m[] = "' << fileName<<'";
+void* MyBadPlugin_exports[][3] = {
+'.
+	collectionOfMethods do:[:each|
+		aStream tab << '{(void*)_m, ' << '"' << each declaration id prettyPrint << '", (void*)' << each declaration id prettyPrint<< '},'. 
+		aStream cr.
+	 ].
+
+aStream <<'	{(void*)_m, "getModuleName", (void*)getModuleName},
+	{(void*)_m, "setInterpreter", (void*)setInterpreter},
+	{NULL, NULL, NULL}
+};
+
+'
+
+]
+
+{ #category : #printing }
+ASTCFilePrinter >> printPrePluginStuff: aStream withMethods: collectionOfMethods [
 	aStream << 
 '
 #include "config.h"
@@ -60,8 +96,11 @@ ASTCFilePrinter >> printPluginStuff: aStream withMethods: collectionOfMethods [
 #define null 0  /* using ''null'' because nil is predefined in Think C */
 
 #include "sqMemoryAccess.h"
-extern struct VirtualMachine* interpreterProxy;
-static const char *moduleName = "MyBadPlugin * VMMaker.oscog-eem.2520 (e);"
+#include "sqVirtualMachine.h"	/*  The virtual machine proxy definition */
+#include "sqPlatformSpecific.h"	/* Platform specific definitions */
+
+struct VirtualMachine* interpreterProxy;
+static const char *moduleName = "'<< fileName <<' * VMMaker.oscog-eem.2520 (i)";
 
 static const char* getModuleName(void)
 {
@@ -72,7 +111,7 @@ static const char* getModuleName(void)
 /*	Note: This is coded so that it can be run in Squeak. */
 
 	/* InterpreterPlugin>>#setInterpreter: */
-static setInterpreter(struct VirtualMachine *anInterpreter)
+static sqInt setInterpreter(struct VirtualMachine *anInterpreter)
 {
     sqInt ok;
 
@@ -83,19 +122,6 @@ static setInterpreter(struct VirtualMachine *anInterpreter)
 			}
 	return ok;
 }
-
-static char _m[] = "' << fileName<<'";
-void* MyBadPlugin_exports[][3] = {
-'.
-	collectionOfMethods do:[:each|
-		aStream tab << '{(void*)_m, ' << '"' << each declaration id prettyPrint << '", (void*)' << each declaration id prettyPrint<< '},'. 
-		aStream cr.
-	 ].
-'
-	{(void*)_m, "getModuleName", (void*)getModuleName},
-	{(void*)_m, "setInterpreter", (void*)setInterpreter},
-	{NULL, NULL, NULL}
-};
 
 '
 

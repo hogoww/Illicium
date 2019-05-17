@@ -27,8 +27,9 @@ ASTCProgramTranslator >> postGenerationMethodAnalysisFor: aCollectionOfASTCMetho
 ASTCProgramTranslator >> printTranslatedMethods: aCollection [ 
 	| printer |
 	printer:=ASTCFilePrinter new
-		fileName: 'aFile.c' ;
+		fileName: 'aFile' ;
 		classDictionary: aCollection ;
+		isPrimitive: true;
 		yourself.
 	
 	printer printInFile.
