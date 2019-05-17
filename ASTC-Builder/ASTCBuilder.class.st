@@ -212,22 +212,19 @@ ASTCBuilder >> defineRelations [
 	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
 	(node property:#parent) -<> (node property:#parent).	
 
-	(functionDeclaration property:#type) <>- (type property:#type).
-	(functionDeclaration property:#id) <>- (identifier property:#id).
+	(declaration property:#id) <>- (identifier property:#id).
+	(definition property:#declaration) <>- (declaration property:#funcDefinition).
+
+
+	(functionDeclaration property:#type) <>- (type property:#type).	
 	(functionDeclaration property:#parameters) <>-* (variableDeclaration property:#arguments).
 	
-	(functionDefinition property:#declaration) <>- (functionDeclaration property:#funcDefinition).
 	(functionDefinition property:#body) <>- (block property:#funcDefBody).
 
 	(variableDeclaration property:#type) <>- (type property:#declType).
-	(variableDeclaration property:#id) <>- (identifier property:#declId).
 
-	(variableDefinition property:#declaration) <>- (variableDeclaration property:#definition).
 	(variableDefinition property:#init) <>- (expression property:#initialization).
 
-	(structureDeclaration property:#id) <>- (identifier property:#structId).
-	
-	(structureDefinition property:#declaration) <>- (structureDeclaration property:#structureDeclaration).
 	(structureDefinition property:#members) <>-* (variableDeclaration property:#structureMembers).
 	
 	"statement"

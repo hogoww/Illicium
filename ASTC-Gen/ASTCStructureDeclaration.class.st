@@ -1,9 +1,6 @@
 Class {
 	#name : #ASTCStructureDeclaration,
 	#superclass : #ASTCDeclaration,
-	#instVars : [
-		'id'
-	],
 	#category : #'ASTC-Gen-Node'
 }
 
@@ -11,9 +8,6 @@ Class {
 ASTCStructureDeclaration >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
-
-	self id = anotherNode id
-		ifFalse: [ ^ false ].
 
 	^ true
 ]
@@ -32,20 +26,7 @@ ASTCStructureDeclaration >> acceptVisitor: aVisitor [
 ASTCStructureDeclaration >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self id hash.
 	^hash
-]
-
-{ #category : #accessors }
-ASTCStructureDeclaration >> id [
-	^id
-]
-
-{ #category : #accessors }
-ASTCStructureDeclaration >> id: anObject [
-	id:=anObject.
-	anObject parent:self.
-	^anObject.
 ]
 
 { #category : #testing }

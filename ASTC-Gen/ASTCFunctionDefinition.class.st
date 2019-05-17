@@ -2,7 +2,6 @@ Class {
 	#name : #ASTCFunctionDefinition,
 	#superclass : #ASTCDefinition,
 	#instVars : [
-		'declaration',
 		'body'
 	],
 	#category : #'ASTC-Gen-Node'
@@ -12,9 +11,6 @@ Class {
 ASTCFunctionDefinition >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
-
-	self declaration = anotherNode declaration
-		ifFalse: [ ^ false ].
 
 	self body = anotherNode body
 		ifFalse: [ ^ false ].
@@ -44,23 +40,10 @@ ASTCFunctionDefinition >> body: anObject [
 	^anObject.
 ]
 
-{ #category : #accessors }
-ASTCFunctionDefinition >> declaration [
-	^declaration
-]
-
-{ #category : #accessors }
-ASTCFunctionDefinition >> declaration: anObject [
-	declaration:=anObject.
-	anObject parent:self.
-	^anObject.
-]
-
 { #category : #comparing }
 ASTCFunctionDefinition >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self declaration hash.
 	hash := hash + self body hash.
 	^hash
 ]

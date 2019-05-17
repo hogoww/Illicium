@@ -3,7 +3,6 @@ Class {
 	#superclass : #ASTCDeclaration,
 	#instVars : [
 		'type',
-		'id',
 		'parameters'
 	],
 	#category : #'ASTC-Gen-Node'
@@ -15,9 +14,6 @@ ASTCFunctionDeclaration >> = anotherNode [
 	ifFalse: [ ^ false ].
 
 	self type = anotherNode type
-		ifFalse: [ ^ false ].
-
-	self id = anotherNode id
 		ifFalse: [ ^ false ].
 
 	self parameters = anotherNode parameters
@@ -41,21 +37,8 @@ ASTCFunctionDeclaration >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self type hash.
-	hash := hash + self id hash.
 	hash := hash + self parameters hash.
 	^hash
-]
-
-{ #category : #accessors }
-ASTCFunctionDeclaration >> id [
-	^id
-]
-
-{ #category : #accessors }
-ASTCFunctionDeclaration >> id: anObject [
-	id:=anObject.
-	anObject parent:self.
-	^anObject.
 ]
 
 { #category : #initialize }

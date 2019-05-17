@@ -2,8 +2,7 @@ Class {
 	#name : #ASTCVariableDeclaration,
 	#superclass : #ASTCDeclaration,
 	#instVars : [
-		'type',
-		'id'
+		'type'
 	],
 	#category : #'ASTC-Gen-Node'
 }
@@ -14,9 +13,6 @@ ASTCVariableDeclaration >> = anotherNode [
 	ifFalse: [ ^ false ].
 
 	self type = anotherNode type
-		ifFalse: [ ^ false ].
-
-	self id = anotherNode id
 		ifFalse: [ ^ false ].
 
 	^ true
@@ -37,20 +33,7 @@ ASTCVariableDeclaration >> hash [
 	| hash |
 	hash := self identityHash.
 	hash := hash + self type hash.
-	hash := hash + self id hash.
 	^hash
-]
-
-{ #category : #accessors }
-ASTCVariableDeclaration >> id [
-	^id
-]
-
-{ #category : #accessors }
-ASTCVariableDeclaration >> id: anObject [
-	id:=anObject.
-	anObject parent:self.
-	^anObject.
 ]
 
 { #category : #testing }

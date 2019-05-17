@@ -1,6 +1,9 @@
 Class {
 	#name : #ASTCDefinition,
 	#superclass : #ASTCNode,
+	#instVars : [
+		'declaration'
+	],
 	#category : #'ASTC-Gen-Node'
 }
 
@@ -8,6 +11,9 @@ Class {
 ASTCDefinition >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
+
+	self declaration = anotherNode declaration
+		ifFalse: [ ^ false ].
 
 	^ true
 ]
@@ -22,10 +28,23 @@ ASTCDefinition >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCDefinition:self.
 ]
 
+{ #category : #accessors }
+ASTCDefinition >> declaration [
+	^declaration
+]
+
+{ #category : #accessors }
+ASTCDefinition >> declaration: anObject [
+	declaration:=anObject.
+	anObject parent:self.
+	^anObject.
+]
+
 { #category : #comparing }
 ASTCDefinition >> hash [
 	| hash |
 	hash := self identityHash.
+	hash := hash + self declaration hash.
 	^hash
 ]
 
