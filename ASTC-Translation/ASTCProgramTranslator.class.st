@@ -36,7 +36,8 @@ ASTCProgramTranslator >> printTranslatedMethods: aCollection [
 	"self halt."
 	printer CompileExternalPlugin = 0
 	ifFalse:[self error:'plugin didn''t compile (or the comand line sucks'].
-	printer moveInVmDirectory: '~/Pharo/vms/70-x86/lib/pharo/5.0-201901051900'
+	printer moveInVmDirectory = 0
+	ifFalse:[self error:'plugin didn''t move for some reason'].
 ]
 
 { #category : #'as yet unclassified' }

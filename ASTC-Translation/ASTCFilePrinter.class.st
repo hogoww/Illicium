@@ -4,16 +4,17 @@ Class {
 	#instVars : [
 		'fileName',
 		'classDictionary',
-		'isPrimitive'
+		'isPrimitive',
+		'virtualMachine'
 	],
 	#category : #'ASTC-Translation'
 }
 
 { #category : #printing }
 ASTCFilePrinter >> CompileExternalPlugin [
-	self halt.
 	^LibC runCommand: (String streamContents: [:s| 
-		s << 'gcc -shared -m32 -IvmHeader -o ./generated/' << fileName << '.so -fPIC ./generated/' << fileName <<'.c']). 
+		s << 'gcc -shared -I./pharo-local/iceberg/hogoww/astc/vmHeader -o ./generated/' << fileName << '.so -fPIC ./generated/' << fileName <<'.c'
+	<< (virtualMachine for32bit: [ ' -m32'] for64bit: [''])]). 
 ]
 
 { #category : #accessing }
@@ -36,6 +37,11 @@ ASTCFilePrinter >> fileName: aString [
 	fileName := aString
 ]
 
+{ #category : #printing }
+ASTCFilePrinter >> initialize [ 
+	virtualMachine := VirtualMachine new.
+]
+
 { #category : #accessing }
 ASTCFilePrinter >> isPrimitive [
 	^isPrimitive
@@ -47,8 +53,10 @@ ASTCFilePrinter >> isPrimitive: aBoolean [
 ]
 
 { #category : #moving }
-ASTCFilePrinter >> moveInVmDirectory: aPath [ 
-	^LibC runCommand: (String streamContents: [:s| s << 'mv ./generated/' << fileName << '.so ' << aPath]). "'mv aFile.so ~/Pharo/vms/70-x86/lib/pharo/5.0-201901051900'"
+ASTCFilePrinter >> moveInVmDirectory [
+
+	^LibC runCommand: (String streamContents: [:s| s << 'mv ./generated/' << fileName << '.so ~/Pharo/vms/70-x'
+		<< (virtualMachine for32bit: [ '86'] for64bit: ['64']) <<'/lib/pharo/5.0-201901051900']). 
 ]
 
 { #category : #printing }

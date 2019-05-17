@@ -19,8 +19,10 @@ RandomTestClass >> aMain [
 { #category : #tests }
 RandomTestClass >> factorialPrimitive: aSmallInteger [ 
 	"unsuccessful so far"
-	<primitive: 'aMain' module:'aFile'> 
-	^self error  
+	<primitive: 'aMain' module:'aFile' error: error>
+	^(error isPrimitiveError)
+		ifTrue: [ self halt.]
+		ifFalse: [ error crLog. self primitiveFailed ].
 ]
 
 { #category : #tests }
