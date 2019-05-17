@@ -25,6 +25,20 @@ BaselineOfASTC >> baseline: spec [
 ]
 
 { #category : #accessing }
+BaselineOfASTC >> lastPlayground [
+ASTCGenerator generate.
+ASTCGenerator new reloadExtentions.
+
+ASTCProgramTranslator new translateStartingFrom: #aMain from: RandomTestClass.
+
+(RandomTestClass >> #factorialR) ast.
+
+PlainCodeGeneration aMethodThatGenerateCode:7.
+RandomTestClass new factorialPrimitive:3.
+VirtualMachine new unloadModule:'aFile'.
+]
+
+{ #category : #accessing }
 BaselineOfASTC >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]

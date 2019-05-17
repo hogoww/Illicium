@@ -9,6 +9,13 @@ Class {
 	#category : #'ASTC-Translation'
 }
 
+{ #category : #printing }
+ASTCFilePrinter >> CompileExternalPlugin [
+	self halt.
+	^LibC runCommand: (String streamContents: [:s| 
+		s << 'gcc -shared -m32 -IvmHeader -o ./generated/' << fileName << '.so -fPIC ./generated/' << fileName <<'.c']). 
+]
+
 { #category : #accessing }
 ASTCFilePrinter >> classDictionary [
 	^ classDictionary
@@ -39,6 +46,11 @@ ASTCFilePrinter >> isPrimitive: aBoolean [
 	^isPrimitive := aBoolean
 ]
 
+{ #category : #moving }
+ASTCFilePrinter >> moveInVmDirectory: aPath [ 
+	^LibC runCommand: (String streamContents: [:s| s << 'mv ./generated/' << fileName << '.so ' << aPath]). "'mv aFile.so ~/Pharo/vms/70-x86/lib/pharo/5.0-201901051900'"
+]
+
 { #category : #printing }
 ASTCFilePrinter >> printInFile [
 	| file |
@@ -61,7 +73,8 @@ ASTCFilePrinter >> printPostPluginStuff: aStream withMethods: collectionOfMethod
 	self flag:'internalPlugin'. "not needed for external plugin, so ignored for now"
 	true ifTrue:[^self].
 	
-	
+	"###############################################"
+	"###############################################"
 	aStream << 
 'static char _m[] = "' << fileName<<'";
 void* MyBadPlugin_exports[][3] = {
@@ -100,10 +113,11 @@ ASTCFilePrinter >> printPrePluginStuff: aStream withMethods: collectionOfMethods
 #include "sqPlatformSpecific.h"	/* Platform specific definitions */
 
 struct VirtualMachine* interpreterProxy;
-static const char *moduleName = "'<< fileName <<' * VMMaker.oscog-eem.2520 (i)";
+static const char *moduleName = "'<< fileName <<' * VMMaker.oscog-eem.2520 (e)";
 
-static const char* getModuleName(void)
+const char* getModuleName(void)
 {
+	printf("\n\n #moduleName# \n\n");
 	return moduleName;
 }
 
@@ -111,8 +125,9 @@ static const char* getModuleName(void)
 /*	Note: This is coded so that it can be run in Squeak. */
 
 	/* InterpreterPlugin>>#setInterpreter: */
-static sqInt setInterpreter(struct VirtualMachine *anInterpreter)
+sqInt setInterpreter(struct VirtualMachine *anInterpreter)
 {
+	printf("\n\n #interpreter# \n\n");
     sqInt ok;
 
 	interpreterProxy = anInterpreter;
