@@ -82,7 +82,7 @@ ASTCFromPharo >> getTypeOf:aNode [
 			ifPresent: [:value| value anyOne. ]
 			ifAbsent:[self error: 'The type inferencer couldn''t figure out the type of ', aNode asString ]).
 	
-	translationType := typeDictionary at: concreteType ifAbsent:[ ^ASTCVoid ]."unknown type for now"
+	translationType := typeDictionary at: concreteType ifAbsent:[ ^ASTCUserClass  ]."unknown type for now"
 
 	^translationType.
 ]
@@ -186,7 +186,7 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 	
 	methodOrBlock:=aMessageNode parent parent.
 	
-	(funCall class isKindOf: ASTCStatement)"To change, when generation will generate every tester rather than have errors thrown around"
+	(funCall isASTCStatement)"To change, when generation will generate every tester rather than have errors thrown around"
 	ifFalse:["If the message is actually a Statement in C (such as If), it's already ready "
 		(methodOrBlock isMethod or:[methodOrBlock isBlock])
 		ifTrue:["If the message isn't an inner message, it then need to be wrapped up. "

@@ -13,6 +13,16 @@ ASTCKernelClasses class >> asCType [
 	^SubclassResponsibility
 ]
 
+{ #category : #converting }
+ASTCKernelClasses >> asString [
+	^String streamContents:[:stream|
+		stream << (self class asString)
+			<<'('
+			<< value printString
+			<<')'.
+		].
+]
+
 { #category : #'reflective operations' }
 ASTCKernelClasses >> doesNotUnderstand: aMessage [
 	^ASTCFunctionCall new 
@@ -20,6 +30,12 @@ ASTCKernelClasses >> doesNotUnderstand: aMessage [
 		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
 		yourself.
 		
+
+]
+
+{ #category : #printing }
+ASTCKernelClasses >> printOn: aStream [
+	aStream << self asString.
 
 ]
 

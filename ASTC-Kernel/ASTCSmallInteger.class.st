@@ -44,16 +44,6 @@ ASTCSmallInteger >> = anotherSmallInteger [
 	^self value = anotherSmallInteger value.
 ]
 
-{ #category : #converting }
-ASTCSmallInteger >> asString [
-	^String streamContents:[:stream|
-		stream << (self class asString)
-			<<'('
-			<< value printString
-			<<')'.
-		].
-]
-
 { #category : #default }
 ASTCSmallInteger >> defaultValue [
 	^0
@@ -69,10 +59,4 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	res operands add:(anArgument acceptVisitor: self visitor).
 	^res.
 		
-]
-
-{ #category : #printing }
-ASTCSmallInteger >> printOn: aStream [
-	aStream << self asString.
-
 ]
