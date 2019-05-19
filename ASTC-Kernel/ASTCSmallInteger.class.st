@@ -9,6 +9,11 @@ ASTCSmallInteger class >> asCType [
 	^#int
 ]
 
+{ #category : #default }
+ASTCSmallInteger class >> defaultValue [
+	^0
+]
+
 { #category : #translation }
 ASTCSmallInteger >> * anotherSmallInteger [
 
@@ -42,11 +47,6 @@ ASTCSmallInteger >> = anotherSmallInteger [
 		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
 		].
 	^self value = anotherSmallInteger value.
-]
-
-{ #category : #default }
-ASTCSmallInteger >> defaultValue [
-	^0
 ]
 
 { #category : #translation }
