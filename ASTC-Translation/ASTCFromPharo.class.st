@@ -146,15 +146,18 @@ ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 			yourself.
 		]
 	ifFalse:[
-		ASTCOperator new
-			symbol:'=';
-			operands: 
-				(ASTCContainer new 
-					add: (anAssignmentNode variable acceptVisitor:self);
-					add: (anAssignmentNode value acceptVisitor:self);
+		ASTCExpressionStatement new
+			expression:
+			(ASTCOperator new
+				symbol:'=';
+				operands: 
+					(ASTCContainer new 
+						add: (anAssignmentNode variable acceptVisitor:self);
+						add: (anAssignmentNode value acceptVisitor:self);
+						yourself);
 					yourself);
-			yourself.
-		].
+				yourself.
+			].
 
 ]
 
@@ -186,8 +189,8 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 	funCall := aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 	
 	methodOrBlock:=aMessageNode parent parent.
-	
-	(funCall isASTCStatement)"To change, when generation will generate every tester rather than have errors thrown around"
+
+	(funCall isASTCStatement)
 	ifFalse:["If the message is actually a Statement in C (such as If), it's already ready "
 		(methodOrBlock isMethod or:[methodOrBlock isBlock])
 		ifTrue:["If the message isn't an inner message, it then need to be wrapped up. "
