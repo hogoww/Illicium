@@ -4,20 +4,23 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #adding }
-ASTCVirtualMachineProxy >> integerObjectOf: aSmallInteger [
-	"dummy, for phineas"
-	^1
+{ #category : #'as yet unclassified' }
+ASTCVirtualMachineProxy class >> asCType [ 
+	^'VirtualMachine*'.
 ]
 
-{ #category : #adding }
-ASTCVirtualMachineProxy >> pop: aSmallInteger [
-	"dummy, for phineas"
-	^self
-]
+{ #category : #'reflective operations' }
+ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
+	^ASTCOperator new
+		symbol:'->';
+		operands:(ASTCContainer new
+			add: (ASTCIdentifier new id:'interpreterProxy'; yourself);
+			add: (ASTCFunctionCall new 
+				id: (ASTCIdentifier new id: (self formatSelector:(aMessage selector)); yourself) ;
+				arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
+					yourself);
+				yourself);
+			yourself.
+		
 
-{ #category : #adding }
-ASTCVirtualMachineProxy >> push: aSmallInteger [
-	"dummy, for phineas"
-	^self
 ]

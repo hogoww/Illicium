@@ -82,7 +82,7 @@ ASTCFromPharo >> getTypeOf:aNode [
 			ifPresent: [:value| value anyOne. ]
 			ifAbsent:[self error: 'The type inferencer couldn''t figure out the type of ', aNode asString ]).
 	
-	translationType := typeDictionary at: concreteType ifAbsent:[ ^ASTCUserClass  ]."unknown type for now"
+	translationType := typeDictionary at: concreteType ifAbsent:[ ^ASTCVoid  ]."unknown type for now"
 
 	^translationType.
 ]
@@ -96,6 +96,7 @@ ASTCFromPharo >> initialize [
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
 		at: ASTCVoid put: ASTCVoid;
+		at:ASTCInterpreterProxy put: ASTCVirtualMachineProxy; 
 		yourself.
 
 ]

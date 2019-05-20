@@ -34,10 +34,8 @@ ASTCProgramTranslator >> printTranslatedMethods: aCollection [
 	
 	printer printInFile.
 	"self halt."
-	printer CompileExternalPlugin = 0
-	ifFalse:[self error:'plugin didn''t compile (or the comand line sucks'].
-	printer moveInVmDirectory = 0
-	ifFalse:[self error:'plugin didn''t move for some reason'].
+	printer CompileExternalPlugin.
+	printer moveInVmDirectory.
 ]
 
 { #category : #'as yet unclassified' }
@@ -55,13 +53,16 @@ ASTCProgramTranslator >> translateProgramMethods: aCollectionOfMethodTypes [
 
 { #category : #'as yet unclassified' }
 ASTCProgramTranslator >> translateStartingFrom: aSelector from: aClass [
-	| mainAst inferer translatedMethods |
+	| mainAst inferer translatedMethods initializeAst |
 	mainAst := (aClass >> aSelector) ast.
+	initializeAst := 
+		([aClass >> #initialize] on: KeyNotFound do:[nil])
+			ifNotNil:[:value| value ast].
 	
-	inferer := self typeProgram: mainAst.
+	inferer := self typeProgram: mainAst withInitialize: initializeAst.
 	self typeProgramAsts: inferer.
 	
-	translatedMethods:=self translateProgramMethods: inferer types methodTypes.
+	translatedMethods := self translateProgramMethods: (inferer types methodTypes select:[:aMethod| aMethod node pragmas noneSatisfy: [:aPragma| aPragma selector = #doNotGenerate ]]).
 	self postGenerationMethodAnalysisFor: translatedMethods.
 
 	
@@ -74,6 +75,19 @@ ASTCProgramTranslator >> typeProgram: anEntryPointAst [
 	|inferer|
 	inferer := PhineasInferer new.
 	inferer inferAST: anEntryPointAst.
+	^inferer.
+	
+]
+
+{ #category : #'as yet unclassified' }
+ASTCProgramTranslator >> typeProgram: anEntryPointAst withInitialize: anInitializeMethodAst [
+	|inferer|
+	inferer := PhineasInferer new.
+	anInitializeMethodAst ifNotNil:[:ast| inferer inferAST: ast ]. "Necessary for some Instances variables"
+	inferer inferAST: anEntryPointAst.
+	
+	"we then remove it for now because we don't want it to be translated"
+	anInitializeMethodAst ifNotNil:[:ast| |mt| mt:=inferer types methodTypes. mt remove: (mt detect:[:aMethod| aMethod node = ast]) ].
 	^inferer.
 	
 ]

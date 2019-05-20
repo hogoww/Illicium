@@ -12,9 +12,12 @@ Class {
 
 { #category : #printing }
 ASTCFilePrinter >> CompileExternalPlugin [
-	^LibC runCommand: (String streamContents: [:s| 
-		s << 'gcc -shared -I./pharo-local/iceberg/hogoww/astc/vmHeader -o ./generated/' << fileName << '.so -fPIC ./generated/' << fileName <<'.c'
+	| res |
+	res:=LibC runCommand: (String streamContents: [:s| 
+		s << 'gcc -shared -I./pharo-local/iceberg/hogoww/ASTC/vmHeader -o ./generated/' << fileName << '.so -fPIC ./generated/' << fileName <<'.c'
 	<< (virtualMachine for32bit: [ ' -m32'] for64bit: [''])]). 
+ 	res = 0
+	ifFalse:[self error:'plugin didn''t compile (or the comand line sucks'].
 ]
 
 { #category : #accessing }
@@ -54,9 +57,11 @@ ASTCFilePrinter >> isPrimitive: aBoolean [
 
 { #category : #moving }
 ASTCFilePrinter >> moveInVmDirectory [
-
-	^LibC runCommand: (String streamContents: [:s| s << 'mv ./generated/' << fileName << '.so ~/Pharo/vms/70-x'
+	| res |
+	res:=LibC runCommand: (String streamContents: [:s| s << 'mv ./generated/' << fileName << '.so ~/Pharo/vms/70-x'
 		<< (virtualMachine for32bit: [ '86'] for64bit: ['64']) <<'/lib/pharo/5.0-201901051900']). 
+	res = 0
+	ifFalse:[self error:'plugin didn''t move for some reason'].
 ]
 
 { #category : #printing }

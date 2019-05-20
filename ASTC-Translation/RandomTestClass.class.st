@@ -6,13 +6,14 @@ My selectors are used by ASTCFromPharo as toy translations.
 Class {
 	#name : #RandomTestClass,
 	#superclass : #Object,
+	#traits : 'ASTCVirtualMachineAPI',
+	#classTraits : 'ASTCVirtualMachineAPI classTrait',
 	#category : #'ASTC-Translation'
 }
 
 { #category : #tests }
 RandomTestClass >> aMain [
-	"interpreterProxy  push:(interpreterProxy integerObjectOf:("
-	self factorialR:5.
+	interpreterProxy  push:(interpreterProxy integerObjectOf:(	self factorialR:5)).
 	^ 0
 ]
 
