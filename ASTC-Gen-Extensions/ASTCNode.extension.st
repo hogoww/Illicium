@@ -11,7 +11,7 @@ ASTCNode >> astDump [
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> debugASTCStructure [
 	| validationVisitor |
-	validationVisitor := ASTCValidatorDebug new.
+	validationVisitor := ASTCDebugStructureVisitor new.
 	self acceptVisitor: validationVisitor.
 ]
 
@@ -39,7 +39,7 @@ ASTCNode >> gtInspectorCPrettyPrint: composite [
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> isStructuralyValidAST [ 
 	| validationVisitor |
-	validationVisitor := ASTCValidator new.
+	validationVisitor := ASTCStructureValidatorVisitor new.
 	self acceptVisitor: validationVisitor.
 	^validationVisitor isValidAst
 ]

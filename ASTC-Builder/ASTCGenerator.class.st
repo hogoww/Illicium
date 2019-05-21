@@ -257,15 +257,19 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 ASTCGenerator >> addDebugStructureForCurrentClass [
 	| aClass  visitSuperclass visitAClass bodyOfMethod |
 	aClass:= self aClassAsVariableName: currentClass asString.
-	visitSuperclass:='visit',currentSuperclass asString,':'.
+	
+	currentSuperclass = #Object ifFalse:[	visitSuperclass:='visit',currentSuperclass asString,':'.].
+
 	visitAClass:='visit',currentClass asString,':'.
 	
 	
 
 	bodyOfMethod:= String streamContents:[:s|
-	s << visitAClass << aClass <<'
-	self '<< visitSuperclass << aClass << '.'.
-	s cr cr.
+	s << visitAClass << aClass.
+	s cr.
+	visitSuperclass ifNotNil:[s << '	self ' << visitSuperclass << aClass << '.'. 
+	s cr cr.].
+	
 	
 	currentRelationshipSides do:[:aProperty| 
 		aProperty isMany

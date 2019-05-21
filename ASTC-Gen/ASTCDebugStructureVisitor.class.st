@@ -24,8 +24,6 @@ ASTCDebugStructureVisitor >> visitASTCBlock:anASTCBlock [
 
 { #category : #check }
 ASTCDebugStructureVisitor >> visitASTCCompilationUnit:anASTCCompilationUnit [
-	self visitObject:anASTCCompilationUnit.
-
 	self assert:anASTCCompilationUnit project isASTCProject.
 	anASTCCompilationUnit definitions do:[:each| self assert: each isASTCDefinition].
 	anASTCCompilationUnit declarations do:[:each| self assert: each isASTCDeclaration].
@@ -38,6 +36,8 @@ ASTCDebugStructureVisitor >> visitASTCDeclaration:anASTCDeclaration [
 	self visitASTCNode:anASTCDeclaration.
 
 	self assert:anASTCDeclaration compilationUnit isASTCCompilationUnit.
+	self assert:anASTCDeclaration id isASTCIdentifier.
+	self assert:anASTCDeclaration funcDefinition isASTCDefinition.
 
 	super visitASTCDeclaration:anASTCDeclaration
 ]
@@ -56,6 +56,7 @@ ASTCDebugStructureVisitor >> visitASTCDefinition:anASTCDefinition [
 	self visitASTCNode:anASTCDefinition.
 
 	self assert:anASTCDefinition compilationUnit isASTCCompilationUnit.
+	self assert:anASTCDefinition declaration isASTCDeclaration.
 
 	super visitASTCDefinition:anASTCDefinition
 ]
@@ -118,9 +119,7 @@ ASTCDebugStructureVisitor >> visitASTCFunctionDeclaration:anASTCFunctionDeclarat
 	self visitASTCDeclaration:anASTCFunctionDeclaration.
 
 	self assert:anASTCFunctionDeclaration type isASTCType.
-	self assert:anASTCFunctionDeclaration id isASTCIdentifier.
 	anASTCFunctionDeclaration parameters do:[:each| self assert: each isASTCVariableDeclaration].
-	self assert:anASTCFunctionDeclaration funcDefinition isASTCFunctionDefinition.
 
 	super visitASTCFunctionDeclaration:anASTCFunctionDeclaration
 ]
@@ -129,7 +128,6 @@ ASTCDebugStructureVisitor >> visitASTCFunctionDeclaration:anASTCFunctionDeclarat
 ASTCDebugStructureVisitor >> visitASTCFunctionDefinition:anASTCFunctionDefinition [
 	self visitASTCDefinition:anASTCFunctionDefinition.
 
-	self assert:anASTCFunctionDefinition declaration isASTCFunctionDeclaration.
 	self assert:anASTCFunctionDefinition body isASTCBlock.
 
 	super visitASTCFunctionDefinition:anASTCFunctionDefinition
@@ -139,8 +137,6 @@ ASTCDebugStructureVisitor >> visitASTCFunctionDefinition:anASTCFunctionDefinitio
 ASTCDebugStructureVisitor >> visitASTCIdentifier:anASTCIdentifier [
 	self visitASTCExpression:anASTCIdentifier.
 
-	self assert:anASTCIdentifier declId isASTCVariableDeclaration.
-	self assert:anASTCIdentifier structId isASTCStructureDeclaration.
 	self assert:anASTCIdentifier FunCallId isASTCFunctionCall.
 
 	super visitASTCIdentifier:anASTCIdentifier
@@ -177,8 +173,6 @@ ASTCDebugStructureVisitor >> visitASTCLoop:anASTCLoop [
 
 { #category : #check }
 ASTCDebugStructureVisitor >> visitASTCNode:anASTCNode [
-	self visitObject:anASTCNode.
-
 	self assert:anASTCNode parent isASTCNode.
 
 	super visitASTCNode:anASTCNode
@@ -195,8 +189,6 @@ ASTCDebugStructureVisitor >> visitASTCOperator:anASTCOperator [
 
 { #category : #check }
 ASTCDebugStructureVisitor >> visitASTCProject:anASTCProject [
-	self visitObject:anASTCProject.
-
 	anASTCProject compilationUnits do:[:each| self assert: each isASTCCompilationUnit].
 
 	super visitASTCProject:anASTCProject
@@ -227,8 +219,6 @@ ASTCDebugStructureVisitor >> visitASTCStatement:anASTCStatement [
 ASTCDebugStructureVisitor >> visitASTCStructureDeclaration:anASTCStructureDeclaration [
 	self visitASTCDeclaration:anASTCStructureDeclaration.
 
-	self assert:anASTCStructureDeclaration id isASTCIdentifier.
-	self assert:anASTCStructureDeclaration structureDeclaration isASTCStructureDefinition.
 
 	super visitASTCStructureDeclaration:anASTCStructureDeclaration
 ]
@@ -237,7 +227,6 @@ ASTCDebugStructureVisitor >> visitASTCStructureDeclaration:anASTCStructureDeclar
 ASTCDebugStructureVisitor >> visitASTCStructureDefinition:anASTCStructureDefinition [
 	self visitASTCDefinition:anASTCStructureDefinition.
 
-	self assert:anASTCStructureDefinition declaration isASTCStructureDeclaration.
 	anASTCStructureDefinition members do:[:each| self assert: each isASTCVariableDeclaration].
 
 	super visitASTCStructureDefinition:anASTCStructureDefinition
@@ -258,8 +247,6 @@ ASTCDebugStructureVisitor >> visitASTCVariableDeclaration:anASTCVariableDeclarat
 
 	self assert:anASTCVariableDeclaration arguments isASTCFunctionDeclaration.
 	self assert:anASTCVariableDeclaration type isASTCType.
-	self assert:anASTCVariableDeclaration id isASTCIdentifier.
-	self assert:anASTCVariableDeclaration definition isASTCVariableDefinition.
 	self assert:anASTCVariableDeclaration structureMembers isASTCStructureDefinition.
 	self assert:anASTCVariableDeclaration declStatement isASTCDeclarationStatement.
 	self assert:anASTCVariableDeclaration declIterator isASTCFor.
@@ -271,7 +258,6 @@ ASTCDebugStructureVisitor >> visitASTCVariableDeclaration:anASTCVariableDeclarat
 ASTCDebugStructureVisitor >> visitASTCVariableDefinition:anASTCVariableDefinition [
 	self visitASTCDefinition:anASTCVariableDefinition.
 
-	self assert:anASTCVariableDefinition declaration isASTCVariableDeclaration.
 	self assert:anASTCVariableDefinition init isASTCExpression.
 
 	super visitASTCVariableDefinition:anASTCVariableDefinition
