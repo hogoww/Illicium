@@ -159,6 +159,7 @@ ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 				yourself.
 			].
 
+
 ]
 
 { #category : #visiting }

@@ -255,15 +255,13 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 
 { #category : #'generating-visitor-structure-validation' }
 ASTCGenerator >> addDebugStructureForCurrentClass [
-	| aClass  visitSuperclass visitAClass bodyOfMethod |
+	| aClass visitSuperclass visitAClass bodyOfMethod |
 	aClass:= self aClassAsVariableName: currentClass asString.
 	
 	currentSuperclass = #Object ifFalse:[	visitSuperclass:='visit',currentSuperclass asString,':'.].
 
 	visitAClass:='visit',currentClass asString,':'.
 	
-	
-
 	bodyOfMethod:= String streamContents:[:s|
 	s << visitAClass << aClass.
 	s cr.
@@ -272,10 +270,11 @@ ASTCGenerator >> addDebugStructureForCurrentClass [
 	
 	
 	currentRelationshipSides do:[:aProperty| 
-		aProperty isMany
-		ifTrue:[ s << '	' << aClass << ' ' << aProperty name << ' do:[:each| self assert: each is' << prefix << aProperty otherSide relatedClass name  << '].' ]
-		ifFalse:[ s << '	' << 'self assert:' << aClass << ' ' << aProperty name << ' is' << prefix << aProperty otherSide relatedClass name  << '.'].
-		s cr.
+		aProperty isContainer ifFalse:[
+			aProperty isMany "if true, it should ALWAYS have a ASTCContainer, so no need to check if it's nil"
+			ifTrue:[ s << '	' << aClass << ' ' << aProperty name << ' do:[:each| self assert: each is' << prefix << aProperty otherSide relatedClass name  << '].' ]"ifFalse, we can't express it in famix, so we have to check every time"
+			ifFalse:[ s << '	' << aClass << ' ' << aProperty name << ' ifNotNil:[ self assert:' << aClass << ' ' << aProperty name << ' is' << prefix << aProperty otherSide relatedClass name  << ' ].'].
+		s cr.].
 		].
 	s cr.
 	s << '	' <<'super '<< visitAClass << aClass ].
@@ -488,6 +487,19 @@ ASTCGenerator >> addStructureValidationFor:aClass [
 	] asMethod: visitAClass withArgs:argumentReplacement.
 	
 	self addMethod: bodyOfMethod asString on: astStructureValidatorVisitor  withProtocol: 'check'
+]
+
+{ #category : #'generating-visitor-structure-validation' }
+ASTCGenerator >> addStructureValidatorVisitorMethods [	
+	self addMethod: 'initialize
+	errors:=0.' on: astStructureValidatorVisitor  withProtocol: 'initialization'.
+	
+	self addMethod:'errors
+	^errors' on: astStructureValidatorVisitor withProtocol: 'accessing'.
+
+	self addMethod:'isValidAst
+	^errors=0' on: astStructureValidatorVisitor withProtocol: 'testing'.
+
 ]
 
 { #category : #'generating-visitor' }
@@ -722,7 +734,8 @@ ASTCGenerator >> generateVisitorsClasses [
 				createClass: classSymbol
 				superclass: superclass
 				withIVs:'errors'
-				withTag: 'visitor'
+				withTag: 'visitor'.
+			self addStructureValidatorVisitorMethods.
 ]
 
 { #category : #initialization }

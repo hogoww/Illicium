@@ -198,10 +198,8 @@ ASTCBuilder >> defineRelations [
 	super defineRelations.
 	"Define the relationships between the classes, following the FmxNG syntax."
 	
-	"Not much relationships to define, they mostly go through Traits since they are multiple compostions."
-	
 	self flag:#comment.
-	"Right properties name will be IGNORED."
+	"Right properties name will be IGNORED, types are used to generate validation visitor!"
 	
 	"General nodes"
 	(project property:#compilationUnits) <>-* (compilationUnit property:#project).
@@ -235,7 +233,7 @@ ASTCBuilder >> defineRelations [
 	(return property:#expression) <>- (expression property:#returnExp).
 
 	(expressionStatement property:#expression) <>- (expression property:#expStatement).
-	(declarationStatement property:#declaration) <>- (variableDeclaration property:#declStatement).	
+	(declarationStatement property:#declaration) <>- (declaration property:#declStatement).	
 
 	(operator property:#operands) <>-* (expression property:#operatorOperand).
 	

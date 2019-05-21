@@ -7,6 +7,21 @@ Class {
 	#category : #'ASTC-Gen-visitor'
 }
 
+{ #category : #accessing }
+ASTCStructureValidatorVisitor >> errors [
+	^errors
+]
+
+{ #category : #initialization }
+ASTCStructureValidatorVisitor >> initialize [
+	errors:=0.
+]
+
+{ #category : #testing }
+ASTCStructureValidatorVisitor >> isValidAst [
+	^errors=0
+]
+
 { #category : #check }
 ASTCStructureValidatorVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
 	[ super visitASTCAbstractWhile: anASTCAbstractWhile ]

@@ -16,7 +16,6 @@ ASTCDebugStructureVisitor >> visitASTCAbstractWhile:anASTCAbstractWhile [
 ASTCDebugStructureVisitor >> visitASTCBlock:anASTCBlock [
 	self visitASTCStatement:anASTCBlock.
 
-	self assert:anASTCBlock funcDefBody isASTCFunctionDefinition.
 	anASTCBlock statements do:[:each| self assert: each isASTCStatement].
 
 	super visitASTCBlock:anASTCBlock
@@ -24,7 +23,6 @@ ASTCDebugStructureVisitor >> visitASTCBlock:anASTCBlock [
 
 { #category : #check }
 ASTCDebugStructureVisitor >> visitASTCCompilationUnit:anASTCCompilationUnit [
-	self assert:anASTCCompilationUnit project isASTCProject.
 	anASTCCompilationUnit definitions do:[:each| self assert: each isASTCDefinition].
 	anASTCCompilationUnit declarations do:[:each| self assert: each isASTCDeclaration].
 
@@ -35,9 +33,7 @@ ASTCDebugStructureVisitor >> visitASTCCompilationUnit:anASTCCompilationUnit [
 ASTCDebugStructureVisitor >> visitASTCDeclaration:anASTCDeclaration [
 	self visitASTCNode:anASTCDeclaration.
 
-	self assert:anASTCDeclaration compilationUnit isASTCCompilationUnit.
-	self assert:anASTCDeclaration id isASTCIdentifier.
-	self assert:anASTCDeclaration funcDefinition isASTCDefinition.
+	anASTCDeclaration id ifNotNil:[ self assert:anASTCDeclaration id isASTCIdentifier ].
 
 	super visitASTCDeclaration:anASTCDeclaration
 ]
@@ -46,7 +42,7 @@ ASTCDebugStructureVisitor >> visitASTCDeclaration:anASTCDeclaration [
 ASTCDebugStructureVisitor >> visitASTCDeclarationStatement:anASTCDeclarationStatement [
 	self visitASTCStatement:anASTCDeclarationStatement.
 
-	self assert:anASTCDeclarationStatement declaration isASTCVariableDeclaration.
+	anASTCDeclarationStatement declaration ifNotNil:[ "self assert:anASTCDeclarationStatement declaration isASTCDeclaration" ].
 
 	super visitASTCDeclarationStatement:anASTCDeclarationStatement
 ]
@@ -55,8 +51,7 @@ ASTCDebugStructureVisitor >> visitASTCDeclarationStatement:anASTCDeclarationStat
 ASTCDebugStructureVisitor >> visitASTCDefinition:anASTCDefinition [
 	self visitASTCNode:anASTCDefinition.
 
-	self assert:anASTCDefinition compilationUnit isASTCCompilationUnit.
-	self assert:anASTCDefinition declaration isASTCDeclaration.
+	anASTCDefinition declaration ifNotNil:[ self assert:anASTCDefinition declaration isASTCDeclaration ].
 
 	super visitASTCDefinition:anASTCDefinition
 ]
@@ -73,14 +68,6 @@ ASTCDebugStructureVisitor >> visitASTCDoWhile:anASTCDoWhile [
 ASTCDebugStructureVisitor >> visitASTCExpression:anASTCExpression [
 	self visitASTCNode:anASTCExpression.
 
-	self assert:anASTCExpression initialization isASTCVariableDefinition.
-	self assert:anASTCExpression conditionIf isASTCIf.
-	self assert:anASTCExpression returnExp isASTCReturn.
-	self assert:anASTCExpression expStatement isASTCExpressionStatement.
-	self assert:anASTCExpression operatorOperand isASTCOperator.
-	self assert:anASTCExpression funcCallArg isASTCFunctionCall.
-	self assert:anASTCExpression condition isASTCLoop.
-	self assert:anASTCExpression modifIterator isASTCFor.
 
 	super visitASTCExpression:anASTCExpression
 ]
@@ -89,7 +76,7 @@ ASTCDebugStructureVisitor >> visitASTCExpression:anASTCExpression [
 ASTCDebugStructureVisitor >> visitASTCExpressionStatement:anASTCExpressionStatement [
 	self visitASTCStatement:anASTCExpressionStatement.
 
-	self assert:anASTCExpressionStatement expression isASTCExpression.
+	anASTCExpressionStatement expression ifNotNil:[ self assert:anASTCExpressionStatement expression isASTCExpression ].
 
 	super visitASTCExpressionStatement:anASTCExpressionStatement
 ]
@@ -98,8 +85,8 @@ ASTCDebugStructureVisitor >> visitASTCExpressionStatement:anASTCExpressionStatem
 ASTCDebugStructureVisitor >> visitASTCFor:anASTCFor [
 	self visitASTCLoop:anASTCFor.
 
-	self assert:anASTCFor iteratorDecl isASTCVariableDeclaration.
-	self assert:anASTCFor iteratorModification isASTCExpression.
+	anASTCFor iteratorDecl ifNotNil:[ self assert:anASTCFor iteratorDecl isASTCVariableDeclaration ].
+	anASTCFor iteratorModification ifNotNil:[ self assert:anASTCFor iteratorModification isASTCExpression ].
 
 	super visitASTCFor:anASTCFor
 ]
@@ -108,7 +95,7 @@ ASTCDebugStructureVisitor >> visitASTCFor:anASTCFor [
 ASTCDebugStructureVisitor >> visitASTCFunctionCall:anASTCFunctionCall [
 	self visitASTCExpression:anASTCFunctionCall.
 
-	self assert:anASTCFunctionCall id isASTCIdentifier.
+	anASTCFunctionCall id ifNotNil:[ self assert:anASTCFunctionCall id isASTCIdentifier ].
 	anASTCFunctionCall arguments do:[:each| self assert: each isASTCExpression].
 
 	super visitASTCFunctionCall:anASTCFunctionCall
@@ -118,7 +105,7 @@ ASTCDebugStructureVisitor >> visitASTCFunctionCall:anASTCFunctionCall [
 ASTCDebugStructureVisitor >> visitASTCFunctionDeclaration:anASTCFunctionDeclaration [
 	self visitASTCDeclaration:anASTCFunctionDeclaration.
 
-	self assert:anASTCFunctionDeclaration type isASTCType.
+	anASTCFunctionDeclaration type ifNotNil:[ self assert:anASTCFunctionDeclaration type isASTCType ].
 	anASTCFunctionDeclaration parameters do:[:each| self assert: each isASTCVariableDeclaration].
 
 	super visitASTCFunctionDeclaration:anASTCFunctionDeclaration
@@ -128,7 +115,7 @@ ASTCDebugStructureVisitor >> visitASTCFunctionDeclaration:anASTCFunctionDeclarat
 ASTCDebugStructureVisitor >> visitASTCFunctionDefinition:anASTCFunctionDefinition [
 	self visitASTCDefinition:anASTCFunctionDefinition.
 
-	self assert:anASTCFunctionDefinition body isASTCBlock.
+	anASTCFunctionDefinition body ifNotNil:[ self assert:anASTCFunctionDefinition body isASTCBlock ].
 
 	super visitASTCFunctionDefinition:anASTCFunctionDefinition
 ]
@@ -137,7 +124,6 @@ ASTCDebugStructureVisitor >> visitASTCFunctionDefinition:anASTCFunctionDefinitio
 ASTCDebugStructureVisitor >> visitASTCIdentifier:anASTCIdentifier [
 	self visitASTCExpression:anASTCIdentifier.
 
-	self assert:anASTCIdentifier FunCallId isASTCFunctionCall.
 
 	super visitASTCIdentifier:anASTCIdentifier
 ]
@@ -146,9 +132,9 @@ ASTCDebugStructureVisitor >> visitASTCIdentifier:anASTCIdentifier [
 ASTCDebugStructureVisitor >> visitASTCIf:anASTCIf [
 	self visitASTCStatement:anASTCIf.
 
-	self assert:anASTCIf condition isASTCExpression.
-	self assert:anASTCIf then isASTCStatement.
-	self assert:anASTCIf else isASTCStatement.
+	anASTCIf condition ifNotNil:[ self assert:anASTCIf condition isASTCExpression ].
+	anASTCIf then ifNotNil:[ self assert:anASTCIf then isASTCStatement ].
+	anASTCIf else ifNotNil:[ self assert:anASTCIf else isASTCStatement ].
 
 	super visitASTCIf:anASTCIf
 ]
@@ -165,15 +151,14 @@ ASTCDebugStructureVisitor >> visitASTCLiteral:anASTCLiteral [
 ASTCDebugStructureVisitor >> visitASTCLoop:anASTCLoop [
 	self visitASTCStatement:anASTCLoop.
 
-	self assert:anASTCLoop condition isASTCExpression.
-	self assert:anASTCLoop body isASTCStatement.
+	anASTCLoop condition ifNotNil:[ self assert:anASTCLoop condition isASTCExpression ].
+	anASTCLoop body ifNotNil:[ self assert:anASTCLoop body isASTCStatement ].
 
 	super visitASTCLoop:anASTCLoop
 ]
 
 { #category : #check }
 ASTCDebugStructureVisitor >> visitASTCNode:anASTCNode [
-	self assert:anASTCNode parent isASTCNode.
 
 	super visitASTCNode:anASTCNode
 ]
@@ -198,7 +183,7 @@ ASTCDebugStructureVisitor >> visitASTCProject:anASTCProject [
 ASTCDebugStructureVisitor >> visitASTCReturn:anASTCReturn [
 	self visitASTCStatement:anASTCReturn.
 
-	self assert:anASTCReturn expression isASTCExpression.
+	anASTCReturn expression ifNotNil:[ self assert:anASTCReturn expression isASTCExpression ].
 
 	super visitASTCReturn:anASTCReturn
 ]
@@ -207,10 +192,6 @@ ASTCDebugStructureVisitor >> visitASTCReturn:anASTCReturn [
 ASTCDebugStructureVisitor >> visitASTCStatement:anASTCStatement [
 	self visitASTCNode:anASTCStatement.
 
-	self assert:anASTCStatement thenStatement isASTCIf.
-	self assert:anASTCStatement elseStatement isASTCIf.
-	self assert:anASTCStatement blockStatement isASTCBlock.
-	self assert:anASTCStatement body isASTCLoop.
 
 	super visitASTCStatement:anASTCStatement
 ]
@@ -236,7 +217,6 @@ ASTCDebugStructureVisitor >> visitASTCStructureDefinition:anASTCStructureDefinit
 ASTCDebugStructureVisitor >> visitASTCType:anASTCType [
 	self visitASTCNode:anASTCType.
 
-	self assert:anASTCType declType isASTCVariableDeclaration.
 
 	super visitASTCType:anASTCType
 ]
@@ -245,11 +225,7 @@ ASTCDebugStructureVisitor >> visitASTCType:anASTCType [
 ASTCDebugStructureVisitor >> visitASTCVariableDeclaration:anASTCVariableDeclaration [
 	self visitASTCDeclaration:anASTCVariableDeclaration.
 
-	self assert:anASTCVariableDeclaration arguments isASTCFunctionDeclaration.
-	self assert:anASTCVariableDeclaration type isASTCType.
-	self assert:anASTCVariableDeclaration structureMembers isASTCStructureDefinition.
-	self assert:anASTCVariableDeclaration declStatement isASTCDeclarationStatement.
-	self assert:anASTCVariableDeclaration declIterator isASTCFor.
+	anASTCVariableDeclaration type ifNotNil:[ self assert:anASTCVariableDeclaration type isASTCType ].
 
 	super visitASTCVariableDeclaration:anASTCVariableDeclaration
 ]
@@ -258,7 +234,7 @@ ASTCDebugStructureVisitor >> visitASTCVariableDeclaration:anASTCVariableDeclarat
 ASTCDebugStructureVisitor >> visitASTCVariableDefinition:anASTCVariableDefinition [
 	self visitASTCDefinition:anASTCVariableDefinition.
 
-	self assert:anASTCVariableDefinition init isASTCExpression.
+	anASTCVariableDefinition init ifNotNil:[ self assert:anASTCVariableDefinition init isASTCExpression ].
 
 	super visitASTCVariableDefinition:anASTCVariableDefinition
 ]
