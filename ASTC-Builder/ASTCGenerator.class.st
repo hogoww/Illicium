@@ -56,8 +56,7 @@ Class {
 		'astPrinterVisitor',
 		'astDebugStructureVisitor',
 		'astStructureValidatorVisitor',
-		'currentSuperclass',
-		'aProperty'
+		'currentSuperclass'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -256,20 +255,29 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 
 { #category : #'generating-visitor-structure-validation' }
 ASTCGenerator >> addDebugStructureForCurrentClass [
-	| aClass  visitSuperClass visitAClass |
-	aClass:= prefix,currentClass asString.
-	visitSuperClass:='visit',currentSuperclass,':'.
-	visitAClass:='visit',currentClass,':'.
+	| aClass  visitSuperclass visitAClass bodyOfMethod |
+	aClass:= self aClassAsVariableName: currentClass asString.
+	visitSuperclass:='visit',currentSuperclass asString,':'.
+	visitAClass:='visit',currentClass asString,':'.
 	
-	aProperty := 1.
+	
 
-	[:anInstanceOfAClass |
-		self visitSuperclass:{anInstanceOfAClass}.
-		
-		self assert:{(aClass aProperty isAProperty)}.
-		
-		super visitAClass:{anInstanceOfAClass}.
-	] asMethod:visitAClass.
+	bodyOfMethod:= String streamContents:[:s|
+	s << visitAClass << aClass <<'
+	self '<< visitSuperclass << aClass << '.'.
+	s cr cr.
+	
+	currentRelationshipSides do:[:aProperty| 
+		aProperty isMany
+		ifTrue:[ s << '	' << aClass << ' ' << aProperty name << ' do:[:each| self assert: each is' << prefix << aProperty otherSide relatedClass name  << '].' ]
+		ifFalse:[ s << '	' << 'self assert:' << aClass << ' ' << aProperty name << ' is' << prefix << aProperty otherSide relatedClass name  << '.'].
+		s cr.
+		].
+	s cr.
+	s << '	' <<'super '<< visitAClass << aClass ].
+
+	self addMethod: bodyOfMethod  on: astDebugStructureVisitor withProtocol: 'check'
+
 ]
 
 { #category : #'generating-equality' }
@@ -465,16 +473,17 @@ ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 
 { #category : #'generating-visitor-structure-validation' }
 ASTCGenerator >> addStructureValidationFor:aClass [
-	| visitAClass instanceOfAClass argumentReplacement errors |
-	visitAClass := ('visit',aClass,$:) asSymbol.
-	instanceOfAClass := self aClassAsVariableName: aClass.
+	| visitAClass instanceOfAClass argumentReplacement errors bodyOfMethod |
+	visitAClass := ('visit',aClass asString,':') asSymbol.
+	instanceOfAClass := self aClassAsVariableName: aClass asString.
 	
 	argumentReplacement:=Dictionary new add: #anInstanceOfAClass -> instanceOfAClass ; yourself.	
-	[:anInstanceOfAClass|
+	bodyOfMethod:=[:anInstanceOfAClass|
 		[ super visitAClass:{anInstanceOfAClass} ]
 		on: AssertionFailure do:[ errors:= errors + 1 ]
 	] asMethod: visitAClass withArgs:argumentReplacement.
-
+	
+	self addMethod: bodyOfMethod asString on: astStructureValidatorVisitor  withProtocol: 'check'
 ]
 
 { #category : #'generating-visitor' }
@@ -613,6 +622,8 @@ ASTCGenerator >> classStuffOnCurrentClass [
 	self addPrinterProperties.
 	self addClassTester.
 	self addEqualityMethods.
+	self addStructureValidationFor: currentClass.
+	self addDebugStructureForCurrentClass 
 ]
 
 { #category : #actions }
@@ -838,7 +849,7 @@ ASTCGenerator >> relationSideStuff [
 ASTCGenerator >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
 	
-	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC'].
+	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC' or:[aRepository name ='astc']].
 
 	listOfPackageNameToReload:= OrderedCollection new.
 	listOfPackageNameToReload 
