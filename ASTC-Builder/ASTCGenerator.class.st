@@ -53,7 +53,10 @@ Class {
 		'astVisitorClass',
 		'collectionsType',
 		'astWalkerVisitorClass',
-		'astPrinterVisitor'
+		'astPrinterVisitor',
+		'astDebugStructureVisitor',
+		'astStructureValidatorVisitor',
+		'currentSuperclass'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -250,6 +253,33 @@ ASTCGenerator >> addCurrentClassVisitToPrinterVisitorOn: aClass [
 	
 ]
 
+{ #category : #'generating-visitor-structure-validation' }
+ASTCGenerator >> addDebugStructureForCurrentClass [
+	| aClass  visitSuperclass visitAClass bodyOfMethod |
+	aClass:= self aClassAsVariableName: currentClass asString.
+	visitSuperclass:='visit',currentSuperclass asString,':'.
+	visitAClass:='visit',currentClass asString,':'.
+	
+	
+
+	bodyOfMethod:= String streamContents:[:s|
+	s << visitAClass << aClass <<'
+	self '<< visitSuperclass << aClass << '.'.
+	s cr cr.
+	
+	currentRelationshipSides do:[:aProperty| 
+		aProperty isMany
+		ifTrue:[ s << '	' << aClass << ' ' << aProperty name << ' do:[:each| self assert: each is' << prefix << aProperty otherSide relatedClass name  << '].' ]
+		ifFalse:[ s << '	' << 'self assert:' << aClass << ' ' << aProperty name << ' is' << prefix << aProperty otherSide relatedClass name  << '.'].
+		s cr.
+		].
+	s cr.
+	s << '	' <<'super '<< visitAClass << aClass ].
+
+	self addMethod: bodyOfMethod  on: astDebugStructureVisitor withProtocol: 'check'
+
+]
+
 { #category : #'generating-equality' }
 ASTCGenerator >> addEqualityMethods [
 
@@ -441,6 +471,21 @@ ASTCGenerator >> addPropertyInitialize: aSymbol On: aClass [
 	self addMethod: methodBody on: aClass withProtocol: 'initialization'.
 ]
 
+{ #category : #'generating-visitor-structure-validation' }
+ASTCGenerator >> addStructureValidationFor:aClass [
+	| visitAClass instanceOfAClass argumentReplacement errors bodyOfMethod |
+	visitAClass := ('visit',aClass asString,':') asSymbol.
+	instanceOfAClass := self aClassAsVariableName: aClass asString.
+	
+	argumentReplacement:=Dictionary new add: #anInstanceOfAClass -> instanceOfAClass ; yourself.	
+	bodyOfMethod:=[:anInstanceOfAClass|
+		[ super visitAClass:{anInstanceOfAClass} ]
+		on: AssertionFailure do:[ errors:= errors + 1 ]
+	] asMethod: visitAClass withArgs:argumentReplacement.
+	
+	self addMethod: bodyOfMethod asString on: astStructureValidatorVisitor  withProtocol: 'check'
+]
+
 { #category : #'generating-visitor' }
 ASTCGenerator >> addVisitor [
 	self addCurrentClassVisitToAbstractVisitor.
@@ -577,6 +622,8 @@ ASTCGenerator >> classStuffOnCurrentClass [
 	self addPrinterProperties.
 	self addClassTester.
 	self addEqualityMethods.
+	self addStructureValidationFor: currentClass.
+	self addDebugStructureForCurrentClass 
 ]
 
 { #category : #actions }
@@ -628,21 +675,50 @@ ASTCGenerator >> generate [
 
 { #category : #'generating-visitor' }
 ASTCGenerator >> generateVisitorsClasses [
-	| previousClassSymbol classSymbol |
-	
-	previousClassSymbol := #Object.
-	classSymbol:= (self prefix,'Visitor') asSymbol.
-	astVisitorClass := self createClass: classSymbol superclass:previousClassSymbol withTag: 'visitor'.
-	
-	previousClassSymbol := classSymbol.
-	classSymbol:=(self prefix,'WalkerVisitor') asSymbol.	
-	astWalkerVisitorClass := self createClass: classSymbol superclass:previousClassSymbol withTag: 'visitor'.
+	| superclass classSymbol |
+	"AbstractVisitor"
+	superclass := #Object.
+	classSymbol := (self prefix , 'Visitor') asSymbol.
+	astVisitorClass := self
+		createClass: classSymbol
+		superclass: superclass
+		withTag: 'visitor'.
 
-	previousClassSymbol := classSymbol.
-	classSymbol:=(self prefix,'PrinterVisitor') asSymbol.
-	astPrinterVisitor := self createClass: classSymbol superclass:previousClassSymbol withIVs: 'currentDepth stream' withTag: 'visitor'.
-	self addPrinterVisitorsMethods.
-	
+		"CallSuperVisitor --|> abstractVisitor"
+
+		"WalkerVisitor --|> AbstractVisitor"
+		superclass := classSymbol.
+		classSymbol := (self prefix , 'WalkerVisitor') asSymbol.
+		astWalkerVisitorClass := self
+			createClass: classSymbol
+			superclass: superclass
+			withTag: 'visitor'.
+
+			"Printer visitor --|> WalkerVisitor"
+			superclass := classSymbol.
+			classSymbol := (self prefix , 'PrinterVisitor') asSymbol.
+			astPrinterVisitor := self
+				createClass: classSymbol
+				superclass: superclass
+				withIVs: 'currentDepth stream'
+				withTag: 'visitor'.
+			self addPrinterVisitorsMethods.
+
+		"DebugStructureVisitor --|> WalkerVisitor"
+		classSymbol := (self prefix , 'DebugStructureVisitor') asSymbol.
+		astDebugStructureVisitor := self
+			createClass: classSymbol
+			superclass: superclass
+			withTag: 'visitor'.
+
+			"StructureValidatorVisitor --|> DebugStructureVisitor"
+			superclass := classSymbol.
+			classSymbol := (self prefix , 'StructureValidatorVisitor') asSymbol.
+			astStructureValidatorVisitor := self
+				createClass: classSymbol
+				superclass: superclass
+				withIVs:'errors'
+				withTag: 'visitor'
 ]
 
 { #category : #initialization }
@@ -773,7 +849,7 @@ ASTCGenerator >> relationSideStuff [
 ASTCGenerator >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
 	
-	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC'].
+	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC' or:[aRepository name ='astc']].
 
 	listOfPackageNameToReload:= OrderedCollection new.
 	listOfPackageNameToReload 
@@ -804,13 +880,13 @@ ASTCGenerator >> typedPropertiesStuff [
 { #category : #visiting }
 ASTCGenerator >> visitClass: aClass [
 	"Visit a class, build it, and deploy it on the system."
-	| superclass className |
+	| className |
 	
-	superclass := (aClass classGeneralization ifNotNil:[ :class| prefix,class name ] ifNil:['Object']) asSymbol. "we get a symbol of the Superclass"
+	currentSuperclass := (aClass classGeneralization ifNotNil:[ :class| prefix,class name ] ifNil:['Object']) asSymbol. "we get a symbol of the Superclass"
 	className := (prefix,aClass name) asSymbol."we get the new class name and format it"
 	
 	"And we create it"
-	currentClass := self createClass: className superclass: superclass withTag: 'Node'.
+	currentClass := self createClass: className superclass: currentSuperclass withTag: 'Node'.
 	currentRelationshipSides := LinkedList new.
 	currentTypedProperties := LinkedList new.
 	
