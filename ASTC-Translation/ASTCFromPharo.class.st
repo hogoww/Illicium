@@ -181,7 +181,7 @@ ASTCFromPharo >> visitLiteralNode: aLiteralNode [
 { #category : #visiting }
 ASTCFromPharo >> visitMessageNode: aMessageNode [
 	"We (will) infer the type and redirect the message on the class of the receiver. So far we just forward it to the only known type: SmallInteger. each of them will handle the messages thrown to them."
-	| aReceiver funCall methodOrBlock |
+	| aReceiver funCall maybeSequenceNode |
 	self flag:#comment.
 	aReceiver:=(self getTypeOf: aMessageNode receiver) new
 		value: aMessageNode receiver;
@@ -189,11 +189,11 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 		yourself.
 	funCall := aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 	
-	methodOrBlock:=aMessageNode parent parent.
+	maybeSequenceNode:=aMessageNode parent.
 
 	(funCall isASTCStatement)
 	ifFalse:["If the message is actually a Statement in C (such as If), it's already ready "
-		(methodOrBlock isMethod or:[methodOrBlock isBlock])
+		(maybeSequenceNode isSequence)
 		ifTrue:["If the message isn't an inner message, it then need to be wrapped up. "
 			funCall:=ASTCExpressionStatement new 
 				expression: funCall;

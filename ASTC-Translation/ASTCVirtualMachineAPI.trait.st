@@ -9,6 +9,14 @@ Trait {
 { #category : #initialization }
 ASTCVirtualMachineAPI >> initialize [
 	<doNotGenerate>
-	interpreterProxy := ASTCInterpreterProxy new.
+	"Won't work until we can describe state, since the interpreterProxy has to be global"
+	"self setInterpreter: ASTCInterpreterProxy new."
 	^self
+]
+
+{ #category : #initialization }
+ASTCVirtualMachineAPI >> setInterpreter: anInterpreterProxy [
+
+	interpreterProxy := anInterpreterProxy.
+	
 ]

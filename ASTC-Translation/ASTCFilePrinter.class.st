@@ -17,7 +17,7 @@ ASTCFilePrinter >> CompileExternalPlugin [
 		s << 'gcc -shared -I./pharo-local/iceberg/hogoww/ASTC/vmHeader -o ./generated/' << fileName << '.so -fPIC ./generated/' << fileName <<'.c'
 	<< (virtualMachine for32bit: [ ' -m32'] for64bit: [''])]). 
  	res = 0
-	ifFalse:[self error:'plugin didn''t compile (or the comand line sucks'].
+	ifFalse:[self error:'plugin didn''t compile (or the comand line sucks)'].
 ]
 
 { #category : #accessing }
