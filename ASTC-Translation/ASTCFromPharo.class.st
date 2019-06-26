@@ -124,42 +124,36 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
-	^(anAssignmentNode propertyAt: IsItTheFirstAssignmentChecker property) ifTrue:[
-		"type checking"
-		
-		"creation of the return thingy."	
-		ASTCDeclarationStatement new
-			declaration:
-				(ASTCVariableDefinition new 
-					declaration:
-						(ASTCVariableDeclaration new 
-						type:
-							(ASTCType new
-							type: (self visitType: anAssignmentNode variable);
-							yourself);
-						id:
-							(anAssignmentNode variable acceptVisitor: self);
-							yourself);
-					init: 
-						(anAssignmentNode value acceptVisitor:self);
-					yourself);
-			yourself.
-		]
-	ifFalse:[
-		ASTCExpressionStatement new
-			expression:
-			(ASTCOperator new
-				symbol:'=';
-				operands: 
-					(ASTCContainer new 
-						add: (anAssignmentNode variable acceptVisitor:self);
-						add: (anAssignmentNode value acceptVisitor:self);
+	^ (anAssignmentNode
+		propertyAt: IsItTheFirstAssignmentChecker property)
+		ifTrue: [ "type checking"
+			"creation of the return thingy."
+			ASTCDeclarationStatement new
+				declaration:
+					(ASTCVariableDefinition new
+						declaration:
+							(ASTCVariableDeclaration new
+								type:
+									(ASTCType new
+										type: (self visitType: anAssignmentNode variable);
+										yourself);
+								id: (anAssignmentNode variable acceptVisitor: self);
+								yourself);
+						init: (anAssignmentNode value acceptVisitor: self);
 						yourself);
-					yourself);
-				yourself.
-			].
-
-
+				yourself ]
+		ifFalse: [ 
+			ASTCExpressionStatement new
+				expression:
+					(ASTCOperator new
+						symbol: '=';
+						operands:
+							(ASTCContainer new
+								add: (anAssignmentNode variable acceptVisitor: self);
+								add: (anAssignmentNode value acceptVisitor: self);
+								yourself);
+						yourself);
+				yourself ]
 ]
 
 { #category : #visiting }
@@ -173,6 +167,7 @@ ASTCFromPharo >> visitBlockNode: aBlockNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitLiteralNode: aLiteralNode [
+	self flag:#Smallint. "needs to translate all kind of literals!"
 	^ASTCLiteral new
 		value: (ASTCSmallInteger new value:aLiteralNode value;yourself);
 		yourself.	
@@ -240,12 +235,12 @@ ASTCFromPharo >> visitMethodSelector: aSelector fromClass: aClass [
 { #category : #visiting }
 ASTCFromPharo >> visitPreTranslationFor: aMethodAST [
 	| annotatorVisitors |
-"	aMethodAST propertyAt: ASTCTypeAnnotationASTOld property
+	"aMethodAST propertyAt: ASTCTypeAnnotationAST property
 	ifPresent:[:value|
 		value crLog.
 		]
 	ifAbsent:[
-		ASTCTypeAnnotationASTOld new 
+		ASTCTypeAnnotationAST new 
 			atNewPropertyPut: (PIVariableType new addType:ASTCVoid;yourself)
 			for: aMethodAST.
 	].	"
