@@ -158,11 +158,14 @@ ASTCFromPharo >> visitAssignmentNode: anAssignmentNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitBlockNode: aBlockNode [
-	| res |
-	res:=ASTCBlock new.
-	res statements: (aBlockNode statements collect: [:each | self visitNode: each] into: ASTCContainer new).
-
-	^res.
+	| res container |
+	res := ASTCBlock new.
+	container := ASTCContainer new.
+	aBlockNode statements do: [ :each | | astCStatement |
+		astCStatement := (self visitNode: each) asASTCStatement.
+		container add: astCStatement ].
+	res statements: container.
+	^ res
 ]
 
 { #category : #visiting }
@@ -182,21 +185,7 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 		value: aMessageNode receiver;
 		visitor: self;
 		yourself.
-	funCall := aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
-	
-	maybeSequenceNode:=aMessageNode parent.
-
-	(funCall isASTCStatement)
-	ifFalse:["If the message is actually a Statement in C (such as If), it's already ready "
-		(maybeSequenceNode isSequence)
-		ifTrue:["If the message isn't an inner message, it then need to be wrapped up. "
-			funCall:=ASTCExpressionStatement new 
-				expression: funCall;
-				yourself.
-			]
-		].
-	
-	^funCall
+	^ aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 ]
 
 { #category : #visiting }
