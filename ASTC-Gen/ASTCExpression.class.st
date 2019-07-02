@@ -22,6 +22,12 @@ ASTCExpression >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCExpression:self.
 ]
 
+{ #category : #converting }
+ASTCExpression >> asASTCStatement [
+
+	^ ASTCExpressionStatement expression: self
+]
+
 { #category : #comparing }
 ASTCExpression >> hash [
 	| hash |
