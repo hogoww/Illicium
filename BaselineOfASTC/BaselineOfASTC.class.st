@@ -22,6 +22,9 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-VisitorsRB';
 				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ].
 		].
+	spec
+		baseline: '{Phineas}'
+		with: [ spec repository: 'gitlab://pharo-project/phineas:master' ]
 ]
 
 { #category : #accessing }
