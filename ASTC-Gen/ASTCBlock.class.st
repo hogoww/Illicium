@@ -28,12 +28,6 @@ ASTCBlock >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCBlock:self.
 ]
 
-{ #category : #accessors }
-ASTCBlock >> add: aStatement [
-
-	self statements add: aStatement
-]
-
 { #category : #comparing }
 ASTCBlock >> hash [
 	| hash |
