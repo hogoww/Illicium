@@ -265,7 +265,7 @@ ASTCFromPharo >> visitType: aNode [
 
 { #category : #visiting }
 ASTCFromPharo >> visitVariableNode: aVariableNode [
-	^ASTCIdentifier new
-			id: aVariableNode name;
-			yourself.
+	^ASTCVariableNodeTranslator new
+		translateNode: aVariableNode
+		withMainTranslator: self
 ]
