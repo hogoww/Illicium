@@ -194,7 +194,7 @@ ASTCPrettyPrint >> visitASTCIf: anIf [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCLiteral: aLiteral [
-	self << aLiteral value value
+	self << aLiteral value value asString
 ]
 
 { #category : #accessing }

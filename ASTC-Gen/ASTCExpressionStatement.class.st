@@ -7,6 +7,14 @@ Class {
 	#category : #'ASTC-Gen-Node'
 }
 
+{ #category : #'instance creation' }
+ASTCExpressionStatement class >> expression: anExpression [
+
+	^ self new
+		expression: anExpression;
+		yourself
+]
+
 { #category : #comparing }
 ASTCExpressionStatement >> = anotherNode [
 	(anotherNode class = self class)

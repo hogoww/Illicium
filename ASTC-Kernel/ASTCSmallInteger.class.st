@@ -14,6 +14,14 @@ ASTCSmallInteger class >> defaultValue [
 	^0
 ]
 
+{ #category : #accessing }
+ASTCSmallInteger class >> value: anInteger [ 
+
+	^ self new
+		value: anInteger;
+		yourself
+]
+
 { #category : #translation }
 ASTCSmallInteger >> * anotherSmallInteger [
 

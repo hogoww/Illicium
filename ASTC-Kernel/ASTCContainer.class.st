@@ -85,6 +85,12 @@ ASTCContainer >> collection:aCollection [
 ]
 
 { #category : #initialization }
+ASTCContainer >> do: aBlock [
+
+	collection do: aBlock
+]
+
+{ #category : #initialization }
 ASTCContainer >> doesNotUnderstand: aMessage [
 	"indirection of the message to my collection. Should be removed when the interface will be good enough"
 	self flag:#toRemove.

@@ -26,25 +26,23 @@ TranslationTest >> testASTCIdentifier [
 
 { #category : #tests }
 TranslationTest >> testASTCIf [
-	| astPharo visitor astC expectedC|
-	astPharo := RBParser parseExpression: '1=2 ifTrue:[1] ifFalse:[2]'.
-	visitor := ASTCFromPharo new.
-	astC := astPharo acceptVisitor: visitor.
+	| astC expectedC |
+	astC := self translate: '1=2 ifTrue:[1] ifFalse:[2]'.
 	
 	expectedC := ASTCIf new 
-		predicate: (ASTCOperator new
+		condition: (ASTCOperator new
 			symbol:'==';
 			operands: (ASTCContainer new 
-				add:
-					(ASTCLiteral new value:	(ASTCSmallInteger new value:1 ; yourself);
-					 yourself);
-				add:
-					(ASTCLiteral new value:	(ASTCSmallInteger new value:2 ; yourself);
-					 yourself);
+				add: (ASTCLiteral value: (ASTCSmallInteger value:1));
+				add: (ASTCLiteral value: (ASTCSmallInteger value:2));
 				yourself);
 			yourself);
-		then:(ASTCBlock new);
-		else:(ASTCBlock new);
+		then:(ASTCBlock new
+			add: (ASTCLiteral value: (ASTCSmallInteger value:1)) asASTCStatement;
+			yourself);
+		else:(ASTCBlock new
+			add: (ASTCLiteral value: (ASTCSmallInteger value:2)) asASTCStatement;
+			yourself);
 		yourself.	
 	
 	self assert: astC isStructuralyValidAST.
@@ -53,24 +51,20 @@ TranslationTest >> testASTCIf [
 
 { #category : #tests }
 TranslationTest >> testASTCOperatorBinary [
-	| astPharo visitor astC expectedC|
-	astPharo := RBParser parseExpression: 'c=6'.
-	visitor := ASTCFromPharo new.
-	astC := astPharo acceptVisitor: visitor.
+	| astC expectedC|
+	astC := self translate: '1=6'.
 	
 	expectedC := ASTCOperator new
 		symbol:'==';
 		operands: (ASTCContainer new
-			add:(ASTCIdentifier new id:#c ; yourself);
-			add:(ASTCLiteral new value: 
-				(ASTCSmallInteger new value:6 ; yourself) ;
-				yourself);
+			add: (ASTCLiteral value: (ASTCSmallInteger value:1));
+			add: (ASTCLiteral value: (ASTCSmallInteger value:6));
 			yourself);
 		yourself.
 	
 	self assert: astC isASTCOperator.
 	self assert: astC symbol equals: '=='.
-	self assert: astC operands first id equals: #c.
+	self assert: astC operands first value value equals: 1.
 	self assert: astC operands second value value equals: 6.
 	self assert: astC equals: expectedC.
 ]
@@ -88,4 +82,20 @@ TranslationTest >> testASTCSmallIntegerIsLiteral [
 		(ASTCLiteral new value: 
 			(ASTCSmallInteger new value:5;yourself) ;
 		yourself).
+]
+
+{ #category : #tests }
+TranslationTest >> translate: sourceCode [
+	| astPharo inferer type |
+	astPharo := RBParser parseExpression: sourceCode.
+	astPharo doSemanticAnalysis.
+	
+	inferer := PhineasInferer new.
+	type := (inferer inferAST: astPharo methodNode) methodType.
+	astPharo methodNode acceptVisitor: (ASTCTypeAnnotationAST new
+		inferer: inferer;
+		yourself).
+	
+	type accept: PIIsMethodTypeInterpreted new.
+	^ astPharo acceptVisitor: ASTCFromPharo new.
 ]
