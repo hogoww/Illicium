@@ -14,8 +14,8 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-Builder';
 				package: 'ASTC-Gen';
 				package: 'ASTC-Gen-Extensions' with:[ spec requires:#('ASTC-Gen')];
-				package: 'ASTC-Kernel' with:[ spec requires:#('ASTC-Gen')];
 				package: 'ASTC-Translation' with:[ spec requires:#('ASTC-Gen')];
+				package: 'ASTC-Kernel' with:[ spec requires:#('ASTC-Gen' 'ASTC-Translation')];
 				package: 'ASTC-Translation-Tests' with:[spec requires:#('ASTC-Translation')];
 				package: 'ASTC-VisitorsASTC' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-VisitorsASTC-Tests' with:[ spec requires:#('ASTC-VisitorsASTC') ];
@@ -29,16 +29,16 @@ BaselineOfASTC >> baseline: spec [
 
 { #category : #accessing }
 BaselineOfASTC >> lastPlayground [
-ASTCGenerator generate.
-ASTCGenerator new reloadExtentions.
+ASTCGenerator generate.	
 
 ASTCProgramTranslator new translateStartingFrom: #aMain from: RandomTestClass.
 
-(RandomTestClass >> #factorialR) ast.
+
 
 PlainCodeGeneration aMethodThatGenerateCode:7.
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.
+(RandomTestClass >> #initialize)ast 
 ]
 
 { #category : #accessing }
