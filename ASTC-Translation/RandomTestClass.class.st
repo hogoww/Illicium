@@ -16,6 +16,7 @@ RandomTestClass >> aMain [
 	| res |
 	res:= self factorialR: 8 anotherArgument:5.
 	"interpreterProxy push:(interpreterProxy integerObjectOf:(res))."
+
 	^ 0
 ]
 

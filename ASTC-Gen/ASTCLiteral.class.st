@@ -7,6 +7,14 @@ Class {
 	#category : #'ASTC-Gen-Node'
 }
 
+{ #category : #'instance-creation' }
+ASTCLiteral class >> value: aValue [
+	
+	^ self new
+		value: aValue;
+		yourself
+]
+
 { #category : #comparing }
 ASTCLiteral >> = anotherNode [
 	(anotherNode class = self class)
