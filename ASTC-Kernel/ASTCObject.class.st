@@ -1,8 +1,6 @@
 Class {
 	#name : #ASTCObject,
 	#superclass : #Object,
-	#traits : 'ASTCFormatTrait',
-	#classTraits : 'ASTCFormatTrait classTrait',
 	#category : #'ASTC-Kernel'
 }
 
