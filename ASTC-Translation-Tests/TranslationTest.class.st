@@ -45,7 +45,7 @@ TranslationTest >> testASTCIf [
 			yourself);
 		yourself.	
 	
-	self assert: astC isStructuralyValidAST.
+	astC debugASTCStructure.
 	self assert: astC equals: expectedC.
 ]
 

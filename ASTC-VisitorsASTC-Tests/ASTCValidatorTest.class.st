@@ -15,7 +15,7 @@ ASTCValidatorTest >> testVisitASTCReturnBad [
 			ASTCReturn new
 		yourself.
 
-	self deny: astc isStructuralyValidAST.
+	astc debugASTCStructure
 ]
 
 { #category : #tests }
@@ -28,16 +28,17 @@ ASTCValidatorTest >> testVisitASTCReturnGood [
 			yourself);
 		yourself.
 
-	self assert: astc isStructuralyValidAST.
+	astc debugASTCStructure.
 ]
 
 { #category : #tests }
 ASTCValidatorTest >> testVisitASTCTypeBad [
 	| astc |
-	astc:=	ASTCType new
-		type:ASTCSmallInteger new;
-		yourself.
 
+	astc := ASTCType new
+		type: ASTCSmallInteger new;
+		yourself.
+	"astc debugASTCStructure."
 	self deny: astc isStructuralyValidAST.
 ]
 
@@ -48,5 +49,5 @@ ASTCValidatorTest >> testVisitASTCTypeGood [
 		type:ASTCSmallInteger;
 		yourself.
 
-	self assert: astc isStructuralyValidAST.
+	astc debugASTCStructure.
 ]
