@@ -520,12 +520,15 @@ ASTCGenerator >> addWalkerMethod [
 
 { #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerMethodFor: aClass forProperties: aCollectionOfProperties [
-	| methodBody className |
+	| methodBody className methodSignature |
 	className := aClass asString.
+	methodSignature := (self methodClassSignatureFor: className withPrefix: 'walk').
 	methodBody := String
 		streamContents: [ :s | 
-			s	<< (self methodClassSignatureFor: className withPrefix: 'walk');
+			s	<< methodSignature;
 				cr.
+			s << 'super ' << methodSignature;
+			cr.
 			aCollectionOfProperties
 				do: [ :aProperty | 
 					s tab
