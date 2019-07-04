@@ -138,9 +138,8 @@ ASTCContainer >> size [
 
 { #category : #initialization }
 ASTCContainer >> visitArgs: someArguments with: aVisitor [
-	self collection: 
-		(someArguments collect:[:each| 
+	(someArguments collect:[:each| 
 			each acceptVisitor: aVisitor.
-		] into: ASTCContainer new).
+	] into: self collection).
 	^self
 ]
