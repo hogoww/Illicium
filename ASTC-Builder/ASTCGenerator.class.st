@@ -520,15 +520,17 @@ ASTCGenerator >> addWalkerMethod [
 
 { #category : #'generating-visitor-walker' }
 ASTCGenerator >> addWalkerMethodFor: aClass forProperties: aCollectionOfProperties [
-	| methodBody className methodSignature |
+	| methodBody className |
 	className := aClass asString.
-	methodSignature := (self methodClassSignatureFor: className withPrefix: 'walk').
 	methodBody := String
 		streamContents: [ :s | 
-			s	<< methodSignature;
+			s	<< (self methodClassSignatureFor: className withPrefix: 'walk');
 				cr.
-			s << 'super ' << methodSignature;
+			currentSuperclass = #Object ifFalse:[
+			s  tab << 'self ' << (self methodSuperclassSignatureFor: className withPrefix: 'walk') ;
+				<< '.';
 			cr.
+			].
 			aCollectionOfProperties
 				do: [ :aProperty | 
 					s tab
@@ -787,6 +789,17 @@ ASTCGenerator >> methodClassSignatureFor: aClassNameAsString withPrefix: aPrefix
 	^String streamContents:[:s|
 		s nextPutAll:aPrefix;
 		nextPutAll: aClassNameAsString capitalized;
+		nextPutAll:': ';
+		nextPutAll: (self aClassAsVariableName: aClassNameAsString).
+		].
+]
+
+{ #category : #'name-formating' }
+ASTCGenerator >> methodSuperclassSignatureFor: aClassNameAsString withPrefix: aPrefix [
+	self flag:#refactor."horific, needs a big refactor"
+	^String streamContents:[:s|
+		s nextPutAll:aPrefix;
+		nextPutAll: currentSuperclass asString capitalized;
 		nextPutAll:': ';
 		nextPutAll: (self aClassAsVariableName: aClassNameAsString).
 		].

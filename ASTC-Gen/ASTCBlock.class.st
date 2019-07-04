@@ -44,7 +44,7 @@ ASTCBlock >> initialize [
 
 { #category : #initialization }
 ASTCBlock >> initializeStatements [
-	statements:= ASTCContainer new parent:self; yourself.
+	statements:=ASTCContainer new parent:self; yourself.
 ]
 
 { #category : #testing }

@@ -22,12 +22,6 @@ ASTCStatement >> acceptVisitor: aVisitor [
 	^aVisitor visitASTCStatement:self.
 ]
 
-{ #category : #converting }
-ASTCStatement >> asASTCStatement [
-
-	^ self
-]
-
 { #category : #comparing }
 ASTCStatement >> hash [
 	| hash |
