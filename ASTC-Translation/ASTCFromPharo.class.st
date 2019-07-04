@@ -185,6 +185,7 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 		value: aMessageNode receiver;
 		visitor: self;
 		yourself.
+	self haltIf: [ aMessageNode selector = #integerObjectOf: ].
 	^ aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 ]
 
@@ -253,7 +254,7 @@ ASTCFromPharo >> visitReturnNode: aReturnNode [
 ASTCFromPharo >> visitSequenceNode: aSequenceNode [
 	| res |
 	res:=ASTCBlock new.
-	res statements: (aSequenceNode statements collect: [:each | self visitNode: each] into: ASTCContainer new).
+	res statements: (aSequenceNode statements collect: [:each | (self visitNode: each) asASTCStatement] into: ASTCContainer new).
 	^res.
 ]
 

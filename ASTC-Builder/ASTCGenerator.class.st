@@ -796,7 +796,7 @@ ASTCGenerator >> methodClassSignatureFor: aClassNameAsString withPrefix: aPrefix
 
 { #category : #'name-formating' }
 ASTCGenerator >> methodSuperclassSignatureFor: aClassNameAsString withPrefix: aPrefix [
-	self flag:#refactor."horific, needs a big refactor"
+	self flag:#refactor."horrific, needs a big refactor. The whole class, not just this"
 	^String streamContents:[:s|
 		s nextPutAll:aPrefix;
 		nextPutAll: currentSuperclass asString capitalized;

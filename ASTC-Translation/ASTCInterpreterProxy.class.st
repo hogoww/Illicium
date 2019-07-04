@@ -8,35 +8,35 @@ Class {
 ASTCInterpreterProxy >> cCoerce: anOop to: aType [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^1
+	^self
 ]
 
 { #category : #adding }
 ASTCInterpreterProxy >> integerObjectOf: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^1
+	^self
 ]
 
 { #category : #adding }
 ASTCInterpreterProxy >> pop: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^1
+	^self
 ]
 
 { #category : #adding }
 ASTCInterpreterProxy >> push: anArg [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^1
+	^self
 ]
 
 { #category : #adding }
 ASTCInterpreterProxy >> pushInteger: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^1
+	^self
 ]
 
 { #category : #adding }

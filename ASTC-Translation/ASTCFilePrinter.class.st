@@ -135,22 +135,6 @@ const char* getModuleName(void)
 }
 
 
-/*	Note: This is coded so that it can be run in Squeak. */
-
-	/* InterpreterPlugin>>#setInterpreter: */
-sqInt setInterpreter(struct VirtualMachine *anInterpreter)
-{
-	printf("\n\n #interpreter# \n\n");
-    sqInt ok;
-
-	interpreterProxy = anInterpreter;
-	ok = ((interpreterProxy->majorVersion()) == (VM_PROXY_MAJOR))
-	 && ((interpreterProxy->minorVersion()) >= (VM_PROXY_MINOR));
-	if (ok) {
-			}
-	return ok;
-}
-
 '
 
 ]
