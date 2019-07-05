@@ -24,12 +24,12 @@ ASTCProgramTranslator >> postGenerationMethodAnalysisFor: aCollectionOfASTCMetho
 ]
 
 { #category : #'As yet unclassified' }
-ASTCProgramTranslator >> printTranslatedMethods: aCollection [ 
+ASTCProgramTranslator >> printTranslatedMethods: aCollectionOfMethods [ 
 	| printer |
 	
 	printer := ASTCFilePrinter new
 		fileName: 'aFile' ;
-		classDictionary: aCollection ;
+		classDictionary: aCollectionOfMethods ;
 		isPrimitive: true;
 		yourself.
 	

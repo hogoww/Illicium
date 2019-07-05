@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'fileName',
-		'classDictionary',
+		'compilationUnit',
 		'isPrimitive',
 		'virtualMachine'
 	],
@@ -21,13 +21,13 @@ ASTCFilePrinter >> CompileExternalPlugin [
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> classDictionary [
-	^ classDictionary
+ASTCFilePrinter >> compilationUnit [
+	^compilationUnit
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> classDictionary: aCollection [
-	classDictionary := aCollection
+ASTCFilePrinter >> compilationUnit: aCompilationUnit [
+	^compilationUnit:= aCompilationUnit
 ]
 
 { #category : #accessing }
@@ -71,13 +71,10 @@ ASTCFilePrinter >> printInFile [
 	file:= file / (fileName,'.c').
 	file exists ifTrue:[file delete].
 	file writeStreamDo:[:stream |
-		isPrimitive ifTrue:[	self printPrePluginStuff:stream withMethods: classDictionary ].
+		isPrimitive ifTrue:[self printPrePluginStuff: stream ]
+		compilationUnit prettyPrint.
 
-		classDictionary do:[:each| stream << (ASTCDeclarationStatement new declaration: each declaration ; yourself) prettyPrint. stream cr.].
-		stream cr cr.
-		classDictionary do:[:each | stream << each prettyPrint. stream cr cr].
-
-		isPrimitive ifTrue:[self printPostPluginStuff:stream withMethods: classDictionary ].
+		"isPrimitive ifTrue:[self printPrePluginStuff: stream ]."
 	].
 ]
 
@@ -107,7 +104,7 @@ aStream <<'	{(void*)_m, "getModuleName", (void*)getModuleName},
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> printPrePluginStuff: aStream withMethods: collectionOfMethods [
+ASTCFilePrinter >> printPrePluginStuff: aStream [
 	aStream << 
 '
 #include "config.h"

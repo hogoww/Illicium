@@ -11,7 +11,7 @@ ASTCClassTranslator class >> translateClass: aClass [
 
 { #category : #'as yet unclassified' }
 ASTCClassTranslator >> translateClass: aClass [
-	| primitives inferer typeAnnotator translatedMethods translator cu |
+	| primitives inferer typeAnnotator translator cu |
 	(aClass traitComposition
 		includesTrait: ASTCVirtualMachineAPI)
 		ifFalse: [ self error: 'can only translate plugins for now.' ].
@@ -48,6 +48,11 @@ ASTCClassTranslator >> translateClass: aClass [
 				type: (ASTCType new type:ivType ; yourself);
 				yourself).
 		].
+	
+	cu debugASTCStructure.
+	
+	
+	
 	
 	self halt.
 ]

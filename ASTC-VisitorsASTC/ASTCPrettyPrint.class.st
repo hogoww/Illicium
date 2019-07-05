@@ -114,6 +114,16 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 ]
 
 { #category : #accessing }
+ASTCPrettyPrint >> visitASTCCompilationUnit: aCompilationUnit [
+	self << '/* Declarations */' cr.
+	aCompilationUnit declarations ifNotNil:[:aDeclaration| aDeclaration acceptVisitor:self].
+	self << '/* Definitions */' cr.
+	aCompilationUnit definitions ifNotNil:[:aDefinition| aDefinition acceptVisitor:self].
+
+
+]
+
+{ #category : #accessing }
 ASTCPrettyPrint >> visitASTCDeclarationStatement: aDeclaration [
 	aDeclaration declaration acceptVisitor: self.
 	self << $;
