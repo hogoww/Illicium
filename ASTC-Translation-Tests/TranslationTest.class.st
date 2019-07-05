@@ -18,10 +18,9 @@ TranslationTest >> testASTCIdentifier [
 	self assert: astC isASTCIdentifier.
 	self assert: astC id equals: #c.
 	self assert: astC equals: expectedC.
-	validationVisitor := ASTCValidatorDebug new.
 
-	astC acceptVisitor: validationVisitor.
-	expectedC acceptVisitor: validationVisitor.
+	astC debugASTCStructure.
+	expectedC debugASTCStructure.
 ]
 
 { #category : #tests }
