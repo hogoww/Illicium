@@ -43,5 +43,5 @@ ASTCInterpreterProxy >> pushInteger: anInteger [
 ASTCInterpreterProxy >> stackValue: anOffset [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^1
+	^self
 ]

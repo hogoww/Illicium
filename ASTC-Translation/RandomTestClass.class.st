@@ -14,6 +14,7 @@ Class {
 { #category : #tests }
 RandomTestClass >> aMain [
 	| res |
+	<primitiveToBe>
 	res:= self factorialR: 7 anotherArgument:5.
 	interpreterProxy push:(interpreterProxy integerObjectOf:res).
 

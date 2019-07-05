@@ -6,6 +6,11 @@ Trait {
 	#category : #'ASTC-Translation'
 }
 
+{ #category : #'as yet unclassified' }
+ASTCVirtualMachineAPI classSide >> primitiveName [
+	^#primitiveToBe
+]
+
 { #category : #initialization }
 ASTCVirtualMachineAPI >> initialize [
 	<doNotGenerate>
