@@ -11,7 +11,7 @@ ASTCClassTranslator class >> translateClass: aClass [
 
 { #category : #'as yet unclassified' }
 ASTCClassTranslator >> translateClass: aClass [
-	| primitives inferer typeAnnotator translator cu |
+	| primitives inferer typeAnnotator translator cu printer |
 	(aClass traitComposition
 		includesTrait: ASTCVirtualMachineAPI)
 		ifFalse: [ self error: 'can only translate plugins for now.' ].
@@ -51,7 +51,16 @@ ASTCClassTranslator >> translateClass: aClass [
 	
 	cu debugASTCStructure.
 	
+	printer := ASTCFilePrinter new
+		fileName: 'aFile' ;
+		compilationUnit: cu ;
+		isPrimitive: true;
+		yourself.
 	
+	printer printInFile.
+	
+	printer CompileExternalPlugin.
+	printer moveInVmDirectory.
 	
 	
 	self halt.

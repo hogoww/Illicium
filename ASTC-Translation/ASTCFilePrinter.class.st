@@ -71,7 +71,7 @@ ASTCFilePrinter >> printInFile [
 	file:= file / (fileName,'.c').
 	file exists ifTrue:[file delete].
 	file writeStreamDo:[:stream |
-		isPrimitive ifTrue:[self printPrePluginStuff: stream ]
+		isPrimitive ifTrue:[self printPrePluginStuff: stream ].
 		compilationUnit prettyPrint.
 
 		"isPrimitive ifTrue:[self printPrePluginStuff: stream ]."

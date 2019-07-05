@@ -24,6 +24,11 @@ ASTCPrettyPrint >> <<< chars [
 ]
 
 { #category : #accessing }
+ASTCPrettyPrint >> cr [
+	stream cr
+]
+
+{ #category : #accessing }
 ASTCPrettyPrint >> enterBlock [
 	self indent
 ]
@@ -114,12 +119,17 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 ]
 
 { #category : #accessing }
-ASTCPrettyPrint >> visitASTCCompilationUnit: aCompilationUnit [
-	self << '/* Declarations */' cr.
-	aCompilationUnit declarations ifNotNil:[:aDeclaration| aDeclaration acceptVisitor:self].
-	self << '/* Definitions */' cr.
-	aCompilationUnit definitions ifNotNil:[:aDefinition| aDefinition acceptVisitor:self].
-
+ASTCPrettyPrint >> visitASTCCompilationUnit: anASTCCompilationUnit [
+	self << '/* Declarations */' ; cr.
+	anASTCCompilationUnit declarations
+		ifNotNil:[ :declarations | declarations
+			do:[ :aDeclaration | aDeclaration acceptVisitor:self ]
+		].
+	self << '/* Definitions */' ; cr.
+	anASTCCompilationUnit definitions
+		ifNotNil:[ :definitions | definitions
+			do:[ :aDefinition | aDefinition acceptVisitor:self ]
+		]
 
 ]
 
