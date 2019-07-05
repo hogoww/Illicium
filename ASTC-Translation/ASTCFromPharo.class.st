@@ -185,7 +185,6 @@ ASTCFromPharo >> visitMessageNode: aMessageNode [
 		value: aMessageNode receiver;
 		visitor: self;
 		yourself.
-	self haltIf: [ aMessageNode selector = #integerObjectOf: ].
 	^ aReceiver perform: aMessageNode selector withArguments: aMessageNode arguments asArray.
 ]
 

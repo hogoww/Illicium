@@ -56,7 +56,7 @@ ASTCProgramTranslator >> translateProgramMethods: aCollectionOfMethodTypes [
 ASTCProgramTranslator >> translateStartingFrom: aSelector from: aClass [
 	| mainAst inferer translatedMethods initializeAst |
 	mainAst := (aClass >> aSelector) ast.
-	initializeAst := ([ aClass >> #initialize ]
+	initializeAst := ([ aClass >> #initializePlugin ]
 		on: KeyNotFound
 		do: [ nil ]) ifNotNil: [ :value | value ast ].
 	inferer := self typeProgram: mainAst withInitialize: initializeAst.

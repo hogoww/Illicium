@@ -12,16 +12,17 @@ ASTCClassTranslator class >> translateClass: aClass [
 { #category : #'as yet unclassified' }
 ASTCClassTranslator >> translateClass: aClass [
 	| primitives inferer typeAnnotator translatedMethods translator |
-	"(aClass traitComposition
-		anySatisfy: [ :aTrait | aTrait = ASTCVirtualMachineAPI ])
-		ifFalse: [ self error: 'can only translate plugins for now' ]."
+	(aClass traitComposition
+		includesTrait: ASTCVirtualMachineAPI)
+		ifFalse: [ self error: 'can only translate plugins for now' ].
 	primitives := aClass methods
 		select: [ :aMethod | 
 			aMethod pragmas
 				anySatisfy: [ :aPragma | aPragma selector = ASTCVirtualMachineAPI primitiveName ] ]
-		thenCollect:[ :aMethod | aMethod ast].
+		thenCollect:[ :aMethod | aMethod ast copy].
 
 	inferer := PhineasInferer new.
+	inferer inferAST: (aClass >> #initializePlugin) ast copy.
 	primitives do:[:aMethodAST|
 		inferer inferAST: aMethodAST ].
 
@@ -29,7 +30,7 @@ ASTCClassTranslator >> translateClass: aClass [
 	primitives do:[:aMethodAST|
 		aMethodAST acceptVisitor: typeAnnotator
 		].
-	
+
 	translator := ASTCFromPharo new.
 	translatedMethods := primitives collect:[:aMethodAST|
 		 translator visitMethodAST: aMethodAST.

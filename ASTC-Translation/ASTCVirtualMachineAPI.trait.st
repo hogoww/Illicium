@@ -20,6 +20,16 @@ ASTCVirtualMachineAPI >> initialize [
 ]
 
 { #category : #initialization }
+ASTCVirtualMachineAPI >> initializePlugin [
+	<doNotGenerate>
+	"Won't work until we can describe state, since the interpreterProxy has to be global"
+	"moduleName"
+	self setInterpreter: ASTCInterpreterProxy new.
+	"initplugin or something"
+	^self
+]
+
+{ #category : #initialization }
 ASTCVirtualMachineAPI >> setInterpreter: anInterpreterProxy [
 
 	interpreterProxy := anInterpreterProxy.
