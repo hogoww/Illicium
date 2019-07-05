@@ -60,19 +60,6 @@ ASTCFromPharo class >> factorialRTest2 [
 ]
 
 { #category : #visiting }
-ASTCFromPharo >> classDictionary [
-	"accessor"
-	^typeDictionary
-]
-
-{ #category : #visiting }
-ASTCFromPharo >> classDictionary:aCollection [
-	"accessor"
-	typeDictionary:=aCollection.
-	^aCollection
-]
-
-{ #category : #visiting }
 ASTCFromPharo >> getTypeOf:aNode [
 	"Even if it's not a visit, for coherence purpose"
 	| concreteType translationType |
@@ -99,6 +86,19 @@ ASTCFromPharo >> initialize [
 		at:ASTCInterpreterProxy put: ASTCVirtualMachineProxy; 
 		yourself.
 
+]
+
+{ #category : #accessors }
+ASTCFromPharo >> typeDictionnary [
+	"accessor"
+	^typeDictionary 
+]
+
+{ #category : #accessors }
+ASTCFromPharo >> typeDictionnary:aCollection [
+	"accessor"
+	typeDictionary:=aCollection.
+	^aCollection
 ]
 
 { #category : #visiting }

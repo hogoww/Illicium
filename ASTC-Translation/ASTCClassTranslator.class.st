@@ -40,12 +40,14 @@ ASTCClassTranslator >> translateClass: aClass [
 		cu declarations add: res declaration.
 		]. 
 	
+	self flag:#horiffic."anyone here. Should use the mainTranslator"
+	
 	aClass allInstVarNames do:[:ivName| |ivType|
-		ivType:=typeAnnotator getTypeOfInstanceVariable: ivName ofClass: aClass.
+		ivType:=translator typeDictionnary at: (typeAnnotator getTypeOfInstanceVariable: ivName ofClass: aClass) anyOne.
 		cu declarations	add: 
 			(ASTCVariableDeclaration new
 				id: (ASTCIdentifier new id: ivName ; yourself);
-				type: (ASTCType new type:ivType ; yourself);
+				type: (ASTCType new type: ivType ; yourself);
 				yourself).
 		].
 	
