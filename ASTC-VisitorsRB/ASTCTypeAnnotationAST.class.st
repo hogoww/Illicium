@@ -65,8 +65,8 @@ ASTCTypeAnnotationAST >> getTypeForArgumentNode: anArgumentNode [
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForInstanceVariableNode: aInstanceVariableNode [ 
-	^(methodType receiver instanceVariable: aInstanceVariableNode name) concreteClasses.
+ASTCTypeAnnotationAST >> getTypeForInstanceVariableNode: anInstanceVariableNode [ 
+	^(methodType receiver instanceVariable: anInstanceVariableNode name) concreteClasses.
 ]
 
 { #category : #typing }
@@ -80,6 +80,11 @@ ASTCTypeAnnotationAST >> getTypeForMessageNode: aRBMessageNode [
 	| aNode |
 	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
 	^aNode concreteClasses.
+]
+
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeOfInstanceVariable: instanceVarName ofClass: aClass [
+	^((inferer typeForClass: aClass) instanceVariable: instanceVarName) concreteClasses.
 ]
 
 { #category : #actions }
@@ -184,7 +189,7 @@ ASTCTypeAnnotationAST >> visitMethodNode: aMethodNode [
 		for: aMethodNode.
 	
 	((self getMethodNodeForAMethodNode: aMethodNode) accept: methodTypeDispatcher) ifTrue:[
-		super visitMethodNode: aMethodNode.
+		super visitMethodNode: aMethodNode."walk the method's ast"
 	].
 	^aMethodNode.
 ]

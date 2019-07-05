@@ -168,6 +168,17 @@ ASTCTypeAnnotationASTTest >> testGetTypeForMessageNode [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationASTTest >> testGetTypeOfInstanceVariable [
+	| ast type |
+
+	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationASTTestMethods.
+	type := visitor getTypeOfInstanceVariable: #iv ofClass: ASTCTypeAnnotationASTTestMethods.
+	
+	self assert: type asArray equals: {SmallInteger}
+
+]
+
+{ #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
