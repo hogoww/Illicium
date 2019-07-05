@@ -136,7 +136,10 @@ ASTCBuilder >> defineHierarchy [
 	super defineHierarchy.
 	
 	"Define the inheritance links between the classes defined in #defineClasses, following the FmxNG syntax."
-		
+
+	project --|> node.
+	compilationUnit --|> node.
+
 		"Node Direct SubClasses"
 		functionDefinition  --|> node.
 		expression --|> node.

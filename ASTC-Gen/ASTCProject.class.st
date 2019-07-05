@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCProject,
-	#superclass : #Object,
+	#superclass : #ASTCNode,
 	#instVars : [
 		'compilationUnits'
 	],

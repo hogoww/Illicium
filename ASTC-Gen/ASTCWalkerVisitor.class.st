@@ -195,6 +195,7 @@ ASTCWalkerVisitor >> walkASTCBlockStatements:anASTCBlock [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCCompilationUnit: anASTCCompilationUnit [
+	self walkASTCNode: anASTCCompilationUnit.
 	self walkASTCCompilationUnitDefinitions: anASTCCompilationUnit.
 	self walkASTCCompilationUnitDeclarations: anASTCCompilationUnit.
 
@@ -213,13 +214,6 @@ ASTCWalkerVisitor >> walkASTCCompilationUnitDefinitions:anASTCCompilationUnit [
 	anASTCCompilationUnit definitions
 		ifNotNil:[ :definitions | definitions
 			do:[ :aDefinition | aDefinition acceptVisitor:self ]
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCCompilationUnitParent:anASTCCompilationUnit [
-	anASTCCompilationUnit parent
-		ifNotNil:[ :parent | parent acceptVisitor:self.
 		]
 ]
 
@@ -477,6 +471,7 @@ ASTCWalkerVisitor >> walkASTCOperatorSymbol:anASTCOperator [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCProject: anASTCProject [
+	self walkASTCNode: anASTCProject.
 	self walkASTCProjectCompilationUnits: anASTCProject.
 
 ]

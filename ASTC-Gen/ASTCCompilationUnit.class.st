@@ -1,8 +1,7 @@
 Class {
 	#name : #ASTCCompilationUnit,
-	#superclass : #Object,
+	#superclass : #ASTCNode,
 	#instVars : [
-		'parent',
 		'definitions',
 		'declarations'
 	],
@@ -86,17 +85,6 @@ ASTCCompilationUnit >> initializeDefinitions [
 { #category : #testing }
 ASTCCompilationUnit >> isASTCCompilationUnit [
 	^true.
-]
-
-{ #category : #accessors }
-ASTCCompilationUnit >> parent [
-	^parent
-]
-
-{ #category : #accessors }
-ASTCCompilationUnit >> parent: anObject [
-	parent:=anObject.
-	^anObject.
 ]
 
 { #category : #print }

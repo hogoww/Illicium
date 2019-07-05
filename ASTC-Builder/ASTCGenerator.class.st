@@ -563,7 +563,7 @@ ASTCGenerator >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolea
 			ifTrue:[ 
 				propertyIteratorName := self aClassAsVariableName:(aPropertyName withoutSuffix: 's').
 				stream << Character cr.
-				stream << Character tab << Character tab << Character tab << 'do:[ :' << propertyIteratorName << ' | ' << propertyIteratorName << ' acceptVisitor:self ]']
+				stream << Character tab << Character tab << Character tab << 'do:[ :' << propertyIteratorName << ' | ' << Character cr << propertyIteratorName << ' acceptVisitor:self ]']
 			ifFalse:[ stream << ' acceptVisitor:self.']).
 			stream << Character cr << Character tab << Character tab << $].
 		]].

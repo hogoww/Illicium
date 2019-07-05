@@ -23,6 +23,8 @@ ASTCDebugStructureVisitor >> visitASTCBlock:anASTCBlock [
 
 { #category : #check }
 ASTCDebugStructureVisitor >> visitASTCCompilationUnit:anASTCCompilationUnit [
+	self visitASTCNode:anASTCCompilationUnit.
+
 	anASTCCompilationUnit definitions do:[:each| self assert: each isASTCDefinition].
 	anASTCCompilationUnit declarations do:[:each| self assert: each isASTCDeclaration].
 
@@ -36,15 +38,6 @@ ASTCDebugStructureVisitor >> visitASTCDeclaration:anASTCDeclaration [
 	anASTCDeclaration id ifNotNil:[ self assert:anASTCDeclaration id isASTCIdentifier ].
 
 	super visitASTCDeclaration:anASTCDeclaration
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCDeclarationStatement:anASTCDeclarationStatement [
-	self visitASTCStatement:anASTCDeclarationStatement.
-
-	anASTCDeclarationStatement declaration ifNotNil:[ "self assert:anASTCDeclarationStatement declaration isASTCDeclaration "].
-
-	super visitASTCDeclarationStatement:anASTCDeclarationStatement
 ]
 
 { #category : #check }
@@ -174,6 +167,8 @@ ASTCDebugStructureVisitor >> visitASTCOperator:anASTCOperator [
 
 { #category : #check }
 ASTCDebugStructureVisitor >> visitASTCProject:anASTCProject [
+	self visitASTCNode:anASTCProject.
+
 	anASTCProject compilationUnits do:[:each| self assert: each isASTCCompilationUnit].
 
 	super visitASTCProject:anASTCProject
