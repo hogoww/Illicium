@@ -11,10 +11,12 @@ ASTCClassTranslator class >> translateClass: aClass [
 
 { #category : #'as yet unclassified' }
 ASTCClassTranslator >> translateClass: aClass [
-	| primitives inferer typeAnnotator translatedMethods translator |
+	| primitives inferer typeAnnotator translatedMethods translator cu |
 	(aClass traitComposition
 		includesTrait: ASTCVirtualMachineAPI)
-		ifFalse: [ self error: 'can only translate plugins for now' ].
+		ifFalse: [ self error: 'can only translate plugins for now.' ].
+
+	cu:=ASTCCompilationUnit new.
 	primitives := aClass methods
 		select: [ :aMethod | 
 			aMethod pragmas
@@ -32,8 +34,19 @@ ASTCClassTranslator >> translateClass: aClass [
 		].
 
 	translator := ASTCFromPharo new.
-	translatedMethods := primitives collect:[:aMethodAST|
-		 translator visitMethodAST: aMethodAST.
+	primitives do:[:aMethodAST| |res|
+		res:=translator visitMethodAST: aMethodAST.
+		cu definitions add: res.
+		cu declarations add: res declaration.
+		]. 
+	
+	aClass allInstVarNames do:[:ivName| |ivType|
+		ivType:=typeAnnotator getTypeOfInstanceVariable: ivName ofClass: aClass.
+		cu declarations	add: 
+			(ASTCVariableDeclaration new
+				id: (ASTCIdentifier new id: ivName ; yourself);
+				type: (ASTCType new type:ivType ; yourself);
+				yourself).
 		].
 	
 	self halt.
