@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-ASTCNodeTranslator >> translateNode: aGlobalNode withMainTranslator: aTranslator [
+ASTCNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
 	self subclassResponsibility
 ]
