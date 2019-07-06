@@ -209,14 +209,6 @@ ASTCDebugStructureVisitor >> visitASTCStructureDefinition:anASTCStructureDefinit
 ]
 
 { #category : #check }
-ASTCDebugStructureVisitor >> visitASTCType:anASTCType [
-	self visitASTCNode:anASTCType.
-
-
-	super visitASTCType:anASTCType
-]
-
-{ #category : #check }
 ASTCDebugStructureVisitor >> visitASTCVariableDeclaration:anASTCVariableDeclaration [
 	self visitASTCDeclaration:anASTCVariableDeclaration.
 

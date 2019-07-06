@@ -8,3 +8,12 @@ ASTCDebugStructureVisitor >> visitASTCDeclarationStatement:anASTCDeclarationStat
 
 	super visitASTCDeclarationStatement:anASTCDeclarationStatement
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCDebugStructureVisitor >> visitASTCType:anASTCType [
+	self visitASTCNode:anASTCType.
+
+	self assert: anASTCType type isClass.
+
+	super visitASTCType:anASTCType
+]
