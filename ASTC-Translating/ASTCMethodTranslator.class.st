@@ -45,9 +45,9 @@ ASTCMethodTranslator >> visitArrayNode: anArrayNode [
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitAssignementNode: anAssignementNode [
-	(translators at: #assignementNodeTranslator)
-		translateNode: anAssignementNode
+ASTCMethodTranslator >> visitAssignmentNode: anAssignmentNode [
+	(translators at: #assignmentNodeTranslator)
+		translateNode: anAssignmentNode
 		withMainTranslator: self
 ]
 
@@ -87,7 +87,7 @@ ASTCMethodTranslator >> visitLiteralArrayNode: aLiteralArrayNode [
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitLiteralValueNode: aLiteralValueNode [
+ASTCMethodTranslator >> visitLiteralVariableNode: aLiteralValueNode [
 	(translators at: #literalValueTranslator)
 		translateNode: aLiteralValueNode
 		withMainTranslator: self
