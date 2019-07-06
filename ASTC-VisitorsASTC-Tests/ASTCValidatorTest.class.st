@@ -10,44 +10,36 @@ Class {
 { #category : #tests }
 ASTCValidatorTest >> testVisitASTCReturnBad [
 	| astc |
-	astc:=	ASTCReturn new
-		expression:
-			ASTCReturn new
-		yourself.
-
-	astc debugASTCStructure
+	astc := ASTCReturn new expression: ASTCReturn new ; yourself.
+	self deny: astc isStructuralyValidAST
 ]
 
 { #category : #tests }
 ASTCValidatorTest >> testVisitASTCReturnGood [
 	| astc |
-	astc:=	ASTCReturn new
+	astc := ASTCReturn new
 		expression:
 			(ASTCLiteral new
-			value:1;
-			yourself);
+				value: 1;
+				yourself);
 		yourself.
-
-	astc debugASTCStructure.
+	astc debugASTCStructure
 ]
 
 { #category : #tests }
 ASTCValidatorTest >> testVisitASTCTypeBad [
 	| astc |
-
 	astc := ASTCType new
 		type: ASTCSmallInteger new;
 		yourself.
-	"astc debugASTCStructure."
-	self deny: astc isStructuralyValidAST.
+	self deny: astc isStructuralyValidAST
 ]
 
 { #category : #tests }
 ASTCValidatorTest >> testVisitASTCTypeGood [
 	| astc |
-	astc:=	ASTCType new
-		type:ASTCSmallInteger;
+	astc := ASTCType new
+		type: ASTCSmallInteger;
 		yourself.
-
-	astc debugASTCStructure.
+	astc debugASTCStructure
 ]

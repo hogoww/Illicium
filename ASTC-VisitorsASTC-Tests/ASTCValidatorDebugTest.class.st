@@ -33,59 +33,50 @@ ASTCValidatorDebugTest >> aRandomStatmentFactory [
 { #category : #test }
 ASTCValidatorDebugTest >> testVisitASTCExpressionStatementBad [
 	| astc |
-	astc:=	ASTCExpressionStatement new 
+	astc := ASTCExpressionStatement new
 		expression: self aRandomStatmentFactory;
 		yourself.
-	self should:[ astc debugASTCStructure ] raise: Error.
-
-
+	self should: [ astc debugASTCStructure ] raise: AssertionFailure
 ]
 
 { #category : #test }
 ASTCValidatorDebugTest >> testVisitASTCExpressionStatementGood [
 	| astc |
-	astc:=	ASTCExpressionStatement new 
+	astc := ASTCExpressionStatement new
 		expression: self aRandomExpressionFactory;
 		yourself.
-	"self shouldnt:[" astc debugASTCStructure "] raise: Error."
-
-
+	self shouldnt: [ astc debugASTCStructure ] raise: AssertionFailure
 ]
 
 { #category : #tests }
 ASTCValidatorDebugTest >> testVisitASTCReturnBad [
 	| astc |
-	astc:=	ASTCReturn new
-		expression:
-			ASTCReturn new
+	astc := ASTCReturn new
+		expression: ASTCReturn new;
 		yourself.
-
-	self should: [astc debugASTCStructure] raise: Error.
-
+	self should: [ astc debugASTCStructure ] raise: AssertionFailure
 ]
 
 { #category : #tests }
 ASTCValidatorDebugTest >> testVisitASTCReturnGood [
 	| astc |
-	astc:=	ASTCReturn new
+	astc := ASTCReturn new
 		expression:
 			(ASTCLiteral new
-			value:1;
-			yourself);
+				value: 1;
+				yourself);
 		yourself.
 
-	"self shouldnt:" astc debugASTCStructure . "raise: Error."
-
+	self shouldnt: [ astc debugASTCStructure ] raise: AssertionFailure
 ]
 
 { #category : #tests }
 ASTCValidatorDebugTest >> testVisitASTCTypeBad [
 	| astc |
-	astc:=	ASTCType new
-		type:ASTCSmallInteger new;
+	astc := ASTCType new
+		type: ASTCSmallInteger new;
 		yourself.
-
-	self should: [ astc debugASTCStructure ] raise: Error.
+	self should: [ astc debugASTCStructure ] raise: AssertionFailure
 ]
 
 { #category : #tests }
@@ -94,6 +85,5 @@ ASTCValidatorDebugTest >> testVisitASTCTypeGood [
 	astc := ASTCType new
 		type: ASTCSmallInteger;
 		yourself.
-		
-	"self shouldnt:" astc debugASTCStructure "raise error"
+	self shouldnt: [ astc debugASTCStructure ] raise: AssertionFailure
 ]
