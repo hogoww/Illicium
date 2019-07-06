@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCGlobalNodeTranslator,
-	#superclass : #Object,
-	#category : #'ASTC-Translation-Translator'
+	#superclass : #ASTCNodeTranslator,
+	#category : #'ASTC-Translating-Methods'
 }
 
 { #category : #'as yet unclassified' }
