@@ -2,32 +2,69 @@ Class {
 	#name : #ASTCMethodTranslator,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
-		'translators'
+		'translators',
+		'mainTranslator'
 	],
 	#category : #'ASTC-Translating-overviewers'
 }
 
 { #category : #initialization }
+ASTCMethodTranslator >> getNodeConcreteType: aNode [
+	| concreteType |
+	concreteType := aNode
+		propertyAt: ASTCTypeAnnotationAST property
+		ifPresent: [ :types | 
+			types size = 1
+				ifTrue: [ types anyOne ]
+				ifFalse: [ self error: 'The type inferencer had too many results' ]
+				]
+		ifAbsent: [ 
+			self error:
+					'The type inferencer couldn''t figure out the type of '	, aNode asString ].
+	^ concreteType
+]
+
+{ #category : #initialization }
+ASTCMethodTranslator >> getNodeTranslationType: aNode [
+	^ self getReplacementType: (self getNodeConcreteType: aNode)
+]
+
+{ #category : #initialization }
+ASTCMethodTranslator >> getReplacementType: aClass [
+	^ mainTranslator getReplacementType: aClass
+]
+
+{ #category : #initialization }
 ASTCMethodTranslator >> initialize [
-	translators := Dictionary new.
-	translators at: #methodNodeTranslator put: ASTCMethodNodeTranslator new.
-	translators at: #pragmaNodeTranslator put: ASTCPragmaNodeTranslator new.
-	translators at: #returnNodeTranslator put: ASTCReturnNodeTranslator new.
-	translators at: #sequenceNodeTranslator put: ASTCSequenceNodeTranslator new.
-	translators at: #arrayNodeTranslator put: ASTCArrayNodeTranslator new.
-	translators at: #assignementNodeTranslator put: ASTCAssignementNodeTranslator new.
-	translators at: #blockNodeTranslator put: ASTCBlockNodeTranslator new.
-	translators at: #cascadeNodeTranslator put: ASTCCascadeNodeTranslator new.
-	translators at: #literalValueNodeTranslator put: ASTCLiteralValueNodeTranslator new.
-	translators at: #literalArrayNodeTranslator put: ASTCLiteralArrayNodeTranslator new.
-	translators at: #messageNodeTranslator put: ASTCMessageNodeTranslator new.
-	translators at: #argumentNodeTranslator put: ASTCArgumentNodeTranslator new.
-	translators at: #globalNodeTranslator put: ASTCGlobalNodeTranslator new.
-	translators at: #instanceVariableNodeTranslator put: ASTCInstanceVariableNodeTranslator new.
-	translators at: #selfNodeTranslator put: ASTCSelfNodeTranslator new.
-	translators at: #superNodeTranslator put: ASTCSuperNodeTranslator new.
-	translators at: #temporaryNodeTranslator put: ASTCTemporaryNodeTranslator new.
-	translators at: #thisContextNodeTranslator put: ASTCThisContextNodeTranslator new.
+	translators := Dictionary new: 18;
+		at: #methodNodeTranslator put: ASTCMethodNodeTranslator new;
+		at: #pragmaNodeTranslator put: ASTCPragmaNodeTranslator new;
+		at: #returnNodeTranslator put: ASTCReturnNodeTranslator new;
+		at: #sequenceNodeTranslator put: ASTCSequenceNodeTranslator new;
+		at: #arrayNodeTranslator put: ASTCArrayNodeTranslator new;
+		at: #assignementNodeTranslator put: ASTCAssignementNodeTranslator new;
+		at: #blockNodeTranslator put: ASTCBlockNodeTranslator new;
+		at: #cascadeNodeTranslator put: ASTCCascadeNodeTranslator new;
+		at: #literalValueNodeTranslator put: ASTCLiteralValueNodeTranslator new;
+		at: #literalArrayNodeTranslator put: ASTCLiteralArrayNodeTranslator new;
+		at: #messageNodeTranslator put: ASTCMessageNodeTranslator new;
+		at: #argumentNodeTranslator put: ASTCArgumentNodeTranslator new;
+		at: #globalNodeTranslator put: ASTCGlobalNodeTranslator new;
+		at: #instanceVariableNodeTranslator put: ASTCInstanceVariableNodeTranslator new;
+		at: #selfNodeTranslator put: ASTCSelfNodeTranslator new;
+		at: #superNodeTranslator put: ASTCSuperNodeTranslator new;
+		at: #temporaryNodeTranslator put: ASTCTemporaryNodeTranslator new;
+		at: #thisContextNodeTranslator put: ASTCThisContextNodeTranslator new
+]
+
+{ #category : #initialization }
+ASTCMethodTranslator >> mainTranslator [
+	^ mainTranslator
+]
+
+{ #category : #initialization }
+ASTCMethodTranslator >> mainTranslator: aMainTranslator [
+	^ mainTranslator := aMainTranslator
 ]
 
 { #category : #visiting }
