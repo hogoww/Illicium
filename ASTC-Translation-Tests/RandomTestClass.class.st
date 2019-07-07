@@ -8,7 +8,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'ASTCVirtualMachineAPI',
 	#classTraits : 'ASTCVirtualMachineAPI classTrait',
-	#category : #'ASTC-Translation'
+	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }

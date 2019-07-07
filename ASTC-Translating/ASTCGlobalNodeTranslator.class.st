@@ -4,7 +4,7 @@ Class {
 	#category : #'ASTC-Translating-Methods'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #translate }
 ASTCGlobalNodeTranslator >> translateNode: aGlobalNode withMainTranslator: aTranslator [
 	(aGlobalNode methodNode methodClass
 		hasClassVarNamed: aGlobalNode name)

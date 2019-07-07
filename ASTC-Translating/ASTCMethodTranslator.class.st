@@ -36,7 +36,7 @@ ASTCMethodTranslator >> getReplacementType: aClass [
 
 { #category : #initialization }
 ASTCMethodTranslator >> initialize [
-	translators := Dictionary new: 18;
+	translators := Dictionary new: 19;
 		at: #methodNodeTranslator put: ASTCMethodNodeTranslator new;
 		at: #pragmaNodeTranslator put: ASTCPragmaNodeTranslator new;
 		at: #returnNodeTranslator put: ASTCReturnNodeTranslator new;
@@ -54,7 +54,8 @@ ASTCMethodTranslator >> initialize [
 		at: #selfNodeTranslator put: ASTCSelfNodeTranslator new;
 		at: #superNodeTranslator put: ASTCSuperNodeTranslator new;
 		at: #temporaryNodeTranslator put: ASTCTemporaryNodeTranslator new;
-		at: #thisContextNodeTranslator put: ASTCThisContextNodeTranslator new
+		at: #thisContextNodeTranslator put: ASTCThisContextNodeTranslator new;
+		at: #variableNodeTranslator put: ASTCVariableNodeTranslator
 ]
 
 { #category : #initialization }
@@ -190,5 +191,12 @@ ASTCMethodTranslator >> visitTemporaryNode: aTemporaryNode [
 ASTCMethodTranslator >> visitThisContextNode: aThisContextNode [
 	(translators at: #thisContextNodeTranslator)
 		translateNode: aThisContextNode
+		withMainTranslator: self
+]
+
+{ #category : #visiting }
+ASTCMethodTranslator >> visitVariableNode: aVariableNode [
+	(translators at: #variableNodeTranslator)
+		translateNode: aVariableNode
 		withMainTranslator: self
 ]

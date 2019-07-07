@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'interpreterProxy'
 	],
-	#category : #'ASTC-Translation'
+	#category : #'ASTC-Kernel'
 }
 
 { #category : #'as yet unclassified' }

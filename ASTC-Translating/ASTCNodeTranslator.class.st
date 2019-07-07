@@ -1,10 +1,12 @@
 Class {
 	#name : #ASTCNodeTranslator,
 	#superclass : #Object,
+	#traits : 'ASTCFormatTrait',
+	#classTraits : 'ASTCFormatTrait classTrait',
 	#category : #'ASTC-Translating-Methods'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #translate }
 ASTCNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
 	self subclassResponsibility
 ]

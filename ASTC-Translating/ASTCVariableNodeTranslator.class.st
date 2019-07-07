@@ -1,10 +1,10 @@
 Class {
 	#name : #ASTCVariableNodeTranslator,
-	#superclass : #Object,
-	#category : #'ASTC-Translation'
+	#superclass : #ASTCNodeTranslator,
+	#category : #'ASTC-Translating-Methods'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #translate }
 ASTCVariableNodeTranslator >> translateNode: aVariableNode withMainTranslator: aTranslator [
 	^ASTCIdentifier new
 			id: aVariableNode name;
