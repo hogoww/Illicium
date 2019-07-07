@@ -36,7 +36,7 @@ ASTCMethodTranslator >> getReplacementType: aClass [
 
 { #category : #initialization }
 ASTCMethodTranslator >> initialize [
-	translators := Dictionary new: 19;
+	translators := (Dictionary new: 19)
 		at: #methodNodeTranslator put: ASTCMethodNodeTranslator new;
 		at: #pragmaNodeTranslator put: ASTCPragmaNodeTranslator new;
 		at: #returnNodeTranslator put: ASTCReturnNodeTranslator new;
@@ -55,7 +55,8 @@ ASTCMethodTranslator >> initialize [
 		at: #superNodeTranslator put: ASTCSuperNodeTranslator new;
 		at: #temporaryNodeTranslator put: ASTCTemporaryNodeTranslator new;
 		at: #thisContextNodeTranslator put: ASTCThisContextNodeTranslator new;
-		at: #variableNodeTranslator put: ASTCVariableNodeTranslator
+		at: #variableNodeTranslator put: ASTCVariableNodeTranslator;
+		yourself.
 ]
 
 { #category : #initialization }
@@ -66,6 +67,23 @@ ASTCMethodTranslator >> mainTranslator [
 { #category : #initialization }
 ASTCMethodTranslator >> mainTranslator: aMainTranslator [
 	^ mainTranslator := aMainTranslator
+]
+
+{ #category : #visiting }
+ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
+	| annotatorVisitors |
+	annotatorVisitors := OrderedCollection new.
+	annotatorVisitors add: IsItTheFirstAssignmentChecker new.
+	aMethodAST acceptMultipleVisitors: annotatorVisitors.	"pre translation visits"
+	^ aMethodAST
+]
+
+{ #category : #visiting }
+ASTCMethodTranslator >> translateMethodAST: aMethodAST [
+	self preTranslationAnalysis: aMethodAST.
+	
+	^aMethodAST acceptVisitor: self.
+	
 ]
 
 { #category : #visiting }

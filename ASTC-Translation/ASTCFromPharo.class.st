@@ -108,18 +108,14 @@ ASTCFromPharo >> visitArgumentNode: anArgumentNode [
 		id: anArgumentNode name;
 		yourself.
 	^ anArgumentNode parent isMethod
-		ifTrue: [ 
-			ASTCVariableDeclaration new
+		ifTrue: [ ASTCVariableDeclaration new
 				id: argIdentifier;
 				type:
 					(ASTCType new
 						type: (self visitType: anArgumentNode);
 						yourself);
-				yourself.
-			]
-		ifFalse: [ 
-				argIdentifier.
-			]
+				yourself ]
+		ifFalse: [ argIdentifier ]
 ]
 
 { #category : #visiting }

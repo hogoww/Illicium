@@ -24,20 +24,20 @@ ASTCClassTranslator >> translateClass: aClass [
 		thenCollect:[ :aMethod | aMethod ast copy].
 
 	inferer := PhineasInferer new.
-	inferer inferAST: (aClass >> #initializePlugin) ast copy.
+	inferer inferAST: (aClass >> #initializePlugin) ast "copy".
 	primitives do:[:aMethodAST|
 		inferer inferAST: aMethodAST ].
 
-	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ;yourself.
+	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ; yourself.
 	primitives do:[:aMethodAST|
 		aMethodAST acceptVisitor: typeAnnotator
 		].
 
-	translator := ASTCFromPharo new.
+	translator := ASTCMethodTranslator new.
 	primitives do:[:aMethodAST| |res|
-		res:=translator visitMethodAST: aMethodAST.
+		res:=translator translateMethodAST: aMethodAST.
 		cu definitions add: res.
-		cu declarations add: res declaration.
+		cu declarations add: res declarations.
 		]. 
 
 	self flag:#horiffic."anyone here. Should use the mainTranslator"
