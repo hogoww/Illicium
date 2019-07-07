@@ -1,6 +1,6 @@
 Trait {
 	#name : #ASTCFormatTrait,
-	#category : #'ASTC-Translation'
+	#category : #'ASTC-Translating'
 }
 
 { #category : #formatting }

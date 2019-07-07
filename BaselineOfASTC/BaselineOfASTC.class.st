@@ -14,6 +14,7 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-Builder';
 				package: 'ASTC-Gen';
 				package: 'ASTC-Gen-Extensions' with:[ spec requires:#('ASTC-Gen')];
+				package: 'ASTC-Translating' with:[spec requires:#('ASTC-Gen')];
 				package: 'ASTC-Translation' with:[ spec requires:#('ASTC-Gen')];
 				package: 'ASTC-Kernel' with:[ spec requires:#('ASTC-Gen' 'ASTC-Translation')];
 				package: 'ASTC-Translation-Tests' with:[spec requires:#('ASTC-Translation')];
