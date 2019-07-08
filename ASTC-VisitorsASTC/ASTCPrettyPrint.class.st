@@ -120,17 +120,19 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCCompilationUnit: anASTCCompilationUnit [
+
 	self << '/* Declarations */' ; cr.
 	anASTCCompilationUnit declarations
 		ifNotNil:[ :declarations | declarations
-			do:[ :aDeclaration | aDeclaration acceptVisitor:self ]
+			do:[ :aDeclaration | aDeclaration acceptVisitor:self.
+					self << ';' ; cr ; cr ]
 		].
-	self << '/* Definitions */' ; cr.
+	self cr ; << '/* Definitions */' ; cr.
 	anASTCCompilationUnit definitions
 		ifNotNil:[ :definitions | definitions
-			do:[ :aDefinition | aDefinition acceptVisitor:self ]
-		]
-
+			do:[ :aDefinition | aDefinition acceptVisitor:self.
+				self cr ; cr ]
+		].
 ]
 
 { #category : #accessing }
