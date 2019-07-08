@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'classTranslator',
-		'methodTranslator',
 		'replacementClasses'
 	],
 	#category : #'ASTC-Translating-overviewers'
@@ -11,11 +10,14 @@ Class {
 
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
-	^ replacementClasses at: aClass asSymbol
+	^ replacementClasses at: aClass ifAbsent:[ ^ASTCVoid  ]."unknown type for now"
 ]
 
 { #category : #initialization }
 ASTCTranslator >> initialize [
+	classTranslator := ASTCClassTranslator new
+		mainTranslator: self;
+		yourself.
 	replacementClasses := Dictionary new
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;

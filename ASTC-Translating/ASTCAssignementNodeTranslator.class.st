@@ -1,9 +1,6 @@
 Class {
 	#name : #ASTCAssignementNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#instVars : [
-		'translators'
-	],
 	#category : #'ASTC-Translating-Methods'
 }
 
@@ -22,9 +19,9 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMainTransla
 									(ASTCType new
 										type: (aTranslator getNodeTranslationType: anAssignmentNode variable);
 										yourself);
-								id: (anAssignmentNode variable acceptVisitor: self);
+								id: (anAssignmentNode variable acceptVisitor: aTranslator);
 								yourself);
-						init: (anAssignmentNode value acceptVisitor: self);
+						init: (anAssignmentNode value acceptVisitor: aTranslator);
 						yourself);
 				yourself ]
 		ifFalse: [ ASTCExpressionStatement new
@@ -33,8 +30,8 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMainTransla
 						symbol: '=';
 						operands:
 							(ASTCContainer new
-								add: (anAssignmentNode variable acceptVisitor: self);
-								add: (anAssignmentNode value acceptVisitor: self);
+								add: (anAssignmentNode variable acceptVisitor: aTranslator);
+								add: (anAssignmentNode value acceptVisitor: aTranslator);
 								yourself);
 						yourself);
 				yourself ]

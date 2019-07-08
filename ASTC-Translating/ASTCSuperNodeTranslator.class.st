@@ -1,8 +1,10 @@
 Class {
 	#name : #ASTCSuperNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#instVars : [
-		'translators'
-	],
 	#category : #'ASTC-Translating-Methods'
 }
+
+{ #category : #translate }
+ASTCSuperNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
+	self error: 'super is not supported'
+]
