@@ -127,6 +127,7 @@ ASTCPrettyPrint >> visitASTCCompilationUnit: anASTCCompilationUnit [
 			do:[ :aDeclaration | aDeclaration acceptVisitor:self.
 					self << ';' ; cr ; cr ]
 		].
+	
 	self cr ; << '/* Definitions */' ; cr.
 	anASTCCompilationUnit definitions
 		ifNotNil:[ :definitions | definitions

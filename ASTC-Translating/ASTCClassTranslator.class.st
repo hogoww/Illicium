@@ -13,6 +13,15 @@ ASTCClassTranslator class >> translateClass: aClass [
 	^ self new translateClass: aClass
 ]
 
+{ #category : #'as yet unclassified' }
+ASTCClassTranslator >> getPrimitiveTranslates: aClass. [
+	^aClass methods
+		select: [ :aMethod | 
+			aMethod pragmas
+				anySatisfy: [ :aPragma | aPragma selector = ASTCVirtualMachineAPI primitiveName ] ]
+		thenCollect:[ :aMethod | aMethod ast copy].
+]
+
 { #category : #accessing }
 ASTCClassTranslator >> getReplacementType: aClass [
 	^ mainTranslator getReplacementType: aClass
@@ -46,32 +55,33 @@ ASTCClassTranslator >> methodTranslator: aMethodTranslator [
 ]
 
 { #category : #'as yet unclassified' }
-ASTCClassTranslator >> translateClass: aClass [ 
-	| primitives inferer typeAnnotator cu printer |
+ASTCClassTranslator >> preTranslationCheck: aClass [
 	(aClass traitComposition
 		includesTrait: ASTCVirtualMachineAPI)
 		ifFalse: [ self error: 'can only translate plugins for now.' ].
 
+]
 
-	primitives := aClass methods
-		select: [ :aMethod | 
-			aMethod pragmas
-				anySatisfy: [ :aPragma | aPragma selector = ASTCVirtualMachineAPI primitiveName ] ]
-		thenCollect:[ :aMethod | aMethod ast copy].
+{ #category : #'as yet unclassified' }
+ASTCClassTranslator >> translateClass: aClass [ 
+	| inferer typeAnnotator cu printer primitivesMethods |
+
+	self preTranslationCheck: aClass.
+	primitivesMethods := self getPrimitiveTranslates: aClass.
 
 	inferer := PhineasInferer new.
 	inferer inferAST: (aClass >> #initializePlugin) ast "copy".
-	primitives do:[:aMethodAST|
+	primitivesMethods do:[:aMethodAST|
 		inferer inferAST: aMethodAST ].
 
 	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ; yourself.
-	primitives do:[:aMethodAST|
+	primitivesMethods do:[:aMethodAST|
 		aMethodAST acceptVisitor: typeAnnotator
 		].
 	
 
 	cu:=ASTCCompilationUnit new.
-	primitives do:[:aMethodAST| |res|
+	primitivesMethods do:[:aMethodAST| |res|
 		res:=methodTranslator translateMethodAST: aMethodAST.
 		cu definitions add: res.
 		cu declarations add: res declaration.
@@ -91,9 +101,9 @@ ASTCClassTranslator >> translateClass: aClass [
 	cu debugASTCStructure.
 
 	printer := ASTCFilePrinter new
-		fileName: 'aFile' ;
+		fileName: aClass asString ;
 		compilationUnit: cu ;
-		isPrimitive: true;
+		isPrimitive: true ;
 		yourself.
 
 	printer printInFile.

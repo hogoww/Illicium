@@ -29,17 +29,18 @@ BaselineOfASTC >> baseline: spec [
 ]
 
 { #category : #accessing }
-BaselineOfASTC >> lastPlayground [
-ASTCGenerator generate.	
+BaselineOfASTC >> lastPlayground [ 
+
+ASTCGenerator generate.
 
 ASTCProgramTranslator new translateStartingFrom: #aMain from: RandomTestClass.
 
+ASTCClassTranslator new mainTranslator: ASTCTranslator new; translateClass: RandomTestClass.
+	
 
-
-PlainCodeGeneration aMethodThatGenerateCode:7.
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.
-(RandomTestClass >> #initialize)ast 
+
 ]
 
 { #category : #accessing }
