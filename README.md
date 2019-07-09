@@ -26,3 +26,10 @@ ASTC-VisitorRB are visitors applied on the Pharo AST before the translation, suc
 ASTC-VisitorASTC are visitor applied on the result, such as the pretty printing to C code.
 
 Phineas is the type inferencer currently used. It's an external dependency which will be installed by the baseline.
+
+
+/!\ Currently we don't get C compilation errors on the Pharo side.
+We use GCC.
+The name of the iceberg project is used in the compilation command line, you can change it in :
+ASTC-Translation : ASTCFilePrinter >> CompileExternalPlugin
+Didn't find a solution to that problem yet.
