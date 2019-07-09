@@ -9,9 +9,9 @@ ASTCBlockNodeTranslator >> translateNode: aBlockNode withMainTranslator: aTransl
 	| res container |
 	res := ASTCBlock new.
 	container := ASTCContainer new.
-	aBlockNode statements do: [ :each | | astCStatement |
-		astCStatement := (each acceptVisitor: aTranslator) asASTCStatement.
-		container add: astCStatement ].
+	aBlockNode statements
+		collect: [ :each | (each acceptVisitor: aTranslator) asASTCStatement ]
+		into: container.
 	res statements: container.
 	^ res
 ]
