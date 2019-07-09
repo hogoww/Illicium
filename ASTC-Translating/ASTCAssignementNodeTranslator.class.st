@@ -7,7 +7,7 @@ Class {
 { #category : #translate }
 ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMainTranslator: aTranslator [
 	^ (anAssignmentNode
-		propertyAt: IsItTheFirstAssignmentChecker property)
+		propertyAt: ASTCShouldItBeDeclared property)
 		ifTrue: [ "type checking"
 			"creation of the return thingy."
 			ASTCDeclarationStatement new

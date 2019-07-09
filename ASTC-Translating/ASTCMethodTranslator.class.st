@@ -74,7 +74,7 @@ ASTCMethodTranslator >> initialize [
 ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
 	| annotatorVisitors |
 	annotatorVisitors := OrderedCollection new.
-	annotatorVisitors add: IsItTheFirstAssignmentChecker new.
+	annotatorVisitors add: ASTCShouldItBeDeclared new.
 	aMethodAST acceptMultipleVisitors: annotatorVisitors.	"pre translation visits"
 	^ aMethodAST
 ]
