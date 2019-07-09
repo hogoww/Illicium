@@ -1,5 +1,8 @@
 # Illicium
 
+This projects aims to translate Pharo to C, to develop the Virtual Machine.  
+
+
 To build the C-AST you need to use a Moose image with the FamixMetamodelGenerator.
 Those dependencies are only for one package : 'ASTC-Builder'.
 You don't need them to work on the rest of the project
