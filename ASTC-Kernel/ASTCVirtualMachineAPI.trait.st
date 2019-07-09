@@ -29,5 +29,5 @@ ASTCVirtualMachineAPI >> initializePlugin [
 { #category : #initialization }
 ASTCVirtualMachineAPI >> setInterpreter: anInterpreterProxy [
 	interpreterProxy := anInterpreterProxy.
-	^self
+	^0
 ]

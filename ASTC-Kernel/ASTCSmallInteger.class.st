@@ -51,8 +51,8 @@ ASTCSmallInteger >> = anotherSmallInteger [
 	"Act as translator only if it's the translator visitor that calls it."
 	"That allow assert equal to be functionnal."
 
-	visitor class = ASTCFromPharo ifTrue:[
-		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
+	(visitor isKindOf: ASTCMethodTranslator) ifTrue:[
+ "ASTCMethodTranslator"		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
 		].
 	^self value = anotherSmallInteger value.
 ]

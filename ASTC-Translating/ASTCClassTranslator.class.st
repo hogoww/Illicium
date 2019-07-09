@@ -74,7 +74,7 @@ ASTCClassTranslator >> translateClass: aClass [
 	primitiveMethods do:[:aMethodAST|
 		inferer inferAST: aMethodAST ].
 
-	methodsToTranslate := LinkedList new
+	methodsToTranslate := Set new
 		addAll: primitiveMethods ;
 		yourself.
 	
