@@ -18,6 +18,7 @@ ASTCFilePrinter >> CompileExternalPlugin [
 	<< (virtualMachine for32bit: [ ' -m32'] for64bit: [''])]). 
  	res = 0
 	ifFalse:[self error:'plugin didn''t compile (or the comand line sucks)'].
+	"If that fails, you probably need to change the name of the Iceberg repository in the command line"
 ]
 
 { #category : #accessing }

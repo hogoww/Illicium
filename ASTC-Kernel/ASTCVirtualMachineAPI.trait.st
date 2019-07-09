@@ -7,16 +7,13 @@ Trait {
 }
 
 { #category : #'as yet unclassified' }
-ASTCVirtualMachineAPI classSide >> primitiveName [
-	^#primitiveToBe
+ASTCVirtualMachineAPI classSide >> doNotGeneratePragma [
+	^ #doNotGenerate
 ]
 
-{ #category : #initialization }
-ASTCVirtualMachineAPI >> initialize [
-	<doNotGenerate>
-	"Won't work until we can describe state, since the interpreterProxy has to be global"
-	self setInterpreter: ASTCInterpreterProxy new.
-	^self
+{ #category : #'as yet unclassified' }
+ASTCVirtualMachineAPI classSide >> primitiveName [
+	^#primitiveToBe
 ]
 
 { #category : #initialization }
@@ -31,5 +28,6 @@ ASTCVirtualMachineAPI >> initializePlugin [
 
 { #category : #initialization }
 ASTCVirtualMachineAPI >> setInterpreter: anInterpreterProxy [
-	interpreterProxy := anInterpreterProxy
+	interpreterProxy := anInterpreterProxy.
+	^self
 ]

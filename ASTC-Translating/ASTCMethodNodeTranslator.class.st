@@ -19,7 +19,7 @@ ASTCMethodNodeTranslator >> translateNode: aMethodNode withMainTranslator: aTran
 						yourself);
 				parameters:
 					(ASTCContainer new
-						visitArgs: aMethodNode arguments with: self;
+						visitArgs: aMethodNode arguments with: aTranslator;
 						yourself);
 				yourself);
 		body: (aMethodNode body acceptVisitor: aTranslator);

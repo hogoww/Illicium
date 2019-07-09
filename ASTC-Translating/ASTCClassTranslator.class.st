@@ -13,7 +13,7 @@ ASTCClassTranslator class >> translateClass: aClass [
 	^ self new translateClass: aClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #translation }
 ASTCClassTranslator >> getPrimitiveTranslates: aClass. [
 	^aClass methods
 		select: [ :aMethod | 
@@ -54,34 +54,44 @@ ASTCClassTranslator >> methodTranslator: aMethodTranslator [
 	^ methodTranslator := aMethodTranslator
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #translation }
 ASTCClassTranslator >> preTranslationCheck: aClass [
 	(aClass traitComposition
 		includesTrait: ASTCVirtualMachineAPI)
-		ifFalse: [ self error: 'can only translate plugins for now.' ].
+		ifFalse: [ self error: 'can only translate plugins for now. They need to use the ASTCVirtualMachineAPI trait.' ].
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #translation }
 ASTCClassTranslator >> translateClass: aClass [ 
-	| inferer typeAnnotator cu printer primitivesMethods |
+	| inferer typeAnnotator cu printer primitiveMethods methodsToTranslate |
 
 	self preTranslationCheck: aClass.
-	primitivesMethods := self getPrimitiveTranslates: aClass.
+	primitiveMethods := self getPrimitiveTranslates: aClass.
 
 	inferer := PhineasInferer new.
 	inferer inferAST: (aClass >> #initializePlugin) ast "copy".
-	primitivesMethods do:[:aMethodAST|
+	primitiveMethods do:[:aMethodAST|
 		inferer inferAST: aMethodAST ].
 
+	methodsToTranslate := LinkedList new
+		addAll: primitiveMethods ;
+		yourself.
+	
+	inferer types methodTypes do:[:aMethodType|
+		((aClass methodDict anySatisfy: [:aMethod| aMethod selector = aMethodType node selector ]) 
+			and:[ aMethodType node pragmas noneSatisfy: [:aPragma| aPragma selector = ASTCVirtualMachineAPI doNotGeneratePragma ]])
+			ifTrue:[ methodsToTranslate add: aMethodType node copy ].
+		].
+
 	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ; yourself.
-	primitivesMethods do:[:aMethodAST|
+	methodsToTranslate do:[:aMethodAST|
 		aMethodAST acceptVisitor: typeAnnotator
 		].
 	
-
+	
 	cu:=ASTCCompilationUnit new.
-	primitivesMethods do:[:aMethodAST| |res|
+	methodsToTranslate do:[:aMethodAST| |res|
 		res:=methodTranslator translateMethodAST: aMethodAST.
 		cu definitions add: res.
 		cu declarations add: res declaration.
