@@ -26,7 +26,7 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 		ifPresent: [ :types | 
 			types size = 1
 				ifTrue: [ types anyOne ]
-				ifFalse: [ self error: 'The type inferencer had too many results' ]
+				ifFalse: [ self error: 'The type inferencer had no or too many results' ]
 				]
 		ifAbsent: [ 
 			self error:

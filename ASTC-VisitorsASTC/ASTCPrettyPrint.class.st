@@ -95,14 +95,14 @@ ASTCPrettyPrint >> unindent [
 	indentation := indentation allButLast: (self class defaultIndentation size).
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTBinaryOperator: anOperator [
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << anOperator symbol << ' '.
 	(anOperator operands at: 2) acceptVisitor: self
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
@@ -118,14 +118,14 @@ ASTCPrettyPrint >> visitASTCBlock: aBlock [
 
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCCompilationUnit: anASTCCompilationUnit [
 
 	self << '/* Declarations */' ; cr.
 	anASTCCompilationUnit declarations
 		ifNotNil:[ :declarations | declarations
 			do:[ :aDeclaration | aDeclaration acceptVisitor:self.
-					self << ';' ; cr ; cr ]
+					self << ';' ; cr ]
 		].
 	
 	self cr ; << '/* Definitions */' ; cr.
@@ -136,13 +136,13 @@ ASTCPrettyPrint >> visitASTCCompilationUnit: anASTCCompilationUnit [
 		].
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCDeclarationStatement: aDeclaration [
 	aDeclaration declaration acceptVisitor: self.
 	self << $;
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCDoWhile: aDoWhile [
 	self << 'do' << Character cr.
 	aDoWhile body acceptVisitor: self.
@@ -152,13 +152,13 @@ ASTCPrettyPrint >> visitASTCDoWhile: aDoWhile [
 
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	self << $;. 
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCFor: aFor [
 	self << 'for('.
 	aFor iteratorDefinition ifNotNil:[:anIteratorDecl| anIteratorDecl acceptVisitor:self].
@@ -170,7 +170,7 @@ ASTCPrettyPrint >> visitASTCFor: aFor [
 	aFor body acceptVisitor:self.
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCFunctionCall: aFunctionCall [
 	aFunctionCall id acceptVisitor: self.
 	self << '('.
@@ -181,7 +181,7 @@ ASTCPrettyPrint >> visitASTCFunctionCall: aFunctionCall [
 	
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCFunctionDeclaration: aFunctionDeclaration [
 	aFunctionDeclaration type acceptVisitor: self.
 	self << Character space.
@@ -191,19 +191,19 @@ ASTCPrettyPrint >> visitASTCFunctionDeclaration: aFunctionDeclaration [
 	self << $).
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCFunctionDefinition: aFunctionDefinition [
 	aFunctionDefinition declaration acceptVisitor:self.
 	aFunctionDefinition body acceptVisitor: self.
 	
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCIdentifier: anIdentifier [
 	self << anIdentifier id
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCIf: anIf [
 	self << 'if ('.
 	anIf condition acceptVisitor: self.
@@ -215,12 +215,12 @@ ASTCPrettyPrint >> visitASTCIf: anIf [
 		].
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCLiteral: aLiteral [
 	self << aLiteral value value asString
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCOperator: anOperator [
 	| nbOperands |
 	nbOperands := anOperator operands size.
@@ -232,26 +232,26 @@ ASTCPrettyPrint >> visitASTCOperator: anOperator [
 		ifTrue: [ ^ self visitASTTernaryOperator: anOperator ]
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCReturn: aReturn [
 	self << 'return '.
 	aReturn expression ifNotNil:[:anExpression| anExpression acceptVisitor: self].
 	self << $;.
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCType: aType [
 	self << aType type asCType.
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCVariableDeclaration: aVariableDeclaration [
 	aVariableDeclaration type acceptVisitor:self.
 	self << Character space.
 	aVariableDeclaration id acceptVisitor:self.
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCVariableDefinition: aVariableDefinition [
 	aVariableDefinition declaration acceptVisitor: self.
 	aVariableDefinition init ifNotNil:[:init| 
@@ -261,7 +261,7 @@ ASTCPrettyPrint >> visitASTCVariableDefinition: aVariableDefinition [
 
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTCWhile: aWhile [
 	self << 'while('.
 	aWhile condition ifNotNil:[:aCondition| aCondition acceptVisitor: self].
@@ -269,7 +269,7 @@ ASTCPrettyPrint >> visitASTCWhile: aWhile [
 	aWhile body acceptVisitor: self.
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTTernaryOperator: anOperator [
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << '?' << ' '.
@@ -278,7 +278,7 @@ ASTCPrettyPrint >> visitASTTernaryOperator: anOperator [
 	(anOperator operands at: 3) acceptVisitor: self
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitASTUnaryOperator: anOperator [
 	self << anOperator symbol.
 	(anOperator operands at: 1) acceptVisitor: self
