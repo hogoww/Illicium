@@ -78,7 +78,7 @@ ASTCDebugStructureVisitor >> visitASTCExpressionStatement:anASTCExpressionStatem
 ASTCDebugStructureVisitor >> visitASTCFor:anASTCFor [
 	self visitASTCLoop:anASTCFor.
 
-	anASTCFor iteratorDecl ifNotNil:[ self assert:anASTCFor iteratorDecl isASTCVariableDeclaration ].
+	anASTCFor iteratorDeclaration ifNotNil:[ self assert:anASTCFor iteratorDeclaration isASTCVariableDeclaration ].
 	anASTCFor iteratorModification ifNotNil:[ self assert:anASTCFor iteratorModification isASTCExpression ].
 
 	super visitASTCFor:anASTCFor

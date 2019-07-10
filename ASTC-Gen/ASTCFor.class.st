@@ -2,7 +2,7 @@ Class {
 	#name : #ASTCFor,
 	#superclass : #ASTCLoop,
 	#instVars : [
-		'iteratorDecl',
+		'iteratorDeclaration',
 		'iteratorModification'
 	],
 	#category : #'ASTC-Gen-Node'
@@ -13,7 +13,7 @@ ASTCFor >> = anotherNode [
 	(anotherNode class = self class)
 	ifFalse: [ ^ false ].
 
-	self iteratorDecl = anotherNode iteratorDecl
+	self iteratorDeclaration = anotherNode iteratorDeclaration
 		ifFalse: [ ^ false ].
 
 	self iteratorModification = anotherNode iteratorModification
@@ -36,7 +36,7 @@ ASTCFor >> acceptVisitor: aVisitor [
 ASTCFor >> hash [
 	| hash |
 	hash := self identityHash.
-	hash := hash + self iteratorDecl hash.
+	hash := hash + self iteratorDeclaration hash.
 	hash := hash + self iteratorModification hash.
 	^hash
 ]
@@ -47,13 +47,13 @@ ASTCFor >> isASTCFor [
 ]
 
 { #category : #accessors }
-ASTCFor >> iteratorDecl [
-	^iteratorDecl
+ASTCFor >> iteratorDeclaration [
+	^iteratorDeclaration
 ]
 
 { #category : #accessors }
-ASTCFor >> iteratorDecl: anObject [
-	iteratorDecl:=anObject.
+ASTCFor >> iteratorDeclaration: anObject [
+	iteratorDeclaration:=anObject.
 	anObject parent:self.
 	^anObject.
 ]

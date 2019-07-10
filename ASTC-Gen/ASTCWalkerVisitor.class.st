@@ -189,7 +189,8 @@ ASTCWalkerVisitor >> walkASTCBlock: anASTCBlock [
 ASTCWalkerVisitor >> walkASTCBlockStatements:anASTCBlock [
 	anASTCBlock statements
 		ifNotNil:[ :statements | statements
-			do:[ :aStatement | aStatement acceptVisitor:self ]
+			do:[ :aStatement | 
+aStatement acceptVisitor:self ]
 		]
 ]
 
@@ -205,7 +206,8 @@ ASTCWalkerVisitor >> walkASTCCompilationUnit: anASTCCompilationUnit [
 ASTCWalkerVisitor >> walkASTCCompilationUnitDeclarations:anASTCCompilationUnit [
 	anASTCCompilationUnit declarations
 		ifNotNil:[ :declarations | declarations
-			do:[ :aDeclaration | aDeclaration acceptVisitor:self ]
+			do:[ :aDeclaration | 
+aDeclaration acceptVisitor:self ]
 		]
 ]
 
@@ -213,7 +215,8 @@ ASTCWalkerVisitor >> walkASTCCompilationUnitDeclarations:anASTCCompilationUnit [
 ASTCWalkerVisitor >> walkASTCCompilationUnitDefinitions:anASTCCompilationUnit [
 	anASTCCompilationUnit definitions
 		ifNotNil:[ :definitions | definitions
-			do:[ :aDefinition | aDefinition acceptVisitor:self ]
+			do:[ :aDefinition | 
+aDefinition acceptVisitor:self ]
 		]
 ]
 
@@ -288,15 +291,15 @@ ASTCWalkerVisitor >> walkASTCExpressionStatementExpression:anASTCExpressionState
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCFor: anASTCFor [
 	self walkASTCLoop: anASTCFor.
-	self walkASTCForIteratorDecl: anASTCFor.
+	self walkASTCForIteratorDeclaration: anASTCFor.
 	self walkASTCForIteratorModification: anASTCFor.
 
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCForIteratorDecl:anASTCFor [
-	anASTCFor iteratorDecl
-		ifNotNil:[ :iteratorDecl | iteratorDecl acceptVisitor:self.
+ASTCWalkerVisitor >> walkASTCForIteratorDeclaration:anASTCFor [
+	anASTCFor iteratorDeclaration
+		ifNotNil:[ :iteratorDeclaration | iteratorDeclaration acceptVisitor:self.
 		]
 ]
 
@@ -319,7 +322,8 @@ ASTCWalkerVisitor >> walkASTCFunctionCall: anASTCFunctionCall [
 ASTCWalkerVisitor >> walkASTCFunctionCallArguments:anASTCFunctionCall [
 	anASTCFunctionCall arguments
 		ifNotNil:[ :arguments | arguments
-			do:[ :anArgument | anArgument acceptVisitor:self ]
+			do:[ :anArgument | 
+anArgument acceptVisitor:self ]
 		]
 ]
 
@@ -342,7 +346,8 @@ ASTCWalkerVisitor >> walkASTCFunctionDeclaration: anASTCFunctionDeclaration [
 ASTCWalkerVisitor >> walkASTCFunctionDeclarationParameters:anASTCFunctionDeclaration [
 	anASTCFunctionDeclaration parameters
 		ifNotNil:[ :parameters | parameters
-			do:[ :aParameter | aParameter acceptVisitor:self ]
+			do:[ :aParameter | 
+aParameter acceptVisitor:self ]
 		]
 ]
 
@@ -460,7 +465,8 @@ ASTCWalkerVisitor >> walkASTCOperator: anASTCOperator [
 ASTCWalkerVisitor >> walkASTCOperatorOperands:anASTCOperator [
 	anASTCOperator operands
 		ifNotNil:[ :operands | operands
-			do:[ :anOperand | anOperand acceptVisitor:self ]
+			do:[ :anOperand | 
+anOperand acceptVisitor:self ]
 		]
 ]
 
@@ -480,7 +486,8 @@ ASTCWalkerVisitor >> walkASTCProject: anASTCProject [
 ASTCWalkerVisitor >> walkASTCProjectCompilationUnits:anASTCProject [
 	anASTCProject compilationUnits
 		ifNotNil:[ :compilationUnits | compilationUnits
-			do:[ :aCompilationUnit | aCompilationUnit acceptVisitor:self ]
+			do:[ :aCompilationUnit | 
+aCompilationUnit acceptVisitor:self ]
 		]
 ]
 
@@ -521,7 +528,8 @@ ASTCWalkerVisitor >> walkASTCStructureDefinition: anASTCStructureDefinition [
 ASTCWalkerVisitor >> walkASTCStructureDefinitionMembers:anASTCStructureDefinition [
 	anASTCStructureDefinition members
 		ifNotNil:[ :members | members
-			do:[ :aMember | aMember acceptVisitor:self ]
+			do:[ :aMember | 
+aMember acceptVisitor:self ]
 		]
 ]
 

@@ -104,7 +104,7 @@ ASTCSmallInteger >> to: stop do: aBlock [
 		ifTrue: [ self error: 'Wrong number of arguments.' ]
 		ifFalse: [ iterName := (aBlock argument at: 1) accept: visitor ].
 	^ ASTCFor new
-		iteratorDecl:
+		iteratorDeclaration:
 			(ASTCVariableDefinition new
 				declaration:
 					(ASTCVariableDeclaration new
