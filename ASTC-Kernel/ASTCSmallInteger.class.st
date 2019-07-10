@@ -103,6 +103,10 @@ ASTCSmallInteger >> to: stop do: aBlock [
 	aBlock arguments size ~= 1
 		ifTrue: [ self error: 'Wrong number of arguments.' ]
 		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: visitor ].
+	"type checking"
+	(((visitor getNodeTranslationType: stop) = ASTCSmallInteger)
+		and:[ aBlock isBlock ])
+    ifFalse:[ self error: 'An arguments has the wrong type' ].
 	^ ASTCFor new
 		iteratorDefinition:
 			(ASTCVariableDefinition new
