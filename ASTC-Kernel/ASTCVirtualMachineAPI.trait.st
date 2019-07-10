@@ -19,8 +19,7 @@ ASTCVirtualMachineAPI classSide >> primitiveName [
 { #category : #initialization }
 ASTCVirtualMachineAPI >> initializePlugin [
 	<doNotGenerate>
-	"Won't work until we can describe state, since the interpreterProxy has to be global"
-	"moduleName"
+ 	"moduleName"
 	self setInterpreter: ASTCInterpreterProxy new.
 	"initplugin or something"
 	^self

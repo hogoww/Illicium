@@ -248,7 +248,7 @@ ASTCBuilder >> defineRelations [
 	
 	(loop property:#condition) <>- (expression property:#condition).
 	(loop property:#body) <>- (statement property:#body).
-		(for property:#iteratorDecl) <>- (variableDeclaration property:#declIterator).
+		(for property:#iteratorDeclaration) <>- (variableDeclaration property:#declIterator).
 		(for property:#iteratorModification) <>- (expression property:#modifIterator).
 		
 		
