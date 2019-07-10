@@ -99,32 +99,46 @@ ASTCSmallInteger >> to:stop do2: aBlock [
 
 { #category : #translation }
 ASTCSmallInteger >> to: stop do: aBlock [
-	|iterName|
-	aBlock argument size ~=1 
-	ifTrue:[self error: 'Wrong number of arguments' ]
-	ifFalse:[iterName:=(aBlock argument at:1) accept:visitor].
-	^Block new 
-		add:
-			(VariableDeclaration new
-					type: self class asCType;
-					id: (Identifier new id: iterName ; yourself);
-					init: (Literal new value:'1' ; yourself);
-					yourself);
-		add: 
-			(While new
-				condition: 
-					(LesserEqualOperator new
-						addOperands:(self value accept:visitor);
-						addOperands: (stop accept:visitor);
-						yourself);
-				body: 
-					(Block new
-						addAll:(aBlock accept: visitor);
-						add:
-							(PreIncrementOperator new
-							   operand: (Identifier new id: iterName ; yourself);
+	| iterName |
+	aBlock argument size ~= 1
+		ifTrue: [ self error: 'Wrong number of arguments.' ]
+		ifFalse: [ iterName := (aBlock argument at: 1) accept: visitor ].
+	^ ASTCFor new
+		iteratorDecl:
+			(ASTCVariableDefinition new
+				declaration:
+					(ASTCVariableDeclaration new
+						id:
+							(ASTCIdentifier new
+								id: iterName;
+								yourself);
+						type:
+							(ASTCType new
+								type: self class asCType;
 								yourself);
 						yourself);
+				init:
+					(ASTCLiteral new
+						value: 1;
+						yourself);
 				yourself);
-		yourself.
+		condition:
+			(ASTCOperator new
+				symbol: '<=';
+				addOperand: (self value accept: visitor);
+				addOperand: (stop accept: visitor);
+				yourself);
+		iteratorModification:
+			(ASTCOperator new
+				symbol: '++';
+				addOperand:
+					(ASTCIdentifier new
+						id: iterName;
+						yourself);
+				yourself);
+		body:
+			(ASTCBlock new
+				addAll: (aBlock accept: visitor);
+				yourself);
+		yourself
 ]
