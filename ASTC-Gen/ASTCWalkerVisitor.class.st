@@ -291,15 +291,15 @@ ASTCWalkerVisitor >> walkASTCExpressionStatementExpression:anASTCExpressionState
 { #category : #visiting }
 ASTCWalkerVisitor >> walkASTCFor: anASTCFor [
 	self walkASTCLoop: anASTCFor.
-	self walkASTCForIteratorDeclaration: anASTCFor.
+	self walkASTCForIteratorDefinition: anASTCFor.
 	self walkASTCForIteratorModification: anASTCFor.
 
 ]
 
 { #category : #walking }
-ASTCWalkerVisitor >> walkASTCForIteratorDeclaration:anASTCFor [
-	anASTCFor iteratorDeclaration
-		ifNotNil:[ :iteratorDeclaration | iteratorDeclaration acceptVisitor:self.
+ASTCWalkerVisitor >> walkASTCForIteratorDefinition:anASTCFor [
+	anASTCFor iteratorDefinition
+		ifNotNil:[ :iteratorDefinition | iteratorDefinition acceptVisitor:self.
 		]
 ]
 
