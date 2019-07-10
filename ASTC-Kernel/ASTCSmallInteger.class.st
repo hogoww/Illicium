@@ -103,7 +103,6 @@ ASTCSmallInteger >> to: stop do: aBlock [
 	aBlock arguments size ~= 1
 		ifTrue: [ self error: 'Wrong number of arguments.' ]
 		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: visitor ].
-		1halt.
 	^ ASTCFor new
 		iteratorDefinition:
 			(ASTCVariableDefinition new

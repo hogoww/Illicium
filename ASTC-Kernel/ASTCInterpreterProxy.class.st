@@ -19,6 +19,13 @@ ASTCInterpreterProxy >> integerObjectOf: anInteger [
 ]
 
 { #category : #adding }
+ASTCInterpreterProxy >> methodArgumentCount [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^1
+]
+
+{ #category : #adding }
 ASTCInterpreterProxy >> methodArgumentCount: anOffset [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
@@ -33,10 +40,23 @@ ASTCInterpreterProxy >> pop: anInteger [
 ]
 
 { #category : #adding }
+ASTCInterpreterProxy >> primitiveFail [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^self
+]
+
+{ #category : #adding }
 ASTCInterpreterProxy >> push: anArg [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
 	^self
+]
+
+{ #category : #adding }
+ASTCInterpreterProxy >> pushBool: aBool [
+	"dummy method for type inference and system checks"
+	^ self
 ]
 
 { #category : #adding }
