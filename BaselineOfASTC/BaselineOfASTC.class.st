@@ -11,7 +11,7 @@ BaselineOfASTC >> baseline: spec [
 		for: #common
 		do: [
 			spec
-				package: 'ASTC-Builder';
+				"package: 'ASTC-Builder';" "Only dependance to Famix, unndeeded in most imports"
 				package: 'ASTC-Gen';
 				package: 'ASTC-Gen-Extensions' with:[ spec requires:#('ASTC-Gen')];
 				package: 'ASTC-Translating' with:[spec requires:#('ASTC-Gen')];
@@ -21,7 +21,8 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-VisitorsASTC' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-VisitorsASTC-Tests' with:[ spec requires:#('ASTC-VisitorsASTC') ];
 				package: 'ASTC-VisitorsRB';
-				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ].
+				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ];
+				package: 'IlliciumPlugins' with: [ spec requires: #('ASTC-Kernel') ].
 		].
 	spec
 		baseline: 'Phineas'
