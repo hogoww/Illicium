@@ -161,7 +161,7 @@ ASTCPrettyPrint >> visitASTCExpressionStatement: anExpressionStatement [
 { #category : #accessing }
 ASTCPrettyPrint >> visitASTCFor: aFor [
 	self << 'for('.
-	aFor iteratorDecl ifNotNil:[:anIteratorDecl| anIteratorDecl acceptVisitor:self].
+	aFor iteratorDefinition ifNotNil:[:anIteratorDecl| anIteratorDecl acceptVisitor:self].
 	self << $;.
 	aFor condition ifNotNil:[:aCondition| aCondition acceptVisitor:self].
 	self << $;.
