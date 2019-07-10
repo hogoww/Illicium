@@ -19,6 +19,13 @@ ASTCInterpreterProxy >> integerObjectOf: anInteger [
 ]
 
 { #category : #adding }
+ASTCInterpreterProxy >> methodArgumentCount: anOffset [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^1
+]
+
+{ #category : #adding }
 ASTCInterpreterProxy >> pop: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"

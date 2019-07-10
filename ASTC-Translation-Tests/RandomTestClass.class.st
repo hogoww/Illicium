@@ -23,7 +23,6 @@ RandomTestClass >> aMain [
 
 { #category : #tests }
 RandomTestClass >> factorialPrimitive: aSmallInteger [ 
-	"unsuccessful so far"
 	<primitive: 'aMain' module:'RandomTestClass' error: error>
 	^(error isPrimitiveError)
 		ifTrue: [ self halt.]
