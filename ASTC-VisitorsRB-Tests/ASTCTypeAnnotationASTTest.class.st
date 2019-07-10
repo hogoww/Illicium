@@ -139,6 +139,21 @@ ASTCTypeAnnotationASTTest >> testGetTypeForATemporaryNode [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationASTTest >> testGetTypeForATemporaryNodeInABlock [
+	| ast counter |
+	counter := 0.
+	ast := visitor
+		inferMethodSelector: #aMethodWithABlockWithATemporary
+		for: ASTCTypeAnnotationASTTestMethods.
+	ast
+		nodesDo: [ :aNode | 
+			aNode isTemp
+				ifTrue: [ counter := counter + 1.
+					self assertTypeOf: aNode is: SmallInteger ] ].
+	self assert: counter equals: 2
+]
+
+{ #category : #test }
 ASTCTypeAnnotationASTTest >> testGetTypeForAnArgumentNode [
 	| ast counter |
 	counter := 0.
@@ -150,6 +165,21 @@ ASTCTypeAnnotationASTTest >> testGetTypeForAnArgumentNode [
 				self assertTypeOf: aNode is: SmallInteger.
 			].].
 	self assert: counter equals: 4.
+]
+
+{ #category : #test }
+ASTCTypeAnnotationASTTest >> testGetTypeForAnArgumentNodeInABlock [
+	| ast counter |
+	counter := 0.
+	ast := visitor
+		inferMethodSelector: #aMethodWithABlockWithAnArgument
+		for: ASTCTypeAnnotationASTTestMethods.
+	ast
+		nodesDo: [ :aNode | 
+			aNode isArgument
+				ifTrue: [ counter := counter + 1.
+					self assertTypeOf: aNode is: SmallInteger ] ].
+	self assert: counter equals: 1
 ]
 
 { #category : #test }

@@ -26,11 +26,6 @@ ASTCTypeAnnotationAST >> getMethodNodeForAMethodNode: aMethodNode [
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getMethodTypeType [
-	^methodType receiver
-]
-
-{ #category : #typing }
 ASTCTypeAnnotationAST >> getTypeForAGlobalNode: aGlobalNode [
 	| type |
 	"Works only for classes so far."
@@ -40,51 +35,106 @@ ASTCTypeAnnotationAST >> getTypeForAGlobalNode: aGlobalNode [
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForALiteralNode: aLiteralNode [ 
-	^{aLiteralNode value class}
-
+ASTCTypeAnnotationAST >> getTypeForALiteralNode: aLiteralNode [
+	^ {aLiteralNode value class}
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForAMessageNode: aRBMessageNode [
+ASTCTypeAnnotationAST >> getTypeForAMessageNode: aMessageNode [
 	| aNode |
-	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
-	^aNode concreteClasses.
+	aNode := inferer types messageTypes
+		detect: [ :each | each message = aMessageNode ].
+	^ aNode concreteClasses
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForAMethodNode: aMethodNode [ 
-	^(self getMethodNodeForAMethodNode: aMethodNode) returnType concreteClasses.
+ASTCTypeAnnotationAST >> getTypeForAMethodNode: aMethodNode [
+	^ (self getMethodNodeForAMethodNode: aMethodNode) returnType
+		concreteClasses
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForASelfNode: aRBSelfNode [ 
-	^self getMethodTypeType concreteClasses.
+ASTCTypeAnnotationAST >> getTypeForASelfNode: aSelfNode [
+	^ methodType receiver concreteClasses
 ]
 
 { #category : #actions }
-ASTCTypeAnnotationAST >> getTypeForATemporaryNode: aRBTemporaryNode [ 
+ASTCTypeAnnotationAST >> getTypeForATemporaryNode: aTemporaryNode [
+	^aTemporaryNode isBlockVar
+		ifTrue:[ self getTypeForATemporaryNodeInABlock: aTemporaryNode ]
+		ifFalse:[ self getTypeForATemporaryNodeInAMethod: aTemporaryNode ]
+]
+
+{ #category : #actions }
+ASTCTypeAnnotationAST >> getTypeForATemporaryNodeInABlock: anArgumentNode [
+	| block phineasBlock |
+	block := (anArgumentNode whoDefines: anArgumentNode name) parent.
+
+	phineasBlock := inferer types blockTypes
+		detect: [ :aBlock | aBlock node = block ].
+	^ (phineasBlock
+		variableAt: anArgumentNode name asSymbol
+		ifAbsent: [ self
+				error:
+					'Phineas couldn''t type the temporary variable : '
+						, anArgumentNode name asSymbol ])
+		ifNotNil: [ :aVariable | aVariable concreteClasses ]
+]
+
+{ #category : #actions }
+ASTCTypeAnnotationAST >> getTypeForATemporaryNodeInAMethod: aTemporaryNode [
 	| selector method |
-	selector:=aRBTemporaryNode methodNode selector.
-	method:=inferer types methodTypes detect:[:aMethod| aMethod node selector = selector].
-	^(method variableAt: aRBTemporaryNode name asSymbol 
-		ifAbsent:[self error: 'Phineas couldn''t type the temporary variable : ', aRBTemporaryNode name asSymbol ]) 
-			ifNotNil:[:aVariable| aVariable concreteClasses].
+	selector := aTemporaryNode methodNode selector.
+	method := inferer types methodTypes
+		detect: [ :aMethod | aMethod node selector = selector ].
+	^ (method
+		variableAt: aTemporaryNode name asSymbol
+		ifAbsent: [ self
+				error:
+					'Phineas couldn''t type the temporary variable : '
+						, aTemporaryNode name asSymbol ])
+		ifNotNil: [ :aVariable | aVariable concreteClasses ]
 ]
 
 { #category : #typing }
 ASTCTypeAnnotationAST >> getTypeForAnArgumentNode: anArgumentNode [
-	^self getTypeForATemporaryNode: anArgumentNode.
+	^anArgumentNode isBlockVar
+		ifTrue:[ self getTypeForAnArgumentNodeInABlock: anArgumentNode ]
+		ifFalse:[ self getTypeForAnArgumentNodeInAMethod: anArgumentNode ]
+]
+
+{ #category : #actions }
+ASTCTypeAnnotationAST >> getTypeForAnArgumentNodeInABlock: anArgumentNode [
+	| block phineasBlock |
+	block := (anArgumentNode whoDefines: anArgumentNode name).
+	block isBlock ifFalse:[ block:= block parent ]. "weird, but 'whoDefines' return's varies."
+
+	phineasBlock := inferer types blockTypes
+		detect: [ :aBlock | aBlock node = block ].
+	^ (phineasBlock
+		variableAt: anArgumentNode name asSymbol
+		ifAbsent: [ self
+				error:
+					'Phineas couldn''t type the temporary variable : '
+						, anArgumentNode name asSymbol ])
+		ifNotNil: [ :aVariable | aVariable concreteClasses ]
+]
+
+{ #category : #actions }
+ASTCTypeAnnotationAST >> getTypeForAnArgumentNodeInAMethod: anArgumentNode [
+	^ self getTypeForATemporaryNodeInAMethod: anArgumentNode
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForAnInstanceVariableNode: anInstanceVariableNode [ 
-	^(methodType receiver instanceVariable: anInstanceVariableNode name) concreteClasses.
+ASTCTypeAnnotationAST >> getTypeForAnInstanceVariableNode: anInstanceVariableNode [
+	^ (methodType receiver instanceVariable: anInstanceVariableNode name)
+		concreteClasses
 ]
 
 { #category : #typing }
 ASTCTypeAnnotationAST >> getTypeOfInstanceVariable: instanceVarName ofClass: aClass [
-	^((inferer typeForClass: aClass) instanceVariable: instanceVarName) concreteClasses.
+	^ ((inferer typeForClass: aClass) instanceVariable: instanceVarName)
+		concreteClasses
 ]
 
 { #category : #actions }
@@ -188,7 +238,9 @@ ASTCTypeAnnotationAST >> visitMethodNode: aMethodNode [
 	self atNewPropertyPut: type
 		for: aMethodNode.
 	
-	((self getMethodNodeForAMethodNode: aMethodNode) accept: methodTypeDispatcher) ifTrue:[
+	"The type inferencer doesn't type some methods, such as primitives."
+	"The methodTypeDispatcher tells me if he did, in fact, type this method"
+	((self getMethodNodeForAMethodNode: aMethodNode) accept: methodTypeDispatcher) ifTrue:[ 
 		super visitMethodNode: aMethodNode."walk the method's ast"
 	].
 	^aMethodNode.

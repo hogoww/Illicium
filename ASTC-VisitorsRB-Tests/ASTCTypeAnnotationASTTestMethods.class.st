@@ -24,6 +24,16 @@ ASTCTypeAnnotationASTTestMethods >> aMethodThatReturnAMessageThatReturnsAnInt [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationASTTestMethods >> aMethodWithABlockWithATemporary [
+	^ [ | i | i:=3 ] value.
+]
+
+{ #category : #test }
+ASTCTypeAnnotationASTTestMethods >> aMethodWithABlockWithAnArgument [
+	^ [:i| ] value:1.
+]
+
+{ #category : #test }
 ASTCTypeAnnotationASTTestMethods >> aMethodWithAClassVariable [
 	A:=3.
 ]
