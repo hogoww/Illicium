@@ -29,5 +29,5 @@ ASTCVirtualMachineAPI >> initializePlugin [
 { #category : #initialization }
 ASTCVirtualMachineAPI >> setInterpreter: anInterpreterProxy [
 	interpreterProxy := anInterpreterProxy.
-	^0
+	^1 "The VM considers that setInterpreter failed, if you return 0."
 ]

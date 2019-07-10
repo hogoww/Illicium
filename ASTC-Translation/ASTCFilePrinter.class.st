@@ -123,7 +123,6 @@ ASTCFilePrinter >> printPrePluginStuff: aStream [
 #include "sqVirtualMachine.h"	/*  The virtual machine proxy definition */
 #include "sqPlatformSpecific.h"	/* Platform specific definitions */
 
-struct VirtualMachine* interpreterProxy;
 static const char *moduleName = "'<< fileName <<' * VMMaker.oscog-eem.2520 (e)";
 
 const char* getModuleName(void)

@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCVirtualMachineProxy class >> asCType [ 
-	^'VirtualMachine*'.
+	^'struct VirtualMachine*'.
 ]
 
 { #category : #'reflective operations' }

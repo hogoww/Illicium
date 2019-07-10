@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCInterpreterProxy,
 	#superclass : #Object,
-	#category : #'ASTC-Translation'
+	#category : #'ASTC-Kernel'
 }
 
 { #category : #adding }
