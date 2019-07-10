@@ -65,6 +65,36 @@ ASTCTypeAnnotationASTTest >> testGetTypeForAGlobalNodeSharedPoolVariable [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationASTTest >> testGetTypeForALiteralNode [
+	| ast counter |
+	counter:=0.
+	ast := visitor inferMethodSelector: #aMethodWithALiteralNode for: ASTCTypeAnnotationASTTestMethods .
+	ast nodesDo: [ :aNode | 
+		(aNode isLiteralNode and:[ aNode isValue ])
+			ifTrue: [ 
+				counter := counter + 1.
+				self assertTypeOf: aNode is: SmallInteger.
+			].].
+	self assert: counter equals: 1.
+
+]
+
+{ #category : #test }
+ASTCTypeAnnotationASTTest >> testGetTypeForAMessageNode [
+	| ast counter |
+	counter := 0.
+	ast := visitor inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: ASTCTypeAnnotationASTTestMethods .
+	ast nodesDo: [ :aNode | 
+		aNode isMessage
+			ifTrue: [ 
+				counter := counter + 1.
+				self assertTypeOf: aNode is: SmallInteger.
+			].].
+	self assert: counter equals: 1.
+
+]
+
+{ #category : #test }
 ASTCTypeAnnotationASTTest >> testGetTypeForAMethodNode [
 	| ast counter |
 	counter := 0.
@@ -109,7 +139,7 @@ ASTCTypeAnnotationASTTest >> testGetTypeForATemporaryNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForArgumentNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForAnArgumentNode [
 	| ast counter |
 	counter := 0.
 	ast := visitor inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
@@ -123,7 +153,7 @@ ASTCTypeAnnotationASTTest >> testGetTypeForArgumentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForInstanceVariableNode [
+ASTCTypeAnnotationASTTest >> testGetTypeForAnInstanceVariableNode [
 	| ast counter |
 	counter:=0.
 	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationASTTestMethods .
@@ -138,44 +168,15 @@ ASTCTypeAnnotationASTTest >> testGetTypeForInstanceVariableNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForLiteralNode [
-	| ast counter |
-	counter:=0.
-	ast := visitor inferMethodSelector: #aMethodWithALiteralNode for: ASTCTypeAnnotationASTTestMethods .
-	ast nodesDo: [ :aNode | 
-		(aNode isLiteralNode and:[ aNode isValue ])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals: 1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForMessageNode [
-	| ast counter |
-	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: ASTCTypeAnnotationASTTestMethods .
-	ast nodesDo: [ :aNode | 
-		aNode isMessage
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals: 1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeOfInstanceVariable [
-	| ast type |
-
-	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationASTTestMethods.
-	type := visitor getTypeOfInstanceVariable: #iv ofClass: ASTCTypeAnnotationASTTestMethods.
-	
+ASTCTypeAnnotationASTTest >> testGetTypeOfInstanceVariableOfClass [
+	| type |
+	visitor
+		inferMethodSelector: #aMethodWithAnInstanceVariable
+		for: ASTCTypeAnnotationASTTestMethods.
+	type := visitor
+		getTypeOfInstanceVariable: #iv
+		ofClass: ASTCTypeAnnotationASTTestMethods.
 	self assert: type asArray equals: {SmallInteger}
-
 ]
 
 { #category : #test }

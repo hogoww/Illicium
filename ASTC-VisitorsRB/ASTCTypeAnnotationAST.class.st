@@ -40,6 +40,19 @@ ASTCTypeAnnotationAST >> getTypeForAGlobalNode: aGlobalNode [
 ]
 
 { #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForALiteralNode: aLiteralNode [ 
+	^{aLiteralNode value class}
+
+]
+
+{ #category : #typing }
+ASTCTypeAnnotationAST >> getTypeForAMessageNode: aRBMessageNode [
+	| aNode |
+	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
+	^aNode concreteClasses.
+]
+
+{ #category : #typing }
 ASTCTypeAnnotationAST >> getTypeForAMethodNode: aMethodNode [ 
 	^(self getMethodNodeForAMethodNode: aMethodNode) returnType concreteClasses.
 ]
@@ -60,26 +73,13 @@ ASTCTypeAnnotationAST >> getTypeForATemporaryNode: aRBTemporaryNode [
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForArgumentNode: anArgumentNode [
+ASTCTypeAnnotationAST >> getTypeForAnArgumentNode: anArgumentNode [
 	^self getTypeForATemporaryNode: anArgumentNode.
 ]
 
 { #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForInstanceVariableNode: anInstanceVariableNode [ 
+ASTCTypeAnnotationAST >> getTypeForAnInstanceVariableNode: anInstanceVariableNode [ 
 	^(methodType receiver instanceVariable: anInstanceVariableNode name) concreteClasses.
-]
-
-{ #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForLiteralNode: aLiteralNode [ 
-	^{aLiteralNode value class}
-
-]
-
-{ #category : #typing }
-ASTCTypeAnnotationAST >> getTypeForMessageNode: aRBMessageNode [
-	| aNode |
-	aNode:=inferer types messageTypes detect:[:each| each message = aRBMessageNode ].
-	^aNode concreteClasses.
 ]
 
 { #category : #typing }
@@ -133,7 +133,7 @@ ASTCTypeAnnotationAST >> initialize [
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitArgumentNode: anArgumentNode [
 	| type |
-	type := self getTypeForArgumentNode: anArgumentNode.
+	type := self getTypeForAnArgumentNode: anArgumentNode.
 	self atNewPropertyPut: type
 		for: anArgumentNode.
 	super visitArgumentNode: anArgumentNode.
@@ -154,7 +154,7 @@ ASTCTypeAnnotationAST >> visitGlobalNode: aGlobalNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitInstanceVariableNode: aInstanceVariableNode [
 	| type |
-	type := self getTypeForInstanceVariableNode: aInstanceVariableNode.
+	type := self getTypeForAnInstanceVariableNode: aInstanceVariableNode.
 	self atNewPropertyPut: type
 		for: aInstanceVariableNode.
 	super visitInstanceVariableNode: aInstanceVariableNode.
@@ -164,7 +164,7 @@ ASTCTypeAnnotationAST >> visitInstanceVariableNode: aInstanceVariableNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
 	| type |
-	type := self getTypeForLiteralNode: aLiteralNode.
+	type := self getTypeForALiteralNode: aLiteralNode.
 	self atNewPropertyPut: type
 		for: aLiteralNode .
 	super visitLiteralNode: aLiteralNode.
@@ -174,7 +174,7 @@ ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
 	| type |
-	type := self getTypeForMessageNode: aMessageNode.
+	type := self getTypeForAMessageNode: aMessageNode.
 	self atNewPropertyPut: type
 		for: aMessageNode.
 	super visitMessageNode: aMessageNode.
