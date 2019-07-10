@@ -15,10 +15,18 @@ Class {
 RandomTestClass >> aMain [
 	| res |
 	<primitiveToBe>
-	res:= self factorialR: 7 anotherArgument:5.
+	res:= self factorialIter: 7.
 	interpreterProxy push:(interpreterProxy integerObjectOf:res).
 
 	^ 0
+]
+
+{ #category : #tests }
+RandomTestClass >> factorialIter: n [
+	| acc |
+	acc := 1.
+	2 to: n do: [ :i | acc := acc * i ].
+	^ acc
 ]
 
 { #category : #tests }
