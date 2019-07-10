@@ -49,7 +49,7 @@ ASTCShouldItBeDeclared >> visitInstanceVariableNode: anInstanceVariable [
 
 { #category : #initialization }
 ASTCShouldItBeDeclared >> visitSelfNode: anSelfNode [
-	"should ever pass there. Pharo's Compiler should stop you first."
+	"shouldn't ever pass there. Pharo's Compiler should stop you first."
 	self error: 'trying to assign something to self? Are you sure?'. 
 	
 ]
