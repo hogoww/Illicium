@@ -99,42 +99,34 @@ ASTCSmallInteger >> to:stop do2: aBlock [
 
 { #category : #translation }
 ASTCSmallInteger >> to: stop do: aBlock [
-	| iterName |
+	| iterID |
 	aBlock arguments size ~= 1
 		ifTrue: [ self error: 'Wrong number of arguments.' ]
-		ifFalse: [ iterName := (aBlock arguments at: 1) acceptVisitor: visitor ].
+		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: visitor ].
+		1halt.
 	^ ASTCFor new
-		iteratorDeclaration:
+		iteratorDefinition:
 			(ASTCVariableDefinition new
 				declaration:
 					(ASTCVariableDeclaration new
-						id:
-							(ASTCIdentifier new
-								id: iterName;
-								yourself);
+						id: iterID ;
 						type:
 							(ASTCType new
-								type: self class asCType;
+								type: ASTCSmallInteger;
 								yourself);
 						yourself);
-				init:
-					(ASTCLiteral new
-						value: 1;
-						yourself);
+				init:(self value acceptVisitor: visitor);
 				yourself);
 		condition:
 			(ASTCOperator new
 				symbol: '<=';
-				addOperand: (self value acceptVisitor: visitor);
+				addOperand: iterID;
 				addOperand: (stop acceptVisitor: visitor);
 				yourself);
 		iteratorModification:
 			(ASTCOperator new
 				symbol: '++';
-				addOperand:
-					(ASTCIdentifier new
-						id: iterName;
-						yourself);
+				addOperand:iterID;
 				yourself);
 		body: (aBlock acceptVisitor: visitor);
 		yourself
