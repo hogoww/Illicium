@@ -12,10 +12,24 @@ ASTCInterpreterProxy >> cCoerce: anOop to: aType [
 ]
 
 { #category : #adding }
+ASTCInterpreterProxy >> firstIndexableField: orderOop [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^Object new
+]
+
+{ #category : #adding }
 ASTCInterpreterProxy >> integerObjectOf: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
 	^self
+]
+
+{ #category : #adding }
+ASTCInterpreterProxy >> isBytes: anOop [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^true
 ]
 
 { #category : #adding }
@@ -33,6 +47,13 @@ ASTCInterpreterProxy >> methodArgumentCount: anOffset [
 ]
 
 { #category : #adding }
+ASTCInterpreterProxy >> methodReturnInteger: anInteger [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^0
+]
+
+{ #category : #adding }
 ASTCInterpreterProxy >> pop: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
@@ -44,6 +65,13 @@ ASTCInterpreterProxy >> primitiveFail [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
 	^self
+]
+
+{ #category : #adding }
+ASTCInterpreterProxy >> primitiveFailFor: reasonCode [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^1
 ]
 
 { #category : #adding }
@@ -64,6 +92,13 @@ ASTCInterpreterProxy >> pushInteger: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
 	^self
+]
+
+{ #category : #adding }
+ASTCInterpreterProxy >> sizeOfSTArrayFromCPrimitive: order [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	^1
 ]
 
 { #category : #adding }
