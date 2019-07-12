@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCSmallInteger,
-	#superclass : #ASTCKernelClasses,
+	#superclass : #ASTCObject,
 	#category : #'ASTC-Kernel'
 }
 

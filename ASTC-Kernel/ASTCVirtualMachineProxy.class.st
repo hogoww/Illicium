@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCVirtualMachineProxy,
-	#superclass : #ASTCKernelClasses,
+	#superclass : #ASTCObject,
 	#category : #'ASTC-Kernel'
 }
 

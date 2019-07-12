@@ -10,7 +10,7 @@ Class {
 
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
-	^ replacementClasses at: aClass ifAbsent:[ ^ASTCVoid  ]."unknown type for now"
+	^ replacementClasses at: aClass ifAbsent:[ ^ASTCUserClass  ]."unknown type for now"
 ]
 
 { #category : #initialization }
@@ -21,7 +21,7 @@ ASTCTranslator >> initialize [
 	replacementClasses := Dictionary new
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
-		at: ASTCVoid put: ASTCVoid;
+		at: ASTCUserClass put: ASTCUserClass;
 		at: ASTCInterpreterProxy put: ASTCVirtualMachineProxy;
 		yourself
 ]
