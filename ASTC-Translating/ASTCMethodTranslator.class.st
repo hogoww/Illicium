@@ -20,18 +20,20 @@ ASTCMethodTranslator >> classTranslator: aClassTranslator [
 
 { #category : #initialization }
 ASTCMethodTranslator >> getNodeConcreteType: aNode [
-	| concreteType |
-	concreteType := aNode
+	
+	aNode
 		propertyAt: ASTCTypeAnnotationAST property
 		ifPresent: [ :types | 
+			"Slang specific heuristic"
+			(types isEmpty and: [ aNode selector beginsWith: #primitive ])
+				ifTrue: [ ^ SmallInteger ].
 			types size = 1
-				ifTrue: [ types anyOne ]
+				ifTrue: [ ^ types anyOne ]
 				ifFalse: [ self error: 'The type inferencer had no or too many results' ]
 				]
 		ifAbsent: [ 
 			self error:
 					'The type inferencer couldn''t figure out the type of '	, aNode asString ].
-	^ concreteType
 ]
 
 { #category : #initialization }
