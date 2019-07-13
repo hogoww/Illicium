@@ -25,6 +25,33 @@ ASTCVirtualMachineAPI >> initializePlugin [
 	^self
 ]
 
+{ #category : #'simulation only' }
+ASTCVirtualMachineAPI >> majorVersion [
+	
+	^ 0
+]
+
+{ #category : #'simulation only' }
+ASTCVirtualMachineAPI >> methodArgumentCount [
+
+	^ 0
+]
+
+{ #category : #'simulation only' }
+ASTCVirtualMachineAPI >> pop: number [
+
+	
+]
+
+{ #category : #'simulation only' }
+ASTCVirtualMachineAPI >> primitiveFail [
+
+]
+
+{ #category : #'simulation only' }
+ASTCVirtualMachineAPI >> pushBool: aBoolean [
+]
+
 { #category : #initialization }
 ASTCVirtualMachineAPI >> setInterpreter: anInterpreterProxy [
 	interpreterProxy := anInterpreterProxy.
