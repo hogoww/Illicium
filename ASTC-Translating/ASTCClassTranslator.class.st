@@ -67,8 +67,14 @@ ASTCClassTranslator >> compilationUnitForClass: aClass [
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> getPrimitiveTranslates: aClass. [
-	^aClass methods collect: #ast
+ASTCClassTranslator >> getPrimitiveTranslates: aClass [
+	^ (aClass methods
+		select: [ :aMethod | 
+			| anAST |
+			anAST := aMethod ast.
+			anAST arguments isEmpty and:[
+			anAST pragmas noneSatisfy: [ :aPragma | aPragma = #doNotGenerate ] ]])
+		collect: #ast
 ]
 
 { #category : #accessing }
