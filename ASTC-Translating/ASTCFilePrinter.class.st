@@ -7,7 +7,7 @@ Class {
 		'isPrimitive',
 		'virtualMachine'
 	],
-	#category : #'ASTC-Translation'
+	#category : #'ASTC-Translating'
 }
 
 { #category : #printing }
