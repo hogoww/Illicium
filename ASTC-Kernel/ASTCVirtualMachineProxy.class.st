@@ -16,7 +16,7 @@ ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
 		operands:(ASTCContainer new
 			add: (ASTCIdentifier new id:'interpreterProxy'; yourself);
 			add: (ASTCFunctionCall new 
-				id: (ASTCIdentifier new id: (self formatSelector:(aMessage selector)); yourself) ;
+				id: (ASTCIdentifier new id: (visitor formatSelector:(aMessage selector)); yourself) ;
 				arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
 					yourself);
 				yourself);

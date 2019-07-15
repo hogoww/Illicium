@@ -27,29 +27,30 @@ ASTCVirtualMachineAPI >> initializePlugin [
 
 { #category : #'simulation only' }
 ASTCVirtualMachineAPI >> majorVersion [
-	
+	<doNotGenerate>
 	^ 0
 ]
 
 { #category : #'simulation only' }
 ASTCVirtualMachineAPI >> methodArgumentCount [
-
+	<doNotGenerate>
 	^ 0
 ]
 
 { #category : #'simulation only' }
 ASTCVirtualMachineAPI >> pop: number [
-
+	<doNotGenerate>
 	
 ]
 
 { #category : #'simulation only' }
 ASTCVirtualMachineAPI >> primitiveFail [
-
+	<doNotGenerate>
 ]
 
 { #category : #'simulation only' }
 ASTCVirtualMachineAPI >> pushBool: aBoolean [
+	<doNotGenerate>
 ]
 
 { #category : #initialization }

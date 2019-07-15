@@ -28,7 +28,7 @@ ASTCKernelClasses >> asString [
 { #category : #'reflective operations' }
 ASTCKernelClasses >> doesNotUnderstand: aMessage [
 	^ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (self formatSelector:(aMessage selector)); yourself) ;
+		id: (ASTCIdentifier new id: (visitor formatSelector:(aMessage selector)); yourself) ;
 		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
 		yourself.
 		

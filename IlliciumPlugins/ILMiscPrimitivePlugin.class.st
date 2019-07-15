@@ -38,7 +38,7 @@ ILMiscPrimitivePlugin >> primitiveCompareString [
 		[ :i | | c1 c2 |
 		c1 := order at: (string1 at: i).
 		c2 := order at: (string2 at: i).
-		c1 = c2 ifFalse:
+		"c1 = c2"true  ifFalse:
 			[^interpreterProxy methodReturnInteger: (c1 < c2 ifTrue: [1] ifFalse: [3])]].
 	interpreterProxy methodReturnInteger:
 		(len1 = len2 ifTrue: [2] ifFalse: [len1 < len2 ifTrue: [1] ifFalse: [3]])
