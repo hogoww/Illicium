@@ -83,6 +83,7 @@ ASTCInterpreterProxy >> push: anArg [
 
 { #category : #adding }
 ASTCInterpreterProxy >> pushBool: aBool [
+	<doNotGenerate>
 	"dummy method for type inference and system checks"
 	^ self
 ]
