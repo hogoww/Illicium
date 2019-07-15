@@ -138,3 +138,9 @@ ASTCClassTranslator >> translateClass: aClass [
 	self halt.
 
 ]
+
+{ #category : #'as yet unclassified' }
+ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
+	self halt.
+	self error:'todo'
+]
