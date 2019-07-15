@@ -26,7 +26,7 @@ IlliciumTestGenerator >> createTestClassFor: aClass [
 	^ IlliciumToSlangTestCase subclass: #IlGenerationTestFor, aClass name
 		instanceVariableNames: ''
 		classVariableNames: ''
-		package: 'IlliciumPlugins'
+		package: 'IlliciumPlugins-Tests'
 ]
 
 { #category : #'as yet unclassified' }
