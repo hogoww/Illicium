@@ -105,5 +105,5 @@ ASTCInterpreterProxy >> sizeOfSTArrayFromCPrimitive: order [
 ASTCInterpreterProxy >> stackValue: anOffset [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^self
+	^Object new
 ]
