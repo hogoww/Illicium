@@ -48,11 +48,6 @@ ASTCShouldItBeDeclared >> visitInstanceVariableNode: anInstanceVariable [
 ]
 
 { #category : #initialization }
-ASTCShouldItBeDeclared >> visitMessageNode: aMessageNode [
-	"Nothing to do, we're only interested in assignments here"
-]
-
-{ #category : #initialization }
 ASTCShouldItBeDeclared >> visitReturnNode: aReturnNode [
 	"We only visit Assignements"
 	aReturnNode value isAssignment 

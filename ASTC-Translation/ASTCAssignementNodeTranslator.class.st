@@ -9,7 +9,7 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMainTransla
 	^ (anAssignmentNode
 		propertyAt: ASTCShouldItBeDeclared property)
 		ifTrue: [ "type checking"
-			"creation of the return thingy."
+			"creation of the return node."
 			ASTCDeclarationStatement new
 				declaration:
 					(ASTCVariableDefinition new

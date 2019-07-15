@@ -71,7 +71,7 @@ ASTCInterpreterProxy >> primitiveFail [
 ASTCInterpreterProxy >> primitiveFailFor: reasonCode [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^1
+	^self
 ]
 
 { #category : #adding }

@@ -12,7 +12,6 @@ Class {
 { #category : #'as yet unclassified' }
 ILMiscPrimitivePlugin >> primitiveCompareString [
 	"ByteString (class) compare: string1 with: string2 collated: order"
-	<export: true>
 	| len1 len2 order string1 string2 orderOop string1Oop string2Oop |
 	
 	<primitiveToBe>
@@ -38,7 +37,7 @@ ILMiscPrimitivePlugin >> primitiveCompareString [
 		[ :i | | c1 c2 |
 		c1 := order at: (string1 at: i).
 		c2 := order at: (string2 at: i).
-		"c1 = c2"true  ifFalse:
+		c1 = c2 ifFalse:
 			[^interpreterProxy methodReturnInteger: (c1 < c2 ifTrue: [1] ifFalse: [3])]].
 	interpreterProxy methodReturnInteger:
 		(len1 = len2 ifTrue: [2] ifFalse: [len1 < len2 ifTrue: [1] ifFalse: [3]])
