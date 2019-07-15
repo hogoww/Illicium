@@ -34,13 +34,14 @@ ASTCClassTranslator >> compilationUnitForClass: aClass [
 	
 	inferer types methodTypes do:[:aMethodType|
 		((aClass methodDict anySatisfy: [:aMethod| aMethod selector = aMethodType node selector ]) 
-			and:[ aMethodType node pragmas noneSatisfy: [:aPragma| aPragma selector = ASTCVirtualMachineAPI doNotGeneratePragma ]])
+			and:[ aMethodType node pragmas noneSatisfy: [:aPragma|aPragma selector = ASTCVirtualMachineAPI doNotGeneratePragma]])
 			ifTrue:[ methodsToTranslate add: aMethodType node copy ].
 		].
 
 	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ; yourself.
 	methodsToTranslate do:[:aMethodAST|
-		aMethodAST acceptVisitor: typeAnnotator
+		aMethodAST acceptVisitor: typeAnnotator.
+		aMethodAST selector crLog.
 		].
 	
 	
@@ -72,8 +73,9 @@ ASTCClassTranslator >> getPrimitiveTranslates: aClass [
 		select: [ :aMethod | 
 			| anAST |
 			anAST := aMethod ast.
-			anAST arguments isEmpty and:[
-			anAST pragmas noneSatisfy: [ :aPragma | aPragma = #doNotGenerate ] ]])
+			anAST arguments isEmpty
+				and: [ anAST pragmas
+						noneSatisfy: [ :aPragma | aPragma selector = #doNotGenerate ] ] ])
 		collect: #ast
 ]
 
@@ -114,7 +116,6 @@ ASTCClassTranslator >> preTranslationCheck: aClass [
 	(aClass traitComposition
 		includesTrait: ASTCVirtualMachineAPI)
 		ifFalse: [ self error: 'can only translate plugins for now. They need to use the ASTCVirtualMachineAPI trait.' ].
-
 ]
 
 { #category : #translation }
