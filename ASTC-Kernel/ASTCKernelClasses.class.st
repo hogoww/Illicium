@@ -1,8 +1,6 @@
 Class {
 	#name : #ASTCKernelClasses,
 	#superclass : #Object,
-	#traits : 'ASTCFormatTrait',
-	#classTraits : 'ASTCFormatTrait classTrait',
 	#instVars : [
 		'visitor',
 		'value'

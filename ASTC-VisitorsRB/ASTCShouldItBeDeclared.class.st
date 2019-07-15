@@ -48,6 +48,19 @@ ASTCShouldItBeDeclared >> visitInstanceVariableNode: anInstanceVariable [
 ]
 
 { #category : #initialization }
+ASTCShouldItBeDeclared >> visitMessageNode: aMessageNode [
+	"Nothing to do, we're only interested in assignments here"
+]
+
+{ #category : #initialization }
+ASTCShouldItBeDeclared >> visitReturnNode: aReturnNode [
+	"We only visit Assignements"
+	aReturnNode value isAssignment 
+	ifTrue:[ aReturnNode value acceptVisitor: self ].
+	
+]
+
+{ #category : #initialization }
 ASTCShouldItBeDeclared >> visitSelfNode: anSelfNode [
 	"shouldn't ever pass there. Pharo's Compiler should stop you first."
 	self error: 'trying to assign something to self? Are you sure?'. 

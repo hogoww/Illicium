@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCMessageNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translating-Methods'
+	#category : #'ASTC-Translation-Methods'
 }
 
 { #category : #translate }

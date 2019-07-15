@@ -1,5 +1,5 @@
 Class {
 	#name : #ASTCArrayNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translating-Methods'
+	#category : #'ASTC-Translation-Methods'
 }

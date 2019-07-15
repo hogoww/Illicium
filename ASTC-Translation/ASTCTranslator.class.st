@@ -5,8 +5,18 @@ Class {
 		'classTranslator',
 		'replacementClasses'
 	],
-	#category : #'ASTC-Translating-overviewers'
+	#category : #'ASTC-Translation-overviewers'
 }
+
+{ #category : #'as yet unclassified' }
+ASTCTranslator class >> translateClass: aClass [
+	^ self new translateClass: aClass
+]
+
+{ #category : #'as yet unclassified' }
+ASTCTranslator class >> translateMethod: aSelector fromClass: aClass [
+	^ self new translateMethod: aSelector fromClass: aClass
+]
 
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
@@ -34,4 +44,14 @@ ASTCTranslator >> replacementClasses [
 { #category : #initialization }
 ASTCTranslator >> replacementClasses: aDictionnary [
 	^ replacementClasses := aDictionnary
+]
+
+{ #category : #translation }
+ASTCTranslator >> translateClass: aClass [
+	^ classTranslator translateClass: aClass
+]
+
+{ #category : #'as yet unclassified' }
+ASTCTranslator >> translateMethod: aSelector fromClass: aClass [
+	^ classTranslator translateMethod: aSelector fromClass: aClass
 ]

@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'ASTCFormatTrait',
 	#classTraits : 'ASTCFormatTrait classTrait',
-	#category : #'ASTC-Translating-Methods'
+	#category : #'ASTC-Translation-Methods'
 }
 
 { #category : #translate }
