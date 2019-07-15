@@ -14,8 +14,8 @@ The generated code is in ASTC-gen.
 When regenerating the metamodel code, every package depending on it will be reloaded.
 Methods added to the AS TC-gen code should be put in the ASTC-Gen-Extensions package.
 
-Translation happens in ASTC-Translating and ASTC-Kernel.
-ASTC-Translating implements how to translate each kind of Pharo AST node using a visitor.
+Translation happens in ASTC-Translation and ASTC-Kernel.
+ASTC-Translation implements how to translate each kind of Pharo AST node using a visitor.
 It also implements the translation of classes.
 ASTC-Kernel implements classes used to translate the messages.
 
