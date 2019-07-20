@@ -12,12 +12,16 @@ Class {
 
 { #category : #printing }
 ASTCFilePrinter >> CompileExternalPlugin [
-	| res |
-	res:=LibC runCommand: (String streamContents: [:s| 
-		s << 'gcc -shared -I./pharo-local/iceberg/hogoww/ASTC/vmHeader -o ./generated/' << fileName << '.so -fPIC ./generated/' << fileName <<'.c'
-	<< (virtualMachine for32bit: [ ' -m32'] for64bit: [''])]). 
- 	res = 0
-	ifFalse:[self error:'plugin didn''t compile (or the comand line sucks)'].
+	| res commandLine |
+	commandLine := String
+		streamContents: [ :s | 
+			s
+				<< 'gcc -shared -I./pharo-local/iceberg/hogoww/ASTC/vmHeader -o ./generated/'
+				<< fileName << '.so -fPIC ./generated/' << fileName << '.c'
+				<< (virtualMachine for32bit: [ ' -m32' ] for64bit: [ '' ]) ].
+	res := LibC runCommand: commandLine.
+	res = 0
+		ifFalse: [ self error: 'plugin didn''t compile (or the comand line sucks)' ]
 	"If that fails, you probably need to change the name of the Iceberg repository in the command line"
 ]
 
