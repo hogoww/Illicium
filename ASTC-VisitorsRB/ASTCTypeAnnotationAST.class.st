@@ -66,18 +66,18 @@ ASTCTypeAnnotationAST >> getTypeForATemporaryNode: aTemporaryNode [
 ]
 
 { #category : #actions }
-ASTCTypeAnnotationAST >> getTypeForATemporaryNodeInABlock: anArgumentNode [
+ASTCTypeAnnotationAST >> getTypeForATemporaryNodeInABlock: aTemporaryNode [
 	| block phineasBlock |
-	block := (anArgumentNode whoDefines: anArgumentNode name) parent.
+	block := (aTemporaryNode whoDefines: aTemporaryNode name) parent.
 
 	phineasBlock := inferer types blockTypes
 		detect: [ :aBlock | aBlock node = block ].
 	^ (phineasBlock
-		variableAt: anArgumentNode name asSymbol
+		variableAt: aTemporaryNode name asSymbol
 		ifAbsent: [ self
 				error:
 					'Phineas couldn''t type the temporary variable : '
-						, anArgumentNode name asSymbol ])
+						, aTemporaryNode name asSymbol ])
 		ifNotNil: [ :aVariable | aVariable concreteClasses ]
 ]
 
