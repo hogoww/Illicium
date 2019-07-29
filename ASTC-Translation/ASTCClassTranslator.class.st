@@ -55,7 +55,7 @@ ASTCClassTranslator >> compilationUnitForClass: aClass [
 	self flag:#horiffic."anyone here. Should use the mainTranslator"
 
 	aClass allInstVarNames do:[:ivName| |ivType|
-		ivType := mainTranslator getReplacementType: (typeAnnotator getTypeOfInstanceVariable: ivName ofClass: aClass) anyOne.
+		ivType := mainTranslator getReplacementType: (inferer typeOfInstanceVariable: ivName ofClass: aClass) anyOne.
 		cu declarations	add: 
 			(ASTCVariableDeclaration new
 				id: (ASTCIdentifier new id: ivName ; yourself);
