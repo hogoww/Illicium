@@ -16,204 +16,46 @@ ASTCTypeAnnotationASTTest >> assertTypeOf: aNode is: aClass [
 	^self assert: (aNode propertyAt: propertyName) asArray equals: {aClass} .
 ]
 
+{ #category : #test }
+ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass [
+	| aMethodAST |
+	aMethodAST := (aClass >> aSelector) ast copy.
+
+	visitor inferer inferAST: aMethodAST.
+	
+	aMethodAST acceptVisitor: visitor.
+	
+	^aMethodAST
+]
+
+{ #category : #test }
+ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass usingBlock: aBlock [
+	| aMethodAST |
+	aMethodAST := (aClass >> aSelector) ast copy.
+	visitor inferer infer: aBlock.
+	"This removes the block used as an entry point of the inference"
+	"This would cause problem for resolution for the methodType otherwise."
+	visitor inferer types methodTypes
+		detect: [ :aMethodType | aMethodType node isBlock ]
+		ifFound: [ :aMethodType | visitor inferer types methodTypes remove: aMethodType ].
+	aMethodAST acceptVisitor: visitor.
+	^ aMethodAST
+]
+
 { #category : #running }
 ASTCTypeAnnotationASTTest >> setUp [
 	super setUp.
 	visitor:=ASTCTypeAnnotationAST new 
-		inferer: PhineasInferer new.		
+		inferer: PhineasInferer new;
+		yourself.
 	propertyName := ASTCTypeAnnotationAST property.
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAGlobalNodeClassVariable [
-	| ast counter |
-	<expectedFailure>"Phineas returns {SmallInteger + Undefined object. Weird}"
-	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithAClassVariable for: ASTCTypeAnnotationASTTestMethods.
-	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[aNode isGlobal])
-			ifTrue: [ 
-				counter := counter + 1. 
-
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals:1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAGlobalNodeGlobal [
-	| ast counter|
-	ast := visitor inferMethodSelector: #aMethodWithAGlobalVariable for: ASTCTypeAnnotationASTTestMethods.
-	counter:=0.
-	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[aNode isGlobal])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: ASTCExpression .
-			].].
-		
-	self assert: counter equals: 1
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAGlobalNodeSharedPoolVariable [
-	"waiting for a better understanding of SharedPool variables"
-	<expectedFailure>
-	self flag: #toImplement.
-	self assert: false equals: true.
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForALiteralNode [
-	| ast counter |
-	counter:=0.
-	ast := visitor inferMethodSelector: #aMethodWithALiteralNode for: ASTCTypeAnnotationASTTestMethods .
-	ast nodesDo: [ :aNode | 
-		(aNode isLiteralNode and:[ aNode isValue ])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals: 1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAMessageNode [
-	| ast counter |
-	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: ASTCTypeAnnotationASTTestMethods .
-	ast nodesDo: [ :aNode | 
-		aNode isMessage
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals: 1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAMethodNode [
-	| ast counter |
-	counter := 0.
-	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
-	ast nodesDo: [ :aNode | 
-		aNode isMethod
-			ifTrue: [ 
-				counter := counter +1.
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals:1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForASelfNode [
-	| ast counter |
-	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithSelf for: ASTCTypeAnnotationASTTestMethods.
-	ast nodesDo: [ :aNode | 
-		aNode isSelf
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: ASTCTypeAnnotationASTTestMethods.
-			].].
-	self assert: counter equals:1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForATemporaryNode [
-	| ast counter |
-	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithATemporaryVariable for: ASTCTypeAnnotationASTTestMethods.
-	ast nodesDo: [ :aNode | 
-		aNode isTemp
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: SmallInteger.
-				].].
-	self assert: counter equals:2.
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForATemporaryNodeInABlock [
-	| ast counter |
-	counter := 0.
-	ast := visitor
-		inferMethodSelector: #aMethodWithABlockWithATemporary
-		for: ASTCTypeAnnotationASTTestMethods.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isTemp
-				ifTrue: [ counter := counter + 1.
-					self assertTypeOf: aNode is: SmallInteger ] ].
-	self assert: counter equals: 2
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAnArgumentNode [
-	| ast counter |
-	counter := 0.
-	ast := visitor inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
-	ast nodesDo: [ :aNode |
-		aNode isArgument
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals: 4.
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAnArgumentNodeInABlock [
-	| ast counter |
-	counter := 0.
-	ast := visitor
-		inferMethodSelector: #aMethodWithABlockWithAnArgument
-		for: ASTCTypeAnnotationASTTestMethods.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isArgument
-				ifTrue: [ counter := counter + 1.
-					self assertTypeOf: aNode is: SmallInteger ] ].
-	self assert: counter equals: 1
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeForAnInstanceVariableNode [
-	| ast counter |
-	counter:=0.
-	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationASTTestMethods .
-	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[ aNode isInstance ])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: SmallInteger.
-			].].
-	self assert: counter equals: 1.
-
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> testGetTypeOfInstanceVariableOfClass [
-	| type |
-	visitor
-		inferMethodSelector: #aMethodWithAnInstanceVariable
-		for: ASTCTypeAnnotationASTTestMethods.
-	type := visitor
-		getTypeOfInstanceVariable: #iv
-		ofClass: ASTCTypeAnnotationASTTestMethods.
-	self assert: type asArray equals: {SmallInteger}
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
+	ast := self inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
 	ast nodesDo: [ :aNode | 
 		aNode isArgument
 			ifTrue: [ 
@@ -227,22 +69,22 @@ ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithAClassVariable for: ASTCTypeAnnotationASTTestMethods.
-	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[aNode isGlobal])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName) 
-			].].
-	self assert: counter equals:1.
-	
+	ast := self
+		inferMethodSelector: #aMethodWithAClassVariable
+		for: PINodeTypeVisitorTestsMethods.
+	ast
+		nodesDo: [ :aNode | 
+			(aNode isVariable and: [ aNode isGlobal ])
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 1
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitGlobalNodeGlobal [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithAGlobalVariable for: ASTCTypeAnnotationASTTestMethods.
+	ast := self inferMethodSelector: #aMethodWithAGlobalVariable for: PINodeTypeVisitorTestsMethods.
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[aNode isGlobal])
 			ifTrue: [ 
@@ -265,86 +107,85 @@ ASTCTypeAnnotationASTTest >> testVisitGlobalNodeSharedPoolVariable [
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitInstanceVariableNode [
 	| ast counter |
-	counter:=0.
-	ast := visitor inferMethodSelector: #aMethodWithAnInstanceVariable for: ASTCTypeAnnotationASTTestMethods .
-	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[ aNode isInstance ])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName). 
-			].].
-	self assert: counter equals: 1.
+	counter := 0.
+	ast := self
+		inferMethodSelector: #aMethodWithAnInstanceVariable
+		for: PINodeTypeVisitorTestsMethods.
+	ast
+		nodesDo: [ :aNode | 
+			(aNode isVariable and: [ aNode isInstance ])
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 1
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitLiteralNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithALiteralNode for: ASTCTypeAnnotationASTTestMethods.
-	ast nodesDo: [ :aNode | 
-		(aNode isLiteralNode and:[ aNode isValue ])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName) 
-			].].
-	self assert: counter equals: 1.
+	ast := self
+		inferMethodSelector: #aMethodWithALiteralNode
+		for: PINodeTypeVisitorTestsMethods.
+	ast
+		nodesDo: [ :aNode | 
+			(aNode isLiteralNode and: [ aNode isValue ])
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 1
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitMessageNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
-	ast nodesDo: [ :aNode | 
-		aNode isMessage
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName) 
-			].].
-	self assert: counter equals: 5.
+	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	ast
+		nodesDo: [ :aNode | 
+			aNode isMessage
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 5
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitMethodNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #factorialR for: RandomTestClass.
-	ast nodesDo: [ :aNode | 
-		aNode isMethod
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName).
-			].].
-	self assert: counter equals:1.
-
+	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	ast
+		nodesDo: [ :aNode | 
+			aNode isMethod
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 1
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitSelfNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithSelf for: ASTCTypeAnnotationASTTestMethods.
-	ast nodesDo: [ :aNode | 
-		aNode isSelf
-			ifTrue: [ 
-				counter := counter +1.
-				self assert: (aNode hasProperty: propertyName).
-			].].
-	self assert: counter equals:1.
-
+	ast := self
+		inferMethodSelector: #aMethodWithSelf
+		for: PINodeTypeVisitorTestsMethods.
+	ast
+		nodesDo: [ :aNode | 
+			aNode isSelf
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 1
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitTemporaryNode [
 	| ast counter |
 	counter := 0.
-	ast := visitor inferMethodSelector: #aMethodWithATemporaryVariable  for: ASTCTypeAnnotationASTTestMethods.
-	ast nodesDo: [ :aNode | 
-		aNode isTemp
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName) 
-			].].
-	self assert: counter equals:2.
-	
+	ast := self
+		inferMethodSelector: #aMethodWithATemporaryVariable
+		for: PINodeTypeVisitorTestsMethods.
+	ast
+		nodesDo: [ :aNode | 
+			aNode isTemp
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 2
 ]
