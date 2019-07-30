@@ -26,7 +26,7 @@ BaselineOfASTC >> baseline: spec [
 		].
 	spec
 		baseline: 'Phineas'
-		with: [ spec repository: 'gitlab://pharo-project/phineas:master' ].
+		with: [ spec repository: 'gitlab://pharo-project/phineas:fixedTypes' ].
 	spec
 		baseline: 'ParametrizedTests'
 		with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
