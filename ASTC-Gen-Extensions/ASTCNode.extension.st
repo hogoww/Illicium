@@ -51,3 +51,9 @@ ASTCNode >> prettyPrint [
 	self acceptVisitor: prettyPrintVisitor.
 	^prettyPrintVisitor stream contents.
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCNode >> prettyPrintUsing: aPrettyPrinter [ 
+	self acceptVisitor: aPrettyPrinter.
+	^aPrettyPrinter stream contents.
+]

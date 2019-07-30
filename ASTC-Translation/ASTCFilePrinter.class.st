@@ -5,7 +5,8 @@ Class {
 		'fileName',
 		'compilationUnit',
 		'isPrimitive',
-		'virtualMachine'
+		'virtualMachine',
+		'prettyPrinter'
 	],
 	#category : #'ASTC-Translation'
 }
@@ -48,6 +49,7 @@ ASTCFilePrinter >> fileName: aString [
 { #category : #printing }
 ASTCFilePrinter >> initialize [ 
 	virtualMachine := VirtualMachine new.
+	prettyPrinter := ASTCPrettyPrint new.
 ]
 
 { #category : #accessing }
@@ -69,6 +71,16 @@ ASTCFilePrinter >> moveInVmDirectory [
 	ifFalse:[self error:'plugin didn''t move for some reason'].
 ]
 
+{ #category : #accessing }
+ASTCFilePrinter >> prettyPrinter [
+	^ prettyPrinter
+]
+
+{ #category : #accessing }
+ASTCFilePrinter >> prettyPrinter: aPrettyPrinter [
+	prettyPrinter := aPrettyPrinter
+]
+
 { #category : #printing }
 ASTCFilePrinter >> printInFile [
 	| file |
@@ -83,7 +95,7 @@ ASTCFilePrinter >> printInFile [
 { #category : #printing }
 ASTCFilePrinter >> printOnStream: aStream [	
 	isPrimitive ifTrue:[self printPrePluginStuff: aStream ].
-	aStream << compilationUnit prettyPrint.
+	aStream << (compilationUnit prettyPrintUsing: prettyPrinter)
 ]
 
 { #category : #printing }
