@@ -11,7 +11,7 @@ BaselineOfASTC >> baseline: spec [
 		for: #common
 		do: [
 			spec
-				"package: 'ASTC-Builder';" "Only dependance to Famix, unndeeded in most imports"
+				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
 				package: 'ASTC-Gen';
 				package: 'ASTC-Gen-Extensions' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-Translation' with:[ spec requires:#('ASTC-Gen') ];
