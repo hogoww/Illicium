@@ -95,138 +95,138 @@ ASTCMethodTranslator >> translateMethodAST: aMethodAST [
 ASTCMethodTranslator >> visitArgumentNode: anArgumentNode [
 	^ (translators at: #argumentNodeTranslator)
 		translateNode: anArgumentNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitArrayNode: anArrayNode [
 	^ (translators at: #arrayNodeTranslator)
 		translateNode: anArrayNode 
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitAssignmentNode: anAssignmentNode [
 	^ (translators at: #assignmentNodeTranslator)
 		translateNode: anAssignmentNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitBlockNode: aBlockNode [
 	^ (translators at: #blockNodeTranslator)
 		translateNode: aBlockNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitCascadeNode: aCascadeNode [
 	^ (translators at: #cascadeNodeTranslator)
 		translateNode: aCascadeNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitGlobalNode: aGlobalNode [
 	^ (translators at: #globalNodeTranslator)
 		translateNode: aGlobalNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitInstanceVariableNode: aInstanceVariableNode [
 	^ (translators at: #instanceVariableNodeTranslator)
 		translateNode: aInstanceVariableNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitLiteralArrayNode: aLiteralArrayNode [
 	^ (translators at: #literalArrayTranslator)
 		translateNode: aLiteralArrayNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitLiteralNode: aLiteralNode [
 	^ (translators at: #literalNodeTranslator)
 		translateNode: aLiteralNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitLiteralValueNode: aLiteralValueNode [
 	^ (translators at: #literalValueNodeTranslator)
 		translateNode: aLiteralValueNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitMessageNode: aMessageNode [
 	^ (translators at: #messageNodeTranslator)
 		translateNode: aMessageNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitMethodNode: aMethodNode [
 	^ (translators at: #methodNodeTranslator)
 		translateNode: aMethodNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitPragmaNode: aPragmaNode [
 	^ (translators at: #pragmaNodeTranslator)
 		translateNode: aPragmaNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitReturnNode: aReturnNode [
 	^ (translators at: #returnNodeTranslator)
 		translateNode: aReturnNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitSelfNode: aSelfNode [
 	^ (translators at: #selfNodeTranslator)
 		translateNode: aSelfNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitSequenceNode: aSequenceNode [
 	^ (translators at: #sequenceNodeTranslator)
 		translateNode: aSequenceNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitSuperNode: aSuperNode [
 	^ (translators at: #superNodeTranslator)
 		translateNode: aSuperNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitTemporaryNode: aTemporaryNode [
 	^ (translators at: #temporaryNodeTranslator)
 		translateNode: aTemporaryNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitThisContextNode: aThisContextNode [
 	^ (translators at: #thisContextNodeTranslator)
 		translateNode: aThisContextNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]
 
 { #category : #visiting }
 ASTCMethodTranslator >> visitVariableNode: aVariableNode [
 	^ (translators at: #variableNodeTranslator)
 		translateNode: aVariableNode
-		withMainTranslator: self
+		withMethodTranslator: self
 ]

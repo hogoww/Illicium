@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #translate }
-ASTCInstanceVariableNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
+ASTCInstanceVariableNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
 	^ aTranslator visitVariableNode: aNode
 ]

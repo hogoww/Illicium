@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCArgumentNodeTranslator >> translateNode: anArgumentNode withMainTranslator: aTranslator [
+ASTCArgumentNodeTranslator >> translateNode: anArgumentNode withMethodTranslator: aTranslator [
 	| argIdentifier |
 	argIdentifier := ASTCIdentifier new
 		id: anArgumentNode name;

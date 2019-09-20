@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMainTranslator: aTranslator [
+ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMethodTranslator: aTranslator [
 	^ (anAssignmentNode
 		propertyAt: ASTCShouldItBeDeclared property)
 		ifTrue: [ "type checking"

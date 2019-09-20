@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCReturnNodeTranslator >> translateNode: aReturnNode withMainTranslator: aTranslator [
+ASTCReturnNodeTranslator >> translateNode: aReturnNode withMethodTranslator: aTranslator [
 	^ ASTCReturn new
 		expression: (aReturnNode value acceptVisitor: aTranslator);
 		yourself

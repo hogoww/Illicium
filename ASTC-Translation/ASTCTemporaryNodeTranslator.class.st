@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #translate }
-ASTCTemporaryNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
+ASTCTemporaryNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
 	^ aTranslator visitVariableNode: aNode
 ]

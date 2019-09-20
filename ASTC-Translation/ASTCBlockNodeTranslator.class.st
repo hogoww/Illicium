@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCBlockNodeTranslator >> translateNode: aBlockNode withMainTranslator: aTranslator [
+ASTCBlockNodeTranslator >> translateNode: aBlockNode withMethodTranslator: aTranslator [
 	| res container |
 	res := ASTCBlock new.
 	container := ASTCContainer new.

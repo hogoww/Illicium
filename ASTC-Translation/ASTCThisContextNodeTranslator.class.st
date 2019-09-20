@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #translate }
-ASTCThisContextNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
+ASTCThisContextNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
 	self error: 'thisContext is not supported yet.'
 ]

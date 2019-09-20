@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #translate }
-ASTCSelfNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
+ASTCSelfNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
 
 ]

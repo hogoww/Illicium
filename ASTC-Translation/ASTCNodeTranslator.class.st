@@ -7,6 +7,6 @@ Class {
 }
 
 { #category : #translate }
-ASTCNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
+ASTCNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
 	self subclassResponsibility
 ]

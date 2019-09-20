@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCSequenceNodeTranslator >> translateNode: aSequenceNode withMainTranslator: aTranslator [
+ASTCSequenceNodeTranslator >> translateNode: aSequenceNode withMethodTranslator: aTranslator [
 	| res |
 	res:=ASTCBlock new.
 	res statements: (aSequenceNode statements collect: [:each | (each acceptVisitor: aTranslator) asASTCStatement] into: ASTCContainer new).

@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #translate }
-ASTCSuperNodeTranslator >> translateNode: aNode withMainTranslator: aTranslator [
+ASTCSuperNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
 	self error: 'super is not supported'
 ]

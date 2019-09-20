@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCMethodNodeTranslator >> translateNode: aMethodNode withMainTranslator: aTranslator [
+ASTCMethodNodeTranslator >> translateNode: aMethodNode withMethodTranslator: aTranslator [
 	^ ASTCFunctionDefinition new
 		declaration:
 			(ASTCFunctionDeclaration new

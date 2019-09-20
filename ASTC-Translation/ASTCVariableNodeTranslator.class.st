@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCVariableNodeTranslator >> translateNode: aVariableNode withMainTranslator: aTranslator [
+ASTCVariableNodeTranslator >> translateNode: aVariableNode withMethodTranslator: aTranslator [
 	^ ASTCIdentifier new
 		id: aVariableNode name;
 		yourself
