@@ -25,7 +25,7 @@ ASTCTranslator >> getReplacementType: aClass [
 
 { #category : #initialization }
 ASTCTranslator >> initialize [
-	classTranslator := ASTCClassTranslator new
+	classTranslator := ASTCIlliciumClassTranslator new
 		mainTranslator: self;
 		yourself.
 	replacementClasses := Dictionary new

@@ -6,24 +6,16 @@ Class {
 		'compilationUnit',
 		'isPrimitive',
 		'virtualMachine',
-		'prettyPrinter'
+		'prettyPrinter',
+		'fileCompiler',
+		'pluginMover'
 	],
-	#category : #'ASTC-Translation'
+	#category : #'ASTC-Translation-Installers'
 }
 
 { #category : #printing }
 ASTCFilePrinter >> CompileExternalPlugin [
-	| res commandLine |
-	commandLine := String
-		streamContents: [ :s | 
-			s
-				<< 'gcc -shared -I./pharo-local/iceberg/hogoww/ASTC/vmHeader -o ./generated/'
-				<< fileName << '.so -fPIC ./generated/' << fileName << '.c'
-				<< (virtualMachine for32bit: [ ' -m32' ] for64bit: [ '' ]) ].
-	res := LibC runCommand: commandLine.
-	res = 0
-		ifFalse: [ self error: 'plugin didn''t compile (or the comand line sucks)' ]
-	"If that fails, you probably need to change the name of the Iceberg repository in the command line"
+	fileCompiler compileExternalPluginNamed: fileName
 ]
 
 { #category : #accessing }
@@ -34,6 +26,16 @@ ASTCFilePrinter >> compilationUnit [
 { #category : #accessing }
 ASTCFilePrinter >> compilationUnit: aCompilationUnit [
 	^compilationUnit:= aCompilationUnit
+]
+
+{ #category : #accessing }
+ASTCFilePrinter >> fileCompiler [
+	^ fileCompiler
+]
+
+{ #category : #accessing }
+ASTCFilePrinter >> fileCompiler: aFileCompiler [
+	fileCompiler := aFileCompiler
 ]
 
 { #category : #accessing }
@@ -50,11 +52,14 @@ ASTCFilePrinter >> fileName: aString [
 ASTCFilePrinter >> initialize [ 
 	virtualMachine := VirtualMachine new.
 	prettyPrinter := ASTCPrettyPrint new.
+	fileCompiler := ASTCFileCompiler new.
+	pluginMover := ASTCPluginMover new.
+	
 ]
 
 { #category : #accessing }
 ASTCFilePrinter >> isPrimitive [
-	^isPrimitive
+	^ isPrimitive
 ]
 
 { #category : #accessing }
@@ -64,11 +69,17 @@ ASTCFilePrinter >> isPrimitive: aBoolean [
 
 { #category : #moving }
 ASTCFilePrinter >> moveInVmDirectory [
-	| res |
-	res:=LibC runCommand: (String streamContents: [:s| s << 'mv ./generated/' << fileName << '.so ~/Pharo/vms/70-x'
-		<< (virtualMachine for32bit: [ '86'] for64bit: ['64']) <<'/lib/pharo/5.0-201901051900']). 
-	res = 0
-	ifFalse:[self error:'plugin didn''t move for some reason'].
+	pluginMover movePluginInVmDirectory: fileName
+]
+
+{ #category : #accessing }
+ASTCFilePrinter >> pluginMover [
+	^ pluginMover
+]
+
+{ #category : #accessing }
+ASTCFilePrinter >> pluginMover: aPluginMover [
+	pluginMover := aPluginMover
 ]
 
 { #category : #accessing }

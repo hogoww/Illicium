@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methodTranslator',
-		'mainTranslator'
+		'mainTranslator',
+		'inferer'
 	],
 	#category : #'ASTC-Translation-overviewers'
 }
@@ -15,68 +16,37 @@ ASTCClassTranslator class >> translateClass: aClass [
 
 { #category : #translation }
 ASTCClassTranslator >> compilationUnitForClass: aClass [ 
-	| inferer typeAnnotator cu primitiveMethods methodsToTranslate ast |
+	| typeAnnotator cu primitiveMethods methodsToTranslate ast typedMethods |
 
-	"self preTranslationCheck: aClass".
-	primitiveMethods := self getPrimitiveTranslates: aClass.
-
-	ast := (ASTCVirtualMachineAPI >> #initializePlugin) ast copy.
-	ast methodNode methodClass: aClass.
-
+	self preTranslationCheck: aClass.
+	primitiveMethods := self getPrimitiveToTranslate: aClass. """""""""""""""""""UNUSED... >_<"
 	inferer := PhineasInferer new.
-	inferer inferAST: ast.
-	primitiveMethods do:[:aMethodAST|
-		inferer inferAST: aMethodAST ].
 
-	methodsToTranslate := Set new
-		addAll: primitiveMethods ;
-		yourself.
-	
-	inferer types methodTypes do:[:aMethodType|
-		((aClass methodDict anySatisfy: [:aMethod| aMethod selector = aMethodType node selector ]) 
-			and:[ aMethodType node pragmas noneSatisfy: [:aPragma|aPragma selector = ASTCVirtualMachineAPI doNotGeneratePragma]])
-			ifTrue:[ methodsToTranslate add: aMethodType node copy ].
-		].
-
-	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ; yourself.
-	methodsToTranslate do:[:aMethodAST|
-		aMethodAST acceptVisitor: typeAnnotator.
-		aMethodAST selector crLog.
-		].
+	self preTypeChecking: aClass.	
+	typedMethods := self typeMethodsOf: aClass.
 	
 	
 	cu:=ASTCCompilationUnit new.
-	methodsToTranslate do:[:aMethodAST| |res|
+	typedMethods do:[:aMethodAST| |res|
 		res:=methodTranslator translateMethodAST: aMethodAST.
 		cu definitions add: res.
 		cu declarations add: res declaration.
-		]. 
-
-	self flag:#horiffic."anyone here. Should use the mainTranslator"
-
-	aClass allInstVarNames do:[:ivName| |ivType|
-		ivType := mainTranslator getReplacementType: (inferer typeOfInstanceVariable: ivName ofClass: aClass) anyOne.
-		cu declarations	add: 
-			(ASTCVariableDeclaration new
-				id: (ASTCIdentifier new id: ivName ; yourself);
-				type: (ASTCType new type: ivType ; yourself);
-				yourself).
 		].
 
+	self translateClassPart: aClass in: cu.
+	
 	cu debugASTCStructure.
 	^ cu
 ]
 
-{ #category : #translation }
-ASTCClassTranslator >> getPrimitiveTranslates: aClass [
-	^ (aClass methods
-		select: [ :aMethod | 
-			| anAST |
-			anAST := aMethod ast.
-			anAST arguments isEmpty
-				and: [ anAST pragmas
-						noneSatisfy: [ :aPragma | aPragma selector = #doNotGenerate ] ] ])
-		collect: #ast
+{ #category : #accessing }
+ASTCClassTranslator >> doNotGeneratePragma [
+	^ ASTCVirtualMachineAPI doNotGeneratePragma
+]
+
+{ #category : #accessing }
+ASTCClassTranslator >> getPrimitiveToTranslate: aClass [
+	self subclassResponsibility 
 ]
 
 { #category : #accessing }
@@ -98,7 +68,7 @@ ASTCClassTranslator >> mainTranslator [
 
 { #category : #accessing }
 ASTCClassTranslator >> mainTranslator: aMainTranslator [
-	^ mainTranslator := aMainTranslator
+	mainTranslator := aMainTranslator
 ]
 
 { #category : #accessing }
@@ -108,17 +78,25 @@ ASTCClassTranslator >> methodTranslator [
 
 { #category : #accessing }
 ASTCClassTranslator >> methodTranslator: aMethodTranslator [
-	^ methodTranslator := aMethodTranslator
+	methodTranslator := aMethodTranslator
+]
+
+{ #category : #'translation-api' }
+ASTCClassTranslator >> methodsToType [
+	self subclassResponsibility 
 ]
 
 { #category : #translation }
 ASTCClassTranslator >> preTranslationCheck: aClass [
-	(aClass traitComposition
-		includesTrait: ASTCVirtualMachineAPI)
-		ifFalse: [ self error: 'can only translate plugins for now. They need to use the ASTCVirtualMachineAPI trait.' ].
+	self subclassResponsibility 
 ]
 
-{ #category : #translation }
+{ #category : #check }
+ASTCClassTranslator >> preTypeChecking: aClass [
+	"empty hook"
+]
+
+{ #category : #'translation-api' }
 ASTCClassTranslator >> translateClass: aClass [ 
 	| cu printer |
 
@@ -139,8 +117,50 @@ ASTCClassTranslator >> translateClass: aClass [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #translation }
+ASTCClassTranslator >> translateClassPart: aClass in: aCompilationUnit [
+	aClass allInstVarNames
+		do: [ :ivName | 
+			| ivType |
+			ivType := mainTranslator
+				getReplacementType: (inferer typeOfInstanceVariable: ivName ofClass: aClass) anyOne.
+			aCompilationUnit declarations
+				add:
+					(ASTCVariableDeclaration new
+						id:
+							(ASTCIdentifier new
+								id: ivName;
+								yourself);
+						type:
+							(ASTCType new
+								type: ivType;
+								yourself);
+						yourself) ]
+]
+
+{ #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	self halt.
 	self error:'todo'
+]
+
+{ #category : #accessing }
+ASTCClassTranslator >> typeMethodsOf: aClass [
+	| typedMethods typeAnnotator |
+	typedMethods := Set new.
+
+	self methodsToType
+		do: [ :aMethodType | 
+			((aClass methodDict
+				anySatisfy: [ :aMethod | aMethod selector = aMethodType node selector ])
+				and: [ aMethodType node pragmas
+						noneSatisfy:
+							[ :aPragma | aPragma selector = self doNotGeneratePragma ] ])
+				ifTrue: [ typedMethods add: aMethodType node copy ] ].
+
+	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ; yourself.
+	typedMethods do:[:aMethodAST|
+		aMethodAST acceptVisitor: typeAnnotator.
+		].
+	^typedMethods 
 ]
