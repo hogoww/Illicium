@@ -5,7 +5,7 @@ I only represent the metamodel, I don't define any behavior on it.
 I use a Trait that offer the possibilities to see me as text (in the Transcript) or as a UML Diagram with PlantUML.
 You could also generate me with the FmxMB classes by using the following message:
 ASTCBuilder new generate. 
-(which won't work in the current state of this program, since we use a slightly different semantic to be used with another generator. See ASTGenerator.)
+(which won't work in the current state of this program, since we use a slightly different semantic to be used with another generator. See ASTCGenerator.)
 
 You can interact with me with a visitor, by subclassing FmxMBVisitor (cf for documentation).
  
@@ -202,7 +202,7 @@ ASTCBuilder >> defineRelations [
 	"Define the relationships between the classes, following the FmxNG syntax."
 	
 	self flag:#comment.
-	"Right properties name will be IGNORED, types are used to generate validation visitor!"
+	"Non container side properties name will be IGNORED, types are used to generate validation visitor!"
 	
 	"General nodes"
 	(project property:#compilationUnits) <>-* (compilationUnit property:#project).
@@ -213,11 +213,11 @@ ASTCBuilder >> defineRelations [
 	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
 	(node property:#parent) -<> (node property:#parent).	
 
-	(declaration property:#id) <>- (identifier property:#id).
-	(definition property:#declaration) <>- (declaration property:#funcDefinition).
+	(declaration property:#id) <>-(identifier property:#id).
+	(definition property:#declaration) <>- (declaration property:#definition).
 
 
-	(functionDeclaration property:#type) <>- (type property:#type).	
+	(functionDeclaration property:#type) <>- (type property:#funcType).	
 	(functionDeclaration property:#parameters) <>-* (variableDeclaration property:#arguments).
 	
 	(functionDefinition property:#body) <>- (block property:#funcDefBody).

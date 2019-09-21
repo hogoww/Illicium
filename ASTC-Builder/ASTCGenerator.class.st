@@ -668,7 +668,7 @@ ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString w
 { #category : #'creation-system' }
 ASTCGenerator >> createClass: classNameAsSymbol superclass: superclassAsString withIVs: aStringOfIVs withTag: aTag [
 	"indirection for class creation, in case that changes."
-	^(ShSmalltalkGlobalsEnvironment new classNamed: superclassAsString ifAbsent:Object)
+	^(self class environment classNamed: superclassAsString)
 		subclass: classNameAsSymbol
 		instanceVariableNames: aStringOfIVs
 		classVariableNames: ''
@@ -940,14 +940,14 @@ ASTCGenerator >> visitRelationSide: aRelationSide [
 
 	oppositeRelationSide:= aRelationSide otherSide.	
 	
-"	Transcript cr;
+	Transcript cr;
 	show:aRelationSide name;
 	space;
 	show:((aRelationSide isMany) ifTrue:['*']ifFalse:[ aRelationSide isContainer ifTrue:['<>']ifFalse:['']]); 
 	show: '-';  
 	show:((oppositeRelationSide isMany) ifTrue:['*']ifFalse:[ oppositeRelationSide isContainer ifTrue:['<>']ifFalse:['']]);
 	space ;
-	show: oppositeRelationSide name."
+	show: oppositeRelationSide name.
 
 	currentRelationshipSides add:aRelationSide.
 	
