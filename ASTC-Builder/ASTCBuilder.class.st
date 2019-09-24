@@ -87,9 +87,9 @@ ASTCBuilder >> defineClasses [
 	super defineClasses.
 	
 	"general"
+	node:=builder newClassNamed:#Node.
 	project:=builder newClassNamed:#Project.
 	compilationUnit:=builder newClassNamed:#CompilationUnit.
-	node:=builder newClassNamed:#Node.
 	
 		"Node Subclasses"
 		definition:=builder newClassNamed:#Definition.
