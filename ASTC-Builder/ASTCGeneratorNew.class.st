@@ -69,6 +69,7 @@ ASTCGeneratorNew >> aClassAsVariableName: aClassNameAsString [
 	"ASTCGenerator new aClassAsVariableName: self class asString>>>'anASTCGenerator'" 
 	self flag:#testInComment.
 	self flag:#wrongClass."should be on String, But I'm trying to do a self sustaining package."
+	self flag:#rename. "Not explicit enough.."
 	^(aClassNameAsString first isVowel ifTrue:['an']ifFalse:['a']),aClassNameAsString capitalized.
 ]
 
@@ -330,29 +331,47 @@ ASTCGeneratorNew >> addHashOn: aClass withPropertiesNamed: properties [
 	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
 ]
 
-{ #category : #actions }
+{ #category : #'generation-attribute' }
 ASTCGeneratorNew >> addInstanceVariable: aProperty to: aClass [
-	| propertyName |
-	propertyName:=aProperty name.
-	(aClass allSlots "we check if the slot already exists"
-		anySatisfy: [ :each | each name = propertyName ])
-		ifTrue: [ ^ self ].
-	
-	debug ifTrue:[
-		Transcript show: 'property: ' ; show: aProperty ; cr
-		].
-
-	aClass addInstVarNamed: propertyName."we add the new instance variable" 
-
+	(aClass allSlots anySatisfy: [ :each | each name = aProperty name ])
+		ifTrue: [ ^ self ].	"we check if the slot already exists"
+	debug
+		ifTrue: [ Transcript
+				show: 'property: ';
+				show: aProperty;
+				cr ].
+	aClass addInstVarNamed: aProperty name.
+	self addInstanceVariableAccessors: aProperty to: aClass
 ]
 
-{ #category : #actions }
+{ #category : #'generation-attribute' }
+ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
+	| propertyName  aPropertyName method |
+	
+	propertyName := aProperty name.
+	aPropertyName :=  self 	aClassAsVariableName: propertyName.
+	
+	"getter"
+	method := propertyName asMethodWithBody: 
+				[ ^ propertyName ].
+	self addMethod: method asString on: aClass withProtocol: 'accessors'.
+	
+	"setter"
+	method := propertyName asMethodWithBody:
+		([ aPropertyName parent: self ] + 
+		[:asClass | ^ propertyName := aPropertyName ])
+		withArgs:{ #asClass -> aPropertyName } asDictionary.
+	self addMethod: method asString on: aClass withProtocol: 'accessors'.
+]
+
+{ #category : #'generation-attribute' }
 ASTCGeneratorNew >> addInstancesVariablesTo: aFMXClass [
 	aFMXClass properties
-		do:
-			[ :aProperty | 
-			aProperty acceptVisitor:self
-		].
+		do: [ :aProperty | 
+			(aProperty isTypedProperty
+				or: [ aProperty isRelationSide and: [ aProperty isContainer not ] ])
+				ifTrue: [ self addInstanceVariable: aProperty to: aFMXClass realClass ].
+			 ]
 ]
 
 { #category : #'creation-system' }
