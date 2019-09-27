@@ -349,7 +349,7 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	| propertyName  aPropertyName method |
 	
 	propertyName := aProperty name.
-	aPropertyName :=  self 	aClassAsVariableName: propertyName.
+	aPropertyName :=  self aClassAsVariableName: propertyName.
 	
 	"getter"
 	method := propertyName asMethodWithBody: 
@@ -362,6 +362,8 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 		[:asClass | ^ propertyName := aPropertyName ])
 		withArgs:{ #asClass -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessors'.
+	self halt.
+	self flag:#bug. "parent needs to be changed only when it's a property"
 ]
 
 { #category : #'generation-attribute' }
