@@ -1,6 +1,6 @@
 Class {
-	#name : #ASTCDeclaration,
-	#superclass : #ASTCNode,
+	#name : #ASTCIdentifier,
+	#superclass : #ASTCExpression,
 	#instVars : [
 		'id'
 	],
@@ -8,12 +8,11 @@ Class {
 }
 
 { #category : #accessors }
-ASTCDeclaration >> id [
+ASTCIdentifier >> id [
 	^ id
 ]
 
 { #category : #accessors }
-ASTCDeclaration >> id: anId [
-	anId parent: self.
+ASTCIdentifier >> id: anId [
 	^ id := anId
 ]

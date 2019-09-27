@@ -1,6 +1,6 @@
 Class {
-	#name : #ASTCDefinition,
-	#superclass : #ASTCNode,
+	#name : #ASTCDeclarationStatement,
+	#superclass : #ASTCStatement,
 	#instVars : [
 		'declaration'
 	],
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #accessors }
-ASTCDefinition >> declaration [
+ASTCDeclarationStatement >> declaration [
 	^ declaration
 ]
 
 { #category : #accessors }
-ASTCDefinition >> declaration: aDeclaration [
+ASTCDeclarationStatement >> declaration: aDeclaration [
 	aDeclaration parent: self.
 	^ declaration := aDeclaration
 ]

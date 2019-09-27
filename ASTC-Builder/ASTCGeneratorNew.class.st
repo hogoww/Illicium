@@ -355,15 +355,17 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	method := propertyName asMethodWithBody: 
 				[ ^ propertyName ].
 	self addMethod: method asString on: aClass withProtocol: 'accessors'.
-	
+
 	"setter"
-	method := propertyName asMethodWithBody:
-		([ aPropertyName parent: self ] + 
-		[:asClass | ^ propertyName := aPropertyName ])
-		withArgs:{ #asClass -> aPropertyName } asDictionary.
+	method := propertyName,':' asMethodWithBody:
+		((aProperty isTypedProperty ifTrue:[[]]
+		
+		ifFalse:[[ aPropertyName parent: self ]]) + 
+		[:anInstance | ^ propertyName := aPropertyName ])
+		withArgs:{ #anInstance -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessors'.
-	self halt.
-	self flag:#bug. "parent needs to be changed only when it's a property"
+
+
 ]
 
 { #category : #'generation-attribute' }
