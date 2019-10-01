@@ -23,15 +23,15 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ];
 				package: 'IlliciumPlugins' with: [ spec requires: #('ASTC-Kernel') ];
 				package: 'IlliciumPlugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].	
-		spec
-			baseline: 'Phineas'
-			with: [ spec repository: 'gitlab://pharo-project/phineas:fixedTypes' ].
-		spec
-			baseline: 'ParametrizedTests'
-			with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
-		spec
-			baseline: 'PlainPharoCode'
-			with: [ spec repository: 'github://tesonep/PlainPharoCode:master' ].
+			spec
+				baseline: 'Phineas'
+				with: [ spec repository: 'gitlab://pharo-project/phineas:fixedTypes' ].
+			spec
+				baseline: 'ParametrizedTests'
+				with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
+			spec
+				baseline: 'PlainPharoCode'
+				with: [ spec repository: 'github://tesonep/PlainPharoCode:master' ].
 		].
 
 ]
