@@ -211,7 +211,7 @@ ASTCBuilder >> defineRelations [
 
 	"Reflexive nodes"
 	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
-	(node property:#parent) -<> (node property:#parent).	
+	(node property:#parent) <>- (node property:#parent).	
 
 	(declaration property:#id) <>-(identifier property:#id).
 	(definition property:#declaration) <>- (declaration property:#definition).
