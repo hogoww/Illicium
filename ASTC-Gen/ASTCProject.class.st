@@ -13,7 +13,7 @@ ASTCProject >> compilationUnits [
 ]
 
 { #category : #accessors }
-ASTCProject >> compilationUnits: aCompilationUnits [
-	aCompilationUnits parent: self.
-	^ compilationUnits := aCompilationUnits
+ASTCProject >> compilationUnits: aCollectionOfCompilationUnits [
+	aCollectionOfCompilationUnits parent: self.
+	^ compilationUnits := aCollectionOfCompilationUnits
 ]

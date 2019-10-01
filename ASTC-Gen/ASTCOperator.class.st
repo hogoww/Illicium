@@ -14,9 +14,9 @@ ASTCOperator >> operands [
 ]
 
 { #category : #accessors }
-ASTCOperator >> operands: anOperands [
-	anOperands parent: self.
-	^ operands := anOperands
+ASTCOperator >> operands: aCollectionOfExpressions [
+	aCollectionOfExpressions parent: self.
+	^ operands := aCollectionOfExpressions
 ]
 
 { #category : #accessors }

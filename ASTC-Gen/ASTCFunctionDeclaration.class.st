@@ -14,9 +14,9 @@ ASTCFunctionDeclaration >> parameters [
 ]
 
 { #category : #accessors }
-ASTCFunctionDeclaration >> parameters: aParameters [
-	aParameters parent: self.
-	^ parameters := aParameters
+ASTCFunctionDeclaration >> parameters: aCollectionOfVariableDeclarations [
+	aCollectionOfVariableDeclarations parent: self.
+	^ parameters := aCollectionOfVariableDeclarations
 ]
 
 { #category : #accessors }

@@ -14,9 +14,9 @@ ASTCCompilationUnit >> declarations [
 ]
 
 { #category : #accessors }
-ASTCCompilationUnit >> declarations: aDeclarations [
-	aDeclarations parent: self.
-	^ declarations := aDeclarations
+ASTCCompilationUnit >> declarations: aCollectionOfDeclarations [
+	aCollectionOfDeclarations parent: self.
+	^ declarations := aCollectionOfDeclarations
 ]
 
 { #category : #accessors }
@@ -25,7 +25,7 @@ ASTCCompilationUnit >> definitions [
 ]
 
 { #category : #accessors }
-ASTCCompilationUnit >> definitions: aDefinitions [
-	aDefinitions parent: self.
-	^ definitions := aDefinitions
+ASTCCompilationUnit >> definitions: aCollectionOfDefinitions [
+	aCollectionOfDefinitions parent: self.
+	^ definitions := aCollectionOfDefinitions
 ]

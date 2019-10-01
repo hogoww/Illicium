@@ -14,9 +14,9 @@ ASTCFunctionCall >> arguments [
 ]
 
 { #category : #accessors }
-ASTCFunctionCall >> arguments: anArguments [
-	anArguments parent: self.
-	^ arguments := anArguments
+ASTCFunctionCall >> arguments: aCollectionOfExpressions [
+	aCollectionOfExpressions parent: self.
+	^ arguments := aCollectionOfExpressions
 ]
 
 { #category : #accessors }

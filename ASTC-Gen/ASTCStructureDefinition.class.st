@@ -13,7 +13,7 @@ ASTCStructureDefinition >> members [
 ]
 
 { #category : #accessors }
-ASTCStructureDefinition >> members: aMembers [
-	aMembers parent: self.
-	^ members := aMembers
+ASTCStructureDefinition >> members: aCollectionOfVariableDeclarations [
+	aCollectionOfVariableDeclarations parent: self.
+	^ members := aCollectionOfVariableDeclarations
 ]

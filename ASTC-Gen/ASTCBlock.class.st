@@ -13,7 +13,7 @@ ASTCBlock >> statements [
 ]
 
 { #category : #accessors }
-ASTCBlock >> statements: aStatements [
-	aStatements parent: self.
-	^ statements := aStatements
+ASTCBlock >> statements: aCollectionOfStatements [
+	aCollectionOfStatements parent: self.
+	^ statements := aCollectionOfStatements
 ]
