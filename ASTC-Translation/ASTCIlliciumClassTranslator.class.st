@@ -6,7 +6,6 @@ Class {
 
 { #category : #accessing }
 ASTCIlliciumClassTranslator >> getPrimitiveToTranslate: aClass [
-self halt.
 	^ (aClass methods
 		select: [ :aMethod | 
 			| anAST |
