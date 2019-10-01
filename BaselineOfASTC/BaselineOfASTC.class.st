@@ -11,6 +11,7 @@ BaselineOfASTC >> baseline: spec [
 		for: #common
 		do: [
 			spec
+				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
 				package: 'ASTC-Gen';
 				package: 'ASTC-Gen-Extensions' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-Translation' with:[ spec requires:#('ASTC-Gen') ];
@@ -21,20 +22,15 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-VisitorsRB' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ];
 				package: 'IlliciumPlugins' with: [ spec requires: #('ASTC-Kernel') ];
-				package: 'IlliciumPlugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].
+				package: 'IlliciumPlugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].	
+		spec
+			baseline: 'Phineas'
+			with: [ spec repository: 'gitlab://pharo-project/phineas:fixedTypes' ].
+		spec
+			baseline: 'ParametrizedTests'
+			with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
 		].
-"	spec
-		for: 'CAST'
-		do:[ 
-			spec 
-			package: 'ASTC-Builder' with:[ spec requires:#('PlainPharoCode')]
-		].
-"	spec
-		baseline: 'Phineas'
-		with: [ spec repository: 'gitlab://pharo-project/phineas:fixedTypes' ].
-	spec
-		baseline: 'ParametrizedTests'
-		with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
+
 ]
 
 { #category : #accessing }
