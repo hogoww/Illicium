@@ -100,52 +100,6 @@ ASTCGeneratorNew >> addAcceptMethodOn:aClass [
 
 ]
 
-{ #category : #'generating-attributes' }
-ASTCGeneratorNew >> addAccessors: aSymbol isMany: aBoolean isProperty:isPropertyBoolean [
-	"shortcut for the currentClass Instance Variable"
-	self addAccessors: aSymbol on:currentClass isMany: aBoolean isProperty:isPropertyBoolean. 
-	
-
-]
-
-{ #category : #'generating-attributes' }
-ASTCGeneratorNew >> addAccessors: aSymbol on: aClass isMany: isManyBoolean isProperty:isPropertyBoolean [
-	| methodBody propertyName variableName |
-	"Add the accessors for the instance variable aSymbol, on aClass"
-	"The isManyBoolean represent a * side of a relation in the model, and means that we have to put a collection instead of an Object in the setter."
-	self flag:#improvement." isPropertyBoolean ifTrue:[We have a property which, by our semantic means that it's not a type from ASTC. Should be improved ]
-															ifFalse:[It's a link with another class of the ASTC, meaning that we'll have to update the parent of the given property in the setter.]"
-
-	self flag:#todo."aSelector should notify his parent before getting adopted by someone else." 
-	
-	propertyName:=aSymbol asString.
-	"getter"
-	methodBody :=
-propertyName,'
-	^',propertyName.
-		
-	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
-	
-	"setter"	
-	variableName:=isManyBoolean ifFalse:['anObject'] ifTrue:['aCollection'].
-	methodBody :=
-propertyName,': ', variableName,'
-	',propertyName,':=',variableName,'.
-	',((isPropertyBoolean or:['parent' match:propertyName]) 
-		ifFalse:[
-				variableName,' parent:self.
-	'		
-	]ifTrue:['']),
-
-	'^',variableName,'.'.
-	
-	self addMethod: methodBody on: aClass withProtocol: 'accessors'.
-	
-	isManyBoolean ifTrue:[
-		self addPropertyInitialize: aSymbol.
-		].
-]
-
 { #category : #'generating-class-testing' }
 ASTCGeneratorNew >> addAllClassTesterOn:aClass [
 	| generatedPackage methodBody |
@@ -349,8 +303,9 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	| propertyName  aPropertyName method |
 	
 	propertyName := aProperty name.
-	aPropertyName :=  self aClassAsVariableName: propertyName.
-	
+	aPropertyName := (aProperty isRelationSide and:[ aProperty isMany ]) 
+		ifTrue: [ String streamContents:[:s| s << 'aCollectionOf' << aProperty otherSide relatedClass name asString << 's' ] ] 
+		ifFalse: [ self aClassAsVariableName: propertyName ] .
 	"getter"
 	method := propertyName asMethodWithBody: 
 				[ ^ propertyName ].
@@ -473,30 +428,6 @@ ASTCGeneratorNew >> addPrinterVisitorsMethods [
 	self addMethod:'toTranscript
 	Transcript show:self ;cr.' on:astPrinterVisitor withProtocol:'printing'.
 	
-]
-
-{ #category : #'generating-attributes' }
-ASTCGeneratorNew >> addProperty: aString isMany: isManyBoolean [
-	"shortcut for properties"
-	self addProperty:aString isMany: isManyBoolean isProperty:false.
-	
-]
-
-{ #category : #'generating-attributes' }
-ASTCGeneratorNew >> addProperty: aString isMany: isManyBoolean isProperty:isPropertyBoolean [
-	"isMany is a property from a Relationship, meaning that a relationship side is '*' (*-<> or *-)"
-	"isPropertyBoolean true if aString represent a property, false if it's a relationshipSide"
-	(currentClass allSlots "we check if the slot already exists"
-		anySatisfy: [ :each | each name = aString ])
-		ifTrue: [ ^ self ].	
-
-	currentClass addInstVarNamed: aString."we create a new instance variable" 
-
-	self addAccessors: aString isMany: isManyBoolean isProperty:isPropertyBoolean. 
-	self addWalkerProperty: aString for: currentClass  isMany: isManyBoolean isProperty:isPropertyBoolean.
-	isPropertyBoolean ifTrue:[
-		self addPrinterProperty: aString.
-	]
 ]
 
 { #category : #'generating-initialize' }
