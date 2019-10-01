@@ -694,7 +694,7 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 	| superclass classSymbol |
 	"AbstractVisitor"
 	superclass := #Object.
-	classSymbol := (self prefix , 'Visitor') asSymbol.
+	classSymbol := self prefix , #Visitor.
 	astVisitorClass := self
 		createClass: classSymbol
 		superclass: superclass
@@ -704,7 +704,7 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 
 		"WalkerVisitor --|> AbstractVisitor"
 		superclass := classSymbol.
-		classSymbol := (self prefix , 'WalkerVisitor') asSymbol.
+		classSymbol := self prefix , #WalkerVisitor.
 		astWalkerVisitorClass := self
 			createClass: classSymbol
 			superclass: superclass
@@ -712,7 +712,7 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 
 			"Printer visitor --|> WalkerVisitor"
 			superclass := classSymbol.
-			classSymbol := (self prefix , 'PrinterVisitor') asSymbol.
+			classSymbol := self prefix , #PrinterVisitor.
 			astPrinterVisitor := self
 				createClass: classSymbol
 				superclass: superclass
@@ -721,7 +721,7 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 			self addPrinterVisitorsMethods.
 
 		"DebugStructureVisitor --|> WalkerVisitor"
-		classSymbol := (self prefix , 'DebugStructureVisitor') asSymbol.
+		classSymbol := self prefix , #DebugStructureVisitor.
 		astDebugStructureVisitor := self
 			createClass: classSymbol
 			superclass: superclass
@@ -729,7 +729,7 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 
 			"StructureValidatorVisitor --|> DebugStructureVisitor"
 			superclass := classSymbol.
-			classSymbol := (self prefix , 'StructureValidatorVisitor') asSymbol.
+			classSymbol := self prefix , #StructureValidatorVisitor.
 			astStructureValidatorVisitor := self
 				createClass: classSymbol
 				superclass: superclass
@@ -879,7 +879,7 @@ ASTCGeneratorNew >> relationSideStuff [
 ASTCGeneratorNew >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
 	
-	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name = 'ASTC' or:[aRepository name ='astc']].
+	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name uncapitalized = 'astc' ].
 
 	listOfPackageNameToReload:= OrderedCollection new.
 	listOfPackageNameToReload 
