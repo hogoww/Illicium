@@ -2,7 +2,7 @@ Extension { #name : #FmxMBProperty }
 
 { #category : #'*ASTC-Builder' }
 FmxMBProperty >> isRelationSide [
-	^ true
+	^ false
 ]
 
 { #category : #'*ASTC-Builder' }
