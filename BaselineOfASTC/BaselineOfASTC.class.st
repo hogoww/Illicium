@@ -11,7 +11,6 @@ BaselineOfASTC >> baseline: spec [
 		for: #common
 		do: [
 			spec
-				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
 				package: 'ASTC-Gen';
 				package: 'ASTC-Gen-Extensions' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-Translation' with:[ spec requires:#('ASTC-Gen') ];
@@ -24,7 +23,13 @@ BaselineOfASTC >> baseline: spec [
 				package: 'IlliciumPlugins' with: [ spec requires: #('ASTC-Kernel') ];
 				package: 'IlliciumPlugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].
 		].
-	spec
+"	spec
+		for: 'CAST'
+		do:[ 
+			spec 
+			package: 'ASTC-Builder' with:[ spec requires:#('PlainPharoCode')]
+		].
+"	spec
 		baseline: 'Phineas'
 		with: [ spec repository: 'gitlab://pharo-project/phineas:fixedTypes' ].
 	spec
