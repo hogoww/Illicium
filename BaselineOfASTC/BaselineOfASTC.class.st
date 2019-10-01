@@ -29,6 +29,9 @@ BaselineOfASTC >> baseline: spec [
 		spec
 			baseline: 'ParametrizedTests'
 			with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
+		spec
+			baseline: 'PlainPharoCode'
+			with: [ spec repository: 'github://tesonep/PlainPharoCode:master' ].
 		].
 
 ]
