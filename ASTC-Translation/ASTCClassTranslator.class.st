@@ -81,7 +81,7 @@ ASTCClassTranslator >> methodTranslator: aMethodTranslator [
 	methodTranslator := aMethodTranslator
 ]
 
-{ #category : #'translation-api' }
+{ #category : #translation }
 ASTCClassTranslator >> methodsToType [
 	self subclassResponsibility 
 ]
@@ -140,7 +140,6 @@ ASTCClassTranslator >> translateClassPart: aClass in: aCompilationUnit [
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	self halt.
 	self error:'todo'
 ]
 
