@@ -41,6 +41,7 @@ ASTCTranslator >> initialize [
 	replacementClasses := Dictionary new
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
+		at: String put: ASTCString;
 		at: ASTCUserClass put: ASTCUserClass;
 		at: ASTCInterpreterProxy put: ASTCVirtualMachineProxy;
 		yourself
