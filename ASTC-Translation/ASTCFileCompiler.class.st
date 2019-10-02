@@ -16,6 +16,9 @@ ASTCFileCompiler >> compileExternalPluginNamed: aFileName [
 				<< (virtualMachine for32bit: [ ' -m32' ] for64bit: [ '' ]) ].
 	res := LibC runCommand: commandLine.
 	res = 0
-		ifFalse: [ self error: 'plugin didn''t compile (or the comand line sucks)' ]
+		ifFalse: [ self error: 'plugin didn''t compile (or the comand line sucks)' .
+			"proceed to copy to clipboard"
+			Clipboard clipboardText: commandLine.
+			self halt ]
 	"If that fails, you probably need to change the name of the Iceberg repository in the command line"
 ]
