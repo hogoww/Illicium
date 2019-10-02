@@ -15,7 +15,7 @@ ASTCPluginMover >> movePluginInVmDirectory: aFileName [
 	res := LibC runCommand: moveCommand.
 	res = 0
 		ifTrue: [ ^ self ].
-	Error signal: 'plugin didn''t compile (or the comand line sucks)'.
+	Error signal: 'plugin didn''t move for some reason'.
 	Clipboard clipboardText: moveCommand.
 	self halt.
 ]
