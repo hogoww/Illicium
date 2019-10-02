@@ -316,7 +316,7 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 		((aProperty isTypedProperty ifTrue:[[]]
 		
 		ifFalse:[[ aPropertyName parent: self ]]) + 
-		[:anInstance | ^ propertyName := aPropertyName ])
+		[:anInstance | propertyName := aPropertyName ])
 		withArgs:{ #anInstance -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessors'.
 
