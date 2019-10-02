@@ -15,7 +15,7 @@ Class {
 RandomTestClass >> aMain [
 	| res |
 	<primitiveToBe>
-	res:= self factorialIter: 7.
+	res:= self factorialIter: 12.
 	interpreterProxy push:(interpreterProxy integerObjectOf:res).
 
 	^ 0

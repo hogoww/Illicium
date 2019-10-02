@@ -4,11 +4,18 @@ Class {
 	#category : #'ASTC-Translation-Installers'
 }
 
-{ #category : #'as yet unclassified' }
-ASTCPluginMover >> movePluginInVmDirectory: aFileName [ 
-	| res virtualMachine |
+{ #category : #accessing }
+ASTCPluginMover >> movePluginInVmDirectory: aFileName [
+	| res virtualMachine moveCommand |
 	virtualMachine := VirtualMachine new.
-	res:=LibC runCommand: (String streamContents: [:s| s << 'mv ./generated/' << aFileName << '.so ' << virtualMachine directory ]). 
+	moveCommand := String
+		streamContents: [ :s | 
+			s << 'mv ./generated/' << aFileName << '.so '
+				<< virtualMachine directory ].
+	res := LibC runCommand: moveCommand.
 	res = 0
-	ifFalse:[self error:'plugin didn''t move for some reason'].
+		ifTrue: [ ^ self ].
+	Error signal: 'plugin didn''t compile (or the comand line sucks)'.
+	Clipboard clipboardText: moveCommand.
+	self halt.
 ]
