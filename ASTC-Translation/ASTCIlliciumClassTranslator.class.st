@@ -16,11 +16,6 @@ ASTCIlliciumClassTranslator >> getPrimitiveToTranslate: aClass [
 		collect: #ast
 ]
 
-{ #category : #typing }
-ASTCIlliciumClassTranslator >> methodsToType [
-	^ inferer types methodTypes
-]
-
 { #category : #translation }
 ASTCIlliciumClassTranslator >> preTranslationCheck: aClass [
 	(aClass traitComposition

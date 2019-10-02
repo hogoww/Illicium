@@ -83,7 +83,7 @@ ASTCClassTranslator >> methodTranslator: aMethodTranslator [
 
 { #category : #translation }
 ASTCClassTranslator >> methodsToType [
-	self subclassResponsibility 
+	^ inferer types methodTypes
 ]
 
 { #category : #translation }
