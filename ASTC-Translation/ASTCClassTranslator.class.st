@@ -9,11 +9,6 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #'as yet unclassified' }
-ASTCClassTranslator class >> translateClass: aClass [
-	^ self new translateClass: aClass
-]
-
 { #category : #translation }
 ASTCClassTranslator >> compilationUnitForClass: aClass [ 
 	| typeAnnotator cu primitiveMethods methodsToTranslate ast typedMethods methods |
@@ -143,8 +138,14 @@ ASTCClassTranslator >> translateInstanceVariable: anIVName from: aClass [
 ]
 
 { #category : #'translation-api' }
+ASTCClassTranslator >> translateMethod: aCompiledMethod [
+	^methodTranslator translateMethodAST: aCompiledMethod ast
+]
+
+{ #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	self error:'todo'
+	self flag:#todo. "missing typecheck"
+	^methodTranslator translateMethodAST: (aClass >> aSelector) ast
 ]
 
 { #category : #accessing }

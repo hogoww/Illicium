@@ -8,12 +8,17 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
 ASTCTranslator class >> translateClass: aClass [
 	^ self new translateClass: aClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
+ASTCTranslator class >> translateMethod: aCompiledMethod [ 
+	^ self new translateMethod: aCompiledMethod
+]
+
+{ #category : #'translation-api' }
 ASTCTranslator class >> translateMethod: aSelector fromClass: aClass [
 	^ self new translateMethod: aSelector fromClass: aClass
 ]
@@ -57,12 +62,17 @@ ASTCTranslator >> replacementClasses: aDictionnary [
 	replacementClasses := aDictionnary
 ]
 
-{ #category : #translation }
+{ #category : #'translation-api' }
 ASTCTranslator >> translateClass: aClass [
 	^ classTranslator translateClass: aClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
+ASTCTranslator >> translateMethod: aCompiledMethod [
+	^ classTranslator translateMethod: aCompiledMethod 
+]
+
+{ #category : #'translation-api' }
 ASTCTranslator >> translateMethod: aSelector fromClass: aClass [
 	^ classTranslator translateMethod: aSelector fromClass: aClass
 ]
