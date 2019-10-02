@@ -18,6 +18,16 @@ ASTCTranslator class >> translateMethod: aSelector fromClass: aClass [
 	^ self new translateMethod: aSelector fromClass: aClass
 ]
 
+{ #category : #accessors }
+ASTCTranslator >> classTranslator [
+	^classTranslator
+]
+
+{ #category : #accessors }
+ASTCTranslator >> classTranslator: aClassTranslator [
+	classTranslator := aClassTranslator
+]
+
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
 	^ replacementClasses at: aClass ifAbsent:[ ^ASTCUserClass  ]."unknown type for now"
@@ -36,14 +46,14 @@ ASTCTranslator >> initialize [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : #accessors }
 ASTCTranslator >> replacementClasses [
 	^ replacementClasses
 ]
 
-{ #category : #initialization }
+{ #category : #accessors }
 ASTCTranslator >> replacementClasses: aDictionnary [
-	^ replacementClasses := aDictionnary
+	replacementClasses := aDictionnary
 ]
 
 { #category : #translation }
