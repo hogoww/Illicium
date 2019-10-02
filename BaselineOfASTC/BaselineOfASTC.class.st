@@ -37,14 +37,23 @@ BaselineOfASTC >> baseline: spec [
 ]
 
 { #category : #accessing }
-BaselineOfASTC >> lastPlayground [ 
-ASTCGenerator generate.
+BaselineOfASTC >> lastPlayground [
 
-ASTCClassTranslator new mainTranslator: ASTCTranslator new; translateClass: RandomTestClass.
+ASTCGenerator generate.
+ASTCGeneratorNew generate.
+
+ASTCTranslator new translateClass: RandomTestClass.
+
+ASTCTranslator translateClass: RandomTestClass.
+
+ASTCSlangClassTranslator translateClass: MiscPrimitivePlugin.
+
+ASTCSlangClassTranslator translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
 
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.
 
+PlainCodeVisitorTest new setUp testRighSideAssignementVariableNodeExpand.
 ]
 
 { #category : #accessing }
