@@ -6,7 +6,7 @@ Class {
 
 { #category : #initialization }
 ASTCSlangTranslator >> initialize [
-	classTranslator := ASTCIlliciumClassTranslator new
+	classTranslator := ASTCSlangClassTranslator new
 		mainTranslator: self;
 		yourself.
 	replacementClasses := Dictionary new
