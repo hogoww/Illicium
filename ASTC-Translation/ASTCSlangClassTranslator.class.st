@@ -25,5 +25,27 @@ ASTCSlangClassTranslator >> preTranslationCheck: aClass [
 
 { #category : #check }
 ASTCSlangClassTranslator >> preTypeChecking: aClass [
-	inferer inferAST: (aClass >> #initializePlugin) ast
+	| piType |
+	inferer types createConcreteType: aClass.
+	piType := (inferer typeForClass: InterpreterPlugin).
+	piType instanceVariable: #interpreterProxy
+		ifPresent: [ piType instanceVariables at:#interpreterProxy put: 
+			(inferer types createConcreteType: InterpreterProxy) ].
+	piType instanceVariable: #moduleName
+	ifPresent: [ piType instanceVariables at:#moduleName put: 
+		(inferer types createConcreteType: String) ].
+
+	self halt.
+]
+
+{ #category : #check }
+ASTCSlangClassTranslator >> translateClassPart: aClass in: aCompilationUnit [
+	| slangCompatibleIVs |
+	slangCompatibleIVs := aClass allInstVarNames asOrderedCollection
+		remove: #translatedMethodCache;
+		yourself.
+	slangCompatibleIVs
+		do: [ :ivName | 
+			aCompilationUnit declarations
+				add: (self translateInstanceVariable: ivName from: aClass) ]
 ]
