@@ -31,11 +31,11 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 				ifTrue: [ ^ SmallInteger ].
 			types size = 1
 				ifTrue: [ ^ types anyOne ]
-				ifFalse: [ self error: 'The type inferencer had no or too many results' ]
+				ifFalse: [ Error signal: 'The type inferencer had no or too many results' ]
 				]
 		ifAbsent: [ 
-			self error:
-					'The type inferencer couldn''t figure out the type of '	, aNode asString ].
+			Error signal:
+					'The type inferencer couldn''t figure out the type of a '	, aNode class asString ].
 ]
 
 { #category : #initialization }
