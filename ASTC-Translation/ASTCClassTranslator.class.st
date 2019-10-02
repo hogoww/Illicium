@@ -121,21 +121,25 @@ ASTCClassTranslator >> translateClass: aClass [
 ASTCClassTranslator >> translateClassPart: aClass in: aCompilationUnit [
 	aClass allInstVarNames
 		do: [ :ivName | 
-			| ivType |
-			ivType := mainTranslator
-				getReplacementType: (inferer typeOfInstanceVariable: ivName ofClass: aClass) anyOne.
 			aCompilationUnit declarations
-				add:
-					(ASTCVariableDeclaration new
-						id:
-							(ASTCIdentifier new
-								id: ivName;
-								yourself);
-						type:
-							(ASTCType new
-								type: ivType;
-								yourself);
-						yourself) ]
+				add: (self translateInstanceVariable: ivName from: aClass) ]
+]
+
+{ #category : #translation }
+ASTCClassTranslator >> translateInstanceVariable: anIVName from: aClass [
+	| ivType |
+	ivType := mainTranslator
+		getReplacementType: (inferer typeOfInstanceVariable: anIVName ofClass: aClass) anyOne.
+	^ ASTCVariableDeclaration new
+		id:
+			(ASTCIdentifier new
+				id: anIVName;
+				yourself);
+		type:
+			(ASTCType new
+				type: ivType;
+				yourself);
+		yourself
 ]
 
 { #category : #'translation-api' }
