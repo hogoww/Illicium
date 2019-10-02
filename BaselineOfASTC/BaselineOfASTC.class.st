@@ -39,15 +39,14 @@ ASTCGenerator new generate.
 
 ASTCTranslator new translateClass: RandomTestClass.
 
-ASTCSlangClassTranslator translateClass: MiscPrimitivePlugin.
+ASTCSlangTranslator translateClass: MiscPrimitivePlugin.
 
-ASTCSlangClassTranslator new translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
+ASTCSlangTranslator new translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
 
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.
 
 PlainCodeVisitorTest new setUp testRighSideAssignementVariableNodeExpand.
-
 ]
 
 { #category : #accessing }
