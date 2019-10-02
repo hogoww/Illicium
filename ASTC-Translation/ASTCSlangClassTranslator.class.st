@@ -31,11 +31,11 @@ ASTCSlangClassTranslator >> preTypeChecking: aClass [
 	piType instanceVariable: #interpreterProxy
 		ifPresent: [ piType instanceVariables at:#interpreterProxy put: 
 			(inferer types createConcreteType: InterpreterProxy) ].
-	piType instanceVariable: #moduleName
+	"For now, handled by the Slang printer as part of the basic output of every plugin"
+	"piType instanceVariable: #moduleName
 	ifPresent: [ piType instanceVariables at:#moduleName put: 
-		(inferer types createConcreteType: String) ].
+		(inferer types createConcreteType: String) ]." 
 
-	self halt.
 ]
 
 { #category : #check }
@@ -43,6 +43,7 @@ ASTCSlangClassTranslator >> translateClassPart: aClass in: aCompilationUnit [
 	| slangCompatibleIVs |
 	slangCompatibleIVs := aClass allInstVarNames asOrderedCollection
 		remove: #translatedMethodCache;
+		remove: #moduleName;
 		yourself.
 	slangCompatibleIVs
 		do: [ :ivName | 

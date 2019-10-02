@@ -16,7 +16,7 @@ ASTCFileCompiler >> compileExternalPluginNamed: aFileName [
 				<< (virtualMachine for32bit: [ ' -m32' ] for64bit: [ '' ]) ].
 	res := LibC runCommand: commandLine.
 	res = 0
-		ifFalse: [ self error: 'plugin didn''t compile (or the comand line sucks)' .
+		ifFalse: [ Error signal: 'plugin didn''t compile (or the comand line sucks)' .
 			"proceed to copy to clipboard"
 			Clipboard clipboardText: commandLine.
 			self halt ]

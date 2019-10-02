@@ -39,6 +39,7 @@ RandomTestClass >> factorialPrimitive: aSmallInteger [
 
 { #category : #tests }
 RandomTestClass >> factorialR [
+	<doNotGenerate>
 	"random function without arguments to test type inference"
 	| res |
 	res:=0.

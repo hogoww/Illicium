@@ -6,5 +6,5 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCString class >> asCType [
-	^#'char*'
+	^'char*'
 ]

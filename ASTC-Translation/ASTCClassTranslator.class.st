@@ -16,15 +16,15 @@ ASTCClassTranslator class >> translateClass: aClass [
 
 { #category : #translation }
 ASTCClassTranslator >> compilationUnitForClass: aClass [ 
-	| typeAnnotator cu primitiveMethods methodsToTranslate ast typedMethods |
+	| typeAnnotator cu primitiveMethods methodsToTranslate ast typedMethods methods |
 
 	self preTranslationCheck: aClass.
 	primitiveMethods := self getPrimitiveToTranslate: aClass. """""""""""""""""""UNUSED... >_<"
 	inferer := PhineasInferer new.
 
 	self preTypeChecking: aClass.	
+	primitiveMethods do: [:aPrimitiveMethod| inferer inferAST: aPrimitiveMethod  ].
 	typedMethods := self typeMethodsOf: aClass.
-	
 	
 	cu:=ASTCCompilationUnit new.
 	typedMethods do:[:aMethodAST| |res|
@@ -151,7 +151,6 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 ASTCClassTranslator >> typeMethodsOf: aClass [
 	| typedMethods typeAnnotator |
 	typedMethods := Set new.
-
 	self methodsToType
 		do: [ :aMethodType | 
 			((aClass methodDict
