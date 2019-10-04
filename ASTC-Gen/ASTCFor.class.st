@@ -16,7 +16,7 @@ ASTCFor >> iteratorDefinition [
 { #category : #accessors }
 ASTCFor >> iteratorDefinition: anIteratorDefinition [
 	anIteratorDefinition parent: self.
-	^ iteratorDefinition := anIteratorDefinition
+	iteratorDefinition := anIteratorDefinition
 ]
 
 { #category : #accessors }
@@ -27,5 +27,5 @@ ASTCFor >> iteratorModification [
 { #category : #accessors }
 ASTCFor >> iteratorModification: anIteratorModification [
 	anIteratorModification parent: self.
-	^ iteratorModification := anIteratorModification
+	iteratorModification := anIteratorModification
 ]

@@ -17,7 +17,7 @@ ASTCIf >> condition [
 { #category : #accessors }
 ASTCIf >> condition: aCondition [
 	aCondition parent: self.
-	^ condition := aCondition
+	condition := aCondition
 ]
 
 { #category : #accessors }
@@ -28,7 +28,7 @@ ASTCIf >> else [
 { #category : #accessors }
 ASTCIf >> else: anElse [
 	anElse parent: self.
-	^ else := anElse
+	else := anElse
 ]
 
 { #category : #accessors }
@@ -39,5 +39,5 @@ ASTCIf >> then [
 { #category : #accessors }
 ASTCIf >> then: aThen [
 	aThen parent: self.
-	^ then := aThen
+	then := aThen
 ]

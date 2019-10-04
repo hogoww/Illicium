@@ -14,5 +14,5 @@ ASTCLiteral >> value [
 
 { #category : #accessors }
 ASTCLiteral >> value: aValue [
-	^ value := aValue
+	value := aValue
 ]

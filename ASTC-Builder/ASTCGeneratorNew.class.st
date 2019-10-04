@@ -300,7 +300,7 @@ ASTCGeneratorNew >> addInstanceVariable: aProperty to: aClass [
 
 { #category : #'generation-attribute' }
 ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
-	| propertyName  aPropertyName method |
+	| propertyName  aPropertyName method methodName anElement |
 	
 	propertyName := aProperty name.
 	aPropertyName := (aProperty isRelationSide and:[ aProperty isMany ]) 
@@ -312,14 +312,24 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	self addMethod: method asString on: aClass withProtocol: 'accessors'.
 
 	"setter"
-	method := propertyName,':' asMethodWithBody:
+	methodName := propertyName,':'. " aProperty: "
+	method := methodName asMethodWithBody:
 		((aProperty isTypedProperty ifTrue:[[]]
 		
 		ifFalse:[[ aPropertyName parent: self ]]) + 
 		[:anInstance | propertyName := aPropertyName ])
 		withArgs:{ #anInstance -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessors'.
+	
+	(aProperty isRelationSide and: [ aProperty isMany ])
+	ifFalse:[ ^self ].
 
+	anElement := ((propertyName first isVowel ifTrue:[ 'an' ] ifFalse:[ 'a' ]) , propertyName capitalized) removeSuffix:'s'.
+	methodName := 'add' , (propertyName capitalized removeSuffix:'s') , ':'. " addProperty: "
+	method :=	 methodName asMethodWithBody: 
+		[:anElem| propertyName add: anElem ] 
+		withArgs: { #anElem -> anElement } asDictionary.
+	self addMethod: method asString on: aClass withProtocol: 'accessors'.
 
 ]
 
@@ -670,7 +680,7 @@ ASTCGeneratorNew >> generate [
 	self reloadExtentions.
 ]
 
-{ #category : #actions }
+{ #category : #'generation-system' }
 ASTCGeneratorNew >> generateClass: aFMXClass [
 
 	| superClass |

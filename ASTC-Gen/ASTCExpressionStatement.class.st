@@ -15,5 +15,5 @@ ASTCExpressionStatement >> expression [
 { #category : #accessors }
 ASTCExpressionStatement >> expression: anExpression [
 	anExpression parent: self.
-	^ expression := anExpression
+	expression := anExpression
 ]

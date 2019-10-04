@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessors }
+ASTCProject >> addCompilationUnit: aCompilationUnit [
+	compilationUnits add: aCompilationUnit
+]
+
+{ #category : #accessors }
 ASTCProject >> compilationUnits [
 	^ compilationUnits
 ]
@@ -15,5 +20,5 @@ ASTCProject >> compilationUnits [
 { #category : #accessors }
 ASTCProject >> compilationUnits: aCollectionOfCompilationUnits [
 	aCollectionOfCompilationUnits parent: self.
-	^ compilationUnits := aCollectionOfCompilationUnits
+	compilationUnits := aCollectionOfCompilationUnits
 ]

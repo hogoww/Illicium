@@ -9,6 +9,16 @@ Class {
 }
 
 { #category : #accessors }
+ASTCCompilationUnit >> addDeclaration: aDeclaration [
+	declarations add: aDeclaration
+]
+
+{ #category : #accessors }
+ASTCCompilationUnit >> addDefinition: aDefinition [
+	definitions add: aDefinition
+]
+
+{ #category : #accessors }
 ASTCCompilationUnit >> declarations [
 	^ declarations
 ]
@@ -16,7 +26,7 @@ ASTCCompilationUnit >> declarations [
 { #category : #accessors }
 ASTCCompilationUnit >> declarations: aCollectionOfDeclarations [
 	aCollectionOfDeclarations parent: self.
-	^ declarations := aCollectionOfDeclarations
+	declarations := aCollectionOfDeclarations
 ]
 
 { #category : #accessors }
@@ -27,5 +37,5 @@ ASTCCompilationUnit >> definitions [
 { #category : #accessors }
 ASTCCompilationUnit >> definitions: aCollectionOfDefinitions [
 	aCollectionOfDefinitions parent: self.
-	^ definitions := aCollectionOfDefinitions
+	definitions := aCollectionOfDefinitions
 ]

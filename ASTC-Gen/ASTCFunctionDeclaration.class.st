@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessors }
+ASTCFunctionDeclaration >> addParameter: aParameter [
+	parameters add: aParameter
+]
+
+{ #category : #accessors }
 ASTCFunctionDeclaration >> parameters [
 	^ parameters
 ]
@@ -16,7 +21,7 @@ ASTCFunctionDeclaration >> parameters [
 { #category : #accessors }
 ASTCFunctionDeclaration >> parameters: aCollectionOfVariableDeclarations [
 	aCollectionOfVariableDeclarations parent: self.
-	^ parameters := aCollectionOfVariableDeclarations
+	parameters := aCollectionOfVariableDeclarations
 ]
 
 { #category : #accessors }
@@ -27,5 +32,5 @@ ASTCFunctionDeclaration >> type [
 { #category : #accessors }
 ASTCFunctionDeclaration >> type: aType [
 	aType parent: self.
-	^ type := aType
+	type := aType
 ]

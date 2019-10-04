@@ -15,5 +15,5 @@ ASTCDefinition >> declaration [
 { #category : #accessors }
 ASTCDefinition >> declaration: aDeclaration [
 	aDeclaration parent: self.
-	^ declaration := aDeclaration
+	declaration := aDeclaration
 ]

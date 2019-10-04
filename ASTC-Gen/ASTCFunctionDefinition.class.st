@@ -15,5 +15,5 @@ ASTCFunctionDefinition >> body [
 { #category : #accessors }
 ASTCFunctionDefinition >> body: aBody [
 	aBody parent: self.
-	^ body := aBody
+	body := aBody
 ]

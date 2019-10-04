@@ -14,5 +14,5 @@ ASTCIdentifier >> id [
 
 { #category : #accessors }
 ASTCIdentifier >> id: anId [
-	^ id := anId
+	id := anId
 ]

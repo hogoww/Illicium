@@ -16,7 +16,7 @@ ASTCLoop >> body [
 { #category : #accessors }
 ASTCLoop >> body: aBody [
 	aBody parent: self.
-	^ body := aBody
+	body := aBody
 ]
 
 { #category : #accessors }
@@ -27,5 +27,5 @@ ASTCLoop >> condition [
 { #category : #accessors }
 ASTCLoop >> condition: aCondition [
 	aCondition parent: self.
-	^ condition := aCondition
+	condition := aCondition
 ]

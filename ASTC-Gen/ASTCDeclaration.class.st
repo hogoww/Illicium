@@ -15,5 +15,5 @@ ASTCDeclaration >> id [
 { #category : #accessors }
 ASTCDeclaration >> id: anId [
 	anId parent: self.
-	^ id := anId
+	id := anId
 ]

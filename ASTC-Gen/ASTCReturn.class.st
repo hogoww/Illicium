@@ -15,5 +15,5 @@ ASTCReturn >> expression [
 { #category : #accessors }
 ASTCReturn >> expression: anExpression [
 	anExpression parent: self.
-	^ expression := anExpression
+	expression := anExpression
 ]

@@ -15,5 +15,5 @@ ASTCVariableDefinition >> init [
 { #category : #accessors }
 ASTCVariableDefinition >> init: anInit [
 	anInit parent: self.
-	^ init := anInit
+	init := anInit
 ]

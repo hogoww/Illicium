@@ -15,5 +15,5 @@ ASTCNode >> parent [
 { #category : #accessors }
 ASTCNode >> parent: aParent [
 	aParent parent: self.
-	^ parent := aParent
+	parent := aParent
 ]

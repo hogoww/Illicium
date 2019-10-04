@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessors }
+ASTCFunctionCall >> addArgument: anArgument [
+	arguments add: anArgument
+]
+
+{ #category : #accessors }
 ASTCFunctionCall >> arguments [
 	^ arguments
 ]
@@ -16,7 +21,7 @@ ASTCFunctionCall >> arguments [
 { #category : #accessors }
 ASTCFunctionCall >> arguments: aCollectionOfExpressions [
 	aCollectionOfExpressions parent: self.
-	^ arguments := aCollectionOfExpressions
+	arguments := aCollectionOfExpressions
 ]
 
 { #category : #accessors }
@@ -27,5 +32,5 @@ ASTCFunctionCall >> id [
 { #category : #accessors }
 ASTCFunctionCall >> id: anId [
 	anId parent: self.
-	^ id := anId
+	id := anId
 ]

@@ -14,5 +14,5 @@ ASTCType >> type [
 
 { #category : #accessors }
 ASTCType >> type: aType [
-	^ type := aType
+	type := aType
 ]

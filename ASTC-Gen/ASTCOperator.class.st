@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessors }
+ASTCOperator >> addOperand: anOperand [
+	operands add: anOperand
+]
+
+{ #category : #accessors }
 ASTCOperator >> operands [
 	^ operands
 ]
@@ -16,7 +21,7 @@ ASTCOperator >> operands [
 { #category : #accessors }
 ASTCOperator >> operands: aCollectionOfExpressions [
 	aCollectionOfExpressions parent: self.
-	^ operands := aCollectionOfExpressions
+	operands := aCollectionOfExpressions
 ]
 
 { #category : #accessors }
@@ -26,5 +31,5 @@ ASTCOperator >> symbol [
 
 { #category : #accessors }
 ASTCOperator >> symbol: aSymbol [
-	^ symbol := aSymbol
+	symbol := aSymbol
 ]

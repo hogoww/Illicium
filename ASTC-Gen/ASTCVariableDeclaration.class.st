@@ -15,5 +15,5 @@ ASTCVariableDeclaration >> type [
 { #category : #accessors }
 ASTCVariableDeclaration >> type: aType [
 	aType parent: self.
-	^ type := aType
+	type := aType
 ]
