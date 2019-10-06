@@ -706,13 +706,13 @@ ASTCGeneratorNew >> generate [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateAbstractVisitOf: aClass [
+ASTCGeneratorNew >> generateAbstractVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
 	| method className |
-	className := aClass name.
+	className := aFMXClass name.
 	method := (className asVisitClassSelector)
-		asMethodWithBody: [ :anInstance | 1 ]
+		asMethodWithBody: [ :anInstance | ]
 		withArgs:
 			{#anInstance ->
 			className asAnInstance} asDictionary.
@@ -781,6 +781,25 @@ ASTCGeneratorNew >> generateStructureValidatorVisitorClass [
 
 ]
 
+{ #category : #'generation-visit' }
+ASTCGeneratorNew >> generateSuperclassVisitOf: aFMXClass [
+	"add an empty behavior visit method"
+	| method className superclassName methodSelector superMethodSelector |
+	
+	superclassName := aFMXClass classGeneralization ifNotNil:[:aSuperClass| aSuperClass name] ifNil:[ ^self ]."No need to override"
+	superMethodSelector := superclassName asVisitClassSelector.
+	
+	className := aFMXClass name.
+	methodSelector := (className asVisitClassSelector).
+		
+	method := methodSelector
+		asMethodWithBody: [ :anInstance | ^ super superMethodSelector: {anInstance}  ]
+		withArgs:
+			{#anInstance ->
+			className asAnInstance} asDictionary.
+	^ self addMethod: method asString on: superclassVisitorClass withProtocol: 'visiting'
+]
+
 { #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> generateSuperclassVisitorClass [
 	"superclass --> Abstract"
@@ -803,7 +822,8 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 
 { #category : #'generation-visit' }
 ASTCGeneratorNew >> generateVisitsFor: aClass [
-	self generateAbstractVisitOf: aClass
+	self generateAbstractVisitOf: aClass.
+	self generateSuperclassVisitOf: aClass
 ]
 
 { #category : #'generation-visitor-classes' }
