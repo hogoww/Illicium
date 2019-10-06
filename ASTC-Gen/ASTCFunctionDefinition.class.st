@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDefinition >> body [
 	^ body
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDefinition >> body: aBody [
 	aBody parent: self.
 	body := aBody

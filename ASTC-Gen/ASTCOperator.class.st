@@ -8,28 +8,28 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCOperator >> addOperand: anOperand [
 	operands add: anOperand
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCOperator >> operands [
 	^ operands
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCOperator >> operands: aCollectionOfExpressions [
 	aCollectionOfExpressions parent: self.
 	operands := aCollectionOfExpressions
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCOperator >> symbol [
 	^ symbol
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCOperator >> symbol: aSymbol [
 	symbol := aSymbol
 ]

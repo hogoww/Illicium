@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIdentifier >> id [
 	^ id
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIdentifier >> id: anId [
 	id := anId
 ]

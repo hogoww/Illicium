@@ -7,17 +7,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCBlock >> addStatement: aStatement [
 	statements add: aStatement
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCBlock >> statements [
 	^ statements
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCBlock >> statements: aCollectionOfStatements [
 	aCollectionOfStatements parent: self.
 	statements := aCollectionOfStatements

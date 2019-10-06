@@ -8,23 +8,23 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFor >> iteratorDefinition [
 	^ iteratorDefinition
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFor >> iteratorDefinition: anIteratorDefinition [
 	anIteratorDefinition parent: self.
 	iteratorDefinition := anIteratorDefinition
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFor >> iteratorModification [
 	^ iteratorModification
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFor >> iteratorModification: anIteratorModification [
 	anIteratorModification parent: self.
 	iteratorModification := anIteratorModification

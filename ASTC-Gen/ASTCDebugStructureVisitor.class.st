@@ -1,5 +1,5 @@
 Class {
 	#name : #ASTCDebugStructureVisitor,
 	#superclass : #ASTCWalkerVisitor,
-	#category : #'ASTC-Gen-visitor'
+	#category : #'ASTC-Gen-visitors'
 }

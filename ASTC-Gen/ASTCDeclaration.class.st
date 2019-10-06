@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCDeclaration >> id [
 	^ id
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCDeclaration >> id: anId [
 	anId parent: self.
 	id := anId

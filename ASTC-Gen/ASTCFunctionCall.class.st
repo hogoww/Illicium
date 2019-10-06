@@ -8,28 +8,28 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionCall >> addArgument: anArgument [
 	arguments add: anArgument
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionCall >> arguments [
 	^ arguments
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionCall >> arguments: aCollectionOfExpressions [
 	aCollectionOfExpressions parent: self.
 	arguments := aCollectionOfExpressions
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionCall >> id [
 	^ id
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionCall >> id: anId [
 	anId parent: self.
 	id := anId

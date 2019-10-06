@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCType >> type [
 	^ type
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCType >> type: aType [
 	type := aType
 ]

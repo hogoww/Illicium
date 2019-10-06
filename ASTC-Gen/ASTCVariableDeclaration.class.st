@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCVariableDeclaration >> type [
 	^ type
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCVariableDeclaration >> type: aType [
 	aType parent: self.
 	type := aType

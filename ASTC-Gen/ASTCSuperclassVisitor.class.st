@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCWalkerVisitor,
+	#name : #ASTCSuperclassVisitor,
 	#superclass : #ASTCVisitor,
 	#category : #'ASTC-Gen-visitors'
 }

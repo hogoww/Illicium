@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCVariableDefinition >> init [
 	^ init
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCVariableDefinition >> init: anInit [
 	anInit parent: self.
 	init := anInit

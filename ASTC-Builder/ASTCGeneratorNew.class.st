@@ -47,12 +47,13 @@ Class {
 		'prefix',
 		'builder',
 		'parentPropertyName',
-		'astVisitorClass',
+		'abstractVisitorClass',
 		'collectionsType',
-		'astWalkerVisitorClass',
-		'astPrinterVisitor',
-		'astDebugStructureVisitor',
-		'astStructureValidatorVisitor',
+		'walkerVisitorClass',
+		'printerVisitorClass',
+		'debugStructureVisitorClass',
+		'structureValidatorVisitorClass',
+		'superclassVisitorClass',
 		'debug'
 	],
 	#category : #'ASTC-Builder'
@@ -309,7 +310,7 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	"getter"
 	method := propertyName asMethodWithBody: 
 				[ ^ propertyName ].
-	self addMethod: method asString on: aClass withProtocol: 'accessors'.
+	self addMethod: method asString on: aClass withProtocol: 'accessing'.
 
 	"setter"
 	methodName := propertyName,':'. " aProperty: "
@@ -319,17 +320,18 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 		ifFalse:[[ aPropertyName parent: self ]]) + 
 		[:anInstance | propertyName := aPropertyName ])
 		withArgs:{ #anInstance -> aPropertyName } asDictionary.
-	self addMethod: method asString on: aClass withProtocol: 'accessors'.
+	self addMethod: method asString on: aClass withProtocol: 'accessing'.
 	
 	(aProperty isRelationSide and: [ aProperty isMany ])
 	ifFalse:[ ^self ].
 
-	anElement := ((propertyName first isVowel ifTrue:[ 'an' ] ifFalse:[ 'a' ]) , propertyName capitalized) removeSuffix:'s'.
+	self flag:#improvement. "Needs to be better to go from plural to singular"
+	anElement := ((propertyName first isVowel ifTrue:[ 'an' ] ifFalse:[ 'a' ]) , propertyName capitalized) removeSuffix:'s'. "aProperty from propertys (not a typo..)"
 	methodName := 'add' , (propertyName capitalized removeSuffix:'s') , ':'. " addProperty: "
 	method :=	 methodName asMethodWithBody: 
 		[:anElem| propertyName add: anElem ] 
 		withArgs: { #anElem -> anElement } asDictionary.
-	self addMethod: method asString on: aClass withProtocol: 'accessors'.
+	self addMethod: method asString on: aClass withProtocol: 'accessing'.
 
 ]
 
@@ -423,20 +425,36 @@ aProperty,'AsString
 	self addMethod: methodBody on: aClass withProtocol: 'printing'.
 ]
 
-{ #category : #'generating-visitor-printer' }
+{ #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> addPrinterVisitorsMethods [
 	"Add necessary methods for PrinterVisitor : #initialize / #printTabCount: / #stream / #toTranscript / #printOn:"
-	self addMethod: 'initialize
-	stream := String new writeStream.
-	currentDepth:=0.' on: astPrinterVisitor withProtocol: 'initialization'.
-	self addMethod: 'printTabCount: aNumber
-		1 to: aNumber do:[:i| stream tab.]' on: astPrinterVisitor withProtocol:'printing'.
-	self addMethod: 'stream
-	^stream' on:astPrinterVisitor  withProtocol: 'accessing'.
-	self addMethod:'printOn:aStream
-	^aStream nextPutAll: self stream contents.' on:astPrinterVisitor withProtocol:'printing'.
-	self addMethod:'toTranscript
-	Transcript show:self ;cr.' on:astPrinterVisitor withProtocol:'printing'.
+	| method 
+		stream currentDepth | "instance variables of printerVisitor"
+		
+	method := 'initialize' asMethodWithBody: 
+		[ stream := String new writeStream.
+			currentDepth:=0 ].
+	self addMethod: method asString on: printerVisitorClass withProtocol: 'initialization'.
+	
+			
+	method := 'printTabCount:' asMethodWithBody: 
+		[:aNumber| aNumber timesRepeat:[:i| stream tab.] ].
+	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
+	
+	method := 'printTabCount:' asMethodWithBody: 
+		[:aNumber| aNumber timesRepeat:[:i| stream tab.] ].
+	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
+
+	method := 'stream' asMethodWithBody: 
+		[ ^ stream ].
+	self addMethod: method asString on: printerVisitorClass  withProtocol: 'accessing'.
+
+	method := 'printOn:' asMethodWithBody: [:aStream| aStream << stream contents ].
+	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
+	
+	method := 'toTranscript' asMethodWithBody: 
+	[ Transcript show:self ; cr ].
+	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
 	
 ]
 
@@ -475,16 +493,18 @@ ASTCGeneratorNew >> addStructureValidationFor:aClass [
 	self addMethod: bodyOfMethod asString on: astStructureValidatorVisitor  withProtocol: 'check'
 ]
 
-{ #category : #'generating-visitor-structure-validation' }
+{ #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> addStructureValidatorVisitorMethods [	
-	self addMethod: 'initialize
-	errors:=0.' on: astStructureValidatorVisitor  withProtocol: 'initialization'.
-	
-	self addMethod:'errors
-	^errors' on: astStructureValidatorVisitor withProtocol: 'accessing'.
+	| errors method |
+	method := 'initialize' asMethodWithBody: [ errors := 0 ].
+	self addMethod: method asString on: structureValidatorVisitorClass  withProtocol: 'initialization'.
 
-	self addMethod:'isValidAst
-	^errors=0' on: astStructureValidatorVisitor withProtocol: 'testing'.
+	method := 'errors' asMethodWithBody: [ ^errors ].		
+	self addMethod:'errors
+	^errors' on: structureValidatorVisitorClass withProtocol: 'accessing'.
+
+	method := 'isValidAst' asMethodWithBody: [ ^errors=0 ].
+	self addMethod: method asString on: structureValidatorVisitorClass withProtocol: 'testing'.
 
 ]
 
@@ -668,6 +688,11 @@ ASTCGeneratorNew >> createClass: classNameAsSymbol superclass: superclassAsStrin
 	^self createClass:classNameAsSymbol superclass:superclassAsString withIVs:'' withTag: aTag.
 ]
 
+{ #category : #'name-formating' }
+ASTCGeneratorNew >> fullNameOf: aSymbol [
+	^ prefix , aSymbol
+]
+
 { #category : #actions }
 ASTCGeneratorNew >> generate [
 	"Warning signal: (String streamContents:[:s| s << 'You''re about to delete everything in ' << packageName << '. Make sure you saved everything depending on it (extensions, class references,  [...]) .' ])."
@@ -678,6 +703,15 @@ ASTCGeneratorNew >> generate [
 	
 	"reload packages that depends on the generated code"
 	self reloadExtentions.
+]
+
+{ #category : #'generation-visitor-classes' }
+ASTCGeneratorNew >> generateAbstractVisitorClass [
+	"Abstract --> Object"
+	abstractVisitorClass := Object subclass: (self fullNameOf: #Visitor)
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors)
 ]
 
 { #category : #'generation-system' }
@@ -699,53 +733,66 @@ ASTCGeneratorNew >> generateClass: aFMXClass [
 	
 ]
 
-{ #category : #'generating-visitor' }
+{ #category : #'generation-visitor-classes' }
+ASTCGeneratorNew >> generateDebugStructureVisitorClass [
+	"DebugStructure --|> Walker"
+	debugStructureVisitorClass :=  walkerVisitorClass subclass: (self fullNameOf: #DebugStructureVisitor)
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors).
+	
+
+]
+
+{ #category : #'generation-visitor-classes' }
+ASTCGeneratorNew >> generatePrinterVisitorClass [
+	"Printer --|> Walker"
+	printerVisitorClass  :=  walkerVisitorClass subclass: (self fullNameOf: #PrinterVisitor)
+		instanceVariableNames: 'currentDepth stream'
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors).
+	self addPrinterVisitorsMethods.
+]
+
+{ #category : #'generation-visitor-classes' }
+ASTCGeneratorNew >> generateStructureValidatorVisitorClass [
+	"StructureValidator --|> DebugStructure"
+	structureValidatorVisitorClass := debugStructureVisitorClass subclass: (self fullNameOf: #StructureValidatorVisitor)
+		instanceVariableNames: 'errors'
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors).
+	self addStructureValidatorVisitorMethods
+
+]
+
+{ #category : #'generation-visitor-classes' }
+ASTCGeneratorNew >> generateSuperclassVisitorClass [
+	"superclass --> Abstract"
+	superclassVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #SuperclassVisitor)
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors)
+]
+
+{ #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> generateVisitorsClasses [
-	| superclass classSymbol |
-	"AbstractVisitor"
-	superclass := #Object.
-	classSymbol := self prefix , #Visitor.
-	astVisitorClass := self
-		createClass: classSymbol
-		superclass: superclass
-		withTag: 'visitor'.
+	self generateAbstractVisitorClass.
+		self generateSuperclassVisitorClass.
+		self generateWalkerVisitorClass.
+			self generatePrinterVisitorClass.
+			self generateDebugStructureVisitorClass.
+				self generateStructureValidatorVisitorClass.
 
-		"CallSuperVisitor --|> abstractVisitor"
+]
 
-		"WalkerVisitor --|> AbstractVisitor"
-		superclass := classSymbol.
-		classSymbol := self prefix , #WalkerVisitor.
-		astWalkerVisitorClass := self
-			createClass: classSymbol
-			superclass: superclass
-			withTag: 'visitor'.
+{ #category : #'generation-visitor-classes' }
+ASTCGeneratorNew >> generateWalkerVisitorClass [
+	"Walker --> Abstract"
+	walkerVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #WalkerVisitor)
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors)
 
-			"Printer visitor --|> WalkerVisitor"
-			superclass := classSymbol.
-			classSymbol := self prefix , #PrinterVisitor.
-			astPrinterVisitor := self
-				createClass: classSymbol
-				superclass: superclass
-				withIVs: 'currentDepth stream'
-				withTag: 'visitor'.
-			self addPrinterVisitorsMethods.
-
-		"DebugStructureVisitor --|> WalkerVisitor"
-		classSymbol := self prefix , #DebugStructureVisitor.
-		astDebugStructureVisitor := self
-			createClass: classSymbol
-			superclass: superclass
-			withTag: 'visitor'.
-
-			"StructureValidatorVisitor --|> DebugStructureVisitor"
-			superclass := classSymbol.
-			classSymbol := self prefix , #StructureValidatorVisitor.
-			astStructureValidatorVisitor := self
-				createClass: classSymbol
-				superclass: superclass
-				withIVs:'errors'
-				withTag: 'visitor'.
-			self addStructureValidatorVisitorMethods.
 ]
 
 { #category : #initialization }

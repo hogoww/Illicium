@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCLiteral >> value [
 	^ value
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCLiteral >> value: aValue [
 	value := aValue
 ]

@@ -7,17 +7,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCProject >> addCompilationUnit: aCompilationUnit [
 	compilationUnits add: aCompilationUnit
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCProject >> compilationUnits [
 	^ compilationUnits
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCProject >> compilationUnits: aCollectionOfCompilationUnits [
 	aCollectionOfCompilationUnits parent: self.
 	compilationUnits := aCollectionOfCompilationUnits

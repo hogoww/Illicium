@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'errors'
 	],
-	#category : #'ASTC-Gen-visitor'
+	#category : #'ASTC-Gen-visitors'
 }
 
 { #category : #accessing }
@@ -14,10 +14,10 @@ ASTCStructureValidatorVisitor >> errors [
 
 { #category : #initialization }
 ASTCStructureValidatorVisitor >> initialize [
-	errors:=0.
+	errors := 0
 ]
 
 { #category : #testing }
 ASTCStructureValidatorVisitor >> isValidAst [
-	^errors=0
+	^ errors = 0
 ]

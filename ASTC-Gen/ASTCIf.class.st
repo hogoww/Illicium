@@ -9,34 +9,34 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> condition [
 	^ condition
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> condition: aCondition [
 	aCondition parent: self.
 	condition := aCondition
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> else [
 	^ else
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> else: anElse [
 	anElse parent: self.
 	else := anElse
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> then [
 	^ then
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> then: aThen [
 	aThen parent: self.
 	then := aThen

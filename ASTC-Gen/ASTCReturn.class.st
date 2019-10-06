@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCReturn >> expression [
 	^ expression
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCReturn >> expression: anExpression [
 	anExpression parent: self.
 	expression := anExpression

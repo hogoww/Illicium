@@ -7,12 +7,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCNode >> parent [
 	^ parent
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCNode >> parent: aParent [
 	aParent parent: self.
 	parent := aParent

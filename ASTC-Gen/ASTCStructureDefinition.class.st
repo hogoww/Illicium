@@ -7,17 +7,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCStructureDefinition >> addMember: aMember [
 	members add: aMember
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCStructureDefinition >> members [
 	^ members
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCStructureDefinition >> members: aCollectionOfVariableDeclarations [
 	aCollectionOfVariableDeclarations parent: self.
 	members := aCollectionOfVariableDeclarations

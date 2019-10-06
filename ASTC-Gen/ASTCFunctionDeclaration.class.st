@@ -8,28 +8,28 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> addParameter: aParameter [
 	parameters add: aParameter
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> parameters [
 	^ parameters
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> parameters: aCollectionOfVariableDeclarations [
 	aCollectionOfVariableDeclarations parent: self.
 	parameters := aCollectionOfVariableDeclarations
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> type [
 	^ type
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> type: aType [
 	aType parent: self.
 	type := aType

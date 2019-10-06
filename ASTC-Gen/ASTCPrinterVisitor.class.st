@@ -5,31 +5,33 @@ Class {
 		'currentDepth',
 		'stream'
 	],
-	#category : #'ASTC-Gen-visitor'
+	#category : #'ASTC-Gen-visitors'
 }
 
 { #category : #initialization }
 ASTCPrinterVisitor >> initialize [
 	stream := String new writeStream.
-	currentDepth:=0.
+	currentDepth := 0
 ]
 
 { #category : #printing }
-ASTCPrinterVisitor >> printOn:aStream [
-	^aStream nextPutAll: self stream contents.
+ASTCPrinterVisitor >> printOn: aStream [
+	aStream << stream contents
 ]
 
 { #category : #printing }
 ASTCPrinterVisitor >> printTabCount: aNumber [
-		1 to: aNumber do:[:i| stream tab.]
+	aNumber timesRepeat: [ :i | stream tab ]
 ]
 
 { #category : #accessing }
 ASTCPrinterVisitor >> stream [
-	^stream
+	^ stream
 ]
 
 { #category : #printing }
 ASTCPrinterVisitor >> toTranscript [
-	Transcript show:self ;cr.
+	Transcript
+		show: self;
+		cr
 ]
