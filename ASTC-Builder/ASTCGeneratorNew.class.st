@@ -705,6 +705,20 @@ ASTCGeneratorNew >> generate [
 	self reloadExtentions.
 ]
 
+{ #category : #'generation-visit' }
+ASTCGeneratorNew >> generateAbstractVisitOf: aClass [
+	"add an empty behavior visit method"
+
+	| method className |
+	className := aClass name.
+	method := (className asVisitClassSelector)
+		asMethodWithBody: [ :anInstance | 1 ]
+		withArgs:
+			{#anInstance ->
+			className asAnInstance} asDictionary.
+	^ self addMethod: method asString on: abstractVisitorClass withProtocol: 'visiting'
+]
+
 { #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> generateAbstractVisitorClass [
 	"Abstract --> Object"
@@ -730,6 +744,8 @@ ASTCGeneratorNew >> generateClass: aFMXClass [
 	package: packageName , '-Nodes' .
 
 	self addInstancesVariablesTo: aFMXClass.
+	
+	self generateVisitsFor: aFMXClass.
 	
 ]
 
@@ -785,6 +801,11 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 
 ]
 
+{ #category : #'generation-visit' }
+ASTCGeneratorNew >> generateVisitsFor: aClass [
+	self generateAbstractVisitOf: aClass
+]
+
 { #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> generateWalkerVisitorClass [
 	"Walker --> Abstract"
@@ -829,12 +850,11 @@ ASTCGeneratorNew >> makePackage [
 ]
 
 { #category : #'creation-system' }
-ASTCGeneratorNew >> makePackageNameWith:aTag [
-	^String streamContents:[:s| 
-		s << packageName. 
-		aTag ifNotEmpty:[:tag| s << $- << aTag ]
-		]
-		
+ASTCGeneratorNew >> makePackageNameWith: aTag [
+	^ String
+		streamContents: [ :s | 
+			s << packageName.
+			aTag ifNotEmpty: [ :tag | s << $- << aTag ] ]
 ]
 
 { #category : #'name-formating' }
