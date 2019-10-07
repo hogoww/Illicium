@@ -27,8 +27,9 @@ ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
 	| association variable | 
 	variable := anAssignmentNode variable.
 	association := variableAppeareanceTracker associationAt:  variable name 
-		ifAbsent:[ variableAppeareanceTracker add: (Association key: variable name value:
-			(variable acceptVisitor: self))].	
+		ifAbsent:[ variableAppeareanceTracker add: 
+			(Association key: variable name value:
+				(variable acceptVisitor: self))].	
 
 	self atNewPropertyPut: association value for: anAssignmentNode.
 
@@ -49,16 +50,13 @@ ASTCShouldItBeDeclared >> visitInstanceVariableNode: anInstanceVariable [
 
 { #category : #initialization }
 ASTCShouldItBeDeclared >> visitReturnNode: aReturnNode [
-	"We only visit Assignements"
-	aReturnNode value isAssignment 
-	ifTrue:[ aReturnNode value acceptVisitor: self ].
-	
+	aReturnNode value isAssignment
+		ifTrue: [ aReturnNode value acceptVisitor: self ]
 ]
 
 { #category : #initialization }
 ASTCShouldItBeDeclared >> visitSelfNode: anSelfNode [
-	"shouldn't ever pass there. Pharo's Compiler should stop you first."
-	self error: 'trying to assign something to self? Are you sure?'. 
+	^false
 	
 ]
 

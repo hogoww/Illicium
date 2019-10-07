@@ -25,11 +25,12 @@ ASTCTranslator class >> translateMethod: aSelector fromClass: aClass [
 
 { #category : #accessors }
 ASTCTranslator >> classTranslator [
-	^classTranslator
+	^ classTranslator
 ]
 
 { #category : #accessors }
 ASTCTranslator >> classTranslator: aClassTranslator [
+	aClassTranslator mainTranslator: self.
 	classTranslator := aClassTranslator
 ]
 

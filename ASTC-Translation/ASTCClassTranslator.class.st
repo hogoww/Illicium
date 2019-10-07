@@ -73,6 +73,7 @@ ASTCClassTranslator >> methodTranslator [
 
 { #category : #accessing }
 ASTCClassTranslator >> methodTranslator: aMethodTranslator [
+	aMethodTranslator mainTranslator: self.
 	methodTranslator := aMethodTranslator
 ]
 
