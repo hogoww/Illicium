@@ -16,6 +16,14 @@ ASTCSlangClassTranslator >> getPrimitiveToTranslate: aClass [
 		collect: #ast
 ]
 
+{ #category : #accessing }
+ASTCSlangClassTranslator >> initialize [
+	super initialize.
+	inferer
+		explicitTypeHeuristic: PISlangTypesHeuristic
+
+]
+
 { #category : #check }
 ASTCSlangClassTranslator >> preTranslationCheck: aClass [
 	(aClass allSuperclasses

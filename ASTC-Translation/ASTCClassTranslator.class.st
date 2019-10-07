@@ -15,7 +15,6 @@ ASTCClassTranslator >> compilationUnitForClass: aClass [
 
 	self preTranslationCheck: aClass.
 	primitiveMethods := self getPrimitiveToTranslate: aClass. """""""""""""""""""UNUSED... >_<"
-	inferer := PhineasInferer new.
 
 	self preTypeChecking: aClass.	
 	primitiveMethods do: [:aPrimitiveMethod| inferer inferAST: aPrimitiveMethod  ].
@@ -53,7 +52,8 @@ ASTCClassTranslator >> getReplacementType: aClass [
 ASTCClassTranslator >> initialize [
 	methodTranslator := ASTCMethodTranslator new
 		classTranslator: self;
-		yourself
+		yourself.
+	inferer := PhineasInferer new
 ]
 
 { #category : #accessing }
@@ -144,7 +144,7 @@ ASTCClassTranslator >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	self flag:#todo. "missing typecheck"
+	self halt. "missing typecheck"
 	^methodTranslator translateMethodAST: (aClass >> aSelector) ast
 ]
 
