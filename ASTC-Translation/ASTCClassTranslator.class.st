@@ -11,11 +11,11 @@ Class {
 
 { #category : #translation }
 ASTCClassTranslator >> compilationUnitForClass: aClass [ 
-	| typeAnnotator cu primitiveMethods methodsToTranslate ast typedMethods methods |
+	| cu primitiveMethods typedMethods |
 
 	self preTranslationCheck: aClass.
-	primitiveMethods := self getPrimitiveToTranslate: aClass. """""""""""""""""""UNUSED... >_<"
-
+	primitiveMethods := self getPrimitiveToTranslate: aClass. 
+	
 	self preTypeChecking: aClass.	
 	primitiveMethods do: [:aPrimitiveMethod| inferer inferAST: aPrimitiveMethod  ].
 	typedMethods := self typeMethodsOf: aClass.
@@ -148,7 +148,7 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	^methodTranslator translateMethodAST: (aClass >> aSelector) ast
 ]
 
-{ #category : #accessing }
+{ #category : #translation }
 ASTCClassTranslator >> typeMethodsOf: aClass [
 	| typedMethods typeAnnotator |
 	typedMethods := Set new.
