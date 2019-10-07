@@ -25,14 +25,7 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
 	aNode
 		propertyAt: ASTCTypeAnnotationAST property
-		ifPresent: [ :types | 
-			"Slang specific heuristic"
-			(types isEmpty and: [ aNode selector beginsWith: #primitive ])
-				ifTrue: [ ^ SmallInteger ].
-			types size = 1
-				ifTrue: [ ^ types anyOne ]
-				ifFalse: [ Error signal: 'The type inferencer had no or too many results' ]
-				]
+		ifPresent: [ :types | types anyOne ]
 		ifAbsent: [ 
 			Error signal:
 					'The type inferencer couldn''t figure out the type of a '	, aNode class asString ].
