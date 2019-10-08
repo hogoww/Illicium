@@ -18,7 +18,7 @@ ASTCStructureDefinition >> members [
 ]
 
 { #category : #accessing }
-ASTCStructureDefinition >> members: aCollectionOfVariableDeclarations [
-	aCollectionOfVariableDeclarations parent: self.
-	members := aCollectionOfVariableDeclarations
+ASTCStructureDefinition >> members: variableDeclarations [
+	variableDeclarations parent: self.
+	members := variableDeclarations
 ]

@@ -305,8 +305,8 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	
 	propertyName := aProperty name.
 	aPropertyName := (aProperty isRelationSide and:[ aProperty isMany ]) 
-		ifTrue: [ String streamContents:[:s| s << 'aCollectionOf' << aProperty otherSide relatedClass name asString << 's' ] ] 
-		ifFalse: [ self aClassAsVariableName: propertyName ] .
+		ifTrue: [ aProperty otherSide relatedClass name asAnInstance: aProperty isMany ]
+		ifFalse: [ propertyName asAnInstance ].
 	"getter"
 	method := propertyName asMethodWithBody: 
 				[ ^ propertyName ].
@@ -823,7 +823,43 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 { #category : #'generation-visit' }
 ASTCGeneratorNew >> generateVisitsFor: aClass [
 	self generateAbstractVisitOf: aClass.
-	self generateSuperclassVisitOf: aClass
+	self generateSuperclassVisitOf: aClass.
+		self generateWalkVisitOf: aClass.
+]
+
+{ #category : #'generation-visit' }
+ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
+	"add an empty behavior visit method"
+
+	| method className body |
+	className := aFMXClass name.
+
+
+	"visitStructureDefinitionMembers:anASTCStructureDefinition
+		anASTCStructureDefinition members
+			ifNotNil:[ :members | members
+				do:[ :aMember | 
+					aMember acceptVisitor:self ]
+		]"
+	body := [ :anInstance |  ] asPlainCodeBC.
+
+	aFMXClass relations
+		do: [ :aRelation | |propertyName|
+				propertyName:= aRelation side name.
+				(aRelation side otherSide isContainer)
+					ifTrue:[
+						body + (aRelation side isMany
+							ifTrue:[ [:anInstance|  anInstance propertyName ifNotNil:[:aMember| aMember do:[:aMemberOfCollection| aMemberOfCollection acceptVisitor: self]]]]
+							ifFalse:[ [:anInstance| anInstance propertyName ifNotNil:[:aMember| aMember acceptVisitor: self ]]])
+					]
+				].
+	method := className asVisitClassSelector
+		asMethodWithBody: body
+		withArgs: {(#anInstance -> className asAnInstance)} asDictionary.
+	^ self
+		addMethod: method asString
+		on: walkerVisitorClass
+		withProtocol: 'visiting'
 ]
 
 { #category : #'generation-visitor-classes' }

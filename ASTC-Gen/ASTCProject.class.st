@@ -18,7 +18,7 @@ ASTCProject >> compilationUnits [
 ]
 
 { #category : #accessing }
-ASTCProject >> compilationUnits: aCollectionOfCompilationUnits [
-	aCollectionOfCompilationUnits parent: self.
-	compilationUnits := aCollectionOfCompilationUnits
+ASTCProject >> compilationUnits: compilationUnits [
+	compilationUnits parent: self.
+	compilationUnits := compilationUnits
 ]

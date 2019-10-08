@@ -19,9 +19,9 @@ ASTCFunctionCall >> arguments [
 ]
 
 { #category : #accessing }
-ASTCFunctionCall >> arguments: aCollectionOfExpressions [
-	aCollectionOfExpressions parent: self.
-	arguments := aCollectionOfExpressions
+ASTCFunctionCall >> arguments: expressions [
+	expressions parent: self.
+	arguments := expressions
 ]
 
 { #category : #accessing }
