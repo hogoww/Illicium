@@ -92,13 +92,19 @@ ASTCClassTranslatorNew >> translateClass: aClass [
 
 { #category : #'translation-api' }
 ASTCClassTranslatorNew >> translateMethod: aCompiledMethod [
-	^methodTranslator translateMethodAST: aCompiledMethod ast
+	^self translateMethod: aCompiledMethod selector fromClass: aCompiledMethod methodClass
 ]
 
 { #category : #'translation-api' }
 ASTCClassTranslatorNew >> translateMethod: aSelector fromClass: aClass [
-	self halt. "missing typecheck"
-	^methodTranslator translateMethodAST: (aClass >> aSelector) ast
+	| methodsASTs functionDefinitionsASTs methodsToTranslate |
+	self preTypeInference: aClass.
+	self callgraphTypeStartingFrom: { (aClass >> aSelector) ast  }.
+	methodsToTranslate := self methodsToTranslateASTs: aClass.
+	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
+	
+	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
+	^self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
 ]
 
 { #category : #translation }
