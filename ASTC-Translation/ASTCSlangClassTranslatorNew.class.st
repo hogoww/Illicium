@@ -4,6 +4,12 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
+{ #category : #initialization }
+ASTCSlangClassTranslatorNew >> initialize [
+	super initialize.
+	inferer explicitTypeHeuristic: PISlangTypesHeuristic.
+]
+
 { #category : #check }
 ASTCSlangClassTranslatorNew >> preTypeInference: aClass [
 	| piType |
