@@ -9,7 +9,7 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #translation }
+{ #category : #typing }
 ASTCClassTranslatorNew >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
 ]
@@ -72,7 +72,7 @@ ASTCClassTranslatorNew >> methodsToTranslateASTs: aClass [
 		thenCollect: #node
 ]
 
-{ #category : #translation }
+{ #category : #typing }
 ASTCClassTranslatorNew >> preTypeInference: aClass [
 	inferer inferAST: (aClass >> #initializePlugin) ast
 ]
@@ -113,7 +113,7 @@ ASTCClassTranslatorNew >> translateMethodsASTs: methodsAST [
 		collect: [ :aMethodAST | methodTranslator translateMethodAST: aMethodAST ]
 ]
 
-{ #category : #translation }
+{ #category : #typing }
 ASTCClassTranslatorNew >> typeASTsOfMethods: methodsASTs [
 	| typeAnnotator |
 	typeAnnotator := ASTCTypeAnnotationAST new
@@ -124,7 +124,7 @@ ASTCClassTranslatorNew >> typeASTsOfMethods: methodsASTs [
 	^ methodsASTs
 ]
 
-{ #category : #translation }
+{ #category : #typing }
 ASTCClassTranslatorNew >> typeInferenceEntryPoints: aClass [
 	| methods |
 	methods := OrderedCollection new.
