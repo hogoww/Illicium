@@ -38,12 +38,13 @@ ASTCTypeAnnotationAST >> initialize [
 ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	| types |
 	types := inferer typeOfNode: aNode.
-"	(types isEmpty and: [ aNode selector beginsWith: #primitive ])
-		ifTrue: [ ^ SmallInteger ]."
+	(aNode isMethod and:[types contains: [:aType| aType name = aNode methodClass name ]]) "remove implicit returns from primitives"
+	ifTrue:[ types remove: aNode methodClass ].
 	types size < 1
 		ifTrue: [ Error signal: 'The type inferencer had no results for ' , aNode asString ].
 	types size > 1
-		ifTrue: [ Error signal: 'The type inferencer had too many results' , aNode asString ].
+		ifTrue: [ Error signal: 'The type inferencer had too many results ' , aNode asString ].
+		
 	self atNewPropertyPut: types for: aNode
 ]
 
