@@ -23,7 +23,7 @@ ASTCMethodTranslator >> classTranslator: aClassTranslator [
 { #category : #initialization }
 ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
-	aNode
+	^ aNode
 		propertyAt: ASTCTypeAnnotationAST property
 		ifPresent: [ :types | types anyOne ]
 		ifAbsent: [ 
