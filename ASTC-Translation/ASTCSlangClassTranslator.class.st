@@ -4,35 +4,21 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #check }
-ASTCSlangClassTranslator >> getPrimitiveToTranslate: aClass [
-	^ (aClass methods
-		select: [ :aMethod | 
-			| anAST |
-			anAST := aMethod ast.
-			anAST arguments isEmpty
-				and: [ anAST pragmas
-						noneSatisfy: [ :aPragma | aPragma selector = #doNotGenerate ] ] ])
-		collect: #ast
-]
-
-{ #category : #accessing }
+{ #category : #initialization }
 ASTCSlangClassTranslator >> initialize [
 	super initialize.
-	inferer
-		explicitTypeHeuristic: PISlangTypesHeuristic
-
+	inferer explicitTypeHeuristic: PISlangTypesHeuristic.
 ]
 
 { #category : #check }
-ASTCSlangClassTranslator >> preTranslationCheck: aClass [
+ASTCSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 	(aClass allSuperclasses
 		includes: InterpreterPlugin)
 		ifFalse: [ self error: 'can only translate plugins for now. They need to inherit from InterpreterPlugin.' ].
 ]
 
 { #category : #check }
-ASTCSlangClassTranslator >> preTypeChecking: aClass [
+ASTCSlangClassTranslator >> preTypeInference: aClass [
 	| piType |
 	inferer types createConcreteType: aClass.
 	piType := (inferer typeForClass: InterpreterPlugin).
@@ -44,17 +30,4 @@ ASTCSlangClassTranslator >> preTypeChecking: aClass [
 	ifPresent: [ piType instanceVariables at:#moduleName put: 
 		(inferer types createConcreteType: String) ]." 
 
-]
-
-{ #category : #check }
-ASTCSlangClassTranslator >> translateClassPart: aClass in: aCompilationUnit [
-	| slangCompatibleIVs |
-	slangCompatibleIVs := aClass allInstVarNames asOrderedCollection
-		remove: #translatedMethodCache;
-		remove: #moduleName;
-		yourself.
-	slangCompatibleIVs
-		do: [ :ivName | 
-			aCompilationUnit declarations
-				add: (self translateInstanceVariable: ivName from: aClass) ]
 ]
