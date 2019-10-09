@@ -319,7 +319,7 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 		
 		ifFalse:[[ aPropertyName parent: self ]]) + 
 		[:anInstance | propertyName := aPropertyName ])
-		withArgs:{ #anInstance -> aPropertyName } asDictionary.
+		withArguments:{ #anInstance -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessing'.
 	
 	(aProperty isRelationSide and: [ aProperty isMany ])
@@ -330,7 +330,7 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	methodName := 'add' , (propertyName capitalized removeSuffix:'s') , ':'. " addProperty: "
 	method :=	 methodName asMethodWithBody: 
 		[:anElem| propertyName add: anElem ] 
-		withArgs: { #anElem -> anElement } asDictionary.
+		withArguments: { #anElem -> anElement } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessing'.
 
 ]
@@ -713,7 +713,7 @@ ASTCGeneratorNew >> generateAbstractVisitOf: aFMXClass [
 	className := aFMXClass name.
 	method := (className asVisitClassSelector)
 		asMethodWithBody: [ :anInstance | ]
-		withArgs:
+		withArguments:
 			{#anInstance ->
 			className asAnInstance} asDictionary.
 	^ self addMethod: method asString on: abstractVisitorClass withProtocol: 'visiting'
@@ -794,7 +794,7 @@ ASTCGeneratorNew >> generateSuperclassVisitOf: aFMXClass [
 		
 	method := methodSelector
 		asMethodWithBody: [ :anInstance | ^ super superMethodSelector: {anInstance}  ]
-		withArgs:
+		withArguments:
 			{#anInstance ->
 			className asAnInstance} asDictionary.
 	^ self addMethod: method asString on: superclassVisitorClass withProtocol: 'visiting'
@@ -855,7 +855,7 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 				].
 	method := className asVisitClassSelector
 		asMethodWithBody: body
-		withArgs: {(#anInstance -> className asAnInstance)} asDictionary.
+		withArguments: {(#anInstance -> className asAnInstance)} asDictionary.
 	^ self
 		addMethod: method asString
 		on: walkerVisitorClass
