@@ -131,6 +131,11 @@ ASTCContainer >> parent:aNode [
 	^parent.
 ]
 
+{ #category : #comparing }
+ASTCContainer >> rootNode [
+	^ parent ifNil: [ self ] ifNotNil: [ :p | p rootNode ]
+]
+
 { #category : #initialization }
 ASTCContainer >> size [
 	^ self collection size
