@@ -13,5 +13,5 @@ ASTCSlangTranslationTest >> setUp [
 ASTCSlangTranslationTest >> testTranslateBrokenPlugin [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
-	translator translateClass: BrokenPlugin
+	^ translator translateClass: BrokenPlugin
 ]
