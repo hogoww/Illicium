@@ -77,11 +77,8 @@ ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
-	| type |
-	type := inferer typeOfNode: aMessageNode.
-	self atNewPropertyPut: type
-		for: aMessageNode.
+ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [ 
+	self typeThatNode: aMessageNode.
 	super visitMessageNode: aMessageNode.
 	^aMessageNode.
 ]
