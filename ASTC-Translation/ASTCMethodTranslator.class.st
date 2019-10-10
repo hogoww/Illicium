@@ -25,7 +25,7 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
 		propertyAt: ASTCTypeAnnotationAST property
-		ifPresent: [ :types | types anyOne ]
+		ifPresent: [ :types | types ]
 		ifAbsent: [ 
 			Error signal:
 					'The type inferencer couldn''t figure out the type of a '	, aNode class asString ].
