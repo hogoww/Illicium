@@ -103,6 +103,11 @@ ASTCContainer >> fillFrom: aCollection with: aBlock [
 ]
 
 { #category : #comparing }
+ASTCContainer >> first [ 	
+	^ collection first
+]
+
+{ #category : #comparing }
 ASTCContainer >> hash [
 	^ collection hash
 ]
@@ -114,6 +119,11 @@ ASTCContainer >> initialize [
 
 	collection:=LinkedList new."A linked list so far, could be changed."
 
+]
+
+{ #category : #initialization }
+ASTCContainer >> isEmpty [
+	^ collection isEmpty 
 ]
 
 { #category : #initialization }
@@ -132,6 +142,11 @@ ASTCContainer >> parent:aNode [
 { #category : #comparing }
 ASTCContainer >> rootNode [
 	^ parent ifNil: [ self ] ifNotNil: [ :p | p rootNode ]
+]
+
+{ #category : #accessing }
+ASTCContainer >> second [
+	^ collection second
 ]
 
 { #category : #initialization }
