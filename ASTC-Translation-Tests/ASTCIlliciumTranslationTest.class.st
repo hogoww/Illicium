@@ -13,13 +13,16 @@ ASTCIlliciumTranslationTest >> setUp [
 ASTCIlliciumTranslationTest >> testTranslateBrokenPlugin [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
-	^ translator translateClass: ILBrokenPlugin
-	
+	| cu |
+	cu:= translator translateClass: ILBrokenPlugin.
+	^ cu
 ]
 
 { #category : #tests }
 ASTCIlliciumTranslationTest >> testTranslateRandomClass [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
-	^ translator translateClass: RandomTestClass
+	| cu |
+	cu := translator translateClass: RandomTestClass.
+	^ cu
 ]
