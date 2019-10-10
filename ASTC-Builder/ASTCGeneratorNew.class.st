@@ -834,13 +834,6 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 	| method className body |
 	className := aFMXClass name.
 
-
-	"visitStructureDefinitionMembers:anASTCStructureDefinition
-		anASTCStructureDefinition members
-			ifNotNil:[ :members | members
-				do:[ :aMember | 
-					aMember acceptVisitor:self ]
-		]"
 	body := [ :anInstance |  ] asPlainCodeBC.
 
 	aFMXClass relations
@@ -848,14 +841,23 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 				propertyName:= aRelation side name.
 				(aRelation side otherSide isContainer)
 					ifTrue:[
-						body + (aRelation side isMany
-							ifTrue:[ [:anInstance|  anInstance propertyName ifNotNil:[:aMember| aMember do:[:aMemberOfCollection| aMemberOfCollection acceptVisitor: self]]]]
-							ifFalse:[ [:anInstance| anInstance propertyName ifNotNil:[:aMember| aMember acceptVisitor: self ]]])
-					]
-				].
+						(aRelation side isMany
+							ifTrue:[ 
+								body add: 
+									[:anInstance| anInstance propertyName 
+										ifNotNil:[:aCollection| aCollection 
+											do:[:aMember| aMember acceptVisitor: self]]]
+									withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ]
+							ifFalse:[ 
+								body add: 
+									[:anInstance| anInstance propertyName 
+										ifNotNil:[:aMember| aMember acceptVisitor: self ] ] 
+									withArguments: {#aMember -> propertyName asAnInstance } asDictionary ])]].
+						
 	method := className asVisitClassSelector
 		asMethodWithBody: body
 		withArguments: {(#anInstance -> className asAnInstance)} asDictionary.
+
 	^ self
 		addMethod: method asString
 		on: walkerVisitorClass
