@@ -793,7 +793,7 @@ ASTCGeneratorNew >> generateSuperclassVisitOf: aFMXClass [
 	methodSelector := (className asVisitClassSelector).
 		
 	method := methodSelector
-		asMethodWithBody: [ :anInstance | ^ super superMethodSelector: {anInstance}  ]
+		asMethodWithBody: [ :anInstance | ^ self superMethodSelector: {anInstance}  ]
 		withArguments:
 			{#anInstance ->
 			className asAnInstance} asDictionary.

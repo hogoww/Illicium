@@ -6,135 +6,135 @@ Class {
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitAbstractWhile: anAbstractWhile [
-	^ super visitLoop: anAbstractWhile
+	^ self visitLoop: anAbstractWhile
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitBlock: aBlock [
-	^ super visitStatement: aBlock
+	^ self visitStatement: aBlock
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitCompilationUnit: aCompilationUnit [
-	^ super visitNode: aCompilationUnit
+	^ self visitNode: aCompilationUnit
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitDeclaration: aDeclaration [
-	^ super visitNode: aDeclaration
+	^ self visitNode: aDeclaration
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitDeclarationStatement: aDeclarationStatement [
-	^ super visitStatement: aDeclarationStatement
+	^ self visitStatement: aDeclarationStatement
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitDefinition: aDefinition [
-	^ super visitNode: aDefinition
+	^ self visitNode: aDefinition
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitDoWhile: aDoWhile [
-	^ super visitAbstractWhile: aDoWhile
+	^ self visitAbstractWhile: aDoWhile
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitExpression: anExpression [
-	^ super visitNode: anExpression
+	^ self visitNode: anExpression
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitExpressionStatement: anExpressionStatement [
-	^ super visitStatement: anExpressionStatement
+	^ self visitStatement: anExpressionStatement
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitFor: aFor [
-	^ super visitLoop: aFor
+	^ self visitLoop: aFor
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitFunctionCall: aFunctionCall [
-	^ super visitExpression: aFunctionCall
+	^ self visitExpression: aFunctionCall
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
-	^ super visitDeclaration: aFunctionDeclaration
+	^ self visitDeclaration: aFunctionDeclaration
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitFunctionDefinition: aFunctionDefinition [
-	^ super visitDefinition: aFunctionDefinition
+	^ self visitDefinition: aFunctionDefinition
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitIdentifier: anIdentifier [
-	^ super visitExpression: anIdentifier
+	^ self visitExpression: anIdentifier
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitIf: anIf [
-	^ super visitStatement: anIf
+	^ self visitStatement: anIf
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitLiteral: aLiteral [
-	^ super visitExpression: aLiteral
+	^ self visitExpression: aLiteral
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitLoop: aLoop [
-	^ super visitStatement: aLoop
+	^ self visitStatement: aLoop
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitOperator: anOperator [
-	^ super visitExpression: anOperator
+	^ self visitExpression: anOperator
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitProject: aProject [
-	^ super visitNode: aProject
+	^ self visitNode: aProject
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitReturn: aReturn [
-	^ super visitStatement: aReturn
+	^ self visitStatement: aReturn
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitStatement: aStatement [
-	^ super visitNode: aStatement
+	^ self visitNode: aStatement
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitStructureDeclaration: aStructureDeclaration [
-	^ super visitDeclaration: aStructureDeclaration
+	^ self visitDeclaration: aStructureDeclaration
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitStructureDefinition: aStructureDefinition [
-	^ super visitDefinition: aStructureDefinition
+	^ self visitDefinition: aStructureDefinition
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitType: aType [
-	^ super visitNode: aType
+	^ self visitNode: aType
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitVariableDeclaration: aVariableDeclaration [
-	^ super visitDeclaration: aVariableDeclaration
+	^ self visitDeclaration: aVariableDeclaration
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitVariableDefinition: aVariableDefinition [
-	^ super visitDefinition: aVariableDefinition
+	^ self visitDefinition: aVariableDefinition
 ]
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitWhile: aWhile [
-	^ super visitAbstractWhile: aWhile
+	^ self visitAbstractWhile: aWhile
 ]
