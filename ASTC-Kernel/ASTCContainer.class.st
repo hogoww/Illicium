@@ -91,13 +91,6 @@ ASTCContainer >> do: aBlock [
 ]
 
 { #category : #initialization }
-ASTCContainer >> doesNotUnderstand: aMessage [
-	"indirection of the message to my collection. Should be removed when the interface will be good enough"
-	self flag:#toRemove.
-	^aMessage sendTo:collection
-]
-
-{ #category : #initialization }
 ASTCContainer >> fillFrom: aCollection with: aBlock [
 	self flag:#bad. "0(2n), instead of o(n)..."
 	self collection: (self collection fillFrom: aCollection with: aBlock).
