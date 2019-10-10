@@ -91,6 +91,11 @@ ASTCContainer >> do: aBlock [
 ]
 
 { #category : #initialization }
+ASTCContainer >> do: aBlock separatedBy: anotherBlock [
+	^ collection do: aBlock separatedBy: anotherBlock
+]
+
+{ #category : #initialization }
 ASTCContainer >> fillFrom: aCollection with: aBlock [
 	self flag:#bad. "0(2n), instead of o(n)..."
 	self collection: (self collection fillFrom: aCollection with: aBlock).
