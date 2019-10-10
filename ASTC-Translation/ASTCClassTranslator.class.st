@@ -84,7 +84,7 @@ ASTCClassTranslator >> preTypeInference: aClass [
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateClass: aClass [ 
-	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints |
+	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu |
 	self preTypeInference: aClass.
 	entryPoints := self typeInferenceEntryPoints: aClass.
 	self callgraphTypeStartingFrom: entryPoints.
@@ -92,7 +92,9 @@ ASTCClassTranslator >> translateClass: aClass [
 	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
 	
 	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
-	^ self compilationUnitFromTranslatedMethod: functionDefinitionsASTs
+	cu := self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
+	cu debugASTCStructure.
+	^ cu
 ]
 
 { #category : #'translation-api' }
@@ -102,7 +104,7 @@ ASTCClassTranslator >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	| methodsASTs functionDefinitionsASTs methodsToTranslate |
+	| methodsASTs functionDefinitionsASTs methodsToTranslate cu |
 	self preTranslationConstraintCheck: aClass.
 	self preTypeInference: aClass.
 	self callgraphTypeStartingFrom: { (aClass >> aSelector) ast  }.
@@ -110,7 +112,9 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
 	
 	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
-	^self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
+	cu := self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
+	cu debugASTCStructure.
+	^ cu
 ]
 
 { #category : #translation }
