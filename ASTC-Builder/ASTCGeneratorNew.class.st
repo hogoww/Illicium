@@ -813,28 +813,29 @@ ASTCGeneratorNew >> generateSuperclassVisitorClass [
 ASTCGeneratorNew >> generateVisitorsClasses [
 	self generateAbstractVisitorClass.
 		self generateSuperclassVisitorClass.
-		self generateWalkerVisitorClass.
-			self generatePrinterVisitorClass.
-			self generateDebugStructureVisitorClass.
-				self generateStructureValidatorVisitorClass.
+			self generateWalkerVisitorClass.
+				self generatePrinterVisitorClass.
+				self generateDebugStructureVisitorClass.
+					self generateStructureValidatorVisitorClass.
 
 ]
 
 { #category : #'generation-visit' }
 ASTCGeneratorNew >> generateVisitsFor: aClass [
 	self generateAbstractVisitOf: aClass.
-	self generateSuperclassVisitOf: aClass.
-		self generateWalkVisitOf: aClass.
+		self generateSuperclassVisitOf: aClass.
+			self generateWalkVisitOf: aClass.
 ]
 
 { #category : #'generation-visit' }
 ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
-	| method className body |
-	className := aFMXClass name.
+	| method body aClass visitClass |
+	aClass := aFMXClass name asAnInstance.
 
-	body := [ :anInstance |  ] asPlainCodeBC.
+	visitClass :=  aFMXClass name asVisitClassSelector.
+	body := [ :anInstance | super visitClass: {aClass} ] asPlainCodeBC.
 
 	aFMXClass relations
 		do: [ :aRelation | |propertyName|
@@ -846,7 +847,7 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 								body add: 
 									[:anInstance| anInstance propertyName 
 										ifNotNil:[:aCollection| aCollection 
-											do:[:aMember| aMember acceptVisitor: self]]]
+											do:[:aMember| aMember acceptVisitor: self ]]]
 									withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ]
 							ifFalse:[ 
 								body add: 
@@ -854,9 +855,9 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 										ifNotNil:[:aMember| aMember acceptVisitor: self ] ] 
 									withArguments: {#aMember -> propertyName asAnInstance } asDictionary ])]].
 						
-	method := className asVisitClassSelector
+	method := visitClass
 		asMethodWithBody: body
-		withArguments: {(#anInstance -> className asAnInstance)} asDictionary.
+		withArguments: {(#anInstance -> aClass )} asDictionary.
 
 	^ self
 		addMethod: method asString
@@ -866,8 +867,8 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 
 { #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> generateWalkerVisitorClass [
-	"Walker --> Abstract"
-	walkerVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #WalkerVisitor)
+	"Walker --> Superclass"
+	walkerVisitorClass := superclassVisitorClass subclass: (self fullNameOf: #WalkerVisitor)
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: (self makePackageNameWith: #visitors)
