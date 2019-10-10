@@ -378,26 +378,29 @@ ASTCGeneratorNew >> addPrintPropertiesOn: aClass [
 ]
 
 { #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addPrintPropertiesOn: aClass forAttributes:aCollectionOfProperties [
-	| methodBody |
+ASTCGeneratorNew >> addPrintPropertiesOn: aFMXClass forAttributes:aCollectionOfProperties [
 	"generate a #printProperties selector that will call every property asString"
 	"The result will keep the order of the definitions in the metamodel"
-	methodBody:='printProperties
-	'.	
+	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass |
+	aClass := aFMXClass name asAnInstance.
+	aClassWithQuotes:= '''',aClass,''''.
+	visitSomething := aFMXClass asVisitClassSelector.
 
-	methodBody := methodBody,
-		(aCollectionOfProperties
-			ifEmpty:['^''''']
-			ifNotEmpty:[	
-			(String streamContents: [:s | 
-		s <<'^String streamContents:[:s |
-	'.
-	aCollectionOfProperties do: [:aProperty | s <<'s << '' '' << self ' ;<< aProperty ;<< 'asString.'. ] separatedBy:[s cr;tab.].
-	s<<'].'.
-		]).
-	]).
-	
-	self addMethod: methodBody on: aClass withProtocol: 'print'.
+
+	methodBody := visitSomething asMethodWithBody:[:anInstance|
+		stream cr.
+
+		self printTabCount: currentDepth.
+		stream << $( << aClassWithQuotes .
+		stream << aClass printProperties.
+		currentDepth := currentDepth+1.
+
+		super visitSomething:{aClass}.
+
+		currentDepth := currentDepth-1.
+		stream << ')'.
+	] withArguments: {#anInstance -> aClass} asDictionary.
+	self addMethod: methodBody asString on: printerVisitorClass withProtocol: 'visiting'.	
 ]
 
 { #category : #'generating-visitor-printer' }
@@ -423,6 +426,32 @@ aProperty,'AsString
 	^',aProperty asString,' asString.'.
 	
 	self addMethod: methodBody on: aClass withProtocol: 'printing'.
+]
+
+{ #category : #'generating-visitor-printer' }
+ASTCGeneratorNew >> addPrinterVisit: aFMXClass [
+	"generate a #printProperties selector that will call every property asString"
+	"The result will keep the order of the definitions in the metamodel"
+	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass |
+	aClass := aFMXClass name asAnInstance.
+	aClassWithQuotes:= '''',aClass,''''.
+	visitSomething := aFMXClass asVisitClassSelector.
+
+
+	methodBody := visitSomething asMethodWithBody:[:anInstance|
+		stream cr.
+
+		self printTabCount: currentDepth.
+		stream << $( << aClassWithQuotes .
+		stream << aClass printProperties.
+		currentDepth := currentDepth+1.
+
+		super visitSomething:{aClass}.
+
+		currentDepth := currentDepth-1.
+		stream << ')'.
+	] withArguments: {#anInstance -> aClass} asDictionary.
+	self addMethod: methodBody asString on: printerVisitorClass withProtocol: 'visiting'.	
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -516,94 +545,6 @@ ASTCGeneratorNew >> addVisitor [
 	self addWalkingOverride.
 	self addCurrentClassVisitToPrinterVisitor.
 
-]
-
-{ #category : #'generating-visitor-walker' }
-ASTCGeneratorNew >> addWalkerMethod [
-	"shortcut for the currentClass IV"
-	self addWalkerMethodFor:currentClass forProperties: (self allPropertiesOfClass: currentClass).
-]
-
-{ #category : #'generating-visitor-walker' }
-ASTCGeneratorNew >> addWalkerMethodFor: aClass forProperties: aCollectionOfProperties [
-	| methodBody className |
-	className := aClass asString.
-	methodBody := String
-		streamContents: [ :s | 
-			s	<< (self methodClassSignatureFor: className withPrefix: 'walk');
-				cr.
-			currentSuperclass = #Object ifFalse:[
-			s  tab << 'self ' << (self methodSuperclassSignatureFor: className withPrefix: 'walk') ;
-				<< '.';
-			cr.
-			].
-			aCollectionOfProperties
-				do: [ :aProperty | 
-					s tab
-						<< 'self walk';
-						<< className;
-						<< aProperty capitalized;
-						<< $:;
-						space;
-						<< (self aClassAsVariableName: aClass asString);
-						<< '.';
-						cr ] ].
-	self
-		addMethod: methodBody
-		on: astWalkerVisitorClass
-		withProtocol: 'visiting'
-]
-
-{ #category : #'generating-visitor-walker' }
-ASTCGeneratorNew >> addWalkerProperty:aPropertyName for: aClass isMany:isManyBoolean isProperty: isPropertyBoolean [
-	| methodBody className propertyIteratorName |
-	
-	className:=aClass asString.
-	methodBody:=String streamContents:[:stream | 
-		stream << 'walk' << className << aPropertyName capitalized << $: << (self aClassAsVariableName:className) << Character cr.
-
-	isPropertyBoolean ifFalse:[
-		stream << Character tab << (self aClassAsVariableName: className) << Character space  << aPropertyName << Character cr.
-		stream << Character tab << Character tab << 'ifNotNil:[ :'<< aPropertyName << ' | ' << aPropertyName .
-		(isManyBoolean 
-			ifTrue:[ 
-				propertyIteratorName := self aClassAsVariableName:(aPropertyName withoutSuffix: 's').
-				stream << Character cr.
-				stream << Character tab << Character tab << Character tab << 'do:[ :' << propertyIteratorName << ' | ' << Character cr << propertyIteratorName << ' acceptVisitor:self ]']
-			ifFalse:[ stream << ' acceptVisitor:self.']).
-			stream << Character cr << Character tab << Character tab << $].
-		]].
-
-
-	self addMethod: methodBody on: astWalkerVisitorClass withProtocol: 'walking'
-	
-]
-
-{ #category : #'generating-visitor-walker' }
-ASTCGeneratorNew >> addWalkingOverride [
-	"indirection on the currentClass Instance Variable"
-	self addWalkingOverrideFor:currentClass.
-]
-
-{ #category : #'generating-visitor-walker' }
-ASTCGeneratorNew >> addWalkingOverrideFor: aClass [
-	"add the visit method for the Walker visitor for aClass"
-	| methodBody className|
-	
-	className:=aClass asString.
-
-	methodBody :=String streamContents: [:s | 
-		s <<(self methodClassSignatureFor: className withPrefix:'visit'); <<'
-	'.
-		s 	<<'self walk';
-			<<className;
-			<<': ';
-			<< (self aClassAsVariableName: className);
-			<<'.
-			'.
-	].
-	
-	self addMethod: methodBody on: astWalkerVisitorClass  withProtocol: 'visiting'.
 ]
 
 { #category : #generating }
@@ -760,6 +701,32 @@ ASTCGeneratorNew >> generateDebugStructureVisitorClass [
 
 ]
 
+{ #category : #'generation-visit' }
+ASTCGeneratorNew >> generatePrinterVisit: aFMXClass [
+	"generate a #printProperties selector that will call every property asString"
+	"The result will keep the order of the definitions in the metamodel"
+	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass |
+	aClass := aFMXClass name asAnInstance.
+	aClassWithQuotes:= '''',aClass,''''.
+	visitSomething := aFMXClass name asVisitClassSelector.
+
+
+	methodBody := visitSomething asMethodWithBody:[:anInstance|
+		stream cr.
+
+		self printTabCount: currentDepth.
+		stream << $( << aClassWithQuotes .
+		stream << aClass printProperties.
+		currentDepth := currentDepth+1.
+
+		super visitSomething:{aClass}.
+
+		currentDepth := currentDepth-1.
+		stream << ')'.
+	] withArguments: {#anInstance -> aClass} asDictionary.
+	self addMethod: methodBody asString on: printerVisitorClass withProtocol: 'visiting'.	
+]
+
 { #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> generatePrinterVisitorClass [
 	"Printer --|> Walker"
@@ -825,6 +792,7 @@ ASTCGeneratorNew >> generateVisitsFor: aClass [
 	self generateAbstractVisitOf: aClass.
 		self generateSuperclassVisitOf: aClass.
 			self generateWalkVisitOf: aClass.
+				self generatePrinterVisit: aClass.
 ]
 
 { #category : #'generation-visit' }
