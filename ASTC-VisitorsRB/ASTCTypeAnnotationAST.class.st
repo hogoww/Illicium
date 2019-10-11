@@ -77,7 +77,7 @@ ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [ 
+ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
 	self typeThatNode: aMessageNode.
 	super visitMessageNode: aMessageNode.
 	^aMessageNode.

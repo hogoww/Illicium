@@ -88,7 +88,7 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 					"interpreterProxy -> methodArgument"
 					self assert: argument operands first isASTCOperator.
 					self assert: argument operands first symbol equals: #->.
-					self assert: argument operands first operands first id id equals: #interpreterProxy.
+					self assert: argument operands first operands first id equals: #interpreterProxy.
 
 					self assert: argument operands first operands second isASTCFunctionCall.
 					self assert: argument operands first operands second id id equals: #methodArgumentCount.
@@ -98,13 +98,13 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 				self assert: argument operands second value value equals: 1.
 		
 		"second statement interpreterProxy primitiveFail"
-		self assert: definition body statements seconds isASTCExpressionStatement.
-		statement := definition body statements seconds expression.
+		self assert: definition body statements second isASTCExpressionStatement.
+		statement := definition body statements second expression.
 		self assert: statement isASTCOperator.
 		self assert: statement symbol equals: #->.
 		self assert: statement operands size equals: 2.
 			self assert: statement operands first isASTCIdentifier.
-			self assert: statement operands first id id equals: #interpreterProxy.
+			self assert: statement operands first id equals: #interpreterProxy.
 		
 			self assert: statement operands second isASTCFunctionCall.
 			self assert: statement operands second id id equals: #primitiveFail.
@@ -158,7 +158,7 @@ ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 					"interpreterProxy -> methodArgument"
 					self assert: argument operands first isASTCOperator.
 					self assert: argument operands first symbol equals: #->.
-					self assert: argument operands first operands first id id equals: #interpreterProxy.
+					self assert: argument operands first operands first id equals: #interpreterProxy.
 
 					self assert: argument operands first operands second isASTCFunctionCall.
 					self assert: argument operands first operands second id id equals: #methodArgumentCount.
@@ -207,20 +207,20 @@ ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 				"pop:'s argument, interpreterProxy methodArgumentCount + 1"
 				argument := operands second arguments first.
 				self assert: argument isASTCOperator.
-				self assert: argument symbol equals: #-.
+				self assert: argument symbol equals: #+.
 				self assert: argument operands size equals: 2.
 					
 					"interpreterProxy -> methodArgument"
 					self assert: argument operands first isASTCOperator.
 					self assert: argument operands first symbol equals: #->.
-					self assert: argument operands first operands first id id equals: #interpreterProxy.
+					self assert: argument operands first operands first id equals: #interpreterProxy.
 
 					self assert: argument operands first operands second isASTCFunctionCall.
 					self assert: argument operands first operands second id id equals: #methodArgumentCount.
 					self assert: argument operands first operands second arguments size equals: 0.
 					
 				self assert: argument operands second isASTCLiteral.
-				self assert: argument operands second value value equals: 1.
+				self assert: argument operands second value value equals: 4.
 	^ cu
 ]
 
@@ -229,6 +229,6 @@ ASTCBrokenPluginTranslationTest >> testTranslateBrokenPlugin [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu |
-	cu := translator translateMethod: #primitivePopMoreThanExpected fromClass: BrokenPlugin.
+	cu := translator translateClass: BrokenPlugin.
 	^ cu
 ]

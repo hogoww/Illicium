@@ -3,6 +3,7 @@ Extension { #name : #MiscPrimitivePlugin }
 { #category : #'*ASTC-Translation-Tests' }
 MiscPrimitivePlugin >> primitiveCompareStringFirstHalf [
 	"ByteString (class) compare: string1 with: string2 collated: order"
+	"cut in half for test purposes"
 	<export: true>
 	| len1 len2 order string1 string2 orderOop string1Oop string2Oop |
 
