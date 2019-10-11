@@ -11,20 +11,21 @@ ASTCAbstractCheckVisitor class >> property [
 ]
 
 { #category : #accessing }
-ASTCAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for:anArgumentNode [
+ASTCAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for: aNode [
 	"similar to #at:put:, but check that this didn't exists previously"
 
-	(anArgumentNode propertyAt: aProperty
+	(aNode propertyAt: aProperty
 		ifPresent:[:assoc|
-			 "self error:
-				(String streamContents:[:s| s << ' visitor property conflict. ''' << aProperty << ''' already exists for instance of ' << anArgumentNode class name])"]
-		ifAbsent: [ anArgumentNode propertyAt: aProperty put: aValue. ] ).
+			 self error:
+				(String streamContents:[:s| s << ' visitor property conflict. ''' << aProperty << ''' already exists for instance of ' << aNode class name ])]
+		ifAbsent: [ aNode propertyAt: aProperty put: aValue. ] ).
 		
 	^aValue
 ]
 
 { #category : #accessing }
-ASTCAbstractCheckVisitor >> atNewPropertyPut: aValue for:anArgumentNode [
+ASTCAbstractCheckVisitor >> atNewPropertyPut: aValue for: aNode [
 	"shortcut"
-	^self atNewProperty: self class property put: aValue for: anArgumentNode 
+
+	^ self atNewProperty: self class property put: aValue for: aNode
 ]

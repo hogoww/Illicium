@@ -69,7 +69,7 @@ ASTCClassTranslator >> methodsToTranslateASTs: aClass [
 		select: [ :aMethod | 
 			(aClass methodDict keys includes: aMethod node selector)
 				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not ] ]
-		thenCollect: #node
+		thenCollect: [:aMethod| aMethod node copy ]
 ]
 
 { #category : #'translation-api' }
