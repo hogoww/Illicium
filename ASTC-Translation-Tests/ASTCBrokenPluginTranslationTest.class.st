@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCBrokenPlugin,
+	#name : #ASTCBrokenPluginTranslationTest,
 	#superclass : #ASTCSlangTranslationTest,
 	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }
-ASTCBrokenPlugin >> testNoPopButPush [
+ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 
@@ -44,7 +44,7 @@ ASTCBrokenPlugin >> testNoPopButPush [
 ]
 
 { #category : #tests }
-ASTCBrokenPlugin >> testPopAndFail [
+ASTCBrokenPluginTranslationTest >> testPopAndFail [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	"Bad test, too big, no checking. But test nonetheless"
@@ -116,7 +116,7 @@ ASTCBrokenPlugin >> testPopAndFail [
 ]
 
 { #category : #tests }
-ASTCBrokenPlugin >> testPopLessThanExpected [
+ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu declaration definition statement operands argument |
@@ -171,7 +171,7 @@ ASTCBrokenPlugin >> testPopLessThanExpected [
 ]
 
 { #category : #tests }
-ASTCBrokenPlugin >> testPopMoreThanExpected [
+ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu declaration definition statement operands argument |
@@ -225,7 +225,7 @@ ASTCBrokenPlugin >> testPopMoreThanExpected [
 ]
 
 { #category : #tests }
-ASTCBrokenPlugin >> testTranslateBrokenPlugin [
+ASTCBrokenPluginTranslationTest >> testTranslateBrokenPlugin [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu |
