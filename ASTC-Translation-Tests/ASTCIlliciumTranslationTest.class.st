@@ -6,6 +6,7 @@ Class {
 
 { #category : #running }
 ASTCIlliciumTranslationTest >> setUp [
+	super setUp.
 	translator := ASTCTranslator new
 ]
 
