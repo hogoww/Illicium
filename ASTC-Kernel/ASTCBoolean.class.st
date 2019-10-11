@@ -10,6 +10,20 @@ ASTCBoolean class >> asCType [
 ]
 
 { #category : #controlling }
+ASTCBoolean >> and: aBoolean [
+	| firstPart secondPart |
+	firstPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ value statements first acceptVisitor: visitor ] ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
+	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: visitor ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
+	^ ASTCOperator new
+		symbol: '&&';
+		operands:(ASTCContainer new
+			add: firstPart;
+			add: secondPart;
+			yourself);
+		yourself 
+]
+
+{ #category : #controlling }
 ASTCBoolean >> ifFTrue: trueBlock [
  	^ASTCIf new
 		condition:(self value acceptVisitor:self visitor);
@@ -43,4 +57,18 @@ ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 		then: (trueBlock acceptVisitor: self visitor);
 		else: (falseBlock acceptVisitor: self visitor);
 		yourself.
+]
+
+{ #category : #controlling }
+ASTCBoolean >> or: aBoolean [
+	| firstPart secondPart |
+	firstPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ value statements first acceptVisitor: visitor ] ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
+	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: visitor ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
+	^ ASTCOperator new
+		symbol: '||';
+		operands:(ASTCContainer new
+			add: firstPart;
+			add: secondPart;
+			yourself);
+		yourself
 ]
