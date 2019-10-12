@@ -21,7 +21,7 @@ String >> asAnInstance: isPlural [
 	"('expression' asAnInstance: false) >>> 'anExpression'"
 	
 	^ isPlural
-		ifTrue: [ self uncapitalized asEnglishPlural ]
+		ifTrue: [ 'some',self capitalized asEnglishPlural ]
 		ifFalse: [ self asAnInstance ]
 ]
 
