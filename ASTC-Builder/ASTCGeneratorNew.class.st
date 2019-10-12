@@ -178,34 +178,6 @@ ASTCGeneratorNew >> addCurrentClassVisitToAbstractVisitor [
 		  withProtocol:'visiting'
 ]
 
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addCurrentClassVisitToPrinterVisitor [
-	"indirection on the currentClass Instance Variable"
-	self addCurrentClassVisitToPrinterVisitorOn: currentClass.
-	
-]
-
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addCurrentClassVisitToPrinterVisitorOn: aClass [
-	"Add the printer method for aClass on the PrinterVisitor class"
-	| methodBody |
-	methodBody:=(self methodClassSignatureFor: aClass asString withPrefix: 'visit'),'
-	stream << ''
-''.
-	self printTabCount: currentDepth.
-	stream << ''(', (self aClassAsVariableName: aClass asString),'''.
-	stream << (',(self aClassAsVariableName: aClass asString),' printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visit',aClass asString,':', (self aClassAsVariableName:aClass asString),'.
-	
-	currentDepth := currentDepth-1.
-	stream << '')''.
-'.
-	self addMethod: methodBody on: astPrinterVisitor withProtocol: 'visiting'.	
-	
-]
-
 { #category : #'generating-visitor-structure-validation' }
 ASTCGeneratorNew >> addDebugStructureForCurrentClass [
 	| aClass visitSuperclass visitAClass bodyOfMethod |
@@ -321,7 +293,7 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 		[:anInstance | propertyName := aPropertyName ])
 		withArguments:{ #anInstance -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessing'.
-	
+
 	(aProperty isRelationSide and: [ aProperty isMany ])
 	ifFalse:[ ^self ].
 
@@ -349,109 +321,6 @@ ASTCGeneratorNew >> addInstancesVariablesTo: aFMXClass [
 ASTCGeneratorNew >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
 	"Shortcut to a system method, in case it changes."
 	aClass compile: aBodyAsString classified: aProtocolAsString
-]
-
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addPrintPropertiesOn: aClass [
-	| methodBody methodstoCall|
-	self flag:#duplication."duplication with initialize/walker"
-	"generate an #print that will call every property printer already on the target class."
-	"The result will be UNORDERED."
-	methodstoCall := aClass selectors select:[:selector| '*AsString' match:selector ]. 
-
-	methodBody:='printProperties
-	'.	
-
-	methodBody := methodBody,
-		(methodstoCall 
-			ifEmpty:['^''''']
-			ifNotEmpty:[	
-			(String streamContents: [:s | 
-		s <<'^String streamContents:[:s |
-	'.
-	methodstoCall do: [:method | s <<'s << '' '' << self ' ;<< method; <<'.'. ] separatedBy:[s cr;tab.].
-	s<<'].'.
-		]).
-	]).
-	
-	self addMethod: methodBody on: aClass withProtocol: 'print'.
-]
-
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addPrintPropertiesOn: aFMXClass forAttributes:aCollectionOfProperties [
-	"generate a #printProperties selector that will call every property asString"
-	"The result will keep the order of the definitions in the metamodel"
-	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass |
-	aClass := aFMXClass name asAnInstance.
-	aClassWithQuotes:= '''',aClass,''''.
-	visitSomething := aFMXClass asVisitClassSelector.
-
-
-	methodBody := visitSomething asMethodWithBody:[:anInstance|
-		stream cr.
-
-		self printTabCount: currentDepth.
-		stream << $( << aClassWithQuotes .
-		stream << aClass printProperties.
-		currentDepth := currentDepth+1.
-
-		super visitSomething:{aClass}.
-
-		currentDepth := currentDepth-1.
-		stream << ')'.
-	] withArguments: {#anInstance -> aClass} asDictionary.
-	self addMethod: methodBody asString on: printerVisitorClass withProtocol: 'visiting'.	
-]
-
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addPrinterProperties [
-	"shortcut for currentClass Instance Variable"
-	self addPrintPropertiesOn: currentClass.
-]
-
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addPrinterProperty: aProperty [
-	"shortcut for currentClass Instance Variable"
-	^self addPrinterProperty: aProperty on: currentClass.
-	
-	
-]
-
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addPrinterProperty: aProperty on: aClass [
-	"add a method on aClass that stringify a property. Used in the generated PrinterVisitor"
-	| methodBody |
-	methodBody:=
-aProperty,'AsString
-	^',aProperty asString,' asString.'.
-	
-	self addMethod: methodBody on: aClass withProtocol: 'printing'.
-]
-
-{ #category : #'generating-visitor-printer' }
-ASTCGeneratorNew >> addPrinterVisit: aFMXClass [
-	"generate a #printProperties selector that will call every property asString"
-	"The result will keep the order of the definitions in the metamodel"
-	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass |
-	aClass := aFMXClass name asAnInstance.
-	aClassWithQuotes:= '''',aClass,''''.
-	visitSomething := aFMXClass asVisitClassSelector.
-
-
-	methodBody := visitSomething asMethodWithBody:[:anInstance|
-		stream cr.
-
-		self printTabCount: currentDepth.
-		stream << $( << aClassWithQuotes .
-		stream << aClass printProperties.
-		currentDepth := currentDepth+1.
-
-		super visitSomething:{aClass}.
-
-		currentDepth := currentDepth-1.
-		stream << ')'.
-	] withArguments: {#anInstance -> aClass} asDictionary.
-	self addMethod: methodBody asString on: printerVisitorClass withProtocol: 'visiting'.	
 ]
 
 { #category : #'generation-visitor-classes' }
