@@ -19,9 +19,9 @@ ASTCFunctionDeclaration >> parameters [
 ]
 
 { #category : #accessing }
-ASTCFunctionDeclaration >> parameters: variableDeclarations [
-	variableDeclarations parent: self.
-	parameters := variableDeclarations
+ASTCFunctionDeclaration >> parameters: someVariableDeclarations [
+	someVariableDeclarations parent: self.
+	parameters := someVariableDeclarations
 ]
 
 { #category : #accessing }

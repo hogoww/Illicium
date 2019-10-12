@@ -19,9 +19,9 @@ ASTCOperator >> operands [
 ]
 
 { #category : #accessing }
-ASTCOperator >> operands: expressions [
-	expressions parent: self.
-	operands := expressions
+ASTCOperator >> operands: someExpressions [
+	someExpressions parent: self.
+	operands := someExpressions
 ]
 
 { #category : #accessing }

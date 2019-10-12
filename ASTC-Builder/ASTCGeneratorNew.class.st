@@ -668,21 +668,21 @@ ASTCGeneratorNew >> generateVisitsFor: aClass [
 ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
-	| method body aClass visitClass |
+	| method body aClass visitClass propertyName |
 	aClass := aFMXClass name asAnInstance.
 
 	visitClass :=  aFMXClass name asVisitClassSelector.
 	body := [ :anInstance | super visitClass: {aClass} ] asPlainCodeBC.
 
 	aFMXClass relations
-		do: [ :aRelation | |propertyName|
+		do: [ :aRelation |
 				propertyName:= aRelation side name.
 				(aRelation side otherSide isContainer)
 					ifTrue:[
 						(aRelation side isMany
 							ifTrue:[ 
 								body add: 
-									[:anInstance| anInstance propertyName 
+									[:anInstance| anInstance propertyName
 										ifNotNil:[:aCollection| aCollection 
 											do:[:aMember| aMember acceptVisitor: self ]]]
 									withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ]
@@ -720,7 +720,7 @@ ASTCGeneratorNew >> initialize [
 	self flag:#toRemove. "remove the Transcript clear, it's just for development."
 	
 	Transcript clear.
-	debug := true.
+	debug := false.
 	super initialize.
 	
 	self initializeDefault.

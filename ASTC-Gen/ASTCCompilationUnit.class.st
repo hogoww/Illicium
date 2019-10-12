@@ -24,9 +24,9 @@ ASTCCompilationUnit >> declarations [
 ]
 
 { #category : #accessing }
-ASTCCompilationUnit >> declarations: declarations [
-	declarations parent: self.
-	declarations := declarations
+ASTCCompilationUnit >> declarations: someDeclarations [
+	someDeclarations parent: self.
+	declarations := someDeclarations
 ]
 
 { #category : #accessing }
@@ -35,7 +35,7 @@ ASTCCompilationUnit >> definitions [
 ]
 
 { #category : #accessing }
-ASTCCompilationUnit >> definitions: definitions [
-	definitions parent: self.
-	definitions := definitions
+ASTCCompilationUnit >> definitions: someDefinitions [
+	someDefinitions parent: self.
+	definitions := someDefinitions
 ]

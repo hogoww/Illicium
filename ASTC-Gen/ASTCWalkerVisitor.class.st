@@ -12,7 +12,7 @@ ASTCWalkerVisitor >> visitAbstractWhile: anAbstractWhile [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBlock: aBlock [
 	super visitBlock: aBlock.
-	aBlock propertyName
+	aBlock statements
 		ifNotNil:
 			[ :statements | statements do: [ :aStatements | aStatements acceptVisitor: self ] ]
 ]
@@ -20,10 +20,10 @@ ASTCWalkerVisitor >> visitBlock: aBlock [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
 	super visitCompilationUnit: aCompilationUnit.
-	aCompilationUnit propertyName
+	aCompilationUnit declarations
 		ifNotNil:
 			[ :definitions | definitions do: [ :aDefinitions | aDefinitions acceptVisitor: self ] ].
-	aCompilationUnit propertyName
+	aCompilationUnit declarations
 		ifNotNil: [ :declarations | 
 			declarations
 				do: [ :aDeclarations | aDeclarations acceptVisitor: self ] ]
@@ -32,21 +32,21 @@ ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDeclaration: aDeclaration [
 	super visitDeclaration: aDeclaration.
-	aDeclaration propertyName
+	aDeclaration declStatement
 		ifNotNil: [ :anId | anId acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDeclarationStatement: aDeclarationStatement [
 	super visitDeclarationStatement: aDeclarationStatement.
-	aDeclarationStatement propertyName
+	aDeclarationStatement declaration
 		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDefinition: aDefinition [
 	super visitDefinition: aDefinition.
-	aDefinition propertyName
+	aDefinition declaration
 		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
@@ -63,25 +63,25 @@ ASTCWalkerVisitor >> visitExpression: anExpression [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitExpressionStatement: anExpressionStatement [
 	super visitExpressionStatement: anExpressionStatement.
-	anExpressionStatement propertyName
+	anExpressionStatement expression
 		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFor: aFor [
 	super visitFor: aFor.
-	aFor propertyName
+	aFor iteratorModification
 		ifNotNil: [ :anIteratorDefinition | anIteratorDefinition acceptVisitor: self ].
-	aFor propertyName
+	aFor iteratorModification
 		ifNotNil: [ :anIteratorModification | anIteratorModification acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFunctionCall: aFunctionCall [
 	super visitFunctionCall: aFunctionCall.
-	aFunctionCall propertyName
+	aFunctionCall arguments
 		ifNotNil: [ :anId | anId acceptVisitor: self ].
-	aFunctionCall propertyName
+	aFunctionCall arguments
 		ifNotNil:
 			[ :arguments | arguments do: [ :anArguments | anArguments acceptVisitor: self ] ]
 ]
@@ -89,9 +89,9 @@ ASTCWalkerVisitor >> visitFunctionCall: aFunctionCall [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
 	super visitFunctionDeclaration: aFunctionDeclaration.
-	aFunctionDeclaration propertyName
+	aFunctionDeclaration parameters
 		ifNotNil: [ :aType | aType acceptVisitor: self ].
-	aFunctionDeclaration propertyName
+	aFunctionDeclaration parameters
 		ifNotNil:
 			[ :parameters | parameters do: [ :aParameters | aParameters acceptVisitor: self ] ]
 ]
@@ -99,7 +99,7 @@ ASTCWalkerVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFunctionDefinition: aFunctionDefinition [
 	super visitFunctionDefinition: aFunctionDefinition.
-	aFunctionDefinition propertyName
+	aFunctionDefinition body
 		ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
@@ -111,10 +111,9 @@ ASTCWalkerVisitor >> visitIdentifier: anIdentifier [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitIf: anIf [
 	super visitIf: anIf.
-	anIf propertyName
-		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
-	anIf propertyName ifNotNil: [ :aThen | aThen acceptVisitor: self ].
-	anIf propertyName ifNotNil: [ :anElse | anElse acceptVisitor: self ]
+	anIf else ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	anIf else ifNotNil: [ :aThen | aThen acceptVisitor: self ].
+	anIf else ifNotNil: [ :anElse | anElse acceptVisitor: self ]
 ]
 
 { #category : #visiting }
@@ -125,22 +124,20 @@ ASTCWalkerVisitor >> visitLiteral: aLiteral [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitLoop: aLoop [
 	super visitLoop: aLoop.
-	aLoop propertyName
-		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
-	aLoop propertyName ifNotNil: [ :aBody | aBody acceptVisitor: self ]
+	aLoop body ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	aLoop body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitNode: aNode [
 	super visitNode: aNode.
-	aNode propertyName
-		ifNotNil: [ :aParent | aParent acceptVisitor: self ]
+	aNode parent ifNotNil: [ :aParent | aParent acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
 	super visitOperator: anOperator.
-	anOperator propertyName
+	anOperator operands
 		ifNotNil:
 			[ :operands | operands do: [ :anOperands | anOperands acceptVisitor: self ] ]
 ]
@@ -148,7 +145,7 @@ ASTCWalkerVisitor >> visitOperator: anOperator [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitProject: aProject [
 	super visitProject: aProject.
-	aProject propertyName
+	aProject compilationUnits
 		ifNotNil: [ :compilationUnits | 
 			compilationUnits
 				do: [ :aCompilationUnits | aCompilationUnits acceptVisitor: self ] ]
@@ -157,7 +154,7 @@ ASTCWalkerVisitor >> visitProject: aProject [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitReturn: aReturn [
 	super visitReturn: aReturn.
-	aReturn propertyName
+	aReturn expression
 		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ]
 ]
 
@@ -174,7 +171,7 @@ ASTCWalkerVisitor >> visitStructureDeclaration: aStructureDeclaration [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitStructureDefinition: aStructureDefinition [
 	super visitStructureDefinition: aStructureDefinition.
-	aStructureDefinition propertyName
+	aStructureDefinition members
 		ifNotNil:
 			[ :members | members do: [ :aMembers | aMembers acceptVisitor: self ] ]
 ]
@@ -187,14 +184,14 @@ ASTCWalkerVisitor >> visitType: aType [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitVariableDeclaration: aVariableDeclaration [
 	super visitVariableDeclaration: aVariableDeclaration.
-	aVariableDeclaration propertyName
+	aVariableDeclaration structureMembers
 		ifNotNil: [ :aType | aType acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitVariableDefinition: aVariableDefinition [
 	super visitVariableDefinition: aVariableDefinition.
-	aVariableDefinition propertyName
+	aVariableDefinition declIterator
 		ifNotNil: [ :anInit | anInit acceptVisitor: self ]
 ]
 

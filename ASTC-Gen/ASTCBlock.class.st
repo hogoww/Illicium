@@ -18,7 +18,7 @@ ASTCBlock >> statements [
 ]
 
 { #category : #accessing }
-ASTCBlock >> statements: statements [
-	statements parent: self.
-	statements := statements
+ASTCBlock >> statements: someStatements [
+	someStatements parent: self.
+	statements := someStatements
 ]
