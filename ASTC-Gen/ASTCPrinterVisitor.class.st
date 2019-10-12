@@ -41,7 +41,6 @@ ASTCPrinterVisitor >> visitAbstractWhile: anAbstractWhile [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anAbstractWhile'.
-	stream << anAbstractWhile printProperties.
 	currentDepth := currentDepth + 1.
 	super visitAbstractWhile: anAbstractWhile.
 	currentDepth := currentDepth - 1.
@@ -53,7 +52,6 @@ ASTCPrinterVisitor >> visitBlock: aBlock [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aBlock'.
-	stream << aBlock printProperties.
 	currentDepth := currentDepth + 1.
 	super visitBlock: aBlock.
 	currentDepth := currentDepth - 1.
@@ -65,7 +63,6 @@ ASTCPrinterVisitor >> visitCompilationUnit: aCompilationUnit [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aCompilationUnit'.
-	stream << aCompilationUnit printProperties.
 	currentDepth := currentDepth + 1.
 	super visitCompilationUnit: aCompilationUnit.
 	currentDepth := currentDepth - 1.
@@ -77,7 +74,6 @@ ASTCPrinterVisitor >> visitDeclaration: aDeclaration [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aDeclaration'.
-	stream << aDeclaration printProperties.
 	currentDepth := currentDepth + 1.
 	super visitDeclaration: aDeclaration.
 	currentDepth := currentDepth - 1.
@@ -89,7 +85,6 @@ ASTCPrinterVisitor >> visitDeclarationStatement: aDeclarationStatement [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aDeclarationStatement'.
-	stream << aDeclarationStatement printProperties.
 	currentDepth := currentDepth + 1.
 	super visitDeclarationStatement: aDeclarationStatement.
 	currentDepth := currentDepth - 1.
@@ -101,7 +96,6 @@ ASTCPrinterVisitor >> visitDefinition: aDefinition [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aDefinition'.
-	stream << aDefinition printProperties.
 	currentDepth := currentDepth + 1.
 	super visitDefinition: aDefinition.
 	currentDepth := currentDepth - 1.
@@ -113,7 +107,6 @@ ASTCPrinterVisitor >> visitDoWhile: aDoWhile [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aDoWhile'.
-	stream << aDoWhile printProperties.
 	currentDepth := currentDepth + 1.
 	super visitDoWhile: aDoWhile.
 	currentDepth := currentDepth - 1.
@@ -125,7 +118,6 @@ ASTCPrinterVisitor >> visitExpression: anExpression [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anExpression'.
-	stream << anExpression printProperties.
 	currentDepth := currentDepth + 1.
 	super visitExpression: anExpression.
 	currentDepth := currentDepth - 1.
@@ -137,7 +129,6 @@ ASTCPrinterVisitor >> visitExpressionStatement: anExpressionStatement [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anExpressionStatement'.
-	stream << anExpressionStatement printProperties.
 	currentDepth := currentDepth + 1.
 	super visitExpressionStatement: anExpressionStatement.
 	currentDepth := currentDepth - 1.
@@ -149,7 +140,6 @@ ASTCPrinterVisitor >> visitFor: aFor [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aFor'.
-	stream << aFor printProperties.
 	currentDepth := currentDepth + 1.
 	super visitFor: aFor.
 	currentDepth := currentDepth - 1.
@@ -161,7 +151,6 @@ ASTCPrinterVisitor >> visitFunctionCall: aFunctionCall [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aFunctionCall'.
-	stream << aFunctionCall printProperties.
 	currentDepth := currentDepth + 1.
 	super visitFunctionCall: aFunctionCall.
 	currentDepth := currentDepth - 1.
@@ -173,7 +162,6 @@ ASTCPrinterVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aFunctionDeclaration'.
-	stream << aFunctionDeclaration printProperties.
 	currentDepth := currentDepth + 1.
 	super visitFunctionDeclaration: aFunctionDeclaration.
 	currentDepth := currentDepth - 1.
@@ -185,7 +173,6 @@ ASTCPrinterVisitor >> visitFunctionDefinition: aFunctionDefinition [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aFunctionDefinition'.
-	stream << aFunctionDefinition printProperties.
 	currentDepth := currentDepth + 1.
 	super visitFunctionDefinition: aFunctionDefinition.
 	currentDepth := currentDepth - 1.
@@ -197,7 +184,7 @@ ASTCPrinterVisitor >> visitIdentifier: anIdentifier [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anIdentifier'.
-	stream << anIdentifier printProperties.
+	stream << anIdentifier id.
 	currentDepth := currentDepth + 1.
 	super visitIdentifier: anIdentifier.
 	currentDepth := currentDepth - 1.
@@ -209,7 +196,6 @@ ASTCPrinterVisitor >> visitIf: anIf [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anIf'.
-	stream << anIf printProperties.
 	currentDepth := currentDepth + 1.
 	super visitIf: anIf.
 	currentDepth := currentDepth - 1.
@@ -221,7 +207,7 @@ ASTCPrinterVisitor >> visitLiteral: aLiteral [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aLiteral'.
-	stream << aLiteral printProperties.
+	stream << aLiteral value.
 	currentDepth := currentDepth + 1.
 	super visitLiteral: aLiteral.
 	currentDepth := currentDepth - 1.
@@ -233,7 +219,6 @@ ASTCPrinterVisitor >> visitLoop: aLoop [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aLoop'.
-	stream << aLoop printProperties.
 	currentDepth := currentDepth + 1.
 	super visitLoop: aLoop.
 	currentDepth := currentDepth - 1.
@@ -245,7 +230,6 @@ ASTCPrinterVisitor >> visitNode: aNode [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aNode'.
-	stream << aNode printProperties.
 	currentDepth := currentDepth + 1.
 	super visitNode: aNode.
 	currentDepth := currentDepth - 1.
@@ -257,7 +241,7 @@ ASTCPrinterVisitor >> visitOperator: anOperator [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'anOperator'.
-	stream << anOperator printProperties.
+	stream << anOperator symbol.
 	currentDepth := currentDepth + 1.
 	super visitOperator: anOperator.
 	currentDepth := currentDepth - 1.
@@ -269,7 +253,6 @@ ASTCPrinterVisitor >> visitProject: aProject [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aProject'.
-	stream << aProject printProperties.
 	currentDepth := currentDepth + 1.
 	super visitProject: aProject.
 	currentDepth := currentDepth - 1.
@@ -281,7 +264,6 @@ ASTCPrinterVisitor >> visitReturn: aReturn [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aReturn'.
-	stream << aReturn printProperties.
 	currentDepth := currentDepth + 1.
 	super visitReturn: aReturn.
 	currentDepth := currentDepth - 1.
@@ -293,7 +275,6 @@ ASTCPrinterVisitor >> visitStatement: aStatement [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aStatement'.
-	stream << aStatement printProperties.
 	currentDepth := currentDepth + 1.
 	super visitStatement: aStatement.
 	currentDepth := currentDepth - 1.
@@ -305,7 +286,6 @@ ASTCPrinterVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aStructureDeclaration'.
-	stream << aStructureDeclaration printProperties.
 	currentDepth := currentDepth + 1.
 	super visitStructureDeclaration: aStructureDeclaration.
 	currentDepth := currentDepth - 1.
@@ -317,7 +297,6 @@ ASTCPrinterVisitor >> visitStructureDefinition: aStructureDefinition [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aStructureDefinition'.
-	stream << aStructureDefinition printProperties.
 	currentDepth := currentDepth + 1.
 	super visitStructureDefinition: aStructureDefinition.
 	currentDepth := currentDepth - 1.
@@ -329,7 +308,7 @@ ASTCPrinterVisitor >> visitType: aType [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aType'.
-	stream << aType printProperties.
+	stream << aType type.
 	currentDepth := currentDepth + 1.
 	super visitType: aType.
 	currentDepth := currentDepth - 1.
@@ -341,7 +320,6 @@ ASTCPrinterVisitor >> visitVariableDeclaration: aVariableDeclaration [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aVariableDeclaration'.
-	stream << aVariableDeclaration printProperties.
 	currentDepth := currentDepth + 1.
 	super visitVariableDeclaration: aVariableDeclaration.
 	currentDepth := currentDepth - 1.
@@ -353,7 +331,6 @@ ASTCPrinterVisitor >> visitVariableDefinition: aVariableDefinition [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aVariableDefinition'.
-	stream << aVariableDefinition printProperties.
 	currentDepth := currentDepth + 1.
 	super visitVariableDefinition: aVariableDefinition.
 	currentDepth := currentDepth - 1.
@@ -365,7 +342,6 @@ ASTCPrinterVisitor >> visitWhile: aWhile [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aWhile'.
-	stream << aWhile printProperties.
 	currentDepth := currentDepth + 1.
 	super visitWhile: aWhile.
 	currentDepth := currentDepth - 1.

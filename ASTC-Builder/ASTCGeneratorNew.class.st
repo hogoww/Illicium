@@ -705,22 +705,22 @@ ASTCGeneratorNew >> generateDebugStructureVisitorClass [
 ASTCGeneratorNew >> generatePrinterVisit: aFMXClass [
 	"generate a #printProperties selector that will call every property asString"
 	"The result will keep the order of the definitions in the metamodel"
-	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass |
+	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass propertiesNames |
 	aClass := aFMXClass name asAnInstance.
 	aClassWithQuotes:= '''',aClass,''''.
 	visitSomething := aFMXClass name asVisitClassSelector.
 
+	propertiesNames := aFMXClass properties select: [:aProp| aProp isTypedProperty ] thenCollect:#name.
 
 	methodBody := visitSomething asMethodWithBody:[:anInstance|
 		stream cr.
 
 		self printTabCount: currentDepth.
 		stream << $( << aClassWithQuotes .
-		stream << aClass printProperties.
+		stream << anInstance propertiesNames.
+		
 		currentDepth := currentDepth+1.
-
 		super visitSomething:{aClass}.
-
 		currentDepth := currentDepth-1.
 		stream << ')'.
 	] withArguments: {#anInstance -> aClass} asDictionary.
