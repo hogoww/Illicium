@@ -668,29 +668,28 @@ ASTCGeneratorNew >> generateVisitsFor: aClass [
 ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
-	| method body aClass visitClass propertyName |
+	| method body aClass visitClass collections singleElements |
 	aClass := aFMXClass name asAnInstance.
 
 	visitClass :=  aFMXClass name asVisitClassSelector.
 	body := [ :anInstance | super visitClass: {aClass} ] asPlainCodeBC.
+	
+	collections := OrderedCollection new.
+	singleElements := OrderedCollection new.
+	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer ifTrue:[ aRelation side isMany ifTrue:[ collections add: aRelation side name ] ifFalse: [ singleElements add: aRelation side name ]]].
+	
+	collections do:[:propertyName|
+		body add: [:anInstance| anInstance propertyName
+			ifNotNil:[:aCollection| aCollection 
+				do:[:aMember| aMember acceptVisitor: self ]]]
+		withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ].
+	
+	singleElements do:[:propertyName|
+		body add: [:anInstance| anInstance propertyName 
+					ifNotNil:[:aMember| aMember acceptVisitor: self ] ] 
+			withArguments: {#aMember -> propertyName asAnInstance } asDictionary ].
 
-	aFMXClass relations
-		do: [ :aRelation |
-				propertyName:= aRelation side name.
-				(aRelation side otherSide isContainer)
-					ifTrue:[
-						(aRelation side isMany
-							ifTrue:[ 
-								body add: 
-									[:anInstance| anInstance propertyName
-										ifNotNil:[:aCollection| aCollection 
-											do:[:aMember| aMember acceptVisitor: self ]]]
-									withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ]
-							ifFalse:[ 
-								body add: 
-									[:anInstance| anInstance propertyName 
-										ifNotNil:[:aMember| aMember acceptVisitor: self ] ] 
-									withArguments: {#aMember -> propertyName asAnInstance } asDictionary ])]].
+
 						
 	method := visitClass
 		asMethodWithBody: body
