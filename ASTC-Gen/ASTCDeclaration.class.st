@@ -17,3 +17,8 @@ ASTCDeclaration >> id: anId [
 	anId parent: self.
 	id := anId
 ]
+
+{ #category : #testing }
+ASTCDeclaration >> isDeclaration [
+	^ true
+]

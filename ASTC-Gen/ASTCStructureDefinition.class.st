@@ -17,6 +17,11 @@ ASTCStructureDefinition >> initialize [
 	members := OrderedCollection new
 ]
 
+{ #category : #testing }
+ASTCStructureDefinition >> isStructureDefinition [
+	^ true
+]
+
 { #category : #accessing }
 ASTCStructureDefinition >> members [
 	^ members

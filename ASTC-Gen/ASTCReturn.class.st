@@ -17,3 +17,8 @@ ASTCReturn >> expression: anExpression [
 	anExpression parent: self.
 	expression := anExpression
 ]
+
+{ #category : #testing }
+ASTCReturn >> isReturn [
+	^ true
+]

@@ -102,28 +102,17 @@ ASTCGeneratorNew >> addAcceptMethodOn:aClass [
 ]
 
 { #category : #'generating-class-testing' }
-ASTCGeneratorNew >> addAllClassTesterOn:aClass [
-	| generatedPackage methodBody |
-	generatedPackage:=self getPackageNamed:packageName.
-	(generatedPackage classTagNamed: 'Node') classes do:[:aNodeClass |
-		methodBody:=String streamContents: [:s|
-			s << 'is' << aNodeClass asString << Character cr.
-			s << Character tab.
-			aNodeClass = aClass ifFalse:[
-				 s << '^false'
-				]
-			ifTrue:[
-				s << '^true'
-				].
-			].
-		self addMethod: methodBody on: aClass withProtocol: 'testing'
-		]
-]
-
-{ #category : #'generating-class-testing' }
 ASTCGeneratorNew >> addAllClassTesterOnNode [
 	self flag:#modularity.
 	self addAllClassTesterOn: ASTCNode.
+]
+
+{ #category : #'generation-testing' }
+ASTCGeneratorNew >> addAllClassTesterTo: aRootClass [
+	builder classes
+		do: [ :aClass | 
+			aClass ~= aRootClass
+				ifTrue: [ self addClassTesterFor: aClass on: aRootClass returning: false ] ]
 ]
 
 { #category : #'generating-initialize' }
@@ -157,17 +146,22 @@ ASTCGeneratorNew >> addClassTester [
 	self addClassTesterOn: currentClass.
 ]
 
-{ #category : #'generating-class-testing' }
-ASTCGeneratorNew >> addClassTesterOn:aClass [
-	| methodBody |	
-		"add the current class tester so it understand the selector #isAClass. it still won't understand #isAnotherClass"
-	methodBody := String 
-		streamContents: [:s|
-			s << 'is' << aClass asString << Character cr.
-			s << Character tab << '^true.'
-		].
-	
-	self addMethod: methodBody on: aClass withProtocol: 'testing'.
+{ #category : #'generation-testing' }
+ASTCGeneratorNew >> addClassTesterFor: aFMXClass on: aTargetFMXClass returning: aBoolean [
+	| methodBody isClass |
+	isClass := aFMXClass name asTesterSelector.
+	methodBody := aBoolean "PlainPharoCode limitation. Should be changed when it'll work well."
+		ifTrue: [ isClass asMethodWithBody: [ ^ true ] ]
+		ifFalse: [ isClass asMethodWithBody: [ ^ false ] ].
+	self
+		addMethod: methodBody asString
+		on: aTargetFMXClass realClass
+		withProtocol: 'testing'
+]
+
+{ #category : #'generation-testing' }
+ASTCGeneratorNew >> addClassTesterOn: aFMXClass [
+	self addClassTesterFor: aFMXClass on: aFMXClass returning: true
 ]
 
 { #category : #'generating-visitor' }
@@ -571,6 +565,7 @@ ASTCGeneratorNew >> generateClass: aFMXClass [
 	package: packageName , '-Nodes' .
 
 	self generateStateFor: aFMXClass.
+	self generateMethodsFor: aFMXClass.
 	self generateVisitsFor: aFMXClass.
 
 ]
@@ -590,41 +585,49 @@ ASTCGeneratorNew >> generateDebugStructureVisitorClass [
 ASTCGeneratorNew >> generateDebugVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
-	| method body aClass visitClass collections singleElements propertyName isType |
-	aClass := aFMXClass name asAnInstance.
+	| method body anInstance visitClass collections singleElements propertyName isType |
+	anInstance := aFMXClass name asAnInstance.
 
 	visitClass :=  aFMXClass name asVisitClassSelector.
-	body := [ :anInstance | super visitClass: {aClass} ] asPlainCodeBC.
-	
+	body := [ :aClass | super visitClass: {aClass} ] asPlainCodeBC.
+
 	collections := OrderedCollection new.
 	singleElements := OrderedCollection new.
+	
 	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
 		ifTrue:[ aRelation side isMany 
 			ifTrue:[ collections add: aRelation side ] 
 			ifFalse: [ singleElements add: aRelation side ]]].
 	
+	(collections isEmpty and:[singleElements isEmpty]) ifTrue:[ ^ self].
+	
 	collections do:[:relationSide|
 		propertyName := relationSide name.
 		isType := String streamContents:[:s| s << 'is' << relationSide otherSide relatedClass name ].
-		body add: [:anInstance | anInstance propertyName 
+		body add: [:aClass | aClass propertyName 
 			ifNotNil:[:aCollection | 
 				aCollection do:[:aMember| self assert: aMember isType]]]
-		withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ].
-	
+		withArguments: {#aCollection -> propertyName. #aMember -> (propertyName asAnInstance) } asDictionary ].
+	"Extended dictionary because of limitation of plainCode."
 	singleElements do:[:relationSide|
 		propertyName := relationSide name.
 		isType := String streamContents:[:s| s << 'is' << relationSide otherSide relatedClass name ].
-		body add: [:anInstance| 	anInstance propertyName ifNotNil:[:aPropertyName| self assert: aPropertyName isType ]] 
+		body add: [:aClass| aClass propertyName ifNotNil:[:aPropertyName| self assert: aPropertyName isType ]] 
 			withArguments: {#aPropertyName -> relationSide name asAnInstance } asDictionary ].
 						
 	method := visitClass
 		asMethodWithBody: body
-		withArguments: {(#anInstance -> aClass )} asDictionary.
-
+		withArguments: {(#aClass -> anInstance )} asDictionary.
+		
 	^ self
 		addMethod: method asString
 		on: debugStructureVisitorClass
 		withProtocol: 'visiting'  
+]
+
+{ #category : #'generation-system' }
+ASTCGeneratorNew >> generateMethodsFor: aFMXClass [
+	self addClassTesterOn: aFMXClass
 ]
 
 { #category : #'generation-visit' }
@@ -870,8 +873,10 @@ ASTCGeneratorNew >> parentPropertyName: aString [
 
 { #category : #actions }
 ASTCGeneratorNew >> postGen [
+	| rootClass |
+	rootClass := builder classes detect: [:aClass| aClass name = #Node ]."pretty bad, but it'll do for now."
+	self addAllClassTesterTo: rootClass .
 	self halt.
-	self addAllClassTesterOnNode.
 ]
 
 { #category : #actions }

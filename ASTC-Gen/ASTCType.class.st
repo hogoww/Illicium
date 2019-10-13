@@ -7,6 +7,11 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCType >> isType [
+	^ true
+]
+
 { #category : #accessing }
 ASTCType >> type [
 	^ type

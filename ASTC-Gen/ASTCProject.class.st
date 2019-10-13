@@ -27,3 +27,8 @@ ASTCProject >> compilationUnits: someCompilationUnits [
 ASTCProject >> initialize [
 	compilationUnits := OrderedCollection new
 ]
+
+{ #category : #testing }
+ASTCProject >> isProject [
+	^ true
+]

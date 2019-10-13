@@ -18,6 +18,11 @@ ASTCOperator >> initialize [
 	operands := OrderedCollection new
 ]
 
+{ #category : #testing }
+ASTCOperator >> isOperator [
+	^ true
+]
+
 { #category : #accessing }
 ASTCOperator >> operands [
 	^ operands

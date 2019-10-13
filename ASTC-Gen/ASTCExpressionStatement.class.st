@@ -17,3 +17,8 @@ ASTCExpressionStatement >> expression: anExpression [
 	anExpression parent: self.
 	expression := anExpression
 ]
+
+{ #category : #testing }
+ASTCExpressionStatement >> isExpressionStatement [
+	^ true
+]

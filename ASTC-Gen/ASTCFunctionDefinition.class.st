@@ -17,3 +17,8 @@ ASTCFunctionDefinition >> body: aBody [
 	aBody parent: self.
 	body := aBody
 ]
+
+{ #category : #testing }
+ASTCFunctionDefinition >> isFunctionDefinition [
+	^ true
+]

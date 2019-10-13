@@ -18,6 +18,11 @@ ASTCFunctionDeclaration >> initialize [
 	parameters := OrderedCollection new
 ]
 
+{ #category : #testing }
+ASTCFunctionDeclaration >> isFunctionDeclaration [
+	^ true
+]
+
 { #category : #accessing }
 ASTCFunctionDeclaration >> parameters [
 	^ parameters

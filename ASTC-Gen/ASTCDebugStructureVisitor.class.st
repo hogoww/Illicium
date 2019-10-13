@@ -5,11 +5,6 @@ Class {
 }
 
 { #category : #visiting }
-ASTCDebugStructureVisitor >> visitAbstractWhile: anAbstractWhile [
-	super visitAbstractWhile: anAbstractWhile
-]
-
-{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitBlock: aBlock [
 	super visitBlock: aBlock.
 	aBlock statements
@@ -48,16 +43,6 @@ ASTCDebugStructureVisitor >> visitDefinition: aDefinition [
 	super visitDefinition: aDefinition.
 	aDefinition declaration
 		ifNotNil: [ :aDeclaration | self assert: aDeclaration isDeclaration ]
-]
-
-{ #category : #visiting }
-ASTCDebugStructureVisitor >> visitDoWhile: aDoWhile [
-	super visitDoWhile: aDoWhile
-]
-
-{ #category : #visiting }
-ASTCDebugStructureVisitor >> visitExpression: anExpression [
-	super visitExpression: anExpression
 ]
 
 { #category : #visiting }
@@ -103,22 +88,12 @@ ASTCDebugStructureVisitor >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
-ASTCDebugStructureVisitor >> visitIdentifier: anIdentifier [
-	super visitIdentifier: anIdentifier
-]
-
-{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitIf: anIf [
 	super visitIf: anIf.
 	anIf else
 		ifNotNil: [ :aCondition | self assert: aCondition isStatement ].
 	anIf else ifNotNil: [ :aThen | self assert: aThen isStatement ].
 	anIf else ifNotNil: [ :anElse | self assert: anElse isStatement ]
-]
-
-{ #category : #visiting }
-ASTCDebugStructureVisitor >> visitLiteral: aLiteral [
-	super visitLiteral: aLiteral
 ]
 
 { #category : #visiting }
@@ -160,27 +135,12 @@ ASTCDebugStructureVisitor >> visitReturn: aReturn [
 ]
 
 { #category : #visiting }
-ASTCDebugStructureVisitor >> visitStatement: aStatement [
-	super visitStatement: aStatement
-]
-
-{ #category : #visiting }
-ASTCDebugStructureVisitor >> visitStructureDeclaration: aStructureDeclaration [
-	super visitStructureDeclaration: aStructureDeclaration
-]
-
-{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitStructureDefinition: aStructureDefinition [
 	super visitStructureDefinition: aStructureDefinition.
 	aStructureDefinition members
 		ifNotNil: [ :members | 
 			members
 				do: [ :aMembers | self assert: aMembers isVariableDeclaration ] ]
-]
-
-{ #category : #visiting }
-ASTCDebugStructureVisitor >> visitType: aType [
-	super visitType: aType
 ]
 
 { #category : #visiting }
@@ -195,9 +155,4 @@ ASTCDebugStructureVisitor >> visitVariableDefinition: aVariableDefinition [
 	super visitVariableDefinition: aVariableDefinition.
 	aVariableDefinition init
 		ifNotNil: [ :anInit | self assert: anInit isExpression ]
-]
-
-{ #category : #visiting }
-ASTCDebugStructureVisitor >> visitWhile: aWhile [
-	super visitWhile: aWhile
 ]

@@ -16,3 +16,8 @@ ASTCIdentifier >> id [
 ASTCIdentifier >> id: anId [
 	id := anId
 ]
+
+{ #category : #testing }
+ASTCIdentifier >> isIdentifier [
+	^ true
+]

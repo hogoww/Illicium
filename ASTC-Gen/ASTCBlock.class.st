@@ -17,6 +17,11 @@ ASTCBlock >> initialize [
 	statements := OrderedCollection new
 ]
 
+{ #category : #testing }
+ASTCBlock >> isBlock [
+	^ true
+]
+
 { #category : #accessing }
 ASTCBlock >> statements [
 	^ statements

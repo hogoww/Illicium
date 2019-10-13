@@ -7,6 +7,11 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCVariableDeclaration >> isVariableDeclaration [
+	^ true
+]
+
 { #category : #accessing }
 ASTCVariableDeclaration >> type [
 	^ type

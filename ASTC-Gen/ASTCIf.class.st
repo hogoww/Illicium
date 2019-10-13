@@ -31,6 +31,11 @@ ASTCIf >> else: anElse [
 	else := anElse
 ]
 
+{ #category : #testing }
+ASTCIf >> isIf [
+	^ true
+]
+
 { #category : #accessing }
 ASTCIf >> then [
 	^ then

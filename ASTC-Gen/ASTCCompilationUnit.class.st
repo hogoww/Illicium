@@ -45,3 +45,8 @@ ASTCCompilationUnit >> initialize [
 	definitions := OrderedCollection new.
 	declarations := OrderedCollection new
 ]
+
+{ #category : #testing }
+ASTCCompilationUnit >> isCompilationUnit [
+	^ true
+]

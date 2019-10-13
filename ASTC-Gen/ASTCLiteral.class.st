@@ -7,6 +7,11 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCLiteral >> isLiteral [
+	^ true
+]
+
 { #category : #accessing }
 ASTCLiteral >> value [
 	^ value

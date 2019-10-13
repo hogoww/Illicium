@@ -17,3 +17,8 @@ ASTCDefinition >> declaration: aDeclaration [
 	aDeclaration parent: self.
 	declaration := aDeclaration
 ]
+
+{ #category : #testing }
+ASTCDefinition >> isDefinition [
+	^ true
+]

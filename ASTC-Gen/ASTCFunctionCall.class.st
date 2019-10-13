@@ -39,3 +39,8 @@ ASTCFunctionCall >> id: anId [
 ASTCFunctionCall >> initialize [
 	arguments := OrderedCollection new
 ]
+
+{ #category : #testing }
+ASTCFunctionCall >> isFunctionCall [
+	^ true
+]

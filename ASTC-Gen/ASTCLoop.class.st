@@ -29,3 +29,8 @@ ASTCLoop >> condition: aCondition [
 	aCondition parent: self.
 	condition := aCondition
 ]
+
+{ #category : #testing }
+ASTCLoop >> isLoop [
+	^ true
+]

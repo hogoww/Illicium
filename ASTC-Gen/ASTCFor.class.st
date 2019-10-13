@@ -8,6 +8,11 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCFor >> isFor [
+	^ true
+]
+
 { #category : #accessing }
 ASTCFor >> iteratorDefinition [
 	^ iteratorDefinition

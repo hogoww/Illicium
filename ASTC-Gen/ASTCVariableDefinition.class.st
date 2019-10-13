@@ -17,3 +17,8 @@ ASTCVariableDefinition >> init: anInit [
 	anInit parent: self.
 	init := anInit
 ]
+
+{ #category : #testing }
+ASTCVariableDefinition >> isVariableDefinition [
+	^ true
+]

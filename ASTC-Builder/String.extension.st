@@ -26,6 +26,16 @@ String >> asAnInstance: isPlural [
 ]
 
 { #category : #'*ASTC-Builder' }
+String >> asTesterSelector [
+	^ String
+		streamContents: [ :s | 
+			s
+				nextPutAll: 'is';
+				nextPutAll: self capitalized
+				]
+]
+
+{ #category : #'*ASTC-Builder' }
 String >> asVisitClassSelector [
 	^ String
 		streamContents: [ :s | 
