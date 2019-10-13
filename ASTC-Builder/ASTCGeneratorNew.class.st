@@ -587,6 +587,47 @@ ASTCGeneratorNew >> generateDebugStructureVisitorClass [
 ]
 
 { #category : #'generation-visit' }
+ASTCGeneratorNew >> generateDebugVisitOf: aFMXClass [
+	"add an empty behavior visit method"
+
+	| method body aClass visitClass collections singleElements propertyName isType |
+	aClass := aFMXClass name asAnInstance.
+
+	visitClass :=  aFMXClass name asVisitClassSelector.
+	body := [ :anInstance | super visitClass: {aClass} ] asPlainCodeBC.
+	
+	collections := OrderedCollection new.
+	singleElements := OrderedCollection new.
+	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
+		ifTrue:[ aRelation side isMany 
+			ifTrue:[ collections add: aRelation side ] 
+			ifFalse: [ singleElements add: aRelation side ]]].
+	
+	collections do:[:relationSide|
+		propertyName := relationSide name.
+		isType := String streamContents:[:s| s << 'is' << relationSide otherSide relatedClass name ].
+		body add: [:anInstance | anInstance propertyName 
+			ifNotNil:[:aCollection | 
+				aCollection do:[:aMember| self assert: aMember isType]]]
+		withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ].
+	
+	singleElements do:[:relationSide|
+		propertyName := relationSide name.
+		isType := String streamContents:[:s| s << 'is' << relationSide otherSide relatedClass name ].
+		body add: [:anInstance| 	anInstance propertyName ifNotNil:[:aPropertyName| self assert: aPropertyName isType ]] 
+			withArguments: {#aPropertyName -> relationSide name asAnInstance } asDictionary ].
+						
+	method := visitClass
+		asMethodWithBody: body
+		withArguments: {(#anInstance -> aClass )} asDictionary.
+
+	^ self
+		addMethod: method asString
+		on: debugStructureVisitorClass
+		withProtocol: 'visiting'  
+]
+
+{ #category : #'generation-visit' }
 ASTCGeneratorNew >> generatePrinterVisit: aFMXClass [
 	"generate a #printProperties selector that will call every property asString"
 	"The result will keep the order of the definitions in the metamodel"
@@ -683,6 +724,7 @@ ASTCGeneratorNew >> generateVisitsFor: aClass [
 	self generateAbstractVisitOf: aClass.
 		self generateSuperclassVisitOf: aClass.
 			self generateWalkVisitOf: aClass.
+				self generateDebugVisitOf: aClass.
 				self generatePrinterVisit: aClass.
 ]
 
@@ -698,7 +740,10 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 	
 	collections := OrderedCollection new.
 	singleElements := OrderedCollection new.
-	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer ifTrue:[ aRelation side isMany ifTrue:[ collections add: aRelation side name ] ifFalse: [ singleElements add: aRelation side name ]]].
+	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
+		ifTrue:[ aRelation side isMany 
+			ifTrue:[ collections add: aRelation side name ] 
+			ifFalse: [ singleElements add: aRelation side name ]]].
 	
 	collections do:[:propertyName|
 		body add: [:anInstance| anInstance propertyName
@@ -708,8 +753,8 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 	
 	singleElements do:[:propertyName|
 		body add: [:anInstance| anInstance propertyName 
-					ifNotNil:[:aMember| aMember acceptVisitor: self ] ] 
-			withArguments: {#aMember -> propertyName asAnInstance } asDictionary ].
+					ifNotNil:[:aPropertyName| aPropertyName acceptVisitor: self ] ] 
+			withArguments: {#aPropertyName -> propertyName asAnInstance } asDictionary ].
 
 
 						
