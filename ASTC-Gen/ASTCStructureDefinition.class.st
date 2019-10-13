@@ -13,6 +13,11 @@ ASTCStructureDefinition >> addMember: aMember [
 ]
 
 { #category : #accessing }
+ASTCStructureDefinition >> initialize [
+	members := LinkedList new
+]
+
+{ #category : #accessing }
 ASTCStructureDefinition >> members [
 	^ members
 ]

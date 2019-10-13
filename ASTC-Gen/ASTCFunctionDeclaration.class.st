@@ -14,6 +14,11 @@ ASTCFunctionDeclaration >> addParameter: aParameter [
 ]
 
 { #category : #accessing }
+ASTCFunctionDeclaration >> initialize [
+	parameters := LinkedList new
+]
+
+{ #category : #accessing }
 ASTCFunctionDeclaration >> parameters [
 	^ parameters
 ]

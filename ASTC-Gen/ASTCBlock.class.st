@@ -13,6 +13,11 @@ ASTCBlock >> addStatement: aStatement [
 ]
 
 { #category : #accessing }
+ASTCBlock >> initialize [
+	statements := LinkedList new
+]
+
+{ #category : #accessing }
 ASTCBlock >> statements [
 	^ statements
 ]

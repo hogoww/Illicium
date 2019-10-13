@@ -14,6 +14,11 @@ ASTCOperator >> addOperand: anOperand [
 ]
 
 { #category : #accessing }
+ASTCOperator >> initialize [
+	operands := LinkedList new
+]
+
+{ #category : #accessing }
 ASTCOperator >> operands [
 	^ operands
 ]

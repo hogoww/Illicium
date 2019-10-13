@@ -258,20 +258,37 @@ ASTCGeneratorNew >> addHashOn: aClass withPropertiesNamed: properties [
 	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
 ]
 
-{ #category : #'generation-attribute' }
+{ #category : #'generation-state' }
+ASTCGeneratorNew >> addInitializeTo: aFMXClass [
+	| collectionsToInitialize method |
+	
+	collectionsToInitialize := (aFMXClass relations 
+		select: [:aRelation| aRelation side otherSide isContainer and:[ aRelation side isMany ]] 
+		thenCollect:[:aRelation| aRelation side name]) asArray.
+	
+	collectionsToInitialize ifEmpty:[ ^ self ].
+	
+	method := 'initialize' asMethodWithBody: [ collectionsToInitialize := collectionsType new ].
+	
+	self addMethod: method asString on: aFMXClass realClass withProtocol: 'accessing'.
+]
+
+{ #category : #'generation-state' }
 ASTCGeneratorNew >> addInstanceVariable: aProperty to: aClass [
 	(aClass allSlots anySatisfy: [ :each | each name = aProperty name ])
 		ifTrue: [ ^ self ].	"we check if the slot already exists"
+
 	debug
 		ifTrue: [ Transcript
 				show: 'property: ';
 				show: aProperty;
 				cr ].
+
 	aClass addInstVarNamed: aProperty name.
 	self addInstanceVariableAccessors: aProperty to: aClass
 ]
 
-{ #category : #'generation-attribute' }
+{ #category : #'generation-state' }
 ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	| propertyName  aPropertyName method methodName anElement |
 	
@@ -307,8 +324,8 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 
 ]
 
-{ #category : #'generation-attribute' }
-ASTCGeneratorNew >> addInstancesVariablesTo: aFMXClass [
+{ #category : #'generation-state' }
+ASTCGeneratorNew >> addInstanceVariablesTo: aFMXClass [
 	aFMXClass properties
 		do: [ :aProperty | 
 			(aProperty isTypedProperty
@@ -553,10 +570,9 @@ ASTCGeneratorNew >> generateClass: aFMXClass [
 	classVariableNames: ''
 	package: packageName , '-Nodes' .
 
-	self addInstancesVariablesTo: aFMXClass.
-	
+	self generateStateFor: aFMXClass.
 	self generateVisitsFor: aFMXClass.
-	
+
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -604,6 +620,12 @@ ASTCGeneratorNew >> generatePrinterVisitorClass [
 		classVariableNames: ''
 		package: (self makePackageNameWith: #visitors).
 	self addPrinterVisitorsMethods.
+]
+
+{ #category : #'generation-state' }
+ASTCGeneratorNew >> generateStateFor: aFMXClass [
+	self addInstanceVariablesTo: aFMXClass.
+	self addInitializeTo: aFMXClass.
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -733,9 +755,8 @@ ASTCGeneratorNew >> initialize [
 { #category : #initialization }
 ASTCGeneratorNew >> initializeDefault [
 	self flag:#modularty.
-	parentPropertyName:='parent'.
-	collectionsType:=ASTCContainer.
-	
+	parentPropertyName := 'parent'.
+	collectionsType := #LinkedList.
 ]
 
 { #category : #actions }

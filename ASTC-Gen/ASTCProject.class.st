@@ -22,3 +22,8 @@ ASTCProject >> compilationUnits: someCompilationUnits [
 	someCompilationUnits parent: self.
 	compilationUnits := someCompilationUnits
 ]
+
+{ #category : #accessing }
+ASTCProject >> initialize [
+	compilationUnits := LinkedList new
+]

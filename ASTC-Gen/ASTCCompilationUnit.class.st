@@ -39,3 +39,9 @@ ASTCCompilationUnit >> definitions: someDefinitions [
 	someDefinitions parent: self.
 	definitions := someDefinitions
 ]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> initialize [
+	definitions := LinkedList new.
+	declarations := LinkedList new
+]

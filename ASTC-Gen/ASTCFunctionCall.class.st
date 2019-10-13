@@ -34,3 +34,8 @@ ASTCFunctionCall >> id: anId [
 	anId parent: self.
 	id := anId
 ]
+
+{ #category : #accessing }
+ASTCFunctionCall >> initialize [
+	arguments := LinkedList new
+]
