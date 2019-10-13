@@ -37,5 +37,5 @@ ASTCFunctionCall >> id: anId [
 
 { #category : #accessing }
 ASTCFunctionCall >> initialize [
-	arguments := LinkedList new
+	arguments := OrderedCollection new
 ]

@@ -14,7 +14,7 @@ ASTCBlock >> addStatement: aStatement [
 
 { #category : #accessing }
 ASTCBlock >> initialize [
-	statements := LinkedList new
+	statements := OrderedCollection new
 ]
 
 { #category : #accessing }

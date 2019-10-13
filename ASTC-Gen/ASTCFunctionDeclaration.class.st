@@ -15,7 +15,7 @@ ASTCFunctionDeclaration >> addParameter: aParameter [
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> initialize [
-	parameters := LinkedList new
+	parameters := OrderedCollection new
 ]
 
 { #category : #accessing }

@@ -14,7 +14,7 @@ ASTCStructureDefinition >> addMember: aMember [
 
 { #category : #accessing }
 ASTCStructureDefinition >> initialize [
-	members := LinkedList new
+	members := OrderedCollection new
 ]
 
 { #category : #accessing }

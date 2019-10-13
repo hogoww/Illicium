@@ -754,9 +754,8 @@ ASTCGeneratorNew >> initialize [
 
 { #category : #initialization }
 ASTCGeneratorNew >> initializeDefault [
-	self flag:#modularty.
 	parentPropertyName := 'parent'.
-	collectionsType := #LinkedList.
+	collectionsType := #OrderedCollection.
 ]
 
 { #category : #actions }

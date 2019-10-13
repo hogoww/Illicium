@@ -42,6 +42,6 @@ ASTCCompilationUnit >> definitions: someDefinitions [
 
 { #category : #accessing }
 ASTCCompilationUnit >> initialize [
-	definitions := LinkedList new.
-	declarations := LinkedList new
+	definitions := OrderedCollection new.
+	declarations := OrderedCollection new
 ]

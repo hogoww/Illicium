@@ -25,5 +25,5 @@ ASTCProject >> compilationUnits: someCompilationUnits [
 
 { #category : #accessing }
 ASTCProject >> initialize [
-	compilationUnits := LinkedList new
+	compilationUnits := OrderedCollection new
 ]

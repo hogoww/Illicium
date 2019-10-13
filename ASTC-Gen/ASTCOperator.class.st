@@ -15,7 +15,7 @@ ASTCOperator >> addOperand: anOperand [
 
 { #category : #accessing }
 ASTCOperator >> initialize [
-	operands := LinkedList new
+	operands := OrderedCollection new
 ]
 
 { #category : #accessing }
