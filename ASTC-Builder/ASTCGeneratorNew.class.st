@@ -711,6 +711,33 @@ ASTCGeneratorNew >> generateSuperclassVisitorClass [
 		package: (self makePackageNameWith: #visitors)
 ]
 
+{ #category : #'generation-visit' }
+ASTCGeneratorNew >> generateValidatorVisitOf: aFMXClass [
+	"add an empty behavior visit method"
+
+	| method body anInstance visitClass 
+	errors | "IV of the visitor"
+	anInstance := aFMXClass name asAnInstance.
+
+
+	visitClass :=  aFMXClass name asVisitClassSelector.
+	body := [ :aClass | 
+		[ super visitClass: {aClass} ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+		].
+	
+			
+		method := visitClass
+		asMethodWithBody: body
+		withArguments: {(#aClass -> anInstance )} asDictionary.
+		
+	^ self
+		addMethod: method asString
+		on: structureValidatorVisitorClass
+		withProtocol: 'visiting'  
+]
+
 { #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> generateVisitorsClasses [
 	self generateAbstractVisitorClass.
@@ -723,12 +750,14 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateVisitsFor: aClass [
-	self generateAbstractVisitOf: aClass.
-		self generateSuperclassVisitOf: aClass.
-			self generateWalkVisitOf: aClass.
-				self generateDebugVisitOf: aClass.
-				self generatePrinterVisit: aClass.
+ASTCGeneratorNew >> generateVisitsFor: aFMXClass [
+	self generateAbstractVisitOf: aFMXClass.
+		self generateSuperclassVisitOf: aFMXClass.
+			self generateWalkVisitOf: aFMXClass.
+				self generateDebugVisitOf: aFMXClass.
+					self generateValidatorVisitOf: aFMXClass.
+				self generatePrinterVisit: aFMXClass.
+
 ]
 
 { #category : #'generation-visit' }

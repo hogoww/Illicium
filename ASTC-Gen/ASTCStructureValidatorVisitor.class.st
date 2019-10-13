@@ -21,3 +21,199 @@ ASTCStructureValidatorVisitor >> initialize [
 ASTCStructureValidatorVisitor >> isValidAst [
 	^ errors = 0
 ]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitAbstractWhile: anAbstractWhile [
+	[ super visitAbstractWhile: anAbstractWhile ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitBlock: aBlock [
+	[ super visitBlock: aBlock ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitCompilationUnit: aCompilationUnit [
+	[ super visitCompilationUnit: aCompilationUnit ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitDeclaration: aDeclaration [
+	[ super visitDeclaration: aDeclaration ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitDeclarationStatement: aDeclarationStatement [
+	[ super visitDeclarationStatement: aDeclarationStatement ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitDefinition: aDefinition [
+	[ super visitDefinition: aDefinition ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitDoWhile: aDoWhile [
+	[ super visitDoWhile: aDoWhile ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitExpression: anExpression [
+	[ super visitExpression: anExpression ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitExpressionStatement: anExpressionStatement [
+	[ super visitExpressionStatement: anExpressionStatement ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitFor: aFor [
+	[ super visitFor: aFor ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitFunctionCall: aFunctionCall [
+	[ super visitFunctionCall: aFunctionCall ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
+	[ super visitFunctionDeclaration: aFunctionDeclaration ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitFunctionDefinition: aFunctionDefinition [
+	[ super visitFunctionDefinition: aFunctionDefinition ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitIdentifier: anIdentifier [
+	[ super visitIdentifier: anIdentifier ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitIf: anIf [
+	[ super visitIf: anIf ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitLiteral: aLiteral [
+	[ super visitLiteral: aLiteral ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitLoop: aLoop [
+	[ super visitLoop: aLoop ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitNode: aNode [
+	[ super visitNode: aNode ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitOperator: anOperator [
+	[ super visitOperator: anOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitProject: aProject [
+	[ super visitProject: aProject ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitReturn: aReturn [
+	[ super visitReturn: aReturn ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitStatement: aStatement [
+	[ super visitStatement: aStatement ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitStructureDeclaration: aStructureDeclaration [
+	[ super visitStructureDeclaration: aStructureDeclaration ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitStructureDefinition: aStructureDefinition [
+	[ super visitStructureDefinition: aStructureDefinition ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitType: aType [
+	[ super visitType: aType ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitVariableDeclaration: aVariableDeclaration [
+	[ super visitVariableDeclaration: aVariableDeclaration ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitVariableDefinition: aVariableDefinition [
+	[ super visitVariableDefinition: aVariableDefinition ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitWhile: aWhile [
+	[ super visitWhile: aWhile ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
