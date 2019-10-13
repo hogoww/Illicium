@@ -91,10 +91,8 @@ ASTCContainer >> do: aBlock [
 ]
 
 { #category : #initialization }
-ASTCContainer >> doesNotUnderstand: aMessage [
-	"indirection of the message to my collection. Should be removed when the interface will be good enough"
-	self flag:#toRemove.
-	^aMessage sendTo:collection
+ASTCContainer >> do: aBlock separatedBy: anotherBlock [
+	^ collection do: aBlock separatedBy: anotherBlock
 ]
 
 { #category : #initialization }
@@ -102,6 +100,11 @@ ASTCContainer >> fillFrom: aCollection with: aBlock [
 	self flag:#bad. "0(2n), instead of o(n)..."
 	self collection: (self collection fillFrom: aCollection with: aBlock).
 	^self.
+]
+
+{ #category : #comparing }
+ASTCContainer >> first [ 	
+	^ collection first
 ]
 
 { #category : #comparing }
@@ -119,6 +122,11 @@ ASTCContainer >> initialize [
 ]
 
 { #category : #initialization }
+ASTCContainer >> isEmpty [
+	^ collection isEmpty 
+]
+
+{ #category : #initialization }
 ASTCContainer >> parent [
 	"accessor"
 	^parent
@@ -129,6 +137,16 @@ ASTCContainer >> parent:aNode [
 	"accessor"
 	parent:=aNode.
 	^parent.
+]
+
+{ #category : #comparing }
+ASTCContainer >> rootNode [
+	^ parent ifNil: [ self ] ifNotNil: [ :p | p rootNode ]
+]
+
+{ #category : #accessing }
+ASTCContainer >> second [
+	^ collection second
 ]
 
 { #category : #initialization }

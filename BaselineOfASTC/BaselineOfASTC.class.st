@@ -10,6 +10,15 @@ BaselineOfASTC >> baseline: spec [
 	spec
 		for: #common
 		do: [
+			
+			spec
+				baseline: 'Phineas'
+				with: [ spec repository: 'gitlab://pharo-project/phineas:master' ].
+			spec
+				baseline: 'ParametrizedTests'
+				with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
+			spec baseline: 'PlainPharoCode'
+				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			spec
 				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
 				package: 'ASTC-Gen';
@@ -40,15 +49,7 @@ BaselineOfASTC >> baseline: spec [
 BaselineOfASTC >> lastPlayground [
 
 ASTCGenerator generate.
-ASTCGeneratorNew generate.
 
-ASTCTranslator new translateClass: RandomTestClass.
-
-ASTCTranslator translateClass: RandomTestClass.
-
-ASTCSlangClassTranslator translateClass: MiscPrimitivePlugin.
-
-ASTCSlangClassTranslator translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
 
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.

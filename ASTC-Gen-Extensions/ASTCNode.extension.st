@@ -57,3 +57,8 @@ ASTCNode >> prettyPrintUsing: aPrettyPrinter [
 	self acceptVisitor: aPrettyPrinter.
 	^aPrettyPrinter stream contents.
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCNode >> rootNode [
+	^ parent ifNil: [ self ] ifNotNil: [ :p | p rootNode ]
+]

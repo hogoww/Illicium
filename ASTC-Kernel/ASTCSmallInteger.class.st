@@ -70,34 +70,6 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> to:stop do2: aBlock [
-	^ASTCBlock new 
-		add:
-			(ASTCVariableDeclaration new
-					type: self class asCType;
-					id: (ASTCIdentifier new id:'i' ; yourself);
-					init: (ASTCLiteral new value:'1' ; yourself);
-					yourself);
-		add: 
-			(ASTCWhile new
-				condition: 
-					(ASTCLesserOperator new
-						addOperands:(self value acceptVisitor:visitor);
-						addOperands: (stop acceptVisitor:visitor);
-						yourself);
-				body: 
-					(ASTCBlock new
-						addAll:(aBlock acceptVisitor: visitor);
-						add:
-							(ASTCPreIncrementOperator new
-							   operand: (ASTCIdentifier new id:'i' ; yourself);
-								yourself);
-						yourself);
-				yourself);
-		yourself.
-]
-
-{ #category : #translation }
 ASTCSmallInteger >> to: stop do: aBlock [
 	| iterID |
 	aBlock arguments size ~= 1

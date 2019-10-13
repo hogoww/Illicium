@@ -68,6 +68,8 @@ ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
+	"failing because it's getting undefined Object as well as Smallinteger as a possible type. This is normal, because the class variable initialization isn't set in the call graph of the variable
+	Maybe use typedSlots would be more explicit"
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithAClassVariable

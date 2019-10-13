@@ -254,11 +254,10 @@ ASTCPrettyPrint >> visitASTCVariableDeclaration: aVariableDeclaration [
 { #category : #visiting }
 ASTCPrettyPrint >> visitASTCVariableDefinition: aVariableDefinition [
 	aVariableDefinition declaration acceptVisitor: self.
-	aVariableDefinition init ifNotNil:[:init| 
-		self << $=.
-		init acceptVisitor:self.
-		].
-
+	aVariableDefinition init
+		ifNotNil: [ :init | 
+			self << Character space << $= << Character space.
+			init acceptVisitor: self ]
 ]
 
 { #category : #visiting }

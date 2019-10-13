@@ -9,44 +9,25 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #'as yet unclassified' }
-ASTCClassTranslator class >> translateClass: aClass [
-	^ self new translateClass: aClass
+{ #category : #typing }
+ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
+	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> compilationUnitForClass: aClass [ 
-	| typeAnnotator cu primitiveMethods methodsToTranslate ast typedMethods |
-
-	self preTranslationCheck: aClass.
-	primitiveMethods := self getPrimitiveToTranslate: aClass. """""""""""""""""""UNUSED... >_<"
-	inferer := PhineasInferer new.
-
-	self preTypeChecking: aClass.	
-	typedMethods := self typeMethodsOf: aClass.
-	
-	
-	cu:=ASTCCompilationUnit new.
-	typedMethods do:[:aMethodAST| |res|
-		res:=methodTranslator translateMethodAST: aMethodAST.
-		cu definitions add: res.
-		cu declarations add: res declaration.
-		].
-
-	self translateClassPart: aClass in: cu.
-	
-	cu debugASTCStructure.
+ASTCClassTranslator >> compilationUnitFromTranslatedMethod: functionDefinitions [
+	| cu |
+	cu := ASTCCompilationUnit new.
+	functionDefinitions
+		do: [ :aFuncDef | 
+			cu definitions add: aFuncDef.
+			cu declarations add: aFuncDef declaration ].
 	^ cu
 ]
 
 { #category : #accessing }
 ASTCClassTranslator >> doNotGeneratePragma [
 	^ ASTCVirtualMachineAPI doNotGeneratePragma
-]
-
-{ #category : #accessing }
-ASTCClassTranslator >> getPrimitiveToTranslate: aClass [
-	self subclassResponsibility 
 ]
 
 { #category : #accessing }
@@ -58,7 +39,8 @@ ASTCClassTranslator >> getReplacementType: aClass [
 ASTCClassTranslator >> initialize [
 	methodTranslator := ASTCMethodTranslator new
 		classTranslator: self;
-		yourself
+		yourself.
+	inferer := PhineasInferer new
 ]
 
 { #category : #accessing }
@@ -81,86 +63,84 @@ ASTCClassTranslator >> methodTranslator: aMethodTranslator [
 	methodTranslator := aMethodTranslator
 ]
 
-{ #category : #'translation-api' }
-ASTCClassTranslator >> methodsToType [
-	self subclassResponsibility 
-]
-
 { #category : #translation }
-ASTCClassTranslator >> preTranslationCheck: aClass [
-	self subclassResponsibility 
+ASTCClassTranslator >> methodsToTranslateASTs: aClass [
+	^ inferer types methodTypes
+		select: [ :aMethod | 
+			(aClass methodDict keys includes: aMethod node selector)
+				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not ] ]
+		thenCollect: [:aMethod| aMethod node copy ]
 ]
 
-{ #category : #check }
-ASTCClassTranslator >> preTypeChecking: aClass [
+{ #category : #'translation-api' }
+ASTCClassTranslator >> preTranslationConstraintCheck: aClass [
+	"empty hook"
+]
+
+{ #category : #typing }
+ASTCClassTranslator >> preTypeInference: aClass [
 	"empty hook"
 ]
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateClass: aClass [ 
-	| cu printer |
-
-	cu := self compilationUnitForClass: aClass.
-	printer := ASTCFilePrinter new
-		fileName: aClass asString ;
-		compilationUnit: cu ;
-		isPrimitive: true ;
-		yourself.
-
-	printer printInFile.
-
-	printer CompileExternalPlugin.
-	printer moveInVmDirectory.
-
-
-	self halt.
-
+	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu |
+	self preTypeInference: aClass.
+	entryPoints := self typeInferenceEntryPoints: aClass.
+	self callgraphTypeStartingFrom: entryPoints.
+	methodsToTranslate := self methodsToTranslateASTs: aClass.
+	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
+	
+	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
+	cu := self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
+	cu debugASTCStructure.
+	^ cu
 ]
 
-{ #category : #translation }
-ASTCClassTranslator >> translateClassPart: aClass in: aCompilationUnit [
-	aClass allInstVarNames
-		do: [ :ivName | 
-			| ivType |
-			ivType := mainTranslator
-				getReplacementType: (inferer typeOfInstanceVariable: ivName ofClass: aClass) anyOne.
-			aCompilationUnit declarations
-				add:
-					(ASTCVariableDeclaration new
-						id:
-							(ASTCIdentifier new
-								id: ivName;
-								yourself);
-						type:
-							(ASTCType new
-								type: ivType;
-								yourself);
-						yourself) ]
+{ #category : #'translation-api' }
+ASTCClassTranslator >> translateMethod: aCompiledMethod [
+	^self translateMethod: aCompiledMethod selector fromClass: aCompiledMethod methodClass
 ]
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	self halt.
-	self error:'todo'
+	| methodsASTs functionDefinitionsASTs methodsToTranslate cu |
+	self preTranslationConstraintCheck: aClass.
+	self preTypeInference: aClass.
+	self callgraphTypeStartingFrom: { (aClass >> aSelector) ast  }.
+	methodsToTranslate := self methodsToTranslateASTs: aClass.
+	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
+	
+	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
+	cu := self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
+	cu debugASTCStructure.
+	^ cu
 ]
 
-{ #category : #accessing }
-ASTCClassTranslator >> typeMethodsOf: aClass [
-	| typedMethods typeAnnotator |
-	typedMethods := Set new.
+{ #category : #translation }
+ASTCClassTranslator >> translateMethodsASTs: methodsAST [
+	^ methodsAST
+		collect: [ :aMethodAST | methodTranslator translateMethodAST: aMethodAST ]
+]
 
-	self methodsToType
-		do: [ :aMethodType | 
-			((aClass methodDict
-				anySatisfy: [ :aMethod | aMethod selector = aMethodType node selector ])
-				and: [ aMethodType node pragmas
-						noneSatisfy:
-							[ :aPragma | aPragma selector = self doNotGeneratePragma ] ])
-				ifTrue: [ typedMethods add: aMethodType node copy ] ].
+{ #category : #typing }
+ASTCClassTranslator >> typeASTsOfMethods: methodsASTs [
+	| typeAnnotator |
+	typeAnnotator := ASTCTypeAnnotationAST new
+		inferer: inferer;
+		yourself.
+	methodsASTs
+		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
+	^ methodsASTs
+]
 
-	typeAnnotator := ASTCTypeAnnotationAST new inferer: inferer ; yourself.
-	typedMethods do:[:aMethodAST|
-		aMethodAST acceptVisitor: typeAnnotator.
-		].
-	^typedMethods 
+{ #category : #typing }
+ASTCClassTranslator >> typeInferenceEntryPoints: aClass [
+	| methods |
+	methods := OrderedCollection new.
+	aClass methodDict
+		do: [ :aMethod | 
+			(aMethod ast arguments isEmpty and: [(aMethod hasPragmaNamed: #doNotGenerate) not])
+				ifTrue: [ methods add: aMethod ast copy ] ].
+	^ methods
 ]
