@@ -1,11 +1,11 @@
 Class {
 	#name : #ASTCGlobalNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCGlobalNodeTranslator >> translateNode: aGlobalNode withMethodTranslator: aTranslator [
+ASTCGlobalNodeTranslator >> translateNode: aGlobalNode [
 	(aGlobalNode methodNode methodClass
 		hasClassVarNamed: aGlobalNode name)
 		ifTrue: [ self error: 'Global/Pool variables are not supported.' ].

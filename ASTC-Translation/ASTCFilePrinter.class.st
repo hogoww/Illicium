@@ -10,7 +10,7 @@ Class {
 		'fileCompiler',
 		'pluginMover'
 	],
-	#category : #'ASTC-Translation-Installers'
+	#category : #'ASTC-Translation-installers'
 }
 
 { #category : #printing }

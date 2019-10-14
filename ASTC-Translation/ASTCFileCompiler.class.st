@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCFileCompiler,
 	#superclass : #Object,
-	#category : #'ASTC-Translation-Installers'
+	#category : #'ASTC-Translation-installers'
 }
 
 { #category : #compiling }

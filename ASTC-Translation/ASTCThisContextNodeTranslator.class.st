@@ -1,10 +1,10 @@
 Class {
 	#name : #ASTCThisContextNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCThisContextNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
+ASTCThisContextNodeTranslator >> translateNode: aNode [
 	self error: 'thisContext is not supported yet.'
 ]

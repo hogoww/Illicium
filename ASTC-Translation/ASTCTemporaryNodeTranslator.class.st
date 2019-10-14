@@ -1,10 +1,10 @@
 Class {
 	#name : #ASTCTemporaryNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCTemporaryNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
-	^ aTranslator visitVariableNode: aNode
+ASTCTemporaryNodeTranslator >> translateNode: aNode [
+	^ methodTranslator visitVariableNode: aNode
 ]

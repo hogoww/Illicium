@@ -1,14 +1,14 @@
 Class {
 	#name : #ASTCLiteralValueNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode withMethodTranslator: aTranslator [
+ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 	^ ASTCLiteral new
 		value:
-			((aTranslator getNodeTranslationType: aLiteralNode) new
+			((methodTranslator getNodeTranslationType: aLiteralNode) new
 				value: aLiteralNode value;
 				yourself);
 		yourself

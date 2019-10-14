@@ -1,11 +1,11 @@
 Class {
 	#name : #ASTCLiteralNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCLiteralNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
+ASTCLiteralNodeTranslator >> translateNode: aNode [
 	"Fix, for Pharo 7. RBVisitor Was pull request in P8 to work as it should"
-	^ aTranslator visitLiteralValueNode: aNode 
+	^ methodTranslator visitLiteralValueNode: aNode 
 ]

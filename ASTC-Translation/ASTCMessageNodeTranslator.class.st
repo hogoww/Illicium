@@ -1,16 +1,16 @@
 Class {
 	#name : #ASTCMessageNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCMessageNodeTranslator >> translateNode: aMessageNode withMethodTranslator: aTranslator [
+ASTCMessageNodeTranslator >> translateNode: aMessageNode [
 	| aReceiver |
-	aReceiver := (aTranslator
+	aReceiver := (methodTranslator
 		getNodeTranslationType: aMessageNode receiver) new
 		value: aMessageNode receiver;
-		visitor: aTranslator;
+		visitor: methodTranslator;
 		yourself.
 	^ aReceiver
 		perform: aMessageNode selector

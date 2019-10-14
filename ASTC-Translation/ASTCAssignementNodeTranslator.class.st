@@ -1,11 +1,11 @@
 Class {
 	#name : #ASTCAssignementNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMethodTranslator: aTranslator [
+ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 	^ (anAssignmentNode
 		propertyAt: ASTCShouldItBeDeclared property)
 		ifTrue: [ "type checking"
@@ -17,11 +17,11 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMethodTrans
 							(ASTCVariableDeclaration new
 								type:
 									(ASTCType new
-										type: (aTranslator getNodeTranslationType: anAssignmentNode variable);
+										type: (methodTranslator getNodeTranslationType: anAssignmentNode variable);
 										yourself);
-								id: (anAssignmentNode variable acceptVisitor: aTranslator);
+								id: (anAssignmentNode variable acceptVisitor: methodTranslator);
 								yourself);
-						init: (anAssignmentNode value acceptVisitor: aTranslator);
+						init: (anAssignmentNode value acceptVisitor: methodTranslator);
 						yourself);
 				yourself ]
 		ifFalse: [ ASTCExpressionStatement new
@@ -30,8 +30,8 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode withMethodTrans
 						symbol: '=';
 						operands:
 							(ASTCContainer new
-								add: (anAssignmentNode variable acceptVisitor: aTranslator);
-								add: (anAssignmentNode value acceptVisitor: aTranslator);
+								add: (anAssignmentNode variable acceptVisitor: methodTranslator);
+								add: (anAssignmentNode value acceptVisitor: methodTranslator);
 								yourself);
 						yourself);
 				yourself ]

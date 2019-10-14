@@ -1,11 +1,11 @@
 Class {
 	#name : #ASTCMethodNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCMethodNodeTranslator >> translateNode: aMethodNode withMethodTranslator: aTranslator [
+ASTCMethodNodeTranslator >> translateNode: aMethodNode [
 	^ ASTCFunctionDefinition new
 		declaration:
 			(ASTCFunctionDeclaration new
@@ -15,13 +15,13 @@ ASTCMethodNodeTranslator >> translateNode: aMethodNode withMethodTranslator: aTr
 						yourself);
 				type:
 					(ASTCType new
-						type: (aTranslator getNodeTranslationType: aMethodNode);
+						type: (methodTranslator getNodeTranslationType: aMethodNode);
 						yourself);
 				parameters:
 					(ASTCContainer new
-						visitArgs: aMethodNode arguments with: aTranslator;
+						visitArgs: aMethodNode arguments with: methodTranslator;
 						yourself);
 				yourself);
-		body: (aMethodNode body acceptVisitor: aTranslator);
+		body: (aMethodNode body acceptVisitor: methodTranslator);
 		yourself
 ]

@@ -1,10 +1,10 @@
 Class {
 	#name : #ASTCInstanceVariableNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCInstanceVariableNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
-	^ aTranslator visitVariableNode: aNode
+ASTCInstanceVariableNodeTranslator >> translateNode: aNode [ 
+	^ methodTranslator visitVariableNode: aNode
 ]

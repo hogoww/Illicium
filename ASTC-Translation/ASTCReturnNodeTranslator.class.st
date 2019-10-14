@@ -1,12 +1,12 @@
 Class {
 	#name : #ASTCReturnNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCReturnNodeTranslator >> translateNode: aReturnNode withMethodTranslator: aTranslator [
+ASTCReturnNodeTranslator >> translateNode: aReturnNode [
 	^ ASTCReturn new
-		expression: (aReturnNode value acceptVisitor: aTranslator);
+		expression: (aReturnNode value acceptVisitor: methodTranslator);
 		yourself
 ]

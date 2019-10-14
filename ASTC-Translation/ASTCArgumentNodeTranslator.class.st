@@ -1,11 +1,11 @@
 Class {
 	#name : #ASTCArgumentNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'ASTC-Translation-Methods'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCArgumentNodeTranslator >> translateNode: anArgumentNode withMethodTranslator: aTranslator [
+ASTCArgumentNodeTranslator >> translateNode: anArgumentNode [
 	| argIdentifier |
 	argIdentifier := ASTCIdentifier new
 		id: anArgumentNode name;
@@ -16,7 +16,7 @@ ASTCArgumentNodeTranslator >> translateNode: anArgumentNode withMethodTranslator
 				id: argIdentifier;
 				type:
 					(ASTCType new
-						type: (aTranslator getNodeTranslationType: anArgumentNode);
+						type: (methodTranslator getNodeTranslationType: anArgumentNode);
 						yourself);
 				yourself.
 			]

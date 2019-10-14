@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCPluginMover,
 	#superclass : #Object,
-	#category : #'ASTC-Translation-Installers'
+	#category : #'ASTC-Translation-installers'
 }
 
 { #category : #accessing }
