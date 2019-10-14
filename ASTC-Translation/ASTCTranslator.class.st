@@ -8,14 +8,30 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
 ASTCTranslator class >> translateClass: aClass [
 	^ self new translateClass: aClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
+ASTCTranslator class >> translateMethod: aCompiledMethod [ 
+	^ self new translateMethod: aCompiledMethod
+]
+
+{ #category : #'translation-api' }
 ASTCTranslator class >> translateMethod: aSelector fromClass: aClass [
 	^ self new translateMethod: aSelector fromClass: aClass
+]
+
+{ #category : #accessors }
+ASTCTranslator >> classTranslator [
+	^ classTranslator
+]
+
+{ #category : #accessors }
+ASTCTranslator >> classTranslator: aClassTranslator [
+	aClassTranslator mainTranslator: self.
+	classTranslator := aClassTranslator
 ]
 
 { #category : #initialization }
@@ -31,27 +47,33 @@ ASTCTranslator >> initialize [
 	replacementClasses := Dictionary new
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
+		at: String put: ASTCString;
 		at: ASTCUserClass put: ASTCUserClass;
 		at: ASTCInterpreterProxy put: ASTCVirtualMachineProxy;
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : #accessors }
 ASTCTranslator >> replacementClasses [
 	^ replacementClasses
 ]
 
-{ #category : #initialization }
+{ #category : #accessors }
 ASTCTranslator >> replacementClasses: aDictionnary [
-	^ replacementClasses := aDictionnary
+	replacementClasses := aDictionnary
 ]
 
-{ #category : #translation }
+{ #category : #'translation-api' }
 ASTCTranslator >> translateClass: aClass [
 	^ classTranslator translateClass: aClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
+ASTCTranslator >> translateMethod: aCompiledMethod [
+	^ classTranslator translateMethod: aCompiledMethod 
+]
+
+{ #category : #'translation-api' }
 ASTCTranslator >> translateMethod: aSelector fromClass: aClass [
 	^ classTranslator translateMethod: aSelector fromClass: aClass
 ]

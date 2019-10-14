@@ -35,91 +35,84 @@ ASTCTypeAnnotationAST >> initialize [
 ]
 
 { #category : #visiting }
+ASTCTypeAnnotationAST >> typeThatNode: aNode [
+	| types |
+	types := inferer typeOfNode: aNode.
+	(types size > 1 and:[ (aNode isMethod and:[types anySatisfy: [:aType| aType name = aNode methodClass name ]])]) 
+	ifTrue:[ types remove: aNode methodClass ].	"remove implicit returns from primitives if it's not the only one"
+	
+	(types size > 1)
+	ifTrue:[ types remove: UndefinedObject ].
+	types size < 1
+		ifTrue: [ Error signal: 'The type inferencer had no results for ' , aNode asString ].
+	types size > 1
+		ifTrue: [ Error signal: 'The type inferencer had too many results ' , aNode asString ].
+		
+	self atNewPropertyPut: types anyOne for: aNode
+]
+
+{ #category : #visiting }
 ASTCTypeAnnotationAST >> visitArgumentNode: anArgumentNode [
-	| type |
-	type := inferer typeOfNode: anArgumentNode.
-	self atNewPropertyPut: type
-		for: anArgumentNode.
+	self typeThatNode: anArgumentNode.
 	super visitArgumentNode: anArgumentNode.
-	^anArgumentNode.
+	^ anArgumentNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitGlobalNode: aGlobalNode [
-	| type |
-	type := inferer typeOfNode: aGlobalNode.
-	self atNewPropertyPut: type
-		for: aGlobalNode.
+	self typeThatNode: aGlobalNode.
 	super visitGlobalNode: aGlobalNode.
-	^aGlobalNode.
-	
+	^ aGlobalNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> visitInstanceVariableNode: aInstanceVariableNode [
-	| type |
-	type := inferer typeOfNode: aInstanceVariableNode.
-	self atNewPropertyPut: type
-		for: aInstanceVariableNode.
-	super visitInstanceVariableNode: aInstanceVariableNode.
-	^aInstanceVariableNode.
+ASTCTypeAnnotationAST >> visitInstanceVariableNode: anInstanceVariableNode [
+	self typeThatNode: anInstanceVariableNode.
+	super visitInstanceVariableNode: anInstanceVariableNode.
+	^ anInstanceVariableNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
-	| type |
-	type := inferer typeOfNode: aLiteralNode.
-	self atNewPropertyPut: type
-		for: aLiteralNode .
+	self typeThatNode: aLiteralNode.
 	super visitLiteralNode: aLiteralNode.
 	^aLiteralNode.
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
-	| type |
-	type := inferer typeOfNode: aMessageNode.
-	self atNewPropertyPut: type
-		for: aMessageNode.
+	self typeThatNode: aMessageNode.
 	super visitMessageNode: aMessageNode.
 	^aMessageNode.
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitMethodNode: aMethodNode [
-	| type |
-	type := inferer typeOfNode:aMethodNode.
-	self atNewPropertyPut: type
-		for: aMethodNode.
-	
+	self typeThatNode: aMethodNode.
+
 	"The type inferencer doesn't type some methods, such as primitives."
 	"The methodTypeDispatcher tells me if he did, in fact, type this method"
-	(self wasMethodVisited: aMethodNode) ifTrue:[ 
-		super visitMethodNode: aMethodNode."walk the method's ast"
-	].
-	^aMethodNode.
+	(self wasMethodTyped: aMethodNode)
+		ifTrue: [ super visitMethodNode: aMethodNode	"walk the method's ast" ].
+	^ aMethodNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitSelfNode: aSelfNode [
-	| type |
-	type := self inferer typeOfNode: aSelfNode.
-	self atNewPropertyPut: type for: aSelfNode.
+	self typeThatNode: aSelfNode.
 	super visitSelfNode: aSelfNode.
 	^ aSelfNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitTemporaryNode: aTemporaryNode [
-	| type |
-	type := inferer typeOfNode: aTemporaryNode.
-	self atNewPropertyPut: type for: aTemporaryNode.
+	self typeThatNode: aTemporaryNode.
 	super visitTemporaryNode: aTemporaryNode.
 	^ aTemporaryNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotationAST >> wasMethodVisited: aMethodNode [
+ASTCTypeAnnotationAST >> wasMethodTyped: aMethodNode [
 	self assert: aMethodNode isMethod.
 	^(inferer getMethodNodeOf: aMethodNode) accept: methodTypeDispatcher
 ]

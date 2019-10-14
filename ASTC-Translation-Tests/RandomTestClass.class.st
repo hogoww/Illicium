@@ -15,7 +15,7 @@ Class {
 RandomTestClass >> aMain [
 	| res |
 	<primitiveToBe>
-	res:= self factorialIter: 7.
+	res:= self factorialIter: 12.
 	interpreterProxy push:(interpreterProxy integerObjectOf:res).
 
 	^ 0
@@ -39,6 +39,7 @@ RandomTestClass >> factorialPrimitive: aSmallInteger [
 
 { #category : #tests }
 RandomTestClass >> factorialR [
+	<doNotGenerate>
 	"random function without arguments to test type inference"
 	| res |
 	res:=0.

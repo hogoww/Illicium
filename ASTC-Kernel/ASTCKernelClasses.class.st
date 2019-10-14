@@ -25,21 +25,9 @@ ASTCKernelClasses >> asString [
 		].
 ]
 
-{ #category : #'reflective operations' }
-ASTCKernelClasses >> doesNotUnderstand: aMessage [
-	aMessage selector = #doesNotUnderstand
-	ifFalse:[ self signal: 'infiniteRecursion' ].
-	"^ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (visitor formatSelector:(aMessage selector)); yourself) ;
-		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
-		yourself.
-		
-"
-]
-
 { #category : #'message performing' }
 ASTCKernelClasses >> perform: aSelector withArguments: anArray [
-	self crLog.
+
 	^(self class methodDictionary includesKey: aSelector)
 	ifTrue:[ super perform:aSelector withArguments: anArray ] 
 	ifFalse:[	 self doesNotUnderstand: (Message selector: aSelector arguments: anArray) ].
