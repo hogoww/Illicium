@@ -47,6 +47,12 @@ ASTCSmallInteger >> / anotherSmallInteger [
 ]
 
 { #category : #translation }
+ASTCSmallInteger >> < anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '<' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
 ASTCSmallInteger >> = anotherSmallInteger [
 	"Act as translator only if it's the translator visitor that calls it."
 	"That allow assert equal to be functionnal."
@@ -55,6 +61,12 @@ ASTCSmallInteger >> = anotherSmallInteger [
  "ASTCMethodTranslator"		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
 		].
 	^self value = anotherSmallInteger value.
+]
+
+{ #category : #translation }
+ASTCSmallInteger >> > anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '>' withArgument: anotherSmallInteger
 ]
 
 { #category : #translation }

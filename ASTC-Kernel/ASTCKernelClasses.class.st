@@ -27,6 +27,8 @@ ASTCKernelClasses >> asString [
 
 { #category : #'reflective operations' }
 ASTCKernelClasses >> doesNotUnderstand: aMessage [
+	self halt.
+	"this should probably only be used on userClasses."
 	^ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (visitor formatSelector:(aMessage selector)); yourself) ;
 		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
