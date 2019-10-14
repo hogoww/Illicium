@@ -10,20 +10,26 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #typing }
-ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
-	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
+{ #category : #translation }
+ASTCClassTranslator >> addState: stateStuff to: aCompilationUnit [
+	stateStuff
+		do: [ :aVarDecl |
+			aCompilationUnit declarations add: aVarDecl.].
+	^ aCompilationUnit
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> compilationUnitFromTranslatedMethod: functionDefinitions [
-	| cu |
-	cu := ASTCCompilationUnit new.
+ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilationUnit [
 	functionDefinitions
 		do: [ :aFuncDef | 
-			cu definitions add: aFuncDef.
-			cu declarations add: aFuncDef declaration ].
-	^ cu
+			aCompilationUnit definitions add: aFuncDef.
+			aCompilationUnit declarations add: aFuncDef declaration ].
+	^ aCompilationUnit
+]
+
+{ #category : #typing }
+ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
+	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
 ]
 
 { #category : #accessing }
@@ -88,29 +94,37 @@ ASTCClassTranslator >> preTypeInference: aClass [
 	"empty hook"
 ]
 
-{ #category : #translation }
+{ #category : #accessing }
 ASTCClassTranslator >> stateTranslator [
 	^ stateTranslator
 ]
 
-{ #category : #translation }
+{ #category : #accessing }
 ASTCClassTranslator >> stateTranslator: aDictionary [
 	stateTranslator := aDictionary
 ]
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateClass: aClass [ 
-	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu |
+	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu stateStuff |
 	self preTypeInference: aClass.
 	entryPoints := self typeInferenceEntryPoints: aClass.
 	self callgraphTypeStartingFrom: entryPoints.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.
 	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
 	
+	cu := ASTCCompilationUnit new.	
+	stateStuff := self translateClassState: aClass.
 	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
-	cu := self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
+	self addState: stateStuff to: cu.
+	self addTranslatedMethods: functionDefinitionsASTs to: cu.
 	cu debugASTCStructure.
 	^ cu
+]
+
+{ #category : #translation }
+ASTCClassTranslator >> translateClassState: aClass [
+	^ (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass. 
 ]
 
 { #category : #'translation-api' }
@@ -120,15 +134,18 @@ ASTCClassTranslator >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	| methodsASTs functionDefinitionsASTs methodsToTranslate cu |
+	| methodsASTs functionDefinitionsASTs methodsToTranslate cu stateStuff |
 	self preTranslationConstraintCheck: aClass.
 	self preTypeInference: aClass.
 	self callgraphTypeStartingFrom: { (aClass >> aSelector) ast  }.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.
 	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
 	
+	cu := ASTCCompilationUnit new.
+	stateStuff := self translateClassState: aClass.
 	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
-	cu := self compilationUnitFromTranslatedMethod: functionDefinitionsASTs.
+	self addState: stateStuff to: cu.
+	self addTranslatedMethods: functionDefinitionsASTs to: cu.
 	cu debugASTCStructure.
 	^ cu
 ]
@@ -164,6 +181,5 @@ ASTCClassTranslator >> typeInferenceEntryPoints: aClass [
 { #category : #typing }
 ASTCClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
-	^ ((inferer types classAt: aClass name) variableAt: anIVName ifAbsent:[:types| NotFound signal]) concreteClasses.
-
+	^ self getReplacementType: (inferer typeOfInstanceVariable: anIVName ofClass: aClass) anyOne
 ]
