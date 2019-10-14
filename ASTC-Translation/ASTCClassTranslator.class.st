@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'methodTranslator',
 		'mainTranslator',
-		'inferer'
+		'inferer',
+		'stateTranslator'
 	],
 	#category : #'ASTC-Translation-overviewers'
 }
@@ -35,12 +36,17 @@ ASTCClassTranslator >> getReplacementType: aClass [
 	^ mainTranslator getReplacementType: aClass
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 ASTCClassTranslator >> initialize [
 	methodTranslator := ASTCMethodTranslator new
 		classTranslator: self;
 		yourself.
-	inferer := PhineasInferer new
+	inferer := PhineasInferer new.
+	
+	stateTranslator := Dictionary new
+		at: #instanceVariable put: (ASTCInstanceVariablesTranslator new classTranslator: self; yourself);
+		yourself
+	
 ]
 
 { #category : #accessing }
@@ -80,6 +86,16 @@ ASTCClassTranslator >> preTranslationConstraintCheck: aClass [
 { #category : #typing }
 ASTCClassTranslator >> preTypeInference: aClass [
 	"empty hook"
+]
+
+{ #category : #translation }
+ASTCClassTranslator >> stateTranslator [
+	^ stateTranslator
+]
+
+{ #category : #translation }
+ASTCClassTranslator >> stateTranslator: aDictionary [
+	stateTranslator := aDictionary
 ]
 
 { #category : #'translation-api' }
@@ -143,4 +159,11 @@ ASTCClassTranslator >> typeInferenceEntryPoints: aClass [
 			(aMethod ast arguments isEmpty and: [(aMethod hasPragmaNamed: #doNotGenerate) not])
 				ifTrue: [ methods add: aMethod ast copy ] ].
 	^ methods
+]
+
+{ #category : #typing }
+ASTCClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
+	"should be pushed into phineas"
+	^ ((inferer types classAt: aClass name) variableAt: anIVName ifAbsent:[:types| NotFound signal]) concreteClasses.
+
 ]
