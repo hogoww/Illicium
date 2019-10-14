@@ -74,76 +74,12 @@ ASTCGeneratorNew >> aClassAsVariableName: aClassNameAsString [
 	^(aClassNameAsString first isVowel ifTrue:['an']ifFalse:['a']),aClassNameAsString capitalized.
 ]
 
-{ #category : #'generating-visitor' }
-ASTCGeneratorNew >> addAcceptMethod [
-	"shortcut for currentClass iv."
-	self addAcceptMethodOn:currentClass.
-]
-
-{ #category : #'generating-visitor' }
-ASTCGeneratorNew >> addAcceptMethodOn:aClass [
-	"Add the #acceptVisitor and #acceptMultipleVisitor methods selector on aClass."	
-	
-	| methodBody |
-	methodBody:=String streamContents:[:s| s << 'acceptVisitor: aVisitor' ; cr ;
-	tab ; << '^aVisitor visit' ; << currentClass asString ; << ':self.'.].
-
-	self addMethod: methodBody
-		on: aClass
-		withProtocol:'visiting'.
-
-	methodBody:=String streamContents:[:s| s << 'acceptMultipleVisitors: aCollectionOfIndependentVisitor' ; cr ;
-	tab ; << 'aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visit' ; << currentClass asString ; << ':self.].'.].
-
-	self addMethod: methodBody
-		on: aClass
-		withProtocol:'visiting'.
-
-]
-
-{ #category : #'generating-class-testing' }
-ASTCGeneratorNew >> addAllClassTesterOnNode [
-	self flag:#modularity.
-	self addAllClassTesterOn: ASTCNode.
-]
-
 { #category : #'generation-testing' }
 ASTCGeneratorNew >> addAllClassTesterTo: aRootClass [
 	builder classes
 		do: [ :aClass | 
 			aClass ~= aRootClass
 				ifTrue: [ self addClassTesterFor: aClass on: aRootClass returning: false ] ]
-]
-
-{ #category : #'generating-initialize' }
-ASTCGeneratorNew >> addClassInitialize [
-	"shortcut for the currentClass Instance Variable"
-	self addClassInitializeOn:currentClass forProperties: self allInitializedPropertiesOfCurrentClass.
-	
-]
-
-{ #category : #'generating-initialize' }
-ASTCGeneratorNew >> addClassInitializeOn: aClass forProperties: aCollection [
-	| methodBody |
-	"Add initialization for a class with many properties (*-<>) in the metamodel)"
-	"The result will keep the order of the definitions in the metamodel"
-	aCollection ifEmpty:[^self]. 
-	
-	methodBody :=String streamContents: [:s | 
-		s << 'initialize' ;cr;tab;
-		  << 'super initialize.'; cr;tab.
-		aCollection do: [:propertyName | s << 'self ' ; << 'initialize' ; << propertyName capitalized ; << '.' ] 
-		separatedBy:[s cr tab]
-		].
-	
-	self addMethod: methodBody on: aClass withProtocol: 'initialize'.
-	
-]
-
-{ #category : #'generating-class-testing' }
-ASTCGeneratorNew >> addClassTester [
-	"shortcut on currentClass"
-	self addClassTesterOn: currentClass.
 ]
 
 { #category : #'generation-testing' }
@@ -199,94 +135,6 @@ ASTCGeneratorNew >> addComparisonOn: aFMXClass [
 		addMethod: method asString
 		on: aFMXClass realClass
 		withProtocol: 'testing'
-]
-
-{ #category : #'generating-visitor' }
-ASTCGeneratorNew >> addCurrentClassVisitToAbstractVisitor [
-	"add an empty behavior visit method for the current class on the (prefix,Visitor) class."
-	^self addMethod: (self methodClassSignatureFor: currentClass asString withPrefix: 'visit' ) 
-		  on: astVisitorClass 
-		  withProtocol:'visiting'
-]
-
-{ #category : #'generating-visitor-structure-validation' }
-ASTCGeneratorNew >> addDebugStructureForCurrentClass [
-	| aClass visitSuperclass visitAClass bodyOfMethod |
-	aClass:= self aClassAsVariableName: currentClass asString.
-	
-	currentSuperclass = #Object ifFalse:[	visitSuperclass:='visit',currentSuperclass asString,':'.].
-
-	visitAClass:='visit',currentClass asString,':'.
-	
-	bodyOfMethod:= String streamContents:[:s|
-	s << visitAClass << aClass.
-	s cr.
-	visitSuperclass ifNotNil:[s << '	self ' << visitSuperclass << aClass << '.'. 
-	s cr cr.].
-	
-	
-	currentRelationshipSides do:[:aProperty| 
-		aProperty isContainer ifFalse:[
-			aProperty isMany "if true, it should ALWAYS have a ASTCContainer, so no need to check if it's nil"
-			ifTrue:[ s << '	' << aClass << ' ' << aProperty name << ' do:[:each| self assert: each is' << prefix << aProperty otherSide relatedClass name  << '].' ]"ifFalse, we can't express it in famix, so we have to check every time"
-			ifFalse:[ s << '	' << aClass << ' ' << aProperty name << ' ifNotNil:[ self assert:' << aClass << ' ' << aProperty name << ' is' << prefix << aProperty otherSide relatedClass name  << ' ].'].
-		s cr.].
-		].
-	s cr.
-	s << '	' <<'super '<< visitAClass << aClass ].
-
-	self addMethod: bodyOfMethod  on: astDebugStructureVisitor withProtocol: 'check'
-
-]
-
-{ #category : #'generating-equality' }
-ASTCGeneratorNew >> addEqualityMethods [
-
-	| properties |
-	properties := self allPropertiesOfClass: currentClass.
-	self addEqualsOn: currentClass withPropertiesNamed: properties.
-	self addHashOn: currentClass withPropertiesNamed: properties.
-]
-
-{ #category : #'generating-equality' }
-ASTCGeneratorNew >> addEqualsOn: aClass withPropertiesNamed: properties [
-	"add binary selector #= on aClass. It'll check its class and every properties"
-	| methodBody |
-	
-	methodBody :=String streamContents: [:s | 
-		s << '= anotherNode
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-'.
-		properties do: [ :each |
-			s << '
-	self ' << each << ' = anotherNode ' << each << '
-		ifFalse: [ ^ false ].
-'  ].
-
-	s << '
-	^ true' ].
-	
-	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
-]
-
-{ #category : #'generating-equality' }
-ASTCGeneratorNew >> addHashOn: aClass withPropertiesNamed: properties [
-	"add the #hash selector on a Class, by adding every properties hash."
-	| methodBody |
-	
-	methodBody :=String streamContents: [:s | 
-		s << 'hash
-	| hash |
-	hash := self identityHash.
-'.
-		properties do: [ :each |
-			s << 
-'	hash := hash + self ' << each << ' hash.' << Character cr.  ].
-
-	s << '	^hash' ].
-	
-	self addMethod: methodBody on: aClass withProtocol: 'comparing'.
 ]
 
 { #category : #'generation-state' }
@@ -404,41 +252,6 @@ ASTCGeneratorNew >> addPrinterVisitorsMethods [
 	
 ]
 
-{ #category : #'generating-initialize' }
-ASTCGeneratorNew >> addPropertyInitialize: aPropertyAsSymbol [
-	"shortcut for the currentClass Instance Variable"
-	self addPropertyInitialize:  aPropertyAsSymbol On: currentClass.
-]
-
-{ #category : #'generating-initialize' }
-ASTCGeneratorNew >> addPropertyInitialize: aSymbol On: aClass [
-	"Add initialisation for aSymbol (which is a property) on aClass"
-	| methodBody propertyName |
-	
-	propertyName:= aSymbol asString.
-	methodBody :=
-'initialize',propertyName asCamelCase ,'
-	',propertyName,':=',collectionsType asString,' new parent:self; yourself.'.
-
-	
-	self addMethod: methodBody on: aClass withProtocol: 'initialization'.
-]
-
-{ #category : #'generating-visitor-structure-validation' }
-ASTCGeneratorNew >> addStructureValidationFor:aClass [
-	| visitAClass instanceOfAClass argumentReplacement errors bodyOfMethod |
-	visitAClass := ('visit',aClass asString,':') asSymbol.
-	instanceOfAClass := self aClassAsVariableName: aClass asString.
-	
-	argumentReplacement:=Dictionary new add: #anInstanceOfAClass -> instanceOfAClass ; yourself.	
-	bodyOfMethod:=[:anInstanceOfAClass|
-		[ super visitAClass:{anInstanceOfAClass} ]
-		on: AssertionFailure do:[ errors:= errors + 1 ]
-	] asMethod: visitAClass withArgs:argumentReplacement.
-	
-	self addMethod: bodyOfMethod asString on: astStructureValidatorVisitor  withProtocol: 'check'
-]
-
 { #category : #'generation-visitor-classes' }
 ASTCGeneratorNew >> addStructureValidatorVisitorMethods [	
 	| errors method |
@@ -452,63 +265,6 @@ ASTCGeneratorNew >> addStructureValidatorVisitorMethods [
 	method := 'isValidAst' asMethodWithBody: [ ^errors=0 ].
 	self addMethod: method asString on: structureValidatorVisitorClass withProtocol: 'testing'.
 
-]
-
-{ #category : #'generating-visitor' }
-ASTCGeneratorNew >> addVisitor [
-	self addCurrentClassVisitToAbstractVisitor.
-	self addAcceptMethod.
-	self addWalkerMethod.
-	self addWalkingOverride.
-	self addCurrentClassVisitToPrinterVisitor.
-
-]
-
-{ #category : #generating }
-ASTCGeneratorNew >> allInitializedPropertiesOfCurrentClass [
-	| res |
-	res := LinkedList new.
-	currentRelationshipSides do:[:aRelationSide |
-		aRelationSide isMany 
-		ifTrue:[ res add:aRelationSide name asString ]
-	].
-	^res
-]
-
-{ #category : #generating }
-ASTCGeneratorNew >> allPropertiesOfClass: aClass [
-	| res |
-	res := LinkedList new.
-	currentRelationshipSides do:[:aRelationSide |
-		aRelationSide isContainer 
-		ifFalse:[ res add: aRelationSide name asString ]].
-
-	currentTypedProperties collect:[:aTypedProperty | aTypedProperty name] into: res.
-	
-	^res
-]
-
-{ #category : #generating }
-ASTCGeneratorNew >> allTypedProperties: aClass [
-	| res |
-	res := LinkedList new.
-
-	currentTypedProperties collect:[:aTypedProperty | aTypedProperty name] into: res.
-	
-	^res
-]
-
-{ #category : #generating }
-ASTCGeneratorNew >> classStuffOnCurrentClass [
-	"dispatcher for everything that needs to be added on currentClass"
-	self addCurrentClassVisitToAbstractVisitor.
-	self addVisitor.
-	self addClassInitialize.
-	self addPrinterProperties.
-	self addClassTester.
-	self addEqualityMethods.
-	self addStructureValidationFor: currentClass.
-	self addDebugStructureForCurrentClass 
 ]
 
 { #category : #actions }
@@ -897,17 +653,6 @@ ASTCGeneratorNew >> methodClassSignatureFor: aClassNameAsString withPrefix: aPre
 		].
 ]
 
-{ #category : #'name-formating' }
-ASTCGeneratorNew >> methodSuperclassSignatureFor: aClassNameAsString withPrefix: aPrefix [
-	self flag:#refactor."horrific, needs a big refactor. The whole class, not just this"
-	^String streamContents:[:s|
-		s nextPutAll:aPrefix;
-		nextPutAll: currentSuperclass asString capitalized;
-		nextPutAll:': ';
-		nextPutAll: (self aClassAsVariableName: aClassNameAsString).
-		].
-]
-
 { #category : #accessing }
 ASTCGeneratorNew >> packageName [
 	"simple accessor"
@@ -971,19 +716,6 @@ ASTCGeneratorNew >> prefix: aString [
 	
 ]
 
-{ #category : #generating }
-ASTCGeneratorNew >> relationSideStuff [
-	currentRelationshipSides do:[:aRelationSide|
-		aRelationSide isContainer 
-		ifTrue:[
-			self addProperty: self parentPropertyName isMany: false.
-			]
-		ifFalse:[
-			self addProperty: aRelationSide name asString isMany: aRelationSide isMany.
-		].
-	].
-]
-
 { #category : #actions }
 ASTCGeneratorNew >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
@@ -1009,43 +741,4 @@ ASTCGeneratorNew >> reloadExtentions [
 		].
 
 	listOfPackageToReload do:[:aPackage| aPackage reload.].
-]
-
-{ #category : #generating }
-ASTCGeneratorNew >> typedPropertiesStuff [
-	currentTypedProperties do:[:aTypedProperty| self addProperty:aTypedProperty name isMany: false isProperty:true ].
-]
-
-{ #category : #visiting }
-ASTCGeneratorNew >> visitClass: aClass [
-	"Visit a class, build it, and deploy it on the system."
-	| className |
-	
-	currentSuperclass := (aClass classGeneralization ifNotNil:[ :class| prefix,class name ] ifNil:['Object']) asSymbol. "we get a symbol of the Superclass"
-	className := (prefix,aClass name) asSymbol."we get the new class name and format it"
-	
-	"And we create it"
-	currentClass := self createClass: className superclass: currentSuperclass withTag: 'Node'.
-	currentRelationshipSides := LinkedList new.
-	currentTypedProperties := LinkedList new.
-	
-	currentClass crLog.
-	super visitClass:aClass."fill up with property and properties methods, such as accessors"
-	
-	self typedPropertiesStuff.	
-	self relationSideStuff.
-	self classStuffOnCurrentClass.
-
-
-]
-
-{ #category : #visiting }
-ASTCGeneratorNew >> visitRelationSide: aRelationSide [
-	aRelationSide isContainer ifTrue:[
-		self addInstanceVariable: aRelationSide to: aRelationSide relatedClass realClass ]
-]
-
-{ #category : #visiting }
-ASTCGeneratorNew >> visitTypedProperty: aTypedProperty [
-	self addInstanceVariable: aTypedProperty to: aTypedProperty realClass
 ]
