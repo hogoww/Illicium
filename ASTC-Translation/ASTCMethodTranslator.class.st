@@ -20,7 +20,7 @@ ASTCMethodTranslator >> classTranslator: aClassTranslator [
 	^ classTranslator := aClassTranslator
 ]
 
-{ #category : #initialization }
+{ #category : #typing }
 ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
@@ -31,12 +31,12 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 					'The type inferencer couldn''t figure out the type of a '	, aNode class asString ].
 ]
 
-{ #category : #initialization }
+{ #category : #typing }
 ASTCMethodTranslator >> getNodeTranslationType: aNode [
 	^ self getReplacementType: (self getNodeConcreteType: aNode)
 ]
 
-{ #category : #initialization }
+{ #category : #typing }
 ASTCMethodTranslator >> getReplacementType: aClass [
 	^ classTranslator getReplacementType: aClass
 ]
