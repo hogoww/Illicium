@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #testing }
+ASTCVariableDeclaration >> = aVariableDeclaration [
+	super = aVariableDeclaration
+		ifFalse: [ ^ false ].
+	type = aVariableDeclaration type
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCVariableDeclaration >> isVariableDeclaration [
 	^ true
 ]

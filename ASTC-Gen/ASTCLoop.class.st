@@ -8,6 +8,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCLoop >> = aLoop [
+	super = aLoop
+		ifFalse: [ ^ false ].
+	body = aLoop body
+		ifFalse: [ ^ false ].
+	body = aLoop body
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCLoop >> body [
 	^ body

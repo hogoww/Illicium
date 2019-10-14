@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCIdentifier >> = anIdentifier [
+	super = anIdentifier
+		ifFalse: [ ^ false ].
+	id = anIdentifier id
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCIdentifier >> id [
 	^ id

@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCBlock >> = aBlock [
+	super = aBlock
+		ifFalse: [ ^ false ].
+	statements = aBlock statements
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCBlock >> addStatement: aStatement [
 	statements add: aStatement

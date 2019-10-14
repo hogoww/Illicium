@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCFunctionDefinition >> = aFunctionDefinition [
+	super = aFunctionDefinition
+		ifFalse: [ ^ false ].
+	body = aFunctionDefinition body
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCFunctionDefinition >> body [
 	^ body

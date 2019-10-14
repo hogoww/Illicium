@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCDefinition >> = aDefinition [
+	super = aDefinition
+		ifFalse: [ ^ false ].
+	declaration = aDefinition declaration
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCDefinition >> declaration [
 	^ declaration

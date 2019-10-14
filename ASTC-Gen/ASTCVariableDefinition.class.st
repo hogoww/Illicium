@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCVariableDefinition >> = aVariableDefinition [
+	super = aVariableDefinition
+		ifFalse: [ ^ false ].
+	init = aVariableDefinition init
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCVariableDefinition >> init [
 	^ init

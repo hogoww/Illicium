@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #testing }
+ASTCExpression >> = anExpression [
+	super = anExpression
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCExpression >> isExpression [
 	^ true
 ]

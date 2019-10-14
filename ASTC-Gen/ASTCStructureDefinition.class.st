@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCStructureDefinition >> = aStructureDefinition [
+	super = aStructureDefinition
+		ifFalse: [ ^ false ].
+	members = aStructureDefinition members
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCStructureDefinition >> addMember: aMember [
 	members add: aMember

@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #testing }
+ASTCWhile >> = aWhile [
+	super = aWhile
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCWhile >> isWhile [
 	^ true
 ]

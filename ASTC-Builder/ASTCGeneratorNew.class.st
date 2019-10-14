@@ -164,6 +164,43 @@ ASTCGeneratorNew >> addClassTesterOn: aFMXClass [
 	self addClassTesterFor: aFMXClass on: aFMXClass returning: true
 ]
 
+{ #category : #'generation-testing' }
+ASTCGeneratorNew >> addComparisonOn: aFMXClass [
+	| method body aClass visitClass propertyName |
+	aClass := aFMXClass name asAnInstance.
+
+	visitClass :=  aFMXClass name asVisitClassSelector.
+	body :=[:anInstance| ] asPlainCodeBC.
+	
+	aFMXClass classGeneralization ifNotNil:[:aSuper|
+		body + [ :anInstance | super = anInstance  ifFalse:[ ^ false ] ].
+		].
+
+	aFMXClass properties do:[:aProperty|
+		aProperty isTypedProperty ifTrue:[
+			propertyName := aProperty name.
+			body + [:anInstance| propertyName = anInstance propertyName ifFalse:[ ^ false ]]
+			]
+		].
+
+	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
+		ifTrue:[ 
+			propertyName := aRelation side name.
+			body + [:anInstance| propertyName = anInstance propertyName ifFalse:[ ^ false ]]
+		]].
+	
+	body + [ ^true ].
+						
+	method := '='
+		asMethodWithBody: body
+		withArguments: {(#anInstance -> aClass )} asDictionary.
+	
+	^ self
+		addMethod: method asString
+		on: aFMXClass realClass
+		withProtocol: 'testing'
+]
+
 { #category : #'generating-visitor' }
 ASTCGeneratorNew >> addCurrentClassVisitToAbstractVisitor [
 	"add an empty behavior visit method for the current class on the (prefix,Visitor) class."
@@ -627,7 +664,8 @@ ASTCGeneratorNew >> generateDebugVisitOf: aFMXClass [
 
 { #category : #'generation-system' }
 ASTCGeneratorNew >> generateMethodsFor: aFMXClass [
-	self addClassTesterOn: aFMXClass
+	self addClassTesterOn: aFMXClass.
+	self addComparisonOn: aFMXClass
 ]
 
 { #category : #'generation-visit' }

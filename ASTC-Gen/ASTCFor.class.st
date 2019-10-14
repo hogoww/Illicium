@@ -9,6 +9,17 @@ Class {
 }
 
 { #category : #testing }
+ASTCFor >> = aFor [
+	super = aFor
+		ifFalse: [ ^ false ].
+	iteratorModification = aFor iteratorModification
+		ifFalse: [ ^ false ].
+	iteratorModification = aFor iteratorModification
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCFor >> isFor [
 	^ true
 ]

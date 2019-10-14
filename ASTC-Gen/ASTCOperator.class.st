@@ -8,6 +8,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCOperator >> = anOperator [
+	super = anOperator
+		ifFalse: [ ^ false ].
+	operands = anOperator operands
+		ifFalse: [ ^ false ].
+	operands = anOperator operands
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCOperator >> addOperand: anOperand [
 	operands add: anOperand

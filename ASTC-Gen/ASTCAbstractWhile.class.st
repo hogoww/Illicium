@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #testing }
+ASTCAbstractWhile >> = anAbstractWhile [
+	super = anAbstractWhile
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCAbstractWhile >> isAbstractWhile [
 	^ true
 ]

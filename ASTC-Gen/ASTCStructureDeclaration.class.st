@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #testing }
+ASTCStructureDeclaration >> = aStructureDeclaration [
+	super = aStructureDeclaration
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCStructureDeclaration >> isStructureDeclaration [
 	^ true
 ]

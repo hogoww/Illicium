@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #testing }
+ASTCLiteral >> = aLiteral [
+	super = aLiteral
+		ifFalse: [ ^ false ].
+	value = aLiteral value
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCLiteral >> isLiteral [
 	^ true
 ]

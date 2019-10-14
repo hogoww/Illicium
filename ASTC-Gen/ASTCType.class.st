@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #testing }
+ASTCType >> = aType [
+	super = aType
+		ifFalse: [ ^ false ].
+	type = aType type
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCType >> isType [
 	^ true
 ]

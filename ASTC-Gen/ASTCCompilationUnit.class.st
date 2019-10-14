@@ -8,6 +8,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCCompilationUnit >> = aCompilationUnit [
+	super = aCompilationUnit
+		ifFalse: [ ^ false ].
+	declarations = aCompilationUnit declarations
+		ifFalse: [ ^ false ].
+	declarations = aCompilationUnit declarations
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCCompilationUnit >> addDeclaration: aDeclaration [
 	declarations add: aDeclaration

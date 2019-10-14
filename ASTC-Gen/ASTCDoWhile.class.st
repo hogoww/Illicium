@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #testing }
+ASTCDoWhile >> = aDoWhile [
+	super = aDoWhile
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCDoWhile >> isDoWhile [
 	^ true
 ]

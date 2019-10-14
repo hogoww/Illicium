@@ -8,6 +8,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCFunctionCall >> = aFunctionCall [
+	super = aFunctionCall
+		ifFalse: [ ^ false ].
+	arguments = aFunctionCall arguments
+		ifFalse: [ ^ false ].
+	arguments = aFunctionCall arguments
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCFunctionCall >> addArgument: anArgument [
 	arguments add: anArgument

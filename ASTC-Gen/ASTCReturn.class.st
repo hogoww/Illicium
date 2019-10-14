@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCReturn >> = aReturn [
+	super = aReturn
+		ifFalse: [ ^ false ].
+	expression = aReturn expression
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCReturn >> expression [
 	^ expression

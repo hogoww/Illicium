@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCDeclaration >> = aDeclaration [
+	super = aDeclaration
+		ifFalse: [ ^ false ].
+	id = aDeclaration id
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCDeclaration >> id [
 	^ id

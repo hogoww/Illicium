@@ -9,6 +9,19 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCIf >> = anIf [
+	super = anIf
+		ifFalse: [ ^ false ].
+	else = anIf else
+		ifFalse: [ ^ false ].
+	else = anIf else
+		ifFalse: [ ^ false ].
+	else = anIf else
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCIf >> condition [
 	^ condition

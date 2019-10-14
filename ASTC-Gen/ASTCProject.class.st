@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCProject >> = aProject [
+	super = aProject
+		ifFalse: [ ^ false ].
+	compilationUnits = aProject compilationUnits
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCProject >> addCompilationUnit: aCompilationUnit [
 	compilationUnits add: aCompilationUnit

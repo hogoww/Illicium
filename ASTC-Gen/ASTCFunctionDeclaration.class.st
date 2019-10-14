@@ -8,6 +8,17 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCFunctionDeclaration >> = aFunctionDeclaration [
+	super = aFunctionDeclaration
+		ifFalse: [ ^ false ].
+	parameters = aFunctionDeclaration parameters
+		ifFalse: [ ^ false ].
+	parameters = aFunctionDeclaration parameters
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCFunctionDeclaration >> addParameter: aParameter [
 	parameters add: aParameter

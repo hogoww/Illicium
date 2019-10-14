@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #testing }
+ASTCStatement >> = aStatement [
+	super = aStatement
+		ifFalse: [ ^ false ].
+	^ true
+]
+
+{ #category : #testing }
 ASTCStatement >> isStatement [
 	^ true
 ]

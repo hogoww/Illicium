@@ -7,6 +7,15 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #testing }
+ASTCExpressionStatement >> = anExpressionStatement [
+	super = anExpressionStatement
+		ifFalse: [ ^ false ].
+	expression = anExpressionStatement expression
+		ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 ASTCExpressionStatement >> expression [
 	^ expression
