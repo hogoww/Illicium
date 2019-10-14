@@ -23,8 +23,3 @@ ASTCNodeTranslator >> methodTranslator: aMethodTranslator [
 ASTCNodeTranslator >> translateNode: aNode [
 	self subclassResponsibility
 ]
-
-{ #category : #translate }
-ASTCNodeTranslator >> translateNode: aNode withMethodTranslator: aTranslator [
-	self subclassResponsibility
-]
