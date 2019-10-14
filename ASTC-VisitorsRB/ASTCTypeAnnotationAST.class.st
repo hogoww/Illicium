@@ -38,8 +38,11 @@ ASTCTypeAnnotationAST >> initialize [
 ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	| types |
 	types := inferer typeOfNode: aNode.
-	(types size > 1 and:[ (aNode isMethod and:[types anySatisfy: [:aType| aType name = aNode methodClass name ]])]) "remove implicit returns from primitives if it's not the only one"
-	ifTrue:[ types remove: aNode methodClass ].
+	(types size > 1 and:[ (aNode isMethod and:[types anySatisfy: [:aType| aType name = aNode methodClass name ]])]) 
+	ifTrue:[ types remove: aNode methodClass ].	"remove implicit returns from primitives if it's not the only one"
+	
+	(types size > 1)
+	ifTrue:[ types remove: UndefinedObject ].
 	types size < 1
 		ifTrue: [ Error signal: 'The type inferencer had no results for ' , aNode asString ].
 	types size > 1
