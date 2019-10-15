@@ -64,16 +64,6 @@ ASTCGeneratorNew class >> generate [
 	^self new generate.
 ]
 
-{ #category : #'name-formating' }
-ASTCGeneratorNew >> aClassAsVariableName: aClassNameAsString [
-	"returns a string (given as a String) with the following format to the classic arguments names: aClass, anObject [...]"
-	"ASTCGenerator new aClassAsVariableName: self class asString>>>'anASTCGenerator'" 
-	self flag:#testInComment.
-	self flag:#wrongClass."should be on String, But I'm trying to do a self sustaining package."
-	self flag:#rename. "Not explicit enough.."
-	^(aClassNameAsString first isVowel ifTrue:['an']ifFalse:['a']),aClassNameAsString capitalized.
-]
-
 { #category : #'generation-testing' }
 ASTCGeneratorNew >> addAllClassTesterTo: aRootClass [
 	builder classes
@@ -641,16 +631,6 @@ ASTCGeneratorNew >> makePackageNameWith: aTag [
 		streamContents: [ :s | 
 			s << packageName.
 			aTag ifNotEmpty: [ :tag | s << $- << aTag ] ]
-]
-
-{ #category : #'name-formating' }
-ASTCGeneratorNew >> methodClassSignatureFor: aClassNameAsString withPrefix: aPrefix [
-	^String streamContents:[:s|
-		s nextPutAll:aPrefix;
-		nextPutAll: aClassNameAsString capitalized;
-		nextPutAll:': ';
-		nextPutAll: (self aClassAsVariableName: aClassNameAsString).
-		].
 ]
 
 { #category : #accessing }
