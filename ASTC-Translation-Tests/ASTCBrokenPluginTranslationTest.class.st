@@ -9,12 +9,17 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 
-	| cu declaration definition statement operands |
+	| cu declaration definition statement operands interpreterProxyDecl |
 	cu := translator translateMethod: #primitiveNoPopButPush fromClass: BrokenPlugin.
 	
 	"declaration checks"
 	self assert: cu isStructuralyValidAST.
-	declaration := cu declarations at:1.
+	"ïnstance variable"
+	interpreterProxyDecl := cu declarations at:1.
+	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	
+	declaration := cu declarations at:2.
 	self assert: declaration type type equals: ASTCUserClass.
 	self assert: declaration id id equals: 'primitiveNoPopButPush'.
 	self assert: declaration parameters isEmpty.
@@ -49,12 +54,17 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 	"Check only for errors"
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
-	| cu declaration definition statement operands argument |
+	| cu declaration definition statement operands argument interpreterProxyDecl |
 	cu := translator translateMethod: #primitivePopAndFail fromClass: BrokenPlugin.
 	
 	"declaration checks"
 	self assert: cu isStructuralyValidAST.
-	declaration := cu declarations at:1.
+	"ïnstance variable"
+	interpreterProxyDecl := cu declarations at:1.
+	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	
+	declaration := cu declarations at:2.
 	self assert: declaration type type equals: ASTCUserClass.
 	self assert: declaration id id equals: 'primitivePopAndFail'.
 	self assert: declaration parameters isEmpty.
@@ -119,12 +129,17 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
-	| cu declaration definition statement operands argument |
+	| cu declaration definition statement operands argument interpreterProxyDecl |
 	cu := translator translateMethod: #primitivePopLessThanExpected fromClass: BrokenPlugin.
 
 	"declaration checks"
 	self assert: cu isStructuralyValidAST.
-	declaration := cu declarations at:1.
+	"ïnstance variable"
+	interpreterProxyDecl := cu declarations at:1.
+	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	
+	declaration := cu declarations at:2.
 	self assert: declaration type type equals: ASTCUserClass.
 	self assert: declaration id id equals: 'primitivePopLessThanExpected'.
 	self assert: declaration parameters isEmpty.
@@ -174,12 +189,17 @@ ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
-	| cu declaration definition statement operands argument |
+	| cu declaration definition statement operands argument interpreterProxyDecl |
 	cu := translator translateMethod: #primitivePopMoreThanExpected fromClass: BrokenPlugin.
 
 	"declaration checks"
+	"ïnstance variable"
+	interpreterProxyDecl := cu declarations at:1.
+	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	
 	self assert: cu isStructuralyValidAST.
-	declaration := cu declarations at:1.
+	declaration := cu declarations at:2.
 	self assert: declaration type type equals: ASTCUserClass.
 	self assert: declaration id id equals: 'primitivePopMoreThanExpected'.
 	self assert: declaration parameters isEmpty.
