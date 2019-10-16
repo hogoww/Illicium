@@ -4,56 +4,29 @@ Class {
 	#instVars : [
 		'body'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCFunctionDefinition >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self body = anotherNode body
+{ #category : #testing }
+ASTCFunctionDefinition >> = aFunctionDefinition [
+	super = aFunctionDefinition
 		ifFalse: [ ^ false ].
-
+	body = aFunctionDefinition body
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCFunctionDefinition >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCFunctionDefinition:self.].
-]
-
-{ #category : #visiting }
-ASTCFunctionDefinition >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCFunctionDefinition:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDefinition >> body [
-	^body
+	^ body
 ]
 
-{ #category : #accessors }
-ASTCFunctionDefinition >> body: anObject [
-	body:=anObject.
-	anObject parent:self.
-	^anObject.
-]
-
-{ #category : #comparing }
-ASTCFunctionDefinition >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self body hash.
-	^hash
+{ #category : #accessing }
+ASTCFunctionDefinition >> body: aBody [
+	body := aBody
 ]
 
 { #category : #testing }
-ASTCFunctionDefinition >> isASTCFunctionDefinition [
-	^true.
-]
-
-{ #category : #print }
-ASTCFunctionDefinition >> printProperties [
-	^''
+ASTCFunctionDefinition >> isFunctionDefinition [
+	^ true
 ]

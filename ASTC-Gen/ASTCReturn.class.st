@@ -4,56 +4,29 @@ Class {
 	#instVars : [
 		'expression'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCReturn >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self expression = anotherNode expression
+{ #category : #testing }
+ASTCReturn >> = aReturn [
+	super = aReturn
 		ifFalse: [ ^ false ].
-
+	expression = aReturn expression
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCReturn >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCReturn:self.].
-]
-
-{ #category : #visiting }
-ASTCReturn >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCReturn:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCReturn >> expression [
-	^expression
+	^ expression
 ]
 
-{ #category : #accessors }
-ASTCReturn >> expression: anObject [
-	expression:=anObject.
-	anObject parent:self.
-	^anObject.
-]
-
-{ #category : #comparing }
-ASTCReturn >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self expression hash.
-	^hash
+{ #category : #accessing }
+ASTCReturn >> expression: anExpression [
+	expression := anExpression
 ]
 
 { #category : #testing }
-ASTCReturn >> isASTCReturn [
-	^true.
-]
-
-{ #category : #print }
-ASTCReturn >> printProperties [
-	^''
+ASTCReturn >> isReturn [
+	^ true
 ]

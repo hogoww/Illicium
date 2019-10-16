@@ -4,67 +4,39 @@ Class {
 	#instVars : [
 		'compilationUnits'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCProject >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self compilationUnits = anotherNode compilationUnits
+{ #category : #testing }
+ASTCProject >> = aProject [
+	super = aProject
 		ifFalse: [ ^ false ].
-
+	compilationUnits = aProject compilationUnits
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCProject >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCProject:self.].
+{ #category : #accessing }
+ASTCProject >> addCompilationUnit: aCompilationUnit [
+	compilationUnits add: aCompilationUnit
 ]
 
-{ #category : #visiting }
-ASTCProject >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCProject:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCProject >> compilationUnits [
-	^compilationUnits
+	^ compilationUnits
 ]
 
-{ #category : #accessors }
-ASTCProject >> compilationUnits: aCollection [
-	compilationUnits:=aCollection.
-	aCollection parent:self.
-	^aCollection.
+{ #category : #accessing }
+ASTCProject >> compilationUnits: someCompilationUnits [
+	compilationUnits := someCompilationUnits
 ]
 
-{ #category : #comparing }
-ASTCProject >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self compilationUnits hash.
-	^hash
-]
-
-{ #category : #initialize }
+{ #category : #accessing }
 ASTCProject >> initialize [
-	super initialize.
-	self initializeCompilationUnits.
-]
-
-{ #category : #initialization }
-ASTCProject >> initializeCompilationUnits [
-	compilationUnits:=ASTCContainer new parent:self; yourself.
+	compilationUnits := OrderedCollection new
 ]
 
 { #category : #testing }
-ASTCProject >> isASTCProject [
-	^true.
-]
-
-{ #category : #print }
-ASTCProject >> printProperties [
-	^''
+ASTCProject >> isProject [
+	^ true
 ]

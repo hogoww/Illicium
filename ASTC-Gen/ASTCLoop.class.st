@@ -5,72 +5,41 @@ Class {
 		'condition',
 		'body'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCLoop >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self condition = anotherNode condition
+{ #category : #testing }
+ASTCLoop >> = aLoop [
+	super = aLoop
 		ifFalse: [ ^ false ].
-
-	self body = anotherNode body
+	condition = aLoop condition
 		ifFalse: [ ^ false ].
-
+	body = aLoop body
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCLoop >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCLoop:self.].
-]
-
-{ #category : #visiting }
-ASTCLoop >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCLoop:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCLoop >> body [
-	^body
+	^ body
 ]
 
-{ #category : #accessors }
-ASTCLoop >> body: anObject [
-	body:=anObject.
-	anObject parent:self.
-	^anObject.
+{ #category : #accessing }
+ASTCLoop >> body: aBody [
+	body := aBody
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCLoop >> condition [
-	^condition
+	^ condition
 ]
 
-{ #category : #accessors }
-ASTCLoop >> condition: anObject [
-	condition:=anObject.
-	anObject parent:self.
-	^anObject.
-]
-
-{ #category : #comparing }
-ASTCLoop >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self condition hash.
-	hash := hash + self body hash.
-	^hash
+{ #category : #accessing }
+ASTCLoop >> condition: aCondition [
+	condition := aCondition
 ]
 
 { #category : #testing }
-ASTCLoop >> isASTCLoop [
-	^true.
-]
-
-{ #category : #print }
-ASTCLoop >> printProperties [
-	^''
+ASTCLoop >> isLoop [
+	^ true
 ]

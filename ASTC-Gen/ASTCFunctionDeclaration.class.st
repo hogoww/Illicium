@@ -5,83 +5,51 @@ Class {
 		'type',
 		'parameters'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCFunctionDeclaration >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self type = anotherNode type
+{ #category : #testing }
+ASTCFunctionDeclaration >> = aFunctionDeclaration [
+	super = aFunctionDeclaration
 		ifFalse: [ ^ false ].
-
-	self parameters = anotherNode parameters
+	type = aFunctionDeclaration type
 		ifFalse: [ ^ false ].
-
+	parameters = aFunctionDeclaration parameters
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCFunctionDeclaration >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCFunctionDeclaration:self.].
+{ #category : #accessing }
+ASTCFunctionDeclaration >> addParameter: aParameter [
+	parameters add: aParameter
 ]
 
-{ #category : #visiting }
-ASTCFunctionDeclaration >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCFunctionDeclaration:self.
-]
-
-{ #category : #comparing }
-ASTCFunctionDeclaration >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self type hash.
-	hash := hash + self parameters hash.
-	^hash
-]
-
-{ #category : #initialize }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> initialize [
-	super initialize.
-	self initializeParameters.
-]
-
-{ #category : #initialization }
-ASTCFunctionDeclaration >> initializeParameters [
-	parameters:=ASTCContainer new parent:self; yourself.
+	parameters := OrderedCollection new
 ]
 
 { #category : #testing }
-ASTCFunctionDeclaration >> isASTCFunctionDeclaration [
-	^true.
+ASTCFunctionDeclaration >> isFunctionDeclaration [
+	^ true
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> parameters [
-	^parameters
+	^ parameters
 ]
 
-{ #category : #accessors }
-ASTCFunctionDeclaration >> parameters: aCollection [
-	parameters:=aCollection.
-	aCollection parent:self.
-	^aCollection.
+{ #category : #accessing }
+ASTCFunctionDeclaration >> parameters: someVariableDeclarations [
+	parameters := someVariableDeclarations
 ]
 
-{ #category : #print }
-ASTCFunctionDeclaration >> printProperties [
-	^''
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionDeclaration >> type [
-	^type
+	^ type
 ]
 
-{ #category : #accessors }
-ASTCFunctionDeclaration >> type: anObject [
-	type:=anObject.
-	anObject parent:self.
-	^anObject.
+{ #category : #accessing }
+ASTCFunctionDeclaration >> type: aType [
+	type := aType
 ]

@@ -4,61 +4,29 @@ Class {
 	#instVars : [
 		'value'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCLiteral >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self value = anotherNode value
+{ #category : #testing }
+ASTCLiteral >> = aLiteral [
+	super = aLiteral
 		ifFalse: [ ^ false ].
-
+	value = aLiteral value
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCLiteral >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCLiteral:self.].
-]
-
-{ #category : #visiting }
-ASTCLiteral >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCLiteral:self.
-]
-
-{ #category : #comparing }
-ASTCLiteral >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self value hash.
-	^hash
-]
-
 { #category : #testing }
-ASTCLiteral >> isASTCLiteral [
-	^true.
+ASTCLiteral >> isLiteral [
+	^ true
 ]
 
-{ #category : #print }
-ASTCLiteral >> printProperties [
-	^String streamContents:[:s |
-	s << ' ' << self valueAsString.].
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCLiteral >> value [
-	^value
+	^ value
 ]
 
-{ #category : #accessors }
-ASTCLiteral >> value: anObject [
-	value:=anObject.
-	^anObject.
-]
-
-{ #category : #printing }
-ASTCLiteral >> valueAsString [
-	^value asString.
+{ #category : #accessing }
+ASTCLiteral >> value: aValue [
+	value := aValue
 ]

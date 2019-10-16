@@ -1,40 +1,17 @@
 Class {
 	#name : #ASTCDoWhile,
 	#superclass : #ASTCAbstractWhile,
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCDoWhile >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
+{ #category : #testing }
+ASTCDoWhile >> = aDoWhile [
+	super = aDoWhile
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCDoWhile >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCDoWhile:self.].
-]
-
-{ #category : #visiting }
-ASTCDoWhile >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCDoWhile:self.
-]
-
-{ #category : #comparing }
-ASTCDoWhile >> hash [
-	| hash |
-	hash := self identityHash.
-	^hash
-]
-
 { #category : #testing }
-ASTCDoWhile >> isASTCDoWhile [
-	^true.
-]
-
-{ #category : #print }
-ASTCDoWhile >> printProperties [
-	^''
+ASTCDoWhile >> isDoWhile [
+	^ true
 ]

@@ -1,580 +1,201 @@
 Class {
 	#name : #ASTCWalkerVisitor,
-	#superclass : #ASTCVisitor,
-	#category : #'ASTC-Gen-visitor'
+	#superclass : #ASTCSuperclassVisitor,
+	#category : #'ASTC-Gen-visitors'
 }
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
-	self walkASTCAbstractWhile: anASTCAbstractWhile.
-			
+ASTCWalkerVisitor >> visitAbstractWhile: anAbstractWhile [
+	super visitAbstractWhile: anAbstractWhile
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCBlock: anASTCBlock [
-	self walkASTCBlock: anASTCBlock.
-			
+ASTCWalkerVisitor >> visitBlock: aBlock [
+	super visitBlock: aBlock.
+	aBlock statements
+		ifNotNil:
+			[ :statements | statements do: [ :aStatements | aStatements acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCCompilationUnit: anASTCCompilationUnit [
-	self walkASTCCompilationUnit: anASTCCompilationUnit.
-			
+ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
+	super visitCompilationUnit: aCompilationUnit.
+	aCompilationUnit definitions
+		ifNotNil:
+			[ :definitions | definitions do: [ :aDefinitions | aDefinitions acceptVisitor: self ] ].
+	aCompilationUnit declarations
+		ifNotNil: [ :declarations | 
+			declarations
+				do: [ :aDeclarations | aDeclarations acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCDeclaration: anASTCDeclaration [
-	self walkASTCDeclaration: anASTCDeclaration.
-			
+ASTCWalkerVisitor >> visitDeclaration: aDeclaration [
+	super visitDeclaration: aDeclaration.
+	aDeclaration id ifNotNil: [ :anId | anId acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
-	self walkASTCDeclarationStatement: anASTCDeclarationStatement.
-			
+ASTCWalkerVisitor >> visitDeclarationStatement: aDeclarationStatement [
+	super visitDeclarationStatement: aDeclarationStatement.
+	aDeclarationStatement declaration
+		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCDefinition: anASTCDefinition [
-	self walkASTCDefinition: anASTCDefinition.
-			
+ASTCWalkerVisitor >> visitDefinition: aDefinition [
+	super visitDefinition: aDefinition.
+	aDefinition declaration
+		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCDoWhile: anASTCDoWhile [
-	self walkASTCDoWhile: anASTCDoWhile.
-			
+ASTCWalkerVisitor >> visitDoWhile: aDoWhile [
+	super visitDoWhile: aDoWhile
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCExpression: anASTCExpression [
-	self walkASTCExpression: anASTCExpression.
-			
+ASTCWalkerVisitor >> visitExpression: anExpression [
+	super visitExpression: anExpression
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCExpressionStatement: anASTCExpressionStatement [
-	self walkASTCExpressionStatement: anASTCExpressionStatement.
-			
+ASTCWalkerVisitor >> visitExpressionStatement: anExpressionStatement [
+	super visitExpressionStatement: anExpressionStatement.
+	anExpressionStatement expression
+		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCFor: anASTCFor [
-	self walkASTCFor: anASTCFor.
-			
+ASTCWalkerVisitor >> visitFor: aFor [
+	super visitFor: aFor.
+	aFor iteratorDefinition
+		ifNotNil: [ :anIteratorDefinition | anIteratorDefinition acceptVisitor: self ].
+	aFor iteratorModification
+		ifNotNil: [ :anIteratorModification | anIteratorModification acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCFunctionCall: anASTCFunctionCall [
-	self walkASTCFunctionCall: anASTCFunctionCall.
-			
+ASTCWalkerVisitor >> visitFunctionCall: aFunctionCall [
+	super visitFunctionCall: aFunctionCall.
+	aFunctionCall arguments
+		ifNotNil:
+			[ :arguments | arguments do: [ :anArguments | anArguments acceptVisitor: self ] ].
+	aFunctionCall id ifNotNil: [ :anId | anId acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
-	self walkASTCFunctionDeclaration: anASTCFunctionDeclaration.
-			
+ASTCWalkerVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
+	super visitFunctionDeclaration: aFunctionDeclaration.
+	aFunctionDeclaration parameters
+		ifNotNil:
+			[ :parameters | parameters do: [ :aParameters | aParameters acceptVisitor: self ] ].
+	aFunctionDeclaration type
+		ifNotNil: [ :aType | aType acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
-	self walkASTCFunctionDefinition: anASTCFunctionDefinition.
-			
+ASTCWalkerVisitor >> visitFunctionDefinition: aFunctionDefinition [
+	super visitFunctionDefinition: aFunctionDefinition.
+	aFunctionDefinition body
+		ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCIdentifier: anASTCIdentifier [
-	self walkASTCIdentifier: anASTCIdentifier.
-			
+ASTCWalkerVisitor >> visitIdentifier: anIdentifier [
+	super visitIdentifier: anIdentifier
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCIf: anASTCIf [
-	self walkASTCIf: anASTCIf.
-			
+ASTCWalkerVisitor >> visitIf: anIf [
+	super visitIf: anIf.
+	anIf condition
+		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	anIf then ifNotNil: [ :aThen | aThen acceptVisitor: self ].
+	anIf else ifNotNil: [ :anElse | anElse acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCLiteral: anASTCLiteral [
-	self walkASTCLiteral: anASTCLiteral.
-			
+ASTCWalkerVisitor >> visitLiteral: aLiteral [
+	super visitLiteral: aLiteral
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCLoop: anASTCLoop [
-	self walkASTCLoop: anASTCLoop.
-			
+ASTCWalkerVisitor >> visitLoop: aLoop [
+	super visitLoop: aLoop.
+	aLoop condition
+		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	aLoop body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCNode: anASTCNode [
-	self walkASTCNode: anASTCNode.
-			
+ASTCWalkerVisitor >> visitNode: aNode [
+	super visitNode: aNode.
+	aNode parent ifNotNil: [ :aParent | aParent acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCOperator: anASTCOperator [
-	self walkASTCOperator: anASTCOperator.
-			
+ASTCWalkerVisitor >> visitOperator: anOperator [
+	super visitOperator: anOperator.
+	anOperator operands
+		ifNotNil:
+			[ :operands | operands do: [ :anOperands | anOperands acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCProject: anASTCProject [
-	self walkASTCProject: anASTCProject.
-			
+ASTCWalkerVisitor >> visitProject: aProject [
+	super visitProject: aProject.
+	aProject compilationUnits
+		ifNotNil: [ :compilationUnits | 
+			compilationUnits
+				do: [ :aCompilationUnits | aCompilationUnits acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCReturn: anASTCReturn [
-	self walkASTCReturn: anASTCReturn.
-			
+ASTCWalkerVisitor >> visitReturn: aReturn [
+	super visitReturn: aReturn.
+	aReturn expression
+		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCStatement: anASTCStatement [
-	self walkASTCStatement: anASTCStatement.
-			
+ASTCWalkerVisitor >> visitStatement: aStatement [
+	super visitStatement: aStatement
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCStructureDeclaration: anASTCStructureDeclaration [
-	self walkASTCStructureDeclaration: anASTCStructureDeclaration.
-			
+ASTCWalkerVisitor >> visitStructureDeclaration: aStructureDeclaration [
+	super visitStructureDeclaration: aStructureDeclaration
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCStructureDefinition: anASTCStructureDefinition [
-	self walkASTCStructureDefinition: anASTCStructureDefinition.
-			
+ASTCWalkerVisitor >> visitStructureDefinition: aStructureDefinition [
+	super visitStructureDefinition: aStructureDefinition.
+	aStructureDefinition members
+		ifNotNil:
+			[ :members | members do: [ :aMembers | aMembers acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCType: anASTCType [
-	self walkASTCType: anASTCType.
-			
+ASTCWalkerVisitor >> visitType: aType [
+	super visitType: aType
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
-	self walkASTCVariableDeclaration: anASTCVariableDeclaration.
-			
+ASTCWalkerVisitor >> visitVariableDeclaration: aVariableDeclaration [
+	super visitVariableDeclaration: aVariableDeclaration.
+	aVariableDeclaration type
+		ifNotNil: [ :aType | aType acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCVariableDefinition: anASTCVariableDefinition [
-	self walkASTCVariableDefinition: anASTCVariableDefinition.
-			
+ASTCWalkerVisitor >> visitVariableDefinition: aVariableDefinition [
+	super visitVariableDefinition: aVariableDefinition.
+	aVariableDefinition init
+		ifNotNil: [ :anInit | anInit acceptVisitor: self ]
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitASTCWhile: anASTCWhile [
-	self walkASTCWhile: anASTCWhile.
-			
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCAbstractWhile: anASTCAbstractWhile [
-	self walkASTCLoop: anASTCAbstractWhile.
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCBlock: anASTCBlock [
-	self walkASTCStatement: anASTCBlock.
-	self walkASTCBlockStatements: anASTCBlock.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCBlockStatements:anASTCBlock [
-	anASTCBlock statements
-		ifNotNil:[ :statements | statements
-			do:[ :aStatement | 
-aStatement acceptVisitor:self ]
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCCompilationUnit: anASTCCompilationUnit [
-	self walkASTCNode: anASTCCompilationUnit.
-	self walkASTCCompilationUnitDefinitions: anASTCCompilationUnit.
-	self walkASTCCompilationUnitDeclarations: anASTCCompilationUnit.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCCompilationUnitDeclarations:anASTCCompilationUnit [
-	anASTCCompilationUnit declarations
-		ifNotNil:[ :declarations | declarations
-			do:[ :aDeclaration | 
-aDeclaration acceptVisitor:self ]
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCCompilationUnitDefinitions:anASTCCompilationUnit [
-	anASTCCompilationUnit definitions
-		ifNotNil:[ :definitions | definitions
-			do:[ :aDefinition | 
-aDefinition acceptVisitor:self ]
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCDeclaration: anASTCDeclaration [
-	self walkASTCNode: anASTCDeclaration.
-	self walkASTCDeclarationId: anASTCDeclaration.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCDeclarationId:anASTCDeclaration [
-	anASTCDeclaration id
-		ifNotNil:[ :id | id acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCDeclarationStatement: anASTCDeclarationStatement [
-	self walkASTCStatement: anASTCDeclarationStatement.
-	self walkASTCDeclarationStatementDeclaration: anASTCDeclarationStatement.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCDeclarationStatementDeclaration:anASTCDeclarationStatement [
-	anASTCDeclarationStatement declaration
-		ifNotNil:[ :declaration | declaration acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCDefinition: anASTCDefinition [
-	self walkASTCNode: anASTCDefinition.
-	self walkASTCDefinitionDeclaration: anASTCDefinition.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCDefinitionDeclaration:anASTCDefinition [
-	anASTCDefinition declaration
-		ifNotNil:[ :declaration | declaration acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCDoWhile: anASTCDoWhile [
-	self walkASTCAbstractWhile: anASTCDoWhile.
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCExpression: anASTCExpression [
-	self walkASTCNode: anASTCExpression.
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCExpressionStatement: anASTCExpressionStatement [
-	self walkASTCStatement: anASTCExpressionStatement.
-	self walkASTCExpressionStatementExpression: anASTCExpressionStatement.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCExpressionStatementExpression:anASTCExpressionStatement [
-	anASTCExpressionStatement expression
-		ifNotNil:[ :expression | expression acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCFor: anASTCFor [
-	self walkASTCLoop: anASTCFor.
-	self walkASTCForIteratorDefinition: anASTCFor.
-	self walkASTCForIteratorModification: anASTCFor.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCForIteratorDefinition:anASTCFor [
-	anASTCFor iteratorDefinition
-		ifNotNil:[ :iteratorDefinition | iteratorDefinition acceptVisitor:self.
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCForIteratorModification:anASTCFor [
-	anASTCFor iteratorModification
-		ifNotNil:[ :iteratorModification | iteratorModification acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCFunctionCall: anASTCFunctionCall [
-	self walkASTCExpression: anASTCFunctionCall.
-	self walkASTCFunctionCallId: anASTCFunctionCall.
-	self walkASTCFunctionCallArguments: anASTCFunctionCall.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionCallArguments:anASTCFunctionCall [
-	anASTCFunctionCall arguments
-		ifNotNil:[ :arguments | arguments
-			do:[ :anArgument | 
-anArgument acceptVisitor:self ]
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionCallId:anASTCFunctionCall [
-	anASTCFunctionCall id
-		ifNotNil:[ :id | id acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCFunctionDeclaration: anASTCFunctionDeclaration [
-	self walkASTCDeclaration: anASTCFunctionDeclaration.
-	self walkASTCFunctionDeclarationType: anASTCFunctionDeclaration.
-	self walkASTCFunctionDeclarationParameters: anASTCFunctionDeclaration.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDeclarationParameters:anASTCFunctionDeclaration [
-	anASTCFunctionDeclaration parameters
-		ifNotNil:[ :parameters | parameters
-			do:[ :aParameter | 
-aParameter acceptVisitor:self ]
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDeclarationType:anASTCFunctionDeclaration [
-	anASTCFunctionDeclaration type
-		ifNotNil:[ :type | type acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCFunctionDefinition: anASTCFunctionDefinition [
-	self walkASTCDefinition: anASTCFunctionDefinition.
-	self walkASTCFunctionDefinitionBody: anASTCFunctionDefinition.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCFunctionDefinitionBody:anASTCFunctionDefinition [
-	anASTCFunctionDefinition body
-		ifNotNil:[ :body | body acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCIdentifier: anASTCIdentifier [
-	self walkASTCExpression: anASTCIdentifier.
-	self walkASTCIdentifierId: anASTCIdentifier.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCIdentifierId:anASTCIdentifier [
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCIf: anASTCIf [
-	self walkASTCStatement: anASTCIf.
-	self walkASTCIfCondition: anASTCIf.
-	self walkASTCIfThen: anASTCIf.
-	self walkASTCIfElse: anASTCIf.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCIfCondition:anASTCIf [
-	anASTCIf condition
-		ifNotNil:[ :condition | condition acceptVisitor:self.
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCIfElse:anASTCIf [
-	anASTCIf else
-		ifNotNil:[ :else | else acceptVisitor:self.
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCIfThen:anASTCIf [
-	anASTCIf then
-		ifNotNil:[ :then | then acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCLiteral: anASTCLiteral [
-	self walkASTCExpression: anASTCLiteral.
-	self walkASTCLiteralValue: anASTCLiteral.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCLiteralValue:anASTCLiteral [
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCLoop: anASTCLoop [
-	self walkASTCStatement: anASTCLoop.
-	self walkASTCLoopCondition: anASTCLoop.
-	self walkASTCLoopBody: anASTCLoop.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCLoopBody:anASTCLoop [
-	anASTCLoop body
-		ifNotNil:[ :body | body acceptVisitor:self.
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCLoopCondition:anASTCLoop [
-	anASTCLoop condition
-		ifNotNil:[ :condition | condition acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCNode: anASTCNode [
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCOperator: anASTCOperator [
-	self walkASTCExpression: anASTCOperator.
-	self walkASTCOperatorOperands: anASTCOperator.
-	self walkASTCOperatorSymbol: anASTCOperator.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCOperatorOperands:anASTCOperator [
-	anASTCOperator operands
-		ifNotNil:[ :operands | operands
-			do:[ :anOperand | 
-anOperand acceptVisitor:self ]
-		]
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCOperatorSymbol:anASTCOperator [
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCProject: anASTCProject [
-	self walkASTCNode: anASTCProject.
-	self walkASTCProjectCompilationUnits: anASTCProject.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCProjectCompilationUnits:anASTCProject [
-	anASTCProject compilationUnits
-		ifNotNil:[ :compilationUnits | compilationUnits
-			do:[ :aCompilationUnit | 
-aCompilationUnit acceptVisitor:self ]
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCReturn: anASTCReturn [
-	self walkASTCStatement: anASTCReturn.
-	self walkASTCReturnExpression: anASTCReturn.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCReturnExpression:anASTCReturn [
-	anASTCReturn expression
-		ifNotNil:[ :expression | expression acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCStatement: anASTCStatement [
-	self walkASTCNode: anASTCStatement.
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCStructureDeclaration: anASTCStructureDeclaration [
-	self walkASTCDeclaration: anASTCStructureDeclaration.
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCStructureDefinition: anASTCStructureDefinition [
-	self walkASTCDefinition: anASTCStructureDefinition.
-	self walkASTCStructureDefinitionMembers: anASTCStructureDefinition.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCStructureDefinitionMembers:anASTCStructureDefinition [
-	anASTCStructureDefinition members
-		ifNotNil:[ :members | members
-			do:[ :aMember | 
-aMember acceptVisitor:self ]
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCType: anASTCType [
-	self walkASTCNode: anASTCType.
-	self walkASTCTypeType: anASTCType.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCTypeType:anASTCType [
-
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCVariableDeclaration: anASTCVariableDeclaration [
-	self walkASTCDeclaration: anASTCVariableDeclaration.
-	self walkASTCVariableDeclarationType: anASTCVariableDeclaration.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCVariableDeclarationType:anASTCVariableDeclaration [
-	anASTCVariableDeclaration type
-		ifNotNil:[ :type | type acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCVariableDefinition: anASTCVariableDefinition [
-	self walkASTCDefinition: anASTCVariableDefinition.
-	self walkASTCVariableDefinitionInit: anASTCVariableDefinition.
-
-]
-
-{ #category : #walking }
-ASTCWalkerVisitor >> walkASTCVariableDefinitionInit:anASTCVariableDefinition [
-	anASTCVariableDefinition init
-		ifNotNil:[ :init | init acceptVisitor:self.
-		]
-]
-
-{ #category : #visiting }
-ASTCWalkerVisitor >> walkASTCWhile: anASTCWhile [
-	self walkASTCAbstractWhile: anASTCWhile.
-
+ASTCWalkerVisitor >> visitWhile: aWhile [
+	super visitWhile: aWhile
 ]

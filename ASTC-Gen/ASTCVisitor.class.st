@@ -1,117 +1,145 @@
 Class {
 	#name : #ASTCVisitor,
 	#superclass : #Object,
-	#category : #'ASTC-Gen-visitor'
+	#category : #'ASTC-Gen-visitors'
 }
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
+ASTCVisitor >> visitAbstractWhile: anAbstractWhile [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCBlock: anASTCBlock [
+ASTCVisitor >> visitBlock: aBlock [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCCompilationUnit: anASTCCompilationUnit [
+ASTCVisitor >> visitCompilationUnit: aCompilationUnit [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCDeclaration: anASTCDeclaration [
+ASTCVisitor >> visitDeclaration: aDeclaration [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
+ASTCVisitor >> visitDeclarationStatement: aDeclarationStatement [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCDefinition: anASTCDefinition [
+ASTCVisitor >> visitDefinition: aDefinition [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCDoWhile: anASTCDoWhile [
+ASTCVisitor >> visitDoWhile: aDoWhile [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCExpression: anASTCExpression [
+ASTCVisitor >> visitExpression: anExpression [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCExpressionStatement: anASTCExpressionStatement [
+ASTCVisitor >> visitExpressionStatement: anExpressionStatement [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCFor: anASTCFor [
+ASTCVisitor >> visitFor: aFor [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCFunctionCall: anASTCFunctionCall [
+ASTCVisitor >> visitFunctionCall: aFunctionCall [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
+ASTCVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
+ASTCVisitor >> visitFunctionDefinition: aFunctionDefinition [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCIdentifier: anASTCIdentifier [
+ASTCVisitor >> visitIdentifier: anIdentifier [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCIf: anASTCIf [
+ASTCVisitor >> visitIf: anIf [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCLiteral: anASTCLiteral [
+ASTCVisitor >> visitLiteral: aLiteral [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCLoop: anASTCLoop [
+ASTCVisitor >> visitLoop: aLoop [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCNode: anASTCNode [
+ASTCVisitor >> visitNode: aNode [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCOperator: anASTCOperator [
+ASTCVisitor >> visitOperator: anOperator [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCProject: anASTCProject [
+ASTCVisitor >> visitProject: aProject [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCReturn: anASTCReturn [
+ASTCVisitor >> visitReturn: aReturn [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCStatement: anASTCStatement [
+ASTCVisitor >> visitStatement: aStatement [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCStructureDeclaration: anASTCStructureDeclaration [
+ASTCVisitor >> visitStructureDeclaration: aStructureDeclaration [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCStructureDefinition: anASTCStructureDefinition [
+ASTCVisitor >> visitStructureDefinition: aStructureDefinition [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCType: anASTCType [
+ASTCVisitor >> visitType: aType [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
+ASTCVisitor >> visitVariableDeclaration: aVariableDeclaration [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCVariableDefinition: anASTCVariableDefinition [
+ASTCVisitor >> visitVariableDefinition: aVariableDefinition [
+	
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitASTCWhile: anASTCWhile [
+ASTCVisitor >> visitWhile: aWhile [
+	
 ]

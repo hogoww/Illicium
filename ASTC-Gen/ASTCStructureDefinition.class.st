@@ -4,67 +4,39 @@ Class {
 	#instVars : [
 		'members'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCStructureDefinition >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self members = anotherNode members
+{ #category : #testing }
+ASTCStructureDefinition >> = aStructureDefinition [
+	super = aStructureDefinition
 		ifFalse: [ ^ false ].
-
+	members = aStructureDefinition members
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCStructureDefinition >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCStructureDefinition:self.].
+{ #category : #accessing }
+ASTCStructureDefinition >> addMember: aMember [
+	members add: aMember
 ]
 
-{ #category : #visiting }
-ASTCStructureDefinition >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCStructureDefinition:self.
-]
-
-{ #category : #comparing }
-ASTCStructureDefinition >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self members hash.
-	^hash
-]
-
-{ #category : #initialize }
+{ #category : #accessing }
 ASTCStructureDefinition >> initialize [
-	super initialize.
-	self initializeMembers.
-]
-
-{ #category : #initialization }
-ASTCStructureDefinition >> initializeMembers [
-	members:=ASTCContainer new parent:self; yourself.
+	members := OrderedCollection new
 ]
 
 { #category : #testing }
-ASTCStructureDefinition >> isASTCStructureDefinition [
-	^true.
+ASTCStructureDefinition >> isStructureDefinition [
+	^ true
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCStructureDefinition >> members [
-	^members
+	^ members
 ]
 
-{ #category : #accessors }
-ASTCStructureDefinition >> members: aCollection [
-	members:=aCollection.
-	aCollection parent:self.
-	^aCollection.
-]
-
-{ #category : #print }
-ASTCStructureDefinition >> printProperties [
-	^''
+{ #category : #accessing }
+ASTCStructureDefinition >> members: someVariableDeclarations [
+	members := someVariableDeclarations
 ]

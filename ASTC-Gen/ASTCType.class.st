@@ -4,61 +4,29 @@ Class {
 	#instVars : [
 		'type'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCType >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self type = anotherNode type
+{ #category : #testing }
+ASTCType >> = aType [
+	super = aType
 		ifFalse: [ ^ false ].
-
+	type = aType type
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCType >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCType:self.].
-]
-
-{ #category : #visiting }
-ASTCType >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCType:self.
-]
-
-{ #category : #comparing }
-ASTCType >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self type hash.
-	^hash
-]
-
 { #category : #testing }
-ASTCType >> isASTCType [
-	^true.
+ASTCType >> isType [
+	^ true
 ]
 
-{ #category : #print }
-ASTCType >> printProperties [
-	^String streamContents:[:s |
-	s << ' ' << self typeAsString.].
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCType >> type [
-	^type
+	^ type
 ]
 
-{ #category : #accessors }
-ASTCType >> type: anObject [
-	type:=anObject.
-	^anObject.
-]
-
-{ #category : #printing }
-ASTCType >> typeAsString [
-	^type asString.
+{ #category : #accessing }
+ASTCType >> type: aType [
+	type := aType
 ]

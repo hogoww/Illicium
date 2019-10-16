@@ -1,235 +1,159 @@
 Class {
 	#name : #ASTCDebugStructureVisitor,
 	#superclass : #ASTCWalkerVisitor,
-	#category : #'ASTC-Gen-visitor'
+	#category : #'ASTC-Gen-visitors'
 }
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCAbstractWhile:anASTCAbstractWhile [
-	self visitASTCLoop:anASTCAbstractWhile.
-
-
-	super visitASTCAbstractWhile:anASTCAbstractWhile
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitBlock: aBlock [
+	super visitBlock: aBlock.
+	aBlock statements
+		ifNotNil:
+			[ :statements | statements do: [ :aStatements | self assert: aStatements isStatement ] ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCBlock:anASTCBlock [
-	self visitASTCStatement:anASTCBlock.
-
-	anASTCBlock statements do:[:each| self assert: each isASTCStatement].
-
-	super visitASTCBlock:anASTCBlock
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitCompilationUnit: aCompilationUnit [
+	super visitCompilationUnit: aCompilationUnit.
+	aCompilationUnit definitions
+		ifNotNil: [ :definitions | 
+			definitions
+				do: [ :aDefinitions | self assert: aDefinitions isDefinition ] ].
+	aCompilationUnit declarations
+		ifNotNil: [ :declarations | 
+			declarations
+				do: [ :aDeclarations | self assert: aDeclarations isDeclaration ] ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCCompilationUnit:anASTCCompilationUnit [
-	self visitASTCNode:anASTCCompilationUnit.
-
-	anASTCCompilationUnit definitions do:[:each| self assert: each isASTCDefinition].
-	anASTCCompilationUnit declarations do:[:each| self assert: each isASTCDeclaration].
-
-	super visitASTCCompilationUnit:anASTCCompilationUnit
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitDeclaration: aDeclaration [
+	super visitDeclaration: aDeclaration.
+	aDeclaration id ifNotNil: [ :anId | self assert: anId isIdentifier ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCDeclaration:anASTCDeclaration [
-	self visitASTCNode:anASTCDeclaration.
-
-	anASTCDeclaration id ifNotNil:[ self assert:anASTCDeclaration id isASTCIdentifier ].
-
-	super visitASTCDeclaration:anASTCDeclaration
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitDeclarationStatement: aDeclarationStatement [
+	super visitDeclarationStatement: aDeclarationStatement.
+	aDeclarationStatement declaration
+		ifNotNil: [ :aDeclaration | self assert: aDeclaration isDeclaration ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCDefinition:anASTCDefinition [
-	self visitASTCNode:anASTCDefinition.
-
-	anASTCDefinition declaration ifNotNil:[ self assert:anASTCDefinition declaration isASTCDeclaration ].
-
-	super visitASTCDefinition:anASTCDefinition
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitDefinition: aDefinition [
+	super visitDefinition: aDefinition.
+	aDefinition declaration
+		ifNotNil: [ :aDeclaration | self assert: aDeclaration isDeclaration ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCDoWhile:anASTCDoWhile [
-	self visitASTCAbstractWhile:anASTCDoWhile.
-
-
-	super visitASTCDoWhile:anASTCDoWhile
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitExpressionStatement: anExpressionStatement [
+	super visitExpressionStatement: anExpressionStatement.
+	anExpressionStatement expression
+		ifNotNil: [ :anExpression | self assert: anExpression isExpression ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCExpression:anASTCExpression [
-	self visitASTCNode:anASTCExpression.
-
-
-	super visitASTCExpression:anASTCExpression
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitFor: aFor [
+	super visitFor: aFor.
+	aFor iteratorDefinition
+		ifNotNil: [ :anIteratorDefinition | self assert: anIteratorDefinition isVariableDefinition ].
+	aFor iteratorModification
+		ifNotNil: [ :anIteratorModification | self assert: anIteratorModification isExpression ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCExpressionStatement:anASTCExpressionStatement [
-	self visitASTCStatement:anASTCExpressionStatement.
-
-	anASTCExpressionStatement expression ifNotNil:[ self assert:anASTCExpressionStatement expression isASTCExpression ].
-
-	super visitASTCExpressionStatement:anASTCExpressionStatement
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitFunctionCall: aFunctionCall [
+	super visitFunctionCall: aFunctionCall.
+	aFunctionCall arguments
+		ifNotNil:
+			[ :arguments | arguments do: [ :anArguments | self assert: anArguments isExpression ] ].
+	aFunctionCall id ifNotNil: [ :anId | self assert: anId isIdentifier ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCFor:anASTCFor [
-	self visitASTCLoop:anASTCFor.
-
-	anASTCFor iteratorDefinition ifNotNil:[ self assert:anASTCFor iteratorDefinition isASTCVariableDefinition ].
-	anASTCFor iteratorModification ifNotNil:[ self assert:anASTCFor iteratorModification isASTCExpression ].
-
-	super visitASTCFor:anASTCFor
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
+	super visitFunctionDeclaration: aFunctionDeclaration.
+	aFunctionDeclaration parameters
+		ifNotNil: [ :parameters | 
+			parameters
+				do: [ :aParameters | self assert: aParameters isVariableDeclaration ] ].
+	aFunctionDeclaration type
+		ifNotNil: [ :aType | self assert: aType isType ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCFunctionCall:anASTCFunctionCall [
-	self visitASTCExpression:anASTCFunctionCall.
-
-	anASTCFunctionCall id ifNotNil:[ self assert:anASTCFunctionCall id isASTCIdentifier ].
-	anASTCFunctionCall arguments do:[:each| self assert: each isASTCExpression].
-
-	super visitASTCFunctionCall:anASTCFunctionCall
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitFunctionDefinition: aFunctionDefinition [
+	super visitFunctionDefinition: aFunctionDefinition.
+	aFunctionDefinition body
+		ifNotNil: [ :aBody | self assert: aBody isBlock ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCFunctionDeclaration:anASTCFunctionDeclaration [
-	self visitASTCDeclaration:anASTCFunctionDeclaration.
-
-	anASTCFunctionDeclaration type ifNotNil:[ self assert:anASTCFunctionDeclaration type isASTCType ].
-	anASTCFunctionDeclaration parameters do:[:each| self assert: each isASTCVariableDeclaration].
-
-	super visitASTCFunctionDeclaration:anASTCFunctionDeclaration
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitIf: anIf [
+	super visitIf: anIf.
+	anIf condition
+		ifNotNil: [ :aCondition | self assert: aCondition isExpression ].
+	anIf then ifNotNil: [ :aThen | self assert: aThen isStatement ].
+	anIf else ifNotNil: [ :anElse | self assert: anElse isStatement ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCFunctionDefinition:anASTCFunctionDefinition [
-	self visitASTCDefinition:anASTCFunctionDefinition.
-
-	anASTCFunctionDefinition body ifNotNil:[ self assert:anASTCFunctionDefinition body isASTCBlock ].
-
-	super visitASTCFunctionDefinition:anASTCFunctionDefinition
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitLoop: aLoop [
+	super visitLoop: aLoop.
+	aLoop condition
+		ifNotNil: [ :aCondition | self assert: aCondition isExpression ].
+	aLoop body ifNotNil: [ :aBody | self assert: aBody isStatement ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCIdentifier:anASTCIdentifier [
-	self visitASTCExpression:anASTCIdentifier.
-
-
-	super visitASTCIdentifier:anASTCIdentifier
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitNode: aNode [
+	super visitNode: aNode.
+	aNode parent ifNotNil: [ :aParent | self assert: aParent isNode ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCIf:anASTCIf [
-	self visitASTCStatement:anASTCIf.
-
-	anASTCIf condition ifNotNil:[ self assert:anASTCIf condition isASTCExpression ].
-	anASTCIf then ifNotNil:[ self assert:anASTCIf then isASTCStatement ].
-	anASTCIf else ifNotNil:[ self assert:anASTCIf else isASTCStatement ].
-
-	super visitASTCIf:anASTCIf
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitOperator: anOperator [
+	super visitOperator: anOperator.
+	anOperator operands
+		ifNotNil:
+			[ :operands | operands do: [ :anOperands | self assert: anOperands isExpression ] ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCLiteral:anASTCLiteral [
-	self visitASTCExpression:anASTCLiteral.
-
-
-	super visitASTCLiteral:anASTCLiteral
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitProject: aProject [
+	super visitProject: aProject.
+	aProject compilationUnits
+		ifNotNil: [ :compilationUnits | 
+			compilationUnits
+				do: [ :aCompilationUnits | self assert: aCompilationUnits isCompilationUnit ] ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCLoop:anASTCLoop [
-	self visitASTCStatement:anASTCLoop.
-
-	anASTCLoop condition ifNotNil:[ self assert:anASTCLoop condition isASTCExpression ].
-	anASTCLoop body ifNotNil:[ self assert:anASTCLoop body isASTCStatement ].
-
-	super visitASTCLoop:anASTCLoop
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitReturn: aReturn [
+	super visitReturn: aReturn.
+	aReturn expression
+		ifNotNil: [ :anExpression | self assert: anExpression isExpression ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCNode:anASTCNode [
-
-	super visitASTCNode:anASTCNode
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitStructureDefinition: aStructureDefinition [
+	super visitStructureDefinition: aStructureDefinition.
+	aStructureDefinition members
+		ifNotNil: [ :members | 
+			members
+				do: [ :aMembers | self assert: aMembers isVariableDeclaration ] ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCOperator:anASTCOperator [
-	self visitASTCExpression:anASTCOperator.
-
-	anASTCOperator operands do:[:each| self assert: each isASTCExpression].
-
-	super visitASTCOperator:anASTCOperator
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitVariableDeclaration: aVariableDeclaration [
+	super visitVariableDeclaration: aVariableDeclaration.
+	aVariableDeclaration type
+		ifNotNil: [ :aType | self assert: aType isType ]
 ]
 
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCProject:anASTCProject [
-	self visitASTCNode:anASTCProject.
-
-	anASTCProject compilationUnits do:[:each| self assert: each isASTCCompilationUnit].
-
-	super visitASTCProject:anASTCProject
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCReturn:anASTCReturn [
-	self visitASTCStatement:anASTCReturn.
-
-	anASTCReturn expression ifNotNil:[ self assert:anASTCReturn expression isASTCExpression ].
-
-	super visitASTCReturn:anASTCReturn
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCStatement:anASTCStatement [
-	self visitASTCNode:anASTCStatement.
-
-
-	super visitASTCStatement:anASTCStatement
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCStructureDeclaration:anASTCStructureDeclaration [
-	self visitASTCDeclaration:anASTCStructureDeclaration.
-
-
-	super visitASTCStructureDeclaration:anASTCStructureDeclaration
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCStructureDefinition:anASTCStructureDefinition [
-	self visitASTCDefinition:anASTCStructureDefinition.
-
-	anASTCStructureDefinition members do:[:each| self assert: each isASTCVariableDeclaration].
-
-	super visitASTCStructureDefinition:anASTCStructureDefinition
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCVariableDeclaration:anASTCVariableDeclaration [
-	self visitASTCDeclaration:anASTCVariableDeclaration.
-
-	anASTCVariableDeclaration type ifNotNil:[ self assert:anASTCVariableDeclaration type isASTCType ].
-
-	super visitASTCVariableDeclaration:anASTCVariableDeclaration
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCVariableDefinition:anASTCVariableDefinition [
-	self visitASTCDefinition:anASTCVariableDefinition.
-
-	anASTCVariableDefinition init ifNotNil:[ self assert:anASTCVariableDefinition init isASTCExpression ].
-
-	super visitASTCVariableDefinition:anASTCVariableDefinition
-]
-
-{ #category : #check }
-ASTCDebugStructureVisitor >> visitASTCWhile:anASTCWhile [
-	self visitASTCAbstractWhile:anASTCWhile.
-
-
-	super visitASTCWhile:anASTCWhile
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitVariableDefinition: aVariableDefinition [
+	super visitVariableDefinition: aVariableDefinition.
+	aVariableDefinition init
+		ifNotNil: [ :anInit | self assert: anInit isExpression ]
 ]

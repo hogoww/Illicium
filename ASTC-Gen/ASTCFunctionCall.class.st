@@ -5,83 +5,51 @@ Class {
 		'id',
 		'arguments'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCFunctionCall >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self id = anotherNode id
+{ #category : #testing }
+ASTCFunctionCall >> = aFunctionCall [
+	super = aFunctionCall
 		ifFalse: [ ^ false ].
-
-	self arguments = anotherNode arguments
+	id = aFunctionCall id
 		ifFalse: [ ^ false ].
-
+	arguments = aFunctionCall arguments
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCFunctionCall >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCFunctionCall:self.].
+{ #category : #accessing }
+ASTCFunctionCall >> addArgument: anArgument [
+	arguments add: anArgument
 ]
 
-{ #category : #visiting }
-ASTCFunctionCall >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCFunctionCall:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionCall >> arguments [
-	^arguments
+	^ arguments
 ]
 
-{ #category : #accessors }
-ASTCFunctionCall >> arguments: aCollection [
-	arguments:=aCollection.
-	aCollection parent:self.
-	^aCollection.
+{ #category : #accessing }
+ASTCFunctionCall >> arguments: someExpressions [
+	arguments := someExpressions
 ]
 
-{ #category : #comparing }
-ASTCFunctionCall >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self id hash.
-	hash := hash + self arguments hash.
-	^hash
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCFunctionCall >> id [
-	^id
+	^ id
 ]
 
-{ #category : #accessors }
-ASTCFunctionCall >> id: anObject [
-	id:=anObject.
-	anObject parent:self.
-	^anObject.
+{ #category : #accessing }
+ASTCFunctionCall >> id: anId [
+	id := anId
 ]
 
-{ #category : #initialize }
+{ #category : #accessing }
 ASTCFunctionCall >> initialize [
-	super initialize.
-	self initializeArguments.
-]
-
-{ #category : #initialization }
-ASTCFunctionCall >> initializeArguments [
-	arguments:=ASTCContainer new parent:self; yourself.
+	arguments := OrderedCollection new
 ]
 
 { #category : #testing }
-ASTCFunctionCall >> isASTCFunctionCall [
-	^true.
-]
-
-{ #category : #print }
-ASTCFunctionCall >> printProperties [
-	^''
+ASTCFunctionCall >> isFunctionCall [
+	^ true
 ]

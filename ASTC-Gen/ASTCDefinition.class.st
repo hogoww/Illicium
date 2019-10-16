@@ -4,56 +4,29 @@ Class {
 	#instVars : [
 		'declaration'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCDefinition >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self declaration = anotherNode declaration
+{ #category : #testing }
+ASTCDefinition >> = aDefinition [
+	super = aDefinition
 		ifFalse: [ ^ false ].
-
+	declaration = aDefinition declaration
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCDefinition >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCDefinition:self.].
-]
-
-{ #category : #visiting }
-ASTCDefinition >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCDefinition:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCDefinition >> declaration [
-	^declaration
+	^ declaration
 ]
 
-{ #category : #accessors }
-ASTCDefinition >> declaration: anObject [
-	declaration:=anObject.
-	anObject parent:self.
-	^anObject.
-]
-
-{ #category : #comparing }
-ASTCDefinition >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self declaration hash.
-	^hash
+{ #category : #accessing }
+ASTCDefinition >> declaration: aDeclaration [
+	declaration := aDeclaration
 ]
 
 { #category : #testing }
-ASTCDefinition >> isASTCDefinition [
-	^true.
-]
-
-{ #category : #print }
-ASTCDefinition >> printProperties [
-	^''
+ASTCDefinition >> isDefinition [
+	^ true
 ]

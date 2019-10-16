@@ -4,186 +4,162 @@ Class {
 	#instVars : [
 		'parent'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCNode >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
+{ #category : #testing }
+ASTCNode >> = aNode [
+	parent = aNode parent
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCNode >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCNode:self.].
-]
-
-{ #category : #visiting }
-ASTCNode >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCNode:self.
-]
-
-{ #category : #comparing }
-ASTCNode >> hash [
-	| hash |
-	hash := self identityHash.
-	^hash
+{ #category : #testing }
+ASTCNode >> isAbstractWhile [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCAbstractWhile [
-	^false
+ASTCNode >> isBlock [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCBlock [
-	^false
+ASTCNode >> isCompilationUnit [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCCompilationUnit [
-	^false
+ASTCNode >> isDeclaration [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCDeclaration [
-	^false
+ASTCNode >> isDeclarationStatement [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCDeclarationStatement [
-	^false
+ASTCNode >> isDefinition [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCDefinition [
-	^false
+ASTCNode >> isDoWhile [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCDoWhile [
-	^false
+ASTCNode >> isExpression [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCExpression [
-	^false
+ASTCNode >> isExpressionStatement [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCExpressionStatement [
-	^false
+ASTCNode >> isFor [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCFor [
-	^false
+ASTCNode >> isFunctionCall [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCFunctionCall [
-	^false
+ASTCNode >> isFunctionDeclaration [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCFunctionDeclaration [
-	^false
+ASTCNode >> isFunctionDefinition [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCFunctionDefinition [
-	^false
+ASTCNode >> isIdentifier [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCIdentifier [
-	^false
+ASTCNode >> isIf [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCIf [
-	^false
+ASTCNode >> isLiteral [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCLiteral [
-	^false
+ASTCNode >> isLoop [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCLoop [
-	^false
+ASTCNode >> isNode [
+	^ true
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCNode [
-	^true
+ASTCNode >> isOperator [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCOperator [
-	^false
+ASTCNode >> isProject [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCProject [
-	^false
+ASTCNode >> isReturn [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCReturn [
-	^false
+ASTCNode >> isStatement [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCStatement [
-	^false
+ASTCNode >> isStructureDeclaration [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCStructureDeclaration [
-	^false
+ASTCNode >> isStructureDefinition [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCStructureDefinition [
-	^false
+ASTCNode >> isType [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCType [
-	^false
+ASTCNode >> isVariableDeclaration [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCVariableDeclaration [
-	^false
+ASTCNode >> isVariableDefinition [
+	^ false
 ]
 
 { #category : #testing }
-ASTCNode >> isASTCVariableDefinition [
-	^false
+ASTCNode >> isWhile [
+	^ false
 ]
 
-{ #category : #testing }
-ASTCNode >> isASTCWhile [
-	^false
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCNode >> parent [
-	^parent
+	^ parent
 ]
 
-{ #category : #accessors }
-ASTCNode >> parent: anObject [
-	parent:=anObject.
-	^anObject.
-]
-
-{ #category : #print }
-ASTCNode >> printProperties [
-	^''
+{ #category : #accessing }
+ASTCNode >> parent: aParent [
+	parent := aParent
 ]

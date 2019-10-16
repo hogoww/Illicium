@@ -5,479 +5,345 @@ Class {
 		'currentDepth',
 		'stream'
 	],
-	#category : #'ASTC-Gen-visitor'
+	#category : #'ASTC-Gen-visitors'
 }
 
 { #category : #initialization }
 ASTCPrinterVisitor >> initialize [
 	stream := String new writeStream.
-	currentDepth:=0.
+	currentDepth := 0
 ]
 
 { #category : #printing }
-ASTCPrinterVisitor >> printOn:aStream [
-	^aStream nextPutAll: self stream contents.
+ASTCPrinterVisitor >> printOn: aStream [
+	aStream << stream contents
 ]
 
 { #category : #printing }
 ASTCPrinterVisitor >> printTabCount: aNumber [
-		1 to: aNumber do:[:i| stream tab.]
+	aNumber timesRepeat: [ :i | stream tab ]
 ]
 
 { #category : #accessing }
 ASTCPrinterVisitor >> stream [
-	^stream
+	^ stream
 ]
 
 { #category : #printing }
 ASTCPrinterVisitor >> toTranscript [
-	Transcript show:self ;cr.
+	Transcript
+		show: self;
+		cr
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCAbstractWhile: anASTCAbstractWhile [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitAbstractWhile: anAbstractWhile [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCAbstractWhile'.
-	stream << (anASTCAbstractWhile printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCAbstractWhile:anASTCAbstractWhile.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'anAbstractWhile'.
+	currentDepth := currentDepth + 1.
+	super visitAbstractWhile: anAbstractWhile.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCBlock: anASTCBlock [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitBlock: aBlock [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCBlock'.
-	stream << (anASTCBlock printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCBlock:anASTCBlock.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aBlock'.
+	currentDepth := currentDepth + 1.
+	super visitBlock: aBlock.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCCompilationUnit: anASTCCompilationUnit [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitCompilationUnit: aCompilationUnit [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCCompilationUnit'.
-	stream << (anASTCCompilationUnit printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCCompilationUnit:anASTCCompilationUnit.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aCompilationUnit'.
+	currentDepth := currentDepth + 1.
+	super visitCompilationUnit: aCompilationUnit.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDeclaration: anASTCDeclaration [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitDeclaration: aDeclaration [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCDeclaration'.
-	stream << (anASTCDeclaration printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCDeclaration:anASTCDeclaration.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aDeclaration'.
+	currentDepth := currentDepth + 1.
+	super visitDeclaration: aDeclaration.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDeclarationStatement: anASTCDeclarationStatement [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitDeclarationStatement: aDeclarationStatement [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCDeclarationStatement'.
-	stream << (anASTCDeclarationStatement printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCDeclarationStatement:anASTCDeclarationStatement.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aDeclarationStatement'.
+	currentDepth := currentDepth + 1.
+	super visitDeclarationStatement: aDeclarationStatement.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDefinition: anASTCDefinition [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitDefinition: aDefinition [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCDefinition'.
-	stream << (anASTCDefinition printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCDefinition:anASTCDefinition.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aDefinition'.
+	currentDepth := currentDepth + 1.
+	super visitDefinition: aDefinition.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCDoWhile: anASTCDoWhile [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitDoWhile: aDoWhile [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCDoWhile'.
-	stream << (anASTCDoWhile printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCDoWhile:anASTCDoWhile.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aDoWhile'.
+	currentDepth := currentDepth + 1.
+	super visitDoWhile: aDoWhile.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCExpression: anASTCExpression [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitExpression: anExpression [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCExpression'.
-	stream << (anASTCExpression printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCExpression:anASTCExpression.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'anExpression'.
+	currentDepth := currentDepth + 1.
+	super visitExpression: anExpression.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCExpressionStatement: anASTCExpressionStatement [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitExpressionStatement: anExpressionStatement [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCExpressionStatement'.
-	stream << (anASTCExpressionStatement printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCExpressionStatement:anASTCExpressionStatement.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'anExpressionStatement'.
+	currentDepth := currentDepth + 1.
+	super visitExpressionStatement: anExpressionStatement.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFor: anASTCFor [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitFor: aFor [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCFor'.
-	stream << (anASTCFor printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCFor:anASTCFor.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aFor'.
+	currentDepth := currentDepth + 1.
+	super visitFor: aFor.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFunctionCall: anASTCFunctionCall [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitFunctionCall: aFunctionCall [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCFunctionCall'.
-	stream << (anASTCFunctionCall printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCFunctionCall:anASTCFunctionCall.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aFunctionCall'.
+	currentDepth := currentDepth + 1.
+	super visitFunctionCall: aFunctionCall.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFunctionDeclaration: anASTCFunctionDeclaration [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCFunctionDeclaration'.
-	stream << (anASTCFunctionDeclaration printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCFunctionDeclaration:anASTCFunctionDeclaration.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aFunctionDeclaration'.
+	currentDepth := currentDepth + 1.
+	super visitFunctionDeclaration: aFunctionDeclaration.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCFunctionDefinition: anASTCFunctionDefinition [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitFunctionDefinition: aFunctionDefinition [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCFunctionDefinition'.
-	stream << (anASTCFunctionDefinition printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCFunctionDefinition:anASTCFunctionDefinition.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aFunctionDefinition'.
+	currentDepth := currentDepth + 1.
+	super visitFunctionDefinition: aFunctionDefinition.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCIdentifier: anASTCIdentifier [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitIdentifier: anIdentifier [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCIdentifier'.
-	stream << (anASTCIdentifier printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCIdentifier:anASTCIdentifier.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'anIdentifier'.
+	stream << anIdentifier id.
+	currentDepth := currentDepth + 1.
+	super visitIdentifier: anIdentifier.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCIf: anASTCIf [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitIf: anIf [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCIf'.
-	stream << (anASTCIf printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCIf:anASTCIf.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'anIf'.
+	currentDepth := currentDepth + 1.
+	super visitIf: anIf.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCLiteral: anASTCLiteral [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitLiteral: aLiteral [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCLiteral'.
-	stream << (anASTCLiteral printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCLiteral:anASTCLiteral.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aLiteral'.
+	stream << aLiteral value.
+	currentDepth := currentDepth + 1.
+	super visitLiteral: aLiteral.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCLoop: anASTCLoop [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitLoop: aLoop [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCLoop'.
-	stream << (anASTCLoop printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCLoop:anASTCLoop.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aLoop'.
+	currentDepth := currentDepth + 1.
+	super visitLoop: aLoop.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCNode: anASTCNode [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitNode: aNode [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCNode'.
-	stream << (anASTCNode printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCNode:anASTCNode.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aNode'.
+	currentDepth := currentDepth + 1.
+	super visitNode: aNode.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCOperator: anASTCOperator [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitOperator: anOperator [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCOperator'.
-	stream << (anASTCOperator printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCOperator:anASTCOperator.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'anOperator'.
+	stream << anOperator symbol.
+	currentDepth := currentDepth + 1.
+	super visitOperator: anOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCProject: anASTCProject [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitProject: aProject [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCProject'.
-	stream << (anASTCProject printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCProject:anASTCProject.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aProject'.
+	currentDepth := currentDepth + 1.
+	super visitProject: aProject.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCReturn: anASTCReturn [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitReturn: aReturn [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCReturn'.
-	stream << (anASTCReturn printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCReturn:anASTCReturn.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aReturn'.
+	currentDepth := currentDepth + 1.
+	super visitReturn: aReturn.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCStatement: anASTCStatement [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitStatement: aStatement [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCStatement'.
-	stream << (anASTCStatement printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCStatement:anASTCStatement.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aStatement'.
+	currentDepth := currentDepth + 1.
+	super visitStatement: aStatement.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCStructureDeclaration: anASTCStructureDeclaration [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitStructureDeclaration: aStructureDeclaration [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCStructureDeclaration'.
-	stream << (anASTCStructureDeclaration printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCStructureDeclaration:anASTCStructureDeclaration.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aStructureDeclaration'.
+	currentDepth := currentDepth + 1.
+	super visitStructureDeclaration: aStructureDeclaration.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCStructureDefinition: anASTCStructureDefinition [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitStructureDefinition: aStructureDefinition [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCStructureDefinition'.
-	stream << (anASTCStructureDefinition printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCStructureDefinition:anASTCStructureDefinition.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aStructureDefinition'.
+	currentDepth := currentDepth + 1.
+	super visitStructureDefinition: aStructureDefinition.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCType: anASTCType [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitType: aType [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCType'.
-	stream << (anASTCType printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCType:anASTCType.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aType'.
+	stream << aType type.
+	currentDepth := currentDepth + 1.
+	super visitType: aType.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCVariableDeclaration: anASTCVariableDeclaration [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitVariableDeclaration: aVariableDeclaration [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCVariableDeclaration'.
-	stream << (anASTCVariableDeclaration printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCVariableDeclaration:anASTCVariableDeclaration.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aVariableDeclaration'.
+	currentDepth := currentDepth + 1.
+	super visitVariableDeclaration: aVariableDeclaration.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCVariableDefinition: anASTCVariableDefinition [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitVariableDefinition: aVariableDefinition [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCVariableDefinition'.
-	stream << (anASTCVariableDefinition printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCVariableDefinition:anASTCVariableDefinition.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aVariableDefinition'.
+	currentDepth := currentDepth + 1.
+	super visitVariableDefinition: aVariableDefinition.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitASTCWhile: anASTCWhile [
-	stream << '
-'.
+ASTCPrinterVisitor >> visitWhile: aWhile [
+	stream cr.
 	self printTabCount: currentDepth.
-	stream << '(anASTCWhile'.
-	stream << (anASTCWhile printProperties).
-	currentDepth := currentDepth+1.
-	
-	super visitASTCWhile:anASTCWhile.
-	
-	currentDepth := currentDepth-1.
-	stream << ')'.
-
+	stream << $( << 'aWhile'.
+	currentDepth := currentDepth + 1.
+	super visitWhile: aWhile.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]

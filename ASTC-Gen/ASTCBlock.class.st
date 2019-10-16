@@ -4,67 +4,39 @@ Class {
 	#instVars : [
 		'statements'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCBlock >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self statements = anotherNode statements
+{ #category : #testing }
+ASTCBlock >> = aBlock [
+	super = aBlock
 		ifFalse: [ ^ false ].
-
+	statements = aBlock statements
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCBlock >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCBlock:self.].
+{ #category : #accessing }
+ASTCBlock >> addStatement: aStatement [
+	statements add: aStatement
 ]
 
-{ #category : #visiting }
-ASTCBlock >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCBlock:self.
-]
-
-{ #category : #comparing }
-ASTCBlock >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self statements hash.
-	^hash
-]
-
-{ #category : #initialize }
+{ #category : #accessing }
 ASTCBlock >> initialize [
-	super initialize.
-	self initializeStatements.
-]
-
-{ #category : #initialization }
-ASTCBlock >> initializeStatements [
-	statements:=ASTCContainer new parent:self; yourself.
+	statements := OrderedCollection new
 ]
 
 { #category : #testing }
-ASTCBlock >> isASTCBlock [
-	^true.
+ASTCBlock >> isBlock [
+	^ true
 ]
 
-{ #category : #print }
-ASTCBlock >> printProperties [
-	^''
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCBlock >> statements [
-	^statements
+	^ statements
 ]
 
-{ #category : #accessors }
-ASTCBlock >> statements: aCollection [
-	statements:=aCollection.
-	aCollection parent:self.
-	^aCollection.
+{ #category : #accessing }
+ASTCBlock >> statements: someStatements [
+	statements := someStatements
 ]

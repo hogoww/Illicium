@@ -6,88 +6,53 @@ Class {
 		'then',
 		'else'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCIf >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self condition = anotherNode condition
+{ #category : #testing }
+ASTCIf >> = anIf [
+	super = anIf
 		ifFalse: [ ^ false ].
-
-	self then = anotherNode then
+	condition = anIf condition
 		ifFalse: [ ^ false ].
-
-	self else = anotherNode else
+	then = anIf then
 		ifFalse: [ ^ false ].
-
+	else = anIf else
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCIf >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCIf:self.].
-]
-
-{ #category : #visiting }
-ASTCIf >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCIf:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> condition [
-	^condition
+	^ condition
 ]
 
-{ #category : #accessors }
-ASTCIf >> condition: anObject [
-	condition:=anObject.
-	anObject parent:self.
-	^anObject.
+{ #category : #accessing }
+ASTCIf >> condition: aCondition [
+	condition := aCondition
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> else [
-	^else
+	^ else
 ]
 
-{ #category : #accessors }
-ASTCIf >> else: anObject [
-	else:=anObject.
-	anObject parent:self.
-	^anObject.
-]
-
-{ #category : #comparing }
-ASTCIf >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self condition hash.
-	hash := hash + self then hash.
-	hash := hash + self else hash.
-	^hash
+{ #category : #accessing }
+ASTCIf >> else: anElse [
+	else := anElse
 ]
 
 { #category : #testing }
-ASTCIf >> isASTCIf [
-	^true.
+ASTCIf >> isIf [
+	^ true
 ]
 
-{ #category : #print }
-ASTCIf >> printProperties [
-	^''
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIf >> then [
-	^then
+	^ then
 ]
 
-{ #category : #accessors }
-ASTCIf >> then: anObject [
-	then:=anObject.
-	anObject parent:self.
-	^anObject.
+{ #category : #accessing }
+ASTCIf >> then: aThen [
+	then := aThen
 ]

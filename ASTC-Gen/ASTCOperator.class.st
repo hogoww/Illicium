@@ -5,88 +5,46 @@ Class {
 		'symbol',
 		'operands'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCOperator >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self operands = anotherNode operands
+{ #category : #testing }
+ASTCOperator >> = anOperator [
+	super = anOperator
 		ifFalse: [ ^ false ].
-
-	self symbol = anotherNode symbol
+	symbol = anOperator symbol
 		ifFalse: [ ^ false ].
-
+	operands = anOperator operands
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCOperator >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCOperator:self.].
-]
-
-{ #category : #visiting }
-ASTCOperator >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCOperator:self.
-]
-
-{ #category : #comparing }
-ASTCOperator >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self operands hash.
-	hash := hash + self symbol hash.
-	^hash
-]
-
-{ #category : #initialize }
+{ #category : #accessing }
 ASTCOperator >> initialize [
-	super initialize.
-	self initializeOperands.
-]
-
-{ #category : #initialization }
-ASTCOperator >> initializeOperands [
-	operands:=ASTCContainer new parent:self; yourself.
+	operands := OrderedCollection new
 ]
 
 { #category : #testing }
-ASTCOperator >> isASTCOperator [
-	^true.
+ASTCOperator >> isOperator [
+	^ true
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCOperator >> operands [
-	^operands
+	^ operands
 ]
 
-{ #category : #accessors }
-ASTCOperator >> operands: aCollection [
-	operands:=aCollection.
-	aCollection parent:self.
-	^aCollection.
+{ #category : #accessing }
+ASTCOperator >> operands: someExpressions [
+	operands := someExpressions
 ]
 
-{ #category : #print }
-ASTCOperator >> printProperties [
-	^String streamContents:[:s |
-	s << ' ' << self symbolAsString.].
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCOperator >> symbol [
-	^symbol
+	^ symbol
 ]
 
-{ #category : #accessors }
-ASTCOperator >> symbol: anObject [
-	symbol:=anObject.
-	^anObject.
-]
-
-{ #category : #printing }
-ASTCOperator >> symbolAsString [
-	^symbol asString.
+{ #category : #accessing }
+ASTCOperator >> symbol: aSymbol [
+	symbol := aSymbol
 ]

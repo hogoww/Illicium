@@ -5,89 +5,57 @@ Class {
 		'definitions',
 		'declarations'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCCompilationUnit >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self definitions = anotherNode definitions
+{ #category : #testing }
+ASTCCompilationUnit >> = aCompilationUnit [
+	super = aCompilationUnit
 		ifFalse: [ ^ false ].
-
-	self declarations = anotherNode declarations
+	definitions = aCompilationUnit definitions
 		ifFalse: [ ^ false ].
-
+	declarations = aCompilationUnit declarations
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCCompilationUnit >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCCompilationUnit:self.].
+{ #category : #accessing }
+ASTCCompilationUnit >> addDeclaration: aDeclaration [
+	declarations add: aDeclaration
 ]
 
-{ #category : #visiting }
-ASTCCompilationUnit >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCCompilationUnit:self.
+{ #category : #accessing }
+ASTCCompilationUnit >> addDefinition: aDefinition [
+	definitions add: aDefinition
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCCompilationUnit >> declarations [
-	^declarations
+	^ declarations
 ]
 
-{ #category : #accessors }
-ASTCCompilationUnit >> declarations: aCollection [
-	declarations:=aCollection.
-	aCollection parent:self.
-	^aCollection.
+{ #category : #accessing }
+ASTCCompilationUnit >> declarations: someDeclarations [
+	declarations := someDeclarations
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCCompilationUnit >> definitions [
-	^definitions
+	^ definitions
 ]
 
-{ #category : #accessors }
-ASTCCompilationUnit >> definitions: aCollection [
-	definitions:=aCollection.
-	aCollection parent:self.
-	^aCollection.
+{ #category : #accessing }
+ASTCCompilationUnit >> definitions: someDefinitions [
+	definitions := someDefinitions
 ]
 
-{ #category : #comparing }
-ASTCCompilationUnit >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self definitions hash.
-	hash := hash + self declarations hash.
-	^hash
-]
-
-{ #category : #initialize }
+{ #category : #accessing }
 ASTCCompilationUnit >> initialize [
-	super initialize.
-	self initializeDefinitions.
-	self initializeDeclarations.
-]
-
-{ #category : #initialization }
-ASTCCompilationUnit >> initializeDeclarations [
-	declarations:=ASTCContainer new parent:self; yourself.
-]
-
-{ #category : #initialization }
-ASTCCompilationUnit >> initializeDefinitions [
-	definitions:=ASTCContainer new parent:self; yourself.
+	definitions := OrderedCollection new.
+	declarations := OrderedCollection new
 ]
 
 { #category : #testing }
-ASTCCompilationUnit >> isASTCCompilationUnit [
-	^true.
-]
-
-{ #category : #print }
-ASTCCompilationUnit >> printProperties [
-	^''
+ASTCCompilationUnit >> isCompilationUnit [
+	^ true
 ]

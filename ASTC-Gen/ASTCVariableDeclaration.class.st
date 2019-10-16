@@ -4,56 +4,29 @@ Class {
 	#instVars : [
 		'type'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCVariableDeclaration >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self type = anotherNode type
+{ #category : #testing }
+ASTCVariableDeclaration >> = aVariableDeclaration [
+	super = aVariableDeclaration
 		ifFalse: [ ^ false ].
-
+	type = aVariableDeclaration type
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCVariableDeclaration >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCVariableDeclaration:self.].
-]
-
-{ #category : #visiting }
-ASTCVariableDeclaration >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCVariableDeclaration:self.
-]
-
-{ #category : #comparing }
-ASTCVariableDeclaration >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self type hash.
-	^hash
-]
-
 { #category : #testing }
-ASTCVariableDeclaration >> isASTCVariableDeclaration [
-	^true.
+ASTCVariableDeclaration >> isVariableDeclaration [
+	^ true
 ]
 
-{ #category : #print }
-ASTCVariableDeclaration >> printProperties [
-	^''
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCVariableDeclaration >> type [
-	^type
+	^ type
 ]
 
-{ #category : #accessors }
-ASTCVariableDeclaration >> type: anObject [
-	type:=anObject.
-	anObject parent:self.
-	^anObject.
+{ #category : #accessing }
+ASTCVariableDeclaration >> type: aType [
+	type := aType
 ]

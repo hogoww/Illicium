@@ -481,11 +481,11 @@ ASTCGenerator >> addStructureValidationFor:aClass [
 	instanceOfAClass := self aClassAsVariableName: aClass asString.
 	
 	argumentReplacement:=Dictionary new add: #anInstanceOfAClass -> instanceOfAClass ; yourself.	
+
 	bodyOfMethod:=[:anInstanceOfAClass|
 		[ super visitAClass:{anInstanceOfAClass} ]
 		on: AssertionFailure do:[ errors:= errors + 1 ]
-	] asMethod: visitAClass withArgs:argumentReplacement.
-	
+	] asMethod: visitAClass withArguments:argumentReplacement.
 	self addMethod: bodyOfMethod asString on: astStructureValidatorVisitor  withProtocol: 'check'
 ]
 

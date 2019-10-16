@@ -36,6 +36,7 @@ FmxMBWalkerVisitor >> visitClass: aClass [
 { #category : #visiting }
 FmxMBWalkerVisitor >> visitRelationSide: aRelationSide [
 	"Node leaf, no more walking needed"
+	self halt.
 ]
 
 { #category : #visiting }
@@ -47,5 +48,5 @@ FmxMBWalkerVisitor >> visitTrait: aTrait [
 { #category : #visiting }
 FmxMBWalkerVisitor >> visitTypedProperty: aTypedProperty [
 	"Leaf node, no more walk needed."
-
+self halt.
 ]

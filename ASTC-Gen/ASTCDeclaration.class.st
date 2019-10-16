@@ -4,56 +4,29 @@ Class {
 	#instVars : [
 		'id'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCDeclaration >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self id = anotherNode id
+{ #category : #testing }
+ASTCDeclaration >> = aDeclaration [
+	super = aDeclaration
 		ifFalse: [ ^ false ].
-
+	id = aDeclaration id
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCDeclaration >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCDeclaration:self.].
-]
-
-{ #category : #visiting }
-ASTCDeclaration >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCDeclaration:self.
-]
-
-{ #category : #comparing }
-ASTCDeclaration >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self id hash.
-	^hash
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCDeclaration >> id [
-	^id
+	^ id
 ]
 
-{ #category : #accessors }
-ASTCDeclaration >> id: anObject [
-	id:=anObject.
-	anObject parent:self.
-	^anObject.
+{ #category : #accessing }
+ASTCDeclaration >> id: anId [
+	id := anId
 ]
 
 { #category : #testing }
-ASTCDeclaration >> isASTCDeclaration [
-	^true.
-]
-
-{ #category : #print }
-ASTCDeclaration >> printProperties [
-	^''
+ASTCDeclaration >> isDeclaration [
+	^ true
 ]

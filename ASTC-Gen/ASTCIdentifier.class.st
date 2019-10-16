@@ -4,61 +4,29 @@ Class {
 	#instVars : [
 		'id'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCIdentifier >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self id = anotherNode id
+{ #category : #testing }
+ASTCIdentifier >> = anIdentifier [
+	super = anIdentifier
 		ifFalse: [ ^ false ].
-
+	id = anIdentifier id
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCIdentifier >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCIdentifier:self.].
-]
-
-{ #category : #visiting }
-ASTCIdentifier >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCIdentifier:self.
-]
-
-{ #category : #comparing }
-ASTCIdentifier >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self id hash.
-	^hash
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCIdentifier >> id [
-	^id
+	^ id
 ]
 
-{ #category : #accessors }
-ASTCIdentifier >> id: anObject [
-	id:=anObject.
-	^anObject.
-]
-
-{ #category : #printing }
-ASTCIdentifier >> idAsString [
-	^id asString.
+{ #category : #accessing }
+ASTCIdentifier >> id: anId [
+	id := anId
 ]
 
 { #category : #testing }
-ASTCIdentifier >> isASTCIdentifier [
-	^true.
-]
-
-{ #category : #print }
-ASTCIdentifier >> printProperties [
-	^String streamContents:[:s |
-	s << ' ' << self idAsString.].
+ASTCIdentifier >> isIdentifier [
+	^ true
 ]

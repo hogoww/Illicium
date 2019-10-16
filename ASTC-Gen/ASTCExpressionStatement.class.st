@@ -4,56 +4,29 @@ Class {
 	#instVars : [
 		'expression'
 	],
-	#category : #'ASTC-Gen-Node'
+	#category : #'ASTC-Gen-Nodes'
 }
 
-{ #category : #comparing }
-ASTCExpressionStatement >> = anotherNode [
-	(anotherNode class = self class)
-	ifFalse: [ ^ false ].
-
-	self expression = anotherNode expression
+{ #category : #testing }
+ASTCExpressionStatement >> = anExpressionStatement [
+	super = anExpressionStatement
 		ifFalse: [ ^ false ].
-
+	expression = anExpressionStatement expression
+		ifFalse: [ ^ false ].
 	^ true
 ]
 
-{ #category : #visiting }
-ASTCExpressionStatement >> acceptMultipleVisitors: aCollectionOfIndependentVisitor [
-	aCollectionOfIndependentVisitor do:[:aVisitor| aVisitor visitASTCExpressionStatement:self.].
-]
-
-{ #category : #visiting }
-ASTCExpressionStatement >> acceptVisitor: aVisitor [
-	^aVisitor visitASTCExpressionStatement:self.
-]
-
-{ #category : #accessors }
+{ #category : #accessing }
 ASTCExpressionStatement >> expression [
-	^expression
+	^ expression
 ]
 
-{ #category : #accessors }
-ASTCExpressionStatement >> expression: anObject [
-	expression:=anObject.
-	anObject parent:self.
-	^anObject.
-]
-
-{ #category : #comparing }
-ASTCExpressionStatement >> hash [
-	| hash |
-	hash := self identityHash.
-	hash := hash + self expression hash.
-	^hash
+{ #category : #accessing }
+ASTCExpressionStatement >> expression: anExpression [
+	expression := anExpression
 ]
 
 { #category : #testing }
-ASTCExpressionStatement >> isASTCExpressionStatement [
-	^true.
-]
-
-{ #category : #print }
-ASTCExpressionStatement >> printProperties [
-	^''
+ASTCExpressionStatement >> isExpressionStatement [
+	^ true
 ]
