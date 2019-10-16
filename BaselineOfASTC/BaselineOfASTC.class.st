@@ -50,11 +50,15 @@ BaselineOfASTC >> lastPlayground [
 
 ASTCGenerator generate.
 
+ASTCTranslator new translateClass: RandomTestClass.
+ASTCSlangTranslator translateClass: MiscPrimitivePlugin.
+
+ASTCSlangTranslator new translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
 
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.
 
-PlainCodeVisitorTest new setUp testRighSideAssignementVariableNodeExpand.
+Transcript clear.
 ]
 
 { #category : #accessing }
