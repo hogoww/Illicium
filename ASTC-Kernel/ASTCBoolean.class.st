@@ -16,10 +16,8 @@ ASTCBoolean >> and: aBoolean [
 	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: visitor ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
 	^ ASTCOperator new
 		symbol: '&&';
-		operands:(ASTCContainer new
-			add: firstPart;
-			add: secondPart;
-			yourself);
+		addOperand: firstPart;
+		addOperand: secondPart;
 		yourself 
 ]
 
@@ -66,9 +64,7 @@ ASTCBoolean >> or: aBoolean [
 	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: visitor ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
 	^ ASTCOperator new
 		symbol: '||';
-		operands:(ASTCContainer new
-			add: firstPart;
-			add: secondPart;
-			yourself);
+		addOperand: firstPart;
+		addOperand: secondPart;
 		yourself
 ]

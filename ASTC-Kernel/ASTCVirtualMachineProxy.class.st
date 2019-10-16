@@ -15,14 +15,12 @@ ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
 	ifTrue:[ Error signal: 'infiniteRecursion' ].
 	^ASTCOperator new
 		symbol:'->';
-		operands:(ASTCContainer new
-			add: (ASTCIdentifier new id:'interpreterProxy'; yourself);
-			add: (ASTCFunctionCall new 
-				id: (ASTCIdentifier new id: (visitor formatSelector:(aMessage selector)); yourself) ;
-				arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
-					yourself);
+		addOperand: (ASTCIdentifier new id:'interpreterProxy'; yourself);
+		addOperand: (ASTCFunctionCall new 
+			id: (ASTCIdentifier new id: (visitor formatSelector:(aMessage selector)); yourself) ;
+			arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
 				yourself);
-			yourself.
+			yourself
 		
 
 ]

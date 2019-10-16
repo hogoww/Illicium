@@ -6,12 +6,10 @@ Class {
 
 { #category : #translate }
 ASTCBlockNodeTranslator >> translateNode: aBlockNode [
-	| res container |
+	| res |
 	res := ASTCBlock new.
-	container := ASTCContainer new.
 	aBlockNode statements
 		collect: [ :each | (each acceptVisitor: methodTranslator) asASTCStatement ]
-		into: container.
-	res statements: container.
+		into: res statements.
 	^ res
 ]

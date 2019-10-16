@@ -8,6 +8,6 @@ Class {
 ASTCSequenceNodeTranslator >> translateNode: aSequenceNode [
 	| res |
 	res:=ASTCBlock new.
-	res statements: (aSequenceNode statements collect: [:each | (each acceptVisitor: methodTranslator) asASTCStatement] into: ASTCContainer new).
+	aSequenceNode statements collect: [:each | (each acceptVisitor: methodTranslator) asASTCStatement] into: res statements.
 	^res.
 ]

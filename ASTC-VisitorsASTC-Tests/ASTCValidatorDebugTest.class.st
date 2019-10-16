@@ -12,9 +12,8 @@ ASTCValidatorDebugTest >> aRandomExpressionFactory [
 	|anExpression|
 	anExpression:=ASTCOperator new
 		symbol: '-';
-		operands:(ASTCContainer new
-			add:(ASTCIdentifier new);
-			yourself);
+		addOperand: (ASTCIdentifier new);
+			yourself;
 		yourself.
 	self assert: anExpression isStructuralyValidAST. "It'll be checked twice, but better that than giving a wrong statment"
 	^anExpression

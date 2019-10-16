@@ -28,11 +28,8 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 				expression:
 					(ASTCOperator new
 						symbol: '=';
-						operands:
-							(ASTCContainer new
-								add: (anAssignmentNode variable acceptVisitor: methodTranslator);
-								add: (anAssignmentNode value acceptVisitor: methodTranslator);
-								yourself);
+						addOperand: (anAssignmentNode variable acceptVisitor: methodTranslator);
+						addOperand: (anAssignmentNode value acceptVisitor: methodTranslator);
 						yourself);
 				yourself ]
 ]
