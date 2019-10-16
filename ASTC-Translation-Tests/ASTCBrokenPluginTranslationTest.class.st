@@ -30,20 +30,20 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	
 	"the only statement/expression check"
 			statement := definition body statements first.
-			self assert: statement isASTCExpressionStatement.	
-			self assert: statement expression isASTCOperator.
+			self assert: statement isExpressionStatement.	
+			self assert: statement expression isOperator.
 			self assert: statement expression symbol equals: '->'.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
-				self assert: operands first isASTCIdentifier.
+				self assert: operands first isIdentifier.
 				self assert: operands first id equals: 'interpreterProxy'.
 				
 				"second operand, pushBool: true"
-				self assert: operands second isASTCFunctionCall.
+				self assert: operands second isFunctionCall.
 				self assert: operands second id id equals: 'pushBool'.
 				self assert: operands second arguments size equals: 1.
-				self assert: operands second arguments first isASTCLiteral.
+				self assert: operands second arguments first isLiteral.
 				self assert: operands second arguments first value value equals: true.
 	^ cu
 ]
