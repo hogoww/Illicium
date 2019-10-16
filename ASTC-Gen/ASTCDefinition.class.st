@@ -16,6 +16,11 @@ ASTCDefinition >> = aDefinition [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCDefinition >> acceptVisitor: aVisitor [
+	aVisitor visitDefinition: self
+]
+
 { #category : #accessing }
 ASTCDefinition >> declaration [
 	^ declaration

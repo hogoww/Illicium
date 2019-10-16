@@ -19,6 +19,11 @@ ASTCLoop >> = aLoop [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCLoop >> acceptVisitor: aVisitor [
+	aVisitor visitLoop: self
+]
+
 { #category : #accessing }
 ASTCLoop >> body [
 	^ body

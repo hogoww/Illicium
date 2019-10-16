@@ -19,6 +19,11 @@ ASTCFunctionCall >> = aFunctionCall [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCFunctionCall >> acceptVisitor: aVisitor [
+	aVisitor visitFunctionCall: self
+]
+
 { #category : #accessing }
 ASTCFunctionCall >> addArgument: anArgument [
 	arguments add: anArgument

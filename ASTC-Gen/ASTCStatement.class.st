@@ -12,6 +12,11 @@ ASTCStatement >> = aStatement [
 ]
 
 { #category : #testing }
+ASTCStatement >> acceptVisitor: aVisitor [
+	aVisitor visitStatement: self
+]
+
+{ #category : #testing }
 ASTCStatement >> isStatement [
 	^ true
 ]

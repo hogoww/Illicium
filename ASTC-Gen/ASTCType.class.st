@@ -17,6 +17,11 @@ ASTCType >> = aType [
 ]
 
 { #category : #testing }
+ASTCType >> acceptVisitor: aVisitor [
+	aVisitor visitType: self
+]
+
+{ #category : #testing }
 ASTCType >> isType [
 	^ true
 ]

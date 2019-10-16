@@ -16,6 +16,11 @@ ASTCReturn >> = aReturn [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCReturn >> acceptVisitor: aVisitor [
+	aVisitor visitReturn: self
+]
+
 { #category : #accessing }
 ASTCReturn >> expression [
 	^ expression

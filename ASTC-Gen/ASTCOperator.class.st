@@ -19,6 +19,11 @@ ASTCOperator >> = anOperator [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCOperator >> acceptVisitor: aVisitor [
+	aVisitor visitOperator: self
+]
+
 { #category : #accessing }
 ASTCOperator >> initialize [
 	operands := OrderedCollection new

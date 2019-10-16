@@ -16,6 +16,11 @@ ASTCBlock >> = aBlock [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCBlock >> acceptVisitor: aVisitor [
+	aVisitor visitBlock: self
+]
+
 { #category : #accessing }
 ASTCBlock >> addStatement: aStatement [
 	statements add: aStatement

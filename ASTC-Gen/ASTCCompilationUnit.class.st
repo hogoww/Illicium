@@ -19,6 +19,11 @@ ASTCCompilationUnit >> = aCompilationUnit [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCCompilationUnit >> acceptVisitor: aVisitor [
+	aVisitor visitCompilationUnit: self
+]
+
 { #category : #accessing }
 ASTCCompilationUnit >> addDeclaration: aDeclaration [
 	declarations add: aDeclaration

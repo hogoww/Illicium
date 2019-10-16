@@ -16,6 +16,11 @@ ASTCProject >> = aProject [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCProject >> acceptVisitor: aVisitor [
+	aVisitor visitProject: self
+]
+
 { #category : #accessing }
 ASTCProject >> addCompilationUnit: aCompilationUnit [
 	compilationUnits add: aCompilationUnit

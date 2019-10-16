@@ -16,6 +16,11 @@ ASTCStructureDefinition >> = aStructureDefinition [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCStructureDefinition >> acceptVisitor: aVisitor [
+	aVisitor visitStructureDefinition: self
+]
+
 { #category : #accessing }
 ASTCStructureDefinition >> addMember: aMember [
 	members add: aMember

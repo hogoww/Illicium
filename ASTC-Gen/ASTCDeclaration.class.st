@@ -16,6 +16,11 @@ ASTCDeclaration >> = aDeclaration [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCDeclaration >> acceptVisitor: aVisitor [
+	aVisitor visitDeclaration: self
+]
+
 { #category : #accessing }
 ASTCDeclaration >> id [
 	^ id

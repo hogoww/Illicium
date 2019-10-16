@@ -19,6 +19,11 @@ ASTCFunctionDeclaration >> = aFunctionDeclaration [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCFunctionDeclaration >> acceptVisitor: aVisitor [
+	aVisitor visitFunctionDeclaration: self
+]
+
 { #category : #accessing }
 ASTCFunctionDeclaration >> addParameter: aParameter [
 	parameters add: aParameter

@@ -22,6 +22,11 @@ ASTCIf >> = anIf [
 	^ true
 ]
 
+{ #category : #testing }
+ASTCIf >> acceptVisitor: aVisitor [
+	aVisitor visitIf: self
+]
+
 { #category : #accessing }
 ASTCIf >> condition [
 	^ condition

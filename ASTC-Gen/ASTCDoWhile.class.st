@@ -12,6 +12,11 @@ ASTCDoWhile >> = aDoWhile [
 ]
 
 { #category : #testing }
+ASTCDoWhile >> acceptVisitor: aVisitor [
+	aVisitor visitDoWhile: self
+]
+
+{ #category : #testing }
 ASTCDoWhile >> isDoWhile [
 	^ true
 ]

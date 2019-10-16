@@ -68,7 +68,7 @@ ASTCGeneratorNew class >> generate [
 ASTCGeneratorNew >> addAcceptVisitorOf: aFMXClass [
 	| method visitClass |
 	visitClass := aFMXClass name asVisitClassSelector.
-	method := 'acceptVisitor:' asMethodWithBody: [:aVisitor| self visitClass: {aVisitor} ].
+	method := 'acceptVisitor:' asMethodWithBody: [:aVisitor| aVisitor visitClass: {self} ].
 
 	self
 		addMethod: method asString
@@ -681,7 +681,6 @@ ASTCGeneratorNew >> postGen [
 	| rootClass |
 	rootClass := builder classes detect: [:aClass| aClass name = #Node ]."pretty bad, but it'll do for now."
 	self addAllClassTesterTo: rootClass .
-	self halt.
 ]
 
 { #category : #actions }
@@ -713,7 +712,7 @@ ASTCGeneratorNew >> prefix: aString [
 ASTCGeneratorNew >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
 	
-	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name uncapitalized = 'astc' ].
+	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name uncapitalized = 'astc' or:[aRepository name uncapitalized = 'illicium'] ].
 
 	listOfPackageNameToReload:= OrderedCollection new.
 	listOfPackageNameToReload 

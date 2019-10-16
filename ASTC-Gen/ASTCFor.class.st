@@ -20,6 +20,11 @@ ASTCFor >> = aFor [
 ]
 
 { #category : #testing }
+ASTCFor >> acceptVisitor: aVisitor [
+	aVisitor visitFor: self
+]
+
+{ #category : #testing }
 ASTCFor >> isFor [
 	^ true
 ]

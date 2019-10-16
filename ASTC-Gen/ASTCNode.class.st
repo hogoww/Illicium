@@ -15,6 +15,11 @@ ASTCNode >> = aNode [
 ]
 
 { #category : #testing }
+ASTCNode >> acceptVisitor: aVisitor [
+	aVisitor visitNode: self
+]
+
+{ #category : #testing }
 ASTCNode >> isAbstractWhile [
 	^ false
 ]
