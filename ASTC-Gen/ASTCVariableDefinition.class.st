@@ -23,7 +23,6 @@ ASTCVariableDefinition >> init [
 
 { #category : #accessing }
 ASTCVariableDefinition >> init: anInit [
-	anInit parent: self.
 	init := anInit
 ]
 

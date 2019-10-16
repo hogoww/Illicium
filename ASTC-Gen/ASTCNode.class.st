@@ -161,6 +161,5 @@ ASTCNode >> parent [
 
 { #category : #accessing }
 ASTCNode >> parent: aParent [
-	aParent parent: self.
 	parent := aParent
 ]

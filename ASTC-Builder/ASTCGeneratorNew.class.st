@@ -173,9 +173,9 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	"setter"
 	methodName := propertyName,':'. " aProperty: "
 	method := methodName asMethodWithBody:
-		((aProperty isTypedProperty ifTrue:[[]]
+		("(aProperty isTypedProperty ifTrue:[[]]
 		
-		ifFalse:[[ aPropertyName parent: self ]]) + 
+		ifFalse:[[ aPropertyName parent: self ]]) + "
 		[:anInstance | propertyName := aPropertyName ])
 		withArguments:{ #anInstance -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessing'.

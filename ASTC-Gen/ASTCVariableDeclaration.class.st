@@ -28,6 +28,5 @@ ASTCVariableDeclaration >> type [
 
 { #category : #accessing }
 ASTCVariableDeclaration >> type: aType [
-	aType parent: self.
 	type := aType
 ]

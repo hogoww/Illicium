@@ -12,7 +12,7 @@ Class {
 ASTCFunctionCall >> = aFunctionCall [
 	super = aFunctionCall
 		ifFalse: [ ^ false ].
-	arguments = aFunctionCall arguments
+	id = aFunctionCall id
 		ifFalse: [ ^ false ].
 	arguments = aFunctionCall arguments
 		ifFalse: [ ^ false ].
@@ -31,7 +31,6 @@ ASTCFunctionCall >> arguments [
 
 { #category : #accessing }
 ASTCFunctionCall >> arguments: someExpressions [
-	someExpressions parent: self.
 	arguments := someExpressions
 ]
 
@@ -42,7 +41,6 @@ ASTCFunctionCall >> id [
 
 { #category : #accessing }
 ASTCFunctionCall >> id: anId [
-	anId parent: self.
 	id := anId
 ]
 

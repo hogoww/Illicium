@@ -12,7 +12,7 @@ Class {
 ASTCFunctionDeclaration >> = aFunctionDeclaration [
 	super = aFunctionDeclaration
 		ifFalse: [ ^ false ].
-	parameters = aFunctionDeclaration parameters
+	type = aFunctionDeclaration type
 		ifFalse: [ ^ false ].
 	parameters = aFunctionDeclaration parameters
 		ifFalse: [ ^ false ].
@@ -41,7 +41,6 @@ ASTCFunctionDeclaration >> parameters [
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> parameters: someVariableDeclarations [
-	someVariableDeclarations parent: self.
 	parameters := someVariableDeclarations
 ]
 
@@ -52,6 +51,5 @@ ASTCFunctionDeclaration >> type [
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> type: aType [
-	aType parent: self.
 	type := aType
 ]

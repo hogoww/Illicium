@@ -12,16 +12,11 @@ Class {
 ASTCOperator >> = anOperator [
 	super = anOperator
 		ifFalse: [ ^ false ].
-	operands = anOperator operands
+	symbol = anOperator symbol
 		ifFalse: [ ^ false ].
 	operands = anOperator operands
 		ifFalse: [ ^ false ].
 	^ true
-]
-
-{ #category : #accessing }
-ASTCOperator >> addOperand: anOperand [
-	operands add: anOperand
 ]
 
 { #category : #accessing }
@@ -41,7 +36,6 @@ ASTCOperator >> operands [
 
 { #category : #accessing }
 ASTCOperator >> operands: someExpressions [
-	someExpressions parent: self.
 	operands := someExpressions
 ]
 

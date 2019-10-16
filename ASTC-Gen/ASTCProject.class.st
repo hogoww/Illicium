@@ -28,7 +28,6 @@ ASTCProject >> compilationUnits [
 
 { #category : #accessing }
 ASTCProject >> compilationUnits: someCompilationUnits [
-	someCompilationUnits parent: self.
 	compilationUnits := someCompilationUnits
 ]
 

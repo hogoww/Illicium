@@ -38,6 +38,5 @@ ASTCStructureDefinition >> members [
 
 { #category : #accessing }
 ASTCStructureDefinition >> members: someVariableDeclarations [
-	someVariableDeclarations parent: self.
 	members := someVariableDeclarations
 ]

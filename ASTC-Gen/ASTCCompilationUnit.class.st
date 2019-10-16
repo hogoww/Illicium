@@ -12,7 +12,7 @@ Class {
 ASTCCompilationUnit >> = aCompilationUnit [
 	super = aCompilationUnit
 		ifFalse: [ ^ false ].
-	declarations = aCompilationUnit declarations
+	definitions = aCompilationUnit definitions
 		ifFalse: [ ^ false ].
 	declarations = aCompilationUnit declarations
 		ifFalse: [ ^ false ].
@@ -36,7 +36,6 @@ ASTCCompilationUnit >> declarations [
 
 { #category : #accessing }
 ASTCCompilationUnit >> declarations: someDeclarations [
-	someDeclarations parent: self.
 	declarations := someDeclarations
 ]
 
@@ -47,7 +46,6 @@ ASTCCompilationUnit >> definitions [
 
 { #category : #accessing }
 ASTCCompilationUnit >> definitions: someDefinitions [
-	someDefinitions parent: self.
 	definitions := someDefinitions
 ]
 

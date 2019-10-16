@@ -12,7 +12,7 @@ Class {
 ASTCLoop >> = aLoop [
 	super = aLoop
 		ifFalse: [ ^ false ].
-	body = aLoop body
+	condition = aLoop condition
 		ifFalse: [ ^ false ].
 	body = aLoop body
 		ifFalse: [ ^ false ].
@@ -26,7 +26,6 @@ ASTCLoop >> body [
 
 { #category : #accessing }
 ASTCLoop >> body: aBody [
-	aBody parent: self.
 	body := aBody
 ]
 
@@ -37,7 +36,6 @@ ASTCLoop >> condition [
 
 { #category : #accessing }
 ASTCLoop >> condition: aCondition [
-	aCondition parent: self.
 	condition := aCondition
 ]
 

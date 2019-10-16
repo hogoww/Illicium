@@ -15,10 +15,10 @@ ASTCDebugStructureVisitor >> visitBlock: aBlock [
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitCompilationUnit: aCompilationUnit [
 	super visitCompilationUnit: aCompilationUnit.
-	aCompilationUnit declarations
+	aCompilationUnit definitions
 		ifNotNil: [ :definitions | 
 			definitions
-				do: [ :aDefinitions | self assert: aDefinitions isDeclaration ] ].
+				do: [ :aDefinitions | self assert: aDefinitions isDefinition ] ].
 	aCompilationUnit declarations
 		ifNotNil: [ :declarations | 
 			declarations
@@ -55,8 +55,8 @@ ASTCDebugStructureVisitor >> visitExpressionStatement: anExpressionStatement [
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitFor: aFor [
 	super visitFor: aFor.
-	aFor iteratorModification
-		ifNotNil: [ :anIteratorDefinition | self assert: anIteratorDefinition isExpression ].
+	aFor iteratorDefinition
+		ifNotNil: [ :anIteratorDefinition | self assert: anIteratorDefinition isVariableDefinition ].
 	aFor iteratorModification
 		ifNotNil: [ :anIteratorModification | self assert: anIteratorModification isExpression ]
 ]
@@ -64,18 +64,19 @@ ASTCDebugStructureVisitor >> visitFor: aFor [
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitFunctionCall: aFunctionCall [
 	super visitFunctionCall: aFunctionCall.
-	aFunctionCall id
+	aFunctionCall arguments
 		ifNotNil:
-			[ :arguments | arguments do: [ :anArguments | self assert: anArguments isIdentifier ] ].
+			[ :arguments | arguments do: [ :anArguments | self assert: anArguments isExpression ] ].
 	aFunctionCall id ifNotNil: [ :anId | self assert: anId isIdentifier ]
 ]
 
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
 	super visitFunctionDeclaration: aFunctionDeclaration.
-	aFunctionDeclaration type
-		ifNotNil:
-			[ :parameters | parameters do: [ :aParameters | self assert: aParameters isType ] ].
+	aFunctionDeclaration parameters
+		ifNotNil: [ :parameters | 
+			parameters
+				do: [ :aParameters | self assert: aParameters isVariableDeclaration ] ].
 	aFunctionDeclaration type
 		ifNotNil: [ :aType | self assert: aType isType ]
 ]
@@ -90,17 +91,17 @@ ASTCDebugStructureVisitor >> visitFunctionDefinition: aFunctionDefinition [
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitIf: anIf [
 	super visitIf: anIf.
-	anIf else
-		ifNotNil: [ :aCondition | self assert: aCondition isStatement ].
-	anIf else ifNotNil: [ :aThen | self assert: aThen isStatement ].
+	anIf condition
+		ifNotNil: [ :aCondition | self assert: aCondition isExpression ].
+	anIf then ifNotNil: [ :aThen | self assert: aThen isStatement ].
 	anIf else ifNotNil: [ :anElse | self assert: anElse isStatement ]
 ]
 
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitLoop: aLoop [
 	super visitLoop: aLoop.
-	aLoop body
-		ifNotNil: [ :aCondition | self assert: aCondition isStatement ].
+	aLoop condition
+		ifNotNil: [ :aCondition | self assert: aCondition isExpression ].
 	aLoop body ifNotNil: [ :aBody | self assert: aBody isStatement ]
 ]
 

@@ -12,7 +12,7 @@ Class {
 ASTCFor >> = aFor [
 	super = aFor
 		ifFalse: [ ^ false ].
-	iteratorModification = aFor iteratorModification
+	iteratorDefinition = aFor iteratorDefinition
 		ifFalse: [ ^ false ].
 	iteratorModification = aFor iteratorModification
 		ifFalse: [ ^ false ].
@@ -31,7 +31,6 @@ ASTCFor >> iteratorDefinition [
 
 { #category : #accessing }
 ASTCFor >> iteratorDefinition: anIteratorDefinition [
-	anIteratorDefinition parent: self.
 	iteratorDefinition := anIteratorDefinition
 ]
 
@@ -42,6 +41,5 @@ ASTCFor >> iteratorModification [
 
 { #category : #accessing }
 ASTCFor >> iteratorModification: anIteratorModification [
-	anIteratorModification parent: self.
 	iteratorModification := anIteratorModification
 ]

@@ -38,6 +38,5 @@ ASTCBlock >> statements [
 
 { #category : #accessing }
 ASTCBlock >> statements: someStatements [
-	someStatements parent: self.
 	statements := someStatements
 ]
