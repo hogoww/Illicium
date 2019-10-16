@@ -64,6 +64,18 @@ ASTCGeneratorNew class >> generate [
 	^self new generate.
 ]
 
+{ #category : #'generating-support' }
+ASTCGeneratorNew >> addAcceptVisitorOf: aFMXClass [
+	| method visitClass |
+	visitClass := aFMXClass name asVisitClassSelector.
+	method := 'acceptVisitor:' asMethodWithBody: [:aVisitor| self visitClass: {aVisitor} ].
+
+	self
+		addMethod: method asString
+		on: aFMXClass realClass
+		withProtocol: 'testing'
+]
+
 { #category : #'generation-testing' }
 ASTCGeneratorNew >> addAllClassTesterTo: aRootClass [
 	builder classes
@@ -411,7 +423,8 @@ ASTCGeneratorNew >> generateDebugVisitOf: aFMXClass [
 { #category : #'generation-system' }
 ASTCGeneratorNew >> generateMethodsFor: aFMXClass [
 	self addClassTesterOn: aFMXClass.
-	self addComparisonOn: aFMXClass
+	self addComparisonOn: aFMXClass.
+	self addAcceptVisitorOf: aFMXClass
 ]
 
 { #category : #'generation-visit' }

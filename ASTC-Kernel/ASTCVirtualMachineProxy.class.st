@@ -12,7 +12,7 @@ ASTCVirtualMachineProxy class >> asCType [
 { #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand
-	ifFalse:[ self signal: 'infiniteRecursion' ].
+	ifTrue:[ Error signal: 'infiniteRecursion' ].
 	^ASTCOperator new
 		symbol:'->';
 		operands:(ASTCContainer new
