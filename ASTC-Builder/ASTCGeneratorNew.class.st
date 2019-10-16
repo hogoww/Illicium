@@ -185,9 +185,11 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	"setter"
 	methodName := propertyName,':'. " aProperty: "
 	method := methodName asMethodWithBody:
-		("(aProperty isTypedProperty ifTrue:[[]]
-		
-		ifFalse:[[ aPropertyName parent: self ]]) + "
+		((aProperty isTypedProperty ifTrue:[[]]
+		ifFalse:[
+			aProperty isMany
+			ifTrue:[ [ aPropertyName do:[:each| each parent: self]]]
+			ifFalse:[	[ aPropertyName parent: self ]]]) +
 		[:anInstance | propertyName := aPropertyName ])
 		withArguments:{ #anInstance -> aPropertyName } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessing'.
@@ -199,7 +201,9 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 	anElement := ((propertyName first isVowel ifTrue:[ 'an' ] ifFalse:[ 'a' ]) , propertyName capitalized) removeSuffix:'s'. "aProperty from propertys (not a typo..)"
 	methodName := 'add' , (propertyName capitalized removeSuffix:'s') , ':'. " addProperty: "
 	method :=	 methodName asMethodWithBody: 
-		[:anElem| propertyName add: anElem ] 
+		[:anElem| 
+		anElem parent: self.
+		propertyName add: anElem ] 
 		withArguments: { #anElem -> anElement } asDictionary.
 	self addMethod: method asString on: aClass withProtocol: 'accessing'.
 
