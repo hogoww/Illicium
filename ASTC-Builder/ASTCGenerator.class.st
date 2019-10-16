@@ -38,7 +38,7 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #ASTCGeneratorNew,
+	#name : #ASTCGenerator,
 	#superclass : #Object,
 	#traits : 'PackageManagementTrait',
 	#classTraits : 'PackageManagementTrait classTrait',
@@ -60,12 +60,12 @@ Class {
 }
 
 { #category : #generating }
-ASTCGeneratorNew class >> generate [ 
+ASTCGenerator class >> generate [ 
 	^self new generate.
 ]
 
 { #category : #'generating-support' }
-ASTCGeneratorNew >> addAcceptVisitorOf: aFMXClass [
+ASTCGenerator >> addAcceptVisitorOf: aFMXClass [
 	| method visitClass |
 	visitClass := aFMXClass name asVisitClassSelector.
 	method := 'acceptVisitor:' asMethodWithBody: [:aVisitor| aVisitor visitClass: {self} ].
@@ -77,7 +77,7 @@ ASTCGeneratorNew >> addAcceptVisitorOf: aFMXClass [
 ]
 
 { #category : #'generation-testing' }
-ASTCGeneratorNew >> addAllClassTesterTo: aRootClass [
+ASTCGenerator >> addAllClassTesterTo: aRootClass [
 	builder classes
 		do: [ :aClass | 
 			aClass ~= aRootClass
@@ -85,7 +85,7 @@ ASTCGeneratorNew >> addAllClassTesterTo: aRootClass [
 ]
 
 { #category : #'generation-testing' }
-ASTCGeneratorNew >> addClassTesterFor: aFMXClass on: aTargetFMXClass returning: aBoolean [
+ASTCGenerator >> addClassTesterFor: aFMXClass on: aTargetFMXClass returning: aBoolean [
 	| methodBody isClass |
 	isClass := aFMXClass name asTesterSelector.
 	methodBody := aBoolean "PlainPharoCode limitation. Should be changed when it'll work well."
@@ -98,12 +98,12 @@ ASTCGeneratorNew >> addClassTesterFor: aFMXClass on: aTargetFMXClass returning: 
 ]
 
 { #category : #'generation-testing' }
-ASTCGeneratorNew >> addClassTesterOn: aFMXClass [
+ASTCGenerator >> addClassTesterOn: aFMXClass [
 	self addClassTesterFor: aFMXClass on: aFMXClass returning: true
 ]
 
 { #category : #'generation-testing' }
-ASTCGeneratorNew >> addComparisonOn: aFMXClass [
+ASTCGenerator >> addComparisonOn: aFMXClass [
 	| method body aClass visitClass propertyName |
 	aClass := aFMXClass name asAnInstance.
 
@@ -140,7 +140,7 @@ ASTCGeneratorNew >> addComparisonOn: aFMXClass [
 ]
 
 { #category : #'generation-state' }
-ASTCGeneratorNew >> addInitializeTo: aFMXClass [
+ASTCGenerator >> addInitializeTo: aFMXClass [
 	| collectionsToInitialize method |
 	
 	collectionsToInitialize := (aFMXClass relations 
@@ -155,7 +155,7 @@ ASTCGeneratorNew >> addInitializeTo: aFMXClass [
 ]
 
 { #category : #'generation-state' }
-ASTCGeneratorNew >> addInstanceVariable: aProperty to: aClass [
+ASTCGenerator >> addInstanceVariable: aProperty to: aClass [
 	(aClass allSlots anySatisfy: [ :each | each name = aProperty name ])
 		ifTrue: [ ^ self ].	"we check if the slot already exists"
 
@@ -170,7 +170,7 @@ ASTCGeneratorNew >> addInstanceVariable: aProperty to: aClass [
 ]
 
 { #category : #'generation-state' }
-ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
+ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aClass [
 	| propertyName  aPropertyName method methodName anElement |
 	
 	propertyName := aProperty name.
@@ -210,7 +210,7 @@ ASTCGeneratorNew >> addInstanceVariableAccessors: aProperty to: aClass [
 ]
 
 { #category : #'generation-state' }
-ASTCGeneratorNew >> addInstanceVariablesTo: aFMXClass [
+ASTCGenerator >> addInstanceVariablesTo: aFMXClass [
 	aFMXClass properties
 		do: [ :aProperty | 
 			(aProperty isTypedProperty
@@ -220,13 +220,13 @@ ASTCGeneratorNew >> addInstanceVariablesTo: aFMXClass [
 ]
 
 { #category : #'creation-system' }
-ASTCGeneratorNew >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
+ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
 	"Shortcut to a system method, in case it changes."
 	aClass compile: aBodyAsString classified: aProtocolAsString
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> addPrinterVisitorsMethods [
+ASTCGenerator >> addPrinterVisitorsMethods [
 	"Add necessary methods for PrinterVisitor : #initialize / #printTabCount: / #stream / #toTranscript / #printOn:"
 	| method 
 		stream currentDepth | "instance variables of printerVisitor"
@@ -259,7 +259,7 @@ ASTCGeneratorNew >> addPrinterVisitorsMethods [
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> addStructureValidatorVisitorMethods [	
+ASTCGenerator >> addStructureValidatorVisitorMethods [	
 	| errors method |
 	method := 'initialize' asMethodWithBody: [ errors := 0 ].
 	self addMethod: method asString on: structureValidatorVisitorClass  withProtocol: 'initialization'.
@@ -274,47 +274,19 @@ ASTCGeneratorNew >> addStructureValidatorVisitorMethods [
 ]
 
 { #category : #actions }
-ASTCGeneratorNew >> clean [
+ASTCGenerator >> clean [
 	"remove the package created by a previous generation, and the contained classes"
 	
 	self removePackageNamed:packageName.
 ]
 
-{ #category : #'creation-system' }
-ASTCGeneratorNew >> createClass: classNameAsSymbol superclass: superclassAsString [
-	"shortcut for classes with no IVs."
-	^self createClass:classNameAsSymbol superclass:superclassAsString withIVs:'' withTag: ''.
-]
-
-{ #category : #'creation-system' }
-ASTCGeneratorNew >> createClass: classNameAsSymbol superclass: superclassAsString withIVs: aStringOfIVs [
-	self createClass: classNameAsSymbol superclass: superclassAsString withIVs: aStringOfIVs	withTag:''.
-]
-
-{ #category : #'creation-system' }
-ASTCGeneratorNew >> createClass: classNameAsSymbol superclass: superclassAsString withIVs: aStringOfIVs withTag: aTag [
-	"indirection for class creation, in case that changes."
-	^(self class environment classNamed: superclassAsString)
-		subclass: classNameAsSymbol
-		instanceVariableNames: aStringOfIVs
-		classVariableNames: ''
-		package: (self makePackageNameWith:aTag)
-		
-]
-
-{ #category : #'creation-system' }
-ASTCGeneratorNew >> createClass: classNameAsSymbol superclass: superclassAsString withTag: aTag [
-	"shortcut for classes with no IVs."
-	^self createClass:classNameAsSymbol superclass:superclassAsString withIVs:'' withTag: aTag.
-]
-
 { #category : #'name-formating' }
-ASTCGeneratorNew >> fullNameOf: aSymbol [
+ASTCGenerator >> fullNameOf: aSymbol [
 	^ prefix , aSymbol
 ]
 
 { #category : #actions }
-ASTCGeneratorNew >> generate [
+ASTCGenerator >> generate [
 	"Warning signal: (String streamContents:[:s| s << 'You''re about to delete everything in ' << packageName << '. Make sure you saved everything depending on it (extensions, class references,  [...]) .' ])."
 		
 	self preGen.	
@@ -326,7 +298,7 @@ ASTCGeneratorNew >> generate [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateAbstractVisitOf: aFMXClass [
+ASTCGenerator >> generateAbstractVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
 	| method className |
@@ -340,7 +312,7 @@ ASTCGeneratorNew >> generateAbstractVisitOf: aFMXClass [
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> generateAbstractVisitorClass [
+ASTCGenerator >> generateAbstractVisitorClass [
 	"Abstract --> Object"
 	abstractVisitorClass := Object subclass: (self fullNameOf: #Visitor)
 		instanceVariableNames: ''
@@ -349,7 +321,7 @@ ASTCGeneratorNew >> generateAbstractVisitorClass [
 ]
 
 { #category : #'generation-system' }
-ASTCGeneratorNew >> generateClass: aFMXClass [
+ASTCGenerator >> generateClass: aFMXClass [
 
 	| superClass |
 	debug ifTrue:[
@@ -370,7 +342,7 @@ ASTCGeneratorNew >> generateClass: aFMXClass [
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> generateDebugStructureVisitorClass [
+ASTCGenerator >> generateDebugStructureVisitorClass [
 	"DebugStructure --|> Walker"
 	debugStructureVisitorClass :=  walkerVisitorClass subclass: (self fullNameOf: #DebugStructureVisitor)
 		instanceVariableNames: ''
@@ -381,7 +353,7 @@ ASTCGeneratorNew >> generateDebugStructureVisitorClass [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateDebugVisitOf: aFMXClass [
+ASTCGenerator >> generateDebugVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
 	| method body anInstance visitClass collections singleElements propertyName isType |
@@ -425,14 +397,14 @@ ASTCGeneratorNew >> generateDebugVisitOf: aFMXClass [
 ]
 
 { #category : #'generation-system' }
-ASTCGeneratorNew >> generateMethodsFor: aFMXClass [
+ASTCGenerator >> generateMethodsFor: aFMXClass [
 	self addClassTesterOn: aFMXClass.
 	self addComparisonOn: aFMXClass.
 	self addAcceptVisitorOf: aFMXClass
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generatePrinterVisit: aFMXClass [
+ASTCGenerator >> generatePrinterVisit: aFMXClass [
 	"generate a #printProperties selector that will call every property asString"
 	"The result will keep the order of the definitions in the metamodel"
 	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass propertiesNames |
@@ -458,7 +430,7 @@ ASTCGeneratorNew >> generatePrinterVisit: aFMXClass [
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> generatePrinterVisitorClass [
+ASTCGenerator >> generatePrinterVisitorClass [
 	"Printer --|> Walker"
 	printerVisitorClass  :=  walkerVisitorClass subclass: (self fullNameOf: #PrinterVisitor)
 		instanceVariableNames: 'currentDepth stream'
@@ -468,13 +440,13 @@ ASTCGeneratorNew >> generatePrinterVisitorClass [
 ]
 
 { #category : #'generation-state' }
-ASTCGeneratorNew >> generateStateFor: aFMXClass [
+ASTCGenerator >> generateStateFor: aFMXClass [
 	self addInstanceVariablesTo: aFMXClass.
 	self addInitializeTo: aFMXClass.
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> generateStructureValidatorVisitorClass [
+ASTCGenerator >> generateStructureValidatorVisitorClass [
 	"StructureValidator --|> DebugStructure"
 	structureValidatorVisitorClass := debugStructureVisitorClass subclass: (self fullNameOf: #StructureValidatorVisitor)
 		instanceVariableNames: 'errors'
@@ -485,7 +457,7 @@ ASTCGeneratorNew >> generateStructureValidatorVisitorClass [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateSuperclassVisitOf: aFMXClass [
+ASTCGenerator >> generateSuperclassVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 	| method className superclassName methodSelector superMethodSelector |
 	
@@ -504,7 +476,7 @@ ASTCGeneratorNew >> generateSuperclassVisitOf: aFMXClass [
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> generateSuperclassVisitorClass [
+ASTCGenerator >> generateSuperclassVisitorClass [
 	"superclass --> Abstract"
 	superclassVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #SuperclassVisitor)
 		instanceVariableNames: ''
@@ -513,7 +485,7 @@ ASTCGeneratorNew >> generateSuperclassVisitorClass [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateValidatorVisitOf: aFMXClass [
+ASTCGenerator >> generateValidatorVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
 	| method body anInstance visitClass 
@@ -540,7 +512,7 @@ ASTCGeneratorNew >> generateValidatorVisitOf: aFMXClass [
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> generateVisitorsClasses [
+ASTCGenerator >> generateVisitorsClasses [
 	self generateAbstractVisitorClass.
 		self generateSuperclassVisitorClass.
 			self generateWalkerVisitorClass.
@@ -551,7 +523,7 @@ ASTCGeneratorNew >> generateVisitorsClasses [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateVisitsFor: aFMXClass [
+ASTCGenerator >> generateVisitsFor: aFMXClass [
 	self generateAbstractVisitOf: aFMXClass.
 		self generateSuperclassVisitOf: aFMXClass.
 			self generateWalkVisitOf: aFMXClass.
@@ -562,7 +534,7 @@ ASTCGeneratorNew >> generateVisitsFor: aFMXClass [
 ]
 
 { #category : #'generation-visit' }
-ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
+ASTCGenerator >> generateWalkVisitOf: aFMXClass [
 	"add an empty behavior visit method"
 
 	| method body aClass visitClass collections singleElements |
@@ -602,7 +574,7 @@ ASTCGeneratorNew >> generateWalkVisitOf: aFMXClass [
 ]
 
 { #category : #'generation-visitor-classes' }
-ASTCGeneratorNew >> generateWalkerVisitorClass [
+ASTCGenerator >> generateWalkerVisitorClass [
 	"Walker --> Superclass"
 	walkerVisitorClass := superclassVisitorClass subclass: (self fullNameOf: #WalkerVisitor)
 		instanceVariableNames: ''
@@ -612,16 +584,17 @@ ASTCGeneratorNew >> generateWalkerVisitorClass [
 ]
 
 { #category : #initialization }
-ASTCGeneratorNew >> initialize [
+ASTCGenerator >> initialize [
 	| builderClass |
 	self flag:#ModularityNeeded. "ASTCBuilder shouldn't be hardcoded, but an argument. Stays that way for developpement speed."
 	self flag:#todo. "Modularity on collections used"
 	self flag:#toRemove. "remove the Transcript clear, it's just for development."
 	
-	Transcript clear.
-	debug := false.
 	super initialize.
 	
+	Transcript clear.
+	debug := false.
+		
 	self initializeDefault.
 	builderClass:=ASTCBuilder.
 	
@@ -631,19 +604,19 @@ ASTCGeneratorNew >> initialize [
 ]
 
 { #category : #initialization }
-ASTCGeneratorNew >> initializeDefault [
+ASTCGenerator >> initializeDefault [
 	parentPropertyName := 'parent'.
 	collectionsType := #OrderedCollection.
 ]
 
 { #category : #actions }
-ASTCGeneratorNew >> makePackage [
+ASTCGenerator >> makePackage [
 	"Create the package for the generated classes"
 	self addPackageNamed: packageName.
 ]
 
 { #category : #'creation-system' }
-ASTCGeneratorNew >> makePackageNameWith: aTag [
+ASTCGenerator >> makePackageNameWith: aTag [
 	^ String
 		streamContents: [ :s | 
 			s << packageName.
@@ -651,14 +624,14 @@ ASTCGeneratorNew >> makePackageNameWith: aTag [
 ]
 
 { #category : #accessing }
-ASTCGeneratorNew >> packageName [
+ASTCGenerator >> packageName [
 	"simple accessor"
 	^packageName
 	
 ]
 
 { #category : #accessing }
-ASTCGeneratorNew >> packageName: aString [
+ASTCGenerator >> packageName: aString [
 	"simple accessor"
 	packageName:=aString.
 	^aString
@@ -666,14 +639,14 @@ ASTCGeneratorNew >> packageName: aString [
 ]
 
 { #category : #accessing }
-ASTCGeneratorNew >> parentPropertyName [
+ASTCGenerator >> parentPropertyName [
 	"simple accessor"
 	^parentPropertyName
 	
 ]
 
 { #category : #accessing }
-ASTCGeneratorNew >> parentPropertyName: aString [
+ASTCGenerator >> parentPropertyName: aString [
 	"simple accessor"
 	parentPropertyName:=aString.
 	^aString
@@ -681,14 +654,14 @@ ASTCGeneratorNew >> parentPropertyName: aString [
 ]
 
 { #category : #actions }
-ASTCGeneratorNew >> postGen [
+ASTCGenerator >> postGen [
 	| rootClass |
 	rootClass := builder classes detect: [:aClass| aClass name = #Node ]."pretty bad, but it'll do for now."
 	self addAllClassTesterTo: rootClass .
 ]
 
 { #category : #actions }
-ASTCGeneratorNew >> preGen [
+ASTCGenerator >> preGen [
 	"recreate a clean package, and generate the classes"
 	self clean.
 	self makePackage.
@@ -697,7 +670,7 @@ ASTCGeneratorNew >> preGen [
 ]
 
 { #category : #accessing }
-ASTCGeneratorNew >> prefix [
+ASTCGenerator >> prefix [
 	"simple accessor"
 	^prefix
 	
@@ -705,7 +678,7 @@ ASTCGeneratorNew >> prefix [
 ]
 
 { #category : #accessing }
-ASTCGeneratorNew >> prefix: aString [
+ASTCGenerator >> prefix: aString [
 	"simple accessor"
 	prefix:=aString.
 	^aString
@@ -713,7 +686,7 @@ ASTCGeneratorNew >> prefix: aString [
 ]
 
 { #category : #actions }
-ASTCGeneratorNew >> reloadExtentions [
+ASTCGenerator >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
 	
 	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name uncapitalized = 'astc' or:[aRepository name uncapitalized = 'illicium'] ].
