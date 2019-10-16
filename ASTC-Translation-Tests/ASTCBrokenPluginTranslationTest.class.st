@@ -75,53 +75,51 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 	
 	"the only statement/expression check"
 			statement := definition body statements first.
-			self assert: statement isASTCExpressionStatement.	
-			self assert: statement expression isASTCOperator.
+			self assert: statement isExpressionStatement.	
+			self assert: statement expression isOperator.
 			self assert: statement expression symbol equals: '->'.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
-				self assert: operands first isASTCIdentifier.
+				self assert: operands first isIdentifier.
 				self assert: operands first id equals: 'interpreterProxy'.
 				
 				"second operand, pop:"
-				self assert: operands second isASTCFunctionCall.
+				self assert: operands second isFunctionCall.
 				self assert: operands second id id equals: 'pop'.
 				self assert: operands second arguments size equals: 1.
 				
 				"pop:'s argument, interpreterProxy methodArgumentCount + 1"
 				argument := operands second arguments first.
-				self assert: argument isASTCOperator.
+				self assert: argument isOperator.
 				self assert: argument symbol equals: #+.
 				self assert: argument operands size equals: 2.
 					
 					"interpreterProxy -> methodArgument"
-					self assert: argument operands first isASTCOperator.
+					self assert: argument operands first isOperator.
 					self assert: argument operands first symbol equals: #->.
 					self assert: argument operands first operands first id equals: #interpreterProxy.
 
-					self assert: argument operands first operands second isASTCFunctionCall.
+					self assert: argument operands first operands second isFunctionCall.
 					self assert: argument operands first operands second id id equals: #methodArgumentCount.
 					self assert: argument operands first operands second arguments size equals: 0.
 					
-				self assert: argument operands second isASTCLiteral.
+				self assert: argument operands second isLiteral.
 				self assert: argument operands second value value equals: 1.
 		
 		"second statement interpreterProxy primitiveFail"
-		self assert: definition body statements second isASTCExpressionStatement.
+		self assert: definition body statements second isExpressionStatement.
 		statement := definition body statements second expression.
-		self assert: statement isASTCOperator.
+		self assert: statement isOperator.
 		self assert: statement symbol equals: #->.
 		self assert: statement operands size equals: 2.
-			self assert: statement operands first isASTCIdentifier.
+			self assert: statement operands first isIdentifier.
 			self assert: statement operands first id equals: #interpreterProxy.
 		
-			self assert: statement operands second isASTCFunctionCall.
+			self assert: statement operands second isFunctionCall.
 			self assert: statement operands second id id equals: #primitiveFail.
 			self assert: statement operands second arguments size equals: 0.
-		
-		
-		
+					
 	^ cu
 ]
 
@@ -150,36 +148,36 @@ ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 	
 	"the only statement/expression check"
 			statement := definition body statements first.
-			self assert: statement isASTCExpressionStatement.	
-			self assert: statement expression isASTCOperator.
+			self assert: statement isExpressionStatement.	
+			self assert: statement expression isOperator.
 			self assert: statement expression symbol equals: '->'.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
-				self assert: operands first isASTCIdentifier.
+				self assert: operands first isIdentifier.
 				self assert: operands first id equals: 'interpreterProxy'.
 				
 				"second operand, pop:"
-				self assert: operands second isASTCFunctionCall.
+				self assert: operands second isFunctionCall.
 				self assert: operands second id id equals: 'pop'.
 				self assert: operands second arguments size equals: 1.
 				
 				"pop:'s argument, interpreterProxy methodArgumentCount + 1"
 				argument := operands second arguments first.
-				self assert: argument isASTCOperator.
+				self assert: argument isOperator.
 				self assert: argument symbol equals: #-.
 				self assert: argument operands size equals: 2.
 					
 					"interpreterProxy -> methodArgument"
-					self assert: argument operands first isASTCOperator.
+					self assert: argument operands first isOperator.
 					self assert: argument operands first symbol equals: #->.
 					self assert: argument operands first operands first id equals: #interpreterProxy.
 
-					self assert: argument operands first operands second isASTCFunctionCall.
+					self assert: argument operands first operands second isFunctionCall.
 					self assert: argument operands first operands second id id equals: #methodArgumentCount.
 					self assert: argument operands first operands second arguments size equals: 0.
 					
-				self assert: argument operands second isASTCLiteral.
+				self assert: argument operands second isLiteral.
 				self assert: argument operands second value value equals: 1.
 				
 	^ cu
@@ -210,37 +208,38 @@ ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 	
 	"the only statement/expression check"
 			statement := definition body statements first.
-			self assert: statement isASTCExpressionStatement.	
-			self assert: statement expression isASTCOperator.
+			self assert: statement isExpressionStatement.	
+			self assert: statement expression isOperator.
 			self assert: statement expression symbol equals: '->'.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
-				self assert: operands first isASTCIdentifier.
+				self assert: operands first isIdentifier.
 				self assert: operands first id equals: 'interpreterProxy'.
 				
 				"second operand, pop:"
-				self assert: operands second isASTCFunctionCall.
+				self assert: operands second isFunctionCall.
 				self assert: operands second id id equals: 'pop'.
 				self assert: operands second arguments size equals: 1.
 				
 				"pop:'s argument, interpreterProxy methodArgumentCount + 1"
 				argument := operands second arguments first.
-				self assert: argument isASTCOperator.
+				self assert: argument isOperator.
 				self assert: argument symbol equals: #+.
 				self assert: argument operands size equals: 2.
 					
 					"interpreterProxy -> methodArgument"
-					self assert: argument operands first isASTCOperator.
+					self assert: argument operands first isOperator.
 					self assert: argument operands first symbol equals: #->.
 					self assert: argument operands first operands first id equals: #interpreterProxy.
 
-					self assert: argument operands first operands second isASTCFunctionCall.
+					self assert: argument operands first operands second isFunctionCall.
 					self assert: argument operands first operands second id id equals: #methodArgumentCount.
 					self assert: argument operands first operands second arguments size equals: 0.
 					
-				self assert: argument operands second isASTCLiteral.
+				self assert: argument operands second isLiteral.
 				self assert: argument operands second value value equals: 4.
+				
 	^ cu
 ]
 
