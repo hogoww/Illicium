@@ -15,7 +15,7 @@ ASTCUserClass >> doesNotUnderstand: aMessage [
 	
 	^ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (visitor formatSelector: (aMessage selector)); yourself) ;
-		arguments: (ASTCContainer new visitArgs: aMessage arguments with: visitor ; yourself);
+		arguments: (aMessage arguments collect:[:each| each acceptVisitor: visitor ]);
 		yourself.
 		
 ]

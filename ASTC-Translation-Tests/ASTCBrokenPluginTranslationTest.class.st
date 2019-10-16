@@ -52,8 +52,6 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 ASTCBrokenPluginTranslationTest >> testPopAndFail [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
-	"Bad test, too big, no checking. But test nonetheless"
-	"Check only for errors"
 	| cu declaration definition statement operands argument interpreterProxyDecl |
 	cu := translator translateMethod: #primitivePopAndFail fromClass: BrokenPlugin.
 	
