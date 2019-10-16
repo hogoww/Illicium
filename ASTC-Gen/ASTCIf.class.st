@@ -34,6 +34,7 @@ ASTCIf >> condition [
 
 { #category : #accessing }
 ASTCIf >> condition: aCondition [
+	aCondition parent: self.
 	condition := aCondition
 ]
 
@@ -44,6 +45,7 @@ ASTCIf >> else [
 
 { #category : #accessing }
 ASTCIf >> else: anElse [
+	anElse parent: self.
 	else := anElse
 ]
 
@@ -59,5 +61,6 @@ ASTCIf >> then [
 
 { #category : #accessing }
 ASTCIf >> then: aThen [
+	aThen parent: self.
 	then := aThen
 ]

@@ -23,6 +23,7 @@ ASTCProject >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 ASTCProject >> addCompilationUnit: aCompilationUnit [
+	aCompilationUnit parent: self.
 	compilationUnits add: aCompilationUnit
 ]
 
@@ -33,6 +34,7 @@ ASTCProject >> compilationUnits [
 
 { #category : #accessing }
 ASTCProject >> compilationUnits: someCompilationUnits [
+	someCompilationUnits do: [ :each | each parent: self ].
 	compilationUnits := someCompilationUnits
 ]
 

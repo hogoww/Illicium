@@ -23,6 +23,7 @@ ASTCBlock >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 ASTCBlock >> addStatement: aStatement [
+	aStatement parent: self.
 	statements add: aStatement
 ]
 
@@ -43,5 +44,6 @@ ASTCBlock >> statements [
 
 { #category : #accessing }
 ASTCBlock >> statements: someStatements [
+	someStatements do: [ :each | each parent: self ].
 	statements := someStatements
 ]

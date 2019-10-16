@@ -32,13 +32,6 @@ ASTCDebugStructureVisitor >> visitDeclaration: aDeclaration [
 ]
 
 { #category : #visiting }
-ASTCDebugStructureVisitor >> visitDeclarationStatement: aDeclarationStatement [
-	super visitDeclarationStatement: aDeclarationStatement.
-	aDeclarationStatement declaration
-		ifNotNil: [ :aDeclaration | self assert: aDeclaration isDeclaration ]
-]
-
-{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitDefinition: aDefinition [
 	super visitDefinition: aDefinition.
 	aDefinition declaration

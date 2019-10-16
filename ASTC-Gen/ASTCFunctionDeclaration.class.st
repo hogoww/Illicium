@@ -26,6 +26,7 @@ ASTCFunctionDeclaration >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> addParameter: aParameter [
+	aParameter parent: self.
 	parameters add: aParameter
 ]
 
@@ -46,6 +47,7 @@ ASTCFunctionDeclaration >> parameters [
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> parameters: someVariableDeclarations [
+	someVariableDeclarations do: [ :each | each parent: self ].
 	parameters := someVariableDeclarations
 ]
 
@@ -56,5 +58,6 @@ ASTCFunctionDeclaration >> type [
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> type: aType [
+	aType parent: self.
 	type := aType
 ]

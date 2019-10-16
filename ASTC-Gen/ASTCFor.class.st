@@ -36,6 +36,7 @@ ASTCFor >> iteratorDefinition [
 
 { #category : #accessing }
 ASTCFor >> iteratorDefinition: anIteratorDefinition [
+	anIteratorDefinition parent: self.
 	iteratorDefinition := anIteratorDefinition
 ]
 
@@ -46,5 +47,6 @@ ASTCFor >> iteratorModification [
 
 { #category : #accessing }
 ASTCFor >> iteratorModification: anIteratorModification [
+	anIteratorModification parent: self.
 	iteratorModification := anIteratorModification
 ]

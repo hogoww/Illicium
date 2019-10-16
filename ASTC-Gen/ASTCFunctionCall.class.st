@@ -26,6 +26,7 @@ ASTCFunctionCall >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 ASTCFunctionCall >> addArgument: anArgument [
+	anArgument parent: self.
 	arguments add: anArgument
 ]
 
@@ -36,6 +37,7 @@ ASTCFunctionCall >> arguments [
 
 { #category : #accessing }
 ASTCFunctionCall >> arguments: someExpressions [
+	someExpressions do: [ :each | each parent: self ].
 	arguments := someExpressions
 ]
 
@@ -46,6 +48,7 @@ ASTCFunctionCall >> id [
 
 { #category : #accessing }
 ASTCFunctionCall >> id: anId [
+	anId parent: self.
 	id := anId
 ]
 

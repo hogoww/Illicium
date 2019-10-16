@@ -28,6 +28,7 @@ ASTCFunctionDefinition >> body [
 
 { #category : #accessing }
 ASTCFunctionDefinition >> body: aBody [
+	aBody parent: self.
 	body := aBody
 ]
 

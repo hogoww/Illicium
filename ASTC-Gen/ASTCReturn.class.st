@@ -28,6 +28,7 @@ ASTCReturn >> expression [
 
 { #category : #accessing }
 ASTCReturn >> expression: anExpression [
+	anExpression parent: self.
 	expression := anExpression
 ]
 

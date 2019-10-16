@@ -28,6 +28,7 @@ ASTCDefinition >> declaration [
 
 { #category : #accessing }
 ASTCDefinition >> declaration: aDeclaration [
+	aDeclaration parent: self.
 	declaration := aDeclaration
 ]
 

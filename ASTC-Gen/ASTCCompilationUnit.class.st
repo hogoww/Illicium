@@ -26,11 +26,13 @@ ASTCCompilationUnit >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 ASTCCompilationUnit >> addDeclaration: aDeclaration [
+	aDeclaration parent: self.
 	declarations add: aDeclaration
 ]
 
 { #category : #accessing }
 ASTCCompilationUnit >> addDefinition: aDefinition [
+	aDefinition parent: self.
 	definitions add: aDefinition
 ]
 
@@ -41,6 +43,7 @@ ASTCCompilationUnit >> declarations [
 
 { #category : #accessing }
 ASTCCompilationUnit >> declarations: someDeclarations [
+	someDeclarations do: [ :each | each parent: self ].
 	declarations := someDeclarations
 ]
 
@@ -51,6 +54,7 @@ ASTCCompilationUnit >> definitions [
 
 { #category : #accessing }
 ASTCCompilationUnit >> definitions: someDefinitions [
+	someDefinitions do: [ :each | each parent: self ].
 	definitions := someDefinitions
 ]
 

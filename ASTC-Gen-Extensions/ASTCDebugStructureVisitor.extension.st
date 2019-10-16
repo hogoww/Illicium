@@ -1,19 +1,19 @@
 Extension { #name : #ASTCDebugStructureVisitor }
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCDebugStructureVisitor >> visitASTCDeclarationStatement:anASTCDeclarationStatement [
-	self visitASTCStatement:anASTCDeclarationStatement.
+ASTCDebugStructureVisitor >> visitDeclarationStatement: anASTCDeclarationStatement [
+	self visitStatement: anASTCDeclarationStatement.
 
 	"anASTCDeclarationStatement declaration ifNotNil:[ self assert:anASTCDeclarationStatement declaration isASTCDeclaration ]."
 
-	super visitASTCDeclarationStatement:anASTCDeclarationStatement
+	super visitDeclarationStatement: anASTCDeclarationStatement
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCDebugStructureVisitor >> visitASTCType:anASTCType [
-	self visitASTCNode:anASTCType.
+ASTCDebugStructureVisitor >> visitType: anASTCType [
+	self visitNode: anASTCType.
 
 	self assert: anASTCType type isClass.
 
-	super visitASTCType:anASTCType
+	super visitType: anASTCType
 ]

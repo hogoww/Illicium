@@ -28,6 +28,7 @@ ASTCDeclaration >> id [
 
 { #category : #accessing }
 ASTCDeclaration >> id: anId [
+	anId parent: self.
 	id := anId
 ]
 

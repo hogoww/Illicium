@@ -23,6 +23,7 @@ ASTCStructureDefinition >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 ASTCStructureDefinition >> addMember: aMember [
+	aMember parent: self.
 	members add: aMember
 ]
 
@@ -43,5 +44,6 @@ ASTCStructureDefinition >> members [
 
 { #category : #accessing }
 ASTCStructureDefinition >> members: someVariableDeclarations [
+	someVariableDeclarations do: [ :each | each parent: self ].
 	members := someVariableDeclarations
 ]

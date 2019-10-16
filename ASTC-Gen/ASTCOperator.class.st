@@ -41,6 +41,7 @@ ASTCOperator >> operands [
 
 { #category : #accessing }
 ASTCOperator >> operands: someExpressions [
+	someExpressions do: [ :each | each parent: self ].
 	operands := someExpressions
 ]
 

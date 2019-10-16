@@ -28,6 +28,7 @@ ASTCExpressionStatement >> expression [
 
 { #category : #accessing }
 ASTCExpressionStatement >> expression: anExpression [
+	anExpression parent: self.
 	expression := anExpression
 ]
 

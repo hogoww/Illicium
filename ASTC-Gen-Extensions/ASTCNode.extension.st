@@ -45,6 +45,11 @@ ASTCNode >> isStructuralyValidAST [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCNode >> parent: aParent [
+	parent := aParent
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> prettyPrint [
 	| prettyPrintVisitor |
 	prettyPrintVisitor:=ASTCPrettyPrint new.

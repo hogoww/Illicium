@@ -163,8 +163,3 @@ ASTCNode >> isWhile [
 ASTCNode >> parent [
 	^ parent
 ]
-
-{ #category : #accessing }
-ASTCNode >> parent: aParent [
-	parent := aParent
-]
