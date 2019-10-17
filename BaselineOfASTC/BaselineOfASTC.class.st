@@ -34,13 +34,13 @@ BaselineOfASTC >> baseline: spec [
 				package: 'IlliciumPlugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].	
 			spec
 				baseline: 'Phineas'
-				with: [ spec repository: 'gitlab://pharo-project/phineas:fixedTypes' ].
+				with: [ spec repository: 'gitlab://pharo-project/phineas:master' ].
 			spec
 				baseline: 'ParametrizedTests'
 				with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
 			spec
 				baseline: 'PlainPharoCode'
-				with: [ spec repository: 'github://tesonep/PlainPharoCode:master' ].
+				with: [ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 		].
 
 ]
