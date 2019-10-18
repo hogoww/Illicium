@@ -21,7 +21,7 @@ ASTCSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 ASTCSlangClassTranslator >> preTypeInference: aClass [
 	| piType |
 	inferer types createConcreteType: aClass.
-	piType := (inferer typeForClass: InterpreterPlugin).
+	piType := (inferer typeForClass: Interpreter).
 	piType instanceVariable: #interpreterProxy
 		ifPresent: [ piType instanceVariables at:#interpreterProxy put: 
 			(inferer types createConcreteType: Interpreter) ].
