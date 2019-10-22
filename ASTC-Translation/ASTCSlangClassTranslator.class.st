@@ -20,14 +20,18 @@ ASTCSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 { #category : #check }
 ASTCSlangClassTranslator >> preTypeInference: aClass [
 	| piType |
-	inferer types createConcreteType: aClass.
-	piType := (inferer typeForClass: Interpreter).
-	piType instanceVariable: #interpreterProxy
-		ifPresent: [ piType instanceVariables at:#interpreterProxy put: 
-			(inferer types createConcreteType: Interpreter) ].
+	piType := inferer typeForClass: InterpreterPlugin.
+	piType
+		instanceVariable: #interpreterProxy
+		ifPresent: [ piType instanceVariables
+				at: #interpreterProxy
+					put: (PIExplicitType new
+					name: #interpreterProxy;
+					owner: piType;
+					explicitType: (inferer types createConcreteType: Interpreter));
+				yourself ]
 	"For now, handled by the Slang printer as part of the basic output of every plugin"
 	"piType instanceVariable: #moduleName
 	ifPresent: [ piType instanceVariables at:#moduleName put: 
-		(inferer types createConcreteType: String) ]." 
-
+		(inferer types createConcreteType: String) ]."
 ]
