@@ -44,7 +44,10 @@ ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	(types size > 1)
 	ifTrue:[ types remove: UndefinedObject ].
 	types size < 1
-		ifTrue: [ Error signal: 'The type inferencer had no results for ' , aNode asString ].
+		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
+			inferer blockingStuff inspect.
+			"
+			Error signal: 'The type inferencer had no results for ' , aNode asString ].
 	types size > 1
 		ifTrue: [ Error signal: 'The type inferencer had too many results ' , aNode asString ].
 		
