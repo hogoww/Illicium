@@ -77,11 +77,13 @@ ASTCClassTranslator >> methodTranslator: aMethodTranslator [
 
 { #category : #translation }
 ASTCClassTranslator >> methodsToTranslateASTs: aClass [
-	^ inferer types methodTypes
+	 ^ inferer types methodTypes
 		select: [ :aMethod | 
 			(aClass methodDict keys includes: aMethod node selector)
-				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not ] ]
-		thenCollect: [:aMethod| aMethod node copy ]
+			and: [ aMethod receiver concreteClass= aClass  
+				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not 
+				and: [ aMethod node compiledMethod isFromTrait not ] ] ] ]
+		thenCollect: [:aMethod| aMethod node copy ].
 ]
 
 { #category : #'translation-api' }
