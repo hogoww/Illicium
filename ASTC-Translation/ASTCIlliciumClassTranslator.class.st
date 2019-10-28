@@ -10,8 +10,3 @@ ASTCIlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 		includesTrait: ASTCVirtualMachineAPI)
 		ifFalse: [ self error: 'can only translate plugins for now. They need to use the ASTCVirtualMachineAPI trait.' ].
 ]
-
-{ #category : #translation }
-ASTCIlliciumClassTranslator >> preTypeInference: aClass [
-	inferer inferAST: (aClass >> #initializePlugin) ast
-]

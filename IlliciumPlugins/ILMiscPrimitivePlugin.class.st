@@ -4,7 +4,7 @@ Class {
 	#traits : 'ASTCVirtualMachineAPI',
 	#classTraits : 'ASTCVirtualMachineAPI classTrait',
 	#classVars : [
-		'PrimErrBadArgument'
+		'#PrimErrBadArgument'
 	],
 	#category : #IlliciumPlugins
 }
