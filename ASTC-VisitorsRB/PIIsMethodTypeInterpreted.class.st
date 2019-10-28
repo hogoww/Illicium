@@ -1,6 +1,6 @@
 Class {
 	#name : #PIIsMethodTypeInterpreted,
-	#superclass : #PIAbstractMethodTypeDispatcher,
+	#superclass : #PIAbstractTypeVisitor,
 	#category : #'ASTC-VisitorsRB-Typing'
 }
 
