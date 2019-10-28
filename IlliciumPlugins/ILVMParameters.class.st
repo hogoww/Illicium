@@ -4,7 +4,7 @@ Class {
 	#traits : 'ASTCVirtualMachineAPI',
 	#classTraits : 'ASTCVirtualMachineAPI classTrait',
 	#instVars : [
-		'#parameters type: AnObsoleteASTCVMParameters'
+		'#parameters type: (Array withItemsType: Association)'
 	],
 	#category : #IlliciumPlugins
 }
@@ -15,6 +15,8 @@ ILVMParameters >> addParameterNamedValue [
 	<var:#key type:#String >
 	<var:#value type:#Smallintger>
 	| key value |
-	key := interpreterProxy pop.
-	value := interpreterProxy pop.
+	key := interpreterProxy pop asString.
+	value := interpreterProxy pop asInteger.
+	(parameters exists: key) ifTrue: [ ^ self primitiveFailed ].
+	parameters at: key put: value.
 ]
