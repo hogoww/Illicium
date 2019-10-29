@@ -14,6 +14,6 @@ ASTCSlangTranslator >> initialize [
 		at: Boolean put: ASTCBoolean;
 		at: String put: ASTCString;
 		at: ASTCUserClass put: ASTCUserClass;
-		at: Interpreter put: ASTCVirtualMachineProxy;
+		at: InterpreterProxy put: ASTCVirtualMachineProxy;
 		yourself
 ]

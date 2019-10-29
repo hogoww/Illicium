@@ -28,7 +28,7 @@ ASTCSlangClassTranslator >> preTypeInference: aClass [
 					put: (PIExplicitType new
 					name: #interpreterProxy;
 					owner: piType;
-					explicitType: (inferer types createConcreteType: Interpreter));
+					explicitType: (inferer types createConcreteType: InterpreterProxy));
 				yourself ]
 	"For now, handled by the Slang printer as part of the basic output of every plugin"
 	"piType instanceVariable: #moduleName
