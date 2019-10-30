@@ -35,9 +35,9 @@ ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass usingBlo
 	visitor inferer infer: aBlock.
 	"This removes the block used as an entry point of the inference"
 	"This would cause problem for resolution for the methodType otherwise."
-	visitor inferer types methodTypes
+	visitor inferer typeProvider methodTypes
 		detect: [ :aMethodType | aMethodType node isBlock ]
-		ifFound: [ :aMethodType | visitor inferer types methodTypes remove: aMethodType ].
+		ifFound: [ :aMethodType | visitor inferer typeProvider methodTypes remove: aMethodType ].
 	aMethodAST acceptVisitor: visitor.
 	^ aMethodAST
 ]

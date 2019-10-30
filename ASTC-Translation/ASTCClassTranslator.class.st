@@ -77,7 +77,7 @@ ASTCClassTranslator >> methodTranslator: aMethodTranslator [
 
 { #category : #translation }
 ASTCClassTranslator >> methodsToTranslateASTs: aClass [
-	 ^ inferer types methodTypes
+	 ^ inferer typeProvider methodTypes
 		select: [ :aMethod | 
 			(aClass methodDict keys includes: aMethod node selector)
 			and: [ aMethod receiver concreteClass= aClass  
