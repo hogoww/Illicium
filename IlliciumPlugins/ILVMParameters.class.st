@@ -15,8 +15,8 @@ ILVMParameters >> addParameterNamedValue [
 	<var:#key type:#String >
 	<var:#value type:#SmallInteger>
 	| key value |
-	key := (interpreterProxy pop:1) asString.
-	value := (interpreterProxy pop:2) asInteger.
+	key := (interpreterProxy popAndGet) asString.
+	value := (interpreterProxy popAndGet) asInteger.
 	(parameters do: [:anElement| key = anElement first ]) ifTrue: [ ^ self primitiveFailed ].
 	parameters at: key put: value.
 ]

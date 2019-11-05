@@ -61,6 +61,14 @@ ASTCInterpreterProxy >> pop: anInteger [
 ]
 
 { #category : #adding }
+ASTCInterpreterProxy >> popAndGet [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	"returns the reasonCode"
+	^ Object new
+]
+
+{ #category : #adding }
 ASTCInterpreterProxy >> primitiveFail [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"

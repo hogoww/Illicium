@@ -11,5 +11,6 @@ InterpreterProxy >> sizeOfSTArrayFromCPrimitive: cPtr [
 { #category : #'*ASTC-VM-extensions' }
 InterpreterProxy >> stackValue: offset [
 	<returnType: #Object>
+	<var:#stack type:#OrderedCollection>
 	^stack at: stack size - offset.
 ]

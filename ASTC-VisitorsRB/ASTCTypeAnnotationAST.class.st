@@ -84,8 +84,8 @@ ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
+	super visitMessageNode: aMessageNode."super visit before, so receivers are typed in case of a problem"
 	self typeThatNode: aMessageNode.
-	super visitMessageNode: aMessageNode.
 	^aMessageNode.
 ]
 
