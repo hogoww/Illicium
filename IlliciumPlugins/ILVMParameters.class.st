@@ -4,7 +4,7 @@ Class {
 	#traits : 'ASTCVirtualMachineAPI',
 	#classTraits : 'ASTCVirtualMachineAPI classTrait',
 	#instVars : [
-		'#parameters type: (Array withItemsType: (Association of: {String,SmallInteger}))'
+		'#parameters type: (Array withItemsType: (Association of: {String.SmallInteger}))'
 	],
 	#category : #IlliciumPlugins
 }
