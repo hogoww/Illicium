@@ -2,8 +2,8 @@ Class {
 	#name : #ASTCKernelClasses,
 	#superclass : #Object,
 	#instVars : [
-		'visitor',
-		'value'
+		'value',
+		'methodTranslator'
 	],
 	#category : #'ASTC-Kernel'
 }
@@ -15,29 +15,31 @@ ASTCKernelClasses class >> asCType [
 	^SubclassResponsibility
 ]
 
-{ #category : #converting }
-ASTCKernelClasses >> asString [
-	^String streamContents:[:stream|
-		stream << (self class asString)
-			<<'('
-			<< value printString
-			<<')'.
-		].
-]
-
 { #category : #'message performing' }
 ASTCKernelClasses >> perform: aSelector withArguments: anArray [
 
 	^(self class methodDictionary includesKey: aSelector)
 	ifTrue:[ super perform:aSelector withArguments: anArray ] 
 	ifFalse:[	 self doesNotUnderstand: (Message selector: aSelector arguments: anArray) ].
-	
+	" 
+	self browse 
+	"
 ]
 
 { #category : #printing }
 ASTCKernelClasses >> printOn: aStream [
 	aStream << self asString.
 
+]
+
+{ #category : #converting }
+ASTCKernelClasses >> printString [
+	^String streamContents:[:stream|
+		stream << (self class asString)
+			<<'('
+			<< value printString
+			<<')'.
+		].
 ]
 
 { #category : #evaluating }
@@ -53,11 +55,11 @@ ASTCKernelClasses >> value: anObject [
 
 { #category : #accessing }
 ASTCKernelClasses >> visitor [ 
-	^visitor
+	^methodTranslator
 ]
 
 { #category : #accessing }
 ASTCKernelClasses >> visitor: aVisitor [
-	visitor:= aVisitor.
-	^visitor
+	methodTranslator:= aVisitor.
+	^methodTranslator
 ]

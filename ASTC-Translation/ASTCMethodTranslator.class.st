@@ -5,10 +5,16 @@ Class {
 	#classTraits : 'ASTCFormatTrait classTrait',
 	#instVars : [
 		'translators',
-		'classTranslator'
+		'classTranslator',
+		'includes'
 	],
 	#category : #'ASTC-Translation-overviewers'
 }
+
+{ #category : #accessing }
+ASTCMethodTranslator >> addInclude: aString [
+	includes add: aString
+]
 
 { #category : #initialization }
 ASTCMethodTranslator >> classTranslator [
@@ -41,8 +47,19 @@ ASTCMethodTranslator >> getReplacementType: aClass [
 	^ classTranslator getReplacementType: aClass
 ]
 
+{ #category : #accessing }
+ASTCMethodTranslator >> includes [
+	^ includes
+]
+
+{ #category : #accessing }
+ASTCMethodTranslator >> includes: aCollectionOfString [
+	includes := aCollectionOfString
+]
+
 { #category : #initialization }
 ASTCMethodTranslator >> initialize [
+	includes := Set new.
 	translators := (Dictionary new: 20)
 		at: #methodNodeTranslator put: (ASTCMethodNodeTranslator new methodTranslator: self ; yourself);
 		at: #pragmaNodeTranslator put: (ASTCPragmaNodeTranslator new methodTranslator: self ; yourself);

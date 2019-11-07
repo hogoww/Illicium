@@ -56,11 +56,12 @@ ASTCSmallInteger >> < anotherSmallInteger [
 ASTCSmallInteger >> = anotherSmallInteger [
 	"Act as translator only if it's the translator visitor that calls it."
 	"That allow assert equal to be functionnal."
+	
+	self flag:#notPretty.
+	(super = anotherSmallInteger isKindOf: Boolean) ifTrue:[ ^ (super = anotherSmallInteger isKindOf: Boolean) ].
+	
+	^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
 
-	(visitor isKindOf: ASTCMethodTranslator) ifTrue:[
- "ASTCMethodTranslator"		^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
-		].
-	^self value = anotherSmallInteger value.
 ]
 
 { #category : #translation }
@@ -75,8 +76,8 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	res:=ASTCOperator new 
 		symbol: operator;
 		yourself.
-	res operands add:(self value acceptVisitor: self visitor).
-	res operands add:(anArgument acceptVisitor: self visitor).
+	res addOperand:(self value acceptVisitor: self visitor).
+	res addOperand:(anArgument acceptVisitor: self visitor).
 	^res.
 		
 ]
@@ -86,9 +87,9 @@ ASTCSmallInteger >> to: stop do: aBlock [
 	| iterID |
 	aBlock arguments size ~= 1
 		ifTrue: [ self error: 'Wrong number of arguments.' ]
-		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: visitor ].
+		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator ].
 	"type checking"
-	(((visitor getNodeTranslationType: stop) = ASTCSmallInteger)
+	(((methodTranslator getNodeTranslationType: stop) = ASTCSmallInteger)
 		and:[ aBlock isBlock ])
     ifFalse:[ self error: 'An arguments has the wrong type' ].
 	^ ASTCFor new
@@ -102,19 +103,19 @@ ASTCSmallInteger >> to: stop do: aBlock [
 								type: ASTCSmallInteger;
 								yourself);
 						yourself);
-				init:(self value acceptVisitor: visitor);
+				init:(self value acceptVisitor: methodTranslator);
 				yourself);
 		condition:
 			(ASTCOperator new
 				symbol: '<=';
 				addOperand: iterID;
-				addOperand: (stop acceptVisitor: visitor);
+				addOperand: (stop acceptVisitor: methodTranslator);
 				yourself);
 		iteratorModification:
 			(ASTCOperator new
 				symbol: '++';
 				addOperand:iterID;
 				yourself);
-		body: (aBlock acceptVisitor: visitor);
+		body: (aBlock acceptVisitor: methodTranslator);
 		yourself
 ]
