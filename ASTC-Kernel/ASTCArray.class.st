@@ -19,5 +19,5 @@ ASTCArray >> do: aBlock [
 	self halt.
 	self flag:#todo.
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
-	^ASTCFor new.
+	^ASTCFor new body: ASTCBlock new.
 ]

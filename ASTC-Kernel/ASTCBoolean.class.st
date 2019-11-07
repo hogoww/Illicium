@@ -15,12 +15,12 @@ ASTCBoolean >> and: aBoolean [
 	firstPart := value isBlock
 		ifTrue: [ value statements size = 1
 				ifTrue: [ value statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an Or.' ] ]
+				ifFalse: [ self error: 'Cannot inline the block inside an #andr.' ] ]
 		ifFalse: [ value acceptVisitor: methodTranslator ].
 	secondPart := aBoolean isBlock
 		ifTrue: [ aBoolean statements size = 1
 				ifTrue: [ aBoolean statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an Or.' ] ]
+				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
 		ifFalse: [ aBoolean acceptVisitor: methodTranslator ].
 	^ ASTCOperator new
 		symbol: '&&';
@@ -71,12 +71,12 @@ ASTCBoolean >> or: aBoolean [
 	firstPart := value isBlock
 		ifTrue: [ value statements size = 1
 				ifTrue: [ value statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an Or.' ] ]
+				ifFalse: [ self error: 'Cannot inline the block inside an #or.' ] ]
 		ifFalse: [ value acceptVisitor: methodTranslator ].
 	secondPart := aBoolean isBlock
 		ifTrue: [ aBoolean statements size = 1
 				ifTrue: [ aBoolean statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an Or.' ] ]
+				ifFalse: [ self error: 'Cannot inline the block inside an #or.' ] ]
 		ifFalse: [ aBoolean acceptVisitor: methodTranslator ].
 	^ ASTCOperator new
 		symbol: '||';
