@@ -14,6 +14,11 @@ ASTCTranslator class >> translateClass: aClass [
 ]
 
 { #category : #'translation-api' }
+ASTCTranslator class >> translateExpression: anExpression [
+	^ self new translateExpression: anExpression
+]
+
+{ #category : #'translation-api' }
 ASTCTranslator class >> translateMethod: aCompiledMethod [ 
 	^ self new translateMethod: aCompiledMethod
 ]
@@ -67,6 +72,11 @@ ASTCTranslator >> replacementClasses: aDictionnary [
 { #category : #'translation-api' }
 ASTCTranslator >> translateClass: aClass [
 	^ classTranslator translateClass: aClass
+]
+
+{ #category : #'translation-api' }
+ASTCTranslator >> translateExpression: anExpression [
+	^ classTranslator translateExpression: anExpression
 ]
 
 { #category : #'translation-api' }

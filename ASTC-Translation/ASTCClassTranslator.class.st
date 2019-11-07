@@ -19,17 +19,29 @@ ASTCClassTranslator >> addState: stateStuff to: aCompilationUnit [
 ]
 
 { #category : #translation }
+ASTCClassTranslator >> addTranslatedMethod: aFuncDef to: aCompilationUnit [
+	aCompilationUnit addDefinition: aFuncDef.
+	aCompilationUnit addDeclaration: aFuncDef declaration.
+	^ aCompilationUnit
+]
+
+{ #category : #translation }
 ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilationUnit [
 	functionDefinitions
 		do: [ :aFuncDef | 
-			aCompilationUnit definitions add: aFuncDef.
-			aCompilationUnit declarations add: aFuncDef declaration ].
+			self addTranslatedMethod: aFuncDef to: aCompilationUnit
+			 ].
 	^ aCompilationUnit
 ]
 
 { #category : #typing }
 ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
+]
+
+{ #category : #'as yet unclassified' }
+ASTCClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
+	inferer inferExpression: anExpression 
 ]
 
 { #category : #accessing }
@@ -127,6 +139,16 @@ ASTCClassTranslator >> translateClass: aClass [
 { #category : #translation }
 ASTCClassTranslator >> translateClassState: aClass [
 	^ (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass. 
+]
+
+{ #category : #'translation-api' }
+ASTCClassTranslator >> translateExpression: anExpression [
+	| methodAST functionDefinitions |
+	self callgraphTypeStartingFromExpression: anExpression.
+	methodAST := self typeASTsOfMethods: (inferer typeProvider methodTypes at:1) node copy.
+	
+	functionDefinitions := self translateMethodsASTs: methodAST.
+	^ functionDefinitions body
 ]
 
 { #category : #'translation-api' }
