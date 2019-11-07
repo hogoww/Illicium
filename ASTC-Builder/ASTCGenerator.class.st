@@ -122,9 +122,10 @@ ASTCGenerator >> addComparisonOn: aFMXClass [
 		].
 
 	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
-		ifTrue:[ 
+		ifTrue:[
 			propertyName := aRelation side name.
-			body + [:anInstance| propertyName = anInstance propertyName ifFalse:[ ^ false ]]
+			propertyName = #parent ifFalse: [ 
+			body + [:anInstance| propertyName = anInstance propertyName ifFalse:[ ^ false ]]]
 		]].
 	
 	body + [ ^true ].
@@ -158,7 +159,7 @@ ASTCGenerator >> addInitializeTo: aFMXClass [
 ASTCGenerator >> addInstanceVariable: aProperty to: aClass [
 	(aClass allSlots anySatisfy: [ :each | each name = aProperty name ])
 		ifTrue: [ ^ self ].	"we check if the slot already exists"
-
+			
 	debug
 		ifTrue: [ Transcript
 				show: 'property: ';
@@ -185,7 +186,7 @@ ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aClass [
 	"setter"
 	methodName := propertyName,':'. " aProperty: "
 	method := methodName asMethodWithBody:
-		((aProperty isTypedProperty ifTrue:[[]]
+		(((aProperty isTypedProperty or:[ aProperty name = #parent ]) ifTrue:[[]]
 		ifFalse:[
 			aProperty isMany
 			ifTrue:[ [ aPropertyName do:[:each| each parent: self]]]

@@ -9,8 +9,6 @@ Class {
 
 { #category : #testing }
 ASTCNode >> = aNode [
-	parent = aNode parent
-		ifFalse: [ ^ false ].
 	^ true
 ]
 
