@@ -16,6 +16,7 @@ ASTCIlliciumTranslationTest >> testTranslateBrokenPlugin [
 	"Check only for errors"
 	| cu |
 	cu:= translator translateClass: ILBrokenPlugin.
+	cu debugASTCStructure.
 	^ cu
 ]
 
@@ -25,5 +26,6 @@ ASTCIlliciumTranslationTest >> testTranslateRandomClass [
 	"Check only for errors"
 	| cu |
 	cu := translator translateClass: RandomTestClass.
+	cu debugASTCStructure.
 	^ cu
 ]

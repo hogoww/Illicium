@@ -8,12 +8,14 @@ Class {
 ASTCMiscPluginPrimitiveTest >> testPrimitiveCompareString [
 	| cu |
 	cu := translator translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
+	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
 
 { #category : #tests }
 ASTCMiscPluginPrimitiveTest >> testPrimitiveCompareStringFirstHalf [
 	| cu |
-	cu := translator translateMethod: #primitiveCompareStringFirstHalf fromClass: MiscPrimitivePlugin.
+	cu := translator translateMethod: #primitiveCompareStringFirstHalf fromClass: MiscPrimitivePlugin.	
+	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
