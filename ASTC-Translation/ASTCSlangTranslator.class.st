@@ -13,7 +13,6 @@ ASTCSlangTranslator >> initialize [
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
 		at: String put: ASTCString;
-		at: ASTCUserClass put: ASTCUserClass;
 		at: InterpreterProxy put: ASTCVirtualMachineProxy;
 		yourself
 ]

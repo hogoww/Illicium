@@ -9,6 +9,13 @@ ASTCNode >> astDump [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCNode >> cu [
+	" convinience method to be able to get the correspomnding compilationUnit from anywhere "
+	self isCompilationUnit ifFalse: [ ^ parent ifNotNil: [ parent cu ] ifNil: [self error: 'projects don''t have compilation units' ]].
+	^ self 
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> debugASTCStructure [
 	| validationVisitor |
 	validationVisitor := ASTCDebugStructureVisitor new.

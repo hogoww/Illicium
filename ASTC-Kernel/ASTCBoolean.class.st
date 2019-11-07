@@ -12,8 +12,8 @@ ASTCBoolean class >> asCType [
 { #category : #controlling }
 ASTCBoolean >> and: aBoolean [
 	| firstPart secondPart |
-	firstPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ value statements first acceptVisitor: visitor ] ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
-	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: visitor ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
+	firstPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ value statements first acceptVisitor: methodTranslator ] ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: methodTranslator]).
+	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: methodTranslator ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: methodTranslator]).
 	^ ASTCOperator new
 		symbol: '&&';
 		addOperand: firstPart;
@@ -60,8 +60,8 @@ ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 { #category : #controlling }
 ASTCBoolean >> or: aBoolean [
 	| firstPart secondPart |
-	firstPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ value statements first acceptVisitor: visitor ] ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
-	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: visitor ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: visitor]).
+	firstPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ value statements first acceptVisitor: methodTranslator ] ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: methodTranslator]).
+	secondPart:= (value isBlock ifTrue:[ value statements size = 1 ifTrue:[ aBoolean statements first acceptVisitor: methodTranslator ]ifFalse:[self error: 'Cannot inline the block inside an Or.']] ifFalse: [value acceptVisitor: methodTranslator]).
 	^ ASTCOperator new
 		symbol: '||';
 		addOperand: firstPart;

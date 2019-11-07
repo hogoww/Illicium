@@ -6,16 +6,16 @@ Class {
 
 { #category : #tests }
 TranslationTest >> testASTCIdentifier [
-	| astPharo visitor astC expectedC validationVisitor |
+	| astPharo visitor astC expectedC |
 	astPharo := RBParser parseExpression: 'c'.
-	visitor := ASTCFromPharo new.
+	visitor := ASTCMethodTranslator new.
 	astC := astPharo acceptVisitor: visitor.
 	
 	expectedC := ASTCIdentifier new
 		id: #c;
 		yourself.
 	
-	self assert: astC isASTCIdentifier.
+	self assert: astC isIdentifier.
 	self assert: astC id equals: #c.
 	self assert: astC equals: expectedC.
 
@@ -31,10 +31,8 @@ TranslationTest >> testASTCIf [
 	expectedC := ASTCIf new 
 		condition: (ASTCOperator new
 			symbol:'==';
-			operands: (ASTCContainer new 
-				add: (ASTCLiteral value: (ASTCSmallInteger value:1));
-				add: (ASTCLiteral value: (ASTCSmallInteger value:2));
-				yourself);
+			addOperand: (ASTCLiteral value: (ASTCSmallInteger value:1));
+			addOperand: (ASTCLiteral value: (ASTCSmallInteger value:2));
 			yourself);
 		then:(ASTCBlock new
 			add: (ASTCLiteral value: (ASTCSmallInteger value:1)) asASTCStatement;
@@ -55,13 +53,11 @@ TranslationTest >> testASTCOperatorBinary [
 	
 	expectedC := ASTCOperator new
 		symbol:'==';
-		operands: (ASTCContainer new
-			add: (ASTCLiteral value: (ASTCSmallInteger value:1));
-			add: (ASTCLiteral value: (ASTCSmallInteger value:6));
-			yourself);
+		addOperand:(ASTCLiteral value: (ASTCSmallInteger value:1));
+		addOperand: (ASTCLiteral value: (ASTCSmallInteger value:6));
 		yourself.
 	
-	self assert: astC isASTCOperator.
+	self assert: astC isOperator.
 	self assert: astC symbol equals: '=='.
 	self assert: astC operands first value value equals: 1.
 	self assert: astC operands second value value equals: 6.
@@ -72,10 +68,10 @@ TranslationTest >> testASTCOperatorBinary [
 TranslationTest >> testASTCSmallIntegerIsLiteral [
 	| astPharo visitor astC |
 	astPharo := RBParser parseExpression: '5'.
-	visitor := ASTCFromPharo new.
+	visitor := ASTCMethodTranslator  new.
 	astC := astPharo acceptVisitor: visitor.
 	
-	self assert: astC isASTCLiteral.
+	self assert: astC isLiteral.
 	self assert: astC value value equals: 5.
 	self assert: astC equals: 
 		(ASTCLiteral new value: 
@@ -96,5 +92,5 @@ TranslationTest >> translate: sourceCode [
 		yourself).
 	
 	type accept: PIIsMethodTypeInterpreted new.
-	^ astPharo acceptVisitor: ASTCFromPharo new.
+	^ astPharo acceptVisitor: ASTCMethodTranslator new.
 ]

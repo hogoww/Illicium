@@ -48,8 +48,9 @@ ASTCTranslator >> initialize [
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
 		at: String put: ASTCString;
-		at: ASTCUserClass put: ASTCUserClass;
+		at: Array put: ASTCArray;
 		at: ASTCInterpreterProxy put: ASTCVirtualMachineProxy;
+		at: ASTCUserClass put: ASTCUserClass;
 		yourself
 ]
 
