@@ -48,7 +48,7 @@ TranslationTest >> testASTCIf [
 { #category : #tests }
 TranslationTest >> testASTCOperatorBinary [
 	| astC expectedC|
-	astC := ASTCTranslator translateExpression: '1=6'.
+	astC := (ASTCTranslator translateExpression: '1=6') statements at: 1.
 	
 	expectedC := ASTCOperator new
 		symbol:'==';
@@ -56,22 +56,24 @@ TranslationTest >> testASTCOperatorBinary [
 		addOperand: (ASTCLiteral value: (ASTCSmallInteger value:6));
 		yourself.
 	
-	self assert: astC isOperator.
-	self assert: astC symbol equals: '=='.
-	self assert: astC operands first value value equals: 1.
-	self assert: astC operands second value value equals: 6.
-	self assert: astC equals: expectedC.
+	self assert: astC isExpressionStatement.
+	self assert: astC expression isOperator.
+	self assert: astC expression symbol equals: '=='.
+	self assert: astC expression operands first value value equals: 1.
+	self assert: astC expression operands second value value equals: 6.
+	self assert: astC expression equals: expectedC.
 ]
 
 { #category : #tests }
 TranslationTest >> testASTCSmallIntegerIsLiteral [
 	| astC |
 	
-	astC := ASTCTranslator translateExpression: '1'.
+	astC := (ASTCTranslator translateExpression: '5') statements at: 1.
 	
-	self assert: astC isLiteral.
-	self assert: astC value value equals: 5.
-	self assert: astC equals: 
+	self assert: astC isExpressionStatement.
+	self assert: astC expression isLiteral.
+	self assert: astC expression value value equals: 5.
+	self assert: astC expression equals: 
 		(ASTCLiteral new value: 
 			(ASTCSmallInteger new value:5;yourself) ;
 		yourself).
