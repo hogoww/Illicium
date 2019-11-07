@@ -6,10 +6,9 @@ Class {
 
 { #category : #tests }
 TranslationTest >> testASTCIdentifier [
-	| astPharo visitor astC expectedC |
+	| astPharo astC expectedC |
 	astPharo := RBParser parseExpression: 'c'.
-	visitor := ASTCMethodTranslator new.
-	astC := astPharo acceptVisitor: visitor.
+	astC := ASTCTranslator translateExpression: astPharo.
 	
 	expectedC := ASTCIdentifier new
 		id: #c;
@@ -26,7 +25,7 @@ TranslationTest >> testASTCIdentifier [
 { #category : #tests }
 TranslationTest >> testASTCIf [
 	| astC expectedC |
-	astC := self translate: '1=2 ifTrue:[1] ifFalse:[2]'.
+	astC := ASTCTranslator translateExpression: '1=2 ifTrue:[1] ifFalse:[2]'.
 	
 	expectedC := ASTCIf new 
 		condition: (ASTCOperator new
@@ -43,13 +42,13 @@ TranslationTest >> testASTCIf [
 		yourself.	
 	
 	astC debugASTCStructure.
-	self assert: astC equals: expectedC.
+	self assert: (astC statements at:1) equals: expectedC.
 ]
 
 { #category : #tests }
 TranslationTest >> testASTCOperatorBinary [
 	| astC expectedC|
-	astC := self translate: '1=6'.
+	astC := ASTCTranslator translateExpression: '1=6'.
 	
 	expectedC := ASTCOperator new
 		symbol:'==';
@@ -66,10 +65,9 @@ TranslationTest >> testASTCOperatorBinary [
 
 { #category : #tests }
 TranslationTest >> testASTCSmallIntegerIsLiteral [
-	| astPharo visitor astC |
-	astPharo := RBParser parseExpression: '5'.
-	visitor := ASTCMethodTranslator  new.
-	astC := astPharo acceptVisitor: visitor.
+	| astC |
+	
+	astC := ASTCTranslator translateExpression: '1'.
 	
 	self assert: astC isLiteral.
 	self assert: astC value value equals: 5.
@@ -77,20 +75,4 @@ TranslationTest >> testASTCSmallIntegerIsLiteral [
 		(ASTCLiteral new value: 
 			(ASTCSmallInteger new value:5;yourself) ;
 		yourself).
-]
-
-{ #category : #tests }
-TranslationTest >> translate: sourceCode [
-	| astPharo inferer type |
-	astPharo := RBParser parseExpression: sourceCode.
-	astPharo doSemanticAnalysis.
-	
-	inferer := PhineasInferer new.
-	type := (inferer inferAST: astPharo methodNode) methodType.
-	astPharo methodNode acceptVisitor: (ASTCTypeAnnotationAST new
-		inferer: inferer;
-		yourself).
-	
-	type accept: PIIsMethodTypeInterpreted new.
-	^ astPharo acceptVisitor: ASTCMethodTranslator new.
 ]
