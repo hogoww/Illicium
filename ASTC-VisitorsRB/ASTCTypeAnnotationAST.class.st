@@ -42,7 +42,7 @@ ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	ifTrue:[ types remove: aNode methodClass ].	"remove implicit returns from primitives if it's not the only one"
 	
 	(types size > 1)
-	ifTrue:[ types remove: UndefinedObject ].
+	ifTrue:[ [ types remove: UndefinedObject ] on: NotFound do: [ self error: ' Unresolved type ambiguity '] ].
 	types size < 1
 		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
 			inferer blockingStuff inspect.
