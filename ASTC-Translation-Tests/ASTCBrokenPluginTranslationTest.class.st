@@ -189,6 +189,7 @@ ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 	cu := translator translateMethod: #primitivePopMoreThanExpected fromClass: BrokenPlugin.
 
 	"declaration checks"
+	self assert: cu isStructuralyValidAST.
 	"ïnstance variable"
 	interpreterProxyDecl := cu declarations at:1.
 	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
