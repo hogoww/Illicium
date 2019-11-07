@@ -4,7 +4,7 @@ Class {
 	#traits : 'ASTCVirtualMachineAPI',
 	#classTraits : 'ASTCVirtualMachineAPI classTrait',
 	#instVars : [
-		'#parameters type: Array'
+		'#parameters type: (Array withItemsType: (Association of: {String,SmallInteger}))'
 	],
 	#category : #IlliciumPlugins
 }
@@ -17,6 +17,6 @@ ILVMParameters >> addParameterNamedValue [
 	| key value |
 	key := (interpreterProxy popAndGet) asString.
 	value := (interpreterProxy popAndGet) asInteger.
-	(parameters do: [:anElement| key = anElement first ]) ifTrue: [ ^ self primitiveFailed ].
+	(parameters do: [:anElement| key = anElement key ifTrue: [ ^ self primitiveFailed ] ]).
 	parameters at: key put: value.
 ]
