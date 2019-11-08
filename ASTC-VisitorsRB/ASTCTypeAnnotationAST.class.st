@@ -3,7 +3,6 @@ Class {
 	#superclass : #ASTCAbstractCheckVisitor,
 	#instVars : [
 		'inferer',
-		'methodType',
 		'methodTypeDispatcher',
 		'aPIMethodInterpreter'
 	],
@@ -14,6 +13,11 @@ Class {
 ASTCTypeAnnotationAST class >> property [
 	"should return a symbol with the name of the property"
 	^#type
+]
+
+{ #category : #accessing }
+ASTCTypeAnnotationAST >> getMethodType: aMethodNode [ 
+	^ (inferer getMethodNodeOf: aMethodNode) 
 ]
 
 { #category : #accessing }
@@ -117,5 +121,5 @@ ASTCTypeAnnotationAST >> visitTemporaryNode: aTemporaryNode [
 { #category : #visiting }
 ASTCTypeAnnotationAST >> wasMethodTyped: aMethodNode [
 	self assert: aMethodNode isMethod.
-	^(inferer getMethodNodeOf: aMethodNode) accept: methodTypeDispatcher
+	^(self getMethodType: aMethodNode) accept: methodTypeDispatcher
 ]
