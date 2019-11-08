@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCGeniePlugin,
+	#name : #ASTCGeniePluginTest,
 	#superclass : #ASTCSlangTranslationTest,
 	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }
-ASTCGeniePlugin >> testCSquaredDistanceFromTo [
+ASTCGeniePluginTest >> testCSquaredDistanceFromTo [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -15,7 +15,7 @@ ASTCGeniePlugin >> testCSquaredDistanceFromTo [
 ]
 
 { #category : #tests }
-ASTCGeniePlugin >> testPrimSameClassAbsoluteStrokeDistanceMyPointsOtherPointsMyVectorsOtherVectorsMySquaredLengthsOtherSquaredLengthsMyAnglesOtherAnglesMaxSizeAndReferenceFlagRowBaseRowInsertRemoveRowInsertRemoveCount [
+ASTCGeniePluginTest >> testPrimSameClassAbsoluteStrokeDistanceMyPointsOtherPointsMyVectorsOtherVectorsMySquaredLengthsOtherSquaredLengthsMyAnglesOtherAnglesMaxSizeAndReferenceFlagRowBaseRowInsertRemoveRowInsertRemoveCount [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	

@@ -1,13 +1,13 @@
 Class {
-	#name : #ASTCFFTPluggin,
+	#name : #ASTCFFTPlugginTest,
 	#superclass : #ASTCSlangTranslationTest,
 	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }
-ASTCFFTPluggin >> testPermuteData [
+ASTCFFTPlugginTest >> testPermuteData [
 	| cu |
-	self flag: #Unsupported."type annotation to fix"
+	self flag: #Failure." hasReturn is not good enough"
 	
 	cu := translator translateMethod: #permuteData fromClass: FFTPlugin.
 	self assert: cu isStructuralyValidAST.
@@ -15,7 +15,7 @@ ASTCFFTPluggin >> testPermuteData [
 ]
 
 { #category : #tests }
-ASTCFFTPluggin >> testPrimitiveFFTPermuteData [
+ASTCFFTPlugginTest >> testPrimitiveFFTPermuteData [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -25,7 +25,7 @@ ASTCFFTPluggin >> testPrimitiveFFTPermuteData [
 ]
 
 { #category : #tests }
-ASTCFFTPluggin >> testPrimitiveFFTScaleData [
+ASTCFFTPlugginTest >> testPrimitiveFFTScaleData [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -35,7 +35,7 @@ ASTCFFTPluggin >> testPrimitiveFFTScaleData [
 ]
 
 { #category : #tests }
-ASTCFFTPluggin >> testPrimitiveFFTTransformData [
+ASTCFFTPlugginTest >> testPrimitiveFFTTransformData [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -45,7 +45,7 @@ ASTCFFTPluggin >> testPrimitiveFFTTransformData [
 ]
 
 { #category : #tests }
-ASTCFFTPluggin >> testScaleData [
+ASTCFFTPlugginTest >> testScaleData [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	

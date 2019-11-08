@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCInflatePlugin,
+	#name : #ASTCInflatePluginTest,
 	#superclass : #ASTCSlangTranslationTest,
 	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }
-ASTCInflatePlugin >> testPrimitiveInflateDecompressBlock [
+ASTCInflatePluginTest >> testPrimitiveInflateDecompressBlock [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	

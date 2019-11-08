@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCStarSqueakPlugin,
+	#name : #ASTCStarSqueakPluginTest,
 	#superclass : #ASTCSlangTranslationTest,
 	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }
-ASTCStarSqueakPlugin >> testPrimitiveDiffuseFromToWidthHeightDelta [
+ASTCStarSqueakPluginTest >> testPrimitiveDiffuseFromToWidthHeightDelta [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -15,7 +15,7 @@ ASTCStarSqueakPlugin >> testPrimitiveDiffuseFromToWidthHeightDelta [
 ]
 
 { #category : #tests }
-ASTCStarSqueakPlugin >> testPrimitiveEvaporateRate [
+ASTCStarSqueakPluginTest >> testPrimitiveEvaporateRate [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -25,7 +25,7 @@ ASTCStarSqueakPlugin >> testPrimitiveEvaporateRate [
 ]
 
 { #category : #tests }
-ASTCStarSqueakPlugin >> testPrimitiveMapFromToWidthHeightPatchSizeRgbFlagsShift [
+ASTCStarSqueakPluginTest >> testPrimitiveMapFromToWidthHeightPatchSizeRgbFlagsShift [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	

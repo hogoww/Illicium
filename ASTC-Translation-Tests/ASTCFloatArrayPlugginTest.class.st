@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCFloatArrayPluggin,
+	#name : #ASTCFloatArrayPlugginTest,
 	#superclass : #ASTCSlangTranslationTest,
 	#category : #'ASTC-Translation-Tests'
 }
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveAddFloatArray [
+ASTCFloatArrayPlugginTest >> testPrimitiveAddFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -15,7 +15,7 @@ ASTCFloatArrayPluggin >> testPrimitiveAddFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveAddScalar [
+ASTCFloatArrayPlugginTest >> testPrimitiveAddScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -25,7 +25,7 @@ ASTCFloatArrayPluggin >> testPrimitiveAddScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveAt [
+ASTCFloatArrayPlugginTest >> testPrimitiveAt [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -35,7 +35,7 @@ ASTCFloatArrayPluggin >> testPrimitiveAt [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveAtPut [
+ASTCFloatArrayPlugginTest >> testPrimitiveAtPut [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -45,7 +45,7 @@ ASTCFloatArrayPluggin >> testPrimitiveAtPut [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveDivFloatArray [
+ASTCFloatArrayPlugginTest >> testPrimitiveDivFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -55,7 +55,7 @@ ASTCFloatArrayPluggin >> testPrimitiveDivFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveDivScalar [
+ASTCFloatArrayPlugginTest >> testPrimitiveDivScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -65,7 +65,7 @@ ASTCFloatArrayPluggin >> testPrimitiveDivScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveDotProduct [
+ASTCFloatArrayPlugginTest >> testPrimitiveDotProduct [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -75,7 +75,7 @@ ASTCFloatArrayPluggin >> testPrimitiveDotProduct [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveEqual [
+ASTCFloatArrayPlugginTest >> testPrimitiveEqual [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -85,7 +85,7 @@ ASTCFloatArrayPluggin >> testPrimitiveEqual [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveHashArray [
+ASTCFloatArrayPlugginTest >> testPrimitiveHashArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -95,7 +95,7 @@ ASTCFloatArrayPluggin >> testPrimitiveHashArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveMulFloatArray [
+ASTCFloatArrayPlugginTest >> testPrimitiveMulFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -105,7 +105,7 @@ ASTCFloatArrayPluggin >> testPrimitiveMulFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveMulScalar [
+ASTCFloatArrayPlugginTest >> testPrimitiveMulScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -115,7 +115,7 @@ ASTCFloatArrayPluggin >> testPrimitiveMulScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveNormalize [
+ASTCFloatArrayPlugginTest >> testPrimitiveNormalize [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -125,7 +125,7 @@ ASTCFloatArrayPluggin >> testPrimitiveNormalize [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveSubFloatArray [
+ASTCFloatArrayPlugginTest >> testPrimitiveSubFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -135,7 +135,7 @@ ASTCFloatArrayPluggin >> testPrimitiveSubFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveSubScalar [
+ASTCFloatArrayPlugginTest >> testPrimitiveSubScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -145,7 +145,7 @@ ASTCFloatArrayPluggin >> testPrimitiveSubScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPluggin >> testPrimitiveSum [
+ASTCFloatArrayPlugginTest >> testPrimitiveSum [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
