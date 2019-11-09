@@ -12,7 +12,7 @@ BaselineOfASTC >> baseline: spec [
 		do: [
 			spec
 				baseline: 'Phineas'
-				with: [ spec repository: 'gitlab://pharo-project/hineas:master' ].
+				with: [ spec repository: 'gitlab://pharo-project/Phineas:master' ].
 			spec
 				baseline: 'TypedSlot'
 				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
