@@ -14,6 +14,9 @@ BaselineOfASTC >> baseline: spec [
 				baseline: 'Phineas'
 				with: [ spec repository: 'gitlab://pharo-project/phineas:master' ].
 			spec
+				baseline: 'TypedSlot'
+				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
+			spec
 				baseline: 'ParametrizedTests'
 				with: [ spec repository: 'github://tesonep/ParametrizedTests:master' ].
 			spec baseline: 'PlainPharoCode'
@@ -33,7 +36,7 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-VisitorsASTC-Tests' with:[ spec requires:#('ASTC-VisitorsASTC') ];
 				package: 'ASTC-VisitorsRB' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ];
-				package: 'IlliciumPlugins' with: [ spec requires: #('ASTC-Kernel' 'TypedSlots') ];
+				package: 'IlliciumPlugins' with: [ spec requires: #('ASTC-Kernel') ];
 				package: 'IlliciumPlugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].
 		].
 
