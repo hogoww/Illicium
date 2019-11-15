@@ -40,8 +40,9 @@ ASTCTypeAnnotationAST >> initialize [
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> typeThatNode: aNode [
-	| types |
-	types := inferer typeOfNode: aNode.
+	| types phineasTypes |
+	phineasTypes := inferer phineasTypeOfNode: aNode.
+	types := phineasTypes concreteClasses.
 	(types size > 1 and:[ (aNode isMethod and:[types anySatisfy: [:aType| aType name = aNode methodClass name ]])]) 
 	ifTrue:[ types remove: aNode methodClass ].	"remove implicit returns from primitives if it's not the only one"
 	
@@ -55,7 +56,7 @@ ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	types size > 1
 		ifTrue: [ Error signal: 'The type inferencer had too many results ' , aNode asString ].
 		
-	self atNewPropertyPut: types anyOne for: aNode
+	self atNewPropertyPut: phineasTypes for: aNode
 ]
 
 { #category : #visiting }
