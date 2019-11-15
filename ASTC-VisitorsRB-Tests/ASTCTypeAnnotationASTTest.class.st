@@ -55,14 +55,14 @@ ASTCTypeAnnotationASTTest >> setUp [
 ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #factorialR: for: RandomTestClass usingBlock:[ RandomTestClass new factorialR: 3 ].
+	ast := self inferMethodSelector: #aMethodWithAnArgument:  for: PINodeTypeVisitorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
 	ast nodesDo: [ :aNode | 
 		aNode isArgument
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName).
 			]. ].
-	self assert: counter equals:4.
+	self assert: counter equals:2.
 ]
 
 { #category : #test }
@@ -73,7 +73,7 @@ ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithAClassVariable
-		for: PINodeTypeVisitorTestsMethods.
+		for: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isVariable and: [ aNode isGlobal ])
@@ -86,7 +86,7 @@ ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
 ASTCTypeAnnotationASTTest >> testVisitGlobalNodeGlobal [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAGlobalVariable for: PINodeTypeVisitorTestsMethods.
+	ast := self inferMethodSelector: #aMethodWithAGlobalVariable for: PINodeTypeVisitorTest.
 	ast nodesDo: [ :aNode | 
 		(aNode isVariable and:[aNode isGlobal])
 			ifTrue: [ 
@@ -112,7 +112,7 @@ ASTCTypeAnnotationASTTest >> testVisitInstanceVariableNode [
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithAnInstanceVariable
-		for: PINodeTypeVisitorTestsMethods.
+		for: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isVariable and: [ aNode isInstance ])
@@ -127,7 +127,7 @@ ASTCTypeAnnotationASTTest >> testVisitLiteralNode [
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithALiteralNode
-		for: PINodeTypeVisitorTestsMethods.
+		for: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isLiteralNode and: [ aNode isValue ])
@@ -140,20 +140,20 @@ ASTCTypeAnnotationASTTest >> testVisitLiteralNode [
 ASTCTypeAnnotationASTTest >> testVisitMessageNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isMessage
 				ifTrue: [ counter := counter + 1.
 					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 5
+	self assert: counter equals: 1
 ]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitMethodNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #factorialR for: RandomTestClass.
+	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger for: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isMethod
@@ -168,7 +168,7 @@ ASTCTypeAnnotationASTTest >> testVisitSelfNode [
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithSelf
-		for: PINodeTypeVisitorTestsMethods.
+		for: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isSelf
@@ -183,7 +183,7 @@ ASTCTypeAnnotationASTTest >> testVisitTemporaryNode [
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithATemporaryVariable
-		for: PINodeTypeVisitorTestsMethods.
+		for: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isTemp
