@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCB3DAcceleratorPluginTest,
 	#superclass : #ASTCSlangTranslationTest,
-	#category : #'ASTC-Translation-Tests'
+	#category : #'ASTC-Translation-Tests-plugin'
 }
 
 { #category : #tests }

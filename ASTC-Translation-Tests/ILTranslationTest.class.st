@@ -4,5 +4,5 @@ Class {
 	#instVars : [
 		'translator'
 	],
-	#category : #'ASTC-Translation-Tests'
+	#category : #'ASTC-Translation-Tests-plugin'
 }

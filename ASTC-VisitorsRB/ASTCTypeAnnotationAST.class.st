@@ -47,14 +47,14 @@ ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	ifTrue:[ types remove: aNode methodClass ].	"remove implicit returns from primitives if it's not the only one"
 	
 	(types size > 1)
-	ifTrue:[ [ types remove: UndefinedObject ] on: NotFound do: [ self error: ' Unresolved type ambiguity '] ].
+	ifTrue:[ [ types remove: UndefinedObject ] on: NotFound do: [ TypeAmbiguityError new types: types ; signal ] ].
 	types size < 1
 		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
 			inferer blockingStuff inspect.
 			"
 			Error signal: 'The type inferencer had no results for ' , aNode asString ].
 	types size > 1
-		ifTrue: [ Error signal: 'The type inferencer had too many results ' , aNode asString ].
+		ifTrue: [ TypeAmbiguityError new types: types ; signal ].
 		
 	self atNewPropertyPut: phineasTypes for: aNode
 ]

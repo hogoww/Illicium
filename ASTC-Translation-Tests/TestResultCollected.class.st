@@ -5,19 +5,33 @@ Class {
 		'errorKinds',
 		'failureKinds'
 	],
-	#category : #'ASTC-Translation-Tests'
+	#category : #'ASTC-Translation-Tests-testing-class'
 }
 
 { #category : #adding }
 TestResultCollected >> addError: aTestCase [
-	[ aTestCase performTest ] on: Exception do: [:e| errorKinds add: e ].
+	| erroredTest |
+	[ aTestCase performTest ]
+		on: Exception
+		do: [ :e |
+			erroredTest := errorKinds
+				at: e class
+				ifAbsentPut: [ OrderedCollection new ].
+			erroredTest add: aTestCase ].
 	^super addError: aTestCase
 ]
 
 { #category : #adding }
 TestResultCollected >> addFailure: aTestCase [
-	[ aTestCase performTest ] on: Exception do: [:e| failureKinds add: e ].
-	^super addFailure: aTestCase
+	| erroredTest |
+	[ aTestCase performTest ]
+		on: Exception
+		do: [ :e | 
+			erroredTest := failureKinds
+				at: e messageText
+				ifAbsentPut: [ OrderedCollection new ].
+			erroredTest add: aTestCase ].
+	^ super addFailure: aTestCase
 ]
 
 { #category : #accessing }
@@ -28,6 +42,6 @@ TestResultCollected >> errorKinds [
 { #category : #accessing }
 TestResultCollected >> initialize [
 	super initialize.
-	errorKinds := Bag new.
-	failureKinds := Bag new.
+	errorKinds := Dictionary new.
+	failureKinds := Dictionary new.
 ]

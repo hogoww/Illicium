@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCGeniePluginTest,
 	#superclass : #ASTCSlangTranslationTest,
-	#category : #'ASTC-Translation-Tests'
+	#category : #'ASTC-Translation-Tests-plugin'
 }
 
 { #category : #tests }

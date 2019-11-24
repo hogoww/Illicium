@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCIlliciumTranslationTest,
 	#superclass : #ILTranslationTest,
-	#category : #'ASTC-Translation-Tests'
+	#category : #'ASTC-Translation-Tests-plugin'
 }
 
 { #category : #running }
