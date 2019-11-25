@@ -40,21 +40,10 @@ ASTCTypeAnnotationAST >> initialize [
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> typeThatNode: aNode [
-	| types phineasTypes |
+	| type phineasTypes |
 	phineasTypes := inferer phineasTypeOfNode: aNode.
-	types := phineasTypes concreteClasses.
-	(types size > 1 and:[ (aNode isMethod and:[types anySatisfy: [:aType| aType name = aNode methodClass name ]])]) 
-	ifTrue:[ types remove: aNode methodClass ].	"remove implicit returns from primitives if it's not the only one"
 	
-	(types size > 1)
-	ifTrue:[ [ types remove: UndefinedObject ] on: NotFound do: [ TypeAmbiguityError new types: types ; signal ] ].
-	types size < 1
-		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
-			inferer blockingStuff inspect.
-			"
-			Error signal: 'The type inferencer had no results for ' , aNode asString ].
-	types size > 1
-		ifTrue: [ TypeAmbiguityError new types: types ; signal ].
+	type := ASTCTypeChecker checkThatType: phineasTypes concreteClasses for: aNode.
 		
 	self atNewPropertyPut: phineasTypes for: aNode
 ]
