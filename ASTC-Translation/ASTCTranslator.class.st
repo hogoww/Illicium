@@ -8,6 +8,11 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
+{ #category : #'as yet unclassified' }
+ASTCTranslator class >> classTranslatorClass [
+	^ ASTCIlliciumClassTranslator 
+]
+
 { #category : #'translation-api' }
 ASTCTranslator class >> translateClass: aClass [
 	^ self new translateClass: aClass
@@ -40,23 +45,31 @@ ASTCTranslator >> classTranslator: aClassTranslator [
 ]
 
 { #category : #initialization }
+ASTCTranslator >> fillWithtranslatorSpecificTypes [
+	replacementClasses at: InterpreterProxy put: ASTCVirtualMachineProxy.
+	replacementClasses at: ASTCInterpreterProxy put: ASTCVirtualMachineProxy.
+]
+
+{ #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
-	^ replacementClasses at: aClass ifAbsent:[ ^ASTCUserClass  ]."unknown type for now"
+	^ replacementClasses at: aClass ifAbsent:[ self halt. ReplacementTypeUnknownError new type:aClass ; signal ].
 ]
 
 { #category : #initialization }
 ASTCTranslator >> initialize [
-	classTranslator := ASTCIlliciumClassTranslator new
+	classTranslator := self class classTranslatorClass new
 		mainTranslator: self;
 		yourself.
+	"basic replacement classes"
 	replacementClasses := Dictionary new
+		at: Object put: ASTCObject;
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
 		at: String put: ASTCString;
 		at: Array put: ASTCArray;
-		at: ASTCInterpreterProxy put: ASTCVirtualMachineProxy;
-		at: ASTCUserClass put: ASTCUserClass;
-		yourself
+		yourself.
+		
+	self fillWithtranslatorSpecificTypes 
 ]
 
 { #category : #accessors }
@@ -71,6 +84,7 @@ ASTCTranslator >> replacementClasses: aDictionnary [
 
 { #category : #'translation-api' }
 ASTCTranslator >> translateClass: aClass [
+	replacementClasses at: aClass put: ASTCUserClass.
 	^ classTranslator translateClass: aClass
 ]
 
@@ -81,10 +95,12 @@ ASTCTranslator >> translateExpression: anExpression [
 
 { #category : #'translation-api' }
 ASTCTranslator >> translateMethod: aCompiledMethod [
+	replacementClasses at: aCompiledMethod class put: ASTCUserClass.
 	^ classTranslator translateMethod: aCompiledMethod 
 ]
 
 { #category : #'translation-api' }
 ASTCTranslator >> translateMethod: aSelector fromClass: aClass [
+	replacementClasses at: aClass put: ASTCUserClass.
 	^ classTranslator translateMethod: aSelector fromClass: aClass
 ]

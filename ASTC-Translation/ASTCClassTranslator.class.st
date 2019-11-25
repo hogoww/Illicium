@@ -205,5 +205,5 @@ ASTCClassTranslator >> typeInferenceEntryPoints: aClass [
 { #category : #typing }
 ASTCClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
-	^ self getReplacementType: (inferer typeOfInstanceVariable: anIVName ofClass: aClass) anyOne
+	^ self getReplacementType: (ASTCTypeChecker type: (inferer typeOfInstanceVariable: anIVName ofClass: aClass))
 ]

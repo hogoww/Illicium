@@ -31,7 +31,7 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
 		propertyAt: ASTCTypeAnnotationAST property
-		ifPresent: [ :types | types concreteClasses anyOne]
+		ifPresent: [ :types | types ]
 		ifAbsent: [ 
 			Error signal:
 				aNode class asString , ' should have been annotated'].
