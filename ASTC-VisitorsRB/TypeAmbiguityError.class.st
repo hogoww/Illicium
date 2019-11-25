@@ -11,7 +11,7 @@ Class {
 TypeAmbiguityError >> description [ 
 	^ String streamContents: [ :stream |
 		stream << self class name;
-			<< 'between: ' ;
+			<< ' between: ' ;
 			print: types.
 			].
 ]

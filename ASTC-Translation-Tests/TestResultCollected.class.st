@@ -11,20 +11,20 @@ Class {
 { #category : #adding }
 TestResultCollected >> addError: aTestCase [
 	| erroredTest |
-	[ aTestCase performTest ]
+	[ aTestCase setUp performTest ]
 		on: Exception
-		do: [ :e |
+		do: [ :e | 
 			erroredTest := errorKinds
 				at: e class
 				ifAbsentPut: [ OrderedCollection new ].
 			erroredTest add: aTestCase ].
-	^super addError: aTestCase
+	^ super addError: aTestCase
 ]
 
 { #category : #adding }
 TestResultCollected >> addFailure: aTestCase [
 	| erroredTest |
-	[ aTestCase performTest ]
+	[ aTestCase setUp performTest ]
 		on: Exception
 		do: [ :e | 
 			erroredTest := failureKinds
