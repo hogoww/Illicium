@@ -15,6 +15,15 @@ InterpreterProxy >> sizeOfSTArrayFromCPrimitive: cPtr [
 ]
 
 { #category : #'*ASTC-VM-extensions' }
+InterpreterProxy >> stackIntegerValue: offset [
+	| oop |
+	<returnType:#int>
+	oop := self stackValue: offset.
+	(self isIntegerObject: oop) ifFalse: [self primitiveFail. ^0].
+	^oop
+]
+
+{ #category : #'*ASTC-VM-extensions' }
 InterpreterProxy >> stackValue: offset [
 	<returnType: #Object>
 	<var:#stack type:#OrderedCollection>
