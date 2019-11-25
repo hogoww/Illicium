@@ -21,7 +21,7 @@ ASTCPrinterVisitor >> printOn: aStream [
 
 { #category : #printing }
 ASTCPrinterVisitor >> printTabCount: aNumber [
-	aNumber timesRepeat: [ :i | stream tab ]
+	aNumber timesRepeat: [ stream tab ]
 ]
 
 { #category : #accessing }
@@ -207,7 +207,7 @@ ASTCPrinterVisitor >> visitLiteral: aLiteral [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aLiteral'.
-	stream << aLiteral value.
+	stream print: aLiteral value value.
 	currentDepth := currentDepth + 1.
 	super visitLiteral: aLiteral.
 	currentDepth := currentDepth - 1.
@@ -308,7 +308,7 @@ ASTCPrinterVisitor >> visitType: aType [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream << $( << 'aType'.
-	stream << aType type.
+	stream << aType type name.
 	currentDepth := currentDepth + 1.
 	super visitType: aType.
 	currentDepth := currentDepth - 1.
