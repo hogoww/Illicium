@@ -3,25 +3,26 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'types',
-		'node'
+		'node',
+		'inferer'
 	],
 	#category : #'ASTC-VisitorsRB-Typing'
 }
 
 { #category : #'as yet unclassified' }
-ASTCTypeChecker class >> checkThatType: types for: aNode [
-	^ self new types: types ; node: aNode ; check
+ASTCTypeChecker class >> checkThatType: types for: aNode using: inferer [
+	^ self new types: types ; node: aNode ; inferer: inferer ; check
 ]
 
 { #category : #'as yet unclassified' }
-ASTCTypeChecker class >> type: types [
-	^ self new types: types ; check
+ASTCTypeChecker class >> type: types using: anInferer [
+	^ self new types: types ; inferer: anInferer ; check
 ]
 
 { #category : #'as yet unclassified' }
 ASTCTypeChecker >> check [
 	(types size > 1)
-		ifTrue:[ [ types remove: Object ] on: NotFound do: [ TypeAmbiguityError new types: types ; signal ] ].
+		ifTrue:[ [ types remove: Object ] on: NotFound do: [] ].
 	self nodeCheck.
 	
 	(types size > 1)
@@ -38,6 +39,16 @@ ASTCTypeChecker >> check [
 	types size > 1
 		ifTrue: [ TypeAmbiguityError new types: types ; signal ].
 	^ types anyOne
+]
+
+{ #category : #accessing }
+ASTCTypeChecker >> inferer [
+	^ inferer
+]
+
+{ #category : #accessing }
+ASTCTypeChecker >> inferer: anInferer [ 
+	inferer := anInferer
 ]
 
 { #category : #accessing }

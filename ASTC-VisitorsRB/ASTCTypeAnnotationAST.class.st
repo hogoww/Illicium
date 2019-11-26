@@ -43,9 +43,9 @@ ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	| phineasTypes type |
 	phineasTypes := inferer phineasTypeOfNode: aNode.
 	
-	type := ASTCTypeChecker checkThatType: phineasTypes concreteClasses for: aNode.
+	type := ASTCTypeChecker checkThatType: phineasTypes concreteClasses for: aNode using: inferer.
 		
-	self atNewPropertyPut: type for: aNode
+	self atNewPropertyPut: type -> phineasTypes for: aNode
 ]
 
 { #category : #visiting }
