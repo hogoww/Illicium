@@ -52,7 +52,7 @@ ASTCTranslator >> fillWithtranslatorSpecificTypes [
 
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
-	^ replacementClasses at: aClass ifAbsent:[ self halt. ReplacementTypeUnknownError new type:aClass ; signal ].
+	^ replacementClasses at: aClass ifAbsent:[ ReplacementTypeUnknownError new type:aClass ; signal ].
 ]
 
 { #category : #initialization }
@@ -63,6 +63,7 @@ ASTCTranslator >> initialize [
 	"basic replacement classes"
 	replacementClasses := Dictionary new
 		at: Object put: ASTCObject;
+		at: UndefinedObject put: ASTCUndefinedObject;
 		at: SmallInteger put: ASTCSmallInteger;
 		at: Boolean put: ASTCBoolean;
 		at: String put: ASTCString;

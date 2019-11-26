@@ -31,7 +31,7 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
 		propertyAt: ASTCTypeAnnotationAST property
-		ifPresent: [ :types | types ]
+		ifPresent: [ :types | types key ]
 		ifAbsent: [ 
 			Error signal:
 				aNode class asString , ' should have been annotated'].
@@ -69,7 +69,6 @@ ASTCMethodTranslator >> initialize [
 		at: #assignmentNodeTranslator put: (ASTCAssignementNodeTranslator new methodTranslator: self ; yourself);
 		at: #blockNodeTranslator put: (ASTCBlockNodeTranslator new methodTranslator: self ; yourself);
 		at: #cascadeNodeTranslator put: (ASTCCascadeNodeTranslator new methodTranslator: self ; yourself);
-		at: #literalNodeTranslator put: (ASTCLiteralNodeTranslator new methodTranslator: self ; yourself);
 		at: #literalValueNodeTranslator put: (ASTCLiteralValueNodeTranslator new methodTranslator: self ; yourself);
 		at: #literalArrayNodeTranslator put: (ASTCLiteralArrayNodeTranslator new methodTranslator: self ; yourself);
 		at: #messageNodeTranslator put: (ASTCMessageNodeTranslator new methodTranslator: self ; yourself);
