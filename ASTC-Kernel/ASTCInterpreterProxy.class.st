@@ -22,7 +22,7 @@ ASTCInterpreterProxy >> firstIndexableField: orderOop [
 ASTCInterpreterProxy >> integerObjectOf: anInteger [
 	<doNotGenerate>
 	"dummy method for type inference and system checks"
-	^self
+	^ self
 ]
 
 { #category : #adding }

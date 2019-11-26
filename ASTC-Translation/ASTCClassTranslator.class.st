@@ -205,7 +205,8 @@ ASTCClassTranslator >> typeInferenceEntryPoints: aClass [
 { #category : #typing }
 ASTCClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
-	| phineasType |
+	| phineasType type |
 	phineasType := (inferer concreteTypesOfInstanceVariable: anIVName ofClass:aClass).
-	^ self getReplacementType: (ASTCTypeChecker type: phineasType concreteTypes using: inferer)
+	type := (ASTCTypeChecker type: phineasType concreteClasses using: inferer).
+	^ self getReplacementType: type
 ]
