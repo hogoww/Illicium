@@ -32,9 +32,7 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	^ aNode
 		propertyAt: ASTCTypeAnnotationAST property
 		ifPresent: [ :types | types key ]
-		ifAbsent: [ 
-			Error signal:
-				aNode class asString , ' should have been annotated'].
+		ifAbsent: [ ASTCUnannotatedType new node: aNode ; signal ].
 ]
 
 { #category : #typing }
