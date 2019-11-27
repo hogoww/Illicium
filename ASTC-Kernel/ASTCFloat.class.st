@@ -6,19 +6,19 @@ Class {
 
 { #category : #converting }
 ASTCFloat class >> asCType [
-	^#int
+	^#float
 ]
 
 { #category : #default }
 ASTCFloat class >> defaultValue [
-	^0
+	^0.0
 ]
 
 { #category : #accessing }
-ASTCFloat class >> value: anInteger [ 
+ASTCFloat class >> value: aFloat [
 
 	^ self new
-		value: anInteger;
+		value: aFloat;
 		yourself
 ]
 

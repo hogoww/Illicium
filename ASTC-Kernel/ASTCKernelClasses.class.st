@@ -10,9 +10,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCKernelClasses class >> asCType [
-	"since SubclassResponsibility value can be used, it can make debugging hard. And error solves that."
-	self error:'Must be defined'.
-	^SubclassResponsibility
+	self subclassResponsibility 
 ]
 
 { #category : #'message performing' }
