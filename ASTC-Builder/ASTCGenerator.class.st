@@ -237,15 +237,10 @@ ASTCGenerator >> addPrinterVisitorsMethods [
 			currentDepth:=0 ].
 	self addMethod: method asString on: printerVisitorClass withProtocol: 'initialization'.
 	
-			
 	method := 'printTabCount:' asMethodWithBody: 
-		[:aNumber| aNumber timesRepeat:[:i| stream tab.] ].
+		[:aNumber| aNumber timesRepeat:[ stream tab] ].
 	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
 	
-	method := 'printTabCount:' asMethodWithBody: 
-		[:aNumber| aNumber timesRepeat:[:i| stream tab.] ].
-	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
-
 	method := 'stream' asMethodWithBody: 
 		[ ^ stream ].
 	self addMethod: method asString on: printerVisitorClass  withProtocol: 'accessing'.
@@ -419,8 +414,10 @@ ASTCGenerator >> generatePrinterVisit: aFMXClass [
 		stream cr.
 
 		self printTabCount: currentDepth.
-		stream << $( << aClassWithQuotes .
-		stream << anInstance propertiesNames.
+		stream << $( ;
+			<< aClassWithQuotes ;
+			space ;
+			print: anInstance propertiesNames.
 		
 		currentDepth := currentDepth+1.
 		super visitSomething:{aClass}.
