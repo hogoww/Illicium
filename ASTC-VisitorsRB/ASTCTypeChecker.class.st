@@ -35,7 +35,7 @@ ASTCTypeChecker >> check [
 		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
 			inferer blockingStuff inspect.
 			"
-			NoTypeFound signal ].
+			NoTypeFound new something: node ; signal ].
 	types size > 1
 		ifTrue: [ TypeAmbiguityError new types: types ; signal ].
 	^ types anyOne
