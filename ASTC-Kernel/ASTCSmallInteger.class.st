@@ -47,6 +47,12 @@ ASTCSmallInteger >> / anotherSmallInteger [
 ]
 
 { #category : #translation }
+ASTCSmallInteger >> // anotherSmallInteger [
+	self flag:#toCheck. "May need to have a cast to int? I don't like it"
+	^ self newBinaryOperatorNamed: '/' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
 ASTCSmallInteger >> < anotherSmallInteger [
 	
 	^ self newBinaryOperatorNamed: '<' withArgument: anotherSmallInteger
@@ -83,6 +89,18 @@ ASTCSmallInteger >> >= anotherSmallInteger [
 ]
 
 { #category : #translation }
+ASTCSmallInteger >> bitAnd: anotherSmallInteger [
+	self flag: #toCheck."UNSURE ABOUT THIS ONE"
+	^ self newBinaryOperatorNamed: '&' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
+ASTCSmallInteger >> bitShift: anotherSmallInteger [ 
+	self flag: #toCheck."UNSURE ABOUT THIS ONE"
+	^ self newBinaryOperatorNamed: '<<' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
 ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	|res|
 	res:=ASTCOperator new 
@@ -91,6 +109,20 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	res addOperand:(self value acceptVisitor: self visitor).
 	res addOperand:(anArgument acceptVisitor: self visitor).
 	^res
+]
+
+{ #category : #translation }
+ASTCSmallInteger >> to: stop by: step do: aBlock [
+	| node |
+	node := self to: stop  do: aBlock.
+	node isLiteral ifTrue: [ self halt. "Should add a check for step to be different of 0 or optimize the symbol" ].
+	node iteratorModification: 
+		(ASTCOperator new
+			symbol: '+=';
+			addOperand: (ASTCIdentifier new id: (aBlock arguments at:1) name ; yourself);
+			addOperand: (step acceptVisitor: methodTranslator);
+			yourself).
+	^ node
 ]
 
 { #category : #translation }
