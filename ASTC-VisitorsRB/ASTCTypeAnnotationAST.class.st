@@ -56,6 +56,13 @@ ASTCTypeAnnotationAST >> visitArgumentNode: anArgumentNode [
 ]
 
 { #category : #visiting }
+ASTCTypeAnnotationAST >> visitAssignmentNode: anAssignementNode [
+	self typeThatNode: anAssignementNode.
+	super visitAssignmentNode: anAssignementNode.
+	^ anAssignementNode
+]
+
+{ #category : #visiting }
 ASTCTypeAnnotationAST >> visitGlobalNode: aGlobalNode [
 	self typeThatNode: aGlobalNode.
 	super visitGlobalNode: aGlobalNode.
