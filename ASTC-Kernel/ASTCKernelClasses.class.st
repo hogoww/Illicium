@@ -21,7 +21,7 @@ ASTCKernelClasses >> perform: aSelector withArguments: anArray [
 	Some stuff get translated by default for UserClasses, which are basically an unknown type."
 	^(self class methodDictionary includesKey: aSelector)
 	ifTrue:[ super perform: aSelector withArguments: anArray ] 
-	ifFalse:[	 self doesNotUnderstand: (Message selector: aSelector arguments: anArray) ].
+	ifFalse:[	 self doesNotUnderstand: ((Message selector: aSelector arguments: anArray) lookupClass: self class ; yourself) ].
 	" 
 	self browse 
 	"
