@@ -21,6 +21,16 @@ ASTCIlliciumTranslationTest >> testTranslateBrokenPlugin [
 ]
 
 { #category : #tests }
+ASTCIlliciumTranslationTest >> testTranslateILVMPArameter [
+	"Bad test, too big, no checking. But test nonetheless"
+	"Check only for errors"
+	| cu |
+	cu := translator translateClass: ILVMParameters .
+	cu debugASTCStructure.
+	^ cu
+]
+
+{ #category : #tests }
 ASTCIlliciumTranslationTest >> testTranslateRandomClass [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"

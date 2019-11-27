@@ -46,13 +46,13 @@ ASTCTranslator >> classTranslator: aClassTranslator [
 
 { #category : #initialization }
 ASTCTranslator >> fillWithtranslatorSpecificTypes [
-	replacementClasses at: InterpreterProxy put: ASTCVirtualMachineProxy.
-	replacementClasses at: ASTCInterpreterProxy put: ASTCVirtualMachineProxy.
+	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy.
+	replacementClasses at: #ASTCInterpreterProxy put: ASTCVirtualMachineProxy.
 ]
 
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
-	^ replacementClasses at: aClass ifAbsent:[ ReplacementTypeUnknownError new type:aClass ; signal ].
+	^ replacementClasses at: aClass name ifAbsent:[ ReplacementTypeUnknownError new type:aClass ; signal ].
 ]
 
 { #category : #initialization }
@@ -61,13 +61,19 @@ ASTCTranslator >> initialize [
 		mainTranslator: self;
 		yourself.
 	"basic replacement classes"
+	self flag: #careful. " float and string are used  "
 	replacementClasses := Dictionary new
-		at: Object put: ASTCObject;
-		at: UndefinedObject put: ASTCUndefinedObject;
-		at: SmallInteger put: ASTCSmallInteger;
-		at: Boolean put: ASTCBoolean;
-		at: String put: ASTCString;
-		at: Array put: ASTCArray;
+		at: #Object put: ASTCObject ;
+		at: #UndefinedObject put: ASTCUndefinedObject ;
+		at: #SmallInteger put: ASTCSmallInteger ;
+		at: #Boolean put: ASTCBoolean ;
+		at: #String put: ASTCString ;
+		at: #ByteString put: ASTCString;
+		at: #ByteSymbol put: ASTCString ;
+		at: #Float put: ASTCFloat ;
+		at: #SmallFloat64 put: ASTCFloat ; 
+		at: #BoxedFloat64 put: ASTCFloat ; 
+		at: #Array put: ASTCArray ;
 		yourself.
 		
 	self fillWithtranslatorSpecificTypes 
@@ -85,7 +91,7 @@ ASTCTranslator >> replacementClasses: aDictionnary [
 
 { #category : #'translation-api' }
 ASTCTranslator >> translateClass: aClass [
-	replacementClasses at: aClass put: ASTCUserClass.
+	replacementClasses at: aClass name put: ASTCUserClass.
 	^ classTranslator translateClass: aClass
 ]
 
@@ -96,12 +102,12 @@ ASTCTranslator >> translateExpression: anExpression [
 
 { #category : #'translation-api' }
 ASTCTranslator >> translateMethod: aCompiledMethod [
-	replacementClasses at: aCompiledMethod class put: ASTCUserClass.
+	replacementClasses at: aCompiledMethod class name put: ASTCUserClass.
 	^ classTranslator translateMethod: aCompiledMethod 
 ]
 
 { #category : #'translation-api' }
 ASTCTranslator >> translateMethod: aSelector fromClass: aClass [
-	replacementClasses at: aClass put: ASTCUserClass.
+	replacementClasses at: aClass name put: ASTCUserClass.
 	^ classTranslator translateMethod: aSelector fromClass: aClass
 ]

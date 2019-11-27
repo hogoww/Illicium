@@ -17,7 +17,8 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAddFloatArray [
 { #category : #tests }
 ASTCFloatArrayPlugginTest >> testPrimitiveAddScalar [
 	| cu |
-	self flag: #Unsupported."type annotation to fix"
+	self flag: #working.
+	"Not too bad. Missing the logic of the do, nil, and cCoerce. also the type annotation for value is not taken into account correctly."
 	
 	cu := translator translateMethod: #primitiveAddScalar fromClass: FloatArrayPlugin .
 	self assert: cu isStructuralyValidAST.
@@ -107,8 +108,8 @@ ASTCFloatArrayPlugginTest >> testPrimitiveMulFloatArray [
 { #category : #tests }
 ASTCFloatArrayPlugginTest >> testPrimitiveMulScalar [
 	| cu |
-	self flag: #Unsupported."type annotation to fix"
-	
+	self flag: #working.
+	"Not too bad. Missing the logic of the do, nil, and cCoerce. also the type annotation for value is not taken into account correctly."
 	cu := translator translateMethod: #primitiveMulScalar fromClass: FloatArrayPlugin .
 	self assert: cu isStructuralyValidAST.
 	^ cu

@@ -11,5 +11,5 @@ ASTCSlangTranslator class >> classTranslatorClass [
 
 { #category : #initialization }
 ASTCSlangTranslator >> fillWithtranslatorSpecificTypes [
-	replacementClasses at: InterpreterProxy put: ASTCVirtualMachineProxy
+	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy
 ]

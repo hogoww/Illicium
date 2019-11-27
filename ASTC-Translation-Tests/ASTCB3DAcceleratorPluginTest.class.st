@@ -99,6 +99,7 @@ ASTCB3DAcceleratorPluginTest >> testPrimitiveEnableDrawRangeChecks [
 	| cu |
 	self flag: #working. 
 	"pretty good actually"
+	"returns nil, should me transformed to 1 or null."
 	
 	cu := translator translateMethod: #primitiveEnableDrawRangeChecks fromClass: B3DAcceleratorPlugin.
 	self assert: cu isStructuralyValidAST.
