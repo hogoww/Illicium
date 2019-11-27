@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #accessing }
+ASTCArray >> at: anIndex [
+	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
+	 self flag:#todo.
+	^ ASTCExpression new
+]
+
+{ #category : #accessing }
 ASTCArray >> at: anIndex put: aValue [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
 	 self flag:#todo.
