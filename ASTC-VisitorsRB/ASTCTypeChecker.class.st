@@ -4,19 +4,31 @@ Class {
 	#instVars : [
 		'types',
 		'node',
-		'inferer'
+		'inferer',
+		'variableName'
 	],
 	#category : #'ASTC-VisitorsRB-Typing'
 }
 
 { #category : #'as yet unclassified' }
 ASTCTypeChecker class >> checkThatType: types for: aNode using: inferer [
-	^ self new types: types ; node: aNode ; inferer: inferer ; check
+	| vname |
+	vname := aNode isVariable ifTrue:[ aNode name ] ifFalse:[ aNode className ].
+	^ self new
+		types: types;
+		node: aNode;
+		inferer: inferer;
+		variableName: vname;
+		check
 ]
 
 { #category : #'as yet unclassified' }
-ASTCTypeChecker class >> type: types using: anInferer [
-	^ self new types: types ; inferer: anInferer ; check
+ASTCTypeChecker class >> type: types using: anInferer forVar: aString [
+	^ self new
+		types: types;
+		inferer: anInferer;
+		variableName: aString;
+		check
 ]
 
 { #category : #'as yet unclassified' }
@@ -35,7 +47,7 @@ ASTCTypeChecker >> check [
 		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
 			inferer blockingStuff inspect.
 			"
-			NoTypeFound new something: node ; signal ].
+			NoTypeFound new something: variableName ; signal ].
 	types size > 1
 		ifTrue: [ TypeAmbiguityError new types: types ; signal ].
 	^ types anyOne
@@ -79,4 +91,14 @@ ASTCTypeChecker >> types [
 { #category : #accessing }
 ASTCTypeChecker >> types: aCollectionOfType [
 	types := aCollectionOfType
+]
+
+{ #category : #accessing }
+ASTCTypeChecker >> variableName [
+	^ variableName
+]
+
+{ #category : #accessing }
+ASTCTypeChecker >> variableName: aVariableName [
+	variableName := aVariableName
 ]

@@ -207,6 +207,6 @@ ASTCClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
 	| phineasType type |
 	phineasType := (inferer concreteTypesOfInstanceVariable: anIVName ofClass:aClass).
-	type := (ASTCTypeChecker type: phineasType concreteClasses using: inferer).
+	type := (ASTCTypeChecker type: phineasType concreteClasses using: inferer forVar: anIVName).
 	^ self getReplacementType: type
 ]
