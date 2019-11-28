@@ -37,6 +37,8 @@ ASTCTypeChecker >> check [
 		ifTrue:[ [ types remove: Object ] on: NotFound do: [] ].
 	self nodeCheck.
 	
+	(types includesAll: {Float. BoxedFloat64 }) ifTrue:[ types remove: BoxedFloat64].
+	
 	(types size > 1)
 		ifTrue:[ [ types remove: UndefinedObject ] on: NotFound do: [ ] ].
 	(types size > 1)
