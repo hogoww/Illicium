@@ -15,6 +15,18 @@ InterpreterProxy >> sizeOfSTArrayFromCPrimitive: cPtr [
 ]
 
 { #category : #'*ASTC-VM-extensions' }
+InterpreterProxy >> slotSizeOf: oop [
+	<returnType: #SmallInteger>
+	self flag:#todo.
+	"Not shown by the heuristic tool, to investigate"
+	
+	"Returns the number of slots in the receiver.
+	If the receiver is a byte object, return the number of bytes.
+	Otherwise return the number of words."
+	^(oop basicSize) + (oop class instSize)
+]
+
+{ #category : #'*ASTC-VM-extensions' }
 InterpreterProxy >> stackIntegerValue: offset [
 	| oop |
 	<returnType:#int>
