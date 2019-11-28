@@ -50,68 +50,68 @@ ASTCTypeAnnotationAST >> typeThatNode: aNode [
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitArgumentNode: anArgumentNode [
-	self typeThatNode: anArgumentNode.
 	super visitArgumentNode: anArgumentNode.
+	self typeThatNode: anArgumentNode.
 	^ anArgumentNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitAssignmentNode: anAssignementNode [
-	self typeThatNode: anAssignementNode.
 	super visitAssignmentNode: anAssignementNode.
+	self typeThatNode: anAssignementNode.
 	^ anAssignementNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitGlobalNode: aGlobalNode [
-	self typeThatNode: aGlobalNode.
 	super visitGlobalNode: aGlobalNode.
+	self typeThatNode: aGlobalNode.
 	^ aGlobalNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitInstanceVariableNode: anInstanceVariableNode [
-	self typeThatNode: anInstanceVariableNode.
 	super visitInstanceVariableNode: anInstanceVariableNode.
+	self typeThatNode: anInstanceVariableNode.
 	^ anInstanceVariableNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitLiteralNode: aLiteralNode [
-	self typeThatNode: aLiteralNode.
 	super visitLiteralNode: aLiteralNode.
+	self typeThatNode: aLiteralNode.
 	^aLiteralNode.
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitMessageNode: aMessageNode [
-	super visitMessageNode: aMessageNode."super visit before, so receivers are typed in case of a problem"
+	super visitMessageNode: aMessageNode.
 	self typeThatNode: aMessageNode.
 	^aMessageNode.
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitMethodNode: aMethodNode [
-	self typeThatNode: aMethodNode.
-
 	"The type inferencer doesn't type some methods, such as primitives."
 	"The methodTypeDispatcher tells me if he did, in fact, type this method"
 	(self wasMethodTyped: aMethodNode)
 		ifTrue: [ super visitMethodNode: aMethodNode	"walk the method's ast" ].
+			
+	self typeThatNode: aMethodNode.
 	^ aMethodNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitSelfNode: aSelfNode [
-	self typeThatNode: aSelfNode.
 	super visitSelfNode: aSelfNode.
+	self typeThatNode: aSelfNode.
 	^ aSelfNode
 ]
 
 { #category : #visiting }
 ASTCTypeAnnotationAST >> visitTemporaryNode: aTemporaryNode [
-	self typeThatNode: aTemporaryNode.
 	super visitTemporaryNode: aTemporaryNode.
+	self typeThatNode: aTemporaryNode.
 	^ aTemporaryNode
 ]
 

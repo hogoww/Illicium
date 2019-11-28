@@ -66,6 +66,20 @@ ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 ]
 
 { #category : #test }
+ASTCTypeAnnotationASTTest >> testVisitAssignmentNode [
+	| counter ast |
+	counter := 0.
+	ast := self inferMethodSelector: #aMethodWithAnAssignement for: PINodeTypeVisitorTest.
+	ast nodesDo: [ :aNode | 
+		aNode isAssignment
+			ifTrue: [ 
+				counter := counter + 1.
+				self assert: (aNode hasProperty: propertyName).
+			]. ].
+	self assert: counter equals:1.
+]
+
+{ #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	"failing because it's getting undefined Object as well as Smallinteger as a possible type. This is normal, because the class variable initialization isn't set in the call graph of the variable
