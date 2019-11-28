@@ -161,7 +161,7 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	| methodsASTs functionDefinitionsASTs methodsToTranslate cu stateStuff |
 	self preTranslationConstraintCheck: aClass.
 	self preTypeInference: aClass.
-	self callgraphTypeStartingFrom: { (aClass >> aSelector) ast  }.
+	self callgraphTypeStartingFrom: { (aClass >> aSelector) ast }.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.
 	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
 	

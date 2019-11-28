@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCUndefinedObject class >> asCType [
-	^ #NULL
+	^ #void
 ]
 
 { #category : #'message performing' }
