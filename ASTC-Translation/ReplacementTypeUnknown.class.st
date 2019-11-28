@@ -1,5 +1,5 @@
 Class {
-	#name : #ReplacementTypeUnknownError,
+	#name : #ReplacementTypeUnknown,
 	#superclass : #Error,
 	#instVars : [
 		'type'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-ReplacementTypeUnknownError >> description [
+ReplacementTypeUnknown >> description [
 	^ String streamContents:[:s|
 		s << 'Type ';
 			print: type;
@@ -17,11 +17,11 @@ ReplacementTypeUnknownError >> description [
 ]
 
 { #category : #accessing }
-ReplacementTypeUnknownError >> type [
+ReplacementTypeUnknown >> type [
 	^ type
 ]
 
 { #category : #accessing }
-ReplacementTypeUnknownError >> type: aType [
+ReplacementTypeUnknown >> type: aType [
 	type := aType
 ]

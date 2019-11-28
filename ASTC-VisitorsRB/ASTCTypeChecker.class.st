@@ -40,7 +40,7 @@ ASTCTypeChecker >> check [
 	(types size > 1)
 		ifTrue:[ [ types remove: UndefinedObject ] on: NotFound do: [ ] ].
 	(types size > 1)
-		ifTrue:[ [ types remove: Object ] on: NotFound do: [ TypeAmbiguityError new types: types ; signal ] ].
+		ifTrue:[ [ types remove: Object ] on: NotFound do: [ TypeAmbiguity new types: types ; signal ] ].
 	
 	
 	types size < 1
@@ -49,7 +49,7 @@ ASTCTypeChecker >> check [
 			"
 			NoTypeFound new something: variableName ; signal ].
 	types size > 1
-		ifTrue: [ TypeAmbiguityError new types: types ; signal ].
+		ifTrue: [ TypeAmbiguity new types: types ; signal ].
 	^ types anyOne
 ]
 

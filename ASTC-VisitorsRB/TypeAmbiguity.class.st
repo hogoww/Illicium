@@ -1,5 +1,5 @@
 Class {
-	#name : #TypeAmbiguityError,
+	#name : #TypeAmbiguity,
 	#superclass : #Error,
 	#instVars : [
 		'types'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-TypeAmbiguityError >> description [ 
+TypeAmbiguity >> description [ 
 	^ String streamContents: [ :stream |
 		stream << self class name;
 			<< ' between: ' ;
@@ -17,11 +17,11 @@ TypeAmbiguityError >> description [
 ]
 
 { #category : #accessing }
-TypeAmbiguityError >> types [
+TypeAmbiguity >> types [
 	^ types
 ]
 
 { #category : #accessing }
-TypeAmbiguityError >> types: aCollectionOfType [
+TypeAmbiguity >> types: aCollectionOfType [
 	types := aCollectionOfType
 ]

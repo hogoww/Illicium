@@ -52,7 +52,7 @@ ASTCTranslator >> fillWithtranslatorSpecificTypes [
 
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aClass [
-	^ replacementClasses at: aClass name ifAbsent:[ ReplacementTypeUnknownError new type:aClass ; signal ].
+	^ replacementClasses at: aClass name ifAbsent:[ ReplacementTypeUnknown new type:aClass ; signal ].
 ]
 
 { #category : #initialization }
