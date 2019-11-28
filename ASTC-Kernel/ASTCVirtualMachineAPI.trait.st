@@ -1,7 +1,7 @@
 Trait {
 	#name : #ASTCVirtualMachineAPI,
 	#instVars : [
-		'#interpreterProxy type: ASTCInterpreterProxy'
+		'#interpreterProxy type: InterpreterProxy'
 	],
 	#category : #'ASTC-Kernel'
 }
@@ -43,6 +43,14 @@ ASTCVirtualMachineAPI >> pop: number [
 	
 ]
 
+{ #category : #initialization }
+ASTCVirtualMachineAPI >> popAndGet [
+	<doNotGenerate>
+	"dummy method for type inference and system checks"
+	"returns the reasonCode"
+	^ Object new
+]
+
 { #category : #'simulation only' }
 ASTCVirtualMachineAPI >> primitiveFail [
 	<doNotGenerate>
@@ -50,6 +58,7 @@ ASTCVirtualMachineAPI >> primitiveFail [
 
 { #category : #initialization }
 ASTCVirtualMachineAPI >> primitiveFailed [ 
+	<doNotGenerate>
 ]
 
 { #category : #'simulation only' }

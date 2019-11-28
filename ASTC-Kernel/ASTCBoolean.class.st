@@ -66,6 +66,14 @@ ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 ]
 
 { #category : #controlling }
+ASTCBoolean >> not [
+	^ ASTCOperator new
+		symbol: '!';
+		addOperand: (value acceptVisitor: methodTranslator) ;
+		yourself
+]
+
+{ #category : #controlling }
 ASTCBoolean >> or: aBoolean [
 	| firstPart secondPart |
 	firstPart := value isBlock
