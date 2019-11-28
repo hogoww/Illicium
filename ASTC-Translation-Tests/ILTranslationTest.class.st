@@ -6,3 +6,9 @@ Class {
 	],
 	#category : #'ASTC-Translation-Tests-plugin'
 }
+
+{ #category : #running }
+ILTranslationTest >> setUp [
+	super setUp.
+	translator := ASTCTranslator new
+]

@@ -4,12 +4,6 @@ Class {
 	#category : #'ASTC-Translation-Tests-plugin'
 }
 
-{ #category : #running }
-ASTCIlliciumTranslationTest >> setUp [
-	super setUp.
-	translator := ASTCTranslator new
-]
-
 { #category : #tests }
 ASTCIlliciumTranslationTest >> testTranslateBrokenPlugin [
 	"Bad test, too big, no checking. But test nonetheless"
