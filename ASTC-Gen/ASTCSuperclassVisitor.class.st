@@ -90,6 +90,11 @@ ASTCSuperclassVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitNode: aNode [
+	
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitOperator: anOperator [
 	^ self visitExpression: anOperator
 ]

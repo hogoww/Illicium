@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCDebugStructureVisitor,
-	#superclass : #ASTCWalkerVisitor,
+	#superclass : #ASTCHierarchyWalkerVisitor,
 	#category : #'ASTC-Gen-visitors'
 }
 

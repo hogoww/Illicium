@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCWalkerVisitor,
-	#superclass : #ASTCSuperclassVisitor,
+	#superclass : #ASTCVisitor,
 	#category : #'ASTC-Gen-visitors'
 }
 
