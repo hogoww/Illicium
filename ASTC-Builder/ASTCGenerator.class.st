@@ -488,15 +488,12 @@ ASTCGenerator >> generateStructureValidatorVisitorClass [
 { #category : #'generation-visit' }
 ASTCGenerator >> generateSuperclassVisitOf: aFMXClass [
 
-	| method className methodSelector body |
-	
-	body := self visitSuperClassBody: aFMXClass.
+	| method className |
 	
 	className := aFMXClass name.
-	methodSelector := className asVisitClassSelector.
-		
-	method := methodSelector
-		asMethodWithBody: body 
+	
+	method := className asVisitClassSelector
+		asMethodWithBody: (self visitSuperClassBody: aFMXClass)
 		withArguments: {#anInstance -> className asAnInstance} asDictionary.
 			
 	^ self addMethod: method asString 
@@ -595,9 +592,8 @@ ASTCGenerator >> generateWalkVisitOf: aFMXClass [
 		body add: [:anInstance| anInstance propertyName 
 					ifNotNil:[:aPropertyName| aPropertyName acceptVisitor: self ] ] 
 			withArguments: {#aPropertyName -> propertyName asAnInstance } asDictionary ].
-
-
-						
+		
+								
 	method := visitClass
 		asMethodWithBody: body
 		withArguments: {(#anInstance -> aClass )} asDictionary.
