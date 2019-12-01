@@ -50,6 +50,7 @@ Class {
 		'abstractVisitorClass',
 		'collectionsType',
 		'walkerVisitorClass',
+		'hierarchyWalkerVisitorClass',
 		'printerVisitorClass',
 		'debugStructureVisitorClass',
 		'structureValidatorVisitorClass',
@@ -339,8 +340,8 @@ ASTCGenerator >> generateClass: aFMXClass [
 
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> generateDebugStructureVisitorClass [
-	"DebugStructure --|> Walker"
-	debugStructureVisitorClass :=  walkerVisitorClass subclass: (self fullNameOf: #DebugStructureVisitor)
+	"DebugStructure --|> HierarchyWalker"
+	debugStructureVisitorClass :=  hierarchyWalkerVisitorClass subclass: (self fullNameOf: #DebugStructureVisitor)
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: (self makePackageNameWith: #visitors).
@@ -350,8 +351,6 @@ ASTCGenerator >> generateDebugStructureVisitorClass [
 
 { #category : #'generation-visit' }
 ASTCGenerator >> generateDebugVisitOf: aFMXClass [
-	"add an empty behavior visit method"
-
 	| method body anInstance visitClass collections singleElements propertyName isType |
 	anInstance := aFMXClass name asAnInstance.
 
@@ -390,6 +389,38 @@ ASTCGenerator >> generateDebugVisitOf: aFMXClass [
 		addMethod: method asString
 		on: debugStructureVisitorClass
 		withProtocol: 'visiting'  
+]
+
+{ #category : #'generation-visit' }
+ASTCGenerator >> generateHierarchyWalkVisitOf: aFMXClass [
+	"add an empty behavior visit method"
+
+	| method body aClass visitClass |
+	
+	aClass := aFMXClass name.
+	visitClass := aClass asVisitClassSelector.
+	
+	body := [:anInstance| super visitClass:{anInstance} ].
+	body := body + (self visitSuperClassBody: aFMXClass).
+
+	method := visitClass
+		asMethodWithBody: body
+		withArguments: {(#anInstance -> aClass asAnInstance )} asDictionary.
+
+	^ self
+		addMethod: method asString
+		on: hierarchyWalkerVisitorClass
+		withProtocol: 'visiting'
+]
+
+{ #category : #'generation-visitor-classes' }
+ASTCGenerator >> generateHierarchyWalkerVisitorClass [
+	"HierarchyWalker --> Walker"
+	hierarchyWalkerVisitorClass := walkerVisitorClass subclass: (self fullNameOf: #HierarchyWalkerVisitor)
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors)
+
 ]
 
 { #category : #'generation-system' }
@@ -456,26 +487,26 @@ ASTCGenerator >> generateStructureValidatorVisitorClass [
 
 { #category : #'generation-visit' }
 ASTCGenerator >> generateSuperclassVisitOf: aFMXClass [
-	"add an empty behavior visit method"
-	| method className superclassName methodSelector superMethodSelector |
+
+	| method className methodSelector body |
 	
-	superclassName := aFMXClass classGeneralization ifNotNil:[:aSuperClass| aSuperClass name] ifNil:[ ^self ]."No need to override"
-	superMethodSelector := superclassName asVisitClassSelector.
+	body := self visitSuperClassBody: aFMXClass.
 	
 	className := aFMXClass name.
-	methodSelector := (className asVisitClassSelector).
+	methodSelector := className asVisitClassSelector.
 		
 	method := methodSelector
-		asMethodWithBody: [ :anInstance | ^ self superMethodSelector: {anInstance}  ]
-		withArguments:
-			{#anInstance ->
-			className asAnInstance} asDictionary.
-	^ self addMethod: method asString on: superclassVisitorClass withProtocol: 'visiting'
+		asMethodWithBody: body 
+		withArguments: {#anInstance -> className asAnInstance} asDictionary.
+			
+	^ self addMethod: method asString 
+		on: superclassVisitorClass 
+		withProtocol: 'visiting'
 ]
 
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> generateSuperclassVisitorClass [
-	"superclass --> Abstract"
+	"Superclass --> Abstract"
 	superclassVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #SuperclassVisitor)
 		instanceVariableNames: ''
 		classVariableNames: ''
@@ -513,10 +544,15 @@ ASTCGenerator >> generateValidatorVisitOf: aFMXClass [
 ASTCGenerator >> generateVisitorsClasses [
 	self generateAbstractVisitorClass.
 		self generateSuperclassVisitorClass.
-			self generateWalkerVisitorClass.
-				self generatePrinterVisitorClass.
+		self generateWalkerVisitorClass.
+			self generatePrinterVisitorClass.
+			self generateHierarchyWalkerVisitorClass.
 				self generateDebugStructureVisitorClass.
 					self generateStructureValidatorVisitorClass.
+
+
+
+
 
 ]
 
@@ -524,10 +560,11 @@ ASTCGenerator >> generateVisitorsClasses [
 ASTCGenerator >> generateVisitsFor: aFMXClass [
 	self generateAbstractVisitOf: aFMXClass.
 		self generateSuperclassVisitOf: aFMXClass.
-			self generateWalkVisitOf: aFMXClass.
+		self generateWalkVisitOf: aFMXClass.
+			self generatePrinterVisit: aFMXClass.
+			self generateHierarchyWalkVisitOf: aFMXClass.
 				self generateDebugVisitOf: aFMXClass.
 					self generateValidatorVisitOf: aFMXClass.
-				self generatePrinterVisit: aFMXClass.
 
 ]
 
@@ -574,7 +611,7 @@ ASTCGenerator >> generateWalkVisitOf: aFMXClass [
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> generateWalkerVisitorClass [
 	"Walker --> Superclass"
-	walkerVisitorClass := superclassVisitorClass subclass: (self fullNameOf: #WalkerVisitor)
+	walkerVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #WalkerVisitor)
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: (self makePackageNameWith: #visitors)
@@ -708,4 +745,16 @@ ASTCGenerator >> reloadExtentions [
 		].
 
 	listOfPackageToReload do:[:aPackage| aPackage reload.].
+]
+
+{ #category : #'generation-visit' }
+ASTCGenerator >> visitSuperClassBody: aFMXClass [
+
+	| superclassName superMethodSelector |
+	superclassName := aFMXClass classGeneralization 
+		ifNotNil:[:aSuperClass| aSuperClass name] 
+		ifNil:[ ^ [:anInstance | ] ]."No need to override"
+	superMethodSelector := superclassName asVisitClassSelector.
+	
+	^ [ :anInstance | ^ self superMethodSelector: {anInstance} ] asPCBlock
 ]
