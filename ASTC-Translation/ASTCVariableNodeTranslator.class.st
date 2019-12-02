@@ -7,6 +7,7 @@ Class {
 { #category : #translate }
 ASTCVariableNodeTranslator >> translateNode: aVariableNode [
 	^ ASTCIdentifier new
+		pharoNode: aVariableNode;
 		id: aVariableNode name;
 		yourself
 ]

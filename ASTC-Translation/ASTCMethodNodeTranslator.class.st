@@ -7,6 +7,7 @@ Class {
 { #category : #translate }
 ASTCMethodNodeTranslator >> translateNode: aMethodNode [
 	^ ASTCFunctionDefinition new
+		pharoNode: aMethodNode;
 		declaration:
 			(ASTCFunctionDeclaration new
 				id:

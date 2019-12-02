@@ -11,6 +11,7 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 		ifTrue: [ "type checking"
 			"creation of the return node."
 			ASTCDeclarationStatement new
+				pharoNode: anAssignmentNode;
 				declaration:
 					(ASTCVariableDefinition new
 						declaration:
@@ -25,6 +26,7 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 						yourself);
 				yourself ]
 		ifFalse: [ ASTCExpressionStatement new
+				pharoNode: anAssignmentNode;
 				expression:
 					(ASTCOperator new
 						symbol: '=';
