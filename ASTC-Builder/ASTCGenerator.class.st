@@ -125,7 +125,7 @@ ASTCGenerator >> addComparisonOn: aFMXClass [
 	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
 		ifTrue:[
 			propertyName := aRelation side name.
-			propertyName = #parent ifFalse: [ 
+			(#(parent pharoNode) includes: propertyName) ifFalse: [ 
 			body + [:anInstance| propertyName = anInstance propertyName ifFalse:[ ^ false ]]]
 		]].
 	
