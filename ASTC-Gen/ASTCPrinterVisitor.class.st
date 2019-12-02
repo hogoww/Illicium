@@ -283,7 +283,8 @@ ASTCPrinterVisitor >> visitNode: aNode [
 	stream
 		<< $(;
 		<< 'aNode';
-		space.
+		space;
+		print: aNode pharoNode.
 	currentDepth := currentDepth + 1.
 	super visitNode: aNode.
 	currentDepth := currentDepth - 1.

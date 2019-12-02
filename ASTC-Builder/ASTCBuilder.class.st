@@ -186,6 +186,8 @@ ASTCBuilder >> defineProperties [
 	
 	"define the properties of the classes following the FmxNG syntax."
 
+	node property: #pharoNode type: #RBNode.
+
 	identifier property: #id type: #String.	
 	operator property: #symbol type: #String.
 
