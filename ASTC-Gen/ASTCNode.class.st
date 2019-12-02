@@ -10,8 +10,6 @@ Class {
 
 { #category : #testing }
 ASTCNode >> = aNode [
-	pharoNode = aNode pharoNode
-		ifFalse: [ ^ false ].
 	^ true
 ]
 
