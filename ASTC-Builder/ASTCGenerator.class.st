@@ -440,7 +440,7 @@ ASTCGenerator >> generatePrinterVisit: aFMXClass [
 	aClassWithQuotes:= '''',aClass,''''.
 	visitSomething := aFMXClass name asVisitClassSelector.
 
-	propertiesNames := aFMXClass properties select: [:aProp| aProp isTypedProperty ] thenCollect:#name.
+	propertiesNames := aFMXClass properties select: [:aProp| aProp isTypedProperty and:[ aProp name ~= #pharoNode] ] thenCollect:#name.
 
 	methodBody := visitSomething asMethodWithBody:[:anInstance|
 		stream cr.
