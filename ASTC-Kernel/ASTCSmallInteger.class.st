@@ -65,15 +65,8 @@ ASTCSmallInteger >> <= anotherSmallInteger [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> = anotherSmallInteger [
-	"Act as translator only if it's the translator visitor that calls it."
-	"That allow assert equal to be functionnal."
-	
-	self flag:#notPretty.
-	(super = anotherSmallInteger isKindOf: Boolean) ifTrue:[ ^ (super = anotherSmallInteger isKindOf: Boolean) ].
-	
-	^ self newBinaryOperatorNamed: '==' withArgument: anotherSmallInteger
-
+ASTCSmallInteger >> = aSmallInteger [
+	^ super = aSmallInteger
 ]
 
 { #category : #translation }

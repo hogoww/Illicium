@@ -9,8 +9,21 @@ ASTCObject class >> asCType [
 	^'void*'
 ]
 
-{ #category : #comparing }
+{ #category : #'message performing' }
 ASTCObject >> = anotherObject [
-	(methodTranslator isKindOf: ASTCMethodTranslator) "Allows to still use #= even though we need it for translation most times"
-		ifFalse: [ ^ self value = anotherObject value ]
+	self flag:#notPretty.
+	(methodTranslator ifNil:[ ^ super = anotherObject ]).
+	
+	^ self newBinaryOperatorNamed: '==' withArgument: anotherObject
+]
+
+{ #category : #comparing }
+ASTCObject >> newBinaryOperatorNamed: operator withArgument: anArgument [
+	|res|
+	res:=ASTCOperator new 
+		symbol: operator;
+		yourself.
+	res addOperand:(self value acceptVisitor: self visitor).
+	res addOperand:(anArgument acceptVisitor: self visitor).
+	^res
 ]

@@ -14,6 +14,11 @@ ASTCKernelClasses class >> asCType [
 ]
 
 { #category : #'message performing' }
+ASTCKernelClasses >> = anotherObject [
+	^ self value = anotherObject value
+]
+
+{ #category : #'message performing' }
 ASTCKernelClasses >> perform: aSelector withArguments: anArray [
 	" Cherry picking for unknown types are not great. Needs improvement.
 	Some stuff get translated by default for UserClasses, which are basically an unknown type."

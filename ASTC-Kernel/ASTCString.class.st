@@ -15,11 +15,10 @@ ASTCString >> = anotherStringNode [
 	"That allow assert equal to be functionnal."
 	
 	self flag:#notPretty.
-	(super = anotherStringNode isKindOf: Boolean) ifTrue:[ ^ (super = anotherStringNode isKindOf: Boolean) ].
+	(super = anotherStringNode isKindOf: Boolean) ifTrue:[ ^ super = anotherStringNode ].
 	
 	(methodTranslator getNodeTranslationType: anotherStringNode) = self class ifFalse:[ self error: 'both nodes have to be explicitly typed as Strings' ].
 	
-	self flag:#unfinished. " missing the // = 0 and the #include <string.h>"
 	methodTranslator addInclude: 'string'.
 	^ ASTCOperator new 
 		symbol: '=' ;
