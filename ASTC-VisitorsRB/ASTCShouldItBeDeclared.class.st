@@ -26,15 +26,15 @@ ASTCShouldItBeDeclared >> visitArgumentNode: anArgumentNode [
 ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
 	| association variable | 
 	variable := anAssignmentNode variable.
-	association := variableAppeareanceTracker associationAt:  variable name 
+	association := variableAppeareanceTracker associationAt: variable name 
 		ifAbsent:[ variableAppeareanceTracker add: 
 			(Association key: variable name value:
 				(variable acceptVisitor: self))].	
 
 	self atNewPropertyPut: association value for: anAssignmentNode.
 
-	association value:false.
-	^self
+	association value: false.
+	^ self
 ]
 
 { #category : #initialization }
