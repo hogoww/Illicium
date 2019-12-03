@@ -13,6 +13,7 @@ ASTCGlobalNodeTranslator >> translateNode: aGlobalNode [
 		and: [ aGlobalNode parent variable = aGlobalNode ])
 		ifTrue: [ self error: ' ClassVariables are read only in Limited Pharo.' ].
 	^ ASTCIdentifier new
+		pharoNode: aGlobalNode;
 		id: aGlobalNode name;
 		yourself
 ]

@@ -33,27 +33,28 @@ ASTCTypeChecker class >> type: types using: anInferer forVar: aString [
 
 { #category : #'as yet unclassified' }
 ASTCTypeChecker >> check [
+	(types isMultipleType)
+		ifTrue:[ [ types types remove: UndefinedObject asTypeConstraint ] on: NotFound do: [ ] ].
 
-	(types size > 1)
-		ifTrue:[ [ types remove: UndefinedObject ] on: NotFound do: [ ] ].
-	(types size > 1)
-		ifTrue:[ [ types remove: Object ] on: NotFound do: [] ].
+	(types isMultipleType)
+		ifTrue:[ [ types remove: Object asTypeConstraint ] on: NotFound do: [] ].
+    
 	self nodeCheck.
 	
-	(types includesAll: {Float. BoxedFloat64 }) ifTrue:[ types remove: BoxedFloat64].
+	(types isMultipleType and: [ types includesAll: {Float. BoxedFloat64 }]) ifTrue:[ types remove: BoxedFloat64].
 	
-	(types size > 1)
+	(types isMultipleType)
 		ifTrue:[ [ types remove: Object ] on: NotFound do: [ TypeAmbiguity new types: types ; signal ] ].
 	
 	
-	types size < 1
+	types isEmptyType
 		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
 			inferer blockingStuff inspect.
 			"
 			NoTypeFound new something: variableName ; signal ].
-	types size > 1
+	types isMultipleType
 		ifTrue: [ TypeAmbiguity new types: types ; signal ].
-	^ types anyOne
+	^ types allTypes anyOne
 ]
 
 { #category : #accessing }
@@ -80,10 +81,10 @@ ASTCTypeChecker >> node: aNode [
 ASTCTypeChecker >> nodeCheck [
 	node ifNil:[ ^ self ].
 	
-	(types size > 1 and:
+	(types isMultipleType and:
 	[ (node isMethod and:
 	[types anySatisfy: [:aType| aType name = node methodClass name ]])]) 
-	ifTrue:[ types remove: node methodClass ].	"remove implicit returns from primitives if it's not the only one"
+	ifTrue:[ types types remove: node methodClass ].	"remove implicit returns from primitives if it's not the only one"
 ]
 
 { #category : #accessing }

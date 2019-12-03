@@ -7,6 +7,7 @@ Class {
 { #category : #translate }
 ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 	^ ASTCLiteral new
+		pharoNode: aLiteralNode;
 		value:
 			((methodTranslator getNodeTranslationType: aLiteralNode) new
 				value: aLiteralNode value;

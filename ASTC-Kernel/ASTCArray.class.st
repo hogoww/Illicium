@@ -7,6 +7,11 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
+{ #category : #'as yet unclassified' }
+ASTCArray class >> asCType [
+	^ #_ARRAY_ERROR_
+]
+
 { #category : #accessing }
 ASTCArray >> at: anIndex [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."

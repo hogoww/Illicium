@@ -2,6 +2,7 @@ Class {
 	#name : #ASTCNode,
 	#superclass : #Object,
 	#instVars : [
+		'pharoNode',
 		'parent'
 	],
 	#category : #'ASTC-Gen-Nodes'
@@ -160,4 +161,14 @@ ASTCNode >> isWhile [
 { #category : #accessing }
 ASTCNode >> parent [
 	^ parent
+]
+
+{ #category : #accessing }
+ASTCNode >> pharoNode [
+	^ pharoNode
+]
+
+{ #category : #accessing }
+ASTCNode >> pharoNode: aPharoNode [
+	pharoNode := aPharoNode
 ]

@@ -13,6 +13,7 @@ ASTCArgumentNodeTranslator >> translateNode: anArgumentNode [
 	^ anArgumentNode parent isMethod
 		ifTrue: [ 
 			ASTCVariableDeclaration new
+				pharoNode: anArgumentNode;
 				id: argIdentifier;
 				type:
 					(ASTCType new

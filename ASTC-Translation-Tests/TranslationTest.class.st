@@ -29,20 +29,20 @@ TranslationTest >> testASTCIf [
 	
 	expectedC := ASTCIf new 
 		condition: (ASTCOperator new
-			symbol:'==';
-			addOperand: (ASTCLiteral value: (ASTCSmallInteger value:1));
-			addOperand: (ASTCLiteral value: (ASTCSmallInteger value:2));
+			symbol: '==';
+			addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 1));
+			addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 2));
 			yourself);
 		then:(ASTCBlock new
-			add: (ASTCLiteral value: (ASTCSmallInteger value:1)) asASTCStatement;
+			add: (ASTCLiteral value: (ASTCSmallInteger value: 1)) asASTCStatement;
 			yourself);
 		else:(ASTCBlock new
-			add: (ASTCLiteral value: (ASTCSmallInteger value:2)) asASTCStatement;
+			add: (ASTCLiteral value: (ASTCSmallInteger value: 2)) asASTCStatement;
 			yourself);
 		yourself.	
 	
 	astC debugASTCStructure.
-	self assert: (astC statements at:1) equals: expectedC.
+	self assert: (astC statements at: 1) equals: expectedC.
 ]
 
 { #category : #tests }
@@ -51,9 +51,9 @@ TranslationTest >> testASTCOperatorBinary [
 	astC := (ASTCTranslator translateExpression: '1=6') statements at: 1.
 	
 	expectedC := ASTCOperator new
-		symbol:'==';
-		addOperand:(ASTCLiteral value: (ASTCSmallInteger value:1));
-		addOperand: (ASTCLiteral value: (ASTCSmallInteger value:6));
+		symbol: '==';
+		addOperand:(ASTCLiteral value: (ASTCSmallInteger value: 1));
+		addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 6));
 		yourself.
 	
 	self assert: astC isExpressionStatement.
@@ -74,7 +74,7 @@ TranslationTest >> testASTCSmallIntegerIsLiteral [
 	self assert: astC expression isLiteral.
 	self assert: astC expression value value equals: 5.
 	self assert: astC expression equals: 
-		(ASTCLiteral new value: 
-			(ASTCSmallInteger new value:5 ; yourself) ;
+		(ASTCLiteral new value:
+			(ASTCSmallInteger new value: 5 ; yourself) ;
 		yourself).
 ]

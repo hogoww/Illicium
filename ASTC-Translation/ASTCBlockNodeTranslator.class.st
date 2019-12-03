@@ -8,6 +8,7 @@ Class {
 ASTCBlockNodeTranslator >> translateNode: aBlockNode [
 	| res |
 	res := ASTCBlock new.
+	res pharoNode: aBlockNode.
 	aBlockNode statements
 		collect: [ :each | (each acceptVisitor: methodTranslator) asASTCStatement ]
 		into: res statements.
