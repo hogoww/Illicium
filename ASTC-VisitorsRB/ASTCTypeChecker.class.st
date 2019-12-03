@@ -38,6 +38,7 @@ ASTCTypeChecker >> check [
 
 	(types isMultipleType)
 		ifTrue:[ [ types remove: Object asTypeConstraint ] on: NotFound do: [] ].
+    
 	self nodeCheck.
 	
 	(types isMultipleType and: [ types includesAll: {Float. BoxedFloat64 }]) ifTrue:[ types remove: BoxedFloat64].

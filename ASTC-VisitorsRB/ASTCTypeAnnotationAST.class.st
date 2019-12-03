@@ -17,7 +17,7 @@ ASTCTypeAnnotationAST class >> property [
 
 { #category : #accessing }
 ASTCTypeAnnotationAST >> getMethodType: aMethodNode [ 
-	^ (inferer getMethodNodeOf: aMethodNode) 
+	^ inferer getMethodNodeOf: aMethodNode
 ]
 
 { #category : #accessing }
