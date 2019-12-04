@@ -43,7 +43,7 @@ ASTCTypeAnnotationAST >> typeThatNode: aNode [
 	| phineasTypes type |
 	phineasTypes := inferer phineasTypeOfNode: aNode.
 
-	type := ASTCTypeChecker checkThatType: 	phineasTypes asPharoType for: aNode using: inferer.
+	type := ASTCTypeChecker checkThatType: phineasTypes asPharoType for: aNode using: inferer.
 		
 	self atNewPropertyPut: type -> phineasTypes for: aNode
 ]

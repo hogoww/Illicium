@@ -83,8 +83,8 @@ ASTCTypeChecker >> nodeCheck [
 	
 	(types isMultipleType and:
 	[ (node isMethod and:
-	[types anySatisfy: [:aType| aType name = node methodClass name ]])]) 
-	ifTrue:[ types types remove: node methodClass ].	"remove implicit returns from primitives if it's not the only one"
+	[ types types anySatisfy: [:aType| aType type name = node methodClass name ]])]) 
+	ifTrue:[ types removeType: node methodClass ].	"remove implicit returns from primitives if it's not the only one"
 ]
 
 { #category : #accessing }
