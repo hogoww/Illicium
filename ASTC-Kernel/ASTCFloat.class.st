@@ -59,11 +59,6 @@ ASTCFloat >> <= anotherSmallInteger [
 ]
 
 { #category : #translation }
-ASTCFloat >> = aFloat [
-	^ super = aFloat
-]
-
-{ #category : #translation }
 ASTCFloat >> > anotherSmallInteger [
 	
 	^ self newBinaryOperatorNamed: '>' withArgument: anotherSmallInteger

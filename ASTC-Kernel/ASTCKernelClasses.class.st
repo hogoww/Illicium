@@ -53,7 +53,7 @@ ASTCKernelClasses >> understandsForTranslation: aSelector [
 	[ 
 	(class methodDict includesKey: aSelector) ifTrue: [ ^ true ].
 		class := class superclass.
-	] doWhileFalse: [ class superclass = ASTCKernelClasses ].
+	] doWhileFalse: [ class = ASTCKernelClasses ]."should not be an infinite loop because this class should not be referenced."
 	^ false
 ]
 

@@ -65,11 +65,6 @@ ASTCSmallInteger >> <= anotherSmallInteger [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> = aSmallInteger [
-	^ super = aSmallInteger
-]
-
-{ #category : #translation }
 ASTCSmallInteger >> > anotherSmallInteger [
 	
 	^ self newBinaryOperatorNamed: '>' withArgument: anotherSmallInteger
