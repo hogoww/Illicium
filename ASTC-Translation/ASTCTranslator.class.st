@@ -68,7 +68,7 @@ ASTCTranslator >> initialize [
 		at: #SmallInteger put: ASTCSmallInteger ;
 		at: #Boolean put: ASTCBoolean ;
 		at: #String put: ASTCString ;
-		at: #ByteString put: ASTCString;
+		at: #ByteString put: ASTCString ;
 		at: #ByteSymbol put: ASTCString ;
 		at: #Float put: ASTCFloat ; 
 		at: #SmallFloat64 put: ASTCFloat ; 

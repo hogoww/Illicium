@@ -22,7 +22,7 @@ ASTCKernelClasses >> = anotherObject [
 ASTCKernelClasses >> perform: aSelector withArguments: anArray [
 	" Cherry picking for unknown types are not great. Needs improvement.
 	Some stuff get translated by default for UserClasses, which are basically an unknown type."
-	^(self class methodDictionary includesKey: aSelector)
+	^(self understandsForTranslation: aSelector)
 	ifTrue:[ super perform: aSelector withArguments: anArray ] 
 	ifFalse:[	 self doesNotUnderstand: ((Message selector: aSelector arguments: anArray) lookupClass: self class ; yourself) ].
 	" 
@@ -44,6 +44,17 @@ ASTCKernelClasses >> printString [
 			<< value printString
 			<<')'.
 		].
+]
+
+{ #category : #'message performing' }
+ASTCKernelClasses >> understandsForTranslation: aSelector [
+	| class |
+	class := self class.
+	[ 
+	(class methodDict includesKey: aSelector) ifTrue: [ ^ true ].
+		class := class superclass.
+	] doWhileFalse: [ class superclass = ASTCKernelClasses ].
+	^ false
 ]
 
 { #category : #evaluating }
