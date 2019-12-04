@@ -49,6 +49,7 @@ ASTCKernelClasses >> printString [
 { #category : #'message performing' }
 ASTCKernelClasses >> understandsForTranslation: aSelector [
 	| class |
+	"search the method until ASTCKernelClass, allow partial inheritence"
 	class := self class.
 	[ 
 	(class methodDict includesKey: aSelector) ifTrue: [ ^ true ].
