@@ -40,15 +40,19 @@ BaselineOfASTC >> lastPlayground [
 
 ASTCGenerator generate.
 
-ASTCTranslator new translateClass: RandomTestClass.
-ASTCSlangTranslator translateClass: MiscPrimitivePlugin.
+ASTCTranslator translateClass: ILVMParameters.
+
+ASTCSlangTranslator new translateClass: BrokenPlugin.
+
 
 ASTCSlangTranslator new translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
 
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.
 
-Transcript clear.
+ASTCFilePrinter new compilationUnit: (ASTCTranslator translateClass: ILBrokenPlugin); fileName:'gen' ; isPrimitive: true; printInFile.
+
+Transcript clear
 ]
 
 { #category : #accessing }

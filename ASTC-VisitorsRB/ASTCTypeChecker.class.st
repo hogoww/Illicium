@@ -41,7 +41,7 @@ ASTCTypeChecker >> check [
     
 	self nodeCheck.
 	
-	(types isMultipleType and: [ types types includesAll: {Float. BoxedFloat64 }]) ifTrue:[ types removeType: BoxedFloat64].
+	(types isMultipleType and: [ types types includesAll: {Float asTypeReification. BoxedFloat64 asTypeReification}]) ifTrue:[ types removeType: BoxedFloat64].
 	
 	(types isMultipleType)
 		ifTrue:[ [ types removeType: Object ] on: NotFound do: [ TypeAmbiguity new types: types ; signal ] ].
