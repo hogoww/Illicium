@@ -34,17 +34,17 @@ ASTCTypeChecker class >> type: types using: anInferer forVar: aString [
 { #category : #'as yet unclassified' }
 ASTCTypeChecker >> check [
 	(types isMultipleType)
-		ifTrue:[ [ types types remove: UndefinedObject asTypeConstraint ] on: NotFound do: [ ] ].
+		ifTrue:[ [ types removeType: UndefinedObject asConstraint ] on: NotFound do: [ ] ].
 
 	(types isMultipleType)
-		ifTrue:[ [ types remove: Object asTypeConstraint ] on: NotFound do: [] ].
+		ifTrue:[ [ types removeType: Object asConstraint ] on: NotFound do: [] ].
     
 	self nodeCheck.
 	
-	(types isMultipleType and: [ types includesAll: {Float. BoxedFloat64 }]) ifTrue:[ types remove: BoxedFloat64].
+	(types isMultipleType and: [ types types includesAll: {Float. BoxedFloat64 }]) ifTrue:[ types removeType: BoxedFloat64].
 	
 	(types isMultipleType)
-		ifTrue:[ [ types remove: Object ] on: NotFound do: [ TypeAmbiguity new types: types ; signal ] ].
+		ifTrue:[ [ types removeType: Object ] on: NotFound do: [ TypeAmbiguity new types: types ; signal ] ].
 	
 	
 	types isEmptyType
