@@ -70,9 +70,9 @@ ASTCTranslator >> initialize [
 		at: #String put: ASTCString ;
 		at: #ByteString put: ASTCString ;
 		at: #ByteSymbol put: ASTCString ;
-		at: #Float put: ASTCFloat ; 
-		at: #SmallFloat64 put: ASTCFloat ; 
-		at: #BoxedFloat64 put: ASTCFloat ; 
+		at: #Float put: ASTCNumber ; 
+		at: #SmallFloat64 put: ASTCNumber ; 
+		at: #BoxedFloat64 put: ASTCNumber ; 
 		at: #Array put: ASTCArray ;
 		yourself.
 		

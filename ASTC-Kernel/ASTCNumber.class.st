@@ -1,47 +1,77 @@
 Class {
-	#name : #ASTCSmallInteger,
-	#superclass : #ASTCNumber,
+	#name : #ASTCNumber,
+	#superclass : #ASTCObject,
 	#category : #'ASTC-Kernel'
 }
 
 { #category : #converting }
-ASTCSmallInteger class >> asCType [
-	^#int
+ASTCNumber class >> asCType [
+	^#float
 ]
 
 { #category : #default }
-ASTCSmallInteger class >> defaultValue [
-	^0
+ASTCNumber class >> defaultValue [
+	^0.0
 ]
 
 { #category : #accessing }
-ASTCSmallInteger class >> value: anInteger [ 
+ASTCNumber class >> value: aFloat [
 
 	^ self new
-		value: anInteger;
+		value: aFloat;
 		yourself
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> // anotherSmallInteger [
-	self flag:#toCheck. "May need to have a cast to int? I don't like it"
+ASTCNumber >> * anotherSmallInteger [
+
+	^ self newBinaryOperatorNamed: '*' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
+ASTCNumber >> + anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '+' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
+ASTCNumber >> - anotherSmallInteger [
+
+	^ self newBinaryOperatorNamed: '-' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
+ASTCNumber >> / anotherSmallInteger [
+	
 	^ self newBinaryOperatorNamed: '/' withArgument: anotherSmallInteger
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> bitAnd: anotherSmallInteger [
-	self flag: #toCheck."UNSURE ABOUT THIS ONE"
-	^ self newBinaryOperatorNamed: '&' withArgument: anotherSmallInteger
+ASTCNumber >> < anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '<' withArgument: anotherSmallInteger
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> bitShift: anotherSmallInteger [ 
-	self flag: #toCheck."UNSURE ABOUT THIS ONE"
-	^ self newBinaryOperatorNamed: '<<' withArgument: anotherSmallInteger
+ASTCNumber >> <= anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '<=' withArgument: anotherSmallInteger
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
+ASTCNumber >> > anotherSmallInteger [
+	
+	^ self newBinaryOperatorNamed: '>' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
+ASTCNumber >> >= aFloat [
+	
+	^ self newBinaryOperatorNamed: '>=' withArgument: aFloat
+]
+
+{ #category : #translation }
+ASTCNumber >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	|res|
 	res:=ASTCOperator new 
 		symbol: operator;
@@ -52,21 +82,7 @@ ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> to: stop by: step do: aBlock [
-	| node |
-	node := self to: stop  do: aBlock.
-	node isLiteral ifTrue: [ self halt. "Should add a check for step to be different of 0 or optimize the symbol" ].
-	node iteratorModification: 
-		(ASTCOperator new
-			symbol: '+=';
-			addOperand: (ASTCIdentifier new id: (aBlock arguments at:1) name ; yourself);
-			addOperand: (step acceptVisitor: methodTranslator);
-			yourself).
-	^ node
-]
-
-{ #category : #translation }
-ASTCSmallInteger >> to: stop do: aBlock [
+ASTCNumber >> to: stop do: aBlock [
 	| iterID |
 	aBlock arguments size ~= 1
 		ifTrue: [ self error: 'Wrong number of arguments.' ]

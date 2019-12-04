@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCKernelClasses,
+	#name : #ASTCKernelClass,
 	#superclass : #Object,
 	#instVars : [
 		'value',
@@ -9,17 +9,17 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-ASTCKernelClasses class >> asCType [
+ASTCKernelClass class >> asCType [
 	self subclassResponsibility 
 ]
 
 { #category : #'message performing' }
-ASTCKernelClasses >> = anotherObject [
+ASTCKernelClass >> = anotherObject [
 	^ self value = anotherObject value
 ]
 
 { #category : #'message performing' }
-ASTCKernelClasses >> perform: aSelector withArguments: anArray [
+ASTCKernelClass >> perform: aSelector withArguments: anArray [
 	" Cherry picking for unknown types are not great. Needs improvement.
 	Some stuff get translated by default for UserClasses, which are basically an unknown type."
 	^(self understandsForTranslation: aSelector)
@@ -31,13 +31,13 @@ ASTCKernelClasses >> perform: aSelector withArguments: anArray [
 ]
 
 { #category : #printing }
-ASTCKernelClasses >> printOn: aStream [
+ASTCKernelClass >> printOn: aStream [
 	aStream << self asString.
 
 ]
 
 { #category : #converting }
-ASTCKernelClasses >> printString [
+ASTCKernelClass >> printString [
 	^String streamContents:[:stream|
 		stream << (self class asString)
 			<<'('
@@ -47,35 +47,35 @@ ASTCKernelClasses >> printString [
 ]
 
 { #category : #'message performing' }
-ASTCKernelClasses >> understandsForTranslation: aSelector [
+ASTCKernelClass >> understandsForTranslation: aSelector [
 	| class |
 	"search the method until ASTCKernelClass, allow partial inheritence"
 	class := self class.
 	[ 
 	(class methodDict includesKey: aSelector) ifTrue: [ ^ true ].
 		class := class superclass.
-	] doWhileFalse: [ class = ASTCKernelClasses ]."should not be an infinite loop because this class should not be referenced."
+	] doWhileFalse: [ class = ASTCKernelClass ]."should not be an infinite loop because this class should not be referenced."
 	^ false
 ]
 
 { #category : #evaluating }
-ASTCKernelClasses >> value [ 
+ASTCKernelClass >> value [ 
 	^value
 ]
 
 { #category : #evaluating }
-ASTCKernelClasses >> value: anObject [
+ASTCKernelClass >> value: anObject [
 	value:=anObject.
 	^value
 ]
 
 { #category : #accessing }
-ASTCKernelClasses >> visitor [ 
+ASTCKernelClass >> visitor [ 
 	^methodTranslator
 ]
 
 { #category : #accessing }
-ASTCKernelClasses >> visitor: aVisitor [
+ASTCKernelClass >> visitor: aVisitor [
 	methodTranslator:= aVisitor.
 	^methodTranslator
 ]

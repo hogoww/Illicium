@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCObject,
-	#superclass : #ASTCKernelClasses,
+	#superclass : #ASTCKernelClass,
 	#category : #'ASTC-Kernel'
 }
 
