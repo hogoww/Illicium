@@ -15,13 +15,14 @@ ASTCBoolean >> and: aBoolean [
 	firstPart := value isBlock
 		ifTrue: [ value statements size = 1
 				ifTrue: [ value statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an #andr.' ] ]
+				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
 		ifFalse: [ value acceptVisitor: methodTranslator ].
 	secondPart := aBoolean isBlock
 		ifTrue: [ aBoolean statements size = 1
 				ifTrue: [ aBoolean statements first acceptVisitor: methodTranslator ]
 				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
 		ifFalse: [ aBoolean acceptVisitor: methodTranslator ].
+	
 	^ ASTCOperator new
 		symbol: '&&';
 		addOperand: firstPart;
