@@ -17,10 +17,10 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	"ïnstance variable"
 	interpreterProxyDecl := cu declarations at:1.
 	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
-	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy asTypeReification.
 	
 	declaration := cu declarations at:2.
-	self assert: declaration type type equals: ASTCUserClass.
+	self assert: declaration type type equals: ASTCUserClass asTypeReification.
 	self assert: declaration id id equals: 'primitiveNoPopButPush'.
 	self assert: declaration parameters isEmpty.
 	
@@ -60,10 +60,10 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 	"ïnstance variable"
 	interpreterProxyDecl := cu declarations at:1.
 	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
-	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy asTypeReification.
 	
 	declaration := cu declarations at:2.
-	self assert: declaration type type equals: ASTCUserClass.
+	self assert: declaration type type equals: ASTCUserClass asTypeReification.
 	self assert: declaration id id equals: 'primitivePopAndFail'.
 	self assert: declaration parameters isEmpty.
 	
@@ -133,10 +133,10 @@ ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 	"ïnstance variable"
 	interpreterProxyDecl := cu declarations at:1.
 	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
-	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy asTypeReification.
 	
 	declaration := cu declarations at:2.
-	self assert: declaration type type equals: ASTCUserClass.
+	self assert: declaration type type equals: ASTCUserClass asTypeReification.
 	self assert: declaration id id equals: 'primitivePopLessThanExpected'.
 	self assert: declaration parameters isEmpty.
 	
@@ -193,11 +193,11 @@ ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 	"ïnstance variable"
 	interpreterProxyDecl := cu declarations at:1.
 	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
-	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy.
+	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy asTypeReification.
 	
 	self assert: cu isStructuralyValidAST.
 	declaration := cu declarations at:2.
-	self assert: declaration type type equals: ASTCUserClass.
+	self assert: declaration type type equals: ASTCUserClass asTypeReification.
 	self assert: declaration id id equals: 'primitivePopMoreThanExpected'.
 	self assert: declaration parameters isEmpty.
 	
