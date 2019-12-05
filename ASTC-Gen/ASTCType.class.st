@@ -30,8 +30,3 @@ ASTCType >> isType [
 ASTCType >> type [
 	^ type
 ]
-
-{ #category : #accessing }
-ASTCType >> type: aType [
-	type := aType
-]

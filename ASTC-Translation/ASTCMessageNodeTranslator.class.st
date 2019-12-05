@@ -8,7 +8,7 @@ Class {
 ASTCMessageNodeTranslator >> forward: aMessage to: aType [
 	| aReceiver |
 	aReceiver := (methodTranslator
-		getReplacementType: aType) new
+		getReplacementType: aType) createInstance
 		value: aMessage receiver;
 		visitor: methodTranslator;
 		yourself.

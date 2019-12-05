@@ -72,7 +72,7 @@ ASTCSmallInteger >> to: stop do: aBlock [
 		ifTrue: [ self error: 'Wrong number of arguments.' ]
 		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator ].
 	"type checking"
-	(((methodTranslator getNodeTranslationType: stop) = ASTCSmallInteger)
+	(((methodTranslator getNodeTranslationType: stop) = ASTCSmallInteger asTypeReification )
 		and:[ aBlock isBlock ])
     ifFalse:[ self error: 'An arguments has the wrong type' ].
 	^ ASTCFor new

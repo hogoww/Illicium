@@ -34,7 +34,7 @@ ASTCMethodTranslator >> classTranslator: aClassTranslator [
 
 { #category : #utility }
 ASTCMethodTranslator >> forward: aMessage to: aType [
-	^ (translators at: #messageNodeTranslator) forward: aMessage to: aType
+	^ (translators at: #messageNodeTranslator) forward: aMessage to: aType asTypeReification
 ]
 
 { #category : #typing }
