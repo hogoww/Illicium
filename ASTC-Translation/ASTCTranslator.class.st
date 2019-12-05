@@ -62,7 +62,7 @@ ASTCTranslator >> initialize [
 		mainTranslator: self;
 		yourself.
 	"basic replacement classes"
-	self flag: #careful. " float and string are used  "
+	self flag: #careful. " float and string are used... Not well !"
 	replacementClasses := Dictionary new
 		at: #Object put: ASTCObject ;
 		at: #UndefinedObject put: ASTCUndefinedObject ;
