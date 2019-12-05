@@ -54,7 +54,7 @@ ASTCTypeChecker >> check [
 			NoTypeFound new something: variableName ; signal ].
 	types isMultipleType
 		ifTrue: [ TypeAmbiguity new types: types ; signal ].
-	^ types allTypes anyOne
+	^ types
 ]
 
 { #category : #accessing }
