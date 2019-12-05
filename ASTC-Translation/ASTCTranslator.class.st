@@ -51,8 +51,9 @@ ASTCTranslator >> fillWithtranslatorSpecificTypes [
 ]
 
 { #category : #initialization }
-ASTCTranslator >> getReplacementType: aClass [
-	^ replacementClasses at: aClass name ifAbsent:[ ReplacementTypeUnknown new type:aClass ; signal ].
+ASTCTranslator >> getReplacementType: aPharoType [
+	^ aPharoType performReplacementUsing: replacementClasses.
+
 ]
 
 { #category : #initialization }

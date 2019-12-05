@@ -9,7 +9,7 @@ ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 	^ ASTCLiteral new
 		pharoNode: aLiteralNode;
 		value:
-			((methodTranslator getNodeTranslationType: aLiteralNode) new
+			((methodTranslator getNodeTranslationType: aLiteralNode) createInstance
 				value: aLiteralNode value;
 				yourself);
 		yourself

@@ -21,7 +21,7 @@ ASTCMessageNodeTranslator >> forward: aMessage to: aType [
 ASTCMessageNodeTranslator >> translateNode: aMessageNode [
 	| aReceiver |
 	aReceiver := (methodTranslator
-		getNodeTranslationType: aMessageNode receiver) new
+		getNodeTranslationType: aMessageNode receiver) createInstance
 		value: aMessageNode receiver;
 		visitor: methodTranslator;
 		yourself.
