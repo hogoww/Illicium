@@ -18,6 +18,11 @@ ASTCObject >> = anotherObject [
 ]
 
 { #category : #comparing }
+ASTCObject >> asFloat [
+	^ methodTranslator forward: (MessageSend receiver: self value selector: #asFloat) to: InterpreterProxy
+]
+
+{ #category : #comparing }
 ASTCObject >> newBinaryOperatorNamed: operator withArgument: anArgument [
 	|res|
 	res:=ASTCOperator new 

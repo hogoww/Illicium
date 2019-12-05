@@ -5,6 +5,19 @@ Class {
 }
 
 { #category : #translate }
+ASTCMessageNodeTranslator >> forward: aMessage to: aType [
+	| aReceiver |
+	aReceiver := (methodTranslator
+		getReplacementType: aType) new
+		value: aMessage receiver;
+		visitor: methodTranslator;
+		yourself.
+	^ aReceiver
+		perform: aMessage selector
+		withArguments: aMessage arguments asArray
+]
+
+{ #category : #translate }
 ASTCMessageNodeTranslator >> translateNode: aMessageNode [
 	| aReceiver |
 	aReceiver := (methodTranslator

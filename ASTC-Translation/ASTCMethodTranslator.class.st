@@ -16,6 +16,12 @@ ASTCMethodTranslator >> addInclude: aString [
 	includes add: aString
 ]
 
+{ #category : #utility }
+ASTCMethodTranslator >> ask: aTranslatorKind to: aSelector with: arguments [
+	" utility, may not be as usefull as I foresee "
+	^ (translators at: aTranslatorKind) perform: aSelector with: arguments
+]
+
 { #category : #initialization }
 ASTCMethodTranslator >> classTranslator [
 	^ classTranslator
@@ -24,6 +30,11 @@ ASTCMethodTranslator >> classTranslator [
 { #category : #initialization }
 ASTCMethodTranslator >> classTranslator: aClassTranslator [
 	^ classTranslator := aClassTranslator
+]
+
+{ #category : #utility }
+ASTCMethodTranslator >> forward: aMessage to: aType [
+	^ (translators at: #messageNodeTranslator) forward: aMessage to: aType
 ]
 
 { #category : #typing }

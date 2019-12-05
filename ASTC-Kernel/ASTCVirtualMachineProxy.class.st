@@ -10,6 +10,13 @@ ASTCVirtualMachineProxy class >> asCType [
 ]
 
 { #category : #'reflective operations' }
+ASTCVirtualMachineProxy >> asFloat [
+	^ ASTCOperator new
+		symbol: '(float)';
+		addOperand: (self value acceptVisitor: methodTranslator)
+]
+
+{ #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand ifTrue:[ Error signal: 'infiniteRecursion' ].
 
