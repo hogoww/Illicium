@@ -32,3 +32,13 @@ ASTCArray >> do: aBlock [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
 	^ASTCFor new body: ASTCBlock new.
 ]
+
+{ #category : #accessing }
+ASTCArray >> elementType [
+	^ elementType
+]
+
+{ #category : #accessing }
+ASTCArray >> elementType: aType [
+	elementType := aType
+]
