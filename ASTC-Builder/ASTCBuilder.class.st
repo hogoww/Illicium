@@ -186,6 +186,7 @@ ASTCBuilder >> defineProperties [
 	
 	"define the properties of the classes following the FmxNG syntax."
 
+	"Having some kind o type check on those would be nice, generated in the debug visitor."
 	node property: #pharoNode type: #RBNode.
 
 	identifier property: #id type: #String.	
@@ -194,8 +195,7 @@ ASTCBuilder >> defineProperties [
 	"removing the type might be a good idea"
 	literal property: #value type: #String.
 
-	"Could probably be replaced by a reference to a Class"
-	type property: #type type: #String.
+	type property: #type type: #TypeConstraint.
 ]
 
 { #category : #definition }

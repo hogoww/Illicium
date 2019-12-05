@@ -21,7 +21,7 @@ ASTCDebugStructureVisitor >> visitOperator: anOperator [
 ASTCDebugStructureVisitor >> visitType: anASTCType [
 	self visitNode: anASTCType.
 
-	self assert: anASTCType type isClass.
+	self assert: anASTCType type isTypeConstraint.
 
 	super visitType: anASTCType
 ]
