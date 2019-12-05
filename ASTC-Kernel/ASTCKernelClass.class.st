@@ -8,7 +8,7 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #type }
 ASTCKernelClass class >> asCType [
 	self subclassResponsibility 
 ]

@@ -250,7 +250,7 @@ ASTCPrettyPrint >> visitTernaryOperator: anOperator [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitType: aType [
-	self << aType type type asCType.
+	self << aType type asCType.
 ]
 
 { #category : #visiting }

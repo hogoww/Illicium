@@ -4,7 +4,7 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #converting }
+{ #category : #type }
 ASTCSmallInteger class >> asCType [
 	^#int
 ]

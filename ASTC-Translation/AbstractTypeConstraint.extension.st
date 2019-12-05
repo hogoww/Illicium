@@ -1,6 +1,11 @@
 Extension { #name : #AbstractTypeConstraint }
 
 { #category : #'*ASTC-Translation' }
+AbstractTypeConstraint >> asCType [
+	^ self subclassResponsibility 
+]
+
+{ #category : #'*ASTC-Translation' }
 AbstractTypeConstraint >> createInstance [
 	^ self subclassResponsibility
 ]

@@ -1,6 +1,11 @@
 Extension { #name : #EmptyType }
 
 { #category : #'*ASTC-Translation' }
+EmptyType >> asCType [
+	^ NoTypeFound signal
+]
+
+{ #category : #'*ASTC-Translation' }
 EmptyType >> createInstance [
 	^ NoTypeFound signal
 ]

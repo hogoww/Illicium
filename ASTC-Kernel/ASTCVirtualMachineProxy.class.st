@@ -4,7 +4,7 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #type }
 ASTCVirtualMachineProxy class >> asCType [ 
 	^'struct VirtualMachine*'.
 ]

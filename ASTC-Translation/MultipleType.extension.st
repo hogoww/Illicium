@@ -1,8 +1,13 @@
 Extension { #name : #MultipleType }
 
 { #category : #'*ASTC-Translation' }
+MultipleType >> asCType [
+	^ TypeAmbiguity new types: types ; signal
+]
+
+{ #category : #'*ASTC-Translation' }
 MultipleType >> createInstance [
-	^ TypeAmbiguity types: types ; signal
+	^ TypeAmbiguity new types: types ; signal
 ]
 
 { #category : #'*ASTC-Translation' }

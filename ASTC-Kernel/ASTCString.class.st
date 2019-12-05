@@ -4,7 +4,7 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #type }
 ASTCString class >> asCType [
 	^'char*'
 ]

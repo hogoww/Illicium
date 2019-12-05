@@ -1,6 +1,11 @@
 Extension { #name : #SingleType }
 
 { #category : #'*ASTC-Translation' }
+SingleType >> asCType [
+	^ type asCType
+]
+
+{ #category : #'*ASTC-Translation' }
 SingleType >> createInstance [
 	^ type new
 ]

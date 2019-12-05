@@ -7,9 +7,11 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #type }
 ASTCArray class >> asCType [
-	^ #_ARRAY_ERROR_
+	" Array don't know what type they are because it's a complex one. 
+	It relies on CollectionType, which will build the corresponding CType"
+	^ self shouldNotImplement 
 ]
 
 { #category : #accessing }

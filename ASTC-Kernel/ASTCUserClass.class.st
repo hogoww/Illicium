@@ -4,7 +4,7 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #converting }
+{ #category : #type }
 ASTCUserClass class >> asCType [
 	^'void'
 ]

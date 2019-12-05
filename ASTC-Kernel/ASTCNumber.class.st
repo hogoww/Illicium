@@ -4,11 +4,6 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
-{ #category : #converting }
-ASTCNumber class >> asCType [
-	^#float
-]
-
 { #category : #default }
 ASTCNumber class >> defaultValue [
 	^0.0
