@@ -60,7 +60,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDivScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveAtPut fromClass: FloatArrayPlugin .
+	cu := translator translateMethod: #primitiveDivScalar fromClass: FloatArrayPlugin .
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -70,7 +70,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDotProduct [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveAtPut fromClass: FloatArrayPlugin .
+	cu := translator translateMethod: #primitiveDotProduct fromClass: FloatArrayPlugin .
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
