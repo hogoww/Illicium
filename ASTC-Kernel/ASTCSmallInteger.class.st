@@ -29,6 +29,12 @@ ASTCSmallInteger >> // anotherSmallInteger [
 ]
 
 { #category : #translation }
+ASTCSmallInteger >> >> anotherSmallInteger [ 
+	self flag: #toCheck."UNSURE ABOUT THIS ONE"
+	^ self newBinaryOperatorNamed: '>>' withArgument: anotherSmallInteger
+]
+
+{ #category : #translation }
 ASTCSmallInteger >> bitAnd: anotherSmallInteger [
 	self flag: #toCheck."UNSURE ABOUT THIS ONE"
 	^ self newBinaryOperatorNamed: '&' withArgument: anotherSmallInteger
