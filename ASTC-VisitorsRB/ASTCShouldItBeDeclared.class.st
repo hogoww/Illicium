@@ -62,7 +62,7 @@ ASTCShouldItBeDeclared >> visitSelfNode: anSelfNode [
 
 { #category : #initialization }
 ASTCShouldItBeDeclared >> visitSuperNode: anSuperNode [
-	"should ever pass there. Pharo's Compiler should stop you first."
+	"should never be called. Pharo's Compiler should stop you first."
 	self error: 'trying to assign something to super? Are you sure?'. 
 	
 ]
