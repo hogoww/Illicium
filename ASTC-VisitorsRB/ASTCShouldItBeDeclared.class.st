@@ -24,8 +24,8 @@ ASTCShouldItBeDeclared >> visitArgumentNode: anArgumentNode [
 
 { #category : #visit }
 ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
-	| association variable | 
-	self haltIf: [ variable = #srcIndex ].
+	| association variable |
+	
 	variable := anAssignmentNode variable.
 	association := variableAppeareanceTracker associationAt: variable name 
 		ifAbsent:[ variableAppeareanceTracker add: 
@@ -33,9 +33,9 @@ ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
 				(variable acceptVisitor: self))].	
 
 	self atNewPropertyPut: association value for: anAssignmentNode.
-
 	association value: false.
-	^ self
+	
+	anAssignmentNode value acceptVisitor: self
 ]
 
 { #category : #visit }
