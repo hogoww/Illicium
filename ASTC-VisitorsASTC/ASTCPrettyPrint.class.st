@@ -101,6 +101,14 @@ ASTCPrettyPrint >> unindent [
 ]
 
 { #category : #visiting }
+ASTCPrettyPrint >> visitAccessOperator: anOperator [
+	self print: anOperator operands first;
+		<< '[';
+		print: anOperator operands second;
+		<< ']'
+]
+
+{ #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << anOperator symbol << ' '.
@@ -119,8 +127,6 @@ ASTCPrettyPrint >> visitBlock: aBlock [
 	self leaveBlock.
 	self spaces.
 	self << '}'.
-
-
 ]
 
 { #category : #visiting }
@@ -232,7 +238,9 @@ ASTCPrettyPrint >> visitOperator: anOperator [
 	nbOperands == 1
 		ifTrue: [ ^ self visitUnaryOperator: anOperator ].
 	nbOperands == 2
-		ifTrue: [ ^ self visitBinaryOperator: anOperator ].
+		ifTrue: [ 
+			anOperator symbol = '[]' ifTrue:[ ^ self visitAccessOperator: anOperator ]
+			ifFalse: [ ^ self visitBinaryOperator: anOperator ]].
 	nbOperands == 3
 		ifTrue: [ ^ self visitTernaryOperator: anOperator ]
 ]
