@@ -13,3 +13,9 @@ ASTCUndefinedObject class >> asCType [
 ASTCUndefinedObject >> perform: aMessage withArguments: anArray [
 	self halt.
 ]
+
+{ #category : #'message performing' }
+ASTCUndefinedObject >> value [ 
+	self flag: #hack.
+	^ #null
+]
