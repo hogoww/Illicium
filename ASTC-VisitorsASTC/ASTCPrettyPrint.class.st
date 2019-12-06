@@ -234,6 +234,7 @@ ASTCPrettyPrint >> visitLiteral: aLiteral [
 { #category : #visiting }
 ASTCPrettyPrint >> visitOperator: anOperator [
 	| nbOperands |
+	self flag: #hack.
 	nbOperands := anOperator operands size.
 	nbOperands == 1
 		ifTrue: [ ^ self visitUnaryOperator: anOperator ].
