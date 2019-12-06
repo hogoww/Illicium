@@ -17,14 +17,15 @@ ASTCShouldItBeDeclared >> initialize [
 	variableAppeareanceTracker:= Dictionary new.
 ]
 
-{ #category : #initialization }
+{ #category : #visit }
 ASTCShouldItBeDeclared >> visitArgumentNode: anArgumentNode [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : #visit }
 ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
 	| association variable | 
+	self haltIf: [ variable = #srcIndex ].
 	variable := anAssignmentNode variable.
 	association := variableAppeareanceTracker associationAt: variable name 
 		ifAbsent:[ variableAppeareanceTracker add: 
@@ -37,42 +38,37 @@ ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
 	^ self
 ]
 
-{ #category : #initialization }
-ASTCShouldItBeDeclared >> visitGlobalNode: anGlobalNode [
-	self error: 'Unsupported for now'.
-	
+{ #category : #visit }
+ASTCShouldItBeDeclared >> visitGlobalNode: aGlobalNode [
+	(aGlobalNode parent isAssignment and:[ aGlobalNode parent variable = self]) ifTrue:[ self error: 'Unsupported for now' ].
+	^ false
+
 ]
 
-{ #category : #initialization }
+{ #category : #visit }
 ASTCShouldItBeDeclared >> visitInstanceVariableNode: anInstanceVariable [
 	^ false
 ]
 
-{ #category : #initialization }
-ASTCShouldItBeDeclared >> visitReturnNode: aReturnNode [
-	aReturnNode value isAssignment
-		ifTrue: [ aReturnNode value acceptVisitor: self ]
-]
-
-{ #category : #initialization }
+{ #category : #visit }
 ASTCShouldItBeDeclared >> visitSelfNode: anSelfNode [
 	^false
 	
 ]
 
-{ #category : #initialization }
+{ #category : #visit }
 ASTCShouldItBeDeclared >> visitSuperNode: anSuperNode [
 	"should never be called. Pharo's Compiler should stop you first."
 	self error: 'trying to assign something to super? Are you sure?'. 
 	
 ]
 
-{ #category : #initialization }
+{ #category : #visit }
 ASTCShouldItBeDeclared >> visitTemporaryNode: anTemporaryNode [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : #visit }
 ASTCShouldItBeDeclared >> visitThisContextNode: anThisContextNode [
 	"should never be called. Pharo's Compiler should stop you first."
 	self error: 'trying to assign something to thisContext? Are you sure?'. 
