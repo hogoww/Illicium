@@ -18,14 +18,21 @@ ASTCArray class >> asCType [
 ASTCArray >> at: anIndex [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
 	 self flag:#todo.
-	^ ASTCExpression new
+	^ ASTCOperator new
+		symbol:'[]';
+		addOperand: (self value acceptVisitor: methodTranslator);
+		addOperand: (anIndex acceptVisitor: methodTranslator);
+		yourself
 ]
 
 { #category : #accessing }
 ASTCArray >> at: anIndex put: aValue [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
-	 self flag:#todo.
-	^ ASTCExpression new
+	^ ASTCOperator new
+		symbol:'=';
+		addOperand: (self at: anIndex );
+		addOperand: (aValue acceptVisitor: methodTranslator);
+		yourself
 ]
 
 { #category : #accessing }
