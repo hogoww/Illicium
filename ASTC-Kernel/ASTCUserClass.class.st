@@ -10,6 +10,11 @@ ASTCUserClass class >> asCType [
 ]
 
 { #category : #'reflective operations' }
+ASTCUserClass >> cCoerce: aVariable to: aType [
+	^ methodTranslator forward: (MessageSend receiver: self value selector: #cCoerce:to: arguments: {aVariable. aType}) to: InterpreterProxy
+]
+
+{ #category : #'reflective operations' }
 ASTCUserClass >> doesNotUnderstand: aMessage [
 	self flag: #checks ."needs to check that the message exists in the original class"
 	aMessage selector = #doesnNotUnderstand ifTrue:[ self error: 'infinite recursion'].
