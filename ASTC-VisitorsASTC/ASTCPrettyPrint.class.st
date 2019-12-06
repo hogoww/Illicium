@@ -62,6 +62,11 @@ ASTCPrettyPrint >> leaveBlock [
 	self unindent
 ]
 
+{ #category : #accessing }
+ASTCPrettyPrint >> print: anObject [
+	anObject acceptVisitor: self
+]
+
 { #category : #printing }
 ASTCPrettyPrint >> printOn: aStream [
 	super printOn: aStream.
