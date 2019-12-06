@@ -74,7 +74,7 @@ ASTCShouldItBeDeclared >> visitTemporaryNode: anTemporaryNode [
 
 { #category : #initialization }
 ASTCShouldItBeDeclared >> visitThisContextNode: anThisContextNode [
-	"should ever pass there. Pharo's Compiler should stop you first."
+	"should never be called. Pharo's Compiler should stop you first."
 	self error: 'trying to assign something to thisContext? Are you sure?'. 
 	
 ]
