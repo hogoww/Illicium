@@ -11,14 +11,14 @@ ASTCVirtualMachineProxy class >> asCType [
 
 { #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> asFloat [
-	^ self cCoerce: (self value acceptVisitor: methodTranslator) to: 'float' 
+	^ self cCoerce: self to: 'float' 
 ]
 
 { #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> cCoerce: aVariable to: aType [
 	^ ASTCOperator new
 		symbol: '(' , aType value , ')';
-		addOperand: (aVariable acceptVisitor: methodTranslator);
+		addOperand: (aVariable value acceptVisitor: methodTranslator);
 		yourself
 ]
 
