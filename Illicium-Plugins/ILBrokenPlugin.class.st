@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'ASTCVirtualMachineAPI',
 	#classTraits : 'ASTCVirtualMachineAPI classTrait',
-	#category : #IlliciumPlugins
+	#category : #'Illicium-Plugins'
 }
 
 { #category : #initialization }

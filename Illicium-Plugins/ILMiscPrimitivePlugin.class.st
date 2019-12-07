@@ -6,7 +6,7 @@ Class {
 	#classVars : [
 		'#PrimErrBadArgument'
 	],
-	#category : #IlliciumPlugins
+	#category : #'Illicium-Plugins'
 }
 
 { #category : #'as yet unclassified' }

@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'#parameters type: (Array of: (Association keyType: String valueType: SmallInteger))'
 	],
-	#category : #IlliciumPlugins
+	#category : #'Illicium-Plugins'
 }
 
 { #category : #adding }

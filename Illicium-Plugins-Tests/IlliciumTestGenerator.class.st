@@ -17,7 +17,7 @@ IlliciumTestGenerator new
 Class {
 	#name : #IlliciumTestGenerator,
 	#superclass : #Object,
-	#category : #'IlliciumPlugins-Tests'
+	#category : #'Illicium-Plugins-Tests'
 }
 
 { #category : #'as yet unclassified' }

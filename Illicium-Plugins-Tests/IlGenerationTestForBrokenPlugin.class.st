@@ -1,7 +1,7 @@
 Class {
 	#name : #IlGenerationTestForBrokenPlugin,
 	#superclass : #IlliciumToSlangTestCase,
-	#category : #'IlliciumPlugins-Tests'
+	#category : #'Illicium-Plugins-Tests'
 }
 
 { #category : #tests }

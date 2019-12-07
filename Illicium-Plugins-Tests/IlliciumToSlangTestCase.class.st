@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'strategy'
 	],
-	#category : #'IlliciumPlugins-Tests'
+	#category : #'Illicium-Plugins-Tests'
 }
 
 { #category : #'building suites' }
