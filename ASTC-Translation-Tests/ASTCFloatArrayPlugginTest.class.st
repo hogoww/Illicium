@@ -11,7 +11,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAddFloatArray [
 	
 	cu := translator translateMethod: #primitiveAddFloatArray fromClass: FloatArrayPlugin .
 	self assert: cu isStructuralyValidAST.
-	^ cu
+	^ cu inspect
 ]
 
 { #category : #tests }
