@@ -1,12 +1,11 @@
 Class {
-	#name : #ASTCTemporaryNodesTranslator,
+	#name : #ASTCTemporaryDeclarationNodesTranslator,
 	#superclass : #ASTCNodeTranslator,
 	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }
-ASTCTemporaryNodesTranslator >> translateNode: aTemporaryDeclarationNode [
-	1 halt.
+ASTCTemporaryDeclarationNodesTranslator >> translateNode: aTemporaryDeclarationNode [
 	^ ASTCDeclarationStatement new
 				pharoNode: aTemporaryDeclarationNode;
 				declaration:
@@ -15,9 +14,9 @@ ASTCTemporaryNodesTranslator >> translateNode: aTemporaryDeclarationNode [
 							(ASTCVariableDeclaration new
 								type:
 									(ASTCType new
-										type: (methodTranslator getNodeTranslationType: aTemporaryDeclarationNode variable);
+										type: (methodTranslator getNodeTranslationType: aTemporaryDeclarationNode);
 										yourself);
-								id: (aTemporaryDeclarationNode variable acceptVisitor: methodTranslator);
+								id: (aTemporaryDeclarationNode acceptVisitor: methodTranslator);
 								yourself);
 						yourself);
 				yourself

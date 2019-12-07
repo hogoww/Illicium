@@ -9,12 +9,19 @@ ASTCSequenceNodeTranslator >> translateNode: aSequenceNode [
 	| res |
 	res := ASTCBlock new.
 	res pharoNode: aSequenceNode.
-	
-	(aSequenceNode temporaries 
-		select: [:aTempDecl| aTempDecl propertyAt: ASTCShouldItBeDeclared property ]) 
-		collect: [:aTempDecl| aTempDecl acceptVisitor: methodTranslator ]
-		into: res statements.
-	
+
+	self translateTemporaryDeclaration: aSequenceNode temporaries into: res statements.
 	aSequenceNode statements collect: [:each | (each acceptVisitor: methodTranslator) asASTCStatement] into: res statements.
+	
 	^res.
+]
+
+{ #category : #translate }
+ASTCSequenceNodeTranslator >> translateTemporaryDeclaration: temporaryNodes into: aCollection [
+	"TemporaryDeclarationNodes are actually just temporaryNodes in the AST. 
+	so we have to use this hackish way."
+	 ^ (temporaryNodes 
+		select: [:aTempDecl| aTempDecl propertyAt: ASTCShouldItBeDeclared property ])
+		collect: [:aTempDecl| methodTranslator visitTemporaryDeclarationNode: aTempDecl ]
+		into: aCollection
 ]

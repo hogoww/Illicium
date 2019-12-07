@@ -69,7 +69,7 @@ ASTCMethodTranslator >> includes: aCollectionOfString [
 { #category : #initialization }
 ASTCMethodTranslator >> initialize [
 	includes := Set new.
-	translators := (Dictionary new: 20)
+	translators := (Dictionary new: 22)
 		at: #methodNodeTranslator put: (ASTCMethodNodeTranslator new methodTranslator: self ; yourself);
 		at: #pragmaNodeTranslator put: (ASTCPragmaNodeTranslator new methodTranslator: self ; yourself);
 		at: #returnNodeTranslator put: (ASTCReturnNodeTranslator new methodTranslator: self ; yourself);
@@ -87,7 +87,7 @@ ASTCMethodTranslator >> initialize [
 		at: #selfNodeTranslator put: (ASTCSelfNodeTranslator new methodTranslator: self ; yourself);
 		at: #superNodeTranslator put: (ASTCSuperNodeTranslator new methodTranslator: self ; yourself);
 		at: #temporaryNodeTranslator put: (ASTCTemporaryNodeTranslator new methodTranslator: self ; yourself);
-		at: #temporaryNodesTranslator put: (ASTCTemporaryNodesTranslator new methodTranslator: self ; yourself);
+		at: #temporaryDeclarationNodeTranslator put: (ASTCTemporaryDeclarationNodesTranslator new methodTranslator: self ; yourself);
 		at: #thisContextNodeTranslator put: (ASTCThisContextNodeTranslator new methodTranslator: self ; yourself);
 		at: #variableNodeTranslator put: (ASTCVariableNodeTranslator new methodTranslator: self ; yourself);
 		yourself.
@@ -209,6 +209,12 @@ ASTCMethodTranslator >> visitSequenceNode: aSequenceNode [
 { #category : #visiting }
 ASTCMethodTranslator >> visitSuperNode: aSuperNode [
 	^ (translators at: #superNodeTranslator)
+]
+
+{ #category : #visiting }
+ASTCMethodTranslator >> visitTemporaryDeclarationNode: aTemporaryDeclarationNode [
+	^ (translators at: #temporaryDeclarationNodeTranslator)
+		translateNode: aTemporaryDeclarationNode
 ]
 
 { #category : #visiting }
