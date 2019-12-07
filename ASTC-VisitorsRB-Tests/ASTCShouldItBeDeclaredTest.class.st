@@ -24,6 +24,12 @@ ASTCShouldItBeDeclaredTest >> aMethodWithATemp [
 ]
 
 { #category : #basic }
+ASTCShouldItBeDeclaredTest >> aMethodWithATempThatShouldBeDeclaredAtStart [
+	|t|
+	(t := true) ifTrue: 1
+]
+
+{ #category : #basic }
 ASTCShouldItBeDeclaredTest >> aMethodWithAnAssignedGlobalVar [
 	"should probably pick something that won't break the system on a random execution :D"
 	Smalltalk := 1
@@ -44,23 +50,20 @@ ASTCShouldItBeDeclaredTest >> setUp [
 
 { #category : #basic }
 ASTCShouldItBeDeclaredTest >> testTemporariesShouldNotBeDeclared [
-	| ast node |
+	| ast |
 	ast := (self class >> #aMethodWithAnIV) ast copy.
 	ast acceptVisitor: visitor.
-	node := (ast body statements at: 1).
-	self assert: (node hasProperty: propertyName).
-	self deny: (node propertyAt: propertyName).
+
+	self assert: (ast body statements at: 1) propertyIs: false
 ]
 
 { #category : #basic }
 ASTCShouldItBeDeclaredTest >> testVisitGlobalNode [
-	| ast node |
+	| ast |
 	ast := (self class >> #aMethodWithAGlobalAssignedToATemp) ast copy.
 	ast acceptVisitor: visitor.
 	
-	node := (ast body statements at: 1).
-	self assert: (node hasProperty: propertyName).
-	self assert: (node propertyAt: propertyName).
+	self assert: (ast body statements at: 1) propertyIs: true
 ]
 
 { #category : #basic }
@@ -73,21 +76,23 @@ ASTCShouldItBeDeclaredTest >> testVisitGlobalVariableNodeAssignation [
 
 { #category : #basic }
 ASTCShouldItBeDeclaredTest >> testVisitInstanceVariableNode [ 
-	| ast node |
+	| ast |
 	ast := (self class >> #aMethodWithAnIV) ast copy.
 	ast acceptVisitor: visitor.
-	node := (ast body statements at: 1).
-	self assert: (node hasProperty: propertyName).
-	self deny: (node propertyAt: propertyName).
+	
+	self assert: (ast body statements at: 1) propertyIs: false
 ]
 
 { #category : #basic }
 ASTCShouldItBeDeclaredTest >> testVisitTemporaryNode [
-	| ast node |
+	| ast |
 	ast := (self class >> #aMethodWithATemp) ast copy.
 	ast acceptVisitor: visitor.
 	
-	node := (ast body statements at: 1).
-	self assert: (node hasProperty: propertyName).
-	self assert: (node propertyAt: propertyName).
+	self assert: (ast body statements at: 1) propertyIs: true.
+
+	self assert: ast body temporaries isNotEmpty.
+	ast body temporaries do:[ :aTempDecl|
+		self assert: aTempDecl propertyIs: false
+		].
 ]
