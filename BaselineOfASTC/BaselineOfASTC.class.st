@@ -29,8 +29,9 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-VisitorsASTC-Tests' with:[ spec requires:#('ASTC-VisitorsASTC') ];
 				package: 'ASTC-VisitorsRB' with:[ spec requires:#('ASTC-Gen') ];
 				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ];
-				package: 'IlliciumPlugins' with: [ spec requires: #('ASTC-Kernel') ];
-				package: 'IlliciumPlugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].	
+				package: 'Illicium-Tools';
+				package: 'Illicium-Plugins' with: [ spec requires: #('ASTC-Kernel') ];
+				package: 'Illicium-Plugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].	
 		].
 
 ]
