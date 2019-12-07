@@ -30,11 +30,11 @@ ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
 				(Association key: variable name value:
 					(variable acceptVisitor: self)) ].
 				
-	"(association value and: [ (variable whoDefines: variable name) = variable methodNode body or:[ anAssignmentNode parent isSequence not]])
+	(association value and: [ anAssignmentNode parent ~= variable methodNode body ])
 		ifTrue:[
 			association value: false.
 			varTodeclareAtStart add: variable.
-			]."
+			].
 	"Heuristic, if something is declared anywhere but the body of the method, we declare it in the body anyway.
 	a scope analysis slightly more complex would allow something better though."
 

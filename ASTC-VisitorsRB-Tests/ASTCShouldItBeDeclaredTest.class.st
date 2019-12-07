@@ -42,10 +42,50 @@ ASTCShouldItBeDeclaredTest >> aMethodWithAnIV [
 ]
 
 { #category : #basic }
+ASTCShouldItBeDeclaredTest >> assignmentInCondition [
+	|t|
+	(t := true) ifTrue: 1
+]
+
+{ #category : #basic }
+ASTCShouldItBeDeclaredTest >> assignmentInOtherSequence [
+	|t|
+	true ifTrue: [ t := 1 ]
+]
+
+{ #category : #basic }
 ASTCShouldItBeDeclaredTest >> setUp [
 	super setUp.
 	visitor:=ASTCShouldItBeDeclared new.
 	propertyName := ASTCShouldItBeDeclared property.
+]
+
+{ #category : #basic }
+ASTCShouldItBeDeclaredTest >> testAssignmentInCondition [
+	| ast |
+	ast := (self class >> #assignmentInCondition) ast copy.
+	ast acceptVisitor: visitor.
+	
+	self assert: (ast body statements at: 1) receiver propertyIs: false.
+
+	self assert: ast body temporaries isNotEmpty.
+	ast body temporaries do:[ :aTempDecl|
+		self assert: aTempDecl propertyIs: true
+		].
+]
+
+{ #category : #basic }
+ASTCShouldItBeDeclaredTest >> testAssignmentIndifferentSequence [
+	| ast |
+	ast := (self class >> #assignmentInOtherSequence) ast copy.
+	ast acceptVisitor: visitor.
+
+	self assert: (((ast body statements at: 1) arguments at: 1) statements at: 1) 	propertyIs: false.
+
+	self assert: ast body temporaries isNotEmpty.
+	ast body temporaries do:[ :aTempDecl|
+		self assert: aTempDecl propertyIs: true
+		].
 ]
 
 { #category : #basic }
