@@ -43,6 +43,16 @@ ASTCShouldItBeDeclaredTest >> setUp [
 ]
 
 { #category : #basic }
+ASTCShouldItBeDeclaredTest >> testTemporariesShouldNotBeDeclared [
+	| ast node |
+	ast := (self class >> #aMethodWithAnIV) ast copy.
+	ast acceptVisitor: visitor.
+	node := (ast body statements at: 1).
+	self assert: (node hasProperty: propertyName).
+	self deny: (node propertyAt: propertyName).
+]
+
+{ #category : #basic }
 ASTCShouldItBeDeclaredTest >> testVisitGlobalNode [
 	| ast node |
 	ast := (self class >> #aMethodWithAGlobalAssignedToATemp) ast copy.

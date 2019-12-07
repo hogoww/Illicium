@@ -61,10 +61,11 @@ ASTCShouldItBeDeclared >> visitInstanceVariableNode: anInstanceVariable [
 { #category : #visit }
 ASTCShouldItBeDeclared >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
-	
-	aMethodNode body temporaries 
-		do: [ :aTemp |
-			(varTodeclareAtStart includes: aTemp) ifTrue:[  self atNewPropertyPut: true for: aTemp ]]
+
+	aMethodNode body temporaries
+		do: [ :aTemp | 
+			self atNewPropertyPut: (varTodeclareAtStart includes: aTemp)
+				for: aTemp ]
 ]
 
 { #category : #visit }
