@@ -66,11 +66,11 @@ ASTCShouldItBeDeclaredTest >> testAssignmentInCondition [
 	ast := (self class >> #assignmentInCondition) ast copy.
 	ast acceptVisitor: visitor.
 	
-	self assert: (ast body statements at: 1) receiver propertyIs: false.
+	self assert: (ast body statements at: 1) receiver propertyEquals: false.
 
 	self assert: ast body temporaries isNotEmpty.
 	ast body temporaries do:[ :aTempDecl|
-		self assert: aTempDecl propertyIs: true
+		self assert: aTempDecl propertyEquals: true
 		].
 ]
 
@@ -80,11 +80,11 @@ ASTCShouldItBeDeclaredTest >> testAssignmentIndifferentSequence [
 	ast := (self class >> #assignmentInOtherSequence) ast copy.
 	ast acceptVisitor: visitor.
 
-	self assert: (((ast body statements at: 1) arguments at: 1) statements at: 1) 	propertyIs: false.
+	self assert: (((ast body statements at: 1) arguments at: 1) statements at: 1) 	propertyEquals: false.
 
 	self assert: ast body temporaries isNotEmpty.
 	ast body temporaries do:[ :aTempDecl|
-		self assert: aTempDecl propertyIs: true
+		self assert: aTempDecl propertyEquals: true
 		].
 ]
 
@@ -94,7 +94,7 @@ ASTCShouldItBeDeclaredTest >> testTemporariesShouldNotBeDeclared [
 	ast := (self class >> #aMethodWithAnIV) ast copy.
 	ast acceptVisitor: visitor.
 
-	self assert: (ast body statements at: 1) propertyIs: false
+	self assert: (ast body statements at: 1) propertyEquals: false
 ]
 
 { #category : #basic }
@@ -103,7 +103,7 @@ ASTCShouldItBeDeclaredTest >> testVisitGlobalNode [
 	ast := (self class >> #aMethodWithAGlobalAssignedToATemp) ast copy.
 	ast acceptVisitor: visitor.
 	
-	self assert: (ast body statements at: 1) propertyIs: true
+	self assert: (ast body statements at: 1) propertyEquals: true
 ]
 
 { #category : #basic }
@@ -120,7 +120,7 @@ ASTCShouldItBeDeclaredTest >> testVisitInstanceVariableNode [
 	ast := (self class >> #aMethodWithAnIV) ast copy.
 	ast acceptVisitor: visitor.
 	
-	self assert: (ast body statements at: 1) propertyIs: false
+	self assert: (ast body statements at: 1) propertyEquals: false
 ]
 
 { #category : #basic }
@@ -129,10 +129,10 @@ ASTCShouldItBeDeclaredTest >> testVisitTemporaryNode [
 	ast := (self class >> #aMethodWithATemp) ast copy.
 	ast acceptVisitor: visitor.
 	
-	self assert: (ast body statements at: 1) propertyIs: true.
+	self assert: (ast body statements at: 1) propertyEquals: true.
 
 	self assert: ast body temporaries isNotEmpty.
 	ast body temporaries do:[ :aTempDecl|
-		self assert: aTempDecl propertyIs: false
+		self assert: aTempDecl propertyEquals: false
 		].
 ]
