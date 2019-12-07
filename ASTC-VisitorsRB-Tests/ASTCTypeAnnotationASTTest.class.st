@@ -3,53 +3,9 @@ An ASTCTypeAnnotationAST2Test is a test class for testing the behavior of ASTCTy
 "
 Class {
 	#name : #ASTCTypeAnnotationASTTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'visitor',
-		'propertyName'
-	],
+	#superclass : #ASTCVisitorTest,
 	#category : #'ASTC-VisitorsRB-Tests-Typing'
 }
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> assertTypeOf: aNode is: aClass [
-	^self assert: (aNode propertyAt: propertyName) asArray equals: {aClass} .
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass [
-	| aMethodAST |
-	aMethodAST := (aClass >> aSelector) ast copy.
-
-	visitor inferer inferAST: aMethodAST.
-	
-	aMethodAST acceptVisitor: visitor.
-	
-	^aMethodAST
-]
-
-{ #category : #test }
-ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass usingBlock: aBlock [
-	| aMethodAST |
-	aMethodAST := (aClass >> aSelector) ast copy.
-	visitor inferer infer: aBlock.
-	"This removes the block used as an entry point of the inference"
-	"This would cause problem for resolution for the methodType otherwise."
-	visitor inferer typeProvider methodTypes
-		detect: [ :aMethodType | aMethodType node isBlock ]
-		ifFound: [ :aMethodType | visitor inferer typeProvider methodTypes remove: aMethodType ].
-	aMethodAST acceptVisitor: visitor.
-	^ aMethodAST
-]
-
-{ #category : #running }
-ASTCTypeAnnotationASTTest >> setUp [
-	super setUp.
-	visitor:=ASTCTypeAnnotationAST new 
-		inferer: PhineasInferer new;
-		yourself.
-	propertyName := ASTCTypeAnnotationAST property.
-]
 
 { #category : #test }
 ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
