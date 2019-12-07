@@ -5,11 +5,17 @@ Class {
 }
 
 { #category : #tests }
+ASTCStarSqueakPluginTest >> setUp [
+	super setUp.
+	pluginClass := StarSqueakPlugin
+]
+
+{ #category : #tests }
 ASTCStarSqueakPluginTest >> testPrimitiveDiffuseFromToWidthHeightDelta [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveDiffuseFromToWidthHeightDelta fromClass: StarSqueakPlugin.
+	cu := self translateMethod: #primitiveDiffuseFromToWidthHeightDelta.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -19,7 +25,7 @@ ASTCStarSqueakPluginTest >> testPrimitiveEvaporateRate [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveEvaporateRate fromClass: StarSqueakPlugin.
+	cu := self translateMethod: #primitiveEvaporateRate.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -29,7 +35,7 @@ ASTCStarSqueakPluginTest >> testPrimitiveMapFromToWidthHeightPatchSizeRgbFlagsSh
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveMapFromToWidthHeightPatchSizeRgbFlagsShift fromClass: StarSqueakPlugin.
+	cu := self translateMethod: #primitiveMapFromToWidthHeightPatchSizeRgbFlagsShift.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]

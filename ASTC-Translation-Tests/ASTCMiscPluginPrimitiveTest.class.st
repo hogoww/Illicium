@@ -5,9 +5,15 @@ Class {
 }
 
 { #category : #tests }
+ASTCMiscPluginPrimitiveTest >> setUp [
+	super setUp.
+	pluginClass := MiscPrimitivePlugin
+]
+
+{ #category : #tests }
 ASTCMiscPluginPrimitiveTest >> testPrimitiveCompareString [
 	| cu |
-	cu := translator translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
+	cu := self translateMethod: #primitiveCompareString.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -15,7 +21,7 @@ ASTCMiscPluginPrimitiveTest >> testPrimitiveCompareString [
 { #category : #tests }
 ASTCMiscPluginPrimitiveTest >> testPrimitiveCompareStringFirstHalf [
 	| cu |
-	cu := translator translateMethod: #primitiveCompareStringFirstHalf fromClass: MiscPrimitivePlugin.	
+	cu := self translateMethod: #primitiveCompareStringFirstHalf.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]

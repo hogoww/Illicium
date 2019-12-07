@@ -5,13 +5,19 @@ Class {
 }
 
 { #category : #tests }
+ASTCFloatArrayPlugginTest >> setUp [
+	super setUp.
+	pluginClass := FloatArrayPlugin
+]
+
+{ #category : #tests }
 ASTCFloatArrayPlugginTest >> testPrimitiveAddFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveAddFloatArray fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveAddFloatArray.
 	self assert: cu isStructuralyValidAST.
-	^ cu inspect
+	^ cu
 ]
 
 { #category : #tests }
@@ -20,7 +26,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAddScalar [
 	self flag: #working.
 	"Not too bad. Missing the logic of the do, nil, and cCoerce. also the type annotation for value is not taken into account correctly."
 	
-	cu := translator translateMethod: #primitiveAddScalar fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveAddScalar.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -30,7 +36,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAt [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveAt fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveAt.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -40,7 +46,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAtPut [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveAtPut fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveAtPut.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -50,7 +56,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDivFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveDivFloatArray fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveDivFloatArray.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -60,7 +66,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDivScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveDivScalar fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveDivScalar.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -70,7 +76,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDotProduct [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveDotProduct fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveDotProduct.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -80,7 +86,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveEqual [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveEqual fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveEqual.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -90,7 +96,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveHashArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveHashArray fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveHashArray.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -100,7 +106,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveMulFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveMulFloatArray fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveMulFloatArray.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -110,7 +116,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveMulScalar [
 	| cu |
 	self flag: #working.
 	"Not too bad. Missing the logic of the do, nil, and cCoerce. also the type annotation for value is not taken into account correctly."
-	cu := translator translateMethod: #primitiveMulScalar fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveMulScalar.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -120,7 +126,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveNormalize [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveNormalize fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveNormalize.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -130,7 +136,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveSubFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveSubFloatArray fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveSubFloatArray.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -140,7 +146,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveSubScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveSubScalar fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveSubScalar.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
@@ -150,7 +156,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveSum [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
-	cu := translator translateMethod: #primitiveSum fromClass: FloatArrayPlugin .
+	cu := self translateMethod: #primitiveSum.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]

@@ -5,12 +5,18 @@ Class {
 }
 
 { #category : #tests }
+ASTCBrokenPluginTranslationTest >> setUp [
+	super setUp.
+	pluginClass := BrokenPlugin
+]
+
+{ #category : #tests }
 ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 
 	| cu declaration definition statement operands interpreterProxyDecl |
-	cu := translator translateMethod: #primitiveNoPopButPush fromClass: BrokenPlugin.
+	cu := self translateMethod: #primitiveNoPopButPush.
 	
 	"declaration checks"
 	self assert: cu isStructuralyValidAST.
@@ -53,7 +59,7 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu declaration definition statement operands argument interpreterProxyDecl |
-	cu := translator translateMethod: #primitivePopAndFail fromClass: BrokenPlugin.
+	cu := self translateMethod: #primitivePopAndFail.
 	
 	"declaration checks"
 	self assert: cu isStructuralyValidAST.
@@ -126,7 +132,7 @@ ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu declaration definition statement operands argument interpreterProxyDecl |
-	cu := translator translateMethod: #primitivePopLessThanExpected fromClass: BrokenPlugin.
+	cu := self translateMethod: #primitivePopLessThanExpected.
 
 	"declaration checks"
 	self assert: cu isStructuralyValidAST.
@@ -186,7 +192,7 @@ ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu declaration definition statement operands argument interpreterProxyDecl |
-	cu := translator translateMethod: #primitivePopMoreThanExpected fromClass: BrokenPlugin.
+	cu := self translateMethod: #primitivePopMoreThanExpected.
 
 	"declaration checks"
 	self assert: cu isStructuralyValidAST.
