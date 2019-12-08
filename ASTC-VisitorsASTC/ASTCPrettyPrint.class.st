@@ -110,9 +110,11 @@ ASTCPrettyPrint >> visitAccessOperator: anOperator [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
+	self << '('.
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << anOperator symbol << ' '.
-	(anOperator operands at: 2) acceptVisitor: self
+	(anOperator operands at: 2) acceptVisitor: self.
+	self << ')'.
 ]
 
 { #category : #visiting }
