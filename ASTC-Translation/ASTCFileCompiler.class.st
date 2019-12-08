@@ -14,12 +14,15 @@ ASTCFileCompiler >> compileExternalPluginNamed: aFileName [
 			s
 				<< 'gcc -shared -I' << vmIncludePath << ' -o ./generated/'
 				<< aFileName << '.so -fPIC ./generated/' << aFileName << '.c'
-				<< (virtualMachine for32bit: [ ' -m32' ] for64bit: [ '' ]) ].
+				<< (virtualMachine for32bit: [ ' -m32' ] for64bit: [ '' ]) 
+			<< ' 2> ./generated/' << aFileName << '.errorLog'].
 	res := LibC runCommand: compileCommand.
 	res = 0
 		ifTrue: [ ^ self ].
 	Error signal: 'plugin didn''t compile (or the comand line sucks)'.
 	"proceed to copy to clipboard"
+	(FileLocator workingDirectory / 'generated' / (aFileName , '.errorLog')) readStream contents inspect.
+	self halt.
 	Clipboard clipboardText: compileCommand.
-	self halt
+	self halt.
 ]
