@@ -10,14 +10,6 @@ ASTCDebugStructureVisitor >> visitDeclarationStatement: anASTCDeclarationStateme
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCDebugStructureVisitor >> visitOperator: anOperator [
-	super visitOperator: anOperator.
-	anOperator operands
-		ifNotNil:
-			[ :operands | operands do: [ :anOperands | "self assert: anOperands isExpression" ] ]
-]
-
-{ #category : #'*ASTC-Gen-Extensions' }
 ASTCDebugStructureVisitor >> visitType: anASTCType [
 	self visitNode: anASTCType.
 
