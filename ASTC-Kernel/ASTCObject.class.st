@@ -6,7 +6,7 @@ Class {
 
 { #category : #type }
 ASTCObject class >> asCType [
-	^'void*'
+	^'sqInt'
 ]
 
 { #category : #'message performing' }

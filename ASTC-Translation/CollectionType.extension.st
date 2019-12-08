@@ -3,7 +3,10 @@ Extension { #name : #CollectionType }
 { #category : #'*ASTC-Translation' }
 CollectionType >> asCType [
 	(collectionType = ASTCArray asTypeReification and: [ elementType = ASTCFloat asTypeReification ])
-	ifTrue: [ ^ #'float*' ]	.
+	ifTrue: [ ^ #'float*' ].
+
+	(collectionType = ASTCArray asTypeReification and: [ elementType = ASTCSmallInteger asTypeReification ])
+	ifTrue: [ ^ #'int*' ]	.
 	"Will be improved case by case"
 	self halt.
 ]
