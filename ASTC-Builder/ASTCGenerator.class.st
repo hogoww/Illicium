@@ -722,7 +722,7 @@ ASTCGenerator >> prefix: aString [
 ASTCGenerator >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
 	
-	 ((Iceberg repositoryForPackage: self class package) codeDirectory / 'vmHeader') fullName.
+	icebergRepo := Iceberg repositoryForPackage: self class package.
 	
 	listOfPackageNameToReload:= OrderedCollection new.
 	listOfPackageNameToReload 
