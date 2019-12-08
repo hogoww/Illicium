@@ -160,3 +160,16 @@ ASTCFloatArrayPlugginTest >> testPrimitiveSum [
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
+
+{ #category : #tests }
+ASTCFloatArrayPlugginTest >> testTranslateFullPlugin [
+	"Bad test, too big, no checking. But test nonetheless"
+	"Check only for errors"
+	| cu printer |
+	cu := translator translateClass: pluginClass.
+	printer := ASTCFilePrinter new compilationUnit: cu ; yourself.
+	printer fileName: FloatArrayPlugin name ; isPrimitive: true; printInFile.
+	printer compileExternalPlugin.
+	printer moveInVmDirectory.
+	^ cu
+]
