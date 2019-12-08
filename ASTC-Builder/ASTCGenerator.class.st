@@ -722,8 +722,8 @@ ASTCGenerator >> prefix: aString [
 ASTCGenerator >> reloadExtentions [
 	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
 	
-	icebergRepo := IceRepository registry detect:[:aRepository| aRepository name uncapitalized = 'astc' or:[aRepository name uncapitalized = 'illicium'] ].
-
+	 ((Iceberg repositoryForPackage: self class package) codeDirectory / 'vmHeader') fullName.
+	
 	listOfPackageNameToReload:= OrderedCollection new.
 	listOfPackageNameToReload 
 		add: 'ASTC-Gen-Extensions';

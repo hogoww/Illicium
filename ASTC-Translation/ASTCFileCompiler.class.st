@@ -6,12 +6,13 @@ Class {
 
 { #category : #compiling }
 ASTCFileCompiler >> compileExternalPluginNamed: aFileName [
-	| res compileCommand virtualMachine |
+	| res compileCommand virtualMachine vmIncludePath |
 	virtualMachine := VirtualMachine new.
+	vmIncludePath := ((Iceberg repositoryForPackage: self class package) codeDirectory / 'vmHeader') fullName.
 	compileCommand := String
 		streamContents: [ :s | 
 			s
-				<< 'gcc -shared -I./pharo-local/iceberg/hogoww/ASTC/vmHeader -o ./generated/'
+				<< 'gcc -shared -I' << vmIncludePath << ' -o ./generated/'
 				<< aFileName << '.so -fPIC ./generated/' << aFileName << '.c'
 				<< (virtualMachine for32bit: [ ' -m32' ] for64bit: [ '' ]) ].
 	res := LibC runCommand: compileCommand.
