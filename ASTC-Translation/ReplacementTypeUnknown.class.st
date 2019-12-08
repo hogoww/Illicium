@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'type'
 	],
-	#category : #'ASTC-Translation'
+	#category : #'ASTC-Translation-errors'
 }
 
 { #category : #accessing }
