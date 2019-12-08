@@ -13,11 +13,6 @@ Class {
 	#category : #'ASTC-Translation-installers'
 }
 
-{ #category : #printing }
-ASTCFilePrinter >> CompileExternalPlugin [
-	fileCompiler compileExternalPluginNamed: fileName
-]
-
 { #category : #accessing }
 ASTCFilePrinter >> compilationUnit [
 	^compilationUnit
@@ -26,6 +21,11 @@ ASTCFilePrinter >> compilationUnit [
 { #category : #accessing }
 ASTCFilePrinter >> compilationUnit: aCompilationUnit [
 	^compilationUnit:= aCompilationUnit
+]
+
+{ #category : #printing }
+ASTCFilePrinter >> compileExternalPlugin [
+	fileCompiler compileExternalPluginNamed: fileName
 ]
 
 { #category : #accessing }
