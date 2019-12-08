@@ -105,6 +105,14 @@ ASTCDebugStructureVisitor >> visitNode: aNode [
 ]
 
 { #category : #visiting }
+ASTCDebugStructureVisitor >> visitOperator: anOperator [
+	super visitOperator: anOperator.
+	anOperator operands
+		ifNotNil:
+			[ :operands | operands do: [ :anOperands | self assert: anOperands isExpression ] ]
+]
+
+{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitProject: aProject [
 	super visitProject: aProject.
 	aProject compilationUnits
