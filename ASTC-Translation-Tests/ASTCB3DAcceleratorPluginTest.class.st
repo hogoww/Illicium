@@ -347,7 +347,7 @@ ASTCB3DAcceleratorPluginTest >> testStackPrimitiveIndexArrayOfSizeValidateForVer
 	| cu |
 	self flag: #incompleteType."missing parameters need to type it using a primitive, then test it on isolation"
 	
-	cu := self translateMethod: #stackPrimitiveIndexArray:ofSize:validate:forVertexSize.
+	cu := self translateMethod: #stackPrimitiveIndexArray:ofSize:validate:forVertexSize:.
 	self assert: cu isStructuralyValidAST.
 	^ cu
 ]
