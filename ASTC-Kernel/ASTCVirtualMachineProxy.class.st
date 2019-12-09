@@ -10,16 +10,17 @@ ASTCVirtualMachineProxy class >> asCType [
 ]
 
 { #category : #'reflective operations' }
-ASTCVirtualMachineProxy >> asFloat [
-	^ self cCoerce: self value to: 'float' 
-]
-
-{ #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> cCoerce: aVariable to: aType [
 	^ ASTCOperator new
 		symbol: '(' , aType value , ') ';
 		addOperand: (aVariable acceptVisitor: methodTranslator);
 		yourself
+]
+
+{ #category : #'reflective operations' }
+ASTCVirtualMachineProxy >> castTo: aType [
+	aType isString ifFalse:[ BadArgument new expected: String; result: aType class ]. 
+	^ self cCoerce: self value to: aType
 ]
 
 { #category : #'reflective operations' }

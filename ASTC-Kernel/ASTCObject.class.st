@@ -19,7 +19,18 @@ ASTCObject >> = anotherObject [
 
 { #category : #comparing }
 ASTCObject >> asFloat [
-	^ methodTranslator forward: (MessageSend receiver: self value selector: #asFloat) to: InterpreterProxy
+	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #float) to: InterpreterProxy
+]
+
+{ #category : #comparing }
+ASTCObject >> asInteger [
+	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #int) to: InterpreterProxy
+]
+
+{ #category : #comparing }
+ASTCObject >> asString [
+	methodTranslator ifNil:[ super asString ].
+	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #'char*') to: InterpreterProxy
 ]
 
 { #category : #comparing }

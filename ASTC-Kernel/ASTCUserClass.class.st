@@ -6,7 +6,7 @@ Class {
 
 { #category : #type }
 ASTCUserClass class >> asCType [
-	^'void'
+	^ 'sqInt'
 ]
 
 { #category : #'reflective operations' }
