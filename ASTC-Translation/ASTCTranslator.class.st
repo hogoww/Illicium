@@ -68,6 +68,7 @@ ASTCTranslator >> initialize [
 		at: #UndefinedObject put: ASTCUndefinedObject ;
 		at: #SmallInteger put: ASTCSmallInteger ;
 		at: #Boolean put: ASTCBoolean ;
+		at: #Character put: ASTCCharacter ;
 		at: #String put: ASTCString ;
 		at: #ByteString put: ASTCString ;
 		at: #ByteSymbol put: ASTCString ;
