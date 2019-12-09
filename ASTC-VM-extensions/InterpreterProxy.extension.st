@@ -7,6 +7,12 @@ InterpreterProxy >> methodArgumentCount [
 ]
 
 { #category : #'*ASTC-VM-extensions' }
+InterpreterProxy >> pop [
+	<returnTypeC: #sqInt>
+	^ stack removeLast
+]
+
+{ #category : #'*ASTC-VM-extensions' }
 InterpreterProxy >> sizeOfSTArrayFromCPrimitive: cPtr [
 	"Note: Only called by translated primitive code."
 	<var: #cPtr type: 'void *'>
