@@ -12,8 +12,8 @@ ASTCSlangClassTranslator >> initialize [
 
 { #category : #check }
 ASTCSlangClassTranslator >> preTranslationConstraintCheck: aClass [
-	(aClass allSuperclasses
-		includes: InterpreterPlugin)
+	((aClass allSuperclasses
+		includes: InterpreterPlugin) or:[ aClass = InterpreterPrimitives])
 		ifFalse: [ self error: 'can only translate plugins for now. They need to inherit from InterpreterPlugin.' ].
 ]
 
