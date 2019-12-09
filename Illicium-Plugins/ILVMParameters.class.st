@@ -12,8 +12,6 @@ Class {
 { #category : #adding }
 ILVMParameters >> addParameterNamedValue [
 	<primitiveToBe>
-	<var:#key type:#String >
-	<var:#value type:#SmallInteger>
 	| key value |
 	key := (interpreterProxy pop) asString.
 	value := (interpreterProxy pop) asInteger.
