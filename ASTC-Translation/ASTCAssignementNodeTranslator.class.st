@@ -25,18 +25,11 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 						init: (anAssignmentNode value acceptVisitor: methodTranslator);
 						yourself);
 				yourself ]
-		ifFalse: [ | expression |
-			expression := (ASTCOperator new
+		ifFalse: [ 
+			(ASTCOperator new
 				symbol: '=';
 				addOperand: (anAssignmentNode variable acceptVisitor: methodTranslator);
 				addOperand: (anAssignmentNode value acceptVisitor: methodTranslator);
 				yourself).
-			anAssignmentNode parent isSequence ifTrue:[	
-				ASTCExpressionStatement new
-				pharoNode: anAssignmentNode;
-				expression: expression;
-				yourself
-				].
-			expression
 			]
 ]
