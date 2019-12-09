@@ -17,43 +17,79 @@ IlliciumTestGenerator new
 Class {
 	#name : #IlliciumTestGenerator,
 	#superclass : #Object,
-	#category : #'Illicium-Plugins-Tests'
+	#category : #'Illicium-Plugins-Tests-generators'
 }
 
-{ #category : #'as yet unclassified' }
-IlliciumTestGenerator >> createTestClassFor: aClass [
-	
-	^ IlliciumToSlangTestCase subclass: #IlGenerationTestFor, aClass name
-		instanceVariableNames: ''
-		classVariableNames: ''
-		package: 'IlliciumPlugins-Tests'
+{ #category : #removing }
+IlliciumTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
+	<script>
+	^ IlliciumTestGenerator new generateTestForClass: InterpreterPrimitives. 
 ]
 
-{ #category : #'as yet unclassified' }
-IlliciumTestGenerator >> generateTestForClass: aClass withExpectedValue: aBlock [
+{ #category : #removing }
+IlliciumTestGenerator class >> generateVMMakerPluginsTests [
+	<script>
+	| generator |
+	generator:= IlliciumTestGenerator new.
+	^ ((#VMMaker asPackage) classesTaggedWith: #Plugins) do:[:aPluginClass| generator generateTestForClass: aPluginClass. ]
+]
 
-	| testClass |
-	[testClass := self createTestClassFor: aClass.
-	aClass methodsDo: [ :each | 
-			self
-				generateTestMethodFor: each
-				inTestClass: testClass
-				usingExpectedBlock: aBlock ]
-	]	on: Warning
-		do: #resume
+{ #category : #removing }
+IlliciumTestGenerator class >> removeTests [
+	<script>
+	^ ILSlangToCGeneratedTests allSubclassesDo:[ :c| c removeFromSystem ]
 ]
 
 { #category : #generation }
-IlliciumTestGenerator >> generateTestMethodFor: aMethod inTestClass: aClass usingExpectedBlock: aBlockClosure [ 
+IlliciumTestGenerator >> createTestClassFor: aClass [
+	^ ILSlangToCGeneratedTests subclass: aClass name , 'TranslationTests'
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: 'Illicium-Plugins-Tests'
+]
+
+{ #category : #generation }
+IlliciumTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
+	| translator method testedClass testedClassName |
+	testedClassName := aTestedClass name.
+	method := 'setUp' asMethodWithBody: [
+		super setUp.
+		testedClass := testedClassName.
+		translator := aTranslatorClass new
+	].
+
+	aClass compile: method asString classified: #running.
+]
+
+{ #category : #generation }
+IlliciumTestGenerator >> generateTestForClass: aClass [
+	| testClass primitivesMethod |
+	primitivesMethod := aClass methodDict
+		select: [ :compiledMethod | 
+			(compiledMethod selector includesSubstring: 'primitive')
+				and: [ compiledMethod argumentNames isEmpty ] ].
+		
+	primitivesMethod ifEmpty: [ ^self ].
+	
+	testClass := self createTestClassFor: aClass.
+	
+	self
+		generateSetUpFor: testClass
+		forTestedClass: aClass
+		forTranslator: #ASTCSlangTranslator.
+	
+	primitivesMethod
+		do: [ :aMethod | self generateTestMethodFor: aMethod selector inTestClass: testClass ]
+]
+
+{ #category : #generation }
+IlliciumTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [ 
 
 	| methodSource |
-	methodSource := 'test{selector}
-	| code |
-	code := self generate: #{selector} from: {class}.
-	self assert: code equals: {expected}' format: { 
-	'selector' -> aMethod selector.
-	'class' -> aMethod methodClass name.
-	'expected' -> (aBlockClosure value: aMethod) printString } asDictionary.
+	methodSource :=	 'test', aSelector onlyLetters asMethodWithBody:[ | cu |
+		cu := self testMethod: #aSelector.
+		^ cu
+	].
 	
-	aClass compile: methodSource classified: #tests.
+	aClass compile: methodSource asString classified: #tests.
 ]
