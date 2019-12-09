@@ -21,6 +21,7 @@ ASTCFileCompiler >> compileExternalPluginNamed: aFileName [
 		ifTrue: [ ^ self ].
 	Error signal: 'plugin didn''t compile (or the comand line sucks)'.
 	(FileLocator workingDirectory / 'generated' / (aFileName , '.errorLog')) readStream contents inspect.
+	(FileLocator workingDirectory / 'generated' / (aFileName , '.c')) readStream contents inspect.
 	self halt.
 	"proceed to copy to clipboard"
 	Clipboard clipboardText: compileCommand.
