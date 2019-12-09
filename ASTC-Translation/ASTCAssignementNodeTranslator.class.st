@@ -8,8 +8,7 @@ Class {
 ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 	^ (anAssignmentNode
 		propertyAt: ASTCShouldItBeDeclared property)
-		ifTrue: [ "type checking"
-			"creation of the return node."
+		ifTrue: [
 			ASTCDeclarationStatement new
 				pharoNode: anAssignmentNode;
 				declaration:
