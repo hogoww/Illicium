@@ -59,7 +59,8 @@ ASTCClassTranslator >> initialize [
 	methodTranslator := ASTCMethodTranslator new
 		classTranslator: self;
 		yourself.
-	inferer := PhineasInferer new.
+	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic; yourself. 
+	"we also manipulate vm stuff, so we need vm type inference"
 	
 	stateTranslator := Dictionary new
 		at: #instanceVariable put: (ASTCInstanceVariablesTranslator new classTranslator: self; yourself);
