@@ -9,6 +9,11 @@ ASTCString class >> asCType [
 	^'char*'
 ]
 
+{ #category : #type }
+ASTCString class >> asPharoType [ 
+	^ String asTypeReification
+]
+
 { #category : #comparing }
 ASTCString >> = anotherStringNode [
 		"Act as translator only if it's the translator visitor that calls it."

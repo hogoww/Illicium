@@ -9,6 +9,27 @@ ASTCObject class >> asCType [
 	^'sqInt'
 ]
 
+{ #category : #accessing }
+ASTCObject class >> asLiteralNodeFor: aValue [ 
+	^ (RBLiteralNode value: aValue) 
+		propertyAt: ASTCTypeAnnotationAST property 
+		put: (self asPharoType -> 'generated, no PhineasType');
+		yourself
+	
+]
+
+{ #category : #accessing }
+ASTCObject class >> asPharoType [ 
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+ASTCObject class >> value: aValue [ 
+	^ self new
+		value: (self asLiteralNodeFor: aValue);
+		yourself
+]
+
 { #category : #'message performing' }
 ASTCObject >> = anotherObject [
 	self flag:#notPretty.

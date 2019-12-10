@@ -9,14 +9,6 @@ ASTCNumber class >> defaultValue [
 	^0.0
 ]
 
-{ #category : #accessing }
-ASTCNumber class >> value: aFloat [
-
-	^ self new
-		value: aFloat;
-		yourself
-]
-
 { #category : #translation }
 ASTCNumber >> * anotherSmallInteger [
 

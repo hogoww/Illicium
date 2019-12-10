@@ -10,16 +10,13 @@ ASTCSmallInteger class >> asCType [
 ]
 
 { #category : #default }
-ASTCSmallInteger class >> defaultValue [
-	^0
+ASTCSmallInteger class >> asPharoType [ 
+	^ SmallInteger asTypeReification
 ]
 
-{ #category : #accessing }
-ASTCSmallInteger class >> value: anInteger [ 
-
-	^ self new
-		value: anInteger;
-		yourself
+{ #category : #default }
+ASTCSmallInteger class >> defaultValue [
+	^0
 ]
 
 { #category : #translation }
