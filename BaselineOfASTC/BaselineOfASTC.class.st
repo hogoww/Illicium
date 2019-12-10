@@ -38,15 +38,7 @@ BaselineOfASTC >> baseline: spec [
 
 { #category : #accessing }
 BaselineOfASTC >> lastPlayground [
-
 ASTCGenerator generate.
-
-ASTCTranslator translateClass: ILVMParameters.
-
-ASTCSlangTranslator new translateClass: BrokenPlugin.
-
-
-ASTCSlangTranslator new translateMethod: #primitiveCompareString fromClass: MiscPrimitivePlugin.
 
 RandomTestClass new factorialPrimitive:3.
 VirtualMachine new unloadModule:'aFile'.
