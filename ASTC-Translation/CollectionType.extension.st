@@ -20,5 +20,7 @@ CollectionType >> createInstance [
 CollectionType >> performReplacementUsing: bindings [
 	^ self class new 
 		collectionType: (collectionType performReplacementUsing: bindings);
-		elementType: (elementType performReplacementUsing: bindings)
+		elementType: (elementType performReplacementUsing: bindings);
+		properties: properties;
+		yourself
 ]

@@ -36,6 +36,14 @@ ASTCArray >> at: anIndex put: aValue [
 ]
 
 { #category : #accessing }
+ASTCArray >> do: aBlock [
+	aBlock arguments size = 1 ifFalse:[ ArgumentsCountMismatch signal ].
+	(value propertyAt: #type) key size.
+	
+	self halt.
+]
+
+{ #category : #accessing }
 ASTCArray >> elementType [
 	^ elementType
 ]
