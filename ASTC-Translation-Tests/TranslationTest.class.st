@@ -30,14 +30,14 @@ TranslationTest >> testASTCIf [
 	expectedC := ASTCIf new 
 		condition: (ASTCOperator new
 			symbol: '==';
-			addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 1));
-			addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 2));
+			addOperand: (ASTCLiteral value: 1);
+			addOperand: (ASTCLiteral value: 2);
 			yourself);
 		then:(ASTCBlock new
-			add: (ASTCLiteral value: (ASTCSmallInteger value: 1)) asASTCStatement;
+			add: (ASTCLiteral value: 1) asStatement;
 			yourself);
 		else:(ASTCBlock new
-			add: (ASTCLiteral value: (ASTCSmallInteger value: 2)) asASTCStatement;
+			add: (ASTCLiteral value: 2) asStatement;
 			yourself);
 		yourself.	
 	
@@ -52,8 +52,8 @@ TranslationTest >> testASTCOperatorBinary [
 	
 	expectedC := ASTCOperator new
 		symbol: '==';
-		addOperand:(ASTCLiteral value: (ASTCSmallInteger value: 1));
-		addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 6));
+		addOperand: (ASTCLiteral value: 1);
+		addOperand: (ASTCLiteral value: 6);
 		yourself.
 	
 	self assert: astC isExpressionStatement.
