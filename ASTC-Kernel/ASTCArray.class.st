@@ -42,7 +42,7 @@ ASTCArray >> do: aBlock [
 	aBlock arguments size = 1 ifFalse:[ ArgumentsCountMismatch signal ].
 	
 	size := [(value propertyAt: #type) key size] on: NotFound 
-		do:[ self error: '#do: is only usable if the IV using it defines a size property' ].
+		do:[ self error: '#do: is curently only usable if the IV using it defines a size property' ].
 	newBlock := aBlock copy.
 	newBlock arguments at: 1 put: ((RBArgumentNode named: #i) parent: newBlock).
 	res := methodTranslator forward: 
