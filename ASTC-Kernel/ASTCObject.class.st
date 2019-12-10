@@ -29,7 +29,7 @@ ASTCObject >> asInteger [
 
 { #category : #comparing }
 ASTCObject >> asString [
-	methodTranslator ifNil:[ super asString ].
+	methodTranslator ifNil:[ ^ super asString ].
 	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #'char*') to: InterpreterProxy
 ]
 
