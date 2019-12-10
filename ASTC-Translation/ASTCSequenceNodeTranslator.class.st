@@ -11,7 +11,7 @@ ASTCSequenceNodeTranslator >> translateNode: aSequenceNode [
 	res pharoNode: aSequenceNode.
 
 	self translateTemporaryDeclaration: aSequenceNode temporaries into: res statements.
-	aSequenceNode statements collect: [:each | (each acceptVisitor: methodTranslator) asASTCStatement] into: res statements.
+	aSequenceNode statements collect: [:each | (each acceptVisitor: methodTranslator) asStatement] into: res statements.
 	
 	^res.
 ]
