@@ -71,16 +71,13 @@ ASTCGenerator >> addAcceptVisitorOf: aFMXClass [
 	visitClass := aFMXClass name asVisitClassSelector.
 	method := 'acceptVisitor:' asMethodWithBody: [:aVisitor| aVisitor visitClass: {self} ].
 
-	self
-		addMethod: method asString
-		on: aFMXClass realClass
-		withProtocol: 'testing'
+	aFMXClass realClass compile: method asString classified: 'testing'
 ]
 
 { #category : #'generation-testing' }
 ASTCGenerator >> addAllClassTesterTo: aRootClass [
 	builder classes
-		do: [ :aClass | 
+		do: [ :aClass |
 			aClass ~= aRootClass
 				ifTrue: [ self addClassTesterFor: aClass on: aRootClass returning: false ] ]
 ]
@@ -89,13 +86,12 @@ ASTCGenerator >> addAllClassTesterTo: aRootClass [
 ASTCGenerator >> addClassTesterFor: aFMXClass on: aTargetFMXClass returning: aBoolean [
 	| methodBody isClass |
 	isClass := aFMXClass name asTesterSelector.
+	self flag: #PPCLiteral.
 	methodBody := aBoolean "PlainPharoCode limitation. Should be changed when it'll work well."
 		ifTrue: [ isClass asMethodWithBody: [ ^ true ] ]
 		ifFalse: [ isClass asMethodWithBody: [ ^ false ] ].
-	self
-		addMethod: methodBody asString
-		on: aTargetFMXClass realClass
-		withProtocol: 'testing'
+
+	aTargetFMXClass realClass compile: methodBody asString classified: 'testing'
 ]
 
 { #category : #'generation-testing' }
@@ -130,16 +126,13 @@ ASTCGenerator >> addComparisonOn: aFMXClass [
 			body + [:anInstance| propertyName = anInstance propertyName ifFalse:[ ^ false ]]]
 		]].
 	
-	body + [ ^true ].
+	body + [ ^ true ].
 						
 	method := '='
 		asMethodWithBody: body
 		withArguments: {(#anInstance -> aClass )} asDictionary.
 	
-	^ self
-		addMethod: method asString
-		on: aFMXClass realClass
-		withProtocol: 'testing'
+	aFMXClass realClass compile: method asString classified: 'testing'
 ]
 
 { #category : #'generation-state' }
@@ -154,7 +147,7 @@ ASTCGenerator >> addInitializeTo: aFMXClass [
 	
 	method := 'initialize' asMethodWithBody: [ collectionsToInitialize := collectionsType new ].
 	
-	self addMethod: method asString on: aFMXClass realClass withProtocol: 'accessing'.
+	aFMXClass realClass compile: method asString classified: 'accessing'
 ]
 
 { #category : #'generation-state' }
@@ -173,7 +166,7 @@ ASTCGenerator >> addInstanceVariable: aProperty to: aClass [
 ]
 
 { #category : #'generation-state' }
-ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aClass [
+ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aFMXClass [
 	| propertyName  aPropertyName method methodName anElement |
 	
 	propertyName := aProperty name.
@@ -183,7 +176,7 @@ ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aClass [
 	"getter"
 	method := propertyName asMethodWithBody: 
 				[ ^ propertyName ].
-	self addMethod: method asString on: aClass withProtocol: 'accessing'.
+	aFMXClass realClass compile: method asString classified: 'accessing'.
 
 	"setter"
 	methodName := propertyName,':'. " aProperty: "
@@ -195,10 +188,11 @@ ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aClass [
 			ifFalse:[	[ aPropertyName parent: self ]]]) +
 		[:anInstance | propertyName := aPropertyName ])
 		withArguments:{ #anInstance -> aPropertyName } asDictionary.
-	self addMethod: method asString on: aClass withProtocol: 'accessing'.
+	
+	aFMXClass realClass compile: method asString classified: 'accessing'.
 
 	(aProperty isRelationSide and: [ aProperty isMany ])
-	ifFalse:[ ^self ].
+		ifFalse:[ ^self ].
 
 	self flag:#improvement. "Needs to be better to go from plural to singular"
 	anElement := ((propertyName first isVowel ifTrue:[ 'an' ] ifFalse:[ 'a' ]) , propertyName capitalized) removeSuffix:'s'. "aProperty from propertys (not a typo..)"
@@ -208,7 +202,8 @@ ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aClass [
 		anElem parent: self.
 		propertyName add: anElem ] 
 		withArguments: { #anElem -> anElement } asDictionary.
-	self addMethod: method asString on: aClass withProtocol: 'accessing'.
+	
+	aFMXClass realClass compile: method asString classified: 'accessing'
 
 ]
 
@@ -222,12 +217,6 @@ ASTCGenerator >> addInstanceVariablesTo: aFMXClass [
 			 ]
 ]
 
-{ #category : #'creation-system' }
-ASTCGenerator >> addMethod: aBodyAsString on: aClass withProtocol: aProtocolAsString [
-	"Shortcut to a system method, in case it changes."
-	aClass compile: aBodyAsString classified: aProtocolAsString
-]
-
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> addPrinterVisitorsMethods [
 	"Add necessary methods for PrinterVisitor : #initialize / #printTabCount: / #stream / #toTranscript / #printOn:"
@@ -237,22 +226,22 @@ ASTCGenerator >> addPrinterVisitorsMethods [
 	method := 'initialize' asMethodWithBody: 
 		[ stream := String new writeStream.
 			currentDepth:=0 ].
-	self addMethod: method asString on: printerVisitorClass withProtocol: 'initialization'.
+	printerVisitorClass compile: method asString classified: 'initialization'.
 	
 	method := 'printTabCount:' asMethodWithBody: 
 		[:aNumber| aNumber timesRepeat:[ stream tab] ].
-	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
+	printerVisitorClass compile: method asString classified: 'printing'.
 	
 	method := 'stream' asMethodWithBody: 
 		[ ^ stream ].
-	self addMethod: method asString on: printerVisitorClass  withProtocol: 'accessing'.
+	printerVisitorClass compile: method asString classified: 'accessing'.
 
 	method := 'printOn:' asMethodWithBody: [:aStream| aStream << stream contents ].
-	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
+	printerVisitorClass compile: method asString classified: 'printing'.
 	
 	method := 'toTranscript' asMethodWithBody: 
 	[ Transcript show:self ; cr ].
-	self addMethod: method asString on: printerVisitorClass withProtocol:'printing'.
+	printerVisitorClass compile: method asString classified: 'printing'.
 	
 ]
 
@@ -260,14 +249,13 @@ ASTCGenerator >> addPrinterVisitorsMethods [
 ASTCGenerator >> addStructureValidatorVisitorMethods [	
 	| errors method |
 	method := 'initialize' asMethodWithBody: [ errors := 0 ].
-	self addMethod: method asString on: structureValidatorVisitorClass  withProtocol: 'initialization'.
+	structureValidatorVisitorClass compile: method asString classified: 'initialization'.
 
-	method := 'errors' asMethodWithBody: [ ^errors ].		
-	self addMethod:'errors
-	^errors' on: structureValidatorVisitorClass withProtocol: 'accessing'.
+	method := 'errors' asMethodWithBody: [ ^ errors ].		
+	structureValidatorVisitorClass compile: method asString classified: 'accessing'.
 
-	method := 'isValidAst' asMethodWithBody: [ ^errors=0 ].
-	self addMethod: method asString on: structureValidatorVisitorClass withProtocol: 'testing'.
+	method := 'isValidAst' asMethodWithBody: [ ^ errors = 0 ].
+	structureValidatorVisitorClass compile: method asString classified: 'testing'.
 
 ]
 
@@ -306,7 +294,7 @@ ASTCGenerator >> generateAbstractVisitOf: aFMXClass [
 		withArguments:
 			{#anInstance ->
 			className asAnInstance} asDictionary.
-	^ self addMethod: method asString on: abstractVisitorClass withProtocol: 'visiting'
+	abstractVisitorClass compile: method asString classified:  'visiting'
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -387,10 +375,7 @@ ASTCGenerator >> generateDebugVisitOf: aFMXClass [
 		asMethodWithBody: body
 		withArguments: {(#aClass -> anInstance )} asDictionary.
 		
-	^ self
-		addMethod: method asString
-		on: debugStructureVisitorClass
-		withProtocol: 'visiting'  
+	debugStructureVisitorClass compile: method asString classified: 'visiting'  
 ]
 
 { #category : #'generation-visit' }
@@ -409,10 +394,7 @@ ASTCGenerator >> generateHierarchyWalkVisitOf: aFMXClass [
 		asMethodWithBody: body
 		withArguments: {(#anInstance -> aClass asAnInstance )} asDictionary.
 
-	^ self
-		addMethod: method asString
-		on: hierarchyWalkerVisitorClass
-		withProtocol: 'visiting'
+	hierarchyWalkerVisitorClass compile: method asString classified: 'visiting'
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -436,14 +418,14 @@ ASTCGenerator >> generateMethodsFor: aFMXClass [
 ASTCGenerator >> generatePrinterVisit: aFMXClass [
 	"generate a #printProperties selector that will call every property asString"
 	"The result will keep the order of the definitions in the metamodel"
-	| methodBody visitSomething stream currentDepth aClassWithQuotes aClass propertiesNames |
+	| method visitSomething stream currentDepth aClassWithQuotes aClass propertiesNames |
 	aClass := aFMXClass name asAnInstance.
 	aClassWithQuotes:= '''',aClass,''''.
 	visitSomething := aFMXClass name asVisitClassSelector.
 
 	propertiesNames := aFMXClass properties select: [:aProp| aProp isTypedProperty and:[ aProp name ~= #pharoNode] ] thenCollect:#name.
 
-	methodBody := visitSomething asMethodWithBody:[:anInstance|
+	method := visitSomething asMethodWithBody:[:anInstance|
 		stream cr.
 
 		self printTabCount: currentDepth.
@@ -457,7 +439,7 @@ ASTCGenerator >> generatePrinterVisit: aFMXClass [
 		currentDepth := currentDepth-1.
 		stream << ')'.
 	] withArguments: {#anInstance -> aClass} asDictionary.
-	self addMethod: methodBody asString on: printerVisitorClass withProtocol: 'visiting'.	
+	printerVisitorClass compile: method asString classified:  'visiting'.	
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -498,9 +480,7 @@ ASTCGenerator >> generateSuperclassVisitOf: aFMXClass [
 		asMethodWithBody: (self visitSuperClassBody: aFMXClass)
 		withArguments: {#anInstance -> className asAnInstance} asDictionary.
 			
-	^ self addMethod: method asString 
-		on: superclassVisitorClass 
-		withProtocol: 'visiting'
+	superclassVisitorClass compile: method asString classified: #visiting
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -529,14 +509,11 @@ ASTCGenerator >> generateValidatorVisitOf: aFMXClass [
 		].
 	
 			
-		method := visitClass
+	method := visitClass
 		asMethodWithBody: body
 		withArguments: {(#aClass -> anInstance )} asDictionary.
 		
-	^ self
-		addMethod: method asString
-		on: structureValidatorVisitorClass
-		withProtocol: 'visiting'  
+	structureValidatorVisitorClass compile: method asString classified: 'visiting'  
 ]
 
 { #category : #'generation-visitor-classes' }
@@ -600,10 +577,7 @@ ASTCGenerator >> generateWalkVisitOf: aFMXClass [
 		asMethodWithBody: body
 		withArguments: {(#anInstance -> aClass )} asDictionary.
 
-	^ self
-		addMethod: method asString
-		on: walkerVisitorClass
-		withProtocol: 'visiting'
+	walkerVisitorClass compile: method asString classified: 'visiting'
 ]
 
 { #category : #'generation-visitor-classes' }

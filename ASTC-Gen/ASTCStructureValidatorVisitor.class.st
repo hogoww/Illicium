@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 ASTCStructureValidatorVisitor >> errors [
-	^errors
+	^ errors
 ]
 
 { #category : #initialization }
