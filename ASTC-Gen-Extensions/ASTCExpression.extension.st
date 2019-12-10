@@ -1,7 +1,7 @@
 Extension { #name : #ASTCExpression }
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCExpression >> asASTCStatement [
+ASTCExpression >> asStatement [
 
 	^ ASTCExpressionStatement expression: self
 ]

@@ -1,6 +1,6 @@
 Extension { #name : #ASTCStatement }
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCStatement >> asASTCStatement [
+ASTCStatement >> asStatement [
 	^self
 ]
