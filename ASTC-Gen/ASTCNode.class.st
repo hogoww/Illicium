@@ -172,3 +172,11 @@ ASTCNode >> pharoNode [
 ASTCNode >> pharoNode: aPharoNode [
 	pharoNode := aPharoNode
 ]
+
+{ #category : #testing }
+ASTCNode >> printOn: aStream [
+	aStream print: self class;
+		<< '(';
+		<< self prettyPrint;
+		<< ')'
+]
