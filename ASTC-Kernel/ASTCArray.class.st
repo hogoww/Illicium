@@ -37,10 +37,42 @@ ASTCArray >> at: anIndex put: aValue [
 
 { #category : #accessing }
 ASTCArray >> do: aBlock [
+	| size newBlock res arg iterator receiver |
+	aBlock isBlock ifFalse:[ BadArgument new expected: RBBlockNode; result: aBlock class; signal ].
 	aBlock arguments size = 1 ifFalse:[ ArgumentsCountMismatch signal ].
-	(value propertyAt: #type) key size.
+	size := (value propertyAt: #type) key size.
+	newBlock := aBlock copy.
+	newBlock arguments at: 1 put: ((RBArgumentNode named: #i) parent: newBlock).
+	res := methodTranslator forward: 
+			(MessageSend receiver: (ASTCSmallInteger asLiteralNodeFor: 0) 
+				selector: #to:do: 
+				arguments:{ ASTCSmallInteger asLiteralNodeFor: size. newBlock} )
+		to: SmallInteger.
+		
+	arg := (aBlock arguments at: 1) acceptVisitor: methodTranslator.
+	iterator := (newBlock arguments at: 1) acceptVisitor: methodTranslator.
+	receiver := self value acceptVisitor: methodTranslator.
 	
-	self halt.
+	res body statements addFirst:
+		(ASTCIf new condition: 
+			(ASTCOperator new symbol: '==';
+				addOperand: arg;
+				addOperand: (ASTCLiteral new value: 'null'));
+			then: (ASTCLiteral new value: 'break') asStatement;
+			yourself).
+	
+	res body statements addFirst: 
+		(ASTCOperator new symbol: '='; 
+		addOperand: arg; 
+		addOperand: 
+			(ASTCOperator new symbol:'[]';
+				addOperand: receiver;
+				addOperand: iterator;
+				yourself);
+			yourself) 
+		asStatement.
+		
+	^ res
 ]
 
 { #category : #accessing }
