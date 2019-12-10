@@ -51,6 +51,62 @@ ASTCPrinterVisitor >> visitAbstractWhile: anAbstractWhile [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitAdditionOperator: anAdditionOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anAdditionOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitAdditionOperator: anAdditionOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitAndOperator: anAndOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anAndOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitAndOperator: anAndOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitAssignmentOperator: anAssignmentOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anAssignmentOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitAssignmentOperator: anAssignmentOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitBinaryOperator: aBinaryOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aBinaryOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitBinaryOperator: aBinaryOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitBlock: aBlock [
 	stream cr.
 	self printTabCount: currentDepth.
@@ -60,6 +116,34 @@ ASTCPrinterVisitor >> visitBlock: aBlock [
 		space.
 	currentDepth := currentDepth + 1.
 	super visitBlock: aBlock.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitBreak: aBreak [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aBreak';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitBreak: aBreak.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitCastOperator: aCastOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aCastOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitCastOperator: aCastOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]
@@ -116,6 +200,20 @@ ASTCPrinterVisitor >> visitDefinition: aDefinition [
 		space.
 	currentDepth := currentDepth + 1.
 	super visitDefinition: aDefinition.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitDivisionOperator: aDivisionOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aDivisionOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitDivisionOperator: aDivisionOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]
@@ -248,6 +346,20 @@ ASTCPrinterVisitor >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitIndexerOperator: anIndexerOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anIndexerOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitIndexerOperator: anIndexerOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitLiteral: aLiteral [
 	stream cr.
 	self printTabCount: currentDepth.
@@ -263,6 +375,20 @@ ASTCPrinterVisitor >> visitLiteral: aLiteral [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aLogicalNotOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitLogicalNotOperator: aLogicalNotOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitLoop: aLoop [
 	stream cr.
 	self printTabCount: currentDepth.
@@ -272,6 +398,20 @@ ASTCPrinterVisitor >> visitLoop: aLoop [
 		space.
 	currentDepth := currentDepth + 1.
 	super visitLoop: aLoop.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aMultiplicationOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitMultiplicationOperator: aMultiplicationOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]
@@ -301,6 +441,48 @@ ASTCPrinterVisitor >> visitOperator: anOperator [
 		print: anOperator symbol.
 	currentDepth := currentDepth + 1.
 	super visitOperator: anOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitOrOperator: anOrOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anOrOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitOrOperator: anOrOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aPreDecrementOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitPreDecrementOperator: aPreDecrementOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aPreIncrementOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitPreIncrementOperator: aPreIncrementOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]
@@ -376,6 +558,20 @@ ASTCPrinterVisitor >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitSubtractionOperator: aSubtractionOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aSubtractionOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitSubtractionOperator: aSubtractionOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitType: aType [
 	stream cr.
 	self printTabCount: currentDepth.
@@ -386,6 +582,20 @@ ASTCPrinterVisitor >> visitType: aType [
 		print: aType type.
 	currentDepth := currentDepth + 1.
 	super visitType: aType.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitUnaryOperator: anUnaryOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anUnaryOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitUnaryOperator: anUnaryOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]

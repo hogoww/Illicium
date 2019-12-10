@@ -24,7 +24,37 @@ ASTCNode >> isAbstractWhile [
 ]
 
 { #category : #testing }
+ASTCNode >> isAdditionOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isAndOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isAssignmentOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isBinaryOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isBlock [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isBreak [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isCastOperator [
 	^ false
 ]
 
@@ -45,6 +75,11 @@ ASTCNode >> isDeclarationStatement [
 
 { #category : #testing }
 ASTCNode >> isDefinition [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isDivisionOperator [
 	^ false
 ]
 
@@ -94,12 +129,27 @@ ASTCNode >> isIf [
 ]
 
 { #category : #testing }
+ASTCNode >> isIndexerOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isLiteral [
 	^ false
 ]
 
 { #category : #testing }
+ASTCNode >> isLogicalNotOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isLoop [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isMultiplicationOperator [
 	^ false
 ]
 
@@ -110,6 +160,21 @@ ASTCNode >> isNode [
 
 { #category : #testing }
 ASTCNode >> isOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isOrOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isPreDecrementOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isPreIncrementOperator [
 	^ false
 ]
 
@@ -139,7 +204,17 @@ ASTCNode >> isStructureDefinition [
 ]
 
 { #category : #testing }
+ASTCNode >> isSubtractionOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isType [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isUnaryOperator [
 	^ false
 ]
 
@@ -171,12 +246,4 @@ ASTCNode >> pharoNode [
 { #category : #accessing }
 ASTCNode >> pharoNode: aPharoNode [
 	pharoNode := aPharoNode
-]
-
-{ #category : #testing }
-ASTCNode >> printOn: aStream [
-	aStream print: self class;
-		<< '(';
-		<< self prettyPrint;
-		<< ')'
 ]

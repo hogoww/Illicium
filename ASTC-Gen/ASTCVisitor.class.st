@@ -10,7 +10,37 @@ ASTCVisitor >> visitAbstractWhile: anAbstractWhile [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitAdditionOperator: anAdditionOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitAndOperator: anAndOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitAssignmentOperator: anAssignmentOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitBinaryOperator: aBinaryOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitBlock: aBlock [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitBreak: aBreak [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitCastOperator: aCastOperator [
 	
 ]
 
@@ -31,6 +61,11 @@ ASTCVisitor >> visitDeclarationStatement: aDeclarationStatement [
 
 { #category : #visiting }
 ASTCVisitor >> visitDefinition: aDefinition [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitDivisionOperator: aDivisionOperator [
 	
 ]
 
@@ -80,12 +115,27 @@ ASTCVisitor >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitIndexerOperator: anIndexerOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitLiteral: aLiteral [
 	
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitLoop: aLoop [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	
 ]
 
@@ -96,6 +146,21 @@ ASTCVisitor >> visitNode: aNode [
 
 { #category : #visiting }
 ASTCVisitor >> visitOperator: anOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitOrOperator: anOrOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 	
 ]
 
@@ -125,7 +190,17 @@ ASTCVisitor >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitSubtractionOperator: aSubtractionOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitType: aType [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitUnaryOperator: anUnaryOperator [
 	
 ]
 

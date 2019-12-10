@@ -30,8 +30,50 @@ ASTCStructureValidatorVisitor >> visitAbstractWhile: anAbstractWhile [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitAdditionOperator: anAdditionOperator [
+	[ super visitAdditionOperator: anAdditionOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitAndOperator: anAndOperator [
+	[ super visitAndOperator: anAndOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitAssignmentOperator: anAssignmentOperator [
+	[ super visitAssignmentOperator: anAssignmentOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitBinaryOperator: aBinaryOperator [
+	[ super visitBinaryOperator: aBinaryOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitBlock: aBlock [
 	[ super visitBlock: aBlock ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitBreak: aBreak [
+	[ super visitBreak: aBreak ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitCastOperator: aCastOperator [
+	[ super visitCastOperator: aCastOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]
@@ -60,6 +102,13 @@ ASTCStructureValidatorVisitor >> visitDeclarationStatement: aDeclarationStatemen
 { #category : #visiting }
 ASTCStructureValidatorVisitor >> visitDefinition: aDefinition [
 	[ super visitDefinition: aDefinition ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitDivisionOperator: aDivisionOperator [
+	[ super visitDivisionOperator: aDivisionOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]
@@ -128,6 +177,13 @@ ASTCStructureValidatorVisitor >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitIndexerOperator: anIndexerOperator [
+	[ super visitIndexerOperator: anIndexerOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitLiteral: aLiteral [
 	[ super visitLiteral: aLiteral ]
 		on: AssertionFailure
@@ -135,8 +191,22 @@ ASTCStructureValidatorVisitor >> visitLiteral: aLiteral [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
+	[ super visitLogicalNotOperator: aLogicalNotOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitLoop: aLoop [
 	[ super visitLoop: aLoop ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
+	[ super visitMultiplicationOperator: aMultiplicationOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]
@@ -151,6 +221,27 @@ ASTCStructureValidatorVisitor >> visitNode: aNode [
 { #category : #visiting }
 ASTCStructureValidatorVisitor >> visitOperator: anOperator [
 	[ super visitOperator: anOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitOrOperator: anOrOperator [
+	[ super visitOrOperator: anOrOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
+	[ super visitPreDecrementOperator: aPreDecrementOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
+	[ super visitPreIncrementOperator: aPreIncrementOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]
@@ -191,8 +282,22 @@ ASTCStructureValidatorVisitor >> visitStructureDefinition: aStructureDefinition 
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitSubtractionOperator: aSubtractionOperator [
+	[ super visitSubtractionOperator: aSubtractionOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitType: aType [
 	[ super visitType: aType ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitUnaryOperator: anUnaryOperator [
+	[ super visitUnaryOperator: anUnaryOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]

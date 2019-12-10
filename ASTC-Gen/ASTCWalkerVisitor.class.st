@@ -10,11 +10,41 @@ ASTCWalkerVisitor >> visitAbstractWhile: anAbstractWhile [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitAdditionOperator: anAdditionOperator [
+	super visitAdditionOperator: anAdditionOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitAndOperator: anAndOperator [
+	super visitAndOperator: anAndOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitAssignmentOperator: anAssignmentOperator [
+	super visitAssignmentOperator: anAssignmentOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
+	super visitBinaryOperator: aBinaryOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitBlock: aBlock [
 	super visitBlock: aBlock.
 	aBlock statements
 		ifNotNil:
 			[ :statements | statements do: [ :aStatements | aStatements acceptVisitor: self ] ]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitBreak: aBreak [
+	super visitBreak: aBreak
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitCastOperator: aCastOperator [
+	super visitCastOperator: aCastOperator
 ]
 
 { #category : #visiting }
@@ -47,6 +77,11 @@ ASTCWalkerVisitor >> visitDefinition: aDefinition [
 	super visitDefinition: aDefinition.
 	aDefinition declaration
 		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitDivisionOperator: aDivisionOperator [
+	super visitDivisionOperator: aDivisionOperator
 ]
 
 { #category : #visiting }
@@ -116,8 +151,18 @@ ASTCWalkerVisitor >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitIndexerOperator: anIndexerOperator [
+	super visitIndexerOperator: anIndexerOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitLiteral: aLiteral [
 	super visitLiteral: aLiteral
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
+	super visitLogicalNotOperator: aLogicalNotOperator
 ]
 
 { #category : #visiting }
@@ -129,11 +174,31 @@ ASTCWalkerVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
+	super visitMultiplicationOperator: aMultiplicationOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
 	super visitOperator: anOperator.
 	anOperator operands
 		ifNotNil:
 			[ :operands | operands do: [ :anOperands | anOperands acceptVisitor: self ] ]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitOrOperator: anOrOperator [
+	super visitOrOperator: anOrOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
+	super visitPreDecrementOperator: aPreDecrementOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
+	super visitPreIncrementOperator: aPreIncrementOperator
 ]
 
 { #category : #visiting }
@@ -171,8 +236,18 @@ ASTCWalkerVisitor >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
+	super visitSubtractionOperator: aSubtractionOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitType: aType [
 	super visitType: aType
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitUnaryOperator: anUnaryOperator [
+	super visitUnaryOperator: anUnaryOperator
 ]
 
 { #category : #visiting }

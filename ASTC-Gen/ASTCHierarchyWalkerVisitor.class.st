@@ -11,9 +11,45 @@ ASTCHierarchyWalkerVisitor >> visitAbstractWhile: anAbstractWhile [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitAdditionOperator: anAdditionOperator [
+	super visitAdditionOperator: anAdditionOperator.
+	^ self visitBinaryOperator: anAdditionOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitAndOperator: anAndOperator [
+	super visitAndOperator: anAndOperator.
+	^ self visitBinaryOperator: anAndOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitAssignmentOperator: anAssignmentOperator [
+	super visitAssignmentOperator: anAssignmentOperator.
+	^ self visitBinaryOperator: anAssignmentOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
+	super visitBinaryOperator: aBinaryOperator.
+	^ self visitOperator: aBinaryOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitBlock: aBlock [
 	super visitBlock: aBlock.
 	^ self visitStatement: aBlock
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitBreak: aBreak [
+	super visitBreak: aBreak.
+	^ self visitStatement: aBreak
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitCastOperator: aCastOperator [
+	super visitCastOperator: aCastOperator.
+	^ self visitUnaryOperator: aCastOperator
 ]
 
 { #category : #visiting }
@@ -38,6 +74,12 @@ ASTCHierarchyWalkerVisitor >> visitDeclarationStatement: aDeclarationStatement [
 ASTCHierarchyWalkerVisitor >> visitDefinition: aDefinition [
 	super visitDefinition: aDefinition.
 	^ self visitNode: aDefinition
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitDivisionOperator: aDivisionOperator [
+	super visitDivisionOperator: aDivisionOperator.
+	^ self visitBinaryOperator: aDivisionOperator
 ]
 
 { #category : #visiting }
@@ -95,15 +137,33 @@ ASTCHierarchyWalkerVisitor >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitIndexerOperator: anIndexerOperator [
+	super visitIndexerOperator: anIndexerOperator.
+	^ self visitBinaryOperator: anIndexerOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitLiteral: aLiteral [
 	super visitLiteral: aLiteral.
 	^ self visitExpression: aLiteral
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
+	super visitLogicalNotOperator: aLogicalNotOperator.
+	^ self visitUnaryOperator: aLogicalNotOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitLoop: aLoop [
 	super visitLoop: aLoop.
 	^ self visitStatement: aLoop
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
+	super visitMultiplicationOperator: aMultiplicationOperator.
+	^ self visitBinaryOperator: aMultiplicationOperator
 ]
 
 { #category : #visiting }
@@ -115,6 +175,24 @@ ASTCHierarchyWalkerVisitor >> visitNode: aNode [
 ASTCHierarchyWalkerVisitor >> visitOperator: anOperator [
 	super visitOperator: anOperator.
 	^ self visitExpression: anOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitOrOperator: anOrOperator [
+	super visitOrOperator: anOrOperator.
+	^ self visitBinaryOperator: anOrOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
+	super visitPreDecrementOperator: aPreDecrementOperator.
+	^ self visitUnaryOperator: aPreDecrementOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
+	super visitPreIncrementOperator: aPreIncrementOperator.
+	^ self visitUnaryOperator: aPreIncrementOperator
 ]
 
 { #category : #visiting }
@@ -148,9 +226,21 @@ ASTCHierarchyWalkerVisitor >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
+	super visitSubtractionOperator: aSubtractionOperator.
+	^ self visitBinaryOperator: aSubtractionOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitType: aType [
 	super visitType: aType.
 	^ self visitNode: aType
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitUnaryOperator: anUnaryOperator [
+	super visitUnaryOperator: anUnaryOperator.
+	^ self visitOperator: anUnaryOperator
 ]
 
 { #category : #visiting }

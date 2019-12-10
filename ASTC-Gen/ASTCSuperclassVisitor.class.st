@@ -10,8 +10,38 @@ ASTCSuperclassVisitor >> visitAbstractWhile: anAbstractWhile [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitAdditionOperator: anAdditionOperator [
+	^ self visitBinaryOperator: anAdditionOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitAndOperator: anAndOperator [
+	^ self visitBinaryOperator: anAndOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitAssignmentOperator: anAssignmentOperator [
+	^ self visitBinaryOperator: anAssignmentOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitBinaryOperator: aBinaryOperator [
+	^ self visitOperator: aBinaryOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitBlock: aBlock [
 	^ self visitStatement: aBlock
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitBreak: aBreak [
+	^ self visitStatement: aBreak
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitCastOperator: aCastOperator [
+	^ self visitUnaryOperator: aCastOperator
 ]
 
 { #category : #visiting }
@@ -32,6 +62,11 @@ ASTCSuperclassVisitor >> visitDeclarationStatement: aDeclarationStatement [
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitDefinition: aDefinition [
 	^ self visitNode: aDefinition
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitDivisionOperator: aDivisionOperator [
+	^ self visitBinaryOperator: aDivisionOperator
 ]
 
 { #category : #visiting }
@@ -80,13 +115,28 @@ ASTCSuperclassVisitor >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitIndexerOperator: anIndexerOperator [
+	^ self visitBinaryOperator: anIndexerOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitLiteral: aLiteral [
 	^ self visitExpression: aLiteral
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
+	^ self visitUnaryOperator: aLogicalNotOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitLoop: aLoop [
 	^ self visitStatement: aLoop
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
+	^ self visitBinaryOperator: aMultiplicationOperator
 ]
 
 { #category : #visiting }
@@ -97,6 +147,21 @@ ASTCSuperclassVisitor >> visitNode: aNode [
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitOperator: anOperator [
 	^ self visitExpression: anOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitOrOperator: anOrOperator [
+	^ self visitBinaryOperator: anOrOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
+	^ self visitUnaryOperator: aPreDecrementOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
+	^ self visitUnaryOperator: aPreIncrementOperator
 ]
 
 { #category : #visiting }
@@ -125,8 +190,18 @@ ASTCSuperclassVisitor >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitSubtractionOperator: aSubtractionOperator [
+	^ self visitBinaryOperator: aSubtractionOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitType: aType [
 	^ self visitNode: aType
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitUnaryOperator: anUnaryOperator [
+	^ self visitOperator: anUnaryOperator
 ]
 
 { #category : #visiting }
