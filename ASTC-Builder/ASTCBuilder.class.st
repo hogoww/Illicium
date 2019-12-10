@@ -64,7 +64,22 @@ Class {
 		'variableDeclaration',
 		'variableDefinition',
 		'structureDeclaration',
-		'structureDefinition'
+		'structureDefinition',
+		'break',
+		'unaryOperator',
+		'binaryOperator',
+		'preIncrementOperator',
+		'preDecrementOperator',
+		'castOperator',
+		'logicalNotOperator',
+		'additionOperator',
+		'subtractionOperator',
+		'multiplicationOperator',
+		'divisionOperator',
+		'indexerOperator',
+		'assignementOperator',
+		'andOperator',
+		'orOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -87,52 +102,56 @@ ASTCBuilder >> defineClasses [
 	super defineClasses.
 	
 	"general"
-	node:=builder newClassNamed:#Node.
-	project:=builder newClassNamed:#Project.
-	compilationUnit:=builder newClassNamed:#CompilationUnit.
-	
+	node := builder newClassNamed: #Node.
+
 		"Node Subclasses"
-		definition:=builder newClassNamed:#Definition.
-		declaration:=builder newClassNamed:#Declaration.
+		project := builder newClassNamed: #Project.
+		compilationUnit := builder newClassNamed: #CompilationUnit.
+		definition := builder newClassNamed: #Definition.
+		declaration := builder newClassNamed: #Declaration.
 		
-		expression:=builder newClassNamed:#Expression.
-		statement:=builder newClassNamed:#Statement.
-		type:=builder newClassNamed:#Type.
+		expression := builder newClassNamed: #Expression.
+		statement := builder newClassNamed: #Statement.
+		type := builder newClassNamed: #Type.
 		
 			"Definition/declaration"
-			functionDeclaration:=builder newClassNamed:#FunctionDeclaration.
-			functionDefinition:=builder newClassNamed:#FunctionDefinition.
+			functionDeclaration := builder newClassNamed: #FunctionDeclaration.
+			functionDefinition := builder newClassNamed: #FunctionDefinition.
 	
-			variableDeclaration:=builder newClassNamed:#VariableDeclaration.
-			variableDefinition:=builder newClassNamed:#VariableDefinition.
+			variableDeclaration := builder newClassNamed: #VariableDeclaration.
+			variableDefinition := builder newClassNamed: #VariableDefinition.
 	
-			structureDeclaration:=builder newClassNamed:#StructureDeclaration.
-			structureDefinition:=builder newClassNamed:#StructureDefinition.
+			structureDeclaration := builder newClassNamed: #StructureDeclaration.
+			structureDefinition := builder newClassNamed: #StructureDefinition.
 			
 		"Expressions"
-		literal:=builder newClassNamed:#Literal.
-		functionCall:=builder newClassNamed:#FunctionCall.
-		operator:=builder newClassNamed:#Operator.
-		identifier:=builder newClassNamed:#Identifier.
+		literal := builder newClassNamed: #Literal.
+		functionCall := builder newClassNamed: #FunctionCall.
+		operator := builder newClassNamed: #Operator.
+		self defineOperatorClasses.
+		identifier := builder newClassNamed: #Identifier.
 		
 		"Statement"
-		expressionStatement:=builder newClassNamed:#ExpressionStatement.
-		declarationStatement := builder newClassNamed:#DeclarationStatement.
-		return:=builder newClassNamed:#Return.
-		if:=builder newClassNamed:#If.
-		block:=builder newClassNamed:#Block.
-		loop:=builder newClassNamed:#Loop.
-			for:=builder newClassNamed:#For.
-			abstractWhile:=builder newClassNamed:#AbstractWhile.
-				while:=builder newClassNamed:#While.
-				doWhile:=builder newClassNamed:#DoWhile.
+		expressionStatement := builder newClassNamed: #ExpressionStatement.
+		declarationStatement := builder newClassNamed: #DeclarationStatement.
+		return := builder newClassNamed: #Return.
+		if := builder newClassNamed: #If.
+		block := builder newClassNamed: #Block.
+		break := builder newClassNamed: #Break.
+		
+		"Loops"
+		loop := builder newClassNamed: #Loop.
+			for := builder newClassNamed: #For.
+			abstractWhile := builder newClassNamed: #AbstractWhile.
+				while := builder newClassNamed: #While.
+				doWhile := builder newClassNamed: #DoWhile.
  
 		
 
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineHierarchy [ 
+ASTCBuilder >> defineHierarchy [
 	super defineHierarchy.
 	
 	"Define the inheritance links between the classes defined in #defineClasses, following the FmxNG syntax."
@@ -162,6 +181,7 @@ ASTCBuilder >> defineHierarchy [
 			literal --|> expression.
 			functionCall  --|> expression.
 			operator --|> expression.
+			self defineOperators.
 			identifier --|> expression.
 			
 			"Statement direct Subclasses"
@@ -170,14 +190,57 @@ ASTCBuilder >> defineHierarchy [
 			return --|> statement.
 			if  --|> statement.
 			block --|> statement.
-			loop --|> statement.
+			break --|> statement.
 				
-				"Loops"
+			"Loops"
+			loop --|> statement.
 				for --|> loop.				
 				abstractWhile --|> loop.
 					while --|> abstractWhile.
 					doWhile --|> abstractWhile.
 			
+]
+
+{ #category : #definition }
+ASTCBuilder >> defineOperatorClasses [
+
+	unaryOperator := builder newClassNamed: #UnaryOperator.
+	binaryOperator := builder newClassNamed: #BinaryOperator.
+	
+	preIncrementOperator := builder newClassNamed: #PreIncrementOperator.
+	preDecrementOperator := builder newClassNamed: #PreDecrementOperator.
+	castOperator := builder newClassNamed: #CastOperator.
+	logicalNotOperator := builder newClassNamed: #LogicalNotOperator.
+	
+	assignementOperator := builder newClassNamed: #AssignmentOperator.
+	additionOperator := builder newClassNamed: #AdditionOperator.
+	subtractionOperator := builder newClassNamed: #SubtractionOperator.
+	multiplicationOperator := builder newClassNamed: #MultiplicationOperator.
+	divisionOperator := builder newClassNamed: #DivisionOperator.
+	indexerOperator := builder newClassNamed: #IndexerOperator.
+	orOperator := builder newClassNamed: #OrOperator.
+	andOperator := builder newClassNamed: #AndOperator.
+]
+
+{ #category : #definition }
+ASTCBuilder >> defineOperators [
+	"Define operators in a different function, to limit the noise"
+	unaryOperator --|> operator.
+	binaryOperator --|> operator.
+	
+		preIncrementOperator --|> unaryOperator." ++i "
+		preDecrementOperator --|> unaryOperator. " --i "
+		castOperator --|> unaryOperator. " (int) a "
+		logicalNotOperator --|> unaryOperator." ! b "
+	
+	assignementOperator --|> binaryOperator." a = b "
+	additionOperator --|> binaryOperator." a + b "
+	subtractionOperator --|> binaryOperator." a - b "
+	multiplicationOperator --|> binaryOperator." a * b "
+	divisionOperator --|> binaryOperator. " a / b "
+	indexerOperator --|> binaryOperator. " aVar[anIndex] "
+	orOperator --|> binaryOperator. " a || b "
+	andOperator --|> binaryOperator. " a && b "
 ]
 
 { #category : #definition }
