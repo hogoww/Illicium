@@ -90,6 +90,11 @@ ASTCWalkerVisitor >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitEqualityOperator: anEqualityOperator [
+	super visitEqualityOperator: anEqualityOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitExpression: anExpression [
 	super visitExpression: anExpression
 ]

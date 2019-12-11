@@ -75,6 +75,11 @@ ASTCSuperclassVisitor >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitEqualityOperator: anEqualityOperator [
+	^ self visitBinaryOperator: anEqualityOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitExpression: anExpression [
 	^ self visitNode: anExpression
 ]

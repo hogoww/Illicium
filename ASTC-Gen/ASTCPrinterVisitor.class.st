@@ -233,6 +233,20 @@ ASTCPrinterVisitor >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitEqualityOperator: anEqualityOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anEqualityOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitEqualityOperator: anEqualityOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitExpression: anExpression [
 	stream cr.
 	self printTabCount: currentDepth.

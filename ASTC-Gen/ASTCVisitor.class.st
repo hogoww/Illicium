@@ -75,6 +75,11 @@ ASTCVisitor >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitEqualityOperator: anEqualityOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitExpression: anExpression [
 	
 ]

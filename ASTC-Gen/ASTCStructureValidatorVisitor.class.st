@@ -121,6 +121,13 @@ ASTCStructureValidatorVisitor >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitEqualityOperator: anEqualityOperator [
+	[ super visitEqualityOperator: anEqualityOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitExpression: anExpression [
 	[ super visitExpression: anExpression ]
 		on: AssertionFailure

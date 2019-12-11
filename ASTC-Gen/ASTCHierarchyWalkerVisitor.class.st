@@ -89,6 +89,12 @@ ASTCHierarchyWalkerVisitor >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitEqualityOperator: anEqualityOperator [
+	super visitEqualityOperator: anEqualityOperator.
+	^ self visitBinaryOperator: anEqualityOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitExpression: anExpression [
 	super visitExpression: anExpression.
 	^ self visitNode: anExpression

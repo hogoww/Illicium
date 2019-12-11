@@ -89,6 +89,11 @@ ASTCNode >> isDoWhile [
 ]
 
 { #category : #testing }
+ASTCNode >> isEqualityOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isExpression [
 	^ false
 ]

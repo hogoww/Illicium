@@ -79,7 +79,8 @@ Class {
 		'indexerOperator',
 		'assignementOperator',
 		'andOperator',
-		'orOperator'
+		'orOperator',
+		'equalityOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -204,6 +205,7 @@ ASTCBuilder >> defineHierarchy [
 { #category : #definition }
 ASTCBuilder >> defineOperatorClasses [
 
+	self flag:#format. "should have a synced format with defineOperators. Will do when they are all there."
 	unaryOperator := builder newClassNamed: #UnaryOperator.
 	binaryOperator := builder newClassNamed: #BinaryOperator.
 	
@@ -220,15 +222,16 @@ ASTCBuilder >> defineOperatorClasses [
 	indexerOperator := builder newClassNamed: #IndexerOperator.
 	orOperator := builder newClassNamed: #OrOperator.
 	andOperator := builder newClassNamed: #AndOperator.
+	equalityOperator := builder newClassNamed: #EqualityOperator.
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineOperators [.
+ASTCBuilder >> defineOperators [
 	"Define operators in a different function, to limit the noise"
 	"priorities come from the ranking from the cppreference website.
 	Second part of the comment refers the associativity.
-	https://en.cppreference.com/w/c/language/operator_precedence
-	"
+	https://en.cppreference.com/w/c/language/operator_precedence"
+	
 	unaryOperator --|> operator.
 	binaryOperator --|> operator.
 	
@@ -249,6 +252,9 @@ ASTCBuilder >> defineOperators [.
 	subtractionOperator --|> binaryOperator." a - b "
 	additionOperator --|> binaryOperator." a + b "
 	
+	"priority 7, #left"
+	equalityOperator --|> binaryOperator." a == b "
+		
 	"priority 11, #left"
 	andOperator --|> binaryOperator. " a && b "
 	"priority 12, #left"
