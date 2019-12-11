@@ -1,12 +1,6 @@
 Extension { #name : #ASTCOperator }
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCOperator >> addOperand: anOperand [
-	operands add: anOperand.
-	^ anOperand
-]
-
-{ #category : #'*ASTC-Gen-Extensions' }
 ASTCOperator class >> associativity [
 	"protocol: meta-data"
 	
