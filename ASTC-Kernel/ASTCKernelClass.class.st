@@ -46,6 +46,11 @@ ASTCKernelClass >> printString [
 		].
 ]
 
+{ #category : #evaluating }
+ASTCKernelClass >> translatedValue [
+	^ self value acceptVisitor: methodTranslator
+]
+
 { #category : #'message performing' }
 ASTCKernelClass >> understandsForTranslation: aSelector [
 	| class |

@@ -35,7 +35,7 @@ ASTCObject >> = anotherObject [
 	self flag:#notPretty.
 	(methodTranslator ifNil:[ ^ super = anotherObject ]).
 	
-	^ self newBinaryOperatorNamed: '==' withArgument: anotherObject
+	^ self translatedValue equals: (anotherObject acceptVisitor: methodTranslator)
 ]
 
 { #category : #comparing }
