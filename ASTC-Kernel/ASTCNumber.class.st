@@ -12,25 +12,25 @@ ASTCNumber class >> defaultValue [
 { #category : #translation }
 ASTCNumber >> * anotherSmallInteger [
 
-	^ self newBinaryOperatorNamed: '*' withArgument: anotherSmallInteger
+	^  self translatedValue * (anotherSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> + anotherSmallInteger [
 	
-	^ self newBinaryOperatorNamed: '+' withArgument: anotherSmallInteger
+	^ self translatedValue + (anotherSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> - anotherSmallInteger [
 
-	^ self newBinaryOperatorNamed: '-' withArgument: anotherSmallInteger
+	^  self translatedValue - (anotherSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> / anotherSmallInteger [
 	
-	^ self newBinaryOperatorNamed: '/' withArgument: anotherSmallInteger
+	^  self translatedValue / (anotherSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }

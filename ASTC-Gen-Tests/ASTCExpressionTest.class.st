@@ -69,11 +69,43 @@ ASTCExpressionTest >> testCastTo [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testDivision [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) / (ASTCIdentifier new id: #b).
+	
+	self assert: operator isDivisionOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testEquals [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) equals: (ASTCIdentifier new id: #b).
 	
 	self assert: operator isEqualityOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testMultiplication [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) * (ASTCIdentifier new id: #b).
+	
+	self assert: operator isMultiplicationOperator.
 	
 	node := (operator operands at: 1).
 	self assert: node isIdentifier.
@@ -122,4 +154,20 @@ ASTCExpressionTest >> testPreIncr [
 	node := (operator operands at: 1).
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testSubtraction [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) - (ASTCIdentifier new id: #b).
+	
+	self assert: operator isSubtractionOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
 ]

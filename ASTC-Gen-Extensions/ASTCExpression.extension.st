@@ -1,8 +1,32 @@
 Extension { #name : #ASTCExpression }
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> * anExpression [
+	^ ASTCMultiplicationOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> + anExpression [
 	^ ASTCAdditionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> - anExpression [
+	^ ASTCSubtractionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> / anExpression [
+	^ ASTCDivisionOperator new
 		addOperand: self;
 		addOperand: anExpression;
 		yourself
