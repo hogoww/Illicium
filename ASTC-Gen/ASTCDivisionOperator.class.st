@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCDivisionOperator,
 	#superclass : #ASTCBinaryOperator,
-	#category : #'ASTC-Gen-Nodes'
+	#category : #'ASTC-Gen-Nodes-Operators'
 }
 
 { #category : #testing }

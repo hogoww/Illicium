@@ -308,23 +308,30 @@ ASTCGenerator >> generateAbstractVisitorClass [
 
 { #category : #'generation-system' }
 ASTCGenerator >> generateClass: aFMXClass [
-
-	| superClass |
-	debug ifTrue:[
-		(aFMXClass fullName asString , ' --|> ' , (aFMXClass classGeneralization ifNotNil:[:aCg| aCg fullName] ifNil:['Object'])) logCr.
-		].
-
-	superClass := aFMXClass classGeneralization ifNil: Object ifNotNil:[:aFMXSuperClass| aFMXSuperClass realClass ]. "we get a symbol of the Superclass"	
-
-	superClass subclass: aFMXClass fullName
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: packageName , '-Nodes' .
-
+	| superclass tagName |
+	debug
+		ifTrue: [ (aFMXClass fullName asString , ' --|> '
+				,
+					(aFMXClass classGeneralization
+						ifNotNil: [ :aCg | aCg fullName ]
+						ifNil: [ 'Object' ])) logCr ].
+	superclass := aFMXClass classGeneralization
+		ifNil: Object
+		ifNotNil: [ :aFMXSuperClass | aFMXSuperClass realClass ].	"we get a symbol of the Superclass"
+	tagName := '-Nodes'.
+	
+	"We put Operators in a different tag, to avoid noise."
+	(aFMXClass allClassGeneralizations anySatisfy:[ :aClassGen| aClassGen name = #Operator  ] )
+		ifTrue: [ tagName := tagName , '-Operators' ].
+		
+	superclass
+		subclass: aFMXClass fullName
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: packageName , tagName.
 	self generateStateFor: aFMXClass.
 	self generateMethodsFor: aFMXClass.
-	self generateVisitsFor: aFMXClass.
-
+	self generateVisitsFor: aFMXClass
 ]
 
 { #category : #'generation-visitor-classes' }

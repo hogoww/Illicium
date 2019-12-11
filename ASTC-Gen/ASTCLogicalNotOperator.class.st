@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCLogicalNotOperator,
 	#superclass : #ASTCUnaryOperator,
-	#category : #'ASTC-Gen-Nodes'
+	#category : #'ASTC-Gen-Nodes-Operators'
 }
 
 { #category : #testing }

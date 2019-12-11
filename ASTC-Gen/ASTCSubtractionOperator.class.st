@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSubtractionOperator,
 	#superclass : #ASTCBinaryOperator,
-	#category : #'ASTC-Gen-Nodes'
+	#category : #'ASTC-Gen-Nodes-Operators'
 }
 
 { #category : #testing }
