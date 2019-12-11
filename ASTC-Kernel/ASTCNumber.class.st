@@ -56,14 +56,3 @@ ASTCNumber >> >= aFloat [
 	
 	^ self newBinaryOperatorNamed: '>=' withArgument: aFloat
 ]
-
-{ #category : #translation }
-ASTCNumber >> newBinaryOperatorNamed: operator withArgument: anArgument [
-	|res|
-	res:=ASTCOperator new 
-		symbol: operator;
-		yourself.
-	res addOperand:(self value acceptVisitor: self visitor).
-	res addOperand:(anArgument acceptVisitor: self visitor).
-	^res
-]

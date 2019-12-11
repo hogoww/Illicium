@@ -44,17 +44,6 @@ ASTCSmallInteger >> bitShift: anotherSmallInteger [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> newBinaryOperatorNamed: operator withArgument: anArgument [
-	|res|
-	res:=ASTCOperator new 
-		symbol: operator;
-		yourself.
-	res addOperand:(self value acceptVisitor: self visitor).
-	res addOperand:(anArgument acceptVisitor: self visitor).
-	^res
-]
-
-{ #category : #translation }
 ASTCSmallInteger >> to: stop by: step do: aBlock [
 	| node |
 	node := self to: stop  do: aBlock.
