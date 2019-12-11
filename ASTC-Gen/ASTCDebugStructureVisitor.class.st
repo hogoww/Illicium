@@ -13,6 +13,12 @@ ASTCDebugStructureVisitor >> visitBlock: aBlock [
 ]
 
 { #category : #visiting }
+ASTCDebugStructureVisitor >> visitCastOperator: aCastOperator [
+	super visitCastOperator: aCastOperator.
+	aCastOperator type ifNotNil: [ :aType | self assert: aType isType ]
+]
+
+{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitCompilationUnit: aCompilationUnit [
 	super visitCompilationUnit: aCompilationUnit.
 	aCompilationUnit definitions

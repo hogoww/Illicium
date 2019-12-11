@@ -292,51 +292,50 @@ ASTCBuilder >> defineRelations [
 	"Non container side properties name will be IGNORED, types are used to generate validation visitor!"
 	
 	"General nodes"
-	(project property:#compilationUnits) <>-* (compilationUnit property:#project).
-	(compilationUnit property:#definitions) <>-* (definition property:#compilationUnit).
-	(compilationUnit property:#declarations) <>-* (declaration property:#compilationUnit).
+	(project property: #compilationUnits) <>-* (compilationUnit property: #project).
+	(compilationUnit property: #definitions) <>-* (definition property: #compilationUnit).
+	(compilationUnit property: #declarations) <>-* (declaration property: #compilationUnit).
 
 	"Reflexive nodes"
 	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
-	(node property:#parent) <>- (node property:#parent).	
+	(node property: #parent) <>- (node property: #parent).	
 
-	(declaration property:#id) <>-(identifier property:#id).
-	(definition property:#declaration) <>- (declaration property:#definition).
+	(declaration property: #id) <>-(identifier property: #id).
+	(definition property: #declaration) <>- (declaration property: #definition).
 
-
-	(functionDeclaration property:#type) <>- (type property:#funcType).	
-	(functionDeclaration property:#parameters) <>-* (variableDeclaration property:#arguments).
+	(functionDeclaration property: #type) <>- (type property: #funcType).	
+	(functionDeclaration property: #parameters) <>-* (variableDeclaration property: #arguments).
 	
-	(functionDefinition property:#body) <>- (block property:#funcDefBody).
+	(functionDefinition property: #body) <>- (block property: #funcDefBody).
 
-	(variableDeclaration property:#type) <>- (type property:#declType).
+	(variableDeclaration property: #type) <>- (type property: #declType).
 
-	(variableDefinition property:#init) <>- (expression property:#initialization).
+	(variableDefinition property: #init) <>- (expression property: #initialization).
 
-	(structureDefinition property:#members) <>-* (variableDeclaration property:#structureMembers).
+	(structureDefinition property: #members) <>-* (variableDeclaration property: #structureMembers).
 	
 	"statement"
-	(if property:#condition) <>- (expression property:#conditionIf).
-	(if property:#then) <>- (statement property:#thenStatement).
-	(if property:#else) <>- (statement property:#elseStatement).
+	(if property: #condition) <>- (expression property: #conditionIf).
+	(if property: #then) <>- (statement property: #thenStatement).
+	(if property: #else) <>- (statement property: #elseStatement).
 	
-	(return property:#expression) <>- (expression property:#returnExp).
+	(return property: #expression) <>- (expression property: #returnExp).
 
-	(expressionStatement property:#expression) <>- (expression property:#expStatement).
-	(declarationStatement property:#declaration) <>- (declaration property:#declStatement).	
+	(expressionStatement property: #expression) <>- (expression property: #expStatement).
+	(declarationStatement property: #declaration) <>- (declaration property: #declStatement).	
 
-	(operator property:#operands) <>-* (expression property:#operatorOperand).
+	(operator property: #operands) <>-* (expression property: #operatorOperand).
+	(castOperator property: #type) <>- (type property: #castOperatorType).
 	
-	(functionCall property:#id) <>- (identifier property:#FunCallId).
-	(functionCall property:#arguments) <>-* (expression property:#funcCallArg).
+	(functionCall property: #id) <>- (identifier property: #FunCallId).
+	(functionCall property: #arguments) <>-* (expression property: #funcCallArg).
 	
-	(block property:#statements) <>-* (statement property:#blockStatement).
+	(block property: #statements) <>-* (statement property: #blockStatement).
 	
-	
-	(loop property:#condition) <>- (expression property:#condition).
-	(loop property:#body) <>- (statement property:#body).
-		(for property:#iteratorDefinition) <>- (variableDefinition property:#declIterator).
-		(for property:#iteratorModification) <>- (expression property:#modifIterator).
+	(loop property: #condition) <>- (expression property: #condition).
+	(loop property: #body) <>- (statement property: #body).
+		(for property: #iteratorDefinition) <>- (variableDefinition property: #declIterator).
+		(for property: #iteratorModification) <>- (expression property: #modifIterator).
 		
 		
 ]

@@ -44,7 +44,8 @@ ASTCWalkerVisitor >> visitBreak: aBreak [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitCastOperator: aCastOperator [
-	super visitCastOperator: aCastOperator
+	super visitCastOperator: aCastOperator.
+	aCastOperator type ifNotNil: [ :aType | aType acceptVisitor: self ]
 ]
 
 { #category : #visiting }

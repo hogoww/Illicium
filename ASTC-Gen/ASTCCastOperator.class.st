@@ -1,12 +1,17 @@
 Class {
 	#name : #ASTCCastOperator,
 	#superclass : #ASTCUnaryOperator,
+	#instVars : [
+		'type'
+	],
 	#category : #'ASTC-Gen-Nodes-Operators'
 }
 
 { #category : #testing }
 ASTCCastOperator >> = aCastOperator [
 	super = aCastOperator
+		ifFalse: [ ^ false ].
+	type = aCastOperator type
 		ifFalse: [ ^ false ].
 	^ true
 ]
@@ -19,4 +24,15 @@ ASTCCastOperator >> acceptVisitor: aVisitor [
 { #category : #testing }
 ASTCCastOperator >> isCastOperator [
 	^ true
+]
+
+{ #category : #accessing }
+ASTCCastOperator >> type [
+	^ type
+]
+
+{ #category : #accessing }
+ASTCCastOperator >> type: aType [
+	aType parent: self.
+	type := aType
 ]
