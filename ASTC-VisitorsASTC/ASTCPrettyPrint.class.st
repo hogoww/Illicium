@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCPrettyPrint,
-	#superclass : #ASTCVisitor,
+	#superclass : #ASTCSubclassResponsibilityVisitor,
 	#instVars : [
 		'stream',
 		'indentation'
@@ -112,7 +112,7 @@ ASTCPrettyPrint >> visitAccessOperator: anOperator [
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 	self << '('.
 	(anOperator operands at: 1) acceptVisitor: self.
-	self << ' ' << anOperator symbol << ' '.
+	self << ' ' << anOperator class symbol << ' '.
 	(anOperator operands at: 2) acceptVisitor: self.
 	self << ')'.
 ]
@@ -161,8 +161,12 @@ ASTCPrettyPrint >> visitDoWhile: aDoWhile [
 	aDoWhile body acceptVisitor: self.
 	self << 'while('.
 	aDoWhile condition ifNotNil:[:aCondition| aCondition acceptVisitor: self].
-	self << ');'.
+	self << ');'
+]
 
+{ #category : #visiting }
+ASTCPrettyPrint >> visitEqualityOperator: anEqualityOperator [
+	^ self visitBinaryOperator: anEqualityOperator
 ]
 
 { #category : #visiting }
