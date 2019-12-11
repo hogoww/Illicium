@@ -41,7 +41,10 @@ ASTCSuperclassVisitor >> visitBreak: aBreak [
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitCastOperator: aCastOperator [
-	^ self visitUnaryOperator: aCastOperator
+	self << '(';
+		print: aCastOperator type;
+		<< ')';
+		print: (aCastOperator operands at: 1)
 ]
 
 { #category : #visiting }
@@ -162,11 +165,6 @@ ASTCSuperclassVisitor >> visitLoop: aLoop [
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	^ self visitBinaryOperator: aMultiplicationOperator
-]
-
-{ #category : #visiting }
-ASTCSuperclassVisitor >> visitNode: aNode [
-	
 ]
 
 { #category : #visiting }
