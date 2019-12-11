@@ -55,7 +55,8 @@ Class {
 		'debugStructureVisitorClass',
 		'structureValidatorVisitorClass',
 		'superclassVisitorClass',
-		'debug'
+		'debug',
+		'subclassResponsibilityVisitorClass'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -477,6 +478,29 @@ ASTCGenerator >> generateStructureValidatorVisitorClass [
 ]
 
 { #category : #'generation-visit' }
+ASTCGenerator >> generateSubclassResponsibilityVisitOf: aFMXClass [
+	"add an empty behavior visit method"
+
+	| method className |
+	className := aFMXClass name.
+	method := (className asVisitClassSelector)
+		asMethodWithBody: [ :anInstance | self subclassResponsibility ]
+		withArguments: { #anInstance -> className asAnInstance } asDictionary.
+
+	subclassResponsibilityVisitorClass compile: method asString classified: 'visiting'
+]
+
+{ #category : #'generation-visitor-classes' }
+ASTCGenerator >> generateSubclassResponsibilityVisitorClass [
+	"subclassResponsibility --> abstract"
+	subclassResponsibilityVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #SubclassResponsibilityVisitor)
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: (self makePackageNameWith: #visitors)
+
+]
+
+{ #category : #'generation-visit' }
 ASTCGenerator >> generateSuperclassVisitOf: aFMXClass [
 
 	| method className |
@@ -526,6 +550,7 @@ ASTCGenerator >> generateValidatorVisitOf: aFMXClass [
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> generateVisitorsClasses [
 	self generateAbstractVisitorClass.
+		self generateSubclassResponsibilityVisitorClass.
 		self generateSuperclassVisitorClass.
 		self generateWalkerVisitorClass.
 			self generatePrinterVisitorClass.
@@ -542,6 +567,7 @@ ASTCGenerator >> generateVisitorsClasses [
 { #category : #'generation-visit' }
 ASTCGenerator >> generateVisitsFor: aFMXClass [
 	self generateAbstractVisitOf: aFMXClass.
+		self generateSubclassResponsibilityVisitOf: aFMXClass.
 		self generateSuperclassVisitOf: aFMXClass.
 		self generateWalkVisitOf: aFMXClass.
 			self generatePrinterVisit: aFMXClass.
