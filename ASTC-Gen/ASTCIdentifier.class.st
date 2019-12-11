@@ -26,11 +26,6 @@ ASTCIdentifier >> id [
 	^ id
 ]
 
-{ #category : #accessing }
-ASTCIdentifier >> id: anId [
-	id := anId
-]
-
 { #category : #testing }
 ASTCIdentifier >> isIdentifier [
 	^ true

@@ -4,7 +4,7 @@ Extension { #name : #ASTCDebugStructureVisitor }
 ASTCDebugStructureVisitor >> visitDeclarationStatement: anASTCDeclarationStatement [
 	self visitStatement: anASTCDeclarationStatement.
 
-	"anASTCDeclarationStatement declaration ifNotNil:[ self assert:anASTCDeclarationStatement declaration isASTCDeclaration ]."
+	"anASTCDeclarationStatement declaration ifNotNil:[ self assert:anASTCDeclarationStatement declaration isDeclaration ]."
 
 	super visitDeclarationStatement: anASTCDeclarationStatement
 ]
