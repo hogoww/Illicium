@@ -32,7 +32,7 @@ ASTCSmallInteger >> to: stop by: step do: aBlock [
 	
 	receiver := ASTCIdentifier new id: (aBlock arguments at:1) name ; yourself.
 	arg := step acceptVisitor: methodTranslator.
-	arg isLiteral ifTrue: [ self halt. "Should add a check for step to be different of 0 or optimize the symbol" ].
+	arg isLiteral ifTrue: [ arg value = 0 ifTrue: [ BadArgument new result: 0; expected: 'non 0 value' ] ].
 	
 	node iteratorModification: (receiver assign: (receiver + arg)).
 	^ node
