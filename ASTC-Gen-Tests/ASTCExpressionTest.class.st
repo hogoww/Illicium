@@ -37,6 +37,25 @@ ASTCExpressionTest >> testAssign [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testCastTo [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) castTo: ASTCSmallInteger new asASTCType.
+	
+	self assert: operator isCastOperator.
+	
+	node := (operator operands at:1).
+	self assert: node isType.
+	self assert: node type equals: ASTCSmallInteger asTypeReification.
+	
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testEquals [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) equals: (ASTCIdentifier new id: #b).
