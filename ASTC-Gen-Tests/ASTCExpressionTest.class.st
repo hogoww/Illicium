@@ -101,6 +101,70 @@ ASTCExpressionTest >> testEquals [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testGreater [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) > (ASTCIdentifier new id: #b).
+	
+	self assert: operator isGreaterOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testGreaterOrEqual [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) >= (ASTCIdentifier new id: #b).
+	
+	self assert: operator isGreaterOrEqualOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testLesser [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) < (ASTCIdentifier new id: #b).
+	
+	self assert: operator isLesserOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testLesserOrEqual [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) <= (ASTCIdentifier new id: #b).
+	
+	self assert: operator isLesserOrEqualOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testMultiplication [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) * (ASTCIdentifier new id: #b).
@@ -154,6 +218,22 @@ ASTCExpressionTest >> testPreIncr [
 	node := (operator operands at: 1).
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testStructAccessPointer [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) -> (ASTCIdentifier new id: #b).
+	
+	self assert: operator isStructAccessPointerOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
 ]
 
 { #category : #tests }

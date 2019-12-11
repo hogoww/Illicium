@@ -26,7 +26,7 @@ ASTCExpression >> - anExpression [
 
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> -> anExpression [
-	^ ASTCStructAccessPointer new
+	^ ASTCStructAccessPointerOperator new
 		addOperand: self;
 		addOperand: anExpression;
 		yourself
