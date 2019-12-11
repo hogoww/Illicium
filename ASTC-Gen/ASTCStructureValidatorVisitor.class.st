@@ -303,8 +303,9 @@ ASTCStructureValidatorVisitor >> visitStatement: aStatement [
 ]
 
 { #category : #visiting }
-ASTCStructureValidatorVisitor >> visitStructAccessPointer: aStructAccessPointer [
-	[ super visitStructAccessPointer: aStructAccessPointer ]
+ASTCStructureValidatorVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOperator [
+	[ super
+		visitStructAccessPointerOperator: aStructAccessPointerOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]

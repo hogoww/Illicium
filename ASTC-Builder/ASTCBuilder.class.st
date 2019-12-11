@@ -232,7 +232,7 @@ ASTCBuilder >> defineOperatorClasses [
 	greaterOrEqualOperator := builder newClassNamed: #GreaterOrEqualOperator.
 	lesserOperator := builder newClassNamed: #LesserOperator.
 	lesserOrEqualOperator := builder newClassNamed: #LesserOrEqualOperator.
-	structAccessPointerOperator := builder newClassNamed: #StructAccessPointer
+	structAccessPointerOperator := builder newClassNamed: #StructAccessPointerOperator
 ]
 
 { #category : #definition }

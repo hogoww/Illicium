@@ -205,7 +205,7 @@ ASTCVisitor >> visitStatement: aStatement [
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitStructAccessPointer: aStructAccessPointer [
+ASTCVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOperator [
 	
 ]
 

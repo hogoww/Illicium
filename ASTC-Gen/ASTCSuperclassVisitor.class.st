@@ -205,8 +205,8 @@ ASTCSuperclassVisitor >> visitStatement: aStatement [
 ]
 
 { #category : #visiting }
-ASTCSuperclassVisitor >> visitStructAccessPointer: aStructAccessPointer [
-	^ self visitBinaryOperator: aStructAccessPointer
+ASTCSuperclassVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOperator [
+	^ self visitBinaryOperator: aStructAccessPointerOperator
 ]
 
 { #category : #visiting }

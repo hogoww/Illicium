@@ -600,15 +600,15 @@ ASTCPrinterVisitor >> visitStatement: aStatement [
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitStructAccessPointer: aStructAccessPointer [
+ASTCPrinterVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOperator [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream
 		<< $(;
-		<< 'aStructAccessPointer';
+		<< 'aStructAccessPointerOperator';
 		space.
 	currentDepth := currentDepth + 1.
-	super visitStructAccessPointer: aStructAccessPointer.
+	super visitStructAccessPointerOperator: aStructAccessPointerOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]
