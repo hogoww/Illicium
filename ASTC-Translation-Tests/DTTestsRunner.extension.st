@@ -8,6 +8,6 @@ DTTestsRunner >> runForConfiguration: aDTpluginConfiguration [
 		testsResult: (self runTestSuites: { aDTpluginConfiguration asTestSuite });
 		yourself.
 
-	"results testsResult inspect."
+	results testsResult inspect.
 	^ aDTpluginConfiguration handleResults: results for: self
 ]

@@ -33,10 +33,10 @@ TranslationTest >> testASTCIf [
 			addOperand: (ASTCLiteral value: 2);
 			yourself);
 		then:(ASTCBlock new
-			add: (ASTCLiteral value: 1) asStatement;
+			addStatement: (ASTCLiteral value: 1) asStatement;
 			yourself);
 		else:(ASTCBlock new
-			add: (ASTCLiteral value: 2) asStatement;
+			addStatement: (ASTCLiteral value: 2) asStatement;
 			yourself);
 		yourself.	
 	
