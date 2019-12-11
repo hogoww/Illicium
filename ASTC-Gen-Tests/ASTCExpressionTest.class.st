@@ -5,6 +5,22 @@ Class {
 }
 
 { #category : #tests }
+ASTCExpressionTest >> testAddition [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) + (ASTCIdentifier new id: #b).
+	
+	self assert: operator isAdditionOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testAnd [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) and: (ASTCIdentifier new id: #b).

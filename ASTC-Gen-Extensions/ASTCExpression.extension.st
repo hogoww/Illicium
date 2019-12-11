@@ -1,6 +1,14 @@
 Extension { #name : #ASTCExpression }
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> + anExpression [
+	^ ASTCAdditionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> and: anExpression [
 	^ ASTCAndOperator new
 		addOperand: self;

@@ -45,15 +45,14 @@ ASTCSmallInteger >> bitShift: anotherSmallInteger [
 
 { #category : #translation }
 ASTCSmallInteger >> to: stop by: step do: aBlock [
-	| node |
+	| node arg receiver | 
 	node := self to: stop  do: aBlock.
-	node isLiteral ifTrue: [ self halt. "Should add a check for step to be different of 0 or optimize the symbol" ].
-	node iteratorModification: 
-		(ASTCOperator new
-			symbol: '+=';
-			addOperand: (ASTCIdentifier new id: (aBlock arguments at:1) name ; yourself);
-			addOperand: (step acceptVisitor: methodTranslator);
-			yourself).
+	
+	receiver := ASTCIdentifier new id: (aBlock arguments at:1) name ; yourself.
+	arg := step acceptVisitor: methodTranslator.
+	arg isLiteral ifTrue: [ self halt. "Should add a check for step to be different of 0 or optimize the symbol" ].
+	
+	node iteratorModification: (receiver assign: (receiver + arg)).
 	^ node
 ]
 
