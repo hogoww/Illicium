@@ -22,6 +22,12 @@ ASTCOperator >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+ASTCOperator >> addOperand: anOperand [
+	anOperand parent: self.
+	operands add: anOperand
+]
+
+{ #category : #accessing }
 ASTCOperator >> initialize [
 	operands := OrderedCollection new
 ]
