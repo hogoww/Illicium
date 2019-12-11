@@ -10,11 +10,7 @@ Class {
 { #category : #test }
 ASTCValidatorDebugTest >> aRandomExpressionFactory [
 	|anExpression|
-	anExpression:=ASTCOperator new
-		symbol: '-';
-		addOperand: (ASTCIdentifier new);
-			yourself;
-		yourself.
+	anExpression:= ASTCIdentifier new.
 	self assert: anExpression isStructuralyValidAST. "It'll be checked twice, but better that than giving a wrong statment"
 	^anExpression
 ]
