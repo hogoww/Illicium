@@ -63,7 +63,6 @@ ASTCExpressionTest >> testCastTo [
 	self assert: node isType.
 	self assert: node type equals: ASTCSmallInteger asTypeReification.
 	
-	
 	node := (operator operands at: 1).
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
@@ -113,4 +112,16 @@ ASTCExpressionTest >> testOr [
 	node := (operator operands at: 2).
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testPreIncr [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) preIncr.
+	
+	self assert: operator isPreIncrementOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
 ]

@@ -53,3 +53,10 @@ ASTCExpression >> or: anExpression [
 		addOperand: anExpression;
 		yourself
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> preIncr [
+	^ ASTCPreIncrementOperator new
+		addOperand: self;
+		yourself
+]
