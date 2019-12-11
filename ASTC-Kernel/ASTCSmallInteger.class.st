@@ -80,16 +80,9 @@ ASTCSmallInteger >> to: stop do: aBlock [
 				init:(self value acceptVisitor: methodTranslator);
 				yourself);
 		condition:
-			(ASTCOperator new
-				symbol: '<=';
-				addOperand: iterID;
-				addOperand: (stop acceptVisitor: methodTranslator);
-				yourself);
+			(iterID <= (stop acceptVisitor: methodTranslator));
 		iteratorModification:
-			(ASTCOperator new
-				symbol: '++';
-				addOperand:iterID;
-				yourself);
+			(iterID preIncr);
 		body: (aBlock acceptVisitor: methodTranslator);
 		yourself
 ]
