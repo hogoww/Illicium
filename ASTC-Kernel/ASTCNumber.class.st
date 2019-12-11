@@ -10,49 +10,49 @@ ASTCNumber class >> defaultValue [
 ]
 
 { #category : #translation }
-ASTCNumber >> * anotherSmallInteger [
+ASTCNumber >> * aNumber [
 
-	^  self translatedValue * (anotherSmallInteger acceptVisitor: methodTranslator)
+	^  self translatedValue * (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> + anotherSmallInteger [
+ASTCNumber >> + aNumber [
 	
-	^ self translatedValue + (anotherSmallInteger acceptVisitor: methodTranslator)
+	^ self translatedValue + (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> - anotherSmallInteger [
+ASTCNumber >> - aNumber [
 
-	^  self translatedValue - (anotherSmallInteger acceptVisitor: methodTranslator)
+	^  self translatedValue - (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> / anotherSmallInteger [
+ASTCNumber >> / aNumber [
 	
-	^  self translatedValue / (anotherSmallInteger acceptVisitor: methodTranslator)
+	^  self translatedValue / (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> < anotherSmallInteger [
+ASTCNumber >> < aNumber [
 	
-	^  self translatedValue < (anotherSmallInteger acceptVisitor: methodTranslator)
+	^  self translatedValue < (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> <= anotherSmallInteger [
+ASTCNumber >> <= aNumber [
 	
-	^  self translatedValue <= (anotherSmallInteger acceptVisitor: methodTranslator)
+	^  self translatedValue <= (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> > anotherSmallInteger [
+ASTCNumber >> > aNumber [
 	
-	^ self translatedValue > (anotherSmallInteger acceptVisitor: methodTranslator)
+	^ self translatedValue > (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> >= aValue [
+ASTCNumber >> >= aNumber [
 	
-	^  self translatedValue >= (aValue acceptVisitor: methodTranslator)
+	^  self translatedValue >= (aNumber acceptVisitor: methodTranslator)
 ]
