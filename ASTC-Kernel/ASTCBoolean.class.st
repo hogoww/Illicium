@@ -13,11 +13,7 @@ ASTCBoolean class >> asCType [
 ASTCBoolean >> and: aBoolean [
 	| args |
 	args := self binarySelectorArgs: aBoolean.
-	^ ASTCOperator new
-		symbol: '&&';
-		addOperand: (args at:1);
-		addOperand: (args at:2);
-		yourself
+	^ (args at:1) and: (args at:2)
 ]
 
 { #category : #controlling }
@@ -93,9 +89,5 @@ ASTCBoolean >> not [
 ASTCBoolean >> or: aBoolean [
 	| args |
 	args := self binarySelectorArgs: aBoolean.
-	^ ASTCOperator new
-		symbol: '||';
-		addOperand: (args at:1);
-		addOperand: (args at:2);
-		yourself
+	^ (args at:1) or: (args at:2)
 ]

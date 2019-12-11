@@ -5,6 +5,22 @@ Class {
 }
 
 { #category : #tests }
+ASTCExpressionTest >> testAnd [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) and: (ASTCIdentifier new id: #b).
+	
+	self assert: operator isAndOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testAssign [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) assign: (ASTCLiteral new value: 1).
@@ -46,4 +62,20 @@ ASTCExpressionTest >> testNot [
 	node := (operator operands at: 1).
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testOr [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) or: (ASTCIdentifier new id: #b).
+	
+	self assert: operator isOrOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
 ]
