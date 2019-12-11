@@ -293,7 +293,7 @@ ASTCBuilder >> defineProperties [
 	
 	"define the properties of the classes following the FmxNG syntax."
 
-	"Having some kind o type check on those would be nice, generated in the debug visitor."
+	"Having some kind of type check on those would be nice, generated in the debug visitor."
 	node property: #pharoNode type: #RBNode.
 
 	identifier property: #id type: #String.
