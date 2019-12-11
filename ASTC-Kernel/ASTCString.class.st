@@ -25,12 +25,9 @@ ASTCString >> = anotherStringNode [
 	(methodTranslator getNodeTranslationType: anotherStringNode) = self class ifFalse:[ self error: 'both nodes have to be explicitly typed as Strings' ].
 	
 	methodTranslator addInclude: 'string'.
-	^ ASTCOperator new 
-		symbol: '=' ;
-		addOperand: (ASTCFunctionCall new id: (ASTCIdentifier new id: #strcomp) ;
+	^ (ASTCFunctionCall new id: (ASTCIdentifier new id: #strcomp) ;
 			addArgument: (self value acceptVisitor: methodTranslator);
 			addArgument: (anotherStringNode acceptVisitor: methodTranslator);
-			yourself);
-		addOperand:( ASTCLiteral new value: 0);
-		yourself
+			yourself)
+		equals: (ASTCLiteral new value: 0)
 ]
