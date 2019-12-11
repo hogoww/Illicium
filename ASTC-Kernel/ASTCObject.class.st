@@ -53,14 +53,3 @@ ASTCObject >> asString [
 	methodTranslator ifNil:[ ^ super asString ].
 	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #'char*' asLiteralNode) to: InterpreterProxy
 ]
-
-{ #category : #comparing }
-ASTCObject >> newBinaryOperatorNamed: operator withArgument: anArgument [
-	|res|
-	res:=ASTCOperator new 
-		symbol: operator;
-		yourself.
-	res addOperand:(self value acceptVisitor: self visitor).
-	res addOperand:(anArgument acceptVisitor: self visitor).
-	^res
-]
