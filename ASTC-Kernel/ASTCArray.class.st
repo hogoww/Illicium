@@ -38,9 +38,9 @@ ASTCArray >> do: aBlock [
 	newBlock := aBlock copy.
 	newBlock arguments at: 1 put: ((RBArgumentNode named: #i) parent: newBlock).
 	res := methodTranslator forward: 
-			(MessageSend receiver: (ASTCSmallInteger asLiteralNodeFor: 0) 
+			(MessageSend receiver: (ASTCSmallInteger literalNodeFor: 0) 
 				selector: #to:do: 
-				arguments:{ ASTCSmallInteger asLiteralNodeFor: size. newBlock} )
+				arguments:{ ASTCSmallInteger literalNodeFor: size. newBlock} )
 		to: SmallInteger.
 		
 	arg := (aBlock arguments at: 1) acceptVisitor: methodTranslator.

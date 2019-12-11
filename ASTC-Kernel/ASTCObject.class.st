@@ -10,8 +10,13 @@ ASTCObject class >> asCType [
 ]
 
 { #category : #accessing }
-ASTCObject class >> asLiteralNodeFor: aValue [ 
-	^ (RBLiteralNode value: aValue) 
+ASTCObject class >> asPharoType [ 
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+ASTCObject class >> literalNodeFor: aValue [ 
+	^ aValue asLiteralNode 
 		propertyAt: ASTCTypeAnnotationAST property 
 		put: (self asPharoType -> 'generated, no PhineasType');
 		yourself
@@ -19,14 +24,9 @@ ASTCObject class >> asLiteralNodeFor: aValue [
 ]
 
 { #category : #accessing }
-ASTCObject class >> asPharoType [ 
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
 ASTCObject class >> value: aValue [ 
 	^ self new
-		value: (self asLiteralNodeFor: aValue);
+		value: (self literalNodeFor: aValue);
 		yourself
 ]
 
