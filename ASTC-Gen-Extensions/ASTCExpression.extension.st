@@ -33,6 +33,38 @@ ASTCExpression >> / anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> < anExpression [
+	^ ASTCLesserOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> <= anExpression [
+	^ ASTCLesserOrEqualOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> > anExpression [
+	^ ASTCGreaterOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> >= anExpression [
+	^ ASTCGreaterOrEqualOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> and: anExpression [
 	^ ASTCAndOperator new
 		addOperand: self;
