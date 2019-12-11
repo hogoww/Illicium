@@ -19,3 +19,10 @@ ASTCOrOperator class >> priority [
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ 12
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCOrOperator class >> symbol [
+	"protocol: printing"
+	
+	^ #||
+]

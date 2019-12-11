@@ -19,3 +19,10 @@ ASTCSubtractionOperator class >> priority [
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ 4
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCSubtractionOperator class >> symbol [
+	"protocol: printing"
+	
+	^ #-
+]

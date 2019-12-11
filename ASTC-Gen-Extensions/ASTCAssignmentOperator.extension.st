@@ -19,3 +19,10 @@ ASTCAssignmentOperator class >> priority [
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ 14
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCAssignmentOperator class >> symbol [
+	"protocol: printing"
+	
+	^ #=
+]

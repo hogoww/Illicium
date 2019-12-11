@@ -19,3 +19,10 @@ ASTCDivisionOperator class >> priority [
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ 3 
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCDivisionOperator class >> symbol [
+	"protocol: printing"
+	
+	^ #/
+]

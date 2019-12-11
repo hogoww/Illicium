@@ -19,3 +19,10 @@ ASTCAndOperator class >> priority [
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ 11
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCAndOperator class >> symbol [
+	"protocol: printing"
+	
+	^ #&&
+]

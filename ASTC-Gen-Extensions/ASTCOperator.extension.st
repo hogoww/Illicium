@@ -25,3 +25,10 @@ ASTCOperator class >> priority [
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ self subclassResponsibility 
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCOperator class >> symbol [
+	"protocol: printing"
+	
+	^ self subclassResponsibility
+]

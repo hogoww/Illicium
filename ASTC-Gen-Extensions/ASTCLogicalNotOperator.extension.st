@@ -19,3 +19,10 @@ ASTCLogicalNotOperator class >> priority [
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ 2
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCLogicalNotOperator class >> symbol [
+	"protocol: printing"
+	
+	^ #!
+]
