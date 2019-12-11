@@ -43,12 +43,12 @@ ASTCExpressionTest >> testCastTo [
 	
 	self assert: operator isCastOperator.
 	
-	node := (operator operands at:1).
+	node := operator type.
 	self assert: node isType.
 	self assert: node type equals: ASTCSmallInteger asTypeReification.
 	
 	
-	node := (operator operands at: 2).
+	node := (operator operands at: 1).
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	

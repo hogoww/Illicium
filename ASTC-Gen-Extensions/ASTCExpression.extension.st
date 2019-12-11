@@ -18,7 +18,7 @@ ASTCExpression >> asStatement [
 ASTCExpression >> castTo: aType [
 	self assert: aType isType.
 	^ ASTCCastOperator new
-		addOperand: aType;
+		type: aType;
 		addOperand: self;
 		yourself
 ]
