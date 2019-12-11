@@ -283,7 +283,7 @@ ASTCPrettyPrint >> visitType: aType [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitUnaryOperator: anOperator [
-	self << anOperator symbol.
+	self << anOperator class symbol.
 	(anOperator operands at: 1) acceptVisitor: self
 ]
 
