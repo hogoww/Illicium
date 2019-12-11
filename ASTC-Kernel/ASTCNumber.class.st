@@ -36,23 +36,23 @@ ASTCNumber >> / anotherSmallInteger [
 { #category : #translation }
 ASTCNumber >> < anotherSmallInteger [
 	
-	^ self newBinaryOperatorNamed: '<' withArgument: anotherSmallInteger
+	^  self translatedValue < (anotherSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> <= anotherSmallInteger [
 	
-	^ self newBinaryOperatorNamed: '<=' withArgument: anotherSmallInteger
+	^  self translatedValue <= (anotherSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> > anotherSmallInteger [
 	
-	^ self newBinaryOperatorNamed: '>' withArgument: anotherSmallInteger
+	^ self translatedValue > (anotherSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
-ASTCNumber >> >= aFloat [
+ASTCNumber >> >= aValue [
 	
-	^ self newBinaryOperatorNamed: '>=' withArgument: aFloat
+	^  self translatedValue >= (aValue acceptVisitor: methodTranslator)
 ]
