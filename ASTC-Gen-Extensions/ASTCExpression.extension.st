@@ -15,6 +15,15 @@ ASTCExpression >> asStatement [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> castTo: aType [
+	self assert: aType isType.
+	^ ASTCCastOperator new
+		addOperand: aType;
+		addOperand: self;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> equals: anExpression [
 	^ ASTCEqualityOperator new
 		addOperand: self;

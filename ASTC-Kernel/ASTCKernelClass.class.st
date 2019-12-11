@@ -18,6 +18,11 @@ ASTCKernelClass >> = anotherObject [
 	^ self value = anotherObject value
 ]
 
+{ #category : #evaluating }
+ASTCKernelClass >> asASTCType [
+	^ ASTCType new type: self class; yourself
+]
+
 { #category : #'message performing' }
 ASTCKernelClass >> perform: aSelector withArguments: anArray [
 	" Cherry picking for unknown types are not great. Needs improvement.

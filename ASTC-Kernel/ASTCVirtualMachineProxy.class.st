@@ -11,10 +11,7 @@ ASTCVirtualMachineProxy class >> asCType [
 
 { #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> cCoerce: aVariable to: aType [
-	^ ASTCCastOperator new
-		type: aType;
-		addOperand: (aVariable acceptVisitor: methodTranslator);
-		yourself
+	^ (aVariable acceptVisitor: methodTranslator) castTo: self asASTCType 
 ]
 
 { #category : #'reflective operations' }
