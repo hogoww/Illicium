@@ -292,9 +292,8 @@ ASTCGenerator >> generateAbstractVisitOf: aFMXClass [
 	className := aFMXClass name.
 	method := (className asVisitClassSelector)
 		asMethodWithBody: [ :anInstance | ]
-		withArguments:
-			{#anInstance ->
-			className asAnInstance} asDictionary.
+		withArguments: { #anInstance -> className asAnInstance } asDictionary.
+	
 	abstractVisitorClass compile: method asString classified:  'visiting'
 ]
 
