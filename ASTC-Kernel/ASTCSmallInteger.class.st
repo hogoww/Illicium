@@ -6,7 +6,7 @@ Class {
 
 { #category : #type }
 ASTCSmallInteger class >> asCType [
-	^#int
+	^ #int
 ]
 
 { #category : #default }
