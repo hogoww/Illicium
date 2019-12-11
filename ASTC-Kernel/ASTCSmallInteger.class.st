@@ -20,27 +20,9 @@ ASTCSmallInteger class >> defaultValue [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> // anotherSmallInteger [
-	self flag:#toCheck. "May need to have a cast to int? I don't like it"
-	^ self newBinaryOperatorNamed: '/' withArgument: anotherSmallInteger
-]
-
-{ #category : #translation }
-ASTCSmallInteger >> >> anotherSmallInteger [ 
-	self flag: #toCheck."UNSURE ABOUT THIS ONE"
-	^ self newBinaryOperatorNamed: '>>' withArgument: anotherSmallInteger
-]
-
-{ #category : #translation }
 ASTCSmallInteger >> bitAnd: anotherSmallInteger [
 	self flag: #toCheck."UNSURE ABOUT THIS ONE"
 	^ self newBinaryOperatorNamed: '&' withArgument: anotherSmallInteger
-]
-
-{ #category : #translation }
-ASTCSmallInteger >> bitShift: anotherSmallInteger [ 
-	self flag: #toCheck."UNSURE ABOUT THIS ONE"
-	^ self newBinaryOperatorNamed: '<<' withArgument: anotherSmallInteger
 ]
 
 { #category : #translation }
