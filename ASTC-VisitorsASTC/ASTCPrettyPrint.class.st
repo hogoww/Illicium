@@ -173,11 +173,6 @@ ASTCPrettyPrint >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitEqualityOperator: anEqualityOperator [
-	^ self visitBinaryOperator: anEqualityOperator
-]
-
-{ #category : #visiting }
 ASTCPrettyPrint >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	self << $;. 
@@ -251,21 +246,6 @@ ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 { #category : #visiting }
 ASTCPrettyPrint >> visitLiteral: aLiteral [
 	self << aLiteral value value asString
-]
-
-{ #category : #visiting }
-ASTCPrettyPrint >> visitOperator: anOperator [
-	| nbOperands |
-	self flag: #hack.
-	nbOperands := anOperator operands size.
-	nbOperands == 1
-		ifTrue: [ ^ self visitUnaryOperator: anOperator ].
-	nbOperands == 2
-		ifTrue: [ 
-			anOperator symbol = '[]' ifTrue:[ ^ self visitAccessOperator: anOperator ]
-			ifFalse: [ ^ self visitBinaryOperator: anOperator ]].
-	nbOperands == 3
-		ifTrue: [ ^ self visitTernaryOperator: anOperator ]
 ]
 
 { #category : #visiting }
