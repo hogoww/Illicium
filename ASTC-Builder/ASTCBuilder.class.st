@@ -223,24 +223,40 @@ ASTCBuilder >> defineOperatorClasses [
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineOperators [
+ASTCBuilder >> defineOperators [.
 	"Define operators in a different function, to limit the noise"
+	"priorities come from the ranking from the cppreference website.
+	Second part of the comment refers the associativity.
+	https://en.cppreference.com/w/c/language/operator_precedence
+	"
 	unaryOperator --|> operator.
 	binaryOperator --|> operator.
 	
-		preIncrementOperator --|> unaryOperator." ++i "
-		preDecrementOperator --|> unaryOperator. " --i "
-		castOperator --|> unaryOperator. " (int) a "
-		logicalNotOperator --|> unaryOperator." ! b "
+	"priority 1, #left"
+	indexerOperator --|> binaryOperator. " aVar[anIndex] "
 	
-	assignementOperator --|> binaryOperator." a = b "
-	additionOperator --|> binaryOperator." a + b "
-	subtractionOperator --|> binaryOperator." a - b "
+	"priority 2 #right"
+	preIncrementOperator --|> unaryOperator." ++i "
+	preDecrementOperator --|> unaryOperator. " --i "
+	logicalNotOperator --|> unaryOperator." ! b "
+	castOperator --|> unaryOperator. " (int) a "
+	
+	"priority 3, #left"
 	multiplicationOperator --|> binaryOperator." a * b "
 	divisionOperator --|> binaryOperator. " a / b "
-	indexerOperator --|> binaryOperator. " aVar[anIndex] "
-	orOperator --|> binaryOperator. " a || b "
+	
+	"priority 4, #left"
+	subtractionOperator --|> binaryOperator." a - b "
+	additionOperator --|> binaryOperator." a + b "
+	
+	"priority 11, #left"
 	andOperator --|> binaryOperator. " a && b "
+	"priority 12, #left"
+	orOperator --|> binaryOperator. " a || b "
+	
+	"priority 14, #right"
+	assignementOperator --|> binaryOperator." a = b "
+	
 ]
 
 { #category : #definition }
