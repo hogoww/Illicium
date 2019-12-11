@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCPrettyPrint,
-	#superclass : #ASTCSubclassResponsibilityVisitor,
+	#superclass : #ASTCSuperclassVisitor,
 	#instVars : [
 		'stream',
 		'indentation'
@@ -129,6 +129,14 @@ ASTCPrettyPrint >> visitBlock: aBlock [
 	self leaveBlock.
 	self spaces.
 	self << '}'.
+]
+
+{ #category : #visiting }
+ASTCPrettyPrint >> visitCastOperator: aCastOperator [
+	self << '(';
+		print: aCastOperator type;
+		<< ')';
+		print: (aCastOperator operands at: 1)
 ]
 
 { #category : #visiting }
