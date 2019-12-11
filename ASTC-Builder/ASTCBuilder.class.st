@@ -84,7 +84,8 @@ Class {
 		'greaterOperator',
 		'greaterOrEqualOperator',
 		'lesserOperator',
-		'lesserOrEqualOperator'
+		'lesserOrEqualOperator',
+		'structAccessPointer'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -230,7 +231,8 @@ ASTCBuilder >> defineOperatorClasses [
 	greaterOperator := builder newClassNamed: #GreaterOperator.
 	greaterOrEqualOperator := builder newClassNamed: #GreaterOrEqualOperator.
 	lesserOperator := builder newClassNamed: #LesserOperator.
-	lesserOrEqualOperator := builder newClassNamed: #LesserOrEqualOperator
+	lesserOrEqualOperator := builder newClassNamed: #LesserOrEqualOperator.
+	structAccessPointer := builder newClassNamed: #StructAccessPointer
 ]
 
 { #category : #definition }
@@ -245,6 +247,7 @@ ASTCBuilder >> defineOperators [
 	
 	"priority 1, #left"
 	indexerOperator --|> binaryOperator. " aVar[anIndex] "
+	structAccessPointer --|> binaryOperator. " aVar -> aField "
 	
 	"priority 2 #right"
 	preIncrementOperator --|> unaryOperator." ++i "

@@ -249,6 +249,11 @@ ASTCWalkerVisitor >> visitStatement: aStatement [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitStructAccessPointer: aStructAccessPointer [
+	super visitStructAccessPointer: aStructAccessPointer
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	super visitStructureDeclaration: aStructureDeclaration
 ]

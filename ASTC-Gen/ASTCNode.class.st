@@ -219,6 +219,11 @@ ASTCNode >> isStatement [
 ]
 
 { #category : #testing }
+ASTCNode >> isStructAccessPointer [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isStructureDeclaration [
 	^ false
 ]

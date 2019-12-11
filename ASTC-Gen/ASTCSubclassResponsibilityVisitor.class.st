@@ -205,6 +205,11 @@ ASTCSubclassResponsibilityVisitor >> visitStatement: aStatement [
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitStructAccessPointer: aStructAccessPointer [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	self subclassResponsibility
 ]
