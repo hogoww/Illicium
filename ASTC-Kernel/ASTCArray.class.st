@@ -48,22 +48,12 @@ ASTCArray >> do: aBlock [
 	receiver := self value acceptVisitor: methodTranslator.
 	
 	res body statements addFirst:
-		(ASTCIf new condition: 
-			(ASTCOperator new symbol: '==';
-				addOperand: arg;
-				addOperand: (ASTCLiteral new value: 'null'));
-			then: (ASTCLiteral new value: 'break') asStatement;
+		(ASTCIf new condition: (arg equals: (ASTCLiteral new value: 'null'));
+			then: ASTCBreak new;
 			yourself).
 	
 	res body statements addFirst: 
-		(ASTCOperator new symbol: '='; 
-		addOperand: arg; 
-		addOperand: 
-			(ASTCOperator new symbol:'[]';
-				addOperand: receiver;
-				addOperand: iterator;
-				yourself);
-			yourself) 
+		(arg assign: (receiver indexAt: iterator))
 		asStatement.
 		
 	^ res
