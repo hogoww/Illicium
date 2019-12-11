@@ -66,8 +66,6 @@ ASTCExpressionTest >> testCastTo [
 	node := (operator operands at: 1).
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
-	
-
 ]
 
 { #category : #tests }
