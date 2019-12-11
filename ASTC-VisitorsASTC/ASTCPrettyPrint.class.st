@@ -28,6 +28,11 @@ ASTCPrettyPrint >> cr [
 	stream cr
 ]
 
+{ #category : #visiting }
+ASTCPrettyPrint >> doesThisNeedParenthesis: aNode [
+	^ self halt
+]
+
 { #category : #accessing }
 ASTCPrettyPrint >> enterBlock [
 	self indent
@@ -110,6 +115,7 @@ ASTCPrettyPrint >> visitAccessOperator: anOperator [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
+	self doesThisNeedParenthesis: anOperator.
 	self << '('.
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << anOperator class symbol << ' '.

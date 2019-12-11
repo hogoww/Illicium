@@ -12,5 +12,5 @@ ASTCPrettyPrintTest >> testVisitEqualityOperator [
 	operator := (ASTCIdentifier new id: #a) equals: (ASTCIdentifier new id: #b).
 	
 	self assert: operator isEqualityOperator.
-	self assert: operator prettyPrint equals: '(a == b)'.
+	self assert: operator prettyPrint equals: 'a == b'.
 ]
