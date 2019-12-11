@@ -241,6 +241,14 @@ ASTCPrettyPrint >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
+	self print: anIndexerOperator operands first;
+		<< '[';
+		print: anIndexerOperator operands second;
+		<< ']'
+]
+
+{ #category : #visiting }
 ASTCPrettyPrint >> visitLiteral: aLiteral [
 	self << aLiteral value value asString
 ]
