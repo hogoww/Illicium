@@ -1,6 +1,14 @@
 Extension { #name : #ASTCIndexerOperator }
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCIndexerOperator >> assign: anExpression [
+	^ ASTCAssignmentOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCIndexerOperator class >> associativity [
 	"protocol: meta-data"
 	

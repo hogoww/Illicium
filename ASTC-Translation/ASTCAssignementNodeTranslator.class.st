@@ -24,11 +24,8 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 						init: (anAssignmentNode value acceptVisitor: methodTranslator);
 						yourself);
 				yourself ]
-		ifFalse: [ 
-			(ASTCOperator new
-				symbol: '=';
-				addOperand: (anAssignmentNode variable acceptVisitor: methodTranslator);
-				addOperand: (anAssignmentNode value acceptVisitor: methodTranslator);
-				yourself).
+		ifFalse: [
+				((anAssignmentNode variable acceptVisitor: methodTranslator)
+					assign: (anAssignmentNode value acceptVisitor: methodTranslator))
 			]
 ]
