@@ -86,10 +86,7 @@ ASTCBoolean >> ifTrueifFalseChecker: anArrayOfArg [
 
 { #category : #controlling }
 ASTCBoolean >> not [
-	^ ASTCOperator new
-		symbol: '!';
-		addOperand: (value acceptVisitor: methodTranslator) ;
-		yourself
+	^ (value acceptVisitor: methodTranslator) not
 ]
 
 { #category : #controlling }

@@ -20,3 +20,10 @@ ASTCExpression >> acceptVisitor: aVisitor [
 ASTCExpression >> isExpression [
 	^ true
 ]
+
+{ #category : #testing }
+ASTCExpression >> not [
+	^ ASTCLogicalNotOperator new
+		addOperand: self;
+		yourself
+]

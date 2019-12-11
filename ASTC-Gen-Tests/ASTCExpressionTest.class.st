@@ -35,3 +35,15 @@ ASTCExpressionTest >> testEquals [
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
+
+{ #category : #tests }
+ASTCExpressionTest >> testNot [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) not.
+	
+	self assert: operator isLogicalNotOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+]
