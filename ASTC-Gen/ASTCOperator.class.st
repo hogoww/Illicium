@@ -2,7 +2,6 @@ Class {
 	#name : #ASTCOperator,
 	#superclass : #ASTCExpression,
 	#instVars : [
-		'symbol',
 		'operands'
 	],
 	#category : #'ASTC-Gen-Nodes'
@@ -11,8 +10,6 @@ Class {
 { #category : #testing }
 ASTCOperator >> = anOperator [
 	super = anOperator
-		ifFalse: [ ^ false ].
-	symbol = anOperator symbol
 		ifFalse: [ ^ false ].
 	operands = anOperator operands
 		ifFalse: [ ^ false ].
@@ -43,14 +40,4 @@ ASTCOperator >> operands [
 ASTCOperator >> operands: someExpressions [
 	someExpressions do: [ :each | each parent: self ].
 	operands := someExpressions
-]
-
-{ #category : #accessing }
-ASTCOperator >> symbol [
-	^ symbol
-]
-
-{ #category : #accessing }
-ASTCOperator >> symbol: aSymbol [
-	symbol := aSymbol
 ]

@@ -521,8 +521,7 @@ ASTCPrinterVisitor >> visitOperator: anOperator [
 	stream
 		<< $(;
 		<< 'anOperator';
-		space;
-		print: anOperator symbol.
+		space.
 	currentDepth := currentDepth + 1.
 	super visitOperator: anOperator.
 	currentDepth := currentDepth - 1.

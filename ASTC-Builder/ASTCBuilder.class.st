@@ -296,8 +296,7 @@ ASTCBuilder >> defineProperties [
 	"Having some kind o type check on those would be nice, generated in the debug visitor."
 	node property: #pharoNode type: #RBNode.
 
-	identifier property: #id type: #String.	
-	operator property: #symbol type: #String.
+	identifier property: #id type: #String.
 
 	"removing the type might be a good idea"
 	literal property: #value type: #String.
