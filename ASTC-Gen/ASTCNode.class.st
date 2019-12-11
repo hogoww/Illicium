@@ -124,6 +124,16 @@ ASTCNode >> isFunctionDefinition [
 ]
 
 { #category : #testing }
+ASTCNode >> isGreaterOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isGreaterOrEqualOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isIdentifier [
 	^ false
 ]
@@ -135,6 +145,16 @@ ASTCNode >> isIf [
 
 { #category : #testing }
 ASTCNode >> isIndexerOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isLesserOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isLesserOrEqualOperator [
 	^ false
 ]
 

@@ -80,7 +80,11 @@ Class {
 		'assignementOperator',
 		'andOperator',
 		'orOperator',
-		'equalityOperator'
+		'equalityOperator',
+		'greaterOperator',
+		'greaterOrEqualOperator',
+		'lesserOperator',
+		'lesserOrEqualOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -223,6 +227,10 @@ ASTCBuilder >> defineOperatorClasses [
 	orOperator := builder newClassNamed: #OrOperator.
 	andOperator := builder newClassNamed: #AndOperator.
 	equalityOperator := builder newClassNamed: #EqualityOperator.
+	greaterOperator := builder newClassNamed: #GreaterOperator.
+	greaterOrEqualOperator := builder newClassNamed: #GreaterOrEqualOperator.
+	lesserOperator := builder newClassNamed: #LesserOperator.
+	lesserOrEqualOperator := builder newClassNamed: #LesserOrEqualOperator
 ]
 
 { #category : #definition }
@@ -251,6 +259,12 @@ ASTCBuilder >> defineOperators [
 	"priority 4, #left"
 	subtractionOperator --|> binaryOperator." a - b "
 	additionOperator --|> binaryOperator." a + b "
+	
+	"priority 6, #left"
+	greaterOperator --|> binaryOperator." a > b "
+	greaterOrEqualOperator --|> binaryOperator." a >= b "
+	lesserOperator --|> binaryOperator." a < b "
+	lesserOrEqualOperator --|> binaryOperator." a <= b "
 	
 	"priority 7, #left"
 	equalityOperator --|> binaryOperator." a == b "

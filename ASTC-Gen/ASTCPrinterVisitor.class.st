@@ -331,6 +331,34 @@ ASTCPrinterVisitor >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitGreaterOperator: aGreaterOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aGreaterOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitGreaterOperator: aGreaterOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aGreaterOrEqualOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitGreaterOrEqualOperator: aGreaterOrEqualOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitIdentifier: anIdentifier [
 	stream cr.
 	self printTabCount: currentDepth.
@@ -369,6 +397,34 @@ ASTCPrinterVisitor >> visitIndexerOperator: anIndexerOperator [
 		space.
 	currentDepth := currentDepth + 1.
 	super visitIndexerOperator: anIndexerOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitLesserOperator: aLesserOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aLesserOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitLesserOperator: aLesserOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aLesserOrEqualOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitLesserOrEqualOperator: aLesserOrEqualOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]

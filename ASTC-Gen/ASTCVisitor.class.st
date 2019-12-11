@@ -110,6 +110,16 @@ ASTCVisitor >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitGreaterOperator: aGreaterOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitIdentifier: anIdentifier [
 	
 ]
@@ -121,6 +131,16 @@ ASTCVisitor >> visitIf: anIf [
 
 { #category : #visiting }
 ASTCVisitor >> visitIndexerOperator: anIndexerOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitLesserOperator: aLesserOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
 	
 ]
 

@@ -143,6 +143,16 @@ ASTCWalkerVisitor >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitGreaterOperator: aGreaterOperator [
+	super visitGreaterOperator: aGreaterOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
+	super visitGreaterOrEqualOperator: aGreaterOrEqualOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitIdentifier: anIdentifier [
 	super visitIdentifier: anIdentifier
 ]
@@ -159,6 +169,16 @@ ASTCWalkerVisitor >> visitIf: anIf [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitIndexerOperator: anIndexerOperator [
 	super visitIndexerOperator: anIndexerOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitLesserOperator: aLesserOperator [
+	super visitLesserOperator: aLesserOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
+	super visitLesserOrEqualOperator: aLesserOrEqualOperator
 ]
 
 { #category : #visiting }

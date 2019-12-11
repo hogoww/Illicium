@@ -131,6 +131,18 @@ ASTCHierarchyWalkerVisitor >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitGreaterOperator: aGreaterOperator [
+	super visitGreaterOperator: aGreaterOperator.
+	^ self visitBinaryOperator: aGreaterOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
+	super visitGreaterOrEqualOperator: aGreaterOrEqualOperator.
+	^ self visitBinaryOperator: aGreaterOrEqualOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitIdentifier: anIdentifier [
 	super visitIdentifier: anIdentifier.
 	^ self visitExpression: anIdentifier
@@ -146,6 +158,18 @@ ASTCHierarchyWalkerVisitor >> visitIf: anIf [
 ASTCHierarchyWalkerVisitor >> visitIndexerOperator: anIndexerOperator [
 	super visitIndexerOperator: anIndexerOperator.
 	^ self visitBinaryOperator: anIndexerOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitLesserOperator: aLesserOperator [
+	super visitLesserOperator: aLesserOperator.
+	^ self visitBinaryOperator: aLesserOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
+	super visitLesserOrEqualOperator: aLesserOrEqualOperator.
+	^ self visitBinaryOperator: aLesserOrEqualOperator
 ]
 
 { #category : #visiting }

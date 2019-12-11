@@ -170,6 +170,20 @@ ASTCStructureValidatorVisitor >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitGreaterOperator: aGreaterOperator [
+	[ super visitGreaterOperator: aGreaterOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
+	[ super visitGreaterOrEqualOperator: aGreaterOrEqualOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitIdentifier: anIdentifier [
 	[ super visitIdentifier: anIdentifier ]
 		on: AssertionFailure
@@ -186,6 +200,20 @@ ASTCStructureValidatorVisitor >> visitIf: anIf [
 { #category : #visiting }
 ASTCStructureValidatorVisitor >> visitIndexerOperator: anIndexerOperator [
 	[ super visitIndexerOperator: anIndexerOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitLesserOperator: aLesserOperator [
+	[ super visitLesserOperator: aLesserOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
+	[ super visitLesserOrEqualOperator: aLesserOrEqualOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]

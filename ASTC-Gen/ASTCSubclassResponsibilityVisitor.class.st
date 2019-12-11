@@ -110,6 +110,16 @@ ASTCSubclassResponsibilityVisitor >> visitFunctionDefinition: aFunctionDefinitio
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitGreaterOperator: aGreaterOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitIdentifier: anIdentifier [
 	self subclassResponsibility
 ]
@@ -121,6 +131,16 @@ ASTCSubclassResponsibilityVisitor >> visitIf: anIf [
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitIndexerOperator: anIndexerOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitLesserOperator: aLesserOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
 	self subclassResponsibility
 ]
 
