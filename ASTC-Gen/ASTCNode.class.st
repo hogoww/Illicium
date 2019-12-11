@@ -219,7 +219,7 @@ ASTCNode >> isStatement [
 ]
 
 { #category : #testing }
-ASTCNode >> isStructAccessPointer [
+ASTCNode >> isStructAccessPointerOperator [
 	^ false
 ]
 

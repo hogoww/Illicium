@@ -17,6 +17,6 @@ ASTCStructAccessPointer >> acceptVisitor: aVisitor [
 ]
 
 { #category : #testing }
-ASTCStructAccessPointer >> isStructAccessPointer [
+ASTCStructAccessPointer >> isStructAccessPointerOperator [
 	^ true
 ]
