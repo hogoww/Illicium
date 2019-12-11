@@ -8,6 +8,12 @@ Class {
 	#category : #'ASTC-Gen-Nodes'
 }
 
+{ #category : #accessing }
+ASTCNode class >> priority [
+	"maximum value for priority, see comment on operators"
+	^ 16 
+]
+
 { #category : #testing }
 ASTCNode >> = aNode [
 	^ true
@@ -281,4 +287,9 @@ ASTCNode >> pharoNode [
 { #category : #accessing }
 ASTCNode >> pharoNode: aPharoNode [
 	pharoNode := aPharoNode
+]
+
+{ #category : #testing }
+ASTCNode >> priority [ 
+	^ self class priority
 ]

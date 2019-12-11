@@ -30,7 +30,9 @@ ASTCPrettyPrint >> cr [
 
 { #category : #visiting }
 ASTCPrettyPrint >> doesThisNeedParenthesis: aNode [
-	^ self halt
+	| parentPriority |
+	parentPriority := aNode parent ifNotNil: [:p | p priority] ifNil:[ 16 ].
+	^ aNode priority > parentPriority
 ]
 
 { #category : #accessing }
@@ -115,12 +117,13 @@ ASTCPrettyPrint >> visitAccessOperator: anOperator [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
-	self doesThisNeedParenthesis: anOperator.
-	self << '('.
+	| parenthesis |
+	parenthesis := self doesThisNeedParenthesis: anOperator.
+	parenthesis ifTrue: [ self << '(' ].
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << anOperator class symbol << ' '.
 	(anOperator operands at: 2) acceptVisitor: self.
-	self << ')'.
+	parenthesis ifTrue: [ self << ')' ].
 ]
 
 { #category : #visiting }

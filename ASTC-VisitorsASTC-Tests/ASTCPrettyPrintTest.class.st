@@ -5,6 +5,56 @@ Class {
 }
 
 { #category : #tests }
+ASTCPrettyPrintTest >> testAssociativityDifferentPriority1 [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) + (ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c).
+	
+	self assert: operator isMultiplicationOperator.
+	
+	node := operator operands at: 1.
+	self assert: node isAdditionOperator.
+		node := (operator operands at: 1) operands at: 1.
+		self assert: node isIdentifier.
+		self assert: node id equals: #a.
+		
+		node := (operator operands at: 1) operands at: 2.
+		self assert: node isIdentifier.
+		self assert: node id equals: #b.
+	
+	node := operator operands at: 2.
+	self assert: node isIdentifier.
+	self assert: node id equals: #c.
+	
+	self assert: operator prettyPrint equals: '(a + b) * c'.
+]
+
+{ #category : #tests }
+ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
+	| operator node |
+	self flag:#shouldFail. "temporary, should be adjusted after work on operator priorities"
+	"should equal 'a == b'"
+	operator := (ASTCIdentifier new id: #a) + ((ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c)).
+	
+	self assert: operator isAdditionOperator .
+		
+	node := operator operands at: 1.
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := operator operands at: 2.
+	self assert: node isMultiplicationOperator.
+		node := (operator operands at: 2) operands at: 1.
+		self assert: node isIdentifier.
+		self assert: node id equals: #b.
+		
+		node := (operator operands at: 2) operands at: 2.
+		self assert: node isIdentifier.
+		self assert: node id equals: #c.
+
+	self assert: operator prettyPrint equals: 'a + b * c'.
+]
+
+{ #category : #tests }
 ASTCPrettyPrintTest >> testVisitEqualityOperator [
 	| operator |
 	self flag:#shouldFail. "temporary, should be adjusted after work on operator priorities"
