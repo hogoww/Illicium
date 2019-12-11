@@ -21,6 +21,14 @@ ASTCIdentifier >> acceptVisitor: aVisitor [
 	aVisitor visitIdentifier: self
 ]
 
+{ #category : #testing }
+ASTCIdentifier >> assign: anExpression [
+	^ ASTCAssignmentOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
 { #category : #accessing }
 ASTCIdentifier >> id [
 	^ id
