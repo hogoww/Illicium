@@ -37,8 +37,7 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	"the only statement/expression check"
 			statement := definition body statements first.
 			self assert: statement isExpressionStatement.	
-			self assert: statement expression isOperator.
-			self assert: statement expression symbol equals: '->'.
+			self assert: statement expression isStructAccessPointer.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
@@ -80,8 +79,7 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 	"the only statement/expression check"
 			statement := definition body statements first.
 			self assert: statement isExpressionStatement.	
-			self assert: statement expression isOperator.
-			self assert: statement expression symbol equals: '->'.
+			self assert: statement expression isStructAccessPointer.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
@@ -95,13 +93,11 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 				
 				"pop:'s argument, interpreterProxy methodArgumentCount + 1"
 				argument := operands second arguments first.
-				self assert: argument isOperator.
-				self assert: argument symbol equals: #+.
+				self assert: argument isAdditionOperator.
 				self assert: argument operands size equals: 2.
 					
 					"interpreterProxy -> methodArgument"
-					self assert: argument operands first isOperator.
-					self assert: argument operands first symbol equals: #->.
+					self assert: argument operands first isStructAccessPointer.
 					self assert: argument operands first operands first id equals: #interpreterProxy.
 
 					self assert: argument operands first operands second isFunctionCall.
@@ -114,8 +110,7 @@ ASTCBrokenPluginTranslationTest >> testPopAndFail [
 		"second statement interpreterProxy primitiveFail"
 		self assert: definition body statements second isExpressionStatement.
 		statement := definition body statements second expression.
-		self assert: statement isOperator.
-		self assert: statement symbol equals: #->.
+		self assert: statement isStructAccessPointer.
 		self assert: statement operands size equals: 2.
 			self assert: statement operands first isIdentifier.
 			self assert: statement operands first id equals: #interpreterProxy.
@@ -153,8 +148,7 @@ ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 	"the only statement/expression check"
 			statement := definition body statements first.
 			self assert: statement isExpressionStatement.	
-			self assert: statement expression isOperator.
-			self assert: statement expression symbol equals: '->'.
+			self assert: statement expression isStructAccessPointer.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
@@ -168,13 +162,11 @@ ASTCBrokenPluginTranslationTest >> testPopLessThanExpected [
 				
 				"pop:'s argument, interpreterProxy methodArgumentCount + 1"
 				argument := operands second arguments first.
-				self assert: argument isOperator.
-				self assert: argument symbol equals: #-.
+				self assert: argument isSubtractionOperator.
 				self assert: argument operands size equals: 2.
 					
 					"interpreterProxy -> methodArgument"
-					self assert: argument operands first isOperator.
-					self assert: argument operands first symbol equals: #->.
+					self assert: argument operands first isStructAccessPointer.
 					self assert: argument operands first operands first id equals: #interpreterProxy.
 
 					self assert: argument operands first operands second isFunctionCall.
@@ -214,8 +206,7 @@ ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 	"the only statement/expression check"
 			statement := definition body statements first.
 			self assert: statement isExpressionStatement.	
-			self assert: statement expression isOperator.
-			self assert: statement expression symbol equals: '->'.
+			self assert: statement expression isStructAccessPointer.
 				operands:=  statement expression operands.
 				"first operand, interpreterProxy"
 				self assert: operands size equals: 2.
@@ -229,13 +220,11 @@ ASTCBrokenPluginTranslationTest >> testPopMoreThanExpected [
 				
 				"pop:'s argument, interpreterProxy methodArgumentCount + 1"
 				argument := operands second arguments first.
-				self assert: argument isOperator.
-				self assert: argument symbol equals: #+.
+				self assert: argument isAdditionOperator.
 				self assert: argument operands size equals: 2.
 					
 					"interpreterProxy -> methodArgument"
-					self assert: argument operands first isOperator.
-					self assert: argument operands first symbol equals: #->.
+					self assert: argument operands first isStructAccessPointer.
 					self assert: argument operands first operands first id equals: #interpreterProxy.
 
 					self assert: argument operands first operands second isFunctionCall.
