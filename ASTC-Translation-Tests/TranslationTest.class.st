@@ -28,8 +28,7 @@ TranslationTest >> testASTCIf [
 	astC := ASTCTranslator translateExpression: '1=2 ifTrue:[1] ifFalse:[2]'.
 	
 	expectedC := ASTCIf new 
-		condition: (ASTCOperator new
-			symbol: '==';
+		condition: (ASTCEqualityOperator new
 			addOperand: (ASTCLiteral value: 1);
 			addOperand: (ASTCLiteral value: 2);
 			yourself);
@@ -50,15 +49,13 @@ TranslationTest >> testASTCOperatorBinary [
 	| astC expectedC|
 	astC := (ASTCTranslator translateExpression: '1=6') statements at: 1.
 	
-	expectedC := ASTCOperator new
-		symbol: '==';
+	expectedC := ASTCEqualityOperator new
 		addOperand: (ASTCLiteral value: 1);
 		addOperand: (ASTCLiteral value: 6);
 		yourself.
 	
 	self assert: astC isExpressionStatement.
 	self assert: astC expression isOperator.
-	self assert: astC expression symbol equals: '=='.
 	self assert: astC expression operands first value value equals: 1.
 	self assert: astC expression operands second value value equals: 6.
 	self assert: astC expression equals: expectedC.
