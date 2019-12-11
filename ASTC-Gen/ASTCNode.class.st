@@ -44,6 +44,11 @@ ASTCNode >> isBinaryOperator [
 ]
 
 { #category : #testing }
+ASTCNode >> isBitwiseAndOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isBlock [
 	^ false
 ]

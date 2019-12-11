@@ -58,6 +58,13 @@ ASTCStructureValidatorVisitor >> visitBinaryOperator: aBinaryOperator [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
+	[ super visitBitwiseAndOperator: aBitwiseAndOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitBlock: aBlock [
 	[ super visitBlock: aBlock ]
 		on: AssertionFailure

@@ -30,6 +30,11 @@ ASTCSubclassResponsibilityVisitor >> visitBinaryOperator: aBinaryOperator [
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitBlock: aBlock [
 	self subclassResponsibility
 ]

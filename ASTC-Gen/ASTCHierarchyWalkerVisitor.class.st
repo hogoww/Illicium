@@ -35,6 +35,12 @@ ASTCHierarchyWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
+	super visitBitwiseAndOperator: aBitwiseAndOperator.
+	^ self visitBinaryOperator: aBitwiseAndOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitBlock: aBlock [
 	super visitBlock: aBlock.
 	^ self visitStatement: aBlock

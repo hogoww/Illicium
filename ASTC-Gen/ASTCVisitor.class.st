@@ -30,6 +30,11 @@ ASTCVisitor >> visitBinaryOperator: aBinaryOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitBlock: aBlock [
 	
 ]

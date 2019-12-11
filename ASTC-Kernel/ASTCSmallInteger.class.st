@@ -20,9 +20,9 @@ ASTCSmallInteger class >> defaultValue [
 ]
 
 { #category : #translation }
-ASTCSmallInteger >> bitAnd: anotherSmallInteger [
+ASTCSmallInteger >> bitAnd: aSmallInteger [
 	self flag: #toCheck."UNSURE ABOUT THIS ONE"
-	^ self newBinaryOperatorNamed: '&' withArgument: anotherSmallInteger
+	^ self translatedValue bitAnd: (aSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }

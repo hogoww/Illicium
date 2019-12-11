@@ -85,7 +85,8 @@ Class {
 		'greaterOrEqualOperator',
 		'lesserOperator',
 		'lesserOrEqualOperator',
-		'structAccessPointerOperator'
+		'structAccessPointerOperator',
+		'bitwiseAndOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -232,7 +233,8 @@ ASTCBuilder >> defineOperatorClasses [
 	greaterOrEqualOperator := builder newClassNamed: #GreaterOrEqualOperator.
 	lesserOperator := builder newClassNamed: #LesserOperator.
 	lesserOrEqualOperator := builder newClassNamed: #LesserOrEqualOperator.
-	structAccessPointerOperator := builder newClassNamed: #StructAccessPointerOperator
+	structAccessPointerOperator := builder newClassNamed: #StructAccessPointerOperator.
+	bitwiseAndOperator := builder newClassNamed: #BitwiseAndOperator
 ]
 
 { #category : #definition }
@@ -271,6 +273,9 @@ ASTCBuilder >> defineOperators [
 	
 	"priority 7, #left"
 	equalityOperator --|> binaryOperator." a == b "
+	
+	"priority 8, #left"
+	bitwiseAndOperator --|> binaryOperator. " a & b "
 		
 	"priority 11, #left"
 	andOperator --|> binaryOperator. " a && b "

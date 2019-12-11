@@ -30,6 +30,11 @@ ASTCSuperclassVisitor >> visitBinaryOperator: aBinaryOperator [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
+	^ self visitBinaryOperator: aBitwiseAndOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitBlock: aBlock [
 	^ self visitStatement: aBlock
 ]
@@ -41,10 +46,7 @@ ASTCSuperclassVisitor >> visitBreak: aBreak [
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitCastOperator: aCastOperator [
-	self << '(';
-		print: aCastOperator type;
-		<< ')';
-		print: (aCastOperator operands at: 1)
+	^ self visitUnaryOperator: aCastOperator
 ]
 
 { #category : #visiting }

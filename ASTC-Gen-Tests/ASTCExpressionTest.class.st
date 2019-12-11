@@ -53,6 +53,22 @@ ASTCExpressionTest >> testAssign [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testBitAnd [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) bitAnd: (ASTCIdentifier new id: #b).
+	
+	self assert: operator isBitwiseAndOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testCastTo [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) castTo: ASTCSmallInteger new asASTCType.
