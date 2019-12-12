@@ -282,6 +282,23 @@ ASTCPrettyPrint >> visitStructureDeclaration: aStructureDeclaration [
 ]
 
 { #category : #visiting }
+ASTCPrettyPrint >> visitStructureDefinition: aStructureDefinition [
+	self print: aStructureDefinition declaration;
+		<< '{';
+		cr.
+		
+	self enterBlock.
+	aStructureDefinition members do: [:aMember| 
+			self spaces. 
+			aMember acceptVisitor: self ]
+		separatedBy: [ self cr ].
+	self leaveBlock.
+	
+	self cr;
+		<< '}'
+]
+
+{ #category : #visiting }
 ASTCPrettyPrint >> visitTernaryOperator: anOperator [
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << '?' << ' '.

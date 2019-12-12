@@ -21,7 +21,7 @@ ASTCIlliciumTranslationTest >> testTranslateILVMPArameter [
 	| cu |
 	cu := translator translateClass: ILVMParameters.
 	cu debugASTCStructure.
-	^ cu
+	^ cu inspect
 ]
 
 { #category : #tests }

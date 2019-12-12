@@ -82,3 +82,20 @@ ASTCPrettyPrintTest >> testVisitStructureDeclaration [
 	self assert: operator isStructureDeclaration.
 	self assert: operator prettyPrint equals: 'struct a'.
 ]
+
+{ #category : #tests }
+ASTCPrettyPrintTest >> testVisitStructureDefinition [
+	| operator |
+	operator := ASTCStructureDefinition new 
+		declaration: (ASTCStructureDeclaration new id:(ASTCIdentifier new id: #heros yourself));
+		addMember: (ASTCVariableDeclaration new 
+			type: (ASTCType new type: ASTCSmallInteger; yourself); 
+			id: (ASTCIdentifier new id: #druss; yourself)) asStatement 
+		yourself.
+	
+	self assert: operator isStructureDefinition.
+	self assert: operator prettyPrint equals: 
+'struct heros{
+  int druss;
+}'.
+]
