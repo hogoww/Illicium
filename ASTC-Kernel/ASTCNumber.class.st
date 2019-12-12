@@ -12,7 +12,7 @@ ASTCNumber class >> defaultValue [
 { #category : #translation }
 ASTCNumber >> * aNumber [
 
-	^  self translatedValue * (aNumber acceptVisitor: methodTranslator)
+	^ self translatedValue * (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
@@ -24,25 +24,25 @@ ASTCNumber >> + aNumber [
 { #category : #translation }
 ASTCNumber >> - aNumber [
 
-	^  self translatedValue - (aNumber acceptVisitor: methodTranslator)
+	^ self translatedValue - (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> / aNumber [
 	
-	^  self translatedValue / (aNumber acceptVisitor: methodTranslator)
+	^ self translatedValue / (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> < aNumber [
 	
-	^  self translatedValue < (aNumber acceptVisitor: methodTranslator)
+	^ self translatedValue < (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> <= aNumber [
 	
-	^  self translatedValue <= (aNumber acceptVisitor: methodTranslator)
+	^ self translatedValue <= (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
@@ -54,5 +54,5 @@ ASTCNumber >> > aNumber [
 { #category : #translation }
 ASTCNumber >> >= aNumber [
 	
-	^  self translatedValue >= (aNumber acceptVisitor: methodTranslator)
+	^ self translatedValue >= (aNumber acceptVisitor: methodTranslator)
 ]
