@@ -38,8 +38,8 @@ ASTCInstanceVariablesTranslator >> translateInstanceVariable: anIVName of: aClas
 ASTCInstanceVariablesTranslator >> translateInstanceVariablesOf: aClass [
 	| instVar |
 	self flag:#notGood.
-	instVar := aClass allInstVarNames select:[:aVarName| aVarName ~=#moduleName and:[ aVarName ~= #translatedMethodCache]] .
-
-	^instVar  collect: [:aVarName|
-		self translateInstanceVariable: aVarName of: aClass  ]
+	instVar := aClass allInstVarNames select:[:aVarName| aVarName ~= #moduleName and:[ aVarName ~= #translatedMethodCache]].
+	
+	^ instVar collect: [:aVarName|
+		self translateInstanceVariable: aVarName of: aClass ]
 ]
