@@ -76,7 +76,7 @@ ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 ASTCBoolean >> ifTrueifFalseChecker: anArrayOfArg [
 	value parent parent isAssignment ifTrue:[ self error: 'Cannot translate assignement from ifTrues messages.' ].
 	anArrayOfArg do: [ : anArg | 
-		anArg isBlock ifFalse:[ self error: 'currently only translate blocks as argument of ifTrues messages.']. 
+			anArg isBlock ifFalse:[ self error: 'currently only translate blocks as argument of ifTrues messages.']. 
 		]
 ]
 
