@@ -26,6 +26,12 @@ ASTCSmallInteger >> bitAnd: aSmallInteger [
 ]
 
 { #category : #translation }
+ASTCSmallInteger >> even [
+	^ (self translatedValue % ((self class literalNodeFor: 2) acceptVisitor: methodTranslator)) 
+		equals: ((self class literalNodeFor: 0) acceptVisitor: methodTranslator)
+]
+
+{ #category : #translation }
 ASTCSmallInteger >> to: stop by: step do: aBlock [
 	| node arg receiver | 
 	node := self to: stop  do: aBlock.
