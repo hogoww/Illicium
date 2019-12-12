@@ -19,7 +19,7 @@ ASTCIlliciumTranslationTest >> testTranslateILVMPArameter [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu |
-	cu := translator translateClass: ILVMParameters .
+	cu := translator translateClass: ILVMParameters.
 	cu debugASTCStructure.
 	^ cu
 ]
