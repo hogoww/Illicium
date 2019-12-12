@@ -4,6 +4,11 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
+{ #category : #accessing }
+ASTCMutex class >> asPharoType [ 
+	^ #pthread_mutex_t
+]
+
 { #category : #'actions api' }
 ASTCMutex >> initialize [
 	^ self declare: #var typed: #aType
