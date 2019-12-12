@@ -31,8 +31,6 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority1 [
 { #category : #tests }
 ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
 	| operator node |
-	self flag:#shouldFail. "temporary, should be adjusted after work on operator priorities"
-	"should equal 'a == b'"
 	operator := (ASTCIdentifier new id: #a) + ((ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c)).
 	
 	self assert: operator isAdditionOperator .
@@ -56,11 +54,11 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
 
 { #category : #tests }
 ASTCPrettyPrintTest >> testVisitBreak [
-	| statement |
-	statement := ASTCBreak new.
+	| breakStatement |
+	breakStatement := ASTCBreak new.
 	
-	self assert: statement isStatement.
-	self assert: statement prettyPrint equals: 'break'.
+	self assert: breakStatement isBreak.
+	self assert: breakStatement prettyPrint equals: 'break'.
 ]
 
 { #category : #tests }
@@ -74,13 +72,11 @@ ASTCPrettyPrintTest >> testVisitEqualityOperator [
 
 { #category : #tests }
 ASTCPrettyPrintTest >> testVisitStructureDeclaration [
-	| operator |
-	self flag:#shouldFail. "temporary, should be adjusted after work on operator priorities"
-	"should equal 'a == b'"
-	operator := ASTCStructureDeclaration new id:(ASTCIdentifier new id: #a).
+	| structure |
+	structure := ASTCStructureDeclaration new id:(ASTCIdentifier new id: #a; yourself); yourself.
 	
-	self assert: operator isStructureDeclaration.
-	self assert: operator prettyPrint equals: 'struct a'.
+	self assert: structure isStructureDeclaration.
+	self assert: structure prettyPrint equals: 'struct a'.
 ]
 
 { #category : #tests }
