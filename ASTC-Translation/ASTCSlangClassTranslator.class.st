@@ -10,6 +10,11 @@ ASTCSlangClassTranslator >> initialize [
 	inferer explicitTypeHeuristic: PISlangTypesHeuristic.
 ]
 
+{ #category : #initialization }
+ASTCSlangClassTranslator >> isStatefulCode [
+	^ false
+]
+
 { #category : #check }
 ASTCSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 	((aClass allSuperclasses

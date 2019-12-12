@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #translation }
+ASTCIlliciumClassTranslator >> isStatefulCode [
+	^ true
+]
+
+{ #category : #translation }
 ASTCIlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 	(aClass traitComposition
 		includesTrait: ASTCVirtualMachineAPI)

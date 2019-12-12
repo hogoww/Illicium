@@ -30,7 +30,7 @@ ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilatio
 	functionDefinitions
 		do: [ :aFuncDef | 
 			self addTranslatedMethod: aFuncDef to: aCompilationUnit
-			 ].
+		].
 	^ aCompilationUnit
 ]
 
@@ -66,6 +66,12 @@ ASTCClassTranslator >> initialize [
 		at: #instanceVariable put: (ASTCInstanceVariablesTranslator new classTranslator: self; yourself);
 		yourself
 	
+]
+
+{ #category : #'translation-state' }
+ASTCClassTranslator >> isStatefulCode [
+	" will be used in the future to know if the translated plugin should have an instance, and stuff declared in an Struct"
+	^ self subclassResponsibility 
 ]
 
 { #category : #accessing }
@@ -139,7 +145,11 @@ ASTCClassTranslator >> translateClass: aClass [
 
 { #category : #'translation-state' }
 ASTCClassTranslator >> translateClassState: aClass [
-	^ (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass. 
+	| varDeclaration |
+	varDeclaration := (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass.
+	^ self isStatefulCode 
+		ifTrue: [ "add to struct "]
+		ifFalse: [ varDeclaration ]
 ]
 
 { #category : #'translation-api' }
