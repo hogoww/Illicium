@@ -14,22 +14,6 @@ ASTCObject class >> asPharoType [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-ASTCObject class >> literalNodeFor: aValue [ 
-	^ aValue asLiteralNode 
-		propertyAt: ASTCTypeAnnotationAST property 
-		put: (self asPharoType -> 'generated, no PhineasType');
-		yourself
-	
-]
-
-{ #category : #accessing }
-ASTCObject class >> value: aValue [ 
-	^ self new
-		value: (self literalNodeFor: aValue);
-		yourself
-]
-
 { #category : #'message performing' }
 ASTCObject >> = anotherObject [
 	self flag:#notPretty.

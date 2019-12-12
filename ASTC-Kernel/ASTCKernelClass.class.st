@@ -13,6 +13,22 @@ ASTCKernelClass class >> asCType [
 	self subclassResponsibility 
 ]
 
+{ #category : #accessing }
+ASTCKernelClass class >> literalNodeFor: aValue [ 
+	^ aValue asLiteralNode 
+		propertyAt: ASTCTypeAnnotationAST property 
+		put: (self asPharoType -> 'generated, no PhineasType');
+		yourself
+	
+]
+
+{ #category : #accessing }
+ASTCKernelClass class >> value: aValue [ 
+	^ self new
+		value: (self literalNodeFor: aValue);
+		yourself
+]
+
 { #category : #'message performing' }
 ASTCKernelClass >> = anotherObject [
 	^ self value = anotherObject value
