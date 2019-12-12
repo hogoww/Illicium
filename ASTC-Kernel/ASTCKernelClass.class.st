@@ -24,6 +24,20 @@ ASTCKernelClass >> asASTCType [
 ]
 
 { #category : #'message performing' }
+ASTCKernelClass >> declare: aVar typed: aType [
+	^ ASTCVariableDeclaration new type: aType; variable: (ASTCIdentifier new id: aVar) ; yourself
+]
+
+{ #category : #'message performing' }
+ASTCKernelClass >> messageToFunctionCall: aMessage [
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (methodTranslator formatSelector: (aMessage selector)); yourself) ;
+		arguments: (aMessage arguments collect:[:each| each acceptVisitor: methodTranslator ]);
+		yourself.
+		
+]
+
+{ #category : #'message performing' }
 ASTCKernelClass >> perform: aSelector withArguments: anArray [
 	" Cherry picking for unknown types are not great. Needs improvement.
 	Some stuff get translated by default for UserClasses, which are basically an unknown type."
