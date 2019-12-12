@@ -170,6 +170,5 @@ ASTCFloatArrayPlugginTest >> testTranslateFullPlugin [
 	printer := ASTCFilePrinter new compilationUnit: cu ; yourself.
 	printer fileName: FloatArrayPlugin name ; isPrimitive: true; printInFile.
 	printer compileExternalPlugin.
-	printer moveInVmDirectory.
 	^ cu
 ]
