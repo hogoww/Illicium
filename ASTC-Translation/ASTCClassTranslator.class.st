@@ -12,8 +12,10 @@ Class {
 
 { #category : #'translation-state' }
 ASTCClassTranslator >> addState: stateStuff to: aCompilationUnit [
+	self flag: #hack."shoud use double dispatch "
 	stateStuff do: [ :aVarDecl |
-			aCompilationUnit addDeclaration: aVarDecl.].
+		aVarDecl isDeclaration ifTrue:[ aCompilationUnit addDeclaration: aVarDecl ]
+			ifFalse:[ aCompilationUnit addDefinition: aVarDecl]] .
 	^ aCompilationUnit
 ]
 
@@ -149,9 +151,9 @@ ASTCClassTranslator >> translateClassState: aClass [
 	^ self isStatefulCode 
 		ifTrue: [ | struct |
 			struct := ASTCStructureDefinition new.
-			varDeclaration do:[:aVarDecl| struct addMember: aVarDecl ].
+			varDeclaration do:[:aVarDecl| struct addMember: aVarDecl  ].
 			struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
-			{ struct }]
+			{struct}]
 		ifFalse: [ varDeclaration ]
 ]
 
