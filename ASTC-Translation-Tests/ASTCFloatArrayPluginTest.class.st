@@ -1,17 +1,17 @@
 Class {
-	#name : #ASTCFloatArrayPlugginTest,
+	#name : #ASTCFloatArrayPluginTest,
 	#superclass : #ASTCSlangTranslationTest,
 	#category : #'ASTC-Translation-Tests-plugin'
 }
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> setUp [
+ASTCFloatArrayPluginTest >> setUp [
 	super setUp.
 	pluginClass := FloatArrayPlugin
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveAddFloatArray [
+ASTCFloatArrayPluginTest >> testPrimitiveAddFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -21,7 +21,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAddFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveAddScalar [
+ASTCFloatArrayPluginTest >> testPrimitiveAddScalar [
 	| cu |
 	self flag: #working.
 	"Not too bad. Missing the logic of the do, nil, and cCoerce. also the type annotation for value is not taken into account correctly."
@@ -32,7 +32,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAddScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveAt [
+ASTCFloatArrayPluginTest >> testPrimitiveAt [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -42,7 +42,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAt [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveAtPut [
+ASTCFloatArrayPluginTest >> testPrimitiveAtPut [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -52,7 +52,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveAtPut [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveDivFloatArray [
+ASTCFloatArrayPluginTest >> testPrimitiveDivFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -62,7 +62,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDivFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveDivScalar [
+ASTCFloatArrayPluginTest >> testPrimitiveDivScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -72,7 +72,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDivScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveDotProduct [
+ASTCFloatArrayPluginTest >> testPrimitiveDotProduct [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -82,7 +82,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveDotProduct [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveEqual [
+ASTCFloatArrayPluginTest >> testPrimitiveEqual [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -92,7 +92,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveEqual [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveHashArray [
+ASTCFloatArrayPluginTest >> testPrimitiveHashArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -102,7 +102,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveHashArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveMulFloatArray [
+ASTCFloatArrayPluginTest >> testPrimitiveMulFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -112,7 +112,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveMulFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveMulScalar [
+ASTCFloatArrayPluginTest >> testPrimitiveMulScalar [
 	| cu |
 	self flag: #working.
 	"Not too bad. Missing the logic of the do, nil, and cCoerce. also the type annotation for value is not taken into account correctly."
@@ -122,7 +122,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveMulScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveNormalize [
+ASTCFloatArrayPluginTest >> testPrimitiveNormalize [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -132,7 +132,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveNormalize [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveSubFloatArray [
+ASTCFloatArrayPluginTest >> testPrimitiveSubFloatArray [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -142,7 +142,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveSubFloatArray [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveSubScalar [
+ASTCFloatArrayPluginTest >> testPrimitiveSubScalar [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -152,7 +152,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveSubScalar [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testPrimitiveSum [
+ASTCFloatArrayPluginTest >> testPrimitiveSum [
 	| cu |
 	self flag: #Unsupported."type annotation to fix"
 	
@@ -162,7 +162,7 @@ ASTCFloatArrayPlugginTest >> testPrimitiveSum [
 ]
 
 { #category : #tests }
-ASTCFloatArrayPlugginTest >> testTranslateFullPlugin [
+ASTCFloatArrayPluginTest >> testTranslateFullPlugin [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu printer |
