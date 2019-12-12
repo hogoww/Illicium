@@ -197,6 +197,12 @@ ASTCHierarchyWalkerVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitModuloOperator: aModuloOperator [
+	super visitModuloOperator: aModuloOperator.
+	^ self visitBinaryOperator: aModuloOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	super visitMultiplicationOperator: aMultiplicationOperator.
 	^ self visitBinaryOperator: aMultiplicationOperator

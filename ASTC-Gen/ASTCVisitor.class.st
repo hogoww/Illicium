@@ -165,6 +165,11 @@ ASTCVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitModuloOperator: aModuloOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	
 ]

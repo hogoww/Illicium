@@ -487,6 +487,20 @@ ASTCPrinterVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitModuloOperator: aModuloOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aModuloOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitModuloOperator: aModuloOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	stream cr.
 	self printTabCount: currentDepth.

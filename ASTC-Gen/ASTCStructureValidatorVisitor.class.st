@@ -247,6 +247,13 @@ ASTCStructureValidatorVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitModuloOperator: aModuloOperator [
+	[ super visitModuloOperator: aModuloOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	[ super visitMultiplicationOperator: aMultiplicationOperator ]
 		on: AssertionFailure

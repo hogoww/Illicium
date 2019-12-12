@@ -185,6 +185,11 @@ ASTCNode >> isLoop [
 ]
 
 { #category : #testing }
+ASTCNode >> isModuloOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isMultiplicationOperator [
 	^ false
 ]

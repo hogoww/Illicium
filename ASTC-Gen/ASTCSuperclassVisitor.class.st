@@ -165,6 +165,11 @@ ASTCSuperclassVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitModuloOperator: aModuloOperator [
+	^ self visitBinaryOperator: aModuloOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	^ self visitBinaryOperator: aMultiplicationOperator
 ]

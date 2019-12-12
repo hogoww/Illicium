@@ -86,7 +86,8 @@ Class {
 		'lesserOperator',
 		'lesserOrEqualOperator',
 		'structAccessPointerOperator',
-		'bitwiseAndOperator'
+		'bitwiseAndOperator',
+		'moduloOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -234,7 +235,8 @@ ASTCBuilder >> defineOperatorClasses [
 	lesserOperator := builder newClassNamed: #LesserOperator.
 	lesserOrEqualOperator := builder newClassNamed: #LesserOrEqualOperator.
 	structAccessPointerOperator := builder newClassNamed: #StructAccessPointerOperator.
-	bitwiseAndOperator := builder newClassNamed: #BitwiseAndOperator
+	bitwiseAndOperator := builder newClassNamed: #BitwiseAndOperator.
+	moduloOperator := builder newClassNamed: #ModuloOperator.
 ]
 
 { #category : #definition }
@@ -243,7 +245,6 @@ ASTCBuilder >> defineOperators [
 	"priorities come from the ranking from the cppreference website.
 	Second part of the comment refers the associativity.
 	https://en.cppreference.com/w/c/language/operator_precedence"
-	
 	unaryOperator --|> operator.
 	binaryOperator --|> operator.
 	
@@ -259,7 +260,8 @@ ASTCBuilder >> defineOperators [
 	
 	"priority 3, #left"
 	multiplicationOperator --|> binaryOperator." a * b "
-	divisionOperator --|> binaryOperator. " a / b "
+	divisionOperator --|> binaryOperator." a / b "
+	moduloOperator --|> binaryOperator." a % b "
 	
 	"priority 4, #left"
 	subtractionOperator --|> binaryOperator." a - b "

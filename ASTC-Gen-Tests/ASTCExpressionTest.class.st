@@ -181,6 +181,22 @@ ASTCExpressionTest >> testLesserOrEqual [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testModulo [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) % (ASTCIdentifier new id: #b).
+	
+	self assert: operator isModuloOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testMultiplication [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) * (ASTCIdentifier new id: #b).

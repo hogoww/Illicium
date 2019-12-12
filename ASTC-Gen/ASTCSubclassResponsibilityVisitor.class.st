@@ -165,6 +165,11 @@ ASTCSubclassResponsibilityVisitor >> visitLoop: aLoop [
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitModuloOperator: aModuloOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 	self subclassResponsibility
 ]
