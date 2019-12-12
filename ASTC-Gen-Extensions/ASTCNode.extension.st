@@ -71,6 +71,11 @@ ASTCNode >> prettyPrintUsing: aPrettyPrinter [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCNode >> printOn: aStream [
+	aStream << self prettyPrint
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> rootNode [
 	^ parent ifNil: [ self ] ifNotNil: [ :p | p rootNode ]
 ]
