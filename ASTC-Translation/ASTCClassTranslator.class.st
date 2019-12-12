@@ -12,8 +12,7 @@ Class {
 
 { #category : #'translation-state' }
 ASTCClassTranslator >> addState: stateStuff to: aCompilationUnit [
-	stateStuff
-		do: [ :aVarDecl |
+	stateStuff do: [ :aVarDecl |
 			aCompilationUnit addDeclaration: aVarDecl.].
 	^ aCompilationUnit
 ]
@@ -148,7 +147,11 @@ ASTCClassTranslator >> translateClassState: aClass [
 	| varDeclaration |
 	varDeclaration := (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass.
 	^ self isStatefulCode 
-		ifTrue: [ "add to struct "]
+		ifTrue: [ | struct |
+			struct := ASTCStructureDefinition new.
+			varDeclaration do:[:aVarDecl| struct addMember: aVarDecl ].
+			struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
+			{ struct }]
 		ifFalse: [ varDeclaration ]
 ]
 
