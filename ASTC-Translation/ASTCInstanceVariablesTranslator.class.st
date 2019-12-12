@@ -22,16 +22,13 @@ ASTCInstanceVariablesTranslator >> translateInstanceVariable: anIVName of: aClas
 	| ivType |
 	ivType := classTranslator typeOfVariable: anIVName ofClass: aClass.
 	^ ASTCVariableDeclaration new
-		id:
-			(ASTCIdentifier new
-				id: anIVName;
-				yourself);
-		type:
-			(ASTCType new
-				type: ivType;
-				yourself);
+		id: (ASTCIdentifier new
+			id: anIVName;
+			yourself);
+		type: (ASTCType new
+			type: ivType;
+			yourself);
 		yourself
-
 ]
 
 { #category : #translation }
