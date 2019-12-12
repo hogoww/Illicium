@@ -24,5 +24,5 @@ ASTCPreIncrementOperator class >> priority [
 ASTCPreIncrementOperator class >> symbol [
 	"protocol: printing"
 	
-	^ #--
+	^ #++
 ]
