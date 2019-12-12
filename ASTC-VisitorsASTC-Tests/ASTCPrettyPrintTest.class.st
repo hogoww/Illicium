@@ -64,3 +64,12 @@ ASTCPrettyPrintTest >> testVisitEqualityOperator [
 	self assert: operator isEqualityOperator.
 	self assert: operator prettyPrint equals: 'a == b'.
 ]
+
+{ #category : #tests }
+ASTCPrettyPrintTest >> testVvisitBreak [
+	| statement |
+	statement := ASTCBreak new.
+	
+	self assert: statement isStatement.
+	self assert: statement prettyPrint equals: 'break'.
+]

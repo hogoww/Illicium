@@ -140,6 +140,11 @@ ASTCPrettyPrint >> visitBlock: aBlock [
 	self << '}'.
 ]
 
+{ #category : #accessing }
+ASTCPrettyPrint >> visitBreak: aBreak [
+	self << #break
+]
+
 { #category : #visiting }
 ASTCPrettyPrint >> visitCastOperator: aCastOperator [
 	self << '(';
