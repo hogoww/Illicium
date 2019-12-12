@@ -88,6 +88,11 @@ ASTCPrettyPrint >> printString [
 ]
 
 { #category : #accessing }
+ASTCPrettyPrint >> space [
+	stream space
+]
+
+{ #category : #accessing }
 ASTCPrettyPrint >> spaces [
 	self <<< ''
 ]
@@ -267,6 +272,13 @@ ASTCPrettyPrint >> visitReturn: aReturn [
 	self << 'return '.
 	aReturn expression ifNotNil:[:anExpression| anExpression acceptVisitor: self].
 	self << $;.
+]
+
+{ #category : #visiting }
+ASTCPrettyPrint >> visitStructureDeclaration: aStructureDeclaration [
+	self << #struct;
+		space;
+		print: aStructureDeclaration id
 ]
 
 { #category : #visiting }
