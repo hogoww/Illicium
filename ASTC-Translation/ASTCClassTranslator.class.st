@@ -10,11 +10,11 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #translation }
+{ #category : #'translation-state' }
 ASTCClassTranslator >> addState: stateStuff to: aCompilationUnit [
 	stateStuff
 		do: [ :aVarDecl |
-			aCompilationUnit declarations add: aVarDecl.].
+			aCompilationUnit addDeclaration: aVarDecl.].
 	^ aCompilationUnit
 ]
 
@@ -137,7 +137,7 @@ ASTCClassTranslator >> translateClass: aClass [
 	^ cu
 ]
 
-{ #category : #translation }
+{ #category : #'translation-state' }
 ASTCClassTranslator >> translateClassState: aClass [
 	^ (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass. 
 ]
