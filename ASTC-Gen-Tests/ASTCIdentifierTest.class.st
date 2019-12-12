@@ -20,6 +20,21 @@ ASTCIdentifierTest >> testKeywordLong [
 ]
 
 { #category : #tests }
+ASTCIdentifierTest >> testPharoKeyword1 [
+	self shouldnt: [ ASTCIdentifier new id: #self ] raise: ReservedKeywordUse 
+]
+
+{ #category : #tests }
+ASTCIdentifierTest >> testPharoKeyword2 [
+	self shouldnt: [ ASTCIdentifier new id: #super ] raise: ReservedKeywordUse 
+]
+
+{ #category : #tests }
+ASTCIdentifierTest >> testPharoKeyword3 [
+	self shouldnt: [ ASTCIdentifier new id: #thisContext ] raise: ReservedKeywordUse 
+]
+
+{ #category : #tests }
 ASTCIdentifierTest >> testRandomId1 [
 	self shouldnt: [ ASTCIdentifier new id: #i ] raise: ReservedKeywordUse 
 ]
