@@ -11,11 +11,8 @@ Class {
 }
 
 { #category : #'translation-state' }
-ASTCClassTranslator >> addState: stateStuff to: aCompilationUnit [
-	self flag: #hack."shoud use double dispatch "
-	stateStuff do: [ :aVarDecl |
-		aVarDecl isDeclaration ifTrue:[ aCompilationUnit addDeclaration: aVarDecl ]
-			ifFalse:[ aCompilationUnit addDefinition: aVarDecl]] .
+ASTCClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
+	aCompilationUnit add: stateStuffStruct.
 	^ aCompilationUnit
 ]
 
