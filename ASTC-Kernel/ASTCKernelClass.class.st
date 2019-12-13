@@ -53,6 +53,13 @@ ASTCKernelClass >> messageToFunctionCall: aMessage [
 		
 ]
 
+{ #category : #accessing }
+ASTCKernelClass >> myType [
+	"in case of most, it doesn't
+	for UserTypes, it does."
+	^ (value propertyAt: ASTCTypeAnnotationAST property) key
+]
+
 { #category : #'message performing' }
 ASTCKernelClass >> perform: aSelector withArguments: anArray [
 	" Cherry picking for unknown types are not great. Needs improvement.
