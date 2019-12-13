@@ -37,7 +37,7 @@ ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #typing }
 ASTCClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
 	inferer inferExpression: anExpression 
 ]
