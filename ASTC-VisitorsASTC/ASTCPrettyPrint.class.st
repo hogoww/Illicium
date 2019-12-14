@@ -289,13 +289,13 @@ ASTCPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 		
 	self enterBlock.
 	aStructureDefinition members do: [:aMember| 
-			self spaces. 
-			aMember acceptVisitor: self ]
-		separatedBy: [ self cr ].
+		self spaces. 
+		aMember acceptVisitor: self.
+		self << ';' ; cr 
+	].
 	self leaveBlock.
 	
-	self cr;
-		<< '}'
+	self spaces; << '}'
 ]
 
 { #category : #visiting }

@@ -9,6 +9,7 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority1 [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) + (ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c).
 	
+	operator debugASTCStructure.
 	self assert: operator isMultiplicationOperator.
 	
 	node := operator operands at: 1.
@@ -33,6 +34,7 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) + ((ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c)).
 	
+	operator debugASTCStructure.
 	self assert: operator isAdditionOperator .
 		
 	node := operator operands at: 1.
@@ -57,6 +59,7 @@ ASTCPrettyPrintTest >> testVisitBreak [
 	| breakStatement |
 	breakStatement := ASTCBreak new.
 	
+	breakStatement 	debugASTCStructure.
 	self assert: breakStatement isBreak.
 	self assert: breakStatement prettyPrint equals: 'break'.
 ]
@@ -65,7 +68,8 @@ ASTCPrettyPrintTest >> testVisitBreak [
 ASTCPrettyPrintTest >> testVisitEqualityOperator [
 	| operator |
 	operator := (ASTCIdentifier new id: #a) equals: (ASTCIdentifier new id: #b).
-	
+
+	operator debugASTCStructure.
 	self assert: operator isEqualityOperator.
 	self assert: operator prettyPrint equals: 'a == b'.
 ]
@@ -75,6 +79,7 @@ ASTCPrettyPrintTest >> testVisitStructureDeclaration [
 	| structure |
 	structure := ASTCStructureDeclaration new id:(ASTCIdentifier new id: #a; yourself); yourself.
 	
+	structure debugASTCStructure.
 	self assert: structure isStructureDeclaration.
 	self assert: structure prettyPrint equals: 'struct a'.
 ]
@@ -86,9 +91,10 @@ ASTCPrettyPrintTest >> testVisitStructureDefinition [
 		declaration: (ASTCStructureDeclaration new id:(ASTCIdentifier new id: #heros yourself));
 		addMember: (ASTCVariableDeclaration new 
 			type: (ASTCType new type: ASTCSmallInteger; yourself); 
-			id: (ASTCIdentifier new id: #druss; yourself)) asStatement 
+			id: (ASTCIdentifier new id: #druss; yourself));
 		yourself.
 	
+	operator debugASTCStructure.
 	self assert: operator isStructureDefinition.
 	self assert: operator prettyPrint equals: 
 'struct heros{
