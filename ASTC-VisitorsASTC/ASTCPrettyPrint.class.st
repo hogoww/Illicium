@@ -31,7 +31,7 @@ ASTCPrettyPrint >> cr [
 { #category : #visiting }
 ASTCPrettyPrint >> doesThisNeedParenthesis: aNode [
 	| parentPriority |
-	parentPriority := aNode parent ifNotNil: [:p | p priority] ifNil:[ 16 ].
+	parentPriority := aNode parent ifNotNil: [:p | p priority ] ifNil:[ 16 ].
 	^ aNode priority > parentPriority
 ]
 

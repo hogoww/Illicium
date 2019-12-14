@@ -76,6 +76,18 @@ ASTCNode >> printOn: aStream [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCNode class >> priority [
+	"Basic lowest priority for classes without any.
+	see Operator class >> priority comment"
+	^ 16
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCNode >> priority [
+	^ self class priority
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> rootNode [
 	^ parent ifNil: [ self ] ifNotNil: [ :p | p rootNode ]
 ]
