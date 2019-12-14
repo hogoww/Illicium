@@ -115,7 +115,12 @@ ASTCClassTranslator >> preTypeInference: aClass [
 
 { #category : #'translation-state' }
 ASTCClassTranslator >> stateId [
-	^ ASTCIdentifier new id: #pluginState; yourself
+	^ ASTCIdentifier new id: self stateName ; yourself
+]
+
+{ #category : #'translation-api' }
+ASTCClassTranslator >> stateName [
+	^ #pluginState
 ]
 
 { #category : #accessing }

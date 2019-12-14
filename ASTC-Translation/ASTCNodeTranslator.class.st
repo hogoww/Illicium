@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #translate }
-ASTCNodeTranslator >> currentTranslatedClass [
+ASTCNodeTranslator >> currentClass [
 	 ^ methodTranslator currentClass
 ]
 
@@ -22,6 +22,11 @@ ASTCNodeTranslator >> methodTranslator [
 { #category : #translate }
 ASTCNodeTranslator >> methodTranslator: aMethodTranslator [
 	methodTranslator := aMethodTranslator
+]
+
+{ #category : #'as yet unclassified' }
+ASTCNodeTranslator >> stateName [
+	^ methodTranslator stateName
 ]
 
 { #category : #translate }

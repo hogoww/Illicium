@@ -104,9 +104,9 @@ ASTCMethodTranslator >> initialize [
 		yourself.
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 ASTCMethodTranslator >> isStatefulCode [ 
-	^ currentClass isNil
+	^ currentClass isNotNil
 ]
 
 { #category : #visiting }
@@ -116,6 +116,11 @@ ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
 	annotatorVisitors add: ASTCShouldItBeDeclared new.
 	aMethodAST acceptMultipleVisitors: annotatorVisitors.	"pre translation visits"
 	^ aMethodAST
+]
+
+{ #category : #visiting }
+ASTCMethodTranslator >> stateName [
+	^ classTranslator stateName
 ]
 
 { #category : #visiting }
