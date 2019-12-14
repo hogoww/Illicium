@@ -15,11 +15,3 @@ ASTCIdentifier >> id: anId [
 	includes: anId) ifTrue: [ ReservedKeywordUse new keyword: anId; signal ].
 	id := anId
 ]
-
-{ #category : #'*ASTC-Gen-Extensions' }
-ASTCIdentifier >> indexAt: anExpression [
-	^ ASTCIndexerOperator new
-		addOperand: self;
-		addOperand: anExpression;
-		yourself
-]

@@ -120,6 +120,14 @@ ASTCExpression >> equals: anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> indexAt: anExpression [
+	^ ASTCIndexerOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> not [
 	^ ASTCLogicalNotOperator new
 		addOperand: self;
