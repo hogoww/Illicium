@@ -112,5 +112,5 @@ ASTCPrettyPrintTest >> testVisitStructureDefinition [
 	self assert: operator prettyPrint equals: 
 'struct heros{
   int druss;
-}'.
+};'.
 ]

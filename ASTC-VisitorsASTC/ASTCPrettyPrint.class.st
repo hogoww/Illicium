@@ -295,7 +295,7 @@ ASTCPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 	].
 	self leaveBlock.
 	
-	self spaces; << '}'
+	self spaces; << '};'
 ]
 
 { #category : #visiting }
