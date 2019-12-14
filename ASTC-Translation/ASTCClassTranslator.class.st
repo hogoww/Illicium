@@ -12,7 +12,7 @@ Class {
 
 { #category : #'translation-state' }
 ASTCClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
-	aCompilationUnit add: stateStuffStruct.
+	stateStuffStruct do:[:anElem| anElem addToCompilationUnit: aCompilationUnit].
 	^ aCompilationUnit
 ]
 
@@ -113,6 +113,11 @@ ASTCClassTranslator >> preTypeInference: aClass [
 	"empty hook"
 ]
 
+{ #category : #'translation-state' }
+ASTCClassTranslator >> stateId [
+	^ ASTCIdentifier new id: #pluginState; yourself
+]
+
 { #category : #accessing }
 ASTCClassTranslator >> stateTranslator [
 	^ stateTranslator
@@ -143,15 +148,23 @@ ASTCClassTranslator >> translateClass: aClass [
 
 { #category : #'translation-state' }
 ASTCClassTranslator >> translateClassState: aClass [
-	| varDeclaration |
+	| varDeclaration struct |
 	varDeclaration := (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass.
-	^ self isStatefulCode 
-		ifTrue: [ | struct |
-			struct := ASTCStructureDefinition new.
-			varDeclaration do:[:aVarDecl| struct addMember: aVarDecl  ].
-			struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
-			{struct}]
-		ifFalse: [ varDeclaration ]
+	
+	struct := ASTCStructureDefinition new.
+	varDeclaration do: [ :aVarDecl | struct addMember: aVarDecl ].
+	struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
+	
+	self isStatefulCode ifTrue:[ 
+		| stateDeclaration |
+		stateDeclaration := ASTCVariableDeclaration new 
+			type: (ASTCType new type: aClass; yourself) ; 
+			id: self stateId;
+			yourself.
+			^ { struct. stateDeclaration }
+		].
+	
+	^ { struct }
 ]
 
 { #category : #'translation-api' }
