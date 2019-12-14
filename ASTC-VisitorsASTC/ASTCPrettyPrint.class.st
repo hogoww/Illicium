@@ -154,7 +154,7 @@ ASTCPrettyPrint >> visitBreak: aBreak [
 ASTCPrettyPrint >> visitCastOperator: aCastOperator [
 	self << '(';
 		print: aCastOperator type;
-		<< ')';
+		<< ') ';
 		print: (aCastOperator operands at: 1)
 ]
 

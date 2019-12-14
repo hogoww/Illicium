@@ -64,6 +64,19 @@ ASTCPrettyPrintTest >> testVisitBreak [
 	self assert: breakStatement prettyPrint equals: 'break'.
 ]
 
+{ #category : #test }
+ASTCPrettyPrintTest >> testVisitCastOperator [
+	| structure |
+	structure := ASTCCastOperator new 
+		type: (ASTCType new type: self class) ; 
+		addOperand: (ASTCIdentifier new id: #a; yourself);
+		yourself.
+	
+	structure debugASTCStructure.
+	self assert: structure isCastOperator.
+	self assert: structure prettyPrint equals: '(struct ASTCPrettyPrintTest) a'.
+]
+
 { #category : #tests }
 ASTCPrettyPrintTest >> testVisitEqualityOperator [
 	| operator |
