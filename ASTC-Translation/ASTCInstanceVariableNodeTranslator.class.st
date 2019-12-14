@@ -6,5 +6,9 @@ Class {
 
 { #category : #translate }
 ASTCInstanceVariableNodeTranslator >> translateNode: aNode [ 
-	^ methodTranslator visitVariableNode: aNode
+	| expression |
+	expression := methodTranslator visitVariableNode: aNode.
+	methodTranslator isStatefulCode ifTrue:[
+		expression := (ASTCIdentifier new id: self stateName ; yourself) -> expression ].
+	^ expression
 ]
