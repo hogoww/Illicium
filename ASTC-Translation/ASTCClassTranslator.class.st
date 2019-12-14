@@ -12,7 +12,7 @@ Class {
 
 { #category : #'translation-state' }
 ASTCClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
-	stateStuffStruct do:[:anElem| anElem addToCompilationUnit: aCompilationUnit].
+	stateStuffStruct do:[:anElem| anElem addToCompilationUnit: aCompilationUnit ].
 	^ aCompilationUnit
 ]
 
@@ -139,7 +139,7 @@ ASTCClassTranslator >> translateClass: aClass [
 	
 	cu := ASTCCompilationUnit new.	
 	stateStuff := self translateClassState: aClass.
-	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
+	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs fromClass: aClass.
 	self addState: stateStuff to: cu.
 	self addTranslatedMethods: functionDefinitionsASTs to: cu.
 	cu debugASTCStructure.
@@ -193,7 +193,7 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	
 	cu := ASTCCompilationUnit new.
 	stateStuff := self translateClassState: aClass.
-	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs.
+	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs fromClass: aClass.
 	self addState: stateStuff to: cu.
 	self addTranslatedMethods: functionDefinitionsASTs to: cu.
 	cu debugASTCStructure.
@@ -204,6 +204,18 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 ASTCClassTranslator >> translateMethodsASTs: methodsAST [
 	^ methodsAST
 		collect: [ :aMethodAST | methodTranslator translateMethodAST: aMethodAST ]
+]
+
+{ #category : #translation }
+ASTCClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
+	| res |
+	"This method sets and unset the method's translator IV.
+	This allows to translate stateful code, by replacing accesses to IV to (state -> iv) "
+	self isStatefulCode ifTrue:[ methodTranslator currentClass: aClass ].
+	res := methodsAST
+		collect: [ :aMethodAST | methodTranslator translateMethodAST: aMethodAST ].
+	methodTranslator currentClass: nil.
+	^ res
 ]
 
 { #category : #typing }

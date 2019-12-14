@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'translators',
 		'classTranslator',
-		'includes'
+		'includes',
+		'currentClass'
 	],
 	#category : #'ASTC-Translation-overviewers'
 }
@@ -30,6 +31,16 @@ ASTCMethodTranslator >> classTranslator [
 { #category : #initialization }
 ASTCMethodTranslator >> classTranslator: aClassTranslator [
 	^ classTranslator := aClassTranslator
+]
+
+{ #category : #accessing }
+ASTCMethodTranslator >> currentClass [
+	^ currentClass
+]
+
+{ #category : #accessing }
+ASTCMethodTranslator >> currentClass: aClass [
+	currentClass := aClass
 ]
 
 { #category : #utility }
@@ -91,6 +102,11 @@ ASTCMethodTranslator >> initialize [
 		at: #thisContextNodeTranslator put: (ASTCThisContextNodeTranslator new methodTranslator: self ; yourself);
 		at: #variableNodeTranslator put: (ASTCVariableNodeTranslator new methodTranslator: self ; yourself);
 		yourself.
+]
+
+{ #category : #accessing }
+ASTCMethodTranslator >> isStatefulCode [ 
+	^ currentClass isNil
 ]
 
 { #category : #visiting }
