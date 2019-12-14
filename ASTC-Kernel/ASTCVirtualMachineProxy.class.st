@@ -26,7 +26,7 @@ ASTCVirtualMachineProxy >> castTo: aType [
 ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand ifTrue:[ Error signal: 'infiniteRecursion' ].
 
-	^ (ASTCIdentifier new id:'interpreterProxy'; yourself)
+	^ self translatedValue
 		-> (ASTCFunctionCall new 
 			id: (ASTCIdentifier new id: (methodTranslator formatSelector:(aMessage selector)); yourself) ;
 			arguments: (aMessage arguments collect:[:each| each acceptVisitor: methodTranslator ]);
