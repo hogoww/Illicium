@@ -140,3 +140,11 @@ ASTCExpression >> preIncr [
 		addOperand: self;
 		yourself
 ]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> structStaticAccess: anIdentifier [
+	^ ASTCStructAccessStaticOperator new
+		addOperand: self;
+		addOperand: anIdentifier;
+		yourself
+]

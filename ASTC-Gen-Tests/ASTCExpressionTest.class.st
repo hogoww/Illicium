@@ -285,6 +285,23 @@ ASTCExpressionTest >> testStructAccessPointer [
 	self assert: node id equals: #b
 ]
 
+{ #category : #test }
+ASTCExpressionTest >> testStructStaticAccess [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) structStaticAccess: (ASTCIdentifier new id: #b).
+	
+	operator debugASTCStructure.
+	self assert: operator isStructAccessStaticOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
 { #category : #tests }
 ASTCExpressionTest >> testSubtraction [
 	| operator node |
