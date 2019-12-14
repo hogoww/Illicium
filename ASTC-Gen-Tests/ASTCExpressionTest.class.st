@@ -9,6 +9,7 @@ ASTCExpressionTest >> testAddition [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) + (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isAdditionOperator.
 	
 	node := (operator operands at: 1).
@@ -25,6 +26,7 @@ ASTCExpressionTest >> testAnd [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) and: (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isAndOperator.
 	
 	node := (operator operands at: 1).
@@ -41,6 +43,7 @@ ASTCExpressionTest >> testAssign [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) assign: (ASTCLiteral new value: 1).
 	
+	operator debugASTCStructure.
 	self assert: operator isAssignmentOperator.
 	
 	node := (operator operands at: 1).
@@ -57,6 +60,7 @@ ASTCExpressionTest >> testBitAnd [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) bitAnd: (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isBitwiseAndOperator.
 	
 	node := (operator operands at: 1).
@@ -73,6 +77,7 @@ ASTCExpressionTest >> testCastTo [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) castTo: ASTCSmallInteger new asASTCType.
 	
+	operator debugASTCStructure.
 	self assert: operator isCastOperator.
 	
 	node := operator type.
@@ -89,6 +94,7 @@ ASTCExpressionTest >> testDivision [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) / (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isDivisionOperator.
 	
 	node := (operator operands at: 1).
@@ -105,6 +111,7 @@ ASTCExpressionTest >> testEquals [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) equals: (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isEqualityOperator.
 	
 	node := (operator operands at: 1).
@@ -121,6 +128,7 @@ ASTCExpressionTest >> testGreater [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) > (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isGreaterOperator.
 	
 	node := (operator operands at: 1).
@@ -137,6 +145,7 @@ ASTCExpressionTest >> testGreaterOrEqual [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) >= (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isGreaterOrEqualOperator.
 	
 	node := (operator operands at: 1).
@@ -153,6 +162,7 @@ ASTCExpressionTest >> testLesser [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) < (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isLesserOperator.
 	
 	node := (operator operands at: 1).
@@ -169,6 +179,7 @@ ASTCExpressionTest >> testLesserOrEqual [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) <= (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isLesserOrEqualOperator.
 	
 	node := (operator operands at: 1).
@@ -185,6 +196,7 @@ ASTCExpressionTest >> testModulo [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) % (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isModuloOperator.
 	
 	node := (operator operands at: 1).
@@ -201,6 +213,7 @@ ASTCExpressionTest >> testMultiplication [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) * (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isMultiplicationOperator.
 	
 	node := (operator operands at: 1).
@@ -217,6 +230,7 @@ ASTCExpressionTest >> testNot [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) not.
 	
+	operator debugASTCStructure.
 	self assert: operator isLogicalNotOperator.
 	
 	node := (operator operands at: 1).
@@ -229,6 +243,7 @@ ASTCExpressionTest >> testOr [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) or: (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isOrOperator.
 	
 	node := (operator operands at: 1).
@@ -245,6 +260,7 @@ ASTCExpressionTest >> testPreIncr [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) preIncr.
 	
+	operator debugASTCStructure.
 	self assert: operator isPreIncrementOperator.
 	
 	node := (operator operands at: 1).
@@ -257,6 +273,7 @@ ASTCExpressionTest >> testStructAccessPointer [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) -> (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isStructAccessPointerOperator.
 	
 	node := (operator operands at: 1).
@@ -273,6 +290,7 @@ ASTCExpressionTest >> testSubtraction [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) - (ASTCIdentifier new id: #b).
 	
+	operator debugASTCStructure.
 	self assert: operator isSubtractionOperator.
 	
 	node := (operator operands at: 1).

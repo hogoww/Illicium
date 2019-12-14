@@ -1,6 +1,14 @@
 Extension { #name : #ASTCStructAccessPointerOperator }
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCStructAccessPointerOperator >> assign: anExpression [
+	^ ASTCAssignmentOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCStructAccessPointerOperator class >> associativity [
 	"protocol: meta-data"
 	
