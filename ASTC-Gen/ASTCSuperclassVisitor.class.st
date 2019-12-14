@@ -215,6 +215,11 @@ ASTCSuperclassVisitor >> visitStructAccessPointerOperator: aStructAccessPointerO
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
+	^ self visitBinaryOperator: aStructAccessStaticOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	^ self visitDeclaration: aStructureDeclaration
 ]

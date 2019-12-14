@@ -264,6 +264,11 @@ ASTCWalkerVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOpera
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
+	super visitStructAccessStaticOperator: aStructAccessStaticOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	super visitStructureDeclaration: aStructureDeclaration
 ]

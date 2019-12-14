@@ -220,6 +220,11 @@ ASTCVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	
 ]

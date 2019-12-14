@@ -17,14 +17,6 @@ ASTCStructAccessPointerOperator >> acceptVisitor: aVisitor [
 ]
 
 { #category : #testing }
-ASTCStructAccessPointerOperator >> indexAt: anExpression [
-	^ ASTCIndexerOperator new
-		addOperand: self;
-		addOperand: anExpression;
-		yourself
-]
-
-{ #category : #testing }
 ASTCStructAccessPointerOperator >> isStructAccessPointerOperator [
 	^ true
 ]

@@ -220,6 +220,11 @@ ASTCSubclassResponsibilityVisitor >> visitStructAccessPointerOperator: aStructAc
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	self subclassResponsibility
 ]

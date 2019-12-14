@@ -262,6 +262,12 @@ ASTCHierarchyWalkerVisitor >> visitStructAccessPointerOperator: aStructAccessPoi
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
+	super visitStructAccessStaticOperator: aStructAccessStaticOperator.
+	^ self visitBinaryOperator: aStructAccessStaticOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	super visitStructureDeclaration: aStructureDeclaration.
 	^ self visitDeclaration: aStructureDeclaration

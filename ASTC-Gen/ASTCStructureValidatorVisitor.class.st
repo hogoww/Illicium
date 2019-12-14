@@ -325,6 +325,13 @@ ASTCStructureValidatorVisitor >> visitStructAccessPointerOperator: aStructAccess
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
+	[ super visitStructAccessStaticOperator: aStructAccessStaticOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitStructureDeclaration: aStructureDeclaration [
 	[ super visitStructureDeclaration: aStructureDeclaration ]
 		on: AssertionFailure
