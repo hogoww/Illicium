@@ -156,20 +156,21 @@ ASTCClassTranslator >> translateClassState: aClass [
 	| varDeclaration struct |
 	varDeclaration := (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass.
 	
-	struct := ASTCStructureDefinition new.
-	varDeclaration do: [ :aVarDecl | struct addMember: aVarDecl ].
-	struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
-	
-	self isStatefulCode ifTrue:[ 
+	^ self isStatefulCode ifTrue:[ 
 		| stateDeclaration |
+		struct := ASTCStructureDefinition new.
+		varDeclaration do: [ :aVarDecl | struct addMember: aVarDecl ].
+		struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
+		
 		stateDeclaration := ASTCVariableDeclaration new 
 			type: (ASTCType new type: aClass; yourself) ; 
 			id: self stateId;
 			yourself.
-			^ { struct. stateDeclaration }
-		].
+			{ struct. stateDeclaration }
+		]
+	ifFalse:[ varDeclaration ].
 	
-	^ { struct }
+
 ]
 
 { #category : #'translation-api' }
