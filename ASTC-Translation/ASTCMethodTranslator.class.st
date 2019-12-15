@@ -106,7 +106,7 @@ ASTCMethodTranslator >> initialize [
 
 { #category : #testing }
 ASTCMethodTranslator >> isStatefulCode [ 
-	^ currentClass isNotNil
+	^ classTranslator isStatefulCode
 ]
 
 { #category : #visiting }

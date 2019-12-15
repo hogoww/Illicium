@@ -6,7 +6,7 @@ Class {
 
 { #category : #translation }
 ASTCIlliciumClassTranslator >> isStatefulCode [
-	^ true
+	^ false
 ]
 
 { #category : #translation }

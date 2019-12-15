@@ -12,7 +12,7 @@ ASTCSlangClassTranslator >> initialize [
 
 { #category : #initialization }
 ASTCSlangClassTranslator >> isStatefulCode [
-	^ true
+	^ false
 ]
 
 { #category : #check }
