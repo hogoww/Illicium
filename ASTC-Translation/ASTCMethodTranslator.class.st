@@ -52,7 +52,7 @@ ASTCMethodTranslator >> forward: aMessage to: aType [
 ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
-		propertyAt: ASTCTypeAnnotationAST property
+		propertyAt: ASTCTypeAnnotator property
 		ifPresent: [ :types | types key ]
 		ifAbsent: [ ASTCUnannotatedNode new node: aNode ; signal ].
 ]
@@ -113,7 +113,7 @@ ASTCMethodTranslator >> isStatefulCode [
 ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
 	| annotatorVisitors |
 	annotatorVisitors := OrderedCollection new.
-	annotatorVisitors add: ASTCShouldItBeDeclared new.
+	annotatorVisitors add: ASTCShouldItBeDeclaredAnnotator new.
 	aMethodAST acceptMultipleVisitors: annotatorVisitors.	"pre translation visits"
 	^ aMethodAST
 ]

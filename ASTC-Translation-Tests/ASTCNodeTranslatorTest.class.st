@@ -9,13 +9,13 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCNodeTranslatorTest >> addType: aClass to: aNode [ 
-	aNode propertyAt: ASTCTypeAnnotationAST property
+	aNode propertyAt: ASTCTypeAnnotator property
 		put: ( aClass asTypeReification -> 'Generated, no Phineas Type')
 ]
 
 { #category : #'as yet unclassified' }
 ASTCNodeTranslatorTest >> assertTypeOf: aNode is: aType [
-	self assert: (aNode propertyAt: ASTCTypeAnnotationAST property) key equals: aType asTypeReification
+	self assert: (aNode propertyAt: ASTCTypeAnnotator property) key equals: aType asTypeReification
 ]
 
 { #category : #tests }

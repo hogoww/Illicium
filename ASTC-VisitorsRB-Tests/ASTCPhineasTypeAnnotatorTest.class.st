@@ -1,14 +1,16 @@
 "
+I am a copy of class TTypeAnnotatorVisitorTest. This comment is copied from there, and might not be entirely accurate
+
 An ASTCTypeAnnotationAST2Test is a test class for testing the behavior of ASTCTypeAnnotationAST2
 "
 Class {
-	#name : #ASTCTypeAnnotationASTTest,
+	#name : #ASTCPhineasTypeAnnotatorTest,
 	#superclass : #ASTCVisitorTest,
 	#category : #'ASTC-VisitorsRB-Tests-Typing'
 }
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass [
+ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector for: aClass [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 
@@ -20,7 +22,7 @@ ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass usingBlock: aBlock [
+ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector for: aClass usingBlock: aBlock [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 	visitor inferer infer: aBlock.
@@ -34,16 +36,16 @@ ASTCTypeAnnotationASTTest >> inferMethodSelector: aSelector for: aClass usingBlo
 ]
 
 { #category : #running }
-ASTCTypeAnnotationASTTest >> setUp [
+ASTCPhineasTypeAnnotatorTest >> setUp [
 	super setUp.
-	visitor:=ASTCTypeAnnotationAST new 
+	visitor := ASTCPhineasTypeAnnotator new 
 		inferer: PhineasInferer new;
 		yourself.
-	propertyName := ASTCTypeAnnotationAST property.
+	propertyName := visitor class property
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAnArgument:  for: PINodeTypeVisitorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
@@ -57,7 +59,7 @@ ASTCTypeAnnotationASTTest >> testVisitArgumentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitAssignmentNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitAssignmentNode [
 	| counter ast |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAnAssignement for: PINodeTypeVisitorTest.
@@ -71,7 +73,7 @@ ASTCTypeAnnotationASTTest >> testVisitAssignmentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
+ASTCPhineasTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	"failing because it's getting undefined Object as well as Smallinteger as a possible type. This is normal, because the class variable initialization isn't set in the call graph of the variable
 	Maybe use typedSlots would be more explicit"
@@ -88,7 +90,7 @@ ASTCTypeAnnotationASTTest >> testVisitGlobalNodeClassVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitGlobalNodeGlobal [
+ASTCPhineasTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAGlobalVariable for: PINodeTypeVisitorTest.
@@ -103,7 +105,7 @@ ASTCTypeAnnotationASTTest >> testVisitGlobalNodeGlobal [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitGlobalNodeSharedPoolVariable [
+ASTCPhineasTypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
 	| ast counter |
 	<expectedFailure>
 	self flag:#todo."waiting to have a better understanding"
@@ -112,7 +114,7 @@ ASTCTypeAnnotationASTTest >> testVisitGlobalNodeSharedPoolVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitInstanceVariableNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitInstanceVariableNode [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -127,7 +129,7 @@ ASTCTypeAnnotationASTTest >> testVisitInstanceVariableNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitLiteralNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitLiteralNode [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -142,7 +144,7 @@ ASTCTypeAnnotationASTTest >> testVisitLiteralNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitMessageNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitMessageNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: PINodeTypeVisitorTest.
@@ -155,7 +157,7 @@ ASTCTypeAnnotationASTTest >> testVisitMessageNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitMethodNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitMethodNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger for: PINodeTypeVisitorTest.
@@ -168,7 +170,7 @@ ASTCTypeAnnotationASTTest >> testVisitMethodNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitSelfNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitSelfNode [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -183,7 +185,7 @@ ASTCTypeAnnotationASTTest >> testVisitSelfNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotationASTTest >> testVisitTemporaryNode [
+ASTCPhineasTypeAnnotatorTest >> testVisitTemporaryNode [
 	| ast counter |
 	counter := 0.
 	ast := self

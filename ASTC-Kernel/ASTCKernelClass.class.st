@@ -16,7 +16,7 @@ ASTCKernelClass class >> asCType [
 { #category : #accessing }
 ASTCKernelClass class >> literalNodeFor: aValue [ 
 	^ aValue asLiteralNode 
-		propertyAt: ASTCTypeAnnotationAST property 
+		propertyAt: ASTCTypeAnnotator property 
 		put: (self asPharoType -> 'generated, no PhineasType');
 		yourself
 	
@@ -57,7 +57,7 @@ ASTCKernelClass >> messageToFunctionCall: aMessage [
 ASTCKernelClass >> myType [
 	"in case of most, it doesn't
 	for UserTypes, it does."
-	^ (value propertyAt: ASTCTypeAnnotationAST property) key
+	^ (value propertyAt: ASTCTypeAnnotator property) key
 ]
 
 { #category : #'message performing' }

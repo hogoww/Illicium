@@ -56,8 +56,8 @@ ASTCShouldItBeDeclaredTest >> assignmentInOtherSequence [
 { #category : #basic }
 ASTCShouldItBeDeclaredTest >> setUp [
 	super setUp.
-	visitor:=ASTCShouldItBeDeclared new.
-	propertyName := ASTCShouldItBeDeclared property.
+	visitor:=ASTCShouldItBeDeclaredAnnotator new.
+	propertyName := ASTCShouldItBeDeclaredAnnotator property.
 ]
 
 { #category : #basic }

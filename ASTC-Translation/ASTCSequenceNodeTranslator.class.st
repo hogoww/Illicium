@@ -21,7 +21,7 @@ ASTCSequenceNodeTranslator >> translateTemporaryDeclaration: temporaryNodes into
 	"TemporaryDeclarationNodes are actually just temporaryNodes in the AST. 
 	so we have to use this hackish way."
 	 ^ (temporaryNodes 
-		select: [:aTempDecl| aTempDecl propertyAt: ASTCShouldItBeDeclared property ])
+		select: [:aTempDecl| aTempDecl propertyAt: ASTCShouldItBeDeclaredAnnotator property ])
 		collect: [:aTempDecl| methodTranslator visitTemporaryDeclarationNode: aTempDecl ]
 		into: aCollection
 ]

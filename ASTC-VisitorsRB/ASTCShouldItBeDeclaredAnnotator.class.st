@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCShouldItBeDeclared,
+	#name : #ASTCShouldItBeDeclaredAnnotator,
 	#superclass : #ASTCAbstractCheckVisitor,
 	#instVars : [
 		'variableAppeareanceTracker',
@@ -9,18 +9,18 @@ Class {
 }
 
 { #category : #accessing }
-ASTCShouldItBeDeclared class >> property [
+ASTCShouldItBeDeclaredAnnotator class >> property [
 	^#needsDeclaration
 ]
 
 { #category : #initialization }
-ASTCShouldItBeDeclared >> initialize [ 
+ASTCShouldItBeDeclaredAnnotator >> initialize [ 
 	variableAppeareanceTracker:= Dictionary new.
 	varTodeclareAtStart := Bag new.
 ]
 
 { #category : #visit }
-ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
+ASTCShouldItBeDeclaredAnnotator >> visitAssignmentNode: anAssignmentNode [
 	| association variable |
 	
 	variable := anAssignmentNode variable.
@@ -46,7 +46,7 @@ ASTCShouldItBeDeclared >> visitAssignmentNode: anAssignmentNode [
 ]
 
 { #category : #visit }
-ASTCShouldItBeDeclared >> visitGlobalNode: aGlobalNode [
+ASTCShouldItBeDeclaredAnnotator >> visitGlobalNode: aGlobalNode [
 	(aGlobalNode parent isAssignment
 		and: [ aGlobalNode parent variable = aGlobalNode ])
 		ifTrue: [ UnsupportedFeature new feature: 'Global variable assignements' ; signal ].
@@ -54,12 +54,12 @@ ASTCShouldItBeDeclared >> visitGlobalNode: aGlobalNode [
 ]
 
 { #category : #visit }
-ASTCShouldItBeDeclared >> visitInstanceVariableNode: anInstanceVariable [
+ASTCShouldItBeDeclaredAnnotator >> visitInstanceVariableNode: anInstanceVariable [
 	^ false
 ]
 
 { #category : #visit }
-ASTCShouldItBeDeclared >> visitMethodNode: aMethodNode [
+ASTCShouldItBeDeclaredAnnotator >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
 
 	aMethodNode body temporaries
@@ -69,6 +69,6 @@ ASTCShouldItBeDeclared >> visitMethodNode: aMethodNode [
 ]
 
 { #category : #visit }
-ASTCShouldItBeDeclared >> visitTemporaryNode: aTemporaryNode [
+ASTCShouldItBeDeclaredAnnotator >> visitTemporaryNode: aTemporaryNode [
 	^ true
 ]

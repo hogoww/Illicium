@@ -7,7 +7,7 @@ Class {
 { #category : #translate }
 ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 	^ (anAssignmentNode
-		propertyAt: ASTCShouldItBeDeclared property)
+		propertyAt: ASTCShouldItBeDeclaredAnnotator property)
 		ifTrue: [
 			ASTCDeclarationStatement new
 				pharoNode: anAssignmentNode;
