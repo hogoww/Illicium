@@ -27,7 +27,7 @@ ASTCSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 
 { #category : #running }
 ASTCSlangTypeAnnotatorTest >> setUp [
-	visitor := ASTCSlangTypeAnnotationAST new 
+	visitor := ASTCSlangTypeAnnotator new 
 		inferer: CCodeGenerator new;
 		yourself.
 	super setUp
