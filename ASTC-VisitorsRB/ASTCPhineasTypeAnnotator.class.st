@@ -1,3 +1,8 @@
+"
+I annotate RB ASTs with types informations coming from the Phineas type inferencer.
+(gitlab.com/pharo-project/phineas)
+
+"
 Class {
 	#name : #ASTCPhineasTypeAnnotator,
 	#superclass : #ASTCTypeAnnotator,

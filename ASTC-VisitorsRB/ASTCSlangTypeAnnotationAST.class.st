@@ -1,3 +1,7 @@
+"
+I annotate RB ASTs with types informations coming from Slang type inference, provided by CCodeGenerator
+(See CCodeGenerator, type inference protocol)
+"
 Class {
 	#name : #ASTCSlangTypeAnnotationAST,
 	#superclass : #ASTCTypeAnnotator,

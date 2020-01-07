@@ -1,3 +1,7 @@
+"
+I am an abstract class to implement types annotator for RB ASTs.
+Subclasses only need to implement how to type a node.
+"
 Class {
 	#name : #ASTCTypeAnnotator,
 	#superclass : #ASTCAbstractCheckVisitor,
