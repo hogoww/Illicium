@@ -1,11 +1,32 @@
+"
+I am an abstract test class for RB Types annotators classes.
+I define basic tests for them.
+"
 Class {
 	#name : #ASTCTypeAnnotatorTest,
 	#superclass : #ASTCVisitorTest,
 	#category : #'ASTC-VisitorsRB-Tests-Typing'
 }
 
+{ #category : #testing }
+ASTCTypeAnnotatorTest class >> isAbstract [
+	^ true
+]
+
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitArgumentNode [
+ASTCTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
+	^ self subclassResponsibility
+]
+
+{ #category : #running }
+ASTCTypeAnnotatorTest >> setUp [
+	"visitor must be set before sending super setUp in subclasses."
+	super setUp.
+	propertyName := visitor class property
+]
+
+{ #category : #test }
+ASTCTypeAnnotatorTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAnArgument: from: PINodeTypeVisitorTest.
@@ -19,7 +40,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitArgumentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitAssignmentNode [
+ASTCTypeAnnotatorTest >> testVisitAssignmentNode [
 	| counter ast |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAnAssignement from: PINodeTypeVisitorTest.
@@ -33,7 +54,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitAssignmentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitGlobalNodeClassVariable [
+ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -48,7 +69,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitGlobalNodeClassVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitGlobalNodeGlobal [
+ASTCTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: PINodeTypeVisitorTest.
@@ -63,7 +84,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitGlobalNodeGlobal [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitGlobalNodeSharedPoolVariable [
+ASTCTypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
 	| ast counter |
 	<expectedFailure>
 	self flag:#todo."waiting to have a better understanding"
@@ -72,7 +93,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitGlobalNodeSharedPoolVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitInstanceVariableNode [
+ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -87,7 +108,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitInstanceVariableNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitLiteralNode [
+ASTCTypeAnnotatorTest >> testVisitLiteralNode [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -102,7 +123,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitLiteralNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitMessageNode [
+ASTCTypeAnnotatorTest >> testVisitMessageNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt from: PINodeTypeVisitorTest.
@@ -115,7 +136,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitMessageNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitMethodNode [
+ASTCTypeAnnotatorTest >> testVisitMethodNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger from: PINodeTypeVisitorTest.
@@ -128,7 +149,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitMethodNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitSelfNode [
+ASTCTypeAnnotatorTest >> testVisitSelfNode [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -143,7 +164,7 @@ ASTCTypeAnnotatorTest >> abstractTestVisitSelfNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> abstractTestVisitTemporaryNode [
+ASTCTypeAnnotatorTest >> testVisitTemporaryNode [
 	| ast counter |
 	counter := 0.
 	ast := self
@@ -155,9 +176,4 @@ ASTCTypeAnnotatorTest >> abstractTestVisitTemporaryNode [
 				ifTrue: [ counter := counter + 1.
 					self assert: (aNode hasProperty: propertyName) ] ].
 	self assert: counter equals: 2
-]
-
-{ #category : #test }
-ASTCTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
-	^ self subclassResponsibility
 ]
