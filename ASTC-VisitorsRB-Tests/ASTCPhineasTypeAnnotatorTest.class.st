@@ -5,12 +5,12 @@ An ASTCTypeAnnotationAST2Test is a test class for testing the behavior of ASTCTy
 "
 Class {
 	#name : #ASTCPhineasTypeAnnotatorTest,
-	#superclass : #ASTCVisitorTest,
+	#superclass : #ASTCTypeAnnotatorTest,
 	#category : #'ASTC-VisitorsRB-Tests-Typing'
 }
 
 { #category : #test }
-ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector for: aClass [
+ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 
@@ -22,7 +22,7 @@ ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector for: aClass [
 ]
 
 { #category : #test }
-ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector for: aClass usingBlock: aBlock [
+ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass usingBlock: aBlock [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 	visitor inferer infer: aBlock.
@@ -46,9 +46,10 @@ ASTCPhineasTypeAnnotatorTest >> setUp [
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitArgumentNode [
+	" override of the test, because we need to use a block for phineas's inference of methods with arguments."
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnArgument:  for: PINodeTypeVisitorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
+	ast := self inferMethodSelector: #aMethodWithAnArgument: from: PINodeTypeVisitorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
 	ast nodesDo: [ :aNode | 
 		aNode isArgument
 			ifTrue: [ 
@@ -60,47 +61,17 @@ ASTCPhineasTypeAnnotatorTest >> testVisitArgumentNode [
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitAssignmentNode [
-	| counter ast |
-	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnAssignement for: PINodeTypeVisitorTest.
-	ast nodesDo: [ :aNode | 
-		aNode isAssignment
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName).
-			]. ].
-	self assert: counter equals:1.
+	self abstractTestVisitAssignmentNode
 ]
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
-	| ast counter |
-	"failing because it's getting undefined Object as well as Smallinteger as a possible type. This is normal, because the class variable initialization isn't set in the call graph of the variable
-	Maybe use typedSlots would be more explicit"
-	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithAClassVariable
-		for: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			(aNode isVariable and: [ aNode isGlobal ])
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 1
+	self abstractTestVisitGlobalNodeClassVariable
 ]
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
-	| ast counter |
-	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAGlobalVariable for: PINodeTypeVisitorTest.
-	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[aNode isGlobal])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName).
-			].].
-	self assert: counter equals:1.
+	self abstractTestVisitGlobalNodeGlobal
 	
 ]
 
@@ -115,86 +86,30 @@ ASTCPhineasTypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitInstanceVariableNode [
-	| ast counter |
-	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithAnInstanceVariable
-		for: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			(aNode isVariable and: [ aNode isInstance ])
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 1
+	self abstractTestVisitInstanceVariableNode
 ]
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitLiteralNode [
-	| ast counter |
-	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithALiteralNode
-		for: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			(aNode isLiteralNode and: [ aNode isValue ])
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 1
+	self abstractTestVisitLiteralNode
 ]
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitMessageNode [
-	| ast counter |
-	counter := 0.
-	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt for: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isMessage
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 1
+	self abstractTestVisitMessageNode
 ]
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitMethodNode [
-	| ast counter |
-	counter := 0.
-	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger for: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isMethod
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 1
+	self abstractTestVisitMethodNode
 ]
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitSelfNode [
-	| ast counter |
-	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithSelf
-		for: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isSelf
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 1
+	self abstractTestVisitSelfNode
 ]
 
 { #category : #test }
 ASTCPhineasTypeAnnotatorTest >> testVisitTemporaryNode [
-	| ast counter |
-	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithATemporaryVariable
-		for: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isTemp
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
-	self assert: counter equals: 2
+	self abstractTestVisitTemporaryNode
 ]
