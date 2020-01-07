@@ -2,7 +2,7 @@
 An ASTCShouldItBeDeclaredTest is a test class for testing the behavior of ASTCShouldItBeDeclared
 "
 Class {
-	#name : #ASTCShouldItBeDeclaredTest,
+	#name : #ASTCShouldItBeDeclaredAnnotatorTest,
 	#superclass : #ASTCVisitorTest,
 	#instVars : [
 		'iv'
@@ -11,57 +11,57 @@ Class {
 }
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> aMethodWithAGlobalAssignedToATemp [
+ASTCShouldItBeDeclaredAnnotatorTest >> aMethodWithAGlobalAssignedToATemp [
 	|t|
-	t := ASTCShouldItBeDeclaredTest 
+	t := ASTCShouldItBeDeclaredAnnotatorTest 
 	
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> aMethodWithATemp [
+ASTCShouldItBeDeclaredAnnotatorTest >> aMethodWithATemp [
 	| aTemp |
 	aTemp := 3
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> aMethodWithATempThatShouldBeDeclaredAtStart [
+ASTCShouldItBeDeclaredAnnotatorTest >> aMethodWithATempThatShouldBeDeclaredAtStart [
 	|t|
 	(t := true) ifTrue: 1
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> aMethodWithAnAssignedGlobalVar [
+ASTCShouldItBeDeclaredAnnotatorTest >> aMethodWithAnAssignedGlobalVar [
 	"should probably pick something that won't break the system on a random execution :D"
 	Smalltalk := 1
 	
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> aMethodWithAnIV [
+ASTCShouldItBeDeclaredAnnotatorTest >> aMethodWithAnIV [
 	iv := 1
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> assignmentInCondition [
+ASTCShouldItBeDeclaredAnnotatorTest >> assignmentInCondition [
 	|t|
 	(t := true) ifTrue: 1
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> assignmentInOtherSequence [
+ASTCShouldItBeDeclaredAnnotatorTest >> assignmentInOtherSequence [
 	|t|
 	true ifTrue: [ t := 1 ]
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> setUp [
+ASTCShouldItBeDeclaredAnnotatorTest >> setUp [
 	super setUp.
 	visitor:=ASTCShouldItBeDeclaredAnnotator new.
 	propertyName := ASTCShouldItBeDeclaredAnnotator property.
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> testAssignmentInCondition [
+ASTCShouldItBeDeclaredAnnotatorTest >> testAssignmentInCondition [
 	| ast |
 	ast := (self class >> #assignmentInCondition) ast copy.
 	ast acceptVisitor: visitor.
@@ -75,7 +75,7 @@ ASTCShouldItBeDeclaredTest >> testAssignmentInCondition [
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> testAssignmentIndifferentSequence [
+ASTCShouldItBeDeclaredAnnotatorTest >> testAssignmentIndifferentSequence [
 	| ast |
 	ast := (self class >> #assignmentInOtherSequence) ast copy.
 	ast acceptVisitor: visitor.
@@ -89,7 +89,7 @@ ASTCShouldItBeDeclaredTest >> testAssignmentIndifferentSequence [
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> testTemporariesShouldNotBeDeclared [
+ASTCShouldItBeDeclaredAnnotatorTest >> testTemporariesShouldNotBeDeclared [
 	| ast |
 	ast := (self class >> #aMethodWithAnIV) ast copy.
 	ast acceptVisitor: visitor.
@@ -98,7 +98,7 @@ ASTCShouldItBeDeclaredTest >> testTemporariesShouldNotBeDeclared [
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> testVisitGlobalNode [
+ASTCShouldItBeDeclaredAnnotatorTest >> testVisitGlobalNode [
 	| ast |
 	ast := (self class >> #aMethodWithAGlobalAssignedToATemp) ast copy.
 	ast acceptVisitor: visitor.
@@ -107,7 +107,7 @@ ASTCShouldItBeDeclaredTest >> testVisitGlobalNode [
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> testVisitGlobalVariableNodeAssignation [
+ASTCShouldItBeDeclaredAnnotatorTest >> testVisitGlobalVariableNodeAssignation [
 	| ast |
 	ast := (self class >> #aMethodWithAnAssignedGlobalVar) ast copy.
 	self should: [ ast acceptVisitor: visitor ] raise: UnsupportedFeature.
@@ -115,7 +115,7 @@ ASTCShouldItBeDeclaredTest >> testVisitGlobalVariableNodeAssignation [
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> testVisitInstanceVariableNode [ 
+ASTCShouldItBeDeclaredAnnotatorTest >> testVisitInstanceVariableNode [ 
 	| ast |
 	ast := (self class >> #aMethodWithAnIV) ast copy.
 	ast acceptVisitor: visitor.
@@ -124,7 +124,7 @@ ASTCShouldItBeDeclaredTest >> testVisitInstanceVariableNode [
 ]
 
 { #category : #basic }
-ASTCShouldItBeDeclaredTest >> testVisitTemporaryNode [
+ASTCShouldItBeDeclaredAnnotatorTest >> testVisitTemporaryNode [
 	| ast |
 	ast := (self class >> #aMethodWithATemp) ast copy.
 	ast acceptVisitor: visitor.
