@@ -11,52 +11,23 @@ Class {
 	#category : #'ASTC-VisitorsRB-Typing'
 }
 
+{ #category : #visiting }
+ASTCSlangTypeAnnotator >> currentTMethod [
+	^ currentTMethod
+]
+
 { #category : #accessing }
 ASTCSlangTypeAnnotator >> typeThatNode: aNode [
-	| type tNode |	
-	tNode := aNode propertyAt: #tnodeEquivalent ifAbsent: [ self error ].
-	
-	type := inferer typeFor: tNode in: currentTMethod.
-		
-	self atNewPropertyPut: type -> nil for: aNode
-]
-
-{ #category : #accessing }
-ASTCSlangTypeAnnotator >> typeThatVariableNode: aNode [
 	| type |
-	"Different method needed because Slang doesn't reify variables nodes"
-	type := currentTMethod typeFor: aNode name in: inferer."same method as the one on ccg, but arguments reversed too" 
-		
+	
+	type := aNode getSlangTypeUsing: inferer in: currentTMethod.
 	self atNewPropertyPut: type -> nil for: aNode
-]
-
-{ #category : #visiting }
-ASTCSlangTypeAnnotator >> visitArgumentNode: anArgumentNode [
-	self typeThatVariableNode: anArgumentNode.
-	^ anArgumentNode
 ]
 
 { #category : #accessing }
 ASTCSlangTypeAnnotator >> visitMethodNode: aMethodNode [
 	"set the current tMethod, so we can give it to the CCodeGenerator, when asking for a node's type"
 	currentTMethod := inferer methodNamed: aMethodNode selector.
-	
-	self atNewPropertyPut: currentTMethod returnType -> currentTMethod for: aMethodNode.
-	"TMethod nodes are not TParseNodes, so we have to ask for the type differntly"
-	
 	super visitMethodNode: aMethodNode.
 	^ aMethodNode
-]
-
-{ #category : #accessing }
-ASTCSlangTypeAnnotator >> visitSelfNode: aSelfNode [
-	"TAST does not have self nodes, and ignores self regardless.
-	So we leave nil for now, and will see in time"
-	self atNewPropertyPut: nil -> nil for: aSelfNode
-]
-
-{ #category : #visiting }
-ASTCSlangTypeAnnotator >> visitTemporaryNode: aTemporaryNode [
-	self typeThatVariableNode: aTemporaryNode.
-	^ aTemporaryNode
 ]
