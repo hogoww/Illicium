@@ -32,3 +32,10 @@ ASTCSlangTypeAnnotator >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
 	^ aMethodNode
 ]
+
+{ #category : #accessing }
+ASTCSlangTypeAnnotator >> visitSelfNode: aSelfNode [
+	"TAST does not have self nodes, and ignores self regardless.
+	So we leave nil for now, and will see in time"
+	self atNewPropertyPut: nil -> nil for: aSelfNode
+]
