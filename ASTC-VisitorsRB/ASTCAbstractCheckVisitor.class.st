@@ -29,3 +29,10 @@ ASTCAbstractCheckVisitor >> atNewPropertyPut: aValue for: aNode [
 
 	^ self atNewProperty: self class property put: aValue for: aNode
 ]
+
+{ #category : #accessing }
+ASTCAbstractCheckVisitor >> visitMethodNode: aMethodNode [
+	"we remove the visit of pragmas"
+	self visitArgumentNodes: aMethodNode arguments.
+	self visitNode: aMethodNode body
+]
