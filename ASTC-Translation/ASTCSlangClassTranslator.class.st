@@ -4,6 +4,18 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
+{ #category : #check }
+ASTCSlangClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
+	| typeAnnotator |
+	self flag:#extract_typeAnnotator.
+	typeAnnotator := ASTCSlangTypeAnnotator new
+		inferer: inferer;
+		yourself.
+	methodsASTs
+		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
+	^ methodsASTs
+]
+
 { #category : #initialization }
 ASTCSlangClassTranslator >> initialize [
 	super initialize.
@@ -39,4 +51,23 @@ ASTCSlangClassTranslator >> preTypeInference: aClass [
 	"piType instanceVariable: #moduleName
 	ifPresent: [ piType instanceVariables at:#moduleName put: 
 		(inferer types createConcreteType: String) ]."
+]
+
+{ #category : #'translation-api' }
+ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
+	| method |
+	inferer := CCodeGenerator new.
+	method := aClass >> aSelector.
+	inferer addMethod: (method asTranslationMethodOfClass: TMethod).
+	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
+	
+	inferer methodNamed: aSelector.
+	
+	self annotateMethodsASTWithTypes: { method ast } .
+	self halt.
+]
+
+{ #category : #typing }
+ASTCSlangClassTranslator >> typeAnnotatorClass [
+	^ ASTCSlangTypeAnnotator
 ]
