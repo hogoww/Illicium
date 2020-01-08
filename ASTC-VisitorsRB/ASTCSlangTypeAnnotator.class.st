@@ -14,8 +14,7 @@ Class {
 { #category : #accessing }
 ASTCSlangTypeAnnotator >> typeThatNode: aNode [
 	| type tNode |	
-	self halt.
-	tNode := aNode propertyAt: #tEquivalent.
+	tNode := aNode propertyAt: #tnodeEquivalent ifAbsent: [ self error ].
 	
 	type := inferer typeFor: tNode in: currentTMethod.
 		
@@ -32,9 +31,4 @@ ASTCSlangTypeAnnotator >> visitMethodNode: aMethodNode [
 	
 	super visitMethodNode: aMethodNode.
 	^ aMethodNode
-]
-
-{ #category : #accessing }
-ASTCSlangTypeAnnotator >> wasMethodTyped: aMethodNode [
-	^ self getMethodType: aMethodNode
 ]
