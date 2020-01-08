@@ -1,6 +1,6 @@
 Extension { #name : #RBVariableNode }
 
 { #category : #'*ASTC-VisitorsRB' }
-RBVariableNode >> getSlangTypeUsing: aCCodeGenerator in: aTMethod [
-	^ aTMethod typeFor: self name in: aCCodeGenerator 
+RBVariableNode >> getSlangTypeUsing: aCodeGenerator in: aTMethod [
+	^ (aTMethod  typeFor: self name in: aCodeGenerator) ifNil: [#sqInt]
 ]

@@ -19,7 +19,32 @@ Class {
 
 { #category : #support }
 ASTCSlangTypeAnnotatorTypingTest class >> aMethodWithAClassVariable [
+	<var:#b type: #float>
 	b:=1
+]
+
+{ #category : #support }
+ASTCSlangTypeAnnotatorTypingTest class >> declareCVarsIn: aCCodeGenerator [ 
+	aCCodeGenerator var: #iv type: #float.
+]
+
+{ #category : #support }
+ASTCSlangTypeAnnotatorTypingTest class >> isNonArgumentImplicitReceiverVariableName: something [
+	^ false
+]
+
+{ #category : #support }
+ASTCSlangTypeAnnotatorTypingTest class >> isStructClass [
+	^ false
+]
+
+{ #category : #support }
+ASTCSlangTypeAnnotatorTypingTest class >> prepareToBeAddedToCodeGenerator: aCCodeGenerator [
+]
+
+{ #category : #support }
+ASTCSlangTypeAnnotatorTypingTest class >> requiredMethodNames: options [
+	^#()
 ]
 
 { #category : #support }
@@ -45,6 +70,7 @@ ASTCSlangTypeAnnotatorTypingTest >> aMethodWithABlockWithAnArgument [
 
 { #category : #support }
 ASTCSlangTypeAnnotatorTypingTest >> aMethodWithAClassVariable [
+	<var:#A type:#float>
 	A:=3.
 ]
 
@@ -81,12 +107,19 @@ ASTCSlangTypeAnnotatorTypingTest >> aMethodWithAnAssignement [
 
 { #category : #support }
 ASTCSlangTypeAnnotatorTypingTest >> aMethodWithAnInstanceVariable [
-	iv:=3
+	<var:#iv type:#float>
+	iv := 3
 ]
 
 { #category : #support }
 ASTCSlangTypeAnnotatorTypingTest >> aMethodWithSelf [
 	self
+]
+
+{ #category : #support }
+ASTCSlangTypeAnnotatorTypingTest >> aMethodWithUnboundVariable [
+	| t |
+	t
 ]
 
 { #category : #running }
@@ -113,6 +146,29 @@ ASTCSlangTypeAnnotatorTypingTest >> setUp [
 		inferer: CCodeGenerator new;
 		yourself.
 	super setUp
+]
+
+{ #category : #running }
+ASTCSlangTypeAnnotatorTypingTest >> testDefaultTypeIsNotNil [
+	| ast counter |
+	counter := 0.
+	ast := self inferMethodSelector: #aMethodWithUnboundVariable from: self class.
+	ast nodesDo: [ :aNode | 
+		(aNode isSelf not and: [ aNode isTemp ])
+			ifTrue: [ 
+				counter := counter + 1.
+				self assertTypeOf: aNode is: #sqInt ] ].
+	self assert: counter equals: 2
+]
+
+{ #category : #running }
+ASTCSlangTypeAnnotatorTypingTest >> testGetInstanceVariableType [
+	| type |
+	"Not semantically in the right class, but kinda bundle together for now"
+	visitor inferer addClass: self class.
+	
+	type := visitor inferer typeOfVariable: #iv.
+	self assert: type equals: #float.
 ]
 
 { #category : #running }
@@ -162,25 +218,18 @@ ASTCSlangTypeAnnotatorTypingTest >> testVisitGlobalNodeClassVariable [
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAClassVariable from: self class.
 	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[aNode isGlobal])
+		(aNode isVariable and:[ aNode isSelf not and: [ aNode isGlobal]])
 			ifTrue: [ 
 				counter := counter + 1. 
-				self assertTypeOf: aNode is: #sqInt ] ].
+				self assertTypeOf: aNode is: #float ] ].
 	self assert: counter equals: 1.
 
 ]
 
 { #category : #running }
 ASTCSlangTypeAnnotatorTypingTest >> testVisitGlobalNodeGlobal [
-	| ast counter|
-	counter :=0 .
-	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: self class.
-	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[aNode isGlobal])
-			ifTrue: [ 
-				counter := counter + 1.
-				self assertTypeOf: aNode is: #sqInt ] ].
-	self assert: counter equals: 1
+	" kept to echo the similar test class for Phineas: PINodeTypeVisitorTest"
+	"In slang, we don't use global variables."
 ]
 
 { #category : #running }
@@ -197,10 +246,10 @@ ASTCSlangTypeAnnotatorTypingTest >> testVisitInstanceVariableClassSide [
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAClassVariable from: self class class.
 	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[aNode isInstance])
+		(aNode isVariable and:[aNode isSelf not and: [ aNode isInstance]])
 			ifTrue: [ 
 				counter := counter + 1.
-				self assertTypeOf: aNode is: #sqInt ] ].
+				self assertTypeOf: aNode is: #float ] ].
 	self assert: counter equals: 1.
 
 ]
@@ -211,10 +260,10 @@ ASTCSlangTypeAnnotatorTypingTest >> testVisitInstanceVariableNode [
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAnInstanceVariable from: self class.
 	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[ aNode isInstance ])
+		(aNode isVariable and: [ aNode isSelf not and:[ aNode isInstance ]])
 			ifTrue: [ 
 				counter := counter + 1.
-				self assertTypeOf: aNode is: #sqInt ] ].
+				self assertTypeOf: aNode is: #float ] ].
 	self assert: counter equals: 1.
 
 ]
