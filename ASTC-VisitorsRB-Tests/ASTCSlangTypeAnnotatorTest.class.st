@@ -1,7 +1,5 @@
 "
-I am a copy of class ASTCPhineasTypeAnnotatorTest. This comment is copied from there, and might not be entirely accurate
-
-I test the PhineasTypeAnnotator class
+I test the ASTCSlangTypeAnnotator class
 "
 Class {
 	#name : #ASTCSlangTypeAnnotatorTest,
