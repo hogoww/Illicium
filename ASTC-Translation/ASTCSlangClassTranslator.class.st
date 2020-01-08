@@ -57,13 +57,13 @@ ASTCSlangClassTranslator >> preTypeInference: aClass [
 ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	inferer := CCodeGenerator new.
-	method := aClass >> aSelector.
+	method := (aClass >> aSelector) ast copy.
 	inferer addMethod: (method asTranslationMethodOfClass: TMethod).
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	
 	inferer methodNamed: aSelector.
 	
-	self annotateMethodsASTWithTypes: { method ast } .
+	self annotateMethodsASTWithTypes: { method }.
 	self halt.
 ]
 
