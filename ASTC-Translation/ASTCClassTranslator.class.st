@@ -33,6 +33,17 @@ ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilatio
 ]
 
 { #category : #typing }
+ASTCClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
+	| typeAnnotator |
+	typeAnnotator := self typeAnnotatorClass new
+		inferer: inferer;
+		yourself.
+	methodsASTs
+		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
+	^ methodsASTs
+]
+
+{ #category : #typing }
 ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
 ]
@@ -113,6 +124,12 @@ ASTCClassTranslator >> preTypeInference: aClass [
 	"empty hook"
 ]
 
+{ #category : #'translation-api' }
+ASTCClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [
+	
+	self subclassResponsibility
+]
+
 { #category : #'translation-state' }
 ASTCClassTranslator >> stateId [
 	^ ASTCIdentifier new id: self stateName ; yourself
@@ -140,7 +157,7 @@ ASTCClassTranslator >> translateClass: aClass [
 	entryPoints := self typeInferenceEntryPoints: aClass.
 	self callgraphTypeStartingFrom: entryPoints.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.
-	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
+	methodsASTs := self annotateMethodsASTWithTypes: methodsToTranslate.
 	
 	cu := ASTCCompilationUnit new.	
 	stateStuff := self translateClassState: aClass.
@@ -177,7 +194,7 @@ ASTCClassTranslator >> translateClassState: aClass [
 ASTCClassTranslator >> translateExpression: anExpression [
 	| methodAST functionDefinitions |
 	self callgraphTypeStartingFromExpression: anExpression.
-	methodAST := self typeASTsOfMethods: (inferer typeProvider methodTypes at:1) node copy.
+	methodAST := self annotateMethodsASTWithTypes: (inferer typeProvider methodTypes at:1) node copy.
 	
 	functionDefinitions := self translateMethodsASTs: methodAST.
 	^ functionDefinitions body
@@ -190,16 +207,15 @@ ASTCClassTranslator >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	| methodsASTs functionDefinitionsASTs methodsToTranslate cu stateStuff |
-	self preTranslationConstraintCheck: aClass.
-	self preTypeInference: aClass.
-	self callgraphTypeStartingFrom: { (aClass >> aSelector) ast }.
-	methodsToTranslate := self methodsToTranslateASTs: aClass.
-	methodsASTs := self typeASTsOfMethods: methodsToTranslate.
-	
+	| methodsASTs functionDefinitionsASTs cu stateStuff |
+	methodsASTs := self
+		prepareForTranslationFromSelector: aSelector
+		fromClass: aClass.
 	cu := ASTCCompilationUnit new.
 	stateStuff := self translateClassState: aClass.
-	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs fromClass: aClass.
+	functionDefinitionsASTs := self
+		translateMethodsASTs: methodsASTs
+		fromClass: aClass.
 	self addState: stateStuff to: cu.
 	self addTranslatedMethods: functionDefinitionsASTs to: cu.
 	cu debugASTCStructure.
@@ -225,14 +241,9 @@ ASTCClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> typeASTsOfMethods: methodsASTs [
-	| typeAnnotator |
-	typeAnnotator := ASTCTypeAnnotationAST new
-		inferer: inferer;
-		yourself.
-	methodsASTs
-		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
-	^ methodsASTs
+ASTCClassTranslator >> typeAnnotatorClass [
+	" This should return the class used to annotate types on RB ASTs"
+	^ self subclassResponsibility 
 ]
 
 { #category : #typing }

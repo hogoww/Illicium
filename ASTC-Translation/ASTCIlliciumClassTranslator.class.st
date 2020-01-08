@@ -26,3 +26,8 @@ ASTCIlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector from
 	methodsASTs := self annotateMethodsASTWithTypes: methodsToTranslate.
 	^ methodsASTs
 ]
+
+{ #category : #typing }
+ASTCIlliciumClassTranslator >> typeAnnotatorClass [
+	^ ASTCPhineasTypeAnnotator
+]

@@ -32,3 +32,19 @@ ASTCSlangTypeAnnotatorTest >> setUp [
 		yourself.
 	super setUp
 ]
+
+{ #category : #test }
+ASTCSlangTypeAnnotatorTest >> testVisitSelfNode [
+	| ast counter |
+	" Override because slang adds an explicit return self "
+	counter := 0.
+	ast := self
+		inferMethodSelector: #aMethodWithSelf
+		from: PINodeTypeVisitorTest.
+	ast
+		nodesDo: [ :aNode | 
+			aNode isSelf
+				ifTrue: [ counter := counter + 1.
+					self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 2
+]
