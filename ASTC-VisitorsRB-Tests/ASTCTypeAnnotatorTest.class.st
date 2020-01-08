@@ -172,7 +172,7 @@ ASTCTypeAnnotatorTest >> testVisitTemporaryNode [
 		from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
-			aNode isTemp
+			(aNode isSelf not and: [ aNode isTemp])
 				ifTrue: [ counter := counter + 1.
 					self assert: (aNode hasProperty: propertyName) ] ].
 	self assert: counter equals: 2
