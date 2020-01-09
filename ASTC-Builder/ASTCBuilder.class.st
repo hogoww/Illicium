@@ -142,6 +142,7 @@ ASTCBuilder >> defineClasses [
 		identifier := builder newClassNamed: #Identifier.
 		
 		"Statement"
+		emptyStatement := builder newClassNamed: #EmptyStatment.
 		expressionStatement := builder newClassNamed: #ExpressionStatement.
 		declarationStatement := builder newClassNamed: #DeclarationStatement.
 		return := builder newClassNamed: #Return.
@@ -163,7 +164,6 @@ ASTCBuilder >> defineClasses [
 { #category : #definition }
 ASTCBuilder >> defineHierarchy [
 	super defineHierarchy.
-	
 	"Define the inheritance links between the classes defined in #defineClasses, following the FmxNG syntax."
 
 	project --|> node.
@@ -191,10 +191,11 @@ ASTCBuilder >> defineHierarchy [
 			literal --|> expression.
 			functionCall  --|> expression.
 			operator --|> expression.
-			self defineOperators.
+			self defineOperatorsRelations.
 			identifier --|> expression.
 			
 			"Statement direct Subclasses"
+			emptyStatement  --|> statement.
 			expressionStatement --|> statement.
 			declarationStatement --|> statement.
 			return --|> statement.
