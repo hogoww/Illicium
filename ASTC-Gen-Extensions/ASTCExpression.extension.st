@@ -9,6 +9,14 @@ ASTCExpression >> % anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> && anExpression [
+	^ ASTCAndOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> * anExpression [
 	^ ASTCMultiplicationOperator new
 		addOperand: self;
@@ -81,14 +89,6 @@ ASTCExpression >> >= anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCExpression >> and: anExpression [
-	^ ASTCAndOperator new
-		addOperand: self;
-		addOperand: anExpression;
-		yourself
-]
-
-{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> asStatement [
 
 	^ ASTCExpressionStatement expression: self
@@ -135,14 +135,6 @@ ASTCExpression >> not [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCExpression >> or: anExpression [
-	^ ASTCOrOperator new
-		addOperand: self;
-		addOperand: anExpression;
-		yourself
-]
-
-{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> preIncr [
 	^ ASTCPreIncrementOperator new
 		addOperand: self;
@@ -154,5 +146,13 @@ ASTCExpression >> structStaticAccess: anIdentifier [
 	^ ASTCStructAccessStaticOperator new
 		addOperand: self;
 		addOperand: anIdentifier;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> || anExpression [
+	^ ASTCOrOperator new
+		addOperand: self;
+		addOperand: anExpression;
 		yourself
 ]

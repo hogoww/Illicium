@@ -24,7 +24,7 @@ ASTCExpressionTest >> testAddition [
 { #category : #tests }
 ASTCExpressionTest >> testAnd [
 	| operator node |
-	operator := (ASTCIdentifier new id: #a) and: (ASTCIdentifier new id: #b).
+	operator := (ASTCIdentifier new id: #a) && (ASTCIdentifier new id: #b).
 	
 	operator debugASTCStructure.
 	self assert: operator isAndOperator.
@@ -258,7 +258,7 @@ ASTCExpressionTest >> testNot [
 { #category : #tests }
 ASTCExpressionTest >> testOr [
 	| operator node |
-	operator := (ASTCIdentifier new id: #a) or: (ASTCIdentifier new id: #b).
+	operator := (ASTCIdentifier new id: #a) || (ASTCIdentifier new id: #b).
 	
 	operator debugASTCStructure.
 	self assert: operator isOrOperator.

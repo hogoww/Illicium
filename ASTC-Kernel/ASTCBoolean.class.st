@@ -13,7 +13,7 @@ ASTCBoolean class >> asCType [
 ASTCBoolean >> and: aBoolean [
 	| args |
 	args := self binarySelectorArgs: aBoolean.
-	^ (args at:1) and: (args at:2)
+	^ (args at:1) && (args at:2)
 ]
 
 { #category : #controlling }
@@ -89,5 +89,5 @@ ASTCBoolean >> not [
 ASTCBoolean >> or: aBoolean [
 	| args |
 	args := self binarySelectorArgs: aBoolean.
-	^ (args at:1) or: (args at:2)
+	^ (args at:1) || (args at:2)
 ]
