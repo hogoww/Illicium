@@ -4,18 +4,6 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #check }
-ASTCSlangClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
-	| typeAnnotator |
-	self flag:#extract_typeAnnotator.
-	typeAnnotator := ASTCSlangTypeAnnotator new
-		inferer: inferer;
-		yourself.
-	methodsASTs
-		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
-	^ methodsASTs
-]
-
 { #category : #initialization }
 ASTCSlangClassTranslator >> initialize [
 	super initialize.

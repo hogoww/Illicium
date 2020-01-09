@@ -212,10 +212,11 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 		prepareForTranslationFromSelector: aSelector
 		fromClass: aClass.
 	cu := ASTCCompilationUnit new.
-	stateStuff := self translateClassState: aClass.
+	
 	functionDefinitionsASTs := self
 		translateMethodsASTs: methodsASTs
 		fromClass: aClass.
+	stateStuff := self translateClassState: aClass.
 	self addState: stateStuff to: cu.
 	self addTranslatedMethods: functionDefinitionsASTs to: cu.
 	cu debugASTCStructure.

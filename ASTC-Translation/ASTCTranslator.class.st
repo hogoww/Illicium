@@ -52,7 +52,7 @@ ASTCTranslator >> fillWithtranslatorSpecificTypes [
 
 { #category : #initialization }
 ASTCTranslator >> getReplacementType: aPharoType [
-	^ aPharoType performReplacementUsing: replacementClasses.
+	^ aPharoType performReplacementUsing: replacementClasses
 
 ]
 
