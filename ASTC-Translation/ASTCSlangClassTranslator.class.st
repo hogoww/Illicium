@@ -59,3 +59,8 @@ ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromCla
 ASTCSlangClassTranslator >> typeAnnotatorClass [
 	^ ASTCSlangTypeAnnotator
 ]
+
+{ #category : #'translation-api' }
+ASTCSlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
+	^ self getReplacementType: (inferer typeOfVariable: anIVName )
+]

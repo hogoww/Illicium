@@ -31,3 +31,12 @@ ASTCIlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector from
 ASTCIlliciumClassTranslator >> typeAnnotatorClass [
 	^ ASTCPhineasTypeAnnotator
 ]
+
+{ #category : #typing }
+ASTCIlliciumClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
+	"should be pushed into phineas"
+	| phineasType type |
+	phineasType := 	phineasType := (inferer concreteTypesOfInstanceVariable: anIVName ofClass:aClass).
+	type := (ASTCTypeChecker type: phineasType asPharoType using: inferer forVar: anIVName).
+	^ self getReplacementType: type
+]
