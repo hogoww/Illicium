@@ -88,7 +88,8 @@ Class {
 		'structAccessPointerOperator',
 		'bitwiseAndOperator',
 		'moduloOperator',
-		'structAccessStaticOperator'
+		'structAccessStaticOperator',
+		'emptyStatement'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -212,7 +213,7 @@ ASTCBuilder >> defineHierarchy [
 
 { #category : #definition }
 ASTCBuilder >> defineOperatorClasses [
-
+	"Define operators in a different function, to limit the noise"
 	self flag:#format. "should have a synced format with defineOperators. Will do when they are all there."
 	unaryOperator := builder newClassNamed: #UnaryOperator.
 	binaryOperator := builder newClassNamed: #BinaryOperator.
@@ -242,7 +243,7 @@ ASTCBuilder >> defineOperatorClasses [
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineOperators [
+ASTCBuilder >> defineOperatorsRelations [
 	"Define operators in a different function, to limit the noise"
 	"priorities come from the ranking from the cppreference website.
 	Second part of the comment refers the associativity.
