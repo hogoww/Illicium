@@ -56,6 +56,11 @@ ASTCTranslator >> getReplacementType: aPharoType [
 
 ]
 
+{ #category : #'translation-api' }
+ASTCTranslator >> getTranslatedType: aClass [
+	^ (self getReplacementType: aClass) asCType
+]
+
 { #category : #initialization }
 ASTCTranslator >> initialize [
 	classTranslator := self class classTranslatorClass new

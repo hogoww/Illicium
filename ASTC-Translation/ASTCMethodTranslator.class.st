@@ -52,7 +52,7 @@ ASTCMethodTranslator >> forward: aMessage to: aType [
 ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
-		propertyAt: ASTCTypeAnnotator property
+		propertyAt: classTranslator typeAnnotatorClass property
 		ifPresent: [ :types | types key ]
 		ifAbsent: [ ASTCUnannotatedNode new node: aNode ; signal ].
 ]
@@ -63,8 +63,13 @@ ASTCMethodTranslator >> getNodeTranslationType: aNode [
 ]
 
 { #category : #typing }
-ASTCMethodTranslator >> getReplacementType: aClass [
-	^ classTranslator getReplacementType: aClass
+ASTCMethodTranslator >> getReplacementType: aType [
+	^ classTranslator getReplacementType: aType
+]
+
+{ #category : #typing }
+ASTCMethodTranslator >> getTranslatedType: aNode [
+	^ classTranslator getTranslatedType: (self getNodeConcreteType: aNode)
 ]
 
 { #category : #accessing }

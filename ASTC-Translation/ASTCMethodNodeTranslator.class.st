@@ -16,7 +16,7 @@ ASTCMethodNodeTranslator >> translateNode: aMethodNode [
 						yourself);
 				type:
 					(ASTCType new
-						type: (methodTranslator getNodeTranslationType: aMethodNode);
+						type: (methodTranslator getTranslatedType: aMethodNode);
 						yourself);
 				parameters: (aMethodNode arguments collect:[:each| each acceptVisitor: methodTranslator ]);
 				yourself);

@@ -18,3 +18,8 @@ ASTCSlangTranslator >> fillWithtranslatorSpecificTypes [
 ASTCSlangTranslator >> getReplacementType: aPharoType [
 	^ ASTCSlangReceiver asTypeReification 
 ]
+
+{ #category : #'translation-api' }
+ASTCSlangTranslator >> getTranslatedType: aSymbol [
+	^ aSymbol asPharoType
+]

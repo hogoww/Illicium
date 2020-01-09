@@ -59,8 +59,13 @@ ASTCClassTranslator >> doNotGeneratePragma [
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> getReplacementType: aClass [
-	^ mainTranslator getReplacementType: aClass
+ASTCClassTranslator >> getReplacementType: aType [
+	^ mainTranslator getReplacementType: aType 
+]
+
+{ #category : #accessing }
+ASTCClassTranslator >> getTranslatedType: aType [ 
+	^ mainTranslator getTranslatedType: aType
 ]
 
 { #category : #initialization }

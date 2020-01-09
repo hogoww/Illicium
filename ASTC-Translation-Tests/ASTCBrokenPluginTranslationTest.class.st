@@ -32,7 +32,7 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	
 	"body stuff"
 		definition:= cu definitions at:1.
-		self assert:definition body statements size equals: 1.
+		self assert: definition body statements size equals: 1.
 	
 	"the only statement/expression check"
 			statement := definition body statements first.
