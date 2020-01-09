@@ -1,6 +1,8 @@
 "
 Small class to query C code for VM generated functions.
+
 Set the VM path in the class side, so it's easier.
+By default, look for the repository in 'FileLocator document'
 
 Try me! 
 	in plugin:
