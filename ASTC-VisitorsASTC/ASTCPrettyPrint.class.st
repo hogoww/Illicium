@@ -192,6 +192,12 @@ ASTCPrettyPrint >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
+ASTCPrettyPrint >> visitEmptyStatment: anEmptyStatment [
+	" empty, because we don't add anything to the stream
+	Empty statements are meant to ignore pharo nodes while not breaking the structure"
+]
+
+{ #category : #visiting }
 ASTCPrettyPrint >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	self << $;. 

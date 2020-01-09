@@ -78,6 +78,16 @@ ASTCPrettyPrintTest >> testVisitCastOperator [
 ]
 
 { #category : #tests }
+ASTCPrettyPrintTest >> testVisitEmptyStatement [
+	| emptyStatement |
+	emptyStatement := ASTCEmptyStatment new.
+	
+	emptyStatement debugASTCStructure.
+	self assert: emptyStatement isEmptyStatment.
+	self assert: emptyStatement prettyPrint equals: ''.
+]
+
+{ #category : #tests }
 ASTCPrettyPrintTest >> testVisitEqualityOperator [
 	| operator |
 	operator := (ASTCIdentifier new id: #a) equals: (ASTCIdentifier new id: #b).

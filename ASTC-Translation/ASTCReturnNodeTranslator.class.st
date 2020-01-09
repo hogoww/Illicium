@@ -6,13 +6,10 @@ Class {
 
 { #category : #translate }
 ASTCReturnNodeTranslator >> translateNode: aReturnNode [
-	| expression |
-	expression := aReturnNode value isSelf 
-		ifTrue:[ ASTCLiteral value: 1 ]
-		ifFalse:[  (aReturnNode value acceptVisitor: methodTranslator) ].
+	aReturnNode value isSelf ifTrue: [ ^ ASTCEmptyStatment new ].
 	
 	^ ASTCReturn new
-		pharoNode: aReturnNode;
-		expression: expression;
+		pharoNode: aReturnNode ;
+		expression: (aReturnNode value acceptVisitor: methodTranslator);
 		yourself
 ]
