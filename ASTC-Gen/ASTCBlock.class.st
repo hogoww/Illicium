@@ -9,41 +9,39 @@ Class {
 
 { #category : #testing }
 ASTCBlock >> = aBlock [
-	super = aBlock
-		ifFalse: [ ^ false ].
-	statements = aBlock statements
-		ifFalse: [ ^ false ].
-	^ true
+  super = aBlock ifFalse: [ ^false ].
+  statements = aBlock statements ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCBlock >> acceptVisitor: aVisitor [
-	aVisitor visitBlock: self
+  aVisitor visitBlock: self
 ]
 
 { #category : #accessing }
 ASTCBlock >> addStatement: aStatement [
-	aStatement parent: self.
-	statements add: aStatement
+  aStatement parent: self.
+  statements add: aStatement
 ]
 
 { #category : #accessing }
 ASTCBlock >> initialize [
-	statements := OrderedCollection new
+  statements := OrderedCollection new
 ]
 
 { #category : #testing }
 ASTCBlock >> isBlock [
-	^ true
+  ^true
 ]
 
 { #category : #accessing }
 ASTCBlock >> statements [
-	^ statements
+  ^statements
 ]
 
 { #category : #accessing }
 ASTCBlock >> statements: someStatements [
-	someStatements do: [ :each | each parent: self ].
-	statements := someStatements
+  someStatements do: [:each |  each parent: self ].
+  statements := someStatements
 ]

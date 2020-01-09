@@ -10,54 +10,51 @@ Class {
 
 { #category : #testing }
 ASTCFunctionDeclaration >> = aFunctionDeclaration [
-	super = aFunctionDeclaration
-		ifFalse: [ ^ false ].
-	type = aFunctionDeclaration type
-		ifFalse: [ ^ false ].
-	parameters = aFunctionDeclaration parameters
-		ifFalse: [ ^ false ].
-	^ true
+  super = aFunctionDeclaration ifFalse: [ ^false ].
+  type = aFunctionDeclaration type ifFalse: [ ^false ].
+  parameters = aFunctionDeclaration parameters ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCFunctionDeclaration >> acceptVisitor: aVisitor [
-	aVisitor visitFunctionDeclaration: self
+  aVisitor visitFunctionDeclaration: self
 ]
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> addParameter: aParameter [
-	aParameter parent: self.
-	parameters add: aParameter
+  aParameter parent: self.
+  parameters add: aParameter
 ]
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> initialize [
-	parameters := OrderedCollection new
+  parameters := OrderedCollection new
 ]
 
 { #category : #testing }
 ASTCFunctionDeclaration >> isFunctionDeclaration [
-	^ true
+  ^true
 ]
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> parameters [
-	^ parameters
+  ^parameters
 ]
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> parameters: someVariableDeclarations [
-	someVariableDeclarations do: [ :each | each parent: self ].
-	parameters := someVariableDeclarations
+  someVariableDeclarations do: [:each |  each parent: self ].
+  parameters := someVariableDeclarations
 ]
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> type [
-	^ type
+  ^type
 ]
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> type: aType [
-	aType parent: self.
-	type := aType
+  aType parent: self.
+  type := aType
 ]

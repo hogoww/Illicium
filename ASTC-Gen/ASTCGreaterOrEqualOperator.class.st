@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCGreaterOrEqualOperator >> = aGreaterOrEqualOperator [
-	super = aGreaterOrEqualOperator
-		ifFalse: [ ^ false ].
-	^ true
+  super = aGreaterOrEqualOperator ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCGreaterOrEqualOperator >> acceptVisitor: aVisitor [
-	aVisitor visitGreaterOrEqualOperator: self
+  aVisitor visitGreaterOrEqualOperator: self
 ]
 
 { #category : #testing }
 ASTCGreaterOrEqualOperator >> isGreaterOrEqualOperator [
-	^ true
+  ^true
 ]

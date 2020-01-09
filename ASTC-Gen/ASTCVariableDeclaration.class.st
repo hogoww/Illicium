@@ -9,30 +9,28 @@ Class {
 
 { #category : #testing }
 ASTCVariableDeclaration >> = aVariableDeclaration [
-	super = aVariableDeclaration
-		ifFalse: [ ^ false ].
-	type = aVariableDeclaration type
-		ifFalse: [ ^ false ].
-	^ true
+  super = aVariableDeclaration ifFalse: [ ^false ].
+  type = aVariableDeclaration type ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCVariableDeclaration >> acceptVisitor: aVisitor [
-	aVisitor visitVariableDeclaration: self
+  aVisitor visitVariableDeclaration: self
 ]
 
 { #category : #testing }
 ASTCVariableDeclaration >> isVariableDeclaration [
-	^ true
+  ^true
 ]
 
 { #category : #accessing }
 ASTCVariableDeclaration >> type [
-	^ type
+  ^type
 ]
 
 { #category : #accessing }
 ASTCVariableDeclaration >> type: aType [
-	aType parent: self.
-	type := aType
+  aType parent: self.
+  type := aType
 ]

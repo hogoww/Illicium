@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCUnaryOperator >> = anUnaryOperator [
-	super = anUnaryOperator
-		ifFalse: [ ^ false ].
-	^ true
+  super = anUnaryOperator ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCUnaryOperator >> acceptVisitor: aVisitor [
-	aVisitor visitUnaryOperator: self
+  aVisitor visitUnaryOperator: self
 ]
 
 { #category : #testing }
 ASTCUnaryOperator >> isUnaryOperator [
-	^ true
+  ^true
 ]

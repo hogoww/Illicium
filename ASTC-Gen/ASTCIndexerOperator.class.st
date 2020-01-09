@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCIndexerOperator >> = anIndexerOperator [
-	super = anIndexerOperator
-		ifFalse: [ ^ false ].
-	^ true
+  super = anIndexerOperator ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCIndexerOperator >> acceptVisitor: aVisitor [
-	aVisitor visitIndexerOperator: self
+  aVisitor visitIndexerOperator: self
 ]
 
 { #category : #testing }
 ASTCIndexerOperator >> isIndexerOperator [
-	^ true
+  ^true
 ]

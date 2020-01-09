@@ -9,30 +9,28 @@ Class {
 
 { #category : #testing }
 ASTCReturn >> = aReturn [
-	super = aReturn
-		ifFalse: [ ^ false ].
-	expression = aReturn expression
-		ifFalse: [ ^ false ].
-	^ true
+  super = aReturn ifFalse: [ ^false ].
+  expression = aReturn expression ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCReturn >> acceptVisitor: aVisitor [
-	aVisitor visitReturn: self
+  aVisitor visitReturn: self
 ]
 
 { #category : #accessing }
 ASTCReturn >> expression [
-	^ expression
+  ^expression
 ]
 
 { #category : #accessing }
 ASTCReturn >> expression: anExpression [
-	anExpression parent: self.
-	expression := anExpression
+  anExpression parent: self.
+  expression := anExpression
 ]
 
 { #category : #testing }
 ASTCReturn >> isReturn [
-	^ true
+  ^true
 ]

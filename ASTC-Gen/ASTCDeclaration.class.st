@@ -9,30 +9,28 @@ Class {
 
 { #category : #testing }
 ASTCDeclaration >> = aDeclaration [
-	super = aDeclaration
-		ifFalse: [ ^ false ].
-	id = aDeclaration id
-		ifFalse: [ ^ false ].
-	^ true
+  super = aDeclaration ifFalse: [ ^false ].
+  id = aDeclaration id ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCDeclaration >> acceptVisitor: aVisitor [
-	aVisitor visitDeclaration: self
+  aVisitor visitDeclaration: self
 ]
 
 { #category : #accessing }
 ASTCDeclaration >> id [
-	^ id
+  ^id
 ]
 
 { #category : #accessing }
 ASTCDeclaration >> id: anId [
-	anId parent: self.
-	id := anId
+  anId parent: self.
+  id := anId
 ]
 
 { #category : #testing }
 ASTCDeclaration >> isDeclaration [
-	^ true
+  ^true
 ]

@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCStructAccessPointerOperator >> = aStructAccessPointerOperator [
-	super = aStructAccessPointerOperator
-		ifFalse: [ ^ false ].
-	^ true
+  super = aStructAccessPointerOperator ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCStructAccessPointerOperator >> acceptVisitor: aVisitor [
-	aVisitor visitStructAccessPointerOperator: self
+  aVisitor visitStructAccessPointerOperator: self
 ]
 
 { #category : #testing }
 ASTCStructAccessPointerOperator >> isStructAccessPointerOperator [
-	^ true
+  ^true
 ]
