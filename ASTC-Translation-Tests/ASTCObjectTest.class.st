@@ -1,16 +1,11 @@
 Class {
-	#name : #ASTCMessageNodeTranslatorTest,
-	#superclass : #ASTCNodeTranslatorTest,
+	#name : #ASTCObjectTest,
+	#superclass : #ASTCMessageNodeTranslatorTest,
 	#category : #'ASTC-Translation-Tests-Translators'
 }
 
-{ #category : #accessing }
-ASTCMessageNodeTranslatorTest class >> testedClass [
-	^ self subclassResponsibility
-]
-
 { #category : #tests }
-ASTCMessageNodeTranslatorTest >> testASTCOperatorBinary [
+ASTCObjectTest >> testEqual [
 	| astC expectedC|
 	astC := (ASTCTranslator translateExpression: '1 = 6') statements at: 1.
 	
