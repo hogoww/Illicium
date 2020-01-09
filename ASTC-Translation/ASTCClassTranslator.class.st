@@ -207,20 +207,32 @@ ASTCClassTranslator >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	| methodsASTs functionDefinitionsASTs cu stateStuff |
+	| methodsASTs functionDefinitionsASTs  |
 	methodsASTs := self
 		prepareForTranslationFromSelector: aSelector
 		fromClass: aClass.
-	cu := ASTCCompilationUnit new.
-	
 	functionDefinitionsASTs := self
 		translateMethodsASTs: methodsASTs
 		fromClass: aClass.
-	stateStuff := self translateClassState: aClass.
-	self addState: stateStuff to: cu.
-	self addTranslatedMethods: functionDefinitionsASTs to: cu.
-	cu debugASTCStructure.
-	^ cu
+		
+	functionDefinitionsASTs size = 1 
+		ifTrue: [
+			aClass allInstVarNames 
+				ifEmpty:[ ^ functionDefinitionsASTs anyOne ]
+				ifNotEmpty:[ | cu stateStuff |
+					cu := ASTCCompilationUnit new.
+					stateStuff := self translateClassState: aClass.
+					self addState: stateStuff to: cu.
+					self addTranslatedMethods: functionDefinitionsASTs to: cu.
+					cu debugASTCStructure.
+					^ cu
+					]
+			].
+	
+	self error: 'Not planned currently, please report it.'
+		 
+	
+	
 ]
 
 { #category : #translation }
