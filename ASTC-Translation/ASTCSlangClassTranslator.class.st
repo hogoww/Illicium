@@ -52,7 +52,7 @@ ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromCla
 	inferer methodNamed: aSelector.
 	
 	self annotateMethodsASTWithTypes: { method }.
-	self halt.
+	^ { method }
 ]
 
 { #category : #typing }
