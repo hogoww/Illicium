@@ -13,3 +13,8 @@ ASTCSlangTranslator class >> classTranslatorClass [
 ASTCSlangTranslator >> fillWithtranslatorSpecificTypes [
 	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy
 ]
+
+{ #category : #initialization }
+ASTCSlangTranslator >> getReplacementType: aPharoType [
+	^ ASTCSlangReceiver asTypeReification 
+]
