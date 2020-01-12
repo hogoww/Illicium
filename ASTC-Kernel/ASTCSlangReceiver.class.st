@@ -24,6 +24,11 @@ ASTCSlangReceiver >> + anOperand [
 	^ self translatedValue + (anOperand acceptVisitor: methodTranslator)
 ]
 
+{ #category : #'translation-operators' }
+ASTCSlangReceiver >> - anOperand [
+	^ self translatedValue - (anOperand acceptVisitor: methodTranslator)
+]
+
 { #category : #accessing }
 ASTCSlangReceiver >> asCType [
 	"for API concistency with the initial design. "
