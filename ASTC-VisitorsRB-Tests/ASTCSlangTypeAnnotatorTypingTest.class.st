@@ -289,7 +289,7 @@ ASTCSlangTypeAnnotatorTypingTest >> testVisitMessageNode [
 	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt from: self class.
 	ast nodesDo: [ :aNode |
 			aNode isMessage
-				ifTrue: [ counter := counter + 1.self halt.
+				ifTrue: [ counter := counter + 1.
 					self assertTypeOf: aNode is: #int ] ].
 	self assert: counter equals: 1
 ]

@@ -21,5 +21,5 @@ ASTCSlangTranslator >> getReplacementType: aPharoType [
 
 { #category : #'translation-api' }
 ASTCSlangTranslator >> getTranslatedType: aSymbol [
-	^ aSymbol asPharoType
+	^ SingleType new type: (ASTCSlangReceiver new type: aSymbol; yourself); yourself
 ]
