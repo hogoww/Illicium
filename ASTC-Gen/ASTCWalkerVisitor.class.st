@@ -200,12 +200,6 @@ ASTCWalkerVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitNode: aNode [
-  super visitNode: aNode.
-  aNode parent ifNotNil: [:aParent |  aParent acceptVisitor: self ]
-]
-
-{ #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
   super visitOperator: anOperator.
   anOperator operands ifNotNil: [:operands |  operands do: [:anOperands |  anOperands acceptVisitor: self ] ]

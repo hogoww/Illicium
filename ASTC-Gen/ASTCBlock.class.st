@@ -20,12 +20,6 @@ ASTCBlock >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
-ASTCBlock >> addStatement: aStatement [
-  aStatement parent: self.
-  statements add: aStatement
-]
-
-{ #category : #accessing }
 ASTCBlock >> initialize [
   statements := OrderedCollection new
 ]

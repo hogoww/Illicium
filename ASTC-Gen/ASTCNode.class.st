@@ -289,11 +289,6 @@ ASTCNode >> parent [
 ]
 
 { #category : #accessing }
-ASTCNode >> parent: aParent [
-  parent := aParent
-]
-
-{ #category : #accessing }
 ASTCNode >> pharoNode [
   ^pharoNode
 ]
