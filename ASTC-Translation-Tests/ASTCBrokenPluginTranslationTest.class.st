@@ -32,7 +32,7 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	
 	"body stuff"
 		definition:= cu definitions at:1.
-		self assert: definition body statements size equals: 2.
+		self assert: definition body statements size equals: 1.
 	
 	"the only statement/expression check"
 			statement := definition body statements first.
@@ -246,6 +246,10 @@ ASTCBrokenPluginTranslationTest >> testTranslateBrokenPlugin [
 	"Bad test, too big, no checking. But test nonetheless"
 	"Check only for errors"
 	| cu |
+	
+	
+	"FAILS BECAUSE class translation was not adapted yet"
+	self halt.
 	cu := translator translateClass: BrokenPlugin.
 	^ cu
 ]
