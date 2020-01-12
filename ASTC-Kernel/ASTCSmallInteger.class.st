@@ -62,7 +62,7 @@ ASTCSmallInteger >> to: stop do: aBlock [
 						id: iterID ;
 						type:
 							(ASTCType new
-								type: ASTCSmallInteger;
+								type: ASTCSmallInteger asPharoType;
 								yourself);
 						yourself);
 				init:(self value acceptVisitor: methodTranslator);
