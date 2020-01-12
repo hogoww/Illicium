@@ -75,7 +75,7 @@ ASTCExpressionTest >> testBitAnd [
 { #category : #tests }
 ASTCExpressionTest >> testCastTo [
 	| operator node |
-	operator := (ASTCIdentifier new id: #a) castTo: ASTCSmallInteger new asASTCType.
+	operator := (ASTCIdentifier new id: #a) castTo: ASTCSmallInteger asASTCType.
 	
 	operator debugASTCStructure.
 	self assert: operator isCastOperator.

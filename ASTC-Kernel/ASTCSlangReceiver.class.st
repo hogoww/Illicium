@@ -32,7 +32,7 @@ ASTCSlangReceiver >> - anOperand [
 { #category : #accessing }
 ASTCSlangReceiver >> asCType [
 	"for API concistency with the initial design. "
-	^ type
+	^ type ifNil: [ #undefined ]
 ]
 
 { #category : #typing }

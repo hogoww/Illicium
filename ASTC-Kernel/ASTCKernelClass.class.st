@@ -8,6 +8,11 @@ Class {
 	#category : #'ASTC-Kernel'
 }
 
+{ #category : #accessing }
+ASTCKernelClass class >> asASTCType [
+	^ ASTCType new type: self asTypeReification ; yourself
+]
+
 { #category : #type }
 ASTCKernelClass class >> asCType [
 	self subclassResponsibility 
@@ -32,11 +37,6 @@ ASTCKernelClass class >> value: aValue [
 { #category : #'message performing' }
 ASTCKernelClass >> = anotherObject [
 	^ self value = anotherObject value
-]
-
-{ #category : #evaluating }
-ASTCKernelClass >> asASTCType [
-	^ ASTCType new type: self class; yourself
 ]
 
 { #category : #'message performing' }
