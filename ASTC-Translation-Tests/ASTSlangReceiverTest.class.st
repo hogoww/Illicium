@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #tests }
+ASTSlangReceiverTest >> setUp [
+	"Overide since we're working on slang"
+	methodTranslator := ASTCSlangTranslator new classTranslator methodTranslator.
+]
+
+{ #category : #tests }
 ASTSlangReceiverTest >> testIfNil [
 	"Note: exactly the same test as ASTCSmallIntegerTest"
 	| messageNode astC expectedC |
