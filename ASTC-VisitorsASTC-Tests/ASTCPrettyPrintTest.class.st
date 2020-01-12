@@ -68,7 +68,7 @@ ASTCPrettyPrintTest >> testVisitBreak [
 ASTCPrettyPrintTest >> testVisitCastOperator [
 	| structure |
 	structure := ASTCCastOperator new 
-		type: (ASTCType new type: self class) ; 
+		type: (ASTCType new type: self class asConstraint ; yourself);
 		addOperand: (ASTCIdentifier new id: #a; yourself);
 		yourself.
 	
@@ -113,7 +113,7 @@ ASTCPrettyPrintTest >> testVisitStructureDefinition [
 	operator := ASTCStructureDefinition new 
 		declaration: (ASTCStructureDeclaration new id:(ASTCIdentifier new id: #heros yourself));
 		addMember: (ASTCVariableDeclaration new 
-			type: (ASTCType new type: ASTCSmallInteger; yourself); 
+			type: (ASTCType new type: ASTCSmallInteger asConstraint; yourself); 
 			id: (ASTCIdentifier new id: #druss; yourself));
 		yourself.
 	
