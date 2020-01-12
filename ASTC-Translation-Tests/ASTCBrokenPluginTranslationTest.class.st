@@ -23,16 +23,16 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	"ïnstance variable"
 	interpreterProxyDecl := cu declarations at:1.
 	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
-	self assert: interpreterProxyDecl type type equals: ASTCVirtualMachineProxy asTypeReification.
+	self assert: interpreterProxyDecl type type equals: ASTCSlangReceiver new asConstraint.
 	
 	declaration := cu declarations at:2.
-	self assert: declaration type type equals: ASTCUserClass asTypeReification.
+	self assert: declaration type type equals: ASTCSlangReceiver new asConstraint.
 	self assert: declaration id id equals: 'primitiveNoPopButPush'.
 	self assert: declaration parameters isEmpty.
 	
 	"body stuff"
 		definition:= cu definitions at:1.
-		self assert: definition body statements size equals: 1.
+		self assert: definition body statements size equals: 2.
 	
 	"the only statement/expression check"
 			statement := definition body statements first.
@@ -50,6 +50,10 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 				self assert: operands second arguments size equals: 1.
 				self assert: operands second arguments first isLiteral.
 				self assert: operands second arguments first value value equals: true.
+			"the second statement should be empty, since it's removing the ^ self that slang adds by default."
+		statement := definition body statements first.
+		self assert: statement isEmptyStatment.
+				
 	^ cu
 ]
 
