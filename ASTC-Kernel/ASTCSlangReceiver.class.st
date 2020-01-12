@@ -13,6 +13,11 @@ ASTCSlangReceiver class >> slangReservedSelector [
 ]
 
 { #category : #accessing }
+ASTCSlangReceiver >> + anOperand [
+	^ self translatedValue + (anOperand acceptVisitor: methodTranslator)
+]
+
+{ #category : #accessing }
 ASTCSlangReceiver >> asCType [
 	^ type
 ]
