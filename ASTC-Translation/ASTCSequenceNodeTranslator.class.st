@@ -9,11 +9,14 @@ ASTCSequenceNodeTranslator >> translateNode: aSequenceNode [
 	| res |
 	res := ASTCBlock new.
 	res pharoNode: aSequenceNode.
-
 	self translateTemporaryDeclaration: aSequenceNode temporaries into: res statements.
-	aSequenceNode statements collect: [:each | (each acceptVisitor: methodTranslator) asStatement] into: res statements.
-	
-	^res.
+	"Do not use collect to use the custom addStatement. it ignores emptyStatements."
+	aSequenceNode statements
+		do: [ :aPharoStatement | 
+			res addStatement: 
+				(aPharoStatement acceptVisitor: methodTranslator) asStatement ].
+		
+	^ res
 ]
 
 { #category : #translate }
