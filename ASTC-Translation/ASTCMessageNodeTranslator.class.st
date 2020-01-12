@@ -18,14 +18,20 @@ ASTCMessageNodeTranslator >> forward: aMessage to: aType [
 ]
 
 { #category : #translate }
+ASTCMessageNodeTranslator >> receiverFor: aMessageNode [
+	"This must return the receiver on which to send the message, see translateNode:"
+	^ self subclassResponsibility 
+]
+
+{ #category : #translate }
 ASTCMessageNodeTranslator >> translateNode: aMessageNode [
-	| aReceiver |
-	aReceiver := (methodTranslator
+	| receiver |
+	receiver := (methodTranslator
 		getNodeTranslationType: aMessageNode receiver) createInstance
 		value: aMessageNode receiver;
 		visitor: methodTranslator;
 		yourself.
-	^ aReceiver
+	^ receiver
 		perform: aMessageNode selector
 		withArguments: aMessageNode arguments asArray
 ]

@@ -15,11 +15,6 @@ ASTCSlangTranslator >> fillWithtranslatorSpecificTypes [
 ]
 
 { #category : #initialization }
-ASTCSlangTranslator >> getReplacementType: aPharoType [
-	^ ASTCSlangReceiver asTypeReification 
-]
-
-{ #category : #'translation-api' }
-ASTCSlangTranslator >> getTranslatedType: aSymbol [
-	^ SingleType new type: (ASTCSlangReceiver new type: aSymbol; yourself); yourself
+ASTCSlangTranslator >> getReplacementType: aSymbol [
+	^ (ASTCSlangReceiver new type: aSymbol) asConstraint
 ]

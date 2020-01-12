@@ -17,6 +17,11 @@ ASTCSlangReceiver >> asCType [
 	^ type
 ]
 
+{ #category : #typing }
+ASTCSlangReceiver >> asConstraint [
+	^ SingleType new type: self; yourself
+]
+
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand ifTrue:[ Error signal: 'infiniteRecursion' ].
@@ -36,6 +41,12 @@ ASTCSlangReceiver >> ifNil: aBlock [
 		condition: self translatedValue not;
 		then: (aBlock acceptVisitor: methodTranslator)
 		yourself.
+]
+
+{ #category : #typing }
+ASTCSlangReceiver >> new [
+	^ self
+
 ]
 
 { #category : #accessing }

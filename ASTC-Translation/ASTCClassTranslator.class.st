@@ -63,11 +63,6 @@ ASTCClassTranslator >> getReplacementType: aType [
 	^ mainTranslator getReplacementType: aType 
 ]
 
-{ #category : #accessing }
-ASTCClassTranslator >> getTranslatedType: aType [ 
-	^ mainTranslator getTranslatedType: aType
-]
-
 { #category : #initialization }
 ASTCClassTranslator >> initialize [
 	methodTranslator := ASTCMethodTranslator new

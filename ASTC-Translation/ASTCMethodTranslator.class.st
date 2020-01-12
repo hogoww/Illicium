@@ -67,11 +67,6 @@ ASTCMethodTranslator >> getReplacementType: aType [
 	^ classTranslator getReplacementType: aType
 ]
 
-{ #category : #typing }
-ASTCMethodTranslator >> getTranslatedType: aNode [
-	^ classTranslator getTranslatedType: (self getNodeConcreteType: aNode)
-]
-
 { #category : #accessing }
 ASTCMethodTranslator >> includes [
 	^ includes
