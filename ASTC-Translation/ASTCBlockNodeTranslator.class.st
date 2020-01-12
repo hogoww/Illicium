@@ -9,8 +9,9 @@ ASTCBlockNodeTranslator >> translateNode: aBlockNode [
 	| res |
 	res := ASTCBlock new.
 	res pharoNode: aBlockNode.
+	"Do not use collect to use the custom addStatement. it ignores emptyStatements."
 	aBlockNode statements
-		collect: [ :each | (each acceptVisitor: methodTranslator) asStatement ]
-		into: res statements.
+		do: [ :each | res statements addStatement: (each acceptVisitor: methodTranslator) asStatement ].
+		
 	^ res
 ]
