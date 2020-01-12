@@ -10,7 +10,7 @@ ASTCMessageNodeTranslatorTest class >> testedClass [
 ]
 
 { #category : #tests }
-ASTCMessageNodeTranslatorTest >> testASTCOperatorBinary [
+ASTCMessageNodeTranslatorTest >> testASTCEqual [
 	| astC expectedC|
 	astC := (ASTCTranslator translateExpression: '1 = 6') statements at: 1.
 	

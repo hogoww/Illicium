@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-ASTCSmallIntegerTest >> testSmallIntegerAddition [
+ASTCSmallIntegerTest >> testAdd [
 	| messageNode astC expectedC |
 	messageNode := RBParser parseExpression: '1 + 2'.
 	"Manual typing"
