@@ -8,3 +8,8 @@ Class {
 ASTCFloat class >> asCType [
 	^ #float
 ]
+
+{ #category : #default }
+ASTCFloat class >> defaultValue [
+	^0.0
+]
