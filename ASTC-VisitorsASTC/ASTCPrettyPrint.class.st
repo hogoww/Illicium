@@ -3,7 +3,8 @@ Class {
 	#superclass : #ASTCSuperclassVisitor,
 	#instVars : [
 		'stream',
-		'indentation'
+		'indentation',
+		'indentationString'
 	],
 	#category : #'ASTC-VisitorsASTC-PrettyPrint'
 }
@@ -53,15 +54,28 @@ ASTCPrettyPrint >> formatSelector: aSelector [
 
 { #category : #accessing }
 ASTCPrettyPrint >> indent [
-	indentation:=indentation , (String streamContents:[:s| 
-		1 to: (self class defaultIndentation size) do:[:i | s << Character space].
+	indentation:=indentation , (String streamContents:[:s|
+		self printSingleIndentationOn: s.
 	]).
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> indentationString [
+
+	^ indentationString
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> indentationString: aString [
+
+	indentationString := aString
 ]
 
 { #category : #accessing }
 ASTCPrettyPrint >> initialize [
 	stream := String new writeStream.
 	indentation := ''.
+	indentationString := self class defaultIndentation
 ]
 
 { #category : #accessing }
@@ -74,12 +88,24 @@ ASTCPrettyPrint >> print: anObject [
 	anObject acceptVisitor: self
 ]
 
+{ #category : #visiting }
+ASTCPrettyPrint >> printBinaryOperand: anOperand [
+	anOperand acceptVisitor: self
+
+]
+
 { #category : #printing }
 ASTCPrettyPrint >> printOn: aStream [
 	super printOn: aStream.
 	aStream << Character cr.
 	aStream << self.
 	^aStream.
+]
+
+{ #category : #accessing }
+ASTCPrettyPrint >> printSingleIndentationOn: aStream [
+
+	aStream << indentationString
 ]
 
 { #category : #printing }
@@ -109,7 +135,7 @@ ASTCPrettyPrint >> toTranscript [
 
 { #category : #accessing }
 ASTCPrettyPrint >> unindent [
-	indentation := indentation allButLast: (self class defaultIndentation size).
+	indentation := indentation allButLast: (indentationString size).
 ]
 
 { #category : #visiting }
@@ -125,9 +151,9 @@ ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 	| parenthesis |
 	parenthesis := self doesThisNeedParenthesis: anOperator.
 	parenthesis ifTrue: [ self << '(' ].
-	(anOperator operands at: 1) acceptVisitor: self.
+	self printBinaryOperand: (anOperator operands at: 1).
 	self << ' ' << anOperator class symbol << ' '.
-	(anOperator operands at: 2) acceptVisitor: self.
+	self printBinaryOperand: (anOperator operands at: 2).
 	parenthesis ifTrue: [ self << ')' ].
 ]
 

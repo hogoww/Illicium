@@ -52,7 +52,7 @@ ASTCDebugStructureVisitor >> visitFor: aFor [
 ASTCDebugStructureVisitor >> visitFunctionCall: aFunctionCall [
   super visitFunctionCall: aFunctionCall.
   aFunctionCall arguments ifNotNil: [:arguments |  arguments do: [:anArguments |  self assert: anArguments isExpression ] ].
-  aFunctionCall id ifNotNil: [:anId |  self assert: anId isIdentifier ]
+  aFunctionCall id ifNotNil: [:anId |  self assert: anId isExpression ]
 ]
 
 { #category : #visiting }

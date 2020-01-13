@@ -18,3 +18,9 @@ ASTCSlangTranslator >> fillWithtranslatorSpecificTypes [
 ASTCSlangTranslator >> getReplacementType: aSymbol [
 	^ (ASTCSlangReceiver new type: aSymbol) asConstraint
 ]
+
+{ #category : #'translation-api' }
+ASTCSlangTranslator >> newPrettyPrinter [
+
+	^ ASTCSlangPrettyPrinter new
+]

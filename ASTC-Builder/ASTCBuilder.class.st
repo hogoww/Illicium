@@ -355,7 +355,7 @@ ASTCBuilder >> defineRelations [
 	(operator property: #operands) <>-* (expression property: #operatorOperand).
 	(castOperator property: #type) <>- (type property: #castOperatorType).
 	
-	(functionCall property: #id) <>- (identifier property: #FunCallId).
+	(functionCall property: #id) <>- (expression property: #FunCallId).
 	(functionCall property: #arguments) <>-* (expression property: #funcCallArg).
 	
 	(block property: #statements) <>-* (statement property: #blockStatement).

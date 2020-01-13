@@ -21,5 +21,6 @@ ASTCMethodNodeTranslator >> translateNode: aMethodNode [
 				parameters: (aMethodNode arguments collect:[:each| each acceptVisitor: methodTranslator ]);
 				yourself);
 		body: (aMethodNode body acceptVisitor: methodTranslator);
+		comment: aMethodNode commentOrNil;
 		yourself
 ]

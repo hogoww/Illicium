@@ -8,6 +8,8 @@ Class {
 ASTCSlangClassTranslator >> initialize [
 	super initialize.
 	inferer explicitTypeHeuristic: PISlangTypesHeuristic.
+	methodTranslator literalValueNodeTranslator: ILSlangLiteralValueNodeTranslator new.
+	methodTranslator returnNodeTranslator: ILSlangReturnNodeTranslator new
 ]
 
 { #category : #initialization }

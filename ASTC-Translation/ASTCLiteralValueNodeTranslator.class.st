@@ -5,12 +5,17 @@ Class {
 }
 
 { #category : #translate }
-ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode [
+ASTCLiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOriginalNode: originalNode [
 	^ ASTCLiteral new
-		pharoNode: aLiteralNode;
+		pharoNode: originalNode;
 		value:
-			((methodTranslator getNodeTranslationType: aLiteralNode) createInstance
-				value: aLiteralNode value;
+			((methodTranslator getNodeTranslationType: originalNode) createInstance
+				value: aValue;
 				yourself);
 		yourself
+]
+
+{ #category : #translate }
+ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode [
+	^ self createLiteralNodeWithValue: aLiteralNode value fromOriginalNode: aLiteralNode
 ]

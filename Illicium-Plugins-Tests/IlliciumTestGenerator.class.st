@@ -31,7 +31,7 @@ IlliciumTestGenerator class >> generateVMMakerPluginsTests [
 	<script>
 	| generator |
 	generator:= IlliciumTestGenerator new.
-	^ ((#VMMaker asPackage) classesTaggedWith: #Plugins) do:[:aPluginClass| generator generateTestForClass: aPluginClass. ]
+	^ {BrokenPlugin} do:[:aPluginClass| generator generateTestForClass: aPluginClass ]
 ]
 
 { #category : #removing }
@@ -62,6 +62,17 @@ IlliciumTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass f
 ]
 
 { #category : #generation }
+IlliciumTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aClass [ 
+
+	| methodSource |
+	methodSource :=	 'testSmoke', aSelector onlyLetters capitalized asMethodWithBody:[
+		self testMethod: #aSelector.
+	].
+	
+	aClass compile: methodSource asString classified: #tests.
+]
+
+{ #category : #generation }
 IlliciumTestGenerator >> generateTestForClass: aClass [
 	| testClass primitivesMethod |
 	primitivesMethod := aClass methodDict
@@ -79,16 +90,20 @@ IlliciumTestGenerator >> generateTestForClass: aClass [
 		forTranslator: #ASTCSlangTranslator.
 	
 	primitivesMethod
-		do: [ :aMethod | self generateTestMethodFor: aMethod selector inTestClass: testClass ]
+		do: [ :aMethod |
+			self generateTestMethodFor: aMethod selector inTestClass: testClass.
+			self generateSmokeTestMethodFor: aMethod selector inTestClass: testClass ]
 ]
 
 { #category : #generation }
 IlliciumTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [ 
 
 	| methodSource |
-	methodSource :=	 'test', aSelector onlyLetters asMethodWithBody:[ | cu |
-		cu := self testMethod: #aSelector.
-		^ cu
+	methodSource :=	 'testEqualsSlangOutputFor', aSelector onlyLetters capitalized asMethodWithBody:[
+		| illiString slangString |
+		illiString := self generateIllicium: #aSelector.
+		slangString := self generateSlang: #aSelector.
+		self assert: illiString equals: slangString.
 	].
 	
 	aClass compile: methodSource asString classified: #tests.

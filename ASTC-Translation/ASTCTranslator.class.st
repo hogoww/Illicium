@@ -81,6 +81,20 @@ ASTCTranslator >> initialize [
 	self fillWithtranslatorSpecificTypes 
 ]
 
+{ #category : #'translation-api' }
+ASTCTranslator >> newPrettyPrinter [
+
+	^ ASTCPrettyPrint new
+]
+
+{ #category : #'translation-api' }
+ASTCTranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
+
+	| compilationUnit |
+	compilationUnit := self translateMethod: aSelector fromClass: aClass.
+	^ compilationUnit definitions anyOne prettyPrintUsing: self newPrettyPrinter
+]
+
 { #category : #accessors }
 ASTCTranslator >> replacementClasses [
 	^ replacementClasses

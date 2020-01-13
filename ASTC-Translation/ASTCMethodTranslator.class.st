@@ -109,6 +109,12 @@ ASTCMethodTranslator >> isStatefulCode [
 	^ classTranslator isStatefulCode
 ]
 
+{ #category : #configuration }
+ASTCMethodTranslator >> literalValueNodeTranslator: anILLiteralValueNodeTranslator [ 
+	
+	translators at: #literalValueNodeTranslator put: (anILLiteralValueNodeTranslator methodTranslator: self ; yourself).
+]
+
 { #category : #visiting }
 ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
 	| annotatorVisitors |
@@ -116,6 +122,11 @@ ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
 	annotatorVisitors add: ASTCShouldItBeDeclaredAnnotator new.
 	aMethodAST acceptMultipleVisitors: annotatorVisitors.	"pre translation visits"
 	^ aMethodAST
+]
+
+{ #category : #configuration }
+ASTCMethodTranslator >> returnNodeTranslator: anILReturnNodeTranslator [ 
+	translators at: #returnNodeTranslator put: (anILReturnNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #visiting }
