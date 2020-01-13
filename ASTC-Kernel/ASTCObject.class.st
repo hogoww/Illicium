@@ -16,10 +16,10 @@ ASTCObject class >> asPharoType [
 
 { #category : #'message performing' }
 ASTCObject >> = anotherObject [
-	self flag:#notPretty.
-	(methodTranslator ifNil:[ ^ super = anotherObject ]).
-	
-	^ self translatedValue equals: (anotherObject acceptVisitor: methodTranslator)
+	^ self 
+		ifTranslation:
+			[ self translatedValue equals: (anotherObject acceptVisitor: methodTranslator) ]
+		ifNot: [ (methodTranslator ifNil:[ ^ super = anotherObject ]) ]
 ]
 
 { #category : #comparing }

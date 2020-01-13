@@ -45,6 +45,15 @@ ASTCKernelClass >> declare: aVar typed: aType [
 ]
 
 { #category : #'message performing' }
+ASTCKernelClass >> ifTranslation: aTranslationBlock ifNot: aNotBlock [
+	self flag:#notPretty.
+	^ methodTranslator ifNotNil: [ aTranslationBlock value ]
+		ifNil:[ aNotBlock value ].
+		
+	
+]
+
+{ #category : #'message performing' }
 ASTCKernelClass >> messageToFunctionCall: aMessage [
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (methodTranslator formatSelector: (aMessage selector)); yourself) ;

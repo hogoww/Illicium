@@ -29,6 +29,11 @@ ASTCSlangReceiver >> - anOperand [
 	^ self translatedValue - (anOperand acceptVisitor: methodTranslator)
 ]
 
+{ #category : #testing }
+ASTCSlangReceiver >> = anotherObject [
+	^ super = anotherObject and: [ type = anotherObject type ]
+]
+
 { #category : #accessing }
 ASTCSlangReceiver >> asCType [
 	"for API concistency with the initial design. "
@@ -65,6 +70,18 @@ ASTCSlangReceiver >> ifNil: aBlock [
 ASTCSlangReceiver >> new [
 	^ self
 
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> printString [
+	^String streamContents:[:stream|
+		stream << (self class asString)
+			<<'('
+			<< value printString
+			<< '-';
+			<< self asCType;
+			<<')'.
+		].
 ]
 
 { #category : #accessing }
