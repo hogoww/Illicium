@@ -30,13 +30,13 @@ ASTCKernelClass class >> literalNodeFor: aValue [
 { #category : #accessing }
 ASTCKernelClass class >> value: aValue [ 
 	^ self new
-		value: (self literalNodeFor: aValue);
+		value: aValue;
 		yourself
 ]
 
 { #category : #'message performing' }
 ASTCKernelClass >> = anotherObject [
-	^ self value = anotherObject value
+	^ self receiverNode = anotherObject receiverNode
 ]
 
 { #category : #'message performing' }
@@ -95,6 +95,12 @@ ASTCKernelClass >> printString [
 			<< value printString
 			<<')'.
 		].
+]
+
+{ #category : #evaluating }
+ASTCKernelClass >> receiverNode [
+	self flag: #needRenaming."need complete renaming, but too unstable. So just make #= fail for now."
+	^ value
 ]
 
 { #category : #evaluating }
