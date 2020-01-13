@@ -58,16 +58,14 @@ ASTCNode >> parent: aParent [
 
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> prettyPrint [
-	| prettyPrintVisitor |
-	prettyPrintVisitor:=ASTCPrettyPrint new.
-	self acceptVisitor: prettyPrintVisitor.
-	^prettyPrintVisitor stream contents.
+	
+	^ self prettyPrintUsing: ASTCPrettyPrint new
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> prettyPrintUsing: aPrettyPrinter [ 
 	self acceptVisitor: aPrettyPrinter.
-	^aPrettyPrinter stream contents.
+	^ aPrettyPrinter stream contents
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
