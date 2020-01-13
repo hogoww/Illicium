@@ -29,5 +29,5 @@ ASTCString >> = anotherStringNode [
 			addArgument: (self value acceptVisitor: methodTranslator);
 			addArgument: (anotherStringNode acceptVisitor: methodTranslator);
 			yourself)
-		equals: (ASTCLiteral new value: 0)
+		equals: (ASTCLiteral new value: ASTCSmallInteger value: 0)
 ]
