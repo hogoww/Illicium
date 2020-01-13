@@ -8,6 +8,30 @@ Class {
 	#category : #'Illicium-Plugins-Tests'
 }
 
+{ #category : #generating }
+ILSlangToCGeneratedTests >> generateIllicium: aSelector [ 
+	
+	^ translator prettyPrintCodeForMethod: aSelector fromClass: testedClass
+]
+
+{ #category : #'generating machine code' }
+ILSlangToCGeneratedTests >> generateSlang: aSelector [ 
+	| method translation codeGenerator result |
+	method := testedClass >> aSelector.
+	translation := method asTranslationMethodOfClass: TMethod.
+	codeGenerator := CCodeGeneratorGlobalStructure new.
+	codeGenerator addMethod: translation.
+	codeGenerator generateDeadCode: false.
+	codeGenerator doInlining: true.
+	
+	codeGenerator  inferTypesForImplicitlyTypedVariablesAndMethods.
+		
+	result := String streamContents: [ :stream |
+		translation emitCCodeOn: stream generator: codeGenerator.
+	].
+	^ result
+]
+
 { #category : #accessing }
 ILSlangToCGeneratedTests >> testMethod: aSelector [
 	| cu |
