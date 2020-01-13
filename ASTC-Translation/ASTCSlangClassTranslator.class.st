@@ -45,6 +45,7 @@ ASTCSlangClassTranslator >> preTypeInference: aClass [
 ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	inferer := CCodeGenerator new.
+	aClass declareCVarsIn: inferer.
 	method := (aClass >> aSelector) ast copy.
 	inferer addMethod: (method asTranslationMethodOfClass: TMethod).
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
@@ -67,5 +68,5 @@ ASTCSlangClassTranslator >> typeAnnotatorClass [
 
 { #category : #'translation-api' }
 ASTCSlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
-	^ self getReplacementType: (inferer typeOfVariable: anIVName )
+	^ self getReplacementType: (inferer typeOfVariable: anIVName)
 ]
