@@ -55,6 +55,11 @@ ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromCla
 	^ { method }
 ]
 
+{ #category : #'translation-api' }
+ASTCSlangClassTranslator >> translateClass: aClass [ 
+	self error: 'not adapted to refactor to use Slang yet'
+]
+
 { #category : #typing }
 ASTCSlangClassTranslator >> typeAnnotatorClass [
 	^ ASTCSlangTypeAnnotator
