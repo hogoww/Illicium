@@ -23,7 +23,7 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 	"ïnstance variable"
 	interpreterProxyDecl := cu declarations at:1.
 	self assert: interpreterProxyDecl id id equals: #interpreterProxy.
-	self assert: interpreterProxyDecl type type equals: ASTCSlangReceiver new asConstraint.
+	self assert: interpreterProxyDecl type type equals: (ASTCSlangReceiver new type: #'struct virtualMachine*'; yourself) asConstraint.
 	
 	declaration := cu declarations at:2.
 	self assert: declaration type type equals: ASTCSlangReceiver new asConstraint.

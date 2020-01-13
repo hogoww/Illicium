@@ -23,9 +23,9 @@ ASTCBooleanTest >> testIfTrue [
 	astC := messageNode acceptVisitor: methodTranslator.
 	
 	expectedC := ASTCIf new 
-		condition: (ASTCLiteral value: true);
+		condition: (ASTCLiteral value: (ASTCBoolean value: true));
 		then: (ASTCBlock new
-			addStatement: (ASTCLiteral value: 1) asStatement;
+			addStatement: (ASTCLiteral value: (ASTCSmallInteger value: 1)) asStatement;
 			yourself);
 		else: ASTCBlock new
 		yourself.	
@@ -46,14 +46,14 @@ ASTCBooleanTest >> testIfTrueIfFalse [
 	
 	expectedC := ASTCIf new 
 		condition: (ASTCEqualityOperator new
-			addOperand: (ASTCLiteral value: 1);
-			addOperand: (ASTCLiteral value: 2);
+			addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 1));
+			addOperand: (ASTCLiteral value: (ASTCSmallInteger value: 2));
 			yourself);
 		then:(ASTCBlock new
-			addStatement: (ASTCLiteral value: 1) asStatement;
+			addStatement: (ASTCLiteral value: (ASTCSmallInteger value: 1)) asStatement;
 			yourself);
 		else:(ASTCBlock new
-			addStatement: (ASTCLiteral value: 2) asStatement;
+			addStatement: (ASTCLiteral value: (ASTCSmallInteger value: 2)) asStatement;
 			yourself);
 		yourself.	
 	
