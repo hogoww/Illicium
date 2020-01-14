@@ -4,10 +4,9 @@ Extension { #name : #DTTestsRunner }
 DTTestsRunner >> runForConfiguration: aDTpluginConfiguration [
 	| results |
 	results := self pluginResultClass new
-
-		testsResult: (self runTestSuites: { aDTpluginConfiguration asTestSuite });
+		testResults: (self runTestSuites: { aDTpluginConfiguration asTestSuite });
 		yourself.
 
-	"results testsResult inspect."
+	results testResults inspect.
 	^ aDTpluginConfiguration handleResults: results for: self
 ]
