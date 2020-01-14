@@ -111,6 +111,18 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 	^ { firstOperand. secondOperand }
 ]
 
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> cCode: aBlock [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> cCode: aBlock inSmalltalk: anotherBlock [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
 { #category : #typing }
 ASTCSlangReceiver >> cCoerce: aVariable to: aType [
 	^ (aVariable acceptVisitor: methodTranslator)
@@ -166,6 +178,24 @@ ASTCSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 		then: (trueBlock acceptVisitor: self visitor);
 		else: (falseBlock acceptVisitor: self visitor);
 		yourself.
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> integerObjectOf: anOop [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> integerValueOf: anOop [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> isIntegerObject: anOop [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #typing }
