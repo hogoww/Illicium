@@ -322,16 +322,16 @@ ASTCBuilder >> defineRelations [
 	"Define the relationships between the classes, following the FmxNG syntax."
 	
 	self flag:#comment.
-	"Non container side properties name will be IGNORED, types are used to generate validation visitor!"
-	
+	"Non container side properties NAMES will be IGNORED, TYPES are USED to generate validation visitor!"
+
+	"Reflexive nodes"
+	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
+	(node property: #parent) <>- (node property: #parent).
+
 	"General nodes"
 	(project property: #compilationUnits) <>-* (compilationUnit property: #project).
 	(compilationUnit property: #definitions) <>-* (definition property: #compilationUnit).
 	(compilationUnit property: #declarations) <>-* (declaration property: #compilationUnit).
-
-	"Reflexive nodes"
-	self flag:#hack. "generates only one parent, because the property have the same names, and one the <> side is the right part of the property, that we 'ignore'. May cause trouble."
-	(node property: #parent) <>- (node property: #parent).	
 
 	(declaration property: #id) <>-(identifier property: #id).
 	(definition property: #declaration) <>- (declaration property: #definition).
