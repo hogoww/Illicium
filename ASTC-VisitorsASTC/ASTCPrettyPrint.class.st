@@ -9,22 +9,22 @@ Class {
 	#category : #'ASTC-VisitorsASTC-PrettyPrint'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 ASTCPrettyPrint class >> defaultIndentation [
 	^ '  '
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> << chars [
 	stream << chars
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> <<< chars [
 	stream << indentation << chars
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> cr [
 	stream cr
 ]
@@ -36,12 +36,12 @@ ASTCPrettyPrint >> doesThisNeedParenthesis: aNode [
 	^ aNode priority > parentPriority
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> enterBlock [
 	self indent
 ]
 
-{ #category : #accessing }
+{ #category : #formating }
 ASTCPrettyPrint >> formatSelector: aSelector [
 	| functionName | 
 	functionName:=aSelector asString.
@@ -52,20 +52,20 @@ ASTCPrettyPrint >> formatSelector: aSelector [
 	^functionName asCamelCase 
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> indent [
 	indentation:=indentation , (String streamContents:[:s|
 		self printSingleIndentationOn: s.
 	]).
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> indentationString [
 
 	^ indentationString
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> indentationString: aString [
 
 	indentationString := aString
@@ -78,12 +78,12 @@ ASTCPrettyPrint >> initialize [
 	indentationString := self class defaultIndentation
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> leaveBlock [
 	self unindent
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> print: anObject [
 	anObject acceptVisitor: self
 ]
@@ -102,7 +102,7 @@ ASTCPrettyPrint >> printOn: aStream [
 	^aStream.
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> printSingleIndentationOn: aStream [
 
 	aStream << indentationString
@@ -113,12 +113,12 @@ ASTCPrettyPrint >> printString [
 	^self stream contents
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> space [
 	stream space
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> spaces [
 	self <<< ''
 ]
@@ -133,7 +133,7 @@ ASTCPrettyPrint >> toTranscript [
 	Transcript show:self ; cr.
 ]
 
-{ #category : #accessing }
+{ #category : #indentation }
 ASTCPrettyPrint >> unindent [
 	indentation := indentation allButLast: (indentationString size).
 ]
@@ -171,7 +171,7 @@ ASTCPrettyPrint >> visitBlock: aBlock [
 	self << '}'.
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 ASTCPrettyPrint >> visitBreak: aBreak [
 	self << #break
 ]
