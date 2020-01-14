@@ -37,7 +37,7 @@ ASTCSlangReceiver >> = anotherObject [
 { #category : #accessing }
 ASTCSlangReceiver >> asCType [
 	"for API concistency with the initial design. "
-	^ type ifNil: [ #undefined ]
+	^ type ifNil: [ #sqInt ]
 ]
 
 { #category : #typing }
@@ -99,7 +99,7 @@ ASTCSlangReceiver >> printString [
 			<<'('
 			<< value printString
 			<< '-';
-			<< self asCType;
+			print: self asCType;
 			<<')'.
 		].
 ]
