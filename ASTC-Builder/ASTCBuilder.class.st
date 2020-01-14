@@ -89,7 +89,9 @@ Class {
 		'bitwiseAndOperator',
 		'moduloOperator',
 		'structAccessStaticOperator',
-		'emptyStatement'
+		'emptyStatement',
+		'unequalOperator',
+		'inequalityOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -233,6 +235,7 @@ ASTCBuilder >> defineOperatorClasses [
 	orOperator := builder newClassNamed: #OrOperator.
 	andOperator := builder newClassNamed: #AndOperator.
 	equalityOperator := builder newClassNamed: #EqualityOperator.
+	inequalityOperator := builder newClassNamed: #inequalityOperator.
 	greaterOperator := builder newClassNamed: #GreaterOperator.
 	greaterOrEqualOperator := builder newClassNamed: #GreaterOrEqualOperator.
 	lesserOperator := builder newClassNamed: #LesserOperator.
@@ -280,6 +283,7 @@ ASTCBuilder >> defineOperatorsRelations [
 	
 	"priority 7, #left"
 	equalityOperator --|> binaryOperator." a == b "
+	inequalityOperator --|> binaryOperator." a !=b "
 	
 	"priority 8, #left"
 	bitwiseAndOperator --|> binaryOperator. " a & b "
@@ -302,6 +306,7 @@ ASTCBuilder >> defineProperties [
 
 	"Having some kind of type check on those would be nice, generated in the debug visitor."
 	node property: #pharoNode type: #RBNode.
+	node property: #comment type: #String.
 
 	identifier property: #id type: #String.
 
