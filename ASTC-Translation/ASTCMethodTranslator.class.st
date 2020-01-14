@@ -117,7 +117,7 @@ ASTCMethodTranslator >> literalValueNodeTranslator: anILLiteralValueNodeTranslat
 ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
 	| annotatorVisitors |
 	annotatorVisitors := OrderedCollection new.
-	annotatorVisitors add: ASTCShouldItBeDeclaredAnnotator new.
+	annotatorVisitors add: ASTCIlliciumDeclarationAnnotator new.
 	aMethodAST acceptMultipleVisitors: annotatorVisitors.	"pre translation visits"
 	^ aMethodAST
 ]
