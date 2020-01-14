@@ -30,8 +30,9 @@ IlliciumTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
 IlliciumTestGenerator class >> generateVMMakerPluginsTests [
 	<script>
 	| generator |
+	self removeTests.
 	generator:= IlliciumTestGenerator new.
-	^ {BrokenPlugin} do:[:aPluginClass| generator generateTestForClass: aPluginClass ]
+	^ {BrokenPlugin. FilePlugin} do:[:aPluginClass| generator generateTestForClass: aPluginClass ]
 ]
 
 { #category : #removing }
@@ -69,7 +70,7 @@ IlliciumTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aCla
 		self testMethod: #aSelector.
 	].
 	
-	aClass compile: methodSource asString classified: #tests.
+	aClass compile: methodSource asString classified: ##'smoke-test'.
 ]
 
 { #category : #generation }
@@ -106,5 +107,5 @@ IlliciumTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [
 		self assert: illiString equals: slangString.
 	].
 	
-	aClass compile: methodSource asString classified: #tests.
+	aClass compile: methodSource asString classified: #'equaliy-test'.
 ]
