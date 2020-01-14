@@ -71,7 +71,7 @@ ASTCPrettyPrint >> indentationString: aString [
 	indentationString := aString
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 ASTCPrettyPrint >> initialize [
 	stream := String new writeStream.
 	indentation := ''.
@@ -245,9 +245,9 @@ ASTCPrettyPrint >> visitFor: aFor [
 ASTCPrettyPrint >> visitFunctionCall: aFunctionCall [
 	aFunctionCall id acceptVisitor: self.
 	self << '('.
-	aFunctionCall arguments do:[:each |
+	aFunctionCall arguments do: [:each |
 		each acceptVisitor:self.
-		] separatedBy:[ self << ',' ].
+		] separatedBy:[ self << ', ' ].
 	self << ')'.
 	
 ]
