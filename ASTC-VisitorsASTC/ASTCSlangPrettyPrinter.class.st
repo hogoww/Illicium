@@ -19,17 +19,14 @@ ASTCSlangPrettyPrinter >> printMultilineComment: aString [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitBlock: aBlock [
-	self << Character cr.
-	super visitBlock: aBlock
-]
-
-{ #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
-
-	aFunctionCall parent isStatement ifFalse: [ self << '(' ].
+	| noParenthesis parent |
+	parent := aFunctionCall parent.
+	noParenthesis := parent isAssignmentOperator or: [parent isStatement or: [ parent isFunctionCall ]].
+	
+	noParenthesis ifFalse: [ self << '(' ].
 	super visitFunctionCall: aFunctionCall.
-	aFunctionCall parent isStatement ifFalse: [ self << ')' ].
+	noParenthesis ifFalse: [ self << ')' ].
 ]
 
 { #category : #visiting }
@@ -49,13 +46,28 @@ ASTCSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
-	stream cr cr.
-	aFunctionDefinition comment ifNotNil: [ self printMultilineComment: '	', aFunctionDefinition comment anyOne ].
+	aFunctionDefinition comment ifNotNil: [ 
+		self cr cr.
+		self printMultilineComment: '	', aFunctionDefinition comment anyOne ].
 	stream cr cr.
 	
 	stream tab.
 	self printMultilineComment: ' ' , aFunctionDefinition pharoNode methodClass name , '>>' , aFunctionDefinition pharoNode selector printString.
+	self cr.
+	aFunctionDefinition declaration acceptVisitor:self. 
+	self cr spaces."cr after a curly brace is inconsistent, so we cannot factorise this in visitBlock (see if)"
+	aFunctionDefinition body acceptVisitor: self.
 	stream cr.
-	super visitFunctionDefinition: aFunctionDefinition.
-	stream cr.
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitIf: anIf [
+	self << 'if ('.
+	anIf condition acceptVisitor: self.
+	self << ') '.
+	anIf then acceptVisitor: self.
+	anIf else ifNotNil:[:anElse|
+		self cr spaces << 'else '.
+		anElse acceptVisitor: self.
+		].
 ]
