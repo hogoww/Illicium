@@ -235,7 +235,7 @@ ASTCBuilder >> defineOperatorClasses [
 	orOperator := builder newClassNamed: #OrOperator.
 	andOperator := builder newClassNamed: #AndOperator.
 	equalityOperator := builder newClassNamed: #EqualityOperator.
-	inequalityOperator := builder newClassNamed: #inequalityOperator.
+	inequalityOperator := builder newClassNamed: #InequalityOperator.
 	greaterOperator := builder newClassNamed: #GreaterOperator.
 	greaterOrEqualOperator := builder newClassNamed: #GreaterOrEqualOperator.
 	lesserOperator := builder newClassNamed: #LesserOperator.
