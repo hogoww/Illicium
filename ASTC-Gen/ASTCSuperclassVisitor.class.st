@@ -145,6 +145,11 @@ ASTCSuperclassVisitor >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitInequalityOperator: anInequalityOperator [
+  ^self visitBinaryOperator: anInequalityOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitLesserOperator: aLesserOperator [
   ^self visitBinaryOperator: aLesserOperator
 ]

@@ -430,6 +430,20 @@ ASTCPrinterVisitor >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitInequalityOperator: anInequalityOperator [
+  stream cr.
+  self printTabCount: currentDepth.
+  stream
+     << $(;
+     << 'anInequalityOperator';
+     space.
+  currentDepth := currentDepth + 1.
+  super visitInequalityOperator: anInequalityOperator.
+  currentDepth := currentDepth - 1.
+  stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitLesserOperator: aLesserOperator [
   stream cr.
   self printTabCount: currentDepth.
@@ -524,20 +538,6 @@ ASTCPrinterVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
      space.
   currentDepth := currentDepth + 1.
   super visitMultiplicationOperator: aMultiplicationOperator.
-  currentDepth := currentDepth - 1.
-  stream << ')'
-]
-
-{ #category : #visiting }
-ASTCPrinterVisitor >> visitNode: aNode [
-  stream cr.
-  self printTabCount: currentDepth.
-  stream
-     << $(;
-     << 'aNode';
-     space.
-  currentDepth := currentDepth + 1.
-  super visitNode: aNode.
   currentDepth := currentDepth - 1.
   stream << ')'
 ]

@@ -145,6 +145,11 @@ ASTCVisitor >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitInequalityOperator: anInequalityOperator [
+  
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitLesserOperator: aLesserOperator [
   
 ]

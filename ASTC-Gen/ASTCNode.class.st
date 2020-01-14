@@ -3,6 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'pharoNode',
+		'comment',
 		'parent'
 	],
 	#category : #'ASTC-Gen-Nodes'
@@ -10,12 +11,23 @@ Class {
 
 { #category : #testing }
 ASTCNode >> = aNode [
+  comment = aNode comment ifFalse: [ ^false ].
   ^true
 ]
 
 { #category : #testing }
 ASTCNode >> acceptVisitor: aVisitor [
   aVisitor visitNode: self
+]
+
+{ #category : #accessing }
+ASTCNode >> comment [
+  ^comment
+]
+
+{ #category : #accessing }
+ASTCNode >> comment: aComment [
+  comment := aComment
 ]
 
 { #category : #testing }
@@ -155,6 +167,11 @@ ASTCNode >> isIf [
 
 { #category : #testing }
 ASTCNode >> isIndexerOperator [
+  ^false
+]
+
+{ #category : #testing }
+ASTCNode >> isInequalityOperator [
   ^false
 ]
 

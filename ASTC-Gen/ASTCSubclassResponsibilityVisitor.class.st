@@ -145,6 +145,11 @@ ASTCSubclassResponsibilityVisitor >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitInequalityOperator: anInequalityOperator [
+  self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitLesserOperator: aLesserOperator [
   self subclassResponsibility
 ]

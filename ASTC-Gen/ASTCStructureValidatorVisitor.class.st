@@ -163,6 +163,11 @@ ASTCStructureValidatorVisitor >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitInequalityOperator: anInequalityOperator [
+  [ super visitInequalityOperator: anInequalityOperator ] on: AssertionFailure do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitLesserOperator: aLesserOperator [
   [ super visitLesserOperator: aLesserOperator ] on: AssertionFailure do: [ errors := errors + 1 ]
 ]

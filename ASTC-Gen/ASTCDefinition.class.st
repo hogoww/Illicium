@@ -2,8 +2,7 @@ Class {
 	#name : #ASTCDefinition,
 	#superclass : #ASTCNode,
 	#instVars : [
-		'declaration',
-		'comment'
+		'declaration'
 	],
 	#category : #'ASTC-Gen-Nodes'
 }
@@ -18,16 +17,6 @@ ASTCDefinition >> = aDefinition [
 { #category : #testing }
 ASTCDefinition >> acceptVisitor: aVisitor [
   aVisitor visitDefinition: self
-]
-
-{ #category : #accessing }
-ASTCDefinition >> comment [
-	^ comment
-]
-
-{ #category : #accessing }
-ASTCDefinition >> comment: anObject [
-	comment := anObject
 ]
 
 { #category : #accessing }

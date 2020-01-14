@@ -163,6 +163,11 @@ ASTCWalkerVisitor >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitInequalityOperator: anInequalityOperator [
+  super visitInequalityOperator: anInequalityOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitLesserOperator: aLesserOperator [
   super visitLesserOperator: aLesserOperator
 ]

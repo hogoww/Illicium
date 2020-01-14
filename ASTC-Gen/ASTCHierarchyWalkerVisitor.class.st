@@ -173,6 +173,12 @@ ASTCHierarchyWalkerVisitor >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitInequalityOperator: anInequalityOperator [
+  super visitInequalityOperator: anInequalityOperator.
+  ^self visitBinaryOperator: anInequalityOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitLesserOperator: aLesserOperator [
   super visitLesserOperator: aLesserOperator.
   ^self visitBinaryOperator: aLesserOperator
