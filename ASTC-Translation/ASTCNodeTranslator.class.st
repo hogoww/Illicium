@@ -1,8 +1,6 @@
 Class {
 	#name : #ASTCNodeTranslator,
 	#superclass : #Object,
-	#traits : 'ASTCFormatTrait',
-	#classTraits : 'ASTCFormatTrait classTrait',
 	#instVars : [
 		'methodTranslator'
 	],

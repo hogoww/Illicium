@@ -1,7 +1,7 @@
 Class {
 	#name : #ILSlangLiteralValueNodeTranslator,
 	#superclass : #ASTCLiteralValueNodeTranslator,
-	#category : #'ASTC-Translation-nodes'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }

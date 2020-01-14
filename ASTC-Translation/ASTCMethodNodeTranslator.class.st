@@ -12,7 +12,7 @@ ASTCMethodNodeTranslator >> translateNode: aMethodNode [
 			(ASTCFunctionDeclaration new
 				id:
 					(ASTCIdentifier new
-						id: (self formatSelector: aMethodNode selector);
+						id: (ASTCFormatHelper formatSelector: aMethodNode selector);
 						yourself);
 				type:
 					(ASTCType new

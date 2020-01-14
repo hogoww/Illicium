@@ -1,7 +1,7 @@
 Class {
 	#name : #ILSlangReturnNodeTranslator,
 	#superclass : #ASTCReturnNodeTranslator,
-	#category : #'ASTC-Translation-nodes'
+	#category : #'ASTC-Translation-ast-nodes'
 }
 
 { #category : #translate }

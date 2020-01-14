@@ -1,8 +1,6 @@
 Class {
 	#name : #ASTCMethodTranslator,
 	#superclass : #RBProgramNodeVisitor,
-	#traits : 'ASTCFormatTrait',
-	#classTraits : 'ASTCFormatTrait classTrait',
 	#instVars : [
 		'translators',
 		'classTranslator',
