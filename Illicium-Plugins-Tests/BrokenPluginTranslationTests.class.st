@@ -6,59 +6,59 @@ Class {
 
 { #category : #running }
 BrokenPluginTranslationTests >> setUp [
-	super setUp.
-	testedClass := BrokenPlugin.
-	translator := ASTCSlangTranslator new
+  super setUp.
+  testedClass := BrokenPlugin.
+  translator := ASTCSlangTranslator new
 ]
 
-{ #category : #tests }
+{ #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitiveNoPopButPush [
-	| slangString illiString |
-	illiString := self generateIllicium: #primitiveNoPopButPush.
-	slangString := self generateSlang: #primitiveNoPopButPush.
-	self assert: illiString equals: slangString
+  | slangString illiString |
+  illiString := self generateIllicium: #primitiveNoPopButPush.
+  slangString := self generateSlang: #primitiveNoPopButPush.
+  self assert: illiString equals: slangString
 ]
 
-{ #category : #tests }
+{ #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopAndFail [
-	| slangString illiString |
-	illiString := self generateIllicium: #primitivePopAndFail.
-	slangString := self generateSlang: #primitivePopAndFail.
-	self assert: illiString equals: slangString
+  | slangString illiString |
+  illiString := self generateIllicium: #primitivePopAndFail.
+  slangString := self generateSlang: #primitivePopAndFail.
+  self assert: illiString equals: slangString
 ]
 
-{ #category : #tests }
+{ #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopLessThanExpected [
-	| slangString illiString |
-	illiString := self generateIllicium: #primitivePopLessThanExpected.
-	slangString := self generateSlang: #primitivePopLessThanExpected.
-	self assert: illiString equals: slangString
+  | slangString illiString |
+  illiString := self generateIllicium: #primitivePopLessThanExpected.
+  slangString := self generateSlang: #primitivePopLessThanExpected.
+  self assert: illiString equals: slangString
 ]
 
-{ #category : #tests }
+{ #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopMoreThanExpected [
-	| slangString illiString |
-	illiString := self generateIllicium: #primitivePopMoreThanExpected.
-	slangString := self generateSlang: #primitivePopMoreThanExpected.
-	self assert: illiString equals: slangString
+  | slangString illiString |
+  illiString := self generateIllicium: #primitivePopMoreThanExpected.
+  slangString := self generateSlang: #primitivePopMoreThanExpected.
+  self assert: illiString equals: slangString
 ]
 
-{ #category : #tests }
+{ #category : #'smoke-test' }
 BrokenPluginTranslationTests >> testSmokePrimitiveNoPopButPush [
-	self testMethod: #primitiveNoPopButPush
+  self testMethod: #primitiveNoPopButPush
 ]
 
-{ #category : #tests }
+{ #category : #'smoke-test' }
 BrokenPluginTranslationTests >> testSmokePrimitivePopAndFail [
-	self testMethod: #primitivePopAndFail
+  self testMethod: #primitivePopAndFail
 ]
 
-{ #category : #tests }
+{ #category : #'smoke-test' }
 BrokenPluginTranslationTests >> testSmokePrimitivePopLessThanExpected [
-	self testMethod: #primitivePopLessThanExpected
+  self testMethod: #primitivePopLessThanExpected
 ]
 
-{ #category : #tests }
+{ #category : #'smoke-test' }
 BrokenPluginTranslationTests >> testSmokePrimitivePopMoreThanExpected [
-	self testMethod: #primitivePopMoreThanExpected
+  self testMethod: #primitivePopMoreThanExpected
 ]
