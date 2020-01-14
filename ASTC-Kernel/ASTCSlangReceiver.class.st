@@ -57,12 +57,32 @@ ASTCSlangReceiver >> doesNotUnderstand: aMessage [
 			yourself)
 ]
 
+{ #category : #accessing }
+ASTCSlangReceiver >> ifFalse: falseBlock [
+	"same code as ASTCBoolean>>ifFalse:"
+ 	^ASTCIf new
+		condition:(self value acceptVisitor:self visitor);
+		then: ASTCBlock new;
+		else: (falseBlock acceptVisitor: self visitor);
+		yourself.
+]
+
 { #category : #'translation-testing' }
 ASTCSlangReceiver >> ifNil: aBlock [
 	self assert: aBlock isBlock.
 	^ ASTCIf new
 		condition: self translatedValue not;
 		then: (aBlock acceptVisitor: methodTranslator)
+		yourself.
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> ifTrue: trueBlock [
+	"same code as ASTCBoolean>>ifFalse:"
+ 	^ASTCIf new
+		condition:(self value acceptVisitor:self visitor);
+		then: (trueBlock acceptVisitor: self visitor);
+		else: ASTCBlock new;
 		yourself.
 ]
 
