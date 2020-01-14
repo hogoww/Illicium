@@ -165,7 +165,6 @@ ASTCSlangReceiver >> ifTrue: trueBlock [
  	^ASTCIf new
 		condition:(self value acceptVisitor:self visitor);
 		then: (trueBlock acceptVisitor: self visitor);
-		else: ASTCBlock new;
 		yourself.
 ]
 
