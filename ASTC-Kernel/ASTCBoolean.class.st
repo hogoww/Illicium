@@ -35,41 +35,41 @@ ASTCBoolean >> binarySelectorArgs: aBoolean [
 { #category : #controlling }
 ASTCBoolean >> ifFalse: falseBlock [
 	self ifTrueifFalseChecker: { falseBlock }.
- 	^ASTCIf new
-		condition:(self value acceptVisitor:self visitor);
+ 	^ ASTCIf new
+		condition: (self value acceptVisitor: self visitor);
 		then: ASTCBlock new;
 		else: (falseBlock acceptVisitor: self visitor);
-		yourself.
+		yourself
 ]
 
 { #category : #controlling }
 ASTCBoolean >> ifFalse: falseBlock ifTrue: trueBlock [
 	self ifTrueifFalseChecker: { falseBlock.trueBlock. }.
- 	^ASTCIf new
-		condition:(self value acceptVisitor:self visitor);
+ 	^ ASTCIf new
+		condition: (self value acceptVisitor: self visitor);
 		then: (trueBlock acceptVisitor: self visitor);
 		else: (falseBlock acceptVisitor: self visitor);
-		yourself.
+		yourself
 ]
 
 { #category : #controlling }
 ASTCBoolean >> ifTrue: trueBlock [
 	self ifTrueifFalseChecker: { trueBlock }.
- 	^ASTCIf new
-		condition:(self value acceptVisitor:self visitor);
+ 	^ ASTCIf new
+		condition: (self value acceptVisitor: self visitor);
 		then: (trueBlock acceptVisitor: self visitor);
 		else: ASTCBlock new;
-		yourself.
+		yourself
 ]
 
 { #category : #controlling }
 ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 	self ifTrueifFalseChecker: { trueBlock.falseBlock }.
- 	^ASTCIf new
-		condition: (self value acceptVisitor:self visitor);
+ 	^ ASTCIf new
+		condition: (self value acceptVisitor: self visitor);
 		then: (trueBlock acceptVisitor: self visitor);
 		else: (falseBlock acceptVisitor: self visitor);
-		yourself.
+		yourself
 ]
 
 { #category : #controlling }
