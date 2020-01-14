@@ -98,6 +98,16 @@ ASTCPrettyPrintTest >> testVisitEqualityOperator [
 ]
 
 { #category : #tests }
+ASTCPrettyPrintTest >> testVisitInequalityOperator [
+	| operator |
+	operator := (ASTCIdentifier new id: #a) notEquals: (ASTCIdentifier new id: #b).
+
+	operator debugASTCStructure.
+	self assert: operator isInequalityOperator.
+	self assert: operator prettyPrint equals: 'a != b'.
+]
+
+{ #category : #tests }
 ASTCPrettyPrintTest >> testVisitStructureDeclaration [
 	| structure |
 	structure := ASTCStructureDeclaration new id:(ASTCIdentifier new id: #a; yourself); yourself.

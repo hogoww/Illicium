@@ -78,7 +78,7 @@ ASTCValidatorDebugTest >> testVisitASTCTypeBad [
 ASTCValidatorDebugTest >> testVisitASTCTypeGood [
 	| astc |
 	astc := ASTCType new
-		type: ASTCSmallInteger;
+		type: ASTCSmallInteger asTypeReification ;
 		yourself.
 	self shouldnt: [ astc debugASTCStructure ] raise: AssertionFailure
 ]

@@ -135,6 +135,14 @@ ASTCExpression >> not [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> notEquals: anExpression [
+	^ ASTCInequalityOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> preIncr [
 	^ ASTCPreIncrementOperator new
 		addOperand: self;

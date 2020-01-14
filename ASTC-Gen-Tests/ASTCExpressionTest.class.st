@@ -256,6 +256,23 @@ ASTCExpressionTest >> testNot [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testNotEquals [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) notEquals: (ASTCIdentifier new id: #b).
+	
+	operator debugASTCStructure.
+	self assert: operator isInequalityOperator.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testOr [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) || (ASTCIdentifier new id: #b).

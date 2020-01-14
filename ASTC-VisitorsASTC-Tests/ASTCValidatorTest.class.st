@@ -23,7 +23,7 @@ ASTCValidatorTest >> testVisitASTCReturnGood [
 				value: 1;
 				yourself);
 		yourself.
-	astc debugASTCStructure
+	self assert: astc isStructuralyValidAST
 ]
 
 { #category : #tests }
@@ -39,7 +39,7 @@ ASTCValidatorTest >> testVisitASTCTypeBad [
 ASTCValidatorTest >> testVisitASTCTypeGood [
 	| astc |
 	astc := ASTCType new
-		type: ASTCSmallInteger;
+		type: ASTCSmallInteger asTypeReification;
 		yourself.
-	astc debugASTCStructure
+	self assert: astc isStructuralyValidAST
 ]
