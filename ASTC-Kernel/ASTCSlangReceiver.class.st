@@ -145,9 +145,8 @@ ASTCSlangReceiver >> doesNotUnderstand: aMessage [
 ASTCSlangReceiver >> ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	^ASTCIf new
-		condition:(self value acceptVisitor:self visitor);
-		then: ASTCBlock new;
-		else: (falseBlock acceptVisitor: self visitor);
+		condition: (self value acceptVisitor: self visitor) not;
+		then: (falseBlock acceptVisitor: self visitor);
 		yourself.
 ]
 
