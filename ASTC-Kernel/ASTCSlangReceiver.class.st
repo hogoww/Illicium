@@ -175,8 +175,10 @@ ASTCSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> ifTrueIfFalseExpression: args [.
-	
+ASTCSlangReceiver >> ifTrueIfFalseExpression: args [
+	"unfinished, because it requires inlining."
+	self flag:#unfinished.
+	^ self translatedValue 
 ]
 
 { #category : #'reflective operations' }
