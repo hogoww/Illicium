@@ -26,7 +26,7 @@ ASTCDeclaration >> id [
 
 { #category : #accessing }
 ASTCDeclaration >> id: anId [
-  anId parent: self.
+  anId ifNotNil: [ anId parent: self ].
   id := anId
 ]
 

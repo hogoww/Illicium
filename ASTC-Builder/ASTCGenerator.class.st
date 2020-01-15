@@ -186,7 +186,7 @@ ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aFMXClass [
 		ifFalse:[
 			aProperty isMany
 			ifTrue:[ [ aPropertyName do:[:each| each parent: self]]]
-			ifFalse:[	[ aPropertyName parent: self ]]]) +
+			ifFalse:[	[ aPropertyName ifNotNil: [aPropertyName parent: self] ]]]) +
 		[:anInstance | propertyName := aPropertyName ])
 		withArguments:{ #anInstance -> aPropertyName } asDictionary.
 	

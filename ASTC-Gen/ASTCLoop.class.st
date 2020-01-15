@@ -28,7 +28,7 @@ ASTCLoop >> body [
 
 { #category : #accessing }
 ASTCLoop >> body: aBody [
-  aBody parent: self.
+  aBody ifNotNil: [ aBody parent: self ].
   body := aBody
 ]
 
@@ -39,7 +39,7 @@ ASTCLoop >> condition [
 
 { #category : #accessing }
 ASTCLoop >> condition: aCondition [
-  aCondition parent: self.
+  aCondition ifNotNil: [ aCondition parent: self ].
   condition := aCondition
 ]
 

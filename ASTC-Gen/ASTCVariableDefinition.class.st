@@ -26,7 +26,7 @@ ASTCVariableDefinition >> init [
 
 { #category : #accessing }
 ASTCVariableDefinition >> init: anInit [
-  anInit parent: self.
+  anInit ifNotNil: [ anInit parent: self ].
   init := anInit
 ]
 

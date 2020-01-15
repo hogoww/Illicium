@@ -26,7 +26,7 @@ ASTCDeclarationStatement >> declaration [
 
 { #category : #accessing }
 ASTCDeclarationStatement >> declaration: aDeclaration [
-  aDeclaration parent: self.
+  aDeclaration ifNotNil: [ aDeclaration parent: self ].
   declaration := aDeclaration
 ]
 

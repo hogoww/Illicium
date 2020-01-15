@@ -55,6 +55,6 @@ ASTCFunctionDeclaration >> type [
 
 { #category : #accessing }
 ASTCFunctionDeclaration >> type: aType [
-  aType parent: self.
+  aType ifNotNil: [ aType parent: self ].
   type := aType
 ]

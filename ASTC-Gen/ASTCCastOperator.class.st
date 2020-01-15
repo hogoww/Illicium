@@ -31,6 +31,6 @@ ASTCCastOperator >> type [
 
 { #category : #accessing }
 ASTCCastOperator >> type: aType [
-  aType parent: self.
+  aType ifNotNil: [ aType parent: self ].
   type := aType
 ]

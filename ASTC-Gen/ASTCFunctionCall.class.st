@@ -45,7 +45,7 @@ ASTCFunctionCall >> id [
 
 { #category : #accessing }
 ASTCFunctionCall >> id: anId [
-  anId parent: self.
+  anId ifNotNil: [ anId parent: self ].
   id := anId
 ]
 

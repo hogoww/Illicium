@@ -26,7 +26,7 @@ ASTCFunctionDefinition >> body [
 
 { #category : #accessing }
 ASTCFunctionDefinition >> body: aBody [
-  aBody parent: self.
+  aBody ifNotNil: [ aBody parent: self ].
   body := aBody
 ]
 
