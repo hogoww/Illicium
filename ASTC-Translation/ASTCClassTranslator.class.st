@@ -251,12 +251,11 @@ ASTCClassTranslator >> translateMethodsASTs: methodsAST [
 { #category : #translation }
 ASTCClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
 	| res |
-	"This method sets and unset the method's translator IV.
-	This allows to translate stateful code, by replacing accesses to IV to (state -> iv) "
-	self isStatefulCode ifTrue:[ methodTranslator currentClass: aClass ].
 	res := methodsAST
-		collect: [ :aMethodAST | methodTranslator translateMethodAST: aMethodAST ].
-	methodTranslator currentClass: nil.
+		collect: [ :aMethodAST |
+			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor new ].
+			methodTranslator translateMethodAST: aMethodAST
+		].
 	^ res
 ]
 

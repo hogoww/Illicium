@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'translators',
 		'classTranslator',
-		'includes',
-		'currentClass'
+		'includes'
 	],
 	#category : #'ASTC-Translation-overviewers'
 }
@@ -29,16 +28,6 @@ ASTCMethodTranslator >> classTranslator [
 { #category : #initialization }
 ASTCMethodTranslator >> classTranslator: aClassTranslator [
 	^ classTranslator := aClassTranslator
-]
-
-{ #category : #accessing }
-ASTCMethodTranslator >> currentClass [
-	^ currentClass
-]
-
-{ #category : #accessing }
-ASTCMethodTranslator >> currentClass: aClass [
-	currentClass := aClass
 ]
 
 { #category : #utility }
