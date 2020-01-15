@@ -194,7 +194,7 @@ ASTCBuilder >> defineHierarchy [
 			literal --|> expression.
 			functionCall  --|> expression.
 			operator --|> expression.
-			self defineOperatorsRelations.
+			self defineOperatorsHierarchy.
 			identifier --|> expression.
 			
 			"Statement direct Subclasses"
@@ -250,7 +250,7 @@ ASTCBuilder >> defineOperatorClasses [
 ]
 
 { #category : #definition }
-ASTCBuilder >> defineOperatorsRelations [
+ASTCBuilder >> defineOperatorsHierarchy [
 	"Define operators in a different function, to limit the noise"
 	"priorities come from the ranking from the cppreference website.
 	Second part of the comment refers the associativity.
