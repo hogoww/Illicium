@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
+	^ false
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> initialize [
 
 	super initialize.
