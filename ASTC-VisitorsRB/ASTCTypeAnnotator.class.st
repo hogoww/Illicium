@@ -49,6 +49,13 @@ ASTCTypeAnnotator >> visitAssignmentNode: anAssignementNode [
 ]
 
 { #category : #visiting }
+ASTCTypeAnnotator >> visitBlockNode: aBlockNode [
+	super visitBlockNode: aBlockNode.
+	self typeThatNode: aBlockNode.
+	^ aBlockNode
+]
+
+{ #category : #visiting }
 ASTCTypeAnnotator >> visitGlobalNode: aGlobalNode [
 	super visitGlobalNode: aGlobalNode.
 	self typeThatNode: aGlobalNode.

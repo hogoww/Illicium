@@ -54,6 +54,20 @@ ASTCTypeAnnotatorTest >> testVisitAssignmentNode [
 ]
 
 { #category : #test }
+ASTCTypeAnnotatorTest >> testVisitBlockNode [
+	| counter ast |
+	counter := 0.
+	ast := self inferMethodSelector: #aBlockWithIntegerAsLastStatement from: PINodeTypeVisitorTest.
+	ast nodesDo: [ :aNode | 
+		aNode isBlock
+			ifTrue: [ 
+				counter := counter + 1.
+				self assert: (aNode hasProperty: propertyName).
+			]. ].
+	self assert: counter equals:1.
+]
+
+{ #category : #test }
 ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	counter := 0.
