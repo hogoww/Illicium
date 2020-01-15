@@ -171,10 +171,27 @@ ASTCSlangReceiver >> ifTrue: trueBlock [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
- 	^ASTCIf new
+ 	^ self ifTrueIfFalseKindOfMessages: { trueBlock. falseBlock }
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> ifTrueIfFalseExpression: args [.
+	
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> ifTrueIfFalseKindOfMessages: args [
+	^ self value parent parent isSequence
+		ifTrue: [ self ifTrueIfFalseStatement: args ]
+		ifFalse: [ self ifTrueIfFalseExpression: args. ]
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> ifTrueIfFalseStatement: args [
+	^ ASTCIf new
 		condition: (self value acceptVisitor:self visitor);
-		then: (trueBlock acceptVisitor: self visitor);
-		else: (falseBlock acceptVisitor: self visitor);
+		then: (args first acceptVisitor: self visitor);
+		else: (args second acceptVisitor: self visitor);
 		yourself.
 ]
 
