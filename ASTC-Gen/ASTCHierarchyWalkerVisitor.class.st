@@ -298,6 +298,12 @@ ASTCHierarchyWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+  super visitTernaryConditionalOperator: aTernaryConditionalOperator.
+  ^self visitOperator: aTernaryConditionalOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitType: aType [
   super visitType: aType.
   ^self visitNode: aType

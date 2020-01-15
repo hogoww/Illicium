@@ -250,6 +250,11 @@ ASTCSubclassResponsibilityVisitor >> visitSubtractionOperator: aSubtractionOpera
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+  self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitType: aType [
   self subclassResponsibility
 ]

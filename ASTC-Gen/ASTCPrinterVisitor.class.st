@@ -711,6 +711,20 @@ ASTCPrinterVisitor >> visitSubtractionOperator: aSubtractionOperator [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+  stream cr.
+  self printTabCount: currentDepth.
+  stream
+     << $(;
+     << 'aTernaryConditionalOperator';
+     space.
+  currentDepth := currentDepth + 1.
+  super visitTernaryConditionalOperator: aTernaryConditionalOperator.
+  currentDepth := currentDepth - 1.
+  stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitType: aType [
   stream cr.
   self printTabCount: currentDepth.

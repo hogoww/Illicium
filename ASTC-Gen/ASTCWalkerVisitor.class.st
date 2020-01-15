@@ -269,6 +269,11 @@ ASTCWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+  super visitTernaryConditionalOperator: aTernaryConditionalOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitType: aType [
   super visitType: aType
 ]

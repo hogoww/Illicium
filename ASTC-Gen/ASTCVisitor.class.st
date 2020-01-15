@@ -250,6 +250,11 @@ ASTCVisitor >> visitSubtractionOperator: aSubtractionOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+  
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitType: aType [
   
 ]

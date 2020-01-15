@@ -268,6 +268,11 @@ ASTCStructureValidatorVisitor >> visitSubtractionOperator: aSubtractionOperator 
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+  [ super visitTernaryConditionalOperator: aTernaryConditionalOperator ] on: AssertionFailure do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitType: aType [
   [ super visitType: aType ] on: AssertionFailure do: [ errors := errors + 1 ]
 ]

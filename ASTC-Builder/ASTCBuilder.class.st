@@ -91,7 +91,8 @@ Class {
 		'structAccessStaticOperator',
 		'emptyStatement',
 		'unequalOperator',
-		'inequalityOperator'
+		'inequalityOperator',
+		'ternaryConditionalOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -217,9 +218,11 @@ ASTCBuilder >> defineHierarchy [
 { #category : #definition }
 ASTCBuilder >> defineOperatorClasses [
 	"Define operators in a different function, to limit the noise"
+	
 	self flag:#format. "should have a synced format with defineOperators. Will do when they are all there."
 	unaryOperator := builder newClassNamed: #UnaryOperator.
 	binaryOperator := builder newClassNamed: #BinaryOperator.
+	ternaryConditionalOperator := builder newClassNamed: #TernaryConditionalOperator.
 	
 	preIncrementOperator := builder newClassNamed: #PreIncrementOperator.
 	preDecrementOperator := builder newClassNamed: #PreDecrementOperator.
@@ -292,6 +295,9 @@ ASTCBuilder >> defineOperatorsRelations [
 	andOperator --|> binaryOperator. " a && b "
 	"priority 12, #left"
 	orOperator --|> binaryOperator. " a || b "
+	
+	"priority 13, #right"
+	ternaryConditionalOperator --|> operator. " a ? b : c "
 	
 	"priority 14, #right"
 	assignementOperator --|> binaryOperator." a = b "

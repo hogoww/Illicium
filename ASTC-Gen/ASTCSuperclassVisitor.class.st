@@ -245,6 +245,11 @@ ASTCSuperclassVisitor >> visitSubtractionOperator: aSubtractionOperator [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+  ^self visitOperator: aTernaryConditionalOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitType: aType [
   ^self visitNode: aType
 ]

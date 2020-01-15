@@ -158,6 +158,12 @@ ASTCExpression >> structStaticAccess: anIdentifier [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> then: aTrueExpression else: aFalseExpression [
+	^ ASTCTernaryConditionalOperator new
+		
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> || anExpression [
 	^ ASTCOrOperator new
 		addOperand: self;

@@ -276,6 +276,11 @@ ASTCNode >> isSubtractionOperator [
 ]
 
 { #category : #testing }
+ASTCNode >> isTernaryConditionalOperator [
+  ^false
+]
+
+{ #category : #testing }
 ASTCNode >> isType [
   ^false
 ]
