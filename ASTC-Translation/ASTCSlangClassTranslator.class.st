@@ -24,6 +24,12 @@ ASTCSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 		ifFalse: [ self error: 'can only translate plugins for now. They need to inherit from InterpreterPlugin.' ].
 ]
 
+{ #category : #visiting }
+ASTCSlangClassTranslator >> preTranslationVisitors [
+	"should return a collection of visitors for RBAST which will annotate a method AST"
+	^ { ASTCSlangDeclarationAnnotator }
+]
+
 { #category : #check }
 ASTCSlangClassTranslator >> preTypeInference: aClass [
 	| piType |

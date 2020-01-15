@@ -116,6 +116,12 @@ ASTCClassTranslator >> preTranslationConstraintCheck: aClass [
 	"empty hook"
 ]
 
+{ #category : #visiting }
+ASTCClassTranslator >> preTranslationVisitors [
+	"should return a collection of visitors for RBAST which will annotate a method AST"
+	^ self subclassResponsibility 
+]
+
 { #category : #typing }
 ASTCClassTranslator >> preTypeInference: aClass [
 	"empty hook"
@@ -235,7 +241,11 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 { #category : #translation }
 ASTCClassTranslator >> translateMethodsASTs: methodsAST [
 	^ methodsAST
-		collect: [ :aMethodAST | methodTranslator translateMethodAST: aMethodAST ]
+		collect: [ :aMethodAST |
+			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor new ].
+			methodTranslator translateMethodAST: aMethodAST ]
+		
+	
 ]
 
 { #category : #translation }

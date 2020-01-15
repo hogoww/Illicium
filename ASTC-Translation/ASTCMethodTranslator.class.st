@@ -113,15 +113,6 @@ ASTCMethodTranslator >> literalValueNodeTranslator: anILLiteralValueNodeTranslat
 	translators at: #literalValueNodeTranslator put: (anILLiteralValueNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #visiting }
-ASTCMethodTranslator >> preTranslationAnalysis: aMethodAST [
-	| annotatorVisitors |
-	annotatorVisitors := OrderedCollection new.
-	annotatorVisitors add: ASTCIlliciumDeclarationAnnotator new.
-	aMethodAST acceptMultipleVisitors: annotatorVisitors.	"pre translation visits"
-	^ aMethodAST
-]
-
 { #category : #configuration }
 ASTCMethodTranslator >> returnNodeTranslator: anILReturnNodeTranslator [ 
 	translators at: #returnNodeTranslator put: (anILReturnNodeTranslator methodTranslator: self ; yourself).
@@ -134,9 +125,7 @@ ASTCMethodTranslator >> stateName [
 
 { #category : #visiting }
 ASTCMethodTranslator >> translateMethodAST: aMethodAST [
-	self preTranslationAnalysis: aMethodAST.
-	
-	^aMethodAST acceptVisitor: self.
+	^ aMethodAST acceptVisitor: self
 	
 ]
 
