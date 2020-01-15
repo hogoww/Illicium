@@ -7,7 +7,8 @@ Class {
 { #category : #initialization }
 ASTCSlangClassTranslator >> initialize [
 	super initialize.
-	inferer explicitTypeHeuristic: PISlangTypesHeuristic.
+	inferer := CCodeGenerator new.
+	inferer vmClass: CoInterpreter."not sure it'll be enough, but a test is failing because of this."
 	methodTranslator literalValueNodeTranslator: ILSlangLiteralValueNodeTranslator new.
 	methodTranslator returnNodeTranslator: ILSlangReturnNodeTranslator new
 ]
@@ -46,7 +47,6 @@ ASTCSlangClassTranslator >> preTypeInference: aClass [
 { #category : #'translation-api' }
 ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
-	inferer := CCodeGenerator new.
 	aClass declareCVarsIn: inferer.
 	method := (aClass >> aSelector) ast copy.
 	inferer addMethod: (method asTranslationMethodOfClass: TMethod).

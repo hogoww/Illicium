@@ -4,6 +4,14 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
+{ #category : #initialization }
+ASTCIlliciumClassTranslator >> initialize [
+	super initialize.
+	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic; yourself. 
+	"we also manipulate vm stuff, so we need vm type inference"
+
+]
+
 { #category : #translation }
 ASTCIlliciumClassTranslator >> isStatefulCode [
 	^ false
