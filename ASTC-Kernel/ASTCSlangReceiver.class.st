@@ -136,7 +136,7 @@ ASTCSlangReceiver >> doesNotUnderstand: aMessage [
 		ifTrue:[ UnsupportedFeature new feature: ('translation of Slang selector: #', aMessage selector) ; signal]. 
 	
 	^ (ASTCFunctionCall new 
-			id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector:(aMessage selector)); yourself) ;
+			id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: aMessage selector); yourself) ;
 			arguments: (aMessage arguments collect:[:each| each acceptVisitor: methodTranslator ]);
 			yourself)
 ]

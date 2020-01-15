@@ -373,3 +373,25 @@ ASTCExpressionTest >> testSubtraction [
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
+
+{ #category : #tests }
+ASTCExpressionTest >> testThenElse [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) then: (ASTCIdentifier new id: #b) else: (ASTCIdentifier new id: #c).
+	
+	operator debugASTCStructure.
+	self assert: operator isTernaryConditionalOperator.
+	self assert: operator operands size equals: 3.
+	
+	node := (operator operands at: 1).
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := (operator operands at: 2).
+	self assert: node isIdentifier.
+	self assert: node id equals: #b.
+	
+	node := (operator operands at: 3).
+	self assert: node isIdentifier.
+	self assert: node id equals: #c
+]
