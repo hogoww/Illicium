@@ -134,3 +134,13 @@ ASTCPrettyPrintTest >> testVisitStructureDefinition [
   int druss;
 };'.
 ]
+
+{ #category : #tests }
+ASTCPrettyPrintTest >> testVisitTernaryOperatorTest [
+	| operator |
+	operator := (ASTCIdentifier new id: #a) then: (ASTCIdentifier new id: #b) else: (ASTCIdentifier new id: #c).
+
+	operator debugASTCStructure.
+	self assert: operator isTernaryConditionalOperator.
+	self assert: operator prettyPrint equals: 'a ? b : c'.
+]

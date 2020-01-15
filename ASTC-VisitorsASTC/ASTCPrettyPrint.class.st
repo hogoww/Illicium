@@ -331,7 +331,7 @@ ASTCPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitTernaryOperator: anOperator [
+ASTCPrettyPrint >> visitTernaryConditionalOperator: anOperator [
 	(anOperator operands at: 1) acceptVisitor: self.
 	self << ' ' << '?' << ' '.
 	(anOperator operands at: 2) acceptVisitor: self.
