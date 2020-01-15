@@ -7,8 +7,7 @@ Class {
 { #category : #initialization }
 ASTCSlangClassTranslator >> initialize [
 	super initialize.
-	inferer := CCodeGenerator new.
-	inferer vmClass: CoInterpreter."not sure it'll be enough, but a test is failing because of this."
+	inferer := CCodeGeneratorGlobalStructure new.
 	methodTranslator literalValueNodeTranslator: ILSlangLiteralValueNodeTranslator new.
 	methodTranslator returnNodeTranslator: ILSlangReturnNodeTranslator new
 ]
