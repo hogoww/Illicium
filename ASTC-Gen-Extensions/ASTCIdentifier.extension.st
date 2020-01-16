@@ -11,7 +11,8 @@ ASTCIdentifier >> assign: anExpression [
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCIdentifier >> id: anId [
 	"took from a random list, might not be good enough"
-	(#(#auto #break #case #char #const #continue #default #do #double #else #enum #extern #float #for #goto #if #int #long #register #return #short #signed #sizeof #static #struct #switch #typedef #union #unsigned #void #volatile #while)
+	"removed #sizeof, because it's kindof a function anyway, so it shouldn't impact much"
+	(#(#auto #break #case #char #const #continue #default #do #double #else #enum #extern #float #for #goto #if #int #long #register #return #short #signed #static #struct #switch #typedef #union #unsigned #void #volatile #while)
 	includes: anId) ifTrue: [ ReservedKeywordUse new keyword: anId; signal ].
 	id := anId
 ]
