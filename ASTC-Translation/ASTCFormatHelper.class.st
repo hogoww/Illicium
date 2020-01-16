@@ -19,8 +19,9 @@ ASTCFormatHelper class >> formatSelector: aSelector [
 			].
 	"remove the underscores present before letters"
 	counter := 0.
-	functionID contents reverseDo:[:aChar|
+	functionID := functionID contents.
+	functionID reverseDo:[:aChar|
 		aChar = $_ 
 			ifTrue: [ counter := counter + 1 ]
-			ifFalse: [ 	^ functionID contents first: counter ] ]
+			ifFalse: [ ^ functionID contents first: functionID size - counter ] ]
 ]
