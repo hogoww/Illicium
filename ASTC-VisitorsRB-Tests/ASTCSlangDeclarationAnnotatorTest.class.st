@@ -22,7 +22,7 @@ ASTCSlangDeclarationAnnotatorTest >> testAssignmentInCondition [
 	self assert: (ast body statements at: 1) receiver propertyEquals: false.
 
 	self assert: ast body temporaries isNotEmpty.
-	self assert: ast body propertyEquals: (ast body temporaries collect:#name) asSet
+	self assert: ast body propertyEquals: (ast body temporaries) asSet
 ]
 
 { #category : #basic }
@@ -32,7 +32,7 @@ ASTCSlangDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 	self assert: (((ast body statements at: 1) arguments at: 1) statements at: 1) propertyEquals: false.
 
 	self assert: ast body temporaries isNotEmpty.
-	self assert: ast body propertyEquals: (ast body temporaries collect:#name) asSet
+	self assert: ast body propertyEquals: (ast body temporaries) asSet
 ]
 
 { #category : #basic }
@@ -56,7 +56,7 @@ ASTCSlangDeclarationAnnotatorTest >> testVisitTemporaryNode [
 	self assert: (ast body statements at: 1) propertyEquals: false.
 
 	self assert: ast body temporaries isNotEmpty.	
-	self assert: ast body propertyEquals: (ast body temporaries collect:#name) asSet
+	self assert: ast body propertyEquals: (ast body temporaries) asSet
 ]
 
 { #category : #basic }
@@ -70,5 +70,5 @@ ASTCSlangDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
 	"and therefore shouldn't be declared at the start"
 	self assert: ast body statements first temporaries isNotEmpty.
 	self assert: ast body statements first body propertyEquals: Set new.
-	self assert: ast body propertyEquals: (ast body statements first temporaries collect: #name) asSet.
+	self assert: ast body propertyEquals: (ast body statements first temporaries) asSet.
 ]

@@ -2,7 +2,8 @@ Class {
 	#name : #ASTCIlliciumDeclarationAnnotator,
 	#superclass : #ASTCVariableDeclarationAnnotator,
 	#instVars : [
-		'variableAppeareanceTracker'
+		'variableAppeareanceTracker',
+		'varNamesTodeclareAtStart'
 	],
 	#category : #'ASTC-VisitorsRB'
 }
@@ -10,6 +11,7 @@ Class {
 { #category : #visit }
 ASTCIlliciumDeclarationAnnotator >> initialize [ 
 	super initialize.
+	varNamesTodeclareAtStart := Set new.
 	variableAppeareanceTracker:= Dictionary new.
 ]
 
@@ -27,7 +29,7 @@ ASTCIlliciumDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 	(association value and: [ anAssignmentNode parent ~= variable methodNode body ])
 		ifTrue:[
 			association value: false.
-			varTodeclareAtStart add: variable name.
+			varNamesTodeclareAtStart add: variable name.
 			].
 	"Heuristic, if something is declared anywhere but the body of the method, we declare it in the body anyway.
 	a scope analysis slightly more complex would allow something better though."
@@ -49,6 +51,20 @@ ASTCIlliciumDeclarationAnnotator >> visitGlobalNode: aGlobalNode [
 ASTCIlliciumDeclarationAnnotator >> visitInstanceVariableNode: aRBInstanceVariableNode [ 
 	"they are already declared"
 	^ false
+]
+
+{ #category : #accessing }
+ASTCIlliciumDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
+	| tempToDeclare |
+	super visitSequenceNode: aSequenceNode.
+	
+	"This set should currently be empty except for the body of the method."
+	"The body of the method is currenlty set by the visit of the methodNode"
+	tempToDeclare := Set new.
+	aSequenceNode temporaries do: [:aTemporaryDeclaration | 
+		(varNamesTodeclareAtStart includes: aTemporaryDeclaration name)
+			ifTrue: [ tempToDeclare add: aTemporaryDeclaration ] ].
+	self atNewPropertyPut: tempToDeclare for: aSequenceNode.
 ]
 
 { #category : #visit }
