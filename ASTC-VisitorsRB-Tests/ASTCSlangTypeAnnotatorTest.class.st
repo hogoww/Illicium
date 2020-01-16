@@ -38,7 +38,7 @@ ASTCSlangTypeAnnotatorTest >> setUp [
 
 { #category : #test }
 ASTCSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
-	| ast counter message |
+	| ast message |
 	" Slang ignores inSmalltalk: part, so we have to as well"
 	ast := self
 		inferMethodSelector: #aMethodWithCCodeInSmalltalk
