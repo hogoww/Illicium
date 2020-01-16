@@ -370,6 +370,7 @@ ASTCBuilder >> defineRelations [
 	(functionCall property: #arguments) <>-* (expression property: #funcCallArg).
 	
 	(block property: #statements) <>-* (statement property: #blockStatement).
+	(block property: #declarations) <>-* (declarationStatement property: #blockDeclarations).
 	
 	(loop property: #condition) <>- (expression property: #condition).
 	(loop property: #body) <>- (statement property: #body).

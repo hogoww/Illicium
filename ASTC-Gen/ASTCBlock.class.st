@@ -2,7 +2,8 @@ Class {
 	#name : #ASTCBlock,
 	#superclass : #ASTCStatement,
 	#instVars : [
-		'statements'
+		'statements',
+		'declarations'
 	],
 	#category : #'ASTC-Gen-Nodes'
 }
@@ -11,6 +12,7 @@ Class {
 ASTCBlock >> = aBlock [
   super = aBlock ifFalse: [ ^false ].
   statements = aBlock statements ifFalse: [ ^false ].
+  declarations = aBlock declarations ifFalse: [ ^false ].
   ^true
 ]
 
@@ -20,8 +22,26 @@ ASTCBlock >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+ASTCBlock >> addDeclaration: aDeclaration [
+  aDeclaration parent: self.
+  declarations add: aDeclaration
+]
+
+{ #category : #accessing }
+ASTCBlock >> declarations [
+  ^declarations
+]
+
+{ #category : #accessing }
+ASTCBlock >> declarations: someDeclarationStatements [
+  someDeclarationStatements do: [:each |  each parent: self ].
+  declarations := someDeclarationStatements
+]
+
+{ #category : #accessing }
 ASTCBlock >> initialize [
-  statements := OrderedCollection new
+  statements := OrderedCollection new.
+  declarations := OrderedCollection new
 ]
 
 { #category : #testing }
