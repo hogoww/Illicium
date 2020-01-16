@@ -157,10 +157,16 @@ ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 	parenthesis ifTrue: [ self << ')' ].
 ]
 
-{ #category : #visiting }
+{ #category : #indentation }
 ASTCPrettyPrint >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
+	aBlock declarations
+		do: [ :each | 
+			self spaces.
+			each acceptVisitor: self.
+			self << Character cr ].
+	aBlock ifNotEmpty: [ self cr ].
 	aBlock statements
 		do: [ :each | 
 			self spaces.

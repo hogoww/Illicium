@@ -24,6 +24,27 @@ ASTCSlangPrettyPrinter >> printMultilineComment: aString [
 ]
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> visitBlock: aBlock [
+	self << '{' << Character cr.
+	self enterBlock.
+	(aBlock declarations sort: [:decl1 :decl2| decl1 declaration declaration id id <= decl2 declaration declaration id id ])
+		do: [ :each | 
+			self space space space space."specifically 4 space for them..."
+			each acceptVisitor: self.
+			self << Character cr ].
+	aBlock declarations ifNotEmpty: [ self cr ].
+
+	aBlock statements
+		do: [ :each | 
+			self spaces.
+			each acceptVisitor: self.
+			self << Character cr ].
+	self leaveBlock.
+	self spaces.
+	self << '}'.
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 	| noParenthesis parent |
 	parent := aFunctionCall parent.
@@ -78,4 +99,11 @@ ASTCSlangPrettyPrinter >> visitIf: anIf [
 		self cr spaces << 'else '.
 		anElse acceptVisitor: self.
 		].
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
+	aVariableDeclaration type acceptVisitor:self.
+	stream peekLast = $* ifFalse: [ self << Character space ].
+	aVariableDeclaration id acceptVisitor:self.
 ]
