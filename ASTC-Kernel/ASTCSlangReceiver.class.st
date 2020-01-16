@@ -132,13 +132,13 @@ ASTCSlangReceiver >> cCoerce: aVariable to: aType [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCEmptyStatment new
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCEmptyStatment new
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #'reflective operations' }
@@ -190,7 +190,7 @@ ASTCSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 ASTCSlangReceiver >> ifTrueIfFalseExpression: args [
 	"unfinished, because it requires inlining."
 	self flag:#unfinished.
-	^ self translatedValue 
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #'reflective operations' }
@@ -264,7 +264,7 @@ ASTCSlangReceiver >> printString [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> to: aNumber do: aBlock [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCEmptyStatment new.
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #accessing }
@@ -280,7 +280,7 @@ ASTCSlangReceiver >> type: aType [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> whileTrue: aBlock [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCEmptyStatment new
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #accessing }
