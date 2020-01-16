@@ -223,8 +223,11 @@ ASTCSlangReceiver >> integerValueOf: anOop [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> isIntegerObject: anOop [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: #isIntegerObject ; yourself);
+		addArgument: (anOop acceptVisitor: methodTranslator);
+		yourself
 ]
 
 { #category : #typing }
