@@ -248,8 +248,6 @@ ASTCBrokenPluginTranslationTest >> testTranslateBrokenPlugin [
 	| cu |
 	
 	
-	"FAILS BECAUSE class translation was not adapted yet"
-	self halt.
 	cu := translator translateClass: BrokenPlugin.
 	^ cu
 ]
