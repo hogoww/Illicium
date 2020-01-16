@@ -19,11 +19,16 @@ ILSlangToCGeneratedTests >> generateSlang: aSelector [
 	| method translation codeGenerator result |
 	method := testedClass >> aSelector.
 	translation := method asTranslationMethodOfClass: TMethod.
-	codeGenerator := CCodeGeneratorGlobalStructure new.
+	codeGenerator := VMPluginCodeGenerator new.
 	codeGenerator addMethod: translation.
+	"needed for some inlinings, i think. (see FilePluginTranslationTest>>testEqualsSlangOutputForPrimitiveFileWrite)"
+"	codeGenerator vmClass: CoInterpreter.
+	codeGenerator retainMethods: #().
+	CoInterpreter initializePrimitiveTable.
+	
 	codeGenerator generateDeadCode: false.
 	codeGenerator doInlining: true.
-	
+	"
 	codeGenerator  inferTypesForImplicitlyTypedVariablesAndMethods.
 		
 	result := String streamContents: [ :stream |
