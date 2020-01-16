@@ -130,6 +130,12 @@ ASTCSlangReceiver >> cCoerce: aVariable to: aType [
 ]
 
 { #category : #'reflective operations' }
+ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
 ASTCSlangReceiver >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand ifTrue:[ Error signal: 'infiniteRecursion' ].
 	(self class slangReservedSelector includes: aMessage selector) 
@@ -257,6 +263,12 @@ ASTCSlangReceiver >> type [
 { #category : #accessing }
 ASTCSlangReceiver >> type: aType [
 	type := aType
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> whileTrue: aBlock [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #accessing }
