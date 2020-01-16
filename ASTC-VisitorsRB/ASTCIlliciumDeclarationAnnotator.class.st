@@ -60,10 +60,8 @@ ASTCIlliciumDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	
 	"This set should currently be empty except for the body of the method."
 	"The body of the method is currenlty set by the visit of the methodNode"
-	tempToDeclare := Set new.
-	aSequenceNode temporaries do: [:aTemporaryDeclaration | 
-		(varNamesTodeclareAtStart includes: aTemporaryDeclaration name)
-			ifTrue: [ tempToDeclare add: aTemporaryDeclaration ] ].
+	tempToDeclare := aSequenceNode temporaries select: [:aTemporaryDeclaration | 
+		(varNamesTodeclareAtStart includes: aTemporaryDeclaration name)].
 	self atNewPropertyPut: tempToDeclare for: aSequenceNode.
 ]
 

@@ -10,7 +10,7 @@ Class {
 { #category : #visiting }
 ASTCSlangDeclarationAnnotator >> initialize [
 	super initialize.
-	varNodesToDeclareAtTheStartOfTheMethod := Set new
+	varNodesToDeclareAtTheStartOfTheMethod := OrderedCollection new
 ]
 
 { #category : #visiting }
@@ -34,5 +34,5 @@ ASTCSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	"Slang declares everything at start.
 	currently skips the temp declared in blocks."
 	aSequenceNode temporaries collect: [ :aTempDecl | aTempDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
-	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: Set new for: aSequenceNode ] 
+	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: OrderedCollection new for: aSequenceNode ] 
 ]
