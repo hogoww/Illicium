@@ -12,6 +12,5 @@ ASTCSlangDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 
 { #category : #visiting }
 ASTCSlangDeclarationAnnotator >> visitTemporaryNode: aTemporaryNode [
-	self halt.
 	varTodeclareAtStart add: aTemporaryNode name
 ]
