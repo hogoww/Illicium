@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCIlliciumDeclarationAnnotatorTest,
-	#superclass : #ASTCDeclarationAnnotatorTest,
+	#superclass : #ASTCVariableDeclarationAnnotatorTest,
 	#category : #'ASTC-VisitorsRB-Tests'
 }
 

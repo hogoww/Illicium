@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCSlangDeclarationAnnotatorTest,
-	#superclass : #ASTCDeclarationAnnotatorTest,
+	#superclass : #ASTCVariableDeclarationAnnotatorTest,
 	#category : #'ASTC-VisitorsRB-Tests'
 }
 
