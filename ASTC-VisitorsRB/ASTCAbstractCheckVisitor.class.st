@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 ASTCAbstractCheckVisitor class >> property [
 	"should return a symbol with the name of the property"
-	^SubclassResponsibility  
+	^self subclassResponsibility  
 ]
 
 { #category : #accessing }

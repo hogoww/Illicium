@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 ASTCVariableDeclarationAnnotator class >> property [
-	^#needsDeclaration
+	^#toDeclare
 ]
 
 { #category : #initialization }
