@@ -2,16 +2,15 @@ Class {
 	#name : #ASTCIlliciumDeclarationAnnotator,
 	#superclass : #ASTCVariableDeclarationAnnotator,
 	#instVars : [
-		'variableAppeareanceTracker',
-		'varTodeclareAtStart'
+		'variableAppeareanceTracker'
 	],
 	#category : #'ASTC-VisitorsRB'
 }
 
-{ #category : #initialization }
+{ #category : #visit }
 ASTCIlliciumDeclarationAnnotator >> initialize [ 
+	super initialize.
 	variableAppeareanceTracker:= Dictionary new.
-	varTodeclareAtStart := Set new.
 ]
 
 { #category : #visit }
@@ -50,17 +49,6 @@ ASTCIlliciumDeclarationAnnotator >> visitGlobalNode: aGlobalNode [
 ASTCIlliciumDeclarationAnnotator >> visitInstanceVariableNode: aRBInstanceVariableNode [ 
 	"they are already declared"
 	^ false
-]
-
-{ #category : #visit }
-ASTCIlliciumDeclarationAnnotator >> visitMethodNode: aMethodNode [
-	super visitMethodNode: aMethodNode.
-
-	"set the property for the temporaries tagged to be declared at the start of the function in the method node"
-	aMethodNode body temporaries
-		do: [ :aTemp |
-			self atNewPropertyPut: (varTodeclareAtStart includes: aTemp name)
-				for: aTemp ]
 ]
 
 { #category : #visit }

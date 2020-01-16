@@ -23,6 +23,14 @@ ASTCVariableDeclarationAnnotatorTest >> aMethodWithATemp [
 ]
 
 { #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> aMethodWithATempInABlock [
+	[
+		| aTemp |
+		aTemp := 3
+	]
+]
+
+{ #category : #basic }
 ASTCVariableDeclarationAnnotatorTest >> aMethodWithAnAssignedGlobalVar [
 	"should probably pick something that won't break the system on a random execution :D"
 	Smalltalk := 1
@@ -80,5 +88,11 @@ ASTCVariableDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
 { #category : #basic }
 ASTCVariableDeclarationAnnotatorTest >> testVisitTemporaryNode [
 	ast := (ASTCVariableDeclarationAnnotatorTest >> #aMethodWithATemp) ast copy.
+	ast acceptVisitor: visitor.
+]
+
+{ #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
+	ast := (ASTCVariableDeclarationAnnotatorTest >> #aMethodWithATempInABlock) ast copy.
 	ast acceptVisitor: visitor.
 ]

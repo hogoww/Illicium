@@ -13,9 +13,7 @@ ASTCSlangDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 { #category : #visiting }
 ASTCSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [ 
 	super visitSequenceNode: aSequenceNode.
-	"Slang declares everything at start"
-	aSequenceNode temporaries
-		do: [ :aTemp |
-			self atNewPropertyPut: true
-				for: aTemp ]
+	"Slang declares everything at start.
+	currently skips the temp declared in blocks."
+	aSequenceNode temporaries collect: [ :aTemp | aTemp name ] into: varTodeclareAtStart
 ]
