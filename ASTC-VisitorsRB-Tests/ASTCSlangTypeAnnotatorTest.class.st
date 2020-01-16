@@ -13,6 +13,11 @@ ASTCSlangTypeAnnotatorTest class >> isAbstract [
 ]
 
 { #category : #test }
+ASTCSlangTypeAnnotatorTest >> aMethodWithCCodeInSmalltalk [
+	^ self cCode: ' 1 ' inSmalltalk: [ 1 ]
+]
+
+{ #category : #test }
 ASTCSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
@@ -29,6 +34,18 @@ ASTCSlangTypeAnnotatorTest >> setUp [
 		inferer: CCodeGenerator new;
 		yourself.
 	super setUp
+]
+
+{ #category : #test }
+ASTCSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
+	| ast counter message |
+	" Slang ignores inSmalltalk: part, so we have to as well"
+	ast := self
+		inferMethodSelector: #aMethodWithCCodeInSmalltalk
+		from: self class.
+	message := ast body statements first value.
+	self assert: (message arguments first hasProperty: propertyName).
+	self deny: (message arguments second hasProperty: propertyName).
 ]
 
 { #category : #test }

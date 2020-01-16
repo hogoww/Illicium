@@ -25,6 +25,21 @@ ASTCSlangTypeAnnotator >> typeThatNode: aNode [
 ]
 
 { #category : #accessing }
+ASTCSlangTypeAnnotator >> visitMessageNode: aMessageNode [
+	" inlined the code of ProgramNodeVisitor>>#visitMessageNode:
+	to add an exception for cCode:inSmalltalk:, because slang ignores the second argument"
+	(aMessageNode isCascaded not or: [ aMessageNode isFirstCascaded ])
+		ifTrue: [ self visitNode: aMessageNode receiver ].
+	
+	aMessageNode selector = #cCode:inSmalltalk: 
+		ifTrue: [ self visitNode: aMessageNode arguments first ]
+		ifFalse: [ aMessageNode arguments do: [ :each | self visitNode: each ] ].
+
+	self typeThatNode: aMessageNode.
+	^ aMessageNode
+]
+
+{ #category : #accessing }
 ASTCSlangTypeAnnotator >> visitMethodNode: aMethodNode [
 	"set the current tMethod, so we can give it to the CCodeGenerator, when asking for a node's type"
 	currentTMethod := inferer methodNamed: aMethodNode selector.
