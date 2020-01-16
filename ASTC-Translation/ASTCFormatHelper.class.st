@@ -10,13 +10,17 @@ Class {
 { #category : #formatting }
 ASTCFormatHelper class >> formatSelector: aSelector [
 	"we first remove the :"
-	| functionID |
+	| functionID counter |
 	functionID := String new writeStream.
 	aSelector do:[:aChar | 
+		"remove the :"
 		aChar = $:
 			ifFalse:[ functionID << aChar ]
-			].		
-	[ functionID peekLast = $_ ]
-		whileTrue:[ functionID removeLast ].
-	^ functionID contents
+			].
+	"remove the underscores present before letters"
+	counter := 0.
+	functionID contents reverseDo:[:aChar|
+		aChar = $_ 
+			ifTrue: [ counter := counter + 1 ]
+			ifFalse: [ 	^ functionID contents first: counter ] ]
 ]
