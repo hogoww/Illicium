@@ -152,13 +152,21 @@ ASTCSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
    self cr.
    self << '#  if ' print: aPreprocessorIfNode condition ; cr.
-   aPreprocessorIfNode then do: [:anExpression | self spaces print: anExpression ; cr ] .
+   aPreprocessorIfNode then do: [:anExpression | 
+		self spaces print: anExpression.
+		aPreprocessorIfNode parent isExpression ifFalse: [ self << ';'].
+		self cr ] .
    aPreprocessorIfNode else ifNotEmpty: [
     	self << '#  else '.
 		self printNodeInMultilineComment: aPreprocessorIfNode condition ; cr.
-        aPreprocessorIfNode else do:[:anExpression | self spaces print: anExpression ; cr ]].
+        aPreprocessorIfNode else do:[:anExpression | 
+				self spaces print: anExpression.
+				aPreprocessorIfNode parent isExpression ifFalse: [ self << ';' ].
+				self cr]
+			].
    self << '#  endif '.
-	self printNodeInMultilineComment: aPreprocessorIfNode condition "; cr". "this cr will be added by the caller"
+	self printNodeInMultilineComment: aPreprocessorIfNode condition.
+	aPreprocessorIfNode parent isExpression ifTrue: [ self cr ]
 ]
 
 { #category : #visiting }
