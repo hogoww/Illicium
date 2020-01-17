@@ -52,9 +52,9 @@ ASTCPreprocessorIf >> else [
 ]
 
 { #category : #accessing }
-ASTCPreprocessorIf >> else: someExpressions [
-  someExpressions do: [:each |  each parent: self ].
-  else := someExpressions
+ASTCPreprocessorIf >> else: someNodes [
+  someNodes do: [:each |  each parent: self ].
+  else := someNodes
 ]
 
 { #category : #accessing }
@@ -74,7 +74,7 @@ ASTCPreprocessorIf >> then [
 ]
 
 { #category : #accessing }
-ASTCPreprocessorIf >> then: someExpressions [
-  someExpressions do: [:each |  each parent: self ].
-  then := someExpressions
+ASTCPreprocessorIf >> then: someNodes [
+  someNodes do: [:each |  each parent: self ].
+  then := someNodes
 ]

@@ -350,9 +350,10 @@ ASTCBuilder >> defineRelations [
 	(compilationUnit property: #declarations) <>-* (declaration property: #compilationUnit).
 
 	"preprocessor"
-	(preprocessorIf property: #condition) <>- (node property: #preProssorIfCond).
-	(preprocessorIf property: #then) <>-* (expression property: #preProssorIfThen).
-	(preprocessorIf property: #else) <>-* (expression property: #preProssorIfElse).
+	(preprocessorIf property: #condition) <>- (expression property: #preProssorIfCond).
+	(preprocessorIf property: #then) <>-* (node property: #preProssorIfThen).
+	(preprocessorIf property: #else) <>-* (node property: #preProssorIfElse).
+
 
 	(declaration property: #id) <>-(identifier property: #id).
 	(definition property: #declaration) <>- (declaration property: #definition).
