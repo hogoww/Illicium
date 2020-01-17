@@ -24,6 +24,13 @@ ASTCSlangPrettyPrinter >> printMultilineComment: aString [
 ]
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
+	anAssignmentOperator comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , anAssignmentOperator comment first ; cr ; spaces ].
+	super visitAssignmentOperator: anAssignmentOperator.
+
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
