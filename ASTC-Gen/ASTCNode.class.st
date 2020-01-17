@@ -241,6 +241,11 @@ ASTCNode >> isProject [
 ]
 
 { #category : #testing }
+ASTCNode >> isRawCCode [
+  ^false
+]
+
+{ #category : #testing }
 ASTCNode >> isReturn [
   ^false
 ]

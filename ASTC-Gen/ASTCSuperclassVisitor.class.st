@@ -210,6 +210,11 @@ ASTCSuperclassVisitor >> visitProject: aProject [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitRawCCode: aRawCCode [
+  ^self visitExpression: aRawCCode
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitReturn: aReturn [
   ^self visitStatement: aReturn
 ]

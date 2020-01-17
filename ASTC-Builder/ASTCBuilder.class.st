@@ -92,7 +92,8 @@ Class {
 		'emptyStatement',
 		'unequalOperator',
 		'inequalityOperator',
-		'ternaryConditionalOperator'
+		'ternaryConditionalOperator',
+		'rawCCode'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -143,6 +144,7 @@ ASTCBuilder >> defineClasses [
 		operator := builder newClassNamed: #Operator.
 		self defineOperatorClasses.
 		identifier := builder newClassNamed: #Identifier.
+		rawCCode := builder newClassNamed: #RawCCode.
 		
 		"Statement"
 		emptyStatement := builder newClassNamed: #EmptyStatment.
@@ -196,6 +198,7 @@ ASTCBuilder >> defineHierarchy [
 			operator --|> expression.
 			self defineOperatorsHierarchy.
 			identifier --|> expression.
+			rawCCode --|> expression.
 			
 			"Statement direct Subclasses"
 			emptyStatement  --|> statement.
@@ -318,6 +321,8 @@ ASTCBuilder >> defineProperties [
 
 	"removing the type might be a good idea"
 	literal property: #value type: #String.
+	
+	rawCCode property: #cCode type: #String.
 
 	type property: #type type: #TypeConstraint.
 ]

@@ -613,6 +613,21 @@ ASTCPrinterVisitor >> visitProject: aProject [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitRawCCode: aRawCCode [
+  stream cr.
+  self printTabCount: currentDepth.
+  stream
+     << $(;
+     << 'aRawCCode';
+     space;
+     print: aRawCCode cCode.
+  currentDepth := currentDepth + 1.
+  super visitRawCCode: aRawCCode.
+  currentDepth := currentDepth - 1.
+  stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitReturn: aReturn [
   stream cr.
   self printTabCount: currentDepth.

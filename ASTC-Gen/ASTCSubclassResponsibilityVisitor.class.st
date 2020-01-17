@@ -215,6 +215,11 @@ ASTCSubclassResponsibilityVisitor >> visitProject: aProject [
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitRawCCode: aRawCCode [
+  self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitReturn: aReturn [
   self subclassResponsibility
 ]

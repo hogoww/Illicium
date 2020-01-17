@@ -112,14 +112,14 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> cCode: aBlock [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ASTCSlangReceiver >> cCode: aString [
+	aString value isString ifFalse: [ self error ]."I don't know if there is sometimes blocks here, or stuff to evaluate"
+	^ ASTCRawCCode new cCode: aString value; yourself
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> cCode: aBlock inSmalltalk: ignoredBlock [
-	^ aBlock cCode: aBlock
+ASTCSlangReceiver >> cCode: aString inSmalltalk: ignoredBlock [
+	^ self cCode: aString
 ]
 
 { #category : #typing }
@@ -210,14 +210,20 @@ ASTCSlangReceiver >> ifTrueIfFalseStatement: args [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> integerObjectOf: anOop [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: #integerObjectOf ; yourself);
+		addArgument: (anOop acceptVisitor: methodTranslator);
+		yourself
 ]
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> integerValueOf: anOop [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: #integerValueOf ; yourself);
+		addArgument: (anOop acceptVisitor: methodTranslator);
+		yourself
 ]
 
 { #category : #'reflective operations' }

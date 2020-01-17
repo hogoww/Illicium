@@ -151,9 +151,9 @@ ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 	| parenthesis |
 	parenthesis := self doesThisNeedParenthesis: anOperator.
 	parenthesis ifTrue: [ self << '(' ].
-	self printBinaryOperand: (anOperator operands at: 1).
+	self printBinaryOperand: anOperator operands first.
 	self << ' ' << anOperator class symbol << ' '.
-	self printBinaryOperand: (anOperator operands at: 2).
+	self printBinaryOperand: anOperator operands second.
 	parenthesis ifTrue: [ self << ')' ].
 ]
 
