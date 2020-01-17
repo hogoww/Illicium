@@ -233,6 +233,11 @@ ASTCStructureValidatorVisitor >> visitProject: aProject [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitRawCCode: aRawCCode [
+  [ super visitRawCCode: aRawCCode ] on: AssertionFailure do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitReturn: aReturn [
   [ super visitReturn: aReturn ] on: AssertionFailure do: [ errors := errors + 1 ]
 ]

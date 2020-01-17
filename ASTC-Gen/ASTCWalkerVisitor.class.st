@@ -233,6 +233,11 @@ ASTCWalkerVisitor >> visitProject: aProject [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitRawCCode: aRawCCode [
+  super visitRawCCode: aRawCCode
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitReturn: aReturn [
   super visitReturn: aReturn.
   aReturn expression ifNotNil: [:anExpression |  anExpression acceptVisitor: self ]

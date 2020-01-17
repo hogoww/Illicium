@@ -215,6 +215,11 @@ ASTCVisitor >> visitProject: aProject [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitRawCCode: aRawCCode [
+  
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitReturn: aReturn [
   
 ]

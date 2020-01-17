@@ -256,6 +256,12 @@ ASTCHierarchyWalkerVisitor >> visitProject: aProject [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitRawCCode: aRawCCode [
+  super visitRawCCode: aRawCCode.
+  ^self visitExpression: aRawCCode
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitReturn: aReturn [
   super visitReturn: aReturn.
   ^self visitStatement: aReturn
