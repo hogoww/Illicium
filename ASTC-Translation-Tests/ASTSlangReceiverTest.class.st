@@ -24,8 +24,11 @@ ASTSlangReceiverTest >> testIfNil [
 	"Manual typing"
 	self addType: #int to: messageNode.
 	self addType: #int to: messageNode receiver.
-"	self addType: BlockClosure to: messageNode arguments first."
+"	self addType: BlockClosure to: messageNode arguments first." "does not seem needed"
 	self addType: #int to: messageNode arguments first statements first.
+	
+	"Manual declaration"
+	self addDeclarationProperty: OrderedCollection new to: messageNode arguments first body.
 	
 	astC := messageNode acceptVisitor: methodTranslator.
 	

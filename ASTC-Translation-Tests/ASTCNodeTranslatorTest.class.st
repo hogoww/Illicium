@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+ASTCNodeTranslatorTest >> addDeclarationProperty: aBooleanOrCollection to: aNode [ 
+	aNode propertyAt: ASTCVariableDeclarationAnnotator property
+		put: aBooleanOrCollection
+]
+
+{ #category : #'as yet unclassified' }
 ASTCNodeTranslatorTest >> addType: aClass to: aNode [ 
 	aNode propertyAt: ASTCTypeAnnotator property
 		put: ( aClass asTypeReification -> 'Generated, no Phineas Type')

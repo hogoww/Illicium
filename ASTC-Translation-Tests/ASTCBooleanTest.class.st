@@ -20,6 +20,9 @@ ASTCBooleanTest >> testIfTrue [
 	self addType: BlockClosure to: messageNode arguments first.
 	self addType: SmallInteger to: messageNode arguments first statements first.
 	
+	"Manual declaration"
+	self addDeclarationProperty: OrderedCollection new to: messageNode arguments first body.
+	
 	astC := messageNode acceptVisitor: methodTranslator.
 	
 	expectedC := ASTCIf new 
