@@ -17,6 +17,17 @@ ASTCVariableDeclarationAnnotatorTest class >> isAbstract [
 ]
 
 { #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> aMethodWithABlockWithAnArg [
+	[:a| ]
+]
+
+{ #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> aMethodWithABlockWithAnArgToDiscard [
+	| temp | 
+	(self addressOf: temp put: [:v| temp := v])
+]
+
+{ #category : #basic }
 ASTCVariableDeclarationAnnotatorTest >> aMethodWithATemp [
 	| aTemp |
 	aTemp := 3
@@ -40,6 +51,12 @@ ASTCVariableDeclarationAnnotatorTest >> aMethodWithAnAssignedGlobalVar [
 { #category : #basic }
 ASTCVariableDeclarationAnnotatorTest >> aMethodWithAnIV [
 	iv := 1
+]
+
+{ #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> aMethodWithTwoBlockWithSameVariable [
+	[:a| ].
+	[:a| ]
 ]
 
 { #category : #basic }
@@ -71,6 +88,24 @@ ASTCVariableDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 	ast := (ASTCVariableDeclarationAnnotatorTest >> #assignmentInOtherSequence) ast copy.
 	ast acceptVisitor: visitor.
 
+]
+
+{ #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
+	ast := (ASTCVariableDeclarationAnnotatorTest >> #aMethodWithTwoBlockWithSameVariable) ast copy.
+	ast acceptVisitor: visitor.
+]
+
+{ #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [ 
+	ast := (ASTCVariableDeclarationAnnotatorTest >> #aMethodWithABlockWithAnArg) ast copy.
+	ast acceptVisitor: visitor.
+]
+
+{ #category : #basic }
+ASTCVariableDeclarationAnnotatorTest >> testVisitArgumentNodeToDiscardInABlock [
+	ast := (ASTCVariableDeclarationAnnotatorTest >> #aMethodWithABlockWithAnArgToDiscard) ast copy.
+	ast acceptVisitor: visitor.
 ]
 
 { #category : #basic }

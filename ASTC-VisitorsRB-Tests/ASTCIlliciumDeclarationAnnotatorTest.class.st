@@ -36,6 +36,13 @@ ASTCIlliciumDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 ]
 
 { #category : #basic }
+ASTCIlliciumDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
+	"not sure how I want it to be for Illicium"
+	<expectedFailure>
+	self assert: false.
+]
+
+{ #category : #basic }
 ASTCIlliciumDeclarationAnnotatorTest >> testVisitGlobalNode [
 	super testVisitGlobalNode.
 	
