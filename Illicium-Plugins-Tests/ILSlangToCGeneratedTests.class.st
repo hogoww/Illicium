@@ -38,6 +38,12 @@ ILSlangToCGeneratedTests >> generateSlang: aSelector [
 	^ result
 ]
 
+{ #category : #generating }
+ILSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
+
+	^ anAST definitions first prettyPrintUsing: ASTCSlangTranslator new prettyPrinterClass new.
+]
+
 { #category : #accessing }
 ILSlangToCGeneratedTests >> testMethod: aSelector [
 	| cu |

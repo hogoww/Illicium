@@ -13,32 +13,36 @@ BrokenPluginTranslationTests >> setUp [
 
 { #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitiveNoPopButPush [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveNoPopButPush.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveNoPopButPush.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveNoPopButPush.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopAndFail [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitivePopAndFail.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitivePopAndFail.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitivePopAndFail.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopLessThanExpected [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitivePopLessThanExpected.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitivePopLessThanExpected.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitivePopLessThanExpected.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopMoreThanExpected [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitivePopMoreThanExpected.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitivePopMoreThanExpected.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitivePopMoreThanExpected.
   self assert: illiString equals: slangString
 ]

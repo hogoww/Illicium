@@ -101,8 +101,9 @@ IlliciumTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [
 
 	| methodSource |
 	methodSource :=	 'testEqualsSlangOutputFor', aSelector onlyLetters capitalized asMethodWithBody:[
-		| illiString slangString |
-		illiString := self generateIllicium: #aSelector.
+		| illiString slangString illiAST |
+		illiAST := self generateIllicium: #aSelector.
+		illiString := self prettyPrintIllicium: illiAST.
 		slangString := self generateSlang: #aSelector.
 		self assert: illiString equals: slangString.
 	].

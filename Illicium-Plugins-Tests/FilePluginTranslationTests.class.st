@@ -13,232 +13,261 @@ FilePluginTranslationTests >> setUp [
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveConnectToFile [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveConnectToFile.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveConnectToFile.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveConnectToFile.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveConnectToFileDescriptor [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveConnectToFileDescriptor.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveConnectToFileDescriptor.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveConnectToFileDescriptor.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDirectoryCreate [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDirectoryCreate.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDirectoryCreate.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDirectoryCreate.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDirectoryDelete [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDirectoryDelete.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDirectoryDelete.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDirectoryDelete.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDirectoryDelimitor [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDirectoryDelimitor.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDirectoryDelimitor.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDirectoryDelimitor.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDirectoryEntry [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDirectoryEntry.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDirectoryEntry.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDirectoryEntry.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDirectoryGetMacTypeAndCreator [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDirectoryGetMacTypeAndCreator.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDirectoryGetMacTypeAndCreator.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDirectoryGetMacTypeAndCreator.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDirectoryLookup [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDirectoryLookup.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDirectoryLookup.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDirectoryLookup.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDirectorySetMacTypeAndCreator [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDirectorySetMacTypeAndCreator.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDirectorySetMacTypeAndCreator.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDirectorySetMacTypeAndCreator.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveDisableFileAccess [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveDisableFileAccess.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveDisableFileAccess.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveDisableFileAccess.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileAtEnd [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileAtEnd.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileAtEnd.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileAtEnd.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileClose [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileClose.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileClose.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileClose.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileDelete [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileDelete.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileDelete.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileDelete.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileDescriptorType [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileDescriptorType.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileDescriptorType.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileDescriptorType.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileFlush [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileFlush.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileFlush.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileFlush.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileGetPosition [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileGetPosition.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileGetPosition.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileGetPosition.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileOpen [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileOpen.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileOpen.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileOpen.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileOpenNew [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileOpenNew.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileOpenNew.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileOpenNew.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileRead [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileRead.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileRead.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileRead.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileReadWithPinning [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileReadWithPinning.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileReadWithPinning.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileReadWithPinning.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileReadWithoutPinning [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileReadWithoutPinning.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileReadWithoutPinning.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileReadWithoutPinning.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileRename [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileRename.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileRename.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileRename.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileSetPosition [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileSetPosition.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileSetPosition.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileSetPosition.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileSize [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileSize.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileSize.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileSize.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileStdioHandles [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileStdioHandles.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileStdioHandles.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileStdioHandles.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileSync [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileSync.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileSync.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileSync.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileTruncate [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileTruncate.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileTruncate.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileTruncate.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveFileWrite [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveFileWrite.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveFileWrite.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveFileWrite.
   self assert: illiString equals: slangString
 ]
 
 { #category : #'equaliy-test' }
 FilePluginTranslationTests >> testEqualsSlangOutputForPrimitiveHasFileAccess [
-  | slangString illiString |
-  illiString := self generateIllicium: #primitiveHasFileAccess.
+  | illiAST slangString illiString |
+  illiAST := self generateIllicium: #primitiveHasFileAccess.
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitiveHasFileAccess.
   self assert: illiString equals: slangString
 ]
