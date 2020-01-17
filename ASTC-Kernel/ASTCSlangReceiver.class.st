@@ -135,11 +135,12 @@ ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
-	^ ASTCPreprocessorIf new
-		condition: (aPredicate acceptVisitor: methodTranslator);
-		then: (trueBlock acceptVisitor: methodTranslator);
-		else: (falseBlock ifNotNil: [ falseBlock acceptVisitor: methodTranslator ]);
-		yourself
+	| res |
+	res := ASTCPreprocessorIf new
+		condition: (aPredicate acceptVisitor: methodTranslator).
+	res then  addAll:(trueBlock acceptVisitor: methodTranslator) statements.
+	res else ifNotNil: [ res else addAll: (falseBlock acceptVisitor: methodTranslator) statements ].
+	^ res
 ]
 
 { #category : #'reflective operations' }

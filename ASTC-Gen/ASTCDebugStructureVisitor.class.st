@@ -99,9 +99,9 @@ ASTCDebugStructureVisitor >> visitOperator: anOperator [
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitPreprocessorIf: aPreprocessorIf [
   super visitPreprocessorIf: aPreprocessorIf.
-  aPreprocessorIf condition ifNotNil: [:aCondition |  self assert: aCondition isNode ].
-  aPreprocessorIf then ifNotNil: [:aThen |  self assert: aThen isNode ].
-  aPreprocessorIf else ifNotNil: [:anElse |  self assert: anElse isNode ]
+  aPreprocessorIf then ifNotNil: [:then |  then do: [:aThen |  self assert: aThen isExpression ] ].
+  aPreprocessorIf else ifNotNil: [:else |  else do: [:anElse |  self assert: anElse isExpression ] ].
+  aPreprocessorIf condition ifNotNil: [:aCondition |  self assert: aCondition isNode ]
 ]
 
 { #category : #visiting }

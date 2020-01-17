@@ -24,6 +24,18 @@ ASTCPreprocessorIf >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+ASTCPreprocessorIf >> addElse: anElse [
+  anElse parent: self.
+  else add: anElse
+]
+
+{ #category : #accessing }
+ASTCPreprocessorIf >> addThen: aThen [
+  aThen parent: self.
+  then add: aThen
+]
+
+{ #category : #accessing }
 ASTCPreprocessorIf >> condition [
   ^condition
 ]
@@ -40,9 +52,15 @@ ASTCPreprocessorIf >> else [
 ]
 
 { #category : #accessing }
-ASTCPreprocessorIf >> else: anElse [
-  anElse ifNotNil: [ anElse parent: self ].
-  else := anElse
+ASTCPreprocessorIf >> else: someExpressions [
+  someExpressions do: [:each |  each parent: self ].
+  else := someExpressions
+]
+
+{ #category : #accessing }
+ASTCPreprocessorIf >> initialize [
+  then := OrderedCollection new.
+  else := OrderedCollection new
 ]
 
 { #category : #testing }
@@ -56,7 +74,7 @@ ASTCPreprocessorIf >> then [
 ]
 
 { #category : #accessing }
-ASTCPreprocessorIf >> then: aThen [
-  aThen ifNotNil: [ aThen parent: self ].
-  then := aThen
+ASTCPreprocessorIf >> then: someExpressions [
+  someExpressions do: [:each |  each parent: self ].
+  then := someExpressions
 ]

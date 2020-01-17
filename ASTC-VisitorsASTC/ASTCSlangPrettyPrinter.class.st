@@ -137,14 +137,14 @@ ASTCSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
-	self cr.
-	self << #if print: aPreprocessorIfNode condition ; cr.
-	self << #then ; cr.
-	self print: aPreprocessorIfNode then.
-	aPreprocessorIfNode else ifNotNil: [ 
-		self << #else ; cr.
-		self print: aPreprocessorIfNode else ].
-	self << #endif ; cr
+    self cr.
+    self << #if print: aPreprocessorIfNode condition ; cr.
+    self << #then ; cr.
+    aPreprocessorIfNode then do: [:anExpression | self print: anExpression ].
+    aPreprocessorIfNode else ifNotNil: [
+        self << #else ; cr.
+        aPreprocessorIfNode else do:[:anExpression | self print: anExpression ]].
+    self << #endif ; cr
 ]
 
 { #category : #visiting }
