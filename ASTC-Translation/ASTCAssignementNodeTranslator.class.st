@@ -27,5 +27,8 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 		ifFalse: [
 				((anAssignmentNode variable acceptVisitor: methodTranslator)
 					assign: (anAssignmentNode value acceptVisitor: methodTranslator))
+					pharoNode: anAssignmentNode;
+					comment: anAssignmentNode commentOrNil;
+					yourself
 			]
 ]

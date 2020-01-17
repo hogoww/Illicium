@@ -25,7 +25,10 @@ ASTCMessageNodeTranslator >> translateNode: aMessageNode [
 		value: aMessageNode receiver;
 		visitor: methodTranslator;
 		yourself.
-	^ receiver
+	^ (receiver
 		perform: aMessageNode selector
-		withArguments: aMessageNode arguments asArray
+		withArguments: aMessageNode arguments asArray)
+		pharoNode: aMessageNode;
+		comment: aMessageNode commentOrNil;
+		yourself
 ]
