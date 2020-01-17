@@ -4,9 +4,15 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 ASTCSlangTranslator class >> classTranslatorClass [
 	^ ASTCSlangClassTranslator 
+]
+
+{ #category : #configuration }
+ASTCSlangTranslator class >> prettyPrinterClass [
+
+	^ ASTCSlangPrettyPrinter 
 ]
 
 { #category : #initialization }
@@ -20,7 +26,7 @@ ASTCSlangTranslator >> getReplacementType: aSymbol [
 ]
 
 { #category : #'translation-api' }
-ASTCSlangTranslator >> newPrettyPrinter [
+ASTCSlangTranslator >> prettyPrinterClass [
 
-	^ ASTCSlangPrettyPrinter new
+	^ ASTCSlangPrettyPrinter 
 ]

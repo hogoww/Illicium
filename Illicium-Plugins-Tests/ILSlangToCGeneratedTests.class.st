@@ -11,7 +11,7 @@ Class {
 { #category : #generating }
 ILSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
-	^ translator prettyPrintCodeForMethod: aSelector fromClass: testedClass
+	^ translator  translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #'generating machine code' }
@@ -41,7 +41,7 @@ ILSlangToCGeneratedTests >> generateSlang: aSelector [
 { #category : #generating }
 ILSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
-	^ anAST definitions first prettyPrintUsing: ASTCSlangTranslator new prettyPrinterClass new.
+	^ anAST definitions first prettyPrintUsing: ASTCSlangTranslator prettyPrinterClass new.
 ]
 
 { #category : #accessing }

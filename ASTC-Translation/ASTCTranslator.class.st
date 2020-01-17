@@ -8,9 +8,15 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 ASTCTranslator class >> classTranslatorClass [
 	^ ASTCIlliciumClassTranslator 
+]
+
+{ #category : #configuration }
+ASTCTranslator class >> prettyPrinterClass [
+
+	^ ASTCPrettyPrint
 ]
 
 { #category : #'translation-api' }
@@ -82,17 +88,17 @@ ASTCTranslator >> initialize [
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator >> newPrettyPrinter [
-
-	^ ASTCPrettyPrint new
-]
-
-{ #category : #'translation-api' }
 ASTCTranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
 
 	| compilationUnit |
 	compilationUnit := self translateMethod: aSelector fromClass: aClass.
-	^ compilationUnit definitions anyOne prettyPrintUsing: self newPrettyPrinter
+	^ compilationUnit definitions anyOne prettyPrintUsing: self class prettyPrinterClass new
+]
+
+{ #category : #'translation-api' }
+ASTCTranslator >> prettyPrinterClass [
+
+	^ ASTCPrettyPrint
 ]
 
 { #category : #accessors }
