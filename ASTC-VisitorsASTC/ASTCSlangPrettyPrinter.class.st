@@ -142,14 +142,16 @@ ASTCSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
-	| parenthesis |
-	self << anUnaryOperator class symbol.
+	| parenthesis innerParenthesis |
 	
-	parenthesis := anUnaryOperator operands first isRawCCode"first isLiteral and: [ anUnaryOperator operands first isString ]".
-	
+	parenthesis := self doesThisNeedParenthesis: anUnaryOperator.
+	innerParenthesis := anUnaryOperator operands first isRawCCode.
 	parenthesis ifTrue: [ self << '(' ].
-	anUnaryOperator operands first acceptVisitor: self.
-	parenthesis ifTrue: [ self << ')' ]
+	self << anUnaryOperator class symbol.
+	innerParenthesis ifTrue: [ self << '(' ].	
+	(anUnaryOperator operands at: 1) acceptVisitor: self.
+	innerParenthesis ifTrue: [ self << ')' ].
+	parenthesis ifTrue: [ self << ')' ].
 ]
 
 { #category : #visiting }

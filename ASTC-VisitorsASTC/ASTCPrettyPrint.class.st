@@ -352,8 +352,13 @@ ASTCPrettyPrint >> visitType: aType [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitUnaryOperator: anOperator [
+	| parenthesis |
+	self halt.
+	parenthesis := self doesThisNeedParenthesis: anOperator.
+	parenthesis ifTrue: [ self << '(' ].
 	self << anOperator class symbol.
-	(anOperator operands at: 1) acceptVisitor: self
+	(anOperator operands at: 1) acceptVisitor: self.
+	parenthesis ifTrue: [ self << ')' ].
 ]
 
 { #category : #visiting }
