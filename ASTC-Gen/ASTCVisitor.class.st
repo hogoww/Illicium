@@ -210,6 +210,11 @@ ASTCVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitPreprocessorIf: aPreprocessorIf [
+  
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitProject: aProject [
   
 ]

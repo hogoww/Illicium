@@ -130,14 +130,17 @@ ASTCSlangReceiver >> cCoerce: aVariable to: aType [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self cppIf: aPredicate ifTrue: trueBlock ifFalse: nil
 ]
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	| res |
+	res := ASTCPreprocessorIf new
+		condition: (aPredicate acceptVisitor: methodTranslator).
+	res then addAll: (trueBlock acceptVisitor: methodTranslator) statements.
+	falseBlock ifNotNil: [ res else addAll: (falseBlock acceptVisitor: methodTranslator) statements].
+	^ res
 ]
 
 { #category : #'reflective operations' }

@@ -210,6 +210,11 @@ ASTCSubclassResponsibilityVisitor >> visitPreIncrementOperator: aPreIncrementOpe
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitPreprocessorIf: aPreprocessorIf [
+  self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitProject: aProject [
   self subclassResponsibility
 ]

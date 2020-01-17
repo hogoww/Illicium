@@ -250,6 +250,12 @@ ASTCHierarchyWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitPreprocessorIf: aPreprocessorIf [
+  super visitPreprocessorIf: aPreprocessorIf.
+  ^self visitExpression: aPreprocessorIf
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitProject: aProject [
   super visitProject: aProject.
   ^self visitNode: aProject

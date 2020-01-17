@@ -38,6 +38,13 @@ ASTCSlangPrettyPrinter >> printMultilineComment: aString [
 		<< ' */'
 ]
 
+{ #category : #comments }
+ASTCSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
+	stream << '/* '
+		print: aNode;
+		<< ' */'
+]
+
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitAndOperator: anAndOperator [
 	self printLogicalOperatorInConditionnal: anAndOperator
@@ -72,6 +79,12 @@ ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 	self leaveBlock.
 	self spaces.
 	self << '}'.
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
+	anExpressionStatement expression acceptVisitor: self.
+	anExpressionStatement expression isPreprocessorIf ifFalse: [ self << $; ]. "pretty sure that won't always be the case."
 ]
 
 { #category : #visiting }
@@ -133,6 +146,19 @@ ASTCSlangPrettyPrinter >> visitIf: anIf [
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 	self printLogicalOperatorInConditionnal: anOrOperator
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
+   self cr.
+   self << '#  if ' print: aPreprocessorIfNode condition ; cr.
+   aPreprocessorIfNode then do: [:anExpression | self spaces print: anExpression ; cr ] .
+   aPreprocessorIfNode else ifNotEmpty: [
+    	self << '#  else '.
+		self printNodeInMultilineComment: aPreprocessorIfNode condition ; cr.
+        aPreprocessorIfNode else do:[:anExpression | self spaces print: anExpression ; cr ]].
+   self << '#  endif '.
+	self printNodeInMultilineComment: aPreprocessorIfNode condition "; cr". "this cr will be added by the caller"
 ]
 
 { #category : #visiting }
