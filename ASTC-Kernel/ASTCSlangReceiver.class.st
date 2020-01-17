@@ -118,9 +118,8 @@ ASTCSlangReceiver >> cCode: aBlock [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> cCode: aBlock inSmalltalk: anotherBlock [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ASTCSlangReceiver >> cCode: aBlock inSmalltalk: ignoredBlock [
+	^ aBlock cCode: aBlock
 ]
 
 { #category : #typing }
