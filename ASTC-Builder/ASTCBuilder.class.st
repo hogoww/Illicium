@@ -354,6 +354,7 @@ ASTCBuilder >> defineRelations [
 	(preprocessorIf property: #then) <>-* (node property: #preProssorIfThen).
 	(preprocessorIf property: #else) <>-* (node property: #preProssorIfElse).
 
+
 	(declaration property: #id) <>-(identifier property: #id).
 	(definition property: #declaration) <>- (declaration property: #definition).
 
