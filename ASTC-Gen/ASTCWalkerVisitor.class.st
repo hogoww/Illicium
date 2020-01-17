@@ -227,6 +227,14 @@ ASTCWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitPreprocessorIf: aPreprocessorIf [
+  super visitPreprocessorIf: aPreprocessorIf.
+  aPreprocessorIf condition ifNotNil: [:aCondition |  aCondition acceptVisitor: self ].
+  aPreprocessorIf then ifNotNil: [:aThen |  aThen acceptVisitor: self ].
+  aPreprocessorIf else ifNotNil: [:anElse |  anElse acceptVisitor: self ]
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitProject: aProject [
   super visitProject: aProject.
   aProject compilationUnits ifNotNil: [:compilationUnits |  compilationUnits do: [:aCompilationUnits |  aCompilationUnits acceptVisitor: self ] ]

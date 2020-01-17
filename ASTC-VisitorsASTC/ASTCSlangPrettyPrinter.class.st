@@ -136,6 +136,18 @@ ASTCSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 ]
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
+	self cr.
+	self << #if print: aPreprocessorIfNode condition ; cr.
+	self << #then ; cr.
+	self print: aPreprocessorIfNode then.
+	aPreprocessorIfNode else ifNotNil: [ 
+		self << #else ; cr.
+		self print: aPreprocessorIfNode else ].
+	self << #endif ; cr
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
 	self << aRawCCodeNode cCode
 ]

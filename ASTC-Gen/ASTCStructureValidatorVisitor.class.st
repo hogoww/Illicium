@@ -228,6 +228,11 @@ ASTCStructureValidatorVisitor >> visitPreIncrementOperator: aPreIncrementOperato
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitPreprocessorIf: aPreprocessorIf [
+  [ super visitPreprocessorIf: aPreprocessorIf ] on: AssertionFailure do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitProject: aProject [
   [ super visitProject: aProject ] on: AssertionFailure do: [ errors := errors + 1 ]
 ]

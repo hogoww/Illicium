@@ -93,7 +93,8 @@ Class {
 		'unequalOperator',
 		'inequalityOperator',
 		'ternaryConditionalOperator',
-		'rawCCode'
+		'rawCCode',
+		'preprocessorIf'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -163,7 +164,8 @@ ASTCBuilder >> defineClasses [
 				doWhile := builder newClassNamed: #DoWhile.
  
 		
-
+		"preprocessor"
+		preprocessorIf := builder newClassNamed: #PreprocessorIf
 ]
 
 { #category : #definition }
@@ -173,6 +175,9 @@ ASTCBuilder >> defineHierarchy [
 
 	project --|> node.
 	compilationUnit --|> node.
+	
+	"preprocessor"
+	preprocessorIf --|> expression "not sure about this..".
 
 		"Node Direct SubClasses"
 		functionDefinition  --|> node.
@@ -343,6 +348,11 @@ ASTCBuilder >> defineRelations [
 	(project property: #compilationUnits) <>-* (compilationUnit property: #project).
 	(compilationUnit property: #definitions) <>-* (definition property: #compilationUnit).
 	(compilationUnit property: #declarations) <>-* (declaration property: #compilationUnit).
+
+	"preprocessor"
+	(preprocessorIf property: #condition) <>- (node property: #preProssorIfCond).
+	(preprocessorIf property: #then) <>- (node property: #preProssorIfThen).
+	(preprocessorIf property: #else) <>- (node property: #preProssorIfElse).
 
 	(declaration property: #id) <>-(identifier property: #id).
 	(definition property: #declaration) <>- (declaration property: #definition).

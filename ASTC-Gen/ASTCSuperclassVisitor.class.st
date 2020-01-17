@@ -205,6 +205,11 @@ ASTCSuperclassVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitPreprocessorIf: aPreprocessorIf [
+  ^self visitExpression: aPreprocessorIf
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitProject: aProject [
   ^self visitNode: aProject
 ]

@@ -236,6 +236,11 @@ ASTCNode >> isPreIncrementOperator [
 ]
 
 { #category : #testing }
+ASTCNode >> isPreprocessorIf [
+  ^false
+]
+
+{ #category : #testing }
 ASTCNode >> isProject [
   ^false
 ]
