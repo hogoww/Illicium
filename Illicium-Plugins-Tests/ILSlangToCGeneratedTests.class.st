@@ -17,6 +17,7 @@ ILSlangToCGeneratedTests >> generateIllicium: aSelector [
 { #category : #'generating machine code' }
 ILSlangToCGeneratedTests >> generateSlang: aSelector [ 
 	| method translation codeGenerator result |
+	"Might be able to use cCodeForMethod: instead"
 	method := testedClass >> aSelector.
 	translation := method asTranslationMethodOfClass: TMethod.
 	codeGenerator := VMPluginCodeGenerator new.
