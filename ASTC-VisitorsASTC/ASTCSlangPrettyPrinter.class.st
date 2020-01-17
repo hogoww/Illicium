@@ -6,7 +6,10 @@ Class {
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
-	^ false
+	^ aNode parent isIf not 
+		and: [ aNode parent isAssignmentOperator not
+			and: [ aNode parent isStatement not
+				and: [ aNode parent isFunctionCall not ]]].
 ]
 
 { #category : #visiting }
@@ -56,13 +59,12 @@ ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
-	| noParenthesis parent |
-	parent := aFunctionCall parent.
-	noParenthesis := parent isAssignmentOperator or: [parent isStatement or: [ parent isFunctionCall ]].
+	| parenthesis |
+	parenthesis := self doesThisNeedParenthesis: aFunctionCall.
 	
-	noParenthesis ifFalse: [ self << '(' ].
+	parenthesis ifTrue: [ self << '(' ].
 	super visitFunctionCall: aFunctionCall.
-	noParenthesis ifFalse: [ self << ')' ].
+	parenthesis ifTrue: [ self << ')' ].
 ]
 
 { #category : #visiting }
@@ -121,7 +123,7 @@ ASTCSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 	| parenthesis |
 	self << anUnaryOperator class symbol.
 	
-	parenthesis := anUnaryOperator operands first isLiteral and: [ anUnaryOperator operands first isString ].
+	parenthesis := anUnaryOperator operands first isRawCCode"first isLiteral and: [ anUnaryOperator operands first isString ]".
 	
 	parenthesis ifTrue: [ self << '(' ].
 	anUnaryOperator operands first acceptVisitor: self.
