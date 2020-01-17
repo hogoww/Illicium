@@ -19,11 +19,28 @@ ASTCSlangPrettyPrinter >> initialize [
 	self indentationString: '	'
 ]
 
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
+	| parenthesis |
+	parenthesis := self doesThisNeedParenthesis: anOperator.
+	parenthesis ifTrue: [ self << '(' ].
+	self printBinaryOperand: anOperator operands first.
+	self cr spaces << Character tab.
+	self << ' ' << anOperator class symbol << ' '.
+	self printBinaryOperand: anOperator operands second.
+	parenthesis ifTrue: [ self << ')' ].
+]
+
 { #category : #comments }
 ASTCSlangPrettyPrinter >> printMultilineComment: aString [
 	stream << '/*'
 		<< aString
 		<< ' */'
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitAndOperator: anAndOperator [
+	self printLogicalOperatorInConditionnal: anAndOperator
 ]
 
 { #category : #visiting }
@@ -111,6 +128,11 @@ ASTCSlangPrettyPrinter >> visitIf: anIf [
 		self cr spaces << 'else '.
 		anElse acceptVisitor: self.
 		].
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitOrOperator: anOrOperator [
+	self printLogicalOperatorInConditionnal: anOrOperator
 ]
 
 { #category : #visiting }
