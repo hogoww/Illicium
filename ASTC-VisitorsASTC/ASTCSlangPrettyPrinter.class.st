@@ -93,7 +93,14 @@ ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 	parenthesis := self doesThisNeedParenthesis: aFunctionCall.
 	
 	parenthesis ifTrue: [ self << '(' ].
-	super visitFunctionCall: aFunctionCall.
+	aFunctionCall id acceptVisitor: self.
+	self << '('.
+	self enterBlock.
+	aFunctionCall arguments do: [:each | each acceptVisitor:self ]
+		separatedBy: [ self << ', ' ].
+	stream peekLast = Character cr ifTrue: [ self spaces ].
+	self leaveBlock.
+	self << ')'.
 	parenthesis ifTrue: [ self << ')' ].
 ]
 

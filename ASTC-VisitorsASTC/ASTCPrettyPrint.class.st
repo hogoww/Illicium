@@ -249,13 +249,18 @@ ASTCPrettyPrint >> visitFor: aFor [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitFunctionCall: aFunctionCall [
+	| parentheses |
+	
+	parentheses := self doesThisNeedParenthesis: aFunctionCall.
+	parentheses ifTrue: [ '(' ].
 	aFunctionCall id acceptVisitor: self.
 	self << '('.
-	aFunctionCall arguments do: [:each |
-		each acceptVisitor:self.
-		] separatedBy:[ self << ', ' ].
+	self enterBlock.
+	aFunctionCall arguments do: [:each | each acceptVisitor:self ]
+		separatedBy: [ self << ', ' ].
+	self leaveBlock.
 	self << ')'.
-	
+	parentheses ifTrue: [ '(' ].
 ]
 
 { #category : #visiting }
