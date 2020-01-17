@@ -27,6 +27,9 @@ ASTCSlangPrettyPrinter >> printMultilineComment: aString [
 ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
+	
+	aBlock comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , aBlock comment first ; cr ].
+	
 	(aBlock declarations sort: [:decl1 :decl2| decl1 declaration declaration id id <= decl2 declaration declaration id id ])
 		do: [ :each | 
 			self space space space space."specifically 4 space for them..."
