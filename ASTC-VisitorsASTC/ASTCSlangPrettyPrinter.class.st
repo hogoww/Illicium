@@ -25,7 +25,7 @@ ASTCSlangPrettyPrinter >> printMultilineComment: aString [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
-	anAssignmentOperator comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , anAssignmentOperator comment first ; cr ; spaces ].
+"	anAssignmentOperator comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , anAssignmentOperator comment first ; cr ; spaces ]."
 	super visitAssignmentOperator: anAssignmentOperator.
 
 ]
@@ -34,8 +34,8 @@ ASTCSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
-	
-	aBlock comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , aBlock comment first ; cr ].
+	"
+	aBlock comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , aBlock comment first ; cr ]."
 	
 	(aBlock declarations sort: [:decl1 :decl2| decl1 declaration declaration id id <= decl2 declaration declaration id id ])
 		do: [ :each | 
@@ -82,11 +82,11 @@ ASTCSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
-	aFunctionDefinition comment ifNotNil: [ 
+	"aFunctionDefinition comment ifNotNil: [ 
 		self cr cr;
 			printMultilineComment: '	', aFunctionDefinition comment anyOne;
 			cr
-		].
+		]."
 	
 	self cr.
 	
@@ -109,6 +109,23 @@ ASTCSlangPrettyPrinter >> visitIf: anIf [
 		self cr spaces << 'else '.
 		anElse acceptVisitor: self.
 		].
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
+	self << aRawCCodeNode cCode
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
+	| parenthesis |
+	self << anUnaryOperator class symbol.
+	
+	parenthesis := anUnaryOperator operands first isLiteral and: [ anUnaryOperator operands first isString ].
+	
+	parenthesis ifTrue: [ self << '(' ].
+	anUnaryOperator operands first acceptVisitor: self.
+	parenthesis ifTrue: [ self << ')' ]
 ]
 
 { #category : #visiting }
