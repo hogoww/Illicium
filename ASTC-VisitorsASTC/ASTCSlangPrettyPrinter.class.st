@@ -47,6 +47,13 @@ ASTCSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
 ]
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
+	self << '('.
+	self visitUnaryOperator: anAddressOfOperatorNode.
+	self << ')'.
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> visitAndOperator: anAndOperator [
 	self printLogicalOperatorInConditionnal: anAndOperator
 ]

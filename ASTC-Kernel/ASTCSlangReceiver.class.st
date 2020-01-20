@@ -77,9 +77,10 @@ ASTCSlangReceiver >> >= aNumber [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> addressOf: something put: somethingelse [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ASTCSlangReceiver >> addressOf: anExpression put: anAssignmentBlock [
+	"Ssecond argument is for simulation purpose, i assume.
+	Regardless, it's ignored during translation"
+	^ (anExpression acceptVisitor: methodTranslator) asAddressOf
 ]
 
 { #category : #typing }
