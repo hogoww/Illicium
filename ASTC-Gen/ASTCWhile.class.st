@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCWhile >> = aWhile [
-  super = aWhile ifFalse: [ ^false ].
-  ^true
+	super = aWhile
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCWhile >> acceptVisitor: aVisitor [
-  aVisitor visitWhile: self
+	aVisitor visitWhile: self
 ]
 
 { #category : #testing }
 ASTCWhile >> isWhile [
-  ^true
+	^ true
 ]

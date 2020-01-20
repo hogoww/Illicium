@@ -6,285 +6,290 @@ Class {
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitAbstractWhile: anAbstractWhile [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitAdditionOperator: anAdditionOperator [
-  self subclassResponsibility
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitAddressOfOperator: anAddressOfOperator [
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitAndOperator: anAndOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitAssignmentOperator: anAssignmentOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitBinaryOperator: aBinaryOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitBlock: aBlock [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitBreak: aBreak [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitCastOperator: aCastOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitCompilationUnit: aCompilationUnit [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitDeclaration: aDeclaration [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitDeclarationStatement: aDeclarationStatement [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitDefinition: aDefinition [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitDivisionOperator: aDivisionOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitDoWhile: aDoWhile [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitEmptyStatment: anEmptyStatment [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitEqualityOperator: anEqualityOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitExpression: anExpression [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitExpressionStatement: anExpressionStatement [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitFor: aFor [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitFunctionCall: aFunctionCall [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitFunctionDefinition: aFunctionDefinition [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitGreaterOperator: aGreaterOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitIdentifier: anIdentifier [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitIf: anIf [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitIndexerOperator: anIndexerOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitInequalityOperator: anInequalityOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitLesserOperator: aLesserOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitLiteral: aLiteral [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitLoop: aLoop [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitModuloOperator: aModuloOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitNode: aNode [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitOperator: anOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitOrOperator: anOrOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitPreprocessorIf: aPreprocessorIf [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitProject: aProject [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitRawCCode: aRawCCode [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitReturn: aReturn [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitStatement: aStatement [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitStructureDeclaration: aStructureDeclaration [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitStructureDefinition: aStructureDefinition [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitSubtractionOperator: aSubtractionOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitType: aType [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitUnaryOperator: anUnaryOperator [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitVariableDeclaration: aVariableDeclaration [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitVariableDefinition: aVariableDefinition [
-  self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitWhile: aWhile [
-  self subclassResponsibility
+	self subclassResponsibility
 ]

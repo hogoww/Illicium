@@ -94,7 +94,8 @@ Class {
 		'inequalityOperator',
 		'ternaryConditionalOperator',
 		'rawCCode',
-		'preprocessorIf'
+		'preprocessorIf',
+		'addressOfOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -254,7 +255,8 @@ ASTCBuilder >> defineOperatorClasses [
 	structAccessPointerOperator := builder newClassNamed: #StructAccessPointerOperator.
 	bitwiseAndOperator := builder newClassNamed: #BitwiseAndOperator.
 	moduloOperator := builder newClassNamed: #ModuloOperator.
-	structAccessStaticOperator := builder newClassNamed: #StructAccessStaticOperator
+	structAccessStaticOperator := builder newClassNamed: #StructAccessStaticOperator.
+	addressOfOperator := builder newClassNamed: #AddressOfOperator
 ]
 
 { #category : #definition }
@@ -275,6 +277,7 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	preIncrementOperator --|> unaryOperator." ++i "
 	preDecrementOperator --|> unaryOperator. " --i "
 	logicalNotOperator --|> unaryOperator." ! b "
+	addressOfOperator --|> unaryOperator. " & a "
 	castOperator --|> unaryOperator. " (int) a "
 	
 	"priority 3, #left"
