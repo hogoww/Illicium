@@ -171,16 +171,20 @@ ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
    self << '#  if ' print: aPreprocessorIfNode condition ; cr.
    aPreprocessorIfNode then do: [:anExpression | 
 		self spaces print: anExpression.
-		aPreprocessorIfNode parent isExpression ifFalse: [ self << ';'].
+			(aPreprocessorIfNode parent isExpression or: [anExpression isPreprocessorIf ])
+				ifFalse: [ self << ';'].
 		self cr ] .
    aPreprocessorIfNode else ifNotEmpty: [
+	
     	self << '#  else '.
 		self printNodeInMultilineComment: aPreprocessorIfNode condition ; cr.
         aPreprocessorIfNode else do:[:anExpression | 
 				self spaces print: anExpression.
-				aPreprocessorIfNode parent isExpression ifFalse: [ self << ';' ].
+				(aPreprocessorIfNode parent isExpression or: [anExpression isPreprocessorIf ])
+					ifFalse: [ self << ';' ].
 				self cr]
 			].
+		
    self << '#  endif '.
 	self printNodeInMultilineComment: aPreprocessorIfNode condition.
 	aPreprocessorIfNode parent isExpression ifTrue: [ self cr ]
