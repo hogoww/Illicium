@@ -33,6 +33,10 @@ FullVMCCodeGeneratorRessource >> newCodeGenerator [
 		to: ''
 		platformDir: ''
 		including: #()) buildCodeGeneratorForInterpreter 
+				inferTypesForImplicitlyTypedVariablesAndMethods;
+				prepareMethods;
+				doInlining: true;
+				yourself
 		
 ]
 
