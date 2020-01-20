@@ -12,5 +12,9 @@ ILSlangTemporaryDeclarationNodesTranslator >> translateNode: aTemporaryDeclarati
 	^ ((aTemporaryDeclarationNode methodNode propertyAt: #tNodeEquivalent) 
 		declarationAt: aTemporaryDeclarationNode name ifAbsent: nil)
 		ifNil: [ super translateNode: aTemporaryDeclarationNode ]
-		ifNotNil: [:aStringDecl| ASTCRawDeclaration new rawDeclaration: aStringDecl; yourself ]
+		ifNotNil: [:aStringDecl| 
+			ASTCRawDeclaration new 
+				rawDeclaration: aStringDecl;
+				varName: aTemporaryDeclarationNode name;
+				yourself ]
 ]

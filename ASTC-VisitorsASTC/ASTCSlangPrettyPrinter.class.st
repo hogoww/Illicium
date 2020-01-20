@@ -78,7 +78,7 @@ ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 	"
 	aBlock comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , aBlock comment first ; cr ]."
 	
-	(aBlock declarations sort: [:decl1 :decl2| decl1 name <= decl2 name ])
+	(aBlock declarations sort: [:decl1 :decl2| decl1 varName <= decl2 varName ])
 		do: [ :each | 
 			self space space space space."specifically 4 space for them..."
 			each acceptVisitor: self.
@@ -193,6 +193,11 @@ ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
 	self << aRawCCodeNode cCode
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitRawDeclaration: aRawDeclarationNode [
+	self << aRawDeclarationNode rawDeclaration << ';'
 ]
 
 { #category : #visiting }
