@@ -89,6 +89,13 @@ ASTCExpression >> >= anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> asAddressOf [
+	^ ASTCAddressOfOperator new
+		addOperand: self;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> asStatement [
 
 	^ ASTCExpressionStatement expression: self

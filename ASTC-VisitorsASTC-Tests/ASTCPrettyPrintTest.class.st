@@ -55,6 +55,16 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
 ]
 
 { #category : #tests }
+ASTCPrettyPrintTest >> testVisitAddressOfOperator [
+	| operator |
+	operator := (ASTCIdentifier new id: #a) asAddressOf.
+
+	operator debugASTCStructure.
+	self assert: operator isAddressOfOperator.
+	self assert: operator prettyPrint equals: '&a'.
+]
+
+{ #category : #tests }
 ASTCPrettyPrintTest >> testVisitBreak [
 	| breakStatement |
 	breakStatement := ASTCBreak new.

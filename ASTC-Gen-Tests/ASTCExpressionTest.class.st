@@ -49,11 +49,11 @@ ASTCExpressionTest >> testAssign [
 	self assert: operator isAssignmentOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isLiteral.
 	self assert: node value equals: 1
 ]
@@ -67,11 +67,11 @@ ASTCExpressionTest >> testBitAnd [
 	self assert: operator isBitwiseAndOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -89,7 +89,7 @@ ASTCExpressionTest >> testCastTo [
 	self assert: node isType.
 	self assert: node type equals: ASTCSmallInteger asTypeReification.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]
@@ -103,11 +103,11 @@ ASTCExpressionTest >> testDivision [
 	self assert: operator isDivisionOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -121,11 +121,11 @@ ASTCExpressionTest >> testEquals [
 	self assert: operator isEqualityOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -139,11 +139,11 @@ ASTCExpressionTest >> testGreater [
 	self assert: operator isGreaterOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -157,11 +157,11 @@ ASTCExpressionTest >> testGreaterOrEqual [
 	self assert: operator isGreaterOrEqualOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -175,11 +175,11 @@ ASTCExpressionTest >> testIndexer [
 	self assert: operator isIndexerOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -193,11 +193,11 @@ ASTCExpressionTest >> testLesser [
 	self assert: operator isLesserOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -211,11 +211,11 @@ ASTCExpressionTest >> testLesserOrEqual [
 	self assert: operator isLesserOrEqualOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -229,11 +229,11 @@ ASTCExpressionTest >> testModulo [
 	self assert: operator isModuloOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -247,11 +247,11 @@ ASTCExpressionTest >> testMultiplication [
 	self assert: operator isMultiplicationOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -265,7 +265,7 @@ ASTCExpressionTest >> testNot [
 	self assert: operator isLogicalNotOperator.
 	self assert: operator operands size equals: 1.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]
@@ -279,11 +279,11 @@ ASTCExpressionTest >> testNotEquals [
 	self assert: operator isInequalityOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -297,11 +297,11 @@ ASTCExpressionTest >> testOr [
 	self assert: operator isOrOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -315,7 +315,7 @@ ASTCExpressionTest >> testPreIncr [
 	self assert: operator isPreIncrementOperator.
 	self assert: operator operands size equals: 1.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]
@@ -329,11 +329,11 @@ ASTCExpressionTest >> testStructAccessPointer [
 	self assert: operator isStructAccessPointerOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -347,11 +347,11 @@ ASTCExpressionTest >> testStructStaticAccess [
 	self assert: operator isStructAccessStaticOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -365,11 +365,11 @@ ASTCExpressionTest >> testSubtraction [
 	self assert: operator isSubtractionOperator.
 	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -383,15 +383,29 @@ ASTCExpressionTest >> testThenElse [
 	self assert: operator isTernaryConditionalOperator.
 	self assert: operator operands size equals: 3.
 	
-	node := (operator operands at: 1).
+	node := operator operands at: 1.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator operands at: 2.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b.
 	
-	node := (operator operands at: 3).
+	node := operator operands at: 3.
 	self assert: node isIdentifier.
 	self assert: node id equals: #c
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testasAddressOf [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) asAddressOf.
+	
+	operator debugASTCStructure.
+	self assert: operator isAddressOfOperator.
+	self assert: operator operands size equals: 1.
+	
+	node := operator operands at: 1.
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
 ]
