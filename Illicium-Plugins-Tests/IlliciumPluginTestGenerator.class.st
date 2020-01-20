@@ -91,10 +91,7 @@ IlliciumPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass
 { #category : #generation }
 IlliciumPluginTestGenerator >> generateTestForClass: aClass [
 	| testClass primitivesMethod |
-	primitivesMethod := aClass methodDict
-		select: [ :compiledMethod | 
-			(compiledMethod selector includesSubstring: 'primitive')
-				and: [ compiledMethod argumentNames isEmpty ] ].
+	primitivesMethod := self methodToTest: aClass.
 		
 	primitivesMethod ifEmpty: [ ^self ].
 	
@@ -124,4 +121,12 @@ IlliciumPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aCl
 	].
 	
 	aClass compile: methodSource asString classified: #'equaliy-test'.
+]
+
+{ #category : #generation }
+IlliciumPluginTestGenerator >> methodToTest: aClass [
+	^ aClass methodDict
+		select: [ :compiledMethod | 
+			(compiledMethod selector includesSubstring: 'primitive')
+				and: [ compiledMethod argumentNames isEmpty ] ].
 ]

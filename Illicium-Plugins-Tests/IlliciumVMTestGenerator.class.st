@@ -23,24 +23,9 @@ IlliciumVMTestGenerator class >> translatorClass [
 	^ ASTCSlangTranslator
 ]
 
-{ #category : #generation }
-IlliciumVMTestGenerator >> generateTestForClass: aClass [
-	| testClass primitivesMethod |
-	primitivesMethod := (aClass allSelectorsBelow: VMClass)
+{ #category : #filter }
+IlliciumVMTestGenerator >> methodToTest: aClass [
+	^ (aClass allSelectorsBelow: VMClass)
 		collect:[ :aSelector | aClass lookupSelector: aSelector ]
-		thenSelect: [ :aCompiledMethod |(aCompiledMethod hasPragmaNamed: #doNotGenerate) not ].
-		
-	primitivesMethod ifEmpty: [ ^self ].
-	
-	testClass := self createTestClassFor: aClass.
-	
-	self
-		generateSetUpFor: testClass
-		forTestedClass: aClass
-		forTranslator: #ASTCSlangTranslator.
-	
-	primitivesMethod
-		do: [ :aMethod |
-			self generateTestMethodFor: aMethod selector inTestClass: testClass.
-			self generateSmokeTestMethodFor: aMethod selector inTestClass: testClass ]
+		thenSelect: [ :aCompiledMethod |(aCompiledMethod hasPragmaNamed: #doNotGenerate) not ]
 ]
