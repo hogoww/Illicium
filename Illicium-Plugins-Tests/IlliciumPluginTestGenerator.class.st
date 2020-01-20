@@ -23,6 +23,7 @@ Class {
 { #category : #removing }
 IlliciumPluginTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
 	<script>
+	StackInterpreterPrimitivesTranslationTests ifNotNil:[:c| c removeFromSystem ] .
 	^ IlliciumPluginTestGenerator new generateTestForClass: StackInterpreterPrimitives
 ]
 
