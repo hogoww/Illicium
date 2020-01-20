@@ -13,19 +13,14 @@ Class {
 	#category : #'Illicium-Plugins-Tests'
 }
 
+{ #category : #'as yet unclassified' }
+ILVMSlangToCGeneratedTests class >> ressource [
+	^ { FullVMCCodeGeneratorRessource }
+]
+
 { #category : #'generating machine code' }
 ILVMSlangToCGeneratedTests >> codeGenerator [
-	^ (VMMaker
-		makerFor: StackInterpreter
-		and: StackToRegisterMappingCogit
-		with: #(COGMTVM false
-				ObjectMemory Spur64BitMemoryManager
-				MULTIPLEBYTECODESETS true
-				bytecodeTableInitializer initializeBytecodeTableForSqueakV3PlusClosuresSistaV1Hybrid)
-		to: ''
-		platformDir: ''
-		including: #()) buildCodeGeneratorForInterpreter 
-		
+	^ FullVMCCodeGeneratorRessource current codeGenerator
 ]
 
 { #category : #generating }
