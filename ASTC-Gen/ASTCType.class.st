@@ -9,24 +9,22 @@ Class {
 
 { #category : #testing }
 ASTCType >> = aType [
-	super = aType
-		ifFalse: [ ^ false ].
-	type = aType type
-		ifFalse: [ ^ false ].
-	^ true
+  super = aType ifFalse: [ ^false ].
+  type = aType type ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCType >> acceptVisitor: aVisitor [
-	aVisitor visitType: self
+  aVisitor visitType: self
 ]
 
 { #category : #testing }
 ASTCType >> isType [
-	^ true
+  ^true
 ]
 
 { #category : #accessing }
 ASTCType >> type [
-	^ type
+  ^type
 ]

@@ -11,327 +11,331 @@ Class {
 
 { #category : #testing }
 ASTCNode >> = aNode [
-	comment = aNode comment
-		ifFalse: [ ^ false ].
-	^ true
+  comment = aNode comment ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCNode >> acceptVisitor: aVisitor [
-	aVisitor visitNode: self
+  aVisitor visitNode: self
 ]
 
 { #category : #accessing }
 ASTCNode >> comment [
-	^ comment
+  ^comment
 ]
 
 { #category : #accessing }
 ASTCNode >> comment: aComment [
-	comment := aComment
+  comment := aComment
 ]
 
 { #category : #testing }
 ASTCNode >> isAbstractWhile [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isAdditionOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isAddressOfOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isAndOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isAssignmentOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isBinaryOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isBitwiseAndOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isBlock [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isBreak [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isCastOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isCompilationUnit [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isDeclaration [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isDeclarationStatement [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isDefinition [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isDivisionOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isDoWhile [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
-ASTCNode >> isEmptyStatment [
-	^ false
+ASTCNode >> isEmptyStatement [
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isEqualityOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isExpression [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isExpressionStatement [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isFor [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isFunctionCall [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isFunctionDeclaration [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isFunctionDefinition [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isGreaterOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isGreaterOrEqualOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isIdentifier [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isIf [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isIndexerOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isInequalityOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isLesserOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isLesserOrEqualOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isLiteral [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isLogicalNotOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isLoop [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isModuloOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isMultiplicationOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isNode [
-	^ true
+  ^true
 ]
 
 { #category : #testing }
 ASTCNode >> isOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isOrOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isPreDecrementOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isPreIncrementOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isPreprocessorIf [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isProject [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isRawCCode [
-	^ false
+  ^false
+]
+
+{ #category : #testing }
+ASTCNode >> isRawDeclaration [
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isReturn [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isStatement [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isStructAccessPointerOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isStructAccessStaticOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isStructureDeclaration [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isStructureDefinition [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isSubtractionOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isTernaryConditionalOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isType [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isUnaryOperator [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isVariableDeclaration [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isVariableDefinition [
-	^ false
+  ^false
 ]
 
 { #category : #testing }
 ASTCNode >> isWhile [
-	^ false
+  ^false
 ]
 
 { #category : #accessing }
 ASTCNode >> parent [
-	^ parent
+  ^parent
 ]
 
 { #category : #accessing }
 ASTCNode >> pharoNode [
-	^ pharoNode
+  ^pharoNode
 ]
 
 { #category : #accessing }
 ASTCNode >> pharoNode: aPharoNode [
-	pharoNode := aPharoNode
+  pharoNode := aPharoNode
 ]

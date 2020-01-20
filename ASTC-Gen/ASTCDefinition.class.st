@@ -9,30 +9,28 @@ Class {
 
 { #category : #testing }
 ASTCDefinition >> = aDefinition [
-	super = aDefinition
-		ifFalse: [ ^ false ].
-	declaration = aDefinition declaration
-		ifFalse: [ ^ false ].
-	^ true
+  super = aDefinition ifFalse: [ ^false ].
+  declaration = aDefinition declaration ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCDefinition >> acceptVisitor: aVisitor [
-	aVisitor visitDefinition: self
+  aVisitor visitDefinition: self
 ]
 
 { #category : #accessing }
 ASTCDefinition >> declaration [
-	^ declaration
+  ^declaration
 ]
 
 { #category : #accessing }
 ASTCDefinition >> declaration: aDeclaration [
-	aDeclaration ifNotNil: [ aDeclaration parent: self ].
-	declaration := aDeclaration
+  aDeclaration ifNotNil: [ aDeclaration parent: self ].
+  declaration := aDeclaration
 ]
 
 { #category : #testing }
 ASTCDefinition >> isDefinition [
-	^ true
+  ^true
 ]

@@ -429,8 +429,10 @@ ASTCGenerator >> generatePrinterVisit: aFMXClass [
 	aClass := aFMXClass name asAnInstance.
 	aClassWithQuotes:= '''',aClass,''''.
 	visitSomething := aFMXClass name asVisitClassSelector.
-
-	propertiesNames := aFMXClass properties select: [:aProp| aProp isTypedProperty and:[ aProp name ~= #pharoNode] ] thenCollect:#name.
+	
+	propertiesNames := aFMXClass properties 
+		select: [:aProp| aProp isTypedProperty and:[ aProp name ~= #pharoNode] ] 
+		thenCollect:#name.
 
 	method := visitSomething asMethodWithBody:[:anInstance|
 		stream cr.
@@ -438,8 +440,9 @@ ASTCGenerator >> generatePrinterVisit: aFMXClass [
 		self printTabCount: currentDepth.
 		stream << $( ;
 			<< aClassWithQuotes ;
-			space ;
-			print: anInstance propertiesNames.
+			space.
+
+		stream print: anInstance propertiesNames.
 		
 		currentDepth := currentDepth+1.
 		super visitSomething:{aClass}.

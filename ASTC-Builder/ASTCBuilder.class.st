@@ -337,6 +337,7 @@ ASTCBuilder >> defineProperties [
 	
 	rawCCode property: #cCode type: #String.
 	rawDeclaration property: #rawDeclaration type: #String.
+	rawDeclaration property: #varName type: #String.
 
 	type property: #type type: #TypeConstraint.
 ]

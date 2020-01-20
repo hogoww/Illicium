@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCDoWhile >> = aDoWhile [
-	super = aDoWhile
-		ifFalse: [ ^ false ].
-	^ true
+  super = aDoWhile ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCDoWhile >> acceptVisitor: aVisitor [
-	aVisitor visitDoWhile: self
+  aVisitor visitDoWhile: self
 ]
 
 { #category : #testing }
 ASTCDoWhile >> isDoWhile [
-	^ true
+  ^true
 ]

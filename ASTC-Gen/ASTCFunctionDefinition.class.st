@@ -9,30 +9,28 @@ Class {
 
 { #category : #testing }
 ASTCFunctionDefinition >> = aFunctionDefinition [
-	super = aFunctionDefinition
-		ifFalse: [ ^ false ].
-	body = aFunctionDefinition body
-		ifFalse: [ ^ false ].
-	^ true
+  super = aFunctionDefinition ifFalse: [ ^false ].
+  body = aFunctionDefinition body ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCFunctionDefinition >> acceptVisitor: aVisitor [
-	aVisitor visitFunctionDefinition: self
+  aVisitor visitFunctionDefinition: self
 ]
 
 { #category : #accessing }
 ASTCFunctionDefinition >> body [
-	^ body
+  ^body
 ]
 
 { #category : #accessing }
 ASTCFunctionDefinition >> body: aBody [
-	aBody ifNotNil: [ aBody parent: self ].
-	body := aBody
+  aBody ifNotNil: [ aBody parent: self ].
+  body := aBody
 ]
 
 { #category : #testing }
 ASTCFunctionDefinition >> isFunctionDefinition [
-	^ true
+  ^true
 ]

@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCAddressOfOperator >> = anAddressOfOperator [
-	super = anAddressOfOperator
-		ifFalse: [ ^ false ].
-	^ true
+  super = anAddressOfOperator ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCAddressOfOperator >> acceptVisitor: aVisitor [
-	aVisitor visitAddressOfOperator: self
+  aVisitor visitAddressOfOperator: self
 ]
 
 { #category : #testing }
 ASTCAddressOfOperator >> isAddressOfOperator [
-	^ true
+  ^true
 ]
