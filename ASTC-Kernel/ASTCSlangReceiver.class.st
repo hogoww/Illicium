@@ -76,6 +76,12 @@ ASTCSlangReceiver >> >= aNumber [
 	^ self translatedValue >= (aNumber acceptVisitor: methodTranslator)
 ]
 
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> addressOf: something put: somethingelse [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
 { #category : #typing }
 ASTCSlangReceiver >> and: aBoolean [
 	| args |
@@ -190,9 +196,14 @@ ASTCSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> ifTrueIfFalseExpression: args [
-	"unfinished, because it requires inlining."
-	self flag:#unfinished.
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	args do: [:aBlock| aBlock statements size ~= 1 
+		ifTrue: [ self error: 'Cannot translate into ternary operator if it has more than one statements yet' ] ].
+	
+	^ ASTCTernaryConditionalOperator new
+		addOperand: self translatedValue;
+		addOperand: (args first acceptVisitor: self visitor) statements first expression;
+		addOperand: (args size = 2 ifTrue: [ args second acceptVisitor: self visitor]) statements first expression;
+		yourself
 ]
 
 { #category : #'reflective operations' }
@@ -207,7 +218,7 @@ ASTCSlangReceiver >> ifTrueIfFalseStatement: args [
 	^ ASTCIf new
 		condition: (self value acceptVisitor:self visitor);
 		then: (args first acceptVisitor: self visitor);
-		else: (args second acceptVisitor: self visitor);
+		else: (args size = 2 ifTrue: [ args second acceptVisitor: self visitor]);
 		yourself.
 ]
 
