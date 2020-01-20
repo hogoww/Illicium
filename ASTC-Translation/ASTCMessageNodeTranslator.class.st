@@ -19,16 +19,19 @@ ASTCMessageNodeTranslator >> forward: aMessage to: aType [
 
 { #category : #translate }
 ASTCMessageNodeTranslator >> translateNode: aMessageNode [
-	| receiver |
+	| receiver res |
 	receiver := (methodTranslator
 		getNodeTranslationType: aMessageNode receiver) createInstance
 		value: aMessageNode receiver;
 		visitor: methodTranslator;
 		yourself.
-	^ (receiver
+	res := (receiver
 		perform: aMessageNode selector
-		withArguments: aMessageNode arguments asArray)
-		pharoNode: aMessageNode;
+		withArguments: aMessageNode arguments asArray).
+	
+	(res isKindOf: ASTCNode) not ifTrue: [self error].
+	res pharoNode: aMessageNode;
 		comment: aMessageNode commentOrNil;
-		yourself
+		yourself.
+	^ res
 ]
