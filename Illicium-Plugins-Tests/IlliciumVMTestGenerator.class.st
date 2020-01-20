@@ -29,7 +29,8 @@ IlliciumVMTestGenerator >> generateTestForClass: aClass [
 	primitivesMethod := (aClass allSelectorsBelow: VMClass)
 		collect:[ :aSelector | aClass lookupSelector: aSelector ]
 		thenSelect: [ :aCompiledMethod |
-			aCompiledMethod argumentNames isEmpty ].
+			aCompiledMethod argumentNames isEmpty 
+			and: [ (aCompiledMethod hasPragmaNamed: #doNotGenerate) not ]].
 		
 	primitivesMethod ifEmpty: [ ^self ].
 	
