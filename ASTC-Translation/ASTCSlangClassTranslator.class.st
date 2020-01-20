@@ -9,7 +9,8 @@ ASTCSlangClassTranslator >> initialize [
 	super initialize.
 	inferer := CCodeGeneratorGlobalStructure new.
 	methodTranslator literalValueNodeTranslator: ILSlangLiteralValueNodeTranslator new.
-	methodTranslator returnNodeTranslator: ILSlangReturnNodeTranslator new
+	methodTranslator returnNodeTranslator: ILSlangReturnNodeTranslator new.
+	methodTranslator TemporaryDeclarationNodeTranslator: ILSlangTemporaryDeclarationNodesTranslator new
 ]
 
 { #category : #initialization }

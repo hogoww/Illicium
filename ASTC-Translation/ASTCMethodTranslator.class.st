@@ -9,6 +9,12 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
+{ #category : #configuration }
+ASTCMethodTranslator >> TemporaryDeclarationNodeTranslator: aTemporaryDeclarationNodeTranslator [
+	
+	translators at: #temporaryDeclarationNodeTranslator put: (aTemporaryDeclarationNodeTranslator methodTranslator: self ; yourself).
+]
+
 { #category : #accessing }
 ASTCMethodTranslator >> addInclude: aString [
 	includes add: aString
