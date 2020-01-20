@@ -121,7 +121,7 @@ ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
   self printDeclarationReturnType: aFunctionDeclaration type.
-	self haltOnce.
+
   self << Character cr.
   aFunctionDeclaration id acceptVisitor: self.
   self << $(.
