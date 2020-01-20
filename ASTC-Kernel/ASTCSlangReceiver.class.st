@@ -133,17 +133,29 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 ]
 
 { #category : #'reflective operations' }
+ASTCSlangReceiver >> bitAnd: anotherStuff [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
 ASTCSlangReceiver >> bytesPerOop [
 	self flag: #undone. "want to see how slang translates it first."
 	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> cCode: aString [
-	aString value isString ifFalse: [ self error ]."I don't know if there is sometimes blocks here, or stuff to evaluate"
-	^ aString value isEmpty 
-		ifTrue:[ ASTCEmptyStatement new ]
-		ifFalse: [ASTCRawCCode new cCode: aString value; yourself ]
+ASTCSlangReceiver >> cCode: aStringOrBlock [
+
+	aStringOrBlock isBlock
+		ifTrue: [ ^ aStringOrBlock acceptVisitor: methodTranslator ].
+	aStringOrBlock isLiteralNode
+		ifTrue: [ 
+			^ aStringOrBlock value isEmpty 
+				ifTrue:[ ASTCEmptyStatement new ]
+				ifFalse: [ ASTCRawCCode new cCode: aStringOrBlock value; yourself ]].
+	self error
+	"I don't know if there is sometimes other stuff"
 ]
 
 { #category : #'reflective operations' }
@@ -316,9 +328,25 @@ ASTCSlangReceiver >> printString [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> to: aNumber do: aBlock [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ASTCSlangReceiver >> to: stop do: aBlock [
+	| iterID |
+	aBlock arguments size ~= 1
+		ifTrue: [ self error: 'Wrong number of arguments.' ]
+		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator ].
+	"type checking"
+
+	"(((methodTranslator getNodeTranslationType: stop) = ASTCSmallInteger asTypeReification )
+		and:[ aBlock isBlock ])
+    ifFalse:[ self error: 'An arguments has the wrong type' ]."
+	^ ASTCFor new
+		iteratorDefinition:
+			(iterID assign: (self value acceptVisitor: methodTranslator));
+		condition:
+			(iterID <= (stop acceptVisitor: methodTranslator));
+		iteratorModification:
+			(iterID preIncr);
+		body: (aBlock acceptVisitor: methodTranslator);
+		yourself
 ]
 
 { #category : #accessing }
