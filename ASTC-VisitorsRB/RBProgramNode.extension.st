@@ -8,5 +8,5 @@ RBProgramNode >> acceptMultipleVisitors: aCollectionOfProgramNodeVisitors [
 
 { #category : #'*ASTC-VisitorsRB' }
 RBProgramNode >> getSlangTypeUsing: aCCodeGenerator in: aTMethod [
-	^ aCCodeGenerator typeFor: (self propertyAt: #tnodeEquivalent) in: aTMethod
+	^ aCCodeGenerator typeFor: (self propertyAt: #tNodeEquivalent) in: aTMethod
 ]
