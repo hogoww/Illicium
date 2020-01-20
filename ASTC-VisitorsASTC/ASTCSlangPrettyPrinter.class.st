@@ -9,7 +9,8 @@ ASTCSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 	^ aNode parent isIf not 
 		and: [ aNode parent isAssignmentOperator not
 			and: [ aNode parent isStatement not
-				and: [ aNode parent isFunctionCall not ]]].
+				and: [ aNode parent isFunctionCall not 
+					and: [ aNode parent isTernaryConditionalOperator not ]]]].
 ]
 
 { #category : #visiting }
@@ -179,6 +180,20 @@ ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
 	self << aRawCCodeNode cCode
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
+	
+	self enterBlock.
+	self << '('.
+	(anOperator operands at: 1) acceptVisitor: self.
+	self cr spaces << '? '.
+	(anOperator operands at: 2) acceptVisitor: self.
+	self cr spaces << ': '.
+	(anOperator operands at: 3) acceptVisitor: self.
+	self leaveBlock.
+	self << ')'.
 ]
 
 { #category : #visiting }
