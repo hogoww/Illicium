@@ -166,7 +166,7 @@ ASTCPrettyPrint >> visitBlock: aBlock [
 			self spaces.
 			each acceptVisitor: self.
 			self << Character cr ].
-	aBlock ifNotEmpty: [ self cr ].
+	aBlock statements ifNotEmpty: [ self cr ].
 	aBlock statements
 		do: [ :each | 
 			self spaces.
