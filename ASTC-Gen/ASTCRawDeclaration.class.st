@@ -37,6 +37,11 @@ ASTCRawDeclaration >> rawDeclaration: aRawDeclaration [
 ]
 
 { #category : #accessing }
+ASTCRawDeclaration >> varName [
+	^ varName
+]
+
+{ #category : #accessing }
 ASTCRawDeclaration >> varName: aVarName [
   varName := aVarName
 ]
