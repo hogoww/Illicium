@@ -11,8 +11,13 @@ BrokenPluginTranslationTests >> setUp [
   translator := ASTCSlangPluginTranslator new
 ]
 
+{ #category : #'smoke-test' }
+BrokenPluginTranslationTests >> testPrimitiveNoPopButPushSmoke [
+  self testMethod: #primitiveNoPopButPush
+]
+
 { #category : #'equaliy-test' }
-BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitiveNoPopButPush [
+BrokenPluginTranslationTests >> testPrimitiveNoPopButPushStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveNoPopButPush.
   illiString := self prettyPrintIllicium: illiAST.
@@ -20,8 +25,13 @@ BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitiveNoPopButPush [
   self assert: illiString equals: slangString
 ]
 
+{ #category : #'smoke-test' }
+BrokenPluginTranslationTests >> testPrimitivePopAndFailSmoke [
+  self testMethod: #primitivePopAndFail
+]
+
 { #category : #'equaliy-test' }
-BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopAndFail [
+BrokenPluginTranslationTests >> testPrimitivePopAndFailStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitivePopAndFail.
   illiString := self prettyPrintIllicium: illiAST.
@@ -29,8 +39,13 @@ BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopAndFail [
   self assert: illiString equals: slangString
 ]
 
+{ #category : #'smoke-test' }
+BrokenPluginTranslationTests >> testPrimitivePopLessThanExpectedSmoke [
+  self testMethod: #primitivePopLessThanExpected
+]
+
 { #category : #'equaliy-test' }
-BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopLessThanExpected [
+BrokenPluginTranslationTests >> testPrimitivePopLessThanExpectedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitivePopLessThanExpected.
   illiString := self prettyPrintIllicium: illiAST.
@@ -38,31 +53,16 @@ BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopLessThanExpe
   self assert: illiString equals: slangString
 ]
 
+{ #category : #'smoke-test' }
+BrokenPluginTranslationTests >> testPrimitivePopMoreThanExpectedSmoke [
+  self testMethod: #primitivePopMoreThanExpected
+]
+
 { #category : #'equaliy-test' }
-BrokenPluginTranslationTests >> testEqualsSlangOutputForPrimitivePopMoreThanExpected [
+BrokenPluginTranslationTests >> testPrimitivePopMoreThanExpectedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitivePopMoreThanExpected.
   illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #primitivePopMoreThanExpected.
   self assert: illiString equals: slangString
-]
-
-{ #category : #'smoke-test' }
-BrokenPluginTranslationTests >> testSmokePrimitiveNoPopButPush [
-  self testMethod: #primitiveNoPopButPush
-]
-
-{ #category : #'smoke-test' }
-BrokenPluginTranslationTests >> testSmokePrimitivePopAndFail [
-  self testMethod: #primitivePopAndFail
-]
-
-{ #category : #'smoke-test' }
-BrokenPluginTranslationTests >> testSmokePrimitivePopLessThanExpected [
-  self testMethod: #primitivePopLessThanExpected
-]
-
-{ #category : #'smoke-test' }
-BrokenPluginTranslationTests >> testSmokePrimitivePopMoreThanExpected [
-  self testMethod: #primitivePopMoreThanExpected
 ]

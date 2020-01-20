@@ -60,6 +60,11 @@ IlliciumPluginTestGenerator >> createTestClassFor: aClass [
 ]
 
 { #category : #generation }
+IlliciumPluginTestGenerator >> formatSelector: aSelector [
+	^ aSelector onlyLetters capitalized
+]
+
+{ #category : #generation }
 IlliciumPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
 	| translator method testedClass testedClassName |
 	testedClassName := aTestedClass name.
@@ -76,7 +81,7 @@ IlliciumPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedC
 IlliciumPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aClass [ 
 
 	| methodSource |
-	methodSource :=	 'testSmoke', aSelector onlyLetters capitalized asMethodWithBody:[
+	methodSource :=	 'test', (self formatSelector: aSelector) , 'Smoke' asMethodWithBody:[
 		self testMethod: #aSelector.
 	].
 	
@@ -110,7 +115,7 @@ IlliciumPluginTestGenerator >> generateTestForClass: aClass [
 IlliciumPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [ 
 
 	| methodSource |
-	methodSource :=	 'testEqualsSlangOutputFor', aSelector onlyLetters capitalized asMethodWithBody:[
+	methodSource :=	 'test', aSelector onlyLetters capitalized , 'StringComparison'  asMethodWithBody:[
 		| illiString slangString illiAST |
 		illiAST := self generateIllicium: #aSelector.
 		illiString := self prettyPrintIllicium: illiAST.
