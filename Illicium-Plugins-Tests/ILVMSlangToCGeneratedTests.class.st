@@ -13,6 +13,21 @@ Class {
 	#category : #'Illicium-Plugins-Tests'
 }
 
+{ #category : #'generating machine code' }
+ILVMSlangToCGeneratedTests >> codeGenerator [
+	^ (VMMaker
+		makerFor: StackInterpreter
+		and: StackToRegisterMappingCogit
+		with: #(COGMTVM false
+				ObjectMemory Spur64BitMemoryManager
+				MULTIPLEBYTECODESETS true
+				bytecodeTableInitializer initializeBytecodeTableForSqueakV3PlusClosuresSistaV1Hybrid)
+		to: ''
+		platformDir: ''
+		including: #()) buildCodeGeneratorForInterpreter 
+		
+]
+
 { #category : #generating }
 ILVMSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
@@ -21,26 +36,11 @@ ILVMSlangToCGeneratedTests >> generateIllicium: aSelector [
 
 { #category : #'generating machine code' }
 ILVMSlangToCGeneratedTests >> generateSlang: aSelector [ 
-	| method translation codeGenerator result |
-	"Might be able to use cCodeForMethod: instead"
-	method := testedClass >> aSelector.
-	translation := method asTranslationMethodOfClass: TMethod.
-	codeGenerator := VMPluginCodeGenerator new.
-	codeGenerator addMethod: translation.
-	"needed for some inlinings, i think. (see FilePluginTranslationTest>>testEqualsSlangOutputForPrimitiveFileWrite)"
-"	codeGenerator vmClass: CoInterpreter.
-	codeGenerator retainMethods: #().
-	CoInterpreter initializePrimitiveTable.
+	| codeGenerator |
+	codeGenerator := self codeGenerator.
+	^ codeGenerator cCodeForMethod: aSelector.
 	
-	codeGenerator generateDeadCode: false.
-	codeGenerator doInlining: true.
-	"
-	codeGenerator  inferTypesForImplicitlyTypedVariablesAndMethods.
-		
-	result := String streamContents: [ :stream |
-		translation emitCCodeOn: stream generator: codeGenerator.
-	].
-	^ result
+	
 ]
 
 { #category : #generating }
