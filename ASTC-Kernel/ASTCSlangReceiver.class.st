@@ -141,7 +141,9 @@ ASTCSlangReceiver >> bytesPerOop [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> cCode: aString [
 	aString value isString ifFalse: [ self error ]."I don't know if there is sometimes blocks here, or stuff to evaluate"
-	^ ASTCRawCCode new cCode: aString value; yourself
+	^ aString value isEmpty 
+		ifTrue:[ ASTCEmptyStatment new ]
+		ifFalse: [ASTCRawCCode new cCode: aString value; yourself ]
 ]
 
 { #category : #'reflective operations' }
