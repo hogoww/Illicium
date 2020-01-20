@@ -36,6 +36,12 @@ ASTCSlangReceiver >> - anOperand [
 ]
 
 { #category : #accessing }
+ASTCSlangReceiver >> / anotherObject [
+	^ self translatedValue / (anotherObject acceptVisitor: methodTranslator) 
+		
+]
+
+{ #category : #accessing }
 ASTCSlangReceiver >> // anotherObject [
 	"should not work"
 	self flag:#notWorking.
@@ -102,6 +108,12 @@ ASTCSlangReceiver >> asConstraint [
 	^ SingleType new type: self; yourself
 ]
 
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> baseHeaderSize [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
 { #category : #accessing }
 ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 	| firstOperand secondOperand |
@@ -116,6 +128,12 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
 		ifFalse: [ aBoolean acceptVisitor: methodTranslator ].
 	^ { firstOperand. secondOperand }
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> bytesPerOop [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #'reflective operations' }
@@ -302,6 +320,12 @@ ASTCSlangReceiver >> type: aType [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> whileTrue: aBlock [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> wordSize [
 	self flag: #undone. "want to see how slang translates it first."
 	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
