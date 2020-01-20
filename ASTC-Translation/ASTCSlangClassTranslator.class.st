@@ -53,7 +53,7 @@ ASTCSlangClassTranslator >> preTypeInference: aClass [
 ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	aClass declareCVarsIn: inferer.
-	method := (aClass >> aSelector) ast copy.
+	method := (aClass lookupSelector: aSelector) ast copy.
 	inferer addMethod: (method asTranslationMethodOfClass: TMethod).
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	

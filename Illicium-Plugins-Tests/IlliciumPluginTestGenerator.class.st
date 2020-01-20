@@ -15,42 +15,52 @@ IlliciumTestGenerator new
  ]
 "
 Class {
-	#name : #IlliciumTestGenerator,
+	#name : #IlliciumPluginTestGenerator,
 	#superclass : #Object,
 	#category : #'Illicium-Plugins-Tests-generators'
 }
 
 { #category : #removing }
-IlliciumTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
+IlliciumPluginTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
 	<script>
-	^ IlliciumTestGenerator new generateTestForClass: InterpreterPrimitives. 
+	^ IlliciumPluginTestGenerator new generateTestForClass: StackInterpreterPrimitives
 ]
 
 { #category : #removing }
-IlliciumTestGenerator class >> generateVMMakerPluginsTests [
+IlliciumPluginTestGenerator class >> generateVMMakerPluginsTests [
 	<script>
 	| generator |
 	self removeTests.
-	generator:= IlliciumTestGenerator new.
+	generator:= self new.
 	^ {BrokenPlugin. FilePlugin} do:[:aPluginClass| generator generateTestForClass: aPluginClass ]
 ]
 
 { #category : #removing }
-IlliciumTestGenerator class >> removeTests [
+IlliciumPluginTestGenerator class >> removeTests [
 	<script>
-	^ ILSlangToCGeneratedTests allSubclassesDo:[ :c| c removeFromSystem ]
+	^ self testBaseClass allSubclassesDo:[ :c| c removeFromSystem ]
+]
+
+{ #category : #removing }
+IlliciumPluginTestGenerator class >> testBaseClass [
+	^ ILPluginSlangToCGeneratedTests
+]
+
+{ #category : #removing }
+IlliciumPluginTestGenerator class >> translatorClass [
+	^ ASTCSlangPluginTranslator
 ]
 
 { #category : #generation }
-IlliciumTestGenerator >> createTestClassFor: aClass [
-	^ ILSlangToCGeneratedTests subclass: aClass name , 'TranslationTests'
+IlliciumPluginTestGenerator >> createTestClassFor: aClass [
+	^ self class testBaseClass subclass: aClass name , 'TranslationTests'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'Illicium-Plugins-Tests'
 ]
 
 { #category : #generation }
-IlliciumTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
+IlliciumPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
 	| translator method testedClass testedClassName |
 	testedClassName := aTestedClass name.
 	method := 'setUp' asMethodWithBody: [
@@ -63,7 +73,7 @@ IlliciumTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass f
 ]
 
 { #category : #generation }
-IlliciumTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aClass [ 
+IlliciumPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aClass [ 
 
 	| methodSource |
 	methodSource :=	 'testSmoke', aSelector onlyLetters capitalized asMethodWithBody:[
@@ -74,7 +84,7 @@ IlliciumTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aCla
 ]
 
 { #category : #generation }
-IlliciumTestGenerator >> generateTestForClass: aClass [
+IlliciumPluginTestGenerator >> generateTestForClass: aClass [
 	| testClass primitivesMethod |
 	primitivesMethod := aClass methodDict
 		select: [ :compiledMethod | 
@@ -88,7 +98,7 @@ IlliciumTestGenerator >> generateTestForClass: aClass [
 	self
 		generateSetUpFor: testClass
 		forTestedClass: aClass
-		forTranslator: #ASTCSlangTranslator.
+		forTranslator: self class translatorClass name.
 	
 	primitivesMethod
 		do: [ :aMethod |
@@ -97,7 +107,7 @@ IlliciumTestGenerator >> generateTestForClass: aClass [
 ]
 
 { #category : #generation }
-IlliciumTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [ 
+IlliciumPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [ 
 
 	| methodSource |
 	methodSource :=	 'testEqualsSlangOutputFor', aSelector onlyLetters capitalized asMethodWithBody:[

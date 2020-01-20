@@ -21,6 +21,12 @@ ASTCSlangPrettyPrinter >> initialize [
 ]
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
+	self << 'static '.
+  aTypeNode acceptVisitor: self.
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
 	| parenthesis |
 	parenthesis := self doesThisNeedParenthesis: anOperator.
@@ -114,17 +120,13 @@ ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
-	stream << 'EXPORT('.
-	aFunctionDeclaration type acceptVisitor: self.
-	stream << ')'.
-	self << Character cr.
-	aFunctionDeclaration id acceptVisitor:self.
-	self << $(.
-	aFunctionDeclaration parameters 
-		ifEmpty: [ stream << #void ]
-		ifNotEmpty: [:params| 
-			params do:[:each| each acceptVisitor:self] separatedBy:[ self << $,]].
-	self << $).
+  self printDeclarationReturnType: aFunctionDeclaration type.
+	self haltOnce.
+  self << Character cr.
+  aFunctionDeclaration id acceptVisitor: self.
+  self << $(.
+  aFunctionDeclaration parameters ifEmpty: [ stream << #void ] ifNotEmpty: [:params |  params do: [:each |  each acceptVisitor: self ] separatedBy: [ self << $, ] ].
+  self << $)
 ]
 
 { #category : #visiting }

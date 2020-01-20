@@ -1,5 +1,5 @@
 Class {
-	#name : #ILSlangToCGeneratedTests,
+	#name : #ILPluginSlangToCGeneratedTests,
 	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'translator',
@@ -9,13 +9,13 @@ Class {
 }
 
 { #category : #generating }
-ILSlangToCGeneratedTests >> generateIllicium: aSelector [ 
+ILPluginSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
-	^ translator  translateMethod: aSelector fromClass: testedClass
+	^ translator translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #'generating machine code' }
-ILSlangToCGeneratedTests >> generateSlang: aSelector [ 
+ILPluginSlangToCGeneratedTests >> generateSlang: aSelector [ 
 	| method translation codeGenerator result |
 	"Might be able to use cCodeForMethod: instead"
 	method := testedClass >> aSelector.
@@ -39,34 +39,34 @@ ILSlangToCGeneratedTests >> generateSlang: aSelector [
 ]
 
 { #category : #generating }
-ILSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
+ILPluginSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
-	^ anAST definitions first prettyPrintUsing: ASTCSlangTranslator prettyPrinterClass new.
+	^ anAST definitions first prettyPrintUsing: translator prettyPrinterClass new.
 ]
 
 { #category : #accessing }
-ILSlangToCGeneratedTests >> testMethod: aSelector [
+ILPluginSlangToCGeneratedTests >> testMethod: aSelector [
 	| cu |
 	cu := translator translateMethod: aSelector fromClass: testedClass.
 	^ cu
 ]
 
 { #category : #accessing }
-ILSlangToCGeneratedTests >> testedClass [
+ILPluginSlangToCGeneratedTests >> testedClass [
 	^ testedClass
 ]
 
 { #category : #accessing }
-ILSlangToCGeneratedTests >> testedClass: aClass [
+ILPluginSlangToCGeneratedTests >> testedClass: aClass [
 	testedClass := aClass
 ]
 
 { #category : #accessing }
-ILSlangToCGeneratedTests >> translator [
+ILPluginSlangToCGeneratedTests >> translator [
 	^ translator
 ]
 
 { #category : #accessing }
-ILSlangToCGeneratedTests >> translator: anObject [
+ILPluginSlangToCGeneratedTests >> translator: anObject [
 	translator := anObject
 ]

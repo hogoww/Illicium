@@ -1,6 +1,6 @@
 Class {
 	#name : #FilePluginTranslationTests,
-	#superclass : #ILSlangToCGeneratedTests,
+	#superclass : #ILPluginSlangToCGeneratedTests,
 	#category : #'Illicium-Plugins-Tests'
 }
 
@@ -8,7 +8,7 @@ Class {
 FilePluginTranslationTests >> setUp [
   super setUp.
   testedClass := FilePlugin.
-  translator := ASTCSlangTranslator new
+  translator := ASTCSlangPluginTranslator new
 ]
 
 { #category : #'equaliy-test' }

@@ -6,7 +6,7 @@ Class {
 
 { #category : #configuration }
 ASTCSlangTranslator class >> classTranslatorClass [
-	^ ASTCSlangClassTranslator 
+	^ ASTCSlangVMClassTranslator 
 ]
 
 { #category : #configuration }
@@ -28,5 +28,5 @@ ASTCSlangTranslator >> getReplacementType: aSymbol [
 { #category : #'translation-api' }
 ASTCSlangTranslator >> prettyPrinterClass [
 
-	^ ASTCSlangPrettyPrinter 
+	^ self classTranslator prettyPrinterClass
 ]
