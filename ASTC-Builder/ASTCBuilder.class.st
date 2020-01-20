@@ -95,7 +95,8 @@ Class {
 		'ternaryConditionalOperator',
 		'rawCCode',
 		'preprocessorIf',
-		'addressOfOperator'
+		'addressOfOperator',
+		'rawDeclaration'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -149,7 +150,7 @@ ASTCBuilder >> defineClasses [
 		rawCCode := builder newClassNamed: #RawCCode.
 		
 		"Statement"
-		emptyStatement := builder newClassNamed: #EmptyStatment.
+		emptyStatement := builder newClassNamed: #EmptyStatement.
 		expressionStatement := builder newClassNamed: #ExpressionStatement.
 		declarationStatement := builder newClassNamed: #DeclarationStatement.
 		return := builder newClassNamed: #Return.
@@ -164,7 +165,8 @@ ASTCBuilder >> defineClasses [
 				while := builder newClassNamed: #While.
 				doWhile := builder newClassNamed: #DoWhile.
  
-		
+		"DeclarationStatement Subclass"
+		rawDeclaration := builder newClassNamed: #RawDeclaration.
 		"preprocessor"
 		preprocessorIf := builder newClassNamed: #PreprocessorIf
 ]
@@ -197,6 +199,7 @@ ASTCBuilder >> defineHierarchy [
 			
 			structureDeclaration --|> declaration.
 			structureDefinition  --|> definition.
+			
 		
 			"Expression direct Subclasses"
 			literal --|> expression.
@@ -222,6 +225,8 @@ ASTCBuilder >> defineHierarchy [
 					while --|> abstractWhile.
 					doWhile --|> abstractWhile.
 			
+				"DeclarationStatement subclass"
+				rawDeclaration --|> declarationStatement.
 ]
 
 { #category : #definition }
@@ -331,6 +336,7 @@ ASTCBuilder >> defineProperties [
 	literal property: #value type: #String.
 	
 	rawCCode property: #cCode type: #String.
+	rawDeclaration property: #rawDeclaration type: #String.
 
 	type property: #type type: #TypeConstraint.
 ]

@@ -90,10 +90,10 @@ ASTCPrettyPrintTest >> testVisitCastOperator [
 { #category : #tests }
 ASTCPrettyPrintTest >> testVisitEmptyStatement [
 	| emptyStatement |
-	emptyStatement := ASTCEmptyStatment new.
+	emptyStatement := ASTCEmptyStatement new.
 	
 	emptyStatement debugASTCStructure.
-	self assert: emptyStatement isEmptyStatment.
+	self assert: emptyStatement isEmptyStatement.
 	self assert: emptyStatement prettyPrint equals: ''.
 ]
 

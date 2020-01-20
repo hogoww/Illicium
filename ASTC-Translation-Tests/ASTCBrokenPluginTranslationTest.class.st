@@ -52,7 +52,7 @@ ASTCBrokenPluginTranslationTest >> testNoPopButPush [
 				self assert: operands second arguments first value value equals: true.
 			"the second statement should be empty, since it's removing the ^ self that slang adds by default."
 		statement := definition body statements first.
-		self assert: statement isEmptyStatment.
+		self assert: statement isEmptyStatement.
 				
 	^ cu
 ]

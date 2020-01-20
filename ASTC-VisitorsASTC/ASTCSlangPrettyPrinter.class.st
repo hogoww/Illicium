@@ -78,7 +78,7 @@ ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 	"
 	aBlock comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , aBlock comment first ; cr ]."
 	
-	(aBlock declarations sort: [:decl1 :decl2| decl1 declaration declaration id id <= decl2 declaration declaration id id ])
+	(aBlock declarations sort: [:decl1 :decl2| decl1 name <= decl2 name ])
 		do: [ :each | 
 			self space space space space."specifically 4 space for them..."
 			each acceptVisitor: self.
