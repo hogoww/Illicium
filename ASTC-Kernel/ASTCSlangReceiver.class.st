@@ -160,7 +160,8 @@ ASTCSlangReceiver >> bytesPerOop [
 ASTCSlangReceiver >> cCode: aStringOrBlock [
 
 	aStringOrBlock isBlock
-		ifTrue: [ ^ aStringOrBlock acceptVisitor: methodTranslator ].
+		ifTrue: [ 
+			^ (self inlineBlock: aStringOrBlock) ].
 	aStringOrBlock isLiteralNode
 		ifTrue: [ 
 			^ aStringOrBlock value isEmpty 
