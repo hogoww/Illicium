@@ -65,6 +65,14 @@ ASTCExpression >> < anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> << anExpression [
+	^ ASTCBitLeftShiftOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> <= anExpression [
 	^ ASTCLesserOrEqualOperator new
 		addOperand: self;
@@ -83,6 +91,14 @@ ASTCExpression >> > anExpression [
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> >= anExpression [
 	^ ASTCGreaterOrEqualOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> >> anExpression [
+	^ ASTCBitRightShiftOperator new
 		addOperand: self;
 		addOperand: anExpression;
 		yourself

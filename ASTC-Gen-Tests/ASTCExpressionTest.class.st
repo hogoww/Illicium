@@ -95,6 +95,42 @@ ASTCExpressionTest >> testBitAnd [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testBitLeftShift [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) << (ASTCIdentifier new id: #b).
+	
+	operator debugASTCStructure.
+	self assert: operator isBitLeftShiftOperator.
+	self assert: operator operands size equals: 2.
+	
+	node := operator operands at: 1.
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := operator operands at: 2.
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
+ASTCExpressionTest >> testBitRightShift [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) >> (ASTCIdentifier new id: #b).
+	
+	operator debugASTCStructure.
+	self assert: operator isBitRightShiftOperator.
+	self assert: operator operands size equals: 2.
+	
+	node := operator operands at: 1.
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+	
+	node := operator operands at: 2.
+	self assert: node isIdentifier.
+	self assert: node id equals: #b
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testCastTo [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) castTo: ASTCSmallInteger asASTCType.
