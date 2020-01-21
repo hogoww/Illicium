@@ -9,39 +9,41 @@ Class {
 
 { #category : #testing }
 ASTCOperator >> = anOperator [
-  super = anOperator ifFalse: [ ^false ].
-  operands = anOperator operands ifFalse: [ ^false ].
-  ^true
+	super = anOperator
+		ifFalse: [ ^ false ].
+	operands = anOperator operands
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCOperator >> acceptVisitor: aVisitor [
-  aVisitor visitOperator: self
+	aVisitor visitOperator: self
 ]
 
 { #category : #accessing }
 ASTCOperator >> addOperand: anOperand [
-  anOperand parent: self.
-  operands add: anOperand
+	anOperand parent: self.
+	operands add: anOperand
 ]
 
 { #category : #accessing }
 ASTCOperator >> initialize [
-  operands := OrderedCollection new
+	operands := OrderedCollection new
 ]
 
 { #category : #testing }
 ASTCOperator >> isOperator [
-  ^true
+	^ true
 ]
 
 { #category : #accessing }
 ASTCOperator >> operands [
-  ^operands
+	^ operands
 ]
 
 { #category : #accessing }
 ASTCOperator >> operands: someExpressions [
-  someExpressions do: [:each |  each parent: self ].
-  operands := someExpressions
+	someExpressions do: [ :each | each parent: self ].
+	operands := someExpressions
 ]

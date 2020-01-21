@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCTernaryConditionalOperator >> = aTernaryConditionalOperator [
-  super = aTernaryConditionalOperator ifFalse: [ ^false ].
-  ^true
+	super = aTernaryConditionalOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCTernaryConditionalOperator >> acceptVisitor: aVisitor [
-  aVisitor visitTernaryConditionalOperator: self
+	aVisitor visitTernaryConditionalOperator: self
 ]
 
 { #category : #testing }
 ASTCTernaryConditionalOperator >> isTernaryConditionalOperator [
-  ^true
+	^ true
 ]

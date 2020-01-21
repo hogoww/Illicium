@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCEmptyStatement >> = anEmptyStatement [
-  super = anEmptyStatement ifFalse: [ ^false ].
-  ^true
+	super = anEmptyStatement
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCEmptyStatement >> acceptVisitor: aVisitor [
-  aVisitor visitEmptyStatement: self
+	aVisitor visitEmptyStatement: self
 ]
 
 { #category : #testing }
 ASTCEmptyStatement >> isEmptyStatement [
-  ^true
+	^ true
 ]

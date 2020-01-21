@@ -9,28 +9,30 @@ Class {
 
 { #category : #testing }
 ASTCVariableDefinition >> = aVariableDefinition [
-  super = aVariableDefinition ifFalse: [ ^false ].
-  init = aVariableDefinition init ifFalse: [ ^false ].
-  ^true
+	super = aVariableDefinition
+		ifFalse: [ ^ false ].
+	init = aVariableDefinition init
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCVariableDefinition >> acceptVisitor: aVisitor [
-  aVisitor visitVariableDefinition: self
+	aVisitor visitVariableDefinition: self
 ]
 
 { #category : #accessing }
 ASTCVariableDefinition >> init [
-  ^init
+	^ init
 ]
 
 { #category : #accessing }
 ASTCVariableDefinition >> init: anInit [
-  anInit ifNotNil: [ anInit parent: self ].
-  init := anInit
+	anInit ifNotNil: [ anInit parent: self ].
+	init := anInit
 ]
 
 { #category : #testing }
 ASTCVariableDefinition >> isVariableDefinition [
-  ^true
+	^ true
 ]
