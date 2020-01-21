@@ -84,6 +84,15 @@ ASTCPrettyPrint >> leaveBlock [
 ]
 
 { #category : #indentation }
+ASTCPrettyPrint >> parenthesisIfNeeded: aBlock [
+	| parenthesis |
+	parenthesis := self doesThisNeedParenthesis: aBlock.
+	parenthesis ifTrue: [ self << '(' ].
+	aBlock value.
+	parenthesis ifTrue: [ self << ')' ].
+]
+
+{ #category : #indentation }
 ASTCPrettyPrint >> print: anObject [
 	anObject acceptVisitor: self
 ]
@@ -148,13 +157,11 @@ ASTCPrettyPrint >> visitAccessOperator: anOperator [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
-	| parenthesis |
-	parenthesis := self doesThisNeedParenthesis: anOperator.
-	parenthesis ifTrue: [ self << '(' ].
-	self printBinaryOperand: anOperator operands first.
-	self << ' ' << anOperator class symbol << ' '.
-	self printBinaryOperand: anOperator operands second.
-	parenthesis ifTrue: [ self << ')' ].
+	self parenthesisIfNeeded: [
+		self printBinaryOperand: anOperator operands first.
+		self << ' ' << anOperator class symbol << ' '.
+		self printBinaryOperand: anOperator operands second.
+	]
 ]
 
 { #category : #indentation }
@@ -184,10 +191,12 @@ ASTCPrettyPrint >> visitBreak: aBreak [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitCastOperator: aCastOperator [
-	self << '(';
-		print: aCastOperator type;
-		<< ') ';
-		print: (aCastOperator operands at: 1)
+	self parenthesisIfNeeded:[
+		self << '(';
+			print: aCastOperator type;
+			<< ') ';
+			print: (aCastOperator operands at: 1)
+		]
 ]
 
 { #category : #visiting }
@@ -237,30 +246,28 @@ ASTCPrettyPrint >> visitExpressionStatement: anExpressionStatement [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitFor: aFor [
-	self << 'for('.
+	self << 'for ('.
 	aFor iteratorDefinition ifNotNil:[:anIteratorDecl| anIteratorDecl acceptVisitor:self].
-	self << $;.
+	self << '; '.
 	aFor condition ifNotNil:[:aCondition| aCondition acceptVisitor:self].
-	self << $;.
+	self << '; '.
 	aFor iteratorModification ifNotNil:[:anIteratorModification | anIteratorModification acceptVisitor:self].
-	self << ')'.
+	self << ') '.
 	aFor body acceptVisitor:self.
 ]
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitFunctionCall: aFunctionCall [
-	| parentheses |
 	
-	parentheses := self doesThisNeedParenthesis: aFunctionCall.
-	parentheses ifTrue: [ '(' ].
-	aFunctionCall id acceptVisitor: self.
-	self << '('.
-	self enterBlock.
-	aFunctionCall arguments do: [:each | each acceptVisitor:self ]
-		separatedBy: [ self << ', ' ].
-	self leaveBlock.
-	self << ')'.
-	parentheses ifTrue: [ '(' ].
+	self parenthesisIfNeeded: [
+		aFunctionCall id acceptVisitor: self.
+		self << '('.
+		self enterBlock.
+		aFunctionCall arguments do: [:each | each acceptVisitor:self ]
+			separatedBy: [ self << ', ' ].
+		self leaveBlock.
+		self << ')'
+	]
 ]
 
 { #category : #visiting }
@@ -299,14 +306,12 @@ ASTCPrettyPrint >> visitIf: anIf [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
-	| parenthesis |
-	parenthesis := self doesThisNeedParenthesis: anIndexerOperator.
-	parenthesis ifTrue:[ stream << '(' ].
-	self print: anIndexerOperator operands first;
-		<< '[';
-		print: anIndexerOperator operands second;
-		<< ']'.
-	parenthesis ifTrue:[ stream << ')' ].
+	self parenthesisIfNeeded: [
+		self print: anIndexerOperator operands first;
+			<< '[';
+			print: anIndexerOperator operands second;
+			<< ']'
+		]
 ]
 
 { #category : #visiting }
@@ -361,12 +366,10 @@ ASTCPrettyPrint >> visitType: aType [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitUnaryOperator: anOperator [
-	| parenthesis |
-	parenthesis := self doesThisNeedParenthesis: anOperator.
-	parenthesis ifTrue: [ self << '(' ].
-	self << anOperator class symbol.
-	(anOperator operands at: 1) acceptVisitor: self.
-	parenthesis ifTrue: [ self << ')' ].
+	self parenthesisIfNeeded: [
+		self << anOperator class symbol.
+		(anOperator operands at: 1) acceptVisitor: self.
+	].
 ]
 
 { #category : #visiting }
