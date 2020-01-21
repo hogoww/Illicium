@@ -84,12 +84,18 @@ ASTCPrettyPrint >> leaveBlock [
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> parenthesisIfNeeded: aBlock [
-	| parenthesis |
-	parenthesis := self doesThisNeedParenthesis: aBlock.
-	parenthesis ifTrue: [ self << '(' ].
+ASTCPrettyPrint >> parenthesisFor: aNode print: aBlock [
+
+	self parenthesisIf: (self doesThisNeedParenthesis: aNode) 
+		print: aBlock.
+
+]
+
+{ #category : #indentation }
+ASTCPrettyPrint >> parenthesisIf: aBool print: aBlock [
+	aBool ifTrue: [ self << '(' ].
 	aBlock value.
-	parenthesis ifTrue: [ self << ')' ].
+	aBool ifTrue: [ self << ')' ].
 ]
 
 { #category : #indentation }
@@ -157,7 +163,7 @@ ASTCPrettyPrint >> visitAccessOperator: anOperator [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
-	self parenthesisIfNeeded: [
+	self parenthesisFor: anOperator print: [
 		self printBinaryOperand: anOperator operands first.
 		self << ' ' << anOperator class symbol << ' '.
 		self printBinaryOperand: anOperator operands second.
@@ -191,7 +197,7 @@ ASTCPrettyPrint >> visitBreak: aBreak [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitCastOperator: aCastOperator [
-	self parenthesisIfNeeded:[
+	self parenthesisFor: aCastOperator print: [
 		self << '(';
 			print: aCastOperator type;
 			<< ') ';
@@ -259,7 +265,7 @@ ASTCPrettyPrint >> visitFor: aFor [
 { #category : #visiting }
 ASTCPrettyPrint >> visitFunctionCall: aFunctionCall [
 	
-	self parenthesisIfNeeded: [
+	self parenthesisFor: aFunctionCall print: [
 		aFunctionCall id acceptVisitor: self.
 		self << '('.
 		self enterBlock.
@@ -306,7 +312,7 @@ ASTCPrettyPrint >> visitIf: anIf [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
-	self parenthesisIfNeeded: [
+	self parenthesisFor: anIndexerOperator print: [
 		self print: anIndexerOperator operands first;
 			<< '[';
 			print: anIndexerOperator operands second;
@@ -366,7 +372,7 @@ ASTCPrettyPrint >> visitType: aType [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitUnaryOperator: anOperator [
-	self parenthesisIfNeeded: [
+	self parenthesisFor: anOperator print: [
 		self << anOperator class symbol.
 		(anOperator operands at: 1) acceptVisitor: self.
 	].

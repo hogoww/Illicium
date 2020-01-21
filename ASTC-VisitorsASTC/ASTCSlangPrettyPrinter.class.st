@@ -28,14 +28,12 @@ ASTCSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
-	| parenthesis |
-	parenthesis := self doesThisNeedParenthesis: anOperator.
-	parenthesis ifTrue: [ self << '(' ].
-	self printBinaryOperand: anOperator operands first.
-	self cr spaces << Character tab.
-	self << ' ' << anOperator class symbol << ' '.
-	self printBinaryOperand: anOperator operands second.
-	parenthesis ifTrue: [ self << ')' ].
+	self parenthesisFor: anOperator print: [	
+		self printBinaryOperand: anOperator operands first.
+		self cr spaces << Character tab.
+		self << ' ' << anOperator class symbol << ' '.
+		self printBinaryOperand: anOperator operands second
+	]
 ]
 
 { #category : #comments }
@@ -103,19 +101,16 @@ ASTCSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
-	| parenthesis |
-	parenthesis := self doesThisNeedParenthesis: aFunctionCall.
-	
-	parenthesis ifTrue: [ self << '(' ].
-	aFunctionCall id acceptVisitor: self.
-	self << '('.
-	self enterBlock.
-	aFunctionCall arguments do: [:each | each acceptVisitor:self ]
-		separatedBy: [ self << ', ' ].
-	stream peekLast = Character cr ifTrue: [ self spaces ].
-	self leaveBlock.
-	self << ')'.
-	parenthesis ifTrue: [ self << ')' ].
+	self parenthesisFor: aFunctionCall print: [
+		aFunctionCall id acceptVisitor: self.
+		self << '('.
+		self enterBlock.
+		aFunctionCall arguments do: [:each | each acceptVisitor:self ]
+			separatedBy: [ self << ', ' ].
+		stream peekLast = Character cr ifTrue: [ self spaces ].
+		self leaveBlock.
+		self << ')'.
+	]
 ]
 
 { #category : #visiting }
@@ -216,16 +211,12 @@ ASTCSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
-	| parenthesis innerParenthesis |
-	
-	parenthesis := self doesThisNeedParenthesis: anUnaryOperator.
-	innerParenthesis := anUnaryOperator operands first isRawCCode.
-	parenthesis ifTrue: [ self << '(' ].
-	self << anUnaryOperator class symbol.
-	innerParenthesis ifTrue: [ self << '(' ].	
-	(anUnaryOperator operands at: 1) acceptVisitor: self.
-	innerParenthesis ifTrue: [ self << ')' ].
-	parenthesis ifTrue: [ self << ')' ].
+
+	self parenthesisFor: anUnaryOperator print: [
+		self << anUnaryOperator class symbol.
+		self parenthesisIf: anUnaryOperator operands first isRawCCode 
+		print:[ (anUnaryOperator operands at: 1) acceptVisitor: self ]
+	]
 ]
 
 { #category : #visiting }
