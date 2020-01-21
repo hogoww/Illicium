@@ -53,8 +53,13 @@ ASTCSlangReceiver >> // anotherObject [
 
 { #category : #accessing }
 ASTCSlangReceiver >> < aNumber [
-	"same as ASTCSmallInteger<<#>"
+	"same as ASTCSmallInteger>>#>"
 	^ self translatedValue < (aNumber acceptVisitor: methodTranslator)
+]
+
+{ #category : #typing }
+ASTCSlangReceiver >> << aNumber [
+	^ self translatedValue bitAnd: (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
@@ -74,20 +79,18 @@ ASTCSlangReceiver >> = anotherObject [
 
 { #category : #typing }
 ASTCSlangReceiver >> > aNumber [
-	"same as ASTCSmallInteger<<#>"
+	"same as ASTCSmallInteger>>#>"
 	^ self translatedValue > (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
 ASTCSlangReceiver >> >= aNumber [
-	"same as ASTCSmallInteger<<#>="
+	"same as ASTCSmallInteger>>#>="
 	^ self translatedValue >= (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> addressOf: anExpression [
-	"Ssecond argument is for simulation purpose, i assume.
-	Regardless, it's ignored during translation"
 	^ (anExpression acceptVisitor: methodTranslator) asAddressOf
 ]
 
@@ -108,6 +111,9 @@ ASTCSlangReceiver >> and: aBoolean [
 
 { #category : #accessing }
 ASTCSlangReceiver >> asCType [
+	<deprecated>
+	"not sure how this is declared"
+	self flag: #deprecated.
 	"for API concistency with the initial design. "
 	^ type ifNil: [ #sqInt ]
 ]
@@ -145,9 +151,9 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> bitAnd: anotherStuff [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ASTCSlangReceiver >> bitAnd: anInteger [
+	"prettysure it's an integer"
+	^ self translatedValue bitAnd: (anInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
