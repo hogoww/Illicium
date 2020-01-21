@@ -224,9 +224,9 @@ ASTCPrettyPrint >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitEmptyStatment: anEmptyStatment [
-	" empty, because we don't add anything to the stream
-	Empty statements are meant to ignore pharo nodes while not breaking the structure"
+ASTCPrettyPrint >> visitEmptyStatement: anEmptyStatemementNode [
+	"Empty statements should not be added to the AST, and therefore not visited during pretty print"
+	self shouldNotImplement
 ]
 
 { #category : #visiting }

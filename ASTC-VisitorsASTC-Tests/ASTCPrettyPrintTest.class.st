@@ -94,7 +94,7 @@ ASTCPrettyPrintTest >> testVisitEmptyStatement [
 	
 	emptyStatement debugASTCStructure.
 	self assert: emptyStatement isEmptyStatement.
-	self assert: emptyStatement prettyPrint equals: ''.
+	self should: [ emptyStatement prettyPrint ] raise: ShouldNotImplement
 ]
 
 { #category : #tests }
