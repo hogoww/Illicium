@@ -192,7 +192,7 @@ ASTCPrettyPrint >> visitBlock: aBlock [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitBreak: aBreak [
-	self << #break
+	self << #'break;'
 ]
 
 { #category : #visiting }
@@ -396,8 +396,8 @@ ASTCPrettyPrint >> visitVariableDefinition: aVariableDefinition [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitWhile: aWhile [
-	self << 'while('.
+	self << 'while ('.
 	aWhile condition ifNotNil:[:aCondition| aCondition acceptVisitor: self].
-	self << ')'.
+	self << ') '.
 	aWhile body acceptVisitor: self.
 ]
