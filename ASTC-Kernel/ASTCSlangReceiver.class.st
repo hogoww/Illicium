@@ -85,10 +85,17 @@ ASTCSlangReceiver >> >= aNumber [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> addressOf: anExpression put: anAssignmentBlock [
+ASTCSlangReceiver >> addressOf: anExpression [
 	"Ssecond argument is for simulation purpose, i assume.
 	Regardless, it's ignored during translation"
 	^ (anExpression acceptVisitor: methodTranslator) asAddressOf
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> addressOf: anExpression put: anAssignmentBlock [
+	"Ssecond argument is for simulation purpose, i assume.
+	Regardless, it's ignored during translation"
+	^ self addressOf: anExpression
 ]
 
 { #category : #typing }
@@ -108,6 +115,11 @@ ASTCSlangReceiver >> asCType [
 { #category : #typing }
 ASTCSlangReceiver >> asConstraint [
 	^ SingleType new type: self; yourself
+]
+
+{ #category : #accessing }
+ASTCSlangReceiver >> at: anExpression [
+	^ self translatedValue indexAt: (anExpression acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -245,8 +257,8 @@ ASTCSlangReceiver >> ifTrueIfFalseExpression: args [
 	
 	^ ASTCTernaryConditionalOperator new
 		addOperand: self translatedValue;
-		addOperand: (args first acceptVisitor: self visitor) statements first expression;
-		addOperand: (args size = 2 ifTrue: [ args second acceptVisitor: self visitor]) statements first expression;
+		addOperand: (self inlineBlock: args first) expression;
+		addOperand: (args size = 2 ifTrue: [ (self inlineBlock: args second) expression ]); "else nil"
 		yourself
 ]
 
@@ -264,6 +276,19 @@ ASTCSlangReceiver >> ifTrueIfFalseStatement: args [
 		then: (args first acceptVisitor: self visitor);
 		else: (args size = 2 ifTrue: [ args second acceptVisitor: self visitor]);
 		yourself.
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> inlineBlock: aBlock [
+	| resBlock |
+	aBlock statements size = 1 
+		ifFalse: [ UnsupportedFeature new feature: 'Cannot inline a block if it has more than one statement yet' ].
+	
+	resBlock := (aBlock acceptVisitor: methodTranslator).
+	
+	resBlock statements size = 1 
+		ifFalse:[ UnsupportedFeature new feature: 'Cannot inline a block which translates into more than one statement yet' ].
+	^ resBlock statements first
 ]
 
 { #category : #'reflective operations' }
