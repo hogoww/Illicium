@@ -94,6 +94,16 @@ ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 ]
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> visitCastOperator: aCastOperator [
+	" Slang systematically use an englobing set of parenthesis"
+	self << '((';
+		print: aCastOperator type;
+		<< ') ';
+		print: (aCastOperator operands at: 1);
+		<< ')'
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	anExpressionStatement expression isPreprocessorIf ifFalse: [ self << $; ]. "pretty sure that won't always be the case."
