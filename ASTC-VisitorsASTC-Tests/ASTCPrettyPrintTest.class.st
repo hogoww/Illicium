@@ -26,7 +26,7 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority1 [
 	self assert: node isIdentifier.
 	self assert: node id equals: #c.
 	
-	self assert: operator prettyPrint equals: '(a + b) * c'.
+	self assert: (operator prettyPrintUsing: ASTCPrettyPrint new) equals: '(a + b) * c'.
 ]
 
 { #category : #tests }
@@ -35,7 +35,7 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
 	operator := (ASTCIdentifier new id: #a) + ((ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c)).
 	
 	operator debugASTCStructure.
-	self assert: operator isAdditionOperator .
+	self assert: operator isAdditionOperator.
 		
 	node := operator operands at: 1.
 	self assert: node isIdentifier.
@@ -51,7 +51,7 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
 		self assert: node isIdentifier.
 		self assert: node id equals: #c.
 
-	self assert: operator prettyPrint equals: 'a + b * c'.
+	self assert: (operator prettyPrintUsing: ASTCPrettyPrint new) equals: 'a + b * c'.
 ]
 
 { #category : #tests }
@@ -61,7 +61,7 @@ ASTCPrettyPrintTest >> testVisitAddressOfOperator [
 
 	operator debugASTCStructure.
 	self assert: operator isAddressOfOperator.
-	self assert: operator prettyPrint equals: '&a'.
+	self assert: (operator prettyPrintUsing: ASTCPrettyPrint new) equals: '&a'.
 ]
 
 { #category : #tests }
@@ -71,7 +71,7 @@ ASTCPrettyPrintTest >> testVisitBreak [
 	
 	breakStatement 	debugASTCStructure.
 	self assert: breakStatement isBreak.
-	self assert: breakStatement prettyPrint equals: 'break'.
+	self assert: (breakStatement prettyPrintUsing: ASTCPrettyPrint new) equals: 'break;'.
 ]
 
 { #category : #test }
@@ -84,7 +84,7 @@ ASTCPrettyPrintTest >> testVisitCastOperator [
 	
 	structure debugASTCStructure.
 	self assert: structure isCastOperator.
-	self assert: structure prettyPrint equals: '(struct ASTCPrettyPrintTest) a'.
+	self assert: (structure prettyPrintUsing: ASTCPrettyPrint new) equals: '(struct ASTCPrettyPrintTest) a'.
 ]
 
 { #category : #tests }
@@ -94,7 +94,7 @@ ASTCPrettyPrintTest >> testVisitEmptyStatement [
 	
 	emptyStatement debugASTCStructure.
 	self assert: emptyStatement isEmptyStatement.
-	self should: [ emptyStatement prettyPrint ] raise: ShouldNotImplement
+	self should: [ emptyStatement prettyPrintUsing: ASTCPrettyPrint new ] raise: ShouldNotImplement
 ]
 
 { #category : #tests }
@@ -104,7 +104,7 @@ ASTCPrettyPrintTest >> testVisitEqualityOperator [
 
 	operator debugASTCStructure.
 	self assert: operator isEqualityOperator.
-	self assert: operator prettyPrint equals: 'a == b'.
+	self assert: (operator prettyPrintUsing: ASTCPrettyPrint new) equals: 'a == b'.
 ]
 
 { #category : #tests }
@@ -114,7 +114,7 @@ ASTCPrettyPrintTest >> testVisitInequalityOperator [
 
 	operator debugASTCStructure.
 	self assert: operator isInequalityOperator.
-	self assert: operator prettyPrint equals: 'a != b'.
+	self assert: (operator prettyPrintUsing: ASTCPrettyPrint new) equals: 'a != b'.
 ]
 
 { #category : #tests }
@@ -124,7 +124,7 @@ ASTCPrettyPrintTest >> testVisitStructureDeclaration [
 	
 	structure debugASTCStructure.
 	self assert: structure isStructureDeclaration.
-	self assert: structure prettyPrint equals: 'struct a'.
+	self assert: (structure prettyPrintUsing: ASTCPrettyPrint new) equals: 'struct a'.
 ]
 
 { #category : #tests }
@@ -139,7 +139,7 @@ ASTCPrettyPrintTest >> testVisitStructureDefinition [
 	
 	operator debugASTCStructure.
 	self assert: operator isStructureDefinition.
-	self assert: operator prettyPrint equals: 
+	self assert: (operator prettyPrintUsing: ASTCPrettyPrint new) equals: 
 'struct heros{
   int druss;
 };'.
@@ -152,5 +152,5 @@ ASTCPrettyPrintTest >> testVisitTernaryOperatorTest [
 
 	operator debugASTCStructure.
 	self assert: operator isTernaryConditionalOperator.
-	self assert: operator prettyPrint equals: 'a ? b : c'.
+	self assert: (operator prettyPrintUsing: ASTCPrettyPrint new) equals: 'a ? b : c'.
 ]
