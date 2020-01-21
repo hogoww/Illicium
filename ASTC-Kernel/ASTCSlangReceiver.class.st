@@ -152,7 +152,7 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> bitAnd: anInteger [
-	"prettysure it's an integer"
+	"pretty sure it's an integer"
 	^ self translatedValue bitAnd: (anInteger acceptVisitor: methodTranslator)
 ]
 
