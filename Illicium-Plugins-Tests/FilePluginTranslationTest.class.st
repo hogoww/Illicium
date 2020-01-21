@@ -1,23 +1,23 @@
 Class {
-	#name : #FilePluginTranslationTests,
+	#name : #FilePluginTranslationTest,
 	#superclass : #ILPluginSlangToCGeneratedTests,
 	#category : #'Illicium-Plugins-Tests'
 }
 
 { #category : #running }
-FilePluginTranslationTests >> setUp [
+FilePluginTranslationTest >> setUp [
   super setUp.
   testedClass := FilePlugin.
   translator := ASTCSlangPluginTranslator new
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveConnectToFileDescriptorSmoke [
+FilePluginTranslationTest >> testPrimitiveConnectToFileDescriptorSmoke [
   self testMethod: #primitiveConnectToFileDescriptor
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveConnectToFileDescriptorStringComparison [
+FilePluginTranslationTest >> testPrimitiveConnectToFileDescriptorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveConnectToFileDescriptor.
   illiString := self prettyPrintIllicium: illiAST.
@@ -26,12 +26,12 @@ FilePluginTranslationTests >> testPrimitiveConnectToFileDescriptorStringComparis
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveConnectToFileSmoke [
+FilePluginTranslationTest >> testPrimitiveConnectToFileSmoke [
   self testMethod: #primitiveConnectToFile
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveConnectToFileStringComparison [
+FilePluginTranslationTest >> testPrimitiveConnectToFileStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveConnectToFile.
   illiString := self prettyPrintIllicium: illiAST.
@@ -40,12 +40,12 @@ FilePluginTranslationTests >> testPrimitiveConnectToFileStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryCreateSmoke [
+FilePluginTranslationTest >> testPrimitiveDirectoryCreateSmoke [
   self testMethod: #primitiveDirectoryCreate
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryCreateStringComparison [
+FilePluginTranslationTest >> testPrimitiveDirectoryCreateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDirectoryCreate.
   illiString := self prettyPrintIllicium: illiAST.
@@ -54,12 +54,12 @@ FilePluginTranslationTests >> testPrimitiveDirectoryCreateStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryDeleteSmoke [
+FilePluginTranslationTest >> testPrimitiveDirectoryDeleteSmoke [
   self testMethod: #primitiveDirectoryDelete
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryDeleteStringComparison [
+FilePluginTranslationTest >> testPrimitiveDirectoryDeleteStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDirectoryDelete.
   illiString := self prettyPrintIllicium: illiAST.
@@ -68,12 +68,12 @@ FilePluginTranslationTests >> testPrimitiveDirectoryDeleteStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryDelimitorSmoke [
+FilePluginTranslationTest >> testPrimitiveDirectoryDelimitorSmoke [
   self testMethod: #primitiveDirectoryDelimitor
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryDelimitorStringComparison [
+FilePluginTranslationTest >> testPrimitiveDirectoryDelimitorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDirectoryDelimitor.
   illiString := self prettyPrintIllicium: illiAST.
@@ -82,12 +82,12 @@ FilePluginTranslationTests >> testPrimitiveDirectoryDelimitorStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryEntrySmoke [
+FilePluginTranslationTest >> testPrimitiveDirectoryEntrySmoke [
   self testMethod: #primitiveDirectoryEntry
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryEntryStringComparison [
+FilePluginTranslationTest >> testPrimitiveDirectoryEntryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDirectoryEntry.
   illiString := self prettyPrintIllicium: illiAST.
@@ -96,12 +96,12 @@ FilePluginTranslationTests >> testPrimitiveDirectoryEntryStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryGetMacTypeAndCreatorSmoke [
+FilePluginTranslationTest >> testPrimitiveDirectoryGetMacTypeAndCreatorSmoke [
   self testMethod: #primitiveDirectoryGetMacTypeAndCreator
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryGetMacTypeAndCreatorStringComparison [
+FilePluginTranslationTest >> testPrimitiveDirectoryGetMacTypeAndCreatorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDirectoryGetMacTypeAndCreator.
   illiString := self prettyPrintIllicium: illiAST.
@@ -110,12 +110,12 @@ FilePluginTranslationTests >> testPrimitiveDirectoryGetMacTypeAndCreatorStringCo
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryLookupSmoke [
+FilePluginTranslationTest >> testPrimitiveDirectoryLookupSmoke [
   self testMethod: #primitiveDirectoryLookup
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDirectoryLookupStringComparison [
+FilePluginTranslationTest >> testPrimitiveDirectoryLookupStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDirectoryLookup.
   illiString := self prettyPrintIllicium: illiAST.
@@ -124,12 +124,12 @@ FilePluginTranslationTests >> testPrimitiveDirectoryLookupStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDirectorySetMacTypeAndCreatorSmoke [
+FilePluginTranslationTest >> testPrimitiveDirectorySetMacTypeAndCreatorSmoke [
   self testMethod: #primitiveDirectorySetMacTypeAndCreator
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDirectorySetMacTypeAndCreatorStringComparison [
+FilePluginTranslationTest >> testPrimitiveDirectorySetMacTypeAndCreatorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDirectorySetMacTypeAndCreator.
   illiString := self prettyPrintIllicium: illiAST.
@@ -138,12 +138,12 @@ FilePluginTranslationTests >> testPrimitiveDirectorySetMacTypeAndCreatorStringCo
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveDisableFileAccessSmoke [
+FilePluginTranslationTest >> testPrimitiveDisableFileAccessSmoke [
   self testMethod: #primitiveDisableFileAccess
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveDisableFileAccessStringComparison [
+FilePluginTranslationTest >> testPrimitiveDisableFileAccessStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveDisableFileAccess.
   illiString := self prettyPrintIllicium: illiAST.
@@ -152,12 +152,12 @@ FilePluginTranslationTests >> testPrimitiveDisableFileAccessStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileAtEndSmoke [
+FilePluginTranslationTest >> testPrimitiveFileAtEndSmoke [
   self testMethod: #primitiveFileAtEnd
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileAtEndStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileAtEndStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileAtEnd.
   illiString := self prettyPrintIllicium: illiAST.
@@ -166,12 +166,12 @@ FilePluginTranslationTests >> testPrimitiveFileAtEndStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileCloseSmoke [
+FilePluginTranslationTest >> testPrimitiveFileCloseSmoke [
   self testMethod: #primitiveFileClose
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileCloseStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileCloseStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileClose.
   illiString := self prettyPrintIllicium: illiAST.
@@ -180,12 +180,12 @@ FilePluginTranslationTests >> testPrimitiveFileCloseStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileDeleteSmoke [
+FilePluginTranslationTest >> testPrimitiveFileDeleteSmoke [
   self testMethod: #primitiveFileDelete
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileDeleteStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileDeleteStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileDelete.
   illiString := self prettyPrintIllicium: illiAST.
@@ -194,12 +194,12 @@ FilePluginTranslationTests >> testPrimitiveFileDeleteStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileDescriptorTypeSmoke [
+FilePluginTranslationTest >> testPrimitiveFileDescriptorTypeSmoke [
   self testMethod: #primitiveFileDescriptorType
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileDescriptorTypeStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileDescriptorTypeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileDescriptorType.
   illiString := self prettyPrintIllicium: illiAST.
@@ -208,12 +208,12 @@ FilePluginTranslationTests >> testPrimitiveFileDescriptorTypeStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileFlushSmoke [
+FilePluginTranslationTest >> testPrimitiveFileFlushSmoke [
   self testMethod: #primitiveFileFlush
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileFlushStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileFlushStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileFlush.
   illiString := self prettyPrintIllicium: illiAST.
@@ -222,12 +222,12 @@ FilePluginTranslationTests >> testPrimitiveFileFlushStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileGetPositionSmoke [
+FilePluginTranslationTest >> testPrimitiveFileGetPositionSmoke [
   self testMethod: #primitiveFileGetPosition
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileGetPositionStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileGetPositionStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileGetPosition.
   illiString := self prettyPrintIllicium: illiAST.
@@ -236,12 +236,12 @@ FilePluginTranslationTests >> testPrimitiveFileGetPositionStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileOpenNewSmoke [
+FilePluginTranslationTest >> testPrimitiveFileOpenNewSmoke [
   self testMethod: #primitiveFileOpenNew
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileOpenNewStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileOpenNewStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileOpenNew.
   illiString := self prettyPrintIllicium: illiAST.
@@ -250,12 +250,12 @@ FilePluginTranslationTests >> testPrimitiveFileOpenNewStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileOpenSmoke [
+FilePluginTranslationTest >> testPrimitiveFileOpenSmoke [
   self testMethod: #primitiveFileOpen
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileOpenStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileOpenStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileOpen.
   illiString := self prettyPrintIllicium: illiAST.
@@ -264,12 +264,12 @@ FilePluginTranslationTests >> testPrimitiveFileOpenStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileReadSmoke [
+FilePluginTranslationTest >> testPrimitiveFileReadSmoke [
   self testMethod: #primitiveFileRead
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileReadStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileReadStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileRead.
   illiString := self prettyPrintIllicium: illiAST.
@@ -278,12 +278,12 @@ FilePluginTranslationTests >> testPrimitiveFileReadStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileReadWithPinningSmoke [
+FilePluginTranslationTest >> testPrimitiveFileReadWithPinningSmoke [
   self testMethod: #primitiveFileReadWithPinning
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileReadWithPinningStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileReadWithPinningStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileReadWithPinning.
   illiString := self prettyPrintIllicium: illiAST.
@@ -292,12 +292,12 @@ FilePluginTranslationTests >> testPrimitiveFileReadWithPinningStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileReadWithoutPinningSmoke [
+FilePluginTranslationTest >> testPrimitiveFileReadWithoutPinningSmoke [
   self testMethod: #primitiveFileReadWithoutPinning
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileReadWithoutPinningStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileReadWithoutPinningStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileReadWithoutPinning.
   illiString := self prettyPrintIllicium: illiAST.
@@ -306,12 +306,12 @@ FilePluginTranslationTests >> testPrimitiveFileReadWithoutPinningStringCompariso
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileRenameSmoke [
+FilePluginTranslationTest >> testPrimitiveFileRenameSmoke [
   self testMethod: #primitiveFileRename
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileRenameStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileRenameStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileRename.
   illiString := self prettyPrintIllicium: illiAST.
@@ -320,12 +320,12 @@ FilePluginTranslationTests >> testPrimitiveFileRenameStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileSetPositionSmoke [
+FilePluginTranslationTest >> testPrimitiveFileSetPositionSmoke [
   self testMethod: #primitiveFileSetPosition
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileSetPositionStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileSetPositionStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileSetPosition.
   illiString := self prettyPrintIllicium: illiAST.
@@ -334,12 +334,12 @@ FilePluginTranslationTests >> testPrimitiveFileSetPositionStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileSizeSmoke [
+FilePluginTranslationTest >> testPrimitiveFileSizeSmoke [
   self testMethod: #primitiveFileSize
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileSizeStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -348,12 +348,12 @@ FilePluginTranslationTests >> testPrimitiveFileSizeStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileStdioHandlesSmoke [
+FilePluginTranslationTest >> testPrimitiveFileStdioHandlesSmoke [
   self testMethod: #primitiveFileStdioHandles
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileStdioHandlesStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileStdioHandlesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileStdioHandles.
   illiString := self prettyPrintIllicium: illiAST.
@@ -362,12 +362,12 @@ FilePluginTranslationTests >> testPrimitiveFileStdioHandlesStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileSyncSmoke [
+FilePluginTranslationTest >> testPrimitiveFileSyncSmoke [
   self testMethod: #primitiveFileSync
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileSyncStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileSyncStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileSync.
   illiString := self prettyPrintIllicium: illiAST.
@@ -376,12 +376,12 @@ FilePluginTranslationTests >> testPrimitiveFileSyncStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileTruncateSmoke [
+FilePluginTranslationTest >> testPrimitiveFileTruncateSmoke [
   self testMethod: #primitiveFileTruncate
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileTruncateStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileTruncateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileTruncate.
   illiString := self prettyPrintIllicium: illiAST.
@@ -390,12 +390,12 @@ FilePluginTranslationTests >> testPrimitiveFileTruncateStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveFileWriteSmoke [
+FilePluginTranslationTest >> testPrimitiveFileWriteSmoke [
   self testMethod: #primitiveFileWrite
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveFileWriteStringComparison [
+FilePluginTranslationTest >> testPrimitiveFileWriteStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveFileWrite.
   illiString := self prettyPrintIllicium: illiAST.
@@ -404,12 +404,12 @@ FilePluginTranslationTests >> testPrimitiveFileWriteStringComparison [
 ]
 
 { #category : #'smoke-test' }
-FilePluginTranslationTests >> testPrimitiveHasFileAccessSmoke [
+FilePluginTranslationTest >> testPrimitiveHasFileAccessSmoke [
   self testMethod: #primitiveHasFileAccess
 ]
 
 { #category : #'equaliy-test' }
-FilePluginTranslationTests >> testPrimitiveHasFileAccessStringComparison [
+FilePluginTranslationTest >> testPrimitiveHasFileAccessStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveHasFileAccess.
   illiString := self prettyPrintIllicium: illiAST.

@@ -54,7 +54,7 @@ IlliciumPluginTestGenerator class >> translatorClass [
 
 { #category : #generation }
 IlliciumPluginTestGenerator >> createTestClassFor: aClass [
-	^ self class testBaseClass subclass: aClass name , 'TranslationTests'
+	^ self class testBaseClass subclass: aClass name , 'TranslationTest'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'Illicium-Plugins-Tests'
