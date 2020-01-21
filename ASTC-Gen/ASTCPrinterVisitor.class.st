@@ -93,6 +93,20 @@ ASTCPrinterVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'anAssignementAdditionOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitAssignementAdditionOperator: anAssignementAdditionOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitAssignmentOperator: anAssignmentOperator [
 	stream cr.
 	self printTabCount: currentDepth.
@@ -116,6 +130,34 @@ ASTCPrinterVisitor >> visitBinaryOperator: aBinaryOperator [
 		space.
 	currentDepth := currentDepth + 1.
 	super visitBinaryOperator: aBinaryOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aBitLeftShiftOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitBitLeftShiftOperator: aBitLeftShiftOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitBitRightShiftOperator: aBitRightShiftOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aBitRightShiftOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitBitRightShiftOperator: aBitRightShiftOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]

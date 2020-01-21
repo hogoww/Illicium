@@ -25,12 +25,27 @@ ASTCSubclassResponsibilityVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitAssignmentOperator: anAssignmentOperator [
 	self subclassResponsibility
 ]
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitBinaryOperator: aBinaryOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitBitRightShiftOperator: aBitRightShiftOperator [
 	self subclassResponsibility
 ]
 

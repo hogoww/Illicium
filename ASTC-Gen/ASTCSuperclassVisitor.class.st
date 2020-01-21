@@ -25,6 +25,11 @@ ASTCSuperclassVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+	^ self visitBinaryOperator: anAssignementAdditionOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitAssignmentOperator: anAssignmentOperator [
 	^ self visitBinaryOperator: anAssignmentOperator
 ]
@@ -32,6 +37,16 @@ ASTCSuperclassVisitor >> visitAssignmentOperator: anAssignmentOperator [
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitBinaryOperator: aBinaryOperator [
 	^ self visitOperator: aBinaryOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	^ self visitBinaryOperator: aBitLeftShiftOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitBitRightShiftOperator: aBitRightShiftOperator [
+	^ self visitBinaryOperator: aBitRightShiftOperator
 ]
 
 { #category : #visiting }

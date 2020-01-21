@@ -96,7 +96,10 @@ Class {
 		'rawCCode',
 		'preprocessorIf',
 		'addressOfOperator',
-		'rawDeclaration'
+		'rawDeclaration',
+		'bitLeftShiftOperator',
+		'bitRightShiftOperator',
+		'assignementAdditionOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -261,7 +264,11 @@ ASTCBuilder >> defineOperatorClasses [
 	bitwiseAndOperator := builder newClassNamed: #BitwiseAndOperator.
 	moduloOperator := builder newClassNamed: #ModuloOperator.
 	structAccessStaticOperator := builder newClassNamed: #StructAccessStaticOperator.
-	addressOfOperator := builder newClassNamed: #AddressOfOperator
+	addressOfOperator := builder newClassNamed: #AddressOfOperator.
+	bitLeftShiftOperator := builder newClassNamed: #BitLeftShiftOperator.
+	bitRightShiftOperator := builder newClassNamed: #BitRightShiftOperator.
+	assignementAdditionOperator := builder newClassNamed: #AssignementAdditionOperator
+	
 ]
 
 { #category : #definition }
@@ -294,6 +301,10 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	subtractionOperator --|> binaryOperator." a - b "
 	additionOperator --|> binaryOperator." a + b "
 	
+	"priority 5, #left"
+	bitLeftShiftOperator --|> binaryOperator.
+	bitRightShiftOperator --|> binaryOperator.
+	
 	"priority 6, #left"
 	greaterOperator --|> binaryOperator." a > b "
 	greaterOrEqualOperator --|> binaryOperator." a >= b "
@@ -317,6 +328,7 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	
 	"priority 14, #right"
 	assignementOperator --|> binaryOperator." a = b "
+	assignementAdditionOperator --|> binaryOperator." a += b"
 	
 ]
 

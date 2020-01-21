@@ -51,6 +51,14 @@ ASTCStructureValidatorVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+	[ super
+		visitAssignementAdditionOperator: anAssignementAdditionOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitAssignmentOperator: anAssignmentOperator [
 	[ super visitAssignmentOperator: anAssignmentOperator ]
 		on: AssertionFailure
@@ -60,6 +68,20 @@ ASTCStructureValidatorVisitor >> visitAssignmentOperator: anAssignmentOperator [
 { #category : #visiting }
 ASTCStructureValidatorVisitor >> visitBinaryOperator: aBinaryOperator [
 	[ super visitBinaryOperator: aBinaryOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	[ super visitBitLeftShiftOperator: aBitLeftShiftOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitBitRightShiftOperator: aBitRightShiftOperator [
+	[ super visitBitRightShiftOperator: aBitRightShiftOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]

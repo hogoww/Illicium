@@ -29,6 +29,12 @@ ASTCHierarchyWalkerVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+	super visitAssignementAdditionOperator: anAssignementAdditionOperator.
+	^ self visitBinaryOperator: anAssignementAdditionOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitAssignmentOperator: anAssignmentOperator [
 	super visitAssignmentOperator: anAssignmentOperator.
 	^ self visitBinaryOperator: anAssignmentOperator
@@ -38,6 +44,18 @@ ASTCHierarchyWalkerVisitor >> visitAssignmentOperator: anAssignmentOperator [
 ASTCHierarchyWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
 	super visitBinaryOperator: aBinaryOperator.
 	^ self visitOperator: aBinaryOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	super visitBitLeftShiftOperator: aBitLeftShiftOperator.
+	^ self visitBinaryOperator: aBitLeftShiftOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitBitRightShiftOperator: aBitRightShiftOperator [
+	super visitBitRightShiftOperator: aBitRightShiftOperator.
+	^ self visitBinaryOperator: aBitRightShiftOperator
 ]
 
 { #category : #visiting }

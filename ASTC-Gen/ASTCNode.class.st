@@ -52,12 +52,27 @@ ASTCNode >> isAndOperator [
 ]
 
 { #category : #testing }
+ASTCNode >> isAssignementAdditionOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isAssignmentOperator [
 	^ false
 ]
 
 { #category : #testing }
 ASTCNode >> isBinaryOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isBitLeftShiftOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isBitRightShiftOperator [
 	^ false
 ]
 

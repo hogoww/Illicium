@@ -25,12 +25,27 @@ ASTCVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitAssignmentOperator: anAssignmentOperator [
 	
 ]
 
 { #category : #visiting }
 ASTCVisitor >> visitBinaryOperator: aBinaryOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitBitRightShiftOperator: aBitRightShiftOperator [
 	
 ]
 
