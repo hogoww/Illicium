@@ -299,10 +299,14 @@ ASTCPrettyPrint >> visitIf: anIf [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
+	| parenthesis |
+	parenthesis := self doesThisNeedParenthesis: anIndexerOperator.
+	parenthesis ifTrue:[ stream << '(' ].
 	self print: anIndexerOperator operands first;
 		<< '[';
 		print: anIndexerOperator operands second;
-		<< ']'
+		<< ']'.
+	parenthesis ifTrue:[ stream << ')' ].
 ]
 
 { #category : #visiting }
