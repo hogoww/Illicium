@@ -184,8 +184,9 @@ ASTCSlangReceiver >> cCode: aString inSmalltalk: ignoredBlock [
 
 { #category : #typing }
 ASTCSlangReceiver >> cCoerce: aVariable to: aType [
+	"a type is a string literal in slang case"
 	^ (aVariable acceptVisitor: methodTranslator)
-		castTo: (ASTCType new type: (methodTranslator getNodeTranslationType: aType) ; yourself)
+		castTo: (ASTCType new type: (self class new type: aType value ; yourself) asConstraint; yourself)
 ]
 
 { #category : #'reflective operations' }
