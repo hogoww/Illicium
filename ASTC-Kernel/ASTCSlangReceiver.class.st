@@ -59,7 +59,7 @@ ASTCSlangReceiver >> < aNumber [
 
 { #category : #typing }
 ASTCSlangReceiver >> << aNumber [
-	^ self translatedValue bitAnd: (aNumber acceptVisitor: methodTranslator)
+	^ self translatedValue << (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
@@ -106,7 +106,7 @@ ASTCSlangReceiver >> and: aBoolean [
 	| args |
 	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
 	args := self binarySelectorArgs: aBoolean.
-	^ (args at:1) && (args at:2)
+	^ args first && args second
 ]
 
 { #category : #accessing }
@@ -217,10 +217,9 @@ ASTCSlangReceiver >> doesNotUnderstand: aMessage [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> eassert: aBlock [
-	self assert: aBlock statements size = 1.
 	^	ASTCFunctionCall new
 		id: (ASTCIdentifier new id: #eassert);
-		addArgument: (aBlock acceptVisitor: methodTranslator) statements first expression;
+		addArgument: (self inlineBlock: aBlock) expression;
 		yourself
 ]
 
@@ -285,7 +284,7 @@ ASTCSlangReceiver >> ifTrueIfFalseStatement: args [
 		yourself.
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-helper' }
 ASTCSlangReceiver >> inlineBlock: aBlock [
 	| resBlock |
 	aBlock statements size = 1 
@@ -344,7 +343,7 @@ ASTCSlangReceiver >> or: aBoolean [
 	| args |
 	"same code as ASTCBoolean>>#or:"
 	args := self binarySelectorArgs: aBoolean.
-	^ (args at:1) || (args at:2)
+	^ args first || args second
 ]
 
 { #category : #'reflective operations' }
@@ -376,7 +375,7 @@ ASTCSlangReceiver >> to: stop do: aBlock [
 		condition:
 			(iterID <= (stop acceptVisitor: methodTranslator));
 		iteratorModification:
-			(iterID assignAndAdd: 1);
+			(iterID assignAndAdd: (ASTCLiteral value: 1));
 		body: (aBlock acceptVisitor: methodTranslator);
 		yourself
 ]
