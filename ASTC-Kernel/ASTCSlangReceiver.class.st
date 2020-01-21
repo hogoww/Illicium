@@ -376,7 +376,7 @@ ASTCSlangReceiver >> to: stop do: aBlock [
 		condition:
 			(iterID <= (stop acceptVisitor: methodTranslator));
 		iteratorModification:
-			(iterID preIncr);
+			(iterID assignAndAdd: 1);
 		body: (aBlock acceptVisitor: methodTranslator);
 		yourself
 ]

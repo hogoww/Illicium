@@ -102,6 +102,14 @@ ASTCExpression >> asStatement [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> assignAndAdd: anExpression [
+	^ ASTCAssignementAdditionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself 
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> bitAnd: anExpression [
 	^ ASTCBitwiseAndOperator new
 		addOperand: self;
