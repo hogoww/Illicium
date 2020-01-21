@@ -1,6 +1,11 @@
 Extension { #name : #ASTCNode }
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCNode >> = aNode [
+	^ true
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> astDump [
 	| visitor |
 	visitor:=ASTCPrinterVisitor new.
@@ -59,7 +64,7 @@ ASTCNode >> parent: aParent [
 { #category : #'*ASTC-Gen-Extensions' }
 ASTCNode >> prettyPrint [
 	
-	^ self prettyPrintUsing: ASTCPrettyPrint new
+	^ self prettyPrintUsing: ASTCSlangPrettyPrinter new
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }

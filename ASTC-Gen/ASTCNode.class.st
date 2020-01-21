@@ -10,13 +10,6 @@ Class {
 }
 
 { #category : #testing }
-ASTCNode >> = aNode [
-	comment = aNode comment
-		ifFalse: [ ^ false ].
-	^ true
-]
-
-{ #category : #testing }
 ASTCNode >> acceptVisitor: aVisitor [
 	aVisitor visitNode: self
 ]
