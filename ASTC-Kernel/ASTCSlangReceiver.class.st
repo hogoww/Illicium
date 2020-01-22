@@ -325,6 +325,15 @@ ASTCSlangReceiver >> isIntegerObject: anOop [
 		yourself
 ]
 
+{ #category : #accessing }
+ASTCSlangReceiver >> literalNodeFor: aValue [ 
+	^ aValue asLiteralNode 
+		propertyAt: ASTCTypeAnnotator property 
+		put: (self asConstraint -> 'generated, no PhineasType');
+		yourself
+	
+]
+
 { #category : #typing }
 ASTCSlangReceiver >> new [
 	"very hacky way to 'create' a 'new' instance of the recever... Should not stay that way."
