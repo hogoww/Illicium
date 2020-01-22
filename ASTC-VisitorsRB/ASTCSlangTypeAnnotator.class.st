@@ -19,23 +19,21 @@ ASTCSlangTypeAnnotator >> currentTMethod [
 { #category : #accessing }
 ASTCSlangTypeAnnotator >> typeThatNode: aNode [
 	| type |
-	
 	type := aNode getSlangTypeUsing: inferer in: currentTMethod.
 	self atNewPropertyPut: type -> nil for: aNode
 ]
 
 { #category : #accessing }
 ASTCSlangTypeAnnotator >> visitMessageNode: aMessageNode [
-	" inlined the code of ProgramNodeVisitor>>#visitMessageNode:
-	to add an exception for cCode:inSmalltalk:, because slang ignores the second argument"
-	(aMessageNode isCascaded not or: [ aMessageNode isFirstCascaded ])
-		ifTrue: [ self visitNode: aMessageNode receiver ].
-	
+	"add an exception for cCode:inSmalltalk:, because slang ignores the second argument"
 	aMessageNode selector = #cCode:inSmalltalk: 
-		ifTrue: [ self visitNode: aMessageNode arguments first ]
-		ifFalse: [ aMessageNode arguments do: [ :each | self visitNode: each ] ].
+		ifTrue: [ 
+			self visitNode: aMessageNode receiver.
+			self visitNode: aMessageNode arguments first.
+			self typeThatNode: aMessageNode
+			]
+		ifFalse: [ super visitMessageNode: aMessageNode ].
 
-	self typeThatNode: aMessageNode.
 	^ aMessageNode
 ]
 

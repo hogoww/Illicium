@@ -78,7 +78,12 @@ ASTCTypeAnnotator >> visitLiteralNode: aLiteralNode [
 
 { #category : #visiting }
 ASTCTypeAnnotator >> visitMessageNode: aMessageNode [
-	super visitMessageNode: aMessageNode.
+	" inlined the code of ProgramNodeVisitor>>#visitMessageNode:
+	because we want to treat receivers individually. 
+	They should therefore always be typed."
+	self visitNode: aMessageNode receiver.
+	aMessageNode arguments do: [ :each | self visitNode: each ].
+
 	self typeThatNode: aMessageNode.
 	^ aMessageNode
 ]

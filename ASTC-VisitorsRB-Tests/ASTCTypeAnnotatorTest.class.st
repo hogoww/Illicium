@@ -14,6 +14,11 @@ ASTCTypeAnnotatorTest class >> isAbstract [
 ]
 
 { #category : #test }
+ASTCTypeAnnotatorTest >> aMethodWithACascade [
+	1 + 2 ; - 3 
+]
+
+{ #category : #test }
 ASTCTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	^ self subclassResponsibility
 ]
@@ -65,6 +70,31 @@ ASTCTypeAnnotatorTest >> testVisitBlockNode [
 				self assert: (aNode hasProperty: propertyName).
 			] ].
 	self assert: counter equals: 1.
+]
+
+{ #category : #test }
+ASTCTypeAnnotatorTest >> testVisitCascadeNodeGlobal [
+	| ast counterValueNode counterMessageNode |
+	counterValueNode := 0.
+	counterMessageNode := 0.
+	
+	ast := self inferMethodSelector: #aMethodWithACascade from: ASTCTypeAnnotatorTest.
+	
+	ast nodesDo: [ :aNode | 
+		aNode isLiteralNode
+			ifTrue: [ 
+				counterValueNode := counterValueNode + 1.
+				self assert: (aNode hasProperty: propertyName).
+			].
+		aNode isMessage 
+			ifTrue:[
+				counterMessageNode := counterMessageNode + 1.
+				self assert: (aNode hasProperty: propertyName).
+				]].
+		
+	self assert: counterValueNode equals: 4. "We visit the receiver twice, and both of them must be typed"
+	self assert: counterMessageNode equals: 2.
+	
 ]
 
 { #category : #test }
