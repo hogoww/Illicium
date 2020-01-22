@@ -154,14 +154,6 @@ ASTCPrettyPrint >> unindent [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitAccessOperator: anOperator [
-	self print: anOperator operands first;
-		<< '[';
-		print: anOperator operands second;
-		<< ']'
-]
-
-{ #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
 		self printBinaryOperand: anOperator operands first.
