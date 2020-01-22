@@ -32,7 +32,8 @@ ASTCPrettyPrint >> cr [
 { #category : #visiting }
 ASTCPrettyPrint >> doesThisNeedParenthesis: aNode [
 	| parentPriority |
-	parentPriority := aNode parent ifNotNil: [:p | p priority ] ifNil:[ 16 ].
+	"this should also take into account associativity"
+	parentPriority := aNode parent ifNotNil: [:p | p priority ] ifNil:[ 16 "minimal priority"].
 	^ aNode priority > parentPriority
 ]
 
