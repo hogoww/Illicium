@@ -9,14 +9,14 @@ ASTCBoolean class >> asCType [
 	^#bool
 ]
 
-{ #category : #controlling }
+{ #category : #'translation-controlling' }
 ASTCBoolean >> and: aBoolean [
 	| args |
 	args := self binarySelectorArgs: aBoolean.
-	^ (args at:1) && (args at:2)
+	^ args first && args second
 ]
 
-{ #category : #controlling }
+{ #category : #checker }
 ASTCBoolean >> binarySelectorArgs: aBoolean [
 	| firstOperand secondOperand |
 	firstOperand := value isBlock
@@ -32,7 +32,7 @@ ASTCBoolean >> binarySelectorArgs: aBoolean [
 	^ { firstOperand. secondOperand }
 ]
 
-{ #category : #controlling }
+{ #category : #'translation-controlling' }
 ASTCBoolean >> ifFalse: falseBlock [
 	self ifTrueifFalseChecker: { falseBlock }.
  	^ ASTCIf new
@@ -42,7 +42,7 @@ ASTCBoolean >> ifFalse: falseBlock [
 		yourself
 ]
 
-{ #category : #controlling }
+{ #category : #'translation-controlling' }
 ASTCBoolean >> ifFalse: falseBlock ifTrue: trueBlock [
 	self ifTrueifFalseChecker: { falseBlock.trueBlock. }.
  	^ ASTCIf new
@@ -52,7 +52,7 @@ ASTCBoolean >> ifFalse: falseBlock ifTrue: trueBlock [
 		yourself
 ]
 
-{ #category : #controlling }
+{ #category : #'translation-controlling' }
 ASTCBoolean >> ifTrue: trueBlock [
 	self ifTrueifFalseChecker: { trueBlock }.
  	^ ASTCIf new
@@ -62,7 +62,7 @@ ASTCBoolean >> ifTrue: trueBlock [
 		yourself
 ]
 
-{ #category : #controlling }
+{ #category : #'translation-controlling' }
 ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 	self ifTrueifFalseChecker: { trueBlock.falseBlock }.
  	^ ASTCIf new
@@ -72,7 +72,7 @@ ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 		yourself
 ]
 
-{ #category : #controlling }
+{ #category : #checker }
 ASTCBoolean >> ifTrueifFalseChecker: anArrayOfArg [
 	value parent parent isAssignment ifTrue:[ self error: 'Cannot translate assignement from ifTrues messages.' ].
 	anArrayOfArg do: [ : anArg | 
@@ -80,14 +80,14 @@ ASTCBoolean >> ifTrueifFalseChecker: anArrayOfArg [
 		]
 ]
 
-{ #category : #controlling }
+{ #category : #'translation-logical operations' }
 ASTCBoolean >> not [
 	^ (value acceptVisitor: methodTranslator) not
 ]
 
-{ #category : #controlling }
+{ #category : #'translation-controlling' }
 ASTCBoolean >> or: aBoolean [
 	| args |
 	args := self binarySelectorArgs: aBoolean.
-	^ (args at:1) || (args at:2)
+	^ args first || args second
 ]

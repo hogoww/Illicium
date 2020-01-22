@@ -199,7 +199,7 @@ ASTCSlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
 	| res |
 	res := ASTCPreprocessorIf new
 		condition: (aPredicate acceptVisitor: methodTranslator).
-	res then addAll: ((trueBlock acceptVisitor: methodTranslator) statements collect:#expression).
+	res then addAll: ((trueBlock acceptVisitor: methodTranslator) statements collect: #expression).
 	falseBlock ifNotNil: [ res else addAll: ((falseBlock acceptVisitor: methodTranslator) statements collect: #expression) ].
 	^ res
 ]
