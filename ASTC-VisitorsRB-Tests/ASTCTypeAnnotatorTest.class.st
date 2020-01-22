@@ -35,8 +35,8 @@ ASTCTypeAnnotatorTest >> testVisitArgumentNode [
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName).
-			]. ].
-	self assert: counter equals:2.
+			] ].
+	self assert: counter equals: 2.
 ]
 
 { #category : #test }
@@ -49,8 +49,8 @@ ASTCTypeAnnotatorTest >> testVisitAssignmentNode [
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName).
-			]. ].
-	self assert: counter equals:1.
+			] ].
+	self assert: counter equals: 1.
 ]
 
 { #category : #test }
@@ -63,22 +63,21 @@ ASTCTypeAnnotatorTest >> testVisitBlockNode [
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName).
-			]. ].
-	self assert: counter equals:1.
+			] ].
+	self assert: counter equals: 1.
 ]
 
 { #category : #test }
 ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithAClassVariable
-		from: PINodeTypeVisitorTest.
-	ast
-		nodesDo: [ :aNode | 
-			(aNode isVariable and:[ aNode isSelf not and: [ aNode isGlobal]])
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+	ast := self inferMethodSelector: #aMethodWithAClassVariable from: PINodeTypeVisitorTest.
+	ast nodesDo: [ :aNode | 
+		(aNode isVariable and:[ aNode isSelf not and: [ aNode isGlobal]])
+			ifTrue: [ 
+				counter := counter + 1.
+				self assert: (aNode hasProperty: propertyName) 
+			] ].
 	self assert: counter equals: 1
 ]
 
@@ -92,8 +91,8 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName).
-			].].
-	self assert: counter equals:1.
+			] ].
+	self assert: counter equals: 1
 	
 ]
 
@@ -110,14 +109,13 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
 ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
 	| ast counter |
 	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithAnInstanceVariable
-		from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithAnInstanceVariable from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isVariable and: [ aNode isSelf not and: [ aNode isInstance ]])" isSelf not => issue #5458 on the Pharo repository"
 				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+					self assert: (aNode hasProperty: propertyName) 
+				] ].
 	self assert: counter equals: 1
 ]
 
@@ -125,14 +123,13 @@ ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
 ASTCTypeAnnotatorTest >> testVisitLiteralNode [
 	| ast counter |
 	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithALiteralNode
-		from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithALiteralNode from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isLiteralNode and: [ aNode isValue ])
 				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+					self assert: (aNode hasProperty: propertyName) 
+				] ].
 	self assert: counter equals: 1
 ]
 
@@ -145,7 +142,8 @@ ASTCTypeAnnotatorTest >> testVisitMessageNode [
 		nodesDo: [ :aNode | 
 			aNode isMessage
 				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+					self assert: (aNode hasProperty: propertyName) 
+				] ].
 	self assert: counter equals: 1
 ]
 
@@ -158,7 +156,8 @@ ASTCTypeAnnotatorTest >> testVisitMethodNode [
 		nodesDo: [ :aNode | 
 			aNode isMethod
 				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+					self assert: (aNode hasProperty: propertyName) 
+				] ].
 	self assert: counter equals: 1
 ]
 
@@ -166,14 +165,13 @@ ASTCTypeAnnotatorTest >> testVisitMethodNode [
 ASTCTypeAnnotatorTest >> testVisitSelfNode [
 	| ast counter |
 	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithSelf
-		from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithSelf from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isSelf
 				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+					self assert: (aNode hasProperty: propertyName) 
+				] ].
 	self assert: counter equals: 1
 ]
 
@@ -181,13 +179,12 @@ ASTCTypeAnnotatorTest >> testVisitSelfNode [
 ASTCTypeAnnotatorTest >> testVisitTemporaryNode [
 	| ast counter |
 	counter := 0.
-	ast := self
-		inferMethodSelector: #aMethodWithATemporaryVariable
-		from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isSelf not and: [ aNode isTemp])
 				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+					self assert: (aNode hasProperty: propertyName) 
+				] ].
 	self assert: counter equals: 2
 ]
