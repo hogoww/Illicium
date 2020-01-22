@@ -412,8 +412,7 @@ ASTCSlangReceiver >> whileTrue: aBlock [
 		else: nil;
 		yourself).
 	
-	aBlock statements collect: [:aStatement| aStatement acceptVisitor: methodTranslator ] into: body statements.
-
+	body addStatement: (aBlock acceptVisitor: methodTranslator).
 
 	^ ASTCWhile new
 		condition: ((self literalNodeFor: true) acceptVisitor: methodTranslator);

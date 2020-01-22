@@ -7,11 +7,16 @@ ASTCBlock >> addStatement: aStatement [
    not sure it'll be good enough."
   aStatement isBlock 
     ifTrue: [ 
-	   aStatement statements 
-		  do: [:aRealStatement| self addStatement: aRealStatement 
-	 ] ]
+	   self addStatements: aStatement.
+	 ]
     ifFalse:[	
        aStatement parent: self.
        statements add: aStatement 
     ]
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCBlock >> addStatements: aBlock [
+	aBlock statements 
+		  do: [:aStatement| self addStatement: aStatement ]
 ]
