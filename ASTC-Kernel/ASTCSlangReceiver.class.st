@@ -393,8 +393,23 @@ ASTCSlangReceiver >> type: aType [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> whileTrue: aBlock [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	| body |
+	body := ASTCBlock new.
+	self value statements collect: [:aStatement| (aStatement acceptVisitor: methodTranslator) asStatement ] into: body statements.
+
+	body addStatement: (ASTCIf new
+		condition: body statements removeLast expression not;
+		then: ASTCBreak new;
+		else: nil;
+		yourself).
+	
+	aBlock statements collect: [:aStatement| aStatement acceptVisitor: methodTranslator ] into: body statements.
+
+
+	^ ASTCWhile new
+		condition: ((self literalNodeFor: true) acceptVisitor: methodTranslator);
+		body: body;
+		yourself
 ]
 
 { #category : #'reflective operations' }
