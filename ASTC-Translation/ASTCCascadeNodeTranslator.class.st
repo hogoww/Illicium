@@ -6,7 +6,8 @@ Class {
 
 { #category : #translate }
 ASTCCascadeNodeTranslator >> translateNode: aCascadeNode [
-	aCascadeNode messages do: [:aMessage| aMessage acceptVisitor: methodTranslator ].
-
-
+	| res |
+	res := ASTCBlock new.
+	aCascadeNode messages do: [:aMessage| res addStatement: (aMessage acceptVisitor: methodTranslator) asStatement ].
+	^ res
 ]
