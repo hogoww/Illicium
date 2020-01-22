@@ -72,6 +72,14 @@ ASTCSlangPrettyPrinter >> visitAssThenAssignOperator: anAddressOfOperatorNode [
 ]
 
 { #category : #visiting }
+ASTCSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOperator [
+	"use of one more set of parentheses than needed. Ok."
+	self << '('.
+	super visitAssignementAdditionOperator: anAssignmentAdditionOperator.
+	self << ')'
+]
+
+{ #category : #visiting }
 ASTCSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 "	anAssignmentOperator comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , anAssignmentOperator comment first ; cr ; spaces ]."
 	super visitAssignmentOperator: anAssignmentOperator.
