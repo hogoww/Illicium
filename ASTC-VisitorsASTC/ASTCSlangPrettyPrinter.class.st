@@ -52,6 +52,7 @@ ASTCSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
 
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
+	"systematique use of parenthesis"
 	self << '('.
 	self visitUnaryOperator: anAddressOfOperatorNode.
 	self << ')'.
@@ -60,6 +61,14 @@ ASTCSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
 { #category : #visiting }
 ASTCSlangPrettyPrinter >> visitAndOperator: anAndOperator [
 	self printLogicalOperatorInConditionnal: anAndOperator
+]
+
+{ #category : #visiting }
+ASTCSlangPrettyPrinter >> visitAssThenAssignOperator: anAddressOfOperatorNode [
+	"systematique use of parenthesis"
+	self << '('.
+	self visitUnaryOperator: anAddressOfOperatorNode.
+	self << ')'.
 ]
 
 { #category : #visiting }
