@@ -9,12 +9,6 @@ Class {
 	#category : #'ASTC-Translation-overviewers'
 }
 
-{ #category : #configuration }
-ASTCMethodTranslator >> TemporaryDeclarationNodeTranslator: aTemporaryDeclarationNodeTranslator [
-	
-	translators at: #temporaryDeclarationNodeTranslator put: (aTemporaryDeclarationNodeTranslator methodTranslator: self ; yourself).
-]
-
 { #category : #accessing }
 ASTCMethodTranslator >> addInclude: aString [
 	includes add: aString
@@ -24,6 +18,12 @@ ASTCMethodTranslator >> addInclude: aString [
 ASTCMethodTranslator >> ask: aTranslatorKind to: aSelector with: arguments [
 	" utility, may not be as usefull as I foresee "
 	^ (translators at: aTranslatorKind) perform: aSelector with: arguments
+]
+
+{ #category : #configuration }
+ASTCMethodTranslator >> assignmentNodeTranslator: anAssignmentNodeTranslator [
+	
+	translators at: #assignmentNodeTranslator put: (anAssignmentNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #initialization }
@@ -116,6 +116,12 @@ ASTCMethodTranslator >> returnNodeTranslator: anILReturnNodeTranslator [
 { #category : #visiting }
 ASTCMethodTranslator >> stateName [
 	^ classTranslator stateName
+]
+
+{ #category : #configuration }
+ASTCMethodTranslator >> temporaryDeclarationNodeTranslator: aTemporaryDeclarationNodeTranslator [
+	
+	translators at: #temporaryDeclarationNodeTranslator put: (aTemporaryDeclarationNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #visiting }
