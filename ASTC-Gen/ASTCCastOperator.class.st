@@ -9,30 +9,28 @@ Class {
 
 { #category : #testing }
 ASTCCastOperator >> = aCastOperator [
-	super = aCastOperator
-		ifFalse: [ ^ false ].
-	type = aCastOperator type
-		ifFalse: [ ^ false ].
-	^ true
+  super = aCastOperator ifFalse: [ ^false ].
+  type = aCastOperator type ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCCastOperator >> acceptVisitor: aVisitor [
-	aVisitor visitCastOperator: self
+  aVisitor visitCastOperator: self
 ]
 
 { #category : #testing }
 ASTCCastOperator >> isCastOperator [
-	^ true
+  ^true
 ]
 
 { #category : #accessing }
 ASTCCastOperator >> type [
-	^ type
+  ^type
 ]
 
 { #category : #accessing }
 ASTCCastOperator >> type: aType [
-	aType ifNotNil: [ aType parent: self ].
-	type := aType
+  aType ifNotNil: [ aType parent: self ].
+  type := aType
 ]

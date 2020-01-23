@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCDivisionOperator >> = aDivisionOperator [
-	super = aDivisionOperator
-		ifFalse: [ ^ false ].
-	^ true
+  super = aDivisionOperator ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCDivisionOperator >> acceptVisitor: aVisitor [
-	aVisitor visitDivisionOperator: self
+  aVisitor visitDivisionOperator: self
 ]
 
 { #category : #testing }
 ASTCDivisionOperator >> isDivisionOperator [
-	^ true
+  ^true
 ]

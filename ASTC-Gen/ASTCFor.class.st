@@ -10,44 +10,40 @@ Class {
 
 { #category : #testing }
 ASTCFor >> = aFor [
-	super = aFor
-		ifFalse: [ ^ false ].
-	iteratorDefinition = aFor iteratorDefinition
-		ifFalse: [ ^ false ].
-	iteratorModification = aFor iteratorModification
-		ifFalse: [ ^ false ].
-	^ true
+  super = aFor ifFalse: [ ^false ].
+  iteratorDefinition = aFor iteratorDefinition ifFalse: [ ^false ].
+  iteratorModification = aFor iteratorModification ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCFor >> acceptVisitor: aVisitor [
-	aVisitor visitFor: self
+  aVisitor visitFor: self
 ]
 
 { #category : #testing }
 ASTCFor >> isFor [
-	^ true
+  ^true
 ]
 
 { #category : #accessing }
 ASTCFor >> iteratorDefinition [
-	^ iteratorDefinition
+  ^iteratorDefinition
 ]
 
 { #category : #accessing }
 ASTCFor >> iteratorDefinition: anIteratorDefinition [
-	anIteratorDefinition ifNotNil: [ anIteratorDefinition parent: self ].
-	iteratorDefinition := anIteratorDefinition
+  anIteratorDefinition ifNotNil: [ anIteratorDefinition parent: self ].
+  iteratorDefinition := anIteratorDefinition
 ]
 
 { #category : #accessing }
 ASTCFor >> iteratorModification [
-	^ iteratorModification
+  ^iteratorModification
 ]
 
 { #category : #accessing }
 ASTCFor >> iteratorModification: anIteratorModification [
-	anIteratorModification
-		ifNotNil: [ anIteratorModification parent: self ].
-	iteratorModification := anIteratorModification
+  anIteratorModification ifNotNil: [ anIteratorModification parent: self ].
+  iteratorModification := anIteratorModification
 ]
