@@ -22,7 +22,7 @@ ASTCSmallInteger class >> defaultValue [
 { #category : #translation }
 ASTCSmallInteger >> bitAnd: aSmallInteger [
 	self flag: #toCheck."UNSURE ABOUT THIS ONE"
-	^ self translatedValue bitAnd: (aSmallInteger acceptVisitor: methodTranslator)
+	^ self translatedValue & (aSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }

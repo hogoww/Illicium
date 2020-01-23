@@ -129,6 +129,12 @@ ASTCSlangReceiver >> at: anExpression [
 ]
 
 { #category : #'reflective operations' }
+ASTCSlangReceiver >> at: something put: pouet [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
 ASTCSlangReceiver >> baseHeaderSize [
 	self flag: #undone. "want to see how slang translates it first."
 	^ ASTCLiteral value: '''unsuportedFeature'''.
@@ -153,7 +159,13 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> bitAnd: anInteger [
 	"pretty sure it's an integer"
-	^ self translatedValue bitAnd: (anInteger acceptVisitor: methodTranslator)
+	^ self translatedValue & (anInteger acceptVisitor: methodTranslator)
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> bitOr: anInteger [
+	"pretty sure it's an integer"
+	^ self translatedValue bitOr: (anInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -366,6 +378,12 @@ ASTCSlangReceiver >> printString [
 			print: self asCType;
 			<<')'.
 		].
+]
+
+{ #category : #'reflective operations' }
+ASTCSlangReceiver >> repeat [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
 { #category : #'reflective operations' }
