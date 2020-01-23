@@ -9,6 +9,14 @@ ASTCExpression >> % anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> & anExpression [
+	^ ASTCBitwiseAndOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> && anExpression [
 	^ ASTCAndOperator new
 		addOperand: self;
@@ -126,14 +134,6 @@ ASTCExpression >> assignAndAdd: anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
-ASTCExpression >> bitAnd: anExpression [
-	^ ASTCBitwiseAndOperator new
-		addOperand: self;
-		addOperand: anExpression;
-		yourself
-]
-
-{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> castTo: aType [
 	self assert: aType isType.
 	^ ASTCCastOperator new
@@ -194,6 +194,14 @@ ASTCExpression >> then: aTrueExpression else: aFalseExpression [
 		addOperand: self;
 		addOperand: aTrueExpression;
 		addOperand: aFalseExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> | anExpression [
+	^ ASTCBitwiseOrOperator new
+		addOperand: self;
+		addOperand: anExpression;
 		yourself
 ]
 
