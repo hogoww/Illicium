@@ -165,7 +165,7 @@ ASTCSlangReceiver >> bitAnd: anInteger [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> bitOr: anInteger [
 	"pretty sure it's an integer"
-	^ self translatedValue bitOr: (anInteger acceptVisitor: methodTranslator)
+	^ self translatedValue | (anInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
