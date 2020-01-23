@@ -99,7 +99,9 @@ Class {
 		'rawDeclaration',
 		'bitLeftShiftOperator',
 		'bitRightShiftOperator',
-		'assignementAdditionOperator'
+		'assignementAdditionOperator',
+		'bitwiseXorOperator',
+		'bitwiseOrOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -267,7 +269,9 @@ ASTCBuilder >> defineOperatorClasses [
 	addressOfOperator := builder newClassNamed: #AddressOfOperator.
 	bitLeftShiftOperator := builder newClassNamed: #BitLeftShiftOperator.
 	bitRightShiftOperator := builder newClassNamed: #BitRightShiftOperator.
-	assignementAdditionOperator := builder newClassNamed: #AssignementAdditionOperator
+	assignementAdditionOperator := builder newClassNamed: #AssignementAdditionOperator.
+	bitwiseXorOperator := builder newClassNamed: #BitwiseXorOperator.
+	bitwiseOrOperator := builder newClassNamed: #BitwiseOrOperator
 	
 ]
 
@@ -317,7 +321,13 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	
 	"priority 8, #left"
 	bitwiseAndOperator --|> binaryOperator. " a & b "
-		
+	
+	"priority 9, #left"
+	bitwiseXorOperator --|> binaryOperator. " a ^ b "
+	
+	"priority 10, #left"
+	bitwiseOrOperator --|> binaryOperator. " a | b "
+	
 	"priority 11, #left"
 	andOperator --|> binaryOperator. " a && b "
 	"priority 12, #left"
