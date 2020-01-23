@@ -79,7 +79,7 @@ ASTCExpressionTest >> testAssignAndAdd [
 { #category : #tests }
 ASTCExpressionTest >> testBitAnd [
 	| operator node |
-	operator := (ASTCIdentifier new id: #a) bitAnd: (ASTCIdentifier new id: #b).
+	operator := (ASTCIdentifier new id: #a) & (ASTCIdentifier new id: #b).
 	
 	operator debugASTCStructure.
 	self assert: operator isBitwiseAndOperator.
