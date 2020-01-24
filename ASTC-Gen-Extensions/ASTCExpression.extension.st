@@ -134,6 +134,14 @@ ASTCExpression >> assignAndAdd: anExpression [
 ]
 
 { #category : #'*ASTC-Gen-Extensions' }
+ASTCExpression >> bitXor: anExpression [
+	^ ASTCBitwiseXorOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Gen-Extensions' }
 ASTCExpression >> castTo: aType [
 	self assert: aType isType.
 	^ ASTCCastOperator new
