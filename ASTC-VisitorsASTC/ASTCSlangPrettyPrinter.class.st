@@ -147,7 +147,7 @@ ASTCSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
   self << Character cr.
   aFunctionDeclaration id acceptVisitor: self.
   self << $(.
-  aFunctionDeclaration parameters ifEmpty: [ stream << #void ] ifNotEmpty: [:params |  params do: [:each |  each acceptVisitor: self ] separatedBy: [ self << $, ] ].
+  aFunctionDeclaration parameters ifEmpty: [ stream << #void ] ifNotEmpty: [:params |  params do: [:each |  each acceptVisitor: self ] separatedBy: [ self << ', ' ] ].
   self << $)
 ]
 

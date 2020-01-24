@@ -275,7 +275,7 @@ ASTCPrettyPrint >> visitFunctionDeclaration: aFunctionDeclaration [
 	self << Character space.
 	aFunctionDeclaration id acceptVisitor:self.
 	self << $(.
-	aFunctionDeclaration parameters do:[:each| each acceptVisitor:self] separatedBy:[ self << $,].
+	aFunctionDeclaration parameters do:[:each| each acceptVisitor:self] separatedBy:[ self << ', '].
 	self << $).
 ]
 

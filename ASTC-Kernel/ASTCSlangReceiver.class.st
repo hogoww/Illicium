@@ -245,6 +245,7 @@ ASTCSlangReceiver >> bitOr: anInteger [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> bitShift: pouet [
 	self flag: #undone. "want to see how slang translates it first."
+	"More complicated than planned, it evaluates constants first, and change the sign of the bitshift if needeed."
 	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
 
@@ -356,7 +357,7 @@ ASTCSlangReceiver >> ifFalse: falseBlock [
 ]
 
 { #category : #'reflective operations' }
-ASTCSlangReceiver >> ifFalse: stuff IfTrue: estuff [
+ASTCSlangReceiver >> ifFalse: stuff ifTrue: estuff [
 	self flag: #undone. "want to see how slang translates it first."
 	^ ASTCLiteral value: '''unsuportedFeature'''.
 ]
