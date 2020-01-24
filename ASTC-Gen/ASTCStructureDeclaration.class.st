@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCStructureDeclaration >> = aStructureDeclaration [
-	super = aStructureDeclaration
-		ifFalse: [ ^ false ].
-	^ true
+  super = aStructureDeclaration ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCStructureDeclaration >> acceptVisitor: aVisitor [
-	aVisitor visitStructureDeclaration: self
+  aVisitor visitStructureDeclaration: self
 ]
 
 { #category : #testing }
 ASTCStructureDeclaration >> isStructureDeclaration [
-	^ true
+  ^true
 ]

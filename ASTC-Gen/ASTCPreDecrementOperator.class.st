@@ -6,17 +6,16 @@ Class {
 
 { #category : #testing }
 ASTCPreDecrementOperator >> = aPreDecrementOperator [
-	super = aPreDecrementOperator
-		ifFalse: [ ^ false ].
-	^ true
+  super = aPreDecrementOperator ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCPreDecrementOperator >> acceptVisitor: aVisitor [
-	aVisitor visitPreDecrementOperator: self
+  aVisitor visitPreDecrementOperator: self
 ]
 
 { #category : #testing }
 ASTCPreDecrementOperator >> isPreDecrementOperator [
-	^ true
+  ^true
 ]

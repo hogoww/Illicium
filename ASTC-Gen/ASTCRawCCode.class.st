@@ -9,29 +9,27 @@ Class {
 
 { #category : #testing }
 ASTCRawCCode >> = aRawCCode [
-	super = aRawCCode
-		ifFalse: [ ^ false ].
-	cCode = aRawCCode cCode
-		ifFalse: [ ^ false ].
-	^ true
+  super = aRawCCode ifFalse: [ ^false ].
+  cCode = aRawCCode cCode ifFalse: [ ^false ].
+  ^true
 ]
 
 { #category : #testing }
 ASTCRawCCode >> acceptVisitor: aVisitor [
-	aVisitor visitRawCCode: self
+  aVisitor visitRawCCode: self
 ]
 
 { #category : #accessing }
 ASTCRawCCode >> cCode [
-	^ cCode
+  ^cCode
 ]
 
 { #category : #accessing }
 ASTCRawCCode >> cCode: aCCode [
-	cCode := aCCode
+  cCode := aCCode
 ]
 
 { #category : #testing }
 ASTCRawCCode >> isRawCCode [
-	^ true
+  ^true
 ]
