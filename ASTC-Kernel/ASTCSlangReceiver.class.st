@@ -546,8 +546,16 @@ ASTCSlangReceiver >> printString [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> repeat [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	"example available in Spur64BitMemoryManager>>accessibleObjectAfter:"
+	"basically, a while true without break"
+	| body |
+	body := ASTCBlock new.
+	receiverNode statements collect: [:aStatement| (aStatement acceptVisitor: methodTranslator) asStatement ] into: body statements.
+	
+	^ ASTCWhile new
+		condition: ((self literalNodeFor: true) acceptVisitor: methodTranslator);
+		body: body;
+		yourself
 ]
 
 { #category : #'reflective operations' }
@@ -614,20 +622,17 @@ ASTCSlangReceiver >> whileFalse: something [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> whileTrue [
-	| body |
-	body := ASTCBlock new.
-	receiverNode statements collect: [:aStatement| (aStatement acceptVisitor: methodTranslator) asStatement ] into: body statements.
-
-	body addStatement: (ASTCIf new
-		condition: body statements removeLast expression not;
+	"a whileTrue is rewritten in slang to have an if using the latest statement of the block"
+	| whileStatement |
+	whileStatement := self repeat.
+	
+	whileStatement body addStatement: (ASTCIf new
+		condition: whileStatement body statements removeLast expression not;
 		then: ASTCBreak new;
 		else: nil;
 		yourself).
 	
-	^ ASTCWhile new
-		condition: ((self literalNodeFor: true) acceptVisitor: methodTranslator);
-		body: body;
-		yourself
+	^ whileStatement
 ]
 
 { #category : #'reflective operations' }
