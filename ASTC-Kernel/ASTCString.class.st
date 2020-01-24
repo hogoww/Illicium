@@ -26,7 +26,7 @@ ASTCString >> = anotherStringNode [
 	
 	methodTranslator addInclude: 'string'.
 	^ (ASTCFunctionCall new id: (ASTCIdentifier new id: #strcomp) ;
-			addArgument: (self value acceptVisitor: methodTranslator);
+			addArgument: self translatedReceiver;
 			addArgument: (anotherStringNode acceptVisitor: methodTranslator);
 			yourself)
 		equals: (ASTCLiteral new value: ASTCSmallInteger value: 0)

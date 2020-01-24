@@ -22,12 +22,12 @@ ASTCSmallInteger class >> defaultValue [
 { #category : #translation }
 ASTCSmallInteger >> bitAnd: aSmallInteger [
 	self flag: #toCheck."UNSURE ABOUT THIS ONE"
-	^ self translatedValue & (aSmallInteger acceptVisitor: methodTranslator)
+	^ self translatedReceiver & (aSmallInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCSmallInteger >> even [
-	^ (self translatedValue % ((self class literalNodeFor: 2) acceptVisitor: methodTranslator)) 
+	^ (self translatedReceiver % ((self class literalNodeFor: 2) acceptVisitor: methodTranslator)) 
 		equals: ((self class literalNodeFor: 0) acceptVisitor: methodTranslator)
 ]
 
@@ -65,7 +65,7 @@ ASTCSmallInteger >> to: stop do: aBlock [
 								type: ASTCSmallInteger asPharoType;
 								yourself);
 						yourself);
-				init:(self value acceptVisitor: methodTranslator);
+				init: self translatedReceiver;
 				yourself);
 		condition:
 			(iterID <= (stop acceptVisitor: methodTranslator));

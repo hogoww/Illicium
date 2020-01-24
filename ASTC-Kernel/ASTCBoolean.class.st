@@ -19,11 +19,11 @@ ASTCBoolean >> and: aBoolean [
 { #category : #checker }
 ASTCBoolean >> binarySelectorArgs: aBoolean [
 	| firstOperand secondOperand |
-	firstOperand := value isBlock
-		ifTrue: [ value statements size = 1
-				ifTrue: [ value statements first acceptVisitor: methodTranslator ]
+	firstOperand := receiverNode isBlock
+		ifTrue: [ receiverNode statements size = 1
+				ifTrue: [ receiverNode statements first acceptVisitor: methodTranslator ]
 				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
-		ifFalse: [ value acceptVisitor: methodTranslator ].
+		ifFalse: [ self translatedReceiver ].
 	secondOperand := aBoolean isBlock
 		ifTrue: [ aBoolean statements size = 1
 				ifTrue: [ aBoolean statements first acceptVisitor: methodTranslator ]
@@ -36,7 +36,7 @@ ASTCBoolean >> binarySelectorArgs: aBoolean [
 ASTCBoolean >> ifFalse: falseBlock [
 	self ifTrueifFalseChecker: { falseBlock }.
  	^ ASTCIf new
-		condition: (self value acceptVisitor: self visitor);
+		condition: self translatedReceiver;
 		then: ASTCBlock new;
 		else: (falseBlock acceptVisitor: self visitor);
 		yourself
@@ -46,7 +46,7 @@ ASTCBoolean >> ifFalse: falseBlock [
 ASTCBoolean >> ifFalse: falseBlock ifTrue: trueBlock [
 	self ifTrueifFalseChecker: { falseBlock.trueBlock. }.
  	^ ASTCIf new
-		condition: (self value acceptVisitor: self visitor);
+		condition: self translatedReceiver;
 		then: (trueBlock acceptVisitor: self visitor);
 		else: (falseBlock acceptVisitor: self visitor);
 		yourself
@@ -56,7 +56,7 @@ ASTCBoolean >> ifFalse: falseBlock ifTrue: trueBlock [
 ASTCBoolean >> ifTrue: trueBlock [
 	self ifTrueifFalseChecker: { trueBlock }.
  	^ ASTCIf new
-		condition: (self value acceptVisitor: self visitor);
+		condition: self translatedReceiver;
 		then: (trueBlock acceptVisitor: self visitor);
 		else: ASTCBlock new;
 		yourself
@@ -66,7 +66,7 @@ ASTCBoolean >> ifTrue: trueBlock [
 ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 	self ifTrueifFalseChecker: { trueBlock.falseBlock }.
  	^ ASTCIf new
-		condition: (self value acceptVisitor: self visitor);
+		condition: self translatedReceiver;
 		then: (trueBlock acceptVisitor: self visitor);
 		else: (falseBlock acceptVisitor: self visitor);
 		yourself
@@ -74,7 +74,7 @@ ASTCBoolean >> ifTrue: trueBlock ifFalse: falseBlock [
 
 { #category : #checker }
 ASTCBoolean >> ifTrueifFalseChecker: anArrayOfArg [
-	value parent parent isAssignment ifTrue:[ self error: 'Cannot translate assignement from ifTrues messages.' ].
+	receiverNode parent parent isAssignment ifTrue:[ self error: 'Cannot translate assignement from ifTrues messages.' ].
 	anArrayOfArg do: [ : anArg | 
 			anArg isBlock ifFalse:[ self error: 'currently only translate blocks as argument of ifTrues messages.']. 
 		]
@@ -82,7 +82,7 @@ ASTCBoolean >> ifTrueifFalseChecker: anArrayOfArg [
 
 { #category : #'translation-logical operations' }
 ASTCBoolean >> not [
-	^ (value acceptVisitor: methodTranslator) not
+	^ self translatedReceiver not
 ]
 
 { #category : #'translation-controlling' }

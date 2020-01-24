@@ -15,13 +15,13 @@ ASTCSmallIntegerTest >> testMoins [
 	
 	astC := messageNode acceptVisitor: methodTranslator.
 	
-	expectedC := (ASTCLiteral value: (ASTCSmallInteger value: 1)) - (ASTCLiteral value: (ASTCSmallInteger value: 2)).
+	expectedC := (ASTCLiteral value: 1) - (ASTCLiteral value: 2).
 	
 	self assert: astC isSubtractionOperator.
 	self assert: (astC operands at: 1) isLiteral.
-	self assert: (astC operands at: 1) value equals: (ASTCSmallInteger value: 1).
+	self assert: (astC operands at: 1) value equals: 1.
 	self assert: (astC operands at: 2) isLiteral.
-	self assert: (astC operands at: 2) value equals: (ASTCSmallInteger value: 2).
+	self assert: (astC operands at: 2) value equals: 2.
 	self assert: astC equals: expectedC.
 
 	astC debugASTCStructure.
@@ -39,13 +39,13 @@ ASTCSmallIntegerTest >> testPlus [
 	
 	astC := messageNode acceptVisitor: methodTranslator.
 	
-	expectedC := (ASTCLiteral value: (ASTCSmallInteger value: 1)) + (ASTCLiteral value: (ASTCSmallInteger value: 2)).
+	expectedC := (ASTCLiteral value: 1) + (ASTCLiteral value: 2).
 	
 	self assert: astC isAdditionOperator.
 	self assert: (astC operands at: 1) isLiteral.
-	self assert: (astC operands at: 1) value equals: (ASTCSmallInteger value: 1).
+	self assert: (astC operands at: 1) value equals: 1.
 	self assert: (astC operands at: 2) isLiteral.
-	self assert: (astC operands at: 2) value equals: (ASTCSmallInteger value: 2).
+	self assert: (astC operands at: 2) value equals: 2.
 	self assert: astC equals: expectedC.
 	
 	astC debugASTCStructure.

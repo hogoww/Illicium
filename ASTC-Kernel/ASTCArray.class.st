@@ -18,7 +18,7 @@ ASTCArray class >> asCType [
 ASTCArray >> at: anIndex [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
 	 self flag:#todo.
-	^ self translatedValue indexAt:(anIndex acceptVisitor: methodTranslator)
+	^ self translatedReceiver indexAt:(anIndex acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
@@ -33,7 +33,7 @@ ASTCArray >> do: aBlock [
 	aBlock isBlock ifFalse:[ BadArgument new expected: RBBlockNode; result: aBlock class; signal ].
 	aBlock arguments size = 1 ifFalse:[ ArgumentsCountMismatch signal ].
 	
-	size := [(value propertyAt: #type) key size] on: NotFound 
+	size := [(receiverNode propertyAt: #type) key size] on: NotFound 
 		do:[ self error: '#do: is curently only usable if the IV using it defines a size property' ].
 	newBlock := aBlock copy.
 	newBlock arguments at: 1 put: ((RBArgumentNode named: #i) parent: newBlock).
@@ -45,10 +45,10 @@ ASTCArray >> do: aBlock [
 		
 	arg := (aBlock arguments at: 1) acceptVisitor: methodTranslator.
 	iterator := (newBlock arguments at: 1) acceptVisitor: methodTranslator.
-	receiver := self value acceptVisitor: methodTranslator.
+	receiver := self translatedReceiver.
 	
 	res body statements addFirst:
-		(ASTCIf new condition: (arg equals: (ASTCLiteral new value: 'null'));
+		(ASTCIf new condition: (arg equals: (ASTCLiteral value: 'null'));
 			then: ASTCBreak new;
 			yourself).
 	

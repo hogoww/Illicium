@@ -8,10 +8,7 @@ Class {
 ASTCLiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOriginalNode: originalNode [
 	^ ASTCLiteral new
 		pharoNode: originalNode;
-		value:
-			((methodTranslator getNodeTranslationType: originalNode) createInstance
-				value: aValue;
-				yourself);
+		value: aValue;
 		yourself
 ]
 

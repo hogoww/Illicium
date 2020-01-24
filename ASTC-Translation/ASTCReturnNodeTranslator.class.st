@@ -6,7 +6,7 @@ Class {
 
 { #category : #translate }
 ASTCReturnNodeTranslator >> translateNode: aReturnNode [
-	aReturnNode value isSelf ifTrue: [ ^ ASTCEmptyStatment new ].
+	aReturnNode value isSelf ifTrue: [ ^ ASTCEmptyStatement new ].
 	
 	^ ASTCReturn new
 		pharoNode: aReturnNode ;

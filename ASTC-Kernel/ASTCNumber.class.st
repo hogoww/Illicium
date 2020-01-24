@@ -7,47 +7,47 @@ Class {
 { #category : #translation }
 ASTCNumber >> * aNumber [
 
-	^ self translatedValue * (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver * (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> + aNumber [
 	
-	^ self translatedValue + (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver + (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> - aNumber [
 
-	^ self translatedValue - (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver - (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> / aNumber [
 	
-	^ self translatedValue / (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver / (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> < aNumber [
 	
-	^ self translatedValue < (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver < (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> <= aNumber [
 	
-	^ self translatedValue <= (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver <= (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> > aNumber [
 	
-	^ self translatedValue > (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver > (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #translation }
 ASTCNumber >> >= aNumber [
 	
-	^ self translatedValue >= (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver >= (aNumber acceptVisitor: methodTranslator)
 ]

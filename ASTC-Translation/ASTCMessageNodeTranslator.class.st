@@ -9,7 +9,7 @@ ASTCMessageNodeTranslator >> forward: aMessage to: aType [
 	| aReceiver |
 	aReceiver := (methodTranslator
 		getReplacementType: aType) createInstance
-		value: aMessage receiver;
+		receiverNode: aMessage receiver;
 		visitor: methodTranslator;
 		yourself.
 	^ aReceiver
@@ -22,7 +22,7 @@ ASTCMessageNodeTranslator >> translateNode: aMessageNode [
 	| receiver res |
 	receiver := (methodTranslator
 		getNodeTranslationType: aMessageNode receiver) createInstance
-		value: aMessageNode receiver;
+		receiverNode: aMessageNode receiver;
 		visitor: methodTranslator;
 		yourself.
 	res := (receiver

@@ -12,9 +12,7 @@ ASTCLiteralTranslatorTest >> testTranslationSmallIntegerLiteral [
 	
 	self assert: astC isExpressionStatement.
 	self assert: astC expression isLiteral.
-	self assert: astC expression value value equals: 5.
+	self assert: astC expression value equals: 5.
 	self assert: astC expression equals: 
-		(ASTCLiteral new value:
-			(ASTCSmallInteger new value: 5 ; yourself) ;
-		yourself).
+		(ASTCLiteral new value: 5; yourself).
 ]

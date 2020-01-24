@@ -2,7 +2,7 @@ Class {
 	#name : #ASTCKernelClass,
 	#superclass : #Object,
 	#instVars : [
-		'value',
+		'receiverNode',
 		'methodTranslator'
 	],
 	#category : #'ASTC-Kernel'
@@ -19,7 +19,7 @@ ASTCKernelClass class >> asCType [
 ]
 
 { #category : #accessing }
-ASTCKernelClass class >> literalNodeFor: aValue [ 
+ASTCKernelClass class >> literalNodeFor: aValue [
 	^ aValue asLiteralNode 
 		propertyAt: ASTCTypeAnnotator property 
 		put: (self asPharoType -> 'generated, no PhineasType');
@@ -28,9 +28,9 @@ ASTCKernelClass class >> literalNodeFor: aValue [
 ]
 
 { #category : #accessing }
-ASTCKernelClass class >> value: aValue [ 
+ASTCKernelClass class >> receiverNode: aValue [ 
 	^ self new
-		value: aValue;
+		receiverNode: aValue;
 		yourself
 ]
 
@@ -66,7 +66,7 @@ ASTCKernelClass >> messageToFunctionCall: aMessage [
 ASTCKernelClass >> myType [
 	"in case of most, it doesn't
 	for UserTypes, it does."
-	^ (value propertyAt: ASTCTypeAnnotator property) key
+	^ (receiverNode propertyAt: ASTCTypeAnnotator property) key
 ]
 
 { #category : #'message performing' }
@@ -92,7 +92,7 @@ ASTCKernelClass >> printString [
 	^String streamContents:[:stream|
 		stream << (self class asString)
 			<<'('
-			<< value printString
+			<< receiverNode printString
 			<<')'.
 		].
 ]
@@ -100,12 +100,17 @@ ASTCKernelClass >> printString [
 { #category : #evaluating }
 ASTCKernelClass >> receiverNode [
 	self flag: #needRenaming."need complete renaming, but too unstable. So just make #= fail for now."
-	^ value
+	^ receiverNode
 ]
 
 { #category : #evaluating }
-ASTCKernelClass >> translatedValue [
-	^ self value acceptVisitor: methodTranslator
+ASTCKernelClass >> receiverNode: aNode [
+	receiverNode := aNode
+]
+
+{ #category : #evaluating }
+ASTCKernelClass >> translatedReceiver [
+	^ self receiverNode acceptVisitor: self visitor
 ]
 
 { #category : #'message performing' }
@@ -118,17 +123,6 @@ ASTCKernelClass >> understandsForTranslation: aSelector [
 		class := class superclass.
 	] doWhileFalse: [ class = ASTCKernelClass ]."should not be an infinite loop because this class should not be referenced."
 	^ false
-]
-
-{ #category : #evaluating }
-ASTCKernelClass >> value [ 
-	^value
-]
-
-{ #category : #evaluating }
-ASTCKernelClass >> value: anObject [
-	value:=anObject.
-	^value
 ]
 
 { #category : #accessing }

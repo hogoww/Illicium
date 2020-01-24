@@ -18,22 +18,22 @@ ASTCObject class >> asPharoType [
 ASTCObject >> = anotherObject [
 	^ self 
 		ifTranslation:
-			[ self translatedValue equals: (anotherObject acceptVisitor: methodTranslator) ]
+			[ self translatedReceiver equals: (anotherObject acceptVisitor: methodTranslator) ]
 		ifNot: [ (methodTranslator ifNil:[ ^ super = anotherObject ]) ]
 ]
 
 { #category : #comparing }
 ASTCObject >> asFloat [
-	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #float asLiteralNode) to: InterpreterProxy
+	^ methodTranslator forward: (MessageSend receiver: self receiverNode selector: #castTo: argument: #float asLiteralNode) to: InterpreterProxy
 ]
 
 { #category : #comparing }
 ASTCObject >> asInteger [
-	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #int asLiteralNode) to: InterpreterProxy
+	^ methodTranslator forward: (MessageSend receiver: self receiverNode selector: #castTo: argument: #int asLiteralNode) to: InterpreterProxy
 ]
 
 { #category : #comparing }
 ASTCObject >> asString [
 	methodTranslator ifNil:[ ^ super asString ].
-	^ methodTranslator forward: (MessageSend receiver: self value selector: #castTo: argument: #'char*' asLiteralNode) to: InterpreterProxy
+	^ methodTranslator forward: (MessageSend receiver: self receiverNode selector: #castTo: argument: #'char*' asLiteralNode) to: InterpreterProxy
 ]

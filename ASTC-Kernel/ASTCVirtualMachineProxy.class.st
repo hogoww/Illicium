@@ -19,14 +19,14 @@ ASTCVirtualMachineProxy >> cCoerce: aVariable to: aType [
 { #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> castTo: aType [
 	aType isString ifFalse:[ BadArgument new expected: String; result: aType class ]. 
-	^ self cCoerce: self value to: aType
+	^ self cCoerce: self receiverNode to: aType
 ]
 
 { #category : #'reflective operations' }
 ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand ifTrue:[ Error signal: 'infiniteRecursion' ].
 
-	^ self translatedValue
+	^ self translatedReceiver
 		-> (ASTCFunctionCall new 
 			id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector:(aMessage selector)); yourself) ;
 			arguments: (aMessage arguments collect:[:each| each acceptVisitor: methodTranslator ]);

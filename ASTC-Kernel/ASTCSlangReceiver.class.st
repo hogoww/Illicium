@@ -24,22 +24,22 @@ ASTCSlangReceiver class >> slangReservedSelector [
 { #category : #accessing }
 ASTCSlangReceiver >> * aNumber [
 	"same code as ASTCNumber>>#*"
-	^ self translatedValue * (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver * (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #'translation-operators' }
 ASTCSlangReceiver >> + anOperand [
-	^ self translatedValue + (anOperand acceptVisitor: methodTranslator)
+	^ self translatedReceiver + (anOperand acceptVisitor: methodTranslator)
 ]
 
 { #category : #'translation-operators' }
 ASTCSlangReceiver >> - anOperand [
-	^ self translatedValue - (anOperand acceptVisitor: methodTranslator)
+	^ self translatedReceiver - (anOperand acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
 ASTCSlangReceiver >> / anotherObject [
-	^ self translatedValue / (anotherObject acceptVisitor: methodTranslator) 
+	^ self translatedReceiver / (anotherObject acceptVisitor: methodTranslator) 
 		
 ]
 
@@ -47,32 +47,32 @@ ASTCSlangReceiver >> / anotherObject [
 ASTCSlangReceiver >> // anotherObject [
 	"should not work"
 	self flag:#notWorking.
-	^ self translatedValue / (anotherObject acceptVisitor: methodTranslator) 
+	^ self translatedReceiver / (anotherObject acceptVisitor: methodTranslator) 
 		
 ]
 
 { #category : #accessing }
 ASTCSlangReceiver >> < aNumber [
 	"same as ASTCSmallInteger>>#>"
-	^ self translatedValue < (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver < (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #typing }
 ASTCSlangReceiver >> << aNumber [
-	^ self translatedValue << (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver << (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
 ASTCSlangReceiver >> <= aNumber [
 	"same code as ASTCSmallInteger>>#<="
-	^ self translatedValue <= (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver <= (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #testing }
 ASTCSlangReceiver >> = anotherObject [
 	^ self 
 		ifTranslation:
-			[ self translatedValue equals: (anotherObject acceptVisitor: methodTranslator) ]
+			[ self translatedReceiver equals: (anotherObject acceptVisitor: methodTranslator) ]
 		ifNot: [ (methodTranslator ifNil:
 			[ ^ super = anotherObject and: [ type = anotherObject type ]]) ]
 ]
@@ -86,18 +86,18 @@ ASTCSlangReceiver >> == pouet [
 { #category : #typing }
 ASTCSlangReceiver >> > aNumber [
 	"same as ASTCSmallInteger>>#>"
-	^ self translatedValue > (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver > (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
 ASTCSlangReceiver >> >= aNumber [
 	"same as ASTCSmallInteger>>#>="
-	^ self translatedValue >= (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver >= (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #typing }
 ASTCSlangReceiver >> >> aNumber [
-	^ self translatedValue >> (aNumber acceptVisitor: methodTranslator)
+	^ self translatedReceiver >> (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -178,7 +178,7 @@ ASTCSlangReceiver >> asVoidPointer [
 
 { #category : #accessing }
 ASTCSlangReceiver >> at: anExpression [
-	^ self translatedValue indexAt: (anExpression acceptVisitor: methodTranslator)
+	^ self translatedReceiver indexAt: (anExpression acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -196,7 +196,7 @@ ASTCSlangReceiver >> baseHeaderSize [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> between: min and: max [
 	| receiver minArg maxArg |
-	receiver := self translatedValue.
+	receiver := self translatedReceiver.
 	minArg := min acceptVisitor: methodTranslator.
 	maxArg := max acceptVisitor: methodTranslator.
 	^ (receiver >= minArg) && (receiver <= maxArg)
@@ -205,11 +205,11 @@ ASTCSlangReceiver >> between: min and: max [
 { #category : #accessing }
 ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 	| firstOperand secondOperand |
-	firstOperand := value isBlock
-		ifTrue: [ value statements size = 1
-				ifTrue: [ value statements first acceptVisitor: methodTranslator ]
+	firstOperand := receiverNode isBlock
+		ifTrue: [ receiverNode statements size = 1
+				ifTrue: [ receiverNode statements first acceptVisitor: methodTranslator ]
 				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
-		ifFalse: [ value acceptVisitor: methodTranslator ].
+		ifFalse: [ receiverNode acceptVisitor: methodTranslator ].
 	secondOperand := aBoolean isBlock
 		ifTrue: [ aBoolean statements size = 1
 				ifTrue: [ aBoolean statements first acceptVisitor: methodTranslator ]
@@ -221,7 +221,7 @@ ASTCSlangReceiver >> binarySelectorArgs: aBoolean [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> bitAnd: anInteger [
 	"pretty sure it's an integer"
-	^ self translatedValue & (anInteger acceptVisitor: methodTranslator)
+	^ self translatedReceiver & (anInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -239,7 +239,7 @@ ASTCSlangReceiver >> bitInvert64 [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> bitOr: anInteger [
 	"pretty sure it's an integer"
-	^ self translatedValue | (anInteger acceptVisitor: methodTranslator)
+	^ self translatedReceiver | (anInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -252,7 +252,7 @@ ASTCSlangReceiver >> bitShift: pouet [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> bitXor: anInteger [
 	"pretty sure it's an integer"
-	^ self translatedValue bitXor: (anInteger acceptVisitor: methodTranslator)
+	^ self translatedReceiver bitXor: (anInteger acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -351,7 +351,7 @@ ASTCSlangReceiver >> eassert: aBlock [
 ASTCSlangReceiver >> ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	^ASTCIf new
-		condition: (self value acceptVisitor: self visitor) not;
+		condition: self translatedReceiver not;
 		then: (falseBlock acceptVisitor: self visitor);
 		yourself.
 ]
@@ -366,7 +366,7 @@ ASTCSlangReceiver >> ifFalse: stuff ifTrue: estuff [
 ASTCSlangReceiver >> ifNil: aBlock [
 	self assert: aBlock isBlock.
 	^ ASTCIf new
-		condition: self translatedValue not;
+		condition: self translatedReceiver not;
 		then: (aBlock acceptVisitor: methodTranslator)
 		yourself.
 ]
@@ -387,7 +387,7 @@ ASTCSlangReceiver >> ifNotNil: something [
 ASTCSlangReceiver >> ifTrue: trueBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	^ASTCIf new
-		condition:(self value acceptVisitor:self visitor);
+		condition: self translatedReceiver;
 		then: (trueBlock acceptVisitor: self visitor);
 		yourself.
 ]
@@ -404,7 +404,7 @@ ASTCSlangReceiver >> ifTrueIfFalseExpression: args [
 		ifTrue: [ self error: 'Cannot translate into ternary operator if it has more than one statements yet' ] ].
 	
 	^ ASTCTernaryConditionalOperator new
-		addOperand: self translatedValue;
+		addOperand: self translatedReceiver;
 		addOperand: (self inlineBlock: args first) expression;
 		addOperand: (args size = 2 ifTrue: [ (self inlineBlock: args second) expression ]); "else nil"
 		yourself
@@ -412,7 +412,7 @@ ASTCSlangReceiver >> ifTrueIfFalseExpression: args [
 
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> ifTrueIfFalseKindOfMessages: args [
-	^ self value parent parent isSequence
+	^ self receiverNode parent parent isSequence
 		ifTrue: [ self ifTrueIfFalseStatement: args ]
 		ifFalse: [ self ifTrueIfFalseExpression: args. ]
 ]
@@ -420,7 +420,7 @@ ASTCSlangReceiver >> ifTrueIfFalseKindOfMessages: args [
 { #category : #'reflective operations' }
 ASTCSlangReceiver >> ifTrueIfFalseStatement: args [
 	^ ASTCIf new
-		condition: (self value acceptVisitor:self visitor);
+		condition: self translatedReceiver;
 		then: (args first acceptVisitor: self visitor);
 		else: (args size = 2 ifTrue: [ args second acceptVisitor: self visitor]);
 		yourself.
@@ -515,8 +515,7 @@ ASTCSlangReceiver >> noMask: stuff [
 
 { #category : #accessing }
 ASTCSlangReceiver >> not [
-	"same code as Boolean>>#not"
-	^ (value acceptVisitor: methodTranslator) not
+	^ self translatedReceiver not
 ]
 
 { #category : #'reflective operations' }
@@ -538,7 +537,7 @@ ASTCSlangReceiver >> printString [
 	^String streamContents:[:stream|
 		stream << (self class asString)
 			<<'('
-			<< value printString
+			<< receiverNode printString
 			<< '-';
 			print: self asCType;
 			<<')'.
@@ -576,7 +575,7 @@ ASTCSlangReceiver >> to: stop do: aBlock [
     ifFalse:[ self error: 'An arguments has the wrong type' ]."
 	^ ASTCFor new
 		iteratorDefinition:
-			(iterID assign: (self value acceptVisitor: methodTranslator));
+			(iterID assign: self translatedReceiver);
 		condition:
 			(iterID <= (stop acceptVisitor: methodTranslator));
 		iteratorModification:
@@ -617,7 +616,7 @@ ASTCSlangReceiver >> whileFalse: something [
 ASTCSlangReceiver >> whileTrue [
 	| body |
 	body := ASTCBlock new.
-	self value statements collect: [:aStatement| (aStatement acceptVisitor: methodTranslator) asStatement ] into: body statements.
+	receiverNode statements collect: [:aStatement| (aStatement acceptVisitor: methodTranslator) asStatement ] into: body statements.
 
 	body addStatement: (ASTCIf new
 		condition: body statements removeLast expression not;
@@ -647,7 +646,7 @@ ASTCSlangReceiver >> wordSize [
 
 { #category : #accessing }
 ASTCSlangReceiver >> | aBool [
-	^ self translatedValue | (aBool acceptVisitor: methodTranslator) 
+	^ self translatedReceiver | (aBool acceptVisitor: methodTranslator) 
 		
 ]
 
@@ -655,7 +654,7 @@ ASTCSlangReceiver >> | aBool [
 ASTCSlangReceiver >> ~= anotherObject [
 	"if weird behavior, it's probably because it's not in the right context."
 	"this is only defined for translation, so if it's use for receiver equality, it won't work."
-	^ self translatedValue notEquals: (anotherObject acceptVisitor: methodTranslator) 
+	^ self translatedReceiver notEquals: (anotherObject acceptVisitor: methodTranslator) 
 		
 ]
 

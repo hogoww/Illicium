@@ -11,7 +11,7 @@ ASTCUserClass class >> asCType [
 
 { #category : #'reflective operations' }
 ASTCUserClass >> cCoerce: aVariable to: aType [
-	^ methodTranslator forward: (MessageSend receiver: self value selector: #cCoerce:to: arguments: {aVariable. aType}) to: InterpreterProxy
+	^ methodTranslator forward: (MessageSend receiver: self receiverNode selector: #cCoerce:to: arguments: {aVariable. aType}) to: InterpreterProxy
 ]
 
 { #category : #'reflective operations' }
