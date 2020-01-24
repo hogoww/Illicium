@@ -79,22 +79,22 @@ IlliciumPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedC
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aClass [ 
+IlliciumPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
 
 	| methodSource |
 	methodSource :=	 'test', (self formatSelector: aSelector) , 'Smoke' asMethodWithBody:[
 		self testMethod: #aSelector.
 	].
 	
-	aClass compile: methodSource asString classified: ##'smoke-test'.
+	aTestClass compile: methodSource asString classified: aString , #'smoke-test'.
 ]
 
 { #category : #generation }
 IlliciumPluginTestGenerator >> generateTestForClass: aClass [
-	| testClass primitivesMethod |
-	primitivesMethod := self methodToTest: aClass.
+	| testClass methodToTest |
+	methodToTest := self methodToTest: aClass.
 		
-	primitivesMethod ifEmpty: [ ^self ].
+	methodToTest ifEmpty: [ ^self ].
 	
 	testClass := self createTestClassFor: aClass.
 	
@@ -103,25 +103,26 @@ IlliciumPluginTestGenerator >> generateTestForClass: aClass [
 		forTestedClass: aClass
 		forTranslator: self class translatorClass name.
 	
-	primitivesMethod
-		do: [ :aMethod |
-			self generateTestMethodFor: aMethod selector inTestClass: testClass.
-			self generateSmokeTestMethodFor: aMethod selector inTestClass: testClass ]
+	methodToTest
+		do: [ :aMethod | | protocol |
+			protocol := aMethod protocol ifNotEmpty: [ aMethod protocol , '-' ].
+			self generateTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol.
+			self generateSmokeTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol ]
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aClass [ 
+IlliciumPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
 
 	| methodSource |
-	methodSource :=	 'test', aSelector onlyLetters capitalized , 'StringComparison'  asMethodWithBody:[
+	methodSource :=	 'test', aSelector onlyLetters capitalized , 'StringComparison' asMethodWithBody:[
 		| illiString slangString illiAST |
 		illiAST := self generateIllicium: #aSelector.
 		illiString := self prettyPrintIllicium: illiAST.
 		slangString := self generateSlang: #aSelector.
 		self assert: illiString equals: slangString.
 	].
-	
-	aClass compile: methodSource asString classified: #'equaliy-test'.
+
+	aTestClass compile: methodSource asString classified: aString , #'equaliy-test'.
 ]
 
 { #category : #generation }
