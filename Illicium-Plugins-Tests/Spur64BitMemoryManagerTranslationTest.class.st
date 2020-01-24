@@ -1,23 +1,23 @@
 Class {
-	#name : #Spur64BitMemoryManagerTranslationTests,
+	#name : #Spur64BitMemoryManagerTranslationTest,
 	#superclass : #ILVMSlangToCGeneratedTests,
 	#category : #'Illicium-Plugins-Tests'
 }
 
 { #category : #running }
-Spur64BitMemoryManagerTranslationTests >> setUp [
+Spur64BitMemoryManagerTranslationTest >> setUp [
   super setUp.
   testedClass := Spur64BitMemoryManager.
   translator := ASTCSlangTranslator new
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAccessibleObjectAfterSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAccessibleObjectAfterSmoke [
   self testMethod: #accessibleObjectAfter:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAccessibleObjectAfterStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAccessibleObjectAfterStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #accessibleObjectAfter:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -25,13 +25,13 @@ Spur64BitMemoryManagerTranslationTests >> testAccessibleObjectAfterStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testActiveAndDeferredScanSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testActiveAndDeferredScanSmoke [
   self testMethod: #activeAndDeferredScan:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testActiveAndDeferredScanStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testActiveAndDeferredScanStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #activeAndDeferredScan:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -39,13 +39,13 @@ Spur64BitMemoryManagerTranslationTests >> testActiveAndDeferredScanStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddFreeChunkWithBytesatSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddFreeChunkWithBytesatSmoke [
   self testMethod: #addFreeChunkWithBytes:at:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddFreeChunkWithBytesatStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddFreeChunkWithBytesatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addFreeChunkWithBytes:at:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -53,27 +53,27 @@ Spur64BitMemoryManagerTranslationTests >> testAddFreeChunkWithBytesatStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddFreeSubTreeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddFreeSubTreeSmoke [
   self testMethod: #addFreeSubTree:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddFreeSubTreeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddFreeSubTreeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addFreeSubTree:.
-  illiString := self prettyPrintIllicium: illiAST. 
+  illiString := self prettyPrintIllicium: illiAST.
   slangString := self generateSlang: #addFreeSubTree:.
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddGCRootSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddGCRootSmoke [
   self testMethod: #addGCRoot:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddGCRootStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddGCRootStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addGCRoot:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -81,13 +81,13 @@ Spur64BitMemoryManagerTranslationTests >> testAddGCRootStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddToFreeListbytesSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddToFreeListbytesSmoke [
   self testMethod: #addToFreeList:bytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddToFreeListbytesStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddToFreeListbytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addToFreeList:bytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -95,13 +95,13 @@ Spur64BitMemoryManagerTranslationTests >> testAddToFreeListbytesStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddToFreeTreebytesSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddToFreeTreebytesSmoke [
   self testMethod: #addToFreeTree:bytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddToFreeTreebytesStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddToFreeTreebytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addToFreeTree:bytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -109,13 +109,13 @@ Spur64BitMemoryManagerTranslationTests >> testAddToFreeTreebytesStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressAfterSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressAfterSmoke [
   self testMethod: #addressAfter:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressAfterStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressAfterStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addressAfter:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -123,13 +123,13 @@ Spur64BitMemoryManagerTranslationTests >> testAddressAfterStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeObjSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressCouldBeObjSmoke [
   self testMethod: #addressCouldBeObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeObjStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressCouldBeObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addressCouldBeObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -137,13 +137,13 @@ Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeObjStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeOldObjSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressCouldBeOldObjSmoke [
   self testMethod: #addressCouldBeOldObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeOldObjStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressCouldBeOldObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addressCouldBeOldObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -151,13 +151,13 @@ Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeOldObjStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeOopSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressCouldBeOopSmoke [
   self testMethod: #addressCouldBeOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeOopStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAddressCouldBeOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #addressCouldBeOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -165,13 +165,13 @@ Spur64BitMemoryManagerTranslationTests >> testAddressCouldBeOopStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAdjustAllOopsBySmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAdjustAllOopsBySmoke [
   self testMethod: #adjustAllOopsBy:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAdjustAllOopsByStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAdjustAllOopsByStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #adjustAllOopsBy:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -179,13 +179,13 @@ Spur64BitMemoryManagerTranslationTests >> testAdjustAllOopsByStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllExistingNewSpaceObjectsDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllExistingNewSpaceObjectsDoSmoke [
   self testMethod: #allExistingNewSpaceObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllExistingNewSpaceObjectsDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllExistingNewSpaceObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allExistingNewSpaceObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -193,13 +193,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllExistingNewSpaceObjectsDoString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllExistingObjectsDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllExistingObjectsDoSmoke [
   self testMethod: #allExistingObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllExistingObjectsDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllExistingObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allExistingObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -207,13 +207,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllExistingObjectsDoStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllExistingOldSpaceObjectsDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllExistingOldSpaceObjectsDoSmoke [
   self testMethod: #allExistingOldSpaceObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllExistingOldSpaceObjectsDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllExistingOldSpaceObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allExistingOldSpaceObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -221,13 +221,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllExistingOldSpaceObjectsDoString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllFreeObjectsDoSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllFreeObjectsDoSmoke [
   self testMethod: #allFreeObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllFreeObjectsDoStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllFreeObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allFreeObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -235,13 +235,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllFreeObjectsDoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllHeapEntitiesDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllHeapEntitiesDoSmoke [
   self testMethod: #allHeapEntitiesDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllHeapEntitiesDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllHeapEntitiesDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allHeapEntitiesDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -249,13 +249,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllHeapEntitiesDoStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllInstancesOfSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllInstancesOfSmoke [
   self testMethod: #allInstancesOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllInstancesOfStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllInstancesOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allInstancesOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -263,13 +263,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllInstancesOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllNewSpaceEntitiesDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllNewSpaceEntitiesDoSmoke [
   self testMethod: #allNewSpaceEntitiesDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllNewSpaceEntitiesDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllNewSpaceEntitiesDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allNewSpaceEntitiesDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -277,13 +277,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllNewSpaceEntitiesDoStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllNewSpaceObjectsDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllNewSpaceObjectsDoSmoke [
   self testMethod: #allNewSpaceObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllNewSpaceObjectsDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllNewSpaceObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allNewSpaceObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -291,13 +291,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllNewSpaceObjectsDoStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsDoSafelySmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsDoSafelySmoke [
   self testMethod: #allObjectsDoSafely:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsDoSafelyStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsDoSafelyStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allObjectsDoSafely:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -305,13 +305,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllObjectsDoSafelyStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsDoSmoke [
   self testMethod: #allObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -319,13 +319,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllObjectsDoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsInFreeTreeDoSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsInFreeTreeDoSmoke [
   self testMethod: #allObjectsInFreeTreeDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsInFreeTreeDoStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsInFreeTreeDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allObjectsInFreeTreeDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -333,13 +333,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllObjectsInFreeTreeDoStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsInFreeTreedoSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsInFreeTreedoSmoke [
   self testMethod: #allObjectsInFreeTree:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsInFreeTreedoStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsInFreeTreedoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allObjectsInFreeTree:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -347,13 +347,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllObjectsInFreeTreedoStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsSmoke [
   self testMethod: #allObjects
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allObjects.
   illiString := self prettyPrintIllicium: illiAST.
@@ -361,13 +361,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllObjectsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsUnmarkedSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsUnmarkedSmoke [
   self testMethod: #allObjectsUnmarked
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllObjectsUnmarkedStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllObjectsUnmarkedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allObjectsUnmarked.
   illiString := self prettyPrintIllicium: illiAST.
@@ -375,13 +375,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllObjectsUnmarkedStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldMarkedWeakObjectsOnWeaklingStackSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldMarkedWeakObjectsOnWeaklingStackSmoke [
   self testMethod: #allOldMarkedWeakObjectsOnWeaklingStack
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldMarkedWeakObjectsOnWeaklingStackStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldMarkedWeakObjectsOnWeaklingStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldMarkedWeakObjectsOnWeaklingStack.
   illiString := self prettyPrintIllicium: illiAST.
@@ -389,13 +389,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldMarkedWeakObjectsOnWeaklingS
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesDoSmoke [
   self testMethod: #allOldSpaceEntitiesDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldSpaceEntitiesDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -403,13 +403,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesDoStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesForCoalescingFromdoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesForCoalescingFromdoSmoke [
   self testMethod: #allOldSpaceEntitiesForCoalescingFrom:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesForCoalescingFromdoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesForCoalescingFromdoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldSpaceEntitiesForCoalescingFrom:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -417,13 +417,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesForCoalescingFr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesForCompactingFromtodoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesForCompactingFromtodoSmoke [
   self testMethod: #allOldSpaceEntitiesForCompactingFrom:to:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesForCompactingFromtodoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesForCompactingFromtodoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldSpaceEntitiesForCompactingFrom:to:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -431,13 +431,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesForCompactingFr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesFromdoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesFromdoSmoke [
   self testMethod: #allOldSpaceEntitiesFrom:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesFromdoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesFromdoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldSpaceEntitiesFrom:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -445,13 +445,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesFromdoStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesFromtodoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesFromtodoSmoke [
   self testMethod: #allOldSpaceEntitiesFrom:to:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesFromtodoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceEntitiesFromtodoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldSpaceEntitiesFrom:to:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -459,13 +459,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceEntitiesFromtodoStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceObjectsDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceObjectsDoSmoke [
   self testMethod: #allOldSpaceObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceObjectsDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldSpaceObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -473,13 +473,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceObjectsDoStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceObjectsFromdoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceObjectsFromdoSmoke [
   self testMethod: #allOldSpaceObjectsFrom:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceObjectsFromdoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllOldSpaceObjectsFromdoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allOldSpaceObjectsFrom:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -487,13 +487,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllOldSpaceObjectsFromdoStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllPastSpaceEntitiesDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllPastSpaceEntitiesDoSmoke [
   self testMethod: #allPastSpaceEntitiesDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllPastSpaceEntitiesDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllPastSpaceEntitiesDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allPastSpaceEntitiesDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -501,13 +501,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllPastSpaceEntitiesDoStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllPastSpaceObjectsDoSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllPastSpaceObjectsDoSmoke [
   self testMethod: #allPastSpaceObjectsDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllPastSpaceObjectsDoStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllPastSpaceObjectsDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allPastSpaceObjectsDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -515,13 +515,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllPastSpaceObjectsDoStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllStrongSlotsOfWeaklingAreMarkedSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllStrongSlotsOfWeaklingAreMarkedSmoke [
   self testMethod: #allStrongSlotsOfWeaklingAreMarked:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllStrongSlotsOfWeaklingAreMarkedStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllStrongSlotsOfWeaklingAreMarkedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allStrongSlotsOfWeaklingAreMarked:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -529,13 +529,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllStrongSlotsOfWeaklingAreMarkedS
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllUnscannedEphemeronsAreActiveSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveSmoke [
   self testMethod: #allUnscannedEphemeronsAreActive
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllUnscannedEphemeronsAreActiveStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allUnscannedEphemeronsAreActive.
   illiString := self prettyPrintIllicium: illiAST.
@@ -543,13 +543,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllUnscannedEphemeronsAreActiveStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateBytesclassIndexSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateBytesclassIndexSmoke [
   self testMethod: #allocateBytes:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateBytesclassIndexStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateBytesclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateBytes:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -557,13 +557,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateBytesclassIndexStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateLargestFreeChunkSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkSmoke [
   self testMethod: #allocateLargestFreeChunk
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateLargestFreeChunkStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateLargestFreeChunk.
   illiString := self prettyPrintIllicium: illiAST.
@@ -571,13 +571,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateLargestFreeChunkStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateNewSpaceSlotsformatclassIndexSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateNewSpaceSlotsformatclassIndexSmoke [
   self testMethod: #allocateNewSpaceSlots:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateNewSpaceSlotsformatclassIndexStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateNewSpaceSlotsformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateNewSpaceSlots:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -585,13 +585,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateNewSpaceSlotsformatclassIn
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateOldSpaceChunkOfBytesSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateOldSpaceChunkOfBytesSmoke [
   self testMethod: #allocateOldSpaceChunkOfBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateOldSpaceChunkOfBytesStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateOldSpaceChunkOfBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateOldSpaceChunkOfBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -599,13 +599,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateOldSpaceChunkOfBytesString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateOldSpaceChunkOfBytessuchThatSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateOldSpaceChunkOfBytessuchThatSmoke [
   self testMethod: #allocateOldSpaceChunkOfBytes:suchThat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateOldSpaceChunkOfBytessuchThatStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateOldSpaceChunkOfBytessuchThatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateOldSpaceChunkOfBytes:suchThat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -613,13 +613,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateOldSpaceChunkOfBytessuchTh
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocatePinnedSlotsSmoke [
+{ #category : #'sista support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocatePinnedSlotsSmoke [
   self testMethod: #allocatePinnedSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocatePinnedSlotsStringComparison [
+{ #category : #'sista support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocatePinnedSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocatePinnedSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -627,13 +627,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocatePinnedSlotsStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsForPinningInOldSpacebytesformatclassIndexSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsForPinningInOldSpacebytesformatclassIndexSmoke [
   self testMethod: #allocateSlotsForPinningInOldSpace:bytes:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsForPinningInOldSpacebytesformatclassIndexStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsForPinningInOldSpacebytesformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateSlotsForPinningInOldSpace:bytes:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -641,13 +641,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsForPinningInOldSpaceb
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsInOldSpacebytesformatclassIndexSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsInOldSpacebytesformatclassIndexSmoke [
   self testMethod: #allocateSlotsInOldSpace:bytes:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsInOldSpacebytesformatclassIndexStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsInOldSpacebytesformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateSlotsInOldSpace:bytes:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -655,13 +655,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsInOldSpacebytesformat
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsInOldSpaceformatclassIndexSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsInOldSpaceformatclassIndexSmoke [
   self testMethod: #allocateSlotsInOldSpace:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsInOldSpaceformatclassIndexStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsInOldSpaceformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateSlotsInOldSpace:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -669,13 +669,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsInOldSpaceformatclass
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsformatclassIndexSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsformatclassIndexSmoke [
   self testMethod: #allocateSlots:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsformatclassIndexStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSlotsformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateSlots:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -683,13 +683,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateSlotsformatclassIndexStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSmallNewSpaceSlotsformatclassIndexSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSmallNewSpaceSlotsformatclassIndexSmoke [
   self testMethod: #allocateSmallNewSpaceSlots:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocateSmallNewSpaceSlotsformatclassIndexStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocateSmallNewSpaceSlotsformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocateSmallNewSpaceSlots:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -697,13 +697,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocateSmallNewSpaceSlotsformatcl
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocationUnitSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocationUnitSmoke [
   self testMethod: #allocationUnit
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAllocationUnitStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAllocationUnitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #allocationUnit.
   illiString := self prettyPrintIllicium: illiAST.
@@ -711,13 +711,13 @@ Spur64BitMemoryManagerTranslationTests >> testAllocationUnitStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAmbiguousClassallInstancesIntolimitresultsIntoSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAmbiguousClassallInstancesIntolimitresultsIntoSmoke [
   self testMethod: #ambiguousClass:allInstancesInto:limit:resultsInto:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAmbiguousClassallInstancesIntolimitresultsIntoStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAmbiguousClassallInstancesIntolimitresultsIntoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ambiguousClass:allInstancesInto:limit:resultsInto:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -725,13 +725,13 @@ Spur64BitMemoryManagerTranslationTests >> testAmbiguousClassallInstancesIntolimi
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAreIntegersandSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAreIntegersandSmoke [
   self testMethod: #areIntegers:and:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAreIntegersandStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAreIntegersandStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #areIntegers:and:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -739,13 +739,13 @@ Spur64BitMemoryManagerTranslationTests >> testAreIntegersandStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testArrayClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testArrayClassIndexPunSmoke [
   self testMethod: #arrayClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testArrayClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testArrayClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #arrayClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -753,13 +753,13 @@ Spur64BitMemoryManagerTranslationTests >> testArrayClassIndexPunStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testArrayFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testArrayFormatSmoke [
   self testMethod: #arrayFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testArrayFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testArrayFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #arrayFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -767,13 +767,13 @@ Spur64BitMemoryManagerTranslationTests >> testArrayFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssertFreeChunkPrevHeadZeroSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssertFreeChunkPrevHeadZeroSmoke [
   self testMethod: #assertFreeChunkPrevHeadZero
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssertFreeChunkPrevHeadZeroStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssertFreeChunkPrevHeadZeroStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #assertFreeChunkPrevHeadZero.
   illiString := self prettyPrintIllicium: illiAST.
@@ -781,13 +781,13 @@ Spur64BitMemoryManagerTranslationTests >> testAssertFreeChunkPrevHeadZeroStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssertInnerValidFreeObjectSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssertInnerValidFreeObjectSmoke [
   self testMethod: #assertInnerValidFreeObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssertInnerValidFreeObjectStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssertInnerValidFreeObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #assertInnerValidFreeObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -795,13 +795,13 @@ Spur64BitMemoryManagerTranslationTests >> testAssertInnerValidFreeObjectStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssertValidFreeObjectSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssertValidFreeObjectSmoke [
   self testMethod: #assertValidFreeObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssertValidFreeObjectStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssertValidFreeObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #assertValidFreeObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -809,13 +809,13 @@ Spur64BitMemoryManagerTranslationTests >> testAssertValidFreeObjectStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssignClassIndicesAndPinFromtooutPointersfillingSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssignClassIndicesAndPinFromtooutPointersfillingSmoke [
   self testMethod: #assignClassIndicesAndPinFrom:to:outPointers:filling:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssignClassIndicesAndPinFromtooutPointersfillingStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssignClassIndicesAndPinFromtooutPointersfillingStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #assignClassIndicesAndPinFrom:to:outPointers:filling:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -823,13 +823,13 @@ Spur64BitMemoryManagerTranslationTests >> testAssignClassIndicesAndPinFromtooutP
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssimilateNewSegmentSmoke [
+{ #category : #'growing/shrinking memory-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssimilateNewSegmentSmoke [
   self testMethod: #assimilateNewSegment:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAssimilateNewSegmentStringComparison [
+{ #category : #'growing/shrinking memory-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAssimilateNewSegmentStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #assimilateNewSegment:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -837,13 +837,13 @@ Spur64BitMemoryManagerTranslationTests >> testAssimilateNewSegmentStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAtLeastClassIndexHalfHeaderSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAtLeastClassIndexHalfHeaderSmoke [
   self testMethod: #atLeastClassIndexHalfHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAtLeastClassIndexHalfHeaderStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAtLeastClassIndexHalfHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #atLeastClassIndexHalfHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -851,13 +851,13 @@ Spur64BitMemoryManagerTranslationTests >> testAtLeastClassIndexHalfHeaderStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAttemptToShrinkSmoke [
+{ #category : #'growing/shrinking memory-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAttemptToShrinkSmoke [
   self testMethod: #attemptToShrink
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAttemptToShrinkStringComparison [
+{ #category : #'growing/shrinking memory-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAttemptToShrinkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #attemptToShrink.
   illiString := self prettyPrintIllicium: illiAST.
@@ -865,13 +865,13 @@ Spur64BitMemoryManagerTranslationTests >> testAttemptToShrinkStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testAverageObjectSizeInBytesSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testAverageObjectSizeInBytesSmoke [
   self testMethod: #averageObjectSizeInBytes
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testAverageObjectSizeInBytesStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testAverageObjectSizeInBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #averageObjectSizeInBytes.
   illiString := self prettyPrintIllicium: illiAST.
@@ -879,13 +879,13 @@ Spur64BitMemoryManagerTranslationTests >> testAverageObjectSizeInBytesStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBaseAddressOfImageSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBaseAddressOfImageSmoke [
   self testMethod: #baseAddressOfImage
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBaseAddressOfImageStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBaseAddressOfImageStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #baseAddressOfImage.
   illiString := self prettyPrintIllicium: illiAST.
@@ -893,13 +893,13 @@ Spur64BitMemoryManagerTranslationTests >> testBaseAddressOfImageStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBaseHeaderSizeSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBaseHeaderSizeSmoke [
   self testMethod: #baseHeaderSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBaseHeaderSizeStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBaseHeaderSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #baseHeaderSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -907,13 +907,13 @@ Spur64BitMemoryManagerTranslationTests >> testBaseHeaderSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBaseHeaderSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBaseHeaderSmoke [
   self testMethod: #baseHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBaseHeaderStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBaseHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #baseHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -921,13 +921,13 @@ Spur64BitMemoryManagerTranslationTests >> testBaseHeaderStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBeRootIfOldSmoke [
+{ #category : #'store check-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBeRootIfOldSmoke [
   self testMethod: #beRootIfOld:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBeRootIfOldStringComparison [
+{ #category : #'store check-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBeRootIfOldStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #beRootIfOld:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -935,13 +935,13 @@ Spur64BitMemoryManagerTranslationTests >> testBeRootIfOldStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBecomeEffectFlagsForSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBecomeEffectFlagsForSmoke [
   self testMethod: #becomeEffectFlagsFor:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBecomeEffectFlagsForStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBecomeEffectFlagsForStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #becomeEffectFlagsFor:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -949,13 +949,13 @@ Spur64BitMemoryManagerTranslationTests >> testBecomeEffectFlagsForStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBecomewithSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBecomewithSmoke [
   self testMethod: #become:with:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBecomewithStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBecomewithStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #become:with:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -963,13 +963,13 @@ Spur64BitMemoryManagerTranslationTests >> testBecomewithStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBecomewithtwoWaycopyHashSmoke [
+{ #category : #'become api-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBecomewithtwoWaycopyHashSmoke [
   self testMethod: #become:with:twoWay:copyHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBecomewithtwoWaycopyHashStringComparison [
+{ #category : #'become api-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBecomewithtwoWaycopyHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #become:with:twoWay:copyHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -977,13 +977,13 @@ Spur64BitMemoryManagerTranslationTests >> testBecomewithtwoWaycopyHashStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBeginSlidingCompactionSmoke [
+{ #category : #'gc - scavenge/compact-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBeginSlidingCompactionSmoke [
   self testMethod: #beginSlidingCompaction
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBeginSlidingCompactionStringComparison [
+{ #category : #'gc - scavenge/compact-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBeginSlidingCompactionStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #beginSlidingCompaction.
   illiString := self prettyPrintIllicium: illiAST.
@@ -991,13 +991,13 @@ Spur64BitMemoryManagerTranslationTests >> testBeginSlidingCompactionStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBitsSetInFreeSpaceMaskForAllFreeListsSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBitsSetInFreeSpaceMaskForAllFreeListsSmoke [
   self testMethod: #bitsSetInFreeSpaceMaskForAllFreeLists
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBitsSetInFreeSpaceMaskForAllFreeListsStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBitsSetInFreeSpaceMaskForAllFreeListsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bitsSetInFreeSpaceMaskForAllFreeLists.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1005,13 +1005,13 @@ Spur64BitMemoryManagerTranslationTests >> testBitsSetInFreeSpaceMaskForAllFreeLi
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBooleanObjectOfSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBooleanObjectOfSmoke [
   self testMethod: #booleanObjectOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBooleanObjectOfStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBooleanObjectOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #booleanObjectOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1019,13 +1019,13 @@ Spur64BitMemoryManagerTranslationTests >> testBooleanObjectOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBootstrappingSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBootstrappingSmoke [
   self testMethod: #bootstrapping
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBootstrappingStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBootstrappingStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bootstrapping.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1033,13 +1033,13 @@ Spur64BitMemoryManagerTranslationTests >> testBootstrappingStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBridgeSizeSmoke [
+{ #category : #'segments-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBridgeSizeSmoke [
   self testMethod: #bridgeSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBridgeSizeStringComparison [
+{ #category : #'segments-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBridgeSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bridgeSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1047,13 +1047,13 @@ Spur64BitMemoryManagerTranslationTests >> testBridgeSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteFormatForNumBytesSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteFormatForNumBytesSmoke [
   self testMethod: #byteFormatForNumBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteFormatForNumBytesStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteFormatForNumBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #byteFormatForNumBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1061,13 +1061,13 @@ Spur64BitMemoryManagerTranslationTests >> testByteFormatForNumBytesStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteFormatMaskSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteFormatMaskSmoke [
   self testMethod: #byteFormatMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteFormatMaskStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteFormatMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #byteFormatMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1075,13 +1075,13 @@ Spur64BitMemoryManagerTranslationTests >> testByteFormatMaskStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSizeOfInstanceOferrIntoSmoke [
+{ #category : #'indexing primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSizeOfInstanceOferrIntoSmoke [
   self testMethod: #byteSizeOfInstanceOf:errInto:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSizeOfInstanceOferrIntoStringComparison [
+{ #category : #'indexing primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSizeOfInstanceOferrIntoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #byteSizeOfInstanceOf:errInto:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1089,13 +1089,13 @@ Spur64BitMemoryManagerTranslationTests >> testByteSizeOfInstanceOferrIntoStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSizeOfInstanceOfwithIndexableSlotserrIntoSmoke [
+{ #category : #'indexing primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSizeOfInstanceOfwithIndexableSlotserrIntoSmoke [
   self testMethod: #byteSizeOfInstanceOf:withIndexableSlots:errInto:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSizeOfInstanceOfwithIndexableSlotserrIntoStringComparison [
+{ #category : #'indexing primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSizeOfInstanceOfwithIndexableSlotserrIntoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #byteSizeOfInstanceOf:withIndexableSlots:errInto:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1103,13 +1103,13 @@ Spur64BitMemoryManagerTranslationTests >> testByteSizeOfInstanceOfwithIndexableS
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSizeOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSizeOfSmoke [
   self testMethod: #byteSizeOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSizeOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSizeOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #byteSizeOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1117,13 +1117,13 @@ Spur64BitMemoryManagerTranslationTests >> testByteSizeOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSwappedSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSwappedSmoke [
   self testMethod: #byteSwapped:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testByteSwappedStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testByteSwappedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #byteSwapped:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1131,13 +1131,13 @@ Spur64BitMemoryManagerTranslationTests >> testByteSwappedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesInObjectSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesInObjectSmoke [
   self testMethod: #bytesInObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesInObjectStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesInObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bytesInObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1145,13 +1145,13 @@ Spur64BitMemoryManagerTranslationTests >> testBytesInObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesInObjectgivenSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesInObjectgivenSmoke [
   self testMethod: #bytesInObject:given:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesInObjectgivenStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesInObjectgivenStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bytesInObject:given:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1159,13 +1159,13 @@ Spur64BitMemoryManagerTranslationTests >> testBytesInObjectgivenStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesLeftInOldSpaceSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesLeftInOldSpaceSmoke [
   self testMethod: #bytesLeftInOldSpace
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesLeftInOldSpaceStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesLeftInOldSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bytesLeftInOldSpace.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1173,13 +1173,13 @@ Spur64BitMemoryManagerTranslationTests >> testBytesLeftInOldSpaceStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesLeftSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesLeftSmoke [
   self testMethod: #bytesLeft:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesLeftStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesLeftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bytesLeft:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1187,13 +1187,13 @@ Spur64BitMemoryManagerTranslationTests >> testBytesLeftStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesPerOopSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesPerOopSmoke [
   self testMethod: #bytesPerOop
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testBytesPerOopStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testBytesPerOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #bytesPerOop.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1201,13 +1201,13 @@ Spur64BitMemoryManagerTranslationTests >> testBytesPerOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCapacityOfObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCapacityOfObjStackSmoke [
   self testMethod: #capacityOfObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCapacityOfObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCapacityOfObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #capacityOfObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1215,13 +1215,13 @@ Spur64BitMemoryManagerTranslationTests >> testCapacityOfObjStackStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testChangeClassOftoSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testChangeClassOftoSmoke [
   self testMethod: #changeClassOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testChangeClassOftoStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testChangeClassOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #changeClassOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1229,13 +1229,13 @@ Spur64BitMemoryManagerTranslationTests >> testChangeClassOftoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterObjectOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterObjectOfSmoke [
   self testMethod: #characterObjectOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterObjectOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterObjectOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #characterObjectOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1243,13 +1243,13 @@ Spur64BitMemoryManagerTranslationTests >> testCharacterObjectOfStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterTableSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterTableSmoke [
   self testMethod: #characterTable
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterTableStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterTableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #characterTable.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1257,13 +1257,13 @@ Spur64BitMemoryManagerTranslationTests >> testCharacterTableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterTagSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterTagSmoke [
   self testMethod: #characterTag
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterTagStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterTagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #characterTag.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1271,13 +1271,13 @@ Spur64BitMemoryManagerTranslationTests >> testCharacterTagStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterValueOfSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterValueOfSmoke [
   self testMethod: #characterValueOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCharacterValueOfStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCharacterValueOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #characterValueOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1285,13 +1285,13 @@ Spur64BitMemoryManagerTranslationTests >> testCharacterValueOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheapAddressCouldBeInHeapSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheapAddressCouldBeInHeapSmoke [
   self testMethod: #cheapAddressCouldBeInHeap:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheapAddressCouldBeInHeapStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheapAddressCouldBeInHeapStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #cheapAddressCouldBeInHeap:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1299,13 +1299,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheapAddressCouldBeInHeapStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckCompactIndexisClassnamedSmoke [
+{ #category : #'initialization-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckCompactIndexisClassnamedSmoke [
   self testMethod: #checkCompactIndex:isClass:named:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckCompactIndexisClassnamedStringComparison [
+{ #category : #'initialization-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckCompactIndexisClassnamedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkCompactIndex:isClass:named:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1313,13 +1313,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckCompactIndexisClassnamedStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckForAvailableSlotsSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckForAvailableSlotsSmoke [
   self testMethod: #checkForAvailableSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckForAvailableSlotsStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckForAvailableSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkForAvailableSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1327,13 +1327,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckForAvailableSlotsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckForLeaksSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckForLeaksSmoke [
   self testMethod: #checkForLeaks
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckForLeaksStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckForLeaksStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkForLeaks.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1341,13 +1341,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckForLeaksStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckFreeSpaceSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckFreeSpaceSmoke [
   self testMethod: #checkFreeSpace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckFreeSpaceStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckFreeSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkFreeSpace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1355,13 +1355,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckFreeSpaceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckHeapFreeSpaceIntegritySmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckHeapFreeSpaceIntegritySmoke [
   self testMethod: #checkHeapFreeSpaceIntegrity
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckHeapFreeSpaceIntegrityStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckHeapFreeSpaceIntegrityStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkHeapFreeSpaceIntegrity.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1369,13 +1369,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckHeapFreeSpaceIntegrityStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckHeapIntegrityclassIndicesShouldBeValidSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckHeapIntegrityclassIndicesShouldBeValidSmoke [
   self testMethod: #checkHeapIntegrity:classIndicesShouldBeValid:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckHeapIntegrityclassIndicesShouldBeValidStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckHeapIntegrityclassIndicesShouldBeValidStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkHeapIntegrity:classIndicesShouldBeValid:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1383,13 +1383,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckHeapIntegrityclassIndicesShou
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckMemoryMapSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckMemoryMapSmoke [
   self testMethod: #checkMemoryMap
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckMemoryMapStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckMemoryMapStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkMemoryMap.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1397,13 +1397,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckMemoryMapStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOkayOopSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOkayOopSmoke [
   self testMethod: #checkOkayOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOkayOopStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOkayOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkOkayOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1411,13 +1411,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckOkayOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOkayYoungReferrerSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOkayYoungReferrerSmoke [
   self testMethod: #checkOkayYoungReferrer:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOkayYoungReferrerStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOkayYoungReferrerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkOkayYoungReferrer:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1425,13 +1425,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckOkayYoungReferrerStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOopHasOkayClassSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOopHasOkayClassSmoke [
   self testMethod: #checkOopHasOkayClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOopHasOkayClassStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOopHasOkayClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkOopHasOkayClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1439,13 +1439,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckOopHasOkayClassStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOopIntegritynamedSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedSmoke [
   self testMethod: #checkOopIntegrity:named:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOopIntegritynamedStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkOopIntegrity:named:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1453,13 +1453,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckOopIntegritynamedStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOopIntegritynamedindexSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedindexSmoke [
   self testMethod: #checkOopIntegrity:named:index:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckOopIntegritynamedindexStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedindexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkOopIntegrity:named:index:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1467,13 +1467,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckOopIntegritynamedindexStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckedLongAtSmoke [
+{ #category : #'memory access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckedLongAtSmoke [
   self testMethod: #checkedLongAt:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCheckedLongAtStringComparison [
+{ #category : #'memory access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCheckedLongAtStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #checkedLongAt:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1481,13 +1481,13 @@ Spur64BitMemoryManagerTranslationTests >> testCheckedLongAtStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassAlienSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassAlienSmoke [
   self testMethod: #classAlien
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassAlienStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassAlienStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classAlien.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1495,13 +1495,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassAlienStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassArraySmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassArraySmoke [
   self testMethod: #classArray
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassArrayStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassArrayStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classArray.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1509,13 +1509,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassArrayStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassAtIndexSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassAtIndexSmoke [
   self testMethod: #classAtIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassAtIndexStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassAtIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classAtIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1523,13 +1523,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassAtIndexStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassAtIndexputSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassAtIndexputSmoke [
   self testMethod: #classAtIndex:put:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassAtIndexputStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassAtIndexputStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classAtIndex:put:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1537,13 +1537,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassAtIndexputStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassBitmapSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassBitmapSmoke [
   self testMethod: #classBitmap
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassBitmapStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassBitmapStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classBitmap.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1551,13 +1551,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassBitmapStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassByteArraySmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassByteArraySmoke [
   self testMethod: #classByteArray
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassByteArrayStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassByteArrayStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classByteArray.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1565,13 +1565,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassByteArrayStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassCharacterSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassCharacterSmoke [
   self testMethod: #classCharacter
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassCharacterStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassCharacterStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classCharacter.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1579,13 +1579,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassCharacterStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalAddressSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalAddressSmoke [
   self testMethod: #classExternalAddress
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalAddressStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalAddressStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classExternalAddress.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1593,13 +1593,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassExternalAddressStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalDataSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalDataSmoke [
   self testMethod: #classExternalData
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalDataStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalDataStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classExternalData.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1607,13 +1607,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassExternalDataStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalFunctionSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalFunctionSmoke [
   self testMethod: #classExternalFunction
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalFunctionStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalFunctionStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classExternalFunction.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1621,13 +1621,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassExternalFunctionStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalLibrarySmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalLibrarySmoke [
   self testMethod: #classExternalLibrary
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalLibraryStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalLibraryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classExternalLibrary.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1635,13 +1635,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassExternalLibraryStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalStructureSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalStructureSmoke [
   self testMethod: #classExternalStructure
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassExternalStructureStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassExternalStructureStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classExternalStructure.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1649,13 +1649,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassExternalStructureStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassFloatSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassFloatSmoke [
   self testMethod: #classFloat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassFloatStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassFloatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classFloat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1663,13 +1663,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassFloatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassForClassTagSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassForClassTagSmoke [
   self testMethod: #classForClassTag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassForClassTagStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassForClassTagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classForClassTag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1677,13 +1677,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassForClassTagStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassFormatForInstanceFormatSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassFormatForInstanceFormatSmoke [
   self testMethod: #classFormatForInstanceFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassFormatForInstanceFormatStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassFormatForInstanceFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classFormatForInstanceFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1691,13 +1691,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassFormatForInstanceFormatString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassFormatFromInstFormatSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassFormatFromInstFormatSmoke [
   self testMethod: #classFormatFromInstFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassFormatFromInstFormatStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassFormatFromInstFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classFormatFromInstFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1705,13 +1705,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassFormatFromInstFormatStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexFieldWidthSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexFieldWidthSmoke [
   self testMethod: #classIndexFieldWidth
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexFieldWidthStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexFieldWidthStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classIndexFieldWidth.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1719,13 +1719,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassIndexFieldWidthStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexMaskSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexMaskSmoke [
   self testMethod: #classIndexMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexMaskStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classIndexMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1733,13 +1733,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassIndexMaskStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexOfHeaderSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexOfHeaderSmoke [
   self testMethod: #classIndexOfHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexOfHeaderStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexOfHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classIndexOfHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1747,13 +1747,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassIndexOfHeaderStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexOfSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexOfSmoke [
   self testMethod: #classIndexOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIndexOfStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIndexOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classIndexOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1761,13 +1761,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassIndexOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIsItselfClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIsItselfClassIndexPunSmoke [
   self testMethod: #classIsItselfClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassIsItselfClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassIsItselfClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classIsItselfClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1775,13 +1775,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassIsItselfClassIndexPunStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassLargeNegativeIntegerSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassLargeNegativeIntegerSmoke [
   self testMethod: #classLargeNegativeInteger
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassLargeNegativeIntegerStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassLargeNegativeIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classLargeNegativeInteger.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1789,13 +1789,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassLargeNegativeIntegerStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassLargePositiveIntegerSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassLargePositiveIntegerSmoke [
   self testMethod: #classLargePositiveInteger
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassLargePositiveIntegerStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassLargePositiveIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classLargePositiveInteger.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1803,13 +1803,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassLargePositiveIntegerStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassMutexSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassMutexSmoke [
   self testMethod: #classMutex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassMutexStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassMutexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classMutex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1817,13 +1817,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassMutexStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassOrNilAtIndexSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassOrNilAtIndexSmoke [
   self testMethod: #classOrNilAtIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassOrNilAtIndexStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassOrNilAtIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classOrNilAtIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1831,13 +1831,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassOrNilAtIndexStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassPointSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassPointSmoke [
   self testMethod: #classPoint
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassPointStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassPointStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classPoint.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1845,13 +1845,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassPointStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassSemaphoreSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassSemaphoreSmoke [
   self testMethod: #classSemaphore
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassSemaphoreStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassSemaphoreStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classSemaphore.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1859,13 +1859,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassSemaphoreStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassSmallIntegerSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassSmallIntegerSmoke [
   self testMethod: #classSmallInteger
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassSmallIntegerStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassSmallIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classSmallInteger.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1873,13 +1873,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassSmallIntegerStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassStringSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassStringSmoke [
   self testMethod: #classString
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassStringStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassStringStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classString.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1887,13 +1887,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassStringStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableEntriesDoSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableEntriesDoSmoke [
   self testMethod: #classTableEntriesDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableEntriesDoStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableEntriesDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTableEntriesDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1901,13 +1901,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTableEntriesDoStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableFirstPageSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableFirstPageSmoke [
   self testMethod: #classTableFirstPage
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableFirstPageStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableFirstPageStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTableFirstPage.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1915,13 +1915,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTableFirstPageStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableIndexSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableIndexSmoke [
   self testMethod: #classTableIndex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableIndexStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTableIndex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1929,13 +1929,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTableIndexStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableMajorIndexShiftSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableMajorIndexShiftSmoke [
   self testMethod: #classTableMajorIndexShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableMajorIndexShiftStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableMajorIndexShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTableMajorIndexShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1943,13 +1943,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTableMajorIndexShiftStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableMinorIndexMaskSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableMinorIndexMaskSmoke [
   self testMethod: #classTableMinorIndexMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableMinorIndexMaskStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableMinorIndexMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTableMinorIndexMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1957,13 +1957,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTableMinorIndexMaskStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTablePageSizeSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTablePageSizeSmoke [
   self testMethod: #classTablePageSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTablePageSizeStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTablePageSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTablePageSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1971,13 +1971,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTablePageSizeStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableRootObjSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableRootObjSmoke [
   self testMethod: #classTableRootObj
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableRootObjStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableRootObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTableRootObj.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1985,13 +1985,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTableRootObjStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableRootSlotsSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableRootSlotsSmoke [
   self testMethod: #classTableRootSlots
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTableRootSlotsStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTableRootSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTableRootSlots.
   illiString := self prettyPrintIllicium: illiAST.
@@ -1999,13 +1999,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTableRootSlotsStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTagForClassSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTagForClassSmoke [
   self testMethod: #classTagForClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTagForClassStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTagForClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTagForClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2013,13 +2013,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTagForClassStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTagForSpecialObjectsIndexcompactClassIndexSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTagForSpecialObjectsIndexcompactClassIndexSmoke [
   self testMethod: #classTagForSpecialObjectsIndex:compactClassIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassTagForSpecialObjectsIndexcompactClassIndexStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassTagForSpecialObjectsIndexcompactClassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classTagForSpecialObjectsIndex:compactClassIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2027,13 +2027,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassTagForSpecialObjectsIndexcomp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassUnsafeAlienSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassUnsafeAlienSmoke [
   self testMethod: #classUnsafeAlien
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClassUnsafeAlienStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClassUnsafeAlienStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #classUnsafeAlien.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2041,13 +2041,13 @@ Spur64BitMemoryManagerTranslationTests >> testClassUnsafeAlienStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClearLeakMapAndMapAccessibleFreeSpaceSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleFreeSpaceSmoke [
   self testMethod: #clearLeakMapAndMapAccessibleFreeSpace
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClearLeakMapAndMapAccessibleFreeSpaceStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleFreeSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #clearLeakMapAndMapAccessibleFreeSpace.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2055,13 +2055,13 @@ Spur64BitMemoryManagerTranslationTests >> testClearLeakMapAndMapAccessibleFreeSp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testClearLeakMapAndMapAccessibleObjectsSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleObjectsSmoke [
   self testMethod: #clearLeakMapAndMapAccessibleObjects
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testClearLeakMapAndMapAccessibleObjectsStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleObjectsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #clearLeakMapAndMapAccessibleObjects.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2069,13 +2069,13 @@ Spur64BitMemoryManagerTranslationTests >> testClearLeakMapAndMapAccessibleObject
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCleverSwapHeadersandcopyHashFlagSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCleverSwapHeadersandcopyHashFlagSmoke [
   self testMethod: #cleverSwapHeaders:and:copyHashFlag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCleverSwapHeadersandcopyHashFlagStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCleverSwapHeadersandcopyHashFlagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #cleverSwapHeaders:and:copyHashFlag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2083,13 +2083,13 @@ Spur64BitMemoryManagerTranslationTests >> testCleverSwapHeadersandcopyHashFlagSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCloneInOldSpaceforPinningSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCloneInOldSpaceforPinningSmoke [
   self testMethod: #cloneInOldSpace:forPinning:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCloneInOldSpaceforPinningStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCloneInOldSpaceforPinningStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #cloneInOldSpace:forPinning:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2097,13 +2097,13 @@ Spur64BitMemoryManagerTranslationTests >> testCloneInOldSpaceforPinningStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCloneSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCloneSmoke [
   self testMethod: #clone:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCloneStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCloneStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #clone:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2111,13 +2111,13 @@ Spur64BitMemoryManagerTranslationTests >> testCloneStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCoalesceandSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCoalesceandSmoke [
   self testMethod: #coalesce:and:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCoalesceandStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCoalesceandStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #coalesce:and:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2125,13 +2125,13 @@ Spur64BitMemoryManagerTranslationTests >> testCoalesceandStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCoallesceFreeChunkSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCoallesceFreeChunkSmoke [
   self testMethod: #coallesceFreeChunk:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCoallesceFreeChunkStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCoallesceFreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #coallesceFreeChunk:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2139,13 +2139,13 @@ Spur64BitMemoryManagerTranslationTests >> testCoallesceFreeChunkStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompactClassIndexOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompactClassIndexOfSmoke [
   self testMethod: #compactClassIndexOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompactClassIndexOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompactClassIndexOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #compactClassIndexOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2153,13 +2153,13 @@ Spur64BitMemoryManagerTranslationTests >> testCompactClassIndexOfStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompactIndexOfClassSmoke [
+{ #category : #'class membership-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompactIndexOfClassSmoke [
   self testMethod: #compactIndexOfClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompactIndexOfClassStringComparison [
+{ #category : #'class membership-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompactIndexOfClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #compactIndexOfClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2167,13 +2167,13 @@ Spur64BitMemoryManagerTranslationTests >> testCompactIndexOfClassStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompactorSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompactorSmoke [
   self testMethod: #compactor
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompactorStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompactorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #compactor.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2181,13 +2181,13 @@ Spur64BitMemoryManagerTranslationTests >> testCompactorStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompiledMethodFormatForNumBytesSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompiledMethodFormatForNumBytesSmoke [
   self testMethod: #compiledMethodFormatForNumBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCompiledMethodFormatForNumBytesStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCompiledMethodFormatForNumBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #compiledMethodFormatForNumBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2195,13 +2195,13 @@ Spur64BitMemoryManagerTranslationTests >> testCompiledMethodFormatForNumBytesStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testComputeFreeSpacePostSwizzleSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testComputeFreeSpacePostSwizzleSmoke [
   self testMethod: #computeFreeSpacePostSwizzle
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testComputeFreeSpacePostSwizzleStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testComputeFreeSpacePostSwizzleStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #computeFreeSpacePostSwizzle.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2209,13 +2209,13 @@ Spur64BitMemoryManagerTranslationTests >> testComputeFreeSpacePostSwizzleStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testContainsOnlyValidBecomeObjectsandtwoWaycopyHashSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testContainsOnlyValidBecomeObjectsandtwoWaycopyHashSmoke [
   self testMethod: #containsOnlyValidBecomeObjects:and:twoWay:copyHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testContainsOnlyValidBecomeObjectsandtwoWaycopyHashStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testContainsOnlyValidBecomeObjectsandtwoWaycopyHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #containsOnlyValidBecomeObjects:and:twoWay:copyHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2223,13 +2223,13 @@ Spur64BitMemoryManagerTranslationTests >> testContainsOnlyValidBecomeObjectsandt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCopyObjtoAddrstopAtsavedFirstFieldsindexSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCopyObjtoAddrstopAtsavedFirstFieldsindexSmoke [
   self testMethod: #copyObj:toAddr:stopAt:savedFirstFields:index:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCopyObjtoAddrstopAtsavedFirstFieldsindexStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCopyObjtoAddrstopAtsavedFirstFieldsindexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #copyObj:toAddr:stopAt:savedFirstFields:index:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2237,13 +2237,13 @@ Spur64BitMemoryManagerTranslationTests >> testCopyObjtoAddrstopAtsavedFirstField
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCountMarkedAndUnmarkdObjectsSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCountMarkedAndUnmarkdObjectsSmoke [
   self testMethod: #countMarkedAndUnmarkdObjects:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCountMarkedAndUnmarkdObjectsStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCountMarkedAndUnmarkdObjectsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #countMarkedAndUnmarkdObjects:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2251,13 +2251,13 @@ Spur64BitMemoryManagerTranslationTests >> testCountMarkedAndUnmarkdObjectsString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCountNumClassPagesPreSwizzleSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCountNumClassPagesPreSwizzleSmoke [
   self testMethod: #countNumClassPagesPreSwizzle:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCountNumClassPagesPreSwizzleStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCountNumClassPagesPreSwizzleStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #countNumClassPagesPreSwizzle:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2265,13 +2265,13 @@ Spur64BitMemoryManagerTranslationTests >> testCountNumClassPagesPreSwizzleString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testCurrentAllocatedBytesSmoke [
+{ #category : #'allocation accounting-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testCurrentAllocatedBytesSmoke [
   self testMethod: #currentAllocatedBytes
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testCurrentAllocatedBytesStringComparison [
+{ #category : #'allocation accounting-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testCurrentAllocatedBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #currentAllocatedBytes.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2279,13 +2279,13 @@ Spur64BitMemoryManagerTranslationTests >> testCurrentAllocatedBytesStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDbgFloatValueOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDbgFloatValueOfSmoke [
   self testMethod: #dbgFloatValueOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDbgFloatValueOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDbgFloatValueOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #dbgFloatValueOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2293,13 +2293,13 @@ Spur64BitMemoryManagerTranslationTests >> testDbgFloatValueOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDefaultEdenBytesSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDefaultEdenBytesSmoke [
   self testMethod: #defaultEdenBytes
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDefaultEdenBytesStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDefaultEdenBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #defaultEdenBytes.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2307,13 +2307,13 @@ Spur64BitMemoryManagerTranslationTests >> testDefaultEdenBytesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDequeueMournerSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDequeueMournerSmoke [
   self testMethod: #dequeueMourner
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDequeueMournerStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDequeueMournerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #dequeueMourner.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2321,13 +2321,13 @@ Spur64BitMemoryManagerTranslationTests >> testDequeueMournerStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDetachFreeObjectSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDetachFreeObjectSmoke [
   self testMethod: #detachFreeObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDetachFreeObjectStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDetachFreeObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #detachFreeObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2335,13 +2335,13 @@ Spur64BitMemoryManagerTranslationTests >> testDetachFreeObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDisplayObjectSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDisplayObjectSmoke [
   self testMethod: #displayObject
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDisplayObjectStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDisplayObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #displayObject.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2349,13 +2349,13 @@ Spur64BitMemoryManagerTranslationTests >> testDisplayObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoAllocationAccountingForScavengeSmoke [
+{ #category : #'allocation accounting-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoAllocationAccountingForScavengeSmoke [
   self testMethod: #doAllocationAccountingForScavenge
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoAllocationAccountingForScavengeStringComparison [
+{ #category : #'allocation accounting-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoAllocationAccountingForScavengeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #doAllocationAccountingForScavenge.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2363,13 +2363,13 @@ Spur64BitMemoryManagerTranslationTests >> testDoAllocationAccountingForScavengeS
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoBecomeandcopyHashSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoBecomeandcopyHashSmoke [
   self testMethod: #doBecome:and:copyHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoBecomeandcopyHashStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoBecomeandcopyHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #doBecome:and:copyHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2377,13 +2377,13 @@ Spur64BitMemoryManagerTranslationTests >> testDoBecomeandcopyHashStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoBecometocopyHashSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoBecometocopyHashSmoke [
   self testMethod: #doBecome:to:copyHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoBecometocopyHashStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoBecometocopyHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #doBecome:to:copyHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2391,13 +2391,13 @@ Spur64BitMemoryManagerTranslationTests >> testDoBecometocopyHashStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoScavengeSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoScavengeSmoke [
   self testMethod: #doScavenge:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testDoScavengeStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testDoScavengeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #doScavenge:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2405,13 +2405,13 @@ Spur64BitMemoryManagerTranslationTests >> testDoScavengeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEdenBytesSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEdenBytesSmoke [
   self testMethod: #edenBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEdenBytesStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEdenBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #edenBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2419,13 +2419,13 @@ Spur64BitMemoryManagerTranslationTests >> testEdenBytesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateClassIndexformatnumSlotsSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateClassIndexformatnumSlotsSmoke [
   self testMethod: #eeInstantiateClassIndex:format:numSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateClassIndexformatnumSlotsStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateClassIndexformatnumSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #eeInstantiateClassIndex:format:numSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2433,13 +2433,13 @@ Spur64BitMemoryManagerTranslationTests >> testEeInstantiateClassIndexformatnumSl
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateMethodContextSlotsSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateMethodContextSlotsSmoke [
   self testMethod: #eeInstantiateMethodContextSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateMethodContextSlotsStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateMethodContextSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #eeInstantiateMethodContextSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2447,13 +2447,13 @@ Spur64BitMemoryManagerTranslationTests >> testEeInstantiateMethodContextSlotsStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateSmallClassIndexformatnumSlotsSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateSmallClassIndexformatnumSlotsSmoke [
   self testMethod: #eeInstantiateSmallClassIndex:format:numSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateSmallClassIndexformatnumSlotsStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateSmallClassIndexformatnumSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #eeInstantiateSmallClassIndex:format:numSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2461,13 +2461,13 @@ Spur64BitMemoryManagerTranslationTests >> testEeInstantiateSmallClassIndexformat
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateSmallClassnumSlotsSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateSmallClassnumSlotsSmoke [
   self testMethod: #eeInstantiateSmallClass:numSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEeInstantiateSmallClassnumSlotsStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEeInstantiateSmallClassnumSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #eeInstantiateSmallClass:numSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2475,13 +2475,13 @@ Spur64BitMemoryManagerTranslationTests >> testEeInstantiateSmallClassnumSlotsStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEekSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEekSmoke [
   self testMethod: #eek
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEekStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEekStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #eek.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2489,13 +2489,13 @@ Spur64BitMemoryManagerTranslationTests >> testEekStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEmptyObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEmptyObjStackSmoke [
   self testMethod: #emptyObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEmptyObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEmptyObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #emptyObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2503,13 +2503,13 @@ Spur64BitMemoryManagerTranslationTests >> testEmptyObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEndOfMemorySmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEndOfMemorySmoke [
   self testMethod: #endOfMemory
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEndOfMemoryStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEndOfMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #endOfMemory.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2517,13 +2517,13 @@ Spur64BitMemoryManagerTranslationTests >> testEndOfMemoryStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEndSlidingCompactionSmoke [
+{ #category : #'gc - scavenge/compact-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEndSlidingCompactionSmoke [
   self testMethod: #endSlidingCompaction
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEndSlidingCompactionStringComparison [
+{ #category : #'gc - scavenge/compact-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEndSlidingCompactionStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #endSlidingCompaction.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2531,13 +2531,13 @@ Spur64BitMemoryManagerTranslationTests >> testEndSlidingCompactionStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureBehaviorHashSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureBehaviorHashSmoke [
   self testMethod: #ensureBehaviorHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureBehaviorHashStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureBehaviorHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ensureBehaviorHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2545,13 +2545,13 @@ Spur64BitMemoryManagerTranslationTests >> testEnsureBehaviorHashStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureHasOverflowHeaderforwardIfClonedSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureHasOverflowHeaderforwardIfClonedSmoke [
   self testMethod: #ensureHasOverflowHeader:forwardIfCloned:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureHasOverflowHeaderforwardIfClonedStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureHasOverflowHeaderforwardIfClonedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ensureHasOverflowHeader:forwardIfCloned:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2559,13 +2559,13 @@ Spur64BitMemoryManagerTranslationTests >> testEnsureHasOverflowHeaderforwardIfCl
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureNoNewObjectsInSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureNoNewObjectsInSmoke [
   self testMethod: #ensureNoNewObjectsIn:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureNoNewObjectsInStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureNoNewObjectsInStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ensureNoNewObjectsIn:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2573,13 +2573,13 @@ Spur64BitMemoryManagerTranslationTests >> testEnsureNoNewObjectsInStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureRoomOnObjStackAtSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureRoomOnObjStackAtSmoke [
   self testMethod: #ensureRoomOnObjStackAt:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureRoomOnObjStackAtStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureRoomOnObjStackAtStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ensureRoomOnObjStackAt:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2587,13 +2587,13 @@ Spur64BitMemoryManagerTranslationTests >> testEnsureRoomOnObjStackAtStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureSemaphoreUnforwardedThroughContextSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureSemaphoreUnforwardedThroughContextSmoke [
   self testMethod: #ensureSemaphoreUnforwardedThroughContext:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnsureSemaphoreUnforwardedThroughContextStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnsureSemaphoreUnforwardedThroughContextStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ensureSemaphoreUnforwardedThroughContext:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2601,13 +2601,13 @@ Spur64BitMemoryManagerTranslationTests >> testEnsureSemaphoreUnforwardedThroughC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnterClassesIntoClassTableFromtoSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnterClassesIntoClassTableFromtoSmoke [
   self testMethod: #enterClassesIntoClassTableFrom:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnterClassesIntoClassTableFromtoStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnterClassesIntoClassTableFromtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #enterClassesIntoClassTableFrom:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2615,13 +2615,13 @@ Spur64BitMemoryManagerTranslationTests >> testEnterClassesIntoClassTableFromtoSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnterIntoClassTableSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnterIntoClassTableSmoke [
   self testMethod: #enterIntoClassTable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEnterIntoClassTableStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEnterIntoClassTableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #enterIntoClassTable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2629,13 +2629,13 @@ Spur64BitMemoryManagerTranslationTests >> testEnterIntoClassTableStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testEphemeronFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testEphemeronFormatSmoke [
   self testMethod: #ephemeronFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testEphemeronFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testEphemeronFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ephemeronFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2643,13 +2643,13 @@ Spur64BitMemoryManagerTranslationTests >> testEphemeronFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testExistInstancesInNewSpaceOfSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testExistInstancesInNewSpaceOfSmoke [
   self testMethod: #existInstancesInNewSpaceOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testExistInstancesInNewSpaceOfStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testExistInstancesInNewSpaceOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #existInstancesInNewSpaceOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2657,13 +2657,13 @@ Spur64BitMemoryManagerTranslationTests >> testExistInstancesInNewSpaceOfStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testExponentOfSmallFloatSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testExponentOfSmallFloatSmoke [
   self testMethod: #exponentOfSmallFloat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testExponentOfSmallFloatStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testExponentOfSmallFloatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #exponentOfSmallFloat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2671,13 +2671,13 @@ Spur64BitMemoryManagerTranslationTests >> testExponentOfSmallFloatStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testExpungeDuplicateAndUnmarkedClassesSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testExpungeDuplicateAndUnmarkedClassesSmoke [
   self testMethod: #expungeDuplicateAndUnmarkedClasses:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testExpungeDuplicateAndUnmarkedClassesStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testExpungeDuplicateAndUnmarkedClassesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #expungeDuplicateAndUnmarkedClasses:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2685,13 +2685,13 @@ Spur64BitMemoryManagerTranslationTests >> testExpungeDuplicateAndUnmarkedClasses
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testExpungeFromClassTableSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testExpungeFromClassTableSmoke [
   self testMethod: #expungeFromClassTable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testExpungeFromClassTableStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testExpungeFromClassTableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #expungeFromClassTable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2699,13 +2699,13 @@ Spur64BitMemoryManagerTranslationTests >> testExpungeFromClassTableStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFalseObjectSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFalseObjectSmoke [
   self testMethod: #falseObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFalseObjectStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFalseObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #falseObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2713,13 +2713,13 @@ Spur64BitMemoryManagerTranslationTests >> testFalseObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchByteofObjectSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchByteofObjectSmoke [
   self testMethod: #fetchByte:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchByteofObjectStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchByteofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchByte:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2727,13 +2727,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchByteofObjectStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassOfNonImmSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassOfNonImmSmoke [
   self testMethod: #fetchClassOfNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassOfNonImmStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassOfNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchClassOfNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2741,13 +2741,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchClassOfNonImmStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassOfSmoke [
   self testMethod: #fetchClassOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchClassOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2755,13 +2755,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchClassOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassTagOfNonImmSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassTagOfNonImmSmoke [
   self testMethod: #fetchClassTagOfNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassTagOfNonImmStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassTagOfNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchClassTagOfNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2769,13 +2769,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchClassTagOfNonImmStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassTagOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassTagOfSmoke [
   self testMethod: #fetchClassTagOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchClassTagOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchClassTagOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchClassTagOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2783,13 +2783,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchClassTagOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchLongofFloatObjectSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchLongofFloatObjectSmoke [
   self testMethod: #fetchLong32:ofFloatObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchLongofFloatObjectStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchLongofFloatObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchLong32:ofFloatObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2797,13 +2797,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchLongofFloatObjectStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchLongofObjectSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchLongofObjectSmoke [
   self testMethod: #fetchLong64:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchLongofObjectStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchLongofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchLong64:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2811,13 +2811,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchLongofObjectStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchPointerofFreeChunkSmoke [
+{ #category : #'heap management-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchPointerofFreeChunkSmoke [
   self testMethod: #fetchPointer:ofFreeChunk:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchPointerofFreeChunkStringComparison [
+{ #category : #'heap management-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchPointerofFreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchPointer:ofFreeChunk:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2825,13 +2825,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchPointerofFreeChunkStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchPointerofMaybeForwardedObjectSmoke [
+{ #category : #'heap management-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchPointerofMaybeForwardedObjectSmoke [
   self testMethod: #fetchPointer:ofMaybeForwardedObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchPointerofMaybeForwardedObjectStringComparison [
+{ #category : #'heap management-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchPointerofMaybeForwardedObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchPointer:ofMaybeForwardedObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2839,13 +2839,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchPointerofMaybeForwardedObject
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchPointerofObjectSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchPointerofObjectSmoke [
   self testMethod: #fetchPointer:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchPointerofObjectStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchPointerofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchPointer:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2853,13 +2853,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchPointerofObjectStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchShortofObjectSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchShortofObjectSmoke [
   self testMethod: #fetchShort16:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchShortofObjectStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchShortofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchShort16:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2867,13 +2867,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchShortofObjectStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchUnsignedShortofObjectSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchUnsignedShortofObjectSmoke [
   self testMethod: #fetchUnsignedShort16:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFetchUnsignedShortofObjectStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFetchUnsignedShortofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fetchUnsignedShort16:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2881,13 +2881,13 @@ Spur64BitMemoryManagerTranslationTests >> testFetchUnsignedShortofObjectStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFillObjnumSlotswithSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFillObjnumSlotswithSmoke [
   self testMethod: #fillObj:numSlots:with:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFillObjnumSlotswithStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFillObjnumSlotswithStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fillObj:numSlots:with:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2895,13 +2895,13 @@ Spur64BitMemoryManagerTranslationTests >> testFillObjnumSlotswithStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFindLargestFreeChunkSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFindLargestFreeChunkSmoke [
   self testMethod: #findLargestFreeChunk
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFindLargestFreeChunkStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFindLargestFreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #findLargestFreeChunk.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2909,13 +2909,13 @@ Spur64BitMemoryManagerTranslationTests >> testFindLargestFreeChunkStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFindStringBeginningWithSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFindStringBeginningWithSmoke [
   self testMethod: #findStringBeginningWith:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFindStringBeginningWithStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFindStringBeginningWithStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #findStringBeginningWith:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2923,13 +2923,13 @@ Spur64BitMemoryManagerTranslationTests >> testFindStringBeginningWithStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFindStringSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFindStringSmoke [
   self testMethod: #findString:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFindStringStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFindStringStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #findString:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2937,13 +2937,13 @@ Spur64BitMemoryManagerTranslationTests >> testFindStringStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFireAllUnscannedEphemeronsSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFireAllUnscannedEphemeronsSmoke [
   self testMethod: #fireAllUnscannedEphemerons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFireAllUnscannedEphemeronsStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFireAllUnscannedEphemeronsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fireAllUnscannedEphemerons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2951,13 +2951,13 @@ Spur64BitMemoryManagerTranslationTests >> testFireAllUnscannedEphemeronsStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstAccessibleObjectSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstAccessibleObjectSmoke [
   self testMethod: #firstAccessibleObject
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstAccessibleObjectStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstAccessibleObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstAccessibleObject.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2965,13 +2965,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstAccessibleObjectStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstByteFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstByteFormatSmoke [
   self testMethod: #firstByteFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstByteFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstByteFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstByteFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2979,13 +2979,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstByteFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstClassIndexPunSmoke [
   self testMethod: #firstClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -2993,13 +2993,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstClassIndexPunStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstCompiledMethodFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstCompiledMethodFormatSmoke [
   self testMethod: #firstCompiledMethodFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstCompiledMethodFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstCompiledMethodFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstCompiledMethodFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3007,13 +3007,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstCompiledMethodFormatStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstFixedFieldOfMaybeImmediateSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstFixedFieldOfMaybeImmediateSmoke [
   self testMethod: #firstFixedFieldOfMaybeImmediate:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstFixedFieldOfMaybeImmediateStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstFixedFieldOfMaybeImmediateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstFixedFieldOfMaybeImmediate:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3021,13 +3021,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstFixedFieldOfMaybeImmediateStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstFixedFieldSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstFixedFieldSmoke [
   self testMethod: #firstFixedField:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstFixedFieldStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstFixedFieldStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstFixedField:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3035,13 +3035,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstFixedFieldStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstIndexableFieldSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstIndexableFieldSmoke [
   self testMethod: #firstIndexableField:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstIndexableFieldStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstIndexableFieldStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstIndexableField:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3049,13 +3049,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstIndexableFieldStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstLilliputianChunkSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstLilliputianChunkSmoke [
   self testMethod: #firstLilliputianChunk
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstLilliputianChunkStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstLilliputianChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstLilliputianChunk.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3063,13 +3063,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstLilliputianChunkStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstLongFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstLongFormatSmoke [
   self testMethod: #firstLongFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstLongFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstLongFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstLongFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3077,13 +3077,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstLongFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstObjectSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstObjectSmoke [
   self testMethod: #firstObject
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstObjectStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstObject.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3091,13 +3091,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstShortFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstShortFormatSmoke [
   self testMethod: #firstShortFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstShortFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstShortFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstShortFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3105,13 +3105,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstShortFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstStringyFakeFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstStringyFakeFormatSmoke [
   self testMethod: #firstStringyFakeFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstStringyFakeFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstStringyFakeFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstStringyFakeFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3119,13 +3119,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstStringyFakeFormatStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstValidIndexOfIndexableObjectwithFormatSmoke [
+{ #category : #'indexing primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstValidIndexOfIndexableObjectwithFormatSmoke [
   self testMethod: #firstValidIndexOfIndexableObject:withFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFirstValidIndexOfIndexableObjectwithFormatStringComparison [
+{ #category : #'indexing primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFirstValidIndexOfIndexableObjectwithFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #firstValidIndexOfIndexableObject:withFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3133,13 +3133,13 @@ Spur64BitMemoryManagerTranslationTests >> testFirstValidIndexOfIndexableObjectwi
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixFollowedFieldofObjectwithInitialValueSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixFollowedFieldofObjectwithInitialValueSmoke [
   self testMethod: #fixFollowedField:ofObject:withInitialValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixFollowedFieldofObjectwithInitialValueStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixFollowedFieldofObjectwithInitialValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fixFollowedField:ofObject:withInitialValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3147,13 +3147,13 @@ Spur64BitMemoryManagerTranslationTests >> testFixFollowedFieldofObjectwithInitia
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsFieldWidthSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsFieldWidthSmoke [
   self testMethod: #fixedFieldsFieldWidth
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsFieldWidthStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsFieldWidthStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fixedFieldsFieldWidth.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3161,13 +3161,13 @@ Spur64BitMemoryManagerTranslationTests >> testFixedFieldsFieldWidthStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassFormatMaskSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatMaskSmoke [
   self testMethod: #fixedFieldsOfClassFormatMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassFormatMaskStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fixedFieldsOfClassFormatMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3175,13 +3175,13 @@ Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassFormatMaskString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassFormatSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatSmoke [
   self testMethod: #fixedFieldsOfClassFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassFormatStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fixedFieldsOfClassFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3189,13 +3189,13 @@ Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassFormatStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassSmoke [
   self testMethod: #fixedFieldsOfClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fixedFieldsOfClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3203,13 +3203,13 @@ Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfClassStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfformatlengthSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfformatlengthSmoke [
   self testMethod: #fixedFieldsOf:format:length:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfformatlengthStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFixedFieldsOfformatlengthStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fixedFieldsOf:format:length:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3217,13 +3217,13 @@ Spur64BitMemoryManagerTranslationTests >> testFixedFieldsOfformatlengthStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFloatObjectOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFloatObjectOfSmoke [
   self testMethod: #floatObjectOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFloatObjectOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFloatObjectOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #floatObjectOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3231,13 +3231,13 @@ Spur64BitMemoryManagerTranslationTests >> testFloatObjectOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFloatValueOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFloatValueOfSmoke [
   self testMethod: #floatValueOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFloatValueOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFloatValueOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #floatValueOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3245,13 +3245,13 @@ Spur64BitMemoryManagerTranslationTests >> testFloatValueOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFlushEdenSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFlushEdenSmoke [
   self testMethod: #flushEden
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFlushEdenStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFlushEdenStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #flushEden.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3259,13 +3259,13 @@ Spur64BitMemoryManagerTranslationTests >> testFlushEdenStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFlushNewSpaceInstancesOfSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFlushNewSpaceInstancesOfSmoke [
   self testMethod: #flushNewSpaceInstancesOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFlushNewSpaceInstancesOfStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFlushNewSpaceInstancesOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #flushNewSpaceInstancesOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3273,13 +3273,13 @@ Spur64BitMemoryManagerTranslationTests >> testFlushNewSpaceInstancesOfStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFlushNewSpaceSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFlushNewSpaceSmoke [
   self testMethod: #flushNewSpace
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFlushNewSpaceStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFlushNewSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #flushNewSpace.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3287,13 +3287,13 @@ Spur64BitMemoryManagerTranslationTests >> testFlushNewSpaceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowClassTableSmoke [
+{ #category : #'selective compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowClassTableSmoke [
   self testMethod: #followClassTable
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowClassTableStringComparison [
+{ #category : #'selective compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowClassTableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followClassTable.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3301,13 +3301,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowClassTableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowFieldofObjectSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowFieldofObjectSmoke [
   self testMethod: #followField:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowFieldofObjectStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowFieldofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followField:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3315,13 +3315,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowFieldofObjectStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedInObjStackatIndexSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedInObjStackatIndexSmoke [
   self testMethod: #followForwardedInObjStack:atIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedInObjStackatIndexStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedInObjStackatIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followForwardedInObjStack:atIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3329,13 +3329,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowForwardedInObjStackatIndexSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedObjStacksSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedObjStacksSmoke [
   self testMethod: #followForwardedObjStacks
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedObjStacksStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedObjStacksStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followForwardedObjStacks.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3343,13 +3343,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowForwardedObjStacksStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedObjectFieldstoDepthSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedObjectFieldstoDepthSmoke [
   self testMethod: #followForwardedObjectFields:toDepth:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedObjectFieldstoDepthStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedObjectFieldstoDepthStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followForwardedObjectFields:toDepth:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3357,13 +3357,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowForwardedObjectFieldstoDepth
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedSmoke [
   self testMethod: #followForwarded:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowForwardedStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowForwardedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followForwarded:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3371,13 +3371,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowForwardedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowMaybeForwardedSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowMaybeForwardedSmoke [
   self testMethod: #followMaybeForwarded:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowMaybeForwardedStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowMaybeForwardedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followMaybeForwarded:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3385,13 +3385,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowMaybeForwardedStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowObjFieldofObjectSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowObjFieldofObjectSmoke [
   self testMethod: #followObjField:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowObjFieldofObjectStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowObjFieldofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followObjField:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3399,13 +3399,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowObjFieldofObjectStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowOopFieldofObjectSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowOopFieldofObjectSmoke [
   self testMethod: #followOopField:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowOopFieldofObjectStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowOopFieldofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followOopField:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3413,13 +3413,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowOopFieldofObjectStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowProcessListSmoke [
+{ #category : #'selective compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowProcessListSmoke [
   self testMethod: #followProcessList
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowProcessListStringComparison [
+{ #category : #'selective compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowProcessListStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followProcessList.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3427,13 +3427,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowProcessListStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowSpecialObjectsOopSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowSpecialObjectsOopSmoke [
   self testMethod: #followSpecialObjectsOop
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowSpecialObjectsOopStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowSpecialObjectsOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followSpecialObjectsOop.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3441,13 +3441,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowSpecialObjectsOopStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowedKeyOfEphemeronSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowedKeyOfEphemeronSmoke [
   self testMethod: #followedKeyOfEphemeron:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowedKeyOfEphemeronStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowedKeyOfEphemeronStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followedKeyOfEphemeron:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3455,13 +3455,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowedKeyOfEphemeronStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowedKeyOfMaybeFiredEphemeronSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowedKeyOfMaybeFiredEphemeronSmoke [
   self testMethod: #followedKeyOfMaybeFiredEphemeron:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFollowedKeyOfMaybeFiredEphemeronStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFollowedKeyOfMaybeFiredEphemeronStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #followedKeyOfMaybeFiredEphemeron:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3469,13 +3469,13 @@ Spur64BitMemoryManagerTranslationTests >> testFollowedKeyOfMaybeFiredEphemeronSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatFieldWidthShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatFieldWidthShiftSmoke [
   self testMethod: #formatFieldWidthShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatFieldWidthShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatFieldWidthShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #formatFieldWidthShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3483,13 +3483,13 @@ Spur64BitMemoryManagerTranslationTests >> testFormatFieldWidthShiftStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatMaskSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatMaskSmoke [
   self testMethod: #formatMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatMaskStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #formatMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3497,13 +3497,13 @@ Spur64BitMemoryManagerTranslationTests >> testFormatMaskStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatOfClassSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatOfClassSmoke [
   self testMethod: #formatOfClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatOfClassStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatOfClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #formatOfClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3511,13 +3511,13 @@ Spur64BitMemoryManagerTranslationTests >> testFormatOfClassStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatOfHeaderSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatOfHeaderSmoke [
   self testMethod: #formatOfHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatOfHeaderStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatOfHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #formatOfHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3525,13 +3525,13 @@ Spur64BitMemoryManagerTranslationTests >> testFormatOfHeaderStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatOfSmoke [
   self testMethod: #formatOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #formatOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3539,13 +3539,13 @@ Spur64BitMemoryManagerTranslationTests >> testFormatOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatShiftSmoke [
   self testMethod: #formatShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFormatShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFormatShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #formatShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3553,13 +3553,13 @@ Spur64BitMemoryManagerTranslationTests >> testFormatShiftStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardSurvivortoSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardSurvivortoSmoke [
   self testMethod: #forwardSurvivor:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardSurvivortoStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardSurvivortoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #forwardSurvivor:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3567,13 +3567,13 @@ Spur64BitMemoryManagerTranslationTests >> testForwardSurvivortoStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardUncheckedtoSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardUncheckedtoSmoke [
   self testMethod: #forwardUnchecked:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardUncheckedtoStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardUncheckedtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #forwardUnchecked:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3581,13 +3581,13 @@ Spur64BitMemoryManagerTranslationTests >> testForwardUncheckedtoStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardedFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardedFormatSmoke [
   self testMethod: #forwardedFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardedFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardedFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #forwardedFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3595,13 +3595,13 @@ Spur64BitMemoryManagerTranslationTests >> testForwardedFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardersInSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardersInSmoke [
   self testMethod: #forwardersIn:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardersInStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardersInStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #forwardersIn:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3609,13 +3609,13 @@ Spur64BitMemoryManagerTranslationTests >> testForwardersInStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardtoSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardtoSmoke [
   self testMethod: #forward:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testForwardtoStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testForwardtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #forward:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3623,13 +3623,13 @@ Spur64BitMemoryManagerTranslationTests >> testForwardtoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkLargerIndexSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkLargerIndexSmoke [
   self testMethod: #freeChunkLargerIndex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkLargerIndexStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkLargerIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeChunkLargerIndex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3637,13 +3637,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeChunkLargerIndexStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkNextIndexSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkNextIndexSmoke [
   self testMethod: #freeChunkNextIndex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkNextIndexStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkNextIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeChunkNextIndex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3651,13 +3651,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeChunkNextIndexStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkParentIndexSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkParentIndexSmoke [
   self testMethod: #freeChunkParentIndex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkParentIndexStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkParentIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeChunkParentIndex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3665,13 +3665,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeChunkParentIndexStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkPrevIndexSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkPrevIndexSmoke [
   self testMethod: #freeChunkPrevIndex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkPrevIndexStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkPrevIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeChunkPrevIndex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3679,13 +3679,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeChunkPrevIndexStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkSmallerIndexSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkSmallerIndexSmoke [
   self testMethod: #freeChunkSmallerIndex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkSmallerIndexStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkSmallerIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeChunkSmallerIndex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3693,13 +3693,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeChunkSmallerIndexStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkWithBytesatSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkWithBytesatSmoke [
   self testMethod: #freeChunkWithBytes:at:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeChunkWithBytesatStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeChunkWithBytesatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeChunkWithBytes:at:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3707,13 +3707,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeChunkWithBytesatStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeListHeadsEmptySmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeListHeadsEmptySmoke [
   self testMethod: #freeListHeadsEmpty
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeListHeadsEmptyStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeListHeadsEmptyStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeListHeadsEmpty.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3721,13 +3721,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeListHeadsEmptyStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeListsObjSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeListsObjSmoke [
   self testMethod: #freeListsObj
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeListsObjStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeListsObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeListsObj.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3735,13 +3735,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeListsObjStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeListsObjectSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeListsObjectSmoke [
   self testMethod: #freeListsObject
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeListsObjectStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeListsObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeListsObject.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3749,13 +3749,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeListsObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeObjectSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeObjectSmoke [
   self testMethod: #freeObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeObjectStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3763,13 +3763,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeOldSpaceStartSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeOldSpaceStartSmoke [
   self testMethod: #freeOldSpaceStart
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeOldSpaceStartStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeOldSpaceStartStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeOldSpaceStart.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3777,13 +3777,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeOldSpaceStartStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeSizeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeSizeSmoke [
   self testMethod: #freeSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeSizeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3791,13 +3791,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeStartSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeStartSmoke [
   self testMethod: #freeStart
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeStartStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeStartStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeStart.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3805,13 +3805,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeStartStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeTreeNodesDoSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeTreeNodesDoSmoke [
   self testMethod: #freeTreeNodesDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFreeTreeNodesDoStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFreeTreeNodesDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #freeTreeNodesDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3819,13 +3819,13 @@ Spur64BitMemoryManagerTranslationTests >> testFreeTreeNodesDoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFullGCLockSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFullGCLockSmoke [
   self testMethod: #fullGCLock
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFullGCLockStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFullGCLockStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fullGCLock.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3833,13 +3833,13 @@ Spur64BitMemoryManagerTranslationTests >> testFullGCLockStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testFullGCSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testFullGCSmoke [
   self testMethod: #fullGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testFullGCStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testFullGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #fullGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3847,13 +3847,13 @@ Spur64BitMemoryManagerTranslationTests >> testFullGCStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGarbageCollectForSnapshotSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGarbageCollectForSnapshotSmoke [
   self testMethod: #garbageCollectForSnapshot
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGarbageCollectForSnapshotStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGarbageCollectForSnapshotStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #garbageCollectForSnapshot.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3861,13 +3861,13 @@ Spur64BitMemoryManagerTranslationTests >> testGarbageCollectForSnapshotStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGcStartUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGcStartUsecsSmoke [
   self testMethod: #gcStartUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGcStartUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGcStartUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #gcStartUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3875,13 +3875,13 @@ Spur64BitMemoryManagerTranslationTests >> testGcStartUsecsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGetHeapGrowthToSizeGCRatioSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGetHeapGrowthToSizeGCRatioSmoke [
   self testMethod: #getHeapGrowthToSizeGCRatio
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGetHeapGrowthToSizeGCRatioStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGetHeapGrowthToSizeGCRatioStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #getHeapGrowthToSizeGCRatio.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3889,13 +3889,13 @@ Spur64BitMemoryManagerTranslationTests >> testGetHeapGrowthToSizeGCRatioStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGlobalGarbageCollectSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGlobalGarbageCollectSmoke [
   self testMethod: #globalGarbageCollect
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGlobalGarbageCollectStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGlobalGarbageCollectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #globalGarbageCollect.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3903,13 +3903,13 @@ Spur64BitMemoryManagerTranslationTests >> testGlobalGarbageCollectStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGoodContextSizeSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGoodContextSizeSmoke [
   self testMethod: #goodContextSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGoodContextSizeStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGoodContextSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #goodContextSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3917,13 +3917,13 @@ Spur64BitMemoryManagerTranslationTests >> testGoodContextSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGreyBitShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGreyBitShiftSmoke [
   self testMethod: #greyBitShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGreyBitShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGreyBitShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #greyBitShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3931,13 +3931,13 @@ Spur64BitMemoryManagerTranslationTests >> testGreyBitShiftStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGrowHeadroomSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGrowHeadroomSmoke [
   self testMethod: #growHeadroom
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGrowHeadroomStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGrowHeadroomStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #growHeadroom.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3945,13 +3945,13 @@ Spur64BitMemoryManagerTranslationTests >> testGrowHeadroomStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGrowOldSpaceByAtLeastSmoke [
+{ #category : #'growing/shrinking memory-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGrowOldSpaceByAtLeastSmoke [
   self testMethod: #growOldSpaceByAtLeast:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGrowOldSpaceByAtLeastStringComparison [
+{ #category : #'growing/shrinking memory-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGrowOldSpaceByAtLeastStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #growOldSpaceByAtLeast:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3959,13 +3959,13 @@ Spur64BitMemoryManagerTranslationTests >> testGrowOldSpaceByAtLeastStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testGrowToAccomodateContainerWithNumSlotsSmoke [
+{ #category : #'growing/shrinking memory-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testGrowToAccomodateContainerWithNumSlotsSmoke [
   self testMethod: #growToAccomodateContainerWithNumSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testGrowToAccomodateContainerWithNumSlotsStringComparison [
+{ #category : #'growing/shrinking memory-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testGrowToAccomodateContainerWithNumSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #growToAccomodateContainerWithNumSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3973,13 +3973,13 @@ Spur64BitMemoryManagerTranslationTests >> testGrowToAccomodateContainerWithNumSl
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasIdentityHashSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasIdentityHashSmoke [
   self testMethod: #hasIdentityHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasIdentityHashStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasIdentityHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hasIdentityHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -3987,13 +3987,13 @@ Spur64BitMemoryManagerTranslationTests >> testHasIdentityHashStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasOverflowHeaderSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasOverflowHeaderSmoke [
   self testMethod: #hasOverflowHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasOverflowHeaderStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasOverflowHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hasOverflowHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4001,13 +4001,13 @@ Spur64BitMemoryManagerTranslationTests >> testHasOverflowHeaderStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasPointerFieldsNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasPointerFieldsNonImmSmoke [
   self testMethod: #hasPointerFieldsNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasPointerFieldsNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasPointerFieldsNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hasPointerFieldsNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4015,13 +4015,13 @@ Spur64BitMemoryManagerTranslationTests >> testHasPointerFieldsNonImmStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasPointerFieldsSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasPointerFieldsSmoke [
   self testMethod: #hasPointerFields:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasPointerFieldsStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasPointerFieldsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hasPointerFields:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4029,13 +4029,13 @@ Spur64BitMemoryManagerTranslationTests >> testHasPointerFieldsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasSixtyFourBitImmediatesSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasSixtyFourBitImmediatesSmoke [
   self testMethod: #hasSixtyFourBitImmediates
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasSixtyFourBitImmediatesStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasSixtyFourBitImmediatesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hasSixtyFourBitImmediates.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4043,13 +4043,13 @@ Spur64BitMemoryManagerTranslationTests >> testHasSixtyFourBitImmediatesStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasSpurMemoryManagerAPISmoke [
+{ #category : #'api characterization-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasSpurMemoryManagerAPISmoke [
   self testMethod: #hasSpurMemoryManagerAPI
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasSpurMemoryManagerAPIStringComparison [
+{ #category : #'api characterization-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasSpurMemoryManagerAPIStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hasSpurMemoryManagerAPI.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4057,13 +4057,13 @@ Spur64BitMemoryManagerTranslationTests >> testHasSpurMemoryManagerAPIStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasYoungReferentsSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasYoungReferentsSmoke [
   self testMethod: #hasYoungReferents:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHasYoungReferentsStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHasYoungReferentsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hasYoungReferents:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4071,13 +4071,13 @@ Spur64BitMemoryManagerTranslationTests >> testHasYoungReferentsStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHashBitsOfSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHashBitsOfSmoke [
   self testMethod: #hashBitsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHashBitsOfStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHashBitsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hashBitsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4085,13 +4085,13 @@ Spur64BitMemoryManagerTranslationTests >> testHashBitsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeaderForSlotsformatclassIndexSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeaderForSlotsformatclassIndexSmoke [
   self testMethod: #headerForSlots:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeaderForSlotsformatclassIndexStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeaderForSlotsformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #headerForSlots:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4099,13 +4099,13 @@ Spur64BitMemoryManagerTranslationTests >> testHeaderForSlotsformatclassIndexStri
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeaderForSlotshashformatclassIndexSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeaderForSlotshashformatclassIndexSmoke [
   self testMethod: #headerForSlots:hash:format:classIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeaderForSlotshashformatclassIndexStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeaderForSlotshashformatclassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #headerForSlots:hash:format:classIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4113,13 +4113,13 @@ Spur64BitMemoryManagerTranslationTests >> testHeaderForSlotshashformatclassIndex
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeaderIndicatesAlternateBytecodeSetSmoke [
+{ #category : #'method access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeaderIndicatesAlternateBytecodeSetSmoke [
   self testMethod: #headerIndicatesAlternateBytecodeSet:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeaderIndicatesAlternateBytecodeSetStringComparison [
+{ #category : #'method access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeaderIndicatesAlternateBytecodeSetStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #headerIndicatesAlternateBytecodeSet:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4127,13 +4127,13 @@ Spur64BitMemoryManagerTranslationTests >> testHeaderIndicatesAlternateBytecodeSe
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeapMapSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeapMapSmoke [
   self testMethod: #heapMap
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHeapMapStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHeapMapStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #heapMap.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4141,13 +4141,13 @@ Spur64BitMemoryManagerTranslationTests >> testHeapMapStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHiddenRootSlotsSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHiddenRootSlotsSmoke [
   self testMethod: #hiddenRootSlots
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHiddenRootSlotsStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHiddenRootSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hiddenRootSlots.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4155,13 +4155,13 @@ Spur64BitMemoryManagerTranslationTests >> testHiddenRootSlotsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testHiddenRootsObjectSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testHiddenRootsObjectSmoke [
   self testMethod: #hiddenRootsObject
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testHiddenRootsObjectStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testHiddenRootsObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #hiddenRootsObject.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4169,13 +4169,13 @@ Spur64BitMemoryManagerTranslationTests >> testHiddenRootsObjectStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashFieldWidthSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashFieldWidthSmoke [
   self testMethod: #identityHashFieldWidth
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashFieldWidthStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashFieldWidthStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #identityHashFieldWidth.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4183,13 +4183,13 @@ Spur64BitMemoryManagerTranslationTests >> testIdentityHashFieldWidthStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashFullWordMaskSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashFullWordMaskSmoke [
   self testMethod: #identityHashFullWordMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashFullWordMaskStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashFullWordMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #identityHashFullWordMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4197,13 +4197,13 @@ Spur64BitMemoryManagerTranslationTests >> testIdentityHashFullWordMaskStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashFullWordShiftSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashFullWordShiftSmoke [
   self testMethod: #identityHashFullWordShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashFullWordShiftStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashFullWordShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #identityHashFullWordShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4211,13 +4211,13 @@ Spur64BitMemoryManagerTranslationTests >> testIdentityHashFullWordShiftStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashHalfWordMaskSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashHalfWordMaskSmoke [
   self testMethod: #identityHashHalfWordMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIdentityHashHalfWordMaskStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIdentityHashHalfWordMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #identityHashHalfWordMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4225,13 +4225,13 @@ Spur64BitMemoryManagerTranslationTests >> testIdentityHashHalfWordMaskStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIfAProxyupdateCopySmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIfAProxyupdateCopySmoke [
   self testMethod: #ifAProxy:updateCopy:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIfAProxyupdateCopyStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIfAProxyupdateCopyStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ifAProxy:updateCopy:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4239,13 +4239,13 @@ Spur64BitMemoryManagerTranslationTests >> testIfAProxyupdateCopyStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIfOopInvalidForBecomeerrorCodeIntoSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIfOopInvalidForBecomeerrorCodeIntoSmoke [
   self testMethod: #ifOopInvalidForBecome:errorCodeInto:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIfOopInvalidForBecomeerrorCodeIntoStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIfOopInvalidForBecomeerrorCodeIntoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #ifOopInvalidForBecome:errorCodeInto:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4253,13 +4253,13 @@ Spur64BitMemoryManagerTranslationTests >> testIfOopInvalidForBecomeerrorCodeInto
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testImageFormatVersionSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testImageFormatVersionSmoke [
   self testMethod: #imageFormatVersion
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testImageFormatVersionStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testImageFormatVersionStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #imageFormatVersion.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4267,13 +4267,13 @@ Spur64BitMemoryManagerTranslationTests >> testImageFormatVersionStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testImageSegmentVersionSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testImageSegmentVersionSmoke [
   self testMethod: #imageSegmentVersion
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testImageSegmentVersionStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testImageSegmentVersionStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #imageSegmentVersion.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4281,13 +4281,13 @@ Spur64BitMemoryManagerTranslationTests >> testImageSegmentVersionStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testImageSizeToWriteSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testImageSizeToWriteSmoke [
   self testMethod: #imageSizeToWrite
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testImageSizeToWriteStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testImageSizeToWriteStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #imageSizeToWrite.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4295,13 +4295,13 @@ Spur64BitMemoryManagerTranslationTests >> testImageSizeToWriteStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testImmutableBitMaskSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testImmutableBitMaskSmoke [
   self testMethod: #immutableBitMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testImmutableBitMaskStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testImmutableBitMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #immutableBitMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4309,13 +4309,13 @@ Spur64BitMemoryManagerTranslationTests >> testImmutableBitMaskStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testImmutableBitShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testImmutableBitShiftSmoke [
   self testMethod: #immutableBitShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testImmutableBitShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testImmutableBitShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #immutableBitShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4323,13 +4323,13 @@ Spur64BitMemoryManagerTranslationTests >> testImmutableBitShiftStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInFreeTreeReplacewithSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInFreeTreeReplacewithSmoke [
   self testMethod: #inFreeTreeReplace:with:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInFreeTreeReplacewithStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInFreeTreeReplacewithStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #inFreeTreeReplace:with:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4337,13 +4337,13 @@ Spur64BitMemoryManagerTranslationTests >> testInFreeTreeReplacewithStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInLineRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInLineRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidSmoke [
   self testMethod: #inLineRunLeakCheckerFor:excludeUnmarkedObjs:classIndicesShouldBeValid:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInLineRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInLineRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #inLineRunLeakCheckerFor:excludeUnmarkedObjs:classIndicesShouldBeValid:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4351,13 +4351,13 @@ Spur64BitMemoryManagerTranslationTests >> testInLineRunLeakCheckerForexcludeUnma
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInOrderPrintFreeTreeprintListSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInOrderPrintFreeTreeprintListSmoke [
   self testMethod: #inOrderPrintFreeTree:printList:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInOrderPrintFreeTreeprintListStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInOrderPrintFreeTreeprintListStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #inOrderPrintFreeTree:printList:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4365,13 +4365,13 @@ Spur64BitMemoryManagerTranslationTests >> testInOrderPrintFreeTreeprintListStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInPlaceBecomeandcopyHashFlagSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInPlaceBecomeandcopyHashFlagSmoke [
   self testMethod: #inPlaceBecome:and:copyHashFlag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInPlaceBecomeandcopyHashFlagStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInPlaceBecomeandcopyHashFlagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #inPlaceBecome:and:copyHashFlag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4379,13 +4379,13 @@ Spur64BitMemoryManagerTranslationTests >> testInPlaceBecomeandcopyHashFlagString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInactiveOrFailedToDeferScanSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInactiveOrFailedToDeferScanSmoke [
   self testMethod: #inactiveOrFailedToDeferScan:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInactiveOrFailedToDeferScanStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInactiveOrFailedToDeferScanStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #inactiveOrFailedToDeferScan:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4393,13 +4393,13 @@ Spur64BitMemoryManagerTranslationTests >> testInactiveOrFailedToDeferScanStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIncreaseFreeOldSpaceBySmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIncreaseFreeOldSpaceBySmoke [
   self testMethod: #increaseFreeOldSpaceBy:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIncreaseFreeOldSpaceByStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIncreaseFreeOldSpaceByStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #increaseFreeOldSpaceBy:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4407,13 +4407,13 @@ Spur64BitMemoryManagerTranslationTests >> testIncreaseFreeOldSpaceByStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIncrementalGCSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIncrementalGCSmoke [
   self testMethod: #incrementalGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIncrementalGCStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIncrementalGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #incrementalGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4421,13 +4421,13 @@ Spur64BitMemoryManagerTranslationTests >> testIncrementalGCStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIndexOfinSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIndexOfinSmoke [
   self testMethod: #indexOf:in:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIndexOfinStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIndexOfinStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #indexOf:in:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4435,13 +4435,13 @@ Spur64BitMemoryManagerTranslationTests >> testIndexOfinStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIndexablePointersFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIndexablePointersFormatSmoke [
   self testMethod: #indexablePointersFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIndexablePointersFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIndexablePointersFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #indexablePointersFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4449,13 +4449,13 @@ Spur64BitMemoryManagerTranslationTests >> testIndexablePointersFormatStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitFreeChunkWithBytesatSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitFreeChunkWithBytesatSmoke [
   self testMethod: #initFreeChunkWithBytes:at:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitFreeChunkWithBytesatStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitFreeChunkWithBytesatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initFreeChunkWithBytes:at:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4463,13 +4463,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitFreeChunkWithBytesatStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitSegmentBridgeWithBytesatSmoke [
+{ #category : #'segments-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitSegmentBridgeWithBytesatSmoke [
   self testMethod: #initSegmentBridgeWithBytes:at:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitSegmentBridgeWithBytesatStringComparison [
+{ #category : #'segments-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitSegmentBridgeWithBytesatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initSegmentBridgeWithBytes:at:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4477,13 +4477,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitSegmentBridgeWithBytesatString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitSpaceForAllocationChecklimitSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitSpaceForAllocationChecklimitSmoke [
   self testMethod: #initSpaceForAllocationCheck:limit:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitSpaceForAllocationChecklimitStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitSpaceForAllocationChecklimitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initSpaceForAllocationCheck:limit:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4491,13 +4491,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitSpaceForAllocationChecklimitSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitialHeadroomgivenFreeOldSpaceInImageSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitialHeadroomgivenFreeOldSpaceInImageSmoke [
   self testMethod: #initialHeadroom:givenFreeOldSpaceInImage:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitialHeadroomgivenFreeOldSpaceInImageStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitialHeadroomgivenFreeOldSpaceInImageStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initialHeadroom:givenFreeOldSpaceInImage:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4505,13 +4505,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitialHeadroomgivenFreeOldSpaceIn
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitialInstanceOfSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitialInstanceOfSmoke [
   self testMethod: #initialInstanceOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitialInstanceOfStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitialInstanceOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initialInstanceOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4519,13 +4519,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitialInstanceOfStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeFreeSpacePostLoadSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeFreeSpacePostLoadSmoke [
   self testMethod: #initializeFreeSpacePostLoad:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeFreeSpacePostLoadStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeFreeSpacePostLoadStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializeFreeSpacePostLoad:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4533,13 +4533,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeFreeSpacePostLoadStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeMarkStackSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeMarkStackSmoke [
   self testMethod: #initializeMarkStack
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeMarkStackStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeMarkStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializeMarkStack.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4547,13 +4547,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeMarkStackStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeNewSpaceVariablesSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeNewSpaceVariablesSmoke [
   self testMethod: #initializeNewSpaceVariables
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeNewSpaceVariablesStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeNewSpaceVariablesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializeNewSpaceVariables.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4561,13 +4561,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeNewSpaceVariablesStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeObjectMemorySmoke [
+{ #category : #'initialization-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeObjectMemorySmoke [
   self testMethod: #initializeObjectMemory:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeObjectMemoryStringComparison [
+{ #category : #'initialization-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeObjectMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializeObjectMemory:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4575,13 +4575,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeObjectMemoryStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeOldSpaceFirstFreeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeOldSpaceFirstFreeSmoke [
   self testMethod: #initializeOldSpaceFirstFree:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeOldSpaceFirstFreeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeOldSpaceFirstFreeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializeOldSpaceFirstFree:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4589,13 +4589,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeOldSpaceFirstFreeStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializePostBootstrapSmoke [
+{ #category : #'spur bootstrap-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializePostBootstrapSmoke [
   self testMethod: #initializePostBootstrap
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializePostBootstrapStringComparison [
+{ #category : #'spur bootstrap-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializePostBootstrapStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializePostBootstrap.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4603,13 +4603,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializePostBootstrapStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeSmoke [
+{ #category : #'initialization-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeSmoke [
   self testMethod: #initialize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeStringComparison [
+{ #category : #'initialization-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initialize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4617,13 +4617,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeUnscannedEphemeronsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeUnscannedEphemeronsSmoke [
   self testMethod: #initializeUnscannedEphemerons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeUnscannedEphemeronsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeUnscannedEphemeronsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializeUnscannedEphemerons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4631,13 +4631,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeUnscannedEphemeronsStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeWeaklingStackSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeWeaklingStackSmoke [
   self testMethod: #initializeWeaklingStack
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInitializeWeaklingStackStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInitializeWeaklingStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #initializeWeaklingStack.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4645,13 +4645,13 @@ Spur64BitMemoryManagerTranslationTests >> testInitializeWeaklingStackStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInnerBecomeObjectsInandcopyHashSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInnerBecomeObjectsInandcopyHashSmoke [
   self testMethod: #innerBecomeObjectsIn:and:copyHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInnerBecomeObjectsInandcopyHashStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInnerBecomeObjectsInandcopyHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #innerBecomeObjectsIn:and:copyHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4659,13 +4659,13 @@ Spur64BitMemoryManagerTranslationTests >> testInnerBecomeObjectsInandcopyHashStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInnerBecomeObjectsIntocopyHashSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInnerBecomeObjectsIntocopyHashSmoke [
   self testMethod: #innerBecomeObjectsIn:to:copyHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInnerBecomeObjectsIntocopyHashStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInnerBecomeObjectsIntocopyHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #innerBecomeObjectsIn:to:copyHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4673,13 +4673,13 @@ Spur64BitMemoryManagerTranslationTests >> testInnerBecomeObjectsIntocopyHashStri
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstSpecForImmediateClassesSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstSpecForImmediateClassesSmoke [
   self testMethod: #instSpecForImmediateClasses
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstSpecForImmediateClassesStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstSpecForImmediateClassesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instSpecForImmediateClasses.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4687,13 +4687,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstSpecForImmediateClassesStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstSpecOfClassFormatSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstSpecOfClassFormatSmoke [
   self testMethod: #instSpecOfClassFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstSpecOfClassFormatStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstSpecOfClassFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instSpecOfClassFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4701,13 +4701,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstSpecOfClassFormatStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstSpecOfClassSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstSpecOfClassSmoke [
   self testMethod: #instSpecOfClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstSpecOfClassStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstSpecOfClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instSpecOfClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4715,13 +4715,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstSpecOfClassStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstanceAfterSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstanceAfterSmoke [
   self testMethod: #instanceAfter:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstanceAfterStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstanceAfterStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instanceAfter:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4729,13 +4729,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstanceAfterStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstanceSizeOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstanceSizeOfSmoke [
   self testMethod: #instanceSizeOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstanceSizeOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstanceSizeOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instanceSizeOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4743,13 +4743,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstanceSizeOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstantiateClassSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstantiateClassSmoke [
   self testMethod: #instantiateClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstantiateClassStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstantiateClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instantiateClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4757,13 +4757,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstantiateClassStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstantiateClassindexableSizeSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstantiateClassindexableSizeSmoke [
   self testMethod: #instantiateClass:indexableSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstantiateClassindexableSizeStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstantiateClassindexableSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instantiateClass:indexableSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4771,13 +4771,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstantiateClassindexableSizeStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstantiateCompiledMethodClassindexableSizeSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstantiateCompiledMethodClassindexableSizeSmoke [
   self testMethod: #instantiateCompiledMethodClass:indexableSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testInstantiateCompiledMethodClassindexableSizeStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testInstantiateCompiledMethodClassindexableSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #instantiateCompiledMethodClass:indexableSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4785,13 +4785,13 @@ Spur64BitMemoryManagerTranslationTests >> testInstantiateCompiledMethodClassinde
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIntegerObjectOfCharacterObjectSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIntegerObjectOfCharacterObjectSmoke [
   self testMethod: #integerObjectOfCharacterObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIntegerObjectOfCharacterObjectStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIntegerObjectOfCharacterObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #integerObjectOfCharacterObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4799,13 +4799,13 @@ Spur64BitMemoryManagerTranslationTests >> testIntegerObjectOfCharacterObjectStri
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIntegerObjectOfSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIntegerObjectOfSmoke [
   self testMethod: #integerObjectOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIntegerObjectOfStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIntegerObjectOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #integerObjectOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4813,13 +4813,13 @@ Spur64BitMemoryManagerTranslationTests >> testIntegerObjectOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIntegerValueOfSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIntegerValueOfSmoke [
   self testMethod: #integerValueOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIntegerValueOfStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIntegerValueOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #integerValueOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4827,13 +4827,13 @@ Spur64BitMemoryManagerTranslationTests >> testIntegerValueOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsAnyPointerFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsAnyPointerFormatSmoke [
   self testMethod: #isAnyPointerFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsAnyPointerFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsAnyPointerFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isAnyPointerFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4841,13 +4841,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsAnyPointerFormatStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsArrayNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsArrayNonImmSmoke [
   self testMethod: #isArrayNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsArrayNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsArrayNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isArrayNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4855,13 +4855,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsArrayNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsArraySmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsArraySmoke [
   self testMethod: #isArray:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsArrayStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsArrayStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isArray:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4869,13 +4869,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsArrayStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsBytesNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsBytesNonImmSmoke [
   self testMethod: #isBytesNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsBytesNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsBytesNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isBytesNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4883,13 +4883,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsBytesNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsBytesSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsBytesSmoke [
   self testMethod: #isBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsBytesStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4897,13 +4897,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsBytesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCharacterObjectSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCharacterObjectSmoke [
   self testMethod: #isCharacterObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCharacterObjectStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCharacterObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isCharacterObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4911,13 +4911,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsCharacterObjectStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCharacterValueSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCharacterValueSmoke [
   self testMethod: #isCharacterValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCharacterValueStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCharacterValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isCharacterValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4925,13 +4925,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsCharacterValueStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsClassAtUniqueIndexSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsClassAtUniqueIndexSmoke [
   self testMethod: #isClassAtUniqueIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsClassAtUniqueIndexStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsClassAtUniqueIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isClassAtUniqueIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4939,13 +4939,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsClassAtUniqueIndexStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsClassOfNonImmequalToSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsClassOfNonImmequalToSmoke [
   self testMethod: #isClassOfNonImm:equalTo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsClassOfNonImmequalToStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsClassOfNonImmequalToStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isClassOfNonImm:equalTo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4953,13 +4953,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsClassOfNonImmequalToStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsClassOfNonImmequalTocompactClassIndexSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsClassOfNonImmequalTocompactClassIndexSmoke [
   self testMethod: #isClassOfNonImm:equalTo:compactClassIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsClassOfNonImmequalTocompactClassIndexStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsClassOfNonImmequalTocompactClassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isClassOfNonImm:equalTo:compactClassIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4967,13 +4967,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsClassOfNonImmequalTocompactClass
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompactInstanceSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompactInstanceSmoke [
   self testMethod: #isCompactInstance:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompactInstanceStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompactInstanceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isCompactInstance:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4981,13 +4981,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsCompactInstanceStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompiledMethodFormatSmoke [
   self testMethod: #isCompiledMethodFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompiledMethodFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isCompiledMethodFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -4995,13 +4995,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodFormatStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodHeaderSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompiledMethodHeaderSmoke [
   self testMethod: #isCompiledMethodHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodHeaderStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompiledMethodHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isCompiledMethodHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5009,13 +5009,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodHeaderStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompiledMethodSmoke [
   self testMethod: #isCompiledMethod:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCompiledMethodStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isCompiledMethod:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5023,13 +5023,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsCompiledMethodStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsContextHeaderSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsContextHeaderSmoke [
   self testMethod: #isContextHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsContextHeaderStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsContextHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isContextHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5037,13 +5037,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsContextHeaderStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsContextNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsContextNonImmSmoke [
   self testMethod: #isContextNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsContextNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsContextNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isContextNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5051,13 +5051,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsContextNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsContextSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsContextSmoke [
   self testMethod: #isContext:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsContextStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsContextStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isContext:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5065,13 +5065,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsContextStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCopiedIntoSegmentSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCopiedIntoSegmentSmoke [
   self testMethod: #isCopiedIntoSegment:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsCopiedIntoSegmentStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsCopiedIntoSegmentStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isCopiedIntoSegment:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5079,13 +5079,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsCopiedIntoSegmentStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEmptyObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEmptyObjStackSmoke [
   self testMethod: #isEmptyObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEmptyObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEmptyObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isEmptyObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5093,13 +5093,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsEmptyObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEnumerableObjectNoAssertSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectNoAssertSmoke [
   self testMethod: #isEnumerableObjectNoAssert:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEnumerableObjectNoAssertStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectNoAssertStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isEnumerableObjectNoAssert:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5107,13 +5107,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsEnumerableObjectNoAssertStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEnumerableObjectSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectSmoke [
   self testMethod: #isEnumerableObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEnumerableObjectStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isEnumerableObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5121,13 +5121,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsEnumerableObjectStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEphemeronFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEphemeronFormatSmoke [
   self testMethod: #isEphemeronFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEphemeronFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEphemeronFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isEphemeronFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5135,13 +5135,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsEphemeronFormatStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEphemeronSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEphemeronSmoke [
   self testMethod: #isEphemeron:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsEphemeronStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsEphemeronStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isEphemeron:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5149,13 +5149,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsEphemeronStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFixedSizePointerFormatSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFixedSizePointerFormatSmoke [
   self testMethod: #isFixedSizePointerFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFixedSizePointerFormatStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFixedSizePointerFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isFixedSizePointerFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5163,13 +5163,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsFixedSizePointerFormatStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFloatInstanceSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFloatInstanceSmoke [
   self testMethod: #isFloatInstance:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFloatInstanceStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFloatInstanceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isFloatInstance:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5177,13 +5177,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsFloatInstanceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFloatOrIntSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFloatOrIntSmoke [
   self testMethod: #isFloatOrInt:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFloatOrIntStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFloatOrIntStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isFloatOrInt:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5191,13 +5191,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsFloatOrIntStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsForwardedClassTagSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsForwardedClassTagSmoke [
   self testMethod: #isForwardedClassTag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsForwardedClassTagStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsForwardedClassTagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isForwardedClassTag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5205,13 +5205,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsForwardedClassTagStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsForwardedObjectClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsForwardedObjectClassIndexPunSmoke [
   self testMethod: #isForwardedObjectClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsForwardedObjectClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsForwardedObjectClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isForwardedObjectClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5219,13 +5219,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsForwardedObjectClassIndexPunStri
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsForwardedSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsForwardedSmoke [
   self testMethod: #isForwarded:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsForwardedStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsForwardedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isForwarded:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5233,13 +5233,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsForwardedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFreeObjectClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFreeObjectClassIndexPunSmoke [
   self testMethod: #isFreeObjectClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFreeObjectClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFreeObjectClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isFreeObjectClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5247,13 +5247,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsFreeObjectClassIndexPunStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFreeObjectSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFreeObjectSmoke [
   self testMethod: #isFreeObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFreeObjectStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFreeObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isFreeObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5261,13 +5261,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsFreeObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFreeOopSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFreeOopSmoke [
   self testMethod: #isFreeOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsFreeOopStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsFreeOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isFreeOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5275,13 +5275,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsFreeOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsGreySmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsGreySmoke [
   self testMethod: #isGrey:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsGreyStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsGreyStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isGrey:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5289,13 +5289,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsGreyStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsHiddenObjSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsHiddenObjSmoke [
   self testMethod: #isHiddenObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsHiddenObjStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsHiddenObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isHiddenObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5303,13 +5303,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsHiddenObjStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmediateCharacterSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmediateCharacterSmoke [
   self testMethod: #isImmediateCharacter:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmediateCharacterStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmediateCharacterStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isImmediateCharacter:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5317,13 +5317,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsImmediateCharacterStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmediateFloatSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmediateFloatSmoke [
   self testMethod: #isImmediateFloat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmediateFloatStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmediateFloatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isImmediateFloat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5331,13 +5331,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsImmediateFloatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmediateSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmediateSmoke [
   self testMethod: #isImmediate:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmediateStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmediateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isImmediate:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5345,13 +5345,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsImmediateStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmutableSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmutableSmoke [
   self testMethod: #isImmutable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsImmutableStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsImmutableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isImmutable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5359,13 +5359,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsImmutableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInClassTableSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInClassTableSmoke [
   self testMethod: #isInClassTable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInClassTableStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInClassTableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInClassTable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5373,13 +5373,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInClassTableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInEdenSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInEdenSmoke [
   self testMethod: #isInEden:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInEdenStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInEdenStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInEden:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5387,13 +5387,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInEdenStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInFutureSpaceSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInFutureSpaceSmoke [
   self testMethod: #isInFutureSpace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInFutureSpaceStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInFutureSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInFutureSpace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5401,13 +5401,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInFutureSpaceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInMemorySmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInMemorySmoke [
   self testMethod: #isInMemory:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInMemoryStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInMemory:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5415,13 +5415,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInMemoryStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInNewSpaceSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInNewSpaceSmoke [
   self testMethod: #isInNewSpace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInNewSpaceStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInNewSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInNewSpace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5429,13 +5429,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInNewSpaceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInOldSpaceSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInOldSpaceSmoke [
   self testMethod: #isInOldSpace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInOldSpaceStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInOldSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInOldSpace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5443,13 +5443,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInOldSpaceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInPastSpaceSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInPastSpaceSmoke [
   self testMethod: #isInPastSpace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInPastSpaceStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInPastSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInPastSpace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5457,13 +5457,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInPastSpaceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInRangeCharacterCodeSmoke [
+{ #category : #'immediates-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInRangeCharacterCodeSmoke [
   self testMethod: #isInRangeCharacterCode:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInRangeCharacterCodeStringComparison [
+{ #category : #'immediates-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInRangeCharacterCodeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInRangeCharacterCode:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5471,13 +5471,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInRangeCharacterCodeStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIndexableFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIndexableFormatSmoke [
   self testMethod: #isIndexableFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIndexableFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIndexableFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isIndexableFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5485,13 +5485,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsIndexableFormatStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIndexableSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIndexableSmoke [
   self testMethod: #isIndexable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIndexableStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIndexableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isIndexable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5499,13 +5499,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsIndexableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInstanceOfClassLargeNegativeIntegerSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInstanceOfClassLargeNegativeIntegerSmoke [
   self testMethod: #isInstanceOfClassLargeNegativeInteger:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInstanceOfClassLargeNegativeIntegerStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInstanceOfClassLargeNegativeIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInstanceOfClassLargeNegativeInteger:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5513,13 +5513,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInstanceOfClassLargeNegativeInte
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInstanceOfClassLargePositiveIntegerSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInstanceOfClassLargePositiveIntegerSmoke [
   self testMethod: #isInstanceOfClassLargePositiveInteger:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsInstanceOfClassLargePositiveIntegerStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsInstanceOfClassLargePositiveIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isInstanceOfClassLargePositiveInteger:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5527,13 +5527,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsInstanceOfClassLargePositiveInte
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIntegerObjectSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIntegerObjectSmoke [
   self testMethod: #isIntegerObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIntegerObjectStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIntegerObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isIntegerObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5541,13 +5541,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsIntegerObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIntegerValueSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIntegerValueSmoke [
   self testMethod: #isIntegerValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsIntegerValueStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsIntegerValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isIntegerValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5555,13 +5555,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsIntegerValueStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLargeFreeObjectSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLargeFreeObjectSmoke [
   self testMethod: #isLargeFreeObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLargeFreeObjectStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLargeFreeObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isLargeFreeObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5569,13 +5569,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsLargeFreeObjectStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLargeIntegerInstanceSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLargeIntegerInstanceSmoke [
   self testMethod: #isLargeIntegerInstance:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLargeIntegerInstanceStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLargeIntegerInstanceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isLargeIntegerInstance:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5583,13 +5583,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsLargeIntegerInstanceStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLilliputianSizeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLilliputianSizeSmoke [
   self testMethod: #isLilliputianSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLilliputianSizeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLilliputianSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isLilliputianSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5597,13 +5597,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsLilliputianSizeStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLongsNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLongsNonImmSmoke [
   self testMethod: #isLong64sNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLongsNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLongsNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isLong64sNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5611,13 +5611,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsLongsNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLongsSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLongsSmoke [
   self testMethod: #isLong64s:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsLongsStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsLongsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isLong64s:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5625,13 +5625,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsLongsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMarkedSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMarkedSmoke [
   self testMethod: #isMarked:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMarkedStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMarkedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isMarked:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5639,13 +5639,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsMarkedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMaybeFiredEphemeronFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronFormatSmoke [
   self testMethod: #isMaybeFiredEphemeronFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMaybeFiredEphemeronFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isMaybeFiredEphemeronFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5653,13 +5653,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsMaybeFiredEphemeronFormatStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMaybeFiredEphemeronSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronSmoke [
   self testMethod: #isMaybeFiredEphemeron:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMaybeFiredEphemeronStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isMaybeFiredEphemeron:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5667,13 +5667,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsMaybeFiredEphemeronStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMobileObjectHeaderSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMobileObjectHeaderSmoke [
   self testMethod: #isMobileObjectHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMobileObjectHeaderStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMobileObjectHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isMobileObjectHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5681,13 +5681,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsMobileObjectHeaderStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMobileObjectSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMobileObjectSmoke [
   self testMethod: #isMobileObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsMobileObjectStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsMobileObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isMobileObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5695,13 +5695,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsMobileObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNegativeSmallFloatSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNegativeSmallFloatSmoke [
   self testMethod: #isNegativeSmallFloat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNegativeSmallFloatStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNegativeSmallFloatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isNegativeSmallFloat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5709,13 +5709,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsNegativeSmallFloatStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonImmediateSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonImmediateSmoke [
   self testMethod: #isNonImmediate:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonImmediateStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonImmediateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isNonImmediate:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5723,13 +5723,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsNonImmediateStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerImmediateSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonIntegerImmediateSmoke [
   self testMethod: #isNonIntegerImmediate:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerImmediateStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonIntegerImmediateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isNonIntegerImmediate:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5737,13 +5737,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerImmediateStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerNonImmediateSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonIntegerNonImmediateSmoke [
   self testMethod: #isNonIntegerNonImmediate:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerNonImmediateStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonIntegerNonImmediateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isNonIntegerNonImmediate:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5751,13 +5751,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerNonImmediateStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerObjectSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonIntegerObjectSmoke [
   self testMethod: #isNonIntegerObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerObjectStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNonIntegerObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isNonIntegerObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5765,13 +5765,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsNonIntegerObjectStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNormalObjectSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNormalObjectSmoke [
   self testMethod: #isNormalObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsNormalObjectStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsNormalObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isNormalObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5779,13 +5779,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsNormalObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsObjEphemeronSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsObjEphemeronSmoke [
   self testMethod: #isObjEphemeron:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsObjEphemeronStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsObjEphemeronStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isObjEphemeron:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5793,13 +5793,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsObjEphemeronStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsObjImmutableSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsObjImmutableSmoke [
   self testMethod: #isObjImmutable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsObjImmutableStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsObjImmutableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isObjImmutable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5807,13 +5807,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsObjImmutableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOldObjectSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOldObjectSmoke [
   self testMethod: #isOldObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOldObjectStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOldObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isOldObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5821,13 +5821,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsOldObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopCompiledMethodSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopCompiledMethodSmoke [
   self testMethod: #isOopCompiledMethod:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopCompiledMethodStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopCompiledMethodStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isOopCompiledMethod:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5835,13 +5835,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsOopCompiledMethodStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopForwardedSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopForwardedSmoke [
   self testMethod: #isOopForwarded:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopForwardedStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopForwardedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isOopForwarded:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5849,13 +5849,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsOopForwardedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopImmutableSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopImmutableSmoke [
   self testMethod: #isOopImmutable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopImmutableStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopImmutableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isOopImmutable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5863,13 +5863,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsOopImmutableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopMutableSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopMutableSmoke [
   self testMethod: #isOopMutable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsOopMutableStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsOopMutableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isOopMutable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5877,13 +5877,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsOopMutableStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPinnedSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPinnedSmoke [
   self testMethod: #isPinned:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPinnedStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPinnedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isPinned:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5891,13 +5891,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsPinnedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPointersFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPointersFormatSmoke [
   self testMethod: #isPointersFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPointersFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPointersFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isPointersFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5905,13 +5905,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsPointersFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPointersNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPointersNonImmSmoke [
   self testMethod: #isPointersNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPointersNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPointersNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isPointersNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5919,13 +5919,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsPointersNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPointersSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPointersSmoke [
   self testMethod: #isPointers:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPointersStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPointersStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isPointers:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5933,13 +5933,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsPointersStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPureBitsFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPureBitsFormatSmoke [
   self testMethod: #isPureBitsFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPureBitsFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPureBitsFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isPureBitsFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5947,13 +5947,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsPureBitsFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPureBitsNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPureBitsNonImmSmoke [
   self testMethod: #isPureBitsNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsPureBitsNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsPureBitsNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isPureBitsNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5961,13 +5961,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsPureBitsNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsReallyYoungObjectSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsReallyYoungObjectSmoke [
   self testMethod: #isReallyYoungObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsReallyYoungObjectStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsReallyYoungObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isReallyYoungObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5975,13 +5975,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsReallyYoungObjectStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsReallyYoungSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsReallyYoungSmoke [
   self testMethod: #isReallyYoung:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsReallyYoungStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsReallyYoungStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isReallyYoung:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -5989,13 +5989,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsReallyYoungStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsRememberedObjectHeaderSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsRememberedObjectHeaderSmoke [
   self testMethod: #isRememberedObjectHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsRememberedObjectHeaderStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsRememberedObjectHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isRememberedObjectHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6003,13 +6003,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsRememberedObjectHeaderStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsRememberedSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsRememberedSmoke [
   self testMethod: #isRemembered:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsRememberedStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsRememberedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isRemembered:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6017,13 +6017,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsRememberedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSegmentBridgeSmoke [
+{ #category : #'segments-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSegmentBridgeSmoke [
   self testMethod: #isSegmentBridge:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSegmentBridgeStringComparison [
+{ #category : #'segments-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSegmentBridgeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isSegmentBridge:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6031,13 +6031,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsSegmentBridgeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSemaphoreObjSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSemaphoreObjSmoke [
   self testMethod: #isSemaphoreObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSemaphoreObjStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSemaphoreObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isSemaphoreObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6045,13 +6045,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsSemaphoreObjStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSemaphoreOopSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSemaphoreOopSmoke [
   self testMethod: #isSemaphoreOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSemaphoreOopStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSemaphoreOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isSemaphoreOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6059,13 +6059,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsSemaphoreOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsShortsNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsShortsNonImmSmoke [
   self testMethod: #isShortsNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsShortsNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsShortsNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isShortsNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6073,13 +6073,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsShortsNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsShortsSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsShortsSmoke [
   self testMethod: #isShorts:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsShortsStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsShortsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isShorts:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6087,13 +6087,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsShortsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSmallFloatValueSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSmallFloatValueSmoke [
   self testMethod: #isSmallFloatValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSmallFloatValueStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSmallFloatValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isSmallFloatValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6101,13 +6101,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsSmallFloatValueStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSmallFloatZeroSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSmallFloatZeroSmoke [
   self testMethod: #isSmallFloatZero:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsSmallFloatZeroStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsSmallFloatZeroStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isSmallFloatZero:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6115,13 +6115,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsSmallFloatZeroStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsUnambiguouslyForwarderSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsUnambiguouslyForwarderSmoke [
   self testMethod: #isUnambiguouslyForwarder:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsUnambiguouslyForwarderStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsUnambiguouslyForwarderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isUnambiguouslyForwarder:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6129,13 +6129,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsUnambiguouslyForwarderStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsUnmarkedSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsUnmarkedSmoke [
   self testMethod: #isUnmarked:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsUnmarkedStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsUnmarkedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isUnmarked:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6143,13 +6143,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsUnmarkedStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidClassIndexSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidClassIndexSmoke [
   self testMethod: #isValidClassIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidClassIndexStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidClassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isValidClassIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6157,13 +6157,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsValidClassIndexStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidClassTagSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidClassTagSmoke [
   self testMethod: #isValidClassTag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidClassTagStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidClassTagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isValidClassTag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6171,13 +6171,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsValidClassTagStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackAtSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackAtSmoke [
   self testMethod: #isValidObjStackAt:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackAtStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackAtStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isValidObjStackAt:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6185,13 +6185,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackAtStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackPagemyIndexSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexSmoke [
   self testMethod: #isValidObjStackPage:myIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackPagemyIndexStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isValidObjStackPage:myIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6199,13 +6199,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackPagemyIndexStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackPagemyIndexfirstPageSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexfirstPageSmoke [
   self testMethod: #isValidObjStackPage:myIndex:firstPage:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackPagemyIndexfirstPageStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexfirstPageStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isValidObjStackPage:myIndex:firstPage:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6213,13 +6213,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackPagemyIndexfirstPag
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackSmoke [
   self testMethod: #isValidObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsValidObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isValidObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6227,13 +6227,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsValidObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWeakFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWeakFormatSmoke [
   self testMethod: #isWeakFormat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWeakFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWeakFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isWeakFormat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6241,13 +6241,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsWeakFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWeakNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWeakNonImmSmoke [
   self testMethod: #isWeakNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWeakNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWeakNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isWeakNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6255,13 +6255,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsWeakNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWeakSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWeakSmoke [
   self testMethod: #isWeak:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWeakStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWeakStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isWeak:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6269,13 +6269,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsWeakStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsNonImmSmoke [
   self testMethod: #isWordsNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isWordsNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6283,13 +6283,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsWordsNonImmStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsOrBytesNonImmSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesNonImmSmoke [
   self testMethod: #isWordsOrBytesNonImm:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsOrBytesNonImmStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesNonImmStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isWordsOrBytesNonImm:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6297,13 +6297,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsWordsOrBytesNonImmStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsOrBytesSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesSmoke [
   self testMethod: #isWordsOrBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsOrBytesStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isWordsOrBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6311,13 +6311,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsWordsOrBytesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsSmoke [
   self testMethod: #isWords:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsWordsStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsWordsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isWords:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6325,13 +6325,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsWordsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsYoungObjectSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsYoungObjectSmoke [
   self testMethod: #isYoungObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsYoungObjectStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsYoungObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isYoungObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6339,13 +6339,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsYoungObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsYoungSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsYoungSmoke [
   self testMethod: #isYoung:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsYoungStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsYoungStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #isYoung:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6353,13 +6353,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsYoungStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsinstanceOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsinstanceOfSmoke [
   self testMethod: #is:instanceOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsinstanceOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsinstanceOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #is:instanceOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6367,13 +6367,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsinstanceOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsinstanceOfcompactClassIndexSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsinstanceOfcompactClassIndexSmoke [
   self testMethod: #is:instanceOf:compactClassIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsinstanceOfcompactClassIndexStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsinstanceOfcompactClassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #is:instanceOf:compactClassIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6381,13 +6381,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsinstanceOfcompactClassIndexStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsonObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsonObjStackSmoke [
   self testMethod: #is:onObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsonObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsonObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #is:onObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6395,13 +6395,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsonObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsoutPointerClassHashForinlimitSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsoutPointerClassHashForinlimitSmoke [
   self testMethod: #is:outPointerClassHashFor:in:limit:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testIsoutPointerClassHashForinlimitStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testIsoutPointerClassHashForinlimitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #is:outPointerClassHashFor:in:limit:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6409,13 +6409,13 @@ Spur64BitMemoryManagerTranslationTests >> testIsoutPointerClassHashForinlimitStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testKeyOfEphemeronSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testKeyOfEphemeronSmoke [
   self testMethod: #keyOfEphemeron:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testKeyOfEphemeronStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testKeyOfEphemeronStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #keyOfEphemeron:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6423,13 +6423,13 @@ Spur64BitMemoryManagerTranslationTests >> testKeyOfEphemeronStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testKeyOfMaybeFiredEphemeronSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testKeyOfMaybeFiredEphemeronSmoke [
   self testMethod: #keyOfMaybeFiredEphemeron:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testKeyOfMaybeFiredEphemeronStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testKeyOfMaybeFiredEphemeronStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #keyOfMaybeFiredEphemeron:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6437,13 +6437,13 @@ Spur64BitMemoryManagerTranslationTests >> testKeyOfMaybeFiredEphemeronStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testKnownClassAtIndexSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testKnownClassAtIndexSmoke [
   self testMethod: #knownClassAtIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testKnownClassAtIndexStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testKnownClassAtIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #knownClassAtIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6451,13 +6451,13 @@ Spur64BitMemoryManagerTranslationTests >> testKnownClassAtIndexStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLargeObjectBytesForSlotsSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLargeObjectBytesForSlotsSmoke [
   self testMethod: #largeObjectBytesForSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLargeObjectBytesForSlotsStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLargeObjectBytesForSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #largeObjectBytesForSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6465,13 +6465,13 @@ Spur64BitMemoryManagerTranslationTests >> testLargeObjectBytesForSlotsStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastClassIndexPunSmoke [
   self testMethod: #lastClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lastClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6479,13 +6479,13 @@ Spur64BitMemoryManagerTranslationTests >> testLastClassIndexPunStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastHashSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastHashSmoke [
   self testMethod: #lastHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastHashStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lastHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6493,13 +6493,13 @@ Spur64BitMemoryManagerTranslationTests >> testLastHashStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerFormatSmoke [
   self testMethod: #lastPointerFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lastPointerFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6507,13 +6507,13 @@ Spur64BitMemoryManagerTranslationTests >> testLastPointerFormatStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfArraySmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfArraySmoke [
   self testMethod: #lastPointerOfArray:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfArrayStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfArrayStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lastPointerOfArray:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6521,13 +6521,13 @@ Spur64BitMemoryManagerTranslationTests >> testLastPointerOfArrayStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfMethodHeaderSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfMethodHeaderSmoke [
   self testMethod: #lastPointerOfMethodHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfMethodHeaderStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfMethodHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lastPointerOfMethodHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6535,13 +6535,13 @@ Spur64BitMemoryManagerTranslationTests >> testLastPointerOfMethodHeaderStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfSmoke [
   self testMethod: #lastPointerOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lastPointerOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6549,13 +6549,13 @@ Spur64BitMemoryManagerTranslationTests >> testLastPointerOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfWhileSwizzlingSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfWhileSwizzlingSmoke [
   self testMethod: #lastPointerOfWhileSwizzling:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLastPointerOfWhileSwizzlingStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLastPointerOfWhileSwizzlingStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lastPointerOfWhileSwizzling:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6563,13 +6563,13 @@ Spur64BitMemoryManagerTranslationTests >> testLastPointerOfWhileSwizzlingStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckBecomeSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckBecomeSmoke [
   self testMethod: #leakCheckBecome
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckBecomeStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckBecomeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #leakCheckBecome.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6577,13 +6577,13 @@ Spur64BitMemoryManagerTranslationTests >> testLeakCheckBecomeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckFullGCSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckFullGCSmoke [
   self testMethod: #leakCheckFullGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckFullGCStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckFullGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #leakCheckFullGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6591,13 +6591,13 @@ Spur64BitMemoryManagerTranslationTests >> testLeakCheckFullGCStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckImageSegmentsSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckImageSegmentsSmoke [
   self testMethod: #leakCheckImageSegments
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckImageSegmentsStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckImageSegmentsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #leakCheckImageSegments.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6605,13 +6605,13 @@ Spur64BitMemoryManagerTranslationTests >> testLeakCheckImageSegmentsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckIncrementalSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckIncrementalSmoke [
   self testMethod: #leakCheckIncremental
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckIncrementalStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckIncrementalStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #leakCheckIncremental.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6619,13 +6619,13 @@ Spur64BitMemoryManagerTranslationTests >> testLeakCheckIncrementalStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckNewSpaceGCSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckNewSpaceGCSmoke [
   self testMethod: #leakCheckNewSpaceGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLeakCheckNewSpaceGCStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLeakCheckNewSpaceGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #leakCheckNewSpaceGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6633,13 +6633,13 @@ Spur64BitMemoryManagerTranslationTests >> testLeakCheckNewSpaceGCStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfMaybeImmediateSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfMaybeImmediateSmoke [
   self testMethod: #lengthOfMaybeImmediate:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfMaybeImmediateStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfMaybeImmediateStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lengthOfMaybeImmediate:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6647,13 +6647,13 @@ Spur64BitMemoryManagerTranslationTests >> testLengthOfMaybeImmediateStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfSmoke [
   self testMethod: #lengthOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lengthOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6661,13 +6661,13 @@ Spur64BitMemoryManagerTranslationTests >> testLengthOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfbaseHeaderformatSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfbaseHeaderformatSmoke [
   self testMethod: #lengthOf:baseHeader:format:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfbaseHeaderformatStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfbaseHeaderformatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lengthOf:baseHeader:format:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6675,13 +6675,13 @@ Spur64BitMemoryManagerTranslationTests >> testLengthOfbaseHeaderformatStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfformatSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfformatSmoke [
   self testMethod: #lengthOf:format:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLengthOfformatStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLengthOfformatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lengthOf:format:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6689,13 +6689,13 @@ Spur64BitMemoryManagerTranslationTests >> testLengthOfformatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLilliputianChunkIndexSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLilliputianChunkIndexSmoke [
   self testMethod: #lilliputianChunkIndex
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLilliputianChunkIndexStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLilliputianChunkIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lilliputianChunkIndex.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6703,13 +6703,13 @@ Spur64BitMemoryManagerTranslationTests >> testLilliputianChunkIndexStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLiteralCountOfMethodHeaderSmoke [
+{ #category : #'method access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLiteralCountOfMethodHeaderSmoke [
   self testMethod: #literalCountOfMethodHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLiteralCountOfMethodHeaderStringComparison [
+{ #category : #'method access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLiteralCountOfMethodHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #literalCountOfMethodHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6717,13 +6717,13 @@ Spur64BitMemoryManagerTranslationTests >> testLiteralCountOfMethodHeaderStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLiteralCountOfSmoke [
+{ #category : #'method access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLiteralCountOfSmoke [
   self testMethod: #literalCountOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLiteralCountOfStringComparison [
+{ #category : #'method access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLiteralCountOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #literalCountOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6731,13 +6731,13 @@ Spur64BitMemoryManagerTranslationTests >> testLiteralCountOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLoadFloatOrIntFromSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLoadFloatOrIntFromSmoke [
   self testMethod: #loadFloatOrIntFrom:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLoadFloatOrIntFromStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLoadFloatOrIntFromStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #loadFloatOrIntFrom:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6745,13 +6745,13 @@ Spur64BitMemoryManagerTranslationTests >> testLoadFloatOrIntFromStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLoadImageSegmentFromoutPointersSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLoadImageSegmentFromoutPointersSmoke [
   self testMethod: #loadImageSegmentFrom:outPointers:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLoadImageSegmentFromoutPointersStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLoadImageSegmentFromoutPointersStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #loadImageSegmentFrom:outPointers:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6759,13 +6759,13 @@ Spur64BitMemoryManagerTranslationTests >> testLoadImageSegmentFromoutPointersStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLogBytesPerOopSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLogBytesPerOopSmoke [
   self testMethod: #logBytesPerOop
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLogBytesPerOopStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLogBytesPerOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #logBytesPerOop.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6773,13 +6773,13 @@ Spur64BitMemoryManagerTranslationTests >> testLogBytesPerOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLongPrintInstancesOfSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLongPrintInstancesOfSmoke [
   self testMethod: #longPrintInstancesOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLongPrintInstancesOfStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLongPrintInstancesOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #longPrintInstancesOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6787,13 +6787,13 @@ Spur64BitMemoryManagerTranslationTests >> testLongPrintInstancesOfStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLongPrintInstancesWithClassIndexSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLongPrintInstancesWithClassIndexSmoke [
   self testMethod: #longPrintInstancesWithClassIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLongPrintInstancesWithClassIndexStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLongPrintInstancesWithClassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #longPrintInstancesWithClassIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6801,13 +6801,13 @@ Spur64BitMemoryManagerTranslationTests >> testLongPrintInstancesWithClassIndexSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLongPrintReferencesToSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLongPrintReferencesToSmoke [
   self testMethod: #longPrintReferencesTo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLongPrintReferencesToStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLongPrintReferencesToStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #longPrintReferencesTo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6815,13 +6815,13 @@ Spur64BitMemoryManagerTranslationTests >> testLongPrintReferencesToStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testLowSpaceThresholdSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testLowSpaceThresholdSmoke [
   self testMethod: #lowSpaceThreshold:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testLowSpaceThresholdStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testLowSpaceThresholdStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #lowSpaceThreshold:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6829,13 +6829,13 @@ Spur64BitMemoryManagerTranslationTests >> testLowSpaceThresholdStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapExtraRootsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapExtraRootsSmoke [
   self testMethod: #mapExtraRoots
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapExtraRootsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapExtraRootsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #mapExtraRoots.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6843,13 +6843,13 @@ Spur64BitMemoryManagerTranslationTests >> testMapExtraRootsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapMournQueueSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapMournQueueSmoke [
   self testMethod: #mapMournQueue
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapMournQueueStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapMournQueueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #mapMournQueue.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6857,13 +6857,13 @@ Spur64BitMemoryManagerTranslationTests >> testMapMournQueueStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapOopsAndValidateClassRefsFromtooutPointersSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapOopsAndValidateClassRefsFromtooutPointersSmoke [
   self testMethod: #mapOopsAndValidateClassRefsFrom:to:outPointers:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapOopsAndValidateClassRefsFromtooutPointersStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapOopsAndValidateClassRefsFromtooutPointersStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #mapOopsAndValidateClassRefsFrom:to:outPointers:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6871,13 +6871,13 @@ Spur64BitMemoryManagerTranslationTests >> testMapOopsAndValidateClassRefsFromtoo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapOopsFromtooutPointersoutHashesSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapOopsFromtooutPointersoutHashesSmoke [
   self testMethod: #mapOopsFrom:to:outPointers:outHashes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapOopsFromtooutPointersoutHashesStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapOopsFromtooutPointersoutHashesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #mapOopsFrom:to:outPointers:outHashes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6885,13 +6885,13 @@ Spur64BitMemoryManagerTranslationTests >> testMapOopsFromtooutPointersoutHashesS
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapSignedSmallFloatToSignedSmallFloatZeroSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapSignedSmallFloatToSignedSmallFloatZeroSmoke [
   self testMethod: #mapSignedSmallFloatToSignedSmallFloatZero:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMapSignedSmallFloatToSignedSmallFloatZeroStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMapSignedSmallFloatToSignedSmallFloatZeroStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #mapSignedSmallFloatToSignedSmallFloatZero:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6899,13 +6899,13 @@ Spur64BitMemoryManagerTranslationTests >> testMapSignedSmallFloatToSignedSmallFl
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAccessibleObjectsAndFireEphemeronsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAccessibleObjectsAndFireEphemeronsSmoke [
   self testMethod: #markAccessibleObjectsAndFireEphemerons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAccessibleObjectsAndFireEphemeronsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAccessibleObjectsAndFireEphemeronsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAccessibleObjectsAndFireEphemerons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6913,13 +6913,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAccessibleObjectsAndFireEpheme
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAllUnscannedEphemeronsSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAllUnscannedEphemeronsSmoke [
   self testMethod: #markAllUnscannedEphemerons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAllUnscannedEphemeronsStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAllUnscannedEphemeronsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAllUnscannedEphemerons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6927,13 +6927,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAllUnscannedEphemeronsStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndShouldScanSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndShouldScanSmoke [
   self testMethod: #markAndShouldScan:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndShouldScanStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndShouldScanStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAndShouldScan:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6941,13 +6941,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAndShouldScanStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceClassOfSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceClassOfSmoke [
   self testMethod: #markAndTraceClassOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceClassOfStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceClassOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAndTraceClassOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6955,13 +6955,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceClassOfStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceExtraRootsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceExtraRootsSmoke [
   self testMethod: #markAndTraceExtraRoots
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceExtraRootsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceExtraRootsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAndTraceExtraRoots.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6969,13 +6969,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceExtraRootsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceHiddenRootsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceHiddenRootsSmoke [
   self testMethod: #markAndTraceHiddenRoots
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceHiddenRootsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceHiddenRootsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAndTraceHiddenRoots.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6983,13 +6983,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceHiddenRootsStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceObjStackandContentsSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceObjStackandContentsSmoke [
   self testMethod: #markAndTraceObjStack:andContents:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceObjStackandContentsStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceObjStackandContentsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAndTraceObjStack:andContents:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -6997,13 +6997,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceObjStackandContentsStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceSmoke [
   self testMethod: #markAndTrace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAndTrace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7011,13 +7011,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceWeaklingsFromSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceWeaklingsFromSmoke [
   self testMethod: #markAndTraceWeaklingsFrom:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceWeaklingsFromStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAndTraceWeaklingsFromStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAndTraceWeaklingsFrom:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7025,13 +7025,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAndTraceWeaklingsFromStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAsCopiedIntoSegmentSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAsCopiedIntoSegmentSmoke [
   self testMethod: #markAsCopiedIntoSegment:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkAsCopiedIntoSegmentStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkAsCopiedIntoSegmentStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markAsCopiedIntoSegment:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7039,13 +7039,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkAsCopiedIntoSegmentStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkInactiveEphemeronsSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkInactiveEphemeronsSmoke [
   self testMethod: #markInactiveEphemerons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkInactiveEphemeronsStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkInactiveEphemeronsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markInactiveEphemerons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7053,13 +7053,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkInactiveEphemeronsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkLoopFromSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkLoopFromSmoke [
   self testMethod: #markLoopFrom:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkLoopFromStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkLoopFromStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markLoopFrom:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7067,13 +7067,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkLoopFromStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkObjectsInSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkObjectsInSmoke [
   self testMethod: #markObjectsIn:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkObjectsInStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkObjectsInStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markObjectsIn:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7081,13 +7081,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkObjectsInStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkObjectsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkObjectsSmoke [
   self testMethod: #markObjects:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkObjectsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkObjectsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markObjects:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7095,18 +7095,18 @@ Spur64BitMemoryManagerTranslationTests >> testMarkObjectsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkSmoke [
   self testMethod: #mark:
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkStackSmoke [
+{ #category : #'spur bootstrap-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkStackSmoke [
   self testMethod: #markStack
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkStackStringComparison [
+{ #category : #'spur bootstrap-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markStack.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7114,8 +7114,8 @@ Spur64BitMemoryManagerTranslationTests >> testMarkStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #mark:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7123,13 +7123,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkWeaklingsAndMarkAndFireEphemeronsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkWeaklingsAndMarkAndFireEphemeronsSmoke [
   self testMethod: #markWeaklingsAndMarkAndFireEphemerons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkWeaklingsAndMarkAndFireEphemeronsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkWeaklingsAndMarkAndFireEphemeronsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markWeaklingsAndMarkAndFireEphemerons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7137,13 +7137,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkWeaklingsAndMarkAndFireEphemer
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkedBitFullShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkedBitFullShiftSmoke [
   self testMethod: #markedBitFullShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkedBitFullShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkedBitFullShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markedBitFullShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7151,13 +7151,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkedBitFullShiftStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkedBitHalfShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkedBitHalfShiftSmoke [
   self testMethod: #markedBitHalfShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMarkedBitHalfShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMarkedBitHalfShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #markedBitHalfShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7165,13 +7165,13 @@ Spur64BitMemoryManagerTranslationTests >> testMarkedBitHalfShiftStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxCIntegerSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxCIntegerSmoke [
   self testMethod: #maxCInteger
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxCIntegerStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxCIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maxCInteger.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7179,13 +7179,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaxCIntegerStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxIdentityHashSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxIdentityHashSmoke [
   self testMethod: #maxIdentityHash
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxIdentityHashStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxIdentityHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maxIdentityHash.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7193,13 +7193,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaxIdentityHashStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxOldSpaceSizeSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxOldSpaceSizeSmoke [
   self testMethod: #maxOldSpaceSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxOldSpaceSizeStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxOldSpaceSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maxOldSpaceSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7207,13 +7207,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaxOldSpaceSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxSlotsForAllocSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxSlotsForAllocSmoke [
   self testMethod: #maxSlotsForAlloc
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxSlotsForAllocStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxSlotsForAllocStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maxSlotsForAlloc.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7221,13 +7221,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaxSlotsForAllocStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxSlotsForNewSpaceAllocSmoke [
+{ #category : #'instantiation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxSlotsForNewSpaceAllocSmoke [
   self testMethod: #maxSlotsForNewSpaceAlloc
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxSlotsForNewSpaceAllocStringComparison [
+{ #category : #'instantiation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxSlotsForNewSpaceAllocStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maxSlotsForNewSpaceAlloc.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7235,13 +7235,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaxSlotsForNewSpaceAllocStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxSmallIntegerSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxSmallIntegerSmoke [
   self testMethod: #maxSmallInteger
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaxSmallIntegerStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaxSmallIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maxSmallInteger.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7249,13 +7249,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaxSmallIntegerStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaybeMethodClassOfseemsToBeInstantiatingSmoke [
+{ #category : #'object testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaybeMethodClassOfseemsToBeInstantiatingSmoke [
   self testMethod: #maybeMethodClassOf:seemsToBeInstantiating:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaybeMethodClassOfseemsToBeInstantiatingStringComparison [
+{ #category : #'object testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaybeMethodClassOfseemsToBeInstantiatingStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maybeMethodClassOf:seemsToBeInstantiating:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7263,13 +7263,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaybeMethodClassOfseemsToBeInstant
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaybeSplObjSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaybeSplObjSmoke [
   self testMethod: #maybeSplObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMaybeSplObjStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMaybeSplObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #maybeSplObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7277,13 +7277,13 @@ Spur64BitMemoryManagerTranslationTests >> testMaybeSplObjStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemoryActiveProcessSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemoryActiveProcessSmoke [
   self testMethod: #memoryActiveProcess
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemoryActiveProcessStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemoryActiveProcessStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #memoryActiveProcess.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7291,13 +7291,13 @@ Spur64BitMemoryManagerTranslationTests >> testMemoryActiveProcessStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemoryBaseForImageReadSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemoryBaseForImageReadSmoke [
   self testMethod: #memoryBaseForImageRead
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemoryBaseForImageReadStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemoryBaseForImageReadStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #memoryBaseForImageRead.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7305,13 +7305,13 @@ Spur64BitMemoryManagerTranslationTests >> testMemoryBaseForImageReadStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemoryLimitSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemoryLimitSmoke [
   self testMethod: #memoryLimit
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemoryLimitStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemoryLimitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #memoryLimit.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7319,13 +7319,13 @@ Spur64BitMemoryManagerTranslationTests >> testMemoryLimitStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemorySchedulerPointerSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemorySchedulerPointerSmoke [
   self testMethod: #memorySchedulerPointer
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemorySchedulerPointerStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemorySchedulerPointerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #memorySchedulerPointer.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7333,13 +7333,13 @@ Spur64BitMemoryManagerTranslationTests >> testMemorySchedulerPointerStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemorySmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemorySmoke [
   self testMethod: #memory
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMemoryStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #memory.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7347,13 +7347,13 @@ Spur64BitMemoryManagerTranslationTests >> testMemoryStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodCacheHashOfwithSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodCacheHashOfwithSmoke [
   self testMethod: #methodCacheHashOf:with:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodCacheHashOfwithStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodCacheHashOfwithStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #methodCacheHashOf:with:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7361,13 +7361,13 @@ Spur64BitMemoryManagerTranslationTests >> testMethodCacheHashOfwithStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodDictionaryHashmaskSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodDictionaryHashmaskSmoke [
   self testMethod: #methodDictionaryHash:mask:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodDictionaryHashmaskStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodDictionaryHashmaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #methodDictionaryHash:mask:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7375,13 +7375,13 @@ Spur64BitMemoryManagerTranslationTests >> testMethodDictionaryHashmaskStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodHeaderFromSavedFirstFieldSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodHeaderFromSavedFirstFieldSmoke [
   self testMethod: #methodHeaderFromSavedFirstField:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodHeaderFromSavedFirstFieldStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodHeaderFromSavedFirstFieldStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #methodHeaderFromSavedFirstField:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7389,13 +7389,13 @@ Spur64BitMemoryManagerTranslationTests >> testMethodHeaderFromSavedFirstFieldStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodHeaderOfSmoke [
+{ #category : #'memory access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodHeaderOfSmoke [
   self testMethod: #methodHeaderOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMethodHeaderOfStringComparison [
+{ #category : #'memory access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMethodHeaderOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #methodHeaderOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7403,13 +7403,13 @@ Spur64BitMemoryManagerTranslationTests >> testMethodHeaderOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMinSlotsForShorteningSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMinSlotsForShorteningSmoke [
   self testMethod: #minSlotsForShortening
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMinSlotsForShorteningStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMinSlotsForShorteningStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #minSlotsForShortening.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7417,13 +7417,13 @@ Spur64BitMemoryManagerTranslationTests >> testMinSlotsForShorteningStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMinSmallIntegerSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMinSmallIntegerSmoke [
   self testMethod: #minSmallInteger
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMinSmallIntegerStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMinSmallIntegerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #minSmallInteger.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7431,13 +7431,13 @@ Spur64BitMemoryManagerTranslationTests >> testMinSmallIntegerStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMournQueueSmoke [
+{ #category : #'spur bootstrap-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMournQueueSmoke [
   self testMethod: #mournQueue
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMournQueueStringComparison [
+{ #category : #'spur bootstrap-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMournQueueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #mournQueue.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7445,13 +7445,13 @@ Spur64BitMemoryManagerTranslationTests >> testMournQueueStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testMoveClassesForwardsInSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testMoveClassesForwardsInSmoke [
   self testMethod: #moveClassesForwardsIn:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testMoveClassesForwardsInStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testMoveClassesForwardsInStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #moveClassesForwardsIn:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7459,13 +7459,13 @@ Spur64BitMemoryManagerTranslationTests >> testMoveClassesForwardsInStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNaiveSwapHeadersandcopyHashFlagSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNaiveSwapHeadersandcopyHashFlagSmoke [
   self testMethod: #naiveSwapHeaders:and:copyHashFlag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNaiveSwapHeadersandcopyHashFlagStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNaiveSwapHeadersandcopyHashFlagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #naiveSwapHeaders:and:copyHashFlag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7473,13 +7473,13 @@ Spur64BitMemoryManagerTranslationTests >> testNaiveSwapHeadersandcopyHashFlagStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNeedGCFlagSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNeedGCFlagSmoke [
   self testMethod: #needGCFlag
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNeedGCFlagStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNeedGCFlagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #needGCFlag.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7487,13 +7487,13 @@ Spur64BitMemoryManagerTranslationTests >> testNeedGCFlagStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNegativeSmallFloatZeroSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNegativeSmallFloatZeroSmoke [
   self testMethod: #negativeSmallFloatZero
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNegativeSmallFloatZeroStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNegativeSmallFloatZeroStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #negativeSmallFloatZero.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7501,13 +7501,13 @@ Spur64BitMemoryManagerTranslationTests >> testNegativeSmallFloatZeroStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewHashBitsOfSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewHashBitsOfSmoke [
   self testMethod: #newHashBitsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewHashBitsOfStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewHashBitsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newHashBitsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7515,13 +7515,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewHashBitsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewObjectHashSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewObjectHashSmoke [
   self testMethod: #newObjectHash
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewObjectHashStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewObjectHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newObjectHash.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7529,13 +7529,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewObjectHashStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewOutPointeratinhashesSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewOutPointeratinhashesSmoke [
   self testMethod: #newOutPointer:at:in:hashes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewOutPointeratinhashesStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewOutPointeratinhashesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newOutPointer:at:in:hashes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7543,13 +7543,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewOutPointeratinhashesStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceBytesSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceBytesSmoke [
   self testMethod: #newSpaceBytes
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceBytesStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newSpaceBytes.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7557,13 +7557,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewSpaceBytesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceIsEmptySmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceIsEmptySmoke [
   self testMethod: #newSpaceIsEmpty
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceIsEmptyStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceIsEmptyStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newSpaceIsEmpty.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7571,13 +7571,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewSpaceIsEmptyStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceLimitSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceLimitSmoke [
   self testMethod: #newSpaceLimit
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceLimitStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceLimitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newSpaceLimit.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7585,13 +7585,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewSpaceLimitStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceRefCountMaskSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceRefCountMaskSmoke [
   self testMethod: #newSpaceRefCountMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceRefCountMaskStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceRefCountMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newSpaceRefCountMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7599,13 +7599,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewSpaceRefCountMaskStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceSizeSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceSizeSmoke [
   self testMethod: #newSpaceSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceSizeStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newSpaceSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7613,13 +7613,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewSpaceSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceStartSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceStartSmoke [
   self testMethod: #newSpaceStart
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNewSpaceStartStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNewSpaceStartStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #newSpaceStart.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7627,13 +7627,13 @@ Spur64BitMemoryManagerTranslationTests >> testNewSpaceStartStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilFieldsOfSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilFieldsOfSmoke [
   self testMethod: #nilFieldsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilFieldsOfStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilFieldsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #nilFieldsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7641,13 +7641,13 @@ Spur64BitMemoryManagerTranslationTests >> testNilFieldsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilObjectSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilObjectSmoke [
   self testMethod: #nilObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilObjectStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #nilObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7655,13 +7655,13 @@ Spur64BitMemoryManagerTranslationTests >> testNilObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilUnmarkedWeaklingSlotsInSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilUnmarkedWeaklingSlotsInSmoke [
   self testMethod: #nilUnmarkedWeaklingSlotsIn:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilUnmarkedWeaklingSlotsInStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilUnmarkedWeaklingSlotsInStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #nilUnmarkedWeaklingSlotsIn:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7669,13 +7669,13 @@ Spur64BitMemoryManagerTranslationTests >> testNilUnmarkedWeaklingSlotsInStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilUnmarkedWeaklingSlotsSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilUnmarkedWeaklingSlotsSmoke [
   self testMethod: #nilUnmarkedWeaklingSlots
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNilUnmarkedWeaklingSlotsStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNilUnmarkedWeaklingSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #nilUnmarkedWeaklingSlots.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7683,13 +7683,13 @@ Spur64BitMemoryManagerTranslationTests >> testNilUnmarkedWeaklingSlotsStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoCheckClassAtIndexSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoCheckClassAtIndexSmoke [
   self testMethod: #noCheckClassAtIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoCheckClassAtIndexStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoCheckClassAtIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #noCheckClassAtIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7697,13 +7697,13 @@ Spur64BitMemoryManagerTranslationTests >> testNoCheckClassAtIndexStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoCheckPushonObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoCheckPushonObjStackSmoke [
   self testMethod: #noCheckPush:onObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoCheckPushonObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoCheckPushonObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #noCheckPush:onObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7711,13 +7711,13 @@ Spur64BitMemoryManagerTranslationTests >> testNoCheckPushonObjStackStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoFixupFollowFieldofObjectSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoFixupFollowFieldofObjectSmoke [
   self testMethod: #noFixupFollowField:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoFixupFollowFieldofObjectStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoFixupFollowFieldofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #noFixupFollowField:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7725,13 +7725,13 @@ Spur64BitMemoryManagerTranslationTests >> testNoFixupFollowFieldofObjectStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoInlineFollowForwardedSmoke [
+{ #category : #'forwarding-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoInlineFollowForwardedSmoke [
   self testMethod: #noInlineFollowForwarded:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoInlineFollowForwardedStringComparison [
+{ #category : #'forwarding-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoInlineFollowForwardedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #noInlineFollowForwarded:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7739,13 +7739,13 @@ Spur64BitMemoryManagerTranslationTests >> testNoInlineFollowForwardedStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoInlineObjectAfterlimitSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoInlineObjectAfterlimitSmoke [
   self testMethod: #noInlineObjectAfter:limit:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoInlineObjectAfterlimitStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoInlineObjectAfterlimitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #noInlineObjectAfter:limit:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7753,13 +7753,13 @@ Spur64BitMemoryManagerTranslationTests >> testNoInlineObjectAfterlimitStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoUnscannedEphemeronsSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoUnscannedEphemeronsSmoke [
   self testMethod: #noUnscannedEphemerons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNoUnscannedEphemeronsStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNoUnscannedEphemeronsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #noUnscannedEphemerons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7767,13 +7767,13 @@ Spur64BitMemoryManagerTranslationTests >> testNoUnscannedEphemeronsStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNonIndexablePointerFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNonIndexablePointerFormatSmoke [
   self testMethod: #nonIndexablePointerFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNonIndexablePointerFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNonIndexablePointerFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #nonIndexablePointerFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7781,13 +7781,13 @@ Spur64BitMemoryManagerTranslationTests >> testNonIndexablePointerFormatStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumBitUnitsOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumBitUnitsOfSmoke [
   self testMethod: #num64BitUnitsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumBitUnitsOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumBitUnitsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #num64BitUnitsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7795,13 +7795,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumBitUnitsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumBytesOfBytesSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumBytesOfBytesSmoke [
   self testMethod: #numBytesOfBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumBytesOfBytesStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumBytesOfBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numBytesOfBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7809,13 +7809,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumBytesOfBytesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumBytesOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumBytesOfSmoke [
   self testMethod: #numBytesOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumBytesOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumBytesOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numBytesOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7823,13 +7823,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumBytesOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumFixedSlotsOfSmoke [
+{ #category : #'object format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumFixedSlotsOfSmoke [
   self testMethod: #numFixedSlotsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumFixedSlotsOfStringComparison [
+{ #category : #'object format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumFixedSlotsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numFixedSlotsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7837,13 +7837,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumFixedSlotsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumFreeListsSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumFreeListsSmoke [
   self testMethod: #numFreeLists
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumFreeListsStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumFreeListsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numFreeLists.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7851,13 +7851,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumFreeListsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumPointerSlotsOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumPointerSlotsOfSmoke [
   self testMethod: #numPointerSlotsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumPointerSlotsOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumPointerSlotsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numPointerSlotsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7865,13 +7865,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumPointerSlotsOfStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsForBytesSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsForBytesSmoke [
   self testMethod: #numSlotsForBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsForBytesStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsForBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSlotsForBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7879,13 +7879,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSlotsForBytesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsForShorteningtoIndexableSizeSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsForShorteningtoIndexableSizeSmoke [
   self testMethod: #numSlotsForShortening:toIndexableSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsForShorteningtoIndexableSizeStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsForShorteningtoIndexableSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSlotsForShortening:toIndexableSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7893,13 +7893,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSlotsForShorteningtoIndexableSi
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsFullShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsFullShiftSmoke [
   self testMethod: #numSlotsFullShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsFullShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsFullShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSlotsFullShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7907,13 +7907,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSlotsFullShiftStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsHalfShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsHalfShiftSmoke [
   self testMethod: #numSlotsHalfShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsHalfShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsHalfShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSlotsHalfShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7921,13 +7921,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSlotsHalfShiftStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsMaskSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsMaskSmoke [
   self testMethod: #numSlotsMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsMaskStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSlotsMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7935,13 +7935,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSlotsMaskStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsOfAnySmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsOfAnySmoke [
   self testMethod: #numSlotsOfAny:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsOfAnyStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsOfAnyStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSlotsOfAny:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7949,13 +7949,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSlotsOfAnyStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsOfSmoke [
   self testMethod: #numSlotsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSlotsOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSlotsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSlotsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7963,13 +7963,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSlotsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSmallIntegerBitsSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSmallIntegerBitsSmoke [
   self testMethod: #numSmallIntegerBits
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSmallIntegerBitsStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSmallIntegerBitsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSmallIntegerBits.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7977,13 +7977,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSmallIntegerBitsStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSmallIntegerTagBitsSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSmallIntegerTagBitsSmoke [
   self testMethod: #numSmallIntegerTagBits
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSmallIntegerTagBitsStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSmallIntegerTagBitsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSmallIntegerTagBits.
   illiString := self prettyPrintIllicium: illiAST.
@@ -7991,13 +7991,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSmallIntegerTagBitsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfInephemeralSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfInephemeralSmoke [
   self testMethod: #numStrongSlotsOfInephemeral:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfInephemeralStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfInephemeralStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numStrongSlotsOfInephemeral:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8005,13 +8005,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfInephemeralStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfWeaklingSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfWeaklingSmoke [
   self testMethod: #numStrongSlotsOfWeakling:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfWeaklingStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfWeaklingStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numStrongSlotsOfWeakling:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8019,13 +8019,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfWeaklingStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfformatephemeronInactiveIfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfformatephemeronInactiveIfSmoke [
   self testMethod: #numStrongSlotsOf:format:ephemeronInactiveIf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfformatephemeronInactiveIfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfformatephemeronInactiveIfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numStrongSlotsOf:format:ephemeronInactiveIf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8033,13 +8033,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumStrongSlotsOfformatephemeronIna
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSurvivorSpacesSmoke [
+{ #category : #'scavenger-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSurvivorSpacesSmoke [
   self testMethod: #numSurvivorSpaces
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumSurvivorSpacesStringComparison [
+{ #category : #'scavenger-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumSurvivorSpacesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numSurvivorSpaces.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8047,13 +8047,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumSurvivorSpacesStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumTagBitsSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumTagBitsSmoke [
   self testMethod: #numTagBits
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumTagBitsStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumTagBitsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numTagBits.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8061,13 +8061,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumTagBitsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumberOfForwardersSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumberOfForwardersSmoke [
   self testMethod: #numberOfForwarders
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testNumberOfForwardersStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testNumberOfForwardersStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #numberOfForwarders.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8075,13 +8075,13 @@ Spur64BitMemoryManagerTranslationTests >> testNumberOfForwardersStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjStackdoSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjStackdoSmoke [
   self testMethod: #objStack:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjStackdoStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjStackdoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objStack:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8089,13 +8089,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjStackdoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjStackfromdoSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjStackfromdoSmoke [
   self testMethod: #objStack:from:do:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjStackfromdoStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjStackfromdoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objStack:from:do:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8103,13 +8103,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjStackfromdoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectAfterSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectAfterSmoke [
   self testMethod: #objectAfter:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectAfterStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectAfterStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objectAfter:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8117,13 +8117,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjectAfterStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectAfterlimitSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectAfterlimitSmoke [
   self testMethod: #objectAfter:limit:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectAfterlimitStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectAfterlimitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objectAfter:limit:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8131,13 +8131,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjectAfterlimitStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectBeforeSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectBeforeSmoke [
   self testMethod: #objectBefore:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectBeforeStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectBeforeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objectBefore:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8145,13 +8145,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjectBeforeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectBytesForSlotsSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectBytesForSlotsSmoke [
   self testMethod: #objectBytesForSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectBytesForSlotsStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectBytesForSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objectBytesForSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8159,13 +8159,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjectBytesForSlotsStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectStartingAtSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectStartingAtSmoke [
   self testMethod: #objectStartingAt:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectStartingAtStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectStartingAtStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objectStartingAt:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8173,13 +8173,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjectStartingAtStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectWithRawSlotsHasOverflowHeaderSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectWithRawSlotsHasOverflowHeaderSmoke [
   self testMethod: #objectWithRawSlotsHasOverflowHeader:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectWithRawSlotsHasOverflowHeaderStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectWithRawSlotsHasOverflowHeaderStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objectWithRawSlotsHasOverflowHeader:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8187,13 +8187,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjectWithRawSlotsHasOverflowHeade
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectsReachableFromRootsSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectsReachableFromRootsSmoke [
   self testMethod: #objectsReachableFromRoots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObjectsReachableFromRootsStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObjectsReachableFromRootsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #objectsReachableFromRoots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8201,13 +8201,13 @@ Spur64BitMemoryManagerTranslationTests >> testObjectsReachableFromRootsStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testObsoleteDontUseThisFetchWordofObjectSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testObsoleteDontUseThisFetchWordofObjectSmoke [
   self testMethod: #obsoleteDontUseThisFetchWord:ofObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testObsoleteDontUseThisFetchWordofObjectStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testObsoleteDontUseThisFetchWordofObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #obsoleteDontUseThisFetchWord:ofObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8215,13 +8215,13 @@ Spur64BitMemoryManagerTranslationTests >> testObsoleteDontUseThisFetchWordofObje
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testOkayOopSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testOkayOopSmoke [
   self testMethod: #okayOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testOkayOopStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testOkayOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #okayOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8229,13 +8229,13 @@ Spur64BitMemoryManagerTranslationTests >> testOkayOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldRawNumSlotsOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldRawNumSlotsOfSmoke [
   self testMethod: #oldRawNumSlotsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldRawNumSlotsOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldRawNumSlotsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #oldRawNumSlotsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8243,13 +8243,13 @@ Spur64BitMemoryManagerTranslationTests >> testOldRawNumSlotsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSmallFloatTagSmoke [
+{ #category : #'cog jit support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSmallFloatTagSmoke [
   self testMethod: #oldSmallFloatTag
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSmallFloatTagStringComparison [
+{ #category : #'cog jit support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSmallFloatTagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #oldSmallFloatTag.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8257,13 +8257,13 @@ Spur64BitMemoryManagerTranslationTests >> testOldSmallFloatTagStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSpaceObjectAfterSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSpaceObjectAfterSmoke [
   self testMethod: #oldSpaceObjectAfter:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSpaceObjectAfterStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSpaceObjectAfterStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #oldSpaceObjectAfter:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8271,13 +8271,13 @@ Spur64BitMemoryManagerTranslationTests >> testOldSpaceObjectAfterStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSpaceSizeSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSpaceSizeSmoke [
   self testMethod: #oldSpaceSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSpaceSizeStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSpaceSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #oldSpaceSize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8285,13 +8285,13 @@ Spur64BitMemoryManagerTranslationTests >> testOldSpaceSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSpaceStartSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSpaceStartSmoke [
   self testMethod: #oldSpaceStart
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testOldSpaceStartStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testOldSpaceStartStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #oldSpaceStart.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8299,13 +8299,13 @@ Spur64BitMemoryManagerTranslationTests >> testOldSpaceStartStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testOutOfPlaceBecomeandcopyHashFlagSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testOutOfPlaceBecomeandcopyHashFlagSmoke [
   self testMethod: #outOfPlaceBecome:and:copyHashFlag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testOutOfPlaceBecomeandcopyHashFlagStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testOutOfPlaceBecomeandcopyHashFlagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #outOfPlaceBecome:and:copyHashFlag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8313,13 +8313,13 @@ Spur64BitMemoryManagerTranslationTests >> testOutOfPlaceBecomeandcopyHashFlagStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPastSpaceStartSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPastSpaceStartSmoke [
   self testMethod: #pastSpaceStart
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPastSpaceStartStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPastSpaceStartStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #pastSpaceStart.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8327,13 +8327,13 @@ Spur64BitMemoryManagerTranslationTests >> testPastSpaceStartStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPinObjectSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPinObjectSmoke [
   self testMethod: #pinObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPinObjectStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPinObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #pinObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8341,13 +8341,13 @@ Spur64BitMemoryManagerTranslationTests >> testPinObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPinnedBitShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPinnedBitShiftSmoke [
   self testMethod: #pinnedBitShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPinnedBitShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPinnedBitShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #pinnedBitShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8355,13 +8355,13 @@ Spur64BitMemoryManagerTranslationTests >> testPinnedBitShiftStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPopObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPopObjStackSmoke [
   self testMethod: #popObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPopObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPopObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #popObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8369,13 +8369,13 @@ Spur64BitMemoryManagerTranslationTests >> testPopObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPopRemappableOopSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPopRemappableOopSmoke [
   self testMethod: #popRemappableOop
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPopRemappableOopStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPopRemappableOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #popRemappableOop.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8383,13 +8383,13 @@ Spur64BitMemoryManagerTranslationTests >> testPopRemappableOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPositiveSmallFloatZeroSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPositiveSmallFloatZeroSmoke [
   self testMethod: #positiveSmallFloatZero
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPositiveSmallFloatZeroStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPositiveSmallFloatZeroStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #positiveSmallFloatZero.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8397,13 +8397,13 @@ Spur64BitMemoryManagerTranslationTests >> testPositiveSmallFloatZeroStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPossibleRootStoreIntoSmoke [
+{ #category : #'store check-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPossibleRootStoreIntoSmoke [
   self testMethod: #possibleRootStoreInto:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPossibleRootStoreIntoStringComparison [
+{ #category : #'store check-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPossibleRootStoreIntoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #possibleRootStoreInto:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8411,13 +8411,13 @@ Spur64BitMemoryManagerTranslationTests >> testPossibleRootStoreIntoStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPostBecomeScanClassTableSmoke [
+{ #category : #'become implementation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPostBecomeScanClassTableSmoke [
   self testMethod: #postBecomeScanClassTable:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPostBecomeScanClassTableStringComparison [
+{ #category : #'become implementation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPostBecomeScanClassTableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #postBecomeScanClassTable:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8425,13 +8425,13 @@ Spur64BitMemoryManagerTranslationTests >> testPostBecomeScanClassTableStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrepareObjStackForPlanningCompactorSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrepareObjStackForPlanningCompactorSmoke [
   self testMethod: #prepareObjStackForPlanningCompactor:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrepareObjStackForPlanningCompactorStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrepareObjStackForPlanningCompactorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #prepareObjStackForPlanningCompactor:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8439,13 +8439,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrepareObjStackForPlanningCompacto
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrepareObjStacksForPlanningCompactorSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrepareObjStacksForPlanningCompactorSmoke [
   self testMethod: #prepareObjStacksForPlanningCompactor
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrepareObjStacksForPlanningCompactorStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrepareObjStacksForPlanningCompactorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #prepareObjStacksForPlanningCompactor.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8453,13 +8453,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrepareObjStacksForPlanningCompact
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrimitiveErrorTableSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrimitiveErrorTableSmoke [
   self testMethod: #primitiveErrorTable
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrimitiveErrorTableStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrimitiveErrorTableStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveErrorTable.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8467,13 +8467,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrimitiveErrorTableStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintActivationsOfSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintActivationsOfSmoke [
   self testMethod: #printActivationsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintActivationsOfStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintActivationsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printActivationsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8481,13 +8481,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintActivationsOfStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintBogonsSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintBogonsSmoke [
   self testMethod: #printBogons
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintBogonsStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintBogonsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printBogons.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8495,13 +8495,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintBogonsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintContextReferencesToSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintContextReferencesToSmoke [
   self testMethod: #printContextReferencesTo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintContextReferencesToStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintContextReferencesToStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printContextReferencesTo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8509,13 +8509,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintContextReferencesToStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintEntitySmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintEntitySmoke [
   self testMethod: #printEntity:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintEntityStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintEntityStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printEntity:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8523,13 +8523,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintEntityStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintForwardersSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintForwardersSmoke [
   self testMethod: #printForwarders
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintForwardersStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintForwardersStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printForwarders.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8537,13 +8537,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintForwardersStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunkSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeChunkSmoke [
   self testMethod: #printFreeChunk:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunkStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printFreeChunk:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8551,13 +8551,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunkStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunkprintAsTreeNodeSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeChunkprintAsTreeNodeSmoke [
   self testMethod: #printFreeChunk:printAsTreeNode:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunkprintAsTreeNodeStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeChunkprintAsTreeNodeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printFreeChunk:printAsTreeNode:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8565,13 +8565,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunkprintAsTreeNodeStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunksSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeChunksSmoke [
   self testMethod: #printFreeChunks
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunksStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeChunksStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printFreeChunks.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8579,13 +8579,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintFreeChunksStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeListHeadsSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeListHeadsSmoke [
   self testMethod: #printFreeListHeads
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeListHeadsStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeListHeadsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printFreeListHeads.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8593,13 +8593,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintFreeListHeadsStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeListSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeListSmoke [
   self testMethod: #printFreeList:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeListStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeListStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printFreeList:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8607,13 +8607,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintFreeListStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeTreeChunkSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeTreeChunkSmoke [
   self testMethod: #printFreeTreeChunk:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeTreeChunkStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeTreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printFreeTreeChunk:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8621,13 +8621,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintFreeTreeChunkStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeTreeSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeTreeSmoke [
   self testMethod: #printFreeTree
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintFreeTreeStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintFreeTreeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printFreeTree.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8635,13 +8635,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintFreeTreeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintHeaderOfSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintHeaderOfSmoke [
   self testMethod: #printHeaderOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintHeaderOfStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintHeaderOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printHeaderOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8649,13 +8649,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintHeaderOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintHeaderTypeOfSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintHeaderTypeOfSmoke [
   self testMethod: #printHeaderTypeOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintHeaderTypeOfStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintHeaderTypeOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printHeaderTypeOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8663,13 +8663,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintHeaderTypeOfStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInstancesOfSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInstancesOfSmoke [
   self testMethod: #printInstancesOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInstancesOfStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInstancesOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printInstancesOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8677,13 +8677,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintInstancesOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInstancesWithClassIndexSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInstancesWithClassIndexSmoke [
   self testMethod: #printInstancesWithClassIndex:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInstancesWithClassIndexStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInstancesWithClassIndexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printInstancesWithClassIndex:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8691,13 +8691,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintInstancesWithClassIndexString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInvalidClassTableEntriesSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInvalidClassTableEntriesSmoke [
   self testMethod: #printInvalidClassTableEntries
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInvalidClassTableEntriesStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInvalidClassTableEntriesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printInvalidClassTableEntries.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8705,13 +8705,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintInvalidClassTableEntriesStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInvalidClassTableHashesSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInvalidClassTableHashesSmoke [
   self testMethod: #printInvalidClassTableHashes
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintInvalidClassTableHashesStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintInvalidClassTableHashesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printInvalidClassTableHashes.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8719,13 +8719,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintInvalidClassTableHashesString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintMarkedOopsSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintMarkedOopsSmoke [
   self testMethod: #printMarkedOops
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintMarkedOopsStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintMarkedOopsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printMarkedOops.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8733,13 +8733,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintMarkedOopsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintMethodImplementorsOfSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintMethodImplementorsOfSmoke [
   self testMethod: #printMethodImplementorsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintMethodImplementorsOfStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintMethodImplementorsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printMethodImplementorsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8747,13 +8747,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintMethodImplementorsOfStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintMethodReferencesToSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintMethodReferencesToSmoke [
   self testMethod: #printMethodReferencesTo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintMethodReferencesToStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintMethodReferencesToStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printMethodReferencesTo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8761,13 +8761,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintMethodReferencesToStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjStackPagemyIndexpageTypeSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndexpageTypeSmoke [
   self testMethod: #printObjStackPage:myIndex:pageType:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjStackPagemyIndexpageTypeStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndexpageTypeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printObjStackPage:myIndex:pageType:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8775,13 +8775,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintObjStackPagemyIndexpageTypeSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjStackPagemyIndextagSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndextagSmoke [
   self testMethod: #printObjStackPage:myIndex:tag:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjStackPagemyIndextagStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndextagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printObjStackPage:myIndex:tag:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8789,13 +8789,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintObjStackPagemyIndextagStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjStackSmoke [
   self testMethod: #printObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8803,13 +8803,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjectsFromtoSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjectsFromtoSmoke [
   self testMethod: #printObjectsFrom:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjectsFromtoStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjectsFromtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printObjectsFrom:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8817,13 +8817,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintObjectsFromtoStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjectsWithHashSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjectsWithHashSmoke [
   self testMethod: #printObjectsWithHash:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintObjectsWithHashStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintObjectsWithHashStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printObjectsWithHash:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8831,13 +8831,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintObjectsWithHashStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintOopsExceptSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintOopsExceptSmoke [
   self testMethod: #printOopsExcept:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintOopsExceptStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintOopsExceptStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printOopsExcept:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8845,13 +8845,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintOopsExceptStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintOopsFromtoSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintOopsFromtoSmoke [
   self testMethod: #printOopsFrom:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintOopsFromtoStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintOopsFromtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printOopsFrom:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8859,13 +8859,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintOopsFromtoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintOopsSuchThatSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintOopsSuchThatSmoke [
   self testMethod: #printOopsSuchThat:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintOopsSuchThatStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintOopsSuchThatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printOopsSuchThat:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8873,13 +8873,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintOopsSuchThatStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintReferencesToSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintReferencesToSmoke [
   self testMethod: #printReferencesTo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintReferencesToStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintReferencesToStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printReferencesTo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8887,13 +8887,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintReferencesToStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintUnmarkedOopsSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintUnmarkedOopsSmoke [
   self testMethod: #printUnmarkedOops
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPrintUnmarkedOopsStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPrintUnmarkedOopsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #printUnmarkedOops.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8901,13 +8901,13 @@ Spur64BitMemoryManagerTranslationTests >> testPrintUnmarkedOopsStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPurgeDuplicateClassTableEntriesForSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPurgeDuplicateClassTableEntriesForSmoke [
   self testMethod: #purgeDuplicateClassTableEntriesFor:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPurgeDuplicateClassTableEntriesForStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPurgeDuplicateClassTableEntriesForStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #purgeDuplicateClassTableEntriesFor:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8915,13 +8915,13 @@ Spur64BitMemoryManagerTranslationTests >> testPurgeDuplicateClassTableEntriesFor
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPushOnUnscannedEphemeronsStackSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPushOnUnscannedEphemeronsStackSmoke [
   self testMethod: #pushOnUnscannedEphemeronsStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPushOnUnscannedEphemeronsStackStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPushOnUnscannedEphemeronsStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #pushOnUnscannedEphemeronsStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8929,13 +8929,13 @@ Spur64BitMemoryManagerTranslationTests >> testPushOnUnscannedEphemeronsStackStri
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPushRemappableOopSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPushRemappableOopSmoke [
   self testMethod: #pushRemappableOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPushRemappableOopStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPushRemappableOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #pushRemappableOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8943,13 +8943,13 @@ Spur64BitMemoryManagerTranslationTests >> testPushRemappableOopStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testPushonObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testPushonObjStackSmoke [
   self testMethod: #push:onObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testPushonObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testPushonObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #push:onObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8957,13 +8957,13 @@ Spur64BitMemoryManagerTranslationTests >> testPushonObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testQueueMournerSmoke [
+{ #category : #'weakness and ephemerality-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testQueueMournerSmoke [
   self testMethod: #queueMourner:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testQueueMournerStringComparison [
+{ #category : #'weakness and ephemerality-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testQueueMournerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #queueMourner:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8971,13 +8971,13 @@ Spur64BitMemoryManagerTranslationTests >> testQueueMournerStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawClassTagForClassSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawClassTagForClassSmoke [
   self testMethod: #rawClassTagForClass:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawClassTagForClassStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawClassTagForClassStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rawClassTagForClass:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8985,13 +8985,13 @@ Spur64BitMemoryManagerTranslationTests >> testRawClassTagForClassStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawHashBitsOfSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawHashBitsOfSmoke [
   self testMethod: #rawHashBitsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawHashBitsOfStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawHashBitsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rawHashBitsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -8999,13 +8999,13 @@ Spur64BitMemoryManagerTranslationTests >> testRawHashBitsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawNumSlotsOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawNumSlotsOfSmoke [
   self testMethod: #rawNumSlotsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawNumSlotsOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawNumSlotsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rawNumSlotsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9013,13 +9013,13 @@ Spur64BitMemoryManagerTranslationTests >> testRawNumSlotsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawNumSlotsOfputSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawNumSlotsOfputSmoke [
   self testMethod: #rawNumSlotsOf:put:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawNumSlotsOfputStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawNumSlotsOfputStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rawNumSlotsOf:put:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9027,13 +9027,13 @@ Spur64BitMemoryManagerTranslationTests >> testRawNumSlotsOfputStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawOverflowSlotsOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawOverflowSlotsOfSmoke [
   self testMethod: #rawOverflowSlotsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawOverflowSlotsOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawOverflowSlotsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rawOverflowSlotsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9041,13 +9041,13 @@ Spur64BitMemoryManagerTranslationTests >> testRawOverflowSlotsOfStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawOverflowSlotsOfputSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawOverflowSlotsOfputSmoke [
   self testMethod: #rawOverflowSlotsOf:put:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRawOverflowSlotsOfputStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRawOverflowSlotsOfputStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rawOverflowSlotsOf:put:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9055,13 +9055,13 @@ Spur64BitMemoryManagerTranslationTests >> testRawOverflowSlotsOfputStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRelocateObjStackForPlanningCompactorSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRelocateObjStackForPlanningCompactorSmoke [
   self testMethod: #relocateObjStackForPlanningCompactor:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRelocateObjStackForPlanningCompactorStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRelocateObjStackForPlanningCompactorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #relocateObjStackForPlanningCompactor:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9069,13 +9069,13 @@ Spur64BitMemoryManagerTranslationTests >> testRelocateObjStackForPlanningCompact
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRelocateObjStacksForPlanningCompactorSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRelocateObjStacksForPlanningCompactorSmoke [
   self testMethod: #relocateObjStacksForPlanningCompactor
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRelocateObjStacksForPlanningCompactorStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRelocateObjStacksForPlanningCompactorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #relocateObjStacksForPlanningCompactor.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9083,13 +9083,13 @@ Spur64BitMemoryManagerTranslationTests >> testRelocateObjStacksForPlanningCompac
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemapBufferCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemapBufferCountSmoke [
   self testMethod: #remapBufferCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemapBufferCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemapBufferCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #remapBufferCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9097,13 +9097,13 @@ Spur64BitMemoryManagerTranslationTests >> testRemapBufferCountStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemapBufferSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemapBufferSmoke [
   self testMethod: #remapBuffer
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemapBufferStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemapBufferStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #remapBuffer.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9111,13 +9111,13 @@ Spur64BitMemoryManagerTranslationTests >> testRemapBufferStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemapSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemapSmoke [
   self testMethod: #remap:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemapStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemapStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #remap:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9125,13 +9125,13 @@ Spur64BitMemoryManagerTranslationTests >> testRemapStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRememberedBitShiftSmoke [
+{ #category : #'header format-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRememberedBitShiftSmoke [
   self testMethod: #rememberedBitShift
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRememberedBitShiftStringComparison [
+{ #category : #'header format-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRememberedBitShiftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rememberedBitShift.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9139,13 +9139,13 @@ Spur64BitMemoryManagerTranslationTests >> testRememberedBitShiftStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRememberedSetObjSmoke [
+{ #category : #'scavenger-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRememberedSetObjSmoke [
   self testMethod: #rememberedSetObj
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRememberedSetObjStringComparison [
+{ #category : #'scavenger-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRememberedSetObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rememberedSetObj.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9153,13 +9153,13 @@ Spur64BitMemoryManagerTranslationTests >> testRememberedSetObjStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemoveGCRootSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemoveGCRootSmoke [
   self testMethod: #removeGCRoot:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRemoveGCRootStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRemoveGCRootStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #removeGCRoot:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9167,13 +9167,13 @@ Spur64BitMemoryManagerTranslationTests >> testRemoveGCRootStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testResetAllocationAccountingAfterGCSmoke [
+{ #category : #'allocation accounting-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testResetAllocationAccountingAfterGCSmoke [
   self testMethod: #resetAllocationAccountingAfterGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testResetAllocationAccountingAfterGCStringComparison [
+{ #category : #'allocation accounting-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testResetAllocationAccountingAfterGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #resetAllocationAccountingAfterGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9181,13 +9181,13 @@ Spur64BitMemoryManagerTranslationTests >> testResetAllocationAccountingAfterGCSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testResetFreeListHeadsSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testResetFreeListHeadsSmoke [
   self testMethod: #resetFreeListHeads
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testResetFreeListHeadsStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testResetFreeListHeadsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #resetFreeListHeads.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9195,13 +9195,13 @@ Spur64BitMemoryManagerTranslationTests >> testResetFreeListHeadsStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRestoreObjectsInsavedHashesSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRestoreObjectsInsavedHashesSmoke [
   self testMethod: #restoreObjectsIn:savedHashes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRestoreObjectsInsavedHashesStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRestoreObjectsInsavedHashesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #restoreObjectsIn:savedHashes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9209,13 +9209,13 @@ Spur64BitMemoryManagerTranslationTests >> testRestoreObjectsInsavedHashesStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRestoreObjectsInupTosavedFirstFieldsSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRestoreObjectsInupTosavedFirstFieldsSmoke [
   self testMethod: #restoreObjectsIn:upTo:savedFirstFields:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRestoreObjectsInupTosavedFirstFieldsStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRestoreObjectsInupTosavedFirstFieldsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #restoreObjectsIn:upTo:savedFirstFields:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9223,13 +9223,13 @@ Spur64BitMemoryManagerTranslationTests >> testRestoreObjectsInupTosavedFirstFiel
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testReturnrestoringObjectsInsavedFirstFieldsandsavedHashesSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInsavedFirstFieldsandsavedHashesSmoke [
   self testMethod: #return:restoringObjectsIn:savedFirstFields:and:savedHashes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testReturnrestoringObjectsInsavedFirstFieldsandsavedHashesStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInsavedFirstFieldsandsavedHashesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #return:restoringObjectsIn:savedFirstFields:and:savedHashes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9237,13 +9237,13 @@ Spur64BitMemoryManagerTranslationTests >> testReturnrestoringObjectsInsavedFirst
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testReturnrestoringObjectsInupTosavedFirstFieldsSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInupTosavedFirstFieldsSmoke [
   self testMethod: #return:restoringObjectsIn:upTo:savedFirstFields:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testReturnrestoringObjectsInupTosavedFirstFieldsStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInupTosavedFirstFieldsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #return:restoringObjectsIn:upTo:savedFirstFields:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9251,13 +9251,13 @@ Spur64BitMemoryManagerTranslationTests >> testReturnrestoringObjectsInupTosavedF
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesFromtoSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesFromtoSmoke [
   self testMethod: #reverseBytesFrom:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesFromtoStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesFromtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #reverseBytesFrom:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9265,13 +9265,13 @@ Spur64BitMemoryManagerTranslationTests >> testReverseBytesFromtoStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesInBitWordsFromtoSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesInBitWordsFromtoSmoke [
   self testMethod: #reverseBytesIn32BitWordsFrom:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesInBitWordsFromtoStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesInBitWordsFromtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #reverseBytesIn32BitWordsFrom:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9279,13 +9279,13 @@ Spur64BitMemoryManagerTranslationTests >> testReverseBytesInBitWordsFromtoString
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesInBitWordsInSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesInBitWordsInSmoke [
   self testMethod: #reverseBytesIn32BitWordsIn:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesInBitWordsInStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesInBitWordsInStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #reverseBytesIn32BitWordsIn:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9293,13 +9293,13 @@ Spur64BitMemoryManagerTranslationTests >> testReverseBytesInBitWordsInStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesInMemorySmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesInMemorySmoke [
   self testMethod: #reverseBytesInMemory
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testReverseBytesInMemoryStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testReverseBytesInMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #reverseBytesInMemory.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9307,13 +9307,13 @@ Spur64BitMemoryManagerTranslationTests >> testReverseBytesInMemoryStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRootTableCapacitySmoke [
+{ #category : #'scavenger-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRootTableCapacitySmoke [
   self testMethod: #rootTableCapacity
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRootTableCapacityStringComparison [
+{ #category : #'scavenger-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRootTableCapacityStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rootTableCapacity.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9321,13 +9321,13 @@ Spur64BitMemoryManagerTranslationTests >> testRootTableCapacityStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRootTableCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRootTableCountSmoke [
   self testMethod: #rootTableCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRootTableCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRootTableCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rootTableCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9335,13 +9335,13 @@ Spur64BitMemoryManagerTranslationTests >> testRootTableCountStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRotateLeftSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRotateLeftSmoke [
   self testMethod: #rotateLeft:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRotateLeftStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRotateLeftStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rotateLeft:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9349,13 +9349,13 @@ Spur64BitMemoryManagerTranslationTests >> testRotateLeftStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRotateRightSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRotateRightSmoke [
   self testMethod: #rotateRight:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRotateRightStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRotateRightStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rotateRight:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9363,13 +9363,13 @@ Spur64BitMemoryManagerTranslationTests >> testRotateRightStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRotatedFloatBitsOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRotatedFloatBitsOfSmoke [
   self testMethod: #rotatedFloatBitsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRotatedFloatBitsOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRotatedFloatBitsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rotatedFloatBitsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9377,13 +9377,13 @@ Spur64BitMemoryManagerTranslationTests >> testRotatedFloatBitsOfStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRoundBytesToAllocationUnitSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRoundBytesToAllocationUnitSmoke [
   self testMethod: #roundBytesToAllocationUnit:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRoundBytesToAllocationUnitStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRoundBytesToAllocationUnitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #roundBytesToAllocationUnit:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9391,13 +9391,13 @@ Spur64BitMemoryManagerTranslationTests >> testRoundBytesToAllocationUnitStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRoundUpHeapSizeSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRoundUpHeapSizeSmoke [
   self testMethod: #roundUpHeapSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRoundUpHeapSizeStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRoundUpHeapSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #roundUpHeapSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9405,13 +9405,13 @@ Spur64BitMemoryManagerTranslationTests >> testRoundUpHeapSizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRtRefCountOfSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRtRefCountOfSmoke [
   self testMethod: #rtRefCountOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRtRefCountOfStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRtRefCountOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rtRefCountOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9419,13 +9419,13 @@ Spur64BitMemoryManagerTranslationTests >> testRtRefCountOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRtRefCountOfputSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRtRefCountOfputSmoke [
   self testMethod: #rtRefCountOf:put:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRtRefCountOfputStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRtRefCountOfputStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #rtRefCountOf:put:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9433,13 +9433,13 @@ Spur64BitMemoryManagerTranslationTests >> testRtRefCountOfputStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForFreeSpaceSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForFreeSpaceSmoke [
   self testMethod: #runLeakCheckerForFreeSpace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForFreeSpaceStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForFreeSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #runLeakCheckerForFreeSpace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9447,13 +9447,13 @@ Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForFreeSpaceStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForSmoke [
   self testMethod: #runLeakCheckerFor:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #runLeakCheckerFor:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9461,13 +9461,13 @@ Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidSmoke [
   self testMethod: #runLeakCheckerFor:excludeUnmarkedObjs:classIndicesShouldBeValid:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #runLeakCheckerFor:excludeUnmarkedObjs:classIndicesShouldBeValid:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9475,13 +9475,13 @@ Spur64BitMemoryManagerTranslationTests >> testRunLeakCheckerForexcludeUnmarkedOb
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSafePrintStringOfSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSafePrintStringOfSmoke [
   self testMethod: #safePrintStringOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSafePrintStringOfStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSafePrintStringOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #safePrintStringOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9489,13 +9489,13 @@ Spur64BitMemoryManagerTranslationTests >> testSafePrintStringOfStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSavedOutHashFillValueSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSavedOutHashFillValueSmoke [
   self testMethod: #savedOutHashFillValue
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSavedOutHashFillValueStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSavedOutHashFillValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #savedOutHashFillValue.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9503,13 +9503,13 @@ Spur64BitMemoryManagerTranslationTests >> testSavedOutHashFillValueStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengeInProgressSmoke [
+{ #category : #'testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengeInProgressSmoke [
   self testMethod: #scavengeInProgress
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengeInProgressStringComparison [
+{ #category : #'testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengeInProgressStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #scavengeInProgress.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9517,13 +9517,13 @@ Spur64BitMemoryManagerTranslationTests >> testScavengeInProgressStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengeThresholdAsExtentSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengeThresholdAsExtentSmoke [
   self testMethod: #scavengeThresholdAsExtent
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengeThresholdAsExtentStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengeThresholdAsExtentStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #scavengeThresholdAsExtent.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9531,13 +9531,13 @@ Spur64BitMemoryManagerTranslationTests >> testScavengeThresholdAsExtentStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengeThresholdSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengeThresholdSmoke [
   self testMethod: #scavengeThreshold
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengeThresholdStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengeThresholdStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #scavengeThreshold.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9545,13 +9545,13 @@ Spur64BitMemoryManagerTranslationTests >> testScavengeThresholdStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengerDenominatorSmoke [
+{ #category : #'scavenger-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengerDenominatorSmoke [
   self testMethod: #scavengerDenominator
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengerDenominatorStringComparison [
+{ #category : #'scavenger-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengerDenominatorStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #scavengerDenominator.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9559,13 +9559,13 @@ Spur64BitMemoryManagerTranslationTests >> testScavengerDenominatorStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengingGCSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengingGCSmoke [
   self testMethod: #scavengingGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengingGCStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengingGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #scavengingGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9573,13 +9573,13 @@ Spur64BitMemoryManagerTranslationTests >> testScavengingGCStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengingGCTenuringIfSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengingGCTenuringIfSmoke [
   self testMethod: #scavengingGCTenuringIf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testScavengingGCTenuringIfStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testScavengingGCTenuringIfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #scavengingGCTenuringIf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9587,13 +9587,13 @@ Spur64BitMemoryManagerTranslationTests >> testScavengingGCTenuringIfStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testScheduleScavengeSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testScheduleScavengeSmoke [
   self testMethod: #scheduleScavenge
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testScheduleScavengeStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testScheduleScavengeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #scheduleScavenge.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9601,13 +9601,13 @@ Spur64BitMemoryManagerTranslationTests >> testScheduleScavengeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSegmentBridgePunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSegmentBridgePunSmoke [
   self testMethod: #segmentBridgePun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSegmentBridgePunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSegmentBridgePunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #segmentBridgePun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9615,13 +9615,13 @@ Spur64BitMemoryManagerTranslationTests >> testSegmentBridgePunStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSegmentManagerSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSegmentManagerSmoke [
   self testMethod: #segmentManager
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSegmentManagerStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSegmentManagerStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #segmentManager.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9629,13 +9629,13 @@ Spur64BitMemoryManagerTranslationTests >> testSegmentManagerStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetCheckForLeaksSmoke [
+{ #category : #'spur bootstrap-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetCheckForLeaksSmoke [
   self testMethod: #setCheckForLeaks:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetCheckForLeaksStringComparison [
+{ #category : #'spur bootstrap-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetCheckForLeaksStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setCheckForLeaks:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9643,13 +9643,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetCheckForLeaksStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetClassIndexOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetClassIndexOftoSmoke [
   self testMethod: #setClassIndexOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetClassIndexOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetClassIndexOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setClassIndexOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9657,13 +9657,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetClassIndexOftoStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetCurrentAllocatedBytesToSmoke [
+{ #category : #'allocation accounting-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetCurrentAllocatedBytesToSmoke [
   self testMethod: #setCurrentAllocatedBytesTo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetCurrentAllocatedBytesToStringComparison [
+{ #category : #'allocation accounting-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetCurrentAllocatedBytesToStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setCurrentAllocatedBytesTo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9671,13 +9671,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetCurrentAllocatedBytesToStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetEndOfMemorySmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetEndOfMemorySmoke [
   self testMethod: #setEndOfMemory:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetEndOfMemoryStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetEndOfMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setEndOfMemory:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9685,13 +9685,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetEndOfMemoryStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetFormatOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetFormatOftoSmoke [
   self testMethod: #setFormatOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetFormatOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetFormatOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setFormatOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9699,13 +9699,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetFormatOftoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetFreeOldSpaceStartSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetFreeOldSpaceStartSmoke [
   self testMethod: #setFreeOldSpaceStart:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetFreeOldSpaceStartStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetFreeOldSpaceStartStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setFreeOldSpaceStart:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9713,13 +9713,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetFreeOldSpaceStartStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetFreeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetFreeSmoke [
   self testMethod: #setFree:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetFreeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetFreeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setFree:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9727,13 +9727,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetFreeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHashBitsOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHashBitsOftoSmoke [
   self testMethod: #setHashBitsOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHashBitsOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHashBitsOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setHashBitsOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9741,13 +9741,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetHashBitsOftoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHeapBasememoryLimitendOfMemorySmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHeapBasememoryLimitendOfMemorySmoke [
   self testMethod: #setHeapBase:memoryLimit:endOfMemory:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHeapBasememoryLimitendOfMemoryStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHeapBasememoryLimitendOfMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setHeapBase:memoryLimit:endOfMemory:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9755,13 +9755,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetHeapBasememoryLimitendOfMemoryS
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHeapGrowthToSizeGCRatioSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHeapGrowthToSizeGCRatioSmoke [
   self testMethod: #setHeapGrowthToSizeGCRatio:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHeapGrowthToSizeGCRatioStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHeapGrowthToSizeGCRatioStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setHeapGrowthToSizeGCRatio:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9769,13 +9769,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetHeapGrowthToSizeGCRatioStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHeapSizeAtPreviousGCSmoke [
+{ #category : #'allocation accounting-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHeapSizeAtPreviousGCSmoke [
   self testMethod: #setHeapSizeAtPreviousGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHeapSizeAtPreviousGCStringComparison [
+{ #category : #'allocation accounting-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHeapSizeAtPreviousGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setHeapSizeAtPreviousGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9783,13 +9783,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetHeapSizeAtPreviousGCStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHiddenRootsObjSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHiddenRootsObjSmoke [
   self testMethod: #setHiddenRootsObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetHiddenRootsObjStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetHiddenRootsObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setHiddenRootsObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9797,13 +9797,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetHiddenRootsObjStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsGreyOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsGreyOftoSmoke [
   self testMethod: #setIsGreyOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsGreyOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsGreyOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setIsGreyOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9811,13 +9811,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetIsGreyOftoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsImmutableOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsImmutableOftoSmoke [
   self testMethod: #setIsImmutableOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsImmutableOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsImmutableOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setIsImmutableOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9825,13 +9825,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetIsImmutableOftoStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsMarkedOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsMarkedOftoSmoke [
   self testMethod: #setIsMarkedOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsMarkedOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsMarkedOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setIsMarkedOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9839,13 +9839,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetIsMarkedOftoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsPinnedOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsPinnedOftoSmoke [
   self testMethod: #setIsPinnedOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsPinnedOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsPinnedOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setIsPinnedOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9853,13 +9853,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetIsPinnedOftoStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsRememberedOftoSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsRememberedOftoSmoke [
   self testMethod: #setIsRememberedOf:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetIsRememberedOftoStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetIsRememberedOftoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setIsRememberedOf:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9867,13 +9867,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetIsRememberedOftoStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetLastSegmentSmoke [
+{ #category : #'growing/shrinking memory-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetLastSegmentSmoke [
   self testMethod: #setLastSegment:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetLastSegmentStringComparison [
+{ #category : #'growing/shrinking memory-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetLastSegmentStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setLastSegment:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9881,13 +9881,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetLastSegmentStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetMaxOldSpaceSizeSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetMaxOldSpaceSizeSmoke [
   self testMethod: #setMaxOldSpaceSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetMaxOldSpaceSizeStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetMaxOldSpaceSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setMaxOldSpaceSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9895,13 +9895,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetMaxOldSpaceSizeStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetNextFreeChunkOfwithValuechunkBytesSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetNextFreeChunkOfwithValuechunkBytesSmoke [
   self testMethod: #setNextFreeChunkOf:withValue:chunkBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetNextFreeChunkOfwithValuechunkBytesStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetNextFreeChunkOfwithValuechunkBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setNextFreeChunkOf:withValue:chunkBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9909,13 +9909,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetNextFreeChunkOfwithValuechunkBy
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetNextFreeChunkOfwithValueisLilliputianSizeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetNextFreeChunkOfwithValueisLilliputianSizeSmoke [
   self testMethod: #setNextFreeChunkOf:withValue:isLilliputianSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetNextFreeChunkOfwithValueisLilliputianSizeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetNextFreeChunkOfwithValueisLilliputianSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setNextFreeChunkOf:withValue:isLilliputianSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9923,13 +9923,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetNextFreeChunkOfwithValueisLilli
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetObjectFreeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetObjectFreeSmoke [
   self testMethod: #setObjectFree:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetObjectFreeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetObjectFreeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #setObjectFree:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9937,13 +9937,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetObjectFreeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetclassIndexToformatToSmoke [
+{ #category : #'header access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetclassIndexToformatToSmoke [
   self testMethod: #set:classIndexTo:formatTo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSetclassIndexToformatToStringComparison [
+{ #category : #'header access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSetclassIndexToformatToStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #set:classIndexTo:formatTo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9951,13 +9951,13 @@ Spur64BitMemoryManagerTranslationTests >> testSetclassIndexToformatToStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShiftForAllocationUnitSmoke [
+{ #category : #'word size-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShiftForAllocationUnitSmoke [
   self testMethod: #shiftForAllocationUnit
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShiftForAllocationUnitStringComparison [
+{ #category : #'word size-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShiftForAllocationUnitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shiftForAllocationUnit.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9965,13 +9965,13 @@ Spur64BitMemoryManagerTranslationTests >> testShiftForAllocationUnitStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShiftForWordSmoke [
+{ #category : #'word size-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShiftForWordSmoke [
   self testMethod: #shiftForWord
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShiftForWordStringComparison [
+{ #category : #'word size-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShiftForWordStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shiftForWord.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9979,13 +9979,13 @@ Spur64BitMemoryManagerTranslationTests >> testShiftForWordStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShortPrintObjectsFromtoSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShortPrintObjectsFromtoSmoke [
   self testMethod: #shortPrintObjectsFrom:to:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShortPrintObjectsFromtoStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShortPrintObjectsFromtoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shortPrintObjectsFrom:to:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -9993,13 +9993,13 @@ Spur64BitMemoryManagerTranslationTests >> testShortPrintObjectsFromtoStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShortentoIndexableSizeSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShortentoIndexableSizeSmoke [
   self testMethod: #shorten:toIndexableSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShortentoIndexableSizeStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShortentoIndexableSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shorten:toIndexableSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10007,13 +10007,13 @@ Spur64BitMemoryManagerTranslationTests >> testShortentoIndexableSizeStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShouldBreakForLookupIngivenSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShouldBreakForLookupIngivenSmoke [
   self testMethod: #shouldBreakForLookupIn:given:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShouldBreakForLookupIngivenStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShouldBreakForLookupIngivenStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shouldBreakForLookupIn:given:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10021,13 +10021,13 @@ Spur64BitMemoryManagerTranslationTests >> testShouldBreakForLookupIngivenStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShouldRemapOopSmoke [
+{ #category : #'gc - scavenge/compact-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShouldRemapOopSmoke [
   self testMethod: #shouldRemapOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShouldRemapOopStringComparison [
+{ #category : #'gc - scavenge/compact-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShouldRemapOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shouldRemapOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10035,13 +10035,13 @@ Spur64BitMemoryManagerTranslationTests >> testShouldRemapOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShrinkThresholdSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShrinkThresholdSmoke [
   self testMethod: #shrinkThreshold
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShrinkThresholdStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShrinkThresholdStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shrinkThreshold.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10049,13 +10049,13 @@ Spur64BitMemoryManagerTranslationTests >> testShrinkThresholdStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testShutDownIncrementalGCSmoke [
+{ #category : #'gc - incremental-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testShutDownIncrementalGCSmoke [
   self testMethod: #shutDownIncrementalGC:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testShutDownIncrementalGCStringComparison [
+{ #category : #'gc - incremental-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testShutDownIncrementalGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #shutDownIncrementalGC:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10063,13 +10063,13 @@ Spur64BitMemoryManagerTranslationTests >> testShutDownIncrementalGCStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSignalLowSpaceSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSignalLowSpaceSmoke [
   self testMethod: #signalLowSpace
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSignalLowSpaceStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSignalLowSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #signalLowSpace.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10077,13 +10077,13 @@ Spur64BitMemoryManagerTranslationTests >> testSignalLowSpaceStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSixtyFourBitIndexableFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSixtyFourBitIndexableFormatSmoke [
   self testMethod: #sixtyFourBitIndexableFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSixtyFourBitIndexableFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSixtyFourBitIndexableFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sixtyFourBitIndexableFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10091,13 +10091,13 @@ Spur64BitMemoryManagerTranslationTests >> testSixtyFourBitIndexableFormatStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSixtyFourBitLongsClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSixtyFourBitLongsClassIndexPunSmoke [
   self testMethod: #sixtyFourBitLongsClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSixtyFourBitLongsClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSixtyFourBitLongsClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sixtyFourBitLongsClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10105,13 +10105,13 @@ Spur64BitMemoryManagerTranslationTests >> testSixtyFourBitLongsClassIndexPunStri
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeBitsOfSafeSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeBitsOfSafeSmoke [
   self testMethod: #sizeBitsOfSafe:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeBitsOfSafeStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeBitsOfSafeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sizeBitsOfSafe:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10119,13 +10119,13 @@ Spur64BitMemoryManagerTranslationTests >> testSizeBitsOfSafeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeBitsOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeBitsOfSmoke [
   self testMethod: #sizeBitsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeBitsOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeBitsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sizeBitsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10133,13 +10133,13 @@ Spur64BitMemoryManagerTranslationTests >> testSizeBitsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeOfFreeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeOfFreeSmoke [
   self testMethod: #sizeOfFree:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeOfFreeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeOfFreeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sizeOfFree:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10147,13 +10147,13 @@ Spur64BitMemoryManagerTranslationTests >> testSizeOfFreeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeOfLargestFreeChunkSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeOfLargestFreeChunkSmoke [
   self testMethod: #sizeOfLargestFreeChunk
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeOfLargestFreeChunkStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeOfLargestFreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sizeOfLargestFreeChunk.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10161,13 +10161,13 @@ Spur64BitMemoryManagerTranslationTests >> testSizeOfLargestFreeChunkStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeOfObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeOfObjStackSmoke [
   self testMethod: #sizeOfObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSizeOfObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSizeOfObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sizeOfObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10175,13 +10175,13 @@ Spur64BitMemoryManagerTranslationTests >> testSizeOfObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionInProgressSmoke [
+{ #category : #'testing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlidingCompactionInProgressSmoke [
   self testMethod: #slidingCompactionInProgress
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionInProgressStringComparison [
+{ #category : #'testing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlidingCompactionInProgressStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #slidingCompactionInProgress.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10189,13 +10189,13 @@ Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionInProgressStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionRemapObjSmoke [
+{ #category : #'gc - scavenge/compact-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlidingCompactionRemapObjSmoke [
   self testMethod: #slidingCompactionRemapObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionRemapObjStringComparison [
+{ #category : #'gc - scavenge/compact-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlidingCompactionRemapObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #slidingCompactionRemapObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10203,13 +10203,13 @@ Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionRemapObjStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionShouldRemapObjSmoke [
+{ #category : #'gc - scavenge/compact-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlidingCompactionShouldRemapObjSmoke [
   self testMethod: #slidingCompactionShouldRemapObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionShouldRemapObjStringComparison [
+{ #category : #'gc - scavenge/compact-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlidingCompactionShouldRemapObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #slidingCompactionShouldRemapObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10217,13 +10217,13 @@ Spur64BitMemoryManagerTranslationTests >> testSlidingCompactionShouldRemapObjStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlotSizeOfSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlotSizeOfSmoke [
   self testMethod: #slotSizeOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSlotSizeOfStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSlotSizeOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #slotSizeOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10231,13 +10231,13 @@ Spur64BitMemoryManagerTranslationTests >> testSlotSizeOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatBitsOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatBitsOfSmoke [
   self testMethod: #smallFloatBitsOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatBitsOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatBitsOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatBitsOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10245,13 +10245,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatBitsOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatExponentBitsSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatExponentBitsSmoke [
   self testMethod: #smallFloatExponentBits
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatExponentBitsStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatExponentBitsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatExponentBits.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10259,13 +10259,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatExponentBitsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatExponentOffsetSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatExponentOffsetSmoke [
   self testMethod: #smallFloatExponentOffset
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatExponentOffsetStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatExponentOffsetStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatExponentOffset.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10273,13 +10273,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatExponentOffsetStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatMantissaBitsSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatMantissaBitsSmoke [
   self testMethod: #smallFloatMantissaBits
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatMantissaBitsStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatMantissaBitsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatMantissaBits.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10287,13 +10287,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatMantissaBitsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatObjectOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatObjectOfSmoke [
   self testMethod: #smallFloatObjectOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatObjectOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatObjectOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatObjectOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10301,13 +10301,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatObjectOfStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatSignBitSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatSignBitSmoke [
   self testMethod: #smallFloatSignBit
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatSignBitStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatSignBitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatSignBit.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10315,13 +10315,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatSignBitStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatTagSmoke [
+{ #category : #'cog jit support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatTagSmoke [
   self testMethod: #smallFloatTag
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatTagStringComparison [
+{ #category : #'cog jit support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatTagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatTag.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10329,13 +10329,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatTagStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatValueOfSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatValueOfSmoke [
   self testMethod: #smallFloatValueOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallFloatValueOfStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallFloatValueOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallFloatValueOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10343,13 +10343,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallFloatValueOfStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallIntegerTagSmoke [
+{ #category : #'cog jit support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallIntegerTagSmoke [
   self testMethod: #smallIntegerTag
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallIntegerTagStringComparison [
+{ #category : #'cog jit support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallIntegerTagStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallIntegerTag.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10357,13 +10357,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallIntegerTagStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallObjectBytesForSlotsSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallObjectBytesForSlotsSmoke [
   self testMethod: #smallObjectBytesForSlots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSmallObjectBytesForSlotsStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSmallObjectBytesForSlotsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #smallObjectBytesForSlots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10371,13 +10371,13 @@ Spur64BitMemoryManagerTranslationTests >> testSmallObjectBytesForSlotsStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSpecialObjectsOopSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSpecialObjectsOopSmoke [
   self testMethod: #specialObjectsOop:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSpecialObjectsOopStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSpecialObjectsOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #specialObjectsOop:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10385,13 +10385,13 @@ Spur64BitMemoryManagerTranslationTests >> testSpecialObjectsOopStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSplObjSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSplObjSmoke [
   self testMethod: #splObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSplObjStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSplObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #splObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10399,13 +10399,13 @@ Spur64BitMemoryManagerTranslationTests >> testSplObjStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSplObjputSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSplObjputSmoke [
   self testMethod: #splObj:put:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSplObjputStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSplObjputStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #splObj:put:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10413,13 +10413,13 @@ Spur64BitMemoryManagerTranslationTests >> testSplObjputStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStackValueofObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStackValueofObjStackSmoke [
   self testMethod: #stackValue:ofObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStackValueofObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStackValueofObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #stackValue:ofObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10427,13 +10427,13 @@ Spur64BitMemoryManagerTranslationTests >> testStackValueofObjStackStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStartOfMemorySmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStartOfMemorySmoke [
   self testMethod: #startOfMemory
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStartOfMemoryStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStartOfMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #startOfMemory.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10441,13 +10441,13 @@ Spur64BitMemoryManagerTranslationTests >> testStartOfMemoryStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStartOfObjectSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStartOfObjectSmoke [
   self testMethod: #startOfObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStartOfObjectStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStartOfObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #startOfObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10455,13 +10455,13 @@ Spur64BitMemoryManagerTranslationTests >> testStartOfObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStartOfObjectgivenSmoke [
+{ #category : #'object enumeration-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStartOfObjectgivenSmoke [
   self testMethod: #startOfObject:given:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStartOfObjectgivenStringComparison [
+{ #category : #'object enumeration-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStartOfObjectgivenStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #startOfObject:given:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10469,13 +10469,13 @@ Spur64BitMemoryManagerTranslationTests >> testStartOfObjectgivenStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatCompMoveCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatCompMoveCountSmoke [
   self testMethod: #statCompMoveCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatCompMoveCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatCompMoveCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statCompMoveCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10483,13 +10483,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatCompMoveCountStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatCompactPassCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatCompactPassCountSmoke [
   self testMethod: #statCompactPassCount:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatCompactPassCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatCompactPassCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statCompactPassCount:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10497,13 +10497,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatCompactPassCountStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatCompactionUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatCompactionUsecsSmoke [
   self testMethod: #statCompactionUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatCompactionUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatCompactionUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statCompactionUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10511,13 +10511,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatCompactionUsecsStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatFGCDeltaUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatFGCDeltaUsecsSmoke [
   self testMethod: #statFGCDeltaUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatFGCDeltaUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatFGCDeltaUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statFGCDeltaUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10525,13 +10525,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatFGCDeltaUsecsStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatFullGCUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatFullGCUsecsSmoke [
   self testMethod: #statFullGCUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatFullGCUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatFullGCUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statFullGCUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10539,13 +10539,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatFullGCUsecsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatFullGCsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatFullGCsSmoke [
   self testMethod: #statFullGCs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatFullGCsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatFullGCsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statFullGCs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10553,13 +10553,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatFullGCsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatGCEndUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatGCEndUsecsSmoke [
   self testMethod: #statGCEndUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatGCEndUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatGCEndUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statGCEndUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10567,13 +10567,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatGCEndUsecsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatGrowMemorySmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatGrowMemorySmoke [
   self testMethod: #statGrowMemory
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatGrowMemoryStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatGrowMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statGrowMemory.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10581,13 +10581,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatGrowMemoryStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatIGCDeltaUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatIGCDeltaUsecsSmoke [
   self testMethod: #statIGCDeltaUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatIGCDeltaUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatIGCDeltaUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statIGCDeltaUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10595,13 +10595,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatIGCDeltaUsecsStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatIncrGCUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatIncrGCUsecsSmoke [
   self testMethod: #statIncrGCUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatIncrGCUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatIncrGCUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statIncrGCUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10609,13 +10609,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatIncrGCUsecsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatIncrGCsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatIncrGCsSmoke [
   self testMethod: #statIncrGCs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatIncrGCsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatIncrGCsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statIncrGCs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10623,13 +10623,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatIncrGCsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMarkCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMarkCountSmoke [
   self testMethod: #statMarkCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMarkCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMarkCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statMarkCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10637,13 +10637,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatMarkCountStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMarkUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMarkUsecsSmoke [
   self testMethod: #statMarkUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMarkUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMarkUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statMarkUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10651,13 +10651,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatMarkUsecsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMaxAllocSegmentTimeSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMaxAllocSegmentTimeSmoke [
   self testMethod: #statMaxAllocSegmentTime:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMaxAllocSegmentTimeStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMaxAllocSegmentTimeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statMaxAllocSegmentTime:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10665,13 +10665,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatMaxAllocSegmentTimeStringCompa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMkFwdCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMkFwdCountSmoke [
   self testMethod: #statMkFwdCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatMkFwdCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatMkFwdCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statMkFwdCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10679,13 +10679,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatMkFwdCountStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatNumGCsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatNumGCsSmoke [
   self testMethod: #statNumGCs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatNumGCsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatNumGCsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statNumGCs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10693,13 +10693,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatNumGCsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatRootTableCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatRootTableCountSmoke [
   self testMethod: #statRootTableCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatRootTableCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatRootTableCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statRootTableCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10707,13 +10707,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatRootTableCountStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatRootTableOverflowsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatRootTableOverflowsSmoke [
   self testMethod: #statRootTableOverflows
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatRootTableOverflowsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatRootTableOverflowsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statRootTableOverflows.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10721,13 +10721,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatRootTableOverflowsStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSGCDeltaUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSGCDeltaUsecsSmoke [
   self testMethod: #statSGCDeltaUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSGCDeltaUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSGCDeltaUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statSGCDeltaUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10735,13 +10735,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatSGCDeltaUsecsStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatScavengeGCUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatScavengeGCUsecsSmoke [
   self testMethod: #statScavengeGCUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatScavengeGCUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatScavengeGCUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statScavengeGCUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10749,13 +10749,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatScavengeGCUsecsStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatScavengesSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatScavengesSmoke [
   self testMethod: #statScavenges
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatScavengesStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatScavengesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statScavenges.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10763,13 +10763,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatScavengesStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatShrinkMemorySmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatShrinkMemorySmoke [
   self testMethod: #statShrinkMemory
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatShrinkMemoryStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatShrinkMemoryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statShrinkMemory.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10777,13 +10777,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatShrinkMemoryStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSpecialMarkCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSpecialMarkCountSmoke [
   self testMethod: #statSpecialMarkCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSpecialMarkCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSpecialMarkCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statSpecialMarkCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10791,13 +10791,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatSpecialMarkCountStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSweepCountSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSweepCountSmoke [
   self testMethod: #statSweepCount
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSweepCountStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSweepCountStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statSweepCount.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10805,13 +10805,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatSweepCountStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSweepUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSweepUsecsSmoke [
   self testMethod: #statSweepUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStatSweepUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStatSweepUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #statSweepUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10819,13 +10819,13 @@ Spur64BitMemoryManagerTranslationTests >> testStatSweepUsecsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreByteofObjectwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreByteofObjectwithValueSmoke [
   self testMethod: #storeByte:ofObject:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreByteofObjectwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreByteofObjectwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storeByte:ofObject:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10833,13 +10833,13 @@ Spur64BitMemoryManagerTranslationTests >> testStoreByteofObjectwithValueStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreCheckBoundarySmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreCheckBoundarySmoke [
   self testMethod: #storeCheckBoundary
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreCheckBoundaryStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreCheckBoundaryStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storeCheckBoundary.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10847,13 +10847,13 @@ Spur64BitMemoryManagerTranslationTests >> testStoreCheckBoundaryStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreImageSegmentIntooutPointersrootsSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreImageSegmentIntooutPointersrootsSmoke [
   self testMethod: #storeImageSegmentInto:outPointers:roots:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreImageSegmentIntooutPointersrootsStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreImageSegmentIntooutPointersrootsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storeImageSegmentInto:outPointers:roots:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10861,13 +10861,13 @@ Spur64BitMemoryManagerTranslationTests >> testStoreImageSegmentIntooutPointersro
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreLongofObjectwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreLongofObjectwithValueSmoke [
   self testMethod: #storeLong32:ofObject:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreLongofObjectwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreLongofObjectwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storeLong32:ofObject:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10875,13 +10875,13 @@ Spur64BitMemoryManagerTranslationTests >> testStoreLongofObjectwithValueStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerImmutabilityCheckofObjectwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerImmutabilityCheckofObjectwithValueSmoke [
   self testMethod: #storePointerImmutabilityCheck:ofObject:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerImmutabilityCheckofObjectwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerImmutabilityCheckofObjectwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointerImmutabilityCheck:ofObject:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10889,13 +10889,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerImmutabilityCheckofObj
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerNoAssertofFreeChunkwithValueSmoke [
+{ #category : #'heap management-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerNoAssertofFreeChunkwithValueSmoke [
   self testMethod: #storePointerNoAssert:ofFreeChunk:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerNoAssertofFreeChunkwithValueStringComparison [
+{ #category : #'heap management-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerNoAssertofFreeChunkwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointerNoAssert:ofFreeChunk:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10903,13 +10903,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerNoAssertofFreeChunkwit
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerUncheckedofMaybeForwardedObjectwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerUncheckedofMaybeForwardedObjectwithValueSmoke [
   self testMethod: #storePointerUnchecked:ofMaybeForwardedObject:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerUncheckedofMaybeForwardedObjectwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerUncheckedofMaybeForwardedObjectwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointerUnchecked:ofMaybeForwardedObject:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10917,13 +10917,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerUncheckedofMaybeForwar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerUncheckedofObjectwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerUncheckedofObjectwithValueSmoke [
   self testMethod: #storePointerUnchecked:ofObject:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerUncheckedofObjectwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerUncheckedofObjectwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointerUnchecked:ofObject:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10931,13 +10931,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerUncheckedofObjectwithV
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofForwarderwithValueSmoke [
+{ #category : #'heap management-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofForwarderwithValueSmoke [
   self testMethod: #storePointer:ofForwarder:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofForwarderwithValueStringComparison [
+{ #category : #'heap management-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofForwarderwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointer:ofForwarder:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10945,13 +10945,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerofForwarderwithValueSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofFreeChunkwithUncheckedValueSmoke [
+{ #category : #'heap management-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofFreeChunkwithUncheckedValueSmoke [
   self testMethod: #storePointer:ofFreeChunk:withUncheckedValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofFreeChunkwithUncheckedValueStringComparison [
+{ #category : #'heap management-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofFreeChunkwithUncheckedValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointer:ofFreeChunk:withUncheckedValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10959,13 +10959,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerofFreeChunkwithUncheck
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofFreeChunkwithValueSmoke [
+{ #category : #'heap management-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofFreeChunkwithValueSmoke [
   self testMethod: #storePointer:ofFreeChunk:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofFreeChunkwithValueStringComparison [
+{ #category : #'heap management-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofFreeChunkwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointer:ofFreeChunk:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10973,13 +10973,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerofFreeChunkwithValueSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofObjStackwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofObjStackwithValueSmoke [
   self testMethod: #storePointer:ofObjStack:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofObjStackwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofObjStackwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointer:ofObjStack:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -10987,13 +10987,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerofObjStackwithValueStr
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofObjectwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueSmoke [
   self testMethod: #storePointer:ofObject:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStorePointerofObjectwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storePointer:ofObject:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11001,13 +11001,13 @@ Spur64BitMemoryManagerTranslationTests >> testStorePointerofObjectwithValueStrin
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreShortofObjectwithValueSmoke [
+{ #category : #'object access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreShortofObjectwithValueSmoke [
   self testMethod: #storeShort16:ofObject:withValue:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStoreShortofObjectwithValueStringComparison [
+{ #category : #'object access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStoreShortofObjectwithValueStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #storeShort16:ofObject:withValue:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11015,13 +11015,13 @@ Spur64BitMemoryManagerTranslationTests >> testStoreShortofObjectwithValueStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testStringForCStringSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testStringForCStringSmoke [
   self testMethod: #stringForCString:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testStringForCStringStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testStringForCStringStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #stringForCString:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11029,13 +11029,13 @@ Spur64BitMemoryManagerTranslationTests >> testStringForCStringStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSufficientSpaceAfterGCSmoke [
+{ #category : #'gc - scavenging-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSufficientSpaceAfterGCSmoke [
   self testMethod: #sufficientSpaceAfterGC:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSufficientSpaceAfterGCStringComparison [
+{ #category : #'gc - scavenging-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSufficientSpaceAfterGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sufficientSpaceAfterGC:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11043,13 +11043,13 @@ Spur64BitMemoryManagerTranslationTests >> testSufficientSpaceAfterGCStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSufficientSpaceToInstantiateindexableSizeSmoke [
+{ #category : #'allocation-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSufficientSpaceToInstantiateindexableSizeSmoke [
   self testMethod: #sufficientSpaceToInstantiate:indexableSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSufficientSpaceToInstantiateindexableSizeStringComparison [
+{ #category : #'allocation-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSufficientSpaceToInstantiateindexableSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #sufficientSpaceToInstantiate:indexableSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11057,13 +11057,13 @@ Spur64BitMemoryManagerTranslationTests >> testSufficientSpaceToInstantiateindexa
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSwizzleFieldsOfFreeChunkSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSwizzleFieldsOfFreeChunkSmoke [
   self testMethod: #swizzleFieldsOfFreeChunk:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSwizzleFieldsOfFreeChunkStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSwizzleFieldsOfFreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #swizzleFieldsOfFreeChunk:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11071,13 +11071,13 @@ Spur64BitMemoryManagerTranslationTests >> testSwizzleFieldsOfFreeChunkStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSwizzleFieldsOfObjectSmoke [
+{ #category : #'snapshot-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSwizzleFieldsOfObjectSmoke [
   self testMethod: #swizzleFieldsOfObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSwizzleFieldsOfObjectStringComparison [
+{ #category : #'snapshot-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSwizzleFieldsOfObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #swizzleFieldsOfObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11085,13 +11085,13 @@ Spur64BitMemoryManagerTranslationTests >> testSwizzleFieldsOfObjectStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testSwizzleObjStackAtSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testSwizzleObjStackAtSmoke [
   self testMethod: #swizzleObjStackAt:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testSwizzleObjStackAtStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testSwizzleObjStackAtStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #swizzleObjStackAt:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11099,13 +11099,13 @@ Spur64BitMemoryManagerTranslationTests >> testSwizzleObjStackAtStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTagMaskSmoke [
+{ #category : #'word size-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTagMaskSmoke [
   self testMethod: #tagMask
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTagMaskStringComparison [
+{ #category : #'word size-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTagMaskStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #tagMask.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11113,13 +11113,13 @@ Spur64BitMemoryManagerTranslationTests >> testTagMaskStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTenuringIncrementalGCSmoke [
+{ #category : #'plugin support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTenuringIncrementalGCSmoke [
   self testMethod: #tenuringIncrementalGC
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTenuringIncrementalGCStringComparison [
+{ #category : #'plugin support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTenuringIncrementalGCStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #tenuringIncrementalGC.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11127,13 +11127,13 @@ Spur64BitMemoryManagerTranslationTests >> testTenuringIncrementalGCStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTenuringThresholdSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTenuringThresholdSmoke [
   self testMethod: #tenuringThreshold
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTenuringThresholdStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTenuringThresholdStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #tenuringThreshold.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11141,13 +11141,13 @@ Spur64BitMemoryManagerTranslationTests >> testTenuringThresholdStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testThirtyTwoBitLongsClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testThirtyTwoBitLongsClassIndexPunSmoke [
   self testMethod: #thirtyTwoBitLongsClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testThirtyTwoBitLongsClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testThirtyTwoBitLongsClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #thirtyTwoBitLongsClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11155,13 +11155,13 @@ Spur64BitMemoryManagerTranslationTests >> testThirtyTwoBitLongsClassIndexPunStri
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTopOfObjStackSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTopOfObjStackSmoke [
   self testMethod: #topOfObjStack:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTopOfObjStackStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTopOfObjStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #topOfObjStack:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11169,13 +11169,13 @@ Spur64BitMemoryManagerTranslationTests >> testTopOfObjStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTopRemappableOopSmoke [
+{ #category : #'interpreter access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTopRemappableOopSmoke [
   self testMethod: #topRemappableOop
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTopRemappableOopStringComparison [
+{ #category : #'interpreter access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTopRemappableOopStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #topRemappableOop.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11183,13 +11183,13 @@ Spur64BitMemoryManagerTranslationTests >> testTopRemappableOopStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalByteSizeOfSmoke [
+{ #category : #'indexing primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalByteSizeOfSmoke [
   self testMethod: #totalByteSizeOf:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalByteSizeOfStringComparison [
+{ #category : #'indexing primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalByteSizeOfStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #totalByteSizeOf:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11197,13 +11197,13 @@ Spur64BitMemoryManagerTranslationTests >> testTotalByteSizeOfStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalFreeListBytesSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalFreeListBytesSmoke [
   self testMethod: #totalFreeListBytes
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalFreeListBytesStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalFreeListBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #totalFreeListBytes.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11211,13 +11211,13 @@ Spur64BitMemoryManagerTranslationTests >> testTotalFreeListBytesStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalFreeOldSpaceSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalFreeOldSpaceSmoke [
   self testMethod: #totalFreeOldSpace:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalFreeOldSpaceStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalFreeOldSpaceStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #totalFreeOldSpace:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11225,13 +11225,13 @@ Spur64BitMemoryManagerTranslationTests >> testTotalFreeOldSpaceStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalMemorySizeSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalMemorySizeSmoke [
   self testMethod: #totalMemorySize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTotalMemorySizeStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTotalMemorySizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #totalMemorySize.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11239,13 +11239,13 @@ Spur64BitMemoryManagerTranslationTests >> testTotalMemorySizeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTraceImmediatelySlotLimitSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTraceImmediatelySlotLimitSmoke [
   self testMethod: #traceImmediatelySlotLimit
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTraceImmediatelySlotLimitStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTraceImmediatelySlotLimitStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #traceImmediatelySlotLimit.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11253,13 +11253,13 @@ Spur64BitMemoryManagerTranslationTests >> testTraceImmediatelySlotLimitStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testTrueObjectSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testTrueObjectSmoke [
   self testMethod: #trueObject
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testTrueObjectStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testTrueObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #trueObject.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11267,13 +11267,13 @@ Spur64BitMemoryManagerTranslationTests >> testTrueObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUniqueIndexallInstancesIntolimitresultsIntoSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUniqueIndexallInstancesIntolimitresultsIntoSmoke [
   self testMethod: #uniqueIndex:allInstancesInto:limit:resultsInto:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUniqueIndexallInstancesIntolimitresultsIntoStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUniqueIndexallInstancesIntolimitresultsIntoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #uniqueIndex:allInstancesInto:limit:resultsInto:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11281,13 +11281,13 @@ Spur64BitMemoryManagerTranslationTests >> testUniqueIndexallInstancesIntolimitre
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkatIndexchunkBytesSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkatIndexchunkBytesSmoke [
   self testMethod: #unlinkFreeChunk:atIndex:chunkBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkatIndexchunkBytesStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkatIndexchunkBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unlinkFreeChunk:atIndex:chunkBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11295,13 +11295,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkatIndexchunkBytesSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkatIndexisLilliputianSizeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkatIndexisLilliputianSizeSmoke [
   self testMethod: #unlinkFreeChunk:atIndex:isLilliputianSize:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkatIndexisLilliputianSizeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkatIndexisLilliputianSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unlinkFreeChunk:atIndex:isLilliputianSize:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11309,13 +11309,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkatIndexisLilliputia
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkchunkBytesSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkchunkBytesSmoke [
   self testMethod: #unlinkFreeChunk:chunkBytes:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkchunkBytesStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkchunkBytesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unlinkFreeChunk:chunkBytes:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11323,13 +11323,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnlinkFreeChunkchunkBytesStringCom
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkLilliputianChunkindexSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkLilliputianChunkindexSmoke [
   self testMethod: #unlinkLilliputianChunk:index:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkLilliputianChunkindexStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkLilliputianChunkindexStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unlinkLilliputianChunk:index:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11337,13 +11337,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnlinkLilliputianChunkindexStringC
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkSolitaryFreeTreeNodeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkSolitaryFreeTreeNodeSmoke [
   self testMethod: #unlinkSolitaryFreeTreeNode:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnlinkSolitaryFreeTreeNodeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnlinkSolitaryFreeTreeNodeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unlinkSolitaryFreeTreeNode:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11351,13 +11351,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnlinkSolitaryFreeTreeNodeStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnmarkAllObjectsSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnmarkAllObjectsSmoke [
   self testMethod: #unmarkAllObjects
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnmarkAllObjectsStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnmarkAllObjectsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unmarkAllObjects.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11365,13 +11365,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnmarkAllObjectsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnmarkObjectsInSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnmarkObjectsInSmoke [
   self testMethod: #unmarkObjectsIn:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnmarkObjectsInStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnmarkObjectsInStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unmarkObjectsIn:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11379,13 +11379,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnmarkObjectsInStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnmarkSurvivingObjectsForCompactSmoke [
+{ #category : #'compaction-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnmarkSurvivingObjectsForCompactSmoke [
   self testMethod: #unmarkSurvivingObjectsForCompact
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnmarkSurvivingObjectsForCompactStringComparison [
+{ #category : #'compaction-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnmarkSurvivingObjectsForCompactStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unmarkSurvivingObjectsForCompact.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11393,13 +11393,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnmarkSurvivingObjectsForCompactSt
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnpinObjectSmoke [
+{ #category : #'primitive support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnpinObjectSmoke [
   self testMethod: #unpinObject:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUnpinObjectStringComparison [
+{ #category : #'primitive support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUnpinObjectStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #unpinObject:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11407,13 +11407,13 @@ Spur64BitMemoryManagerTranslationTests >> testUnpinObjectStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateFreeListsSmoke [
+{ #category : #'initialization-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateFreeListsSmoke [
   self testMethod: #updateFreeLists
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateFreeListsStringComparison [
+{ #category : #'initialization-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateFreeListsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #updateFreeLists.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11421,13 +11421,13 @@ Spur64BitMemoryManagerTranslationTests >> testUpdateFreeListsStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateFullGCStatsSmoke [
+{ #category : #'gc - global-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateFullGCStatsSmoke [
   self testMethod: #updateFullGCStats
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateFullGCStatsStringComparison [
+{ #category : #'gc - global-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateFullGCStatsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #updateFullGCStats.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11435,13 +11435,13 @@ Spur64BitMemoryManagerTranslationTests >> testUpdateFullGCStatsStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateListStartingAtSmoke [
+{ #category : #'initialization-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateListStartingAtSmoke [
   self testMethod: #updateListStartingAt:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateListStartingAtStringComparison [
+{ #category : #'initialization-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateListStartingAtStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #updateListStartingAt:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11449,13 +11449,13 @@ Spur64BitMemoryManagerTranslationTests >> testUpdateListStartingAtStringComparis
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdatePostScavengeSmoke [
+{ #category : #'image segment in/out-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdatePostScavengeSmoke [
   self testMethod: #updatePostScavenge:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdatePostScavengeStringComparison [
+{ #category : #'image segment in/out-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdatePostScavengeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #updatePostScavenge:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11463,13 +11463,13 @@ Spur64BitMemoryManagerTranslationTests >> testUpdatePostScavengeStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateRootOfObjStackAtwithSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateRootOfObjStackAtwithSmoke [
   self testMethod: #updateRootOfObjStackAt:with:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateRootOfObjStackAtwithStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateRootOfObjStackAtwithStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #updateRootOfObjStackAt:with:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11477,13 +11477,13 @@ Spur64BitMemoryManagerTranslationTests >> testUpdateRootOfObjStackAtwithStringCo
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateSweepEndUsecsSmoke [
+{ #category : #'accessing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateSweepEndUsecsSmoke [
   self testMethod: #updateSweepEndUsecs
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testUpdateSweepEndUsecsStringComparison [
+{ #category : #'accessing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testUpdateSweepEndUsecsStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #updateSweepEndUsecs.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11491,13 +11491,13 @@ Spur64BitMemoryManagerTranslationTests >> testUpdateSweepEndUsecsStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidClassTableHashesSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidClassTableHashesSmoke [
   self testMethod: #validClassTableHashes
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidClassTableHashesStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidClassTableHashesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #validClassTableHashes.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11505,13 +11505,13 @@ Spur64BitMemoryManagerTranslationTests >> testValidClassTableHashesStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidClassTableRootPagesSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidClassTableRootPagesSmoke [
   self testMethod: #validClassTableRootPages
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidClassTableRootPagesStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidClassTableRootPagesStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #validClassTableRootPages.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11519,13 +11519,13 @@ Spur64BitMemoryManagerTranslationTests >> testValidClassTableRootPagesStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeChunkSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkSmoke [
   self testMethod: #validFreeTreeChunk:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeChunkStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #validFreeTreeChunk:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11533,13 +11533,13 @@ Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeChunkStringComparison
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeChunkparentSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkparentSmoke [
   self testMethod: #validFreeTreeChunk:parent:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeChunkparentStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkparentStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #validFreeTreeChunk:parent:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11547,13 +11547,13 @@ Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeChunkparentStringComp
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeSmoke [
+{ #category : #'free space-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidFreeTreeSmoke [
   self testMethod: #validFreeTree
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeStringComparison [
+{ #category : #'free space-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidFreeTreeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #validFreeTree.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11561,13 +11561,13 @@ Spur64BitMemoryManagerTranslationTests >> testValidFreeTreeStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidObjStacksSmoke [
+{ #category : #'obj stacks-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidObjStacksSmoke [
   self testMethod: #validObjStacks
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testValidObjStacksStringComparison [
+{ #category : #'obj stacks-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testValidObjStacksStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #validObjStacks.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11575,13 +11575,13 @@ Spur64BitMemoryManagerTranslationTests >> testValidObjStacksStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testVanillaRemapObjSmoke [
+{ #category : #'gc - scavenge/compact-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testVanillaRemapObjSmoke [
   self testMethod: #vanillaRemapObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testVanillaRemapObjStringComparison [
+{ #category : #'gc - scavenge/compact-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testVanillaRemapObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #vanillaRemapObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11589,13 +11589,13 @@ Spur64BitMemoryManagerTranslationTests >> testVanillaRemapObjStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testVanillaShouldRemapObjSmoke [
+{ #category : #'gc - scavenge/compact-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testVanillaShouldRemapObjSmoke [
   self testMethod: #vanillaShouldRemapObj:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testVanillaShouldRemapObjStringComparison [
+{ #category : #'gc - scavenge/compact-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testVanillaShouldRemapObjStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #vanillaShouldRemapObj:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11603,13 +11603,13 @@ Spur64BitMemoryManagerTranslationTests >> testVanillaShouldRemapObjStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testVmEndiannessSmoke [
+{ #category : #'memory access-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testVmEndiannessSmoke [
   self testMethod: #vmEndianness
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testVmEndiannessStringComparison [
+{ #category : #'memory access-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testVmEndiannessStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #vmEndianness.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11617,13 +11617,13 @@ Spur64BitMemoryManagerTranslationTests >> testVmEndiannessStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWeakArrayClassIndexPunSmoke [
+{ #category : #'class table puns-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWeakArrayClassIndexPunSmoke [
   self testMethod: #weakArrayClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWeakArrayClassIndexPunStringComparison [
+{ #category : #'class table puns-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWeakArrayClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #weakArrayClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11631,13 +11631,13 @@ Spur64BitMemoryManagerTranslationTests >> testWeakArrayClassIndexPunStringCompar
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWeakArrayFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWeakArrayFormatSmoke [
   self testMethod: #weakArrayFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWeakArrayFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWeakArrayFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #weakArrayFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11645,13 +11645,13 @@ Spur64BitMemoryManagerTranslationTests >> testWeakArrayFormatStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWeaklingStackSmoke [
+{ #category : #'spur bootstrap-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWeaklingStackSmoke [
   self testMethod: #weaklingStack
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWeaklingStackStringComparison [
+{ #category : #'spur bootstrap-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWeaklingStackStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #weaklingStack.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11659,13 +11659,13 @@ Spur64BitMemoryManagerTranslationTests >> testWeaklingStackStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWhereIsMaybeHeapThingSmoke [
+{ #category : #'debug printing-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWhereIsMaybeHeapThingSmoke [
   self testMethod: #whereIsMaybeHeapThing:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWhereIsMaybeHeapThingStringComparison [
+{ #category : #'debug printing-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWhereIsMaybeHeapThingStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #whereIsMaybeHeapThing:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11673,13 +11673,13 @@ Spur64BitMemoryManagerTranslationTests >> testWhereIsMaybeHeapThingStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWithSimulatorFetchPointerMovedAsideDoSmoke [
+{ #category : #'debug support-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWithSimulatorFetchPointerMovedAsideDoSmoke [
   self testMethod: #withSimulatorFetchPointerMovedAsideDo:
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWithSimulatorFetchPointerMovedAsideDoStringComparison [
+{ #category : #'debug support-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWithSimulatorFetchPointerMovedAsideDoStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #withSimulatorFetchPointerMovedAsideDo:.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11687,13 +11687,13 @@ Spur64BitMemoryManagerTranslationTests >> testWithSimulatorFetchPointerMovedAsid
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWordIndexableFormatSmoke [
+{ #category : #'header formats-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWordIndexableFormatSmoke [
   self testMethod: #wordIndexableFormat
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWordIndexableFormatStringComparison [
+{ #category : #'header formats-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWordIndexableFormatStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #wordIndexableFormat.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11701,13 +11701,13 @@ Spur64BitMemoryManagerTranslationTests >> testWordIndexableFormatStringCompariso
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWordSizeClassIndexPunSmoke [
+{ #category : #'class table-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWordSizeClassIndexPunSmoke [
   self testMethod: #wordSizeClassIndexPun
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWordSizeClassIndexPunStringComparison [
+{ #category : #'class table-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWordSizeClassIndexPunStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #wordSizeClassIndexPun.
   illiString := self prettyPrintIllicium: illiAST.
@@ -11715,13 +11715,13 @@ Spur64BitMemoryManagerTranslationTests >> testWordSizeClassIndexPunStringCompari
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
-Spur64BitMemoryManagerTranslationTests >> testWordSizeSmoke [
+{ #category : #'word size-smoke-test' }
+Spur64BitMemoryManagerTranslationTest >> testWordSizeSmoke [
   self testMethod: #wordSize
 ]
 
-{ #category : #'equaliy-test' }
-Spur64BitMemoryManagerTranslationTests >> testWordSizeStringComparison [
+{ #category : #'word size-equaliy-test' }
+Spur64BitMemoryManagerTranslationTest >> testWordSizeStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #wordSize.
   illiString := self prettyPrintIllicium: illiAST.

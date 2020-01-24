@@ -11,12 +11,12 @@ BrokenPluginTranslationTest >> setUp [
   translator := ASTCSlangPluginTranslator new
 ]
 
-{ #category : #'smoke-test' }
+{ #category : #'primitives-smoke-test' }
 BrokenPluginTranslationTest >> testPrimitiveNoPopButPushSmoke [
   self testMethod: #primitiveNoPopButPush
 ]
 
-{ #category : #'equaliy-test' }
+{ #category : #'primitives-equaliy-test' }
 BrokenPluginTranslationTest >> testPrimitiveNoPopButPushStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitiveNoPopButPush.
@@ -25,12 +25,12 @@ BrokenPluginTranslationTest >> testPrimitiveNoPopButPushStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
+{ #category : #'primitives-smoke-test' }
 BrokenPluginTranslationTest >> testPrimitivePopAndFailSmoke [
   self testMethod: #primitivePopAndFail
 ]
 
-{ #category : #'equaliy-test' }
+{ #category : #'primitives-equaliy-test' }
 BrokenPluginTranslationTest >> testPrimitivePopAndFailStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitivePopAndFail.
@@ -39,12 +39,12 @@ BrokenPluginTranslationTest >> testPrimitivePopAndFailStringComparison [
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
+{ #category : #'primitives-smoke-test' }
 BrokenPluginTranslationTest >> testPrimitivePopLessThanExpectedSmoke [
   self testMethod: #primitivePopLessThanExpected
 ]
 
-{ #category : #'equaliy-test' }
+{ #category : #'primitives-equaliy-test' }
 BrokenPluginTranslationTest >> testPrimitivePopLessThanExpectedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitivePopLessThanExpected.
@@ -53,12 +53,12 @@ BrokenPluginTranslationTest >> testPrimitivePopLessThanExpectedStringComparison 
   self assert: illiString equals: slangString
 ]
 
-{ #category : #'smoke-test' }
+{ #category : #'primitives-smoke-test' }
 BrokenPluginTranslationTest >> testPrimitivePopMoreThanExpectedSmoke [
   self testMethod: #primitivePopMoreThanExpected
 ]
 
-{ #category : #'equaliy-test' }
+{ #category : #'primitives-equaliy-test' }
 BrokenPluginTranslationTest >> testPrimitivePopMoreThanExpectedStringComparison [
   | illiAST slangString illiString |
   illiAST := self generateIllicium: #primitivePopMoreThanExpected.
