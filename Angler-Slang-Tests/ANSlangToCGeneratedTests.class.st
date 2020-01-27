@@ -26,7 +26,7 @@ ANSlangToCGeneratedTests >> codeGenerator [
 { #category : #generating }
 ANSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
-	^ translator  translateMethod: aSelector fromClass: testedClass
+	^ translator translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #'generating machine code' }
@@ -42,6 +42,12 @@ ANSlangToCGeneratedTests >> generateSlang: aSelector [
 ANSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
 	^ anAST definitions first prettyPrintUsing: ANSlangTranslator prettyPrinterClass new.
+]
+
+{ #category : #generating }
+ANSlangToCGeneratedTests >> setUp [
+	super setUp.
+  translator := ANSlangTranslator new
 ]
 
 { #category : #accessing }

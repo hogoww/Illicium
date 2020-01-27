@@ -8,7 +8,7 @@ Class {
 ANSpur64BitMemoryManagerTranslationTest >> setUp [
   super setUp.
   testedClass := Spur64BitMemoryManager.
-  translator := ANSlangTranslator new
+	translator addMethod: StackInterpreter >> #cr.
 ]
 
 { #category : #'object enumeration-equaliy-test' }

@@ -67,12 +67,11 @@ ANPluginTestGenerator >> formatSelector: aSelector [
 
 { #category : #generation }
 ANPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
-	| translator method testedClass testedClassName |
+	| method testedClass testedClassName |
 	testedClassName := aTestedClass name.
 	method := 'setUp' asMethodWithBody: [
 		super setUp.
 		testedClass := testedClassName.
-		translator := aTranslatorClass new
 	].
 
 	aClass compile: method asString classified: #running.
