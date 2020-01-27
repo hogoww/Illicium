@@ -1,8 +1,25 @@
 Class {
 	#name : #ANSlangClassTranslator,
 	#superclass : #ASTCClassTranslator,
+	#instVars : [
+		'transformations',
+		'program'
+	],
 	#category : #'Angler-Slang'
 }
+
+{ #category : #'program-configuration' }
+ANSlangClassTranslator >> addMethod: aCollection [
+	program addMethod: aCollection
+]
+
+{ #category : #transformations }
+ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
+	transformations do: [:aTransformation|
+		aTransformation applyOnMethod: aMethodNode ofProgram: program.
+		].
+	^ aMethodNode
+]
 
 { #category : #initialization }
 ANSlangClassTranslator >> initialize [
@@ -12,6 +29,8 @@ ANSlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
+	transformations := {ANSlangInliner new}.
+	program := ANProgram new.
 ]
 
 { #category : #initialization }
@@ -57,11 +76,13 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 	aClass declareCVarsIn: inferer.
 	method := (aClass lookupSelector: aSelector) ast copy.
 	inferer addMethod: (method asTranslationMethodOfClass: TMethod).
+	program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod) ].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	
-	inferer methodNamed: aSelector.
+	self annotateMethodsASTWithTypes: { method }, program methods asArray.
 	
-	self annotateMethodsASTWithTypes: { method }.
+	method := self applyTransformationsOn: method.
+	
 	^ { method }
 ]
 

@@ -15,6 +15,11 @@ ANSlangTranslator class >> prettyPrinterClass [
 	^ ANSlangPrettyPrinter 
 ]
 
+{ #category : #'program-configuration' }
+ANSlangTranslator >> addMethod: aCollection [ 
+	^ classTranslator addMethod: aCollection
+]
+
 { #category : #initialization }
 ANSlangTranslator >> fillWithtranslatorSpecificTypes [
 	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy
