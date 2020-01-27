@@ -189,8 +189,7 @@ ANSlangReceiver >> at: something put: pouet [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> baseHeaderSize [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ ASTCIdentifier new id: #BaseHeaderSize
 ]
 
 { #category : #'reflective operations' }
