@@ -9,6 +9,9 @@ ANSpur64BitMemoryManagerTranslationTest >> setUp [
   super setUp.
   testedClass := Spur64BitMemoryManager.
 	translator addMethod: StackInterpreter >> #cr.
+	translator addMethod: SpurMemoryManager >> #splObj:.
+	translator addMethod: SpurMemoryManager >> #fetchPointer:ofObject:.
+	translator addMethod: SpurMemoryManager >> #knownClassAtIndex:.
 ]
 
 { #category : #'object enumeration-equaliy-test' }
