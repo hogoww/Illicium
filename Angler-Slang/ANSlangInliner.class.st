@@ -25,17 +25,7 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	nodeToInline := aMethodNode statements first.
 	nodeToInline isReturn
 		ifTrue: [ nodeToInline := nodeToInline value ].
-	self renameVariablesOf: aMethodNode byArguments: aMessageNode arguments.
-	aMessageNode replaceWith: nodeToInline
-]
-
-{ #category : #inilining }
-ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
-  | replacement |
-	aMethodNode body nodesDo: [:aNode |  aNode isArgument ifTrue: [
-		
-		replacement := arguments at: (aMethodNode argumentNames indexOf: aNode name).
-		aNode replaceWith: replacement ] ]
+	aMessageNode parent replaceNode: aMessageNode withNode: nodeToInline
 ]
 
 { #category : #inilining }
@@ -46,18 +36,15 @@ ANSlangInliner >> visitArgument: anArgumentNode [
 ]
 
 { #category : #applying }
-ANSlangInliner >> visitAssignmentNode: anAssignmentNode [
-	self halt.
-	super visitAssignmentNode: anAssignmentNode 
-]
-
-{ #category : #applying }
 ANSlangInliner >> visitMessageNode: aMessageNode [
+	| methodToInline |
 	(program hasMethodNamed: aMessageNode selector)
 		ifTrue:[ 
 			inlinedSomething := true.
 			argumentToReplace := aMessageNode arguments.
-			self inline: (program methodNamed: aMessageNode selector) insteadOf: aMessageNode.
+			methodToInline := (program methodNamed: aMessageNode selector) copy. 
+			methodToInline body acceptVisitor: self.
+			self inline:methodToInline insteadOf: aMessageNode.
 			argumentToReplace := nil.
 			].
 	super visitMessageNode: aMessageNode
