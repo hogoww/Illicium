@@ -1,11 +1,11 @@
 Class {
-	#name : #ILSlangLiteralValueNodeTranslator,
+	#name : #ANSlangLiteralValueNodeTranslator,
 	#superclass : #ASTCLiteralValueNodeTranslator,
 	#category : #'Angler-Slang'
 }
 
 { #category : #translate }
-ILSlangLiteralValueNodeTranslator >> translateNode: aLiteralNode [
+ANSlangLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 	
 	| value |
 	value := (#( true false ) includes: aLiteralNode value)

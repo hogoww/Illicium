@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCSlangPrettyPrinter,
+	#name : #ANSlangPrettyPrinter,
 	#superclass : #ASTCPrettyPrint,
 	#category : #'Angler-Slang'
 }
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
+ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 	^ aNode parent isIf not 
 		and: [ aNode parent isAssignmentOperator not
 			and: [ aNode parent isStatement not
@@ -14,20 +14,20 @@ ASTCSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> initialize [
+ANSlangPrettyPrinter >> initialize [
 
 	super initialize.
 	self indentationString: '	'
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
+ANSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
 	self << 'static '.
   aTypeNode acceptVisitor: self.
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
+ANSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
 	self parenthesisFor: anOperator print: [	
 		self printBinaryOperand: anOperator operands first.
 		self cr spaces << Character tab.
@@ -37,21 +37,21 @@ ASTCSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
 ]
 
 { #category : #comments }
-ASTCSlangPrettyPrinter >> printMultilineComment: aString [
+ANSlangPrettyPrinter >> printMultilineComment: aString [
 	stream << '/*'
 		<< aString
 		<< ' */'
 ]
 
 { #category : #comments }
-ASTCSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
+ANSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
 	stream << '/* '
 		print: aNode;
 		<< ' */'
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
+ANSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
 	"systematique use of parenthesis"
 	self << '('.
 	self visitUnaryOperator: anAddressOfOperatorNode.
@@ -59,12 +59,12 @@ ASTCSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitAndOperator: anAndOperator [
+ANSlangPrettyPrinter >> visitAndOperator: anAndOperator [
 	self printLogicalOperatorInConditionnal: anAndOperator
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitAssThenAssignOperator: anAddressOfOperatorNode [
+ANSlangPrettyPrinter >> visitAssThenAssignOperator: anAddressOfOperatorNode [
 	"systematique use of parenthesis"
 	self << '('.
 	self visitUnaryOperator: anAddressOfOperatorNode.
@@ -72,7 +72,7 @@ ASTCSlangPrettyPrinter >> visitAssThenAssignOperator: anAddressOfOperatorNode [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOperator [
+ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOperator [
 	"use of one more set of parentheses than needed. Ok."
 	self << '('.
 	super visitAssignementAdditionOperator: anAssignmentAdditionOperator.
@@ -80,14 +80,14 @@ ASTCSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAddition
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
+ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 "	anAssignmentOperator comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , anAssignmentOperator comment first ; cr ; spaces ]."
 	super visitAssignmentOperator: anAssignmentOperator.
 
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitBlock: aBlock [
+ANSlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
 	"
@@ -111,7 +111,7 @@ ASTCSlangPrettyPrinter >> visitBlock: aBlock [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitCastOperator: aCastOperator [
+ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 	" Slang systematically use an englobing set of parenthesis"
 	self << '((';
 		print: aCastOperator type;
@@ -121,13 +121,13 @@ ASTCSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
+ANSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	anExpressionStatement expression isPreprocessorIf ifFalse: [ self << $; ]. "pretty sure that won't always be the case."
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
+ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 	self parenthesisFor: aFunctionCall print: [
 		aFunctionCall id acceptVisitor: self.
 		self << '('.
@@ -141,7 +141,7 @@ ASTCSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
+ANSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
   self printDeclarationReturnType: aFunctionDeclaration type.
 
   self << Character cr.
@@ -152,7 +152,7 @@ ASTCSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
+ANSlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
 	"aFunctionDefinition comment ifNotNil: [ 
 		self cr cr;
 			printMultilineComment: '	', aFunctionDefinition comment anyOne;
@@ -171,7 +171,7 @@ ASTCSlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitIf: anIf [
+ANSlangPrettyPrinter >> visitIf: anIf [
 	self << 'if ('.
 	anIf condition acceptVisitor: self.
 	self << ') '.
@@ -183,12 +183,12 @@ ASTCSlangPrettyPrinter >> visitIf: anIf [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitOrOperator: anOrOperator [
+ANSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 	self printLogicalOperatorInConditionnal: anOrOperator
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
+ANSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
    self cr.
    self << '#  if ' print: aPreprocessorIfNode condition ; cr.
    aPreprocessorIfNode then do: [:anExpression | 
@@ -213,17 +213,17 @@ ASTCSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
+ANSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
 	self << aRawCCodeNode cCode
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitRawDeclaration: aRawDeclarationNode [
+ANSlangPrettyPrinter >> visitRawDeclaration: aRawDeclarationNode [
 	self << aRawDeclarationNode rawDeclaration << ';'
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
+ANSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
 	
 	self enterBlock.
 	self << '('.
@@ -237,7 +237,7 @@ ASTCSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
+ANSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 
 	self parenthesisFor: anUnaryOperator print: [
 		self << anUnaryOperator class symbol.
@@ -247,7 +247,7 @@ ASTCSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 ]
 
 { #category : #visiting }
-ASTCSlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
+ANSlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
 	aVariableDeclaration type acceptVisitor:self.
 	stream peekLast = $* ifFalse: [ self << Character space ].
 	aVariableDeclaration id acceptVisitor:self.

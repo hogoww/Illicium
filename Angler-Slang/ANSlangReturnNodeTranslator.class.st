@@ -1,11 +1,11 @@
 Class {
-	#name : #ILSlangReturnNodeTranslator,
+	#name : #ANSlangReturnNodeTranslator,
 	#superclass : #ASTCReturnNodeTranslator,
 	#category : #'Angler-Slang'
 }
 
 { #category : #translate }
-ILSlangReturnNodeTranslator >> translateNode: aReturnNode [
+ANSlangReturnNodeTranslator >> translateNode: aReturnNode [
 	| returnExpression |
 	returnExpression := aReturnNode value isSelf 
 		ifTrue: [ ASTCLiteral value: 0 ]

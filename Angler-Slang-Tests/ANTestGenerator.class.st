@@ -20,7 +20,7 @@ ANTestGenerator class >> testBaseClass [
 
 { #category : #removing }
 ANTestGenerator class >> translatorClass [
-	^ ASTCSlangTranslator
+	^ ANSlangTranslator
 ]
 
 { #category : #filter }

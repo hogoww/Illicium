@@ -1,39 +1,39 @@
 Class {
-	#name : #ASTCSlangClassTranslator,
+	#name : #ANSlangClassTranslator,
 	#superclass : #ASTCClassTranslator,
 	#category : #'Angler-Slang'
 }
 
 { #category : #initialization }
-ASTCSlangClassTranslator >> initialize [
+ANSlangClassTranslator >> initialize [
 	super initialize.
 	inferer := CCodeGeneratorGlobalStructure new.
-	methodTranslator literalValueNodeTranslator: ILSlangLiteralValueNodeTranslator new.
-	methodTranslator returnNodeTranslator: ILSlangReturnNodeTranslator new.
-	methodTranslator temporaryDeclarationNodeTranslator: ILSlangTemporaryDeclarationNodesTranslator new.
-	methodTranslator assignmentNodeTranslator: ILSlangAssignmentNodeTranslator new.
+	methodTranslator literalValueNodeTranslator: ANSlangLiteralValueNodeTranslator new.
+	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
+	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
+	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
 ]
 
 { #category : #initialization }
-ASTCSlangClassTranslator >> isStatefulCode [
+ANSlangClassTranslator >> isStatefulCode [
 	^ false
 ]
 
 { #category : #check }
-ASTCSlangClassTranslator >> preTranslationConstraintCheck: aClass [
+ANSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 	((aClass allSuperclasses
 		includes: InterpreterPlugin) or:[ aClass = InterpreterPrimitives])
 		ifFalse: [ self error: 'can only translate plugins for now. They need to inherit from InterpreterPlugin.' ].
 ]
 
 { #category : #visiting }
-ASTCSlangClassTranslator >> preTranslationVisitors [
+ANSlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { ASTCSlangDeclarationAnnotator }
+	^ { ANSlangDeclarationAnnotator }
 ]
 
 { #category : #check }
-ASTCSlangClassTranslator >> preTypeInference: aClass [
+ANSlangClassTranslator >> preTypeInference: aClass [
 	| piType |
 	piType := inferer typeForClass: InterpreterPlugin.
 	piType
@@ -52,7 +52,7 @@ ASTCSlangClassTranslator >> preTypeInference: aClass [
 ]
 
 { #category : #'translation-api' }
-ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
+ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	aClass declareCVarsIn: inferer.
 	method := (aClass lookupSelector: aSelector) ast copy.
@@ -66,16 +66,16 @@ ASTCSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromCla
 ]
 
 { #category : #'translation-api' }
-ASTCSlangClassTranslator >> translateClass: aClass [ 
+ANSlangClassTranslator >> translateClass: aClass [ 
 	self error: 'not adapted to refactor to use Slang yet'
 ]
 
 { #category : #typing }
-ASTCSlangClassTranslator >> typeAnnotatorClass [
-	^ ASTCSlangTypeAnnotator
+ANSlangClassTranslator >> typeAnnotatorClass [
+	^ ANSlangTypeAnnotator
 ]
 
 { #category : #'translation-api' }
-ASTCSlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
+ANSlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	^ self getReplacementType: (inferer typeOfVariable: anIVName)
 ]

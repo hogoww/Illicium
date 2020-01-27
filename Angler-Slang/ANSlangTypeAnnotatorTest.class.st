@@ -2,23 +2,23 @@
 I test the ASTCSlangTypeAnnotator class
 "
 Class {
-	#name : #ASTCSlangTypeAnnotatorTest,
+	#name : #ANSlangTypeAnnotatorTest,
 	#superclass : #ASTCTypeAnnotatorTest,
 	#category : #'Angler-Slang'
 }
 
 { #category : #testing }
-ASTCSlangTypeAnnotatorTest class >> isAbstract [
+ANSlangTypeAnnotatorTest class >> isAbstract [
 	^ false
 ]
 
 { #category : #test }
-ASTCSlangTypeAnnotatorTest >> aMethodWithCCodeInSmalltalk [
+ANSlangTypeAnnotatorTest >> aMethodWithCCodeInSmalltalk [
 	^ self cCode: ' 1 ' inSmalltalk: [ 1 ]
 ]
 
 { #category : #test }
-ASTCSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
+ANSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 	visitor inferer addMethod: (aMethodAST asTranslationMethodOfClass: TMethod).
@@ -29,15 +29,15 @@ ASTCSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 ]
 
 { #category : #running }
-ASTCSlangTypeAnnotatorTest >> setUp [
-	visitor := ASTCSlangTypeAnnotator new 
+ANSlangTypeAnnotatorTest >> setUp [
+	visitor := ANSlangTypeAnnotator new 
 		inferer: CCodeGenerator new;
 		yourself.
 	super setUp
 ]
 
 { #category : #test }
-ASTCSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
+ANSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
 	| ast message |
 	" Slang ignores inSmalltalk: part, so we have to as well"
 	ast := self
@@ -49,7 +49,7 @@ ASTCSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
 ]
 
 { #category : #test }
-ASTCSlangTypeAnnotatorTest >> testVisitSelfNode [
+ANSlangTypeAnnotatorTest >> testVisitSelfNode [
 	| ast counter |
 	" Override because slang adds an explicit return self "
 	counter := 0.

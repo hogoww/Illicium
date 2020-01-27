@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCSlangDeclarationAnnotator,
+	#name : #ANSlangDeclarationAnnotator,
 	#superclass : #ASTCVariableDeclarationAnnotator,
 	#instVars : [
 		'varNodesToDeclareAtTheStartOfTheMethod'
@@ -8,19 +8,19 @@ Class {
 }
 
 { #category : #visiting }
-ASTCSlangDeclarationAnnotator >> initialize [
+ANSlangDeclarationAnnotator >> initialize [
 	super initialize.
 	varNodesToDeclareAtTheStartOfTheMethod := Set new
 ]
 
 { #category : #visiting }
-ASTCSlangDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
+ANSlangDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 	super visitAssignmentNode: anAssignmentNode.
 	self atNewPropertyPut: false for: anAssignmentNode
 ]
 
 { #category : #visiting }
-ASTCSlangDeclarationAnnotator >> visitBlockNode: aBlockNode [ 
+ANSlangDeclarationAnnotator >> visitBlockNode: aBlockNode [ 
 	super visitBlockNode: aBlockNode.
 	"Slang declares everything at start, including arguments of certain blocks (#to:do:..)"
 	
@@ -33,7 +33,7 @@ ASTCSlangDeclarationAnnotator >> visitBlockNode: aBlockNode [
 ]
 
 { #category : #visit }
-ASTCSlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
+ANSlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
 	
 	"set the property for the temporaries tagged to be declared at the start of the function in the sequence node"
@@ -42,7 +42,7 @@ ASTCSlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
 ]
 
 { #category : #visiting }
-ASTCSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [ 
+ANSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [ 
 	super visitSequenceNode: aSequenceNode.
 	"Slang declares everything at start.
 	currently skips the temp declared in blocks."

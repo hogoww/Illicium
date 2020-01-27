@@ -13,7 +13,7 @@ ASTSlangReceiverTest >> addType: aSymbol to: aNode [
 { #category : #tests }
 ASTSlangReceiverTest >> setUp [
 	"Overide since we're working on slang"
-	methodTranslator := ASTCSlangTranslator new classTranslator methodTranslator.
+	methodTranslator := ANSlangTranslator new classTranslator methodTranslator.
 ]
 
 { #category : #tests }

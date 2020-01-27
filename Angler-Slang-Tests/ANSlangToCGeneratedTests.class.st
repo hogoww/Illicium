@@ -41,7 +41,7 @@ ANSlangToCGeneratedTests >> generateSlang: aSelector [
 { #category : #generating }
 ANSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
-	^ anAST definitions first prettyPrintUsing: ASTCSlangTranslator prettyPrinterClass new.
+	^ anAST definitions first prettyPrintUsing: ANSlangTranslator prettyPrinterClass new.
 ]
 
 { #category : #accessing }

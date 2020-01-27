@@ -3,7 +3,7 @@ I annotate RB ASTs with types informations coming from Slang type inference, pro
 (See CCodeGenerator, type inference protocol)
 "
 Class {
-	#name : #ASTCSlangTypeAnnotator,
+	#name : #ANSlangTypeAnnotator,
 	#superclass : #ASTCTypeAnnotator,
 	#instVars : [
 		'currentTMethod'
@@ -12,19 +12,19 @@ Class {
 }
 
 { #category : #visiting }
-ASTCSlangTypeAnnotator >> currentTMethod [
+ANSlangTypeAnnotator >> currentTMethod [
 	^ currentTMethod
 ]
 
 { #category : #accessing }
-ASTCSlangTypeAnnotator >> typeThatNode: aNode [
+ANSlangTypeAnnotator >> typeThatNode: aNode [
 	| type |
 	type := aNode getSlangTypeUsing: inferer in: currentTMethod.
 	self atNewPropertyPut: type -> nil for: aNode
 ]
 
 { #category : #accessing }
-ASTCSlangTypeAnnotator >> visitMessageNode: aMessageNode [
+ANSlangTypeAnnotator >> visitMessageNode: aMessageNode [
 	"add an exception for cCode:inSmalltalk:, because slang ignores the second argument"
 	aMessageNode selector = #cCode:inSmalltalk: 
 		ifTrue: [ 
@@ -38,7 +38,7 @@ ASTCSlangTypeAnnotator >> visitMessageNode: aMessageNode [
 ]
 
 { #category : #accessing }
-ASTCSlangTypeAnnotator >> visitMethodNode: aMethodNode [
+ANSlangTypeAnnotator >> visitMethodNode: aMethodNode [
 	"set the current tMethod, so we can give it to the CCodeGenerator, when asking for a node's type"
 	currentTMethod := inferer methodNamed: aMethodNode selector.
 	super visitMethodNode: aMethodNode.

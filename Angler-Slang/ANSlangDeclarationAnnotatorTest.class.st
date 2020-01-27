@@ -1,22 +1,22 @@
 Class {
-	#name : #ASTCSlangDeclarationAnnotatorTest,
+	#name : #ANSlangDeclarationAnnotatorTest,
 	#superclass : #ASTCVariableDeclarationAnnotatorTest,
 	#category : #'Angler-Slang'
 }
 
 { #category : #testing }
-ASTCSlangDeclarationAnnotatorTest class >> isAbstract [
+ANSlangDeclarationAnnotatorTest class >> isAbstract [
 	^ false
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> setUp [
+ANSlangDeclarationAnnotatorTest >> setUp [
 	super setUp.
-	visitor := ASTCSlangDeclarationAnnotator new.
+	visitor := ANSlangDeclarationAnnotator new.
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testAssignmentInCondition [
+ANSlangDeclarationAnnotatorTest >> testAssignmentInCondition [
 	super testAssignmentInCondition.
 	
 	"Should not be declared in the if condition"
@@ -28,7 +28,7 @@ ASTCSlangDeclarationAnnotatorTest >> testAssignmentInCondition [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
+ANSlangDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 	super testAssignmentInDifferentSequence.
 	
 	"The temporary first used in another sequence than the method's one should nit be declared in it"
@@ -40,7 +40,7 @@ ASTCSlangDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
+ANSlangDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
 	"Argument used in 2 different blocks, should be only declared once"
 	super testMethodWithTwoBlockWithSameVariable. 
 	
@@ -55,7 +55,7 @@ ASTCSlangDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
+ANSlangDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
 	super testVisitArgumentNodeInABlock. 
 	
 	"The argument should not be declared in its block"	
@@ -67,7 +67,7 @@ ASTCSlangDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testVisitArgumentNodeToDiscardInABlock [
+ANSlangDeclarationAnnotatorTest >> testVisitArgumentNodeToDiscardInABlock [
 	super testVisitArgumentNodeToDiscardInABlock. 
 	
 	"The argument should not be declared."	
@@ -79,7 +79,7 @@ ASTCSlangDeclarationAnnotatorTest >> testVisitArgumentNodeToDiscardInABlock [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testVisitGlobalNode [
+ANSlangDeclarationAnnotatorTest >> testVisitGlobalNode [
 	super testVisitGlobalNode.
 	
 	"Global nodes should not be declared in functions"
@@ -87,7 +87,7 @@ ASTCSlangDeclarationAnnotatorTest >> testVisitGlobalNode [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
+ANSlangDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
 	super testVisitInstanceVariableNode.
 	
 	"InstanceVariables should not be declared in functions. (plus, they are globals in Slang)"
@@ -95,7 +95,7 @@ ASTCSlangDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testVisitTemporaryNode [
+ANSlangDeclarationAnnotatorTest >> testVisitTemporaryNode [
 	super testVisitTemporaryNode.
 	"Temporaries should not be declared with the assignment"
 	self assert: (ast body statements at: 1) propertyEquals: false.
@@ -106,7 +106,7 @@ ASTCSlangDeclarationAnnotatorTest >> testVisitTemporaryNode [
 ]
 
 { #category : #basic }
-ASTCSlangDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
+ANSlangDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
 	super testVisitTemporaryNodeInBlock. 
 	
 	"Temp declared in Smalltalk blocks should not be declared in the block"	

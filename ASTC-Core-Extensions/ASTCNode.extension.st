@@ -64,7 +64,7 @@ ASTCNode >> parent: aParent [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> prettyPrint [
 	
-	^ self prettyPrintUsing: ASTCSlangPrettyPrinter new
+	^ self prettyPrintUsing: ANSlangPrettyPrinter new
 ]
 
 { #category : #'*ASTC-Core-Extensions' }

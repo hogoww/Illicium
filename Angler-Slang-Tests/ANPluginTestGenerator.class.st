@@ -49,7 +49,7 @@ ANPluginTestGenerator class >> testBaseClass [
 
 { #category : #removing }
 ANPluginTestGenerator class >> translatorClass [
-	^ ASTCSlangPluginTranslator
+	^ ANSlangPluginTranslator
 ]
 
 { #category : #generation }
