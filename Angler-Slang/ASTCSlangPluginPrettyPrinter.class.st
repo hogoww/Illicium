@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSlangPluginPrettyPrinter,
 	#superclass : #ASTCSlangPrettyPrinter,
-	#category : #'ASTC-VisitorsASTC-PrettyPrint'
+	#category : #'Angler-Slang'
 }
 
 { #category : #visiting }
