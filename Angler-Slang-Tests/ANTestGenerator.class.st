@@ -1,11 +1,11 @@
 Class {
-	#name : #IlliciumVMTestGenerator,
-	#superclass : #IlliciumPluginTestGenerator,
-	#category : #'Illicium-Plugins-Tests-generators'
+	#name : #ANTestGenerator,
+	#superclass : #ANPluginTestGenerator,
+	#category : #'Angler-Slang-Tests-generators'
 }
 
 { #category : #removing }
-IlliciumVMTestGenerator class >> generateVMMakerPluginsTests [
+ANTestGenerator class >> generateVMMakerPluginsTests [
 	<script>
 	| generator |
 	self removeTests.
@@ -14,17 +14,17 @@ IlliciumVMTestGenerator class >> generateVMMakerPluginsTests [
 ]
 
 { #category : #removing }
-IlliciumVMTestGenerator class >> testBaseClass [
-	^ ILVMSlangToCGeneratedTests
+ANTestGenerator class >> testBaseClass [
+	^ ANSlangToCGeneratedTests
 ]
 
 { #category : #removing }
-IlliciumVMTestGenerator class >> translatorClass [
+ANTestGenerator class >> translatorClass [
 	^ ASTCSlangTranslator
 ]
 
 { #category : #filter }
-IlliciumVMTestGenerator >> methodToTest: aClass [
+ANTestGenerator >> methodToTest: aClass [
 	^ (aClass allSelectorsBelow: VMClass)
 		collect:[ :aSelector | aClass lookupSelector: aSelector ]
 		thenSelect: [ :aCompiledMethod |(aCompiledMethod hasPragmaNamed: #doNotGenerate) not ]

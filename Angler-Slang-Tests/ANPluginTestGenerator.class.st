@@ -15,20 +15,20 @@ IlliciumTestGenerator new
  ]
 "
 Class {
-	#name : #IlliciumPluginTestGenerator,
+	#name : #ANPluginTestGenerator,
 	#superclass : #Object,
-	#category : #'Illicium-Plugins-Tests-generators'
+	#category : #'Angler-Slang-Tests-generators'
 }
 
 { #category : #removing }
-IlliciumPluginTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
+ANPluginTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
 	<script>
 	StackInterpreterPrimitivesTranslationTests ifNotNil:[:c| c removeFromSystem ] .
-	^ IlliciumPluginTestGenerator new generateTestForClass: StackInterpreterPrimitives
+	^ ANPluginTestGenerator new generateTestForClass: StackInterpreterPrimitives
 ]
 
 { #category : #removing }
-IlliciumPluginTestGenerator class >> generateVMMakerPluginsTests [
+ANPluginTestGenerator class >> generateVMMakerPluginsTests [
 	<script>
 	| generator |
 	self removeTests.
@@ -37,36 +37,36 @@ IlliciumPluginTestGenerator class >> generateVMMakerPluginsTests [
 ]
 
 { #category : #removing }
-IlliciumPluginTestGenerator class >> removeTests [
+ANPluginTestGenerator class >> removeTests [
 	<script>
 	^ self testBaseClass allSubclassesDo:[ :c| c removeFromSystem ]
 ]
 
 { #category : #removing }
-IlliciumPluginTestGenerator class >> testBaseClass [
-	^ ILPluginSlangToCGeneratedTests
+ANPluginTestGenerator class >> testBaseClass [
+	^ ANPluginSlangToCGeneratedTests
 ]
 
 { #category : #removing }
-IlliciumPluginTestGenerator class >> translatorClass [
+ANPluginTestGenerator class >> translatorClass [
 	^ ASTCSlangPluginTranslator
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> createTestClassFor: aClass [
-	^ self class testBaseClass subclass: aClass name , 'TranslationTest'
+ANPluginTestGenerator >> createTestClassFor: aClass [
+	^ self class testBaseClass subclass: 'AN' , aClass name , 'TranslationTest'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'Illicium-Plugins-Tests'
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> formatSelector: aSelector [
+ANPluginTestGenerator >> formatSelector: aSelector [
 	^ aSelector onlyLetters capitalized
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
+ANPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
 	| translator method testedClass testedClassName |
 	testedClassName := aTestedClass name.
 	method := 'setUp' asMethodWithBody: [
@@ -79,7 +79,7 @@ IlliciumPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedC
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
+ANPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
 
 	| methodSource |
 	methodSource :=	 'test', (self formatSelector: aSelector) , 'Smoke' asMethodWithBody:[
@@ -90,7 +90,7 @@ IlliciumPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> generateTestForClass: aClass [
+ANPluginTestGenerator >> generateTestForClass: aClass [
 	| testClass methodToTest |
 	methodToTest := self methodToTest: aClass.
 		
@@ -107,11 +107,11 @@ IlliciumPluginTestGenerator >> generateTestForClass: aClass [
 		do: [ :aMethod | | protocol |
 			protocol := aMethod protocol ifNotEmpty: [ aMethod protocol , '-' ].
 			self generateTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol.
-			self generateSmokeTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol ]
+			"self generateSmokeTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol" ]
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
+ANPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
 
 	| methodSource |
 	methodSource :=	 'test', aSelector onlyLetters capitalized , 'StringComparison' asMethodWithBody:[
@@ -126,7 +126,7 @@ IlliciumPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTe
 ]
 
 { #category : #generation }
-IlliciumPluginTestGenerator >> methodToTest: aClass [
+ANPluginTestGenerator >> methodToTest: aClass [
 	^ aClass methodDict
 		select: [ :compiledMethod | 
 			(compiledMethod selector includesSubstring: 'primitive')

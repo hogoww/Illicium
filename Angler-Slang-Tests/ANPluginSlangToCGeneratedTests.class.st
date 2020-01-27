@@ -1,21 +1,21 @@
 Class {
-	#name : #ILPluginSlangToCGeneratedTests,
+	#name : #ANPluginSlangToCGeneratedTests,
 	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'translator',
 		'testedClass'
 	],
-	#category : #'Illicium-Plugins-Tests'
+	#category : #'Angler-Slang-Tests'
 }
 
 { #category : #generating }
-ILPluginSlangToCGeneratedTests >> generateIllicium: aSelector [ 
+ANPluginSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
 	^ translator translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #'generating machine code' }
-ILPluginSlangToCGeneratedTests >> generateSlang: aSelector [ 
+ANPluginSlangToCGeneratedTests >> generateSlang: aSelector [ 
 	| method translation codeGenerator result |
 	"Might be able to use cCodeForMethod: instead"
 	method := testedClass >> aSelector.
@@ -39,34 +39,34 @@ ILPluginSlangToCGeneratedTests >> generateSlang: aSelector [
 ]
 
 { #category : #generating }
-ILPluginSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
+ANPluginSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
 	^ anAST definitions first prettyPrintUsing: translator prettyPrinterClass new.
 ]
 
 { #category : #accessing }
-ILPluginSlangToCGeneratedTests >> testMethod: aSelector [
+ANPluginSlangToCGeneratedTests >> testMethod: aSelector [
 	| cu |
 	cu := translator translateMethod: aSelector fromClass: testedClass.
 	^ cu
 ]
 
 { #category : #accessing }
-ILPluginSlangToCGeneratedTests >> testedClass [
+ANPluginSlangToCGeneratedTests >> testedClass [
 	^ testedClass
 ]
 
 { #category : #accessing }
-ILPluginSlangToCGeneratedTests >> testedClass: aClass [
+ANPluginSlangToCGeneratedTests >> testedClass: aClass [
 	testedClass := aClass
 ]
 
 { #category : #accessing }
-ILPluginSlangToCGeneratedTests >> translator [
+ANPluginSlangToCGeneratedTests >> translator [
 	^ translator
 ]
 
 { #category : #accessing }
-ILPluginSlangToCGeneratedTests >> translator: anObject [
+ANPluginSlangToCGeneratedTests >> translator: anObject [
 	translator := anObject
 ]

@@ -4,33 +4,33 @@ I am a copy of class ILSlangToCGeneratedTests. This comment is copied from there
 This class contains tests
 "
 Class {
-	#name : #ILVMSlangToCGeneratedTests,
+	#name : #ANSlangToCGeneratedTests,
 	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'translator',
 		'testedClass'
 	],
-	#category : #'Illicium-Plugins-Tests'
+	#category : #'Angler-Slang-Tests'
 }
 
 { #category : #'as yet unclassified' }
-ILVMSlangToCGeneratedTests class >> ressource [
-	^ { FullVMCCodeGeneratorRessource }
+ANSlangToCGeneratedTests class >> ressource [
+	^ { ANFullVMCCodeGeneratorRessource }
 ]
 
 { #category : #'generating machine code' }
-ILVMSlangToCGeneratedTests >> codeGenerator [
-	^ FullVMCCodeGeneratorRessource current codeGenerator
+ANSlangToCGeneratedTests >> codeGenerator [
+	^ ANFullVMCCodeGeneratorRessource current codeGenerator
 ]
 
 { #category : #generating }
-ILVMSlangToCGeneratedTests >> generateIllicium: aSelector [ 
+ANSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
 	^ translator  translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #'generating machine code' }
-ILVMSlangToCGeneratedTests >> generateSlang: aSelector [ 
+ANSlangToCGeneratedTests >> generateSlang: aSelector [ 
 	| codeGenerator |
 	codeGenerator := self codeGenerator.
 	^ codeGenerator cCodeForMethod: aSelector.
@@ -39,34 +39,34 @@ ILVMSlangToCGeneratedTests >> generateSlang: aSelector [
 ]
 
 { #category : #generating }
-ILVMSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
+ANSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
 	^ anAST definitions first prettyPrintUsing: ASTCSlangTranslator prettyPrinterClass new.
 ]
 
 { #category : #accessing }
-ILVMSlangToCGeneratedTests >> testMethod: aSelector [
+ANSlangToCGeneratedTests >> testMethod: aSelector [
 	| cu |
 	cu := translator translateMethod: aSelector fromClass: testedClass.
 	^ cu
 ]
 
 { #category : #accessing }
-ILVMSlangToCGeneratedTests >> testedClass [
+ANSlangToCGeneratedTests >> testedClass [
 	^ testedClass
 ]
 
 { #category : #accessing }
-ILVMSlangToCGeneratedTests >> testedClass: aClass [
+ANSlangToCGeneratedTests >> testedClass: aClass [
 	testedClass := aClass
 ]
 
 { #category : #accessing }
-ILVMSlangToCGeneratedTests >> translator [
+ANSlangToCGeneratedTests >> translator [
 	^ translator
 ]
 
 { #category : #accessing }
-ILVMSlangToCGeneratedTests >> translator: anObject [
+ANSlangToCGeneratedTests >> translator: anObject [
 	translator := anObject
 ]

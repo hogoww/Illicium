@@ -3,26 +3,26 @@ Ressource for VM Slang tests.
 The CCodeGenerator is only created once, and needs to be reseted manually if needed.
 "
 Class {
-	#name : #FullVMCCodeGeneratorRessource,
+	#name : #ANFullVMCCodeGeneratorRessource,
 	#superclass : #TestResource,
 	#instVars : [
 		'codeGenerator'
 	],
-	#category : #'Illicium-Plugins-Tests-generators'
+	#category : #'Angler-Slang-Tests-generators'
 }
 
 { #category : #'generating machine code' }
-FullVMCCodeGeneratorRessource >> codeGenerator [
+ANFullVMCCodeGeneratorRessource >> codeGenerator [
 	^ codeGenerator
 ]
 
 { #category : #accessing }
-FullVMCCodeGeneratorRessource >> codeGenerator: anObject [
+ANFullVMCCodeGeneratorRessource >> codeGenerator: anObject [
 	codeGenerator := anObject
 ]
 
 { #category : #'generating machine code' }
-FullVMCCodeGeneratorRessource >> newCodeGenerator [
+ANFullVMCCodeGeneratorRessource >> newCodeGenerator [
 	^ (VMMaker
 		makerFor: StackInterpreter
 		and: StackToRegisterMappingCogit
@@ -41,7 +41,7 @@ FullVMCCodeGeneratorRessource >> newCodeGenerator [
 ]
 
 { #category : #'generating machine code' }
-FullVMCCodeGeneratorRessource >> setUp [
+ANFullVMCCodeGeneratorRessource >> setUp [
 	super setUp.
 	codeGenerator := self newCodeGenerator
 ]
