@@ -6,17 +6,19 @@ Class {
 
 { #category : #translate }
 ASTCMethodNodeTranslator >> translateNode: aMethodNode [
+	
 	^ ASTCFunctionDefinition new
 		pharoNode: aMethodNode;
 		declaration:
 			(ASTCFunctionDeclaration new
-				id:
-					(ASTCIdentifier new
-						id: (ASTCFormatHelper formatSelector: aMethodNode selector);
-						yourself);
+				qualifiers: OrderedCollection new;
 				type:
 					(ASTCType new
 						type: (methodTranslator getNodeTranslationType: aMethodNode);
+						yourself);
+				id:
+					(ASTCIdentifier new
+						id: (ASTCFormatHelper formatSelector: aMethodNode selector);
 						yourself);
 				parameters: (aMethodNode arguments collect:[:each| each acceptVisitor: methodTranslator ]);
 				yourself);

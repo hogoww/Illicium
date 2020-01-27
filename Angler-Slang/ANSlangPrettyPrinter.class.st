@@ -22,8 +22,7 @@ ANSlangPrettyPrinter >> initialize [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
-	self << 'static '.
-  aTypeNode acceptVisitor: self.
+  aTypeNode acceptVisitor: self
 ]
 
 { #category : #visiting }
@@ -142,6 +141,7 @@ ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
+	aFunctionDeclaration qualifiers do: [:aQualifier | self << aQualifier. self space ] .
   self printDeclarationReturnType: aFunctionDeclaration type.
 
   self << Character cr.

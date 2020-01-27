@@ -352,6 +352,8 @@ ASTCBuilder >> defineProperties [
 	node property: #pharoNode type: #RBNode.
 	node property: #comment type: #String.
 
+	functionDeclaration property: #qualifiers type: #OrderedCollection.
+
 	identifier property: #id type: #String.
 
 	"removing the type might be a good idea"
@@ -362,6 +364,7 @@ ASTCBuilder >> defineProperties [
 	rawDeclaration property: #varName type: #String.
 
 	type property: #type type: #TypeConstraint.
+	
 ]
 
 { #category : #definition }

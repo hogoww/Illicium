@@ -2,6 +2,7 @@ Class {
 	#name : #ASTCFunctionDeclaration,
 	#superclass : #ASTCDeclaration,
 	#instVars : [
+		'qualifiers',
 		'type',
 		'parameters'
 	],
@@ -11,6 +12,7 @@ Class {
 { #category : #testing }
 ASTCFunctionDeclaration >> = aFunctionDeclaration [
   super = aFunctionDeclaration ifFalse: [ ^false ].
+  qualifiers = aFunctionDeclaration qualifiers ifFalse: [ ^false ].
   type = aFunctionDeclaration type ifFalse: [ ^false ].
   parameters = aFunctionDeclaration parameters ifFalse: [ ^false ].
   ^true
@@ -46,6 +48,16 @@ ASTCFunctionDeclaration >> parameters [
 ASTCFunctionDeclaration >> parameters: someVariableDeclarations [
   someVariableDeclarations do: [:each |  each parent: self ].
   parameters := someVariableDeclarations
+]
+
+{ #category : #accessing }
+ASTCFunctionDeclaration >> qualifiers [
+  ^qualifiers
+]
+
+{ #category : #accessing }
+ASTCFunctionDeclaration >> qualifiers: aQualifiers [
+  qualifiers := aQualifiers
 ]
 
 { #category : #accessing }

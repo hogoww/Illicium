@@ -25,6 +25,7 @@ ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [
 ANSlangClassTranslator >> initialize [
 	super initialize.
 	inferer := CCodeGeneratorGlobalStructure new.
+	methodTranslator methodNodeTranslator: ANSlangMethodNodeTranslator new.
 	methodTranslator literalValueNodeTranslator: ANSlangLiteralValueNodeTranslator new.
 	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
