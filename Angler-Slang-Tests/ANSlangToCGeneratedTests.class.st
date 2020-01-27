@@ -46,7 +46,7 @@ ANSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
 { #category : #generating }
 ANSlangToCGeneratedTests >> setUp [
-	super setUp.
+  super setUp.
   translator := ANSlangTranslator new
 ]
 

@@ -7,8 +7,7 @@ Class {
 { #category : #running }
 ANBrokenPluginTranslationTest >> setUp [
   super setUp.
-  testedClass := BrokenPlugin.
-  translator := ANSlangPluginTranslator new
+  testedClass := BrokenPlugin
 ]
 
 { #category : #'primitives-equaliy-test' }

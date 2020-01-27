@@ -45,6 +45,13 @@ ANPluginSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 ]
 
 { #category : #accessing }
+ANPluginSlangToCGeneratedTests >> setUp [
+	super setUp.
+	translator := ANSlangTranslator new.
+	translator classTranslator: ANSlangPluginClassTranslator new
+]
+
+{ #category : #accessing }
 ANPluginSlangToCGeneratedTests >> testMethod: aSelector [
 	| cu |
 	cu := translator translateMethod: aSelector fromClass: testedClass.

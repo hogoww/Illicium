@@ -7,8 +7,7 @@ Class {
 { #category : #running }
 ANFilePluginTranslationTest >> setUp [
   super setUp.
-  testedClass := FilePlugin.
-  translator := ANSlangPluginTranslator new
+  testedClass := FilePlugin
 ]
 
 { #category : #'file primitives-equaliy-test' }
