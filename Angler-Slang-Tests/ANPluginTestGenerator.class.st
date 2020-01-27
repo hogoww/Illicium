@@ -57,7 +57,7 @@ ANPluginTestGenerator >> createTestClassFor: aClass [
 	^ self class testBaseClass subclass: 'AN' , aClass name , 'TranslationTest'
 		instanceVariableNames: ''
 		classVariableNames: ''
-		package: 'Illicium-Plugins-Tests'
+		package: 'Angler-Slang-Tests'
 ]
 
 { #category : #generation }
