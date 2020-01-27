@@ -80,8 +80,9 @@ ANPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass f
 
 { #category : #generation }
 ANPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
-
+	"currently unused"
 	| methodSource |
+	self flag: #deadMethod.
 	methodSource :=	 'test', (self formatSelector: aSelector) , 'Smoke' asMethodWithBody:[
 		self testMethod: #aSelector.
 	].
