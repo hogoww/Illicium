@@ -315,7 +315,9 @@ ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitLiteral: aLiteral [
-	self << aLiteral value asString
+	aLiteral value isString ifTrue:[ self << '"' ].
+	self << aLiteral value asString.
+	aLiteral value isString ifTrue:[ self << '"' ].
 ]
 
 { #category : #visiting }
