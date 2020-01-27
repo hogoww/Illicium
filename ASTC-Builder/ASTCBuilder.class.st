@@ -109,7 +109,7 @@ Class {
 { #category : #accessing }
 ASTCBuilder class >> packageName [
 	"Override. Define the name of the package"
-	^'ASTC-Gen'
+	^'ASTC-Core'
 ]
 
 { #category : #accessing }
