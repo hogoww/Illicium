@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'varNodesToDeclareAtTheStartOfTheMethod'
 	],
-	#category : #'ASTC-VisitorsRB'
+	#category : #'Angler-Slang'
 }
 
 { #category : #visiting }

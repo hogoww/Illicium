@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'type'
 	],
-	#category : #'ASTC-Kernel'
+	#category : #'Angler-Slang'
 }
 
 { #category : #type }

@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'currentTMethod'
 	],
-	#category : #'ASTC-VisitorsRB-Typing'
+	#category : #'Angler-Slang'
 }
 
 { #category : #visiting }

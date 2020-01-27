@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSlangPluginTranslator,
 	#superclass : #ASTCSlangTranslator,
-	#category : #'Angler-Core-overviewers'
+	#category : #'Angler-Slang'
 }
 
 { #category : #configuration }

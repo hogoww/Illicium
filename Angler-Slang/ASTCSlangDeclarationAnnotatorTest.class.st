@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSlangDeclarationAnnotatorTest,
 	#superclass : #ASTCVariableDeclarationAnnotatorTest,
-	#category : #'ASTC-VisitorsRB-Tests'
+	#category : #'Angler-Slang'
 }
 
 { #category : #testing }
