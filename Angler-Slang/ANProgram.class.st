@@ -13,7 +13,7 @@ ANProgram >> addMethod: aMethod [
 ]
 
 { #category : #testing }
-ANProgram >> containsMethodNamed: aSelector [
+ANProgram >> hasMethodNamed: aSelector [
   ^methods anySatisfy: [:aCompiledMethod |  aCompiledMethod selector = aSelector ]
 ]
 

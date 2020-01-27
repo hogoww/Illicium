@@ -1,23 +1,21 @@
 Class {
 	#name : #ANSlangInliner,
-	#superclass : #Object,
+	#superclass : #RBProgramNodeVisitor,
+	#instVars : [
+		'program',
+		'inlinedSomething',
+		'argumentToReplace'
+	],
 	#category : #'Angler-Slang'
 }
 
 { #category : #applying }
 ANSlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
-	| inlining |
-	inlining := true.
-	[ inlining ]
-	whileTrue:[
-		inlining := false.
-		aMethodNode nodesDo: [:aNode|
-			(aNode isMessage and: [ aProgram containsMethodNamed: aNode selector ] )
-				ifTrue:[
-					inlining := true.
-					self inline:( aProgram methodNamed: aNode selector) insteadOf: aNode
-					]
-		 ]].
+	program := aProgram.
+	[ 
+		inlinedSomething := false.
+		aMethodNode acceptVisitor: self 
+	] doWhileTrue: [ inlinedSomething ].
 	 ^ aMethodNode
 ]
 
@@ -38,4 +36,29 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 		
 		replacement := arguments at: (aMethodNode argumentNames indexOf: aNode name).
 		aNode replaceWith: replacement ] ]
+]
+
+{ #category : #inilining }
+ANSlangInliner >> visitArgument: anArgumentNode [
+
+	argumentToReplace ifNil:[ ^self]. "Unset, therefore no replacement needed"
+	anArgumentNode replaceWith: [ argumentToReplace detect: [:anArgNode| anArgNode name = anArgumentNode name ] ]
+]
+
+{ #category : #applying }
+ANSlangInliner >> visitAssignmentNode: anAssignmentNode [
+	self halt.
+	super visitAssignmentNode: anAssignmentNode 
+]
+
+{ #category : #applying }
+ANSlangInliner >> visitMessageNode: aMessageNode [
+	(program hasMethodNamed: aMessageNode selector)
+		ifTrue:[ 
+			inlinedSomething := true.
+			argumentToReplace := aMessageNode arguments.
+			self inline: (program methodNamed: aMessageNode selector) insteadOf: aMessageNode.
+			argumentToReplace := nil.
+			].
+	super visitMessageNode: aMessageNode
 ]
