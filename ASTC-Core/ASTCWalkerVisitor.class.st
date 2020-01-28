@@ -236,6 +236,11 @@ ASTCWalkerVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitNegationOperator: aNegationOperator [
+  super visitNegationOperator: aNegationOperator
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
   super visitOperator: anOperator.
   anOperator operands ifNotNil: [:operands |  operands do: [:anOperands |  anOperands acceptVisitor: self ] ]

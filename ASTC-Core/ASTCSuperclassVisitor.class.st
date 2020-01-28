@@ -215,6 +215,11 @@ ASTCSuperclassVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitNegationOperator: aNegationOperator [
+  ^self visitUnaryOperator: aNegationOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitOperator: anOperator [
   ^self visitExpression: anOperator
 ]

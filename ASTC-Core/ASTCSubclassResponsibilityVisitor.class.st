@@ -215,6 +215,11 @@ ASTCSubclassResponsibilityVisitor >> visitMultiplicationOperator: aMultiplicatio
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitNegationOperator: aNegationOperator [
+  self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitNode: aNode [
   self subclassResponsibility
 ]

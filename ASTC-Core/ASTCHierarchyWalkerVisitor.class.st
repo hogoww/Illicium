@@ -257,6 +257,12 @@ ASTCHierarchyWalkerVisitor >> visitMultiplicationOperator: aMultiplicationOperat
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitNegationOperator: aNegationOperator [
+  super visitNegationOperator: aNegationOperator.
+  ^self visitUnaryOperator: aNegationOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitNode: aNode [
   super visitNode: aNode
 ]

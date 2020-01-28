@@ -233,6 +233,11 @@ ASTCStructureValidatorVisitor >> visitMultiplicationOperator: aMultiplicationOpe
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitNegationOperator: aNegationOperator [
+  [ super visitNegationOperator: aNegationOperator ] on: AssertionFailure do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitNode: aNode [
   [ super visitNode: aNode ] on: AssertionFailure do: [ errors := errors + 1 ]
 ]

@@ -215,6 +215,11 @@ ASTCVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitNegationOperator: aNegationOperator [
+  
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitNode: aNode [
   
 ]

@@ -101,7 +101,8 @@ Class {
 		'bitRightShiftOperator',
 		'assignementAdditionOperator',
 		'bitwiseXorOperator',
-		'bitwiseOrOperator'
+		'bitwiseOrOperator',
+		'negationOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -271,7 +272,8 @@ ASTCBuilder >> defineOperatorClasses [
 	bitRightShiftOperator := builder newClassNamed: #BitRightShiftOperator.
 	assignementAdditionOperator := builder newClassNamed: #AssignementAdditionOperator.
 	bitwiseXorOperator := builder newClassNamed: #BitwiseXorOperator.
-	bitwiseOrOperator := builder newClassNamed: #BitwiseOrOperator
+	bitwiseOrOperator := builder newClassNamed: #BitwiseOrOperator.
+	negationOperator := builder newClassNamed: #NegationOperator
 	
 ]
 
@@ -295,6 +297,7 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	logicalNotOperator --|> unaryOperator." ! b "
 	addressOfOperator --|> unaryOperator. " & a "
 	castOperator --|> unaryOperator. " (int) a "
+	negationOperator --|> unaryOperator. " - a "
 	
 	"priority 3, #left"
 	multiplicationOperator --|> binaryOperator." a * b "

@@ -235,6 +235,11 @@ ASTCNode >> isMultiplicationOperator [
 ]
 
 { #category : #testing }
+ASTCNode >> isNegationOperator [
+  ^false
+]
+
+{ #category : #testing }
 ASTCNode >> isNode [
   ^true
 ]
