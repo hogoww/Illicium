@@ -51,7 +51,10 @@ GetCCode >> findFunction: primitiveName in: aFileContent [
 			  current := lines at: i.
 			  matcher := RxMatcher forString: primitiveName,'\(.*\)'.
 			  ((matcher matches: current) and: [ ((lines at: i + 1) at: 1) = ${ ]) 
-				  ifTrue: [ shouldCollect := true ].
+				  ifTrue: [ shouldCollect := true.
+					s << (lines at: i - 2) ; cr. "function comment"
+					s << (lines at: i - 1) ; cr. "type"
+					].
 			  (shouldCollect and: [ current = '}' ]) ifTrue: [ 
 				  s << '}'.
 				  shouldCollect := false ].
