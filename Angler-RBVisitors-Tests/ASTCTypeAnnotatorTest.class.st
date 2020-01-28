@@ -5,7 +5,7 @@ I define basic tests for them.
 Class {
 	#name : #ASTCTypeAnnotatorTest,
 	#superclass : #ASTCVisitorTest,
-	#category : #'Angler-RBVisitors=Tests-Typing'
+	#category : #'Angler-RBVisitors-Tests-Typing'
 }
 
 { #category : #testing }

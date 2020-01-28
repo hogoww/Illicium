@@ -5,7 +5,7 @@ Class {
 		'visitor',
 		'propertyName'
 	],
-	#category : #'Angler-RBVisitors=Tests'
+	#category : #'Angler-RBVisitors-Tests'
 }
 
 { #category : #basic }

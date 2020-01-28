@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCIlliciumDeclarationAnnotatorTest,
 	#superclass : #ASTCVariableDeclarationAnnotatorTest,
-	#category : #'Angler-RBVisitors=Tests'
+	#category : #'Angler-RBVisitors-Tests'
 }
 
 { #category : #testing }
