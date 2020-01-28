@@ -20,6 +20,11 @@ ANSlangPrettyPrinter >> initialize [
 	self indentationString: '	'
 ]
 
+{ #category : #printing }
+ANSlangPrettyPrinter >> printDeclarationQualifiers: qualifiers [
+	qualifiers do: [:aQualifier | self << aQualifier. self space ] .
+]
+
 { #category : #visiting }
 ANSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
   aTypeNode acceptVisitor: self
@@ -141,7 +146,7 @@ ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
-	aFunctionDeclaration qualifiers do: [:aQualifier | self << aQualifier. self space ] .
+  self printDeclarationQualifiers: aFunctionDeclaration qualifiers.
   self printDeclarationReturnType: aFunctionDeclaration type.
 
   self << Character cr.
