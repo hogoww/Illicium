@@ -14,5 +14,10 @@ ASTCLiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOrigina
 
 { #category : #translate }
 ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode [
-	^ self createLiteralNodeWithValue: aLiteralNode value fromOriginalNode: aLiteralNode
+	| res |
+	res := self createLiteralNodeWithValue: aLiteralNode value fromOriginalNode: aLiteralNode.
+	(aLiteralNode value isInteger and: [ aLiteralNode value < 0 ])
+		ifTrue:[ res value: res value negated. "-3 becomes 3"
+			^ res negated " add negationOperator "]."this allows to remove double negatives"
+	^ res
 ]
