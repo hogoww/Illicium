@@ -347,6 +347,20 @@ ASTCExpressionTest >> testMultiplication [
 ]
 
 { #category : #tests }
+ASTCExpressionTest >> testNegated [
+	| operator node |
+	operator := (ASTCIdentifier new id: #a) negated.
+	
+	operator debugASTCStructure.
+	self assert: operator isNegationOperator.
+	self assert: operator operands size equals: 1.
+	
+	node := operator operands at: 1.
+	self assert: node isIdentifier.
+	self assert: node id equals: #a.
+]
+
+{ #category : #tests }
 ASTCExpressionTest >> testNot [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) not.

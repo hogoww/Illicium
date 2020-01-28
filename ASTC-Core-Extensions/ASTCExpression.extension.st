@@ -167,6 +167,13 @@ ASTCExpression >> indexAt: anExpression [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCExpression >> negated [
+	^ ASTCNegationOperator new
+		addOperand: self;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCExpression >> not [
 	^ ASTCLogicalNotOperator new
 		addOperand: self;
