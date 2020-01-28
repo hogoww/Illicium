@@ -20,18 +20,20 @@ BaselineOfASTC >> baseline: spec [
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			spec
 				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
-				package: 'ASTC-Gen';
-				package: 'ASTC-Gen-Extensions' with:[ spec requires:#('ASTC-Gen') ];
-				package: 'ASTC-Translation' with:[ spec requires:#('ASTC-Gen') ];
-				package: 'ASTC-Kernel' with:[ spec requires:#('ASTC-Gen' 'ASTC-Translation') ];
-				package: 'ASTC-Translation-Tests' with:[spec requires:#('ASTC-Translation') ];
-				package: 'ASTC-VisitorsASTC' with:[ spec requires:#('ASTC-Gen') ];
-				package: 'ASTC-VisitorsASTC-Tests' with:[ spec requires:#('ASTC-VisitorsASTC') ];
-				package: 'ASTC-VisitorsRB' with:[ spec requires:#('ASTC-Gen') ];
-				package: 'ASTC-VisitorsRB-Tests' with:[ spec requires:#('ASTC-VisitorsRB') ];
-				package: 'Illicium-Tools';
+				package: 'ASTC-Core';
+				package: 'ASTC-Core-Extensions' with:[ spec requires:#('ASTC-Core') ];
+				package: 'ASTC-Core-Tests' with:[ spec requires:#('ASTC-Core-Extensions') ];
+				package: 'Angler-Core' with:[ spec requires:#('ASTC-Core' 'ASTC-Core-Extensions') ];
+				package: 'ASTC-Kernel' with:[ spec requires:#('ASTC-Core' 'Angler-Core') ];
+				package: 'Angler-Core-Tests' with:[spec requires:#('Angler-Core') ];
+				package: 'Angler-Slang' with: [ #('Angler-Core') ];
+				package: 'Angler-Slang-Tests' with: [ #('Angler-Core') ];
+				package: 'Angler-VisitorsASTC' with:[ spec requires:#('ASTC-Core') ];
+				package: 'Angler-VisitorsASTC-Tests' with:[ spec requires:#('Angler-VisitorsASTC') ];
+				package: 'Angler-RBVisitors' with:[ spec requires:#('ASTC-Core') ];
+				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-VisitorsRB') ];
 				package: 'Illicium-Plugins' with: [ spec requires: #('ASTC-Kernel') ];
-				package: 'Illicium-Plugins-Tests' with: [ spec requires: #('ASTC-Kernel') ].	
+				package: 'Illicium-Tools'.
 		].
 
 ]
