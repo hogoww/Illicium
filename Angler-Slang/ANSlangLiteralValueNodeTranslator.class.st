@@ -11,7 +11,7 @@ ANSlangLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 	value := (#( true false ) includes: aLiteralNode value)
 		ifTrue: [ aLiteralNode value asBit ]
 		ifFalse: [
-			aLiteralNode value ifNil:[ 'null' ]
+			aLiteralNode value ifNil:[ #null ]
 				ifNotNil:[ aLiteralNode value ]].
 		
 	^ self createLiteralNodeWithValue: value fromOriginalNode: aLiteralNode

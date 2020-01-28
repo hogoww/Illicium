@@ -188,6 +188,15 @@ ANSlangPrettyPrinter >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> visitLiteral: aLiteral [
+	(aLiteral value = #null
+		or: [aLiteral value isString and: [ aLiteral value isSymbol ]]) 
+		ifTrue: [ ^ self << aLiteral value ].
+
+	super visitLiteral: aLiteral
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 	self printLogicalOperatorInConditionnal: anOrOperator
 ]
