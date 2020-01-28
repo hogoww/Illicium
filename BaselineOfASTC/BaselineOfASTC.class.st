@@ -31,7 +31,7 @@ BaselineOfASTC >> baseline: spec [
 				package: 'Angler-VisitorsASTC' with:[ spec requires:#('ASTC-Core') ];
 				package: 'Angler-VisitorsASTC-Tests' with:[ spec requires:#('Angler-VisitorsASTC') ];
 				package: 'Angler-RBVisitors' with:[ spec requires:#('ASTC-Core') ];
-				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-VisitorsRB') ];
+				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-RBVisitors') ];
 				package: 'Illicium-Plugins' with: [ spec requires: #('ASTC-Kernel') ];
 				package: 'Illicium-Tools'.
 		].
