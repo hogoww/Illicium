@@ -242,10 +242,24 @@ ANSlangReceiver >> bitOr: anInteger [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> bitShift: pouet [
-	self flag: #undone. "want to see how slang translates it first."
-	"More complicated than planned, it evaluates constants first, and change the sign of the bitshift if needeed."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> bitShift: anIndex [
+	| translatedArg translatedReceiver |
+	translatedArg := anIndex acceptVisitor: methodTranslator.
+	translatedReceiver := self translatedReceiver.
+	self flag: #Incomplete."slang's version attempts to evaluate the expression as a literal"
+	^ (translatedArg isLiteral and:[translatedArg value isInteger])
+		ifTrue: "bit shift amount is a constant"
+		[
+			translatedArg value < 0
+				ifTrue: [ translatedReceiver >> translatedArg "negated"]
+				ifFalse: [ translatedReceiver << translatedArg ]]
+		ifFalse: "bit shift amount is an expression"
+			[
+			translatedArg < (ASTCLiteral value: 0)
+				then: (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> translatedArg "negated"
+				else: (translatedReceiver castTo: (self cTypeFor: #usqInt)) << translatedArg.
+			].
+
 ]
 
 { #category : #'reflective operations' }
@@ -296,13 +310,20 @@ ANSlangReceiver >> cCode: aString inSmalltalk: ignoredBlock [
 ANSlangReceiver >> cCoerce: aVariable to: aType [
 	"a type is a string literal in slang case"
 	^ (aVariable acceptVisitor: methodTranslator)
-		castTo: (ASTCType new type: (self class new type: aType value ; yourself) asConstraint; yourself)
+		castTo: (self cTypeFor: aType)
 ]
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> cCoerceSimple: e to: er [
 	self flag: #undone. "want to see how slang translates it first."
 	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
+ANSlangReceiver >> cTypeFor: aSymbol [
+	^ ASTCType new 
+		type: (self class new type: aSymbol value ; yourself) asConstraint;
+		yourself
 ]
 
 { #category : #'reflective operations' }
