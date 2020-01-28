@@ -9,6 +9,13 @@ ASTCIdentifier >> assign: anExpression [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCIdentifier class >> id: aSymbol [
+	^ self new
+		id: aSymbol;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCIdentifier >> id: anId [
 	"took from a random list, might not be good enough"
 	"removed #sizeof, because it's kindof a function anyway, so it shouldn't impact much"

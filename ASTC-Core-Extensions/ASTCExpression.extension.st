@@ -168,9 +168,15 @@ ASTCExpression >> indexAt: anExpression [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCExpression >> negated [
-	^ ASTCNegationOperator new
-		addOperand: self;
-		yourself
+	^ self isNegationOperator 
+		ifTrue: ["If there's aDouble negation, we become positive !"
+			self operands first
+			]
+		ifFalse: ["otherwise, we negate !"
+			ASTCNegationOperator new
+				addOperand: self;
+				yourself
+				]
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
