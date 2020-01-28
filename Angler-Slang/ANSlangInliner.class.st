@@ -3,8 +3,7 @@ Class {
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'program',
-		'inlinedSomething',
-		'argumentToReplace'
+		'inlinedSomething'
 	],
 	#category : #'Angler-Slang'
 }
@@ -20,17 +19,18 @@ ANSlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
 ]
 
 { #category : #applying }
-ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
-	| inlining |		
+ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [	
 	program := aProgram.
-	inlining := true.
-	[ inlining ]
+	inlinedSomething := true.
+	[ inlinedSomething ]
 	whileTrue: [  
 		aMethodNode nodesDo: [:aNode|	
-			(aNode isMessage and: [ aProgram containsMethodNamed: aNode selector ] )	
-				ifTrue:[
-					inlining := true.	
-					self inline:( aProgram methodNamed: aNode selector) insteadOf: aNode	
+			(aNode isMessage and: [ aProgram hasMethodNamed: aNode selector ])	
+				ifTrue:[ | methodToInline |	
+					inlinedSomething := true.
+					methodToInline := (aProgram methodNamed: aNode selector) copy.
+					self renameVariablesOf: methodToInline byArguments: aNode arguments.
+					self inline: methodToInline insteadOf: aNode	
 					]]].
 	^ aMethodNode
 ]
@@ -55,15 +55,12 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 
 { #category : #applying }
 ANSlangInliner >> visitMessageNode: aMessageNode [
-	| methodToInline |
 	(program hasMethodNamed: aMessageNode selector)
-		ifTrue:[
+		ifTrue:[ | methodToInline |
 			inlinedSomething := true.
-			argumentToReplace := aMessageNode arguments.
 			methodToInline := (program methodNamed: aMessageNode selector) copy.
-			self renameVariablesOf: methodToInline byArguments: argumentToReplace.
+			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.
-			argumentToReplace := nil.
 			].
 	super visitMessageNode: aMessageNode
 ]
