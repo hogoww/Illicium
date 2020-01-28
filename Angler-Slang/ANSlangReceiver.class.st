@@ -515,8 +515,7 @@ ANSlangReceiver >> min: anInt [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> negated [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self translatedReceiver negated
 ]
 
 { #category : #typing }
