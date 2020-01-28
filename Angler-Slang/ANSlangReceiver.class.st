@@ -249,9 +249,10 @@ ANSlangReceiver >> bitShift: anIndex [
 	self flag: #Incomplete."slang's version attempts to evaluate the expression as a literal"
 	^ (translatedArg isLiteral and:[ translatedArg isInteger ])
 		ifTrue:[ "bit shift amount is a constant"
-			translatedArg asPharoLiteral < 0
+			(translatedArg asPharoLiteral < 0
 				ifTrue: [ translatedReceiver >> translatedArg negated ]
-				ifFalse: [ translatedReceiver << translatedArg ]]
+				ifFalse: [ translatedReceiver << translatedArg ])
+					castTo: (self cTypeFor: #usqInt)]
 		ifFalse: [ "bit shift amount is an expression"
 			translatedArg < (ASTCLiteral value: 0)
 				then: (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> translatedArg negated
