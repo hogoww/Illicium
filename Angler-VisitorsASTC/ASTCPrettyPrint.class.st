@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCPrettyPrint,
-	#superclass : #ASTCSuperclassVisitor,
+	#superclass : #AnObsoleteASTCSuperclassVisitor,
 	#instVars : [
 		'stream',
 		'indentation',
