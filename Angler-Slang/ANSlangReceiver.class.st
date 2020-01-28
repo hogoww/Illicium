@@ -251,12 +251,12 @@ ANSlangReceiver >> bitShift: anIndex [
 		ifTrue: "bit shift amount is a constant"
 		[
 			translatedArg value < 0
-				ifTrue: [ translatedReceiver >> translatedArg "negated"]
+				ifTrue: [ translatedReceiver >> translatedArg negated ]
 				ifFalse: [ translatedReceiver << translatedArg ]]
 		ifFalse: "bit shift amount is an expression"
 			[
 			translatedArg < (ASTCLiteral value: 0)
-				then: (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> translatedArg "negated"
+				then: (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> translatedArg negated
 				else: (translatedReceiver castTo: (self cTypeFor: #usqInt)) << translatedArg.
 			].
 
