@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #visiting }
+ASTCVisitor >> asPharoLiteral [
+	^ self operand asPharoLiteral negated
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitAbstractWhile: anAbstractWhile [
   
 ]

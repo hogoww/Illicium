@@ -19,6 +19,11 @@ ASTCLiteral >> acceptVisitor: aVisitor [
   aVisitor visitLiteral: self
 ]
 
+{ #category : #accessing }
+ASTCLiteral >> asPharoLiteral [
+	^ value
+]
+
 { #category : #testing }
 ASTCLiteral >> isLiteral [
   ^true

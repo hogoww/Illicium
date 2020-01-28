@@ -1,6 +1,11 @@
 Extension { #name : #ASTCNegationOperator }
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCNegationOperator >> asPharoLiteral [
+	^ self operand asPharoLiteral negated
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCNegationOperator class >> associativity [
 	"protocol: meta-data"
 	
@@ -8,6 +13,16 @@ ASTCNegationOperator class >> associativity [
 	see following link for information about C operators precedence.
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ #right
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNegationOperator >> isInteger [
+	^ self operand isInteger
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNegationOperator >> isLiteral [
+	^ self operand isLiteral
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
