@@ -6,7 +6,7 @@ Class {
 
 { #category : #translate }
 ANSlangLiteralValueNodeTranslator >> translateNode: aLiteralNode [
-	| value |
+	| value res |
 	
 	value := (#( true false ) includes: aLiteralNode value)
 		ifTrue: [ aLiteralNode value asBit ]
@@ -17,5 +17,10 @@ ANSlangLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 	(value isString and:[ value isSymbol ])
 		ifTrue: [ ^ ASTCIdentifier id: value ]. "symbols are identifiers in Slang"
 		
-	^ self createLiteralNodeWithValue: value fromOriginalNode: aLiteralNode
+	res := self createLiteralNodeWithValue: value fromOriginalNode: aLiteralNode.
+	(aLiteralNode value isInteger and: [ aLiteralNode value < 0 ])
+		ifTrue:[ 
+			res value: res value negated. "-3 becomes 3"
+			res := res negated " add negationOperator "]."this allows to remove double negatives"
+	^ res
 ]
