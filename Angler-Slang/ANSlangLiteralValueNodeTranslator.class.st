@@ -15,7 +15,7 @@ ANSlangLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 				ifNotNil:[ aLiteralNode value ]].
 			
 	(value isString and:[ value isSymbol ])
-	ifTrue: [ ASTCIdentifier id: value ]. "symbols are identifiers in Slang"
+		ifTrue: [ ^ ASTCIdentifier id: value ]. "symbols are identifiers in Slang"
 		
 	^ self createLiteralNodeWithValue: value fromOriginalNode: aLiteralNode
 ]

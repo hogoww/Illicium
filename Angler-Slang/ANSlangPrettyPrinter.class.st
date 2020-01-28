@@ -189,8 +189,7 @@ ANSlangPrettyPrinter >> visitIf: anIf [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitLiteral: aLiteral [
-	(aLiteral value = #null
-		or: [aLiteral value isString and: [ aLiteral value isSymbol ]]) 
+	aLiteral value = #null 
 		ifTrue: [ ^ self << aLiteral value ].
 
 	super visitLiteral: aLiteral
