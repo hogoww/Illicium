@@ -68,14 +68,6 @@ ANSlangPrettyPrinter >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitAssThenAssignOperator: anAddressOfOperatorNode [
-	"systematique use of parenthesis"
-	self << '('.
-	self visitUnaryOperator: anAddressOfOperatorNode.
-	self << ')'.
-]
-
-{ #category : #visiting }
 ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOperator [
 	"use of one more set of parentheses than needed. Ok."
 	self << '('.
