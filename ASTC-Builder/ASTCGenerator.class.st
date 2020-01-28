@@ -729,29 +729,13 @@ ASTCGenerator >> prefix: aString [
 
 { #category : #actions }
 ASTCGenerator >> reloadExtentions [
-	| icebergRepo listOfPackageNameToReload listOfPackageToReload |
+	| icebergRepo |
 	
 	icebergRepo := Iceberg repositoryForPackage: self class package.
-	
-	listOfPackageNameToReload:= OrderedCollection new.
-	listOfPackageNameToReload 
-		add: 'ASTC-Gen-Extensions';
-		add: 'ASTC-Kernel';
-		add: 'ASTC-Translation';
-		add: 'ASTC-Translation-Tests';
-		add: 'ASTC-VisitorsASTC' ;
-		add: 'ASTC-VisitorsASTC-Tests';
-		add: 'ASTC-VisitorsRB' ;
-		add: 'ASTC-VisitorsRB-Tests'.
-		
-	listOfPackageToReload:= OrderedCollection new.
 
-	listOfPackageNameToReload do:[:aPackageName| 
-		icebergRepo loadedPackages do:[:aPackage|
-			aPackageName = aPackage name ifTrue:[listOfPackageToReload add: aPackage] ]
-		].
-
-	listOfPackageToReload do:[:aPackage| aPackage reload.].
+	icebergRepo loadedPackages do:[:aPackage| 
+		(aPackage name = self class package name or: [aPackage name = builder packageName])
+			ifFalse: [ aPackage reload ]]
 ]
 
 { #category : #'generation-visit' }
