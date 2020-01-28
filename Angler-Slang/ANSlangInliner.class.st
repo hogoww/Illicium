@@ -19,6 +19,22 @@ ANSlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
 	 ^ aMethodNode
 ]
 
+{ #category : #applying }
+ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
+	| inlining |		
+	program := aProgram.
+	inlining := true.
+	[ inlining ]
+	whileTrue: [  
+		aMethodNode nodesDo: [:aNode|	
+			(aNode isMessage and: [ aProgram containsMethodNamed: aNode selector ] )	
+				ifTrue:[
+					inlining := true.	
+					self inline:( aProgram methodNamed: aNode selector) insteadOf: aNode	
+					]]].
+	^ aMethodNode
+]
+
 { #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodeToInline |
@@ -28,23 +44,25 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	aMessageNode parent replaceNode: aMessageNode withNode: nodeToInline
 ]
 
-{ #category : #inilining }
-ANSlangInliner >> visitArgument: anArgumentNode [
-
-	argumentToReplace ifNil:[ ^self]. "Unset, therefore no replacement needed"
-	anArgumentNode replaceWith: [ argumentToReplace detect: [:anArgNode| anArgNode name = anArgumentNode name ] ]
+{ #category : #inlining }
+ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
+  | replacement |	
+	aMethodNode body nodesDo: [:aNode |  
+		aNode isArgument ifTrue: [
+			replacement :=  arguments at: (aMethodNode arguments indexOf: aNode).
+			aNode replaceWith: replacement ] ] 
 ]
 
 { #category : #applying }
 ANSlangInliner >> visitMessageNode: aMessageNode [
 	| methodToInline |
 	(program hasMethodNamed: aMessageNode selector)
-		ifTrue:[ 
+		ifTrue:[
 			inlinedSomething := true.
 			argumentToReplace := aMessageNode arguments.
-			methodToInline := (program methodNamed: aMessageNode selector) copy. 
-			methodToInline body acceptVisitor: self.
-			self inline:methodToInline insteadOf: aMessageNode.
+			methodToInline := (program methodNamed: aMessageNode selector) copy.
+			self renameVariablesOf: methodToInline byArguments: argumentToReplace.
+			self inline: methodToInline insteadOf: aMessageNode.
 			argumentToReplace := nil.
 			].
 	super visitMessageNode: aMessageNode
