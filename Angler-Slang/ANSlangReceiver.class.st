@@ -102,7 +102,7 @@ ANSlangReceiver >> >= aNumber [
 
 { #category : #typing }
 ANSlangReceiver >> >> aNumber [
-	^ self translatedReceiver >> (aNumber acceptVisitor: methodTranslator)
+	^ (self translatedReceiver castTo: (self cTypeFor: #usqInt)) >> (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
