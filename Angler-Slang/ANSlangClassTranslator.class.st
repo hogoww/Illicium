@@ -15,10 +15,12 @@ ANSlangClassTranslator >> addMethod: aCollection [
 
 { #category : #transformations }
 ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
+	| method |
+	method := aMethodNode copy.
 	transformations do: [:aTransformation|
-		aTransformation applyOnMethod: aMethodNode ofProgram: program.
+		aTransformation applyOnMethod: method ofProgram: program.
 		].
-	^ aMethodNode
+	^ method
 ]
 
 { #category : #initialization }
