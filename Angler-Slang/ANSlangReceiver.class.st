@@ -64,7 +64,7 @@ ANSlangReceiver >> < aNumber [
 
 { #category : #typing }
 ANSlangReceiver >> << aNumber [
-	^ self translatedReceiver << (aNumber acceptVisitor: methodTranslator)
+	^ (self translatedReceiver castTo: (self cTypeFor: #usqInt)) << (aNumber acceptVisitor: methodTranslator)
 ]
 
 { #category : #accessing }
@@ -159,14 +159,12 @@ ANSlangReceiver >> asConstraint [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> asFloat [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self translatedReceiver castTo: (self cTypeFor: #double)
 ]
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> asInteger [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self translatedReceiver castTo: (self cTypeFor: #sqInt)
 ]
 
 { #category : #'reflective operations' }
@@ -176,8 +174,7 @@ ANSlangReceiver >> asUnsignedInteger [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> asVoidPointer [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self translatedReceiver castTo: (self cTypeFor: #'void *')
 ]
 
 { #category : #accessing }
