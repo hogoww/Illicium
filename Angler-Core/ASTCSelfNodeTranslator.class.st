@@ -6,5 +6,5 @@ Class {
 
 { #category : #translate }
 ASTCSelfNodeTranslator >> translateNode: aNode [ 
-
+	self error: 'self nodes should not be visited'
 ]
