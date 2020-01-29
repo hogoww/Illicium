@@ -18,7 +18,7 @@ ANSlangLiteralValueNodeTranslator >> translateNode: aLiteralNode [
 		ifTrue: [ ^ ASTCIdentifier id: value ]. "symbols are identifiers in Slang"
 		
 	res := self createLiteralNodeWithValue: value fromOriginalNode: aLiteralNode.
-	(aLiteralNode value isInteger and: [ aLiteralNode value < 0 ])
+	(value isInteger and: [ value < 0 ])
 		ifTrue:[ 
 			res value: res value negated. "-3 becomes 3"
 			res := res negated " add negationOperator "]."this allows to remove double negatives"

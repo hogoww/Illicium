@@ -11,9 +11,10 @@ ANSlangAssignmentNodeTranslator >> translateNode: anAssignmentNode [
 		ifTrue: [
 			anAssignmentNode variable = anAssignmentNode value receiver ifTrue:[
 				^ (anAssignmentNode variable acceptVisitor: methodTranslator)
-					assignAndAdd: (ASTCLiteral value: anAssignmentNode value arguments first) ].
+					assignAndAdd: (ASTCLiteral value: anAssignmentNode value arguments first value) ].
+			" apparently not done in slang..
 			anAssignmentNode variable = anAssignmentNode value receiver ifTrue:[
 				^ (anAssignmentNode variable acceptVisitor: methodTranslator)
-					assignAndAdd: (ASTCLiteral value: anAssignmentNode receiver) ]].
+					assignAndAdd: (ASTCLiteral value: anAssignmentNode receiver) ]"].
 	^ super translateNode: anAssignmentNode
 ]
