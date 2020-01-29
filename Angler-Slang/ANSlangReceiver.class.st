@@ -627,6 +627,12 @@ ANSlangReceiver >> type: aType [
 ]
 
 { #category : #'reflective operations' }
+ANSlangReceiver >> value: somethong [
+	self flag: #undone. "want to see how slang translates it first."
+	^ ASTCLiteral value: '''unsuportedFeature'''.
+]
+
+{ #category : #'reflective operations' }
 ANSlangReceiver >> value: somethong value: bidule [
 	self flag: #undone. "want to see how slang translates it first."
 	^ ASTCLiteral value: '''unsuportedFeature'''.
