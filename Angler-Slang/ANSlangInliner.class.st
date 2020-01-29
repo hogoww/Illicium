@@ -10,8 +10,9 @@ Class {
 
 { #category : #applying }
 ANSlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
+	"Should get a copy of a method node as parameter, since it's going to modify it."
 	program := aProgram.
-	[ 
+	[
 		inlinedSomething := false.
 		aMethodNode acceptVisitor: self 
 	] doWhileTrue: [ inlinedSomething ].
