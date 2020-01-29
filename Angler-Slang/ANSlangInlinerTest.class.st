@@ -10,6 +10,16 @@ Class {
 }
 
 { #category : #tests }
+ANSlangInlinerTest >> methodWithBlockParameter: aBlock [
+	aBlock value
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithBlockParameterToInline [
+	self methodWithBlockParameter: [ 1 even ]
+]
+
+{ #category : #tests }
 ANSlangInlinerTest >> methodWithSingleStatement [
 	1 even
 ]
@@ -47,6 +57,17 @@ ANSlangInlinerTest >> methodWithTwoStatements [
 ]
 
 { #category : #tests }
+ANSlangInlinerTest >> methodWithTwoStatementsThatReturns [
+	1 even.
+	^ 2 even
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithTwoStatementsThatReturnsToInline [
+	self methodWithTwoStatementsThatReturns
+]
+
+{ #category : #tests }
 ANSlangInlinerTest >> methodWithTwoStatementsToInline [
 	self methodWithTwoStatements
 ]
@@ -57,6 +78,24 @@ ANSlangInlinerTest >> setUp [
 	super setUp.
 	program := ANProgram new.
 	inliner := ANSlangInliner new.
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
+	| resultingMethod inlinedStatement initialMethod |
+	program addMethod: self class >> #methodWithBlockParameter:. 
+	initialMethod := (self class >> #methodWithBlockParameterToInline) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	
+	self deny: initialMethod equals: resultingMethod.
+	inlinedStatement := resultingMethod statements first.
+	self assert: methodToInline statements size equals: 1.
+	self assert: inlinedStatement isMessage.
+	self assert: inlinedStatement receiver isBlock.
+	self assert: inlinedStatement receiver equals: [ 1 even ] sourceNode.
+	self assert: inlinedStatement selector equals: #value.
 ]
 
 { #category : #tests }
@@ -122,6 +161,27 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
+	
+	self deny: initialMethod equals: resultingMethod.
+	inlinedStatement := resultingMethod statements.
+	self assert: methodToInline statements size equals: 2.
+	self assert: inlinedStatement first isMessage.
+	self assert: inlinedStatement first receiver value equals: 1.
+	self assert: inlinedStatement first selector equals: #even.
+	
+	self assert: inlinedStatement second isMessage.
+	self assert: inlinedStatement second receiver value equals: 2.
+	self assert: inlinedStatement second selector equals: #even.
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
+	"same behavior as self class >> testInlineTwoStatement, because the return is discarded in the inlining"
+	| resultingMethod inlinedStatement initialMethod |
+	program addMethod: self class >> #methodWithTwoStatementsThatReturns. 
+	initialMethod := (self class >> #methodWithTwoStatementsThatReturnsToInline) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	self deny: initialMethod equals: resultingMethod.
 	inlinedStatement := resultingMethod statements.
