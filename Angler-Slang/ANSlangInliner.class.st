@@ -49,7 +49,7 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
   | replacement |	
 	aMethodNode body nodesDo: [:aNode |  
-		aNode isArgument ifTrue: [
+		(aNode isArgument and:[ aNode isBlockVar not ]) ifTrue: [
 			replacement :=  arguments at: (aMethodNode arguments indexOf: aNode).
 			aNode replaceWith: replacement ] ] 
 ]
