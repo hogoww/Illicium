@@ -48,7 +48,7 @@ ASTCArray >> do: aBlock [
 	receiver := self translatedReceiver.
 	
 	res body statements addFirst:
-		(ASTCIf new condition: (arg equals: (ASTCLiteral value: 'null'));
+		(ASTCIf new condition: (arg equals: (ASTCLiteral value: #null));
 			then: ASTCBreak new;
 			yourself).
 	

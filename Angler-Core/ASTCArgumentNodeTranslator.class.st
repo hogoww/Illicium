@@ -7,9 +7,8 @@ Class {
 { #category : #translate }
 ASTCArgumentNodeTranslator >> translateNode: anArgumentNode [
 	| argIdentifier |
-	argIdentifier := ASTCIdentifier new
-		id: anArgumentNode name;
-		yourself.
+	argIdentifier := ASTCIdentifier id: anArgumentNode name.
+	
 	^ anArgumentNode parent isMethod
 		ifTrue: [ 
 			ASTCVariableDeclaration new
@@ -22,6 +21,6 @@ ASTCArgumentNodeTranslator >> translateNode: anArgumentNode [
 				yourself.
 			]
 		ifFalse: [ 
-				argIdentifier.
+				argIdentifier
 			]
 ]
