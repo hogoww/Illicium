@@ -10,16 +10,6 @@ Class {
 }
 
 { #category : #tests }
-ANSlangInlinerTest >> methodWithSingleReturnStatement [
-	^ 1 even
-]
-
-{ #category : #tests }
-ANSlangInlinerTest >> methodWithSingleReturnStatementToInline [
-	self methodWithSingleReturnStatement
-]
-
-{ #category : #tests }
 ANSlangInlinerTest >> methodWithSingleStatement [
 	1 even
 ]
@@ -33,6 +23,16 @@ ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporary [
 { #category : #tests }
 ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporaryToInline [
 	self methodWithSingleStatementAndSingleTemporary
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithSingleStatementThatReturns [
+	^ 1 even
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithSingleStatementThatReturnsToInline [
+	self methodWithSingleStatementThatReturns
 ]
 
 { #category : #tests }
@@ -100,8 +100,8 @@ ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
 { #category : #tests }
 ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithSingleReturnStatement.
-	initialMethod := (self class >> #methodWithSingleReturnStatementToInline) ast.
+	program addMethod: self class >> #methodWithSingleStatementThatReturns.
+	initialMethod := (self class >> #methodWithSingleStatementThatReturnsToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
