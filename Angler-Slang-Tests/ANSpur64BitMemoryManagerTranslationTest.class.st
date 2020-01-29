@@ -20,6 +20,11 @@ ANSpur64BitMemoryManagerTranslationTest >> setUp [
 	translator addMethod: SpurMemoryManager >> #allHeapEntitiesDo:.
 	translator addMethod: SpurMemoryManager >> #allOldSpaceObjectsFrom:do:.
 	translator addMethod: SpurMemoryManager >> #allOldSpaceEntitiesFrom:do:.
+	translator addMethod: SpurMemoryManager >> #checkFreeSpace:.
+	translator addMethod: SpurMemoryManager >> #checkFreeSpace.
+	translator addMethod: SpurMemoryManager >> #isImmediate:.
+	translator addMethod: SpurMemoryManager >> #classIndexOf:.
+	translator addMethod: SpurMemoryManager >> #rawNumSlotsOf:.
 ]
 
 { #category : #'object enumeration-equaliy-test' }
