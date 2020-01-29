@@ -26,6 +26,11 @@ ANSlangReceiver >> % anOperand [
 	^ self translatedReceiver % (anOperand acceptVisitor: methodTranslator)
 ]
 
+{ #category : #'translation-operators' }
+ANSlangReceiver >> & anOperand [
+	^ self translatedReceiver & (anOperand acceptVisitor: methodTranslator)
+]
+
 { #category : #accessing }
 ANSlangReceiver >> * aNumber [
 	"same code as ASTCNumber>>#*"
@@ -83,9 +88,8 @@ ANSlangReceiver >> = anotherObject [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> == pouet [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> == anOperand [
+	^ self translatedReceiver equals: anOperand
 ]
 
 { #category : #typing }
@@ -124,9 +128,10 @@ ANSlangReceiver >> addressOf: anExpression put: anAssignmentBlock [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> allMask: something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> allMask: anOperand [
+	| arg |
+	arg := anOperand acceptVisitor: methodTranslator.
+	^ self translatedReceiver & arg equals: arg
 ]
 
 { #category : #typing }
@@ -138,9 +143,8 @@ ANSlangReceiver >> and: aBoolean [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> anyMask: something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> anyMask: anOperand [
+	^ self & anOperand
 ]
 
 { #category : #accessing }
@@ -183,9 +187,8 @@ ANSlangReceiver >> at: anExpression [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> at: something put: pouet [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> at: anExpression put: aValue [
+	^ (self at: anExpression) assign: (aValue acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -282,8 +285,14 @@ ANSlangReceiver >> byteSwap64 [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> bytesPerOop [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	"i think ?"
+	^ ASTCIdentifier id: #BytesPerOop
+]
+
+{ #category : #'reflective operations' }
+ANSlangReceiver >> bytesPerWord [
+	"i think ?"
+	^ ASTCIdentifier id: #BytesPerWord
 ]
 
 { #category : #'reflective operations' }
@@ -388,7 +397,7 @@ ANSlangReceiver >> ifNil: aBlock [
 	^ ASTCIf new
 		condition: self translatedReceiver not;
 		then: (aBlock acceptVisitor: methodTranslator)
-		yourself.
+		yourself
 ]
 
 { #category : #'reflective operations' }
@@ -488,8 +497,7 @@ ANSlangReceiver >> isIntegerObject: anOop [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> isNil [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self translatedReceiver equals: (ASTCLiteral value: #null)
 ]
 
 { #category : #accessing }
@@ -503,14 +511,22 @@ ANSlangReceiver >> literalNodeFor: aValue [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> max: anInt [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	| arg translatedReceiver |
+	arg := anInt acceptVisitor: methodTranslator.
+	translatedReceiver := self translatedReceiver.
+	^ translatedReceiver < arg
+		then: arg
+		else: translatedReceiver
 ]
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> min: anInt [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	| arg translatedReceiver |
+	arg := anInt acceptVisitor: methodTranslator.
+	translatedReceiver := self translatedReceiver.
+	^ translatedReceiver < arg
+		then: translatedReceiver
+		else: arg
 ]
 
 { #category : #'reflective operations' }
@@ -527,9 +543,8 @@ ANSlangReceiver >> new [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> noMask: stuff [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> noMask: anOperand [
+	^ (self translatedReceiver & (anOperand acceptVisitor: methodTranslator)) equals: (ASTCLiteral value: 0)
 ]
 
 { #category : #accessing }
@@ -539,8 +554,7 @@ ANSlangReceiver >> not [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> notNil [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self translatedReceiver notEquals: (ASTCLiteral value: #null)
 ]
 
 { #category : #'reflective operations' }
@@ -613,8 +627,8 @@ ANSlangReceiver >> to: stop do: aBlock [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> touch: something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	"does not do appear in translation"
+	^ ASTCEmptyStatement new
 ]
 
 { #category : #accessing }
@@ -670,8 +684,7 @@ ANSlangReceiver >> whileTrue: aBlock [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> wordSize [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self bytesPerWord
 ]
 
 { #category : #accessing }

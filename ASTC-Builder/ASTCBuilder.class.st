@@ -320,7 +320,7 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	
 	"priority 7, #left"
 	equalityOperator --|> binaryOperator." a == b "
-	inequalityOperator --|> binaryOperator." a !=b "
+	inequalityOperator --|> binaryOperator." a != b "
 	
 	"priority 8, #left"
 	bitwiseAndOperator --|> binaryOperator. " a & b "
