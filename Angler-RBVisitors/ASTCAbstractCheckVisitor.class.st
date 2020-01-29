@@ -16,7 +16,7 @@ ASTCAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for: aNode [
 
 	(aNode propertyAt: aProperty
 		ifPresent:[:assoc|
-			 self error:
+			 Warning new signal:
 				(String streamContents:[:s| s << ' visitor property conflict. ''' << aProperty << ''' already exists for instance of ' << aNode class name ])]
 		ifAbsent: [ aNode propertyAt: aProperty put: aValue. ]).
 		
