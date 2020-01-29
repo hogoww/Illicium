@@ -21,6 +21,11 @@ ANSlangReceiver class >> slangReservedSelector [
 	eassert:)
 ]
 
+{ #category : #'translation-operators' }
+ANSlangReceiver >> % anOperand [
+	^ self translatedReceiver % (anOperand acceptVisitor: methodTranslator)
+]
+
 { #category : #accessing }
 ANSlangReceiver >> * aNumber [
 	"same code as ASTCNumber>>#*"
