@@ -9,70 +9,70 @@ Class {
 	#category : #'Angler-Slang'
 }
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodReturningInlinedSingleStatement [
 	^ self methodWithSingleStatement
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithBlockParameter: aBlock [
 	aBlock value
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithBlockParameterToInline [
 	self methodWithBlockParameter: [ 1 even ]
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithSingleStatement [
 	1 even
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporary [
 	| t |
 	1 even
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporaryToInline [
 	self methodWithSingleStatementAndSingleTemporary
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithSingleStatementThatReturns [
 	^ 1 even
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithSingleStatementThatReturnsToInline [
 	self methodWithSingleStatementThatReturns
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithSingleStatementToInline [
 	self methodWithSingleStatement
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithTwoStatements [
 	1 even.
 	2 even
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithTwoStatementsThatReturns [
 	1 even.
 	^ 2 even
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithTwoStatementsThatReturnsToInline [
 	self methodWithTwoStatementsThatReturns
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithTwoStatementsToInline [
 	self methodWithTwoStatements
 ]
