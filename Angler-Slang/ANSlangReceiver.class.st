@@ -171,8 +171,7 @@ ANSlangReceiver >> asInteger [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> asUnsignedInteger [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self translatedReceiver castTo: (self cTypeFor: #usqInt)
 ]
 
 { #category : #'reflective operations' }
