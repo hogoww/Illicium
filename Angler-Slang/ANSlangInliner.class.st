@@ -45,7 +45,9 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
     nodesToInline last isReturn
         ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
 
-    aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
+	nodesToInline size = 1
+		ifTrue: [ aMessageNode replaceWith: nodesToInline first ]
+		ifFalse: [ aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline ]
 ]
 
 { #category : #inlining }
@@ -53,7 +55,7 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
   | replacement |	
 	aMethodNode body nodesDo: [:aNode |  
 		(aNode isArgument and:[ aNode isBlockVar not ]) ifTrue: [
-			replacement :=  arguments at: (aMethodNode arguments indexOf: aNode).
+			replacement := arguments at: (aMethodNode arguments indexOf: aNode).
 			aNode replaceWith: replacement ] ] 
 ]
 

@@ -10,6 +10,11 @@ Class {
 }
 
 { #category : #tests }
+ANSlangInlinerTest >> methodReturningInlinedSingleStatement [
+	^ self methodWithSingleStatement
+]
+
+{ #category : #tests }
 ANSlangInlinerTest >> methodWithBlockParameter: aBlock [
 	aBlock value
 ]
@@ -193,4 +198,22 @@ ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 	self assert: inlinedStatement second isMessage.
 	self assert: inlinedStatement second receiver value equals: 2.
 	self assert: inlinedStatement second selector equals: #even.
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> testReturningInlinedSingleStatement [
+	| resultingMethod inlinedStatement initialMethod |
+	program addMethod: self class >> #methodWithSingleStatement. 
+	initialMethod := (self class >> #methodReturningInlinedSingleStatement) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	
+	self deny: initialMethod equals: resultingMethod.
+	inlinedStatement := resultingMethod statements first.
+	self assert: methodToInline statements size equals: 1.
+	self assert: inlinedStatement isReturn.
+	self assert: inlinedStatement value isMessage.
+	self assert: inlinedStatement value receiver value equals: 1.
+	self assert: inlinedStatement value selector equals: #even.
 ]
