@@ -25,6 +25,17 @@ ANSlangInlinerTest >> methodWithSingleStatement [
 ]
 
 { #category : #tests }
+ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporary [
+	| t |
+	1 even
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporaryToInline [
+	self methodWithSingleStatementAndSingleTemporary
+]
+
+{ #category : #tests }
 ANSlangInlinerTest >> methodWithSingleStatementToInline [
 	self methodWithSingleStatement
 ]
@@ -41,7 +52,7 @@ ANSlangInlinerTest >> setUp [
 ANSlangInlinerTest >> testInlineSingleStatement [
 	| resultingMethod inlinedStatement |
 	program addMethod: self class >> #methodWithSingleStatement. 
-	methodToInline := (self class >> #methodWithSingleStatementToInline) ast.
+	methodToInline := (self class >> #methodWithSingleStatementToInline) ast copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	inlinedStatement := resultingMethod statements first.
@@ -52,10 +63,27 @@ ANSlangInlinerTest >> testInlineSingleStatement [
 ]
 
 { #category : #tests }
+ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
+	| resultingMethod inlinedStatement |
+	program addMethod: self class >> #methodWithSingleStatementAndSingleTemporary. 
+	methodToInline := (self class >> #methodWithSingleStatementAndSingleTemporaryToInline) ast copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	inlinedStatement := resultingMethod statements first.
+	self assert: resultingMethod temporaries size equals: 1.
+	self assert: resultingMethod temporaries first name equals: #t.
+	self assert: methodToInline statement size equals: 1.
+	self assert: inlinedStatement isMessage.
+	self assert: inlinedStatement receiver value equals: 1.
+	self assert: inlinedStatement selector equals: #even.
+	
+]
+
+{ #category : #tests }
 ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 	| resultingMethod inlinedStatement |
 	program addMethod: self class >> #methodWithSingleReturnStatement. 
-	methodToInline := (self class >> #methodWithSingleReturnStatementToInline) ast.
+	methodToInline := (self class >> #methodWithSingleReturnStatementToInline) ast copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	inlinedStatement := resultingMethod statements first.

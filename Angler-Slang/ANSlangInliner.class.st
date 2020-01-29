@@ -39,6 +39,8 @@ ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 { #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodeToInline |
+	aMessageNode methodNode body temporaries:  aMessageNode methodNode body temporaries , aMethodNode body temporaries.
+	
 	nodeToInline := aMethodNode statements first.
 	nodeToInline isReturn
 		ifTrue: [ nodeToInline := nodeToInline value ].
