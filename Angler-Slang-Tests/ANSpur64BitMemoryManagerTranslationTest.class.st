@@ -12,6 +12,14 @@ ANSpur64BitMemoryManagerTranslationTest >> setUp [
 	translator addMethod: SpurMemoryManager >> #splObj:.
 	translator addMethod: SpurMemoryManager >> #fetchPointer:ofObject:.
 	translator addMethod: SpurMemoryManager >> #knownClassAtIndex:.
+	translator addMethod: SpurMemoryManager >> #allObjectsDo:.
+	translator addMethod: SpurMemoryManager >> #allNewSpaceObjectsDo:.
+	translator addMethod: SpurMemoryManager >> #allOldSpaceObjectsDo:.
+	translator addMethod: SpurMemoryManager >> #allNewSpaceEntitiesDo:.
+	translator addMethod: SpurMemoryManager >> #allOldSpaceEntitiesDo:.
+	translator addMethod: SpurMemoryManager >> #allHeapEntitiesDo:.
+	translator addMethod: SpurMemoryManager >> #allOldSpaceObjectsFrom:do:.
+	translator addMethod: SpurMemoryManager >> #allOldSpaceEntitiesFrom:do:.
 ]
 
 { #category : #'object enumeration-equaliy-test' }
