@@ -38,13 +38,14 @@ ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 
 { #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
-	| nodeToInline |
-	aMessageNode methodNode body temporaries:  aMessageNode methodNode body temporaries , aMethodNode body temporaries.
-	
-	nodeToInline := aMethodNode statements first.
-	nodeToInline isReturn
-		ifTrue: [ nodeToInline := nodeToInline value ].
-	aMessageNode parent replaceNode: aMessageNode withNode: nodeToInline
+    | nodesToInline |
+    aMessageNode methodNode body temporaries:  aMessageNode methodNode temporaries , aMethodNode body temporaries.
+
+    nodesToInline := aMethodNode statements.
+    nodesToInline last isReturn
+        ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
+
+    aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
 ]
 
 { #category : #inlining }

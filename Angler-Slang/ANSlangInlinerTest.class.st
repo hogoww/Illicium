@@ -40,6 +40,17 @@ ANSlangInlinerTest >> methodWithSingleStatementToInline [
 	self methodWithSingleStatement
 ]
 
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithTwoStatements [
+	1 even.
+	2 even
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithTwoStatementsToInline [
+	self methodWithTwoStatements
+]
+
 { #category : #running }
 ANSlangInlinerTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
@@ -59,7 +70,7 @@ ANSlangInlinerTest >> testInlineSingleStatement [
 	
 	self deny: initialMethod equals: resultingMethod.
 	inlinedStatement := resultingMethod statements first.
-	self assert: methodToInline statement size equals: 1.
+	self assert: methodToInline statements size equals: 1.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver value equals: 1.
 	self assert: inlinedStatement selector equals: #even.
@@ -78,7 +89,8 @@ ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
 	inlinedStatement := resultingMethod statements first.
 	self assert: resultingMethod temporaries size equals: 1.
 	self assert: resultingMethod temporaries first name equals: #t.
-	self assert: methodToInline statement size equals: 1.
+	
+	self assert: methodToInline statements size equals: 1.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver value equals: 1.
 	self assert: inlinedStatement selector equals: #even.
@@ -96,8 +108,29 @@ ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 	
 	self deny: initialMethod equals: resultingMethod.
 	inlinedStatement := resultingMethod statements first.
-	self assert: methodToInline statement size equals: 1.
+	self assert: methodToInline statements size equals: 1.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver value equals: 1.
 	self assert: inlinedStatement selector equals: #even.
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> testInlineTwoStatement [
+	| resultingMethod inlinedStatement initialMethod |
+	program addMethod: self class >> #methodWithTwoStatements. 
+	initialMethod := (self class >> #methodWithTwoStatementsToInline) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	
+	self deny: initialMethod equals: resultingMethod.
+	inlinedStatement := resultingMethod statements.
+	self assert: methodToInline statements size equals: 2.
+	self assert: inlinedStatement first isMessage.
+	self assert: inlinedStatement first receiver value equals: 1.
+	self assert: inlinedStatement first selector equals: #even.
+	
+	self assert: inlinedStatement second isMessage.
+	self assert: inlinedStatement second receiver value equals: 2.
+	self assert: inlinedStatement second selector equals: #even.
 ]
