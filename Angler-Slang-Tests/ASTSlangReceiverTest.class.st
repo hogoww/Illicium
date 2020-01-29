@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTSlangReceiverTest,
 	#superclass : #ASTCMessageNodeTranslatorTest,
-	#category : #'Angler-Core-Tests-Translators'
+	#category : #'Angler-Slang-Tests'
 }
 
 { #category : #tests }
