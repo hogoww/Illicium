@@ -18,6 +18,11 @@ ANSlangTypeAnnotatorTest >> aMethodWithCCodeInSmalltalk [
 ]
 
 { #category : #test }
+ANSlangTypeAnnotatorTest >> aMethodWithCaseOf [
+	1 caseOf: { [ 1 ] -> [ 1 even ] }
+]
+
+{ #category : #test }
 ANSlangTypeAnnotatorTest >> aMethodWithCaseOfOtherwise [
 	1 caseOf: 
 		{ [ 1 ] -> [ 1 even ] }
@@ -59,6 +64,26 @@ ANSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
 	message := ast body statements first value.
 	self assert: (message arguments first hasProperty: propertyName).
 	self deny: (message arguments second hasProperty: propertyName).
+]
+
+{ #category : #test }
+ANSlangTypeAnnotatorTest >> testVisitCaseOf [
+	"cases in caseOf: do not have TNodes equivalent"
+	| ast caseMessage caseArray case |
+	ast := self
+		inferMethodSelector: #aMethodWithCaseOf
+		from: self class.
+	caseMessage := ast body statements first.
+	self assert: (caseMessage hasProperty: propertyName).
+	self assert: (caseMessage receiver hasProperty: propertyName).
+	
+	caseArray := caseMessage arguments first.
+	self deny: (caseArray hasProperty: propertyName).
+	
+	case := caseArray statements first.
+	self deny: (case hasProperty: propertyName).
+	self assertHasType: case receiver.
+	self assertHasType: case arguments first
 ]
 
 { #category : #test }
