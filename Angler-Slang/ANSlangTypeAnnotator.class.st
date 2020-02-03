@@ -30,11 +30,23 @@ ANSlangTypeAnnotator >> visitMessageNode: aMessageNode [
 		ifTrue: [ 
 			self visitNode: aMessageNode receiver.
 			self visitNode: aMessageNode arguments first.
-			self typeThatNode: aMessageNode
-			]
-		ifFalse: [ super visitMessageNode: aMessageNode ].
+			self typeThatNode: aMessageNode.
+			^aMessageNode
+			].
 
-	^ aMessageNode
+	aMessageNode selector = #caseOf:otherwise:  
+		ifTrue: [ 
+			self visitNode: aMessageNode receiver.
+			aMessageNode arguments first statements do: [ :aMessageCaseNode |
+					self visitNode: aMessageCaseNode receiver.
+					aMessageCaseNode arguments do: [ :each | self visitNode: each ] ].
+			self visitNode: aMessageNode arguments second.
+			self typeThatNode: aMessageNode.
+			^ aMessageNode ].
+		
+	super visitMessageNode: aMessageNode
+
+	
 ]
 
 { #category : #accessing }

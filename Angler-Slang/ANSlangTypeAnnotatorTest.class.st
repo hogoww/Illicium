@@ -18,6 +18,19 @@ ANSlangTypeAnnotatorTest >> aMethodWithCCodeInSmalltalk [
 ]
 
 { #category : #test }
+ANSlangTypeAnnotatorTest >> aMethodWithCaseOfOtherwise [
+	1 caseOf: 
+		{ [ 1 ] -> [ 1 even ] }
+		otherwise: 1
+]
+
+{ #category : #test }
+ANSlangTypeAnnotatorTest >> assertHasType: aNode [
+	self assert: (aNode hasProperty: propertyName).
+
+]
+
+{ #category : #test }
 ANSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
@@ -46,6 +59,29 @@ ANSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
 	message := ast body statements first value.
 	self assert: (message arguments first hasProperty: propertyName).
 	self deny: (message arguments second hasProperty: propertyName).
+]
+
+{ #category : #test }
+ANSlangTypeAnnotatorTest >> testVisitCaseOfOtherwise [
+	"cases in caseOf:otherwise: do not have TNodes equivalent"
+	| ast caseMessage caseArray case otherwiseNode |
+	ast := self
+		inferMethodSelector: #aMethodWithCaseOfOtherwise
+		from: self class.
+	caseMessage := ast body statements first.
+	self assert: (caseMessage hasProperty: propertyName).
+	self assert: (caseMessage receiver hasProperty: propertyName).
+	
+	caseArray := caseMessage arguments first.
+	self deny: (caseArray hasProperty: propertyName).
+	
+	case := caseArray statements first.
+	self deny: (case hasProperty: propertyName).
+	self assertHasType: case receiver.
+	self assertHasType: case arguments first.
+	
+	otherwiseNode := caseMessage arguments second.
+	self assert: (otherwiseNode hasProperty: propertyName)
 ]
 
 { #category : #test }
