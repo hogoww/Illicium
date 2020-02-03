@@ -36,18 +36,32 @@ ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 	^ aMethodNode
 ]
 
+{ #category : #cleaning }
+ANSlangInliner >> cleanMethod: aRBMethodNode [
+	| node |
+	aRBMethodNode statements size > 1 ifFalse: [ ^ self ].
+
+	node := aRBMethodNode statements first.
+	(node isMessage and: [ node selector = #flag: ])
+		ifTrue: [ aRBMethodNode body removeNode: node ]
+]
+
 { #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
-    | nodesToInline |
-    aMessageNode methodNode body temporaries:  aMessageNode methodNode temporaries , aMethodNode body temporaries.
-
-    nodesToInline := aMethodNode statements.
-    nodesToInline last isReturn
-        ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
-
+	| nodesToInline |
+	self cleanMethod: aMethodNode.
+	aMessageNode methodNode body
+		temporaries: aMessageNode methodNode temporaries , aMethodNode body temporaries.
+	nodesToInline := aMethodNode statements.
+	
+	nodesToInline last isReturn
+		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
+		
 	nodesToInline size = 1
 		ifTrue: [ aMessageNode replaceWith: nodesToInline first ]
-		ifFalse: [ aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline ]
+		ifFalse: [ aMessageNode parent
+				replaceNode: aMessageNode
+				withNodes: nodesToInline ]
 ]
 
 { #category : #inlining }
