@@ -15,8 +15,13 @@ ANSlangTranslator class >> prettyPrinterClass [
 	^ ANSlangPrettyPrinter 
 ]
 
+{ #category : #'as yet unclassified' }
+ANSlangTranslator >> addClass: aClass [
+	aClass methodsDo: [ :aMethod | classTranslator addMethod: aMethod ]
+]
+
 { #category : #'program-configuration' }
-ANSlangTranslator >> addMethod: aCollection [ 
+ANSlangTranslator >> addMethod: aCollection [
 	^ classTranslator addMethod: aCollection
 ]
 
