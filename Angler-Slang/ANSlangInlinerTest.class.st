@@ -14,17 +14,6 @@ ANSlangInlinerTest >> methodReturningInlinedSingleStatement [
 	^ self methodWithSingleStatement
 ]
 
-{ #category : #tests }
-ANSlangInlinerTest >> methodWithAFirstFlag [
-	self flag: #something.
-	1 even
-]
-
-{ #category : #tests }
-ANSlangInlinerTest >> methodWithAFirstFlagToInline [
-	self methodWithAFirstFlag
-]
-
 { #category : #support }
 ANSlangInlinerTest >> methodWithBlockParameter: aBlock [
 	aBlock value
@@ -94,23 +83,6 @@ ANSlangInlinerTest >> setUp [
 	super setUp.
 	program := ANProgram new.
 	inliner := ANSlangInliner new.
-]
-
-{ #category : #tests }
-ANSlangInlinerTest >> testInlineCleanFirstFlags [
-	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithAFirstFlag. 
-	initialMethod := (self class >> #methodWithAFirstFlagToInline) ast.
-	methodToInline := initialMethod copy.
-	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
-	
-	
-	self deny: initialMethod equals: resultingMethod.
-	self assert: resultingMethod statements size equals: 1.
-	inlinedStatement := resultingMethod statements first.
-	self assert: inlinedStatement isMessage.
-	self assert: inlinedStatement receiver value equals: 1.
-	self assert: inlinedStatement selector equals: #even.
 ]
 
 { #category : #tests }

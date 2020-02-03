@@ -1,0 +1,19 @@
+Class {
+	#name : #ANSlangCleaner,
+	#superclass : #RBProgramNodeVisitor,
+	#instVars : [
+		'program',
+		'inlinedSomething'
+	],
+	#category : #'Angler-Slang'
+}
+
+{ #category : #cleaning }
+ANSlangCleaner >> cleanMethod: aRBMethodNode [
+	| node |
+	aRBMethodNode statements size > 1 ifFalse: [ ^ self ].
+
+	node := aRBMethodNode statements first.
+	(node isMessage and: [ node selector = #flag: ])
+		ifTrue: [ aRBMethodNode body removeNode: node ]
+]

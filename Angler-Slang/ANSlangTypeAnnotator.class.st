@@ -34,13 +34,16 @@ ANSlangTypeAnnotator >> visitMessageNode: aMessageNode [
 			^aMessageNode
 			].
 
-	aMessageNode selector = #caseOf:otherwise:  
+	(#( caseOf: caseOf:otherwise:) includes: aMessageNode selector)
 		ifTrue: [ 
 			self visitNode: aMessageNode receiver.
 			aMessageNode arguments first statements do: [ :aMessageCaseNode |
 					self visitNode: aMessageCaseNode receiver.
 					aMessageCaseNode arguments do: [ :each | self visitNode: each ] ].
-			self visitNode: aMessageNode arguments second.
+	
+			"If there is an otherwise clause"
+			aMessageNode arguments size > 1
+				ifTrue: [self visitNode: aMessageNode arguments second].
 			self typeThatNode: aMessageNode.
 			^ aMessageNode ].
 		
