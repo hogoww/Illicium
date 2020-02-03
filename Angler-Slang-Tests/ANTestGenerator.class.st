@@ -23,6 +23,21 @@ ANTestGenerator class >> translatorClass [
 	^ ANSlangTranslator
 ]
 
+{ #category : #generation }
+ANTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
+	| method testedClass testedClassName translator |
+	testedClassName := aTestedClass name.
+	method := 'setUp' asMethodWithBody: [
+		super setUp.
+		testedClass := testedClassName.
+		translator addClass: testedClassName.
+		translator addMethod: StackInterpreter >> #cr.
+		translator addClass: SpurMemoryManager.
+	].
+
+	aClass compile: method asString classified: #running.
+]
+
 { #category : #filter }
 ANTestGenerator >> methodToTest: aClass [
 	^ (aClass allSelectorsBelow: VMClass)

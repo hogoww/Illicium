@@ -67,26 +67,14 @@ ANPluginTestGenerator >> formatSelector: aSelector [
 
 { #category : #generation }
 ANPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
-	| method testedClass testedClassName |
+	| method testedClass testedClassName translator |
 	testedClassName := aTestedClass name.
 	method := 'setUp' asMethodWithBody: [
 		super setUp.
 		testedClass := testedClassName.
+		translator addClass: testedClassName
 	].
-
 	aClass compile: method asString classified: #running.
-]
-
-{ #category : #generation }
-ANPluginTestGenerator >> generateSmokeTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
-	"currently unused"
-	| methodSource |
-	self flag: #deadMethod.
-	methodSource :=	 'test', (self formatSelector: aSelector) , 'Smoke' asMethodWithBody:[
-		self testMethod: #aSelector.
-	].
-	
-	aTestClass compile: methodSource asString classified: aString , #'smoke-test'.
 ]
 
 { #category : #generation }
@@ -106,8 +94,7 @@ ANPluginTestGenerator >> generateTestForClass: aClass [
 	methodToTest
 		do: [ :aMethod | | protocol |
 			protocol := aMethod protocol ifNotEmpty: [ aMethod protocol , '-' ].
-			self generateTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol.
-			"self generateSmokeTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol" ]
+			self generateTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol ]
 ]
 
 { #category : #generation }

@@ -31,11 +31,10 @@ ANPluginSlangToCGeneratedTests >> generateSlang: aSelector [
 	codeGenerator doInlining: true.
 	"
 	codeGenerator  inferTypesForImplicitlyTypedVariablesAndMethods.
-		
-	result := String streamContents: [ :stream |
+	
+	^ String streamContents: [ :stream |
 		translation emitCCodeOn: stream generator: codeGenerator.
 	].
-	^ result
 ]
 
 { #category : #generating }
