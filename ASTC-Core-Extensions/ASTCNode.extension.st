@@ -2,7 +2,7 @@ Extension { #name : #ASTCNode }
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> = aNode [
-	^ true
+	^ aNode isKindOf: self species
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
