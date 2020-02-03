@@ -32,7 +32,7 @@ ANSlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
-	transformations := {ANSlangInliner new}.
+	transformations := {ANSlangCleaner new. ANSlangInliner new}.
 	program := ANProgram new.
 ]
 
@@ -77,12 +77,14 @@ ANSlangClassTranslator >> preTypeInference: aClass [
 ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	aClass declareCVarsIn: inferer.
-	method := (aClass lookupSelector: aSelector) ast copy.
-	inferer addMethod: (method asTranslationMethodOfClass: TMethod).
-	program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod) ].
+	method := program methodNamed: aSelector.
+	program methodsDo: [ :each | 
+		(each hasPragmaNamed: #doNotGenerate)
+			ifFalse: [inferer addMethod: (each asTranslationMethodOfClass: TMethod)] ].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	
-	self annotateMethodsASTWithTypes: { method }, program methods asArray.
+	self annotateMethodsASTWithTypes: { method }, 
+		(program methods reject: [ :each | each hasPragmaNamed: #doNotGenerate ]) asArray.
 	
 	method := self applyTransformationsOn: method.
 	
