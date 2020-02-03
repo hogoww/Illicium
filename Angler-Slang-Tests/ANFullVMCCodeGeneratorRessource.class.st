@@ -11,6 +11,12 @@ Class {
 	#category : #'Angler-Slang-Tests-generators'
 }
 
+{ #category : #initialization }
+ANFullVMCCodeGeneratorRessource class >> resetInstance [
+	<script>
+	self reset
+]
+
 { #category : #'generating machine code' }
 ANFullVMCCodeGeneratorRessource >> codeGenerator [
 	^ codeGenerator
