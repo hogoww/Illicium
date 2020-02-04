@@ -23,7 +23,7 @@ Class {
 { #category : #removing }
 ANPluginTestGenerator class >> cleanUp [
 	<script>
-	self removeRessources.
+	self removeResources.
 	self removeTests.
 ]
 
@@ -44,9 +44,9 @@ ANPluginTestGenerator class >> generateVMMakerPluginsTests [
 ]
 
 { #category : #removing }
-ANPluginTestGenerator class >> removeRessources [
+ANPluginTestGenerator class >> removeResources [
 	<script>
-	^ self ressourceBaseClass allSubclassesDo: [ :c | c removeFromSystem ]
+	^ self resourceBaseClass allSubclassesDo: [ :c | c removeFromSystem ]
 ]
 
 { #category : #removing }
@@ -56,8 +56,8 @@ ANPluginTestGenerator class >> removeTests [
 ]
 
 { #category : #configuring }
-ANPluginTestGenerator class >> ressourceBaseClass [
-	^ ANSlangPluginTestRessource
+ANPluginTestGenerator class >> resourceBaseClass [
+	^ ANSlangPluginTestResource
 ]
 
 { #category : #configuring }
@@ -110,7 +110,7 @@ ANPluginTestGenerator >> generateResourceAccessorsFor: aRessourceClass [
 
 { #category : #'ressource-generation' }
 ANPluginTestGenerator >> generateResourceClassFor: aClass [
-	^ self class ressourceBaseClass subclass: 'AN' , aClass name , 'Ressource'
+	^ self class resourceBaseClass subclass: 'AN' , aClass name , 'Ressource'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'Angler-Slang-Tests'

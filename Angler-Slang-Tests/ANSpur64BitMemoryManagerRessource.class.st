@@ -1,6 +1,6 @@
 Class {
 	#name : #ANSpur64BitMemoryManagerRessource,
-	#superclass : #ANSlangVMTestRessource,
+	#superclass : #ANSlangVMTestResource,
 	#category : #'Angler-Slang-Tests'
 }
 
