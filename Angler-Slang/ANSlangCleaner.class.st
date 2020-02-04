@@ -10,10 +10,6 @@ Class {
 
 { #category : #cleaning }
 ANSlangCleaner >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
-]
-
-{ #category : #cleaning }
-ANSlangCleaner >> cleanMethod: aRBMethodNode [
 	| node |
 	aRBMethodNode statements size > 1 ifFalse: [ ^ self ].
 
