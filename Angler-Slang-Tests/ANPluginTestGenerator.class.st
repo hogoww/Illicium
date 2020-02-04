@@ -46,7 +46,7 @@ ANPluginTestGenerator class >> generateVMMakerPluginsTests [
 { #category : #removing }
 ANPluginTestGenerator class >> removeRessources [
 	<script>
-	^ ANSlangTestRessource allSubclassesDo:[ :c| c removeFromSystem ]
+	^ self ressourceBaseClass allSubclassesDo: [ :c | c removeFromSystem ]
 ]
 
 { #category : #removing }
