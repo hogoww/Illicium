@@ -401,15 +401,22 @@ ANSlangReceiver >> ifNil: aBlock [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> ifNil: ear ifNotNil: inge [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> ifNil: aNilBlock ifNotNil: aBlock [
+	self assert: aBlock isBlock.
+	^ ASTCIf new
+		condition: self translatedReceiver not;
+		then: (aNilBlock acceptVisitor: methodTranslator);
+		else: (aBlock acceptVisitor: methodTranslator);
+		yourself
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> ifNotNil: something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> ifNotNil: aBlock [
+	self assert: aBlock isBlock.
+	^ ASTCIf new
+		condition: self translatedReceiver;
+		then: (aBlock acceptVisitor: methodTranslator)
+		yourself
 ]
 
 { #category : #'reflective operations' }
