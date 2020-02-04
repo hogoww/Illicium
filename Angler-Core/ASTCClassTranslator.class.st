@@ -50,7 +50,7 @@ ASTCClassTranslator >> annotateProgram [
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	
 	self annotateMethodsASTWithTypes: program methods.
-	
+	program isFullyAnnotated: true
 	
 ]
 
