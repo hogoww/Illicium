@@ -1,11 +1,11 @@
 Class {
 	#name : #ANPluginSlangToCGeneratedTests,
-	#superclass : #ParametrizedTestCase,
+	#superclass : #TestCase,
 	#instVars : [
 		'translator',
 		'testedClass'
 	],
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-tests'
 }
 
 { #category : #generating }
@@ -16,7 +16,7 @@ ANPluginSlangToCGeneratedTests >> generateIllicium: aSelector [
 
 { #category : #'generating machine code' }
 ANPluginSlangToCGeneratedTests >> generateSlang: aSelector [ 
-	| method translation codeGenerator result |
+	| method translation codeGenerator |
 	"Might be able to use cCodeForMethod: instead"
 	method := testedClass >> aSelector.
 	translation := method asTranslationMethodOfClass: TMethod.
@@ -46,8 +46,7 @@ ANPluginSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 { #category : #accessing }
 ANPluginSlangToCGeneratedTests >> setUp [
 	super setUp.
-	translator := ANSlangTranslator new.
-	translator classTranslator: ANSlangPluginClassTranslator new
+	translator := ANSlangTranslator new
 ]
 
 { #category : #accessing }

@@ -7,8 +7,7 @@ Class {
 { #category : #running }
 ANBrokenPluginTranslationTest >> setUp [
 	super setUp.
-	testedClass := BrokenPlugin.
-	translator addClass: BrokenPlugin
+	testedClass := BrokenPlugin
 ]
 
 { #category : #'primitives-equaliy-test' }
@@ -45,4 +44,9 @@ ANBrokenPluginTranslationTest >> testPrimitivePopMoreThanExpectedStringCompariso
 	illiString := self prettyPrintIllicium: illiAST.
 	slangString := self generateSlang: #primitivePopMoreThanExpected.
 	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+ANBrokenPluginTranslationTest >> translator [
+	^ ANBrokenPluginTranslationTest current translator
 ]

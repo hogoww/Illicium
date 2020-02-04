@@ -21,19 +21,32 @@ Class {
 }
 
 { #category : #removing }
+ANPluginTestGenerator class >> cleanUp [
+	<script>
+	self removeRessources.
+	self removeTests.
+]
+
+{ #category : #generating }
 ANPluginTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
 	<script>
 	StackInterpreterPrimitivesTranslationTests ifNotNil:[:c| c removeFromSystem ] .
 	^ ANPluginTestGenerator new generateTestForClass: StackInterpreterPrimitives
 ]
 
-{ #category : #removing }
+{ #category : #generating }
 ANPluginTestGenerator class >> generateVMMakerPluginsTests [
 	<script>
 	| generator |
-	self removeTests.
+	self cleanUp.
 	generator:= self new.
 	^ {BrokenPlugin. FilePlugin} do:[:aPluginClass| generator generateTestForClass: aPluginClass ]
+]
+
+{ #category : #removing }
+ANPluginTestGenerator class >> removeRessources [
+	<script>
+	^ ANSlangTestRessource allSubclassesDo:[ :c| c removeFromSystem ]
 ]
 
 { #category : #removing }
@@ -42,17 +55,17 @@ ANPluginTestGenerator class >> removeTests [
 	^ self testBaseClass allSubclassesDo:[ :c| c removeFromSystem ]
 ]
 
-{ #category : #removing }
+{ #category : #configuring }
 ANPluginTestGenerator class >> testBaseClass [
 	^ ANPluginSlangToCGeneratedTests
 ]
 
-{ #category : #removing }
+{ #category : #configuring }
 ANPluginTestGenerator class >> translatorClass [
 	^ ANSlangPluginTranslator
 ]
 
-{ #category : #generation }
+{ #category : #'test-generation' }
 ANPluginTestGenerator >> createTestClassFor: aClass [
 	^ self class testBaseClass subclass: 'AN' , aClass name , 'TranslationTest'
 		instanceVariableNames: ''
@@ -60,26 +73,69 @@ ANPluginTestGenerator >> createTestClassFor: aClass [
 		package: 'Angler-Slang-Tests'
 ]
 
-{ #category : #generation }
+{ #category : #'test-generation' }
 ANPluginTestGenerator >> formatSelector: aSelector [
 	^ aSelector onlyLetters capitalized
 ]
 
-{ #category : #generation }
+{ #category : #'ressource-generation' }
+ANPluginTestGenerator >> generateAccessorsTo: aResourceClass For: aTestedClass [ 
+	| method testedClassName |
+	testedClassName := aTestedClass name.
+	method := #translator asMethodWithBody: [
+		^ testedClassName current translator
+	].
+	aTestedClass compile: method asString classified: #accessing.
+	
+]
+
+{ #category : #'ressource-generation' }
+ANPluginTestGenerator >> generateResourceAccessorsFor: aRessourceClass [
+	| translator method |
+	method := #translator asMethodWithBody: [
+		^ translator
+	].
+	aRessourceClass compile: method asString classified: #accessing.
+	
+	method := #translator: asMethodWithBody: [:aTranslator|
+		translator := aTranslator
+	].
+	aRessourceClass compile: method asString classified: #accessing.
+]
+
+{ #category : #'ressource-generation' }
+ANPluginTestGenerator >> generateResourceClassFor: aClass [
+	^ ANSlangTestRessource subclass: 'AN' , aClass name , 'Ressource'
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: 'Angler-Slang-Tests'
+]
+
+{ #category : #'ressource-generation' }
+ANPluginTestGenerator >> generateSetUpFor: aClass forResource: aRessourceClass [
+	| testedClassName method |
+	testedClassName := aClass name.
+	method := 'setUp' asMethodWithBody: [
+		super setUp.
+		self translator: (self newTranslatorWith: testedClassName)
+	].
+	aRessourceClass compile: method asString classified: #running.
+]
+
+{ #category : #'test-generation' }
 ANPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
 	| method testedClass testedClassName translator |
 	testedClassName := aTestedClass name.
 	method := 'setUp' asMethodWithBody: [
 		super setUp.
 		testedClass := testedClassName.
-		translator addClass: testedClassName
 	].
 	aClass compile: method asString classified: #running.
 ]
 
-{ #category : #generation }
+{ #category : #'test-generation' }
 ANPluginTestGenerator >> generateTestForClass: aClass [
-	| testClass methodToTest |
+	| testClass methodToTest resourceClass |
 	methodToTest := self methodToTest: aClass.
 		
 	methodToTest ifEmpty: [ ^self ].
@@ -94,10 +150,16 @@ ANPluginTestGenerator >> generateTestForClass: aClass [
 	methodToTest
 		do: [ :aMethod | | protocol |
 			protocol := aMethod protocol ifNotEmpty: [ aMethod protocol , '-' ].
-			self generateTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol ]
+			self generateTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol ].
+	
+	"ressource part"	
+	resourceClass := self generateResourceClassFor: aClass.
+	self generateSetUpFor: aClass forResource: resourceClass.
+	self generateResourceAccessorsFor: resourceClass.
+	self generateAccessorsTo: resourceClass For: testClass 
 ]
 
-{ #category : #generation }
+{ #category : #'test-generation' }
 ANPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
 
 	| methodSource |
@@ -112,7 +174,7 @@ ANPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClas
 	aTestClass compile: methodSource asString classified: aString , #'equaliy-test'.
 ]
 
-{ #category : #generation }
+{ #category : #'test-generation' }
 ANPluginTestGenerator >> methodToTest: aClass [
 	^ aClass methodDict
 		select: [ :compiledMethod | 

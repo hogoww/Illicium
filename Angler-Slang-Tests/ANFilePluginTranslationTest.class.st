@@ -7,8 +7,7 @@ Class {
 { #category : #running }
 ANFilePluginTranslationTest >> setUp [
 	super setUp.
-	testedClass := FilePlugin.
-	translator addClass: FilePlugin
+	testedClass := FilePlugin
 ]
 
 { #category : #'file primitives-equaliy-test' }
@@ -274,4 +273,9 @@ ANFilePluginTranslationTest >> testPrimitiveHasFileAccessStringComparison [
 	illiString := self prettyPrintIllicium: illiAST.
 	slangString := self generateSlang: #primitiveHasFileAccess.
 	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+ANFilePluginTranslationTest >> translator [
+	^ ANFilePluginTranslationTest current translator
 ]
