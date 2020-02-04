@@ -2,13 +2,15 @@ Class {
 	#name : #ANProgram,
 	#superclass : #Object,
 	#instVars : [
-		'methods'
+		'methods',
+		'isFullyAnnotated'
 	],
-	#category : #'Angler-Slang'
+	#category : #'Angler-Core'
 }
 
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
+	isFullyAnnotated := false.
 	methods add: aMethod ast copy
 ]
 
@@ -21,6 +23,17 @@ ANProgram >> hasMethodNamed: aSelector [
 ANProgram >> initialize [
 	super initialize.
 	methods := Set new.
+	isFullyAnnotated := false.
+]
+
+{ #category : #accessing }
+ANProgram >> isFullyAnnotated [
+	^ isFullyAnnotated
+]
+
+{ #category : #accessing }
+ANProgram >> isFullyAnnotated: aBoolean [
+	isFullyAnnotated := aBoolean
 ]
 
 { #category : #accessing }
