@@ -39,6 +39,16 @@ ASTCTranslator class >> translateMethod: aSelector fromClass: aClass [
 	^ self new translateMethod: aSelector fromClass: aClass
 ]
 
+{ #category : #'program-configuration' }
+ASTCTranslator >> addClass: aClass [
+	aClass methodsDo: [ :aMethod | classTranslator addMethod: aMethod ]
+]
+
+{ #category : #'program-configuration' }
+ASTCTranslator >> addMethod: aCollection [
+	^ classTranslator addMethod: aCollection
+]
+
 { #category : #accessors }
 ASTCTranslator >> classTranslator [
 	^ classTranslator
@@ -132,4 +142,9 @@ ASTCTranslator >> translateMethod: aCompiledMethod [
 ASTCTranslator >> translateMethod: aSelector fromClass: aClass [
 	replacementClasses at: aClass name put: ASTCUserClass.
 	^ classTranslator translateMethod: aSelector fromClass: aClass
+]
+
+{ #category : #'program-configuration' }
+ASTCTranslator >> useProgram: aProgram [
+	classTranslator program: aProgram
 ]

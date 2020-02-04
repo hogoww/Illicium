@@ -5,7 +5,8 @@ Class {
 		'methodTranslator',
 		'mainTranslator',
 		'inferer',
-		'stateTranslator'
+		'stateTranslator',
+		'program'
 	],
 	#category : #'Angler-Core-overviewers'
 }
@@ -41,6 +42,16 @@ ASTCClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
 	methodsASTs
 		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
 	^ methodsASTs
+]
+
+{ #category : #'program-configuration' }
+ASTCClassTranslator >> annotateProgram [ 
+	self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
+	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
+	
+	self annotateMethodsASTWithTypes: program methods.
+	
+	
 ]
 
 { #category : #typing }
@@ -131,6 +142,17 @@ ASTCClassTranslator >> preTypeInference: aClass [
 ASTCClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [
 	
 	self subclassResponsibility
+]
+
+{ #category : #typing }
+ASTCClassTranslator >> program [
+	^ program
+]
+
+{ #category : #typing }
+ASTCClassTranslator >> program: aProgram [
+	program := aProgram.
+	self annotateProgram
 ]
 
 { #category : #'translation-state' }

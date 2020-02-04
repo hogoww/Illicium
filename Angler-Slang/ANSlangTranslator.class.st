@@ -15,16 +15,6 @@ ANSlangTranslator class >> prettyPrinterClass [
 	^ ANSlangPrettyPrinter 
 ]
 
-{ #category : #'as yet unclassified' }
-ANSlangTranslator >> addClass: aClass [
-	aClass methodsDo: [ :aMethod | classTranslator addMethod: aMethod ]
-]
-
-{ #category : #'program-configuration' }
-ANSlangTranslator >> addMethod: aCollection [
-	^ classTranslator addMethod: aCollection
-]
-
 { #category : #initialization }
 ANSlangTranslator >> fillWithtranslatorSpecificTypes [
 	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy
