@@ -2,7 +2,7 @@ Class {
 	#name : #ANSlangClassTranslator,
 	#superclass : #ASTCClassTranslator,
 	#instVars : [
-		'transformations'
+		'doInlining'
 	],
 	#category : #'Angler-Slang'
 }
@@ -16,10 +16,20 @@ ANSlangClassTranslator >> addMethod: aCollection [
 ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
 	| method |
 	method := aMethodNode copy.
-	transformations do: [:aTransformation|
+	self transformations do: [:aTransformation|
 		aTransformation applyOnMethod: method ofProgram: program.
 		].
 	^ method
+]
+
+{ #category : #initialization }
+ANSlangClassTranslator >> doInlining [
+	^ doInlining
+]
+
+{ #category : #initialization }
+ANSlangClassTranslator >> doInlining: aBoolean [
+	doInlining := aBoolean
 ]
 
 { #category : #initialization }
@@ -31,7 +41,7 @@ ANSlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
-	transformations := {ANSlangCleaner new. ANSlangInliner new}.
+	doInlining := false.
 	program := ANProgram new.
 ]
 
@@ -82,6 +92,15 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 	method := self applyTransformationsOn: method.
 	
 	^ { method }
+]
+
+{ #category : #accessing }
+ANSlangClassTranslator >> transformations [
+	| transformations |
+	transformations := OrderedCollection new.
+	transformations add: ANSlangCleaner new.
+	doInlining ifTrue: [ transformations add: ANSlangInliner new ].
+	^ transformations
 ]
 
 { #category : #'translation-api' }
