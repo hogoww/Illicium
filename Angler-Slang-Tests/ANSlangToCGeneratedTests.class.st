@@ -5,7 +5,7 @@ This class contains tests
 "
 Class {
 	#name : #ANSlangToCGeneratedTests,
-	#superclass : #ParametrizedTestCase,
+	#superclass : #TestCase,
 	#instVars : [
 		'translator',
 		'testedClass'
@@ -18,43 +18,16 @@ ANSlangToCGeneratedTests class >> ressource [
 	^ { ANFullVMCCodeGeneratorRessource }
 ]
 
-{ #category : #'generating machine code' }
-ANSlangToCGeneratedTests >> codeGenerator [
-	^ ANFullVMCCodeGeneratorRessource current codeGenerator
-]
-
 { #category : #generating }
 ANSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
-	^ translator translateMethod: aSelector fromClass: testedClass
-]
-
-{ #category : #'generating machine code' }
-ANSlangToCGeneratedTests >> generateSlang: aSelector [ 
-	| codeGenerator |
-	codeGenerator := self codeGenerator.
-	^ codeGenerator cCodeForMethod: aSelector.
-	
-	
+	^ self translator translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #generating }
 ANSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
-	^ anAST definitions first prettyPrintUsing: ANSlangTranslator prettyPrinterClass new.
-]
-
-{ #category : #generating }
-ANSlangToCGeneratedTests >> setUp [
-  super setUp.
-  translator := ANSlangTranslator new
-]
-
-{ #category : #accessing }
-ANSlangToCGeneratedTests >> testMethod: aSelector [
-	| cu |
-	cu := translator translateMethod: aSelector fromClass: testedClass.
-	^ cu
+	^ anAST definitions first prettyPrintUsing: self translator prettyPrinterClass new.
 ]
 
 { #category : #accessing }
@@ -69,10 +42,7 @@ ANSlangToCGeneratedTests >> testedClass: aClass [
 
 { #category : #accessing }
 ANSlangToCGeneratedTests >> translator [
-	^ translator
-]
-
-{ #category : #accessing }
-ANSlangToCGeneratedTests >> translator: anObject [
-	translator := anObject
+	"Should be generated.
+	Should return the reference of the ressource."
+	^ self subclassResponsibility
 ]

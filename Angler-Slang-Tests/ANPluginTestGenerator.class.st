@@ -62,7 +62,7 @@ ANPluginTestGenerator class >> resourceBaseClass [
 
 { #category : #configuring }
 ANPluginTestGenerator class >> testBaseClass [
-	^ ANPluginSlangToCGeneratedTests
+	^ ANPluginTranslationTests 
 ]
 
 { #category : #configuring }
