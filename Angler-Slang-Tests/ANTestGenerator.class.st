@@ -14,6 +14,11 @@ ANTestGenerator class >> generateVMTests [
 ]
 
 { #category : #generating }
+ANTestGenerator class >> resourceBaseClass [
+	^ ANSlangVMTestResource
+]
+
+{ #category : #generating }
 ANTestGenerator class >> testBaseClass [
 	^ ANSlangToCGeneratedTests
 ]
