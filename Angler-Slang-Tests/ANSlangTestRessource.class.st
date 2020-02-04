@@ -8,8 +8,15 @@ Class {
 }
 
 { #category : #configuring }
+ANSlangTestRessource class >> resetAll [
+	<script>
+	self allSubclassesDo: [ :aResourceClass | aResourceClass reset ]
+]
+
+{ #category : #configuring }
 ANSlangTestRessource class >> translatorClass [
-	^ ANSlangTranslator
+	"should return the method used for this tests translation"
+	^ self subclassResponsibility
 ]
 
 { #category : #'instance creation' }

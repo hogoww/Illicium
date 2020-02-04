@@ -2,7 +2,6 @@ Class {
 	#name : #ANPluginSlangToCGeneratedTests,
 	#superclass : #TestCase,
 	#instVars : [
-		'translator',
 		'testedClass'
 	],
 	#category : #'Angler-Slang-Tests-tests'
@@ -11,7 +10,7 @@ Class {
 { #category : #generating }
 ANPluginSlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
-	^ translator translateMethod: aSelector fromClass: testedClass
+	^ self translator translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #'generating machine code' }
@@ -40,19 +39,13 @@ ANPluginSlangToCGeneratedTests >> generateSlang: aSelector [
 { #category : #generating }
 ANPluginSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
-	^ anAST definitions first prettyPrintUsing: translator prettyPrinterClass new.
-]
-
-{ #category : #accessing }
-ANPluginSlangToCGeneratedTests >> setUp [
-	super setUp.
-	translator := ANSlangTranslator new
+	^ anAST definitions first prettyPrintUsing: self translator prettyPrinterClass new.
 ]
 
 { #category : #accessing }
 ANPluginSlangToCGeneratedTests >> testMethod: aSelector [
 	| cu |
-	cu := translator translateMethod: aSelector fromClass: testedClass.
+	cu := self translator translateMethod: aSelector fromClass: testedClass.
 	^ cu
 ]
 
@@ -68,10 +61,6 @@ ANPluginSlangToCGeneratedTests >> testedClass: aClass [
 
 { #category : #accessing }
 ANPluginSlangToCGeneratedTests >> translator [
-	^ translator
-]
-
-{ #category : #accessing }
-ANPluginSlangToCGeneratedTests >> translator: anObject [
-	translator := anObject
+	"should be generated, and this one should not be used."
+	^ self subclassResponsibility 
 ]

@@ -7707,3 +7707,8 @@ ANSpur64BitMemoryManagerTranslationTest >> testWordSizeStringComparison [
 	slangString := self generateSlang: #wordSize.
 	self assert: illiString equals: slangString
 ]
+
+{ #category : #accessing }
+ANSpur64BitMemoryManagerTranslationTest >> translator [
+	^ ANSpur64BitMemoryManagerRessource current translator
+]

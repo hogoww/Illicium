@@ -1,6 +1,6 @@
 Class {
 	#name : #ANFilePluginRessource,
-	#superclass : #ANSlangTestRessource,
+	#superclass : #ANSlangVMTestRessource,
 	#category : #'Angler-Slang-Tests'
 }
 

@@ -56,6 +56,11 @@ ANPluginTestGenerator class >> removeTests [
 ]
 
 { #category : #configuring }
+ANPluginTestGenerator class >> ressourceBaseClass [
+	^ ANSlangPluginTestRessource
+]
+
+{ #category : #configuring }
 ANPluginTestGenerator class >> testBaseClass [
 	^ ANPluginSlangToCGeneratedTests
 ]
@@ -80,10 +85,10 @@ ANPluginTestGenerator >> formatSelector: aSelector [
 
 { #category : #'ressource-generation' }
 ANPluginTestGenerator >> generateAccessorsTo: aResourceClass For: aTestedClass [ 
-	| method testedClassName |
-	testedClassName := aTestedClass name.
+	| method ressourceClassName |
+	ressourceClassName := aResourceClass name.
 	method := #translator asMethodWithBody: [
-		^ testedClassName current translator
+		^ ressourceClassName current translator
 	].
 	aTestedClass compile: method asString classified: #accessing.
 	
@@ -105,7 +110,7 @@ ANPluginTestGenerator >> generateResourceAccessorsFor: aRessourceClass [
 
 { #category : #'ressource-generation' }
 ANPluginTestGenerator >> generateResourceClassFor: aClass [
-	^ ANSlangTestRessource subclass: 'AN' , aClass name , 'Ressource'
+	^ self class ressourceBaseClass subclass: 'AN' , aClass name , 'Ressource'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'Angler-Slang-Tests'
@@ -124,7 +129,7 @@ ANPluginTestGenerator >> generateSetUpFor: aClass forResource: aRessourceClass [
 
 { #category : #'test-generation' }
 ANPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
-	| method testedClass testedClassName translator |
+	| method testedClass testedClassName |
 	testedClassName := aTestedClass name.
 	method := 'setUp' asMethodWithBody: [
 		super setUp.

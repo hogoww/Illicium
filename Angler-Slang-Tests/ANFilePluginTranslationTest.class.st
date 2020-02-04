@@ -277,5 +277,5 @@ ANFilePluginTranslationTest >> testPrimitiveHasFileAccessStringComparison [
 
 { #category : #accessing }
 ANFilePluginTranslationTest >> translator [
-	^ ANFilePluginTranslationTest current translator
+	^ ANFilePluginRessource current translator
 ]

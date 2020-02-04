@@ -48,5 +48,5 @@ ANBrokenPluginTranslationTest >> testPrimitivePopMoreThanExpectedStringCompariso
 
 { #category : #accessing }
 ANBrokenPluginTranslationTest >> translator [
-	^ ANBrokenPluginTranslationTest current translator
+	^ ANBrokenPluginRessource current translator
 ]
