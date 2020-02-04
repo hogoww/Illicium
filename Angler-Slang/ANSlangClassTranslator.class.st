@@ -77,7 +77,7 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 	| method |
 	aClass declareCVarsIn: inferer.
 	method := program methodNamed: aSelector.
-	program isFullyAnnotated ifFalse: [ self annotateProgram ].
+	program isFullyAnnotated ifFalse: [ self annotateProgramWith: aClass ].
 
 	method := self applyTransformationsOn: method.
 	

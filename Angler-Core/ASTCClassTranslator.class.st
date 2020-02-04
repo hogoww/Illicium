@@ -11,6 +11,12 @@ Class {
 	#category : #'Angler-Core-overviewers'
 }
 
+{ #category : #'as yet unclassified' }
+ASTCClassTranslator >> addClass: aClass [ 
+	program addClass: aClass.
+	self annotateProgramWith: aClass
+]
+
 { #category : #'translation-state' }
 ASTCClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
 	stateStuffStruct do:[:anElem| anElem addToCompilationUnit: aCompilationUnit ].
@@ -45,7 +51,9 @@ ASTCClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
 ]
 
 { #category : #'program-configuration' }
-ASTCClassTranslator >> annotateProgram [ 
+ASTCClassTranslator >> annotateProgramWith: aClass [
+	self flag: #slang.
+	aClass declareCVarsIn: inferer.
 	self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	

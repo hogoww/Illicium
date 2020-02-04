@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessing }
+ANProgram >> addClass: aClass [
+	aClass allMethods do: [:aMethod | self addMethod: aMethod ].
+]
+
+{ #category : #accessing }
 ANProgram >> addMethod: aMethod [
 	isFullyAnnotated := false.
 	methods add: aMethod ast copy
