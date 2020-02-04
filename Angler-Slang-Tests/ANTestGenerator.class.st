@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #generating }
+ANTestGenerator class >> generateVMTests [
+	<script>	
+	| generator |
+	self cleanUp.	
+	generator:= self new.	
+	^ {Spur64BitMemoryManager} do:[:aVMClass| generator generateTestForClass: aVMClass ]
+]
+
+{ #category : #generating }
 ANTestGenerator class >> testBaseClass [
 	^ ANSlangToCGeneratedTests
 ]

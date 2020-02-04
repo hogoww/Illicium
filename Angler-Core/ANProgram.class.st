@@ -10,7 +10,10 @@ Class {
 
 { #category : #accessing }
 ANProgram >> addClass: aClass [
-	aClass allMethods do: [:aMethod | self addMethod: aMethod ].
+	(aClass allSelectorsBelow: VMClass) 
+		do: [:aSelector ||aMethod|
+			aMethod := (aClass lookupSelector: aSelector).
+			(self methodNeedAdding: aMethod) ifTrue: [ self addMethod: (aClass lookupSelector: aSelector) ]].
 ]
 
 { #category : #accessing }
@@ -44,6 +47,12 @@ ANProgram >> isFullyAnnotated: aBoolean [
 { #category : #accessing }
 ANProgram >> methodNamed: aSelector [
   ^methods detect: [:e |  e selector = aSelector ]
+]
+
+{ #category : #testing }
+ANProgram >> methodNeedAdding: aMethod [
+	(aMethod hasPragmaNamed: #doNotGenerate) ifTrue: [ ^ false ].
+	^ true
 ]
 
 { #category : #accessing }
