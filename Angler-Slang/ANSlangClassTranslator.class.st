@@ -2,8 +2,7 @@ Class {
 	#name : #ANSlangClassTranslator,
 	#superclass : #ASTCClassTranslator,
 	#instVars : [
-		'transformations',
-		'program'
+		'transformations'
 	],
 	#category : #'Angler-Slang'
 }
@@ -78,14 +77,8 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 	| method |
 	aClass declareCVarsIn: inferer.
 	method := program methodNamed: aSelector.
-	program methodsDo: [ :each | 
-		(each hasPragmaNamed: #doNotGenerate)
-			ifFalse: [inferer addMethod: (each asTranslationMethodOfClass: TMethod)] ].
-	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
-	
-	self annotateMethodsASTWithTypes: { method }, 
-		(program methods reject: [ :each | each hasPragmaNamed: #doNotGenerate ]) asArray.
-	
+	program isFullyAnnotated ifFalse: [ self annotateProgram ].
+
 	method := self applyTransformationsOn: method.
 	
 	^ { method }
