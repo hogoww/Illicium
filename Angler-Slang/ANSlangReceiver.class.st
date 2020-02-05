@@ -277,14 +277,20 @@ ANSlangReceiver >> bitXor: anInteger [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> byteSwap32 [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: #SQ_SWAP_4_BYTES) ;
+		arguments: {(receiverNode acceptVisitor: methodTranslator)};
+		yourself.
 ]
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> byteSwap64 [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: #SQ_SWAP_8_BYTES) ;
+		arguments: {(receiverNode acceptVisitor: methodTranslator)};
+		yourself.
 ]
 
 { #category : #'reflective operations' }
