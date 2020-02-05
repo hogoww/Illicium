@@ -6,6 +6,12 @@ Class {
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
+
+	aNode isLiteral ifTrue: [ ^ false ].
+	(aNode isBitLeftShiftOperator
+		and: [ aNode operands first isCastOperator
+			and: [ aNode parent isCastOperator ] ]) ifTrue: [ ^ false ].
+
 	^ aNode parent isIf not 
 		and: [ aNode parent isAssignmentOperator not
 			and: [ aNode parent isStatement not
@@ -83,6 +89,16 @@ ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 ]
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	
+	| shouldWrapWithExtraParenthesis |
+	shouldWrapWithExtraParenthesis := aBitLeftShiftOperator operands first isCastOperator.
+	shouldWrapWithExtraParenthesis ifTrue: [ self << '(' ].
+	super visitBitLeftShiftOperator: aBitLeftShiftOperator.
+	shouldWrapWithExtraParenthesis ifTrue: [ self << ')' ].
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
@@ -108,12 +124,23 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
-	" Slang systematically use an englobing set of parenthesis"
-	self << '((';
-		print: aCastOperator type;
-		<< ') ';
-		print: (aCastOperator operands at: 1);
-		<< ')'
+	
+	self
+		parenthesisIf: (aCastOperator parent isCastOperator not and: [aCastOperator parent isBitLeftShiftOperator not])
+		print: [
+			self
+				<< '(';
+				print: aCastOperator type;
+				<< ') '.
+			self
+				parenthesisIf: (aCastOperator operands first isIdentifier not
+					and: [ aCastOperator operands first isBitLeftShiftOperator not ])
+				print: [
+					self
+						parenthesisIf: (aCastOperator operands first isIdentifier not
+							and: [ aCastOperator operands first isFunctionCall not
+								and: [ aCastOperator operands first isBitLeftShiftOperator not ] ])
+						print: [ self print: aCastOperator operands first ] ] ]
 ]
 
 { #category : #visiting }

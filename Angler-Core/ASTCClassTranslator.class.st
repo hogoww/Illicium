@@ -13,8 +13,8 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCClassTranslator >> addClass: aClass [ 
-	program addClass: aClass.
-	self annotateProgramWith: aClass
+
+	program addClass: aClass
 ]
 
 { #category : #'translation-state' }
@@ -37,29 +37,6 @@ ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilatio
 			self addTranslatedMethod: aFuncDef to: aCompilationUnit
 		].
 	^ aCompilationUnit
-]
-
-{ #category : #typing }
-ASTCClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
-	| typeAnnotator |
-	typeAnnotator := self typeAnnotatorClass new
-		inferer: inferer;
-		yourself.
-	methodsASTs
-		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
-	^ methodsASTs
-]
-
-{ #category : #'program-configuration' }
-ASTCClassTranslator >> annotateProgramWith: aClass [
-	self flag: #slang.
-	aClass declareCVarsIn: inferer.
-	self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
-	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
-	
-	self annotateMethodsASTWithTypes: program methods.
-	program isFullyAnnotated: true
-	
 ]
 
 { #category : #typing }

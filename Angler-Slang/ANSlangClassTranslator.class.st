@@ -1,15 +1,36 @@
 Class {
 	#name : #ANSlangClassTranslator,
 	#superclass : #ASTCClassTranslator,
-	#instVars : [
-		'doInlining'
-	],
 	#category : #'Angler-Slang'
 }
 
 { #category : #'program-configuration' }
 ANSlangClassTranslator >> addMethod: aCollection [
 	program addMethod: aCollection
+]
+
+{ #category : #typing }
+ANSlangClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
+	| typeAnnotator |
+	typeAnnotator := self typeAnnotatorClass new
+		inferer: inferer;
+		yourself.
+	methodsASTs
+		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
+	^ methodsASTs
+]
+
+{ #category : #'program-configuration' }
+ANSlangClassTranslator >> annotateProgramWith: aClass [
+	self flag: #slang.
+	aClass declareCVarsIn: inferer.
+
+	self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
+	[inferer inferTypesForImplicitlyTypedVariablesAndMethods.] timeToRun.
+	
+	self annotateMethodsASTWithTypes: program methods.
+	program isFullyAnnotated: true
+	
 ]
 
 { #category : #transformations }
@@ -23,16 +44,6 @@ ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [
 ]
 
 { #category : #initialization }
-ANSlangClassTranslator >> doInlining [
-	^ doInlining
-]
-
-{ #category : #initialization }
-ANSlangClassTranslator >> doInlining: aBoolean [
-	doInlining := aBoolean
-]
-
-{ #category : #initialization }
 ANSlangClassTranslator >> initialize [
 	super initialize.
 	inferer := CCodeGeneratorGlobalStructure new.
@@ -41,8 +52,13 @@ ANSlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
-	doInlining := false.
 	program := ANProgram new.
+]
+
+{ #category : #'special selectors' }
+ANSlangClassTranslator >> isSpecialSelector: aString [ 
+	
+	^ ANSlangReceiver slangReservedSelector includes: aString
 ]
 
 { #category : #initialization }
@@ -98,8 +114,7 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 ANSlangClassTranslator >> transformations [
 	| transformations |
 	transformations := OrderedCollection new.
-	transformations add: ANSlangCleaner new.
-	doInlining ifTrue: [ transformations add: ANSlangInliner new ].
+	transformations add: (ANSlangInliner translator: self).
 	^ transformations
 ]
 

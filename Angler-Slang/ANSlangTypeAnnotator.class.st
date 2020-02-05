@@ -33,6 +33,9 @@ ANSlangTypeAnnotator >> visitMessageNode: aMessageNode [
 			self typeThatNode: aMessageNode.
 			^aMessageNode
 			].
+		
+	aMessageNode selector = #halt
+		ifTrue: [ ^ self visitNode: aMessageNode receiver ].
 
 	(#( caseOf: caseOf:otherwise:) includes: aMessageNode selector)
 		ifTrue: [ 

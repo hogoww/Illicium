@@ -39,7 +39,7 @@ ASTCNode >> gtInspectorASTDumpIn: composite [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> gtInspectorCPrettyPrint: composite [ 
-	<gtInspectorPresentationOrder: 0>
+
 	^ composite pharoMethod
 		title: [ 'AST C pretty print' translated ];
 			display: [ 
@@ -75,7 +75,8 @@ ASTCNode >> prettyPrintUsing: aPrettyPrinter [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> printOn: aStream [
-	aStream << self prettyPrint
+
+	aStream nextPutAll: self astDump stream contents
 ]
 
 { #category : #'*ASTC-Core-Extensions' }

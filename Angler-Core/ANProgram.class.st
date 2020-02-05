@@ -18,19 +18,25 @@ ANProgram >> addClass: aClass [
 
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
-	isFullyAnnotated := false.
-	methods add: aMethod ast copy
+
+	| conflict |
+	aMethod isSubclassResponsibility ifTrue: [ ^ self ].
+	
+	methods at: aMethod selector
+		ifPresent: [ :conflicting | self halt ]
+		ifAbsentPut: [ aMethod ast copy ]
 ]
 
 { #category : #testing }
 ANProgram >> hasMethodNamed: aSelector [
-  ^methods anySatisfy: [:aCompiledMethod |  aCompiledMethod selector = aSelector ]
+
+	^ methods includesKey: aSelector
 ]
 
 { #category : #accessing }
 ANProgram >> initialize [
 	super initialize.
-	methods := Set new.
+	methods := Dictionary new.
 	isFullyAnnotated := false.
 ]
 
@@ -46,7 +52,8 @@ ANProgram >> isFullyAnnotated: aBoolean [
 
 { #category : #accessing }
 ANProgram >> methodNamed: aSelector [
-  ^methods detect: [:e |  e selector = aSelector ]
+
+	^ methods at: aSelector
 ]
 
 { #category : #testing }
@@ -57,7 +64,7 @@ ANProgram >> methodNeedAdding: aMethod [
 
 { #category : #accessing }
 ANProgram >> methods [
-	^ methods
+	^ methods values
 ]
 
 { #category : #accessing }

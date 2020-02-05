@@ -3,10 +3,19 @@ Class {
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'program',
-		'inlinedSomething'
+		'inlinedSomething',
+		'translator'
 	],
 	#category : #'Angler-Slang'
 }
+
+{ #category : #accessing }
+ANSlangInliner class >> translator: aTranslator [
+
+	^ self new
+		translator: aTranslator;
+		yourself
+]
 
 { #category : #applying }
 ANSlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
@@ -25,8 +34,11 @@ ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 	inlinedSomething := true.
 	[ inlinedSomething ]
 	whileTrue: [  
-		aMethodNode nodesDo: [:aNode|	
-			(aNode isMessage and: [ aProgram hasMethodNamed: aNode selector ])	
+		aMethodNode nodesDo: [:aNode|
+			1halt.
+			((aNode isMessage
+				and: [ aProgram hasMethodNamed: aNode selector ])
+					and: [ (translator isSpecialSelector: aNode selector) ])	
 				ifTrue:[ | methodToInline |	
 					inlinedSomething := true.
 					methodToInline := (aProgram methodNamed: aNode selector) copy.
@@ -47,11 +59,24 @@ ANSlangInliner >> cleanMethod: aRBMethodNode [
 ]
 
 { #category : #inlining }
+ANSlangInliner >> cleanStatements: nodesToInline [
+
+	| cleanNodes node |
+	nodesToInline size > 1 ifFalse: [ ^ nodesToInline ].
+	cleanNodes := nodesToInline copy.
+	node := cleanNodes first.
+	(node isMessage and: [ node selector = #flag: ])
+		ifTrue: [ cleanNodes remove: node ].
+	^ cleanNodes
+]
+
+{ #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodesToInline |
 	aMessageNode methodNode body
 		temporaries: aMessageNode methodNode temporaries , aMethodNode body temporaries.
 	nodesToInline := aMethodNode statements.
+	nodesToInline := self cleanStatements: nodesToInline.
 	
 	nodesToInline last isReturn
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
@@ -74,8 +99,30 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 ]
 
 { #category : #applying }
+ANSlangInliner >> shouldInline: aMessageNode [
+	
+	| methodToInline |
+	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
+	
+	methodToInline := program methodNamed: aMessageNode selector.
+	^ (translator isSpecialSelector: aMessageNode selector) not
+		and: [ (methodToInline hasPragmaNamed: #cmacro) not ]
+]
+
+{ #category : #accessing }
+ANSlangInliner >> translator [
+	^ translator
+]
+
+{ #category : #accessing }
+ANSlangInliner >> translator: anObject [
+	translator := anObject
+]
+
+{ #category : #applying }
 ANSlangInliner >> visitMessageNode: aMessageNode [
-	(program hasMethodNamed: aMessageNode selector)
+
+	(self shouldInline: aMessageNode)
 		ifTrue:[ | methodToInline |
 			inlinedSomething := true.
 			methodToInline := (program methodNamed: aMessageNode selector) copy.

@@ -69,7 +69,12 @@ ANSlangReceiver >> < aNumber [
 
 { #category : #typing }
 ANSlangReceiver >> << aNumber [
-	^ (self translatedReceiver castTo: (self cTypeFor: #usqInt)) << (aNumber acceptVisitor: methodTranslator)
+	"Equivalent to Slang's <<.
+	See CCodeGenerator >> #generateShiftLeft:on:indent: for original semantics."
+
+	^ ((self translatedReceiver castTo: (self cTypeFor: #usqInt))
+			<< (aNumber acceptVisitor: methodTranslator))
+				castTo: (self cTypeFor: self myType)
 ]
 
 { #category : #accessing }
@@ -248,21 +253,20 @@ ANSlangReceiver >> bitOr: anInteger [
 { #category : #'reflective operations' }
 ANSlangReceiver >> bitShift: anIndex [
 	| translatedArg translatedReceiver |
-	translatedArg := anIndex acceptVisitor: methodTranslator.
 	translatedReceiver := self translatedReceiver.
-	self flag: #Incomplete."slang's version attempts to evaluate the expression as a literal"
-	^ (translatedArg isLiteral and:[ translatedArg isInteger ])
-		ifTrue:[ "bit shift amount is a constant"
-			(translatedArg asPharoLiteral < 0
-				ifTrue: [ (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> translatedArg negated ]
-				ifFalse: [ (translatedReceiver castTo: (self cTypeFor: #usqInt)) << translatedArg ])
-					]
-		ifFalse: [ "bit shift amount is an expression"
-			translatedArg < (ASTCLiteral value: 0)
-				then: (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> translatedArg negated
-				else: (translatedReceiver castTo: (self cTypeFor: #usqInt)) << translatedArg.
-			].
+	(self tryEvaluateLiteralExpression: anIndex)
+		ifNotNil: [ :evaluation | | shiftValue |
+			"bit shift amount is a constant"
+			shiftValue := ASTCLiteral value: evaluation.
+			^ evaluation < 0
+				ifTrue: [ (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> shiftValue negated ]
+				ifFalse: [ (translatedReceiver castTo: (self cTypeFor: #usqInt)) << shiftValue ] ].
 
+	"bit shift amount is an expression"
+	translatedArg := anIndex acceptVisitor: methodTranslator.
+	^ translatedArg < (ASTCLiteral value: 0)
+		then: (translatedReceiver castTo: (self cTypeFor: #usqInt)) >> translatedArg negated
+		else: (translatedReceiver castTo: (self cTypeFor: #usqInt)) << translatedArg
 ]
 
 { #category : #'reflective operations' }
@@ -636,6 +640,15 @@ ANSlangReceiver >> to: stop do: aBlock [
 ANSlangReceiver >> touch: something [
 	"does not do appear in translation"
 	^ ASTCEmptyStatement new
+]
+
+{ #category : #'reflective operations' }
+ANSlangReceiver >> tryEvaluateLiteralExpression: anExpression [
+
+	^ ANSlangConstantEvaluator new
+		program: methodTranslator program;
+		evaluate: anExpression
+		ifNonValueDo: [ nil ]
 ]
 
 { #category : #accessing }
