@@ -62,8 +62,11 @@ ANSlangInliner >> cleanMethod: aRBMethodNode [
 ANSlangInliner >> cleanStatements: nodesToInline [
 
 	| cleanNodes node |
-	nodesToInline size > 1 ifFalse: [ ^ nodesToInline ].
 	cleanNodes := nodesToInline copy.
+	nodesToInline do: [:aNode| 
+		(aNode isMessage and: [ aNode selector = #assert: ]) ifTrue: [ cleanNodes remove: aNode ]].
+	nodesToInline size > 1 ifFalse: [ ^ nodesToInline ].
+	
 	node := cleanNodes first.
 	(node isMessage and: [ node selector = #flag: ])
 		ifTrue: [ cleanNodes remove: node ].
