@@ -190,7 +190,7 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
-	
+
 	"Specific for expressions wrapping casts"
 	self
 		parenthesisIf: (aCastOperator parent isBinaryOperator
@@ -214,8 +214,7 @@ ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 				print: aCastOperator type;
 				<< ') '.
 			self
-				parenthesisIf: (aCastOperator operands first isIdentifier not
-					and: [ aCastOperator operands first isBitLeftShiftOperator not ])
+				parenthesisIf: (aCastOperator operands first isBitLeftShiftOperator not)
 				print: [
 					self
 						parenthesisIf: (aCastOperator operands first isIdentifier not
@@ -232,10 +231,12 @@ ANSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
+
 	self
-		parenthesisIf: ((aFunctionCall parent isBinaryOperator
-			or: [aFunctionCall parent isCastOperator ])
-				and: [ aFunctionCall parent isAssignmentOperator not ])
+		parenthesisIf: (aFunctionCall id id ~= #GIV "Special case due to rewriting."
+			and: [((aFunctionCall parent isBinaryOperator
+				or: [aFunctionCall parent isCastOperator ])
+					and: [ aFunctionCall parent isAssignmentOperator not ])])
 		print: [
 		aFunctionCall id acceptVisitor: self.
 		self << '('.
