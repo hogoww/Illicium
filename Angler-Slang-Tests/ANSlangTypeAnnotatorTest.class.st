@@ -4,7 +4,7 @@ I test the ASTCSlangTypeAnnotator class
 Class {
 	#name : #ANSlangTypeAnnotatorTest,
 	#superclass : #ASTCTypeAnnotatorTest,
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-Tests'
 }
 
 { #category : #testing }

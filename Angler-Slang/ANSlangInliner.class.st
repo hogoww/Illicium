@@ -6,7 +6,7 @@ Class {
 		'inlinedSomething',
 		'translator'
 	],
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-analysis'
 }
 
 { #category : #accessing }
