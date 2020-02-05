@@ -1,9 +1,6 @@
 Class {
 	#name : #ANSlangClassTranslator,
 	#superclass : #ASTCClassTranslator,
-	#instVars : [
-		'doInlining'
-	],
 	#category : #'Angler-Slang'
 }
 
@@ -31,16 +28,6 @@ ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [
 ]
 
 { #category : #initialization }
-ANSlangClassTranslator >> doInlining [
-	^ doInlining
-]
-
-{ #category : #initialization }
-ANSlangClassTranslator >> doInlining: aBoolean [
-	doInlining := aBoolean
-]
-
-{ #category : #initialization }
 ANSlangClassTranslator >> initialize [
 	super initialize.
 	inferer := CCodeGeneratorGlobalStructure new.
@@ -49,8 +36,13 @@ ANSlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
-	doInlining := false.
 	program := ANProgram new.
+]
+
+{ #category : #'special selectors' }
+ANSlangClassTranslator >> isSpecialSelector: aString [ 
+	
+	^ ANSlangReceiver slangReservedSelector includes: aString
 ]
 
 { #category : #initialization }
@@ -109,8 +101,7 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 ANSlangClassTranslator >> transformations [
 	| transformations |
 	transformations := OrderedCollection new.
-	transformations add: ANSlangCleaner new.
-	doInlining ifTrue: [ transformations add: ANSlangInliner new ].
+	transformations add: (ANSlangInliner translator: self).
 	^ transformations
 ]
 

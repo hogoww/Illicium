@@ -24,27 +24,34 @@ ANProgram >> addClass: aClass [
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
 	| methodCopy |
-	wasModifiedSinceLastCheck:= true.
-	methodCopy := aMethod ast copy.
-	methodCopy propertyAt: self class isAnnotatedProperty put: false.
-	methods add: methodCopy
+	aMethod isSubclassResponsibility ifTrue: [ ^ self ].
+  
+  methods at: aMethod selector
+		ifPresent: [ :conflicting | self halt ]
+		ifAbsentPut: [
+	    wasModifiedSinceLastCheck:= true.
+	    methodCopy := aMethod ast copy.
+	    methodCopy propertyAt: self class isAnnotatedProperty put: false.
+      methods add: methodCopy 
+  ]
 ]
 
 { #category : #testing }
 ANProgram >> hasMethodNamed: aSelector [
-	^ methods anySatisfy: [ :aCompiledMethod | aCompiledMethod selector = aSelector ]
+	^ methods includesKey: aSelector
 ]
 
 { #category : #accessing }
 ANProgram >> initialize [
 	super initialize.
-	methods := Set new.
 	wasModifiedSinceLastCheck := true. "No check was done yet"
+	methods := Dictionary new.
 ]
 
 { #category : #accessing }
 ANProgram >> methodNamed: aSelector [
-  ^methods detect: [:e |  e selector = aSelector ]
+
+	^ methods at: aSelector
 ]
 
 { #category : #testing }
@@ -55,7 +62,7 @@ ANProgram >> methodNeedAdding: aMethod [
 
 { #category : #accessing }
 ANProgram >> methods [
-	^ methods
+	^ methods values
 ]
 
 { #category : #accessing }

@@ -5,7 +5,77 @@ Class {
 }
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> cLiteralFor: anObject [
+	"Return a string representing the C literal value for the given object."
+	anObject isNumber
+		ifTrue:
+			[anObject isInteger ifTrue:
+				[| hex |
+				 hex := (anObject > 0
+								and: [(anObject >> anObject lowBit + 1) isPowerOfTwo
+								and: [(anObject highBit = anObject lowBit and: [anObject > 65536])
+									  or: [anObject highBit - anObject lowBit >= 4]]]).
+				^self cLiteralForInteger: anObject hex: hex].
+			anObject isFloat ifTrue:
+				[^anObject printString]]
+		ifFalse:
+			[anObject isSymbol ifTrue:
+				[^self cFunctionNameFor: anObject].
+			anObject isString ifTrue:
+				[^'"', (anObject copyReplaceAll: (String with: Character cr) with: '\n') , '"'].
+			anObject == nil ifTrue: [^ 'null' ].
+			anObject == true ifTrue: [^ '1' ].
+			anObject == false ifTrue: [^ '0' ].
+			anObject isCharacter ifTrue:
+				[^anObject == $'
+					ifTrue: ['''\'''''] "i.e. '\''"
+					ifFalse: [anObject asString printString]]].
+	self error: 'Warning: A Smalltalk literal could not be translated into a C constant: ', anObject printString.
+	^'"XXX UNTRANSLATABLE CONSTANT XXX"'
+]
+
+{ #category : #literals }
+ANSlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
+	"Answer the string for generating a literal integer.
+	Use hexadecimal notation as prescribed by aBoolean.
+	Use long long suffix (LL) if the integer does not fit on 32 bits.
+	Use unsigned suffix (U) if the integer does not fit on a signed integer (resp. long long).
+	Correctly generate INT_MIN and LONG_LONG_MIN.
+	Indeed -0x8000000 is parsed as - (0x8000000) by C Compiler.
+	0x8000000 does not fit on a signed int, it is interpreted as unsigned.
+	That makes INT_MIN unsigned which is badly broken..."
+	
+	| printString |
+	printString := aBoolean
+		ifTrue: [anInteger positive
+			ifTrue: ['0x' , (anInteger printStringBase: 16)]
+			ifFalse: ['-0x' , (anInteger negated printStringBase: 16)]]
+		ifFalse: [anInteger printString].
+	^anInteger positive
+		ifTrue: [anInteger > 16r7FFFFFFF "INT_MAX"
+			ifTrue: [anInteger > 16rFFFFFFFF "UINT_MAX"
+				ifTrue: [anInteger > 16r7FFFFFFFFFFFFFFF "LONG_LONG_MAX"
+					ifTrue: [printString , 'ULL']
+					ifFalse: [printString , 'LL']]
+				ifFalse: [printString , 'U']]
+			ifFalse: [printString]]
+		ifFalse: [anInteger < -16r8000000
+			ifTrue: [anInteger = -16r800000000000000	"LONG_LONG_MIN"
+				ifTrue: ['(-0x7FFFFFFFFFFFFFFFLL-1)']
+				ifFalse: [printString , 'LL']]
+			ifFalse: [anInteger = -16r8000000	"INT_MIN"
+				ifTrue: ['(-0x7FFFFFFF-1)']
+				ifFalse: [printString]]]
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
+
+	aNode isLiteral ifTrue: [ ^ false ].
+	(aNode isBitLeftShiftOperator
+		and: [ aNode operands first isCastOperator
+			and: [ aNode parent isCastOperator ] ]) ifTrue: [ ^ false ].
+
 	^ aNode parent isIf not 
 		and: [ aNode parent isAssignmentOperator not
 			and: [ aNode parent isStatement not
@@ -83,6 +153,16 @@ ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 ]
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+	
+	| shouldWrapWithExtraParenthesis |
+	shouldWrapWithExtraParenthesis := aBitLeftShiftOperator operands first isCastOperator.
+	shouldWrapWithExtraParenthesis ifTrue: [ self << '(' ].
+	super visitBitLeftShiftOperator: aBitLeftShiftOperator.
+	shouldWrapWithExtraParenthesis ifTrue: [ self << ')' ].
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
@@ -108,12 +188,38 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
-	" Slang systematically use an englobing set of parenthesis"
-	self << '((';
-		print: aCastOperator type;
-		<< ') ';
-		print: (aCastOperator operands at: 1);
-		<< ')'
+	
+	"Specific for expressions wrapping casts"
+	self
+		parenthesisIf: (aCastOperator parent isBinaryOperator
+			and: [ aCastOperator parent isBitLeftShiftOperator not
+				and: [ aCastOperator parent isBitRightShiftOperator not
+					and: [ aCastOperator parent isAssignmentOperator not ] ] ])
+		print: [
+	
+	"Second parenthesis is the cast-specific one"
+	self
+		parenthesisIf: 
+		((aCastOperator parent isBinaryOperator and: [ aCastOperator parent isBitLeftShiftOperator not ])
+			or: [
+		(aCastOperator parent isCastOperator not
+			and: [aCastOperator parent isBitLeftShiftOperator not
+				and: [ aCastOperator operands first isIdentifier not
+							and: [ aCastOperator operands first isFunctionCall not ] ] ])])
+		print: [
+			self
+				<< '(';
+				print: aCastOperator type;
+				<< ') '.
+			self
+				parenthesisIf: (aCastOperator operands first isIdentifier not
+					and: [ aCastOperator operands first isBitLeftShiftOperator not ])
+				print: [
+					self
+						parenthesisIf: (aCastOperator operands first isIdentifier not
+							and: [ aCastOperator operands first isFunctionCall not
+								and: [ aCastOperator operands first isBitLeftShiftOperator not ] ])
+						print: [ self print: aCastOperator operands first ] ] ] ]
 ]
 
 { #category : #visiting }
@@ -181,10 +287,8 @@ ANSlangPrettyPrinter >> visitIf: anIf [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitLiteral: aLiteral [
-	aLiteral value = #null 
-		ifTrue: [ ^ self << aLiteral value ].
 
-	super visitLiteral: aLiteral
+	self << (self cLiteralFor: aLiteral value)
 ]
 
 { #category : #visiting }

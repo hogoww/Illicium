@@ -113,6 +113,12 @@ ASTCMethodTranslator >> methodNodeTranslator: aMethodNodeTranslator [
 	 translators at: #methodNodeTranslator put: (aMethodNodeTranslator methodTranslator: self ; yourself).
 ]
 
+{ #category : #accessing }
+ASTCMethodTranslator >> program [
+	
+	^ classTranslator program
+]
+
 { #category : #configuration }
 ASTCMethodTranslator >> returnNodeTranslator: anILReturnNodeTranslator [ 
 	translators at: #returnNodeTranslator put: (anILReturnNodeTranslator methodTranslator: self ; yourself).

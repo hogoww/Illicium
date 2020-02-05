@@ -170,9 +170,10 @@ ANPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClas
 	| methodSource |
 	methodSource :=	 'test', aSelector onlyLetters capitalized , 'StringComparison' asMethodWithBody:[
 		| illiString slangString illiAST |
+		"Generate Slang first. Slang fails faster"
+		slangString := self generateSlang: #aSelector.
 		illiAST := self generateIllicium: #aSelector.
 		illiString := self prettyPrintIllicium: illiAST.
-		slangString := self generateSlang: #aSelector.
 		self assert: illiString equals: slangString.
 	].
 
