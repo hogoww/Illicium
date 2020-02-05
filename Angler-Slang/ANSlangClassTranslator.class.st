@@ -9,28 +9,12 @@ ANSlangClassTranslator >> addMethod: aCollection [
 	program addMethod: aCollection
 ]
 
-{ #category : #typing }
-ANSlangClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
-	| typeAnnotator |
-	typeAnnotator := self typeAnnotatorClass new
-		inferer: inferer;
-		yourself.
-	methodsASTs
-		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
-	^ methodsASTs
-]
-
-{ #category : #'program-configuration' }
-ANSlangClassTranslator >> annotateProgramWith: aClass [
-	self flag: #slang.
-	aClass declareCVarsIn: inferer.
-
-	self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
-	[inferer inferTypesForImplicitlyTypedVariablesAndMethods.] timeToRun.
-	
-	self annotateMethodsASTWithTypes: program methods.
-	program isFullyAnnotated: true
-	
+{ #category : #annotation }
+ANSlangClassTranslator >> annotateMethodAST: aMethodNode [ 
+	| visitors |
+	visitors := self preTranslationVisitors.
+	aMethodNode acceptMultipleVisitors: visitors.
+	aMethodNode propertyAt: ANProgram isAnnotatedProperty put: true.
 ]
 
 { #category : #transformations }
@@ -76,7 +60,10 @@ ANSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 { #category : #visiting }
 ANSlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { ANSlangDeclarationAnnotator }
+	^ { 
+		ANSlangDeclarationAnnotator new. 
+		ANSlangTypeAnnotator new inferer: inferer ; yourself"always take the latest inferer"
+		}
 ]
 
 { #category : #check }
@@ -102,9 +89,9 @@ ANSlangClassTranslator >> preTypeInference: aClass [
 ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	aClass declareCVarsIn: inferer.
+	self annotateProgramWith: aClass.
+	
 	method := program methodNamed: aSelector.
-	program isFullyAnnotated ifFalse: [ self annotateProgramWith: aClass ].
-
 	method := self applyTransformationsOn: method.
 	
 	^ { method }

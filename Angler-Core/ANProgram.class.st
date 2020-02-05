@@ -3,10 +3,15 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methods',
-		'isFullyAnnotated'
+		'wasModifiedSinceLastCheck'
 	],
 	#category : #'Angler-Core'
 }
+
+{ #category : #properties }
+ANProgram class >> isAnnotatedProperty [
+	^ #isAnnotated
+]
 
 { #category : #accessing }
 ANProgram >> addClass: aClass [
@@ -18,36 +23,29 @@ ANProgram >> addClass: aClass [
 
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
-
-	| conflict |
+	| methodCopy |
 	aMethod isSubclassResponsibility ifTrue: [ ^ self ].
-	
-	methods at: aMethod selector
+  
+  methods at: aMethod selector
 		ifPresent: [ :conflicting | self halt ]
-		ifAbsentPut: [ aMethod ast copy ]
+		ifAbsentPut: [
+	    wasModifiedSinceLastCheck:= true.
+	    methodCopy := aMethod ast copy.
+	    methodCopy propertyAt: self class isAnnotatedProperty put: false.
+      methods add: methodCopy 
+  ]
 ]
 
 { #category : #testing }
 ANProgram >> hasMethodNamed: aSelector [
-
 	^ methods includesKey: aSelector
 ]
 
 { #category : #accessing }
 ANProgram >> initialize [
 	super initialize.
+	wasModifiedSinceLastCheck := true. "No check was done yet"
 	methods := Dictionary new.
-	isFullyAnnotated := false.
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated [
-	^ isFullyAnnotated
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated: aBoolean [
-	isFullyAnnotated := aBoolean
 ]
 
 { #category : #accessing }
@@ -71,4 +69,20 @@ ANProgram >> methods [
 ANProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
+]
+
+{ #category : #accessing }
+ANProgram >> methodsNeedingAnnotation [
+	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
+	^ methods reject: [:aMethod| aMethod propertyAt: self class isAnnotatedProperty ]
+]
+
+{ #category : #accessing }
+ANProgram >> wasModifiedSinceLastCheck [
+	^ wasModifiedSinceLastCheck
+]
+
+{ #category : #accessing }
+ANProgram >> wasModifiedSinceLastCheck: aBoolean [
+	wasModifiedSinceLastCheck := aBoolean
 ]
