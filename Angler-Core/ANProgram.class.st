@@ -3,11 +3,15 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methods',
-		'isFullyAnnotated',
-		'classesToGenerate'
+		'wasModifiedSinceLastCheck'
 	],
 	#category : #'Angler-Core'
 }
+
+{ #category : #properties }
+ANProgram class >> isAnnotatedProperty [
+	^ #isAnnotated
+]
 
 { #category : #accessing }
 ANProgram >> addClass: aClass [
@@ -44,7 +48,6 @@ ANProgram >> classesDo: aBlockClosure [
 
 { #category : #testing }
 ANProgram >> hasMethodNamed: aSelector [
-
 	^ methods includesKey: aSelector
 ]
 
@@ -54,16 +57,6 @@ ANProgram >> initialize [
 	classesToGenerate := OrderedCollection new.
 	methods := Dictionary new.
 	isFullyAnnotated := false.
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated [
-	^ isFullyAnnotated
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated: aBoolean [
-	isFullyAnnotated := aBoolean
 ]
 
 { #category : #accessing }
@@ -90,4 +83,21 @@ ANProgram >> methods [
 ANProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
+]
+
+{ #category : #accessing }
+ANProgram >> methodsNeedingAnnotation [
+	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
+	^ methods reject: [:anAssociation| anAssociation value propertyAt: self class isAnnotatedProperty ]
+		thenCollect: [:anAssociation| anAssociation value ]
+]
+
+{ #category : #accessing }
+ANProgram >> wasModifiedSinceLastCheck [
+	^ wasModifiedSinceLastCheck
+]
+
+{ #category : #accessing }
+ANProgram >> wasModifiedSinceLastCheck: aBoolean [
+	wasModifiedSinceLastCheck := aBoolean
 ]
