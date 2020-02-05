@@ -113,7 +113,8 @@ ANSlangInliner >> shouldInline: aMessageNode [
 		ifPresent: [:aPragma| (#(false never) includes: aPragma arguments first value) ifTrue: [ ^ false ] ].
 		
 	^(translator isSpecialSelector: aMessageNode selector) not
-		and: [ (methodToInline hasPragmaNamed: #cmacro) not ]
+		and: [ (methodToInline hasPragmaNamed: #cmacro) not
+			and: [ (methodToInline hasPragmaNamed: #cmacro:) not ] ]
 ]
 
 { #category : #accessing }
