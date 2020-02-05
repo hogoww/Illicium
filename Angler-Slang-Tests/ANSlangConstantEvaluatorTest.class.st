@@ -75,7 +75,7 @@ ANSlangConstantEvaluatorTest >> setUp [
 	evaluated := false.
 	
 	program := ANProgram new.
-	program addMethod: self class >> #foo.
+	program addMethod: (self class >> #foo) ast.
 ]
 
 { #category : #tests }
