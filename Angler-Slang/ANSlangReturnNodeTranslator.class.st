@@ -7,8 +7,8 @@ Class {
 { #category : #translate }
 ANSlangReturnNodeTranslator >> translateNode: aReturnNode [
 	| returnExpression |
-	returnExpression := aReturnNode value isSelf 
-		ifTrue: [ ASTCLiteral value: 0 ]
+	returnExpression := aReturnNode value isSelf
+		ifTrue: [ ^ ASTCEmptyStatement new ]
 		ifFalse: [ aReturnNode value acceptVisitor: methodTranslator ].
 	
 	^ ASTCReturn new
