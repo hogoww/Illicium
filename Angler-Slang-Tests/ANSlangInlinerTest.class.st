@@ -89,7 +89,7 @@ ANSlangInlinerTest >> setUp [
 { #category : #tests }
 ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithBlockParameter:. 
+	program addMethod: (self class >> #methodWithBlockParameter:) ast. 
 	initialMethod := (self class >> #methodWithBlockParameterToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -107,7 +107,7 @@ ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
 { #category : #tests }
 ANSlangInlinerTest >> testInlineSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithSingleStatement. 
+	program addMethod: (self class >> #methodWithSingleStatement) ast.
 	initialMethod := (self class >> #methodWithSingleStatementToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -124,7 +124,7 @@ ANSlangInlinerTest >> testInlineSingleStatement [
 { #category : #tests }
 ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithSingleStatementAndSingleTemporary. 
+	program addMethod: (self class >> #methodWithSingleStatementAndSingleTemporary) ast.
 	initialMethod := (self class >> #methodWithSingleStatementAndSingleTemporaryToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -145,7 +145,7 @@ ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
 { #category : #tests }
 ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithSingleStatementThatReturns.
+	program addMethod: (self class >> #methodWithSingleStatementThatReturns) ast.
 	initialMethod := (self class >> #methodWithSingleStatementThatReturnsToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -162,7 +162,7 @@ ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 { #category : #tests }
 ANSlangInlinerTest >> testInlineTwoStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithTwoStatements. 
+	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -184,7 +184,7 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 	"same behavior as self class >> testInlineTwoStatement, because the return is discarded in the inlining"
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithTwoStatementsThatReturns. 
+	program addMethod: (self class >> #methodWithTwoStatementsThatReturns) ast. 
 	initialMethod := (self class >> #methodWithTwoStatementsThatReturnsToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -204,7 +204,7 @@ ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 { #category : #tests }
 ANSlangInlinerTest >> testReturningInlinedSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: self class >> #methodWithSingleStatement. 
+	program addMethod: (self class >> #methodWithSingleStatement) ast. 
 	initialMethod := (self class >> #methodReturningInlinedSingleStatement) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
