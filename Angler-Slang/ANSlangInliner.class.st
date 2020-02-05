@@ -63,10 +63,10 @@ ANSlangInliner >> cleanStatements: nodesToInline [
 
 	| cleanNodes node |
 	cleanNodes := nodesToInline copy.
-	nodesToInline do: [:aNode| 
-		(aNode isMessage and: [ aNode selector = #assert: ]) ifTrue: [ cleanNodes remove: aNode ]].
-	nodesToInline size > 1 ifFalse: [ ^ nodesToInline ].
+	"nodesToInline do: [:aNode| 
+		(aNode isMessage and: [ aNode selector = #assert: ]) ifTrue: [ cleanNodes remove: aNode ]]."
 	
+	nodesToInline size > 1 ifFalse: [ ^ nodesToInline ].
 	node := cleanNodes first.
 	(node isMessage and: [ node selector = #flag: ])
 		ifTrue: [ cleanNodes remove: node ].
@@ -108,7 +108,11 @@ ANSlangInliner >> shouldInline: aMessageNode [
 	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
 	
 	methodToInline := program methodNamed: aMessageNode selector.
-	^ (translator isSpecialSelector: aMessageNode selector) not
+	
+	methodToInline pragmaNamed: #inline:
+		ifPresent: [:aPragma| (#(false never) includes: aPragma arguments first value) ifTrue: [ ^ false ] ].
+		
+	^(translator isSpecialSelector: aMessageNode selector) not
 		and: [ (methodToInline hasPragmaNamed: #cmacro) not ]
 ]
 
