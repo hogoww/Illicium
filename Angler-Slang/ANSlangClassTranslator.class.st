@@ -11,7 +11,8 @@ ANSlangClassTranslator >> addMethod: aCollection [
 
 { #category : #'program-configuration' }
 ANSlangClassTranslator >> annotateProgramWith: aClass [
-	self flag: #slang.
+	program isFullyAnnotated ifTrue: [ ^ self ].
+	1halt.
 	inferer vmClass: self program vmClass.
 	self program classesDo: [ :each | 
 		each prepareToBeAddedToCodeGenerator: inferer.
@@ -36,7 +37,6 @@ ANSlangClassTranslator >> annotateProgramWith: aClass [
 	
 	self annotateMethodsASTWithTypes: (program methods select: [:e| e methodClass ~~ StackInterpreter]).
 	program isFullyAnnotated: true
-	
 ]
 
 { #category : #transformations }
@@ -118,7 +118,7 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 	| method |
 	aClass declareCVarsIn: inferer.
 
-	program isFullyAnnotated ifFalse: [ self annotateProgramWith: aClass ].
+	self annotateProgramWith: aClass.
 
 	method := program methodNamed: aSelector.
 	method := self applyTransformationsOn: method.
