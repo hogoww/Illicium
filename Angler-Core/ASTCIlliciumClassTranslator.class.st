@@ -27,7 +27,10 @@ ASTCIlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 { #category : #visiting }
 ASTCIlliciumClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { ASTCIlliciumDeclarationAnnotator }
+	^ { 
+		ANSlangDeclarationAnnotator new. 
+		ANSlangTypeAnnotator new inferer: inferer ; yourself"always take the latest inferer"
+		}
 ]
 
 { #category : #'translation-api' }

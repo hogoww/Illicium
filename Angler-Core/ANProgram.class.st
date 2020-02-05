@@ -3,51 +3,50 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methods',
-		'isFullyAnnotated'
+		'wasModifiedSinceLastCheck'
 	],
 	#category : #'Angler-Core'
 }
+
+{ #category : #properties }
+ANProgram class >> isAnnotatedProperty [
+	^ #isAnnotated
+]
 
 { #category : #accessing }
 ANProgram >> addClass: aClass [
 	(aClass allSelectorsBelow: VMClass) 
 		do: [:aSelector ||aMethod|
 			aMethod := (aClass lookupSelector: aSelector).
-			(self methodNeedAdding: aMethod) ifTrue: [ self addMethod: (aClass lookupSelector: aSelector) ]].
+			(self methodNeedAdding: aMethod) 
+				ifTrue: [ self addMethod: aMethod ]].
 ]
 
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
+  | methodCopy |
+  aMethod isSubclassResponsibility ifTrue: [ ^self ].
 
-	| conflict |
-	aMethod isSubclassResponsibility ifTrue: [ ^ self ].
-	
-	methods at: aMethod selector
-		ifPresent: [ :conflicting | self halt ]
-		ifAbsentPut: [ aMethod ast copy ]
+  methods at: aMethod selector 
+	ifPresent: [:conflicting | self halt ]
+	ifAbsentPut: [
+			wasModifiedSinceLastCheck := true.
+        methodCopy := aMethod ast copy.
+        methodCopy propertyAt: self class isAnnotatedProperty put: false.
+        methodCopy 
+	]
 ]
 
 { #category : #testing }
 ANProgram >> hasMethodNamed: aSelector [
-
 	^ methods includesKey: aSelector
 ]
 
 { #category : #accessing }
 ANProgram >> initialize [
 	super initialize.
+	wasModifiedSinceLastCheck := true. "No check was done yet"
 	methods := Dictionary new.
-	isFullyAnnotated := false.
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated [
-	^ isFullyAnnotated
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated: aBoolean [
-	isFullyAnnotated := aBoolean
 ]
 
 { #category : #accessing }
@@ -71,4 +70,21 @@ ANProgram >> methods [
 ANProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
+]
+
+{ #category : #accessing }
+ANProgram >> methodsNeedingAnnotation [
+	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
+	^ methods reject: [:anAssociation| anAssociation value propertyAt: self class isAnnotatedProperty ]
+		thenCollect: [:anAssociation| anAssociation value ]
+]
+
+{ #category : #accessing }
+ANProgram >> wasModifiedSinceLastCheck [
+	^ wasModifiedSinceLastCheck
+]
+
+{ #category : #accessing }
+ANProgram >> wasModifiedSinceLastCheck: aBoolean [
+	wasModifiedSinceLastCheck := aBoolean
 ]

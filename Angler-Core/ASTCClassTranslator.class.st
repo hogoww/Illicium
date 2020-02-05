@@ -257,10 +257,12 @@ ASTCClassTranslator >> translateMethodsASTs: methodsAST [
 
 { #category : #translation }
 ASTCClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
+	"overrides the previous one to remove the hook for pre translation. 
+	Should probably disapear, but that's work for another day"
 	| res |
 	res := methodsAST
 		collect: [ :aMethodAST |
-			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor new ].
+			
 			methodTranslator translateMethodAST: aMethodAST
 		].
 	^ res
