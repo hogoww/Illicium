@@ -145,8 +145,8 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 ANSlangClassTranslator >> transformations [
 	| transformations |
 	transformations := OrderedCollection new.
-	transformations add: (ANGlobalStructureAccessTransformer translator: self).
 	transformations add: (ANSlangInliner translator: self).
+	transformations add: (ANGlobalStructureAccessTransformer translator: self).
 	^ transformations
 ]
 
