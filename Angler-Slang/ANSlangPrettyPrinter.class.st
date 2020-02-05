@@ -142,9 +142,11 @@ ANSlangPrettyPrinter >> visitAndOperator: anAndOperator [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOperator [
 	"use of one more set of parentheses than needed. Ok."
-	self << '('.
+	| isStatement |
+	isStatement := anAssignmentAdditionOperator parent isExpressionStatement.
+	isStatement ifFalse: [self << '('].
 	super visitAssignementAdditionOperator: anAssignmentAdditionOperator.
-	self << ')'
+	isStatement ifFalse: [self << ')'].
 ]
 
 { #category : #visiting }
