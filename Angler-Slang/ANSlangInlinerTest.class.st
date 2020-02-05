@@ -6,7 +6,7 @@ Class {
 		'inliner',
 		'methodToInline'
 	],
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-analysis'
 }
 
 { #category : #support }

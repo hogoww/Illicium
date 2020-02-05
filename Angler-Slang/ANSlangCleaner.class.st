@@ -5,7 +5,7 @@ Class {
 		'program',
 		'inlinedSomething'
 	],
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-analysis'
 }
 
 { #category : #cleaning }

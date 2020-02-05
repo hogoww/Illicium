@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSlangAssignmentNodeTranslator,
 	#superclass : #ASTCAssignementNodeTranslator,
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-nodes-translators'
 }
 
 { #category : #translate }

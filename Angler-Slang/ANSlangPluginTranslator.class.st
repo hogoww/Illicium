@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSlangPluginTranslator,
 	#superclass : #ANSlangTranslator,
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-translators'
 }
 
 { #category : #configuration }

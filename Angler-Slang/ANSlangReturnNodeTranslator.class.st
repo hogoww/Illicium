@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSlangReturnNodeTranslator,
 	#superclass : #ASTCReturnNodeTranslator,
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-nodes-translators'
 }
 
 { #category : #translate }

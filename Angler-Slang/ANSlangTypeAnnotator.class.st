@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'currentTMethod'
 	],
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-analysis'
 }
 
 { #category : #visiting }
