@@ -129,5 +129,8 @@ ANSlangInliner >> visitMessageNode: aMessageNode [
 			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.
 			].
+	
+	"Do not inline inside assertions"
+	aMessageNode selector = #assert: ifTrue: [ ^ self ].
 	super visitMessageNode: aMessageNode
 ]
