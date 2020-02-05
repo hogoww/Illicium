@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methods',
-		'wasModifiedSinceLastCheck'
+		'isFullyAnnotated',
+		'classesToGenerate'
 	],
 	#category : #'Angler-Core'
 }
@@ -60,6 +61,16 @@ ANProgram >> initialize [
 ]
 
 { #category : #accessing }
+ANProgram >> isFullyAnnotated [
+	^ isFullyAnnotated
+]
+
+{ #category : #accessing }
+ANProgram >> isFullyAnnotated: anObject [
+	isFullyAnnotated := anObject
+]
+
+{ #category : #accessing }
 ANProgram >> methodNamed: aSelector [
 
 	^ methods at: aSelector ifAbsent: [ 
@@ -90,14 +101,4 @@ ANProgram >> methodsNeedingAnnotation [
 	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
 	^ methods reject: [:anAssociation| anAssociation value propertyAt: self class isAnnotatedProperty ]
 		thenCollect: [:anAssociation| anAssociation value ]
-]
-
-{ #category : #accessing }
-ANProgram >> wasModifiedSinceLastCheck [
-	^ wasModifiedSinceLastCheck
-]
-
-{ #category : #accessing }
-ANProgram >> wasModifiedSinceLastCheck: aBoolean [
-	wasModifiedSinceLastCheck := aBoolean
 ]
