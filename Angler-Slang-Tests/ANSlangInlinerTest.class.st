@@ -25,6 +25,19 @@ ANSlangInlinerTest >> methodWithBlockParameterToInline [
 ]
 
 { #category : #support }
+ANSlangInlinerTest >> methodWithCMacro [
+	
+	<cmacro>
+	^ 17
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> methodWithMacroToInline [
+	
+	^ self methodWithCMacro
+]
+
+{ #category : #support }
 ANSlangInlinerTest >> methodWithSingleStatement [
 	1 even
 ]
@@ -102,6 +115,18 @@ ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
 	self assert: inlinedStatement receiver isBlock.
 	self assert: inlinedStatement receiver equals: [ 1 even ] sourceNode.
 	self assert: inlinedStatement selector equals: #value.
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> testInlineMessageWithCMacroShouldNotInline [
+	| resultingMethod initialMethod |
+	program addMethod: (self class >> #methodWithCMacro) ast. 
+	initialMethod := (self class >> #methodWithMacroToInline) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	self assert: resultingMethod equals: resultingMethod.
+
 ]
 
 { #category : #tests }
