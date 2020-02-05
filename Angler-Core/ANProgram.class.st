@@ -18,22 +18,23 @@ ANProgram >> addClass: aClass [
 	(aClass allSelectorsBelow: VMClass) 
 		do: [:aSelector ||aMethod|
 			aMethod := (aClass lookupSelector: aSelector).
-			(self methodNeedAdding: aMethod) ifTrue: [ self addMethod: (aClass lookupSelector: aSelector) ]].
+			(self methodNeedAdding: aMethod) 
+				ifTrue: [ self addMethod: aMethod ]].
 ]
 
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
-	| methodCopy |
-	aMethod isSubclassResponsibility ifTrue: [ ^ self ].
-  
-  methods at: aMethod selector
-		ifPresent: [ :conflicting | self halt ]
-		ifAbsentPut: [
-	    wasModifiedSinceLastCheck:= true.
-	    methodCopy := aMethod ast copy.
-	    methodCopy propertyAt: self class isAnnotatedProperty put: false.
-      methods add: methodCopy 
-  ]
+  | methodCopy |
+  aMethod isSubclassResponsibility ifTrue: [ ^self ].
+
+  methods at: aMethod selector 
+	ifPresent: [:conflicting | self halt ]
+	ifAbsentPut: [
+			wasModifiedSinceLastCheck := true.
+        methodCopy := aMethod ast copy.
+        methodCopy propertyAt: self class isAnnotatedProperty put: false.
+        methodCopy 
+	]
 ]
 
 { #category : #testing }
@@ -74,7 +75,8 @@ ANProgram >> methodsDo: aBlockClosure [
 { #category : #accessing }
 ANProgram >> methodsNeedingAnnotation [
 	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
-	^ methods reject: [:aMethod| aMethod propertyAt: self class isAnnotatedProperty ]
+	^ methods reject: [:anAssociation| anAssociation value propertyAt: self class isAnnotatedProperty ]
+		thenCollect: [:anAssociation| anAssociation value ]
 ]
 
 { #category : #accessing }

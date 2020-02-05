@@ -17,6 +17,27 @@ ANSlangClassTranslator >> annotateMethodAST: aMethodNode [
 	aMethodNode propertyAt: ANProgram isAnnotatedProperty put: true.
 ]
 
+{ #category : #annotation }
+ANSlangClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
+	methodsASTs
+		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
+	^ methodsASTs
+]
+
+{ #category : #annotation }
+ANSlangClassTranslator >> annotateProgramWith: aClass [
+	| methodsNeedingAnnotation |
+	aClass declareCVarsIn: inferer.
+	
+	methodsNeedingAnnotation := self program methodsNeedingAnnotation.
+	methodsNeedingAnnotation do:[ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
+	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
+	self annotateMethodsASTWithTypes: methodsNeedingAnnotation.
+	
+	program wasModifiedSinceLastCheck: false
+	
+]
+
 { #category : #transformations }
 ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
 	| method |
