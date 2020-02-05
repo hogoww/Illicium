@@ -9,21 +9,6 @@ ANSlangClassTranslator >> addMethod: aCollection [
 	program addMethod: aCollection
 ]
 
-{ #category : #annotation }
-ANSlangClassTranslator >> annotateMethodAST: aMethodNode [ 
-	| visitors |
-	visitors := self preTranslationVisitors.
-	aMethodNode acceptMultipleVisitors: visitors.
-	aMethodNode propertyAt: ANProgram isAnnotatedProperty put: true.
-]
-
-{ #category : #annotation }
-ANSlangClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
-	methodsASTs
-		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
-	^ methodsASTs
-]
-
 { #category : #'program-configuration' }
 ANSlangClassTranslator >> annotateProgramWith: aClass [
 	self flag: #slang.

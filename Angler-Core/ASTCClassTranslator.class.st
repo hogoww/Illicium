@@ -39,6 +39,21 @@ ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilatio
 	^ aCompilationUnit
 ]
 
+{ #category : #annotation }
+ASTCClassTranslator >> annotateMethodAST: aMethodNode [ 
+	| visitors |
+	visitors := self preTranslationVisitors.
+	aMethodNode acceptMultipleVisitors: visitors.
+	aMethodNode propertyAt: ANProgram isAnnotatedProperty put: true.
+]
+
+{ #category : #annotation }
+ASTCClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
+	methodsASTs
+		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
+	^ methodsASTs
+]
+
 { #category : #typing }
 ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
@@ -249,7 +264,7 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 ASTCClassTranslator >> translateMethodsASTs: methodsAST [
 	^ methodsAST
 		collect: [ :aMethodAST |
-			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor new ].
+			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor ].
 			methodTranslator translateMethodAST: aMethodAST ]
 		
 	
