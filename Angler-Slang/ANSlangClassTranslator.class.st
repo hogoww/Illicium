@@ -23,12 +23,29 @@ ANSlangClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
 { #category : #'program-configuration' }
 ANSlangClassTranslator >> annotateProgramWith: aClass [
 	self flag: #slang.
-	aClass declareCVarsIn: inferer.
-
-	self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
-	[inferer inferTypesForImplicitlyTypedVariablesAndMethods.] timeToRun.
+	inferer vmClass: self program vmClass.
+	self program classesDo: [ :each | 
+		each prepareToBeAddedToCodeGenerator: inferer.
+		inferer checkClassForNameConflicts: each.
+		inferer addClassVarsFor: each.
+		inferer addPoolVarsFor: each.
+		(each inheritsFrom: VMStructType) ifFalse:
+			[inferer globalsAsSet addAll: (inferer instVarNamesForClass: each)].
+		inferer retainMethods: (each requiredMethodNames: inferer options).
+		 each methods
+			select: [ :method | method isSubclassResponsibility not
+				and: [ (method hasPragmaNamed: #doNotGenerate) not
+					and: [ method selector ~~ #initialize ] ] ]
+			thenDo: [ :method |
+			| copy |
+			copy := method ast copy.
+			self program addMethod: copy.
+			inferer addMethod: (copy asTranslationMethodOfClass: TMethod) ].
+		each declareCVarsIn: inferer ].
+	"self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)]."
+	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	
-	self annotateMethodsASTWithTypes: program methods.
+	self annotateMethodsASTWithTypes: (program methods select: [:e| e methodClass ~~ StackInterpreter]).
 	program isFullyAnnotated: true
 	
 ]
@@ -53,6 +70,12 @@ ANSlangClassTranslator >> initialize [
 	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
 	program := ANProgram new.
+]
+
+{ #category : #testing }
+ANSlangClassTranslator >> isGlobalInstanceVariable: aString [ 
+	
+	^ inferer globalsAsSet includes: aString
 ]
 
 { #category : #'special selectors' }
@@ -102,9 +125,10 @@ ANSlangClassTranslator >> preTypeInference: aClass [
 ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	aClass declareCVarsIn: inferer.
-	method := program methodNamed: aSelector.
+
 	program isFullyAnnotated ifFalse: [ self annotateProgramWith: aClass ].
 
+	method := program methodNamed: aSelector.
 	method := self applyTransformationsOn: method.
 	
 	^ { method }
@@ -114,6 +138,7 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 ANSlangClassTranslator >> transformations [
 	| transformations |
 	transformations := OrderedCollection new.
+	transformations add: (ANGlobalStructureAccessTransformer translator: self).
 	transformations add: (ANSlangInliner translator: self).
 	^ transformations
 ]

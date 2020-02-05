@@ -22,6 +22,7 @@ ANSlangTestResource class >> translatorClass [
 { #category : #'instance creation' }
 ANSlangTestResource >> newTranslatorWith: aClass [
 	^ self class translatorClass new
+		program: ANSlangProgram new;
 		addClass: aClass;
 		yourself
 ]

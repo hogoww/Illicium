@@ -136,8 +136,8 @@ ASTCClassTranslator >> program [
 
 { #category : #typing }
 ASTCClassTranslator >> program: aProgram [
-	program := aProgram.
-	self annotateProgram
+
+	program := aProgram
 ]
 
 { #category : #'translation-state' }

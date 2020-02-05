@@ -3,28 +3,43 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methods',
-		'isFullyAnnotated'
+		'isFullyAnnotated',
+		'classesToGenerate'
 	],
 	#category : #'Angler-Core'
 }
 
 { #category : #accessing }
 ANProgram >> addClass: aClass [
-	(aClass allSelectorsBelow: VMClass) 
+
+	classesToGenerate add: aClass.
+
+	"(aClass allSelectorsBelow: VMClass) 
 		do: [:aSelector ||aMethod|
 			aMethod := (aClass lookupSelector: aSelector).
-			(self methodNeedAdding: aMethod) ifTrue: [ self addMethod: (aClass lookupSelector: aSelector) ]].
+			(self methodNeedAdding: aMethod) ifTrue: [ self addMethod: (aClass lookupSelector: aSelector) ]]."
 ]
 
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
 
 	| conflict |
-	aMethod isSubclassResponsibility ifTrue: [ ^ self ].
-	
+	"aMethod isSubclassResponsibility ifTrue: [ ^ self ]."
 	methods at: aMethod selector
 		ifPresent: [ :conflicting | self halt ]
-		ifAbsentPut: [ aMethod ast copy ]
+		ifAbsentPut: [ aMethod ]
+]
+
+{ #category : #enumeration }
+ANProgram >> classes [
+
+	^ classesToGenerate
+]
+
+{ #category : #enumeration }
+ANProgram >> classesDo: aBlockClosure [ 
+	
+	^ self classes do: aBlockClosure
 ]
 
 { #category : #testing }
@@ -36,6 +51,7 @@ ANProgram >> hasMethodNamed: aSelector [
 { #category : #accessing }
 ANProgram >> initialize [
 	super initialize.
+	classesToGenerate := OrderedCollection new.
 	methods := Dictionary new.
 	isFullyAnnotated := false.
 ]
@@ -53,7 +69,10 @@ ANProgram >> isFullyAnnotated: aBoolean [
 { #category : #accessing }
 ANProgram >> methodNamed: aSelector [
 
-	^ methods at: aSelector
+	^ methods at: aSelector ifAbsent: [ 
+		classesToGenerate do: [ :each | 
+			(each lookupSelector: aSelector) ifNotNil: [ :found |
+				^ methods at: aSelector put: found ast copy ] ] ]
 ]
 
 { #category : #testing }

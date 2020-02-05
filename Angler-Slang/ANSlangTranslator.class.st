@@ -30,3 +30,9 @@ ANSlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
 ]
+
+{ #category : #accessing }
+ANSlangTranslator >> program: anANSlangProgram [ 
+	
+	classTranslator program: anANSlangProgram
+]

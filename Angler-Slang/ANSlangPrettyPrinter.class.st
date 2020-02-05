@@ -76,6 +76,8 @@ ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 		and: [ aNode operands first isCastOperator
 			and: [ aNode parent isCastOperator ] ]) ifTrue: [ ^ false ].
 
+	aNode isFunctionCall ifTrue: [ ^ false ].
+
 	^ aNode parent isIf not 
 		and: [ aNode parent isAssignmentOperator not
 			and: [ aNode parent isStatement not
@@ -230,7 +232,11 @@ ANSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
-	self parenthesisFor: aFunctionCall print: [
+	self
+		parenthesisIf: ((aFunctionCall parent isBinaryOperator
+			or: [aFunctionCall parent isCastOperator ])
+				and: [ aFunctionCall parent isAssignmentOperator not ])
+		print: [
 		aFunctionCall id acceptVisitor: self.
 		self << '('.
 		self enterBlock.
