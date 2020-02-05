@@ -3,7 +3,8 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'value',
-		'evaluated'
+		'evaluated',
+		'program'
 	],
 	#category : #'Angler-Slang-Tests'
 }
@@ -55,6 +56,7 @@ isConstantNode: aNode valueInto: aBlock
 ANSlangConstantEvaluatorTest >> evaluateNode: aNode [
 
 	value := ANSlangConstantEvaluator new
+		program: program;
 		evaluate: aNode
 		ifNonValueDo: [ ^ self ].
 	evaluated := true.
@@ -71,6 +73,9 @@ ANSlangConstantEvaluatorTest >> setUp [
 
 	super setUp.
 	evaluated := false.
+	
+	program := ANProgram new.
+	program addMethod: self class >> #foo.
 ]
 
 { #category : #tests }
@@ -99,18 +104,12 @@ ANSlangConstantEvaluatorTest >> testEvaluateFalseNodeIsFalse [
 { #category : #tests }
 ANSlangConstantEvaluatorTest >> testEvaluateKnownMethodWithConstantAsLastArgument [
 
-	| node program |
+	| node |
 	node := RBMessageNode
 		receiver: (RBLiteralValueNode value: nil)
 		selector: #foo.
-	program := ANProgram new.
-	program addMethod: self class >> #foo.
 
-	value := ANSlangConstantEvaluator new
-		program: program;
-		evaluate: node
-		ifNonValueDo: [ self fail ].
-	
+	self evaluateNode: node.
 	self assert: value equals: 24
 ]
 
