@@ -121,7 +121,8 @@ ANSlangPrettyPrinter >> printMultilineComment: aString [
 
 { #category : #comments }
 ANSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
-	stream << '/* '
+	self
+		<< '/* ';
 		print: aNode;
 		<< ' */'
 ]
