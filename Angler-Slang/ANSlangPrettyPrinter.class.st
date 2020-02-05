@@ -104,7 +104,7 @@ ANSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
 ANSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
 	self parenthesisFor: anOperator print: [	
 		self printBinaryOperand: anOperator operands first.
-		self cr spaces << Character tab.
+		self cr spaces.
 		self << ' ' << anOperator class symbol << ' '.
 		self printBinaryOperand: anOperator operands second
 	]
