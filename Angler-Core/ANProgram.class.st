@@ -3,8 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methods',
-		'isFullyAnnotated',
-		'wasTouchedSinceLastCheck'
+		'wasModifiedSinceLastCheck'
 	],
 	#category : #'Angler-Core'
 }
@@ -25,7 +24,7 @@ ANProgram >> addClass: aClass [
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
 	| methodCopy |
-	wasTouchedSinceLastCheck := true.
+	wasModifiedSinceLastCheck:= true.
 	methodCopy := aMethod ast copy.
 	methodCopy propertyAt: self class isAnnotatedProperty put: false.
 	methods add: methodCopy
@@ -33,24 +32,14 @@ ANProgram >> addMethod: aMethod [
 
 { #category : #testing }
 ANProgram >> hasMethodNamed: aSelector [
-  ^methods anySatisfy: [:aCompiledMethod |  aCompiledMethod selector = aSelector ]
+	^ methods anySatisfy: [ :aCompiledMethod | aCompiledMethod selector = aSelector ]
 ]
 
 { #category : #accessing }
 ANProgram >> initialize [
 	super initialize.
 	methods := Set new.
-	isFullyAnnotated := false.
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated [
-	self wasTouchedSinceLastCheck ifFalse:[ ^ isFullyAnnotated ]
-]
-
-{ #category : #accessing }
-ANProgram >> isFullyAnnotated: aBoolean [
-	isFullyAnnotated := aBoolean
+	wasModifiedSinceLastCheck := true. "No check was done yet"
 ]
 
 { #category : #accessing }
@@ -77,11 +66,16 @@ ANProgram >> methodsDo: aBlockClosure [
 
 { #category : #accessing }
 ANProgram >> methodsNeedingAnnotation [
-	self wasTouchedSinceLastCheck ifFalse:[ ^ {} ].
-	^ methods select: [:aMethod| aMethod hasProperty: self class isAnnotatedProperty ]
+	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
+	^ methods reject: [:aMethod| aMethod propertyAt: self class isAnnotatedProperty ]
 ]
 
 { #category : #accessing }
-ANProgram >> wasTouchedSinceLastCheck [
-	^ wasTouchedSinceLastCheck
+ANProgram >> wasModifiedSinceLastCheck [
+	^ wasModifiedSinceLastCheck
+]
+
+{ #category : #accessing }
+ANProgram >> wasModifiedSinceLastCheck: aBoolean [
+	wasModifiedSinceLastCheck := aBoolean
 ]

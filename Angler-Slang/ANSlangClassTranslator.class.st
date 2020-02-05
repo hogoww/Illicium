@@ -97,9 +97,9 @@ ANSlangClassTranslator >> preTypeInference: aClass [
 ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	aClass declareCVarsIn: inferer.
-	method := program methodNamed: aSelector.
 	self annotateProgramWith: aClass.
 	
+	method := program methodNamed: aSelector.
 	method := self applyTransformationsOn: method.
 	
 	^ { method }

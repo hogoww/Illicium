@@ -51,12 +51,13 @@ ASTCClassTranslator >> annotateProgramWith: aClass [
 	| methodsNeedingAnnotation |
 	self flag: #slang.
 	aClass declareCVarsIn: inferer.
+	
 	methodsNeedingAnnotation := self program methodsNeedingAnnotation.
 	methodsNeedingAnnotation do:[ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
+	self annotateMethodsASTWithTypes: methodsNeedingAnnotation.
 	
-	self annotateMethodsASTWithTypes: program methods.
-	program isFullyAnnotated: true
+	program wasModifiedSinceLastCheck: false
 	
 ]
 
