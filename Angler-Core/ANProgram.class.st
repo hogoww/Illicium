@@ -30,7 +30,7 @@ ANProgram >> addMethod: aMethod [
 	"aMethod isSubclassResponsibility ifTrue: [ ^ self ]."
 	methods at: aMethod selector
 		ifPresent: [ :conflicting | self halt ]
-		ifAbsentPut: [ aMethod methodNode copy ]
+		ifAbsentPut: [ aMethod methodNode ]
 ]
 
 { #category : #enumeration }
