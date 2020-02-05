@@ -12,6 +12,14 @@ ANSlangClassTranslator >> addMethod: aCollection [
 	program addMethod: aCollection
 ]
 
+{ #category : #annotation }
+ANSlangClassTranslator >> annotateMethodAST: aMethodNode [ 
+	| visitors |
+	visitors := self preTranslationVisitors.
+	aMethodNode acceptMultipleVisitors: visitors.
+	aMethodNode propertyAt: ANProgram isAnnotatedProperty put: true.
+]
+
 { #category : #transformations }
 ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
 	| method |
@@ -60,7 +68,10 @@ ANSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 { #category : #visiting }
 ANSlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { ANSlangDeclarationAnnotator }
+	^ { 
+		ANSlangDeclarationAnnotator new. 
+		ANSlangTypeAnnotator new inferer: inferer ; yourself"always take the latest inferer"
+		}
 ]
 
 { #category : #check }
@@ -87,8 +98,8 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 	| method |
 	aClass declareCVarsIn: inferer.
 	method := program methodNamed: aSelector.
-	program isFullyAnnotated ifFalse: [ self annotateProgramWith: aClass ].
-
+	self annotateProgramWith: aClass.
+	
 	method := self applyTransformationsOn: method.
 	
 	^ { method }

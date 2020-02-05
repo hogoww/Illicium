@@ -41,20 +41,18 @@ ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilatio
 
 { #category : #typing }
 ASTCClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
-	| typeAnnotator |
-	typeAnnotator := self typeAnnotatorClass new
-		inferer: inferer;
-		yourself.
 	methodsASTs
-		do: [ :aMethodAST | aMethodAST acceptVisitor: typeAnnotator ].
+		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
 	^ methodsASTs
 ]
 
 { #category : #'program-configuration' }
 ASTCClassTranslator >> annotateProgramWith: aClass [
+	| methodsNeedingAnnotation |
 	self flag: #slang.
 	aClass declareCVarsIn: inferer.
-	self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
+	methodsNeedingAnnotation := self program methodsNeedingAnnotation.
+	methodsNeedingAnnotation do:[ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	
 	self annotateMethodsASTWithTypes: program methods.
@@ -280,10 +278,12 @@ ASTCClassTranslator >> translateMethodsASTs: methodsAST [
 
 { #category : #translation }
 ASTCClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
+	"overrides the previous one to remove the hook for pre translation. 
+	Should probably disapear, but that's work for another day"
 	| res |
 	res := methodsAST
 		collect: [ :aMethodAST |
-			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor new ].
+			
 			methodTranslator translateMethodAST: aMethodAST
 		].
 	^ res

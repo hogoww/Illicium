@@ -3,10 +3,16 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'methods',
-		'isFullyAnnotated'
+		'isFullyAnnotated',
+		'wasTouchedSinceLastCheck'
 	],
 	#category : #'Angler-Core'
 }
+
+{ #category : #properties }
+ANProgram class >> isAnnotatedProperty [
+	^ #isAnnotated
+]
 
 { #category : #accessing }
 ANProgram >> addClass: aClass [
@@ -18,8 +24,11 @@ ANProgram >> addClass: aClass [
 
 { #category : #accessing }
 ANProgram >> addMethod: aMethod [
-	isFullyAnnotated := false.
-	methods add: aMethod ast copy
+	| methodCopy |
+	wasTouchedSinceLastCheck := true.
+	methodCopy := aMethod ast copy.
+	methodCopy propertyAt: self class isAnnotatedProperty put: false.
+	methods add: methodCopy
 ]
 
 { #category : #testing }
@@ -36,7 +45,7 @@ ANProgram >> initialize [
 
 { #category : #accessing }
 ANProgram >> isFullyAnnotated [
-	^ isFullyAnnotated
+	self wasTouchedSinceLastCheck ifFalse:[ ^ isFullyAnnotated ]
 ]
 
 { #category : #accessing }
@@ -64,4 +73,15 @@ ANProgram >> methods [
 ANProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
+]
+
+{ #category : #accessing }
+ANProgram >> methodsNeedingAnnotation [
+	self wasTouchedSinceLastCheck ifFalse:[ ^ {} ].
+	^ methods select: [:aMethod| aMethod hasProperty: self class isAnnotatedProperty ]
+]
+
+{ #category : #accessing }
+ANProgram >> wasTouchedSinceLastCheck [
+	^ wasTouchedSinceLastCheck
 ]
