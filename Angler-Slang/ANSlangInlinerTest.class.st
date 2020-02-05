@@ -82,7 +82,8 @@ ANSlangInlinerTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 	super setUp.
 	program := ANProgram new.
-	inliner := ANSlangInliner new.
+	inliner := ANSlangInliner new
+		translator: ANSlangClassTranslator new.
 ]
 
 { #category : #tests }
