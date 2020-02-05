@@ -125,8 +125,23 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 	
+	"Specific for expressions wrapping casts"
 	self
-		parenthesisIf: (aCastOperator parent isCastOperator not and: [aCastOperator parent isBitLeftShiftOperator not])
+		parenthesisIf: (aCastOperator parent isBinaryOperator
+			and: [ aCastOperator parent isBitLeftShiftOperator not
+				and: [ aCastOperator parent isBitRightShiftOperator not
+					and: [ aCastOperator parent isAssignmentOperator not ] ] ])
+		print: [
+	
+	"Second parenthesis is the cast-specific one"
+	self
+		parenthesisIf: 
+		((aCastOperator parent isBinaryOperator and: [ aCastOperator parent isBitLeftShiftOperator not ])
+			or: [
+		(aCastOperator parent isCastOperator not
+			and: [aCastOperator parent isBitLeftShiftOperator not
+				and: [ aCastOperator operands first isIdentifier not
+							and: [ aCastOperator operands first isFunctionCall not ] ] ])])
 		print: [
 			self
 				<< '(';
@@ -140,7 +155,7 @@ ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 						parenthesisIf: (aCastOperator operands first isIdentifier not
 							and: [ aCastOperator operands first isFunctionCall not
 								and: [ aCastOperator operands first isBitLeftShiftOperator not ] ])
-						print: [ self print: aCastOperator operands first ] ] ]
+						print: [ self print: aCastOperator operands first ] ] ] ]
 ]
 
 { #category : #visiting }

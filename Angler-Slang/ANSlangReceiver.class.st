@@ -604,8 +604,8 @@ ANSlangReceiver >> repeat [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> signedIntFromLong64 [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	
+	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
 ]
 
 { #category : #'reflective operations' }

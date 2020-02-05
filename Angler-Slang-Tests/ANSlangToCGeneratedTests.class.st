@@ -25,9 +25,15 @@ ANSlangToCGeneratedTests >> generateIllicium: aSelector [
 ]
 
 { #category : #generating }
+ANSlangToCGeneratedTests >> newPrettyPrinter [
+
+	^ self translator prettyPrinterClass new
+]
+
+{ #category : #generating }
 ANSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
-	^ anAST definitions first prettyPrintUsing: self translator prettyPrinterClass new.
+	^ anAST definitions first prettyPrintUsing: self newPrettyPrinter
 ]
 
 { #category : #accessing }
