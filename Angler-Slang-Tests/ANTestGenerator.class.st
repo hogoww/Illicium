@@ -35,7 +35,6 @@ ANTestGenerator >> generateSetUpFor: aClass forResource: aRessourceClass [
 	method := 'setUp' asMethodWithBody: [
 		super setUp.
 		self translator: (self newTranslatorWith: testedClassName).
-		self translator addMethod: StackInterpreter >> #cr.	
 	].
 	aRessourceClass compile: method asString classified: #running.
 ]
