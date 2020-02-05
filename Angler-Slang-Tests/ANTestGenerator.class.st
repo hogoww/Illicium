@@ -40,18 +40,6 @@ ANTestGenerator >> generateSetUpFor: aClass forResource: aRessourceClass [
 ]
 
 { #category : #'test-generation' }
-ANTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [ 
-	| method testedClass testedClassName translator |	
-	testedClassName := aTestedClass name.	
-	method := 'setUp' asMethodWithBody: [	
-		super setUp.	
-		testedClass := testedClassName.
-	].	
-
-	aClass compile: method asString classified: #running.
-]
-
-{ #category : #'test-generation' }
 ANTestGenerator >> methodToTest: aClass [
 	| methods |
 	methods := (aClass allSelectorsBelow: VMClass)	
