@@ -54,7 +54,14 @@ ANTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTran
 
 { #category : #'test-generation' }
 ANTestGenerator >> methodToTest: aClass [
-	^ (aClass allSelectorsBelow: VMClass)	
+	| methods |
+	methods := (aClass allSelectorsBelow: VMClass)	
 		collect:[ :aSelector | aClass lookupSelector: aSelector ]	
-		thenSelect: [ :aCompiledMethod |(aCompiledMethod hasPragmaNamed: #doNotGenerate) not ]
+		thenSelect: [ :aCompiledMethod |
+			(aCompiledMethod hasPragmaNamed: #doNotGenerate) not
+				and: [ (ANFullVMCCodeGeneratorRessource current codeGenerator
+					methodNamed: aCompiledMethod selector) notNil ] ].
+		
+	ANFullVMCCodeGeneratorRessource reset.
+	^ methods
 ]
