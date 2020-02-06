@@ -148,7 +148,8 @@ ASTCWalkerVisitor >> visitExpression: anExpression [
 ASTCWalkerVisitor >> visitExpressionList: anExpressionList [
 	super visitExpressionList: anExpressionList.
 	anExpressionList expressions
-		ifNotNil: [ :anExpressions | anExpressions acceptVisitor: self ]
+		ifNotNil:
+			[ :expressions | expressions do: [ :anExpressions | anExpressions acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }

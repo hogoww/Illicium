@@ -126,7 +126,7 @@ ASTCSuperclassVisitor >> visitExpression: anExpression [
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitExpressionList: anExpressionList [
-	
+	^ self visitExpression: anExpressionList
 ]
 
 { #category : #visiting }

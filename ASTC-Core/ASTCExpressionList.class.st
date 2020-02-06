@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCExpressionList,
-	#superclass : #Object,
+	#superclass : #ASTCExpression,
 	#instVars : [
 		'expressions'
 	],
@@ -9,6 +9,8 @@ Class {
 
 { #category : #testing }
 ASTCExpressionList >> = anExpressionList [
+	super = anExpressionList
+		ifFalse: [ ^ false ].
 	expressions = anExpressionList expressions
 		ifFalse: [ ^ false ].
 	^ true
@@ -20,14 +22,25 @@ ASTCExpressionList >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+ASTCExpressionList >> addExpression: anExpression [
+	anExpression parent: self.
+	expressions add: anExpression
+]
+
+{ #category : #accessing }
 ASTCExpressionList >> expressions [
 	^ expressions
 ]
 
 { #category : #accessing }
-ASTCExpressionList >> expressions: anExpressions [
-	anExpressions ifNotNil: [ anExpressions parent: self ].
-	expressions := anExpressions
+ASTCExpressionList >> expressions: someExpressions [
+	someExpressions do: [ :each | each parent: self ].
+	expressions := someExpressions
+]
+
+{ #category : #accessing }
+ASTCExpressionList >> initialize [
+	expressions := OrderedCollection new
 ]
 
 { #category : #testing }

@@ -150,7 +150,8 @@ ASTCHierarchyWalkerVisitor >> visitExpression: anExpression [
 
 { #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitExpressionList: anExpressionList [
-	super visitExpressionList: anExpressionList
+	super visitExpressionList: anExpressionList.
+	^ self visitExpression: anExpressionList
 ]
 
 { #category : #visiting }

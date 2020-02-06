@@ -52,7 +52,9 @@ ASTCDebugStructureVisitor >> visitDefinition: aDefinition [
 ASTCDebugStructureVisitor >> visitExpressionList: anExpressionList [
 	super visitExpressionList: anExpressionList.
 	anExpressionList expressions
-		ifNotNil: [ :anExpressions | self assert: anExpressions isExpression ]
+		ifNotNil: [ :expressions | 
+			expressions
+				do: [ :anExpressions | self assert: anExpressions isExpression ] ]
 ]
 
 { #category : #visiting }
