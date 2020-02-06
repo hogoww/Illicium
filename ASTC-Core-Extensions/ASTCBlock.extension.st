@@ -20,3 +20,14 @@ ASTCBlock >> addStatements: aBlock [
 	aBlock statements 
 		  do: [:aStatement| self addStatement: aStatement ]
 ]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCBlock >> becomeExpressionList [
+	"protocol: converting"
+	| asExpressionList |
+	asExpressionList := ASTCExpressionList new.
+	self declarations ifNotEmpty: [ self halt." should not happen in Slang." ].
+	self statements do:[:aStatement| asExpressionList addExpression: aStatement ].
+	
+	self becomeForward: asExpressionList
+]

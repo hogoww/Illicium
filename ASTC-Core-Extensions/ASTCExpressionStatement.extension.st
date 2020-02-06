@@ -6,6 +6,13 @@ ASTCExpressionStatement >> asStatement [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCExpressionStatement >> becomeExpression [
+	"protocol = converting"
+	self becomeForward: self expression
+	
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCExpressionStatement class >> expression: anExpression [
 
 	^ self new

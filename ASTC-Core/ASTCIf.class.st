@@ -27,18 +27,6 @@ ASTCIf >> acceptVisitor: aVisitor [
 	aVisitor visitIf: self
 ]
 
-{ #category : #converting }
-ASTCIf >> becomeTernaryConditionalOperator [
-	| asTernary |
-	asTernary := ASTCTernaryConditionalOperator new
-		addOperand: self condition ;
-		addOperand: self then ;
-		addOperand: self else ;
-		yourself.
-	
-	self becomeForward: asTernary
-]
-
 { #category : #accessing }
 ASTCIf >> condition [
 	^ condition

@@ -34,6 +34,15 @@ ASTCStatementsBecomeExpressions >> visitBlock: aBlock [
 	super visitBlock: aBlock
 ]
 
+{ #category : #'visiting-modifying' }
+ASTCStatementsBecomeExpressions >> visitExpressionStatement: anExpressionStatement [
+	self shouldBeExpression ifTrue: [ 
+			anExpressionStatement becomeExpression.
+			^ anExpressionStatement acceptVisitor: self
+		].
+	super visitExpressionStatement: anExpressionStatement
+]
+
 { #category : #visiting }
 ASTCStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
