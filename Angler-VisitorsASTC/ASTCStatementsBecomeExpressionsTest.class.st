@@ -25,7 +25,8 @@ ASTCStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment
 	
 	self assert: node isAssignmentOperator.
 	self assert: node operands first isIdentifier.
-	self assert: node operands second isTernaryConditionalOperator.
+	self assert: node operands second isExpressionList.
+	
 	
 ]
 
