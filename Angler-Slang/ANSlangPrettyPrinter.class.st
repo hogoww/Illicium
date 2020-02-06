@@ -78,11 +78,12 @@ ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 
 	aNode isFunctionCall ifTrue: [ ^ false ].
 
-	^ aNode parent isIf not 
-		and: [ aNode parent isAssignmentOperator not
-			and: [ aNode parent isStatement not
-				and: [ aNode parent isFunctionCall not 
-					and: [ aNode parent isTernaryConditionalOperator not ]]]].
+	^ aNode parent isNotNil
+		and: [ aNode parent isIf not  
+			and: [ aNode parent isAssignmentOperator not
+				and: [ aNode parent isStatement not
+					and: [ aNode parent isFunctionCall not 
+						and: [ aNode parent isTernaryConditionalOperator not ]]]]].
 ]
 
 { #category : #visiting }
