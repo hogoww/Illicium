@@ -10,38 +10,41 @@ Class {
 
 { #category : #testing }
 ASTCRawDeclaration >> = aRawDeclaration [
-  super = aRawDeclaration ifFalse: [ ^false ].
-  rawDeclaration = aRawDeclaration rawDeclaration ifFalse: [ ^false ].
-  varName = aRawDeclaration varName ifFalse: [ ^false ].
-  ^true
+	super = aRawDeclaration
+		ifFalse: [ ^ false ].
+	rawDeclaration = aRawDeclaration rawDeclaration
+		ifFalse: [ ^ false ].
+	varName = aRawDeclaration varName
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCRawDeclaration >> acceptVisitor: aVisitor [
-  aVisitor visitRawDeclaration: self
+	aVisitor visitRawDeclaration: self
 ]
 
 { #category : #testing }
 ASTCRawDeclaration >> isRawDeclaration [
-  ^true
+	^ true
 ]
 
 { #category : #accessing }
 ASTCRawDeclaration >> rawDeclaration [
-  ^rawDeclaration
+	^ rawDeclaration
 ]
 
 { #category : #accessing }
 ASTCRawDeclaration >> rawDeclaration: aRawDeclaration [
-  rawDeclaration := aRawDeclaration
+	rawDeclaration := aRawDeclaration
 ]
 
 { #category : #accessing }
 ASTCRawDeclaration >> varName [
-  ^varName
+	^ varName
 ]
 
 { #category : #accessing }
 ASTCRawDeclaration >> varName: aVarName [
-  varName := aVarName
+	varName := aVarName
 ]

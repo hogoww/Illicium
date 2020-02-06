@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCLesserOrEqualOperator >> = aLesserOrEqualOperator [
-  super = aLesserOrEqualOperator ifFalse: [ ^false ].
-  ^true
+	super = aLesserOrEqualOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCLesserOrEqualOperator >> acceptVisitor: aVisitor [
-  aVisitor visitLesserOrEqualOperator: self
+	aVisitor visitLesserOrEqualOperator: self
 ]
 
 { #category : #testing }
 ASTCLesserOrEqualOperator >> isLesserOrEqualOperator [
-  ^true
+	^ true
 ]

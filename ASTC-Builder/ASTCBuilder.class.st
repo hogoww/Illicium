@@ -102,7 +102,8 @@ Class {
 		'assignementAdditionOperator',
 		'bitwiseXorOperator',
 		'bitwiseOrOperator',
-		'negationOperator'
+		'negationOperator',
+		'expressionList'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -154,6 +155,7 @@ ASTCBuilder >> defineClasses [
 		self defineOperatorClasses.
 		identifier := builder newClassNamed: #Identifier.
 		rawCCode := builder newClassNamed: #RawCCode.
+		expressionList := builder newClassNamed: #ExpressionList.
 		
 		"Statement"
 		emptyStatement := builder newClassNamed: #EmptyStatement.
@@ -406,6 +408,9 @@ ASTCBuilder >> defineRelations [
 	(variableDefinition property: #init) <>- (expression property: #initialization).
 
 	(structureDefinition property: #members) <>-* (variableDeclaration property: #structureMembers).
+	
+	"expressions"
+	(expressionList property: #expressions ) <>- (expression property: #expressionListPart).
 	
 	"statement"
 	(if property: #condition) <>- (expression property: #conditionIf).

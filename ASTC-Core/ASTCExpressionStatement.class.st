@@ -9,28 +9,30 @@ Class {
 
 { #category : #testing }
 ASTCExpressionStatement >> = anExpressionStatement [
-  super = anExpressionStatement ifFalse: [ ^false ].
-  expression = anExpressionStatement expression ifFalse: [ ^false ].
-  ^true
+	super = anExpressionStatement
+		ifFalse: [ ^ false ].
+	expression = anExpressionStatement expression
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCExpressionStatement >> acceptVisitor: aVisitor [
-  aVisitor visitExpressionStatement: self
+	aVisitor visitExpressionStatement: self
 ]
 
 { #category : #accessing }
 ASTCExpressionStatement >> expression [
-  ^expression
+	^ expression
 ]
 
 { #category : #accessing }
 ASTCExpressionStatement >> expression: anExpression [
-  anExpression ifNotNil: [ anExpression parent: self ].
-  expression := anExpression
+	anExpression ifNotNil: [ anExpression parent: self ].
+	expression := anExpression
 ]
 
 { #category : #testing }
 ASTCExpressionStatement >> isExpressionStatement [
-  ^true
+	^ true
 ]

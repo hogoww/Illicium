@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCBitLeftShiftOperator >> = aBitLeftShiftOperator [
-  super = aBitLeftShiftOperator ifFalse: [ ^false ].
-  ^true
+	super = aBitLeftShiftOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCBitLeftShiftOperator >> acceptVisitor: aVisitor [
-  aVisitor visitBitLeftShiftOperator: self
+	aVisitor visitBitLeftShiftOperator: self
 ]
 
 { #category : #testing }
 ASTCBitLeftShiftOperator >> isBitLeftShiftOperator [
-  ^true
+	^ true
 ]

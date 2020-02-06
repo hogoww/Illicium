@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCBitwiseOrOperator >> = aBitwiseOrOperator [
-  super = aBitwiseOrOperator ifFalse: [ ^false ].
-  ^true
+	super = aBitwiseOrOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCBitwiseOrOperator >> acceptVisitor: aVisitor [
-  aVisitor visitBitwiseOrOperator: self
+	aVisitor visitBitwiseOrOperator: self
 ]
 
 { #category : #testing }
 ASTCBitwiseOrOperator >> isBitwiseOrOperator [
-  ^true
+	^ true
 ]

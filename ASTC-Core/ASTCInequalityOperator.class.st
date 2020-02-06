@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCInequalityOperator >> = anInequalityOperator [
-  super = anInequalityOperator ifFalse: [ ^false ].
-  ^true
+	super = anInequalityOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCInequalityOperator >> acceptVisitor: aVisitor [
-  aVisitor visitInequalityOperator: self
+	aVisitor visitInequalityOperator: self
 ]
 
 { #category : #testing }
 ASTCInequalityOperator >> isInequalityOperator [
-  ^true
+	^ true
 ]
