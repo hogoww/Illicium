@@ -94,7 +94,7 @@ ANSlangReceiver >> = anotherObject [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> == anOperand [
-	^ self translatedReceiver equals: anOperand
+	^ self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator)
 ]
 
 { #category : #typing }
