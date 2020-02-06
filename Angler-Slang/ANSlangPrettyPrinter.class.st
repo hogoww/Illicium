@@ -229,6 +229,17 @@ ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 ]
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> visitExpressionList: anExpressionList [
+	self parenthesisIf: true
+		print:[
+			anExpressionList expressions do: [:anExpression | 
+				self print: anExpression 
+				]
+			separatedBy: [ self << $, ; cr ; spaces ]
+			]
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	anExpressionStatement expression isPreprocessorIf ifFalse: [ self << $; ]. "pretty sure that won't always be the case."
