@@ -216,6 +216,7 @@ ASTCBuilder >> defineHierarchy [
 			self defineOperatorsHierarchy.
 			identifier --|> expression.
 			rawCCode --|> expression.
+			expressionList --|> expression.
 			
 			"Statement direct Subclasses"
 			emptyStatement  --|> statement.
@@ -410,7 +411,7 @@ ASTCBuilder >> defineRelations [
 	(structureDefinition property: #members) <>-* (variableDeclaration property: #structureMembers).
 	
 	"expressions"
-	(expressionList property: #expressions ) <>- (expression property: #expressionListPart).
+	(expressionList property: #expressions) <>-* (expression property: #expressionListPart).
 	
 	"statement"
 	(if property: #condition) <>- (expression property: #conditionIf).
