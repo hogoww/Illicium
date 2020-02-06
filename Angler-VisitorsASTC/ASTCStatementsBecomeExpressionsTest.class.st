@@ -14,6 +14,22 @@ ASTCStatementsBecomeExpressionsTest >> setUp [
 ]
 
 { #category : #tests }
+ASTCStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment [
+	| node |
+	node :=
+		(ASTCIdentifier id: #a)
+			assign:
+				(ASTCBlock new
+					addStatement: (ASTCLiteral value: true) asStatement).
+	node acceptVisitor: visitor.
+	
+	self assert: node isAssignmentOperator.
+	self assert: node operands first isIdentifier.
+	self assert: node operands second isTernaryConditionalOperator.
+	
+]
+
+{ #category : #tests }
 ASTCStatementsBecomeExpressionsTest >> testIfAndInnerIfBecomesTernaryInAssignment [
 	| node |
 	node :=

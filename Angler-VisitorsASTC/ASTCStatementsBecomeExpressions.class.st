@@ -7,12 +7,12 @@ Class {
 	#category : #'Angler-VisitorsASTC-PrettyPrint'
 }
 
-{ #category : #visiting }
+{ #category : #initialization }
 ASTCStatementsBecomeExpressions >> initialize [
 	subTreeShouldBeAllExpressions := 0
 ]
 
-{ #category : #visiting }
+{ #category : #testing }
 ASTCStatementsBecomeExpressions >> shouldBeExpression [
 	^ subTreeShouldBeAllExpressions > 0
 ]
@@ -25,6 +25,15 @@ ASTCStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator
 	
 ]
 
+{ #category : #'visiting-modifying' }
+ASTCStatementsBecomeExpressions >> visitBlock: aBlock [
+	self shouldBeExpression ifTrue: [ 
+			aBlock becomeStatementList.
+			^ aBlock acceptVisitor: self
+		].
+	super visitIf: aBlock
+]
+
 { #category : #visiting }
 ASTCStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
@@ -33,7 +42,7 @@ ASTCStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
 	
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting-modifying' }
 ASTCStatementsBecomeExpressions >> visitIf: anIf [
 	self shouldBeExpression ifTrue: [ 
 			anIf becomeTernaryConditionalOperator.
