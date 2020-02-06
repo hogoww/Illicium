@@ -85,11 +85,13 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
 
 	nodesToInline size = 1
-		ifTrue: [ aMessageNode replaceWith: nodesToInline first ]
-		ifFalse: [
-			aMessageNode parent
-				replaceNode: aMessageNode
-				withNodes: nodesToInline ]
+		ifTrue: [ ^ aMessageNode replaceWith: nodesToInline first ].
+	
+	aMessageNode parent isAssignment ifTrue: [
+		^ aMessageNode replaceWith: (RBBlockNode body: (RBSequenceNode statements: nodesToInline))
+		].
+	
+	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
 ]
 
 { #category : #inlining }
