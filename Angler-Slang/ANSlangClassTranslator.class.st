@@ -78,6 +78,13 @@ ANSlangClassTranslator >> isStatefulCode [
 	^ false
 ]
 
+{ #category : #configuration }
+ANSlangClassTranslator >> postTranslationVisitors [
+	^ {
+		ASTCStatementsBecomeExpressions new
+	}
+]
+
 { #category : #check }
 ANSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 	((aClass allSuperclasses

@@ -122,6 +122,12 @@ ASTCClassTranslator >> methodsToTranslateASTs: aClass [
 		thenCollect: [:aMethod| aMethod node copy ].
 ]
 
+{ #category : #finishing }
+ASTCClassTranslator >> postTranslationVisitsFor: anASTCNode [ 
+	self postTranslationVisitors do: [ :aVisitor | anASTCNode acceptVisitor: aVisitor ].
+	^ anASTCNode
+]
+
 { #category : #'translation-api' }
 ASTCClassTranslator >> preTranslationConstraintCheck: aClass [
 	"empty hook"
@@ -249,6 +255,7 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 					stateStuff := self translateClassState: aClass.
 					self addState: stateStuff to: cu.
 					self addTranslatedMethods: functionDefinitionsASTs to: cu.
+					self postTranslationVisitsFor: cu.
 					cu debugASTCStructure.
 					^ cu
 					]
