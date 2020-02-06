@@ -88,7 +88,13 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 		ifTrue: [ ^ aMessageNode replaceWith: nodesToInline first ].
 	
 	aMessageNode parent isAssignment ifTrue: [
-		^ aMessageNode replaceWith: (RBBlockNode body: (RBSequenceNode statements: nodesToInline))
+		^ aMessageNode replaceWith: 
+		(RBBlockNode body:
+			((RBSequenceNode new statements: nodesToInline)	
+				"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
+				propertyAt: ANSlangDeclarationAnnotator property put: OrderedCollection new;
+				yourself)
+			)
 		].
 	
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
