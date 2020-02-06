@@ -28,10 +28,10 @@ ASTCStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator
 { #category : #'visiting-modifying' }
 ASTCStatementsBecomeExpressions >> visitBlock: aBlock [
 	self shouldBeExpression ifTrue: [ 
-			aBlock becomeStatementList.
+			aBlock becomeExpressionList.
 			^ aBlock acceptVisitor: self
 		].
-	super visitIf: aBlock
+	super visitBlock: aBlock
 ]
 
 { #category : #visiting }

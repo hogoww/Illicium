@@ -30,6 +30,16 @@ ASTCBlock >> addDeclaration: aDeclaration [
 	declarations add: aDeclaration
 ]
 
+{ #category : #converting }
+ASTCBlock >> becomeExpressionList [
+	| asExpressionList |
+	asExpressionList := ASTCExpressionList new.
+	self declarations ifNotEmpty: [ self halt." should not happen in Slang." ].
+	self statements do:[:aStatement| asExpressionList addExpression: aStatement ].
+	self becomeForward: asExpressionList.
+	^ asExpressionList
+]
+
 { #category : #accessing }
 ASTCBlock >> declarations [
 	^ declarations
