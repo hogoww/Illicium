@@ -12,3 +12,45 @@ ASTCStatementsBecomeExpressionsTest >> setUp [
 	super setUp.
 	visitor := ASTCStatementsBecomeExpressions new
 ]
+
+{ #category : #tests }
+ASTCStatementsBecomeExpressionsTest >> testIfAndInnerIfBecomesTernaryInAssignment [
+	| node |
+	node :=
+		(ASTCIdentifier id: #a)
+			assign:
+				(ASTCIf new
+					condition:(ASTCLiteral value: true);
+					then: (ASTCLiteral value: true) ;
+					else: (ASTCIf new
+						condition:(ASTCLiteral value: true);
+						then: (ASTCLiteral value: true) ;
+						else: (ASTCLiteral value: true) ;
+						yourself);
+					yourself).
+	node acceptVisitor: visitor.
+	
+	self assert: node isAssignmentOperator.
+	self assert: node operands first isIdentifier.
+	self assert: node operands second isTernaryConditionalOperator.
+	
+]
+
+{ #category : #tests }
+ASTCStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
+	| node |
+	node :=
+		(ASTCIdentifier id: #a)
+			assign:
+				(ASTCIf new
+					condition:(ASTCLiteral value: true);
+					then: (ASTCLiteral value: true) ;
+					else: (ASTCLiteral value: true) ;
+					yourself).
+	node acceptVisitor: visitor.
+	
+	self assert: node isAssignmentOperator.
+	self assert: node operands first isIdentifier.
+	self assert: node operands second isTernaryConditionalOperator.
+	
+]
