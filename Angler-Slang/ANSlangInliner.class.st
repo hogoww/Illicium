@@ -87,17 +87,25 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	nodesToInline size = 1
 		ifTrue: [ ^ aMessageNode replaceWith: nodesToInline first ].
 	
-	aMessageNode parent isAssignment ifTrue: [ | newBlock |
-		newBlock := (RBBlockNode body:
-			((RBSequenceNode new 
-				statements: nodesToInline)
-				"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
-				propertyAt: ANSlangDeclarationAnnotator property put: OrderedCollection new;
-				yourself)
+	aMessageNode parent isAssignment ifTrue: [ | typingProperty newBlock newAssignment lastNode |
+		newBlock := 
+			(RBBlockNode body:
+				(RBSequenceNode new
+					"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
+					propertyAt: ANSlangDeclarationAnnotator property put: OrderedCollection new;
+					yourself)
 				).
-			newBlock propertyAt: ASTCTypeAnnotator  property put: (newBlock statements last propertyAt: #type).
-			newBlock statements add:
-				(aMessageNode parent value: newBlock statements removeLast; yourself).
+			typingProperty := ASTCTypeAnnotator property.
+			lastNode := nodesToInline removeLast.
+			newAssignment := aMessageNode parent copy.
+			newAssignment value: lastNode.
+			nodesToInline add: newAssignment.
+			newBlock body statements: nodesToInline.
+			lastNode propertyAt: typingProperty 
+				ifPresent: [ newBlock propertyAt: typingProperty
+						put:  (lastNode propertyAt: typingProperty) 
+					]
+				ifAbsent: [ nil ]."If it's untyped, we don't do anything. This is the case in a test context for example."
 			^ aMessageNode parent replaceWith: newBlock "replacing the whole assignment"
 		].
 	
