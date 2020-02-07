@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'program',
 		'inlinedSomething',
-		'translator'
+		'translator',
+		'selectorMacros'
 	],
 	#category : #'Angler-Slang-analysis'
 }
@@ -121,10 +122,17 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 			aNode replaceWith: replacement ] ] 
 ]
 
+{ #category : #inlining }
+ANSlangInliner >> selectorTranslatedAsMacro [
+	"lazy accessor for now."
+	^ selectorMacros ifNil: [ selectorMacros := VMPluginCodeGenerator new selectorsThatMayBeGeneratedAsMacros ]
+]
+
 { #category : #applying }
 ANSlangInliner >> shouldInline: aMessageNode [
 	
 	| methodToInline |
+	(self selectorTranslatedAsMacro includes: aMessageNode selector) ifTrue: [ ^ false ].
 	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
 	
 	methodToInline := program methodNamed: aMessageNode selector.
