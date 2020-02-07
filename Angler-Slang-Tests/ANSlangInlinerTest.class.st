@@ -14,6 +14,18 @@ ANSlangInlinerTest >> methodReturningInlinedSingleStatement [
 	^ self methodWithSingleStatement
 ]
 
+{ #category : #'as yet unclassified' }
+ANSlangInlinerTest >> methodWithATemp [
+	| t |
+	t
+]
+
+{ #category : #support }
+ANSlangInlinerTest >> methodWithATempInliningMethodWithSameTemp [
+	| t |
+	t := self methodWithATemp
+]
+
 { #category : #support }
 ANSlangInlinerTest >> methodWithBlockParameter: aBlock [
 	aBlock value
@@ -103,6 +115,24 @@ ANSlangInlinerTest >> setUp [
 	program := ANProgram new.
 	inliner := ANSlangInliner new
 		translator: ANSlangClassTranslator new.
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
+	| resultingMethod inlinedStatement initialMethod |
+	program addMethod: (self class >> #methodWithATemp) ast.
+	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: methodToInline statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
+	self assert: inlinedStatement isAssignment.
+	self assert: inlinedStatement variable name equals: #t.
+	self assert: inlinedStatement value isTemp.
+	self assert: inlinedStatement value name equals: #t1.
 ]
 
 { #category : #tests }

@@ -5,7 +5,8 @@ Class {
 		'program',
 		'inlinedSomething',
 		'translator',
-		'selectorMacros'
+		'selectorMacros',
+		'temporaryNamesToAdd'
 	],
 	#category : #'Angler-Slang-analysis'
 }
@@ -75,6 +76,13 @@ ANSlangInliner >> cleanStatements: nodesToInline [
 ]
 
 { #category : #inlining }
+ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
+	self temporariesFrom: methodToInline in: methodInlining.
+
+	self halt.
+]
+
+{ #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodesToInline |
 	aMessageNode methodNode body
@@ -123,6 +131,17 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 ]
 
 { #category : #inlining }
+ANSlangInliner >> renameVariablesOf: aMethodNode byTemporariesNames: tempNames [
+  	| replacement tempName |	
+	self halt.
+	aMethodNode body temporaries 
+	nodesDo: [:aNode |  
+		(aNode isTemp and:[ aNode isBlockVar not ]) ifTrue: [
+			replacement := tempName at: (aMethodNode arguments indexOf: aNode).
+			aNode replaceWith: replacement ] ] 
+]
+
+{ #category : #inlining }
 ANSlangInliner >> selectorTranslatedAsMacro [
 	"lazy accessor for now."
 	^ selectorMacros ifNil: [ selectorMacros := VMPluginCodeGenerator new selectorsThatMayBeGeneratedAsMacros ]
@@ -145,6 +164,23 @@ ANSlangInliner >> shouldInline: aMessageNode [
 			and: [ (methodToInline hasPragmaNamed: #cmacro:) not ] ]
 ]
 
+{ #category : #renaming }
+ANSlangInliner >> temporariesFrom: methodToInline in: methodInlining [ 
+	| temporaryNames intersection|
+	temporaryNames :=  methodInlining temporaries.
+	
+	intersection := methodToInline temporaryNames intersection: temporaryNames.
+	temporaryNamesToAdd := OrderedCollection new.
+	methodToInline temporaries do: [ :aTemp | | newName counter |
+		newName := aTemp name.
+		counter := 1.
+		[ intersection includes:  newName , counter asString ]
+			whileTrue:[ counter := counter + 1 ].
+		aTemp name: newName , counter asString.
+		temporaryNamesToAdd add: newName.
+		].
+]
+
 { #category : #accessing }
 ANSlangInliner >> translator [
 	^ translator
@@ -162,6 +198,7 @@ ANSlangInliner >> visitMessageNode: aMessageNode [
 		ifTrue:[ | methodToInline |
 			inlinedSomething := true.
 			methodToInline := (program methodNamed: aMessageNode selector) copy.
+			self handleTemporariesFrom: methodToInline in: aMessageNode methodNode.
 			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.
 			].
