@@ -22,16 +22,25 @@ ASTCStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitAssignmentOperator: anAssignmentOperator.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
-	
+	^ anAssignmentOperator
 ]
 
 { #category : #'visiting-modifying' }
 ASTCStatementsBecomeExpressions >> visitBlock: aBlock [
-	self shouldBeExpression ifTrue: [ 
+	self shouldBeExpression ifTrue: [
 			aBlock becomeExpressionList.
+			aBlock parent isAssignmentOperator ifTrue:[ | assignment returnedExpression |
+				self halt.
+				assignment := aBlock parent.
+				aBlock parent: assignment parent.
+				returnedExpression := aBlock expressions removeLast.
+				assignment operands at: 2 put: returnedExpression.
+				returnedExpression parent: assignment.
+				aBlock expressions add: assignment.
+				].
 			^ aBlock acceptVisitor: self
 		].
-	super visitBlock: aBlock
+	^ super visitBlock: aBlock
 ]
 
 { #category : #'visiting-modifying' }
@@ -48,7 +57,7 @@ ASTCStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitFunctionCall: aFunctionCall.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
-	
+	^ aFunctionCall
 ]
 
 { #category : #'visiting-modifying' }
@@ -57,7 +66,7 @@ ASTCStatementsBecomeExpressions >> visitIf: anIf [
 			anIf becomeTernaryConditionalOperator.
 			^ anIf acceptVisitor: self
 		].
-	super visitIf: anIf
+	^ super visitIf: anIf
 ]
 
 { #category : #visiting }
@@ -65,5 +74,5 @@ ASTCStatementsBecomeExpressions >> visitReturn: aReturn [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitReturn: aReturn.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
-	
+	^ aReturn
 ]

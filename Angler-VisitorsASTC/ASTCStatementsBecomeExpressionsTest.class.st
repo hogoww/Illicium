@@ -36,6 +36,35 @@ ASTCStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment
 ]
 
 { #category : #tests }
+ASTCStatementsBecomeExpressionsTest >> testBlockWithReturningStatementMovesAssignementInsideExpressionList [
+	| node blockNode assignment resultingNode |
+	node :=
+		(ASTCIdentifier id: #druss)
+			assign:
+				(ASTCBlock new 
+					addStatement: (ASTCLiteral value: true) asStatement;
+					addStatement: (ASTCReturn new expression: (ASTCLiteral value: true); yourself);
+					yourself).
+	resultingNode := node acceptVisitor: visitor.
+	
+	self assert: resultingNode isAssignmentOperator.
+	self assert: resultingNode operands first isIdentifier.
+	
+	blockNode := resultingNode operands second.
+	self assert: blockNode isExpressionList.
+	self assert: blockNode expressions size equals: 2.
+	self assert: blockNode expressions first equals: (ASTCLiteral value: true).
+	
+	assignment := blockNode expressions second.
+	self assert: assignment isAssignmentOperator.
+	self assert: assignment operands first id equals: #druss.
+	self assert: assignment operands second value equals:  (ASTCLiteral value: true) .
+	
+	
+	
+]
+
+{ #category : #tests }
 ASTCStatementsBecomeExpressionsTest >> testExpressionStatementBecomesExpression [
 	| node |
 	node :=
