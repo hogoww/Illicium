@@ -115,8 +115,8 @@ ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	inlinedStatement := resultingMethod statements first.
 	self assert: methodToInline statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver isBlock.
 	self assert: inlinedStatement receiver equals: [ 1 even ] sourceNode.
@@ -145,8 +145,8 @@ ANSlangInlinerTest >> testInlineSingleStatement [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	inlinedStatement := resultingMethod statements first.
 	self assert: methodToInline statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver value equals: 1.
 	self assert: inlinedStatement selector equals: #even.
@@ -162,8 +162,8 @@ ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	inlinedStatement := resultingMethod statements first.
 	self assert: resultingMethod temporaries size equals: 1.
+	inlinedStatement := resultingMethod statements first.
 	self assert: resultingMethod temporaries first name equals: #t.
 	
 	self assert: methodToInline statements size equals: 1.
@@ -183,8 +183,8 @@ ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	inlinedStatement := resultingMethod statements first.
 	self assert: methodToInline statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver value equals: 1.
 	self assert: inlinedStatement selector equals: #even.
@@ -200,8 +200,8 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	inlinedStatement := resultingMethod statements.
 	self assert: methodToInline statements size equals: 2.
+	inlinedStatement := resultingMethod statements.
 	self assert: inlinedStatement first isMessage.
 	self assert: inlinedStatement first receiver value equals: 1.
 	self assert: inlinedStatement first selector equals: #even.
@@ -248,8 +248,8 @@ ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	self deny: initialMethod equals: resultingMethod.
-	inlinedStatement := resultingMethod statements.
 	self assert: methodToInline statements size equals: 2.
+	inlinedStatement := resultingMethod statements.
 	self assert: inlinedStatement first isMessage.
 	self assert: inlinedStatement first receiver value equals: 1.
 	self assert: inlinedStatement first selector equals: #even.
@@ -269,8 +269,8 @@ ANSlangInlinerTest >> testReturningInlinedSingleStatement [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	inlinedStatement := resultingMethod statements first.
 	self assert: methodToInline statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isReturn.
 	self assert: inlinedStatement value isMessage.
 	self assert: inlinedStatement value receiver value equals: 1.
