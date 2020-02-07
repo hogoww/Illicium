@@ -497,10 +497,7 @@ ANSlangReceiver >> integerObjectOf: anOop [
 { #category : #'reflective operations' }
 ANSlangReceiver >> integerValueOf: anOop [
 	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
-	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: #integerValueOf ; yourself);
-		addArgument: (anOop acceptVisitor: methodTranslator);
-		yourself
+	^ (anOop acceptVisitor: methodTranslator) >> (ASTCLiteral value: 3)
 ]
 
 { #category : #'reflective operations' }
