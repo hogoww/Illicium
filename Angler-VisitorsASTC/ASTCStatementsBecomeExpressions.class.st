@@ -61,6 +61,14 @@ ASTCStatementsBecomeExpressions >> visitIf: anIf [
 ]
 
 { #category : #visiting }
+ASTCStatementsBecomeExpressions >> visitOperator: anOperator [
+	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
+	super visitOperator: anOperator.
+	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
+	
+]
+
+{ #category : #visiting }
 ASTCStatementsBecomeExpressions >> visitReturn: aReturn [ 
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitReturn: aReturn.
