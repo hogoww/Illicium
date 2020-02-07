@@ -15,19 +15,24 @@ ASTCStatementsBecomeExpressionsTest >> setUp [
 
 { #category : #tests }
 ASTCStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment [
-	| node |
+	| node expressionList |
 	node :=
 		(ASTCIdentifier id: #a)
 			assign:
 				(ASTCBlock new
-					addStatement: (ASTCLiteral value: true) asStatement).
+					addStatement: (ASTCLiteral value: true) asStatement;
+					yourself).
 	node acceptVisitor: visitor.
 	
 	self assert: node isAssignmentOperator.
 	self assert: node operands first isIdentifier.
 	self assert: node operands second isExpressionList.
 	
-	
+	expressionList := node operands second.
+	self assert: expressionList isExpressionList.
+	self assert: expressionList expressions size equals: 1.
+	self assert: expressionList expressions first equals: (ASTCLiteral value: true).
+
 ]
 
 { #category : #tests }
