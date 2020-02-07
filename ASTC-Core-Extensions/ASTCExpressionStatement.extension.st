@@ -8,8 +8,12 @@ ASTCExpressionStatement >> asStatement [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCExpressionStatement >> becomeExpression [
 	"protocol = converting"
-	self becomeForward: self expression
-	
+	expression := self expression.
+	expression 
+		parent: parent;
+		pharoNode: pharoNode.
+	self becomeForward: expression
+		
 ]
 
 { #category : #'*ASTC-Core-Extensions' }

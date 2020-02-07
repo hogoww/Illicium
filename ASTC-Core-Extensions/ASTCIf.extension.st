@@ -5,9 +5,11 @@ ASTCIf >> becomeTernaryConditionalOperator [
 	"protocol: converting"
 	| asTernary |
 	asTernary := ASTCTernaryConditionalOperator new
-		addOperand: self condition ;
-		addOperand: self then ;
-		addOperand: self else ;
+		parent: parent;
+		pharoNode: pharoNode;
+		addOperand: condition;
+		addOperand: then;
+		addOperand: else;
 		yourself.
 	
 	self becomeForward: asTernary
