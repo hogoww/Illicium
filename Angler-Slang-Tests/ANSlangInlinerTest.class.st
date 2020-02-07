@@ -131,7 +131,7 @@ ANSlangInlinerTest >> testInlineMessageWithCMacroShouldNotInline [
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
-	self assert: resultingMethod equals: resultingMethod.
+	self assert: initialMethod equals: resultingMethod.
 
 ]
 
