@@ -93,7 +93,9 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 				statements: nodesToInline)
 				"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
 				propertyAt: ANSlangDeclarationAnnotator property put: OrderedCollection new;
-				yourself)).
+				yourself)
+				).
+			newBlock propertyAt: ASTCTypeAnnotator  property put: (newBlock statements last propertyAt: #type).
 			newBlock statements add:
 				(aMessageNode parent value: newBlock statements removeLast; yourself).
 			^ aMessageNode parent replaceWith: newBlock "replacing the whole assignment"
