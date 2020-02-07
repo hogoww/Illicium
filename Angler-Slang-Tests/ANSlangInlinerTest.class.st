@@ -225,15 +225,17 @@ ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
 
 	block := resultingMethod statements first.
 	self assert: block isBlock.
-	self assert: block size equals: 2.
+	self assert: block statements size equals: 2.
 	self assert: block statements first isMessage.
 	self assert: block statements first receiver value equals: 1.
 	self assert: block statements first selector equals: #even.
 	
 	assignment := block statements second.
-	self assert: assignment isAssignmentOperator.
-	self assert: assignment operands first value equals: #druss.
-	self assert: assignment operands second value equals: true.
+	self assert: assignment isAssignment.
+	self assert: assignment variable name equals: #t.
+	self assert: assignment value isMessage.
+	self assert: assignment value receiver value equals: 2.
+	self assert: assignment value selector equals: #even
 ]
 
 { #category : #tests }
