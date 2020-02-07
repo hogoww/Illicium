@@ -213,7 +213,7 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 
 { #category : #tests }
 ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
-	| resultingMethod inlinedStatement initialMethod assignment |
+	| resultingMethod inlinedStatement initialMethod assignment block |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsToInlineIntoAssignment) ast.
 	methodToInline := initialMethod copy.
@@ -223,19 +223,17 @@ ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
 	self deny: initialMethod equals: resultingMethod.
 	self assert: methodToInline statements size equals: 1.
 
-	assignment := resultingMethod statements first.
-	self assert: assignment isAssignment.
-	self assert: assignment variable name equals: #t.
-
-	inlinedStatement := assignment value.
-	self assert: inlinedStatement isBlock.
-	self assert: inlinedStatement statements first isMessage.
-	self assert: inlinedStatement statements first receiver value equals: 1.
-	self assert: inlinedStatement statements first selector equals: #even.
+	block := resultingMethod statements first.
+	self assert: block isBlock.
+	self assert: block size equals: 2.
+	self assert: block statements first isMessage.
+	self assert: block statements first receiver value equals: 1.
+	self assert: block statements first selector equals: #even.
 	
-	self assert: inlinedStatement statements second isMessage.
-	self assert: inlinedStatement statements second receiver value equals: 2.
-	self assert: inlinedStatement statements second selector equals: #even.
+	assignment := block statements second.
+	self assert: assignment isAssignmentOperator.
+	self assert: assignment operands first value equals: #druss.
+	self assert: assignment operands second value equals: true.
 ]
 
 { #category : #tests }
