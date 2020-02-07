@@ -213,7 +213,7 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 
 { #category : #tests }
 ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
-	| resultingMethod inlinedStatement initialMethod assignment block |
+	| resultingMethod initialMethod assignment block |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsToInlineIntoAssignment) ast.
 	methodToInline := initialMethod copy.
