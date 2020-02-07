@@ -225,7 +225,7 @@ ASTCClassTranslator >> translateClassState: aClass [
 ASTCClassTranslator >> translateExpression: anExpression [
 	| methodAST functionDefinitions |
 	self callgraphTypeStartingFromExpression: anExpression.
-	methodAST := self annotateMethodsASTWithTypes: (inferer typeProvider methodTypes at:1) node copy.
+	methodAST := self annotateMethodsASTWithTypes: (inferer typeProvider methodTypes at: 1) node copy.
 	
 	functionDefinitions := self translateMethodsASTs: methodAST.
 	^ functionDefinitions body
