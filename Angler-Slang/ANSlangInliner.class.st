@@ -185,15 +185,21 @@ ANSlangInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
 
 { #category : #renaming }
 ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
-	| namesToReplace |
-	namesToReplace := replacementNames keys.
 	aMethodNode nodesDo: [ :aNode |
-		(aNode isTemp and: [ namesToReplace includes: aNode name])
+		aNode isTemp
 			ifTrue:[
-				aNode name: (replacementNames at: aNode name)
+				replacementNames at: aNode name
+					ifPresent:[ aNode name: (replacementNames at: aNode name) ]
 				]
 		].
 	
+	"Check in case we're in testing environment."
+	(aMethodNode body hasProperty: ASTCVariableDeclarationAnnotator property) ifFalse: [ ^ self ].
+	(aMethodNode body propertyAt: ASTCVariableDeclarationAnnotator property)
+		do: [ :aTempDecl |
+			replacementNames at: aTempDecl name
+				ifPresent:[ aTempDecl name: (replacementNames at: aTempDecl name) ]
+			]
 ]
 
 { #category : #renaming }

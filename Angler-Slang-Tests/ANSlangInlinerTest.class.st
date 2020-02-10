@@ -320,14 +320,16 @@ ANSlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 	methodToInline acceptVisitor: declarationVisitor.
 	
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
-	
+	"main declaration, in smalltalk code"
 	self deny: initialMethod equals: resultingMethod.
 	self assert: resultingMethod temporaries size equals: 2.
 	
+	"annotation for C declaration"
 	self assert: (resultingMethod body hasProperty: ASTCVariableDeclarationAnnotator property).
 	declarationAnnotation := resultingMethod body propertyAt: ASTCVariableDeclarationAnnotator property.
-	declarationAnnotation do:[ :aName |
-		#(t t1) includes: aName.
+	self assert: declarationAnnotation size = 2.
+	declarationAnnotation do:[ :aTempNode |
+		self assert: (#(t t1) includes: aTempNode name).
 		]
 ]
 
@@ -357,7 +359,7 @@ ANSlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
 	
 	res := inliner newNamesForIntersectionOf: tempNamesToInline and: tempNamesInliningIn.
 	self assert: res size equals: 1.
-	self assert: (res at: #a) equals: #a1
+	self assert: (res at: #a) equals: #a1.
 ]
 
 { #category : #'test-renaming' }
