@@ -308,17 +308,27 @@ ANSlangInlinerTest >> testNewNamesShouldBeDeclared [
 
 { #category : #'test-renaming' }
 ANSlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
-	| resultingMethod  initialMethod |
-	program addMethod: (self class >> #methodWithATemp) ast.
+	| resultingMethod  initialMethod declarationAnnotation declarationVisitor methodThatWillBeInlined |
+	methodThatWillBeInlined := (self class >> #methodWithATemp) ast.
+	program addMethod: methodThatWillBeInlined.
 	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
 	methodToInline := initialMethod copy.
-	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
+	"we check the merge of the declarations, therefore we need to make declare them"
+	declarationVisitor := ANSlangDeclarationAnnotator new.
+	methodThatWillBeInlined acceptVisitor: declarationVisitor.
+	methodToInline acceptVisitor: declarationVisitor.
+	
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	self deny: initialMethod equals: resultingMethod.
 	self assert: resultingMethod temporaries size equals: 2.
 	
-	resultingMethod body hasProperty: ASTCVariableDeclarationAnnotator property
+	self assert: (resultingMethod body hasProperty: ASTCVariableDeclarationAnnotator property).
+	declarationAnnotation := resultingMethod body propertyAt: ASTCVariableDeclarationAnnotator property.
+	declarationAnnotation do:[ :aName |
+		#(t t1) includes: aName.
+		]
 ]
 
 { #category : #tests }

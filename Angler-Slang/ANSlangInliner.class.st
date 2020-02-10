@@ -84,49 +84,82 @@ ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 	"then replace the names of the nodes with the new ones"
 	replacements ifNotEmpty: [ "This avoids costy iteration over an ast"
 			self renameVariablesIn: methodToInline using: replacements
-		]
+		].
+	
+	"finally we merge the name annotations. as well as the declaration annotation"
+	self mergeTemporariesOf: methodToInline with: methodInlining
 ]
 
 { #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodesToInline |
-	aMessageNode methodNode propertyAt: ASTCVariableDeclarationAnnotator property
-		put: [ (aMessageNode methodNode propertyAt: ASTCVariableDeclarationAnnotator property) 
-			, (aMessageNode methodNode propertyAt: ASTCVariableDeclarationAnnotator property) ].
-	aMessageNode methodNode body
-		temporaries: aMessageNode methodNode temporaries , aMethodNode body temporaries.
+	"We attempt to inline the nodes in different cases.
+	If none match, we just replace the message with the collection of nodes."
+	"replacing the whole assignment"
+	"General preparation for inlining"
 	nodesToInline := aMethodNode statements.
 	nodesToInline := self cleanStatements: nodesToInline.
-	
 	nodesToInline last isReturn
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
 
-	nodesToInline size = 1
-		ifTrue: [ ^ aMessageNode replaceWith: nodesToInline first ].
-	
-	aMessageNode parent isAssignment ifTrue: [ | typingProperty newBlock newAssignment lastNode |
-		newBlock := 
-			(RBBlockNode body:
-				(RBSequenceNode new
-					"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
-					propertyAt: ASTCVariableDeclarationAnnotator property put: OrderedCollection new;
-					yourself)
-				).
-			typingProperty := ASTCTypeAnnotator property.
-			lastNode := nodesToInline removeLast.
-			newAssignment := aMessageNode parent copy.
-			newAssignment value: lastNode.
-			nodesToInline add: newAssignment.
-			newBlock body statements: nodesToInline.
-			lastNode propertyAt: typingProperty 
-				ifPresent: [ newBlock propertyAt: typingProperty
-						put:  (lastNode propertyAt: typingProperty) 
-					]
-				ifAbsent: [ nil ]."If it's untyped, we don't do anything. This is the case in a test context for example."
-			^ aMessageNode parent replaceWith: newBlock "replacing the whole assignment"
-		].
+	(self inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
+	(self inlineIfMultipleNodeInAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
+]
+
+{ #category : #inlining }
+ANSlangInliner >> inlineIfMultipleNodeInAssignment: nodesToInline insteadOf: aMessageNode [
+	| typingProperty newBlock newAssignment lastNode |
+	aMessageNode parent isAssignment ifFalse: [ ^ false ].
+	
+	newBlock := RBBlockNode
+		body:
+			"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
+			(RBSequenceNode new
+				propertyAt: ASTCVariableDeclarationAnnotator property
+					put: OrderedCollection new;
+				yourself).
+	lastNode := nodesToInline removeLast.
+	newAssignment := aMessageNode parent copy.
+	newAssignment value: lastNode.
+	nodesToInline add: newAssignment.
+	newBlock body statements: nodesToInline.
+			
+	"If it's untyped, we don't do anything. This is the case in a test context for example."
+	typingProperty := ASTCTypeAnnotator property.
+	lastNode
+		propertyAt: typingProperty
+		ifPresent: [ newBlock
+				propertyAt: typingProperty
+				put: (lastNode propertyAt: typingProperty) ]
+		ifAbsent: [ nil ].
+	aMessageNode parent replaceWith: newBlock.
+	^ true
+]
+
+{ #category : #inlining }
+ANSlangInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode [
+	nodesToInline size = 1 ifFalse: [ ^ false ]. 	
+	
+	aMessageNode replaceWith: nodesToInline first.
+	^ true
+]
+
+{ #category : #inlining }
+ANSlangInliner >> mergeTemporariesOf: aMessageNode with: aMethodNode [
+	| declarationProperty |
+	declarationProperty := ASTCVariableDeclarationAnnotator property.
+	(aMessageNode methodNode body hasProperty: declarationProperty)
+		ifFalse:[ ^ self ].
+	
+	
+	aMessageNode methodNode body
+		propertyAt: declarationProperty
+		put: (aMessageNode methodNode body propertyAt: declarationProperty)
+				,(aMethodNode body propertyAt: declarationProperty).
+	aMessageNode methodNode body
+		temporaries: aMessageNode methodNode temporaries , aMethodNode body temporaries
 ]
 
 { #category : #renaming }
@@ -216,7 +249,7 @@ ANSlangInliner >> visitMessageNode: aMessageNode [
 			self inline: methodToInline insteadOf: aMessageNode.
 			].
 	
-	"Do not inline inside assertions"
+	"Do not inline inside assertions <- inline is already done here. looks weird."
 	aMessageNode selector = #assert: ifTrue: [ ^ self ].
 	super visitMessageNode: aMessageNode
 ]
