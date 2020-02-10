@@ -58,16 +58,6 @@ ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 	^ aMethodNode
 ]
 
-{ #category : #cleaning }
-ANSlangInliner >> cleanMethod: aRBMethodNode [
-	| node |
-	aRBMethodNode statements size > 1 ifFalse: [ ^ self ].
-
-	node := aRBMethodNode statements first.
-	(node isMessage and: [ node selector = #flag: ])
-		ifTrue: [ aRBMethodNode body removeNode: node ]
-]
-
 { #category : #inlining }
 ANSlangInliner >> cleanStatements: nodesToInline [
 
