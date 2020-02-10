@@ -90,6 +90,12 @@ ANSlangInlinerTest >> methodWithTwoStatementsToInline [
 	self methodWithTwoStatements
 ]
 
+{ #category : #support }
+ANSlangInlinerTest >> methodWithTwoStatementsToInlineIntoAssignment [
+	| t |
+	t := self methodWithTwoStatements
+]
+
 { #category : #running }
 ANSlangInlinerTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
@@ -203,6 +209,33 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 	self assert: inlinedStatement second isMessage.
 	self assert: inlinedStatement second receiver value equals: 2.
 	self assert: inlinedStatement second selector equals: #even.
+]
+
+{ #category : #tests }
+ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
+	| resultingMethod inlinedStatement initialMethod assignment |
+	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	initialMethod := (self class >> #methodWithTwoStatementsToInlineIntoAssignment) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: methodToInline statements size equals: 1.
+
+	assignment := resultingMethod statements first.
+	self assert: assignment isAssignment.
+	self assert: assignment variable name equals: #t.
+
+	inlinedStatement := assignment value.
+	self assert: inlinedStatement isBlock.
+	self assert: inlinedStatement statements first isMessage.
+	self assert: inlinedStatement statements first receiver value equals: 1.
+	self assert: inlinedStatement statements first selector equals: #even.
+	
+	self assert: inlinedStatement statements second isMessage.
+	self assert: inlinedStatement statements second receiver value equals: 2.
+	self assert: inlinedStatement statements second selector equals: #even.
 ]
 
 { #category : #tests }
