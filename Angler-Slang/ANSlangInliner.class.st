@@ -5,8 +5,7 @@ Class {
 		'program',
 		'inlinedSomething',
 		'translator',
-		'selectorMacros',
-		'temporaryNamesToAdd'
+		'selectorMacros'
 	],
 	#category : #'Angler-Slang-analysis'
 }
