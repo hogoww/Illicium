@@ -6,7 +6,7 @@ Class {
 		'evaluated',
 		'program'
 	],
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-analysis-tests'
 }
 
 { #category : #asserting }

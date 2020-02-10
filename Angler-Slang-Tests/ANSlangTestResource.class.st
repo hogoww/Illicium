@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'translator'
 	],
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-generated-tests-base'
 }
 
 { #category : #configuring }

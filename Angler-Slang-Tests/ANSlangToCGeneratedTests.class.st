@@ -10,7 +10,7 @@ Class {
 		'translator',
 		'testedClass'
 	],
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-generated-tests-base'
 }
 
 { #category : #'as yet unclassified' }
