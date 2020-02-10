@@ -317,3 +317,13 @@ ANSlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
 	self assert: res size equals: 1.
 	self assert: (res at: #a) equals: #a1
 ]
+
+{ #category : #'test-renaming' }
+ANSlangInlinerTest >> testTempNameDifferentShouldNotChangeNames [
+	| tempNamesToInline tempNamesInliningIn res |
+	tempNamesToInline := { #a }.
+	tempNamesInliningIn := { #b }.
+	
+	res := inliner temporariesFrom: tempNamesToInline in: tempNamesInliningIn.
+	self assert: res size equals: 0.
+]

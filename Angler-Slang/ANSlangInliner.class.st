@@ -172,7 +172,7 @@ ANSlangInliner >> temporariesFrom: methodToInlineTempNames in: methodInliningTem
 	intersection := methodToInlineTempNames intersection: methodInliningTempNames.
 	
 	"suitable new name being the same name, with a number at the end."
-	methodToInlineTempNames do: [ :aTempName | 
+	intersection do: [ :aTempName | 
 			| newName counter |
 			counter := 1.
 			[ 
