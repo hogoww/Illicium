@@ -312,7 +312,7 @@ ANSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
    self cr.
    self << '#  if ' print: aPreprocessorIfNode condition ; cr.
    aPreprocessorIfNode then do: [:anExpression | 
-		self spaces print: anExpression.
+		self spaces;spaces; print: anExpression.
 			(aPreprocessorIfNode parent isExpression or: [anExpression isPreprocessorIf ])
 				ifFalse: [ self << ';'].
 		self cr ] .
@@ -321,7 +321,7 @@ ANSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
     	self << '#  else '.
 		self printNodeInMultilineComment: aPreprocessorIfNode condition ; cr.
         aPreprocessorIfNode else do:[:anExpression | 
-				self spaces print: anExpression.
+				self spaces;spaces; print: anExpression.
 				(aPreprocessorIfNode parent isExpression or: [anExpression isPreprocessorIf ])
 					ifFalse: [ self << ';' ].
 				self cr]
