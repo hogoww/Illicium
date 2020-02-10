@@ -612,9 +612,16 @@ ANSlangReceiver >> signedIntFromLong64 [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> to: s by: e do: i [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> to: stop by: step do: aBlock [
+	| node arg receiver | 
+	node := self to: stop  do: aBlock.
+	
+	receiver := ASTCIdentifier new id: (aBlock arguments at:1) name ; yourself.
+	arg := step acceptVisitor: methodTranslator.
+	arg isLiteral ifTrue: [ arg value = 0 ifTrue: [ BadArgument new result: 0; expected: 'non 0 value' ] ].
+	
+	node iteratorModification: (receiver assign: (receiver assignAndAdd: arg)).
+	^ node
 ]
 
 { #category : #'reflective operations' }
