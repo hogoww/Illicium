@@ -93,6 +93,18 @@ ANSlangPrettyPrinter >> initialize [
 ]
 
 { #category : #printing }
+ANSlangPrettyPrinter >> parenthesisAround: aBlockClosure [ 
+	
+	self parenthesisIf: true print: aBlockClosure
+]
+
+{ #category : #visiting }
+ANSlangPrettyPrinter >> printBinaryOperand: anOperand [
+
+	self visitExpression: anOperand
+]
+
+{ #category : #printing }
 ANSlangPrettyPrinter >> printDeclarationQualifiers: qualifiers [
 	qualifiers do: [:aQualifier | self << aQualifier. self space ] .
 ]
@@ -153,19 +165,10 @@ ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOp
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
-"	anAssignmentOperator comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , anAssignmentOperator comment first ; cr ; spaces ]."
-	super visitAssignmentOperator: anAssignmentOperator.
 
-]
-
-{ #category : #visiting }
-ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
-	
-	| shouldWrapWithExtraParenthesis |
-	shouldWrapWithExtraParenthesis := aBitLeftShiftOperator operands first isCastOperator.
-	shouldWrapWithExtraParenthesis ifTrue: [ self << '(' ].
-	super visitBitLeftShiftOperator: aBitLeftShiftOperator.
-	shouldWrapWithExtraParenthesis ifTrue: [ self << ')' ].
+	self print: anAssignmentOperator operands first.
+	self << ' ' << anAssignmentOperator class symbol << ' '.
+	self print: anAssignmentOperator operands second
 ]
 
 { #category : #visiting }
@@ -195,36 +198,27 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 
-	"Specific for expressions wrapping casts"
 	self
-		parenthesisIf: (aCastOperator parent isBinaryOperator
-			and: [ aCastOperator parent isBitLeftShiftOperator not
-				and: [ aCastOperator parent isBitRightShiftOperator not
-					and: [ aCastOperator parent isAssignmentOperator not ] ] ])
-		print: [
-	
-	"Second parenthesis is the cast-specific one"
-	self
-		parenthesisIf: 
-		((aCastOperator parent isBinaryOperator and: [ aCastOperator parent isBitLeftShiftOperator not ])
-			or: [
-		(aCastOperator parent isCastOperator not
-			and: [aCastOperator parent isBitLeftShiftOperator not
-				and: [ aCastOperator operands first isIdentifier not
-							and: [ aCastOperator operands first isFunctionCall not ] ] ])])
+		parenthesisIf: (aCastOperator parent isCastOperator not
+			and: [ aCastOperator parent isBitLeftShiftOperator not ])
 		print: [
 			self
 				<< '(';
 				print: aCastOperator type;
 				<< ') '.
 			self
-				parenthesisIf: (aCastOperator operands first isBitLeftShiftOperator not)
-				print: [
-					self
-						parenthesisIf: (aCastOperator operands first isIdentifier not
-							and: [ aCastOperator operands first isFunctionCall not
-								and: [ aCastOperator operands first isBitLeftShiftOperator not ] ])
-						print: [ self print: aCastOperator operands first ] ] ] ]
+				parenthesisIf: true"aCastOperator operands first isCastOperator not"
+				print: [ self visitExpression: aCastOperator operands first ]]
+]
+
+{ #category : #visiting }
+ANSlangPrettyPrinter >> visitExpression: anExpression [
+
+	self
+		parenthesisIf: ((anExpression isLiteral or: [ anExpression isIdentifier ]) not
+			and: [ anExpression isCastOperator not "which have special treatment"
+				and: [ anExpression isFunctionCall and: [ anExpression id ~= 'GIV' ]  ] ])
+		print: [ self print: anExpression ]
 ]
 
 { #category : #visiting }
@@ -236,21 +230,14 @@ ANSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 
-	self
-		parenthesisIf: (aFunctionCall id id ~= #GIV "Special case due to rewriting."
-			and: [((aFunctionCall parent isBinaryOperator
-				or: [aFunctionCall parent isCastOperator ])
-					and: [ aFunctionCall parent isAssignmentOperator not ])])
-		print: [
-		aFunctionCall id acceptVisitor: self.
-		self << '('.
-		self enterBlock.
-		aFunctionCall arguments do: [:each | each acceptVisitor:self ]
-			separatedBy: [ self << ', ' ].
-		stream peekLast = Character cr ifTrue: [ self spaces ].
-		self leaveBlock.
-		self << ')'.
-	]
+	aFunctionCall id acceptVisitor: self.
+	self << '('.
+	self enterBlock.
+	aFunctionCall arguments do: [:each | each acceptVisitor:self ]
+		separatedBy: [ self << ', ' ].
+	stream peekLast = Character cr ifTrue: [ self spaces ].
+	self leaveBlock.
+	self << ')'.
 ]
 
 { #category : #visiting }
