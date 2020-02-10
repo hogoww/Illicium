@@ -4,11 +4,20 @@ Class {
 	#instVars : [
 		'program',
 		'inlinedSomething',
-		'translator',
+		'translator'
+	],
+	#classInstVars : [
 		'selectorMacros'
 	],
 	#category : #'Angler-Slang-analysis'
 }
+
+{ #category : #testing }
+ANSlangInliner class >> includesSelectorTranslatedAsMacro: aSelector [ 
+	"Caching the result" 
+	selectorMacros ifNil: [ selectorMacros := VMPluginCodeGenerator new selectorsThatMayBeGeneratedAsMacros ].
+	^ selectorMacros includes: aSelector
+]
 
 { #category : #accessing }
 ANSlangInliner class >> translator: aTranslator [
@@ -74,7 +83,7 @@ ANSlangInliner >> cleanStatements: nodesToInline [
 	^ cleanNodes
 ]
 
-{ #category : #inlining }
+{ #category : #renaming }
 ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 	| replacements |
 	"we first get the names"
@@ -83,7 +92,7 @@ ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 		
 	"then replace the names of the nodes with the new ones"
 	replacements ifNotEmpty: [ "This avoids costy iteration over an ast"
-			self renameVariablesIn: methodToInline using: replacements
+			self renameVariablesIn: methodToInline using: replacements.
 		].
 	
 	"finally we merge the name annotations. as well as the declaration annotation"
@@ -147,7 +156,7 @@ ANSlangInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode [
 	^ true
 ]
 
-{ #category : #inlining }
+{ #category : #renaming }
 ANSlangInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
 	| declarationProperty |
 	declarationProperty := ASTCVariableDeclarationAnnotator property.
@@ -161,7 +170,7 @@ ANSlangInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
 	methodInlining body
 		propertyAt: declarationProperty
 		put: (methodInlining body propertyAt: declarationProperty)
-				,(methodToInline body propertyAt: declarationProperty).
+				, (methodToInline body propertyAt: declarationProperty).
 ]
 
 { #category : #renaming }
@@ -193,11 +202,11 @@ ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
 			ifTrue:[
 				aNode name: (replacementNames at: aNode name)
 				]
-		] 
+		].
 	
 ]
 
-{ #category : #inlining }
+{ #category : #renaming }
 ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
   | replacement |	
 	aMethodNode body nodesDo: [:aNode |  
@@ -207,16 +216,10 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 ]
 
 { #category : #inlining }
-ANSlangInliner >> selectorTranslatedAsMacro [
-	"lazy accessor for now."
-	^ selectorMacros ifNil: [ selectorMacros := VMPluginCodeGenerator new selectorsThatMayBeGeneratedAsMacros ]
-]
-
-{ #category : #applying }
 ANSlangInliner >> shouldInline: aMessageNode [
 	
 	| methodToInline |
-	(self selectorTranslatedAsMacro includes: aMessageNode selector) ifTrue: [ ^ false ].
+	(self class includesSelectorTranslatedAsMacro: aMessageNode selector) ifTrue: [ ^ false ].
 	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
 	
 	methodToInline := program methodNamed: aMessageNode selector.
