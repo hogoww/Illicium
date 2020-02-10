@@ -24,7 +24,7 @@ ANSlangDeclarationAnnotatorTest >> testAssignmentInCondition [
 
 	"But in the body of the function"
 	self assert: ast body temporaries isNotEmpty.
-	self assert: ast body propertyEquals: ast body temporaries
+	self assert: ast body propertyEquals: ast body temporaries asSet
 ]
 
 { #category : #basic }
@@ -36,7 +36,7 @@ ANSlangDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 
 	"But in the function"
 	self assert: ast body temporaries isNotEmpty.
-	self assert: ast body propertyEquals: ast body temporaries
+	self assert: ast body propertyEquals: ast body temporaries asSet
 ]
 
 { #category : #basic }
@@ -45,13 +45,13 @@ ANSlangDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
 	super testMethodWithTwoBlockWithSameVariable. 
 	
 	"It should not be declared in either blocks"	
-	self assert: ast body statements first body propertyEquals: OrderedCollection new.
+	self assert: ast body statements first body propertyEquals: Set new.
 	self assert: ast body statements first arguments isNotEmpty.
-	self assert: ast body statements second body propertyEquals: OrderedCollection new.
+	self assert: ast body statements second body propertyEquals: Set new.
 	self assert: ast body statements second arguments isNotEmpty.
 
 	"But declared once in the function"
-	self assert: ast body propertyEquals: ast body statements first arguments.
+	self assert: ast body propertyEquals: ast body statements first arguments asSet.
 ]
 
 { #category : #basic }
@@ -59,11 +59,11 @@ ANSlangDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
 	super testVisitArgumentNodeInABlock. 
 	
 	"The argument should not be declared in its block"	
-	self assert: ast body statements first body propertyEquals: OrderedCollection new.
+	self assert: ast body statements first body propertyEquals: Set new.
 
 	"But at the start of the function"
 	self assert: ast body statements first arguments isNotEmpty.
-	self assert: ast body propertyEquals: ast body statements first arguments.
+	self assert: ast body propertyEquals: ast body statements first arguments asSet.
 ]
 
 { #category : #basic }
@@ -71,11 +71,11 @@ ANSlangDeclarationAnnotatorTest >> testVisitArgumentNodeToDiscardInABlock [
 	super testVisitArgumentNodeToDiscardInABlock. 
 	
 	"The argument should not be declared."	
-	self assert: ast body statements first arguments second body propertyEquals: OrderedCollection new.
+	self assert: ast body statements first arguments second body propertyEquals: Set new.
 
 	self assert: ast body statements first arguments isNotEmpty.
-	self assert: ast body statements first arguments second body propertyEquals: OrderedCollection new.
-	self assert: ast body propertyEquals: ast body temporaries.
+	self assert: ast body statements first arguments second body propertyEquals: Set new.
+	self assert: ast body propertyEquals: ast body temporaries asSet.
 ]
 
 { #category : #basic }
@@ -102,7 +102,7 @@ ANSlangDeclarationAnnotatorTest >> testVisitTemporaryNode [
 	
 	"But at the start of the function"
 	self assert: ast body temporaries isNotEmpty.	
-	self assert: ast body propertyEquals: ast body temporaries
+	self assert: ast body propertyEquals: ast body temporaries asSet
 ]
 
 { #category : #basic }
@@ -114,6 +114,6 @@ ANSlangDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
 
 	"But should be declared at the start of the function"
 	self assert: ast body statements first temporaries isNotEmpty.
-	self assert: ast body statements first body propertyEquals: OrderedCollection new.
-	self assert: ast body propertyEquals: ast body statements first temporaries.
+	self assert: ast body statements first body propertyEquals: Set new.
+	self assert: ast body propertyEquals: ast body statements first temporaries asSet.
 ]

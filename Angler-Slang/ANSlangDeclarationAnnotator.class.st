@@ -38,7 +38,7 @@ ANSlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
 	
 	"set the property for the temporaries tagged to be declared at the start of the function in the sequence node"
 	"currenlty the temporary inside a block should still be declared at the start of the method"
-	self atNewPropertyPut: varNodesToDeclareAtTheStartOfTheMethod asOrderedCollection for: aMethodNode body
+	self atNewPropertyPut: varNodesToDeclareAtTheStartOfTheMethod for: aMethodNode body
 ]
 
 { #category : #visiting }
@@ -47,5 +47,5 @@ ANSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	"Slang declares everything at start.
 	currently skips the temp declared in blocks."
 	aSequenceNode temporaries collect: [ :aTempDecl | aTempDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
-	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: OrderedCollection new for: aSequenceNode ] 
+	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: Set new for: aSequenceNode ] 
 ]

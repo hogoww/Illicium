@@ -43,7 +43,7 @@ ANSlangInlinerTest >> methodWithCMacro [
 	^ 17
 ]
 
-{ #category : #tests }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithMacroToInline [
 	
 	^ self methodWithCMacro
