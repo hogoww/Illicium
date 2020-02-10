@@ -87,7 +87,7 @@ ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 		].
 	
 	"finally we merge the name annotations. as well as the declaration annotation"
-	self mergeTemporariesOf: methodToInline with: methodInlining
+	self mergeTemporariesOf: methodToInline into: methodInlining
 ]
 
 { #category : #inlining }
@@ -95,7 +95,6 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodesToInline |
 	"We attempt to inline the nodes in different cases.
 	If none match, we just replace the message with the collection of nodes."
-	"replacing the whole assignment"
 	"General preparation for inlining"
 	nodesToInline := aMethodNode statements.
 	nodesToInline := self cleanStatements: nodesToInline.
@@ -134,6 +133,8 @@ ANSlangInliner >> inlineIfMultipleNodeInAssignment: nodesToInline insteadOf: aMe
 				propertyAt: typingProperty
 				put: (lastNode propertyAt: typingProperty) ]
 		ifAbsent: [ nil ].
+	
+	"replacing the whole assignment"
 	aMessageNode parent replaceWith: newBlock.
 	^ true
 ]
@@ -147,27 +148,28 @@ ANSlangInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode [
 ]
 
 { #category : #inlining }
-ANSlangInliner >> mergeTemporariesOf: aMessageNode with: aMethodNode [
+ANSlangInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
 	| declarationProperty |
 	declarationProperty := ASTCVariableDeclarationAnnotator property.
-	(aMessageNode methodNode body hasProperty: declarationProperty)
-		ifFalse:[ ^ self ].
+	"in case of testing environment, we don't check"
+	methodInlining body
+		temporaries: methodInlining temporaries , methodToInline body temporaries.
+		
+	((methodInlining body hasProperty: declarationProperty) 
+		and:[ methodToInline body hasProperty: declarationProperty ]) ifFalse:[ ^ self ].
 	
-	
-	aMessageNode methodNode body
+	methodInlining body
 		propertyAt: declarationProperty
-		put: (aMessageNode methodNode body propertyAt: declarationProperty)
-				,(aMethodNode body propertyAt: declarationProperty).
-	aMessageNode methodNode body
-		temporaries: aMessageNode methodNode temporaries , aMethodNode body temporaries
+		put: (methodInlining body propertyAt: declarationProperty)
+				,(methodToInline body propertyAt: declarationProperty).
 ]
 
 { #category : #renaming }
-ANSlangInliner >> newNamesForIntersectionOf: methodToInlineTempNames and: methodInliningTempNames [
+ANSlangInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
 	| newTemporariesName intersection |
 	"We gather the names of the temporaries that appear in both method, and find a suitable new name for the ones that will be inlined."
 	newTemporariesName := Dictionary new.
-	intersection := methodToInlineTempNames intersection: methodInliningTempNames.
+	intersection := tempNames1 intersection: tempNames2.
 	
 	"suitable new name being the same name, with a number at the end."
 	intersection do: [ :aTempName | 
