@@ -77,9 +77,15 @@ ANSlangInliner >> cleanStatements: nodesToInline [
 
 { #category : #inlining }
 ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
-	self temporariesFrom: methodToInline in: methodInlining.
-
-	self halt.
+	| replacements |
+	"we first get the names"
+	replacements := self newNamesForIntersectionOf: methodToInline temporaryNames
+		and: methodInlining temporaryNames.
+		
+	"then replace the names of the nodes with the new ones"
+	replacements ifNotEmpty: [ "This avoids costy iteration over an ast"
+			self renameVariablesIn: methodToInline using: replacements
+		]
 ]
 
 { #category : #inlining }
@@ -121,23 +127,45 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
 ]
 
+{ #category : #renaming }
+ANSlangInliner >> newNamesForIntersectionOf: methodToInlineTempNames and: methodInliningTempNames [
+	| newTemporariesName intersection |
+	"We gather the names of the temporaries that appear in both method, and find a suitable new name for the ones that will be inlined."
+	newTemporariesName := Dictionary new.
+	intersection := methodToInlineTempNames intersection: methodInliningTempNames.
+	
+	"suitable new name being the same name, with a number at the end."
+	intersection do: [ :aTempName | 
+			| newName counter |
+			counter := 1.
+			[ 
+				newName := aTempName , counter asString.
+				intersection includes:  newName 
+			] whileTrue:[ counter := counter + 1 ].
+			newTemporariesName at: aTempName put: newName.
+		].
+	^ newTemporariesName
+]
+
+{ #category : #renaming }
+ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
+	| namesToReplace |
+	namesToReplace := replacementNames keys.
+	aMethodNode nodesDo: [ :aNode |
+		(aNode isTemp or: [ aNode isArgument and: [ namesToReplace includes: aNode name]])
+			ifTrue:[
+				aNode name: (replacementNames at: aNode name)
+				]
+		] 
+	
+]
+
 { #category : #inlining }
 ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
   | replacement |	
 	aMethodNode body nodesDo: [:aNode |  
 		(aNode isArgument and:[ aNode isBlockVar not ]) ifTrue: [
 			replacement := arguments at: (aMethodNode arguments indexOf: aNode).
-			aNode replaceWith: replacement ] ] 
-]
-
-{ #category : #inlining }
-ANSlangInliner >> renameVariablesOf: aMethodNode byTemporariesNames: tempNames [
-  	| replacement tempName |	
-	self halt.
-	aMethodNode body temporaries 
-	nodesDo: [:aNode |  
-		(aNode isTemp and:[ aNode isBlockVar not ]) ifTrue: [
-			replacement := tempName at: (aMethodNode arguments indexOf: aNode).
 			aNode replaceWith: replacement ] ] 
 ]
 
@@ -162,26 +190,6 @@ ANSlangInliner >> shouldInline: aMessageNode [
 	^(translator isSpecialSelector: aMessageNode selector) not
 		and: [ (methodToInline hasPragmaNamed: #cmacro) not
 			and: [ (methodToInline hasPragmaNamed: #cmacro:) not ] ]
-]
-
-{ #category : #renaming }
-ANSlangInliner >> temporariesFrom: methodToInlineTempNames in: methodInliningTempNames [
-	| newTemporariesName intersection |
-	"We gather the names of the temporaries that appear in both method, and find a suitable new name for the ones that will be inlined."
-	newTemporariesName := Dictionary new.
-	intersection := methodToInlineTempNames intersection: methodInliningTempNames.
-	
-	"suitable new name being the same name, with a number at the end."
-	intersection do: [ :aTempName | 
-			| newName counter |
-			counter := 1.
-			[ 
-				newName := aTempName , counter asString.
-				intersection includes:  newName 
-			] whileTrue:[ counter := counter + 1 ].
-			newTemporariesName at: aTempName put: newName.
-		].
-	^ newTemporariesName
 ]
 
 { #category : #accessing }
