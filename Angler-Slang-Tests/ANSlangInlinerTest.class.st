@@ -14,7 +14,7 @@ ANSlangInlinerTest >> methodReturningInlinedSingleStatement [
 	^ self methodWithSingleStatement
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #support }
 ANSlangInlinerTest >> methodWithATemp [
 	| t |
 	t
@@ -117,7 +117,7 @@ ANSlangInlinerTest >> setUp [
 		translator: ANSlangClassTranslator new.
 ]
 
-{ #category : #tests }
+{ #category : #'test-renaming' }
 ANSlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithATemp) ast.
@@ -127,7 +127,7 @@ ANSlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 1.
+	self assert: resultingMethod statements size equals: 1.
 	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isAssignment.
 	self assert: inlinedStatement variable name equals: #t.
@@ -145,7 +145,7 @@ ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 1.
+	self assert: resultingMethod statements size equals: 1.
 	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver isBlock.
@@ -175,7 +175,7 @@ ANSlangInlinerTest >> testInlineSingleStatement [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 1.
+	self assert: resultingMethod statements size equals: 1.
 	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver value equals: 1.
@@ -213,7 +213,7 @@ ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 1.
+	self assert: resultingMethod statements size equals: 1.
 	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isMessage.
 	self assert: inlinedStatement receiver value equals: 1.
@@ -230,7 +230,7 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 2.
+	self assert: resultingMethod statements size equals: 2.
 	inlinedStatement := resultingMethod statements.
 	self assert: inlinedStatement first isMessage.
 	self assert: inlinedStatement first receiver value equals: 1.
@@ -251,7 +251,7 @@ ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 1.
+	self assert: resultingMethod statements size equals: 1.
 
 	block := resultingMethod statements first.
 	self assert: block isBlock.
@@ -278,7 +278,7 @@ ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 2.
+	self assert: resultingMethod statements size equals: 2.
 	inlinedStatement := resultingMethod statements.
 	self assert: inlinedStatement first isMessage.
 	self assert: inlinedStatement first receiver value equals: 1.
@@ -287,6 +287,38 @@ ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 	self assert: inlinedStatement second isMessage.
 	self assert: inlinedStatement second receiver value equals: 2.
 	self assert: inlinedStatement second selector equals: #even.
+]
+
+{ #category : #'test-renaming' }
+ANSlangInlinerTest >> testNewNamesShouldBeDeclared [
+	| resultingMethod  initialMethod newTempNames |
+	program addMethod: (self class >> #methodWithATemp) ast.
+	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod temporaries size equals: 2.
+	
+	newTempNames := resultingMethod temporaries collect: [ :aTemp| aTemp name ].
+	self assert: (newTempNames includes: #t).
+	self assert: (newTempNames includes: #t1).
+]
+
+{ #category : #'test-renaming' }
+ANSlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
+	| resultingMethod  initialMethod |
+	program addMethod: (self class >> #methodWithATemp) ast.
+	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod temporaries size equals: 2.
+	
+	resultingMethod body hasProperty: ASTCVariableDeclarationAnnotator property
 ]
 
 { #category : #tests }
@@ -299,7 +331,7 @@ ANSlangInlinerTest >> testReturningInlinedSingleStatement [
 	
 	
 	self deny: initialMethod equals: resultingMethod.
-	self assert: methodToInline statements size equals: 1.
+	self assert: resultingMethod statements size equals: 1.
 	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isReturn.
 	self assert: inlinedStatement value isMessage.

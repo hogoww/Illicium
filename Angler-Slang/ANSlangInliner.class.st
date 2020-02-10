@@ -90,6 +90,9 @@ ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 { #category : #inlining }
 ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodesToInline |
+	aMessageNode methodNode propertyAt: ASTCVariableDeclarationAnnotator property
+		put: [ (aMessageNode methodNode propertyAt: ASTCVariableDeclarationAnnotator property) 
+			, (aMessageNode methodNode propertyAt: ASTCVariableDeclarationAnnotator property) ].
 	aMessageNode methodNode body
 		temporaries: aMessageNode methodNode temporaries , aMethodNode body temporaries.
 	nodesToInline := aMethodNode statements.
@@ -106,7 +109,7 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 			(RBBlockNode body:
 				(RBSequenceNode new
 					"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
-					propertyAt: ANSlangDeclarationAnnotator property put: OrderedCollection new;
+					propertyAt: ASTCVariableDeclarationAnnotator property put: OrderedCollection new;
 					yourself)
 				).
 			typingProperty := ASTCTypeAnnotator property.
