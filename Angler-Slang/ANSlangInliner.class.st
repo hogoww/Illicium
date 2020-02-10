@@ -152,7 +152,7 @@ ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
 	| namesToReplace |
 	namesToReplace := replacementNames keys.
 	aMethodNode nodesDo: [ :aNode |
-		(aNode isTemp or: [ aNode isArgument and: [ namesToReplace includes: aNode name]])
+		(aNode isTemp and: [ namesToReplace includes: aNode name])
 			ifTrue:[
 				aNode name: (replacementNames at: aNode name)
 				]
