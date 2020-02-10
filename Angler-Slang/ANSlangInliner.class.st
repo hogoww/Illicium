@@ -165,20 +165,23 @@ ANSlangInliner >> shouldInline: aMessageNode [
 ]
 
 { #category : #renaming }
-ANSlangInliner >> temporariesFrom: methodToInline in: methodInlining [ 
-	| temporaryNames intersection|
-	temporaryNames :=  methodInlining temporaries.
+ANSlangInliner >> temporariesFrom: methodToInlineTempNames in: methodInliningTempNames [
+	| newTemporariesName intersection |
+	"We gather the names of the temporaries that appear in both method, and find a suitable new name for the ones that will be inlined."
+	newTemporariesName := Dictionary new.
+	intersection := methodToInlineTempNames intersection: methodInliningTempNames.
 	
-	intersection := methodToInline temporaryNames intersection: temporaryNames.
-	temporaryNamesToAdd := OrderedCollection new.
-	methodToInline temporaries do: [ :aTemp | | newName counter |
-		newName := aTemp name.
-		counter := 1.
-		[ intersection includes:  newName , counter asString ]
-			whileTrue:[ counter := counter + 1 ].
-		aTemp name: newName , counter asString.
-		temporaryNamesToAdd add: newName.
+	"suitable new name being the same name, with a number at the end."
+	methodToInlineTempNames do: [ :aTempName | 
+			| newName counter |
+			counter := 1.
+			[ 
+				newName := aTempName , counter asString.
+				intersection includes:  newName 
+			] whileTrue:[ counter := counter + 1 ].
+			newTemporariesName at: aTempName put: newName.
 		].
+	^ newTemporariesName
 ]
 
 { #category : #accessing }

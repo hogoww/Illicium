@@ -306,3 +306,14 @@ ANSlangInlinerTest >> testReturningInlinedSingleStatement [
 	self assert: inlinedStatement value receiver value equals: 1.
 	self assert: inlinedStatement value selector equals: #even.
 ]
+
+{ #category : #'test-renaming' }
+ANSlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
+	| tempNamesToInline tempNamesInliningIn res |
+	tempNamesToInline := { #a }.
+	tempNamesInliningIn := { #a }.
+	
+	res := inliner temporariesFrom: tempNamesToInline in: tempNamesInliningIn.
+	self assert: res size equals: 1.
+	self assert: (res at: #a) equals: #a1
+]
