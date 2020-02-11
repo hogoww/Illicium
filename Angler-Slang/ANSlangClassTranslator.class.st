@@ -64,7 +64,8 @@ ANSlangClassTranslator >> initialize [
 { #category : #testing }
 ANSlangClassTranslator >> isGlobalInstanceVariable: aString [ 
 	
-	^ inferer globalsAsSet includes: aString
+	^ (inferer globalsAsSet includes: aString)
+		and: [ inferer placeInStructure: aString ]
 ]
 
 { #category : #'special selectors' }
