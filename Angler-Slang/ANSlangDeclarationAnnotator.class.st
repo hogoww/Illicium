@@ -1,3 +1,10 @@
+"
+see super comment.
+
+I also have a bad dependency forcing me to be run last, because i copy temporary nodes that may be used.
+
+USE WITH CARE.
+"
 Class {
 	#name : #ANSlangDeclarationAnnotator,
 	#superclass : #ASTCVariableDeclarationAnnotator,
@@ -10,7 +17,7 @@ Class {
 { #category : #visiting }
 ANSlangDeclarationAnnotator >> initialize [
 	super initialize.
-	varNodesToDeclareAtTheStartOfTheMethod := Set new
+	varNodesToDeclareAtTheStartOfTheMethod := self class defaultCollection new
 ]
 
 { #category : #visiting }
@@ -47,6 +54,6 @@ ANSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	super visitSequenceNode: aSequenceNode.
 	"Slang declares everything at start.
 	currently skips the temp declared in blocks."
-	aSequenceNode temporaries collect: [ :aTempDecl | aTempDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
-	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: Set new for: aSequenceNode ] 
+	aSequenceNode temporaries collect: [ :aTempDecl | aTempDecl copy ] into: varNodesToDeclareAtTheStartOfTheMethod.
+	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: self class defaultCollection new for: aSequenceNode ] 
 ]

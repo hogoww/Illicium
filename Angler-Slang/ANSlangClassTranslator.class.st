@@ -96,8 +96,8 @@ ANSlangClassTranslator >> preTranslationConstraintCheck: aClass [
 ANSlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ { 
-		ANSlangDeclarationAnnotator new. 
-		ANSlangTypeAnnotator new inferer: inferer ; yourself"always take the latest inferer"
+		ANSlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
+		ANSlangDeclarationAnnotator new
 		}
 ]
 
