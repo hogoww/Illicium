@@ -29,7 +29,8 @@ ANSlangDeclarationAnnotator >> visitBlockNode: aBlockNode [
 		and: [ (#(addressOf:put:) includes: aBlockNode parent selector) ]) 
 			ifTrue:[ ^ self ].
 	
-	aBlockNode arguments collect: [ :aTempDecl | aTempDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
+	"Temporaries are handled by the sequence node."
+	aBlockNode arguments collect: [ :anArgDecl | anArgDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
 ]
 
 { #category : #visit }
