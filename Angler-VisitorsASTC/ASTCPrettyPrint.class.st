@@ -306,11 +306,10 @@ ASTCPrettyPrint >> visitIf: anIf [
 { #category : #visiting }
 ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 	self parenthesisFor: anIndexerOperator print: [
-		self print: anIndexerOperator operands first;
-			<< '[';
-			print: anIndexerOperator operands second;
-			<< ']'
-		]
+		self visitExpression: anIndexerOperator operands first.
+		self << '['.
+		self visitExpression: anIndexerOperator operands second.
+		self << ']' ]
 ]
 
 { #category : #visiting }
