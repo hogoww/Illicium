@@ -4,7 +4,7 @@ Class {
 	#category : #'Angler-Slang'
 }
 
-{ #category : #visiting }
+{ #category : #'printing-literals' }
 ANSlangPrettyPrinter >> cLiteralFor: anObject [
 	"Return a string representing the C literal value for the given object."
 	anObject isNumber
@@ -34,7 +34,7 @@ ANSlangPrettyPrinter >> cLiteralFor: anObject [
 	^'"XXX UNTRANSLATABLE CONSTANT XXX"'
 ]
 
-{ #category : #literals }
+{ #category : #'printing-literals' }
 ANSlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
 	"Answer the string for generating a literal integer.
 	Use hexadecimal notation as prescribed by aBoolean.
@@ -68,6 +68,39 @@ ANSlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
 				ifFalse: [printString]]]
 ]
 
+{ #category : #'printing-literals' }
+ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger hex: aBoolean longlong: llBoolean [
+	"Answer the string for generating an unsigned literal integer.
+	Use hexadecimal notation as prescribed by aBoolean.
+	Force long long suffix (LL) if the integer does not fit on 32 bits, or if llBoolean is true."
+	
+	| printString |
+	printString := aBoolean
+		ifTrue: [anInteger positive
+			ifTrue: ['0x' , (anInteger printStringBase: 16)]
+			ifFalse: ['-0x' , (anInteger negated printStringBase: 16)]]
+		ifFalse: [anInteger printString].
+	^anInteger positive
+		ifTrue: [(llBoolean or: [anInteger > 16rFFFFFFFF "UINT_MAX"])
+			ifTrue: [printString , 'ULL']
+			ifFalse: [printString , 'U']]
+		ifFalse: [self error: 'please provide positive integer']
+]
+
+{ #category : #'printing-literals' }
+ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger longlong: llBoolean [
+	"Answer the string for generating an unsigned literal integer.
+	Eventually use hexadecimal.
+	Force long long suffix (LL) if the integer does not fit on 32 bits, or if llBoolean is true."
+	
+	| hex |
+	hex := (anInteger > 0
+				and: [(anInteger >> anInteger lowBit + 1) isPowerOfTwo
+				and: [(anInteger highBit = anInteger lowBit and: [anInteger > 65536])
+					  or: [anInteger highBit - anInteger lowBit >= 4]]]).
+	^self cLiteralForUnsignedInteger: anInteger hex: hex longlong: llBoolean
+]
+
 { #category : #visiting }
 ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 
@@ -91,6 +124,18 @@ ANSlangPrettyPrinter >> initialize [
 
 	super initialize.
 	self indentationString: '	'
+]
+
+{ #category : #printing }
+ANSlangPrettyPrinter >> parenthesisAround: aBlockClosure [ 
+	
+	self parenthesisIf: true print: aBlockClosure
+]
+
+{ #category : #visiting }
+ANSlangPrettyPrinter >> printBinaryOperand: anOperand [
+
+	self visitExpression: anOperand
 ]
 
 { #category : #printing }
@@ -154,19 +199,32 @@ ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOp
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
-"	anAssignmentOperator comment ifNotNil:[ self cr spaces ; printMultilineComment: ' ' , anAssignmentOperator comment first ; cr ; spaces ]."
-	super visitAssignmentOperator: anAssignmentOperator.
 
+	self print: anAssignmentOperator operands first.
+	self << ' ' << anAssignmentOperator class symbol << ' '.
+	self print: anAssignmentOperator operands second
+]
+
+{ #category : #visiting }
+ANSlangPrettyPrinter >> visitBinaryOperator: anOperator [
+
+	self printBinaryOperand: anOperator operands first.
+	self << ' ' << anOperator class symbol << ' '.
+	self printBinaryOperand: anOperator operands second.
 ]
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+
+	"Special case if first operator is a constant: format the integer correctly"
+	aBitLeftShiftOperator operands first isLiteral ifTrue: [
+		self << (self cLiteralForUnsignedInteger: aBitLeftShiftOperator operands first value longlong: false).
+		self << ' ' << aBitLeftShiftOperator class symbol << ' '.
+		self printBinaryOperand: aBitLeftShiftOperator operands second.
+		^ self
+	].
 	
-	| shouldWrapWithExtraParenthesis |
-	shouldWrapWithExtraParenthesis := aBitLeftShiftOperator operands first isCastOperator.
-	shouldWrapWithExtraParenthesis ifTrue: [ self << '(' ].
-	super visitBitLeftShiftOperator: aBitLeftShiftOperator.
-	shouldWrapWithExtraParenthesis ifTrue: [ self << ')' ].
+	super visitBitLeftShiftOperator: aBitLeftShiftOperator
 ]
 
 { #category : #visiting }
@@ -196,36 +254,22 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 
-	"Specific for expressions wrapping casts"
+	"Cast operators always are wrapped in parenthesis in slang"
+	self parenthesisAround: [
+		self
+			<< '(';
+			print: aCastOperator type;
+			<< ') '.
+		self parenthesisAround: [ self visitExpression: aCastOperator operands first ] ]
+]
+
+{ #category : #visiting }
+ANSlangPrettyPrinter >> visitExpression: anExpression [
+
 	self
-		parenthesisIf: (aCastOperator parent isBinaryOperator
-			and: [ aCastOperator parent isBitLeftShiftOperator not
-				and: [ aCastOperator parent isBitRightShiftOperator not
-					and: [ aCastOperator parent isAssignmentOperator not ] ] ])
-		print: [
-	
-	"Second parenthesis is the cast-specific one"
-	self
-		parenthesisIf: 
-		((aCastOperator parent isBinaryOperator and: [ aCastOperator parent isBitLeftShiftOperator not ])
-			or: [
-		(aCastOperator parent isCastOperator not
-			and: [aCastOperator parent isBitLeftShiftOperator not
-				and: [ aCastOperator operands first isIdentifier not
-							and: [ aCastOperator operands first isFunctionCall not ] ] ])])
-		print: [
-			self
-				<< '(';
-				print: aCastOperator type;
-				<< ') '.
-			self
-				parenthesisIf: (aCastOperator operands first isBitLeftShiftOperator not)
-				print: [
-					self
-						parenthesisIf: (aCastOperator operands first isIdentifier not
-							and: [ aCastOperator operands first isFunctionCall not
-								and: [ aCastOperator operands first isBitLeftShiftOperator not ] ])
-						print: [ self print: aCastOperator operands first ] ] ] ]
+		parenthesisIf: ((anExpression isLiteral or: [ anExpression isIdentifier ]) not
+				and: [ (anExpression isFunctionCall and: [ anExpression id id = 'GIV' ]) not  ] )
+		print: [ self print: anExpression ]
 ]
 
 { #category : #visiting }
@@ -248,21 +292,14 @@ ANSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 
-	self
-		parenthesisIf: (aFunctionCall id id ~= #GIV "Special case due to rewriting."
-			and: [((aFunctionCall parent isBinaryOperator
-				or: [aFunctionCall parent isCastOperator ])
-					and: [ aFunctionCall parent isAssignmentOperator not ])])
-		print: [
-		aFunctionCall id acceptVisitor: self.
-		self << '('.
-		self enterBlock.
-		aFunctionCall arguments do: [:each | each acceptVisitor:self ]
-			separatedBy: [ self << ', ' ].
-		stream peekLast = Character cr ifTrue: [ self spaces ].
-		self leaveBlock.
-		self << ')'.
-	]
+	aFunctionCall id acceptVisitor: self.
+	self << '('.
+	self enterBlock.
+	aFunctionCall arguments do: [:each | each acceptVisitor:self ]
+		separatedBy: [ self << ', ' ].
+	stream peekLast = Character cr ifTrue: [ self spaces ].
+	self leaveBlock.
+	self << ')'.
 ]
 
 { #category : #visiting }
@@ -315,6 +352,16 @@ ANSlangPrettyPrinter >> visitLiteral: aLiteral [
 ]
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> visitNegationOperator: aNegationOperator [
+
+	aNegationOperator operands first isLiteral ifTrue: [ 
+		^ (ASTCLiteral value: (aNegationOperator operands first value negated)) acceptVisitor: self
+	].
+
+	super visitNegationOperator: aNegationOperator
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 	self printLogicalOperatorInConditionnal: anOrOperator
 ]
@@ -324,7 +371,7 @@ ANSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
    self cr.
    self << '#  if ' print: aPreprocessorIfNode condition ; cr.
    aPreprocessorIfNode then do: [:anExpression | 
-		self spaces print: anExpression.
+		self spaces;spaces; print: anExpression.
 			(aPreprocessorIfNode parent isExpression or: [anExpression isPreprocessorIf ])
 				ifFalse: [ self << ';'].
 		self cr ] .
@@ -333,7 +380,7 @@ ANSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
     	self << '#  else '.
 		self printNodeInMultilineComment: aPreprocessorIfNode condition ; cr.
         aPreprocessorIfNode else do:[:anExpression | 
-				self spaces print: anExpression.
+				self spaces;spaces; print: anExpression.
 				(aPreprocessorIfNode parent isExpression or: [anExpression isPreprocessorIf ])
 					ifFalse: [ self << ';' ].
 				self cr]

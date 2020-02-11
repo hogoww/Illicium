@@ -71,7 +71,18 @@ ANSlangReceiver >> < aNumber [
 ANSlangReceiver >> << aNumber [
 	"Equivalent to Slang's <<.
 	See CCodeGenerator >> #generateShiftLeft:on:indent: for original semantics."
-
+	
+	(self tryEvaluateLiteralExpression: receiverNode)
+		ifNotNil: [ :value | | castToLong result |
+			castToLong := (self tryEvaluateLiteralExpression: aNumber)
+				ifNil: [ methodTranslator program wordSize = 8. ]
+				ifNotNil: [ :argumentValue | | valueBeyondInt |
+					valueBeyondInt := 1 bitShift: 32. "The default type of const << N is int."
+					value < valueBeyondInt and: [(value bitShift: argumentValue) >= valueBeyondInt ] ].
+			result := (ASTCLiteral value: value).
+			castToLong ifTrue: [ result := result castTo: (self cTypeFor: #usqLong) ].
+			^ result << (aNumber acceptVisitor: methodTranslator) ].
+	
 	^ ((self translatedReceiver castTo: (self cTypeFor: #usqInt))
 			<< (aNumber acceptVisitor: methodTranslator))
 				castTo: (self cTypeFor: self myType)

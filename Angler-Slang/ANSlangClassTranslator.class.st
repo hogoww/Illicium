@@ -12,7 +12,7 @@ ANSlangClassTranslator >> addMethod: aCollection [
 { #category : #'program-configuration' }
 ANSlangClassTranslator >> annotateProgramWith: aClass [
 	program isFullyAnnotated ifTrue: [ ^ self ].
-	
+
 	inferer vmClass: self program vmClass.
 	self program classesDo: [ :each | 
 		each prepareToBeAddedToCodeGenerator: inferer.
@@ -64,7 +64,8 @@ ANSlangClassTranslator >> initialize [
 { #category : #testing }
 ANSlangClassTranslator >> isGlobalInstanceVariable: aString [ 
 	
-	^ inferer globalsAsSet includes: aString
+	^ (inferer globalsAsSet includes: aString)
+		and: [ inferer placeInStructure: aString ]
 ]
 
 { #category : #'special selectors' }

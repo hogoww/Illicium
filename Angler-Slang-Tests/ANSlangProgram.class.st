@@ -15,3 +15,9 @@ ANSlangProgram >> vmClass [
 	
 	^ StackInterpreter
 ]
+
+{ #category : #accessing }
+ANSlangProgram >> wordSize [
+	
+	^ 8 "64bits for now"
+]
