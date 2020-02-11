@@ -340,6 +340,16 @@ ANSlangPrettyPrinter >> visitLiteral: aLiteral [
 ]
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> visitNegationOperator: aNegationOperator [
+
+	aNegationOperator operands first isLiteral ifTrue: [ 
+		^ (ASTCLiteral value: (aNegationOperator operands first value negated)) acceptVisitor: self
+	].
+
+	super visitNegationOperator: aNegationOperator
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> visitOrOperator: anOrOperator [
 	self printLogicalOperatorInConditionnal: anOrOperator
 ]
