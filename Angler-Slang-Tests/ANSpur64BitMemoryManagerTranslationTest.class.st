@@ -58,6 +58,8 @@ ANSpur64BitMemoryManagerTranslationTest >> testAddToFreeListbytesStringCompariso
 { #category : #'object enumeration-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testAddressAfterStringComparison [
 	| illiAST slangString illiString |
+	<skip>
+	self skip.
 	slangString := self generateSlang: #addressAfter:.
 	illiAST := self generateIllicium: #addressAfter:.
 	illiString := self prettyPrintIllicium: illiAST.
