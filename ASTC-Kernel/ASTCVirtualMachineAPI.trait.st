@@ -1,7 +1,7 @@
 Trait {
 	#name : #ASTCVirtualMachineAPI,
 	#instVars : [
-		'#interpreterProxy'
+		'interpreterProxy'
 	],
 	#category : #'ASTC-Kernel'
 }
