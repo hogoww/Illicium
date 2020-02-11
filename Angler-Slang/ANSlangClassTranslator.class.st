@@ -12,7 +12,7 @@ ANSlangClassTranslator >> addMethod: aCollection [
 { #category : #'program-configuration' }
 ANSlangClassTranslator >> annotateProgramWith: aClass [
 	program isFullyAnnotated ifTrue: [ ^ self ].
-	1halt.
+
 	inferer vmClass: self program vmClass.
 	self program classesDo: [ :each | 
 		each prepareToBeAddedToCodeGenerator: inferer.

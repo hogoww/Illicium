@@ -172,6 +172,14 @@ ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 ]
 
 { #category : #visiting }
+ANSlangPrettyPrinter >> visitBinaryOperator: anOperator [
+
+	self printBinaryOperand: anOperator operands first.
+	self << ' ' << anOperator class symbol << ' '.
+	self printBinaryOperand: anOperator operands second.
+]
+
+{ #category : #visiting }
 ANSlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
@@ -198,17 +206,13 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 
-	self
-		parenthesisIf: (aCastOperator parent isCastOperator not
-			and: [ aCastOperator parent isBitLeftShiftOperator not ])
-		print: [
-			self
-				<< '(';
-				print: aCastOperator type;
-				<< ') '.
-			self
-				parenthesisIf: true"aCastOperator operands first isCastOperator not"
-				print: [ self visitExpression: aCastOperator operands first ]]
+	"Cast operators always are wrapped in parenthesis in slang"
+	self parenthesisAround: [
+		self
+			<< '(';
+			print: aCastOperator type;
+			<< ') '.
+		self parenthesisAround: [ self visitExpression: aCastOperator operands first ] ]
 ]
 
 { #category : #visiting }
@@ -216,8 +220,7 @@ ANSlangPrettyPrinter >> visitExpression: anExpression [
 
 	self
 		parenthesisIf: ((anExpression isLiteral or: [ anExpression isIdentifier ]) not
-			and: [ anExpression isCastOperator not "which have special treatment"
-				and: [ anExpression isFunctionCall and: [ anExpression id ~= 'GIV' ]  ] ])
+				and: [ (anExpression isFunctionCall and: [ anExpression id id = 'GIV' ]) not  ] )
 		print: [ self print: anExpression ]
 ]
 
