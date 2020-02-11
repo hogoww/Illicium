@@ -4,7 +4,7 @@ Class {
 	#category : #'Angler-Slang'
 }
 
-{ #category : #visiting }
+{ #category : #'printing-literals' }
 ANSlangPrettyPrinter >> cLiteralFor: anObject [
 	"Return a string representing the C literal value for the given object."
 	anObject isNumber
@@ -34,7 +34,7 @@ ANSlangPrettyPrinter >> cLiteralFor: anObject [
 	^'"XXX UNTRANSLATABLE CONSTANT XXX"'
 ]
 
-{ #category : #literals }
+{ #category : #'printing-literals' }
 ANSlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
 	"Answer the string for generating a literal integer.
 	Use hexadecimal notation as prescribed by aBoolean.
@@ -66,6 +66,39 @@ ANSlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
 			ifFalse: [anInteger = -16r8000000	"INT_MIN"
 				ifTrue: ['(-0x7FFFFFFF-1)']
 				ifFalse: [printString]]]
+]
+
+{ #category : #'printing-literals' }
+ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger hex: aBoolean longlong: llBoolean [
+	"Answer the string for generating an unsigned literal integer.
+	Use hexadecimal notation as prescribed by aBoolean.
+	Force long long suffix (LL) if the integer does not fit on 32 bits, or if llBoolean is true."
+	
+	| printString |
+	printString := aBoolean
+		ifTrue: [anInteger positive
+			ifTrue: ['0x' , (anInteger printStringBase: 16)]
+			ifFalse: ['-0x' , (anInteger negated printStringBase: 16)]]
+		ifFalse: [anInteger printString].
+	^anInteger positive
+		ifTrue: [(llBoolean or: [anInteger > 16rFFFFFFFF "UINT_MAX"])
+			ifTrue: [printString , 'ULL']
+			ifFalse: [printString , 'U']]
+		ifFalse: [self error: 'please provide positive integer']
+]
+
+{ #category : #'printing-literals' }
+ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger longlong: llBoolean [
+	"Answer the string for generating an unsigned literal integer.
+	Eventually use hexadecimal.
+	Force long long suffix (LL) if the integer does not fit on 32 bits, or if llBoolean is true."
+	
+	| hex |
+	hex := (anInteger > 0
+				and: [(anInteger >> anInteger lowBit + 1) isPowerOfTwo
+				and: [(anInteger highBit = anInteger lowBit and: [anInteger > 65536])
+					  or: [anInteger highBit - anInteger lowBit >= 4]]]).
+	^self cLiteralForUnsignedInteger: anInteger hex: hex longlong: llBoolean
 ]
 
 { #category : #visiting }
@@ -177,6 +210,20 @@ ANSlangPrettyPrinter >> visitBinaryOperator: anOperator [
 	self printBinaryOperand: anOperator operands first.
 	self << ' ' << anOperator class symbol << ' '.
 	self printBinaryOperand: anOperator operands second.
+]
+
+{ #category : #visiting }
+ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+
+	"Special case if first operator is a constant: format the integer correctly"
+	aBitLeftShiftOperator operands first isLiteral ifTrue: [
+		self << (self cLiteralForUnsignedInteger: aBitLeftShiftOperator operands first value longlong: false).
+		self << ' ' << aBitLeftShiftOperator class symbol << ' '.
+		self printBinaryOperand: aBitLeftShiftOperator operands second.
+		^ self
+	].
+	
+	super visitBitLeftShiftOperator: aBitLeftShiftOperator
 ]
 
 { #category : #visiting }
