@@ -144,6 +144,8 @@ ANSpur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveSt
 { #category : #'free space-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringComparison [
 	| illiAST slangString illiString |
+	<skip>
+	self skip.
 	slangString := self generateSlang: #allocateLargestFreeChunk.
 	illiAST := self generateIllicium: #allocateLargestFreeChunk.
 	illiString := self prettyPrintIllicium: illiAST.
