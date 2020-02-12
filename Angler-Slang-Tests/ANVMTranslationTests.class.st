@@ -10,10 +10,8 @@ ANVMTranslationTests >> codeGenerator [
 ]
 
 { #category : #'generating machine code' }
-ANVMTranslationTests >> generateSlang: aSelector [ 
-	| codeGenerator |
-	codeGenerator := self codeGenerator.
-	^ codeGenerator cCodeForMethod: aSelector.
+ANVMTranslationTests >> generateSlang: aSelector [
+	^ self codeGenerator cCodeForMethod: aSelector
 	
 	
 ]
