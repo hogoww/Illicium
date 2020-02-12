@@ -593,6 +593,14 @@ ANSlangReceiver >> repeat [
 ]
 
 { #category : #'reflective operations' }
+ANSlangReceiver >> shouldNotImplement [
+	"Yes, this is special too... I don't like it."
+	^ ASTCFunctionCall new
+		id: (ASTCIdentifier id: #error);
+		arguments: { ASTCLiteral value: 'shouldNotImplement' }
+]
+
+{ #category : #'reflective operations' }
 ANSlangReceiver >> signedIntFromLong64 [
 	
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
