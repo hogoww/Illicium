@@ -400,10 +400,10 @@ ANSlangReceiver >> eassert: aBlock [
 { #category : #accessing }
 ANSlangReceiver >> ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
- 	^ASTCIf new
-		condition: self translatedReceiver not;
-		then: (falseBlock acceptVisitor: self visitor);
-		yourself.
+ 	| ifNode |
+	ifNode := self ifTrue: falseBlock.
+	ifNode condition: ifNode condition not.
+	^ ifNode
 ]
 
 { #category : #'reflective operations' }
@@ -443,7 +443,7 @@ ANSlangReceiver >> ifNotNil: aBlock [
 { #category : #'reflective operations' }
 ANSlangReceiver >> ifTrue: trueBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
- 	^ASTCIf new
+ 	^ ASTCIf new
 		condition: self translatedReceiver;
 		then: (trueBlock acceptVisitor: self visitor);
 		yourself.
