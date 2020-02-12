@@ -493,7 +493,7 @@ ANSlangReceiver >> inlineBlock: aBlock [
 	
 	resBlock statements size = 1 
 		ifFalse:[ UnsupportedFeature new feature: 'Cannot inline a block which translates into more than one statement yet' ].
-	^ resBlock statements first expression
+	^ resBlock statements first
 ]
 
 { #category : #'reflective operations' }
