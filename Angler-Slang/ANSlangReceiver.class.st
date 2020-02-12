@@ -469,6 +469,7 @@ ANSlangReceiver >> inlineBlock: aBlock [
 	
 	resBlock statements size = 1 
 		ifFalse:[ UnsupportedFeature new feature: 'Cannot inline a block which translates into more than one statement yet' ].
+	resBlock statements isEmpty ifTrue: [ ^ ASTCEmptyStatement new ].
 	^ resBlock statements first
 ]
 
