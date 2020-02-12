@@ -15,7 +15,7 @@ TestResultCollected >> addError: aTestCase [
 		on: Exception
 		do: [ :e | 
 			erroredTest := errorKinds
-				at: e class
+				at: e class name, ' ',e messageText
 				ifAbsentPut: [ OrderedCollection new ].
 			erroredTest add: aTestCase ].
 	^ super addError: aTestCase
