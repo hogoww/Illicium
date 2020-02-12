@@ -452,7 +452,11 @@ ANSlangReceiver >> ifTrue: trueBlock [
 { #category : #'reflective operations' }
 ANSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
- 	^ self ifTrueIfFalseKindOfMessages: { trueBlock. falseBlock }
+ 	^ ASTCIf new
+		condition: self translatedReceiver;
+		then: (trueBlock acceptVisitor: self visitor);
+		else: (falseBlock acceptVisitor: self visitor);
+		yourself
 ]
 
 { #category : #'reflective operations' }
