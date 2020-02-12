@@ -212,7 +212,7 @@ ASTCTypeAnnotatorTest >> testVisitTemporaryNode [
 	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
-			(aNode isSelf not and: [ aNode isTemp])
+			(aNode isSelf not and: [ aNode isTemporaryNode ])
 				ifTrue: [ counter := counter + 1.
 					self assert: (aNode hasProperty: propertyName) 
 				] ].

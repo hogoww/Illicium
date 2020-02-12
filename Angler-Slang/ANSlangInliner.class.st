@@ -187,7 +187,7 @@ ANSlangInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
 ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
 	| newProperties |
 	aMethodNode nodesDo: [ :aNode |
-		aNode isTemp
+		aNode isTemporaryNode
 			ifTrue:[
 				replacementNames at: aNode name
 					ifPresent:[ aNode name: (replacementNames at: aNode name) ]

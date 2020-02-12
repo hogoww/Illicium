@@ -131,7 +131,7 @@ ANSlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
 	inlinedStatement := resultingMethod statements first.
 	self assert: inlinedStatement isAssignment.
 	self assert: inlinedStatement variable name equals: #t.
-	self assert: inlinedStatement value isTemp.
+	self assert: inlinedStatement value isTemporaryNode.
 	self assert: inlinedStatement value name equals: #t1.
 ]
 
