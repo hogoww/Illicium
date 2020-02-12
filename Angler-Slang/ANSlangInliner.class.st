@@ -73,6 +73,20 @@ ANSlangInliner >> cleanStatements: nodesToInline [
 	^ cleanNodes
 ]
 
+{ #category : #inlining }
+ANSlangInliner >> createNewBlockithStatements: nodesToInline [
+	| newBlock |
+	newBlock := RBBlockNode
+		body:
+			(RBSequenceNode new
+				propertyAt: ASTCVariableDeclarationAnnotator property
+					put: ASTCVariableDeclarationAnnotator defaultCollection new;
+				yourself).
+	"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
+	newBlock body statements: nodesToInline.
+	^ newBlock
+]
+
 { #category : #renaming }
 ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 	| replacements |
@@ -101,38 +115,26 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
 
 	(self inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
-	(self inlineIfMultipleNodeInAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
+	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inlineIfMultipleNodeInAssignment: nodesToInline insteadOf: aMessageNode [
-	| typingProperty newBlock newAssignment lastNode |
+ANSlangInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode [
+	| newBlock newAssignment lastNode |
 	aMessageNode parent isAssignment ifFalse: [ ^ false ].
 	
-	newBlock := RBBlockNode
-		body:
-			"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
-			(RBSequenceNode new
-				propertyAt: ASTCVariableDeclarationAnnotator property
-					put: OrderedCollection new;
-				yourself).
+	"rearanging the parent and children of the assignment 
+	to put the assignment as the last statement of the collection"
 	lastNode := nodesToInline removeLast.
 	newAssignment := aMessageNode parent copy.
 	newAssignment value: lastNode.
 	nodesToInline add: newAssignment.
-	newBlock body statements: nodesToInline.
-			
-	"If it's untyped, we don't do anything. This is the case in a test context for example."
-	typingProperty := ASTCTypeAnnotator property.
-	lastNode
-		propertyAt: typingProperty
-		ifPresent: [ newBlock
-				propertyAt: typingProperty
-				put: (lastNode propertyAt: typingProperty) ]
-		ifAbsent: [ nil ].
 	
+	newBlock := self createNewBlockithStatements: nodesToInline.
+	lastNode := self typeNewBlock: newBlock.
+
 	"replacing the whole assignment"
 	aMessageNode parent replaceWith: newBlock.
 	^ true
@@ -241,6 +243,22 @@ ANSlangInliner >> translator [
 { #category : #accessing }
 ANSlangInliner >> translator: anObject [
 	translator := anObject
+]
+
+{ #category : #inlining }
+ANSlangInliner >> typeNewBlock: newBlock [
+	| typingProperty lastNode |
+	
+	typingProperty := ASTCTypeAnnotator property.
+	lastNode := newBlock statements last.
+	lastNode
+		propertyAt: typingProperty
+		ifPresent: [ newBlock
+				propertyAt: typingProperty
+				put: (lastNode propertyAt: typingProperty) ]
+		"If it's untyped, we don't do anything. This is the case in a test context for example."
+		ifAbsent: [ nil ].
+	^ lastNode
 ]
 
 { #category : #applying }
