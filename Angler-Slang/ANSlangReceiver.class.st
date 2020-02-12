@@ -79,7 +79,7 @@ ANSlangReceiver >> << aNumber [
 				ifNotNil: [ :argumentValue | | valueBeyondInt |
 					valueBeyondInt := 1 bitShift: 32. "The default type of const << N is int."
 					value < valueBeyondInt and: [(value bitShift: argumentValue) >= valueBeyondInt ] ].
-			result := (ASTCLiteral value: value).
+			result := self translatedReceiver.
 			castToLong ifTrue: [ result := result castTo: (self cTypeFor: #usqLong) ].
 			^ result << (aNumber acceptVisitor: methodTranslator) ].
 	
