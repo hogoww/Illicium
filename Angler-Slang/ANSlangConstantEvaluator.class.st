@@ -22,6 +22,18 @@ ANSlangConstantEvaluator >> program: anANProgram [
 ]
 
 { #category : #visiting }
+ANSlangConstantEvaluator >> visitArgumentNode: aRBArgumentNode [ 
+
+	^ nil
+]
+
+{ #category : #visiting }
+ANSlangConstantEvaluator >> visitGlobalNode: aRBGlobalNode [ 
+	
+	^ nil
+]
+
+{ #category : #visiting }
 ANSlangConstantEvaluator >> visitLiteralValueNode: aRBLiteralValueNode [ 
 	
 	^ aRBLiteralValueNode value
@@ -55,4 +67,10 @@ ANSlangConstantEvaluator >> visitSequenceNode: aRBSequenceNode [
 	
 	aRBSequenceNode statements size > 1 ifTrue: [ errorBlock value ].
 	^ aRBSequenceNode statements first acceptVisitor: self
+]
+
+{ #category : #visiting }
+ANSlangConstantEvaluator >> visitTemporaryNode: aRBTemporaryNode [ 
+
+	^ nil
 ]
