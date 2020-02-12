@@ -152,10 +152,7 @@ ANSlangReceiver >> allMask: anOperand [
 
 { #category : #typing }
 ANSlangReceiver >> and: aBoolean [
-	| args |
-	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
-	args := self binarySelectorArgs: aBoolean.
-	^ args first && args second
+	^ self translatedReceiver && (aBoolean acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -219,22 +216,6 @@ ANSlangReceiver >> between: min and: max [
 	minArg := min acceptVisitor: methodTranslator.
 	maxArg := max acceptVisitor: methodTranslator.
 	^ (receiver >= minArg) && (receiver <= maxArg)
-]
-
-{ #category : #accessing }
-ANSlangReceiver >> binarySelectorArgs: aBoolean [
-	| firstOperand secondOperand |
-	firstOperand := receiverNode isBlock
-		ifTrue: [ receiverNode statements size = 1
-				ifTrue: [ receiverNode statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
-		ifFalse: [ receiverNode acceptVisitor: methodTranslator ].
-	secondOperand := aBoolean isBlock
-		ifTrue: [ aBoolean statements size = 1
-				ifTrue: [ aBoolean statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
-		ifFalse: [ aBoolean acceptVisitor: methodTranslator ].
-	^ { firstOperand. secondOperand }
 ]
 
 { #category : #'reflective operations' }
@@ -561,10 +542,7 @@ ANSlangReceiver >> notNil [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> or: aBoolean [
-	| args |
-	"same code as ASTCBoolean>>#or:"
-	args := self binarySelectorArgs: aBoolean.
-	^ args first || args second
+	^ self translatedReceiver || (aBoolean acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
