@@ -116,6 +116,7 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 
 	(self inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
+	(self inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
 ]
@@ -137,6 +138,18 @@ ANSlangInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: a
 
 	"replacing the whole assignment"
 	aMessageNode parent replaceWith: newBlock.
+	^ true
+]
+
+{ #category : #inlining }
+ANSlangInliner >> inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode [
+	| newBlock newAssignment lastNode |
+	aMessageNode parent isReturn ifFalse: [ ^ false ].
+	newBlock := self createNewBlockithStatements: nodesToInline.
+	lastNode := self typeNewBlock: newBlock.
+
+	"replacing the whole assignment"
+	aMessageNode replaceWith: newBlock.
 	^ true
 ]
 
