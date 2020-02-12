@@ -19,6 +19,7 @@ BaselineOfASTC >> baseline: spec [
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			spec
+				package: 'Angler-RB-Extensions';
 				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
 				package: 'ASTC-Core';
 				package: 'ASTC-Core-Extensions' with:[ spec requires:#('ASTC-Core') ];
