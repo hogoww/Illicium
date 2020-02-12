@@ -27,8 +27,14 @@ ASTCStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator
 
 { #category : #'visiting-modifying' }
 ASTCStatementsBecomeExpressions >> visitBlock: aBlock [
-	self shouldBeExpression ifTrue: [ 
-			aBlock becomeExpressionList.
+	self shouldBeExpression ifTrue: [
+			aBlock statements size = 0 ifTrue: [ self halt "I want to see the useCase" ].
+			aBlock statements size = 1 ifTrue: [ 
+				aBlock declarations isEmpty ifFalse: [ self halt "I want to see the useCase" ].
+				aBlock becomeSingleStatement.
+				]
+				ifFalse:[ aBlock becomeExpressionList ].
+			
 			^ aBlock acceptVisitor: self
 		].
 	super visitBlock: aBlock

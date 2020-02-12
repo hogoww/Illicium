@@ -33,3 +33,15 @@ ASTCBlock >> becomeExpressionList [
 		pharoNode: pharoNode.
 	self becomeForward: asExpressionList
 ]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCBlock >> becomeSingleStatement [
+	"protocol = converting"
+	| expression |
+	expression := statements first.
+	expression 
+		parent: parent;
+		pharoNode: pharoNode.
+	self becomeForward: expression
+		
+]
