@@ -185,6 +185,7 @@ ANSlangInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
 
 { #category : #renaming }
 ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
+	| newProperties |
 	aMethodNode nodesDo: [ :aNode |
 		aNode isTemp
 			ifTrue:[
@@ -195,11 +196,15 @@ ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
 	
 	"Check in case we're in testing environment."
 	(aMethodNode body hasProperty: ASTCVariableDeclarationAnnotator property) ifFalse: [ ^ self ].
-	(aMethodNode body propertyAt: ASTCVariableDeclarationAnnotator property)
-		do: [ :aTempDecl |
+	
+	"properties are shallow copied. Since have references to TempDeclaration, we have to touch the copy, not the main node."
+	newProperties := (aMethodNode body propertyAt: ASTCVariableDeclarationAnnotator property)
+		collect: [ :aTempDecl |
 			replacementNames at: aTempDecl name
-				ifPresent:[ aTempDecl name: (replacementNames at: aTempDecl name) ]
-			]
+				ifPresent:[ aTempDecl copy name: (replacementNames at: aTempDecl name) ]
+				ifAbsent: [  aTempDecl copy ]
+			].
+	aMethodNode body propertyAt: ASTCVariableDeclarationAnnotator property put: newProperties
 ]
 
 { #category : #renaming }
