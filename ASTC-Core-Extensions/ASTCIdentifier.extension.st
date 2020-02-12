@@ -1,14 +1,6 @@
 Extension { #name : #ASTCIdentifier }
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCIdentifier >> assign: anExpression [
-	^ ASTCAssignmentOperator new
-		addOperand: self;
-		addOperand: anExpression;
-		yourself
-]
-
-{ #category : #'*ASTC-Core-Extensions' }
 ASTCIdentifier class >> id: aSymbol [
 	^ self new
 		id: aSymbol;

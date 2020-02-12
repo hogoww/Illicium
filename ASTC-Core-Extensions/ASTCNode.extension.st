@@ -131,6 +131,14 @@ ASTCNode >> asStatement [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> assign: anExpression [
+	^ ASTCAssignmentOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> assignAndAdd: anExpression [
 	^ ASTCAssignementAdditionOperator new
 		addOperand: self;
