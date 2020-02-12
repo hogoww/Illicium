@@ -459,34 +459,6 @@ ANSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
-ANSlangReceiver >> ifTrueIfFalseExpression: args [
-	args do: [:aBlock| aBlock statements size ~= 1 
-		ifTrue: [ self error: 'Cannot translate into ternary operator if it has more than one statements yet' ] ].
-	
-	^ ASTCTernaryConditionalOperator new
-		addOperand: self translatedReceiver;
-		addOperand: (self inlineBlock: args first);
-		addOperand: (args size = 2 ifTrue: [ (self inlineBlock: args second) ]); "else nil"
-		yourself
-]
-
-{ #category : #'reflective operations' }
-ANSlangReceiver >> ifTrueIfFalseKindOfMessages: args [
-	^ self receiverNode parent parent isSequence
-		ifTrue: [ self ifTrueIfFalseStatement: args ]
-		ifFalse: [ self ifTrueIfFalseExpression: args. ]
-]
-
-{ #category : #'reflective operations' }
-ANSlangReceiver >> ifTrueIfFalseStatement: args [
-	^ ASTCIf new
-		condition: self translatedReceiver;
-		then: (args first acceptVisitor: self visitor);
-		else: (args size = 2 ifTrue: [ args second acceptVisitor: self visitor]);
-		yourself.
-]
-
 { #category : #'translation-helper' }
 ANSlangReceiver >> inlineBlock: aBlock [
 	| resBlock |
