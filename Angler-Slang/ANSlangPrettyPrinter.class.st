@@ -20,7 +20,7 @@ ANSlangPrettyPrinter >> cLiteralFor: anObject [
 				[^anObject printString]]
 		ifFalse:
 			[anObject isSymbol ifTrue:
-				[^self cFunctionNameFor: anObject].
+				[^ ASTCFormatHelper formatSelector: anObject].
 			anObject isString ifTrue:
 				[^'"', (anObject copyReplaceAll: (String with: Character cr) with: '\n') , '"'].
 			anObject == nil ifTrue: [^ 'null' ].
