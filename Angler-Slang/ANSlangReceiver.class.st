@@ -397,6 +397,15 @@ ANSlangReceiver >> eassert: aBlock [
 		yourself
 ]
 
+{ #category : #'reflective operations' }
+ANSlangReceiver >> flag: anArgument [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #flag); yourself) ;
+		arguments: {ASTCLiteral value: anArgument value asString};
+		yourself
+]
+
 { #category : #accessing }
 ANSlangReceiver >> ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
@@ -620,9 +629,36 @@ ANSlangReceiver >> repeat [
 ]
 
 { #category : #'reflective operations' }
+ANSlangReceiver >> shouldBeImplemented [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: #shouldBeImplemented };
+		yourself
+]
+
+{ #category : #'reflective operations' }
+ANSlangReceiver >> shouldNotImplement [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: #shouldNotImplement };
+		yourself
+]
+
+{ #category : #'reflective operations' }
 ANSlangReceiver >> signedIntFromLong64 [
 	
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
+]
+
+{ #category : #'reflective operations' }
+ANSlangReceiver >> subclassResponsibility [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: #subclassResponsibility };
+		yourself
 ]
 
 { #category : #'reflective operations' }
