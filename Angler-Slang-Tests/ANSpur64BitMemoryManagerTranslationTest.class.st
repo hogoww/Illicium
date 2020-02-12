@@ -58,8 +58,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testAddToFreeListbytesStringCompariso
 { #category : #'object enumeration-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testAddressAfterStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #addressAfter:.
 	illiAST := self generateIllicium: #addressAfter:.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -144,8 +142,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveSt
 { #category : #'free space-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #allocateLargestFreeChunk.
 	illiAST := self generateIllicium: #allocateLargestFreeChunk.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -2044,7 +2040,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testIsMarkedStringComparison [
 { #category : #'object testing-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronStringComparison [
 	| illiAST slangString illiString |
-	true ifTrue: [ ^ self skip ].
 	slangString := self generateSlang: #isMaybeFiredEphemeron:.
 	illiAST := self generateIllicium: #isMaybeFiredEphemeron:.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -2290,7 +2285,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testIsWeakStringComparison [
 { #category : #'object testing-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesStringComparison [
 	| illiAST slangString illiString |
-	true ifTrue: [ ^ self skip ].
 	slangString := self generateSlang: #isWordsOrBytes:.
 	illiAST := self generateIllicium: #isWordsOrBytes:.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -3738,8 +3732,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueStri
 { #category : #'primitive support-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testStringForCStringStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #stringForCString:.
 	illiAST := self generateIllicium: #stringForCString:.
 	illiString := self prettyPrintIllicium: illiAST.

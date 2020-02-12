@@ -118,7 +118,8 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	
-	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline
+	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline.
+	aMessageNode parent: nil
 ]
 
 { #category : #inlining }
@@ -138,18 +139,20 @@ ANSlangInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: a
 
 	"replacing the whole assignment"
 	aMessageNode parent replaceWith: newBlock.
+	aMessageNode parent parent: nil.
 	^ true
 ]
 
 { #category : #inlining }
 ANSlangInliner >> inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode [
-	| newBlock newAssignment lastNode |
+	| newBlock |
 	aMessageNode parent isReturn ifFalse: [ ^ false ].
 	newBlock := self createNewBlockithStatements: nodesToInline.
-	lastNode := self typeNewBlock: newBlock.
+	self typeNewBlock: newBlock.
 
 	"replacing the whole assignment"
 	aMessageNode replaceWith: newBlock.
+	aMessageNode parent: nil.
 	^ true
 ]
 
@@ -158,6 +161,7 @@ ANSlangInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode [
 	nodesToInline size = 1 ifFalse: [ ^ false ]. 	
 	
 	aMessageNode replaceWith: nodesToInline first.
+	aMessageNode parent: nil.
 	^ true
 ]
 
@@ -275,8 +279,8 @@ ANSlangInliner >> typeNewBlock: newBlock [
 ]
 
 { #category : #applying }
-ANSlangInliner >> visitMessageNode: aMessageNode [
-
+ANSlangInliner >> visitMessageNode: aMessageNode [ 
+	
 	(self shouldInline: aMessageNode)
 		ifTrue:[ | methodToInline |
 			inlinedSomething := true.
@@ -286,7 +290,14 @@ ANSlangInliner >> visitMessageNode: aMessageNode [
 			self inline: methodToInline insteadOf: aMessageNode.
 			].
 	
-	"Do not inline inside assertions <- inline is already done here. looks weird."
+	"we don't look further if the message is an assert."
 	aMessageNode selector = #assert: ifTrue: [ ^ self ].
 	super visitMessageNode: aMessageNode
+]
+
+{ #category : #accessing }
+ANSlangInliner >> visitNode: aNode [
+	"a node without parent that is not a method node, is a node that was cut out during inlining, and should not be visited anymore."
+	(aNode parent isNotNil or:[ aNode isMethod ])
+		ifTrue:[ ^ super visitNode: aNode ]
 ]
