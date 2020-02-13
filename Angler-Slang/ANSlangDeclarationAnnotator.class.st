@@ -1,3 +1,11 @@
+"
+see super comment.
+
+I also have a bad dependency forcing me to be run last, because i copy temporary nodes that may be used.
+And those temporary nodes have to be typed..
+
+USE WITH CARE.
+"
 Class {
 	#name : #ANSlangDeclarationAnnotator,
 	#superclass : #ASTCVariableDeclarationAnnotator,
@@ -10,7 +18,7 @@ Class {
 { #category : #visiting }
 ANSlangDeclarationAnnotator >> initialize [
 	super initialize.
-	varNodesToDeclareAtTheStartOfTheMethod := Set new
+	varNodesToDeclareAtTheStartOfTheMethod := self class defaultCollection new
 ]
 
 { #category : #visiting }
@@ -29,7 +37,8 @@ ANSlangDeclarationAnnotator >> visitBlockNode: aBlockNode [
 		and: [ (#(addressOf:put:) includes: aBlockNode parent selector) ]) 
 			ifTrue:[ ^ self ].
 	
-	aBlockNode arguments collect: [ :aTempDecl | aTempDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
+	"Temporaries are handled by the sequence node."
+	aBlockNode arguments collect: [ :anArgDecl | anArgDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
 ]
 
 { #category : #visit }
@@ -38,7 +47,7 @@ ANSlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
 	
 	"set the property for the temporaries tagged to be declared at the start of the function in the sequence node"
 	"currenlty the temporary inside a block should still be declared at the start of the method"
-	self atNewPropertyPut: varNodesToDeclareAtTheStartOfTheMethod asOrderedCollection for: aMethodNode body
+	self atNewPropertyPut: varNodesToDeclareAtTheStartOfTheMethod for: aMethodNode body
 ]
 
 { #category : #visiting }
@@ -46,6 +55,6 @@ ANSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	super visitSequenceNode: aSequenceNode.
 	"Slang declares everything at start.
 	currently skips the temp declared in blocks."
-	aSequenceNode temporaries collect: [ :aTempDecl | aTempDecl ] into: varNodesToDeclareAtTheStartOfTheMethod.
-	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: OrderedCollection new for: aSequenceNode ] 
+	aSequenceNode temporaries collect: [ :aTempDecl | aTempDecl copy ] into: varNodesToDeclareAtTheStartOfTheMethod.
+	aSequenceNode parent isMethod ifFalse: [ self atNewPropertyPut: self class defaultCollection new for: aSequenceNode ] 
 ]

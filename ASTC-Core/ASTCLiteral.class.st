@@ -9,32 +9,29 @@ Class {
 
 { #category : #testing }
 ASTCLiteral >> = aLiteral [
-  super = aLiteral ifFalse: [ ^false ].
-  value = aLiteral value ifFalse: [ ^false ].
-  ^true
+	super = aLiteral
+		ifFalse: [ ^ false ].
+	value = aLiteral value
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCLiteral >> acceptVisitor: aVisitor [
-  aVisitor visitLiteral: self
-]
-
-{ #category : #accessing }
-ASTCLiteral >> asPharoLiteral [
-	^ value
+	aVisitor visitLiteral: self
 ]
 
 { #category : #testing }
 ASTCLiteral >> isLiteral [
-  ^true
+	^ true
 ]
 
 { #category : #accessing }
 ASTCLiteral >> value [
-  ^value
+	^ value
 ]
 
 { #category : #accessing }
 ASTCLiteral >> value: aValue [
-  value := aValue
+	value := aValue
 ]

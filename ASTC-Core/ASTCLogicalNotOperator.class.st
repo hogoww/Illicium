@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCLogicalNotOperator >> = aLogicalNotOperator [
-  super = aLogicalNotOperator ifFalse: [ ^false ].
-  ^true
+	super = aLogicalNotOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCLogicalNotOperator >> acceptVisitor: aVisitor [
-  aVisitor visitLogicalNotOperator: self
+	aVisitor visitLogicalNotOperator: self
 ]
 
 { #category : #testing }
 ASTCLogicalNotOperator >> isLogicalNotOperator [
-  ^true
+	^ true
 ]

@@ -10,7 +10,7 @@ Class {
 		'translator',
 		'testedClass'
 	],
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-generated-tests-base'
 }
 
 { #category : #'as yet unclassified' }
@@ -44,6 +44,11 @@ ANSlangToCGeneratedTests >> testedClass [
 { #category : #accessing }
 ANSlangToCGeneratedTests >> testedClass: aClass [
 	testedClass := aClass
+]
+
+{ #category : #accessing }
+ANSlangToCGeneratedTests >> timeLimit: aDuration [
+	^ Duration seconds: 5
 ]
 
 { #category : #accessing }

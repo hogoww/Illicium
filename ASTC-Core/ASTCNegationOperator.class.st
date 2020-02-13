@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCNegationOperator >> = aNegationOperator [
-  super = aNegationOperator ifFalse: [ ^false ].
-  ^true
+	super = aNegationOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCNegationOperator >> acceptVisitor: aVisitor [
-  aVisitor visitNegationOperator: self
+	aVisitor visitNegationOperator: self
 ]
 
 { #category : #testing }
 ASTCNegationOperator >> isNegationOperator [
-  ^true
+	^ true
 ]

@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCAssignementAdditionOperator >> = anAssignementAdditionOperator [
-  super = anAssignementAdditionOperator ifFalse: [ ^false ].
-  ^true
+	super = anAssignementAdditionOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCAssignementAdditionOperator >> acceptVisitor: aVisitor [
-  aVisitor visitAssignementAdditionOperator: self
+	aVisitor visitAssignementAdditionOperator: self
 ]
 
 { #category : #testing }
 ASTCAssignementAdditionOperator >> isAssignementAdditionOperator [
-  ^true
+	^ true
 ]

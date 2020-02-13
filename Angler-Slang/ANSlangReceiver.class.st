@@ -105,7 +105,7 @@ ANSlangReceiver >> = anotherObject [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> == anOperand [
-	^ self translatedReceiver equals: anOperand
+	^ self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator)
 ]
 
 { #category : #typing }
@@ -152,10 +152,7 @@ ANSlangReceiver >> allMask: anOperand [
 
 { #category : #typing }
 ANSlangReceiver >> and: aBoolean [
-	| args |
-	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
-	args := self binarySelectorArgs: aBoolean.
-	^ args first && args second
+	^ self translatedReceiver && (aBoolean acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -219,22 +216,6 @@ ANSlangReceiver >> between: min and: max [
 	minArg := min acceptVisitor: methodTranslator.
 	maxArg := max acceptVisitor: methodTranslator.
 	^ (receiver >= minArg) && (receiver <= maxArg)
-]
-
-{ #category : #accessing }
-ANSlangReceiver >> binarySelectorArgs: aBoolean [
-	| firstOperand secondOperand |
-	firstOperand := receiverNode isBlock
-		ifTrue: [ receiverNode statements size = 1
-				ifTrue: [ receiverNode statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
-		ifFalse: [ receiverNode acceptVisitor: methodTranslator ].
-	secondOperand := aBoolean isBlock
-		ifTrue: [ aBoolean statements size = 1
-				ifTrue: [ aBoolean statements first acceptVisitor: methodTranslator ]
-				ifFalse: [ self error: 'Cannot inline the block inside an #and.' ] ]
-		ifFalse: [ aBoolean acceptVisitor: methodTranslator ].
-	^ { firstOperand. secondOperand }
 ]
 
 { #category : #'reflective operations' }
@@ -409,10 +390,10 @@ ANSlangReceiver >> flag: anArgument [
 { #category : #accessing }
 ANSlangReceiver >> ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
- 	^ASTCIf new
-		condition: self translatedReceiver not;
-		then: (falseBlock acceptVisitor: self visitor);
-		yourself.
+ 	| ifNode |
+	ifNode := self ifTrue: falseBlock.
+	ifNode condition: ifNode condition not.
+	^ ifNode
 ]
 
 { #category : #'reflective operations' }
@@ -452,7 +433,7 @@ ANSlangReceiver >> ifNotNil: aBlock [
 { #category : #'reflective operations' }
 ANSlangReceiver >> ifTrue: trueBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
- 	^ASTCIf new
+ 	^ ASTCIf new
 		condition: self translatedReceiver;
 		then: (trueBlock acceptVisitor: self visitor);
 		yourself.
@@ -461,35 +442,11 @@ ANSlangReceiver >> ifTrue: trueBlock [
 { #category : #'reflective operations' }
 ANSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
- 	^ self ifTrueIfFalseKindOfMessages: { trueBlock. falseBlock }
-]
-
-{ #category : #'reflective operations' }
-ANSlangReceiver >> ifTrueIfFalseExpression: args [
-	args do: [:aBlock| aBlock statements size ~= 1 
-		ifTrue: [ self error: 'Cannot translate into ternary operator if it has more than one statements yet' ] ].
-	
-	^ ASTCTernaryConditionalOperator new
-		addOperand: self translatedReceiver;
-		addOperand: (self inlineBlock: args first);
-		addOperand: (args size = 2 ifTrue: [ (self inlineBlock: args second) ]); "else nil"
-		yourself
-]
-
-{ #category : #'reflective operations' }
-ANSlangReceiver >> ifTrueIfFalseKindOfMessages: args [
-	^ self receiverNode parent parent isSequence
-		ifTrue: [ self ifTrueIfFalseStatement: args ]
-		ifFalse: [ self ifTrueIfFalseExpression: args. ]
-]
-
-{ #category : #'reflective operations' }
-ANSlangReceiver >> ifTrueIfFalseStatement: args [
-	^ ASTCIf new
+ 	^ ASTCIf new
 		condition: self translatedReceiver;
-		then: (args first acceptVisitor: self visitor);
-		else: (args size = 2 ifTrue: [ args second acceptVisitor: self visitor]);
-		yourself.
+		then: (trueBlock acceptVisitor: self visitor);
+		else: (falseBlock acceptVisitor: self visitor);
+		yourself
 ]
 
 { #category : #'translation-helper' }
@@ -502,7 +459,8 @@ ANSlangReceiver >> inlineBlock: aBlock [
 	
 	resBlock statements size = 1 
 		ifFalse:[ UnsupportedFeature new feature: 'Cannot inline a block which translates into more than one statement yet' ].
-	^ resBlock statements first expression
+	resBlock statements isEmpty ifTrue: [ ^ ASTCEmptyStatement new ].
+	^ resBlock statements first
 ]
 
 { #category : #'reflective operations' }
@@ -517,10 +475,7 @@ ANSlangReceiver >> integerObjectOf: anOop [
 { #category : #'reflective operations' }
 ANSlangReceiver >> integerValueOf: anOop [
 	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
-	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: #integerValueOf ; yourself);
-		addArgument: (anOop acceptVisitor: methodTranslator);
-		yourself
+	^ (anOop acceptVisitor: methodTranslator) >> (ASTCLiteral value: 3)
 ]
 
 { #category : #'reflective operations' }
@@ -596,10 +551,7 @@ ANSlangReceiver >> notNil [
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> or: aBoolean [
-	| args |
-	"same code as ASTCBoolean>>#or:"
-	args := self binarySelectorArgs: aBoolean.
-	^ args first || args second
+	^ self translatedReceiver || (aBoolean acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -629,7 +581,7 @@ ANSlangReceiver >> repeat [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> shouldBeImplemented [
+shouldBeImplemented [
 
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
@@ -662,9 +614,16 @@ ANSlangReceiver >> subclassResponsibility [
 ]
 
 { #category : #'reflective operations' }
-ANSlangReceiver >> to: s by: e do: i [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+ANSlangReceiver >> to: stop by: step do: aBlock [
+	| node arg receiver | 
+	node := self to: stop  do: aBlock.
+	
+	receiver := ASTCIdentifier new id: (aBlock arguments at:1) name ; yourself.
+	arg := step acceptVisitor: methodTranslator.
+	arg isLiteral ifTrue: [ arg value = 0 ifTrue: [ BadArgument new result: 0; expected: 'non 0 value' ] ].
+	
+	node iteratorModification: (receiver assign: (receiver assignAndAdd: arg)).
+	^ node
 ]
 
 { #category : #'reflective operations' }

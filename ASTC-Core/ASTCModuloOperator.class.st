@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCModuloOperator >> = aModuloOperator [
-  super = aModuloOperator ifFalse: [ ^false ].
-  ^true
+	super = aModuloOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCModuloOperator >> acceptVisitor: aVisitor [
-  aVisitor visitModuloOperator: self
+	aVisitor visitModuloOperator: self
 ]
 
 { #category : #testing }
 ASTCModuloOperator >> isModuloOperator [
-  ^true
+	^ true
 ]

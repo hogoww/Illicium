@@ -6,16 +6,17 @@ Class {
 
 { #category : #testing }
 ASTCMultiplicationOperator >> = aMultiplicationOperator [
-  super = aMultiplicationOperator ifFalse: [ ^false ].
-  ^true
+	super = aMultiplicationOperator
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCMultiplicationOperator >> acceptVisitor: aVisitor [
-  aVisitor visitMultiplicationOperator: self
+	aVisitor visitMultiplicationOperator: self
 ]
 
 { #category : #testing }
 ASTCMultiplicationOperator >> isMultiplicationOperator [
-  ^true
+	^ true
 ]

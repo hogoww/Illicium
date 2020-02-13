@@ -103,7 +103,7 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAClassVariable from: PINodeTypeVisitorTest.
 	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[ aNode isSelf not and: [ aNode isGlobal]])
+		aNode isGlobalNode
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName) 
@@ -117,7 +117,7 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: PINodeTypeVisitorTest.
 	ast nodesDo: [ :aNode | 
-		(aNode isVariable and:[ aNode isSelf not and: [ aNode isGlobal]])
+		aNode isGlobalNode
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName).
@@ -142,7 +142,7 @@ ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
 	ast := self inferMethodSelector: #aMethodWithAnInstanceVariable from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
-			(aNode isVariable and: [ aNode isSelf not and: [ aNode isInstance ]])" isSelf not => issue #5458 on the Pharo repository"
+			aNode isInstanceVariableNode
 				ifTrue: [ counter := counter + 1.
 					self assert: (aNode hasProperty: propertyName) 
 				] ].
@@ -212,7 +212,7 @@ ASTCTypeAnnotatorTest >> testVisitTemporaryNode [
 	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: PINodeTypeVisitorTest.
 	ast
 		nodesDo: [ :aNode | 
-			(aNode isSelf not and: [ aNode isTemp])
+			(aNode isSelf not and: [ aNode isTemporaryNode ])
 				ifTrue: [ counter := counter + 1.
 					self assert: (aNode hasProperty: propertyName) 
 				] ].

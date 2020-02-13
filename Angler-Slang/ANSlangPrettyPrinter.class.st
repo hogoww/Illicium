@@ -20,7 +20,7 @@ ANSlangPrettyPrinter >> cLiteralFor: anObject [
 				[^anObject printString]]
 		ifFalse:
 			[anObject isSymbol ifTrue:
-				[^self cFunctionNameFor: anObject].
+				[^ ASTCFormatHelper formatSelector: anObject].
 			anObject isString ifTrue:
 				[^'"', (anObject copyReplaceAll: (String with: Character cr) with: '\n') , '"'].
 			anObject == nil ifTrue: [^ 'null' ].
@@ -111,11 +111,12 @@ ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 
 	aNode isFunctionCall ifTrue: [ ^ false ].
 
-	^ aNode parent isIf not 
-		and: [ aNode parent isAssignmentOperator not
-			and: [ aNode parent isStatement not
-				and: [ aNode parent isFunctionCall not 
-					and: [ aNode parent isTernaryConditionalOperator not ]]]].
+	^ aNode parent isNotNil
+		and: [ aNode parent isIf not  
+			and: [ aNode parent isAssignmentOperator not
+				and: [ aNode parent isStatement not
+					and: [ aNode parent isFunctionCall not 
+						and: [ aNode parent isTernaryConditionalOperator not ]]]]].
 ]
 
 { #category : #visiting }
@@ -269,6 +270,17 @@ ANSlangPrettyPrinter >> visitExpression: anExpression [
 		parenthesisIf: ((anExpression isLiteral or: [ anExpression isIdentifier ]) not
 				and: [ (anExpression isFunctionCall and: [ anExpression id id = 'GIV' ]) not  ] )
 		print: [ self print: anExpression ]
+]
+
+{ #category : #visiting }
+ANSlangPrettyPrinter >> visitExpressionList: anExpressionList [
+	self parenthesisIf: true
+		print:[
+			anExpressionList expressions do: [:anExpression | 
+				self print: anExpression 
+				]
+			separatedBy: [ self << $, ; cr ; spaces ]
+			]
 ]
 
 { #category : #visiting }

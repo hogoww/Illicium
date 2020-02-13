@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSlangDeclarationAnnotatorTest,
 	#superclass : #ASTCVariableDeclarationAnnotatorTest,
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-analysis-tests'
 }
 
 { #category : #testing }
@@ -24,7 +24,7 @@ ANSlangDeclarationAnnotatorTest >> testAssignmentInCondition [
 
 	"But in the body of the function"
 	self assert: ast body temporaries isNotEmpty.
-	self assert: ast body propertyEquals: ast body temporaries
+	self assert: ast body propertyEquals: ast body temporaries asSet
 ]
 
 { #category : #basic }
@@ -36,46 +36,52 @@ ANSlangDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 
 	"But in the function"
 	self assert: ast body temporaries isNotEmpty.
-	self assert: ast body propertyEquals: ast body temporaries
+	self assert: ast body propertyEquals: ast body temporaries asSet
 ]
 
 { #category : #basic }
 ANSlangDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
 	"Argument used in 2 different blocks, should be only declared once"
+	| defaultCollection |
 	super testMethodWithTwoBlockWithSameVariable. 
+	defaultCollection := ASTCVariableDeclarationAnnotator defaultCollection.
 	
 	"It should not be declared in either blocks"	
-	self assert: ast body statements first body propertyEquals: OrderedCollection new.
+	self assert: ast body statements first body propertyEquals: defaultCollection new.
 	self assert: ast body statements first arguments isNotEmpty.
-	self assert: ast body statements second body propertyEquals: OrderedCollection new.
+	self assert: ast body statements second body propertyEquals: defaultCollection new.
 	self assert: ast body statements second arguments isNotEmpty.
 
 	"But declared once in the function"
-	self assert: ast body propertyEquals: ast body statements first arguments.
+	self assert: ast body propertyEquals: ast body statements first arguments asSet.
 ]
 
 { #category : #basic }
 ANSlangDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
+	| defaultCollection |
 	super testVisitArgumentNodeInABlock. 
+	defaultCollection := ASTCVariableDeclarationAnnotator defaultCollection.
 	
 	"The argument should not be declared in its block"	
-	self assert: ast body statements first body propertyEquals: OrderedCollection new.
+	self assert: ast body statements first body propertyEquals: defaultCollection new.
 
 	"But at the start of the function"
 	self assert: ast body statements first arguments isNotEmpty.
-	self assert: ast body propertyEquals: ast body statements first arguments.
+	self assert: ast body propertyEquals: ast body statements first arguments asSet.
 ]
 
 { #category : #basic }
 ANSlangDeclarationAnnotatorTest >> testVisitArgumentNodeToDiscardInABlock [
+	| defaultCollection |
 	super testVisitArgumentNodeToDiscardInABlock. 
+	defaultCollection := ASTCVariableDeclarationAnnotator defaultCollection.
 	
 	"The argument should not be declared."	
-	self assert: ast body statements first arguments second body propertyEquals: OrderedCollection new.
+	self assert: ast body statements first arguments second body propertyEquals: defaultCollection new.
 
 	self assert: ast body statements first arguments isNotEmpty.
-	self assert: ast body statements first arguments second body propertyEquals: OrderedCollection new.
-	self assert: ast body propertyEquals: ast body temporaries.
+	self assert: ast body statements first arguments second body propertyEquals: defaultCollection new.
+	self assert: ast body propertyEquals: ast body temporaries asSet.
 ]
 
 { #category : #basic }
@@ -102,7 +108,7 @@ ANSlangDeclarationAnnotatorTest >> testVisitTemporaryNode [
 	
 	"But at the start of the function"
 	self assert: ast body temporaries isNotEmpty.	
-	self assert: ast body propertyEquals: ast body temporaries
+	self assert: ast body propertyEquals: ast body temporaries asSet
 ]
 
 { #category : #basic }
@@ -114,6 +120,6 @@ ANSlangDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
 
 	"But should be declared at the start of the function"
 	self assert: ast body statements first temporaries isNotEmpty.
-	self assert: ast body statements first body propertyEquals: OrderedCollection new.
-	self assert: ast body propertyEquals: ast body statements first temporaries.
+	self assert: ast body statements first body propertyEquals: ASTCVariableDeclarationAnnotator defaultCollection new.
+	self assert: ast body propertyEquals: ast body statements first temporaries asSet.
 ]

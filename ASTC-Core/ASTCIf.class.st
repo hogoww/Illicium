@@ -11,52 +11,56 @@ Class {
 
 { #category : #testing }
 ASTCIf >> = anIf [
-  super = anIf ifFalse: [ ^false ].
-  condition = anIf condition ifFalse: [ ^false ].
-  then = anIf then ifFalse: [ ^false ].
-  else = anIf else ifFalse: [ ^false ].
-  ^true
+	super = anIf
+		ifFalse: [ ^ false ].
+	condition = anIf condition
+		ifFalse: [ ^ false ].
+	then = anIf then
+		ifFalse: [ ^ false ].
+	else = anIf else
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #testing }
 ASTCIf >> acceptVisitor: aVisitor [
-  aVisitor visitIf: self
+	aVisitor visitIf: self
 ]
 
 { #category : #accessing }
 ASTCIf >> condition [
-  ^condition
+	^ condition
 ]
 
 { #category : #accessing }
 ASTCIf >> condition: aCondition [
-  aCondition ifNotNil: [ aCondition parent: self ].
-  condition := aCondition
+	aCondition ifNotNil: [ aCondition parent: self ].
+	condition := aCondition
 ]
 
 { #category : #accessing }
 ASTCIf >> else [
-  ^else
+	^ else
 ]
 
 { #category : #accessing }
 ASTCIf >> else: anElse [
-  anElse ifNotNil: [ anElse parent: self ].
-  else := anElse
+	anElse ifNotNil: [ anElse parent: self ].
+	else := anElse
 ]
 
 { #category : #testing }
 ASTCIf >> isIf [
-  ^true
+	^ true
 ]
 
 { #category : #accessing }
 ASTCIf >> then [
-  ^then
+	^ then
 ]
 
 { #category : #accessing }
 ASTCIf >> then: aThen [
-  aThen ifNotNil: [ aThen parent: self ].
-  then := aThen
+	aThen ifNotNil: [ aThen parent: self ].
+	then := aThen
 ]

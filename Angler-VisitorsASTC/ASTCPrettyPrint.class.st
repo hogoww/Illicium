@@ -42,17 +42,6 @@ ASTCPrettyPrint >> enterBlock [
 	self indent
 ]
 
-{ #category : #formating }
-ASTCPrettyPrint >> formatSelector: aSelector [
-	| functionName | 
-	functionName:=aSelector asString.
-	functionName size timesRepeat:[:index | 
-		(functionName at: index)=$: 
-		ifTrue:[ functionName at:index put: Character space]
-		].
-	^functionName asCamelCase 
-]
-
 { #category : #indentation }
 ASTCPrettyPrint >> indent [
 	indentation:=indentation , (String streamContents:[:s|

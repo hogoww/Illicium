@@ -1,8 +1,149 @@
 Extension { #name : #ASTCNode }
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> % anExpression [
+	^ ASTCModuloOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> & anExpression [
+	^ ASTCBitwiseAndOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> && anExpression [
+	^ ASTCAndOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> * anExpression [
+	^ ASTCMultiplicationOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> + anExpression [
+	^ ASTCAdditionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> - anExpression [
+	^ ASTCSubtractionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> -> anExpression [
+	^ ASTCStructAccessPointerOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> / anExpression [
+	^ ASTCDivisionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> < anExpression [
+	^ ASTCLesserOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> << anExpression [
+	^ ASTCBitLeftShiftOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> <= anExpression [
+	^ ASTCLesserOrEqualOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> = aNode [
 	^ aNode isKindOf: self species
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> > anExpression [
+	^ ASTCGreaterOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> >= anExpression [
+	^ ASTCGreaterOrEqualOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> >> anExpression [
+	^ ASTCBitRightShiftOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> asAddressOf [
+	^ ASTCAddressOfOperator new
+		addOperand: self;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> asStatement [
+
+	^ ASTCExpressionStatement expression: self
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> assign: anExpression [
+	^ ASTCAssignmentOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> assignAndAdd: anExpression [
+	^ ASTCAssignementAdditionOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself 
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
@@ -11,6 +152,23 @@ ASTCNode >> astDump [
 	visitor:=ASTCPrinterVisitor new.
 	self acceptVisitor: visitor.
 	^visitor.
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> bitXor: anExpression [
+	^ ASTCBitwiseXorOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> castTo: aType [
+	self assert: aType isType.
+	^ ASTCCastOperator new
+		type: aType;
+		addOperand: self;
+		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
@@ -28,8 +186,16 @@ ASTCNode >> debugASTCStructure [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> equals: anExpression [
+	^ ASTCEqualityOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> gtInspectorASTDumpIn: composite [ 
-	<gtInspectorPresentationOrder: 2>
+	<gtInspectorPresentationOrder: 1>
 	^ composite pharoMethod
 		title: [ 'AST Dump' translated ];
 			display: [ 
@@ -39,13 +205,21 @@ ASTCNode >> gtInspectorASTDumpIn: composite [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> gtInspectorCPrettyPrint: composite [ 
-
+	<gtInspectorPresentationOrder: 2>
 	^ composite pharoMethod
 		title: [ 'AST C pretty print' translated ];
 			display: [ 
 				self prettyPrint.
 				]
 			
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> indexAt: anExpression [
+	^ ASTCIndexerOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
@@ -57,8 +231,43 @@ ASTCNode >> isStructuralyValidAST [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> negated [
+	^ self isNegationOperator 
+		ifTrue: ["If there's aDouble negation, we become positive !"
+			self operands first
+			]
+		ifFalse: ["otherwise, we negate !"
+			ASTCNegationOperator new
+				addOperand: self;
+				yourself
+				]
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> not [
+	^ ASTCLogicalNotOperator new
+		addOperand: self;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> notEquals: anExpression [
+	^ ASTCInequalityOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> parent: aParent [
 	parent := aParent
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> preIncr [
+	^ ASTCPreIncrementOperator new
+		addOperand: self;
+		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
@@ -94,4 +303,37 @@ ASTCNode class >> priority [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> rootNode [
 	^ parent ifNil: [ self ] ifNotNil: [ :p | p rootNode ]
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> structStaticAccess: anIdentifier [
+	^ ASTCStructAccessStaticOperator new
+		addOperand: self;
+		addOperand: anIdentifier;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> then: aTrueExpression else: aFalseExpression [
+	^ ASTCTernaryConditionalOperator new
+		addOperand: self;
+		addOperand: aTrueExpression;
+		addOperand: aFalseExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> | anExpression [
+	^ ASTCBitwiseOrOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> || anExpression [
+	^ ASTCOrOperator new
+		addOperand: self;
+		addOperand: anExpression;
+		yourself
 ]
