@@ -47,6 +47,11 @@ ANSlangToCGeneratedTests >> testedClass: aClass [
 ]
 
 { #category : #accessing }
+ANSlangToCGeneratedTests >> timeLimit: aDuration [
+	^ Duration seconds: 5
+]
+
+{ #category : #accessing }
 ANSlangToCGeneratedTests >> translator [
 	"Should be generated.
 	Should return the reference of the ressource."
