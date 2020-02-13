@@ -302,11 +302,12 @@ ANSlangInliner >> visitMessageNode: aMessageNode [
 			self handleTemporariesFrom: methodToInline in: aMessageNode methodNode.
 			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.
-			].
+			]ifFalse: [ 
+				"we don't look further if the message is an assert."	
+				aMessageNode selector = #assert: ifTrue: [ ^ self ].
+				super visitMessageNode: aMessageNode
+			 ]
 	
-	"we don't look further if the message is an assert."
-	aMessageNode selector = #assert: ifTrue: [ ^ self ].
-	super visitMessageNode: aMessageNode
 ]
 
 { #category : #accessing }

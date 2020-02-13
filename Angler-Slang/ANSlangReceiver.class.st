@@ -581,24 +581,6 @@ ANSlangReceiver >> repeat [
 ]
 
 { #category : #'reflective operations' }
-shouldBeImplemented [
-
-	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
-		arguments: { ASTCLiteral value: #shouldBeImplemented };
-		yourself
-]
-
-{ #category : #'reflective operations' }
-ANSlangReceiver >> shouldNotImplement [
-
-	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
-		arguments: { ASTCLiteral value: #shouldNotImplement };
-		yourself
-]
-
-{ #category : #'reflective operations' }
 ANSlangReceiver >> signedIntFromLong64 [
 	
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
