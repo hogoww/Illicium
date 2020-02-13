@@ -104,6 +104,13 @@ ANSlangInlinerTest >> methodWithTwoStatementsThatBothInlineTwoStatements [
 ]
 
 { #category : #support }
+ANSlangInlinerTest >> methodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignment [
+	| t |
+	t := self methodWithTwoStatements.
+	t := self methodWithTwoStatements
+]
+
+{ #category : #support }
 ANSlangInlinerTest >> methodWithTwoStatementsThatReturns [
 	1 even.
 	^ 2 even
@@ -375,7 +382,7 @@ ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineSingleStatement [
 ]
 
 { #category : #'test-multiples' }
-ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwotatement [
+ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatement [
 	| resultingMethod firstInlinedStatement initialMethod secondInlinedStatement |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatements) ast.
@@ -397,6 +404,27 @@ ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwotatement [
 	
 	self assert: firstInlinedStatement equals: resultingMethod statements third.
 	self assert: secondInlinedStatement equals: resultingMethod statements fourth.
+]
+
+{ #category : #'test-multiples' }
+ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignments [
+	| resultingMethod firstInlinedStatement initialMethod assignment |
+	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignment) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod statements size equals: 2.
+	
+	self assert: resultingMethod statements first isBlock.
+	assignment := resultingMethod statements first statements second.
+	self assert: assignment isAssignment.
+	self assert: assignment value isMessage.
+	self assert: assignment value receiver value equals: 2.
+	self assert: assignment value selector equals: #even.
+	
+	self assert: resultingMethod statements second equals: resultingMethod statements second.
 ]
 
 { #category : #'test-renaming' }
