@@ -79,7 +79,7 @@ ANSlangReceiver >> << aNumber [
 				ifNotNil: [ :argumentValue | | valueBeyondInt |
 					valueBeyondInt := 1 bitShift: 32. "The default type of const << N is int."
 					value < valueBeyondInt and: [(value bitShift: argumentValue) >= valueBeyondInt ] ].
-			result := (ASTCLiteral value: value).
+			result := self translatedReceiver.
 			castToLong ifTrue: [ result := result castTo: (self cTypeFor: #usqLong) ].
 			^ result << (aNumber acceptVisitor: methodTranslator) ].
 	
@@ -378,6 +378,15 @@ ANSlangReceiver >> eassert: aBlock [
 		yourself
 ]
 
+{ #category : #'reflective operations' }
+ANSlangReceiver >> flag: anArgument [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #flag); yourself) ;
+		arguments: {ASTCLiteral value: anArgument value asString};
+		yourself
+]
+
 { #category : #accessing }
 ANSlangReceiver >> ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
@@ -572,17 +581,36 @@ ANSlangReceiver >> repeat [
 ]
 
 { #category : #'reflective operations' }
+shouldBeImplemented [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: #shouldBeImplemented };
+		yourself
+]
+
+{ #category : #'reflective operations' }
 ANSlangReceiver >> shouldNotImplement [
-	"Yes, this is special too... I don't like it."
-	^ ASTCFunctionCall new
-		id: (ASTCIdentifier id: #error);
-		arguments: { ASTCLiteral value: 'shouldNotImplement' }
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: #shouldNotImplement };
+		yourself
 ]
 
 { #category : #'reflective operations' }
 ANSlangReceiver >> signedIntFromLong64 [
 	
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
+]
+
+{ #category : #'reflective operations' }
+ANSlangReceiver >> subclassResponsibility [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: #subclassResponsibility };
+		yourself
 ]
 
 { #category : #'reflective operations' }

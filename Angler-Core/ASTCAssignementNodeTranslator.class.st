@@ -25,10 +25,10 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 						yourself);
 				yourself ]
 		ifFalse: [
-				((anAssignmentNode variable acceptVisitor: methodTranslator)
-					assign: (anAssignmentNode value acceptVisitor: methodTranslator))
-					pharoNode: anAssignmentNode;
-					comment: anAssignmentNode commentOrNil;
-					yourself
-			]
+			ASTCAssignmentOperator new
+				pharoNode: anAssignmentNode;
+				comment: anAssignmentNode commentOrNil;
+				addOperand: (anAssignmentNode variable acceptVisitor: methodTranslator);
+				addOperand: (anAssignmentNode value acceptVisitor: methodTranslator);
+				yourself ]
 ]

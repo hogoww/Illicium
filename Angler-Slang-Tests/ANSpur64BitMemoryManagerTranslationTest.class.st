@@ -142,6 +142,8 @@ ANSpur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveSt
 { #category : #'free space-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringComparison [
 	| illiAST slangString illiString |
+	<skip>
+	self skip.
 	slangString := self generateSlang: #allocateLargestFreeChunk.
 	illiAST := self generateIllicium: #allocateLargestFreeChunk.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -3732,6 +3734,8 @@ ANSpur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueStri
 { #category : #'primitive support-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testStringForCStringStringComparison [
 	| illiAST slangString illiString |
+	<skip>
+	self skip.
 	slangString := self generateSlang: #stringForCString:.
 	illiAST := self generateIllicium: #stringForCString:.
 	illiString := self prettyPrintIllicium: illiAST.
