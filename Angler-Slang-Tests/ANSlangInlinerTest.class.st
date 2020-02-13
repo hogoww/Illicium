@@ -10,6 +10,11 @@ Class {
 }
 
 { #category : #support }
+ANSlangInlinerTest >> methodInliningAMethodInliningAStatement [
+	self methodWithSingleStatementToInline
+]
+
+{ #category : #support }
 ANSlangInlinerTest >> methodReturningInlinedSingleStatement [
 	^ self methodWithSingleStatement
 ]
@@ -84,6 +89,18 @@ ANSlangInlinerTest >> methodWithSingleStatementToInline [
 ANSlangInlinerTest >> methodWithTwoStatements [
 	1 even.
 	2 even
+]
+
+{ #category : #support }
+ANSlangInlinerTest >> methodWithTwoStatementsThatBothInlineSingleStatements [
+	self methodWithSingleStatement.
+	self methodWithSingleStatement
+]
+
+{ #category : #support }
+ANSlangInlinerTest >> methodWithTwoStatementsThatBothInlineTwoStatements [
+	self methodWithTwoStatements.
+	self methodWithTwoStatements
 ]
 
 { #category : #support }
@@ -319,6 +336,67 @@ ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 	self assert: inlinedStatement second isMessage.
 	self assert: inlinedStatement second receiver value equals: 2.
 	self assert: inlinedStatement second selector equals: #even.
+]
+
+{ #category : #'test-multiples' }
+ANSlangInlinerTest >> testMethodInliningMethodInliningAStatement [
+	| resultingMethod inlinedStatement initialMethod |
+	program addMethod: (self class >> #methodWithSingleStatementToInline) ast.
+	program addMethod: (self class >> #methodWithSingleStatement) ast.
+	initialMethod := (self class >> #methodInliningAMethodInliningAStatement) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
+	self assert: inlinedStatement isMessage.
+	self assert: inlinedStatement receiver value equals: 1.
+	self assert: inlinedStatement selector equals: #even
+]
+
+{ #category : #'test-multiples' }
+ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineSingleStatement [
+	| resultingMethod inlinedStatement initialMethod |
+	program addMethod: (self class >> #methodWithSingleStatement) ast.
+	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineSingleStatements) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod statements size equals: 2.
+	inlinedStatement := resultingMethod statements first.
+	
+	self assert: inlinedStatement isMessage.
+	self assert: inlinedStatement receiver value equals: 1.
+	self assert: inlinedStatement selector equals: #even.
+	
+	self assert: resultingMethod statements first equals: resultingMethod statements second.
+]
+
+{ #category : #'test-multiples' }
+ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwotatement [
+	| resultingMethod firstInlinedStatement initialMethod secondInlinedStatement |
+	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatements) ast.
+	methodToInline := initialMethod copy.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod statements size equals: 4.
+	
+	firstInlinedStatement := resultingMethod statements first.
+	self assert: firstInlinedStatement isMessage.
+	self assert: firstInlinedStatement receiver value equals: 1.
+	self assert: firstInlinedStatement selector equals: #even.
+	
+	secondInlinedStatement := resultingMethod statements second.
+	self assert: secondInlinedStatement isMessage.
+	self assert: secondInlinedStatement receiver value equals: 2.
+	self assert: secondInlinedStatement selector equals: #even.
+	
+	self assert: firstInlinedStatement equals: resultingMethod statements third.
+	self assert: secondInlinedStatement equals: resultingMethod statements fourth.
 ]
 
 { #category : #'test-renaming' }
