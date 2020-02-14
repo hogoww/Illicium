@@ -2,8 +2,8 @@ Class {
 	#name : #ASTCBinaryOperator,
 	#superclass : #ASTCOperator,
 	#instVars : [
-		'rightOperand',
-		'leftOperand'
+		'leftOperand',
+		'rightOperand'
 	],
 	#category : #'ASTC-Core-Nodes-Operators'
 }
@@ -12,9 +12,9 @@ Class {
 ASTCBinaryOperator >> = aBinaryOperator [
 	super = aBinaryOperator
 		ifFalse: [ ^ false ].
-	rightOperand = aBinaryOperator rightOperand
-		ifFalse: [ ^ false ].
 	leftOperand = aBinaryOperator leftOperand
+		ifFalse: [ ^ false ].
+	rightOperand = aBinaryOperator rightOperand
 		ifFalse: [ ^ false ].
 	^ true
 ]

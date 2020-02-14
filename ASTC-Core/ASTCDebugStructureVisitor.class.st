@@ -7,10 +7,10 @@ Class {
 { #category : #visiting }
 ASTCDebugStructureVisitor >> visitBinaryOperator: aBinaryOperator [
 	super visitBinaryOperator: aBinaryOperator.
-	aBinaryOperator rightOperand
-		ifNotNil: [ :aRightOperand | self assert: aRightOperand isExpression ].
 	aBinaryOperator leftOperand
-		ifNotNil: [ :aLeftOperand | self assert: aLeftOperand isExpression ]
+		ifNotNil: [ :aLeftOperand | self assert: aLeftOperand isExpression ].
+	aBinaryOperator rightOperand
+		ifNotNil: [ :aRightOperand | self assert: aRightOperand isExpression ]
 ]
 
 { #category : #visiting }
@@ -176,9 +176,9 @@ ASTCDebugStructureVisitor >> visitTernaryConditionalOperator: aTernaryConditiona
 	aTernaryConditionalOperator condition
 		ifNotNil: [ :aCondition | self assert: aCondition isExpression ].
 	aTernaryConditionalOperator then
-		ifNotNil: [ :aThen | self assert: aThen isStatement ].
+		ifNotNil: [ :aThen | self assert: aThen isExpression ].
 	aTernaryConditionalOperator else
-		ifNotNil: [ :anElse | self assert: anElse isStatement ]
+		ifNotNil: [ :anElse | self assert: anElse isExpression ]
 ]
 
 { #category : #visiting }

@@ -427,8 +427,8 @@ ASTCBuilder >> defineRelations [
 	(binaryOperator property: #leftOperand) <>- (expression property: #leftBinaryOperand).
 	(binaryOperator property: #rightOperand) <>- (expression property: #rightBinaryOperand).
 	(ternaryConditionalOperator property: #condition) <>- (expression property: #conditionTernary).
-	(ternaryConditionalOperator property: #then) <>- (statement property: #thenStatementTernary).
-	(ternaryConditionalOperator property: #else) <>- (statement property: #elseStatementTernary).
+	(ternaryConditionalOperator property: #then) <>- (expression property: #thenStatementTernary).
+	(ternaryConditionalOperator property: #else) <>- (expression property: #elseStatementTernary).
 	
 	
 	(castOperator property: #type) <>- (type property: #castOperatorType).

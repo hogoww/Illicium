@@ -37,10 +37,10 @@ ASTCWalkerVisitor >> visitAssignmentOperator: anAssignmentOperator [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
 	super visitBinaryOperator: aBinaryOperator.
-	aBinaryOperator rightOperand
-		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ].
 	aBinaryOperator leftOperand
-		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ]
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aBinaryOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
