@@ -315,7 +315,7 @@ ASTCNode >> structStaticAccess: anIdentifier [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> then: aTrueExpression else: aFalseExpression [
-	^ ASTCTernaryConditionalOperator new
+	^ ASTCIf new
 		condition: self;
 		then: aTrueExpression;
 		else: aFalseExpression;

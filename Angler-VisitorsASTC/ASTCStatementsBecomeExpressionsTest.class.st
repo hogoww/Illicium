@@ -112,3 +112,25 @@ ASTCStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
 	self assert: node rightOperand isTernaryConditionalOperator.
 	
 ]
+
+{ #category : #tests }
+ASTCStatementsBecomeExpressionsTest >> testStatementInIFConditionShouldBecomeExpression [
+	| node expressionList |
+	node :=
+		(ASTCIdentifier id: #a) 
+			assign:
+				(ASTCBlock new
+					addStatement: (ASTCLiteral value: true) asStatement;
+					addStatement: (ASTCLiteral value: true) asStatement;
+					yourself).
+	node acceptVisitor: visitor.
+	
+	self assert: node isAssignmentOperator.
+	self assert: node leftOperand isIdentifier.
+	
+	expressionList := node rightOperand.
+	self assert: expressionList isExpressionList.
+	self assert: expressionList expressions size equals: 2.
+	self assert: expressionList expressions first equals: (ASTCLiteral value: true).
+	self assert: expressionList expressions second equals: (ASTCLiteral value: true).
+]
