@@ -3,8 +3,8 @@ Extension { #name : #ASTCStructAccessPointerOperator }
 { #category : #'*ASTC-Core-Extensions' }
 ASTCStructAccessPointerOperator >> assign: anExpression [
 	^ ASTCAssignmentOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 

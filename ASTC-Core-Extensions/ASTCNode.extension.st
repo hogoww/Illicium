@@ -3,88 +3,88 @@ Extension { #name : #ASTCNode }
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> % anExpression [
 	^ ASTCModuloOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> & anExpression [
 	^ ASTCBitwiseAndOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> && anExpression [
 	^ ASTCAndOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> * anExpression [
 	^ ASTCMultiplicationOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> + anExpression [
 	^ ASTCAdditionOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> - anExpression [
 	^ ASTCSubtractionOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> -> anExpression [
 	^ ASTCStructAccessPointerOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> / anExpression [
 	^ ASTCDivisionOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> < anExpression [
 	^ ASTCLesserOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> << anExpression [
 	^ ASTCBitLeftShiftOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> <= anExpression [
 	^ ASTCLesserOrEqualOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
@@ -96,31 +96,31 @@ ASTCNode >> = aNode [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> > anExpression [
 	^ ASTCGreaterOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> >= anExpression [
 	^ ASTCGreaterOrEqualOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> >> anExpression [
 	^ ASTCBitRightShiftOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> asAddressOf [
 	^ ASTCAddressOfOperator new
-		addOperand: self;
+		operand: self;
 		yourself
 ]
 
@@ -133,16 +133,16 @@ ASTCNode >> asStatement [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> assign: anExpression [
 	^ ASTCAssignmentOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> assignAndAdd: anExpression [
 	^ ASTCAssignementAdditionOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself 
 ]
 
@@ -157,8 +157,8 @@ ASTCNode >> astDump [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> bitXor: anExpression [
 	^ ASTCBitwiseXorOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
@@ -167,7 +167,7 @@ ASTCNode >> castTo: aType [
 	self assert: aType isType.
 	^ ASTCCastOperator new
 		type: aType;
-		addOperand: self;
+		operand: self;
 		yourself
 ]
 
@@ -188,8 +188,8 @@ ASTCNode >> debugASTCStructure [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> equals: anExpression [
 	^ ASTCEqualityOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
@@ -217,8 +217,8 @@ ASTCNode >> gtInspectorCPrettyPrint: composite [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> indexAt: anExpression [
 	^ ASTCIndexerOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
@@ -234,11 +234,11 @@ ASTCNode >> isStructuralyValidAST [
 ASTCNode >> negated [
 	^ self isNegationOperator 
 		ifTrue: ["If there's aDouble negation, we become positive !"
-			self operands first
+			self operand
 			]
 		ifFalse: ["otherwise, we negate !"
 			ASTCNegationOperator new
-				addOperand: self;
+				operand: self;
 				yourself
 				]
 ]
@@ -246,15 +246,15 @@ ASTCNode >> negated [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> not [
 	^ ASTCLogicalNotOperator new
-		addOperand: self;
+		operand: self;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> notEquals: anExpression [
 	^ ASTCInequalityOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
@@ -266,7 +266,7 @@ ASTCNode >> parent: aParent [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> preIncr [
 	^ ASTCPreIncrementOperator new
-		addOperand: self;
+		operand: self;
 		yourself
 ]
 
@@ -308,32 +308,32 @@ ASTCNode >> rootNode [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> structStaticAccess: anIdentifier [
 	^ ASTCStructAccessStaticOperator new
-		addOperand: self;
-		addOperand: anIdentifier;
+		leftOperand: self;
+		rightOperand: anIdentifier;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> then: aTrueExpression else: aFalseExpression [
 	^ ASTCTernaryConditionalOperator new
-		addOperand: self;
-		addOperand: aTrueExpression;
-		addOperand: aFalseExpression;
+		condition: self;
+		then: aTrueExpression;
+		else: aFalseExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> | anExpression [
 	^ ASTCBitwiseOrOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> || anExpression [
 	^ ASTCOrOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]

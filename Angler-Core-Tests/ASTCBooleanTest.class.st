@@ -49,8 +49,8 @@ ASTCBooleanTest >> testIfTrueIfFalse [
 	
 	expectedC := ASTCIf new 
 		condition: (ASTCEqualityOperator new
-			addOperand: (ASTCLiteral value: 1);
-			addOperand: (ASTCLiteral value: 2);
+			leftOperand: (ASTCLiteral value: 1);
+			rightOperand: (ASTCLiteral value: 2);
 			yourself);
 		then:(ASTCBlock new
 			addStatement: (ASTCLiteral value: 1) asStatement;

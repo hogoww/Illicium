@@ -79,7 +79,7 @@ ASTCPrettyPrintTest >> testVisitCastOperator [
 	| structure |
 	structure := ASTCCastOperator new 
 		type: (ASTCType new type: self class asConstraint ; yourself);
-		addOperand: (ASTCIdentifier new id: #a; yourself);
+		operand: (ASTCIdentifier new id: #a; yourself);
 		yourself.
 	
 	structure debugASTCStructure.

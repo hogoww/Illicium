@@ -36,7 +36,11 @@ ASTCWalkerVisitor >> visitAssignmentOperator: anAssignmentOperator [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
-	super visitBinaryOperator: aBinaryOperator
+	super visitBinaryOperator: aBinaryOperator.
+	aBinaryOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ].
+	aBinaryOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
@@ -273,10 +277,7 @@ ASTCWalkerVisitor >> visitNegationOperator: aNegationOperator [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
-	super visitOperator: anOperator.
-	anOperator operands
-		ifNotNil:
-			[ :operands | operands do: [ :anOperands | anOperands acceptVisitor: self ] ]
+	super visitOperator: anOperator
 ]
 
 { #category : #visiting }
@@ -368,7 +369,13 @@ ASTCWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
-	super visitTernaryConditionalOperator: aTernaryConditionalOperator
+	super visitTernaryConditionalOperator: aTernaryConditionalOperator.
+	aTernaryConditionalOperator condition
+		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	aTernaryConditionalOperator then
+		ifNotNil: [ :aThen | aThen acceptVisitor: self ].
+	aTernaryConditionalOperator else
+		ifNotNil: [ :anElse | anElse acceptVisitor: self ]
 ]
 
 { #category : #visiting }
@@ -378,7 +385,9 @@ ASTCWalkerVisitor >> visitType: aType [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitUnaryOperator: anUnaryOperator [
-	super visitUnaryOperator: anUnaryOperator
+	super visitUnaryOperator: anUnaryOperator.
+	anUnaryOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }

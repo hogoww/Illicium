@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #visiting }
+ASTCDebugStructureVisitor >> visitBinaryOperator: aBinaryOperator [
+	super visitBinaryOperator: aBinaryOperator.
+	aBinaryOperator rightOperand
+		ifNotNil: [ :aRightOperand | self assert: aRightOperand isExpression ].
+	aBinaryOperator leftOperand
+		ifNotNil: [ :aLeftOperand | self assert: aLeftOperand isExpression ]
+]
+
+{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitBlock: aBlock [
 	super visitBlock: aBlock.
 	aBlock statements
@@ -124,14 +133,6 @@ ASTCDebugStructureVisitor >> visitNode: aNode [
 ]
 
 { #category : #visiting }
-ASTCDebugStructureVisitor >> visitOperator: anOperator [
-	super visitOperator: anOperator.
-	anOperator operands
-		ifNotNil:
-			[ :operands | operands do: [ :anOperands | self assert: anOperands isExpression ] ]
-]
-
-{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitPreprocessorIf: aPreprocessorIf [
 	super visitPreprocessorIf: aPreprocessorIf.
 	aPreprocessorIf then
@@ -167,6 +168,24 @@ ASTCDebugStructureVisitor >> visitStructureDefinition: aStructureDefinition [
 		ifNotNil: [ :members | 
 			members
 				do: [ :aMembers | self assert: aMembers isVariableDeclaration ] ]
+]
+
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
+	super visitTernaryConditionalOperator: aTernaryConditionalOperator.
+	aTernaryConditionalOperator condition
+		ifNotNil: [ :aCondition | self assert: aCondition isExpression ].
+	aTernaryConditionalOperator then
+		ifNotNil: [ :aThen | self assert: aThen isStatement ].
+	aTernaryConditionalOperator else
+		ifNotNil: [ :anElse | self assert: anElse isStatement ]
+]
+
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitUnaryOperator: anUnaryOperator [
+	super visitUnaryOperator: anUnaryOperator.
+	anUnaryOperator operand
+		ifNotNil: [ :anOperand | self assert: anOperand isExpression ]
 ]
 
 { #category : #visiting }
