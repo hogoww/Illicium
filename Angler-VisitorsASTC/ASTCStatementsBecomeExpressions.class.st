@@ -63,7 +63,16 @@ ASTCStatementsBecomeExpressions >> visitIf: anIf [
 			anIf becomeTernaryConditionalOperator.
 			^ anIf acceptVisitor: self
 		].
-	super visitIf: anIf
+	
+	"if is kind of a particular case, because statements inside the condition should be expressions too. We therefore inline the visit code."
+	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
+	anIf condition ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
+	
+	anIf then ifNotNil: [ :aThen | aThen acceptVisitor: self ].
+	anIf else ifNotNil: [ :anElse | anElse acceptVisitor: self ].
+	
+	self visitStatement: anIf
 ]
 
 { #category : #visiting }
