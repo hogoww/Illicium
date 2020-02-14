@@ -190,6 +190,11 @@ ANSlangReceiver >> asUnsignedInteger [
 ]
 
 { #category : #'reflective operations' }
+ANSlangReceiver >> asUnsignedIntegerPtr [
+	^ self translatedReceiver castTo: (self cTypeFor: #usqIntptr_t)
+]
+
+{ #category : #'reflective operations' }
 ANSlangReceiver >> asVoidPointer [
 	^ self translatedReceiver castTo: (self cTypeFor: #'void *')
 ]
