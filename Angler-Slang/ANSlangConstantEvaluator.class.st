@@ -42,6 +42,7 @@ ANSlangConstantEvaluator >> visitLiteralValueNode: aRBLiteralValueNode [
 { #category : #visiting }
 ANSlangConstantEvaluator >> visitMessageNode: aRBMessageNode [ 
 
+	| receiver argument |
 	(VMBasicConstants valueOfBasicSelector: aRBMessageNode selector)
 		ifNotNil: [ :value | ^ value ].
 	
@@ -51,9 +52,12 @@ ANSlangConstantEvaluator >> visitMessageNode: aRBMessageNode [
 	(#( + - * // ) includes: aRBMessageNode selector)
 		ifFalse: [ errorBlock value ].
 	
-	^ (aRBMessageNode receiver acceptVisitor: self)
-		perform: aRBMessageNode selector
-		withArguments: { (aRBMessageNode arguments first acceptVisitor: self) }
+	receiver := (aRBMessageNode receiver acceptVisitor: self).
+	argument := (aRBMessageNode arguments first acceptVisitor: self).
+	
+	(receiver isNil or: [ argument isNil ]) ifTrue: [ errorBlock value ].
+	
+	^ receiver perform: aRBMessageNode selector withArguments: { argument }
 ]
 
 { #category : #visiting }
