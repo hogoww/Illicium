@@ -200,7 +200,7 @@ ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOp
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 
-	self print: anAssignmentOperator leftOperand
+	self print: anAssignmentOperator leftOperand.
 	self << ' ' << anAssignmentOperator class symbol << ' '.
 	self print: anAssignmentOperator rightOperand
 ]
