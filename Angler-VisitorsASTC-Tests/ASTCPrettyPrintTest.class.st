@@ -148,7 +148,11 @@ ASTCPrettyPrintTest >> testVisitStructureDefinition [
 { #category : #tests }
 ASTCPrettyPrintTest >> testVisitTernaryOperatorTest [
 	| operator |
-	operator := (ASTCIdentifier new id: #a) then: (ASTCIdentifier new id: #b) else: (ASTCIdentifier new id: #c).
+	operator := ASTCTernaryConditionalOperator new 
+		condition: (ASTCIdentifier new id: #a);
+		then: (ASTCIdentifier new id: #b);
+		else: (ASTCIdentifier new id: #c);
+		yourself.
 
 	operator debugASTCStructure.
 	self assert: operator isTernaryConditionalOperator.
