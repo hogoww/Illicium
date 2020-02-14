@@ -19,7 +19,7 @@ ANSlangReceiverTest >> setUp [
 { #category : #tests }
 ANSlangReceiverTest >> testIfNil [
 	"Note: exactly the same test as ASTCSmallIntegerTest"
-	| messageNode astC expectedC |
+	| messageNode ifNode expectedC |
 	messageNode := RBParser parseExpression: '1 ifNil: [ 2 ]'.
 	"Manual typing"
 	self addType: #int to: messageNode.
@@ -30,7 +30,7 @@ ANSlangReceiverTest >> testIfNil [
 	"Manual declaration"
 	self addDeclarationProperty: OrderedCollection new to: messageNode arguments first body.
 	
-	astC := messageNode acceptVisitor: methodTranslator.
+	ifNode := messageNode acceptVisitor: methodTranslator.
 	
 	expectedC := (ASTCIf new
 		condition: (ASTCLogicalNotOperator new
@@ -41,18 +41,18 @@ ANSlangReceiverTest >> testIfNil [
 			addStatement: (ASTCLiteral value: 2) asStatement;
 			yourself)).
 	
-	self assert: astC isIf.
-	self assert: astC condition isLogicalNotOperator.
-	self deny: astC condition isStatement.
-	self assert: (astC condition leftOperand) isLiteral.
-	self assert: (astC condition leftOperand) value equals: 1.
-	self assert: astC then isBlock.
-	self assert: (astC then statements at: 1) isExpressionStatement.
-	self assert: (astC then statements at: 1) expression isLiteral.
-	self assert: (astC then statements at: 1) expression value equals: 2.
-	self assert: astC equals: expectedC.
+	self assert: ifNode isIf.
+	self assert: ifNode condition isLogicalNotOperator.
+	self deny: ifNode condition isStatement.
+	self assert: ifNode condition operand isLiteral.
+	self assert: ifNode condition operand value equals: 1.
+	self assert: ifNode then isBlock.
+	self assert: (ifNode then statements at: 1) isExpressionStatement.
+	self assert: (ifNode then statements at: 1) expression isLiteral.
+	self assert: (ifNode then statements at: 1) expression value equals: 2.
+	self assert: ifNode equals: expectedC.
 
-	astC debugASTCStructure.
+	ifNode debugASTCStructure.
 	expectedC debugASTCStructure.
 ]
 
@@ -97,7 +97,6 @@ ANSlangReceiverTest >> testPlus [
 		+ (ASTCLiteral value: 2).
 	
 	self assert: operator isAdditionOperator.
-	self assert: operator isLiteral.
 	self assert: operator leftOperand isLiteral.
 	self assert: operator leftOperand value equals: 1.
 	self assert: operator rightOperand isLiteral.
