@@ -64,7 +64,8 @@ ASTCStatementsBecomeExpressions >> visitIf: anIf [
 			^ anIf acceptVisitor: self
 		].
 	
-	"if is kind of a particular case, because statements inside the condition should be expressions too. We therefore inline the visit code."
+	"if is kind of a particular case, because statements inside the condition should be expressions too. 
+	We therefore inline the visit code."
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	anIf condition ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
