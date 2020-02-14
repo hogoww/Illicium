@@ -302,7 +302,7 @@ ANSlangReceiver >> cCode: aStringOrBlock [
 
 	aStringOrBlock isBlock
 		ifTrue: [ 
-			^ (self inlineBlock: aStringOrBlock) ].
+			^ aStringOrBlock acceptVisitor: methodTranslator ].
 	aStringOrBlock isLiteralNode
 		ifTrue: [ 
 			^ aStringOrBlock value isEmpty 
@@ -374,7 +374,7 @@ ANSlangReceiver >> doesNotUnderstand: aMessage [
 ANSlangReceiver >> eassert: aBlock [
 	^	ASTCFunctionCall new
 		id: (ASTCIdentifier new id: #eassert);
-		addArgument: (self inlineBlock: aBlock) expression;
+		addArgument: (aBlock acceptVisitor: methodTranslator);
 		yourself
 ]
 
@@ -447,20 +447,6 @@ ANSlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 		then: (trueBlock acceptVisitor: self visitor);
 		else: (falseBlock acceptVisitor: self visitor);
 		yourself
-]
-
-{ #category : #'translation-helper' }
-ANSlangReceiver >> inlineBlock: aBlock [
-	| resBlock |
-	aBlock statements size = 1 
-		ifFalse: [ UnsupportedFeature new feature: 'Cannot inline a block if it has more than one statement yet' ].
-	
-	resBlock := (aBlock acceptVisitor: methodTranslator).
-	
-	resBlock statements size = 1 
-		ifFalse:[ UnsupportedFeature new feature: 'Cannot inline a block which translates into more than one statement yet' ].
-	resBlock statements isEmpty ifTrue: [ ^ ASTCEmptyStatement new ].
-	^ resBlock statements first
 ]
 
 { #category : #'reflective operations' }
@@ -572,7 +558,7 @@ ANSlangReceiver >> repeat [
 	"basically, a while true without break"
 	| body |
 	body := ASTCBlock new.
-	receiverNode statements collect: [:aStatement| (aStatement acceptVisitor: methodTranslator) asStatement ] into: body statements.
+	receiverNode statements do: [:aStatement| body addStatement: (aStatement acceptVisitor: methodTranslator) asStatement ].
 	
 	^ ASTCWhile new
 		condition: ((self literalNodeFor: true) acceptVisitor: methodTranslator);
