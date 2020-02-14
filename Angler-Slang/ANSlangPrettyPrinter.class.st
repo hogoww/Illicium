@@ -106,7 +106,7 @@ ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 
 	aNode isLiteral ifTrue: [ ^ false ].
 	(aNode isBitLeftShiftOperator
-		and: [ aNode operands first isCastOperator
+		and: [ aNode operand isCastOperator
 			and: [ aNode parent isCastOperator ] ]) ifTrue: [ ^ false ].
 
 	aNode isFunctionCall ifTrue: [ ^ false ].
@@ -151,10 +151,10 @@ ANSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
 { #category : #visiting }
 ANSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
 	self parenthesisFor: anOperator print: [	
-		self printBinaryOperand: anOperator operands first.
+		self printBinaryOperand: anOperator leftOperand.
 		self cr spaces.
 		self << ' ' << anOperator class symbol << ' '.
-		self printBinaryOperand: anOperator operands second
+		self printBinaryOperand: anOperator rightOperand
 	]
 ]
 
@@ -200,27 +200,27 @@ ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOp
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 
-	self print: anAssignmentOperator operands first.
+	self print: anAssignmentOperator leftOperand.
 	self << ' ' << anAssignmentOperator class symbol << ' '.
-	self print: anAssignmentOperator operands second
+	self print: anAssignmentOperator rightOperand
 ]
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitBinaryOperator: anOperator [
 
-	self printBinaryOperand: anOperator operands first.
+	self printBinaryOperand: anOperator leftOperand.
 	self << ' ' << anOperator class symbol << ' '.
-	self printBinaryOperand: anOperator operands second.
+	self printBinaryOperand: anOperator rightOperand.
 ]
 
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
 
 	"Special case if first operator is a constant: format the integer correctly"
-	aBitLeftShiftOperator operands first isLiteral ifTrue: [
-		self << (self cLiteralForUnsignedInteger: aBitLeftShiftOperator operands first value longlong: false).
+	aBitLeftShiftOperator leftOperand isLiteral ifTrue: [
+		self << (self cLiteralForUnsignedInteger: aBitLeftShiftOperator leftOperand value longlong: false).
 		self << ' ' << aBitLeftShiftOperator class symbol << ' '.
-		self printBinaryOperand: aBitLeftShiftOperator operands second.
+		self printBinaryOperand: aBitLeftShiftOperator rightOperand.
 		^ self
 	].
 	
@@ -260,7 +260,7 @@ ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 			<< '(';
 			print: aCastOperator type;
 			<< ') '.
-		self parenthesisAround: [ self visitExpression: aCastOperator operands first ] ]
+		self parenthesisAround: [ self visitExpression: aCastOperator operand ] ]
 ]
 
 { #category : #visiting }
@@ -354,8 +354,8 @@ ANSlangPrettyPrinter >> visitLiteral: aLiteral [
 { #category : #visiting }
 ANSlangPrettyPrinter >> visitNegationOperator: aNegationOperator [
 
-	aNegationOperator operands first isLiteral ifTrue: [ 
-		^ (ASTCLiteral value: (aNegationOperator operands first value negated)) acceptVisitor: self
+	aNegationOperator operand isLiteral ifTrue: [ 
+		^ (ASTCLiteral value: (aNegationOperator operand value negated)) acceptVisitor: self
 	].
 
 	super visitNegationOperator: aNegationOperator
@@ -406,11 +406,11 @@ ANSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
 	
 	self enterBlock.
 	self << '('.
-	(anOperator operands at: 1) acceptVisitor: self.
+	anOperator condition acceptVisitor: self.
 	self cr spaces << '? '.
-	(anOperator operands at: 2) acceptVisitor: self.
+	anOperator then acceptVisitor: self.
 	self cr spaces << ': '.
-	(anOperator operands at: 3) acceptVisitor: self.
+	anOperator else ifNotNil: [ :e | e acceptVisitor: self ].
 	self leaveBlock.
 	self << ')'.
 ]
@@ -420,8 +420,8 @@ ANSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 
 	self parenthesisFor: anUnaryOperator print: [
 		self << anUnaryOperator class symbol.
-		self parenthesisIf: anUnaryOperator operands first isRawCCode 
-		print:[ (anUnaryOperator operands at: 1) acceptVisitor: self ]
+		self parenthesisIf: anUnaryOperator operand isRawCCode 
+		print:[ anUnaryOperator operand acceptVisitor: self ]
 	]
 ]
 
