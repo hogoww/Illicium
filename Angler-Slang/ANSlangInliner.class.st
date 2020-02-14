@@ -118,6 +118,7 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
+	(self inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline.
 	aMessageNode parent: nil
@@ -145,15 +146,20 @@ ANSlangInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: a
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMessageNode [
-	| newBlock |
-	aMessageNode parent isMessage ifFalse: [ ^ false ].
-	newBlock := self createNewBlockithStatements: nodesToInline.
-	self typeNewBlock: newBlock.
+ANSlangInliner >> inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMessageNode [
+	aMessageNode parent isCascade ifFalse: [ ^ false ].
+	
+	"inlining several messages in another message is just not done, from what i've seen"
+	inlinedSomething := false.
+	^ true
+]
 
-	"replacing the whole assignment"
-	aMessageNode replaceWith: newBlock.
-	aMessageNode parent: nil.
+{ #category : #inlining }
+ANSlangInliner >> inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMessageNode [
+	aMessageNode parent isMessage ifFalse: [ ^ false ].
+	
+	"inlining several messages in another message is just not done, from what i've seen"
+	inlinedSomething := false.
 	^ true
 ]
 
@@ -293,8 +299,7 @@ ANSlangInliner >> typeNewBlock: newBlock [
 ]
 
 { #category : #applying }
-ANSlangInliner >> visitMessageNode: aMessageNode [ 
-	
+ANSlangInliner >> visitMessageNode: aMessageNode [
 	(self shouldInline: aMessageNode)
 		ifTrue:[ | methodToInline |
 			inlinedSomething := true.

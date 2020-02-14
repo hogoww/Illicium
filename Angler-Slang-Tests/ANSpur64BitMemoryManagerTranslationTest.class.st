@@ -142,8 +142,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveSt
 { #category : #'free space-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #allocateLargestFreeChunk.
 	illiAST := self generateIllicium: #allocateLargestFreeChunk.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -1529,6 +1527,8 @@ ANSpur64BitMemoryManagerTranslationTest >> testInFreeTreeReplacewithStringCompar
 { #category : #'debug printing-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testInOrderPrintFreeTreeprintListStringComparison [
 	| illiAST slangString illiString |
+	<skip>
+	self skip.
 	slangString := self generateSlang: #inOrderPrintFreeTree:printList:.
 	illiAST := self generateIllicium: #inOrderPrintFreeTree:printList:.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -3734,8 +3734,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueStri
 { #category : #'primitive support-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testStringForCStringStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #stringForCString:.
 	illiAST := self generateIllicium: #stringForCString:.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -3889,8 +3887,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testValidClassTableRootPagesStringCom
 { #category : #'free space-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #validFreeTreeChunk:.
 	illiAST := self generateIllicium: #validFreeTreeChunk:.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -3900,8 +3896,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkStringCompariso
 { #category : #'free space-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkparentStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #validFreeTreeChunk:parent:.
 	illiAST := self generateIllicium: #validFreeTreeChunk:parent:.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -3911,8 +3905,6 @@ ANSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkparentStringCom
 { #category : #'free space-equaliy-test' }
 ANSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip.
 	slangString := self generateSlang: #validFreeTree.
 	illiAST := self generateIllicium: #validFreeTree.
 	illiString := self prettyPrintIllicium: illiAST.
