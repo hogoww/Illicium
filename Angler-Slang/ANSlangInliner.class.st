@@ -300,6 +300,9 @@ ANSlangInliner >> typeNewBlock: newBlock [
 
 { #category : #applying }
 ANSlangInliner >> visitMessageNode: aMessageNode [
+	aMessageNode selector = #assert: ifTrue: [ ^ self ].
+	aMessageNode selector = #eassert: ifTrue: [ ^ self ].
+	
 	(self shouldInline: aMessageNode)
 		ifTrue:[ | methodToInline |
 			inlinedSomething := true.
@@ -307,9 +310,9 @@ ANSlangInliner >> visitMessageNode: aMessageNode [
 			self handleTemporariesFrom: methodToInline in: aMessageNode methodNode.
 			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.
-			]ifFalse: [ 
+			]
+		ifFalse: [ 
 				"we don't look further if the message is an assert."	
-				aMessageNode selector = #assert: ifTrue: [ ^ self ].
 				super visitMessageNode: aMessageNode
 			 ]
 	
