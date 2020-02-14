@@ -12,17 +12,17 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority1 [
 	operator debugASTCStructure.
 	self assert: operator isMultiplicationOperator.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isAdditionOperator.
-		node := (operator operands at: 1) operands at: 1.
+		node := operator leftOperand leftOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #a.
 		
-		node := (operator operands at: 1) operands at: 2.
+		node := operator leftOperand rightOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #b.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #c.
 	
@@ -37,17 +37,17 @@ ASTCPrettyPrintTest >> testAssociativityDifferentPriority2 [
 	operator debugASTCStructure.
 	self assert: operator isAdditionOperator.
 		
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isMultiplicationOperator.
-		node := (operator operands at: 2) operands at: 1.
+		node := operator rightOperand leftOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #b.
 		
-		node := (operator operands at: 2) operands at: 2.
+		node := operator rightOperand rightOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #c.
 
