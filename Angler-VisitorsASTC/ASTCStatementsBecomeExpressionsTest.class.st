@@ -26,9 +26,9 @@ ASTCStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment
 	node acceptVisitor: visitor.
 	
 	self assert: node isAssignmentOperator.
-	self assert: node operands first isIdentifier.
+	self assert: node leftOperand isIdentifier.
 	
-	expressionList := node operands second.
+	expressionList := node rightOperand.
 	self assert: expressionList isExpressionList.
 	self assert: expressionList expressions size equals: 2.
 	self assert: expressionList expressions first equals: (ASTCLiteral value: true).
@@ -47,9 +47,9 @@ ASTCStatementsBecomeExpressionsTest >> testBlockWithSingleStatementBecomesExpres
 	node acceptVisitor: visitor.
 	
 	self assert: node isAssignmentOperator.
-	self assert: node operands first isIdentifier.
+	self assert: node leftOperand isIdentifier.
 	
-	expression := node operands second.
+	expression := node rightOperand.
 	self assert: expression isExpression.
 	self assert: expression equals: (ASTCLiteral value: true).
 
@@ -66,8 +66,8 @@ ASTCStatementsBecomeExpressionsTest >> testExpressionStatementBecomesExpression 
 	node acceptVisitor: visitor.
 	
 	self assert: node isAssignmentOperator.
-	self assert: node operands first isIdentifier.
-	self assert: node operands second isExpression.
+	self assert: node leftOperand isIdentifier.
+	self assert: node rightOperand isExpression.
 	
 ]
 
@@ -89,8 +89,8 @@ ASTCStatementsBecomeExpressionsTest >> testIfAndInnerIfBecomesTernaryInAssignmen
 	node acceptVisitor: visitor.
 	
 	self assert: node isAssignmentOperator.
-	self assert: node operands first isIdentifier.
-	self assert: node operands second isTernaryConditionalOperator.
+	self assert: node leftOperand isIdentifier.
+	self assert: node rightOperand isTernaryConditionalOperator.
 	
 ]
 
@@ -108,7 +108,7 @@ ASTCStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
 	node acceptVisitor: visitor.
 	
 	self assert: node isAssignmentOperator.
-	self assert: node operands first isIdentifier.
-	self assert: node operands second isTernaryConditionalOperator.
+	self assert: node leftOperand isIdentifier.
+	self assert: node rightOperand isTernaryConditionalOperator.
 	
 ]

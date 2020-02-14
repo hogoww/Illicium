@@ -11,13 +11,12 @@ ASTCExpressionTest >> testAddition [
 	
 	operator debugASTCStructure.
 	self assert: operator isAdditionOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -29,13 +28,12 @@ ASTCExpressionTest >> testAnd [
 	
 	operator debugASTCStructure.
 	self assert: operator isAndOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := (operator operands at: 1).
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := (operator operands at: 2).
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -47,13 +45,12 @@ ASTCExpressionTest >> testAssign [
 	
 	operator debugASTCStructure.
 	self assert: operator isAssignmentOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isLiteral.
 	self assert: node value equals: 1
 ]
@@ -65,13 +62,12 @@ ASTCExpressionTest >> testAssignAndAdd [
 	
 	operator debugASTCStructure.
 	self assert: operator isAssignementAdditionOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -83,13 +79,12 @@ ASTCExpressionTest >> testBitAnd [
 	
 	operator debugASTCStructure.
 	self assert: operator isBitwiseAndOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -101,13 +96,12 @@ ASTCExpressionTest >> testBitLeftShift [
 	
 	operator debugASTCStructure.
 	self assert: operator isBitLeftShiftOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -119,13 +113,12 @@ ASTCExpressionTest >> testBitOr [
 	
 	operator debugASTCStructure.
 	self assert: operator isBitwiseOrOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -137,13 +130,12 @@ ASTCExpressionTest >> testBitRightShift [
 	
 	operator debugASTCStructure.
 	self assert: operator isBitRightShiftOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -155,13 +147,12 @@ ASTCExpressionTest >> testBitXor [
 	
 	operator debugASTCStructure.
 	self assert: operator isBitwiseXorOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -173,13 +164,12 @@ ASTCExpressionTest >> testCastTo [
 	
 	operator debugASTCStructure.
 	self assert: operator isCastOperator.
-	self assert: operator operands size equals: 1.
 	
 	node := operator type.
 	self assert: node isType.
 	self assert: node type equals: ASTCSmallInteger asTypeReification.
 	
-	node := operator operands at: 1.
+	node := operator operand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]
@@ -191,13 +181,12 @@ ASTCExpressionTest >> testDivision [
 	
 	operator debugASTCStructure.
 	self assert: operator isDivisionOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -209,13 +198,12 @@ ASTCExpressionTest >> testEquals [
 	
 	operator debugASTCStructure.
 	self assert: operator isEqualityOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -227,13 +215,12 @@ ASTCExpressionTest >> testGreater [
 	
 	operator debugASTCStructure.
 	self assert: operator isGreaterOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -245,13 +232,12 @@ ASTCExpressionTest >> testGreaterOrEqual [
 	
 	operator debugASTCStructure.
 	self assert: operator isGreaterOrEqualOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -263,13 +249,12 @@ ASTCExpressionTest >> testIndexer [
 	
 	operator debugASTCStructure.
 	self assert: operator isIndexerOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -281,13 +266,12 @@ ASTCExpressionTest >> testLesser [
 	
 	operator debugASTCStructure.
 	self assert: operator isLesserOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -299,13 +283,12 @@ ASTCExpressionTest >> testLesserOrEqual [
 	
 	operator debugASTCStructure.
 	self assert: operator isLesserOrEqualOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -317,13 +300,12 @@ ASTCExpressionTest >> testModulo [
 	
 	operator debugASTCStructure.
 	self assert: operator isModuloOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -335,13 +317,12 @@ ASTCExpressionTest >> testMultiplication [
 	
 	operator debugASTCStructure.
 	self assert: operator isMultiplicationOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -353,9 +334,8 @@ ASTCExpressionTest >> testNegated [
 	
 	operator debugASTCStructure.
 	self assert: operator isNegationOperator.
-	self assert: operator operands size equals: 1.
 	
-	node := operator operands at: 1.
+	node := operator operand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]
@@ -378,9 +358,8 @@ ASTCExpressionTest >> testNot [
 	
 	operator debugASTCStructure.
 	self assert: operator isLogicalNotOperator.
-	self assert: operator operands size equals: 1.
 	
-	node := operator operands at: 1.
+	node := operator operand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]
@@ -392,13 +371,12 @@ ASTCExpressionTest >> testNotEquals [
 	
 	operator debugASTCStructure.
 	self assert: operator isInequalityOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -410,13 +388,12 @@ ASTCExpressionTest >> testOr [
 	
 	operator debugASTCStructure.
 	self assert: operator isOrOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -428,9 +405,8 @@ ASTCExpressionTest >> testPreIncr [
 	
 	operator debugASTCStructure.
 	self assert: operator isPreIncrementOperator.
-	self assert: operator operands size equals: 1.
 	
-	node := operator operands at: 1.
+	node := operator operand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]
@@ -442,13 +418,12 @@ ASTCExpressionTest >> testStructAccessPointer [
 	
 	operator debugASTCStructure.
 	self assert: operator isStructAccessPointerOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -460,13 +435,12 @@ ASTCExpressionTest >> testStructStaticAccess [
 	
 	operator debugASTCStructure.
 	self assert: operator isStructAccessStaticOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -478,13 +452,12 @@ ASTCExpressionTest >> testSubtraction [
 	
 	operator debugASTCStructure.
 	self assert: operator isSubtractionOperator.
-	self assert: operator operands size equals: 2.
 	
-	node := operator operands at: 1.
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b
 ]
@@ -496,17 +469,16 @@ ASTCExpressionTest >> testThenElse [
 	
 	operator debugASTCStructure.
 	self assert: operator isTernaryConditionalOperator.
-	self assert: operator operands size equals: 3.
 	
-	node := operator operands at: 1.
+	node := operator condition.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator then.
 	self assert: node isIdentifier.
 	self assert: node id equals: #b.
 	
-	node := operator operands at: 3.
+	node := operator else.
 	self assert: node isIdentifier.
 	self assert: node id equals: #c
 ]
@@ -518,9 +490,8 @@ ASTCExpressionTest >> testasAddressOf [
 	
 	operator debugASTCStructure.
 	self assert: operator isAddressOfOperator.
-	self assert: operator operands size equals: 1.
 	
-	node := operator operands at: 1.
+	node := operator operand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 ]

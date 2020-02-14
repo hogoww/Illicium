@@ -3,8 +3,8 @@ Extension { #name : #ASTCIndexerOperator }
 { #category : #'*ASTC-Core-Extensions' }
 ASTCIndexerOperator >> assign: anExpression [
 	^ ASTCAssignmentOperator new
-		addOperand: self;
-		addOperand: anExpression;
+		leftOperand: self;
+		rightOperand: anExpression;
 		yourself
 ]
 

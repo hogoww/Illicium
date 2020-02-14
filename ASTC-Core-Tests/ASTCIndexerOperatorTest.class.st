@@ -12,18 +12,18 @@ ASTCIndexerOperatorTest >> testAssign [
 	operator debugASTCStructure.
 	self assert: operator isAssignmentOperator.
 	
-	node := (operator operands at: 1).
+	node := operator leftOperand.
 	self assert: node isIndexerOperator.
 
-		node := (operator operands at: 1) operands at: 1.
+		node := operator leftOperand leftOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #a.
 	
-		node := (operator operands at: 1) operands at: 2.
+		node := operator leftOperand rightOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #c.
 	
-	node := (operator operands at: 2).
+	node := operator rightOperand.
 	self assert: node isLiteral.
 	self assert: node value equals: 1
 ]
@@ -36,11 +36,11 @@ ASTCIndexerOperatorTest >> testIndexAt [
 	operator debugASTCStructure.
 	self assert: operator isIndexerOperator.
 	
-	node := (operator operands at: 1).
+	node := operator leftOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #a.
 	
-	node := operator operands at: 2.
+	node := operator rightOperand.
 	self assert: node isIdentifier.
 	self assert: node id equals: #c.
 ]

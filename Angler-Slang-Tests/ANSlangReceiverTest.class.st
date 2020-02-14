@@ -34,7 +34,7 @@ ANSlangReceiverTest >> testIfNil [
 	
 	expectedC := (ASTCIf new
 		condition: (ASTCLogicalNotOperator new
-			addOperand: (ASTCLiteral value: 1);
+			operand: (ASTCLiteral value: 1);
 			yourself);
 		then: 
 		(ASTCBlock new
@@ -44,8 +44,8 @@ ANSlangReceiverTest >> testIfNil [
 	self assert: astC isIf.
 	self assert: astC condition isLogicalNotOperator.
 	self deny: astC condition isStatement.
-	self assert: (astC condition operands at: 1) isLiteral.
-	self assert: (astC condition operands at: 1) value equals: 1.
+	self assert: (astC condition leftOperand) isLiteral.
+	self assert: (astC condition leftOperand) value equals: 1.
 	self assert: astC then isBlock.
 	self assert: (astC then statements at: 1) isExpressionStatement.
 	self assert: (astC then statements at: 1) expression isLiteral.
@@ -59,50 +59,51 @@ ANSlangReceiverTest >> testIfNil [
 { #category : #tests }
 ANSlangReceiverTest >> testMoins [
 	"Note: exactly the same test as ASTCSmallIntegerTest, except for typing"
-	| messageNode astC expectedC |
+	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 - 2'.
 	"Manual typing"
 	self addType: #int to: messageNode.
 	self addType: #int to: messageNode receiver.
 	self addType: #int to: messageNode arguments first.
 	
-	astC := messageNode acceptVisitor: methodTranslator.
+	operator := messageNode acceptVisitor: methodTranslator.
 	
 	expectedC := (ASTCLiteral value: 1) - (ASTCLiteral value: 2).
 	
-	self assert: astC isSubtractionOperator.
-	self assert: (astC operands at: 1) isLiteral.
-	self assert: (astC operands at: 1) value equals: 1.
-	self assert: (astC operands at: 2) isLiteral.
-	self assert: (astC operands at: 2) value equals: 2.
-	self assert: astC equals: expectedC.
+	self assert: operator isSubtractionOperator.
+	self assert: operator leftOperand isLiteral.
+	self assert: operator leftOperand value equals: 1.
+	self assert: operator rightOperand isLiteral.
+	self assert: operator rightOperand value equals: 2.
+	self assert: operator equals: expectedC.
 
-	astC debugASTCStructure.
+	operator debugASTCStructure.
 	expectedC debugASTCStructure.
 ]
 
 { #category : #tests }
 ANSlangReceiverTest >> testPlus [
 	"Note: exactly the same test as ASTCSmallIntegerTest, except for typing"
-	| messageNode astC expectedC |
+	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 + 2'.
 	"Manual typing"
 	self addType: #int to: messageNode.
 	self addType: #int to: messageNode receiver.
 	self addType: #int to: messageNode arguments first.
 	
-	astC := messageNode acceptVisitor: methodTranslator.
+	operator := messageNode acceptVisitor: methodTranslator.
 	
 	expectedC := (ASTCLiteral value: 1) 
 		+ (ASTCLiteral value: 2).
 	
-	self assert: astC isAdditionOperator.
-	self assert: (astC operands at: 1) isLiteral.
-	self assert: (astC operands at: 1) value equals: 1.
-	self assert: (astC operands at: 2) isLiteral.
-	self assert: (astC operands at: 2) value equals: 2.
-	self assert: astC equals: expectedC.
+	self assert: operator isAdditionOperator.
+	self assert: operator isLiteral.
+	self assert: operator leftOperand isLiteral.
+	self assert: operator leftOperand value equals: 1.
+	self assert: operator rightOperand isLiteral.
+	self assert: operator rightOperand value equals: 2.
+	self assert: operator equals: expectedC.
 
-	astC debugASTCStructure.
+	operator debugASTCStructure.
 	expectedC debugASTCStructure.
 ]

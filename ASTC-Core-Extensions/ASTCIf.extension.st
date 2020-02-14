@@ -7,9 +7,9 @@ ASTCIf >> becomeTernaryConditionalOperator [
 	asTernary := ASTCTernaryConditionalOperator new
 		parent: parent;
 		pharoNode: pharoNode;
-		addOperand: condition;
-		addOperand: then;
-		addOperand: else;
+		condition: condition;
+		then: then;
+		else: else;
 		yourself.
 	
 	self becomeForward: asTernary

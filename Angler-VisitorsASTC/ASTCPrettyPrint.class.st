@@ -146,9 +146,9 @@ ASTCPrettyPrint >> unindent [
 { #category : #visiting }
 ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
-		self printBinaryOperand: anOperator operands first.
+		self printBinaryOperand: anOperator leftOperand.
 		self << ' ' << anOperator class symbol << ' '.
-		self printBinaryOperand: anOperator operands second.
+		self printBinaryOperand: anOperator rightOperand.
 	]
 ]
 
@@ -183,7 +183,7 @@ ASTCPrettyPrint >> visitCastOperator: aCastOperator [
 		self << '(';
 			print: aCastOperator type;
 			<< ') ';
-			print: (aCastOperator operands at: 1)
+			print: (aCastOperator operand)
 		]
 ]
 
@@ -295,9 +295,9 @@ ASTCPrettyPrint >> visitIf: anIf [
 { #category : #visiting }
 ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 	self parenthesisFor: anIndexerOperator print: [
-		self visitExpression: anIndexerOperator operands first.
+		self visitExpression: anIndexerOperator leftOperand.
 		self << '['.
-		self visitExpression: anIndexerOperator operands second.
+		self visitExpression: anIndexerOperator rightOperand.
 		self << ']' ]
 ]
 
@@ -341,11 +341,11 @@ ASTCPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 
 { #category : #visiting }
 ASTCPrettyPrint >> visitTernaryConditionalOperator: anOperator [
-	(anOperator operands at: 1) acceptVisitor: self.
+	anOperator condition acceptVisitor: self.
 	self << ' ' << '?' << ' '.
-	(anOperator operands at: 2) acceptVisitor: self.
+	anOperator then acceptVisitor: self.
 	self << ' ' << ':' << ' '.
-	(anOperator operands at: 3) acceptVisitor: self
+	anOperator else ifNotNil:[ :e | e acceptVisitor: self ]
 ]
 
 { #category : #visiting }
@@ -357,7 +357,7 @@ ASTCPrettyPrint >> visitType: aType [
 ASTCPrettyPrint >> visitUnaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
 		self << anOperator class symbol.
-		(anOperator operands at: 1) acceptVisitor: self.
+		anOperator operand acceptVisitor: self.
 	].
 ]
 

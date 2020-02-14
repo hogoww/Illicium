@@ -28,7 +28,7 @@ ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
 			ASTCAssignmentOperator new
 				pharoNode: anAssignmentNode;
 				comment: anAssignmentNode commentOrNil;
-				addOperand: (anAssignmentNode variable acceptVisitor: methodTranslator);
-				addOperand: (anAssignmentNode value acceptVisitor: methodTranslator);
+				leftOperand: (anAssignmentNode variable acceptVisitor: methodTranslator);
+				rightOperand: (anAssignmentNode value acceptVisitor: methodTranslator);
 				yourself ]
 ]
