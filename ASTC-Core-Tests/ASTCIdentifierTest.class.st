@@ -10,16 +10,6 @@ ASTCIdentifierTest >> testKeywordIf [
 ]
 
 { #category : #tests }
-ASTCIdentifierTest >> testKeywordInt [
-	self should: [ ASTCIdentifier new id: #int ] raise: ReservedKeywordUse 
-]
-
-{ #category : #tests }
-ASTCIdentifierTest >> testKeywordLong [
-	self should: [ ASTCIdentifier new id: #long ] raise: ReservedKeywordUse 
-]
-
-{ #category : #tests }
 ASTCIdentifierTest >> testPharoKeyword1 [
 	self shouldnt: [ ASTCIdentifier new id: #self ] raise: ReservedKeywordUse 
 ]
