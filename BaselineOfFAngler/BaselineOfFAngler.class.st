@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfAngler,
+	#name : #BaselineOfFAngler,
 	#superclass : #BaselineOf,
 	#category : #BaselineOfFAngler
 }
 
 { #category : #accessing }
-BaselineOfAngler >> baseline: spec [
+BaselineOfFAngler >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
@@ -43,7 +43,7 @@ BaselineOfAngler >> baseline: spec [
 ]
 
 { #category : #accessing }
-BaselineOfAngler >> lastPlayground [
+BaselineOfFAngler >> lastPlayground [
 
 ASTCGenerator generate.	
 MAPluginTestGenerator generateVMMakerPluginsTests.
@@ -57,6 +57,6 @@ MASpur64BitMemoryManagerTranslationTest methods select:[:m| m hasPragmaNamed: #s
 ]
 
 { #category : #accessing }
-BaselineOfAngler >> projectClass [
+BaselineOfFAngler >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]

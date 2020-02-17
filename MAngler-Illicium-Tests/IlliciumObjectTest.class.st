@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCObjectTest,
+	#name : #IlliciumObjectTest,
 	#superclass : #FAMessageNodeTranslatorTest,
 	#category : #'MAngler-Illicium-Tests'
 }
 
 { #category : #tests }
-ASTCObjectTest >> testEqual [
+IlliciumObjectTest >> testEqual [
 	| astC expectedC|
 	astC := (FATranslator translateExpression: '1 = 6') statements at: 1.
 	

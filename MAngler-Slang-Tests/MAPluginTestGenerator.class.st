@@ -103,7 +103,7 @@ MAPluginTestGenerator >> generateResourceAccessorsFor: aRessourceClass [
 { #category : #'ressource-generation' }
 MAPluginTestGenerator >> generateResourceClassFor: aClass [
 	| ressourceClass |
-	ressourceClass := self class resourceBaseClass subclass: 'AN' , aClass name , 'Ressource'
+	ressourceClass := self class resourceBaseClass subclass: 'MA' , aClass name , 'Ressource'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'Angler-Slang-Tests'.
@@ -136,7 +136,7 @@ MAPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass f
 { #category : #'test-generation' }
 MAPluginTestGenerator >> generateTestClassFor: aClass [
 	| testClass |
-	testClass := self class testBaseClass subclass: 'AN' , aClass name , 'TranslationTest'
+	testClass := self class testBaseClass subclass: 'MA' , aClass name , 'TranslationTest'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'Angler-Slang-Tests'.

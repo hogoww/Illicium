@@ -1,6 +1,6 @@
 Class {
 	#name : #IlliciumObject,
-	#superclass : #IlliciumKernelClass,
+	#superclass : #FAKernelClass,
 	#category : #'MAngler-Illicium-messages-translators'
 }
 

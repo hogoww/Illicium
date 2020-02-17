@@ -1,16 +1,16 @@
 Class {
-	#name : #ASTCBooleanTest,
+	#name : #IlliciumBooleanTest,
 	#superclass : #FAMessageNodeTranslatorTest,
 	#category : #'MAngler-Illicium-Tests'
 }
 
 { #category : #accessing }
-ASTCBooleanTest class >> testedClass [
+IlliciumBooleanTest class >> testedClass [
 	^ Boolean
 ]
 
 { #category : #tests }
-ASTCBooleanTest >> testIfTrue [
+IlliciumBooleanTest >> testIfTrue [
 	| astC expectedC messageNode |
 	messageNode := RBParser parseExpression: 'true ifTrue:[ 1 ]'.
 	
@@ -43,7 +43,7 @@ ASTCBooleanTest >> testIfTrue [
 ]
 
 { #category : #tests }
-ASTCBooleanTest >> testIfTrueIfFalse [
+IlliciumBooleanTest >> testIfTrueIfFalse [
 	| astC expectedC |
 	astC := FATranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]'.
 	

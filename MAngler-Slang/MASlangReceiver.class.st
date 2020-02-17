@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangReceiver,
-	#superclass : #IlliciumKernelClass,
+	#superclass : #FAKernelClass,
 	#instVars : [
 		'type'
 	],

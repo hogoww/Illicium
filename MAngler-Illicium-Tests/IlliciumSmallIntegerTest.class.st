@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCSmallIntegerTest,
+	#name : #IlliciumSmallIntegerTest,
 	#superclass : #FAMessageNodeTranslatorTest,
 	#category : #'MAngler-Illicium-Tests'
 }
 
 { #category : #tests }
-ASTCSmallIntegerTest >> testMoins [
+IlliciumSmallIntegerTest >> testMoins [
 	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 - 2'.
 	"Manual typing"
@@ -29,7 +29,7 @@ ASTCSmallIntegerTest >> testMoins [
 ]
 
 { #category : #tests }
-ASTCSmallIntegerTest >> testPlus [
+IlliciumSmallIntegerTest >> testPlus [
 	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 + 2'.
 	"Manual typing"
