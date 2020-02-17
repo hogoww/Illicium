@@ -57,8 +57,7 @@ MASlangReceiver >> / anotherObject [
 MASlangReceiver >> // anotherObject [
 	"should not work"
 	self flag:#notWorking.
-	^ self translatedReceiver / (anotherObject acceptVisitor: methodTranslator) 
-		
+	^ self unsupportedFeature: #//
 ]
 
 { #category : #accessing }
@@ -128,7 +127,7 @@ MASlangReceiver >> >> aNumber [
 { #category : #'reflective operations' }
 MASlangReceiver >> \\ something [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #\\
 ]
 
 { #category : #'reflective operations' }
@@ -232,13 +231,13 @@ MASlangReceiver >> bitAnd: anInteger [
 { #category : #'reflective operations' }
 MASlangReceiver >> bitClear: something [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #bitClear:
 ]
 
 { #category : #'reflective operations' }
 MASlangReceiver >> bitInvert64 [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #bitInvert64
 ]
 
 { #category : #'reflective operations' }
@@ -332,7 +331,7 @@ MASlangReceiver >> cCoerce: aVariable to: aType [
 { #category : #'reflective operations' }
 MASlangReceiver >> cCoerceSimple: e to: er [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #cCoerceSimple:to: 
 ]
 
 { #category : #'reflective operations' }
@@ -360,7 +359,7 @@ MASlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
 { #category : #'reflective operations' }
 MASlangReceiver >> deny: something [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #deny:
 ]
 
 { #category : #'reflective operations' }
@@ -484,6 +483,11 @@ MASlangReceiver >> isIntegerObject: anOop [
 { #category : #'reflective operations' }
 MASlangReceiver >> isNil [
 	^ self translatedReceiver equals: (ASTCLiteral value: #null)
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> isStrict [
+	^ methodTranslator isStrict
 ]
 
 { #category : #accessing }
@@ -650,21 +654,28 @@ MASlangReceiver >> type: aType [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> unsupportedFeature: aSelector [
+	self isStrict ifTrue: [ ^ UnsupportedFeature new feature: aSelector ; signal ].
+	
+	^ ASTCLiteral value: '''unsuportedFeature'''
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> value: somethong [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #value:
 ]
 
 { #category : #'reflective operations' }
 MASlangReceiver >> value: somethong value: bidule [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #value:value:
 ]
 
 { #category : #'reflective operations' }
 MASlangReceiver >> whileFalse: something [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #whileFalse:
 ]
 
 { #category : #'reflective operations' }
@@ -712,5 +723,5 @@ MASlangReceiver >> ~= anotherObject [
 { #category : #'reflective operations' }
 MASlangReceiver >> ~~ something [
 	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+	^ self unsupportedFeature: #~~
 ]

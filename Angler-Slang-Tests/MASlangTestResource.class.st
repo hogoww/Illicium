@@ -24,5 +24,6 @@ MASlangTestResource >> newTranslatorWith: aClass [
 	^ self class translatorClass new
 		program: MASlangProgram new;
 		addClass: aClass;
+		beStrict;
 		yourself
 ]

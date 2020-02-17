@@ -103,6 +103,11 @@ FAMethodTranslator >> isStatefulCode [
 ]
 
 { #category : #configuration }
+FAMethodTranslator >> isStrict [
+	^ classTranslator isStrict
+]
+
+{ #category : #configuration }
 FAMethodTranslator >> literalValueNodeTranslator: anILLiteralValueNodeTranslator [ 
 	
 	translators at: #literalValueNodeTranslator put: (anILLiteralValueNodeTranslator methodTranslator: self ; yourself).

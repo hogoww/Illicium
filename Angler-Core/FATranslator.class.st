@@ -50,6 +50,11 @@ FATranslator >> addMethod: aCollection [
 ]
 
 { #category : #accessors }
+FATranslator >> beStrict [
+ 	classTranslator beStrict
+]
+
+{ #category : #accessors }
 FATranslator >> classTranslator [
 	^ classTranslator
 ]

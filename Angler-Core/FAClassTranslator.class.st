@@ -6,7 +6,8 @@ Class {
 		'mainTranslator',
 		'inferer',
 		'stateTranslator',
-		'program'
+		'program',
+		'isStrict'
 	],
 	#category : #'Angler-Core-translation'
 }
@@ -54,6 +55,11 @@ FAClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
 	^ methodsASTs
 ]
 
+{ #category : #configuration }
+FAClassTranslator >> beStrict [
+	isStrict := true
+]
+
 { #category : #typing }
 FAClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
@@ -74,9 +80,10 @@ FAClassTranslator >> getReplacementType: aType [
 	^ mainTranslator getReplacementType: aType 
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 FAClassTranslator >> initialize [
 	super initialize.
+	isStrict := false.
 	methodTranslator := FAMethodTranslator new
 		classTranslator: self;
 		yourself.
@@ -89,6 +96,11 @@ FAClassTranslator >> initialize [
 FAClassTranslator >> isStatefulCode [
 	" will be used in the future to know if the translated plugin should have an instance, and stuff declared in an Struct"
 	^ self subclassResponsibility 
+]
+
+{ #category : #configuration }
+FAClassTranslator >> isStrict [
+	^ isStrict
 ]
 
 { #category : #accessing }
