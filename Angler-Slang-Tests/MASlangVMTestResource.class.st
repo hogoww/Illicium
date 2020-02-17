@@ -1,10 +1,10 @@
 Class {
-	#name : #ANSlangVMTestResource,
-	#superclass : #ANSlangTestResource,
+	#name : #MASlangVMTestResource,
+	#superclass : #MASlangTestResource,
 	#category : #'Angler-Slang-Tests-generated-tests-base'
 }
 
 { #category : #configuring }
-ANSlangVMTestResource class >> translatorClass [
+MASlangVMTestResource class >> translatorClass [
 	^ ANSlangTranslator
 ]

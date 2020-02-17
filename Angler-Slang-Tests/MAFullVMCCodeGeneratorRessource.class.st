@@ -3,7 +3,7 @@ Ressource for VM Slang tests.
 The CCodeGenerator is only created once, and needs to be reseted manually if needed.
 "
 Class {
-	#name : #ANFullVMCCodeGeneratorRessource,
+	#name : #MAFullVMCCodeGeneratorRessource,
 	#superclass : #TestResource,
 	#instVars : [
 		'codeGenerator'
@@ -12,23 +12,23 @@ Class {
 }
 
 { #category : #initialization }
-ANFullVMCCodeGeneratorRessource class >> resetInstance [
+MAFullVMCCodeGeneratorRessource class >> resetInstance [
 	<script>
 	self reset
 ]
 
 { #category : #'generating machine code' }
-ANFullVMCCodeGeneratorRessource >> codeGenerator [
+MAFullVMCCodeGeneratorRessource >> codeGenerator [
 	^ codeGenerator
 ]
 
 { #category : #accessing }
-ANFullVMCCodeGeneratorRessource >> codeGenerator: anObject [
+MAFullVMCCodeGeneratorRessource >> codeGenerator: anObject [
 	codeGenerator := anObject
 ]
 
 { #category : #'generating machine code' }
-ANFullVMCCodeGeneratorRessource >> newCodeGenerator [
+MAFullVMCCodeGeneratorRessource >> newCodeGenerator [
 	^ (VMMaker
 		makerFor: StackInterpreter
 		and: StackToRegisterMappingCogit
@@ -47,7 +47,7 @@ ANFullVMCCodeGeneratorRessource >> newCodeGenerator [
 ]
 
 { #category : #'generating machine code' }
-ANFullVMCCodeGeneratorRessource >> setUp [
+MAFullVMCCodeGeneratorRessource >> setUp [
 	super setUp.
 	codeGenerator := self newCodeGenerator
 ]

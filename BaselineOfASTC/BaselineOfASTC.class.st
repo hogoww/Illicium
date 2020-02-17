@@ -43,14 +43,14 @@ BaselineOfASTC >> baseline: spec [
 BaselineOfASTC >> lastPlayground [
 
 ASTCGenerator generate.	
-ANPluginTestGenerator generateVMMakerPluginsTests.
-ANPluginTestGenerator generateVMMakerInterpreterPrimitiveTests.
-ANTestGenerator generateVMTests.
-ANPluginTestGenerator cleanUp.
-ANTestGenerator cleanUp.
-ANSlangTestResource resetAll.
+MAPluginTestGenerator generateVMMakerPluginsTests.
+MAPluginTestGenerator generateVMMakerInterpreterPrimitiveTests.
+MATestGenerator generateVMTests.
+MAPluginTestGenerator cleanUp.
+MATestGenerator cleanUp.
+MASlangTestResource resetAll.
 
-ANSpur64BitMemoryManagerTranslationTest methods select:[:m| m hasPragmaNamed: #skip]
+MASpur64BitMemoryManagerTranslationTest methods select:[:m| m hasPragmaNamed: #skip]
 ]
 
 { #category : #accessing }

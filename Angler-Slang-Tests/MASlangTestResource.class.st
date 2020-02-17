@@ -1,5 +1,5 @@
 Class {
-	#name : #ANSlangTestResource,
+	#name : #MASlangTestResource,
 	#superclass : #TestResource,
 	#instVars : [
 		'translator'
@@ -8,21 +8,21 @@ Class {
 }
 
 { #category : #configuring }
-ANSlangTestResource class >> resetAll [
+MASlangTestResource class >> resetAll [
 	<script>
 	self allSubclassesDo: [ :aResourceClass | aResourceClass reset ]
 ]
 
 { #category : #configuring }
-ANSlangTestResource class >> translatorClass [
+MASlangTestResource class >> translatorClass [
 	"should return the method used for this tests translation"
 	^ self subclassResponsibility
 ]
 
 { #category : #'instance creation' }
-ANSlangTestResource >> newTranslatorWith: aClass [
+MASlangTestResource >> newTranslatorWith: aClass [
 	^ self class translatorClass new
-		program: ANSlangProgram new;
+		program: MASlangProgram new;
 		addClass: aClass;
 		yourself
 ]

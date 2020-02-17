@@ -4,7 +4,7 @@ I am a copy of class ILSlangToCGeneratedTests. This comment is copied from there
 This class contains tests
 "
 Class {
-	#name : #ANSlangToCGeneratedTests,
+	#name : #MASlangToCGeneratedTests,
 	#superclass : #TestCase,
 	#instVars : [
 		'translator',
@@ -14,45 +14,45 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-ANSlangToCGeneratedTests class >> ressource [
-	^ { ANFullVMCCodeGeneratorRessource }
+MASlangToCGeneratedTests class >> ressource [
+	^ { MAFullVMCCodeGeneratorRessource }
 ]
 
 { #category : #generating }
-ANSlangToCGeneratedTests >> generateIllicium: aSelector [ 
+MASlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
 	^ self translator translateMethod: aSelector fromClass: testedClass
 ]
 
 { #category : #generating }
-ANSlangToCGeneratedTests >> newPrettyPrinter [
+MASlangToCGeneratedTests >> newPrettyPrinter [
 
 	^ self translator prettyPrinterClass new
 ]
 
 { #category : #generating }
-ANSlangToCGeneratedTests >> prettyPrintIllicium: anAST [
+MASlangToCGeneratedTests >> prettyPrintIllicium: anAST [
 
 	^ anAST definitions first prettyPrintUsing: self newPrettyPrinter
 ]
 
 { #category : #accessing }
-ANSlangToCGeneratedTests >> testedClass [
+MASlangToCGeneratedTests >> testedClass [
 	^ testedClass
 ]
 
 { #category : #accessing }
-ANSlangToCGeneratedTests >> testedClass: aClass [
+MASlangToCGeneratedTests >> testedClass: aClass [
 	testedClass := aClass
 ]
 
 { #category : #accessing }
-ANSlangToCGeneratedTests >> timeLimit: aDuration [
+MASlangToCGeneratedTests >> timeLimit: aDuration [
 	^ Duration seconds: 5
 ]
 
 { #category : #accessing }
-ANSlangToCGeneratedTests >> translator [
+MASlangToCGeneratedTests >> translator [
 	"Should be generated.
 	Should return the reference of the ressource."
 	^ self subclassResponsibility

@@ -1,5 +1,5 @@
 Class {
-	#name : #ANSlangInlinerTest,
+	#name : #MASlangInlinerTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'program',
@@ -10,135 +10,135 @@ Class {
 }
 
 { #category : #support }
-ANSlangInlinerTest >> methodInliningAMethodInliningAStatement [
+MASlangInlinerTest >> methodInliningAMethodInliningAStatement [
 	self methodWithSingleStatementToInline
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodReturningInlinedSingleStatement [
+MASlangInlinerTest >> methodReturningInlinedSingleStatement [
 	^ self methodWithSingleStatement
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithATemp [
+MASlangInlinerTest >> methodWithATemp [
 	| t |
 	t
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithATempInliningMethodWithSameTemp [
+MASlangInlinerTest >> methodWithATempInliningMethodWithSameTemp [
 	| t |
 	t := self methodWithATemp
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithBlockParameter: aBlock [
+MASlangInlinerTest >> methodWithBlockParameter: aBlock [
 	aBlock value
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithBlockParameterToInline [
+MASlangInlinerTest >> methodWithBlockParameterToInline [
 	self methodWithBlockParameter: [ 1 even ]
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithCMacro [
+MASlangInlinerTest >> methodWithCMacro [
 	
 	<cmacro>
 	^ 17
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithMacroToInline [
+MASlangInlinerTest >> methodWithMacroToInline [
 	
 	^ self methodWithCMacro
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithSingleStatement [
+MASlangInlinerTest >> methodWithSingleStatement [
 	1 even
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporary [
+MASlangInlinerTest >> methodWithSingleStatementAndSingleTemporary [
 	| t |
 	1 even
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithSingleStatementAndSingleTemporaryToInline [
+MASlangInlinerTest >> methodWithSingleStatementAndSingleTemporaryToInline [
 	self methodWithSingleStatementAndSingleTemporary
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithSingleStatementThatReturns [
+MASlangInlinerTest >> methodWithSingleStatementThatReturns [
 	^ 1 even
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithSingleStatementThatReturnsToInline [
+MASlangInlinerTest >> methodWithSingleStatementThatReturnsToInline [
 	self methodWithSingleStatementThatReturns
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithSingleStatementToInline [
+MASlangInlinerTest >> methodWithSingleStatementToInline [
 	self methodWithSingleStatement
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatements [
+MASlangInlinerTest >> methodWithTwoStatements [
 	1 even.
 	2 even
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsThatBothInlineSingleStatements [
+MASlangInlinerTest >> methodWithTwoStatementsThatBothInlineSingleStatements [
 	self methodWithSingleStatement.
 	self methodWithSingleStatement
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsThatBothInlineTwoStatements [
+MASlangInlinerTest >> methodWithTwoStatementsThatBothInlineTwoStatements [
 	self methodWithTwoStatements.
 	self methodWithTwoStatements
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignment [
+MASlangInlinerTest >> methodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignment [
 	| t |
 	t := self methodWithTwoStatements.
 	t := self methodWithTwoStatements
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsThatReturns [
+MASlangInlinerTest >> methodWithTwoStatementsThatReturns [
 	1 even.
 	^ 2 even
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsThatReturnsToInline [
+MASlangInlinerTest >> methodWithTwoStatementsThatReturnsToInline [
 	self methodWithTwoStatementsThatReturns
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsToInline [
+MASlangInlinerTest >> methodWithTwoStatementsToInline [
 	self methodWithTwoStatements
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsToInlineIntoAssignment [
+MASlangInlinerTest >> methodWithTwoStatementsToInlineIntoAssignment [
 	| t |
 	t := self methodWithTwoStatements
 ]
 
 { #category : #support }
-ANSlangInlinerTest >> methodWithTwoStatementsToInlineIntoReturn [
+MASlangInlinerTest >> methodWithTwoStatementsToInlineIntoReturn [
 	^ self methodWithTwoStatements
 ]
 
 { #category : #running }
-ANSlangInlinerTest >> setUp [
+MASlangInlinerTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 	super setUp.
 	program := ANProgram new.
@@ -147,7 +147,7 @@ ANSlangInlinerTest >> setUp [
 ]
 
 { #category : #'test-renaming' }
-ANSlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
+MASlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithATemp) ast.
 	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
@@ -165,7 +165,7 @@ ANSlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
+MASlangInlinerTest >> testInlineMessageWithBlockParameter [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithBlockParameter:) ast. 
 	initialMethod := (self class >> #methodWithBlockParameterToInline) ast.
@@ -183,7 +183,7 @@ ANSlangInlinerTest >> testInlineMessageWithBlockParameter [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineMessageWithCMacroShouldNotInline [
+MASlangInlinerTest >> testInlineMessageWithCMacroShouldNotInline [
 	| resultingMethod initialMethod |
 	program addMethod: (self class >> #methodWithCMacro) ast. 
 	initialMethod := (self class >> #methodWithMacroToInline) ast.
@@ -195,7 +195,7 @@ ANSlangInlinerTest >> testInlineMessageWithCMacroShouldNotInline [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineSingleStatement [
+MASlangInlinerTest >> testInlineSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithSingleStatement) ast.
 	initialMethod := (self class >> #methodWithSingleStatementToInline) ast.
@@ -212,7 +212,7 @@ ANSlangInlinerTest >> testInlineSingleStatement [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
+MASlangInlinerTest >> testInlineSingleStatementAndTemporary [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithSingleStatementAndSingleTemporary) ast.
 	initialMethod := (self class >> #methodWithSingleStatementAndSingleTemporaryToInline) ast.
@@ -233,7 +233,7 @@ ANSlangInlinerTest >> testInlineSingleStatementAndTemporary [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
+MASlangInlinerTest >> testInlineSingleStatementThatReturns [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithSingleStatementThatReturns) ast.
 	initialMethod := (self class >> #methodWithSingleStatementThatReturnsToInline) ast.
@@ -250,7 +250,7 @@ ANSlangInlinerTest >> testInlineSingleStatementThatReturns [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineTwoStatement [
+MASlangInlinerTest >> testInlineTwoStatement [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsToInline) ast.
@@ -271,7 +271,7 @@ ANSlangInlinerTest >> testInlineTwoStatement [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
+MASlangInlinerTest >> testInlineTwoStatementIntoAssignment [
 	| resultingMethod initialMethod assignment block |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsToInlineIntoAssignment) ast.
@@ -298,7 +298,7 @@ ANSlangInlinerTest >> testInlineTwoStatementIntoAssignment [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineTwoStatementIntoReturn [
+MASlangInlinerTest >> testInlineTwoStatementIntoReturn [
 	| resultingMethod initialMethod block secondMessage firstMessage |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsToInlineIntoReturn) ast.
@@ -325,7 +325,7 @@ ANSlangInlinerTest >> testInlineTwoStatementIntoReturn [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
+MASlangInlinerTest >> testInlineTwoStatementThatReturns [
 	"same behavior as self class >> testInlineTwoStatement, because the return is discarded in the inlining"
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithTwoStatementsThatReturns) ast. 
@@ -346,7 +346,7 @@ ANSlangInlinerTest >> testInlineTwoStatementThatReturns [
 ]
 
 { #category : #'test-multiples' }
-ANSlangInlinerTest >> testMethodInliningMethodInliningAStatement [
+MASlangInlinerTest >> testMethodInliningMethodInliningAStatement [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithSingleStatementToInline) ast.
 	program addMethod: (self class >> #methodWithSingleStatement) ast.
@@ -363,7 +363,7 @@ ANSlangInlinerTest >> testMethodInliningMethodInliningAStatement [
 ]
 
 { #category : #'test-multiples' }
-ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineSingleStatement [
+MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithSingleStatement) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineSingleStatements) ast.
@@ -382,7 +382,7 @@ ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineSingleStatement [
 ]
 
 { #category : #'test-multiples' }
-ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatement [
+MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatement [
 	| resultingMethod firstInlinedStatement initialMethod secondInlinedStatement |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatements) ast.
@@ -407,7 +407,7 @@ ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatement [
 ]
 
 { #category : #'test-multiples' }
-ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignments [
+MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignments [
 	| resultingMethod firstInlinedStatement initialMethod assignment |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignment) ast.
@@ -428,7 +428,7 @@ ANSlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatementsInto
 ]
 
 { #category : #'test-renaming' }
-ANSlangInlinerTest >> testNewNamesShouldBeDeclared [
+MASlangInlinerTest >> testNewNamesShouldBeDeclared [
 	| resultingMethod  initialMethod newTempNames |
 	program addMethod: (self class >> #methodWithATemp) ast.
 	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
@@ -445,7 +445,7 @@ ANSlangInlinerTest >> testNewNamesShouldBeDeclared [
 ]
 
 { #category : #'test-renaming' }
-ANSlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
+MASlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 	| resultingMethod  initialMethod declarationAnnotation declarationVisitor methodThatWillBeInlined |
 	methodThatWillBeInlined := (self class >> #methodWithATemp) ast.
 	program addMethod: methodThatWillBeInlined.
@@ -472,7 +472,7 @@ ANSlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 ]
 
 { #category : #tests }
-ANSlangInlinerTest >> testReturningInlinedSingleStatement [
+MASlangInlinerTest >> testReturningInlinedSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithSingleStatement) ast. 
 	initialMethod := (self class >> #methodReturningInlinedSingleStatement) ast.
@@ -490,7 +490,7 @@ ANSlangInlinerTest >> testReturningInlinedSingleStatement [
 ]
 
 { #category : #'test-renaming' }
-ANSlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
+MASlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
 	| tempNamesToInline tempNamesInliningIn res |
 	tempNamesToInline := { #a }.
 	tempNamesInliningIn := { #a }.
@@ -501,7 +501,7 @@ ANSlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
 ]
 
 { #category : #'test-renaming' }
-ANSlangInlinerTest >> testTempNameDifferentShouldNotChangeNames [
+MASlangInlinerTest >> testTempNameDifferentShouldNotChangeNames [
 	| tempNamesToInline tempNamesInliningIn res |
 	tempNamesToInline := { #a }.
 	tempNamesInliningIn := { #b }.

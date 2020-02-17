@@ -82,7 +82,7 @@ ANSlangClassTranslator >> isStatefulCode [
 { #category : #configuration }
 ANSlangClassTranslator >> postTranslationVisitors [
 	^ {
-		ASTCStatementsBecomeExpressions new
+		FAStatementsBecomeExpressions new
 	}
 ]
 

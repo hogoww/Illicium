@@ -1,23 +1,23 @@
 Class {
-	#name : #ANSlangReceiverTest,
+	#name : #MASlangReceiverTest,
 	#superclass : #ASTCMessageNodeTranslatorTest,
 	#category : #'Angler-Slang-Tests-analysis-tests'
 }
 
 { #category : #tests }
-ANSlangReceiverTest >> addType: aSymbol to: aNode [ 
+MASlangReceiverTest >> addType: aSymbol to: aNode [ 
 	aNode propertyAt: ASTCTypeAnnotator property
 		put: aSymbol -> 'Generaed, no Phineas Type'
 ]
 
 { #category : #tests }
-ANSlangReceiverTest >> setUp [
+MASlangReceiverTest >> setUp [
 	"Overide since we're working on slang"
 	methodTranslator := ANSlangTranslator new classTranslator methodTranslator.
 ]
 
 { #category : #tests }
-ANSlangReceiverTest >> testIfNil [
+MASlangReceiverTest >> testIfNil [
 	"Note: exactly the same test as ASTCSmallIntegerTest"
 	| messageNode ifNode expectedC |
 	messageNode := RBParser parseExpression: '1 ifNil: [ 2 ]'.
@@ -57,7 +57,7 @@ ANSlangReceiverTest >> testIfNil [
 ]
 
 { #category : #tests }
-ANSlangReceiverTest >> testMoins [
+MASlangReceiverTest >> testMoins [
 	"Note: exactly the same test as ASTCSmallIntegerTest, except for typing"
 	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 - 2'.
@@ -82,7 +82,7 @@ ANSlangReceiverTest >> testMoins [
 ]
 
 { #category : #tests }
-ANSlangReceiverTest >> testPlus [
+MASlangReceiverTest >> testPlus [
 	"Note: exactly the same test as ASTCSmallIntegerTest, except for typing"
 	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 + 2'.

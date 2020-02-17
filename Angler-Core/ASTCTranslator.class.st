@@ -16,7 +16,7 @@ ASTCTranslator class >> classTranslatorClass [
 { #category : #configuration }
 ASTCTranslator class >> prettyPrinterClass [
 
-	^ ASTCPrettyPrint
+	^ FAPrettyPrint
 ]
 
 { #category : #'translation-api' }
@@ -108,7 +108,7 @@ ASTCTranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
 { #category : #'translation-api' }
 ASTCTranslator >> prettyPrinterClass [
 
-	^ ASTCPrettyPrint
+	^ FAPrettyPrint
 ]
 
 { #category : #accessors }

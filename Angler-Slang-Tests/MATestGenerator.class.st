@@ -1,11 +1,11 @@
 Class {
-	#name : #ANTestGenerator,
-	#superclass : #ANPluginTestGenerator,
+	#name : #MATestGenerator,
+	#superclass : #MAPluginTestGenerator,
 	#category : #'Angler-Slang-Tests-generators'
 }
 
 { #category : #generating }
-ANTestGenerator class >> generateVMTests [
+MATestGenerator class >> generateVMTests [
 	<script>	
 	| generator |
 	self cleanUp.	
@@ -14,30 +14,30 @@ ANTestGenerator class >> generateVMTests [
 ]
 
 { #category : #generating }
-ANTestGenerator class >> resourceBaseClass [
-	^ ANSlangVMTestResource
+MATestGenerator class >> resourceBaseClass [
+	^ MASlangVMTestResource
 ]
 
 { #category : #generating }
-ANTestGenerator class >> testBaseClass [
-	^ ANVMTranslationTests
+MATestGenerator class >> testBaseClass [
+	^ MAVMTranslationTests
 ]
 
 { #category : #generating }
-ANTestGenerator class >> translatorClass [
+MATestGenerator class >> translatorClass [
 	^ ANSlangTranslator
 ]
 
 { #category : #picking }
-ANTestGenerator >> methodToTest: aClass [
+MATestGenerator >> methodToTest: aClass [
 	| methods |
 	methods := (aClass allSelectorsBelow: VMClass)	
 		collect:[ :aSelector | aClass lookupSelector: aSelector ]	
 		thenSelect: [ :aCompiledMethod |
 			(aCompiledMethod hasPragmaNamed: #doNotGenerate) not
-				and: [ (ANFullVMCCodeGeneratorRessource current codeGenerator
+				and: [ (MAFullVMCCodeGeneratorRessource current codeGenerator
 					methodNamed: aCompiledMethod selector) notNil ] ].
 		
-	ANFullVMCCodeGeneratorRessource reset.
+	MAFullVMCCodeGeneratorRessource reset.
 	^ methods
 ]

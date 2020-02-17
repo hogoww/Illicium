@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCPrettyPrint,
+	#name : #FAPrettyPrint,
 	#superclass : #ASTCSuperclassVisitor,
 	#instVars : [
 		'stream',
@@ -10,27 +10,27 @@ Class {
 }
 
 { #category : #configuration }
-ASTCPrettyPrint class >> defaultIndentation [
+FAPrettyPrint class >> defaultIndentation [
 	^ '  '
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> << chars [
+FAPrettyPrint >> << chars [
 	stream << chars
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> <<< chars [
+FAPrettyPrint >> <<< chars [
 	stream << indentation << chars
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> cr [
+FAPrettyPrint >> cr [
 	stream cr
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> doesThisNeedParenthesis: aNode [
+FAPrettyPrint >> doesThisNeedParenthesis: aNode [
 	| parentPriority |
 	"this should also take into account associativity"
 	parentPriority := aNode parent ifNotNil: [:p | p priority ] ifNil:[ 16 "minimal priority"].
@@ -38,43 +38,43 @@ ASTCPrettyPrint >> doesThisNeedParenthesis: aNode [
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> enterBlock [
+FAPrettyPrint >> enterBlock [
 	self indent
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> indent [
+FAPrettyPrint >> indent [
 	indentation:=indentation , (String streamContents:[:s|
 		self printSingleIndentationOn: s.
 	]).
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> indentationString [
+FAPrettyPrint >> indentationString [
 
 	^ indentationString
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> indentationString: aString [
+FAPrettyPrint >> indentationString: aString [
 
 	indentationString := aString
 ]
 
 { #category : #initialization }
-ASTCPrettyPrint >> initialize [
+FAPrettyPrint >> initialize [
 	stream := String new writeStream.
 	indentation := ''.
 	indentationString := self class defaultIndentation
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> leaveBlock [
+FAPrettyPrint >> leaveBlock [
 	self unindent
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> parenthesisFor: aNode print: aBlock [
+FAPrettyPrint >> parenthesisFor: aNode print: aBlock [
 
 	self parenthesisIf: (self doesThisNeedParenthesis: aNode) 
 		print: aBlock.
@@ -82,25 +82,25 @@ ASTCPrettyPrint >> parenthesisFor: aNode print: aBlock [
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> parenthesisIf: aBool print: aBlock [
+FAPrettyPrint >> parenthesisIf: aBool print: aBlock [
 	aBool ifTrue: [ self << '(' ].
 	aBlock value.
 	aBool ifTrue: [ self << ')' ].
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> print: anObject [
+FAPrettyPrint >> print: anObject [
 	anObject acceptVisitor: self
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> printBinaryOperand: anOperand [
+FAPrettyPrint >> printBinaryOperand: anOperand [
 	anOperand acceptVisitor: self
 
 ]
 
 { #category : #printing }
-ASTCPrettyPrint >> printOn: aStream [
+FAPrettyPrint >> printOn: aStream [
 	super printOn: aStream.
 	aStream << Character cr.
 	aStream << self.
@@ -108,43 +108,43 @@ ASTCPrettyPrint >> printOn: aStream [
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> printSingleIndentationOn: aStream [
+FAPrettyPrint >> printSingleIndentationOn: aStream [
 
 	aStream << indentationString
 ]
 
 { #category : #printing }
-ASTCPrettyPrint >> printString [
+FAPrettyPrint >> printString [
 	^self stream contents
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> space [
+FAPrettyPrint >> space [
 	stream space
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> spaces [
+FAPrettyPrint >> spaces [
 	self <<< ''
 ]
 
 { #category : #accessing }
-ASTCPrettyPrint >> stream [
+FAPrettyPrint >> stream [
 	^ stream
 ]
 
 { #category : #printing }
-ASTCPrettyPrint >> toTranscript [
+FAPrettyPrint >> toTranscript [
 	Transcript show:self ; cr.
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> unindent [
+FAPrettyPrint >> unindent [
 	indentation := indentation allButLast: (indentationString size).
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitBinaryOperator: anOperator [
+FAPrettyPrint >> visitBinaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
 		self printBinaryOperand: anOperator leftOperand.
 		self << ' ' << anOperator class symbol << ' '.
@@ -153,7 +153,7 @@ ASTCPrettyPrint >> visitBinaryOperator: anOperator [
 ]
 
 { #category : #indentation }
-ASTCPrettyPrint >> visitBlock: aBlock [
+FAPrettyPrint >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
 	aBlock declarations
@@ -173,12 +173,12 @@ ASTCPrettyPrint >> visitBlock: aBlock [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitBreak: aBreak [
+FAPrettyPrint >> visitBreak: aBreak [
 	self << #'break;'
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitCastOperator: aCastOperator [
+FAPrettyPrint >> visitCastOperator: aCastOperator [
 	self parenthesisFor: aCastOperator print: [
 		self << '(';
 			print: aCastOperator type;
@@ -188,7 +188,7 @@ ASTCPrettyPrint >> visitCastOperator: aCastOperator [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
+FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 
 	self << '/* Declarations */' ; cr.
 	anASTCCompilationUnit declarations
@@ -206,13 +206,13 @@ ASTCPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitDeclarationStatement: aDeclaration [
+FAPrettyPrint >> visitDeclarationStatement: aDeclaration [
 	aDeclaration declaration acceptVisitor: self.
 	self << $;
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitDoWhile: aDoWhile [
+FAPrettyPrint >> visitDoWhile: aDoWhile [
 	self << 'do' << Character cr.
 	aDoWhile body acceptVisitor: self.
 	self << 'while('.
@@ -221,19 +221,19 @@ ASTCPrettyPrint >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitEmptyStatement: anEmptyStatemementNode [
+FAPrettyPrint >> visitEmptyStatement: anEmptyStatemementNode [
 	"Empty statements should not be added to the AST, and therefore not visited during pretty print"
 	self shouldNotImplement
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitExpressionStatement: anExpressionStatement [
+FAPrettyPrint >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	self << $;. 
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitFor: aFor [
+FAPrettyPrint >> visitFor: aFor [
 	self << 'for ('.
 	aFor iteratorDefinition ifNotNil:[:anIteratorDecl| anIteratorDecl acceptVisitor:self].
 	self << '; '.
@@ -245,7 +245,7 @@ ASTCPrettyPrint >> visitFor: aFor [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitFunctionCall: aFunctionCall [
+FAPrettyPrint >> visitFunctionCall: aFunctionCall [
 	
 	self parenthesisFor: aFunctionCall print: [
 		aFunctionCall id acceptVisitor: self.
@@ -259,7 +259,7 @@ ASTCPrettyPrint >> visitFunctionCall: aFunctionCall [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitFunctionDeclaration: aFunctionDeclaration [
+FAPrettyPrint >> visitFunctionDeclaration: aFunctionDeclaration [
 	aFunctionDeclaration type acceptVisitor: self.
 	self << Character space.
 	aFunctionDeclaration id acceptVisitor:self.
@@ -269,19 +269,19 @@ ASTCPrettyPrint >> visitFunctionDeclaration: aFunctionDeclaration [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitFunctionDefinition: aFunctionDefinition [
+FAPrettyPrint >> visitFunctionDefinition: aFunctionDefinition [
 	aFunctionDefinition declaration acceptVisitor:self.
 	aFunctionDefinition body acceptVisitor: self.
 	
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitIdentifier: anIdentifier [
+FAPrettyPrint >> visitIdentifier: anIdentifier [
 	self << anIdentifier id
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitIf: anIf [
+FAPrettyPrint >> visitIf: anIf [
 	self << 'if ('.
 	anIf condition acceptVisitor: self.
 	self << ') '.
@@ -293,7 +293,7 @@ ASTCPrettyPrint >> visitIf: anIf [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
+FAPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 	self parenthesisFor: anIndexerOperator print: [
 		self visitExpression: anIndexerOperator leftOperand.
 		self << '['.
@@ -302,28 +302,28 @@ ASTCPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitLiteral: aLiteral [
+FAPrettyPrint >> visitLiteral: aLiteral [
 	aLiteral value isString ifTrue:[ self << '"' ].
 	self << aLiteral value asString.
 	aLiteral value isString ifTrue:[ self << '"' ].
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitReturn: aReturn [
+FAPrettyPrint >> visitReturn: aReturn [
 	self << 'return '.
 	aReturn expression ifNotNil:[:anExpression| anExpression acceptVisitor: self].
 	self << $;.
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitStructureDeclaration: aStructureDeclaration [
+FAPrettyPrint >> visitStructureDeclaration: aStructureDeclaration [
 	self << #struct;
 		space;
 		print: aStructureDeclaration id
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitStructureDefinition: aStructureDefinition [
+FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 	self print: aStructureDefinition declaration;
 		<< '{';
 		cr.
@@ -340,7 +340,7 @@ ASTCPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitTernaryConditionalOperator: anOperator [
+FAPrettyPrint >> visitTernaryConditionalOperator: anOperator [
 	anOperator condition acceptVisitor: self.
 	self << ' ' << '?' << ' '.
 	anOperator then acceptVisitor: self.
@@ -349,12 +349,12 @@ ASTCPrettyPrint >> visitTernaryConditionalOperator: anOperator [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitType: aType [
+FAPrettyPrint >> visitType: aType [
 	self << aType type asCType.
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitUnaryOperator: anOperator [
+FAPrettyPrint >> visitUnaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
 		self << anOperator class symbol.
 		anOperator operand acceptVisitor: self.
@@ -362,14 +362,14 @@ ASTCPrettyPrint >> visitUnaryOperator: anOperator [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitVariableDeclaration: aVariableDeclaration [
+FAPrettyPrint >> visitVariableDeclaration: aVariableDeclaration [
 	aVariableDeclaration type acceptVisitor:self.
 	self << Character space.
 	aVariableDeclaration id acceptVisitor:self.
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitVariableDefinition: aVariableDefinition [
+FAPrettyPrint >> visitVariableDefinition: aVariableDefinition [
 	aVariableDefinition declaration acceptVisitor: self.
 	aVariableDefinition init
 		ifNotNil: [ :init | 
@@ -378,7 +378,7 @@ ASTCPrettyPrint >> visitVariableDefinition: aVariableDefinition [
 ]
 
 { #category : #visiting }
-ASTCPrettyPrint >> visitWhile: aWhile [
+FAPrettyPrint >> visitWhile: aWhile [
 	self << 'while ('.
 	aWhile condition ifNotNil:[:aCondition| aCondition acceptVisitor: self].
 	self << ') '.

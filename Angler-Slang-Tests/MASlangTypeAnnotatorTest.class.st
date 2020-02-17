@@ -2,41 +2,41 @@
 I test the ASTCSlangTypeAnnotator class
 "
 Class {
-	#name : #ANSlangTypeAnnotatorTest,
+	#name : #MASlangTypeAnnotatorTest,
 	#superclass : #ASTCTypeAnnotatorTest,
 	#category : #'Angler-Slang-Tests-analysis-tests'
 }
 
 { #category : #testing }
-ANSlangTypeAnnotatorTest class >> isAbstract [
+MASlangTypeAnnotatorTest class >> isAbstract [
 	^ false
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> aMethodWithCCodeInSmalltalk [
+MASlangTypeAnnotatorTest >> aMethodWithCCodeInSmalltalk [
 	^ self cCode: ' 1 ' inSmalltalk: [ 1 ]
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> aMethodWithCaseOf [
+MASlangTypeAnnotatorTest >> aMethodWithCaseOf [
 	1 caseOf: { [ 1 ] -> [ 1 even ] }
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> aMethodWithCaseOfOtherwise [
+MASlangTypeAnnotatorTest >> aMethodWithCaseOfOtherwise [
 	1 caseOf: 
 		{ [ 1 ] -> [ 1 even ] }
 		otherwise: 1
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> assertHasType: aNode [
+MASlangTypeAnnotatorTest >> assertHasType: aNode [
 	self assert: (aNode hasProperty: propertyName).
 
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
+MASlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 	visitor inferer addMethod: (aMethodAST asTranslationMethodOfClass: TMethod).
@@ -47,7 +47,7 @@ ANSlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 ]
 
 { #category : #running }
-ANSlangTypeAnnotatorTest >> setUp [
+MASlangTypeAnnotatorTest >> setUp [
 	visitor := ANSlangTypeAnnotator new 
 		inferer: CCodeGenerator new;
 		yourself.
@@ -55,7 +55,7 @@ ANSlangTypeAnnotatorTest >> setUp [
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
+MASlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
 	| ast message |
 	" Slang ignores inSmalltalk: part, so we have to as well"
 	ast := self
@@ -67,7 +67,7 @@ ANSlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> testVisitCaseOf [
+MASlangTypeAnnotatorTest >> testVisitCaseOf [
 	"cases in caseOf: do not have TNodes equivalent"
 	| ast caseMessage caseArray case |
 	ast := self
@@ -87,7 +87,7 @@ ANSlangTypeAnnotatorTest >> testVisitCaseOf [
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> testVisitCaseOfOtherwise [
+MASlangTypeAnnotatorTest >> testVisitCaseOfOtherwise [
 	"cases in caseOf:otherwise: do not have TNodes equivalent"
 	| ast caseMessage caseArray case otherwiseNode |
 	ast := self
@@ -110,7 +110,7 @@ ANSlangTypeAnnotatorTest >> testVisitCaseOfOtherwise [
 ]
 
 { #category : #test }
-ANSlangTypeAnnotatorTest >> testVisitSelfNode [
+MASlangTypeAnnotatorTest >> testVisitSelfNode [
 	| ast counter |
 	" Override because slang adds an explicit return self "
 	counter := 0.

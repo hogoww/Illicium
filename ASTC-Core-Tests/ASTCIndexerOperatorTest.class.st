@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCIndexerOperatorTest,
 	#superclass : #TestCase,
-	#category : #'ASTC-Core-Tests'
+	#category : #'ASTC-Core-Tests-shortcuts'
 }
 
 { #category : #tests }

@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCStatementsBecomeExpressions,
+	#name : #FAStatementsBecomeExpressions,
 	#superclass : #ASTCHierarchyWalkerVisitor,
 	#instVars : [
 		'subTreeShouldBeAllExpressions'
@@ -8,17 +8,17 @@ Class {
 }
 
 { #category : #initialization }
-ASTCStatementsBecomeExpressions >> initialize [
+FAStatementsBecomeExpressions >> initialize [
 	subTreeShouldBeAllExpressions := 0
 ]
 
 { #category : #testing }
-ASTCStatementsBecomeExpressions >> shouldBeExpression [
+FAStatementsBecomeExpressions >> shouldBeExpression [
 	^ subTreeShouldBeAllExpressions > 0
 ]
 
 { #category : #visiting }
-ASTCStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator [ 
+FAStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator [ 
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitAssignmentOperator: anAssignmentOperator.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
@@ -26,7 +26,7 @@ ASTCStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator
 ]
 
 { #category : #'visiting-modifying' }
-ASTCStatementsBecomeExpressions >> visitBlock: aBlock [
+FAStatementsBecomeExpressions >> visitBlock: aBlock [
 	self shouldBeExpression ifTrue: [
 			aBlock statements size = 0 ifTrue: [ self halt "I want to see the useCase" ].
 			aBlock statements size = 1 ifTrue: [ 
@@ -41,7 +41,7 @@ ASTCStatementsBecomeExpressions >> visitBlock: aBlock [
 ]
 
 { #category : #'visiting-modifying' }
-ASTCStatementsBecomeExpressions >> visitExpressionStatement: anExpressionStatement [
+FAStatementsBecomeExpressions >> visitExpressionStatement: anExpressionStatement [
 	self shouldBeExpression ifTrue: [ 
 			anExpressionStatement becomeExpression.
 			^ anExpressionStatement acceptVisitor: self
@@ -50,7 +50,7 @@ ASTCStatementsBecomeExpressions >> visitExpressionStatement: anExpressionStateme
 ]
 
 { #category : #visiting }
-ASTCStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
+FAStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitFunctionCall: aFunctionCall.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
@@ -58,7 +58,7 @@ ASTCStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
 ]
 
 { #category : #'visiting-modifying' }
-ASTCStatementsBecomeExpressions >> visitIf: anIf [
+FAStatementsBecomeExpressions >> visitIf: anIf [
 	self shouldBeExpression ifTrue: [ 
 			anIf becomeTernaryConditionalOperator.
 			^ anIf acceptVisitor: self
@@ -77,7 +77,7 @@ ASTCStatementsBecomeExpressions >> visitIf: anIf [
 ]
 
 { #category : #visiting }
-ASTCStatementsBecomeExpressions >> visitOperator: anOperator [
+FAStatementsBecomeExpressions >> visitOperator: anOperator [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitOperator: anOperator.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
@@ -85,7 +85,7 @@ ASTCStatementsBecomeExpressions >> visitOperator: anOperator [
 ]
 
 { #category : #visiting }
-ASTCStatementsBecomeExpressions >> visitReturn: aReturn [ 
+FAStatementsBecomeExpressions >> visitReturn: aReturn [ 
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
 	super visitReturn: aReturn.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.

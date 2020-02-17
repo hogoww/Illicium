@@ -1,11 +1,11 @@
 Class {
-	#name : #ANPluginTranslationTests,
-	#superclass : #ANSlangToCGeneratedTests,
+	#name : #MAPluginTranslationTests,
+	#superclass : #MASlangToCGeneratedTests,
 	#category : #'Angler-Slang-Tests-generated-tests-base'
 }
 
 { #category : #'generating machine code' }
-ANPluginTranslationTests >> generateSlang: aSelector [ 
+MAPluginTranslationTests >> generateSlang: aSelector [ 
 	| method translation codeGenerator |
 	"Might be able to use cCodeForMethod: instead"
 	method := testedClass >> aSelector.

@@ -1,5 +1,5 @@
 Class {
-	#name : #ANSlangConstantEvaluatorTest,
+	#name : #MASlangConstantEvaluatorTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'value',
@@ -10,14 +10,14 @@ Class {
 }
 
 { #category : #asserting }
-ANSlangConstantEvaluatorTest >> assertEvaluatedAs: aValue [
+MASlangConstantEvaluatorTest >> assertEvaluatedAs: aValue [
 	
 	self assert: evaluated.
 	self assert: aValue equals: value
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> doc [
+MASlangConstantEvaluatorTest >> doc [
 
 	'
 isConstantNode: aNode valueInto: aBlock
@@ -53,7 +53,7 @@ isConstantNode: aNode valueInto: aBlock
 ]
 
 { #category : #helpers }
-ANSlangConstantEvaluatorTest >> evaluateNode: aNode [
+MASlangConstantEvaluatorTest >> evaluateNode: aNode [
 
 	value := ANSlangConstantEvaluator new
 		program: program;
@@ -63,13 +63,13 @@ ANSlangConstantEvaluatorTest >> evaluateNode: aNode [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> foo [
+MASlangConstantEvaluatorTest >> foo [
 
 	^ 3*8
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> setUp [
+MASlangConstantEvaluatorTest >> setUp [
 
 	super setUp.
 	evaluated := false.
@@ -79,7 +79,7 @@ ANSlangConstantEvaluatorTest >> setUp [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateDivision [
+MASlangConstantEvaluatorTest >> testEvaluateDivision [
 
 	| node |
 	node := RBMessageNode
@@ -92,7 +92,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateDivision [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateFalseNodeIsFalse [
+MASlangConstantEvaluatorTest >> testEvaluateFalseNodeIsFalse [
 
 	| node |
 	node := RBLiteralValueNode value: false.
@@ -102,7 +102,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateFalseNodeIsFalse [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateKnownMethodWithConstantAsLastArgument [
+MASlangConstantEvaluatorTest >> testEvaluateKnownMethodWithConstantAsLastArgument [
 
 	| node |
 	node := RBMessageNode
@@ -114,7 +114,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateKnownMethodWithConstantAsLastArgumen
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateMultiplication [
+MASlangConstantEvaluatorTest >> testEvaluateMultiplication [
 
 	| node |
 	node := RBMessageNode
@@ -127,7 +127,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateMultiplication [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateNilNodeIsNil [
+MASlangConstantEvaluatorTest >> testEvaluateNilNodeIsNil [
 
 	| node |
 	node := RBLiteralValueNode value: nil.
@@ -137,7 +137,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateNilNodeIsNil [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateSubstraction [
+MASlangConstantEvaluatorTest >> testEvaluateSubstraction [
 
 	| node |
 	node := RBMessageNode
@@ -150,7 +150,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateSubstraction [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateSum [
+MASlangConstantEvaluatorTest >> testEvaluateSum [
 
 	| node |
 	node := RBMessageNode
@@ -163,7 +163,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateSum [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateTrueNodeIsTrue [
+MASlangConstantEvaluatorTest >> testEvaluateTrueNodeIsTrue [
 
 	| node |
 	node := RBLiteralValueNode value: true.
@@ -173,7 +173,7 @@ ANSlangConstantEvaluatorTest >> testEvaluateTrueNodeIsTrue [
 ]
 
 { #category : #tests }
-ANSlangConstantEvaluatorTest >> testEvaluateVMConstants [
+MASlangConstantEvaluatorTest >> testEvaluateVMConstants [
 
 	VMBasicConstants mostBasicConstantNames
 		select: [ :constant | (VMBasicConstants classPool at: constant ifAbsent: []) notNil ]

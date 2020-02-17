@@ -51,7 +51,7 @@ ASTCFilePrinter >> fileName: aString [
 { #category : #printing }
 ASTCFilePrinter >> initialize [ 
 	virtualMachine := VirtualMachine new.
-	prettyPrinter := ASTCPrettyPrint new.
+	prettyPrinter := FAPrettyPrint new.
 	fileCompiler := ASTCFileCompiler new.
 	pluginMover := ASTCPluginMover new.
 	

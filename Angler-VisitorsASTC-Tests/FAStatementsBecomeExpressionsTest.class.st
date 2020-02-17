@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCStatementsBecomeExpressionsTest,
+	#name : #FAStatementsBecomeExpressionsTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'visitor'
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #running }
-ASTCStatementsBecomeExpressionsTest >> setUp [
+FAStatementsBecomeExpressionsTest >> setUp [
 	super setUp.
-	visitor := ASTCStatementsBecomeExpressions new
+	visitor := FAStatementsBecomeExpressions new
 ]
 
 { #category : #tests }
-ASTCStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment [
+FAStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment [
 	| node expressionList |
 	node :=
 		(ASTCIdentifier id: #a)
@@ -36,7 +36,7 @@ ASTCStatementsBecomeExpressionsTest >> testBlockBecomesStatementListInAssignment
 ]
 
 { #category : #tests }
-ASTCStatementsBecomeExpressionsTest >> testBlockWithSingleStatementBecomesExpression [
+FAStatementsBecomeExpressionsTest >> testBlockWithSingleStatementBecomesExpression [
 	| node expression |
 	node :=
 		(ASTCIdentifier id: #a)
@@ -57,7 +57,7 @@ ASTCStatementsBecomeExpressionsTest >> testBlockWithSingleStatementBecomesExpres
 ]
 
 { #category : #tests }
-ASTCStatementsBecomeExpressionsTest >> testExpressionStatementBecomesExpression [
+FAStatementsBecomeExpressionsTest >> testExpressionStatementBecomesExpression [
 	| node |
 	node :=
 		(ASTCIdentifier id: #a)
@@ -72,7 +72,7 @@ ASTCStatementsBecomeExpressionsTest >> testExpressionStatementBecomesExpression 
 ]
 
 { #category : #tests }
-ASTCStatementsBecomeExpressionsTest >> testIfAndInnerIfBecomesTernaryInAssignment [
+FAStatementsBecomeExpressionsTest >> testIfAndInnerIfBecomesTernaryInAssignment [
 	| node |
 	node :=
 		(ASTCIdentifier id: #a)
@@ -95,7 +95,7 @@ ASTCStatementsBecomeExpressionsTest >> testIfAndInnerIfBecomesTernaryInAssignmen
 ]
 
 { #category : #tests }
-ASTCStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
+FAStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
 	| node |
 	node :=
 		(ASTCIdentifier id: #a)
@@ -114,7 +114,7 @@ ASTCStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
 ]
 
 { #category : #tests }
-ASTCStatementsBecomeExpressionsTest >> testStatementInIFConditionShouldBecomeExpression [
+FAStatementsBecomeExpressionsTest >> testStatementInIFConditionShouldBecomeExpression [
 	| ifNode then else |
 	ifNode :=
 		(ASTCIdentifier id: #a) asStatement 

@@ -1,23 +1,23 @@
 Class {
-	#name : #ANSlangProgram,
+	#name : #MASlangProgram,
 	#superclass : #ANProgram,
 	#category : #'Angler-Slang-Tests-generators'
 }
 
 { #category : #accessing }
-ANSlangProgram >> classes [
+MASlangProgram >> classes [
 
 	^ { VMClass. SpurMemoryManager . Spur64BitMemoryManager . StackInterpreter }
 ]
 
 { #category : #accessing }
-ANSlangProgram >> vmClass [
+MASlangProgram >> vmClass [
 	
 	^ StackInterpreter
 ]
 
 { #category : #accessing }
-ANSlangProgram >> wordSize [
+MASlangProgram >> wordSize [
 	
 	^ 8 "64bits for now"
 ]
