@@ -1,22 +1,12 @@
 Class {
 	#name : #ASTCIdentifierTest,
 	#superclass : #TestCase,
-	#category : #'ASTC-Core-Tests'
+	#category : #'ASTC-Core-Tests-shortcuts'
 }
 
 { #category : #tests }
 ASTCIdentifierTest >> testKeywordIf [
 	self should: [ ASTCIdentifier new id: #if ] raise: ReservedKeywordUse 
-]
-
-{ #category : #tests }
-ASTCIdentifierTest >> testKeywordInt [
-	self should: [ ASTCIdentifier new id: #int ] raise: ReservedKeywordUse 
-]
-
-{ #category : #tests }
-ASTCIdentifierTest >> testKeywordLong [
-	self should: [ ASTCIdentifier new id: #long ] raise: ReservedKeywordUse 
 ]
 
 { #category : #tests }

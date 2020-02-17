@@ -41,14 +41,16 @@ BaselineOfASTC >> baseline: spec [
 
 { #category : #accessing }
 BaselineOfASTC >> lastPlayground [
-ASTCGenerator generate.
 
-RandomTestClass new factorialPrimitive:3.
-VirtualMachine new unloadModule:'aFile'.
+ASTCGenerator generate.	
+MAPluginTestGenerator generateVMMakerPluginsTests.
+MAPluginTestGenerator generateVMMakerInterpreterPrimitiveTests.
+MATestGenerator generateVMTests.
+MAPluginTestGenerator cleanUp.
+MATestGenerator cleanUp.
+MASlangTestResource resetAll.
 
-ASTCFilePrinter new compilationUnit: (ASTCTranslator translateClass: ILBrokenPlugin); fileName:'gen' ; isPrimitive: true; printInFile.
-
-Transcript clear
+MASpur64BitMemoryManagerTranslationTest methods select:[:m| m hasPragmaNamed: #skip]
 ]
 
 { #category : #accessing }

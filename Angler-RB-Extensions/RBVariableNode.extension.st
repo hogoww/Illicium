@@ -1,6 +1,11 @@
 Extension { #name : #RBVariableNode }
 
 { #category : #'*Angler-RB-Extensions' }
+RBVariableNode >> getSlangTypeUsing: aCodeGenerator in: aTMethod [
+	^ (aTMethod typeFor: self name in: aCodeGenerator) ifNil: [#sqInt]
+]
+
+{ #category : #'*Angler-RB-Extensions' }
 RBVariableNode >> isArgumentNode [
 
 	^self binding 

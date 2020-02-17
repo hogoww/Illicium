@@ -1,10 +1,19 @@
 Class {
 	#name : #ILBrokenPlugin,
 	#superclass : #Object,
-	#traits : 'ASTCVirtualMachineAPI',
-	#classTraits : 'ASTCVirtualMachineAPI classTrait',
+	#traits : 'IlliciumVirtualMachineAPI',
+	#classTraits : 'IlliciumVirtualMachineAPI classTrait',
 	#category : #'Illicium-Plugins-simple'
 }
+
+{ #category : #initialization }
+ILBrokenPlugin >> initializePlugin [
+	<doNotGenerate>
+ 	"moduleName"
+	self setInterpreter: IlliciumInterpreterProxy new.
+	"initplugin or something"
+	^self
+]
 
 { #category : #initialization }
 ILBrokenPlugin >> primitiveNoPopButPush [

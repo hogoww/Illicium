@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCCompilationUnitTest,
 	#superclass : #TestCase,
-	#category : #'ASTC-Core-Tests'
+	#category : #'ASTC-Core-Tests-shortcuts'
 }
 
 { #category : #tests }
@@ -9,7 +9,7 @@ ASTCCompilationUnitTest >> testAdd [
 	| definition cu |
 	definition := ASTCVariableDefinition new 
 		declaration: (ASTCVariableDeclaration new id: (ASTCIdentifier new id: #i; yourself);
-			type: ASTCSmallInteger asASTCType
+			type: IlliciumSmallInteger asASTCType
 		 yourself);
 		yourself.
 	cu := ASTCCompilationUnit new.

@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCStructAccessPlugin,
 	#superclass : #TestCase,
-	#category : #'ASTC-Core-Tests'
+	#category : #'ASTC-Core-Tests-shortcuts'
 }
 
 { #category : #tests }
@@ -12,18 +12,18 @@ ASTCStructAccessPlugin >> testAssign [
 	operator debugASTCStructure.
 	self assert: operator isAssignmentOperator.
 	
-	node := (operator operands at: 1).
+	node := operator leftOperand.
 	self assert: node isStructAccessPointerOperator.
 
-		node := (operator operands at: 1) operands at: 1.
+		node := operator leftOperand leftOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #a.
 	
-		node := (operator operands at: 1) operands at: 2.
+		node := operator leftOperand rightOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #c.
 	
-	node := (operator operands at: 2).
+	node := operator rightOperand.
 	self assert: node isLiteral.
 	self assert: node value equals: 1
 ]
@@ -36,18 +36,18 @@ ASTCStructAccessPlugin >> testIndex [
 	operator debugASTCStructure.
 	self assert: operator isIndexerOperator.
 	
-	node := (operator operands at: 1).
+	node := operator leftOperand.
 	self assert: node isStructAccessPointerOperator.
 
-		node := (operator operands at: 1) operands at: 1.
+		node := operator leftOperand leftOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #a.
 	
-		node := (operator operands at: 1) operands at: 2.
+		node := operator leftOperand rightOperand.
 		self assert: node isIdentifier.
 		self assert: node id equals: #c.
 	
-	node := (operator operands at: 2).
+	node := operator rightOperand.
 	self assert: node isLiteral.
 	self assert: node value equals: 1
 ]
