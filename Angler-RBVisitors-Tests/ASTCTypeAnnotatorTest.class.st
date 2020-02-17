@@ -5,6 +5,12 @@ I define basic tests for them.
 Class {
 	#name : #ASTCTypeAnnotatorTest,
 	#superclass : #ASTCVisitorTest,
+	#instVars : [
+		'iv'
+	],
+	#classVars : [
+		'A'
+	],
 	#category : #'Angler-RBVisitors-Tests-Typing'
 }
 
@@ -13,9 +19,76 @@ ASTCTypeAnnotatorTest class >> isAbstract [
 	^ true
 ]
 
-{ #category : #test }
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aBlockWithIntegerAsLastStatement [
+	[ 4 ]
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodThatReturnAMessageThatReturnsAnInt [
+	^ 1 + 2
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodThatReturnsAnInteger [
+	^ 4
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithABlockWithATemporary [
+	^ [ | i | i := 3 ] value
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithABlockWithAnArgument [
+	^ [:i| ] value: 1
+]
+
+{ #category : #support }
 ASTCTypeAnnotatorTest >> aMethodWithACascade [
 	1 + 2 ; - 3 
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithAClassVariable [
+	A := 3
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithAGlobalVariable [
+	ASTCTypeAnnotatorTest
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithALiteralNode [
+	1
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithATemporaryVariable [
+	| t |
+	t := 3
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithAnArgument: anInt [
+	^ anInt
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithAnAssignement [
+	| e |
+	e := 3 
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithAnInstanceVariable [
+	iv := 3
+]
+
+{ #category : #support }
+ASTCTypeAnnotatorTest >> aMethodWithSelf [
+	self
 ]
 
 { #category : #test }
@@ -34,7 +107,7 @@ ASTCTypeAnnotatorTest >> setUp [
 ASTCTypeAnnotatorTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnArgument: from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithAnArgument: from: ASTCTypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isArgument
 			ifTrue: [ 
@@ -48,7 +121,7 @@ ASTCTypeAnnotatorTest >> testVisitArgumentNode [
 ASTCTypeAnnotatorTest >> testVisitAssignmentNode [
 	| counter ast |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnAssignement from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithAnAssignement from: ASTCTypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isAssignment
 			ifTrue: [ 
@@ -62,7 +135,7 @@ ASTCTypeAnnotatorTest >> testVisitAssignmentNode [
 ASTCTypeAnnotatorTest >> testVisitBlockNode [
 	| counter ast |
 	counter := 0.
-	ast := self inferMethodSelector: #aBlockWithIntegerAsLastStatement from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aBlockWithIntegerAsLastStatement from: ASTCTypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isBlock
 			ifTrue: [ 
@@ -101,7 +174,7 @@ ASTCTypeAnnotatorTest >> testVisitCascadeNodeGlobal [
 ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAClassVariable from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithAClassVariable from: ASTCTypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isGlobalNode
 			ifTrue: [ 
@@ -115,7 +188,7 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 ASTCTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: ASTCTypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isGlobalNode
 			ifTrue: [ 
@@ -139,7 +212,7 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
 ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnInstanceVariable from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithAnInstanceVariable from: ASTCTypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isInstanceVariableNode
@@ -153,7 +226,7 @@ ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
 ASTCTypeAnnotatorTest >> testVisitLiteralNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithALiteralNode from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithALiteralNode from: ASTCTypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isLiteralNode and: [ aNode isValue ])
@@ -167,7 +240,7 @@ ASTCTypeAnnotatorTest >> testVisitLiteralNode [
 ASTCTypeAnnotatorTest >> testVisitMessageNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt from: ASTCTypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isMessage
@@ -181,7 +254,7 @@ ASTCTypeAnnotatorTest >> testVisitMessageNode [
 ASTCTypeAnnotatorTest >> testVisitMethodNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger from: ASTCTypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isMethod
@@ -195,7 +268,7 @@ ASTCTypeAnnotatorTest >> testVisitMethodNode [
 ASTCTypeAnnotatorTest >> testVisitSelfNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithSelf from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithSelf from: ASTCTypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isSelf
@@ -209,7 +282,7 @@ ASTCTypeAnnotatorTest >> testVisitSelfNode [
 ASTCTypeAnnotatorTest >> testVisitTemporaryNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: PINodeTypeVisitorTest.
+	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: ASTCTypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isSelf not and: [ aNode isTemporaryNode ])

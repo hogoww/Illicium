@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSlangPluginPrettyPrinter,
 	#superclass : #ANSlangPrettyPrinter,
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-prettyprint'
 }
 
 { #category : #visiting }

@@ -116,7 +116,7 @@ ANSlangTypeAnnotatorTest >> testVisitSelfNode [
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithSelf
-		from: PINodeTypeVisitorTest.
+		from: ASTCTypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isSelf

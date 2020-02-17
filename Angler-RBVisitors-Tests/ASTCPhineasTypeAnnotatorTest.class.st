@@ -43,7 +43,7 @@ ASTCPhineasTypeAnnotatorTest >> testVisitArgumentNode [
 	" override of the test, because we need to use a block for phineas's inference of methods with arguments."
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnArgument: from: PINodeTypeVisitorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
+	ast := self inferMethodSelector: #aMethodWithAnArgument: from: ASTCTypeAnnotatorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
 	ast nodesDo: [ :aNode | 
 		aNode isArgument
 			ifTrue: [ 

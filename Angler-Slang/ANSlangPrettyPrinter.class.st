@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSlangPrettyPrinter,
 	#superclass : #ASTCPrettyPrint,
-	#category : #'Angler-Slang'
+	#category : #'Angler-Slang-prettyprint'
 }
 
 { #category : #'printing-literals' }
