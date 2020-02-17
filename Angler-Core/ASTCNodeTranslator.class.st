@@ -8,11 +8,6 @@ Class {
 }
 
 { #category : #translate }
-ASTCNodeTranslator >> currentClass [
-	 ^ methodTranslator currentClass
-]
-
-{ #category : #translate }
 ASTCNodeTranslator >> methodTranslator [
 	^ methodTranslator
 ]
