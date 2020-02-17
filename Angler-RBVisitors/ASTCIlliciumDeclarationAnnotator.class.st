@@ -5,7 +5,7 @@ Class {
 		'variableAppeareanceTracker',
 		'varNamesTodeclareAtStart'
 	],
-	#category : #'Angler-RBVisitors'
+	#category : #'Angler-RBVisitors-declaration'
 }
 
 { #category : #visit }

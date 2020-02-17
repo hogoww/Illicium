@@ -27,7 +27,7 @@ t = 1;
 Class {
 	#name : #ASTCVariableDeclarationAnnotator,
 	#superclass : #ASTCAbstractCheckVisitor,
-	#category : #'Angler-RBVisitors'
+	#category : #'Angler-RBVisitors-declaration'
 }
 
 { #category : #accessing }

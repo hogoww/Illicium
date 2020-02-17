@@ -1,6 +1,6 @@
 Extension { #name : #RBBlockNode }
 
-{ #category : #'*Angler-RBVisitors' }
+{ #category : #'*Angler-RB-Extensions' }
 RBBlockNode >> getDefiningBlockOrMethodNode [
 	^ self
 ]

@@ -4,7 +4,7 @@ I test the PhineasTypeAnnotator class
 Class {
 	#name : #ASTCPhineasTypeAnnotatorTest,
 	#superclass : #ASTCTypeAnnotatorTest,
-	#category : #'Angler-RBVisitors-Tests-Typing'
+	#category : #'Angler-RBVisitors-Tests-typing'
 }
 
 { #category : #testing }

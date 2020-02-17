@@ -8,7 +8,7 @@ Class {
 		'iv',
 		'ast'
 	],
-	#category : #'Angler-RBVisitors-Tests'
+	#category : #'Angler-RBVisitors-Tests-declaration'
 }
 
 { #category : #testing }

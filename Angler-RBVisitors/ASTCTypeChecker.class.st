@@ -7,7 +7,7 @@ Class {
 		'inferer',
 		'variableName'
 	],
-	#category : #'Angler-RBVisitors-Typing'
+	#category : #'Angler-RBVisitors-typing'
 }
 
 { #category : #'as yet unclassified' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'node'
 	],
-	#category : #'Angler-RBVisitors-Errors'
+	#category : #'Angler-RBVisitors-errors'
 }
 
 { #category : #accessing }

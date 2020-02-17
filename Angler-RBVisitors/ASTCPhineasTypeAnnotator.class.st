@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'methodTypeDispatcher'
 	],
-	#category : #'Angler-RBVisitors-Typing'
+	#category : #'Angler-RBVisitors-typing'
 }
 
 { #category : #initialization }

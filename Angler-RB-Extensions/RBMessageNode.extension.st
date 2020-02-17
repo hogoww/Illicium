@@ -1,11 +1,11 @@
 Extension { #name : #RBMessageNode }
 
-{ #category : #'*Angler-RBVisitors' }
+{ #category : #'*Angler-RB-Extensions' }
 RBMessageNode >> getDefiningBlockOrMethodNode [
 	^ parent getDefiningBlockOrMethodNode
 ]
 
-{ #category : #'*Angler-RBVisitors' }
+{ #category : #'*Angler-RB-Extensions' }
 RBMessageNode >> isMessageInABlock [
 	^self getDefiningBlockOrMethodNode isBlock
 ]

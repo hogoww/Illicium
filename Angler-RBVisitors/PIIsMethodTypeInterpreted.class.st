@@ -1,7 +1,7 @@
 Class {
 	#name : #PIIsMethodTypeInterpreted,
 	#superclass : #PIAbstractTypeVisitor,
-	#category : #'Angler-RBVisitors-Typing'
+	#category : #'Angler-RBVisitors-typing'
 }
 
 { #category : #visiting }
