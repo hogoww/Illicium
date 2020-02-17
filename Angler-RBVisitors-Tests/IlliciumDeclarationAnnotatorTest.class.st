@@ -1,22 +1,22 @@
 Class {
-	#name : #ASTCIlliciumDeclarationAnnotatorTest,
-	#superclass : #ASTCVariableDeclarationAnnotatorTest,
+	#name : #IlliciumDeclarationAnnotatorTest,
+	#superclass : #FAVariableDeclarationAnnotatorTest,
 	#category : #'Angler-RBVisitors-Tests-declaration'
 }
 
 { #category : #testing }
-ASTCIlliciumDeclarationAnnotatorTest class >> isAbstract [ 
+IlliciumDeclarationAnnotatorTest class >> isAbstract [ 
 	^ false
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> setUp [
+IlliciumDeclarationAnnotatorTest >> setUp [
 	super setUp.
-	visitor := ASTCIlliciumDeclarationAnnotator new.
+	visitor := IlliciumDeclarationAnnotator new.
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> testAssignmentInCondition [
+IlliciumDeclarationAnnotatorTest >> testAssignmentInCondition [
 	super testAssignmentInCondition.
 	
 	self assert: (ast body statements at: 1) receiver propertyEquals: false.
@@ -26,7 +26,7 @@ ASTCIlliciumDeclarationAnnotatorTest >> testAssignmentInCondition [
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [ 
+IlliciumDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [ 
 	super testAssignmentInDifferentSequence.
 	
 	self assert: ast body statements first arguments first statements first propertyEquals: false.
@@ -36,21 +36,21 @@ ASTCIlliciumDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
+IlliciumDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
 	"not sure how I want it to be for Illicium"
 	<expectedFailure>
 	self assert: false.
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> testVisitGlobalNode [
+IlliciumDeclarationAnnotatorTest >> testVisitGlobalNode [
 	super testVisitGlobalNode.
 	
 	self assert: (ast body statements at: 1) propertyEquals: false
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
+IlliciumDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
 	super testVisitInstanceVariableNode.
 	
 	"An instance variable should not be declared in a function"
@@ -58,7 +58,7 @@ ASTCIlliciumDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> testVisitTemporaryNode [
+IlliciumDeclarationAnnotatorTest >> testVisitTemporaryNode [
 	super testVisitTemporaryNode.
 	
 	"the assignment should become a C declaration"	
@@ -70,7 +70,7 @@ ASTCIlliciumDeclarationAnnotatorTest >> testVisitTemporaryNode [
 ]
 
 { #category : #basic }
-ASTCIlliciumDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
+IlliciumDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
 	super testVisitTemporaryNodeInBlock. 
 	
 	"the assignment should become a C declaration"	

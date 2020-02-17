@@ -24,7 +24,7 @@ ASTCSequenceNodeTranslator >> translateTemporaryDeclaration: aSequenceNode into:
 	"TemporaryDeclarationNodes are actually just temporaryNodes in the AST. 
 	so we have to use this hackish way."
 	| varToDeclare |
-	varToDeclare := aSequenceNode propertyAt: ASTCVariableDeclarationAnnotator property.
+	varToDeclare := aSequenceNode propertyAt: FAVariableDeclarationAnnotator property.
 		 
 	varToDeclare do:[:aTempName| 
 		anASTCBlock addDeclaration: (methodTranslator visitTemporaryDeclarationNode: aTempName)

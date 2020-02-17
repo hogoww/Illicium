@@ -273,7 +273,7 @@ ASTCNode >> preIncr [
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> prettyPrint [
 	
-	^ self prettyPrintUsing: ANSlangPrettyPrinter new
+	^ self prettyPrintUsing: MASlangPrettyPrinter new
 ]
 
 { #category : #'*ASTC-Core-Extensions' }

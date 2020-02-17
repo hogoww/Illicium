@@ -1,22 +1,22 @@
 Class {
-	#name : #ASTCIlliciumDeclarationAnnotator,
-	#superclass : #ASTCVariableDeclarationAnnotator,
+	#name : #IlliciumDeclarationAnnotator,
+	#superclass : #FAVariableDeclarationAnnotator,
 	#instVars : [
 		'variableAppeareanceTracker',
 		'varNamesTodeclareAtStart'
 	],
-	#category : #'Angler-RBVisitors-declaration'
+	#category : #'Angler-Illicium-analysis'
 }
 
 { #category : #visit }
-ASTCIlliciumDeclarationAnnotator >> initialize [ 
+IlliciumDeclarationAnnotator >> initialize [ 
 	super initialize.
 	varNamesTodeclareAtStart := Set new.
 	variableAppeareanceTracker:= Dictionary new.
 ]
 
 { #category : #visit }
-ASTCIlliciumDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
+IlliciumDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 	| association variable |
 	
 	variable := anAssignmentNode variable.
@@ -42,19 +42,19 @@ ASTCIlliciumDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 ]
 
 { #category : #visit }
-ASTCIlliciumDeclarationAnnotator >> visitGlobalNode: aGlobalNode [
+IlliciumDeclarationAnnotator >> visitGlobalNode: aGlobalNode [
 	"they are already declared"
 	^ false
 ]
 
 { #category : #visit }
-ASTCIlliciumDeclarationAnnotator >> visitInstanceVariableNode: aRBInstanceVariableNode [ 
+IlliciumDeclarationAnnotator >> visitInstanceVariableNode: aRBInstanceVariableNode [ 
 	"they are already declared"
 	^ false
 ]
 
 { #category : #accessing }
-ASTCIlliciumDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
+IlliciumDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	| tempToDeclare |
 	super visitSequenceNode: aSequenceNode.
 	
@@ -66,7 +66,7 @@ ASTCIlliciumDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 ]
 
 { #category : #visit }
-ASTCIlliciumDeclarationAnnotator >> visitTemporaryNode: aRBTemporaryNode [ 
+IlliciumDeclarationAnnotator >> visitTemporaryNode: aRBTemporaryNode [ 
 	"The first occurence should be declared, and the others shouldn't.
 	See #visitAssignementNode for more information"
 	^ true

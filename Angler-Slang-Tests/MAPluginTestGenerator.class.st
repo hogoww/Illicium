@@ -67,7 +67,7 @@ MAPluginTestGenerator class >> testBaseClass [
 
 { #category : #configuring }
 MAPluginTestGenerator class >> translatorClass [
-	^ ANSlangPluginTranslator
+	^ MASlangPluginTranslator
 ]
 
 { #category : #formating }

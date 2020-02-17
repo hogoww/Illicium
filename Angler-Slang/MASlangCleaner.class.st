@@ -1,5 +1,5 @@
 Class {
-	#name : #ANSlangCleaner,
+	#name : #MASlangCleaner,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'program',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #cleaning }
-ANSlangCleaner >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
+MASlangCleaner >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
 	| node |
 	aRBMethodNode statements size > 1 ifFalse: [ ^ self ].
 

@@ -1,11 +1,11 @@
 Class {
-	#name : #ANSlangAssignmentNodeTranslator,
+	#name : #MASlangAssignmentNodeTranslator,
 	#superclass : #ASTCAssignementNodeTranslator,
 	#category : #'Angler-Slang-nodes-translators'
 }
 
 { #category : #translate }
-ANSlangAssignmentNodeTranslator >> translateNode: anAssignmentNode [
+MASlangAssignmentNodeTranslator >> translateNode: anAssignmentNode [
 
 	(anAssignmentNode value isMessage and: [ anAssignmentNode value selector = #+ ])
 		ifTrue: [

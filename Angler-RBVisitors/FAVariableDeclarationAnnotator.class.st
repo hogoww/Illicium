@@ -25,17 +25,17 @@ ifNot:
 t = 1; 
 "
 Class {
-	#name : #ASTCVariableDeclarationAnnotator,
+	#name : #FAVariableDeclarationAnnotator,
 	#superclass : #ASTCAbstractCheckVisitor,
 	#category : #'Angler-RBVisitors-declaration'
 }
 
 { #category : #accessing }
-ASTCVariableDeclarationAnnotator class >> defaultCollection [
+FAVariableDeclarationAnnotator class >> defaultCollection [
 	^ Set
 ]
 
 { #category : #accessing }
-ASTCVariableDeclarationAnnotator class >> property [
+FAVariableDeclarationAnnotator class >> property [
 	^#toDeclare
 ]

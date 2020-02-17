@@ -3,7 +3,7 @@ I am an abstract class to implement types annotator for RB ASTs.
 Subclasses only need to implement how to type a node.
 "
 Class {
-	#name : #ASTCTypeAnnotator,
+	#name : #FATypeAnnotator,
 	#superclass : #ASTCAbstractCheckVisitor,
 	#instVars : [
 		'inferer'
@@ -12,72 +12,72 @@ Class {
 }
 
 { #category : #accessing }
-ASTCTypeAnnotator class >> property [
+FATypeAnnotator class >> property [
 	"should return a symbol with the name of the property"
 	^#type
 ]
 
 { #category : #accessing }
-ASTCTypeAnnotator >> inferer [
+FATypeAnnotator >> inferer [
 	^ inferer
 	
 ]
 
 { #category : #accessing }
-ASTCTypeAnnotator >> inferer: aTypeInferer [
+FATypeAnnotator >> inferer: aTypeInferer [
 	inferer := aTypeInferer.
 	
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> typeThatNode: aNode [
+FATypeAnnotator >> typeThatNode: aNode [
 	^ self subclassResponsibility
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitArgumentNode: anArgumentNode [
+FATypeAnnotator >> visitArgumentNode: anArgumentNode [
 	super visitArgumentNode: anArgumentNode.
 	self typeThatNode: anArgumentNode.
 	^ anArgumentNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitAssignmentNode: anAssignementNode [
+FATypeAnnotator >> visitAssignmentNode: anAssignementNode [
 	super visitAssignmentNode: anAssignementNode.
 	self typeThatNode: anAssignementNode.
 	^ anAssignementNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitBlockNode: aBlockNode [
+FATypeAnnotator >> visitBlockNode: aBlockNode [
 	super visitBlockNode: aBlockNode.
 	self typeThatNode: aBlockNode.
 	^ aBlockNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitGlobalNode: aGlobalNode [
+FATypeAnnotator >> visitGlobalNode: aGlobalNode [
 	super visitGlobalNode: aGlobalNode.
 	self typeThatNode: aGlobalNode.
 	^ aGlobalNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitInstanceVariableNode: anInstanceVariableNode [
+FATypeAnnotator >> visitInstanceVariableNode: anInstanceVariableNode [
 	super visitInstanceVariableNode: anInstanceVariableNode.
 	self typeThatNode: anInstanceVariableNode.
 	^ anInstanceVariableNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitLiteralNode: aLiteralNode [
+FATypeAnnotator >> visitLiteralNode: aLiteralNode [
 	super visitLiteralNode: aLiteralNode.
 	self typeThatNode: aLiteralNode.
 	^ aLiteralNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitMessageNode: aMessageNode [
+FATypeAnnotator >> visitMessageNode: aMessageNode [
 	" inlined the code of ProgramNodeVisitor>>#visitMessageNode:
 	because we want to treat receivers individually. 
 	They should therefore always be typed."
@@ -89,21 +89,21 @@ ASTCTypeAnnotator >> visitMessageNode: aMessageNode [
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitMethodNode: aMethodNode [
+FATypeAnnotator >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
 	self typeThatNode: aMethodNode.
 	^ aMethodNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitSelfNode: aSelfNode [
+FATypeAnnotator >> visitSelfNode: aSelfNode [
 	super visitSelfNode: aSelfNode.
 	self typeThatNode: aSelfNode.
 	^ aSelfNode
 ]
 
 { #category : #visiting }
-ASTCTypeAnnotator >> visitTemporaryNode: aTemporaryNode [
+FATypeAnnotator >> visitTemporaryNode: aTemporaryNode [
 	super visitTemporaryNode: aTemporaryNode.
 	self typeThatNode: aTemporaryNode.
 	^ aTemporaryNode

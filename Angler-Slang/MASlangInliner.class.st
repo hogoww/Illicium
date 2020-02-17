@@ -1,5 +1,5 @@
 Class {
-	#name : #ANSlangInliner,
+	#name : #MASlangInliner,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'program',
@@ -13,14 +13,14 @@ Class {
 }
 
 { #category : #testing }
-ANSlangInliner class >> includesSelectorTranslatedAsMacro: aSelector [ 
+MASlangInliner class >> includesSelectorTranslatedAsMacro: aSelector [ 
 	"Caching the result" 
 	selectorMacros ifNil: [ selectorMacros := VMPluginCodeGenerator new selectorsThatMayBeGeneratedAsMacros ].
 	^ selectorMacros includes: aSelector
 ]
 
 { #category : #accessing }
-ANSlangInliner class >> translator: aTranslator [
+MASlangInliner class >> translator: aTranslator [
 
 	^ self new
 		translator: aTranslator;
@@ -28,7 +28,7 @@ ANSlangInliner class >> translator: aTranslator [
 ]
 
 { #category : #applying }
-ANSlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
+MASlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
 	"Should get a copy of a method node as parameter, since it's going to modify it."
 	program := aProgram.
 	[
@@ -39,7 +39,7 @@ ANSlangInliner >> applyOnMethod: aMethodNode ofProgram: aProgram [
 ]
 
 { #category : #applying }
-ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [	
+MASlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [	
 	program := aProgram.
 	inlinedSomething := true.
 	[ inlinedSomething ]
@@ -59,7 +59,7 @@ ANSlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 ]
 
 { #category : #inlining }
-ANSlangInliner >> cleanStatements: nodesToInline [
+MASlangInliner >> cleanStatements: nodesToInline [
 
 	| cleanNodes node |
 	cleanNodes := nodesToInline copy.
@@ -74,13 +74,13 @@ ANSlangInliner >> cleanStatements: nodesToInline [
 ]
 
 { #category : #inlining }
-ANSlangInliner >> createNewBlockithStatements: nodesToInline [
+MASlangInliner >> createNewBlockithStatements: nodesToInline [
 	| newBlock |
 	newBlock := RBBlockNode
 		body:
 			(RBSequenceNode new
-				propertyAt: ASTCVariableDeclarationAnnotator property
-					put: ASTCVariableDeclarationAnnotator defaultCollection new;
+				propertyAt: FAVariableDeclarationAnnotator property
+					put: FAVariableDeclarationAnnotator defaultCollection new;
 				yourself).
 	"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
 	newBlock body statements: nodesToInline.
@@ -88,7 +88,7 @@ ANSlangInliner >> createNewBlockithStatements: nodesToInline [
 ]
 
 { #category : #renaming }
-ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
+MASlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 	| replacements |
 	"we first get the names"
 	replacements := self newNamesForIntersectionOf: methodToInline temporaryNames
@@ -104,7 +104,7 @@ ANSlangInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
+MASlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	| nodesToInline |
 	"We attempt to inline the nodes in different cases.
 	If none match, we just replace the message with the collection of nodes."
@@ -125,7 +125,7 @@ ANSlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode [
+MASlangInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode [
 	| newBlock newAssignment lastNode |
 	aMessageNode parent isAssignment ifFalse: [ ^ false ].
 	
@@ -146,7 +146,7 @@ ANSlangInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: a
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMessageNode [
+MASlangInliner >> inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMessageNode [
 	aMessageNode parent isCascade ifFalse: [ ^ false ].
 	
 	"inlining several messages in another message is just not done, from what i've seen"
@@ -155,7 +155,7 @@ ANSlangInliner >> inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMes
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMessageNode [
+MASlangInliner >> inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMessageNode [
 	aMessageNode parent isMessage ifFalse: [ ^ false ].
 	
 	"inlining several messages in another message is just not done, from what i've seen"
@@ -164,7 +164,7 @@ ANSlangInliner >> inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMes
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode [
+MASlangInliner >> inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode [
 	| newBlock |
 	aMessageNode parent isReturn ifFalse: [ ^ false ].
 	newBlock := self createNewBlockithStatements: nodesToInline.
@@ -177,7 +177,7 @@ ANSlangInliner >> inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMess
 ]
 
 { #category : #inlining }
-ANSlangInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode [
+MASlangInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode [
 	nodesToInline size = 1 ifFalse: [ ^ false ]. 	
 	
 	aMessageNode replaceWith: nodesToInline first.
@@ -186,9 +186,9 @@ ANSlangInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode [
 ]
 
 { #category : #renaming }
-ANSlangInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
+MASlangInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
 	| declarationProperty |
-	declarationProperty := ASTCVariableDeclarationAnnotator property.
+	declarationProperty := FAVariableDeclarationAnnotator property.
 	"in case of testing environment, we don't check"
 	methodInlining body
 		temporaries: methodInlining temporaries , methodToInline body temporaries.
@@ -203,7 +203,7 @@ ANSlangInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
 ]
 
 { #category : #renaming }
-ANSlangInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
+MASlangInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
 	| newTemporariesName intersection |
 	"We gather the names of the temporaries that appear in both method, and find a suitable new name for the ones that will be inlined."
 	newTemporariesName := Dictionary new.
@@ -223,7 +223,7 @@ ANSlangInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
 ]
 
 { #category : #renaming }
-ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
+MASlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
 	| newProperties |
 	aMethodNode nodesDo: [ :aNode |
 		aNode isTemporaryNode
@@ -234,20 +234,20 @@ ANSlangInliner >> renameVariablesIn: aMethodNode using: replacementNames [
 		].
 	
 	"Check in case we're in testing environment."
-	(aMethodNode body hasProperty: ASTCVariableDeclarationAnnotator property) ifFalse: [ ^ self ].
+	(aMethodNode body hasProperty: FAVariableDeclarationAnnotator property) ifFalse: [ ^ self ].
 	
 	"properties are shallow copied. Since have references to TempDeclaration, we have to touch the copy, not the main node."
-	newProperties := (aMethodNode body propertyAt: ASTCVariableDeclarationAnnotator property)
+	newProperties := (aMethodNode body propertyAt: FAVariableDeclarationAnnotator property)
 		collect: [ :aTempDecl |
 			replacementNames at: aTempDecl name
 				ifPresent:[ aTempDecl copy name: (replacementNames at: aTempDecl name) ]
 				ifAbsent: [  aTempDecl copy ]
 			].
-	aMethodNode body propertyAt: ASTCVariableDeclarationAnnotator property put: newProperties
+	aMethodNode body propertyAt: FAVariableDeclarationAnnotator property put: newProperties
 ]
 
 { #category : #renaming }
-ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
+MASlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
   | replacement |	
 	aMethodNode body nodesDo: [:aNode |  
 		(aNode isArgument and:[ aNode isBlockVar not ]) ifTrue: [
@@ -256,7 +256,7 @@ ANSlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 ]
 
 { #category : #inlining }
-ANSlangInliner >> shouldInline: aMessageNode [
+MASlangInliner >> shouldInline: aMessageNode [
 	
 	| methodToInline |
 	(self class includesSelectorTranslatedAsMacro: aMessageNode selector) ifTrue: [ ^ false ].
@@ -273,20 +273,20 @@ ANSlangInliner >> shouldInline: aMessageNode [
 ]
 
 { #category : #accessing }
-ANSlangInliner >> translator [
+MASlangInliner >> translator [
 	^ translator
 ]
 
 { #category : #accessing }
-ANSlangInliner >> translator: anObject [
+MASlangInliner >> translator: anObject [
 	translator := anObject
 ]
 
 { #category : #inlining }
-ANSlangInliner >> typeNewBlock: newBlock [
+MASlangInliner >> typeNewBlock: newBlock [
 	| typingProperty lastNode |
 	
-	typingProperty := ASTCTypeAnnotator property.
+	typingProperty := FATypeAnnotator property.
 	lastNode := newBlock statements last.
 	lastNode
 		propertyAt: typingProperty
@@ -299,7 +299,7 @@ ANSlangInliner >> typeNewBlock: newBlock [
 ]
 
 { #category : #applying }
-ANSlangInliner >> visitMessageNode: aMessageNode [
+MASlangInliner >> visitMessageNode: aMessageNode [
 	aMessageNode selector = #assert: ifTrue: [ ^ self ].
 	aMessageNode selector = #eassert: ifTrue: [ ^ self ].
 	
@@ -319,7 +319,7 @@ ANSlangInliner >> visitMessageNode: aMessageNode [
 ]
 
 { #category : #accessing }
-ANSlangInliner >> visitNode: aNode [
+MASlangInliner >> visitNode: aNode [
 	"a node without parent that is not a method node, is a node that was cut out during inlining, and should not be visited anymore."
 	(aNode parent isNotNil or:[ aNode isMethod ])
 		ifTrue:[ ^ super visitNode: aNode ]

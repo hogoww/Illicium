@@ -1,11 +1,11 @@
 Class {
-	#name : #ANSlangMethodNodeTranslator,
+	#name : #MASlangMethodNodeTranslator,
 	#superclass : #ASTCMethodNodeTranslator,
 	#category : #'Angler-Slang-nodes-translators'
 }
 
 { #category : #translate }
-ANSlangMethodNodeTranslator >> translateNode: aMethodNode [
+MASlangMethodNodeTranslator >> translateNode: aMethodNode [
 	| functionDefinition |
 	functionDefinition := super translateNode: aMethodNode.
 	

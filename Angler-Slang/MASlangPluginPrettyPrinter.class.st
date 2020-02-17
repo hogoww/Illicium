@@ -1,16 +1,16 @@
 Class {
-	#name : #ANSlangPluginPrettyPrinter,
-	#superclass : #ANSlangPrettyPrinter,
+	#name : #MASlangPluginPrettyPrinter,
+	#superclass : #MASlangPrettyPrinter,
 	#category : #'Angler-Slang-prettyprint'
 }
 
 { #category : #visiting }
-ANSlangPluginPrettyPrinter >> printDeclarationQualifiers: qualifiers [
+MASlangPluginPrettyPrinter >> printDeclarationQualifiers: qualifiers [
 	"we ignore them. since staticish is added in the type of the declaration"
 ]
 
 { #category : #visiting }
-ANSlangPluginPrettyPrinter >> printDeclarationReturnType: aTypeNode [
+MASlangPluginPrettyPrinter >> printDeclarationReturnType: aTypeNode [
   stream << 'EXPORT('.
   aTypeNode acceptVisitor: self.
   stream << ')'

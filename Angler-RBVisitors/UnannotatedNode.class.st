@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCUnannotatedNode,
+	#name : #UnannotatedNode,
 	#superclass : #Error,
 	#instVars : [
 		'node'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-ASTCUnannotatedNode >> description [ 
+UnannotatedNode >> description [ 
 	^ String streamContents: [ :s|
 		s print: node class ;
 		 << ' wasn''t annotated with a type.'
@@ -16,11 +16,11 @@ ASTCUnannotatedNode >> description [
 ]
 
 { #category : #accessing }
-ASTCUnannotatedNode >> node [
+UnannotatedNode >> node [
 	^ node
 ]
 
 { #category : #accessing }
-ASTCUnannotatedNode >> node: aNode [
+UnannotatedNode >> node: aNode [
 	node := aNode
 ]

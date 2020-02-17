@@ -1,5 +1,5 @@
 Class {
-	#name : #ANSlangConstantEvaluator,
+	#name : #MASlangConstantEvaluator,
 	#superclass : #Object,
 	#instVars : [
 		'errorBlock',
@@ -9,38 +9,38 @@ Class {
 }
 
 { #category : #evaluating }
-ANSlangConstantEvaluator >> evaluate: aRBLiteralValueNode ifNonValueDo: aBlockClosure [ 
+MASlangConstantEvaluator >> evaluate: aRBLiteralValueNode ifNonValueDo: aBlockClosure [ 
 	
 	errorBlock := [ ^ aBlockClosure value ].
 	^ aRBLiteralValueNode acceptVisitor: self
 ]
 
 { #category : #accessing }
-ANSlangConstantEvaluator >> program: anANProgram [
+MASlangConstantEvaluator >> program: anANProgram [
 
 	program := anANProgram 
 ]
 
 { #category : #visiting }
-ANSlangConstantEvaluator >> visitArgumentNode: aRBArgumentNode [ 
+MASlangConstantEvaluator >> visitArgumentNode: aRBArgumentNode [ 
 
 	^ nil
 ]
 
 { #category : #visiting }
-ANSlangConstantEvaluator >> visitGlobalNode: aRBGlobalNode [ 
+MASlangConstantEvaluator >> visitGlobalNode: aRBGlobalNode [ 
 	
 	^ nil
 ]
 
 { #category : #visiting }
-ANSlangConstantEvaluator >> visitLiteralValueNode: aRBLiteralValueNode [ 
+MASlangConstantEvaluator >> visitLiteralValueNode: aRBLiteralValueNode [ 
 	
 	^ aRBLiteralValueNode value
 ]
 
 { #category : #visiting }
-ANSlangConstantEvaluator >> visitMessageNode: aRBMessageNode [ 
+MASlangConstantEvaluator >> visitMessageNode: aRBMessageNode [ 
 
 	| receiver argument |
 	(VMBasicConstants valueOfBasicSelector: aRBMessageNode selector)
@@ -61,20 +61,20 @@ ANSlangConstantEvaluator >> visitMessageNode: aRBMessageNode [
 ]
 
 { #category : #visiting }
-ANSlangConstantEvaluator >> visitReturnNode: aRBReturnNode [ 
+MASlangConstantEvaluator >> visitReturnNode: aRBReturnNode [ 
 	
 	^ aRBReturnNode value acceptVisitor: self
 ]
 
 { #category : #visiting }
-ANSlangConstantEvaluator >> visitSequenceNode: aRBSequenceNode [ 
+MASlangConstantEvaluator >> visitSequenceNode: aRBSequenceNode [ 
 	
 	aRBSequenceNode statements size > 1 ifTrue: [ errorBlock value ].
 	^ aRBSequenceNode statements first acceptVisitor: self
 ]
 
 { #category : #visiting }
-ANSlangConstantEvaluator >> visitTemporaryNode: aRBTemporaryNode [ 
+MASlangConstantEvaluator >> visitTemporaryNode: aRBTemporaryNode [ 
 
 	^ nil
 ]

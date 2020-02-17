@@ -6,5 +6,5 @@ Class {
 
 { #category : #configuring }
 MASlangPluginTestResource class >> translatorClass [
-	^ ANSlangPluginTranslator
+	^ MASlangPluginTranslator
 ]

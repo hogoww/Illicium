@@ -7,8 +7,8 @@ And those temporary nodes have to be typed..
 USE WITH CARE.
 "
 Class {
-	#name : #ANSlangDeclarationAnnotator,
-	#superclass : #ASTCVariableDeclarationAnnotator,
+	#name : #MASlangDeclarationAnnotator,
+	#superclass : #FAVariableDeclarationAnnotator,
 	#instVars : [
 		'varNodesToDeclareAtTheStartOfTheMethod'
 	],
@@ -16,19 +16,19 @@ Class {
 }
 
 { #category : #visiting }
-ANSlangDeclarationAnnotator >> initialize [
+MASlangDeclarationAnnotator >> initialize [
 	super initialize.
 	varNodesToDeclareAtTheStartOfTheMethod := self class defaultCollection new
 ]
 
 { #category : #visiting }
-ANSlangDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
+MASlangDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 	super visitAssignmentNode: anAssignmentNode.
 	self atNewPropertyPut: false for: anAssignmentNode
 ]
 
 { #category : #visiting }
-ANSlangDeclarationAnnotator >> visitBlockNode: aBlockNode [ 
+MASlangDeclarationAnnotator >> visitBlockNode: aBlockNode [ 
 	super visitBlockNode: aBlockNode.
 	"Slang declares everything at start, including arguments of certain blocks (#to:do:..)"
 	
@@ -42,7 +42,7 @@ ANSlangDeclarationAnnotator >> visitBlockNode: aBlockNode [
 ]
 
 { #category : #visit }
-ANSlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
+MASlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
 	
 	"set the property for the temporaries tagged to be declared at the start of the function in the sequence node"
@@ -51,7 +51,7 @@ ANSlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
 ]
 
 { #category : #visiting }
-ANSlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [ 
+MASlangDeclarationAnnotator >> visitSequenceNode: aSequenceNode [ 
 	super visitSequenceNode: aSequenceNode.
 	"Slang declares everything at start.
 	currently skips the temp declared in blocks."

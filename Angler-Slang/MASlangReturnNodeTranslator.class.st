@@ -1,11 +1,11 @@
 Class {
-	#name : #ANSlangReturnNodeTranslator,
+	#name : #MASlangReturnNodeTranslator,
 	#superclass : #ASTCReturnNodeTranslator,
 	#category : #'Angler-Slang-nodes-translators'
 }
 
 { #category : #translate }
-ANSlangReturnNodeTranslator >> translateNode: aReturnNode [
+MASlangReturnNodeTranslator >> translateNode: aReturnNode [
 	| returnExpression |
 	returnExpression := aReturnNode value isSelf
 		ifTrue: [ ^ ASTCEmptyStatement new ]

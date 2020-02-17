@@ -6,14 +6,14 @@ Class {
 
 { #category : #tests }
 MASlangReceiverTest >> addType: aSymbol to: aNode [ 
-	aNode propertyAt: ASTCTypeAnnotator property
+	aNode propertyAt: FATypeAnnotator property
 		put: aSymbol -> 'Generaed, no Phineas Type'
 ]
 
 { #category : #tests }
 MASlangReceiverTest >> setUp [
 	"Overide since we're working on slang"
-	methodTranslator := ANSlangTranslator new classTranslator methodTranslator.
+	methodTranslator := MASlangTranslator new classTranslator methodTranslator.
 ]
 
 { #category : #tests }

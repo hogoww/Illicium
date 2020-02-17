@@ -3,7 +3,7 @@ I am an abstract test class for RB Types annotators classes.
 I define basic tests for them.
 "
 Class {
-	#name : #ASTCTypeAnnotatorTest,
+	#name : #FATypeAnnotatorTest,
 	#superclass : #ASTCVisitorTest,
 	#instVars : [
 		'iv'
@@ -15,99 +15,99 @@ Class {
 }
 
 { #category : #testing }
-ASTCTypeAnnotatorTest class >> isAbstract [
+FATypeAnnotatorTest class >> isAbstract [
 	^ true
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aBlockWithIntegerAsLastStatement [
+FATypeAnnotatorTest >> aBlockWithIntegerAsLastStatement [
 	[ 4 ]
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodThatReturnAMessageThatReturnsAnInt [
+FATypeAnnotatorTest >> aMethodThatReturnAMessageThatReturnsAnInt [
 	^ 1 + 2
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodThatReturnsAnInteger [
+FATypeAnnotatorTest >> aMethodThatReturnsAnInteger [
 	^ 4
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithABlockWithATemporary [
+FATypeAnnotatorTest >> aMethodWithABlockWithATemporary [
 	^ [ | i | i := 3 ] value
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithABlockWithAnArgument [
+FATypeAnnotatorTest >> aMethodWithABlockWithAnArgument [
 	^ [:i| ] value: 1
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithACascade [
+FATypeAnnotatorTest >> aMethodWithACascade [
 	1 + 2 ; - 3 
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithAClassVariable [
+FATypeAnnotatorTest >> aMethodWithAClassVariable [
 	A := 3
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithAGlobalVariable [
-	ASTCTypeAnnotatorTest
+FATypeAnnotatorTest >> aMethodWithAGlobalVariable [
+	FATypeAnnotatorTest
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithALiteralNode [
+FATypeAnnotatorTest >> aMethodWithALiteralNode [
 	1
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithATemporaryVariable [
+FATypeAnnotatorTest >> aMethodWithATemporaryVariable [
 	| t |
 	t := 3
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithAnArgument: anInt [
+FATypeAnnotatorTest >> aMethodWithAnArgument: anInt [
 	^ anInt
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithAnAssignement [
+FATypeAnnotatorTest >> aMethodWithAnAssignement [
 	| e |
 	e := 3 
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithAnInstanceVariable [
+FATypeAnnotatorTest >> aMethodWithAnInstanceVariable [
 	iv := 3
 ]
 
 { #category : #support }
-ASTCTypeAnnotatorTest >> aMethodWithSelf [
+FATypeAnnotatorTest >> aMethodWithSelf [
 	self
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
+FATypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	^ self subclassResponsibility
 ]
 
 { #category : #running }
-ASTCTypeAnnotatorTest >> setUp [
+FATypeAnnotatorTest >> setUp [
 	"visitor must be set before sending super setUp in subclasses."
 	super setUp.
 	propertyName := visitor class property
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitArgumentNode [
+FATypeAnnotatorTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnArgument: from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithAnArgument: from: FATypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isArgument
 			ifTrue: [ 
@@ -118,10 +118,10 @@ ASTCTypeAnnotatorTest >> testVisitArgumentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitAssignmentNode [
+FATypeAnnotatorTest >> testVisitAssignmentNode [
 	| counter ast |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnAssignement from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithAnAssignement from: FATypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isAssignment
 			ifTrue: [ 
@@ -132,10 +132,10 @@ ASTCTypeAnnotatorTest >> testVisitAssignmentNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitBlockNode [
+FATypeAnnotatorTest >> testVisitBlockNode [
 	| counter ast |
 	counter := 0.
-	ast := self inferMethodSelector: #aBlockWithIntegerAsLastStatement from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aBlockWithIntegerAsLastStatement from: FATypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isBlock
 			ifTrue: [ 
@@ -146,12 +146,12 @@ ASTCTypeAnnotatorTest >> testVisitBlockNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitCascadeNodeGlobal [
+FATypeAnnotatorTest >> testVisitCascadeNodeGlobal [
 	| ast counterValueNode counterMessageNode |
 	counterValueNode := 0.
 	counterMessageNode := 0.
 	
-	ast := self inferMethodSelector: #aMethodWithACascade from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithACascade from: FATypeAnnotatorTest.
 	
 	ast nodesDo: [ :aNode | 
 		aNode isLiteralNode
@@ -171,10 +171,10 @@ ASTCTypeAnnotatorTest >> testVisitCascadeNodeGlobal [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
+FATypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAClassVariable from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithAClassVariable from: FATypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isGlobalNode
 			ifTrue: [ 
@@ -185,10 +185,10 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
+FATypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: FATypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
 		aNode isGlobalNode
 			ifTrue: [ 
@@ -200,7 +200,7 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
+FATypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
 	| ast counter |
 	<expectedFailure>
 	self flag:#todo."waiting to have a better understanding"
@@ -209,10 +209,10 @@ ASTCTypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
+FATypeAnnotatorTest >> testVisitInstanceVariableNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnInstanceVariable from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithAnInstanceVariable from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isInstanceVariableNode
@@ -223,10 +223,10 @@ ASTCTypeAnnotatorTest >> testVisitInstanceVariableNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitLiteralNode [
+FATypeAnnotatorTest >> testVisitLiteralNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithALiteralNode from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithALiteralNode from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isLiteralNode and: [ aNode isValue ])
@@ -237,10 +237,10 @@ ASTCTypeAnnotatorTest >> testVisitLiteralNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitMessageNode [
+FATypeAnnotatorTest >> testVisitMessageNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodThatReturnAMessageThatReturnsAnInt from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isMessage
@@ -251,10 +251,10 @@ ASTCTypeAnnotatorTest >> testVisitMessageNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitMethodNode [
+FATypeAnnotatorTest >> testVisitMethodNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodThatReturnsAnInteger from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isMethod
@@ -265,10 +265,10 @@ ASTCTypeAnnotatorTest >> testVisitMethodNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitSelfNode [
+FATypeAnnotatorTest >> testVisitSelfNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithSelf from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithSelf from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isSelf
@@ -279,10 +279,10 @@ ASTCTypeAnnotatorTest >> testVisitSelfNode [
 ]
 
 { #category : #test }
-ASTCTypeAnnotatorTest >> testVisitTemporaryNode [
+FATypeAnnotatorTest >> testVisitTemporaryNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: ASTCTypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isSelf not and: [ aNode isTemporaryNode ])

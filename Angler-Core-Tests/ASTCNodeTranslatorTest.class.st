@@ -9,19 +9,19 @@ Class {
 
 { #category : #'as yet unclassified' }
 ASTCNodeTranslatorTest >> addDeclarationProperty: aBooleanOrCollection to: aNode [ 
-	aNode propertyAt: ASTCVariableDeclarationAnnotator property
+	aNode propertyAt: FAVariableDeclarationAnnotator property
 		put: aBooleanOrCollection
 ]
 
 { #category : #'as yet unclassified' }
 ASTCNodeTranslatorTest >> addType: aClass to: aNode [ 
-	aNode propertyAt: ASTCTypeAnnotator property
+	aNode propertyAt: FATypeAnnotator property
 		put: ( aClass asTypeReification -> 'Generated, no Phineas Type')
 ]
 
 { #category : #'as yet unclassified' }
 ASTCNodeTranslatorTest >> assertTypeOf: aNode is: aType [
-	self assert: (aNode propertyAt: ASTCTypeAnnotator property) key equals: aType asTypeReification
+	self assert: (aNode propertyAt: FATypeAnnotator property) key equals: aType asTypeReification
 ]
 
 { #category : #tests }

@@ -47,7 +47,7 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 	^ aNode
 		propertyAt: classTranslator typeAnnotatorClass property
 		ifPresent: [ :types | types key ]
-		ifAbsent: [ ASTCUnannotatedNode new node: aNode ; signal ].
+		ifAbsent: [ UnannotatedNode new node: aNode ; signal ].
 ]
 
 { #category : #typing }

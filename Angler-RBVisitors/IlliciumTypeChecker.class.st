@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCTypeChecker,
+	#name : #IlliciumTypeChecker,
 	#superclass : #Object,
 	#instVars : [
 		'types',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-ASTCTypeChecker class >> checkThatType: types for: aNode using: inferer [
+IlliciumTypeChecker class >> checkThatType: types for: aNode using: inferer [
 	| vname |
 	vname := aNode isVariable ifTrue:[ aNode name ] ifFalse:[ aNode className ].
 	^ self new
@@ -23,7 +23,7 @@ ASTCTypeChecker class >> checkThatType: types for: aNode using: inferer [
 ]
 
 { #category : #'as yet unclassified' }
-ASTCTypeChecker class >> type: types using: anInferer forVar: aString [
+IlliciumTypeChecker class >> type: types using: anInferer forVar: aString [
 	^ self new
 		types: types;
 		inferer: anInferer;
@@ -32,7 +32,7 @@ ASTCTypeChecker class >> type: types using: anInferer forVar: aString [
 ]
 
 { #category : #'as yet unclassified' }
-ASTCTypeChecker >> check [
+IlliciumTypeChecker >> check [
 	(types isMultipleType)
 		ifTrue:[ [ types removeType: UndefinedObject asConstraint ] on: NotFound do: [ ] ].
 
@@ -58,27 +58,27 @@ ASTCTypeChecker >> check [
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> inferer [
+IlliciumTypeChecker >> inferer [
 	^ inferer
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> inferer: anInferer [ 
+IlliciumTypeChecker >> inferer: anInferer [ 
 	inferer := anInferer
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> node [ 
+IlliciumTypeChecker >> node [ 
 	^ node
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> node: aNode [ 
+IlliciumTypeChecker >> node: aNode [ 
 	node := aNode
 ]
 
 { #category : #'as yet unclassified' }
-ASTCTypeChecker >> nodeCheck [
+IlliciumTypeChecker >> nodeCheck [
 	node ifNil:[ ^ self ].
 	
 	(types isMultipleType and:
@@ -88,21 +88,21 @@ ASTCTypeChecker >> nodeCheck [
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> types [
+IlliciumTypeChecker >> types [
 	^ types
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> types: aCollectionOfType [
+IlliciumTypeChecker >> types: aCollectionOfType [
 	types := aCollectionOfType
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> variableName [
+IlliciumTypeChecker >> variableName [
 	^ variableName
 ]
 
 { #category : #accessing }
-ASTCTypeChecker >> variableName: aVariableName [
+IlliciumTypeChecker >> variableName: aVariableName [
 	variableName := aVariableName
 ]

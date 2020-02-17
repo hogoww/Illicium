@@ -3,7 +3,7 @@ I test the ASTCSlangTypeAnnotator class
 "
 Class {
 	#name : #MASlangTypeAnnotatorTest,
-	#superclass : #ASTCTypeAnnotatorTest,
+	#superclass : #FATypeAnnotatorTest,
 	#category : #'Angler-Slang-Tests-analysis-tests'
 }
 
@@ -48,7 +48,7 @@ MASlangTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 
 { #category : #running }
 MASlangTypeAnnotatorTest >> setUp [
-	visitor := ANSlangTypeAnnotator new 
+	visitor := MASlangTypeAnnotator new 
 		inferer: CCodeGenerator new;
 		yourself.
 	super setUp
@@ -116,7 +116,7 @@ MASlangTypeAnnotatorTest >> testVisitSelfNode [
 	counter := 0.
 	ast := self
 		inferMethodSelector: #aMethodWithSelf
-		from: ASTCTypeAnnotatorTest.
+		from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			aNode isSelf

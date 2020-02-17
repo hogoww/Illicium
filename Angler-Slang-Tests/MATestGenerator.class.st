@@ -25,7 +25,7 @@ MATestGenerator class >> testBaseClass [
 
 { #category : #generating }
 MATestGenerator class >> translatorClass [
-	^ ANSlangTranslator
+	^ MASlangTranslator
 ]
 
 { #category : #picking }

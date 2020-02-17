@@ -1,5 +1,5 @@
 Class {
-	#name : #ANGlobalStructureAccessTransformer,
+	#name : #MAGlobalStructureAccessTransformer,
 	#superclass : #Object,
 	#instVars : [
 		'translator'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-ANGlobalStructureAccessTransformer class >> translator: aTranslator [
+MAGlobalStructureAccessTransformer class >> translator: aTranslator [
 
 	^ self new
 		translator: aTranslator;
@@ -16,7 +16,7 @@ ANGlobalStructureAccessTransformer class >> translator: aTranslator [
 ]
 
 { #category : #transforming }
-ANGlobalStructureAccessTransformer >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
+MAGlobalStructureAccessTransformer >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
 
 	aRBMethodNode nodesDo: [ :each |
 		(each isVariable and: [ translator isGlobalInstanceVariable: each name ])
@@ -32,11 +32,11 @@ ANGlobalStructureAccessTransformer >> applyOnMethod: aRBMethodNode ofProgram: an
 ]
 
 { #category : #accessing }
-ANGlobalStructureAccessTransformer >> translator [
+MAGlobalStructureAccessTransformer >> translator [
 	^ translator
 ]
 
 { #category : #accessing }
-ANGlobalStructureAccessTransformer >> translator: anObject [
+MAGlobalStructureAccessTransformer >> translator: anObject [
 	translator := anObject
 ]

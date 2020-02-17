@@ -28,8 +28,8 @@ ASTCIlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 ASTCIlliciumClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ { 
-		ASTCIlliciumDeclarationAnnotator new. 
-		ASTCPhineasTypeAnnotator new inferer: inferer ; yourself"always take the latest inferer"
+		IlliciumDeclarationAnnotator new. 
+		IlliciumPhineasTypeAnnotator new inferer: inferer ; yourself"always take the latest inferer"
 		}
 ]
 
@@ -46,7 +46,7 @@ ASTCIlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector from
 
 { #category : #typing }
 ASTCIlliciumClassTranslator >> typeAnnotatorClass [
-	^ ASTCPhineasTypeAnnotator
+	^ IlliciumPhineasTypeAnnotator
 ]
 
 { #category : #typing }
@@ -54,6 +54,6 @@ ASTCIlliciumClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
 	| phineasType type |
 	phineasType := 	phineasType := (inferer concreteTypesOfInstanceVariable: anIVName ofClass:aClass).
-	type := (ASTCTypeChecker type: phineasType asPharoType using: inferer forVar: anIVName).
+	type := (IlliciumTypeChecker type: phineasType asPharoType using: inferer forVar: anIVName).
 	^ self getReplacementType: type
 ]

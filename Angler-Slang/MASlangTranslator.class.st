@@ -1,38 +1,38 @@
 Class {
-	#name : #ANSlangTranslator,
+	#name : #MASlangTranslator,
 	#superclass : #ASTCTranslator,
 	#category : #'Angler-Slang-translators'
 }
 
 { #category : #configuration }
-ANSlangTranslator class >> classTranslatorClass [
-	^ ANSlangVMClassTranslator 
+MASlangTranslator class >> classTranslatorClass [
+	^ MASlangVMClassTranslator 
 ]
 
 { #category : #configuration }
-ANSlangTranslator class >> prettyPrinterClass [
+MASlangTranslator class >> prettyPrinterClass [
 
-	^ ANSlangPrettyPrinter 
+	^ MASlangPrettyPrinter 
 ]
 
 { #category : #initialization }
-ANSlangTranslator >> fillWithtranslatorSpecificTypes [
+MASlangTranslator >> fillWithtranslatorSpecificTypes [
 	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy
 ]
 
 { #category : #initialization }
-ANSlangTranslator >> getReplacementType: aSymbol [
-	^ (ANSlangReceiver new type: aSymbol) asConstraint
+MASlangTranslator >> getReplacementType: aSymbol [
+	^ (MASlangReceiver new type: aSymbol) asConstraint
 ]
 
 { #category : #'translation-api' }
-ANSlangTranslator >> prettyPrinterClass [
+MASlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
 ]
 
 { #category : #accessing }
-ANSlangTranslator >> program: anANSlangProgram [ 
+MASlangTranslator >> program: anANSlangProgram [ 
 	
 	classTranslator program: anANSlangProgram
 ]

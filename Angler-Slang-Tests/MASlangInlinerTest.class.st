@@ -142,8 +142,8 @@ MASlangInlinerTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 	super setUp.
 	program := ANProgram new.
-	inliner := ANSlangInliner new
-		translator: ANSlangClassTranslator new.
+	inliner := MASlangInliner new
+		translator: MASlangClassTranslator new.
 ]
 
 { #category : #'test-renaming' }
@@ -453,7 +453,7 @@ MASlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 	methodToInline := initialMethod copy.
 	
 	"we check the merge of the declarations, therefore we need to make declare them"
-	declarationVisitor := ANSlangDeclarationAnnotator new.
+	declarationVisitor := MASlangDeclarationAnnotator new.
 	methodThatWillBeInlined acceptVisitor: declarationVisitor.
 	methodToInline acceptVisitor: declarationVisitor.
 	
@@ -463,8 +463,8 @@ MASlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 	self assert: resultingMethod temporaries size equals: 2.
 	
 	"annotation for C declaration"
-	self assert: (resultingMethod body hasProperty: ASTCVariableDeclarationAnnotator property).
-	declarationAnnotation := resultingMethod body propertyAt: ASTCVariableDeclarationAnnotator property.
+	self assert: (resultingMethod body hasProperty: FAVariableDeclarationAnnotator property).
+	declarationAnnotation := resultingMethod body propertyAt: FAVariableDeclarationAnnotator property.
 	self assert: declarationAnnotation size = 2.
 	declarationAnnotation do:[ :aTempNode |
 		self assert: (#(t t1) includes: aTempNode name).

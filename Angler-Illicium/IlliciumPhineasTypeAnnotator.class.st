@@ -4,32 +4,32 @@ I annotate RB ASTs with types informations coming from the Phineas type inferenc
 
 "
 Class {
-	#name : #ASTCPhineasTypeAnnotator,
-	#superclass : #ASTCTypeAnnotator,
+	#name : #IlliciumPhineasTypeAnnotator,
+	#superclass : #FATypeAnnotator,
 	#instVars : [
 		'methodTypeDispatcher'
 	],
-	#category : #'Angler-RBVisitors-typing'
+	#category : #'Angler-Illicium-analysis'
 }
 
 { #category : #initialization }
-ASTCPhineasTypeAnnotator >> initialize [
+IlliciumPhineasTypeAnnotator >> initialize [
 	super initialize.
 	methodTypeDispatcher := PIIsMethodTypeInterpreted new.
 ]
 
 { #category : #visiting }
-ASTCPhineasTypeAnnotator >> typeThatNode: aNode [
+IlliciumPhineasTypeAnnotator >> typeThatNode: aNode [
 	| phineasTypes type |
 	phineasTypes := inferer phineasTypeOfNode: aNode.
 
-	type := ASTCTypeChecker checkThatType: phineasTypes asPharoType for: aNode using: inferer.
+	type := IlliciumTypeChecker checkThatType: phineasTypes asPharoType for: aNode using: inferer.
 	
 	self atNewPropertyPut: type -> phineasTypes for: aNode
 ]
 
 { #category : #visiting }
-ASTCPhineasTypeAnnotator >> visitMethodNode: aMethodNode [
+IlliciumPhineasTypeAnnotator >> visitMethodNode: aMethodNode [
 	"The Phineas type inferencer doesn't type some methods, such as primitives."
 	"The methodTypeDispatcher tells us if it did, in fact, type this method."
 	(self wasMethodTyped: aMethodNode)
@@ -38,6 +38,6 @@ ASTCPhineasTypeAnnotator >> visitMethodNode: aMethodNode [
 ]
 
 { #category : #visiting }
-ASTCPhineasTypeAnnotator >> wasMethodTyped: aMethodNode [
+IlliciumPhineasTypeAnnotator >> wasMethodTyped: aMethodNode [
 	^ (inferer getMethodNodeOf: aMethodNode) accept: methodTypeDispatcher
 ]

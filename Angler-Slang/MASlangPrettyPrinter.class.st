@@ -1,11 +1,11 @@
 Class {
-	#name : #ANSlangPrettyPrinter,
+	#name : #MASlangPrettyPrinter,
 	#superclass : #FAPrettyPrint,
 	#category : #'Angler-Slang-prettyprint'
 }
 
 { #category : #'printing-literals' }
-ANSlangPrettyPrinter >> cLiteralFor: anObject [
+MASlangPrettyPrinter >> cLiteralFor: anObject [
 	"Return a string representing the C literal value for the given object."
 	anObject isNumber
 		ifTrue:
@@ -35,7 +35,7 @@ ANSlangPrettyPrinter >> cLiteralFor: anObject [
 ]
 
 { #category : #'printing-literals' }
-ANSlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
+MASlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
 	"Answer the string for generating a literal integer.
 	Use hexadecimal notation as prescribed by aBoolean.
 	Use long long suffix (LL) if the integer does not fit on 32 bits.
@@ -69,7 +69,7 @@ ANSlangPrettyPrinter >> cLiteralForInteger: anInteger hex: aBoolean [
 ]
 
 { #category : #'printing-literals' }
-ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger hex: aBoolean longlong: llBoolean [
+MASlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger hex: aBoolean longlong: llBoolean [
 	"Answer the string for generating an unsigned literal integer.
 	Use hexadecimal notation as prescribed by aBoolean.
 	Force long long suffix (LL) if the integer does not fit on 32 bits, or if llBoolean is true."
@@ -88,7 +88,7 @@ ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger hex: aBoolean long
 ]
 
 { #category : #'printing-literals' }
-ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger longlong: llBoolean [
+MASlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger longlong: llBoolean [
 	"Answer the string for generating an unsigned literal integer.
 	Eventually use hexadecimal.
 	Force long long suffix (LL) if the integer does not fit on 32 bits, or if llBoolean is true."
@@ -102,7 +102,7 @@ ANSlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger longlong: llBoolea
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
+MASlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 
 	aNode isLiteral ifTrue: [ ^ false ].
 	(aNode isBitLeftShiftOperator
@@ -120,36 +120,36 @@ ANSlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> initialize [
+MASlangPrettyPrinter >> initialize [
 
 	super initialize.
 	self indentationString: '	'
 ]
 
 { #category : #printing }
-ANSlangPrettyPrinter >> parenthesisAround: aBlockClosure [ 
+MASlangPrettyPrinter >> parenthesisAround: aBlockClosure [ 
 	
 	self parenthesisIf: true print: aBlockClosure
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> printBinaryOperand: anOperand [
+MASlangPrettyPrinter >> printBinaryOperand: anOperand [
 
 	self visitExpression: anOperand
 ]
 
 { #category : #printing }
-ANSlangPrettyPrinter >> printDeclarationQualifiers: qualifiers [
+MASlangPrettyPrinter >> printDeclarationQualifiers: qualifiers [
 	qualifiers do: [:aQualifier | self << aQualifier. self space ] .
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
+MASlangPrettyPrinter >> printDeclarationReturnType: aTypeNode [
   aTypeNode acceptVisitor: self
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
+MASlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
 	self parenthesisFor: anOperator print: [	
 		self printBinaryOperand: anOperator leftOperand.
 		self cr spaces.
@@ -159,14 +159,14 @@ ANSlangPrettyPrinter >> printLogicalOperatorInConditionnal: anOperator [
 ]
 
 { #category : #comments }
-ANSlangPrettyPrinter >> printMultilineComment: aString [
+MASlangPrettyPrinter >> printMultilineComment: aString [
 	stream << '/*'
 		<< aString
 		<< ' */'
 ]
 
 { #category : #comments }
-ANSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
+MASlangPrettyPrinter >> printNodeInMultilineComment: aNode [
 	self
 		<< '/* ';
 		print: aNode;
@@ -174,7 +174,7 @@ ANSlangPrettyPrinter >> printNodeInMultilineComment: aNode [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
+MASlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
 	"systematique use of parenthesis"
 	self << '('.
 	self visitUnaryOperator: anAddressOfOperatorNode.
@@ -182,12 +182,12 @@ ANSlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitAndOperator: anAndOperator [
+MASlangPrettyPrinter >> visitAndOperator: anAndOperator [
 	self printLogicalOperatorInConditionnal: anAndOperator
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOperator [
+MASlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOperator [
 	"use of one more set of parentheses than needed. Ok."
 	| isStatement |
 	isStatement := anAssignmentAdditionOperator parent isExpressionStatement
@@ -198,7 +198,7 @@ ANSlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOp
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
+MASlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 
 	self print: anAssignmentOperator leftOperand.
 	self << ' ' << anAssignmentOperator class symbol << ' '.
@@ -206,7 +206,7 @@ ANSlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitBinaryOperator: anOperator [
+MASlangPrettyPrinter >> visitBinaryOperator: anOperator [
 
 	self printBinaryOperand: anOperator leftOperand.
 	self << ' ' << anOperator class symbol << ' '.
@@ -214,7 +214,7 @@ ANSlangPrettyPrinter >> visitBinaryOperator: anOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
+MASlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
 
 	"Special case if first operator is a constant: format the integer correctly"
 	aBitLeftShiftOperator leftOperand isLiteral ifTrue: [
@@ -228,7 +228,7 @@ ANSlangPrettyPrinter >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitBlock: aBlock [
+MASlangPrettyPrinter >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
 	"
@@ -252,7 +252,7 @@ ANSlangPrettyPrinter >> visitBlock: aBlock [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
+MASlangPrettyPrinter >> visitCastOperator: aCastOperator [
 
 	"Cast operators always are wrapped in parenthesis in slang"
 	self parenthesisAround: [
@@ -264,7 +264,7 @@ ANSlangPrettyPrinter >> visitCastOperator: aCastOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitExpression: anExpression [
+MASlangPrettyPrinter >> visitExpression: anExpression [
 
 	self
 		parenthesisIf: ((anExpression isLiteral or: [ anExpression isIdentifier ]) not
@@ -273,7 +273,7 @@ ANSlangPrettyPrinter >> visitExpression: anExpression [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitExpressionList: anExpressionList [
+MASlangPrettyPrinter >> visitExpressionList: anExpressionList [
 	self parenthesisIf: true
 		print:[
 			anExpressionList expressions do: [:anExpression | 
@@ -284,13 +284,13 @@ ANSlangPrettyPrinter >> visitExpressionList: anExpressionList [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
+MASlangPrettyPrinter >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	anExpressionStatement expression isPreprocessorIf ifFalse: [ self << $; ]. "pretty sure that won't always be the case."
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
+MASlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 
 	aFunctionCall id acceptVisitor: self.
 	self << '('.
@@ -303,7 +303,7 @@ ANSlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
+MASlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
   self printDeclarationQualifiers: aFunctionDeclaration qualifiers.
   self printDeclarationReturnType: aFunctionDeclaration type.
 
@@ -315,7 +315,7 @@ ANSlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
+MASlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
 	"aFunctionDefinition comment ifNotNil: [ 
 		self cr cr;
 			printMultilineComment: '	', aFunctionDefinition comment anyOne;
@@ -334,7 +334,7 @@ ANSlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitIf: anIf [
+MASlangPrettyPrinter >> visitIf: anIf [
 	self << 'if ('.
 	anIf condition acceptVisitor: self.
 	self << ') '.
@@ -346,13 +346,13 @@ ANSlangPrettyPrinter >> visitIf: anIf [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitLiteral: aLiteral [
+MASlangPrettyPrinter >> visitLiteral: aLiteral [
 
 	self << (self cLiteralFor: aLiteral value)
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitNegationOperator: aNegationOperator [
+MASlangPrettyPrinter >> visitNegationOperator: aNegationOperator [
 
 	aNegationOperator operand isLiteral ifTrue: [ 
 		^ (ASTCLiteral value: (aNegationOperator operand value negated)) acceptVisitor: self
@@ -362,12 +362,12 @@ ANSlangPrettyPrinter >> visitNegationOperator: aNegationOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitOrOperator: anOrOperator [
+MASlangPrettyPrinter >> visitOrOperator: anOrOperator [
 	self printLogicalOperatorInConditionnal: anOrOperator
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
+MASlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
    self cr.
    self << '#  if ' print: aPreprocessorIfNode condition ; cr.
    aPreprocessorIfNode then do: [:anExpression | 
@@ -392,17 +392,17 @@ ANSlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
+MASlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
 	self << aRawCCodeNode cCode
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitRawDeclaration: aRawDeclarationNode [
+MASlangPrettyPrinter >> visitRawDeclaration: aRawDeclarationNode [
 	self << aRawDeclarationNode rawDeclaration << ';'
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
+MASlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
 	
 	self enterBlock.
 	self << '('.
@@ -416,7 +416,7 @@ ANSlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
+MASlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 
 	self parenthesisFor: anUnaryOperator print: [
 		self << anUnaryOperator class symbol.
@@ -426,7 +426,7 @@ ANSlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 ]
 
 { #category : #visiting }
-ANSlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
+MASlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
 	aVariableDeclaration type acceptVisitor:self.
 	stream peekLast = $* ifFalse: [ self << Character space ].
 	aVariableDeclaration id acceptVisitor:self.

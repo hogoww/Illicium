@@ -55,7 +55,7 @@ isConstantNode: aNode valueInto: aBlock
 { #category : #helpers }
 MASlangConstantEvaluatorTest >> evaluateNode: aNode [
 
-	value := ANSlangConstantEvaluator new
+	value := MASlangConstantEvaluator new
 		program: program;
 		evaluate: aNode
 		ifNonValueDo: [ ^ self ].

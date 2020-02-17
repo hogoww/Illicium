@@ -2,18 +2,18 @@
 I test the PhineasTypeAnnotator class
 "
 Class {
-	#name : #ASTCPhineasTypeAnnotatorTest,
-	#superclass : #ASTCTypeAnnotatorTest,
+	#name : #IlliciumPhineasTypeAnnotatorTest,
+	#superclass : #FATypeAnnotatorTest,
 	#category : #'Angler-RBVisitors-Tests-typing'
 }
 
 { #category : #testing }
-ASTCPhineasTypeAnnotatorTest class >> isAbstract [
+IlliciumPhineasTypeAnnotatorTest class >> isAbstract [
 	^ false
 ]
 
 { #category : #test }
-ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
+IlliciumPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 	visitor inferer infer: aMethodAST.
@@ -22,7 +22,7 @@ ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 ]
 
 { #category : #test }
-ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass usingBlock: aBlock [
+IlliciumPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass usingBlock: aBlock [
 	| aMethodAST |
 	aMethodAST := (aClass >> aSelector) ast copy.
 	visitor inferer infer: aBlock.
@@ -31,19 +31,19 @@ ASTCPhineasTypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass usin
 ]
 
 { #category : #running }
-ASTCPhineasTypeAnnotatorTest >> setUp [
-	visitor := ASTCPhineasTypeAnnotator new 
+IlliciumPhineasTypeAnnotatorTest >> setUp [
+	visitor := IlliciumPhineasTypeAnnotator new 
 		inferer: PhineasInferer new;
 		yourself.
 	super setUp
 ]
 
 { #category : #test }
-ASTCPhineasTypeAnnotatorTest >> testVisitArgumentNode [
+IlliciumPhineasTypeAnnotatorTest >> testVisitArgumentNode [
 	" override of the test, because we need to use a block for phineas's inference of methods with arguments."
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnArgument: from: ASTCTypeAnnotatorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
+	ast := self inferMethodSelector: #aMethodWithAnArgument: from: FATypeAnnotatorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
 	ast nodesDo: [ :aNode | 
 		aNode isArgument
 			ifTrue: [ 

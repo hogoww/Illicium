@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangDeclarationAnnotatorTest,
-	#superclass : #ASTCVariableDeclarationAnnotatorTest,
+	#superclass : #FAVariableDeclarationAnnotatorTest,
 	#category : #'Angler-Slang-Tests-analysis-tests'
 }
 
@@ -12,7 +12,7 @@ MASlangDeclarationAnnotatorTest class >> isAbstract [
 { #category : #basic }
 MASlangDeclarationAnnotatorTest >> setUp [
 	super setUp.
-	visitor := ANSlangDeclarationAnnotator new.
+	visitor := MASlangDeclarationAnnotator new.
 ]
 
 { #category : #basic }
@@ -44,7 +44,7 @@ MASlangDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
 	"Argument used in 2 different blocks, should be only declared once"
 	| defaultCollection |
 	super testMethodWithTwoBlockWithSameVariable. 
-	defaultCollection := ASTCVariableDeclarationAnnotator defaultCollection.
+	defaultCollection := FAVariableDeclarationAnnotator defaultCollection.
 	
 	"It should not be declared in either blocks"	
 	self assert: ast body statements first body propertyEquals: defaultCollection new.
@@ -60,7 +60,7 @@ MASlangDeclarationAnnotatorTest >> testMethodWithTwoBlockWithSameVariable [
 MASlangDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
 	| defaultCollection |
 	super testVisitArgumentNodeInABlock. 
-	defaultCollection := ASTCVariableDeclarationAnnotator defaultCollection.
+	defaultCollection := FAVariableDeclarationAnnotator defaultCollection.
 	
 	"The argument should not be declared in its block"	
 	self assert: ast body statements first body propertyEquals: defaultCollection new.
@@ -74,7 +74,7 @@ MASlangDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
 MASlangDeclarationAnnotatorTest >> testVisitArgumentNodeToDiscardInABlock [
 	| defaultCollection |
 	super testVisitArgumentNodeToDiscardInABlock. 
-	defaultCollection := ASTCVariableDeclarationAnnotator defaultCollection.
+	defaultCollection := FAVariableDeclarationAnnotator defaultCollection.
 	
 	"The argument should not be declared."	
 	self assert: ast body statements first arguments second body propertyEquals: defaultCollection new.
@@ -120,6 +120,6 @@ MASlangDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
 
 	"But should be declared at the start of the function"
 	self assert: ast body statements first temporaries isNotEmpty.
-	self assert: ast body statements first body propertyEquals: ASTCVariableDeclarationAnnotator defaultCollection new.
+	self assert: ast body statements first body propertyEquals: FAVariableDeclarationAnnotator defaultCollection new.
 	self assert: ast body propertyEquals: ast body statements first temporaries asSet.
 ]

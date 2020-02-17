@@ -1,16 +1,16 @@
 Class {
-	#name : #ANSlangClassTranslator,
+	#name : #MASlangClassTranslator,
 	#superclass : #ASTCClassTranslator,
 	#category : #'Angler-Slang-translators'
 }
 
 { #category : #'program-configuration' }
-ANSlangClassTranslator >> addMethod: aCollection [
+MASlangClassTranslator >> addMethod: aCollection [
 	program addMethod: aCollection
 ]
 
 { #category : #'program-configuration' }
-ANSlangClassTranslator >> annotateProgramWith: aClass [
+MASlangClassTranslator >> annotateProgramWith: aClass [
 	program isFullyAnnotated ifTrue: [ ^ self ].
 
 	inferer vmClass: self program vmClass.
@@ -40,7 +40,7 @@ ANSlangClassTranslator >> annotateProgramWith: aClass [
 ]
 
 { #category : #transformations }
-ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
+MASlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
 	| method |
 	method := aMethodNode copy.
 	self transformations do: [:aTransformation|
@@ -50,60 +50,60 @@ ANSlangClassTranslator >> applyTransformationsOn: aMethodNode [
 ]
 
 { #category : #initialization }
-ANSlangClassTranslator >> initialize [
+MASlangClassTranslator >> initialize [
 	super initialize.
 	inferer := CCodeGeneratorGlobalStructure new.
-	methodTranslator methodNodeTranslator: ANSlangMethodNodeTranslator new.
-	methodTranslator literalValueNodeTranslator: ANSlangLiteralValueNodeTranslator new.
-	methodTranslator returnNodeTranslator: ANSlangReturnNodeTranslator new.
-	methodTranslator temporaryDeclarationNodeTranslator: ANSlangTemporaryDeclarationNodesTranslator new.
-	methodTranslator assignmentNodeTranslator: ANSlangAssignmentNodeTranslator new.
+	methodTranslator methodNodeTranslator: MASlangMethodNodeTranslator new.
+	methodTranslator literalValueNodeTranslator: MASlangLiteralValueNodeTranslator new.
+	methodTranslator returnNodeTranslator: MASlangReturnNodeTranslator new.
+	methodTranslator temporaryDeclarationNodeTranslator: MASlangTemporaryDeclarationNodesTranslator new.
+	methodTranslator assignmentNodeTranslator: MASlangAssignmentNodeTranslator new.
 	program := ANProgram new.
 ]
 
 { #category : #testing }
-ANSlangClassTranslator >> isGlobalInstanceVariable: aString [ 
+MASlangClassTranslator >> isGlobalInstanceVariable: aString [ 
 	
 	^ (inferer globalsAsSet includes: aString)
 		and: [ inferer placeInStructure: aString ]
 ]
 
 { #category : #'special selectors' }
-ANSlangClassTranslator >> isSpecialSelector: aString [ 
+MASlangClassTranslator >> isSpecialSelector: aString [ 
 	
-	^ ANSlangReceiver slangReservedSelector includes: aString
+	^ MASlangReceiver slangReservedSelector includes: aString
 ]
 
 { #category : #initialization }
-ANSlangClassTranslator >> isStatefulCode [
+MASlangClassTranslator >> isStatefulCode [
 	^ false
 ]
 
 { #category : #configuration }
-ANSlangClassTranslator >> postTranslationVisitors [
+MASlangClassTranslator >> postTranslationVisitors [
 	^ {
 		FAStatementsBecomeExpressions new
 	}
 ]
 
 { #category : #check }
-ANSlangClassTranslator >> preTranslationConstraintCheck: aClass [
+MASlangClassTranslator >> preTranslationConstraintCheck: aClass [
 	((aClass allSuperclasses
 		includes: InterpreterPlugin) or:[ aClass = InterpreterPrimitives])
 		ifFalse: [ self error: 'can only translate plugins for now. They need to inherit from InterpreterPlugin.' ].
 ]
 
 { #category : #visiting }
-ANSlangClassTranslator >> preTranslationVisitors [
+MASlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ { 
-		ANSlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
-		ANSlangDeclarationAnnotator new
+		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
+		MASlangDeclarationAnnotator new
 		}
 ]
 
 { #category : #check }
-ANSlangClassTranslator >> preTypeInference: aClass [
+MASlangClassTranslator >> preTypeInference: aClass [
 	| piType |
 	piType := inferer typeForClass: InterpreterPlugin.
 	piType
@@ -122,7 +122,7 @@ ANSlangClassTranslator >> preTypeInference: aClass [
 ]
 
 { #category : #'translation-api' }
-ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
+MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
 	aClass declareCVarsIn: inferer.
 
@@ -135,25 +135,25 @@ ANSlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 ]
 
 { #category : #accessing }
-ANSlangClassTranslator >> transformations [
+MASlangClassTranslator >> transformations [
 	| transformations |
 	transformations := OrderedCollection new.
-	transformations add: (ANSlangInliner translator: self).
-	transformations add: (ANGlobalStructureAccessTransformer translator: self).
+	transformations add: (MASlangInliner translator: self).
+	transformations add: (MAGlobalStructureAccessTransformer translator: self).
 	^ transformations
 ]
 
 { #category : #'translation-api' }
-ANSlangClassTranslator >> translateClass: aClass [ 
+MASlangClassTranslator >> translateClass: aClass [ 
 	self error: 'not adapted to refactor to use Slang yet'
 ]
 
 { #category : #typing }
-ANSlangClassTranslator >> typeAnnotatorClass [
-	^ ANSlangTypeAnnotator
+MASlangClassTranslator >> typeAnnotatorClass [
+	^ MASlangTypeAnnotator
 ]
 
 { #category : #'translation-api' }
-ANSlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
+MASlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	^ self getReplacementType: (inferer typeOfVariable: anIVName)
 ]

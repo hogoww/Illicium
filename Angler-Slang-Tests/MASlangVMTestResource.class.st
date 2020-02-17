@@ -6,5 +6,5 @@ Class {
 
 { #category : #configuring }
 MASlangVMTestResource class >> translatorClass [
-	^ ANSlangTranslator
+	^ MASlangTranslator
 ]
