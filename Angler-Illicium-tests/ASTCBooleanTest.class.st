@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCBooleanTest,
-	#superclass : #ASTCMessageNodeTranslatorTest,
+	#superclass : #FAMessageNodeTranslatorTest,
 	#category : #'Angler-Illicium-tests'
 }
 

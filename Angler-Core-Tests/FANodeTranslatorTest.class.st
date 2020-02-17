@@ -1,31 +1,31 @@
 Class {
-	#name : #ASTCNodeTranslatorTest,
+	#name : #FANodeTranslatorTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'methodTranslator'
 	],
-	#category : #'Angler-Illicium-tests'
+	#category : #'Angler-Core-Tests'
 }
 
 { #category : #'as yet unclassified' }
-ASTCNodeTranslatorTest >> addDeclarationProperty: aBooleanOrCollection to: aNode [ 
+FANodeTranslatorTest >> addDeclarationProperty: aBooleanOrCollection to: aNode [ 
 	aNode propertyAt: FAVariableDeclarationAnnotator property
 		put: aBooleanOrCollection
 ]
 
 { #category : #'as yet unclassified' }
-ASTCNodeTranslatorTest >> addType: aClass to: aNode [ 
+FANodeTranslatorTest >> addType: aClass to: aNode [ 
 	aNode propertyAt: FATypeAnnotator property
 		put: ( aClass asTypeReification -> 'Generated, no Phineas Type')
 ]
 
 { #category : #'as yet unclassified' }
-ASTCNodeTranslatorTest >> assertTypeOf: aNode is: aType [
+FANodeTranslatorTest >> assertTypeOf: aNode is: aType [
 	self assert: (aNode propertyAt: FATypeAnnotator property) key equals: aType asTypeReification
 ]
 
 { #category : #tests }
-ASTCNodeTranslatorTest >> setUp [
+FANodeTranslatorTest >> setUp [
 	"we only need a reference to the method translator"
 	methodTranslator := FATranslator new classTranslator methodTranslator.
 ]

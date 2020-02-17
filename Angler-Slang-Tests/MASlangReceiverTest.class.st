@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangReceiverTest,
-	#superclass : #ASTCMessageNodeTranslatorTest,
+	#superclass : #FAMessageNodeTranslatorTest,
 	#category : #'Angler-Slang-Tests-analysis-tests'
 }
 

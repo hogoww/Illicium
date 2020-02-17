@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCLiteralTranslatorTest,
-	#superclass : #ASTCNodeTranslatorTest,
-	#category : #'Angler-Illicium-tests'
+	#name : #FALiteralTranslatorTest,
+	#superclass : #FANodeTranslatorTest,
+	#category : #'Angler-Core-Tests'
 }
 
 { #category : #tests }
-ASTCLiteralTranslatorTest >> testTranslationSmallIntegerLiteral [
+FALiteralTranslatorTest >> testTranslationSmallIntegerLiteral [
 	| astC |
 	
 	astC := (FATranslator translateExpression: '5') statements at: 1.
