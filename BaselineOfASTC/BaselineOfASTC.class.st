@@ -28,13 +28,14 @@ BaselineOfASTC >> baseline: spec [
 				
 				"FAngler"
 				package: 'Angler-Core' with:[ spec requires:#('ASTC-Core' 'ASTC-Core-Extensions') ];
-				package: 'Angler-Core-Tests' with:[spec requires:#('Angler-Core') ]"
-				package: 'Angler-Slang' with: [ #('Angler-Core' 'Angler-RBVisitors' 'Angler-VisitorASTC' 'ASTC-kernel') ];
-				package: 'Angler-Slang-Tests' with: [ #('Angler-Slang') ];
+				package: 'Angler-Core-Tests' with:[spec requires:#('Angler-Core') ];	
 				package: 'Angler-VisitorsASTC' with:[ spec requires:#('ASTC-Core') ];
 				package: 'Angler-VisitorsASTC-Tests' with:[ spec requires:#('Angler-VisitorsASTC') ];
 				package: 'Angler-RBVisitors' with:[ spec requires:#('ASTC-Core') ];
-				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-RBVisitors') ];
+				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-RBVisitors') ]"
+				package: 'Angler-Slang' with: [ #('Angler-Core' 'Angler-RBVisitors' 'Angler-VisitorASTC' 'ASTC-kernel') ];
+				package: 'Angler-Slang-Tests' with: [ #('Angler-Slang') ];
+			
 				package: 'Illicium-Tools'"
 		].
 ]
