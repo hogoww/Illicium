@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'visitor'
 	],
-	#category : #'Angler-VisitorsASTC-PrettyPrint'
+	#category : #'Angler-VisitorsASTC-Tests-modification'
 }
 
 { #category : #running }

@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCPrettyPrintTest,
 	#superclass : #TestCase,
-	#category : #'Angler-VisitorsASTC-Tests-Validation'
+	#category : #'Angler-VisitorsASTC-Tests-validation'
 }
 
 { #category : #tests }

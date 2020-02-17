@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'subTreeShouldBeAllExpressions'
 	],
-	#category : #'Angler-VisitorsASTC-PrettyPrint'
+	#category : #'Angler-VisitorsASTC-modification'
 }
 
 { #category : #initialization }
