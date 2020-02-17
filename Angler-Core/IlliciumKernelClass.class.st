@@ -5,7 +5,7 @@ Class {
 		'receiverNode',
 		'methodTranslator'
 	],
-	#category : #'Angler-Illicium-messages-translators'
+	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #accessing }
