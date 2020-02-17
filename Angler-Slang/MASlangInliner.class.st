@@ -259,7 +259,6 @@ MASlangInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
 MASlangInliner >> shouldInline: aMessageNode [
 	
 	| methodToInline |
-	(self class includesSelectorTranslatedAsMacro: aMessageNode selector) ifTrue: [ ^ false ].
 	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
 	
 	methodToInline := program methodNamed: aMessageNode selector.
