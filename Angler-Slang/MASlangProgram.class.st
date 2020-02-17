@@ -1,13 +1,21 @@
 Class {
 	#name : #MASlangProgram,
 	#superclass : #FAProgram,
-	#category : #'Angler-Slang-Tests-generators'
+	#category : #'Angler-Slang-Translation'
 }
 
 { #category : #accessing }
 MASlangProgram >> classes [
 
 	^ { VMClass. SpurMemoryManager . Spur64BitMemoryManager . StackInterpreter }
+]
+
+{ #category : #accessing }
+MASlangProgram >> newMethodCallerCounterVisitor [
+
+	^ MAMethodCallerCounterVisitor new
+		program: self;
+		yourself
 ]
 
 { #category : #accessing }
@@ -36,6 +44,8 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 		each declareCVarsIn: inferer ].
 	"self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)]."
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
+	
+	self methods do: [ :each | each acceptVisitor: self newMethodCallerCounterVisitor ].
 	
 	aTranslator annotateMethodsASTWithTypes: (self methods select: [:e| e methodClass ~~ StackInterpreter]).
 	self isFullyAnnotated: true

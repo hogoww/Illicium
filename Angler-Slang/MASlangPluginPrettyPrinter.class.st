@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangPluginPrettyPrinter,
 	#superclass : #MASlangPrettyPrinter,
-	#category : #'Angler-Slang-prettyprint'
+	#category : #'Angler-Slang-Prettyprint'
 }
 
 { #category : #visiting }

@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'varNodesToDeclareAtTheStartOfTheMethod'
 	],
-	#category : #'Angler-Slang-analysis'
+	#category : #'Angler-Slang-Analysis'
 }
 
 { #category : #visiting }

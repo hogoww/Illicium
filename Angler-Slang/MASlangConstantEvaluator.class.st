@@ -5,7 +5,7 @@ Class {
 		'errorBlock',
 		'program'
 	],
-	#category : #'Angler-Slang-analysis'
+	#category : #'Angler-Slang-Analysis'
 }
 
 { #category : #evaluating }

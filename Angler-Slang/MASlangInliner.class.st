@@ -9,7 +9,7 @@ Class {
 	#classInstVars : [
 		'selectorMacros'
 	],
-	#category : #'Angler-Slang-analysis'
+	#category : #'Angler-Slang-Analysis'
 }
 
 { #category : #testing }
@@ -265,6 +265,8 @@ MASlangInliner >> shouldInline: aMessageNode [
 	
 	methodToInline pragmaNamed: #inline:
 		ifPresent: [:aPragma| (#(false never) includes: aPragma arguments first value) ifTrue: [ ^ false ] ].
+	
+	methodToInline anglerCalls = 1 ifTrue: [ ^ true ].
 		
 	^(translator isSpecialSelector: aMessageNode selector) not
 		and: [ (methodToInline hasPragmaNamed: #cmacro) not

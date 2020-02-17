@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangReturnNodeTranslator,
 	#superclass : #FAReturnNodeTranslator,
-	#category : #'Angler-Slang-nodes-translators'
+	#category : #'Angler-Slang-NodesTranslators'
 }
 
 { #category : #translate }

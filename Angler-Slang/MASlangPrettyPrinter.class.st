@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangPrettyPrinter,
 	#superclass : #FAPrettyPrint,
-	#category : #'Angler-Slang-prettyprint'
+	#category : #'Angler-Slang-Prettyprint'
 }
 
 { #category : #'printing-literals' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'translator'
 	],
-	#category : #'Angler-Slang-analysis'
+	#category : #'Angler-Slang-Analysis'
 }
 
 { #category : #accessing }
