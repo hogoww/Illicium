@@ -6,7 +6,7 @@ Class {
 		'classTranslator',
 		'includes'
 	],
-	#category : #'Angler-Core-overviewers'
+	#category : #'Angler-Core-translation'
 }
 
 { #category : #accessing }

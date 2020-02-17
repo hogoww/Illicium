@@ -1,27 +1,10 @@
 Class {
 	#name : #ASTCMessageNodeTranslatorTest,
 	#superclass : #ASTCNodeTranslatorTest,
-	#category : #'Angler-Core-Tests-Translators'
+	#category : #'Angler-Core-Tests-translators-messages'
 }
 
 { #category : #accessing }
 ASTCMessageNodeTranslatorTest class >> testedClass [
 	^ self subclassResponsibility
-]
-
-{ #category : #tests }
-ASTCMessageNodeTranslatorTest >> testASTCEqual [
-	| astC expectedC|
-	astC := (ASTCTranslator translateExpression: '1 = 6') statements at: 1.
-	
-	expectedC := ASTCEqualityOperator new
-		leftOperand: (ASTCLiteral value: 1);
-		rightOperand: (ASTCLiteral value: 6);
-		yourself.
-	
-	self assert: astC isExpressionStatement.
-	self assert: astC expression isOperator.
-	self assert: astC expression leftOperand value equals: 1.
-	self assert: astC expression rightOperand value equals: 6.
-	self assert: astC expression equals: expectedC.
 ]

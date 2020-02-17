@@ -6,7 +6,7 @@ Class {
 		'isFullyAnnotated',
 		'classesToGenerate'
 	],
-	#category : #'Angler-Core'
+	#category : #'Angler-Core-translation'
 }
 
 { #category : #properties }

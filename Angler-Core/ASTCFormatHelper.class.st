@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'classTranslator'
 	],
-	#category : #'Angler-Core-class-state'
+	#category : #'Angler-Core-state-translator'
 }
 
 { #category : #formatting }

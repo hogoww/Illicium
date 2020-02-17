@@ -8,7 +8,7 @@ Class {
 		'stateTranslator',
 		'program'
 	],
-	#category : #'Angler-Core-overviewers'
+	#category : #'Angler-Core-translation'
 }
 
 { #category : #'as yet unclassified' }

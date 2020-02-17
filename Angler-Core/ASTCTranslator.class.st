@@ -5,7 +5,7 @@ Class {
 		'classTranslator',
 		'replacementClasses'
 	],
-	#category : #'Angler-Core-overviewers'
+	#category : #'Angler-Core-translation'
 }
 
 { #category : #configuration }

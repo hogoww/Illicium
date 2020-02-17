@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCLiteralTranslatorTest,
 	#superclass : #ASTCNodeTranslatorTest,
-	#category : #'Angler-Core-Tests-Translators'
+	#category : #'Angler-Core-Tests-translators-nodes'
 }
 
 { #category : #tests }

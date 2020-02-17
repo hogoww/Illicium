@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'methodTranslator'
 	],
-	#category : #'Angler-Core-Tests-Translators'
+	#category : #'Angler-Core-Tests-support'
 }
 
 { #category : #'as yet unclassified' }

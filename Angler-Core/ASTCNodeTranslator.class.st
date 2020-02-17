@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'methodTranslator'
 	],
-	#category : #'Angler-Core-ast-nodes'
+	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }

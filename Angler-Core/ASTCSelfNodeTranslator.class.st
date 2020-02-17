@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSelfNodeTranslator,
 	#superclass : #ASTCNodeTranslator,
-	#category : #'Angler-Core-ast-nodes'
+	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }

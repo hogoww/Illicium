@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCIlliciumClassTranslator,
 	#superclass : #ASTCClassTranslator,
-	#category : #'Angler-Core-overviewers'
+	#category : #'Angler-Core-translation'
 }
 
 { #category : #initialization }
