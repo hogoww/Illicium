@@ -25,7 +25,6 @@ BaselineOfASTC >> baseline: spec [
 				package: 'ASTC-Core-Extensions' with:[ spec requires:#('ASTC-Core') ];
 				package: 'ASTC-Core-Tests' with:[ spec requires:#('ASTC-Core-Extensions') ];
 				package: 'Angler-Core' with:[ spec requires:#('ASTC-Core' 'ASTC-Core-Extensions') ];
-				package: 'ASTC-Kernel' with:[ spec requires:#('ASTC-Core' 'Angler-Core') ];
 				package: 'Angler-Core-Tests' with:[spec requires:#('Angler-Core') ];
 				package: 'Angler-Slang' with: [ #('Angler-Core' 'Angler-RBVisitors' 'Angler-VisitorASTC' 'ASTC-kernel') ];
 				package: 'Angler-Slang-Tests' with: [ #('Angler-Slang') ];
