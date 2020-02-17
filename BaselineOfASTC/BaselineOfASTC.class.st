@@ -23,7 +23,7 @@ BaselineOfASTC >> baseline: spec [
 				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
 				package: 'ASTC-Core';
 				package: 'ASTC-Core-Extensions' with:[ spec requires:#('ASTC-Core') ];
-				package: 'ASTC-Core-Tests' with:[ spec requires:#('ASTC-Core-Extensions') ];
+				package: 'ASTC-Core-Tests' with:[ spec requires:#('ASTC-Core-Extensions') ]."
 				package: 'Angler-Core' with:[ spec requires:#('ASTC-Core' 'ASTC-Core-Extensions') ];
 				package: 'Angler-Core-Tests' with:[spec requires:#('Angler-Core') ];
 				package: 'Angler-Slang' with: [ #('Angler-Core' 'Angler-RBVisitors' 'Angler-VisitorASTC' 'ASTC-kernel') ];
@@ -32,7 +32,7 @@ BaselineOfASTC >> baseline: spec [
 				package: 'Angler-VisitorsASTC-Tests' with:[ spec requires:#('Angler-VisitorsASTC') ];
 				package: 'Angler-RBVisitors' with:[ spec requires:#('ASTC-Core') ];
 				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-RBVisitors') ];
-				package: 'Illicium-Tools'
+				package: 'Illicium-Tools'"
 		].
 
 ]
