@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCMethodNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAMethodNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCMethodNodeTranslator >> translateNode: aMethodNode [
+FAMethodNodeTranslator >> translateNode: aMethodNode [
 	
 	^ ASTCFunctionDefinition new
 		pharoNode: aMethodNode;

@@ -1,16 +1,16 @@
 Class {
-	#name : #ASTCTemporaryNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FATemporaryNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCTemporaryNodeTranslator >> translateNode: aNode [
+FATemporaryNodeTranslator >> translateNode: aNode [
 	^ methodTranslator visitVariableNode: aNode
 ]
 
 { #category : #translate }
-ASTCTemporaryNodeTranslator >> visitTemporaryNodes: aTemporaryNode [
+FATemporaryNodeTranslator >> visitTemporaryNodes: aTemporaryNode [
 	1 halt.
 	^ ASTCDeclarationStatement new
 				pharoNode: aTemporaryNode;

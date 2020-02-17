@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCArgumentNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAArgumentNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCArgumentNodeTranslator >> translateNode: anArgumentNode [
+FAArgumentNodeTranslator >> translateNode: anArgumentNode [
 	| argIdentifier |
 	argIdentifier := ASTCIdentifier id: anArgumentNode name.
 	

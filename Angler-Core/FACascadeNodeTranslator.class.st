@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCCascadeNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FACascadeNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCCascadeNodeTranslator >> translateNode: aCascadeNode [
+FACascadeNodeTranslator >> translateNode: aCascadeNode [
 	| res |
 	res := ASTCBlock new.
 	aCascadeNode messages do: [:aMessage| res addStatement: (aMessage acceptVisitor: methodTranslator) asStatement ].

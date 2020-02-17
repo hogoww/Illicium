@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCBlockNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FABlockNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCBlockNodeTranslator >> translateNode: aBlockNode [
+FABlockNodeTranslator >> translateNode: aBlockNode [
 	^ (aBlockNode body acceptVisitor: methodTranslator)
 		pharoNode: aBlockNode;
 		comment: aBlockNode commentOrNil;

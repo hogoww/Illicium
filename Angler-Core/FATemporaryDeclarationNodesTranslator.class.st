@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCTemporaryDeclarationNodesTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FATemporaryDeclarationNodesTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCTemporaryDeclarationNodesTranslator >> translateNode: aTemporaryDeclarationNode [
+FATemporaryDeclarationNodesTranslator >> translateNode: aTemporaryDeclarationNode [
 	^ ASTCDeclarationStatement new
 				pharoNode: aTemporaryDeclarationNode;
 				declaration:

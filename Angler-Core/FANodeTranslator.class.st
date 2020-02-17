@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCNodeTranslator,
+	#name : #FANodeTranslator,
 	#superclass : #Object,
 	#instVars : [
 		'methodTranslator'
@@ -8,21 +8,21 @@ Class {
 }
 
 { #category : #translate }
-ASTCNodeTranslator >> methodTranslator [
+FANodeTranslator >> methodTranslator [
 	^ methodTranslator
 ]
 
 { #category : #translate }
-ASTCNodeTranslator >> methodTranslator: aMethodTranslator [
+FANodeTranslator >> methodTranslator: aMethodTranslator [
 	methodTranslator := aMethodTranslator
 ]
 
 { #category : #'as yet unclassified' }
-ASTCNodeTranslator >> stateName [
+FANodeTranslator >> stateName [
 	^ methodTranslator stateName
 ]
 
 { #category : #translate }
-ASTCNodeTranslator >> translateNode: aNode [
+FANodeTranslator >> translateNode: aNode [
 	self subclassResponsibility
 ]

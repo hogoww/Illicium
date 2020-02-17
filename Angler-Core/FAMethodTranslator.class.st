@@ -74,26 +74,26 @@ FAMethodTranslator >> includes: aCollectionOfString [
 FAMethodTranslator >> initialize [
 	includes := Set new.
 	translators := (Dictionary new: 22)
-		at: #methodNodeTranslator put: (ASTCMethodNodeTranslator new methodTranslator: self ; yourself);
-		at: #pragmaNodeTranslator put: (ASTCPragmaNodeTranslator new methodTranslator: self ; yourself);
-		at: #returnNodeTranslator put: (ASTCReturnNodeTranslator new methodTranslator: self ; yourself);
-		at: #sequenceNodeTranslator put: (ASTCSequenceNodeTranslator new methodTranslator: self ; yourself);
-		at: #arrayNodeTranslator put: (ASTCArrayNodeTranslator new methodTranslator: self ; yourself);
-		at: #assignmentNodeTranslator put: (ASTCAssignementNodeTranslator new methodTranslator: self ; yourself);
-		at: #blockNodeTranslator put: (ASTCBlockNodeTranslator new methodTranslator: self ; yourself);
-		at: #cascadeNodeTranslator put: (ASTCCascadeNodeTranslator new methodTranslator: self ; yourself);
-		at: #literalValueNodeTranslator put: (ASTCLiteralValueNodeTranslator new methodTranslator: self ; yourself);
-		at: #literalArrayNodeTranslator put: (ASTCLiteralArrayNodeTranslator new methodTranslator: self ; yourself);
-		at: #messageNodeTranslator put: (ASTCMessageNodeTranslator new methodTranslator: self ; yourself);
-		at: #argumentNodeTranslator put: (ASTCArgumentNodeTranslator new methodTranslator: self ; yourself);
-		at: #globalNodeTranslator put: (ASTCGlobalNodeTranslator new methodTranslator: self ; yourself);
-		at: #instanceVariableNodeTranslator put: (ASTCInstanceVariableNodeTranslator new methodTranslator: self ; yourself);
-		at: #selfNodeTranslator put: (ASTCSelfNodeTranslator new methodTranslator: self ; yourself);
-		at: #superNodeTranslator put: (ASTCSuperNodeTranslator new methodTranslator: self ; yourself);
-		at: #temporaryNodeTranslator put: (ASTCTemporaryNodeTranslator new methodTranslator: self ; yourself);
-		at: #temporaryDeclarationNodeTranslator put: (ASTCTemporaryDeclarationNodesTranslator new methodTranslator: self ; yourself);
-		at: #thisContextNodeTranslator put: (ASTCThisContextNodeTranslator new methodTranslator: self ; yourself);
-		at: #variableNodeTranslator put: (ASTCVariableNodeTranslator new methodTranslator: self ; yourself);
+		at: #methodNodeTranslator put: (FAMethodNodeTranslator new methodTranslator: self ; yourself);
+		at: #pragmaNodeTranslator put: (FAPragmaNodeTranslator new methodTranslator: self ; yourself);
+		at: #returnNodeTranslator put: (FAReturnNodeTranslator new methodTranslator: self ; yourself);
+		at: #sequenceNodeTranslator put: (FASequenceNodeTranslator new methodTranslator: self ; yourself);
+		at: #arrayNodeTranslator put: (FAArrayNodeTranslator new methodTranslator: self ; yourself);
+		at: #assignmentNodeTranslator put: (FAAssignementNodeTranslator new methodTranslator: self ; yourself);
+		at: #blockNodeTranslator put: (FABlockNodeTranslator new methodTranslator: self ; yourself);
+		at: #cascadeNodeTranslator put: (FACascadeNodeTranslator new methodTranslator: self ; yourself);
+		at: #literalValueNodeTranslator put: (FALiteralValueNodeTranslator new methodTranslator: self ; yourself);
+		at: #literalArrayNodeTranslator put: (FALiteralArrayNodeTranslator new methodTranslator: self ; yourself);
+		at: #messageNodeTranslator put: (FAMessageNodeTranslator new methodTranslator: self ; yourself);
+		at: #argumentNodeTranslator put: (FAArgumentNodeTranslator new methodTranslator: self ; yourself);
+		at: #globalNodeTranslator put: (FAGlobalNodeTranslator new methodTranslator: self ; yourself);
+		at: #instanceVariableNodeTranslator put: (FAInstanceVariableNodeTranslator new methodTranslator: self ; yourself);
+		at: #selfNodeTranslator put: (FASelfNodeTranslator new methodTranslator: self ; yourself);
+		at: #superNodeTranslator put: (FASuperNodeTranslator new methodTranslator: self ; yourself);
+		at: #temporaryNodeTranslator put: (FATemporaryNodeTranslator new methodTranslator: self ; yourself);
+		at: #temporaryDeclarationNodeTranslator put: (FATemporaryDeclarationNodesTranslator new methodTranslator: self ; yourself);
+		at: #thisContextNodeTranslator put: (FAThisContextNodeTranslator new methodTranslator: self ; yourself);
+		at: #variableNodeTranslator put: (FAVariableNodeTranslator new methodTranslator: self ; yourself);
 		yourself.
 ]
 

@@ -45,7 +45,7 @@ ASTCBooleanTest >> testIfTrue [
 { #category : #tests }
 ASTCBooleanTest >> testIfTrueIfFalse [
 	| astC expectedC |
-	astC := ASTCTranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]'.
+	astC := FATranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]'.
 	
 	expectedC := ASTCIf new 
 		condition: (ASTCEqualityOperator new

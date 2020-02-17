@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCMessageNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAMessageNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCMessageNodeTranslator >> forward: aMessage to: aType [
+FAMessageNodeTranslator >> forward: aMessage to: aType [
 	| aReceiver |
 	aReceiver := (methodTranslator
 		getReplacementType: aType) createInstance
@@ -18,7 +18,7 @@ ASTCMessageNodeTranslator >> forward: aMessage to: aType [
 ]
 
 { #category : #translate }
-ASTCMessageNodeTranslator >> translateNode: aMessageNode [
+FAMessageNodeTranslator >> translateNode: aMessageNode [
 	| receiver res |
 	receiver := (methodTranslator
 		getNodeTranslationType: aMessageNode receiver) createInstance

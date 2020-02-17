@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'classTranslator'
 	],
-	#category : #'Angler-Core-state-translator'
+	#category : #'Angler-Illicium-translation'
 }
 
 { #category : #accessing }

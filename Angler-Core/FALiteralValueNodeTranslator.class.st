@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCLiteralValueNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FALiteralValueNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCLiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOriginalNode: originalNode [
+FALiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOriginalNode: originalNode [
 	^ ASTCLiteral new
 		pharoNode: originalNode;
 		value: aValue;
@@ -13,7 +13,7 @@ ASTCLiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOrigina
 ]
 
 { #category : #translate }
-ASTCLiteralValueNodeTranslator >> translateNode: aLiteralNode [
+FALiteralValueNodeTranslator >> translateNode: aLiteralNode [
 	| res |
 	res := self createLiteralNodeWithValue: aLiteralNode value fromOriginalNode: aLiteralNode.
 	(aLiteralNode value isInteger and: [ aLiteralNode value < 0 ])

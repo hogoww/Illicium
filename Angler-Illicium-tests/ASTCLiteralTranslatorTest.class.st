@@ -8,7 +8,7 @@ Class {
 ASTCLiteralTranslatorTest >> testTranslationSmallIntegerLiteral [
 	| astC |
 	
-	astC := (ASTCTranslator translateExpression: '5') statements at: 1.
+	astC := (FATranslator translateExpression: '5') statements at: 1.
 	
 	self assert: astC isExpressionStatement.
 	self assert: astC expression isLiteral.

@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCSelfNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FASelfNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCSelfNodeTranslator >> translateNode: aNode [ 
+FASelfNodeTranslator >> translateNode: aNode [ 
 	^ aNode parent isReturn 
 		ifTrue:[ nil ] " we just return; for now "
 		ifFalse:[ ASTCEmptyStatement new ]

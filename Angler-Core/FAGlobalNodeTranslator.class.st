@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCGlobalNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAGlobalNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCGlobalNodeTranslator >> translateNode: aGlobalNode [
+FAGlobalNodeTranslator >> translateNode: aGlobalNode [
 	"(aGlobalNode methodNode methodClass
 		hasClassVarNamed: aGlobalNode name)
 		ifTrue: [ self error: 'Global/Pool variables are not supported.' ]."

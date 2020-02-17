@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCVariableNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAVariableNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCVariableNodeTranslator >> translateNode: aVariableNode [
+FAVariableNodeTranslator >> translateNode: aVariableNode [
 	^ ASTCIdentifier new
 		pharoNode: aVariableNode;
 		id: aVariableNode name;

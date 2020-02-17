@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCAssignementNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAAssignementNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCAssignementNodeTranslator >> translateNode: anAssignmentNode [
+FAAssignementNodeTranslator >> translateNode: anAssignmentNode [
 	^ (anAssignmentNode
 		propertyAt: FAVariableDeclarationAnnotator property)
 		ifTrue: [

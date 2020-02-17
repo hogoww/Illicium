@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCInstanceVariableNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAInstanceVariableNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCInstanceVariableNodeTranslator >> translateNode: aNode [ 
+FAInstanceVariableNodeTranslator >> translateNode: aNode [ 
 	| expression |
 	expression := methodTranslator visitVariableNode: aNode.
 	methodTranslator isStatefulCode ifTrue:[

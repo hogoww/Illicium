@@ -27,5 +27,5 @@ ASTCNodeTranslatorTest >> assertTypeOf: aNode is: aType [
 { #category : #tests }
 ASTCNodeTranslatorTest >> setUp [
 	"we only need a reference to the method translator"
-	methodTranslator := ASTCTranslator new classTranslator methodTranslator.
+	methodTranslator := FATranslator new classTranslator methodTranslator.
 ]

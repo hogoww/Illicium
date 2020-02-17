@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangTranslator,
-	#superclass : #ASTCTranslator,
+	#superclass : #FATranslator,
 	#category : #'Angler-Slang-translators'
 }
 

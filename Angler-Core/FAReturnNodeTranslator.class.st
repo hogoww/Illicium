@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCReturnNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAReturnNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCReturnNodeTranslator >> translateNode: aReturnNode [
+FAReturnNodeTranslator >> translateNode: aReturnNode [
 	^ ASTCReturn new
 		pharoNode: aReturnNode ;
 		expression: (aReturnNode value acceptVisitor: methodTranslator);

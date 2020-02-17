@@ -53,7 +53,7 @@ FAFilePrinter >> initialize [
 	virtualMachine := VirtualMachine new.
 	prettyPrinter := FAPrettyPrint new.
 	fileCompiler := FAFileCompiler new.
-	pluginMover := ASTCPluginMover new.
+	pluginMover := FAPluginMover new.
 	
 ]
 

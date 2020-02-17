@@ -1,10 +1,10 @@
 Class {
-	#name : #ASTCThisContextNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FAThisContextNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCThisContextNodeTranslator >> translateNode: aNode [
+FAThisContextNodeTranslator >> translateNode: aNode [
 	self error: 'thisContext is not supported yet.'
 ]

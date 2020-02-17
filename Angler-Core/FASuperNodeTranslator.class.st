@@ -1,10 +1,10 @@
 Class {
-	#name : #ASTCSuperNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FASuperNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCSuperNodeTranslator >> translateNode: aNode [
+FASuperNodeTranslator >> translateNode: aNode [
 	self error: 'super is not supported'
 ]

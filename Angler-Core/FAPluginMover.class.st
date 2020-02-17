@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCPluginMover,
+	#name : #FAPluginMover,
 	#superclass : #Object,
 	#category : #'Angler-Core-installers'
 }
 
 { #category : #accessing }
-ASTCPluginMover >> movePluginInVmDirectory: aFileName [
+FAPluginMover >> movePluginInVmDirectory: aFileName [
 	| res virtualMachine moveCommand |
 	virtualMachine := VirtualMachine new.
 	moveCommand := String

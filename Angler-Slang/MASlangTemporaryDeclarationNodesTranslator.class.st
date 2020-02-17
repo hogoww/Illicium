@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangTemporaryDeclarationNodesTranslator,
-	#superclass : #ASTCTemporaryDeclarationNodesTranslator,
+	#superclass : #FATemporaryDeclarationNodesTranslator,
 	#category : #'Angler-Slang-nodes-translators'
 }
 

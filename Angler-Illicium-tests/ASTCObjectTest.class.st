@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 ASTCObjectTest >> testEqual [
 	| astC expectedC|
-	astC := (ASTCTranslator translateExpression: '1 = 6') statements at: 1.
+	astC := (FATranslator translateExpression: '1 = 6') statements at: 1.
 	
 	expectedC := ASTCEqualityOperator new
 		leftOperand: (ASTCLiteral value: 1);

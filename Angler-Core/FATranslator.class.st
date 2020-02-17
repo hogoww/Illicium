@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCTranslator,
+	#name : #FATranslator,
 	#superclass : #Object,
 	#instVars : [
 		'classTranslator',
@@ -9,71 +9,71 @@ Class {
 }
 
 { #category : #configuration }
-ASTCTranslator class >> classTranslatorClass [
-	^ ASTCIlliciumClassTranslator 
+FATranslator class >> classTranslatorClass [
+	^ IlliciumClassTranslator 
 ]
 
 { #category : #configuration }
-ASTCTranslator class >> prettyPrinterClass [
+FATranslator class >> prettyPrinterClass [
 
 	^ FAPrettyPrint
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator class >> translateClass: aClass [
+FATranslator class >> translateClass: aClass [
 	^ self new translateClass: aClass
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator class >> translateExpression: anExpression [
+FATranslator class >> translateExpression: anExpression [
 	^ self new translateExpression: anExpression
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator class >> translateMethod: aCompiledMethod [ 
+FATranslator class >> translateMethod: aCompiledMethod [ 
 	^ self new translateMethod: aCompiledMethod
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator class >> translateMethod: aSelector fromClass: aClass [
+FATranslator class >> translateMethod: aSelector fromClass: aClass [
 	^ self new translateMethod: aSelector fromClass: aClass
 ]
 
 { #category : #'program-configuration' }
-ASTCTranslator >> addClass: aClass [
+FATranslator >> addClass: aClass [
 	classTranslator addClass: aClass
 ]
 
 { #category : #'program-configuration' }
-ASTCTranslator >> addMethod: aCollection [
+FATranslator >> addMethod: aCollection [
 	^ classTranslator addMethod: aCollection
 ]
 
 { #category : #accessors }
-ASTCTranslator >> classTranslator [
+FATranslator >> classTranslator [
 	^ classTranslator
 ]
 
 { #category : #accessors }
-ASTCTranslator >> classTranslator: aClassTranslator [
+FATranslator >> classTranslator: aClassTranslator [
 	aClassTranslator mainTranslator: self.
 	classTranslator := aClassTranslator
 ]
 
 { #category : #initialization }
-ASTCTranslator >> fillWithtranslatorSpecificTypes [
+FATranslator >> fillWithtranslatorSpecificTypes [
 	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy.
 	replacementClasses at: #ASTCInterpreterProxy put: ASTCVirtualMachineProxy.
 ]
 
 { #category : #initialization }
-ASTCTranslator >> getReplacementType: aPharoType [
+FATranslator >> getReplacementType: aPharoType [
 	^ aPharoType performReplacementUsing: replacementClasses
 
 ]
 
 { #category : #initialization }
-ASTCTranslator >> initialize [
+FATranslator >> initialize [
 	classTranslator := self class classTranslatorClass new
 		mainTranslator: self;
 		yourself.
@@ -98,7 +98,7 @@ ASTCTranslator >> initialize [
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
+FATranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
 
 	| compilationUnit |
 	compilationUnit := self translateMethod: aSelector fromClass: aClass.
@@ -106,40 +106,40 @@ ASTCTranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator >> prettyPrinterClass [
+FATranslator >> prettyPrinterClass [
 
 	^ FAPrettyPrint
 ]
 
 { #category : #accessors }
-ASTCTranslator >> replacementClasses [
+FATranslator >> replacementClasses [
 	^ replacementClasses
 ]
 
 { #category : #accessors }
-ASTCTranslator >> replacementClasses: aDictionnary [
+FATranslator >> replacementClasses: aDictionnary [
 	replacementClasses := aDictionnary
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator >> translateClass: aClass [
+FATranslator >> translateClass: aClass [
 	replacementClasses at: aClass name put: ASTCUserClass.
 	^ classTranslator translateClass: aClass
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator >> translateExpression: anExpression [
+FATranslator >> translateExpression: anExpression [
 	^ classTranslator translateExpression: anExpression
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator >> translateMethod: aCompiledMethod [
+FATranslator >> translateMethod: aCompiledMethod [
 	replacementClasses at: aCompiledMethod class name put: ASTCUserClass.
 	^ classTranslator translateMethod: aCompiledMethod 
 ]
 
 { #category : #'translation-api' }
-ASTCTranslator >> translateMethod: aSelector fromClass: aClass [
+FATranslator >> translateMethod: aSelector fromClass: aClass [
 	replacementClasses at: aClass name put: ASTCUserClass.
 	^ classTranslator translateMethod: aSelector fromClass: aClass
 ]

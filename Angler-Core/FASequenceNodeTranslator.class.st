@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCSequenceNodeTranslator,
-	#superclass : #ASTCNodeTranslator,
+	#name : #FASequenceNodeTranslator,
+	#superclass : #FANodeTranslator,
 	#category : #'Angler-Core-nodes-translators'
 }
 
 { #category : #translate }
-ASTCSequenceNodeTranslator >> translateNode: aSequenceNode [
+FASequenceNodeTranslator >> translateNode: aSequenceNode [
 	| res |
 	res := ASTCBlock new.
 	res pharoNode: aSequenceNode.
@@ -20,7 +20,7 @@ ASTCSequenceNodeTranslator >> translateNode: aSequenceNode [
 ]
 
 { #category : #translate }
-ASTCSequenceNodeTranslator >> translateTemporaryDeclaration: aSequenceNode into: anASTCBlock [
+FASequenceNodeTranslator >> translateTemporaryDeclaration: aSequenceNode into: anASTCBlock [
 	"TemporaryDeclarationNodes are actually just temporaryNodes in the AST. 
 	so we have to use this hackish way."
 	| varToDeclare |
