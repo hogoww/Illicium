@@ -4,7 +4,7 @@ I test the PhineasTypeAnnotator class
 Class {
 	#name : #IlliciumPhineasTypeAnnotatorTest,
 	#superclass : #FATypeAnnotatorTest,
-	#category : #'Angler-RBVisitors-Tests-typing'
+	#category : #'Angler-Illicium-Tests'
 }
 
 { #category : #testing }

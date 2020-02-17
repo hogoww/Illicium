@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumDeclarationAnnotatorTest,
 	#superclass : #FAVariableDeclarationAnnotatorTest,
-	#category : #'Angler-RBVisitors-Tests-declaration'
+	#category : #'Angler-Illicium-Tests'
 }
 
 { #category : #testing }
