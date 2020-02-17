@@ -34,7 +34,7 @@ BaselineOfAngler >> baseline: spec [
 				package: 'Angler-RBVisitors' with:[ spec requires:#('ASTC-Core') ];
 				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-RBVisitors') ];
 				package: 'Angler-Slang' with: [ #('Angler-Core' 'Angler-RBVisitors' 'Angler-VisitorASTC') ];
-				package: 'Angler-Slang-Tests' with: [ #('Angler-Slang') ]";
+				package: 'Angler-Slang-Tests' with: [ #('Angler-Core-Tests' 'Angler-Slang') ]";
 			
 				package: 'Illicium-Tools'"
 		].
