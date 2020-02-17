@@ -19,6 +19,16 @@ MASlangToCGeneratedTests class >> ressource [
 ]
 
 { #category : #generating }
+MASlangToCGeneratedTests >> assert: actual equals: expected [
+	actual = expected
+		ifFalse: [ 
+			MAStringAreDifferent new
+				actual: actual;
+				expected: expected;
+				signal ]
+]
+
+{ #category : #generating }
 MASlangToCGeneratedTests >> generateIllicium: aSelector [ 
 	
 	^ self translator translateMethod: aSelector fromClass: testedClass

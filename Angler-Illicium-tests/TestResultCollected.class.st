@@ -28,9 +28,9 @@ TestResultCollected >> addFailure: aTestCase [
 		on: Exception
 		do: [ :e | 
 			erroredTest := failureKinds
-				at: e messageText
+				at: e class
 				ifAbsentPut: [ OrderedCollection new ].
-			erroredTest add: aTestCase ].
+			erroredTest add: e ].
 	^ super addFailure: aTestCase
 ]
 
