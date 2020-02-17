@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangReceiver,
-	#superclass : #ASTCKernelClass,
+	#superclass : #IlliciumKernelClass,
 	#instVars : [
 		'type'
 	],

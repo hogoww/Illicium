@@ -6,8 +6,8 @@ My selectors are used by ASTCFromPharo as toy translations.
 Class {
 	#name : #RandomTestClass,
 	#superclass : #Object,
-	#traits : 'ASTCVirtualMachineAPI',
-	#classTraits : 'ASTCVirtualMachineAPI classTrait',
+	#traits : 'IlliciumVirtualMachineAPI',
+	#classTraits : 'IlliciumVirtualMachineAPI classTrait',
 	#category : #'Angler-Illicium-tests'
 }
 
@@ -79,6 +79,15 @@ RandomTestClass >> factorialR: n anotherArgument: n2 [
 		res:=n*(self factorialR:(n-1) anotherArgument:n2)
 		].
 	^res.
+]
+
+{ #category : #initialization }
+RandomTestClass >> initializePlugin [
+	<doNotGenerate>
+ 	"moduleName"
+	self setInterpreter: IlliciumInterpreterProxy new.
+	"initplugin or something"
+	^self
 ]
 
 { #category : #tests }

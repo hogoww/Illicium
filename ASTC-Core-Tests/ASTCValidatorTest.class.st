@@ -32,7 +32,7 @@ ASTCValidatorTest >> testVisitASTCTypeBad [
 	"not up to date"
 	| astc |
 	astc := ASTCType new
-		type: ASTCSmallInteger new;
+		type: IlliciumSmallInteger new;
 		yourself.
 	self deny: astc isStructuralyValidAST
 ]
@@ -41,7 +41,7 @@ ASTCValidatorTest >> testVisitASTCTypeBad [
 ASTCValidatorTest >> testVisitASTCTypeGood [
 	| astc |
 	astc := ASTCType new
-		type: ASTCSmallInteger asTypeReification;
+		type: IlliciumSmallInteger asTypeReification;
 		yourself.
 	self assert: astc isStructuralyValidAST
 ]

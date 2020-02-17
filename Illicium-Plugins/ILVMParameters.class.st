@@ -1,8 +1,8 @@
 Class {
 	#name : #ILVMParameters,
 	#superclass : #Object,
-	#traits : 'ASTCVirtualMachineAPI',
-	#classTraits : 'ASTCVirtualMachineAPI classTrait',
+	#traits : 'IlliciumVirtualMachineAPI',
+	#classTraits : 'IlliciumVirtualMachineAPI classTrait',
 	#instVars : [
 		'#parameters type: (Array of: SmallInteger)'
 	],
@@ -17,4 +17,13 @@ ILVMParameters >> addParameterNamedValue [
 	value := (interpreterProxy pop) asInteger.
 	(parameters do: [:anElement| anElement even ]).
 	parameters at: key put: value.
+]
+
+{ #category : #initialization }
+ILVMParameters >> initializePlugin [
+	<doNotGenerate>
+ 	"moduleName"
+	self setInterpreter: IlliciumInterpreterProxy new.
+	"initplugin or something"
+	^self
 ]

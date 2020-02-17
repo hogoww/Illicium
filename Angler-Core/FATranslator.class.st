@@ -62,8 +62,8 @@ FATranslator >> classTranslator: aClassTranslator [
 
 { #category : #initialization }
 FATranslator >> fillWithtranslatorSpecificTypes [
-	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy.
-	replacementClasses at: #ASTCInterpreterProxy put: ASTCVirtualMachineProxy.
+	replacementClasses at: #InterpreterProxy put: IlliciumVirtualMachineProxy.
+	replacementClasses at: #IlliciumInterpreterProxy put: IlliciumVirtualMachineProxy.
 ]
 
 { #category : #initialization }
@@ -80,18 +80,18 @@ FATranslator >> initialize [
 	"basic replacement classes"
 	self flag: #careful. " float and string are used... Not well !"
 	replacementClasses := Dictionary new
-		at: #Object put: ASTCObject ;
-		at: #UndefinedObject put: ASTCUndefinedObject ;
-		at: #SmallInteger put: ASTCSmallInteger ;
-		at: #Boolean put: ASTCBoolean ;
-		at: #Character put: ASTCCharacter ;
-		at: #String put: ASTCString ;
-		at: #ByteString put: ASTCString ;
-		at: #ByteSymbol put: ASTCString ;
-		at: #Float put: ASTCFloat ; 
-		at: #SmallFloat64 put: ASTCFloat ; 
-		at: #BoxedFloat64 put: ASTCFloat ; 
-		at: #Array put: ASTCArray ;
+		at: #Object put: IlliciumObject ;
+		at: #UndefinedObject put: IlliciumUndefinedObject ;
+		at: #SmallInteger put: IlliciumSmallInteger ;
+		at: #Boolean put: IlliciumBoolean ;
+		at: #Character put: IlliciumCharacter ;
+		at: #String put: IlliciumString ;
+		at: #ByteString put: IlliciumString ;
+		at: #ByteSymbol put: IlliciumString ;
+		at: #Float put: IlliciumFloat ; 
+		at: #SmallFloat64 put: IlliciumFloat ; 
+		at: #BoxedFloat64 put: IlliciumFloat ; 
+		at: #Array put: IlliciumArray ;
 		yourself.
 		
 	self fillWithtranslatorSpecificTypes 
@@ -123,7 +123,7 @@ FATranslator >> replacementClasses: aDictionnary [
 
 { #category : #'translation-api' }
 FATranslator >> translateClass: aClass [
-	replacementClasses at: aClass name put: ASTCUserClass.
+	replacementClasses at: aClass name put: IlliciumUserClass.
 	^ classTranslator translateClass: aClass
 ]
 
@@ -134,12 +134,12 @@ FATranslator >> translateExpression: anExpression [
 
 { #category : #'translation-api' }
 FATranslator >> translateMethod: aCompiledMethod [
-	replacementClasses at: aCompiledMethod class name put: ASTCUserClass.
+	replacementClasses at: aCompiledMethod class name put: IlliciumUserClass.
 	^ classTranslator translateMethod: aCompiledMethod 
 ]
 
 { #category : #'translation-api' }
 FATranslator >> translateMethod: aSelector fromClass: aClass [
-	replacementClasses at: aClass name put: ASTCUserClass.
+	replacementClasses at: aClass name put: IlliciumUserClass.
 	^ classTranslator translateMethod: aSelector fromClass: aClass
 ]

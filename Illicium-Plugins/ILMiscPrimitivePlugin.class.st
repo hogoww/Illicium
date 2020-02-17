@@ -1,13 +1,22 @@
 Class {
 	#name : #ILMiscPrimitivePlugin,
 	#superclass : #Object,
-	#traits : 'ASTCVirtualMachineAPI',
-	#classTraits : 'ASTCVirtualMachineAPI classTrait',
+	#traits : 'IlliciumVirtualMachineAPI',
+	#classTraits : 'IlliciumVirtualMachineAPI classTrait',
 	#classVars : [
 		'PrimErrBadArgument'
 	],
 	#category : #'Illicium-Plugins-simple'
 }
+
+{ #category : #initialization }
+ILMiscPrimitivePlugin >> initializePlugin [
+	<doNotGenerate>
+ 	"moduleName"
+	self setInterpreter: IlliciumInterpreterProxy new.
+	"initplugin or something"
+	^self
+]
 
 { #category : #'as yet unclassified' }
 ILMiscPrimitivePlugin >> primitiveCompareString [

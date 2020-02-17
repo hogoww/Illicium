@@ -20,7 +20,7 @@ IlliciumClassTranslator >> isStatefulCode [
 { #category : #translation }
 IlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 	(aClass traitComposition
-		includesTrait: ASTCVirtualMachineAPI)
+		includesTrait: IlliciumVirtualMachineAPI)
 		ifFalse: [ self error: 'can only translate plugins for now. They need to use the ASTCVirtualMachineAPI trait.' ].
 ]
 

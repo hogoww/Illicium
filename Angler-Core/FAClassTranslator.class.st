@@ -66,7 +66,7 @@ FAClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
 
 { #category : #accessing }
 FAClassTranslator >> doNotGeneratePragma [
-	^ ASTCVirtualMachineAPI doNotGeneratePragma
+	^ IlliciumVirtualMachineAPI doNotGeneratePragma
 ]
 
 { #category : #accessing }

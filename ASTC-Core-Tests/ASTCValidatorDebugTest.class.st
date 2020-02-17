@@ -71,7 +71,7 @@ ASTCValidatorDebugTest >> testVisitASTCTypeBad [
 	"not up to date"
 	| astc |
 	astc := ASTCType new
-		type: ASTCSmallInteger new;
+		type: IlliciumSmallInteger new;
 		yourself.
 	self should: [ astc debugASTCStructure ] raise: AssertionFailure
 ]
@@ -80,7 +80,7 @@ ASTCValidatorDebugTest >> testVisitASTCTypeBad [
 ASTCValidatorDebugTest >> testVisitASTCTypeGood [
 	| astc |
 	astc := ASTCType new
-		type: ASTCSmallInteger asTypeReification ;
+		type: IlliciumSmallInteger asTypeReification ;
 		yourself.
 	self shouldnt: [ astc debugASTCStructure ] raise: AssertionFailure
 ]

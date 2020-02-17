@@ -133,7 +133,7 @@ FAPrettyPrintTest >> testVisitStructureDefinition [
 	operator := ASTCStructureDefinition new 
 		declaration: (ASTCStructureDeclaration new id:(ASTCIdentifier new id: #heros yourself));
 		addMember: (ASTCVariableDeclaration new 
-			type: (ASTCType new type: ASTCSmallInteger asConstraint; yourself); 
+			type: (ASTCType new type: IlliciumSmallInteger asConstraint; yourself); 
 			id: (ASTCIdentifier new id: #druss; yourself));
 		yourself.
 	

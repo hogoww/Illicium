@@ -160,14 +160,14 @@ ASTCExpressionTest >> testBitXor [
 { #category : #tests }
 ASTCExpressionTest >> testCastTo [
 	| operator node |
-	operator := (ASTCIdentifier new id: #a) castTo: ASTCSmallInteger asASTCType.
+	operator := (ASTCIdentifier new id: #a) castTo: IlliciumSmallInteger asASTCType.
 	
 	operator debugASTCStructure.
 	self assert: operator isCastOperator.
 	
 	node := operator type.
 	self assert: node isType.
-	self assert: node type equals: ASTCSmallInteger asTypeReification.
+	self assert: node type equals: IlliciumSmallInteger asTypeReification.
 	
 	node := operator operand.
 	self assert: node isIdentifier.

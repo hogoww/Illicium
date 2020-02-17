@@ -2,10 +2,10 @@ Extension { #name : #CollectionType }
 
 { #category : #'*Angler-Core' }
 CollectionType >> asCType [
-	(collectionType = ASTCArray asTypeReification and: [ elementType = ASTCFloat asTypeReification ])
+	(collectionType = IlliciumArray asTypeReification and: [ elementType = IlliciumFloat asTypeReification ])
 	ifTrue: [ ^ #'float*' ].
 
-	(collectionType = ASTCArray asTypeReification and: [ elementType = ASTCSmallInteger asTypeReification ])
+	(collectionType = IlliciumArray asTypeReification and: [ elementType = IlliciumSmallInteger asTypeReification ])
 	ifTrue: [ ^ #'int*' ]	.
 	"Will be improved case by case"
 	self halt.

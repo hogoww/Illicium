@@ -17,7 +17,7 @@ MASlangTranslator class >> prettyPrinterClass [
 
 { #category : #initialization }
 MASlangTranslator >> fillWithtranslatorSpecificTypes [
-	replacementClasses at: #InterpreterProxy put: ASTCVirtualMachineProxy
+	replacementClasses at: #InterpreterProxy put: IlliciumVirtualMachineProxy
 ]
 
 { #category : #initialization }
