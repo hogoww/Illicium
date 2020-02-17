@@ -19,13 +19,16 @@ BaselineOfASTC >> baseline: spec [
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			spec
+				"ASTC packages"
 				package: 'Angler-RB-Extensions';
-				"package: 'ASTC-Builder';" "Only dependance to Famix, un needed in most imports"
+				
 				package: 'ASTC-Core';
 				package: 'ASTC-Core-Extensions' with:[ spec requires:#('ASTC-Core') ];
-				package: 'ASTC-Core-Tests' with:[ spec requires:#('ASTC-Core-Extensions') ]."
+				package: 'ASTC-Core-Tests' with:[ spec requires:#('ASTC-Core-Extensions') ];
+				
+				"FAngler"
 				package: 'Angler-Core' with:[ spec requires:#('ASTC-Core' 'ASTC-Core-Extensions') ];
-				package: 'Angler-Core-Tests' with:[spec requires:#('Angler-Core') ];
+				package: 'Angler-Core-Tests' with:[spec requires:#('Angler-Core') ]"
 				package: 'Angler-Slang' with: [ #('Angler-Core' 'Angler-RBVisitors' 'Angler-VisitorASTC' 'ASTC-kernel') ];
 				package: 'Angler-Slang-Tests' with: [ #('Angler-Slang') ];
 				package: 'Angler-VisitorsASTC' with:[ spec requires:#('ASTC-Core') ];
@@ -34,7 +37,6 @@ BaselineOfASTC >> baseline: spec [
 				package: 'Angler-RBVisitors-Tests' with:[ spec requires:#('Angler-RBVisitors') ];
 				package: 'Illicium-Tools'"
 		].
-
 ]
 
 { #category : #accessing }
