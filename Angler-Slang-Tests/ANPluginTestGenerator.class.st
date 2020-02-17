@@ -70,15 +70,7 @@ ANPluginTestGenerator class >> translatorClass [
 	^ ANSlangPluginTranslator
 ]
 
-{ #category : #'test-generation' }
-ANPluginTestGenerator >> createTestClassFor: aClass [
-	^ self class testBaseClass subclass: 'AN' , aClass name , 'TranslationTest'
-		instanceVariableNames: ''
-		classVariableNames: ''
-		package: 'Angler-Slang-Tests'
-]
-
-{ #category : #'test-generation' }
+{ #category : #formating }
 ANPluginTestGenerator >> formatSelector: aSelector [
 	^ aSelector onlyLetters capitalized
 ]
@@ -110,10 +102,13 @@ ANPluginTestGenerator >> generateResourceAccessorsFor: aRessourceClass [
 
 { #category : #'ressource-generation' }
 ANPluginTestGenerator >> generateResourceClassFor: aClass [
-	^ self class resourceBaseClass subclass: 'AN' , aClass name , 'Ressource'
+	| ressourceClass |
+	ressourceClass := self class resourceBaseClass subclass: 'AN' , aClass name , 'Ressource'
 		instanceVariableNames: ''
 		classVariableNames: ''
-		package: 'Angler-Slang-Tests'
+		package: 'Angler-Slang-Tests'.
+	ressourceClass tagWith: 'generated-ressource'.
+	^ ressourceClass
 ]
 
 { #category : #'ressource-generation' }
@@ -139,13 +134,24 @@ ANPluginTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass f
 ]
 
 { #category : #'test-generation' }
+ANPluginTestGenerator >> generateTestClassFor: aClass [
+	| testClass |
+	testClass := self class testBaseClass subclass: 'AN' , aClass name , 'TranslationTest'
+		instanceVariableNames: ''
+		classVariableNames: ''
+		package: 'Angler-Slang-Tests'.
+	testClass tagWith: 'generated-tests'.
+	^ testClass
+]
+
+{ #category : #'test-generation' }
 ANPluginTestGenerator >> generateTestForClass: aClass [
 	| testClass methodToTest resourceClass |
 	methodToTest := self methodToTest: aClass.
 		
 	methodToTest ifEmpty: [ ^self ].
 	
-	testClass := self createTestClassFor: aClass.
+	testClass := self generateTestClassFor: aClass.
 	
 	self
 		generateSetUpFor: testClass
@@ -180,7 +186,7 @@ ANPluginTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClas
 	aTestClass compile: methodSource asString classified: aString , #'equaliy-test'.
 ]
 
-{ #category : #'test-generation' }
+{ #category : #picking }
 ANPluginTestGenerator >> methodToTest: aClass [
 	^ aClass methodDict
 		select: [ :compiledMethod | 

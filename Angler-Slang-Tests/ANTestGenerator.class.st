@@ -28,7 +28,7 @@ ANTestGenerator class >> translatorClass [
 	^ ANSlangTranslator
 ]
 
-{ #category : #'test-generation' }
+{ #category : #picking }
 ANTestGenerator >> methodToTest: aClass [
 	| methods |
 	methods := (aClass allSelectorsBelow: VMClass)	

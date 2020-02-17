@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSpur64BitMemoryManagerRessource,
 	#superclass : #ANSlangVMTestResource,
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-generated-ressource'
 }
 
 { #category : #running }

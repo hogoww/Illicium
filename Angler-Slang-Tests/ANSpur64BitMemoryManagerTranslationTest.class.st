@@ -1,7 +1,7 @@
 Class {
 	#name : #ANSpur64BitMemoryManagerTranslationTest,
 	#superclass : #ANVMTranslationTests,
-	#category : #'Angler-Slang-Tests'
+	#category : #'Angler-Slang-Tests-generated-tests'
 }
 
 { #category : #running }
