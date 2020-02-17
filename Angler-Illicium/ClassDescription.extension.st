@@ -1,6 +1,6 @@
 Extension { #name : #ClassDescription }
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Illicium' }
 ClassDescription >> asCType [
 	^ #'struct ' , self name
 ]

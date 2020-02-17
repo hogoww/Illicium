@@ -1,6 +1,6 @@
 Extension { #name : #AssociationType }
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Core-Tests' }
 AssociationType >> performReplacementUsing: bindings [
 	^ self class new
 		keyType: (keyType performReplacementUsing: bindings);

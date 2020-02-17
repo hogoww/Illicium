@@ -1,6 +1,6 @@
 Extension { #name : #CollectionType }
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Illicium' }
 CollectionType >> asCType [
 	(collectionType = IlliciumArray asTypeReification and: [ elementType = IlliciumFloat asTypeReification ])
 	ifTrue: [ ^ #'float*' ].
@@ -11,12 +11,12 @@ CollectionType >> asCType [
 	self halt.
 ]
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Illicium' }
 CollectionType >> createInstance [
 	^ collectionType createInstance elementType: elementType ; yourself
 ]
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Illicium' }
 CollectionType >> performReplacementUsing: bindings [
 	^ self class new 
 		collectionType: (collectionType performReplacementUsing: bindings);

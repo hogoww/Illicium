@@ -1,16 +1,16 @@
 Extension { #name : #EmptyType }
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Illicium' }
 EmptyType >> asCType [
 	^ NoTypeFound signal
 ]
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Illicium' }
 EmptyType >> createInstance [
 	^ NoTypeFound signal
 ]
 
-{ #category : #'*Angler-Core' }
+{ #category : #'*Angler-Illicium' }
 EmptyType >> performReplacementUsing: bindings [
 	^ NoTypeFound new signal
 ]
