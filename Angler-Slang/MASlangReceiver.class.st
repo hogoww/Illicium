@@ -402,9 +402,12 @@ MASlangReceiver >> ifFalse: falseBlock [
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> ifFalse: stuff ifTrue: estuff [
-	self flag: #undone. "want to see how slang translates it first."
-	^ ASTCLiteral value: '''unsuportedFeature'''.
+MASlangReceiver >> ifFalse: falseBlock ifTrue: trueBlock [
+	"same code as ASTCBoolean>>#ifFalse:"
+ 	| ifNode |
+	ifNode := self ifTrue: falseBlock ifFalse: trueBlock.
+	ifNode condition: ifNode condition not.
+	^ ifNode
 ]
 
 { #category : #'translation-testing' }
