@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCInstanceVariablesTranslator,
+	#name : #IlliciumInstanceVariablesTranslator,
 	#superclass : #Object,
 	#instVars : [
 		'classTranslator'
@@ -8,17 +8,17 @@ Class {
 }
 
 { #category : #accessing }
-ASTCInstanceVariablesTranslator >> classTranslator [
+IlliciumInstanceVariablesTranslator >> classTranslator [
 	^ classTranslator
 ]
 
 { #category : #accessing }
-ASTCInstanceVariablesTranslator >> classTranslator: aClassTranslator [
+IlliciumInstanceVariablesTranslator >> classTranslator: aClassTranslator [
 	classTranslator := aClassTranslator
 ]
 
 { #category : #translation }
-ASTCInstanceVariablesTranslator >> translateInstanceVariable: anIVName of: aClass [
+IlliciumInstanceVariablesTranslator >> translateInstanceVariable: anIVName of: aClass [
 	| ivType |
 	ivType := classTranslator typeOfVariable: anIVName ofClass: aClass.
 	^ ASTCVariableDeclaration new
@@ -32,7 +32,7 @@ ASTCInstanceVariablesTranslator >> translateInstanceVariable: anIVName of: aClas
 ]
 
 { #category : #translation }
-ASTCInstanceVariablesTranslator >> translateInstanceVariablesOf: aClass [
+IlliciumInstanceVariablesTranslator >> translateInstanceVariablesOf: aClass [
 	| instVar |
 	self flag:#notGood.
 	instVar := aClass allInstVarNames select:[:aVarName| aVarName ~= #moduleName and:[ aVarName ~= #translatedMethodCache]].

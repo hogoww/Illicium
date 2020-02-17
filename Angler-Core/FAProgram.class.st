@@ -1,5 +1,5 @@
 Class {
-	#name : #ANProgram,
+	#name : #FAProgram,
 	#superclass : #Object,
 	#instVars : [
 		'methods',
@@ -10,12 +10,12 @@ Class {
 }
 
 { #category : #properties }
-ANProgram class >> isAnnotatedProperty [
+FAProgram class >> isAnnotatedProperty [
 	^ #isAnnotated
 ]
 
 { #category : #accessing }
-ANProgram >> addClass: aClass [
+FAProgram >> addClass: aClass [
 
 	classesToGenerate add: aClass.
 
@@ -26,7 +26,7 @@ ANProgram >> addClass: aClass [
 ]
 
 { #category : #accessing }
-ANProgram >> addMethod: aMethod [
+FAProgram >> addMethod: aMethod [
 	"aMethod isSubclassResponsibility ifTrue: [ ^ self ]."
 	methods at: aMethod selector
 		ifPresent: [ :conflicting | self halt ]
@@ -34,24 +34,24 @@ ANProgram >> addMethod: aMethod [
 ]
 
 { #category : #enumeration }
-ANProgram >> classes [
+FAProgram >> classes [
 
 	^ classesToGenerate
 ]
 
 { #category : #enumeration }
-ANProgram >> classesDo: aBlockClosure [ 
+FAProgram >> classesDo: aBlockClosure [ 
 	
 	^ self classes do: aBlockClosure
 ]
 
 { #category : #testing }
-ANProgram >> hasMethodNamed: aSelector [
+FAProgram >> hasMethodNamed: aSelector [
 	^ methods includesKey: aSelector
 ]
 
 { #category : #accessing }
-ANProgram >> initialize [
+FAProgram >> initialize [
 	super initialize.
 	classesToGenerate := OrderedCollection new.
 	methods := Dictionary new.
@@ -59,17 +59,17 @@ ANProgram >> initialize [
 ]
 
 { #category : #accessing }
-ANProgram >> isFullyAnnotated [
+FAProgram >> isFullyAnnotated [
 	^ isFullyAnnotated
 ]
 
 { #category : #accessing }
-ANProgram >> isFullyAnnotated: anObject [
+FAProgram >> isFullyAnnotated: anObject [
 	isFullyAnnotated := anObject
 ]
 
 { #category : #accessing }
-ANProgram >> methodNamed: aSelector [
+FAProgram >> methodNamed: aSelector [
 
 	^ methods at: aSelector ifAbsent: [ 
 		classesToGenerate do: [ :each | 
@@ -78,24 +78,24 @@ ANProgram >> methodNamed: aSelector [
 ]
 
 { #category : #testing }
-ANProgram >> methodNeedAdding: aMethod [
+FAProgram >> methodNeedAdding: aMethod [
 	(aMethod hasPragmaNamed: #doNotGenerate) ifTrue: [ ^ false ].
 	^ true
 ]
 
 { #category : #accessing }
-ANProgram >> methods [
+FAProgram >> methods [
 	^ methods values
 ]
 
 { #category : #accessing }
-ANProgram >> methodsDo: aBlockClosure [ 
+FAProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
 ]
 
 { #category : #accessing }
-ANProgram >> methodsNeedingAnnotation [
+FAProgram >> methodsNeedingAnnotation [
 	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
 	^ methods reject: [:anAssociation| anAssociation value propertyAt: self class isAnnotatedProperty ]
 		thenCollect: [:anAssociation| anAssociation value ]

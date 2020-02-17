@@ -1,11 +1,11 @@
 Class {
-	#name : #ASTCFileCompiler,
+	#name : #FAFileCompiler,
 	#superclass : #Object,
 	#category : #'Angler-Core-installers'
 }
 
 { #category : #compiling }
-ASTCFileCompiler >> compileExternalPluginNamed: aFileName [
+FAFileCompiler >> compileExternalPluginNamed: aFileName [
 	| res compileCommand virtualMachine vmIncludePath |
 	virtualMachine := VirtualMachine new.
 	vmIncludePath := ((Iceberg repositoryForPackage: self class package) codeDirectory / 'vmHeader') fullName.

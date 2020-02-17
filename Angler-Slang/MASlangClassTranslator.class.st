@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangClassTranslator,
-	#superclass : #ASTCClassTranslator,
+	#superclass : #FAClassTranslator,
 	#category : #'Angler-Slang-translators'
 }
 
@@ -58,7 +58,7 @@ MASlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: MASlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: MASlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: MASlangAssignmentNodeTranslator new.
-	program := ANProgram new.
+	program := FAProgram new.
 ]
 
 { #category : #testing }

@@ -18,7 +18,7 @@ ASTCMethodNodeTranslator >> translateNode: aMethodNode [
 						yourself);
 				id:
 					(ASTCIdentifier new
-						id: (ASTCFormatHelper formatSelector: aMethodNode selector);
+						id: (FAFormatHelper formatSelector: aMethodNode selector);
 						yourself);
 				parameters: (aMethodNode arguments collect:[:each| each acceptVisitor: methodTranslator ]);
 				yourself);

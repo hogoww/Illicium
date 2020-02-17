@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCClassTranslator,
+	#name : #FAClassTranslator,
 	#superclass : #Object,
 	#instVars : [
 		'methodTranslator',
@@ -12,26 +12,26 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-ASTCClassTranslator >> addClass: aClass [ 
+FAClassTranslator >> addClass: aClass [ 
 
 	program addClass: aClass
 ]
 
 { #category : #'translation-state' }
-ASTCClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
+FAClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
 	stateStuffStruct do:[:anElem| anElem addToCompilationUnit: aCompilationUnit ].
 	^ aCompilationUnit
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> addTranslatedMethod: aFuncDef to: aCompilationUnit [
+FAClassTranslator >> addTranslatedMethod: aFuncDef to: aCompilationUnit [
 	aCompilationUnit addDefinition: aFuncDef.
 	aCompilationUnit addDeclaration: aFuncDef declaration.
 	^ aCompilationUnit
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilationUnit [
+FAClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilationUnit [
 	functionDefinitions
 		do: [ :aFuncDef | 
 			self addTranslatedMethod: aFuncDef to: aCompilationUnit
@@ -40,79 +40,79 @@ ASTCClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilatio
 ]
 
 { #category : #annotation }
-ASTCClassTranslator >> annotateMethodAST: aMethodNode [ 
+FAClassTranslator >> annotateMethodAST: aMethodNode [ 
 	| visitors |
 	visitors := self preTranslationVisitors.
 	aMethodNode acceptMultipleVisitors: visitors.
-	aMethodNode propertyAt: ANProgram isAnnotatedProperty put: true.
+	aMethodNode propertyAt: FAProgram isAnnotatedProperty put: true.
 ]
 
 { #category : #annotation }
-ASTCClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
+FAClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
 	methodsASTs
 		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
 	^ methodsASTs
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> callgraphTypeStartingFrom: methodsAST [
+FAClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
+FAClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
 	inferer inferExpression: anExpression 
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> doNotGeneratePragma [
+FAClassTranslator >> doNotGeneratePragma [
 	^ ASTCVirtualMachineAPI doNotGeneratePragma
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> getReplacementType: aType [
+FAClassTranslator >> getReplacementType: aType [
 	^ mainTranslator getReplacementType: aType 
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> initialize [
+FAClassTranslator >> initialize [
 	super initialize.
-	methodTranslator := ASTCMethodTranslator new
+	methodTranslator := FAMethodTranslator new
 		classTranslator: self;
 		yourself.
 	stateTranslator := Dictionary new
-		at: #instanceVariable put: (ASTCInstanceVariablesTranslator new classTranslator: self; yourself);
+		at: #instanceVariable put: (IlliciumInstanceVariablesTranslator new classTranslator: self; yourself);
 		yourself
 ]
 
 { #category : #'translation-state' }
-ASTCClassTranslator >> isStatefulCode [
+FAClassTranslator >> isStatefulCode [
 	" will be used in the future to know if the translated plugin should have an instance, and stuff declared in an Struct"
 	^ self subclassResponsibility 
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> mainTranslator [
+FAClassTranslator >> mainTranslator [
 	^ mainTranslator
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> mainTranslator: aMainTranslator [
+FAClassTranslator >> mainTranslator: aMainTranslator [
 	mainTranslator := aMainTranslator
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> methodTranslator [
+FAClassTranslator >> methodTranslator [
 	^ methodTranslator
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> methodTranslator: aMethodTranslator [
+FAClassTranslator >> methodTranslator: aMethodTranslator [
 	methodTranslator := aMethodTranslator
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> methodsToTranslateASTs: aClass [
+FAClassTranslator >> methodsToTranslateASTs: aClass [
 	 ^ inferer typeProvider methodTypes
 		select: [ :aMethod | 
 			(aClass methodDict keys includes: aMethod node selector)
@@ -123,66 +123,66 @@ ASTCClassTranslator >> methodsToTranslateASTs: aClass [
 ]
 
 { #category : #finishing }
-ASTCClassTranslator >> postTranslationVisitsFor: anASTCNode [ 
+FAClassTranslator >> postTranslationVisitsFor: anASTCNode [ 
 	self postTranslationVisitors do: [ :aVisitor | anASTCNode acceptVisitor: aVisitor ].
 	^ anASTCNode
 ]
 
 { #category : #'translation-api' }
-ASTCClassTranslator >> preTranslationConstraintCheck: aClass [
+FAClassTranslator >> preTranslationConstraintCheck: aClass [
 	"empty hook"
 ]
 
 { #category : #visiting }
-ASTCClassTranslator >> preTranslationVisitors [
+FAClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ self subclassResponsibility 
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> preTypeInference: aClass [
+FAClassTranslator >> preTypeInference: aClass [
 	"empty hook"
 ]
 
 { #category : #'translation-api' }
-ASTCClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [
+FAClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [
 	
 	self subclassResponsibility
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> program [
+FAClassTranslator >> program [
 	^ program
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> program: aProgram [
+FAClassTranslator >> program: aProgram [
 
 	program := aProgram
 ]
 
 { #category : #'translation-state' }
-ASTCClassTranslator >> stateId [
+FAClassTranslator >> stateId [
 	^ ASTCIdentifier new id: self stateName ; yourself
 ]
 
 { #category : #'translation-api' }
-ASTCClassTranslator >> stateName [
+FAClassTranslator >> stateName [
 	^ #pluginState
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> stateTranslator [
+FAClassTranslator >> stateTranslator [
 	^ stateTranslator
 ]
 
 { #category : #accessing }
-ASTCClassTranslator >> stateTranslator: aDictionary [
+FAClassTranslator >> stateTranslator: aDictionary [
 	stateTranslator := aDictionary
 ]
 
 { #category : #'translation-api' }
-ASTCClassTranslator >> translateClass: aClass [ 
+FAClassTranslator >> translateClass: aClass [ 
 	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu stateStuff |
 	self preTypeInference: aClass.
 	entryPoints := self typeInferenceEntryPoints: aClass.
@@ -200,7 +200,7 @@ ASTCClassTranslator >> translateClass: aClass [
 ]
 
 { #category : #'translation-state' }
-ASTCClassTranslator >> translateClassState: aClass [
+FAClassTranslator >> translateClassState: aClass [
 	| varDeclaration struct |
 	varDeclaration := (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass.
 	
@@ -222,7 +222,7 @@ ASTCClassTranslator >> translateClassState: aClass [
 ]
 
 { #category : #'translation-api' }
-ASTCClassTranslator >> translateExpression: anExpression [
+FAClassTranslator >> translateExpression: anExpression [
 	| methodAST functionDefinitions |
 	self callgraphTypeStartingFromExpression: anExpression.
 	methodAST := self annotateMethodsASTWithTypes: (inferer typeProvider methodTypes at: 1) node copy.
@@ -232,12 +232,12 @@ ASTCClassTranslator >> translateExpression: anExpression [
 ]
 
 { #category : #'translation-api' }
-ASTCClassTranslator >> translateMethod: aCompiledMethod [
+FAClassTranslator >> translateMethod: aCompiledMethod [
 	^self translateMethod: aCompiledMethod selector fromClass: aCompiledMethod methodClass
 ]
 
 { #category : #'translation-api' }
-ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
+FAClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	| methodsASTs functionDefinitionsASTs  |
 	methodsASTs := self
 		prepareForTranslationFromSelector: aSelector
@@ -268,7 +268,7 @@ ASTCClassTranslator >> translateMethod: aSelector fromClass: aClass [
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> translateMethodsASTs: methodsAST [
+FAClassTranslator >> translateMethodsASTs: methodsAST [
 	^ methodsAST
 		collect: [ :aMethodAST |
 			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor ].
@@ -278,7 +278,7 @@ ASTCClassTranslator >> translateMethodsASTs: methodsAST [
 ]
 
 { #category : #translation }
-ASTCClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
+FAClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
 	"overrides the previous one to remove the hook for pre translation. 
 	Should probably disapear, but that's work for another day"
 	| res |
@@ -291,13 +291,13 @@ ASTCClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> typeAnnotatorClass [
+FAClassTranslator >> typeAnnotatorClass [
 	" This should return the class used to annotate types on RB ASTs"
 	^ self subclassResponsibility 
 ]
 
 { #category : #typing }
-ASTCClassTranslator >> typeInferenceEntryPoints: aClass [
+FAClassTranslator >> typeInferenceEntryPoints: aClass [
 	| methods |
 	methods := OrderedCollection new.
 	aClass methodDict

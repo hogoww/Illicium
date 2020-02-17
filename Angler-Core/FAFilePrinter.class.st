@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCFilePrinter,
+	#name : #FAFilePrinter,
 	#superclass : #Object,
 	#instVars : [
 		'fileName',
@@ -14,86 +14,86 @@ Class {
 }
 
 { #category : #accessing }
-ASTCFilePrinter >> compilationUnit [
+FAFilePrinter >> compilationUnit [
 	^compilationUnit
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> compilationUnit: aCompilationUnit [
+FAFilePrinter >> compilationUnit: aCompilationUnit [
 	^compilationUnit:= aCompilationUnit
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> compileExternalPlugin [
+FAFilePrinter >> compileExternalPlugin [
 	fileCompiler compileExternalPluginNamed: fileName
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> fileCompiler [
+FAFilePrinter >> fileCompiler [
 	^ fileCompiler
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> fileCompiler: aFileCompiler [
+FAFilePrinter >> fileCompiler: aFileCompiler [
 	fileCompiler := aFileCompiler
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> fileName [
+FAFilePrinter >> fileName [
 	^ fileName
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> fileName: aString [
+FAFilePrinter >> fileName: aString [
 	fileName := aString
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> initialize [ 
+FAFilePrinter >> initialize [ 
 	virtualMachine := VirtualMachine new.
 	prettyPrinter := FAPrettyPrint new.
-	fileCompiler := ASTCFileCompiler new.
+	fileCompiler := FAFileCompiler new.
 	pluginMover := ASTCPluginMover new.
 	
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> isPrimitive [
+FAFilePrinter >> isPrimitive [
 	^ isPrimitive
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> isPrimitive: aBoolean [
+FAFilePrinter >> isPrimitive: aBoolean [
 	^isPrimitive := aBoolean
 ]
 
 { #category : #moving }
-ASTCFilePrinter >> moveInVmDirectory [
+FAFilePrinter >> moveInVmDirectory [
 	pluginMover movePluginInVmDirectory: fileName
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> pluginMover [
+FAFilePrinter >> pluginMover [
 	^ pluginMover
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> pluginMover: aPluginMover [
+FAFilePrinter >> pluginMover: aPluginMover [
 	pluginMover := aPluginMover
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> prettyPrinter [
+FAFilePrinter >> prettyPrinter [
 	^ prettyPrinter
 ]
 
 { #category : #accessing }
-ASTCFilePrinter >> prettyPrinter: aPrettyPrinter [
+FAFilePrinter >> prettyPrinter: aPrettyPrinter [
 	prettyPrinter := aPrettyPrinter
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> printInFile [
+FAFilePrinter >> printInFile [
 	| file |
 	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
 	file:= file / (fileName,'.c').
@@ -104,13 +104,13 @@ ASTCFilePrinter >> printInFile [
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> printOnStream: aStream [	
+FAFilePrinter >> printOnStream: aStream [	
 	isPrimitive ifTrue:[self printPrePluginStuff: aStream ].
 	aStream << (compilationUnit prettyPrintUsing: prettyPrinter)
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> printPostPluginStuff: aStream withMethods: collectionOfMethods [
+FAFilePrinter >> printPostPluginStuff: aStream withMethods: collectionOfMethods [
 	self flag:'internalPlugin'. "not needed for external plugin, so ignored for now"
 	true ifTrue:[^self].
 	
@@ -135,7 +135,7 @@ aStream <<'	{(void*)_m, "getModuleName", (void*)getModuleName},
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> printPrePluginStuff: aStream [
+FAFilePrinter >> printPrePluginStuff: aStream [
 	aStream << 
 '
 #include "config.h"
@@ -167,7 +167,7 @@ const char* getModuleName(void)
 ]
 
 { #category : #printing }
-ASTCFilePrinter >> printString [
+FAFilePrinter >> printString [
 	
 	^ String streamContents: [ :stream |
 		self printOnStream: stream ]

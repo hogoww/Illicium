@@ -141,7 +141,7 @@ MASlangInlinerTest >> methodWithTwoStatementsToInlineIntoReturn [
 MASlangInlinerTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 	super setUp.
-	program := ANProgram new.
+	program := FAProgram new.
 	inliner := MASlangInliner new
 		translator: MASlangClassTranslator new.
 ]

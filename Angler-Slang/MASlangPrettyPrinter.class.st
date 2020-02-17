@@ -20,7 +20,7 @@ MASlangPrettyPrinter >> cLiteralFor: anObject [
 				[^anObject printString]]
 		ifFalse:
 			[anObject isSymbol ifTrue:
-				[^ ASTCFormatHelper formatSelector: anObject].
+				[^ FAFormatHelper formatSelector: anObject].
 			anObject isString ifTrue:
 				[^'"', (anObject copyReplaceAll: (String with: Character cr) with: '\n') , '"'].
 			anObject == nil ifTrue: [^ 'null' ].

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'types'
 	],
-	#category : #'Angler-RBVisitors-errors'
+	#category : #'Angler-Core-errors'
 }
 
 { #category : #accessing }

@@ -74,7 +74,7 @@ MASlangConstantEvaluatorTest >> setUp [
 	super setUp.
 	evaluated := false.
 	
-	program := ANProgram new.
+	program := FAProgram new.
 	program addMethod: (self class >> #foo) ast.
 ]
 

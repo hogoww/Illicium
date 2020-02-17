@@ -370,7 +370,7 @@ MASlangReceiver >> doesNotUnderstand: aMessage [
 		ifTrue:[ UnsupportedFeature new feature: ('translation of Slang selector: #', aMessage selector) ; signal]. 
 	
 	^ (ASTCFunctionCall new 
-			id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: aMessage selector); yourself) ;
+			id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: aMessage selector); yourself) ;
 			arguments: (aMessage arguments collect:[:each| each acceptVisitor: methodTranslator ]);
 			yourself)
 ]
@@ -387,7 +387,7 @@ MASlangReceiver >> eassert: aBlock [
 MASlangReceiver >> flag: anArgument [
 
 	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #flag); yourself) ;
+		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #flag); yourself) ;
 		arguments: {ASTCLiteral value: anArgument value asString};
 		yourself
 ]
@@ -581,7 +581,7 @@ MASlangReceiver >> signedIntFromLong64 [
 MASlangReceiver >> subclassResponsibility [
 
 	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector: #error); yourself) ;
+		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
 		arguments: { ASTCLiteral value: #subclassResponsibility };
 		yourself
 ]

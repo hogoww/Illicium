@@ -28,7 +28,7 @@ ASTCVirtualMachineProxy >> doesNotUnderstand: aMessage [
 
 	^ self translatedReceiver
 		-> (ASTCFunctionCall new 
-			id: (ASTCIdentifier new id: (ASTCFormatHelper formatSelector:(aMessage selector)); yourself) ;
+			id: (ASTCIdentifier new id: (FAFormatHelper formatSelector:(aMessage selector)); yourself) ;
 			arguments: (aMessage arguments collect:[:each| each acceptVisitor: methodTranslator ]);
 			yourself)
 ]

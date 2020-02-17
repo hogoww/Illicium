@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCIlliciumClassTranslator,
-	#superclass : #ASTCClassTranslator,
+	#superclass : #FAClassTranslator,
 	#category : #'Angler-Core-translation'
 }
 

@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangProgram,
-	#superclass : #ANProgram,
+	#superclass : #FAProgram,
 	#category : #'Angler-Slang-Tests-generators'
 }
 

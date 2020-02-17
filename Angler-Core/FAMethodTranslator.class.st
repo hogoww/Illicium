@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCMethodTranslator,
+	#name : #FAMethodTranslator,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'translators',
@@ -10,39 +10,39 @@ Class {
 }
 
 { #category : #accessing }
-ASTCMethodTranslator >> addInclude: aString [
+FAMethodTranslator >> addInclude: aString [
 	includes add: aString
 ]
 
 { #category : #utility }
-ASTCMethodTranslator >> ask: aTranslatorKind to: aSelector with: arguments [
+FAMethodTranslator >> ask: aTranslatorKind to: aSelector with: arguments [
 	" utility, may not be as usefull as I foresee "
 	^ (translators at: aTranslatorKind) perform: aSelector with: arguments
 ]
 
 { #category : #configuration }
-ASTCMethodTranslator >> assignmentNodeTranslator: anAssignmentNodeTranslator [
+FAMethodTranslator >> assignmentNodeTranslator: anAssignmentNodeTranslator [
 	
 	translators at: #assignmentNodeTranslator put: (anAssignmentNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #initialization }
-ASTCMethodTranslator >> classTranslator [
+FAMethodTranslator >> classTranslator [
 	^ classTranslator
 ]
 
 { #category : #initialization }
-ASTCMethodTranslator >> classTranslator: aClassTranslator [
+FAMethodTranslator >> classTranslator: aClassTranslator [
 	^ classTranslator := aClassTranslator
 ]
 
 { #category : #utility }
-ASTCMethodTranslator >> forward: aMessage to: aType [
+FAMethodTranslator >> forward: aMessage to: aType [
 	^ (translators at: #messageNodeTranslator) forward: aMessage to: aType asTypeReification
 ]
 
 { #category : #typing }
-ASTCMethodTranslator >> getNodeConcreteType: aNode [
+FAMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
 		propertyAt: classTranslator typeAnnotatorClass property
@@ -51,27 +51,27 @@ ASTCMethodTranslator >> getNodeConcreteType: aNode [
 ]
 
 { #category : #typing }
-ASTCMethodTranslator >> getNodeTranslationType: aNode [
+FAMethodTranslator >> getNodeTranslationType: aNode [
 	^ self getReplacementType: (self getNodeConcreteType: aNode)
 ]
 
 { #category : #typing }
-ASTCMethodTranslator >> getReplacementType: aType [
+FAMethodTranslator >> getReplacementType: aType [
 	^ classTranslator getReplacementType: aType
 ]
 
 { #category : #accessing }
-ASTCMethodTranslator >> includes [
+FAMethodTranslator >> includes [
 	^ includes
 ]
 
 { #category : #accessing }
-ASTCMethodTranslator >> includes: aCollectionOfString [
+FAMethodTranslator >> includes: aCollectionOfString [
 	includes := aCollectionOfString
 ]
 
 { #category : #initialization }
-ASTCMethodTranslator >> initialize [
+FAMethodTranslator >> initialize [
 	includes := Set new.
 	translators := (Dictionary new: 22)
 		at: #methodNodeTranslator put: (ASTCMethodNodeTranslator new methodTranslator: self ; yourself);
@@ -98,170 +98,170 @@ ASTCMethodTranslator >> initialize [
 ]
 
 { #category : #testing }
-ASTCMethodTranslator >> isStatefulCode [ 
+FAMethodTranslator >> isStatefulCode [ 
 	^ classTranslator isStatefulCode
 ]
 
 { #category : #configuration }
-ASTCMethodTranslator >> literalValueNodeTranslator: anILLiteralValueNodeTranslator [ 
+FAMethodTranslator >> literalValueNodeTranslator: anILLiteralValueNodeTranslator [ 
 	
 	translators at: #literalValueNodeTranslator put: (anILLiteralValueNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #configuration }
-ASTCMethodTranslator >> methodNodeTranslator: aMethodNodeTranslator [ 
+FAMethodTranslator >> methodNodeTranslator: aMethodNodeTranslator [ 
 	 translators at: #methodNodeTranslator put: (aMethodNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #accessing }
-ASTCMethodTranslator >> program [
+FAMethodTranslator >> program [
 	
 	^ classTranslator program
 ]
 
 { #category : #configuration }
-ASTCMethodTranslator >> returnNodeTranslator: anILReturnNodeTranslator [ 
+FAMethodTranslator >> returnNodeTranslator: anILReturnNodeTranslator [ 
 	translators at: #returnNodeTranslator put: (anILReturnNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> stateName [
+FAMethodTranslator >> stateName [
 	^ classTranslator stateName
 ]
 
 { #category : #configuration }
-ASTCMethodTranslator >> temporaryDeclarationNodeTranslator: aTemporaryDeclarationNodeTranslator [
+FAMethodTranslator >> temporaryDeclarationNodeTranslator: aTemporaryDeclarationNodeTranslator [
 	
 	translators at: #temporaryDeclarationNodeTranslator put: (aTemporaryDeclarationNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> translateMethodAST: aMethodAST [
+FAMethodTranslator >> translateMethodAST: aMethodAST [
 	^ aMethodAST acceptVisitor: self
 	
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitArgumentNode: anArgumentNode [
+FAMethodTranslator >> visitArgumentNode: anArgumentNode [
 	^ (translators at: #argumentNodeTranslator)
 		translateNode: anArgumentNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitArrayNode: anArrayNode [
+FAMethodTranslator >> visitArrayNode: anArrayNode [
 	^ (translators at: #arrayNodeTranslator)
 		translateNode: anArrayNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitAssignmentNode: anAssignmentNode [
+FAMethodTranslator >> visitAssignmentNode: anAssignmentNode [
 	^ (translators at: #assignmentNodeTranslator)
 		translateNode: anAssignmentNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitBlockNode: aBlockNode [
+FAMethodTranslator >> visitBlockNode: aBlockNode [
 	^ (translators at: #blockNodeTranslator)
 		translateNode: aBlockNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitCascadeNode: aCascadeNode [
+FAMethodTranslator >> visitCascadeNode: aCascadeNode [
 	^ (translators at: #cascadeNodeTranslator)
 		translateNode: aCascadeNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitGlobalNode: aGlobalNode [
+FAMethodTranslator >> visitGlobalNode: aGlobalNode [
 	^ (translators at: #globalNodeTranslator)
 		translateNode: aGlobalNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitInstanceVariableNode: aInstanceVariableNode [
+FAMethodTranslator >> visitInstanceVariableNode: aInstanceVariableNode [
 	^ (translators at: #instanceVariableNodeTranslator)
 		translateNode: aInstanceVariableNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitLiteralArrayNode: aLiteralArrayNode [
+FAMethodTranslator >> visitLiteralArrayNode: aLiteralArrayNode [
 	^ (translators at: #literalArrayTranslator)
 		translateNode: aLiteralArrayNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitLiteralNode: aLiteralNode [
+FAMethodTranslator >> visitLiteralNode: aLiteralNode [
 	^ (translators at: #literalNodeTranslator)
 		translateNode: aLiteralNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitLiteralValueNode: aLiteralValueNode [
+FAMethodTranslator >> visitLiteralValueNode: aLiteralValueNode [
 	^ (translators at: #literalValueNodeTranslator)
 		translateNode: aLiteralValueNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitMessageNode: aMessageNode [
+FAMethodTranslator >> visitMessageNode: aMessageNode [
 	^ (translators at: #messageNodeTranslator)
 		translateNode: aMessageNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitMethodNode: aMethodNode [
+FAMethodTranslator >> visitMethodNode: aMethodNode [
 	^ (translators at: #methodNodeTranslator)
 		translateNode: aMethodNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitPragmaNode: aPragmaNode [
+FAMethodTranslator >> visitPragmaNode: aPragmaNode [
 	^ (translators at: #pragmaNodeTranslator)
 		translateNode: aPragmaNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitReturnNode: aReturnNode [
+FAMethodTranslator >> visitReturnNode: aReturnNode [
 	^ (translators at: #returnNodeTranslator)
 		translateNode: aReturnNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitSelfNode: aSelfNode [
+FAMethodTranslator >> visitSelfNode: aSelfNode [
 	^ (translators at: #selfNodeTranslator)
 		translateNode: aSelfNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitSequenceNode: aSequenceNode [
+FAMethodTranslator >> visitSequenceNode: aSequenceNode [
 	^ (translators at: #sequenceNodeTranslator)
 		translateNode: aSequenceNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitSuperNode: aSuperNode [
+FAMethodTranslator >> visitSuperNode: aSuperNode [
 	^ (translators at: #superNodeTranslator)
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitTemporaryDeclarationNode: aTemporaryDeclarationNode [
+FAMethodTranslator >> visitTemporaryDeclarationNode: aTemporaryDeclarationNode [
 	^ (translators at: #temporaryDeclarationNodeTranslator)
 		translateNode: aTemporaryDeclarationNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitTemporaryNode: aTemporaryNode [
+FAMethodTranslator >> visitTemporaryNode: aTemporaryNode [
 	^ (translators at: #temporaryNodeTranslator)
 		translateNode: aTemporaryNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitThisContextNode: aThisContextNode [
+FAMethodTranslator >> visitThisContextNode: aThisContextNode [
 	^ (translators at: #thisContextNodeTranslator)
 		translateNode: aThisContextNode
 ]
 
 { #category : #visiting }
-ASTCMethodTranslator >> visitVariableNode: aVariableNode [
+FAMethodTranslator >> visitVariableNode: aVariableNode [
 	^ (translators at: #variableNodeTranslator)
 		translateNode: aVariableNode
 ]

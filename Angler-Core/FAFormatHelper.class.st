@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCFormatHelper,
+	#name : #FAFormatHelper,
 	#superclass : #Object,
 	#instVars : [
 		'classTranslator'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #formatting }
-ASTCFormatHelper class >> formatSelector: aSelector [
+FAFormatHelper class >> formatSelector: aSelector [
 	"we first remove the :"
 	| functionID counter |
 	functionID := String new writeStream.
