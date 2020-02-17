@@ -62,13 +62,6 @@ MASlangClassTranslator >> postTranslationVisitors [
 	}
 ]
 
-{ #category : #check }
-MASlangClassTranslator >> preTranslationConstraintCheck: aClass [
-	((aClass allSuperclasses
-		includes: InterpreterPlugin) or:[ aClass = InterpreterPrimitives])
-		ifFalse: [ self error: 'can only translate plugins for now. They need to inherit from InterpreterPlugin.' ].
-]
-
 { #category : #visiting }
 MASlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
@@ -76,25 +69,6 @@ MASlangClassTranslator >> preTranslationVisitors [
 		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
 		MASlangDeclarationAnnotator new
 		}
-]
-
-{ #category : #check }
-MASlangClassTranslator >> preTypeInference: aClass [
-	| piType |
-	piType := inferer typeForClass: InterpreterPlugin.
-	piType
-		instanceVariable: #interpreterProxy
-		ifPresent: [ piType instanceVariables
-				at: #interpreterProxy
-					put: (PIExplicitType new
-					name: #interpreterProxy;
-					owner: piType;
-					explicitType: (inferer typeProvider createConcreteType: InterpreterProxy));
-				yourself ]
-	"For now, handled by the Slang printer as part of the basic output of every plugin"
-	"piType instanceVariable: #moduleName
-	ifPresent: [ piType instanceVariables at:#moduleName put: 
-		(inferer types createConcreteType: String) ]."
 ]
 
 { #category : #'translation-api' }

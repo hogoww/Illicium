@@ -16,11 +16,6 @@ MASlangTranslator class >> prettyPrinterClass [
 ]
 
 { #category : #initialization }
-MASlangTranslator >> fillWithtranslatorSpecificTypes [
-	replacementClasses at: #InterpreterProxy put: IlliciumVirtualMachineProxy
-]
-
-{ #category : #initialization }
 MASlangTranslator >> getReplacementType: aSymbol [
 	^ (MASlangReceiver new type: aSymbol) asConstraint
 ]
