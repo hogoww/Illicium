@@ -5,7 +5,7 @@ Class {
 		'errorKinds',
 		'failureKinds'
 	],
-	#category : #'Angler-Core-Tests-testing-class'
+	#category : #'Angler-Illicium-tests'
 }
 
 { #category : #adding }

@@ -1,6 +1,6 @@
 Extension { #name : #DTTestsRunner }
 
-{ #category : #'*Angler-Core-Tests' }
+{ #category : #'*Angler-Illicium-tests' }
 DTTestsRunner >> runForConfiguration: aDTpluginConfiguration [
 	| results |
 	results := self pluginResultClass new

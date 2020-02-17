@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSmallIntegerTest,
 	#superclass : #ASTCMessageNodeTranslatorTest,
-	#category : #'Angler-Core-Tests-translators-messages'
+	#category : #'Angler-Illicium-tests'
 }
 
 { #category : #tests }

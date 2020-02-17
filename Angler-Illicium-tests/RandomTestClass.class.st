@@ -8,7 +8,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'ASTCVirtualMachineAPI',
 	#classTraits : 'ASTCVirtualMachineAPI classTrait',
-	#category : #'Angler-Core-Tests-support'
+	#category : #'Angler-Illicium-tests'
 }
 
 { #category : #tests }

@@ -1,6 +1,6 @@
 Extension { #name : #TestAsserter }
 
-{ #category : #'*Angler-Core-Tests' }
+{ #category : #'*Angler-Illicium-tests' }
 TestAsserter class >> classForTestResult [
 	"Returns the class of the test result"
 	^ TestResultCollected
