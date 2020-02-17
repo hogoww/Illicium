@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'keyword'
 	],
-	#category : #'Angler-Core-errors'
+	#category : #'ASTC-Core'
 }
 
 { #category : #accessing }

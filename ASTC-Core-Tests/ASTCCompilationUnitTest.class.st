@@ -9,7 +9,7 @@ ASTCCompilationUnitTest >> testAdd [
 	| definition cu |
 	definition := ASTCVariableDefinition new 
 		declaration: (ASTCVariableDeclaration new id: (ASTCIdentifier new id: #i; yourself);
-			type: IlliciumSmallInteger asASTCType
+			type: (ASTCType new type: SmallInteger asTypeReification ; yourself)
 		 yourself);
 		yourself.
 	cu := ASTCCompilationUnit new.
