@@ -84,7 +84,7 @@ FAPrettyPrintTest >> testVisitCastOperator [
 	
 	structure debugASTCStructure.
 	self assert: structure isCastOperator.
-	self assert: (structure prettyPrintUsing: FAPrettyPrint new) equals: '(struct ASTCPrettyPrintTest) a'.
+	self assert: (structure prettyPrintUsing: FAPrettyPrint new) equals: '(struct FAPrettyPrintTest) a'.
 ]
 
 { #category : #tests }
