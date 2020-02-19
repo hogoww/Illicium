@@ -5,7 +5,7 @@ Class {
 		'variableAppeareanceTracker',
 		'varNamesTodeclareAtStart'
 	],
-	#category : #'MAngler-Illicium-analysis'
+	#category : #'MAngler-Illicium-Analysis'
 }
 
 { #category : #visit }

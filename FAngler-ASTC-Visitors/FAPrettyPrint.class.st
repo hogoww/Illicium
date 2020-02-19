@@ -6,7 +6,7 @@ Class {
 		'indentation',
 		'indentationString'
 	],
-	#category : #'FAngler-ASTC-Visitors-prettyprint'
+	#category : #'FAngler-ASTC-Visitors-Prettyprint'
 }
 
 { #category : #configuration }

@@ -6,7 +6,7 @@ Class {
 		'isFullyAnnotated',
 		'classesToGenerate'
 	],
-	#category : #'FAngler-Core-translation'
+	#category : #'FAngler-Core-Translation'
 }
 
 { #category : #properties }

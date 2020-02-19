@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumClassTranslator,
 	#superclass : #FAClassTranslator,
-	#category : #'MAngler-Illicium-translation'
+	#category : #'MAngler-Illicium-Translation'
 }
 
 { #category : #initialization }

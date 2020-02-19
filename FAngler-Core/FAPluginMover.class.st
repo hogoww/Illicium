@@ -1,7 +1,7 @@
 Class {
 	#name : #FAPluginMover,
 	#superclass : #Object,
-	#category : #'FAngler-Core-installers'
+	#category : #'FAngler-Core-Installers'
 }
 
 { #category : #accessing }

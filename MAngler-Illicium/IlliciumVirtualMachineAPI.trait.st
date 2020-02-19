@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'interpreterProxy'
 	],
-	#category : #'MAngler-Illicium-messages-translators'
+	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
 { #category : #'as yet unclassified' }

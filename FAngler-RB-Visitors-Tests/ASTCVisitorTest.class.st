@@ -5,7 +5,7 @@ Class {
 		'visitor',
 		'propertyName'
 	],
-	#category : #'FAngler-RB-Visitors-Tests-abstract-test'
+	#category : #'FAngler-RB-Visitors-Tests-Abstract-test'
 }
 
 { #category : #basic }

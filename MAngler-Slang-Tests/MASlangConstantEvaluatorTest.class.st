@@ -6,7 +6,7 @@ Class {
 		'evaluated',
 		'program'
 	],
-	#category : #'MAngler-Slang-Tests-analysis-tests'
+	#category : #'MAngler-Slang-Tests-AnalysisTests'
 }
 
 { #category : #asserting }

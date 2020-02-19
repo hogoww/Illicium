@@ -7,7 +7,7 @@ Class {
 		'inferer',
 		'variableName'
 	],
-	#category : #'MAngler-Illicium-analysis'
+	#category : #'MAngler-Illicium-Analysis'
 }
 
 { #category : #'as yet unclassified' }

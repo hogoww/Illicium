@@ -1,7 +1,7 @@
 Class {
 	#name : #MASpur64BitMemoryManagerTranslationTest,
 	#superclass : #MAVMTranslationTests,
-	#category : #'MAngler-Slang-Tests-generated-tests'
+	#category : #'MAngler-Slang-Tests-GeneratedTests'
 }
 
 { #category : #running }

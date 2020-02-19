@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangPluginTestResource,
 	#superclass : #MASlangTestResource,
-	#category : #'MAngler-Slang-Tests-generated-tests-base'
+	#category : #'MAngler-Slang-Tests-GeneratedTestsBase'
 }
 
 { #category : #configuring }

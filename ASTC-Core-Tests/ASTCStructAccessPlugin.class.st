@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCStructAccessPlugin,
 	#superclass : #TestCase,
-	#category : #'ASTC-Core-Tests-shortcuts'
+	#category : #'ASTC-Core-Tests-Shortcuts'
 }
 
 { #category : #tests }

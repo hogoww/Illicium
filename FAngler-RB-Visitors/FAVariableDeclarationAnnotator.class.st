@@ -27,7 +27,7 @@ t = 1;
 Class {
 	#name : #FAVariableDeclarationAnnotator,
 	#superclass : #ASTCAbstractCheckVisitor,
-	#category : #'FAngler-RB-Visitors-declaration'
+	#category : #'FAngler-RB-Visitors-Declaration'
 }
 
 { #category : #accessing }

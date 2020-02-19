@@ -5,7 +5,7 @@ Class {
 		'currentDepth',
 		'stream'
 	],
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #initialization }
@@ -653,6 +653,20 @@ ASTCPrinterVisitor >> visitNegationOperator: aNegationOperator [
 	super visitNegationOperator: aNegationOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
+]
+
+{ #category : #'as yet unclassified' }
+ASTCPrinterVisitor >> visitNode: aNode [
+	"remove print of the comment, not relevant in the ast"
+  stream cr.
+  self printTabCount: currentDepth.
+  stream
+     << $(;
+     << 'aNode'.
+  currentDepth := currentDepth + 1.
+  super visitNode: aNode.
+  currentDepth := currentDepth - 1.
+  stream << ')'
 ]
 
 { #category : #visiting }

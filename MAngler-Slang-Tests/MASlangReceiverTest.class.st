@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangReceiverTest,
 	#superclass : #FAMessageNodeTranslatorTest,
-	#category : #'MAngler-Slang-Tests-analysis-tests'
+	#category : #'MAngler-Slang-Tests-AnalysisTests'
 }
 
 { #category : #tests }

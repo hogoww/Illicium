@@ -9,7 +9,7 @@ Class {
 	#classInstVars : [
 		'selectorMacros'
 	],
-	#category : #'MAngler-Slang-analysis'
+	#category : #'MAngler-Slang-Analysis'
 }
 
 { #category : #testing }

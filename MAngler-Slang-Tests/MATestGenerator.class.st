@@ -1,7 +1,7 @@
 Class {
 	#name : #MATestGenerator,
 	#superclass : #MAPluginTestGenerator,
-	#category : #'MAngler-Slang-Tests-generators'
+	#category : #'MAngler-Slang-Tests-Generators'
 }
 
 { #category : #generating }

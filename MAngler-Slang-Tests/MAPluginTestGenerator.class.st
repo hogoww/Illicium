@@ -17,7 +17,7 @@ IlliciumTestGenerator new
 Class {
 	#name : #MAPluginTestGenerator,
 	#superclass : #Object,
-	#category : #'MAngler-Slang-Tests-generators'
+	#category : #'MAngler-Slang-Tests-Generators'
 }
 
 { #category : #removing }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'errors'
 	],
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #accessing }

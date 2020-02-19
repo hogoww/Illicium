@@ -1,7 +1,7 @@
 Class {
 	#name : #MASpur64BitMemoryManagerRessource,
 	#superclass : #MASlangVMTestResource,
-	#category : #'MAngler-Slang-Tests-generated-ressource'
+	#category : #'MAngler-Slang-Tests-GeneratedRessource'
 }
 
 { #category : #running }

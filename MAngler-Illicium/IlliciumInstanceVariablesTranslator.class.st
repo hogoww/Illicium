@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'classTranslator'
 	],
-	#category : #'MAngler-Illicium-translation'
+	#category : #'MAngler-Illicium-Translation'
 }
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCWalkerVisitor,
 	#superclass : #ASTCVisitor,
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #visiting }
@@ -275,6 +275,11 @@ ASTCWalkerVisitor >> visitNegationOperator: aNegationOperator [
 	super visitNegationOperator: aNegationOperator
 ]
 
+{ #category : #'as yet unclassified' }
+ASTCWalkerVisitor >> visitNode: aNode [
+	super visitNode: aNode.
+]
+
 { #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
 	super visitOperator: anOperator
@@ -407,4 +412,10 @@ ASTCWalkerVisitor >> visitVariableDefinition: aVariableDefinition [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitWhile: aWhile [
 	super visitWhile: aWhile
+]
+
+{ #category : #'as yet unclassified' }
+ASTCWalkerVisitor >> walkASTCNodeParent:anASTCNode [
+	self flag:#badFix."avoid infinite recursivity when using the walker."
+	^self.
 ]

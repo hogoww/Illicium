@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSubclassResponsibilityVisitor,
 	#superclass : #ASTCVisitor,
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #visiting }

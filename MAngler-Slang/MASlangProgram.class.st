@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangProgram,
 	#superclass : #FAProgram,
-	#category : #'MAngler-Slang-Tests-generators'
+	#category : #'MAngler-Slang-Translation'
 }
 
 { #category : #accessing }

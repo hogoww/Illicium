@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'visitor'
 	],
-	#category : #'FAngler-ASTC-Visitors-Tests-modification'
+	#category : #'FAngler-ASTC-Visitors-Tests-Modification'
 }
 
 { #category : #running }

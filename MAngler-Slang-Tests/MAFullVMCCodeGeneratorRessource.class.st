@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'codeGenerator'
 	],
-	#category : #'MAngler-Slang-Tests-generators'
+	#category : #'MAngler-Slang-Tests-CommonRessource'
 }
 
 { #category : #initialization }

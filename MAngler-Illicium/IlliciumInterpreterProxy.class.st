@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumInterpreterProxy,
 	#superclass : #Object,
-	#category : #'MAngler-Illicium-messages-translators'
+	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
 { #category : #adding }

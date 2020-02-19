@@ -1,7 +1,7 @@
 Class {
 	#name : #FAFileCompiler,
 	#superclass : #Object,
-	#category : #'FAngler-Core-installers'
+	#category : #'FAngler-Core-Installers'
 }
 
 { #category : #compiling }

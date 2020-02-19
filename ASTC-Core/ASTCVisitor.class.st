@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCVisitor,
 	#superclass : #Object,
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #visiting }

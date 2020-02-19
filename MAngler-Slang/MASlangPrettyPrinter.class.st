@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangPrettyPrinter,
 	#superclass : #FAPrettyPrint,
-	#category : #'MAngler-Slang-prettyprint'
+	#category : #'MAngler-Slang-Prettyprint'
 }
 
 { #category : #'printing-literals' }

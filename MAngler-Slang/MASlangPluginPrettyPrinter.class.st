@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangPluginPrettyPrinter,
 	#superclass : #MASlangPrettyPrinter,
-	#category : #'MAngler-Slang-prettyprint'
+	#category : #'MAngler-Slang-Prettyprint'
 }
 
 { #category : #visiting }

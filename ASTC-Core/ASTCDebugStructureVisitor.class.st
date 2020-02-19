@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCDebugStructureVisitor,
 	#superclass : #ASTCHierarchyWalkerVisitor,
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #visiting }
@@ -48,6 +48,15 @@ ASTCDebugStructureVisitor >> visitCompilationUnit: aCompilationUnit [
 ASTCDebugStructureVisitor >> visitDeclaration: aDeclaration [
 	super visitDeclaration: aDeclaration.
 	aDeclaration id ifNotNil: [ :anId | self assert: anId isIdentifier ]
+]
+
+{ #category : #'as yet unclassified' }
+ASTCDebugStructureVisitor >> visitDeclarationStatement: anASTCDeclarationStatement [
+	self visitStatement: anASTCDeclarationStatement.
+
+	"anASTCDeclarationStatement declaration ifNotNil:[ self assert:anASTCDeclarationStatement declaration isDeclaration ]."
+
+	super visitDeclarationStatement: anASTCDeclarationStatement
 ]
 
 { #category : #visiting }
@@ -179,6 +188,15 @@ ASTCDebugStructureVisitor >> visitTernaryConditionalOperator: aTernaryConditiona
 		ifNotNil: [ :aThen | self assert: aThen isExpression ].
 	aTernaryConditionalOperator else
 		ifNotNil: [ :anElse | self assert: anElse isExpression ]
+]
+
+{ #category : #'as yet unclassified' }
+ASTCDebugStructureVisitor >> visitType: anASTCType [
+	self visitNode: anASTCType.
+
+	self assert: anASTCType type isTypeConstraint.
+
+	super visitType: anASTCType
 ]
 
 { #category : #visiting }

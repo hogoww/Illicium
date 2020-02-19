@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'methodTypeDispatcher'
 	],
-	#category : #'MAngler-Illicium-analysis'
+	#category : #'MAngler-Illicium-Analysis'
 }
 
 { #category : #initialization }

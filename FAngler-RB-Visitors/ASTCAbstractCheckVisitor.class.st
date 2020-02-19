@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCAbstractCheckVisitor,
 	#superclass : #RBProgramNodeVisitor,
-	#category : #'FAngler-RB-Visitors-abstract-visitor'
+	#category : #'FAngler-RB-Visitors-AbstractVisitor'
 }
 
 { #category : #accessing }

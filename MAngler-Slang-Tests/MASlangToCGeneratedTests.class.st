@@ -10,7 +10,7 @@ Class {
 		'translator',
 		'testedClass'
 	],
-	#category : #'MAngler-Slang-Tests-generated-tests-base'
+	#category : #'MAngler-Slang-Tests-GeneratedTestsBase'
 }
 
 { #category : #'as yet unclassified' }

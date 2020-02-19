@@ -6,7 +6,7 @@ Class {
 		'inliner',
 		'methodToInline'
 	],
-	#category : #'MAngler-Slang-Tests-analysis-tests'
+	#category : #'MAngler-Slang-Tests-AnalysisTests'
 }
 
 { #category : #support }

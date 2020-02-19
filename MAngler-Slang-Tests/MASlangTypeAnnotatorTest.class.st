@@ -4,7 +4,7 @@ I test the ASTCSlangTypeAnnotator class
 Class {
 	#name : #MASlangTypeAnnotatorTest,
 	#superclass : #FATypeAnnotatorTest,
-	#category : #'MAngler-Slang-Tests-analysis-tests'
+	#category : #'MAngler-Slang-Tests-AnalysisTests'
 }
 
 { #category : #testing }

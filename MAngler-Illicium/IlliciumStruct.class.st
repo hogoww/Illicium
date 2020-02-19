@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumStruct,
 	#superclass : #Object,
-	#category : #'MAngler-Illicium-messages-translators'
+	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
 { #category : #'reflective operations' }

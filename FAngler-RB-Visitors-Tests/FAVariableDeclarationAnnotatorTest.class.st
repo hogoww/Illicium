@@ -8,7 +8,7 @@ Class {
 		'iv',
 		'ast'
 	],
-	#category : #'FAngler-RB-Visitors-Tests-declaration'
+	#category : #'FAngler-RB-Visitors-Tests-Declaration'
 }
 
 { #category : #testing }

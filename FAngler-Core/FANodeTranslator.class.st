@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'methodTranslator'
 	],
-	#category : #'FAngler-Core-nodes-translators'
+	#category : #'FAngler-Core-Nodes-translators'
 }
 
 { #category : #translate }

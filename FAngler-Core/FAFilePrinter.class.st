@@ -10,7 +10,7 @@ Class {
 		'fileCompiler',
 		'pluginMover'
 	],
-	#category : #'FAngler-Core-installers'
+	#category : #'FAngler-Core-Installers'
 }
 
 { #category : #accessing }

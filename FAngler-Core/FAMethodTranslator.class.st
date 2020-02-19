@@ -6,7 +6,7 @@ Class {
 		'classTranslator',
 		'includes'
 	],
-	#category : #'FAngler-Core-translation'
+	#category : #'FAngler-Core-Translation'
 }
 
 { #category : #accessing }

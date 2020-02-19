@@ -11,7 +11,7 @@ Class {
 	#classVars : [
 		'A'
 	],
-	#category : #'FAngler-RB-Visitors-Tests-typing'
+	#category : #'FAngler-RB-Visitors-Tests-Typing'
 }
 
 { #category : #testing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangDeclarationAnnotatorTest,
 	#superclass : #FAVariableDeclarationAnnotatorTest,
-	#category : #'MAngler-Slang-Tests-analysis-tests'
+	#category : #'MAngler-Slang-Tests-AnalysisTests'
 }
 
 { #category : #testing }

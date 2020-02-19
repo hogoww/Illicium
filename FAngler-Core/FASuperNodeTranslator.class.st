@@ -1,7 +1,7 @@
 Class {
 	#name : #FASuperNodeTranslator,
 	#superclass : #FANodeTranslator,
-	#category : #'FAngler-Core-nodes-translators'
+	#category : #'FAngler-Core-Nodes-translators'
 }
 
 { #category : #translate }

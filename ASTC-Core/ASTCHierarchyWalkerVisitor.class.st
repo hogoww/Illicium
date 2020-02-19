@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCHierarchyWalkerVisitor,
 	#superclass : #ASTCWalkerVisitor,
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #visiting }

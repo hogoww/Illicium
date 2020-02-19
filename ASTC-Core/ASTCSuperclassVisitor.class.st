@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSuperclassVisitor,
 	#superclass : #ASTCVisitor,
-	#category : #'ASTC-Core-visitors'
+	#category : #'ASTC-Core-Visitors'
 }
 
 { #category : #visiting }
@@ -222,6 +222,11 @@ ASTCSuperclassVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitNegationOperator: aNegationOperator [
 	^ self visitUnaryOperator: aNegationOperator
+]
+
+{ #category : #'as yet unclassified' }
+ASTCSuperclassVisitor >> visitNode: aNode [
+	self error: 'if you visit till node, you probably forgot to add code somewhere.'
 ]
 
 { #category : #visiting }

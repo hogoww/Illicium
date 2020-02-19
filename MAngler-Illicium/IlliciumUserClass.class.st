@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumUserClass,
 	#superclass : #IlliciumObject,
-	#category : #'MAngler-Illicium-messages-translators'
+	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
 { #category : #type }

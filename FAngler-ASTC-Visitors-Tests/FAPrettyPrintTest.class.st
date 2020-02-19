@@ -1,7 +1,7 @@
 Class {
 	#name : #FAPrettyPrintTest,
 	#superclass : #TestCase,
-	#category : #'FAngler-ASTC-Visitors-Tests-validation'
+	#category : #'FAngler-ASTC-Visitors-Tests-Validation'
 }
 
 { #category : #tests }

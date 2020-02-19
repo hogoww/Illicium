@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'inferer'
 	],
-	#category : #'FAngler-RB-Visitors-typing'
+	#category : #'FAngler-RB-Visitors-Typing'
 }
 
 { #category : #accessing }

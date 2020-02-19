@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumMutex,
 	#superclass : #IlliciumObject,
-	#category : #'MAngler-Illicium-messages-translators'
+	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
 { #category : #accessing }

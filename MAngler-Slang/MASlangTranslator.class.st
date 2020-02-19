@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangTranslator,
 	#superclass : #FATranslator,
-	#category : #'MAngler-Slang-translators'
+	#category : #'MAngler-Slang-Translation'
 }
 
 { #category : #configuration }

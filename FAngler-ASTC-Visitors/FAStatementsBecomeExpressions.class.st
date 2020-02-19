@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'subTreeShouldBeAllExpressions'
 	],
-	#category : #'FAngler-ASTC-Visitors-modification'
+	#category : #'FAngler-ASTC-Visitors-Modification'
 }
 
 { #category : #initialization }

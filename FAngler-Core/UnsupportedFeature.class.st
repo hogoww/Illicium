@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'feature'
 	],
-	#category : #'FAngler-Core-errors'
+	#category : #'FAngler-Core-Errors'
 }
 
 { #category : #accessing }

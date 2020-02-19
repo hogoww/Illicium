@@ -1,7 +1,7 @@
 Class {
 	#name : #MASlangAssignmentNodeTranslator,
 	#superclass : #FAAssignementNodeTranslator,
-	#category : #'MAngler-Slang-nodes-translators'
+	#category : #'MAngler-Slang-Nodes-translators'
 }
 
 { #category : #translate }
