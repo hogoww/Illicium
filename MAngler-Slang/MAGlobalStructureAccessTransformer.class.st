@@ -17,18 +17,27 @@ MAGlobalStructureAccessTransformer class >> translator: aTranslator [
 
 { #category : #transforming }
 MAGlobalStructureAccessTransformer >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
-
-	aRBMethodNode nodesDo: [ :each |
-		(each isVariable and: [ translator isGlobalInstanceVariable: each name ])
+	| typeProperty |
+	"I don't like having to check if the property exists or not.
+	Problem is that cCode:inSmalltalk: are not typed by slang, and therefore not by us either.
+	We can either add an exception for inSmalltalk code, or do this which might hide another error till later. 
+	Anyway... Quick fix..."
+	typeProperty := FATypeAnnotator property.
+	
+	aRBMethodNode nodesDo: [ :aNode |
+		(aNode isVariable and: [ translator isGlobalInstanceVariable: aNode name ])
 			ifTrue: [ | newNode |
 				newNode := RBMessageNode 
-					receiver: each copy
+					receiver: aNode copy
 					selector: #GIV:
-					arguments: { each copy }.
+					arguments: { aNode copy }.
 				newNode
-					propertyAt: #type
-					put: (each propertyAt: #type).
-				each replaceWith: newNode ] ]
+					propertyAt: typeProperty
+					put: (aNode propertyAt: typeProperty 
+						ifPresent:[ :aType | aType ] 
+						ifAbsent:[ nil ])
+						"see method comment".
+				aNode replaceWith: newNode ] ]
 ]
 
 { #category : #accessing }
