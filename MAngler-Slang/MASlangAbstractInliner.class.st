@@ -59,7 +59,7 @@ MASlangAbstractInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 ]
 
 { #category : #inlining }
-MASlangInliner >> createNewBlockithStatements: nodesToInline [
+MASlangAbstractInliner >> createNewBlockithStatements: nodesToInline [
 	| newBlock |
 	newBlock := RBBlockNode
 		body:
