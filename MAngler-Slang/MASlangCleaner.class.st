@@ -22,5 +22,8 @@ MASlangCleaner >> selectorToRemove [
 { #category : #cleaning }
 MASlangCleaner >> visitMessageNode: aMessageNode [
 	(selectorToRemove includes: aMessageNode selector)
-		ifTrue:[ aMessageNode replaceWith: #() ]
+		ifFalse: [ ^ super visitMessageNode: aMessageNode ].
+	aMessageNode parent isSequence ifTrue:[ ^ aMessageNode parent replaceNode: aMessageNode withNodes: #() ].
+	"if it is not replaced in a sequence, this is waaaay more complex and should be handled with care"
+	self halt.
 ]
