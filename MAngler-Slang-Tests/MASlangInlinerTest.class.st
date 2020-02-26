@@ -142,7 +142,7 @@ MASlangInlinerTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 	super setUp.
 	program := FAProgram new.
-	inliner := MASlangInliner new
+	inliner := MASlangAbstractInliner new
 		translator: MASlangClassTranslator new.
 ]
 
