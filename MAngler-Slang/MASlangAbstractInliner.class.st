@@ -98,11 +98,14 @@ MASlangAbstractInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	nodesToInline last isReturn
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
 
+	(self inlineIfReceiverIsSuper: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
+
 	(self inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
+
 	
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline.
 	aMessageNode parent: nil
@@ -167,6 +170,13 @@ MASlangAbstractInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessage
 	aMessageNode replaceWith: nodesToInline first.
 	aMessageNode parent: nil.
 	^ true
+]
+
+{ #category : #inlining }
+MASlangAbstractInliner >> inlineIfReceiverIsSuper: nodesToInline insteadOf: aMessageNode [
+	| newBlock newAssignment lastNode |
+	aMessageNode receiver isSuper ifFalse: [ ^ false ].
+	^ self halt.
 ]
 
 { #category : #renaming }
