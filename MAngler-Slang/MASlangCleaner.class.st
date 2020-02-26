@@ -9,11 +9,12 @@ Class {
 }
 
 { #category : #cleaning }
-MASlangCleaner >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
+MASlangCleaner >> applyOnMethod: aMethodNode ofProgram: anANProgram [ 
 	| node |
-	aRBMethodNode statements size > 1 ifFalse: [ ^ self ].
-
-	node := aRBMethodNode statements first.
+	aMethodNode statements size > 1 ifFalse: [ ^ self ].
+	
+	node := aMethodNode statements first.
 	(node isMessage and: [ node selector = #flag: ])
-		ifTrue: [ aRBMethodNode body removeNode: node ]
+		ifTrue: [ aMethodNode remove: node ].
+	^ aMethodNode
 ]
