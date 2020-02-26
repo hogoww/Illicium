@@ -37,7 +37,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	"self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)]."
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	
-	aTranslator annotateMethodsASTWithTypes: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
+	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
 	self isFullyAnnotated: true
 ]
 

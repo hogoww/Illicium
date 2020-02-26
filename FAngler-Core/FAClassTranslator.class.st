@@ -48,13 +48,6 @@ FAClassTranslator >> annotateMethodAST: aMethodNode [
 	aMethodNode propertyAt: FAProgram isAnnotatedProperty put: true.
 ]
 
-{ #category : #annotation }
-FAClassTranslator >> annotateMethodsASTWithTypes: methodsASTs [
-	methodsASTs
-		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
-	^ methodsASTs
-]
-
 { #category : #configuration }
 FAClassTranslator >> beStrict [
 	isStrict := true
@@ -162,6 +155,13 @@ FAClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aCl
 	self subclassResponsibility
 ]
 
+{ #category : #annotation }
+FAClassTranslator >> prepareMethodsASTs: methodsASTs [
+	methodsASTs
+		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
+	^ methodsASTs
+]
+
 { #category : #typing }
 FAClassTranslator >> program [
 	^ program
@@ -200,7 +200,7 @@ FAClassTranslator >> translateClass: aClass [
 	entryPoints := self typeInferenceEntryPoints: aClass.
 	self callgraphTypeStartingFrom: entryPoints.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.
-	methodsASTs := self annotateMethodsASTWithTypes: methodsToTranslate.
+	methodsASTs := self prepareMethodsASTs: methodsToTranslate.
 	
 	cu := ASTCCompilationUnit new.	
 	stateStuff := self translateClassState: aClass.
@@ -237,7 +237,7 @@ FAClassTranslator >> translateClassState: aClass [
 FAClassTranslator >> translateExpression: anExpression [
 	| methodAST functionDefinitions |
 	self callgraphTypeStartingFromExpression: anExpression.
-	methodAST := self annotateMethodsASTWithTypes: (inferer typeProvider methodTypes at: 1) node copy.
+	methodAST := self prepareMethodsASTs: (inferer typeProvider methodTypes at: 1) node copy.
 	
 	functionDefinitions := self translateMethodsASTs: methodAST.
 	^ functionDefinitions body

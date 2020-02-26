@@ -77,12 +77,6 @@ FAProgram >> methodNamed: aSelector [
 				^ methods at: aSelector put: found ast copy ] ] ]
 ]
 
-{ #category : #testing }
-FAProgram >> methodNeedAdding: aMethod [
-	(aMethod hasPragmaNamed: #doNotGenerate) ifTrue: [ ^ false ].
-	^ true
-]
-
 { #category : #accessing }
 FAProgram >> methods [
 	^ methods values
@@ -92,11 +86,4 @@ FAProgram >> methods [
 FAProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
-]
-
-{ #category : #accessing }
-FAProgram >> methodsNeedingAnnotation [
-	self wasModifiedSinceLastCheck ifFalse:[ ^ {} ].
-	^ methods reject: [:anAssociation| anAssociation value propertyAt: self class isAnnotatedProperty ]
-		thenCollect: [:anAssociation| anAssociation value ]
 ]

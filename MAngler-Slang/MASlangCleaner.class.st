@@ -3,17 +3,24 @@ Class {
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'program',
-		'inlinedSomething'
+		'inlinedSomething',
+		'selectorToRemove'
 	],
 	#category : #'MAngler-Slang-Analysis'
 }
 
 { #category : #cleaning }
-MASlangCleaner >> applyOnMethod: aRBMethodNode ofProgram: anANProgram [ 
-	| node |
-	aRBMethodNode statements size > 1 ifFalse: [ ^ self ].
+MASlangCleaner >> initialize [
+	selectorToRemove := #(flag flag: assert: eassert: deny:)
+]
 
-	node := aRBMethodNode statements first.
-	(node isMessage and: [ node selector = #flag: ])
-		ifTrue: [ aRBMethodNode body removeNode: node ]
+{ #category : #cleaning }
+MASlangCleaner >> selectorToRemove [
+	^ selectorToRemove
+]
+
+{ #category : #cleaning }
+MASlangCleaner >> visitMessageNode: aMessageNode [
+	(selectorToRemove includes: aMessageNode selector)
+		ifTrue:[ aMessageNode replaceWith: #() ]
 ]
