@@ -23,3 +23,8 @@ MASlangCompleteShouldInlineTest >> testShouldInlineMethodWithArgumentBlock [
 MASlangCompleteShouldInlineTest >> testShouldInlineSuper [
 	self assert: super testShouldInlineSuper
 ]
+
+{ #category : #tests }
+MASlangCompleteShouldInlineTest >> testShouldNotInlineUnknownMethods [
+	self deny: super testShouldNotInlineUnknownMethods
+]

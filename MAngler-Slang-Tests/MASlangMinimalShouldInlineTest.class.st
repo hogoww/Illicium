@@ -23,3 +23,8 @@ MASlangMinimalShouldInlineTest >> testShouldInlineMethodWithArgumentBlock [
 MASlangMinimalShouldInlineTest >> testShouldInlineSuper [
 	self assert: super testShouldInlineSuper
 ]
+
+{ #category : #tests }
+MASlangMinimalShouldInlineTest >> testShouldNotInlineUnknownMethods [
+	self deny: super testShouldNotInlineUnknownMethods
+]

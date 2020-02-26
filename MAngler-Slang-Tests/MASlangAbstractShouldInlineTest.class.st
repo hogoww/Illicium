@@ -14,6 +14,11 @@ MASlangAbstractShouldInlineTest class >> isAbstract [
 ]
 
 { #category : #support }
+MASlangAbstractShouldInlineTest >> aMethodNotInTheProgram [
+	1
+]
+
+{ #category : #support }
 MASlangAbstractShouldInlineTest >> aMethodWithAMessageWithAReceiverBlock [
 	[ ] value
 ]
@@ -21,6 +26,11 @@ MASlangAbstractShouldInlineTest >> aMethodWithAMessageWithAReceiverBlock [
 { #category : #support }
 MASlangAbstractShouldInlineTest >> aMethodWithAMessageWithAnArgumentBlock [
 	1 allObjectsDo: [ 2 ]
+]
+
+{ #category : #support }
+MASlangAbstractShouldInlineTest >> aMethodWithAnUnknownMessage [
+	self aMethodNotInTheProgram
 ]
 
 { #category : #support }
@@ -53,6 +63,14 @@ MASlangAbstractShouldInlineTest >> testShouldInlineMethodWithArgumentBlock [
 MASlangAbstractShouldInlineTest >> testShouldInlineSuper [
 	| method |
 	method := (MASlangAbstractShouldInlineTest >> #aMethodWithSuperCall) ast.
+	program addMethod: method.
+	^ inliner shouldInline: method statements first
+]
+
+{ #category : #tests }
+MASlangAbstractShouldInlineTest >> testShouldNotInlineUnknownMethods [
+	| method |
+	method := (MASlangAbstractShouldInlineTest >> #aMethodWithAnUnknownMessage) ast.
 	program addMethod: method.
 	^ inliner shouldInline: method statements first
 ]
