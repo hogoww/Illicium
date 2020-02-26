@@ -59,21 +59,6 @@ MASlangInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 ]
 
 { #category : #inlining }
-MASlangInliner >> cleanStatements: nodesToInline [
-
-	| cleanNodes node |
-	cleanNodes := nodesToInline copy.
-	"nodesToInline do: [:aNode| 
-		(aNode isMessage and: [ aNode selector = #assert: ]) ifTrue: [ cleanNodes remove: aNode ]]."
-	
-	nodesToInline size > 1 ifFalse: [ ^ nodesToInline ].
-	node := cleanNodes first.
-	(node isMessage and: [ node selector = #flag: ])
-		ifTrue: [ cleanNodes remove: node ].
-	^ cleanNodes
-]
-
-{ #category : #inlining }
 MASlangInliner >> createNewBlockithStatements: nodesToInline [
 	| newBlock |
 	newBlock := RBBlockNode
@@ -110,7 +95,6 @@ MASlangInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	If none match, we just replace the message with the collection of nodes."
 	"General preparation for inlining"
 	nodesToInline := aMethodNode statements.
-	nodesToInline := self cleanStatements: nodesToInline.
 	nodesToInline last isReturn
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
 
