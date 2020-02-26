@@ -40,7 +40,7 @@ IlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector fromClas
 	self preTypeInference: aClass.
 	self callgraphTypeStartingFrom: {(aClass >> aSelector) ast}.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.
-	methodsASTs := self annotateMethodsASTWithTypes: methodsToTranslate.
+	methodsASTs := self prepareMethodsASTs: methodsToTranslate.
 	^ methodsASTs
 ]
 
