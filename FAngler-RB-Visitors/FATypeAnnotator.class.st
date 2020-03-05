@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #accessing }
-FATypeAnnotator class >> property [
+FATypeAnnotator class >> propertyName [
 	"should return a symbol with the name of the property"
 	^#type
 ]

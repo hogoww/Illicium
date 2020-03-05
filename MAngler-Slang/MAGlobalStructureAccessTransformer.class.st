@@ -22,7 +22,7 @@ MAGlobalStructureAccessTransformer >> applyOnMethod: aRBMethodNode ofProgram: an
 	Problem is that cCode:inSmalltalk: are not typed by slang, and therefore not by us either.
 	We can either add an exception for inSmalltalk code, or do this which might hide another error till later. 
 	Anyway... Quick fix..."
-	typeProperty := FATypeAnnotator property.
+	typeProperty := FATypeAnnotator propertyName.
 	
 	aRBMethodNode nodesDo: [ :aNode |
 		(aNode isVariable and: [ translator isGlobalInstanceVariable: aNode name ])

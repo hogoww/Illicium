@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #accessing }
-FAAbstractCheckVisitor class >> property [
+FAAbstractCheckVisitor class >> propertyName [
 	"should return a symbol with the name of the property"
-	^self subclassResponsibility  
+	^ self subclassResponsibility  
 ]
 
 { #category : #accessing }
@@ -27,7 +27,7 @@ FAAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for: aNode [
 FAAbstractCheckVisitor >> atNewPropertyPut: aValue for: aNode [
 	"shortcut"
 
-	^ self atNewProperty: self class property put: aValue for: aNode
+	^ self atNewProperty: self class propertyName put: aValue for: aNode
 ]
 
 { #category : #accessing }

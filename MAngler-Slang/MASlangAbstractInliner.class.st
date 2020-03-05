@@ -64,7 +64,7 @@ MASlangAbstractInliner >> createNewBlockithStatements: nodesToInline [
 	newBlock := RBBlockNode
 		body:
 			(RBSequenceNode new
-				propertyAt: FAVariableDeclarationAnnotator property
+				propertyAt: FAVariableDeclarationAnnotator propertyName
 					put: FAVariableDeclarationAnnotator defaultCollection new;
 				yourself).
 	"each sequence node must know what to declare. In slang, nothing unless you're the body of the method"
@@ -191,7 +191,7 @@ MASlangAbstractInliner >> inlineIfReceiverIsSuper: nodesToInline insteadOf: aMes
 { #category : #renaming }
 MASlangAbstractInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
 	| declarationProperty |
-	declarationProperty := FAVariableDeclarationAnnotator property.
+	declarationProperty := FAVariableDeclarationAnnotator propertyName.
 	"in case of testing environment, we don't check"
 	methodInlining body
 		temporaries: methodInlining temporaries , methodToInline body temporaries.
@@ -247,16 +247,16 @@ MASlangAbstractInliner >> renameVariablesIn: aMethodNode using: replacementNames
 		].
 	
 	"Check in case we're in testing environment."
-	(aMethodNode body hasProperty: FAVariableDeclarationAnnotator property) ifFalse: [ ^ self ].
+	(aMethodNode body hasProperty: FAVariableDeclarationAnnotator propertyName) ifFalse: [ ^ self ].
 	
 	"properties are shallow copied. Since have references to TempDeclaration, we have to touch the copy, not the main node."
-	newProperties := (aMethodNode body propertyAt: FAVariableDeclarationAnnotator property)
+	newProperties := (aMethodNode body propertyAt: FAVariableDeclarationAnnotator propertyName)
 		collect: [ :aTempDecl |
 			replacementNames at: aTempDecl name
 				ifPresent:[ aTempDecl copy name: (replacementNames at: aTempDecl name) ]
 				ifAbsent: [  aTempDecl copy ]
 			].
-	aMethodNode body propertyAt: FAVariableDeclarationAnnotator property put: newProperties
+	aMethodNode body propertyAt: FAVariableDeclarationAnnotator propertyName put: newProperties
 ]
 
 { #category : #renaming }
@@ -287,7 +287,7 @@ MASlangAbstractInliner >> translator: anObject [
 MASlangAbstractInliner >> typeNewBlock: newBlock [
 	| typingProperty lastNode |
 	
-	typingProperty := FATypeAnnotator property.
+	typingProperty := FATypeAnnotator propertyName.
 	lastNode := newBlock statements last.
 	lastNode
 		propertyAt: typingProperty

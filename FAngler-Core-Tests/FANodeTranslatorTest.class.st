@@ -9,19 +9,19 @@ Class {
 
 { #category : #'as yet unclassified' }
 FANodeTranslatorTest >> addDeclarationProperty: aBooleanOrCollection to: aNode [ 
-	aNode propertyAt: FAVariableDeclarationAnnotator property
+	aNode propertyAt: FAVariableDeclarationAnnotator propertyName
 		put: aBooleanOrCollection
 ]
 
 { #category : #'as yet unclassified' }
 FANodeTranslatorTest >> addType: aClass to: aNode [ 
-	aNode propertyAt: FATypeAnnotator property
+	aNode propertyAt: FATypeAnnotator propertyName
 		put: ( aClass asTypeReification -> 'Generated, no Phineas Type')
 ]
 
 { #category : #'as yet unclassified' }
 FANodeTranslatorTest >> assertTypeOf: aNode is: aType [
-	self assert: (aNode propertyAt: FATypeAnnotator property) key equals: aType asTypeReification
+	self assert: (aNode propertyAt: FATypeAnnotator propertyName) key equals: aType asTypeReification
 ]
 
 { #category : #tests }

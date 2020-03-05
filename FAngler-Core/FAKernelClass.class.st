@@ -21,7 +21,7 @@ FAKernelClass class >> asCType [
 { #category : #accessing }
 FAKernelClass class >> literalNodeFor: aValue [
 	^ aValue asLiteralNode 
-		propertyAt: FATypeAnnotator property 
+		propertyAt: FATypeAnnotator propertyName
 		put: (self asPharoType -> 'generated, no PhineasType');
 		yourself
 	
@@ -66,7 +66,7 @@ FAKernelClass >> messageToFunctionCall: aMessage [
 FAKernelClass >> myType [
 	"in case of most, it doesn't
 	for UserTypes, it does."
-	^ (receiverNode propertyAt: FATypeAnnotator property) key
+	^ (receiverNode propertyAt: FATypeAnnotator propertyName) key
 ]
 
 { #category : #'message performing' }

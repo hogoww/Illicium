@@ -505,7 +505,7 @@ MASlangReceiver >> isStrict [
 { #category : #accessing }
 MASlangReceiver >> literalNodeFor: aValue [ 
 	^ aValue asLiteralNode 
-		propertyAt: FATypeAnnotator property 
+		propertyAt: FATypeAnnotator propertyName 
 		put: (self asConstraint -> 'generated, no PhineasType');
 		yourself
 	

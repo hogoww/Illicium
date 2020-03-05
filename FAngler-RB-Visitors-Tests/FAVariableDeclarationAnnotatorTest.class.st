@@ -74,7 +74,7 @@ FAVariableDeclarationAnnotatorTest >> assignmentInOtherSequence [
 { #category : #basic }
 FAVariableDeclarationAnnotatorTest >> setUp [
 	super setUp.
-	propertyName := FAVariableDeclarationAnnotator property.
+	propertyName := FAVariableDeclarationAnnotator propertyName.
 ]
 
 { #category : #basic }

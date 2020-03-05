@@ -36,6 +36,6 @@ FAVariableDeclarationAnnotator class >> defaultCollection [
 ]
 
 { #category : #accessing }
-FAVariableDeclarationAnnotator class >> property [
-	^#toDeclare
+FAVariableDeclarationAnnotator class >> propertyName [
+	^ #toDeclare
 ]

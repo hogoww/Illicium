@@ -100,7 +100,7 @@ FATypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 FATypeAnnotatorTest >> setUp [
 	"visitor must be set before sending super setUp in subclasses."
 	super setUp.
-	propertyName := visitor class property
+	propertyName := visitor class propertyName
 ]
 
 { #category : #test }
