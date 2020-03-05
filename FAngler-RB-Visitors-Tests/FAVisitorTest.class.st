@@ -9,9 +9,9 @@ Class {
 }
 
 { #category : #basic }
-FAVisitorTest >> assert: aNode propertyEquals: aBoolean [
+FAVisitorTest >> assert: aNode propertyEquals: aValue [
 	self assert: (aNode hasProperty: propertyName).
-	self assert: (aNode propertyAt: propertyName) equals: aBoolean
+	self assert: (aNode propertyAt: propertyName) equals: aValue
 ]
 
 { #category : #basic }
