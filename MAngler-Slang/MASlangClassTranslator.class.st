@@ -65,7 +65,8 @@ MASlangClassTranslator >> postTranslationVisitors [
 { #category : #visiting }
 MASlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { 
+	^ {
+		MASlangCleaner new.
 		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
 		MASlangDeclarationAnnotator new
 		}
@@ -88,7 +89,7 @@ MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 MASlangClassTranslator >> transformations [
 	| transformations |
 	transformations := OrderedCollection new.
-	transformations add: (MASlangInliner translator: self).
+	transformations add: (MASlangCompleteInliner translator: self).
 	transformations add: (MAGlobalStructureAccessTransformer translator: self).
 	^ transformations
 ]
