@@ -72,12 +72,6 @@ FAVariableDeclarationAnnotatorTest >> assignmentInOtherSequence [
 ]
 
 { #category : #basic }
-FAVariableDeclarationAnnotatorTest >> setUp [
-	super setUp.
-	propertyName := FAVariableDeclarationAnnotator propertyName.
-]
-
-{ #category : #basic }
 FAVariableDeclarationAnnotatorTest >> testAssignmentInCondition [
 	ast := (FAVariableDeclarationAnnotatorTest >> #assignmentInCondition) ast copy.
 	ast acceptVisitor: visitor.

@@ -11,8 +11,8 @@ MASlangDeclarationAnnotatorTest class >> isAbstract [
 
 { #category : #basic }
 MASlangDeclarationAnnotatorTest >> setUp [
-	super setUp.
 	visitor := MASlangDeclarationAnnotator new.
+	super setUp.
 ]
 
 { #category : #basic }

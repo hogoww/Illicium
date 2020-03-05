@@ -11,8 +11,8 @@ IlliciumDeclarationAnnotatorTest class >> isAbstract [
 
 { #category : #basic }
 IlliciumDeclarationAnnotatorTest >> setUp [
-	super setUp.
 	visitor := IlliciumDeclarationAnnotator new.
+	super setUp.
 ]
 
 { #category : #basic }

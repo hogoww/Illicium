@@ -96,13 +96,6 @@ FATypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #running }
-FATypeAnnotatorTest >> setUp [
-	"visitor must be set before sending super setUp in subclasses."
-	super setUp.
-	propertyName := visitor class propertyName
-]
-
 { #category : #test }
 FATypeAnnotatorTest >> testVisitArgumentNode [
 	| ast counter |
