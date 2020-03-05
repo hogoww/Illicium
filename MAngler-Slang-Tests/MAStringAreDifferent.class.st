@@ -5,7 +5,7 @@ Class {
 		'expected',
 		'actual'
 	],
-	#category : #'MAngler-Slang-Tests-GeneratedRessource'
+	#category : #'MAngler-Slang-Tests-Errors'
 }
 
 { #category : #accessing }

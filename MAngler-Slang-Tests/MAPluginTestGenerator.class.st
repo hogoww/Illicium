@@ -106,8 +106,8 @@ MAPluginTestGenerator >> generateResourceClassFor: aClass [
 	ressourceClass := self class resourceBaseClass subclass: 'MA' , aClass name , 'Ressource'
 		instanceVariableNames: ''
 		classVariableNames: ''
-		package: 'Angler-Slang-Tests'.
-	ressourceClass tagWith: 'generated-ressource'.
+		package: 'MAngler-Slang-Tests'.
+	ressourceClass tagWith: 'generatedResource'.
 	^ ressourceClass
 ]
 
@@ -139,8 +139,8 @@ MAPluginTestGenerator >> generateTestClassFor: aClass [
 	testClass := self class testBaseClass subclass: 'MA' , aClass name , 'TranslationTest'
 		instanceVariableNames: ''
 		classVariableNames: ''
-		package: 'Angler-Slang-Tests'.
-	testClass tagWith: 'generated-tests'.
+		package: 'MAngler-Slang-Tests'.
+	testClass tagWith: 'generatedTests'.
 	^ testClass
 ]
 
