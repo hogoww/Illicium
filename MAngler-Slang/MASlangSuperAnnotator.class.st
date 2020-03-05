@@ -12,7 +12,7 @@ MASlangSuperAnnotator class >> propertyName [
 
 { #category : #visiting }
 MASlangSuperAnnotator >> visitMessageNode: aMessageNode [
-	aMessageNode receiver isSuper ifTrue:[
+	aMessageNode receiver isSuper ifTrue: [
 		| superMethod |
 		superMethod := (aMessageNode methodNode methodClass superclass lookupSelector: aMessageNode selector) ast.
 		self atNewPropertyPut: superMethod for: aMessageNode.

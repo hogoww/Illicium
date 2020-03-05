@@ -25,9 +25,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 			[inferer globalsAsSet addAll: (inferer instVarNamesForClass: each)].
 		inferer retainMethods: (each requiredMethodNames: inferer options).
 		 each methods
-			select: [ :method | method isSubclassResponsibility not
-				and: [ (method hasPragmaNamed: #doNotGenerate) not
-					and: [ method selector ~~ #initialize ] ] ]
+			select: [ :aMethod | aTranslator shouldITranslate: aMethod ]
 			thenDo: [ :method |
 			| copy |
 			copy := method ast copy.
@@ -36,7 +34,6 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 		each declareCVarsIn: inferer ].
 	"self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)]."
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
-	
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
 	self isFullyAnnotated: true
 ]

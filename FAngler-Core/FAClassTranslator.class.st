@@ -12,6 +12,12 @@ Class {
 	#category : #'FAngler-Core-Translation'
 }
 
+{ #category : #asserting }
+FAClassTranslator class >> shouldITranslate: aMethod [
+	"should return true if aMethod should be translated and false overwise."
+	^ self subclassResponsibility
+]
+
 { #category : #'as yet unclassified' }
 FAClassTranslator >> addClass: aClass [ 
 
@@ -171,6 +177,11 @@ FAClassTranslator >> program [
 FAClassTranslator >> program: aProgram [
 
 	program := aProgram
+]
+
+{ #category : #testing }
+FAClassTranslator >> shouldITranslate: aMethod [
+	^ self class shouldITranslate: aMethod
 ]
 
 { #category : #'translation-state' }

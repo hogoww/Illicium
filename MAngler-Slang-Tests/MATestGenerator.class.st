@@ -33,10 +33,7 @@ MATestGenerator >> methodToTest: aClass [
 	| methods |
 	methods := (aClass allSelectorsBelow: VMClass)	
 		collect:[ :aSelector | aClass lookupSelector: aSelector ]	
-		thenSelect: [ :aCompiledMethod |
-			(aCompiledMethod hasPragmaNamed: #doNotGenerate) not
-				and: [ (MAFullVMCCodeGeneratorRessource current codeGenerator
-					methodNamed: aCompiledMethod selector) notNil ] ].
+		thenSelect: [ :aCompiledMethod | MASlangVMClassTranslator shouldITranslate: aCompiledMethod ].
 		
 	MAFullVMCCodeGeneratorRessource reset.
 	^ methods
