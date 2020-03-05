@@ -30,7 +30,7 @@ MAPluginTestGenerator class >> cleanUp [
 { #category : #generating }
 MAPluginTestGenerator class >> generateVMMakerInterpreterPrimitiveTests [
 	<script>
-	StackInterpreterPrimitivesTranslationTests ifNotNil:[:c| c removeFromSystem ] .
+	MAStackInterpreterPrimitivesTranslationTest ifNotNil:[:c| c removeFromSystem ] .
 	^ MAPluginTestGenerator new generateTestForClass: StackInterpreterPrimitives
 ]
 
