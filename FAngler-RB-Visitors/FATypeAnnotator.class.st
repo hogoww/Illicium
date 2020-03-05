@@ -4,7 +4,7 @@ Subclasses only need to implement how to type a node.
 "
 Class {
 	#name : #FATypeAnnotator,
-	#superclass : #ASTCAbstractCheckVisitor,
+	#superclass : #FAAbstractCheckVisitor,
 	#instVars : [
 		'inferer'
 	],

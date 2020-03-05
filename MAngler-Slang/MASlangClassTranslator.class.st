@@ -75,6 +75,7 @@ MASlangClassTranslator >> preTranslationVisitors [
 { #category : #'translation-api' }
 MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
+	inferer vmClass: StackInterpreterPrimitives.
 	aClass declareCVarsIn: inferer.
 
 	self annotateProgramWith: aClass.

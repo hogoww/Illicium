@@ -1,17 +1,17 @@
 Class {
-	#name : #ASTCAbstractCheckVisitor,
+	#name : #FAAbstractCheckVisitor,
 	#superclass : #RBProgramNodeVisitor,
 	#category : #'FAngler-RB-Visitors-AbstractVisitor'
 }
 
 { #category : #accessing }
-ASTCAbstractCheckVisitor class >> property [
+FAAbstractCheckVisitor class >> property [
 	"should return a symbol with the name of the property"
 	^self subclassResponsibility  
 ]
 
 { #category : #accessing }
-ASTCAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for: aNode [
+FAAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for: aNode [
 	"similar to #at:put:, but check that this didn't exists previously"
 
 	"(aNode propertyAt: aProperty
@@ -24,14 +24,14 @@ ASTCAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for: aNode [
 ]
 
 { #category : #accessing }
-ASTCAbstractCheckVisitor >> atNewPropertyPut: aValue for: aNode [
+FAAbstractCheckVisitor >> atNewPropertyPut: aValue for: aNode [
 	"shortcut"
 
 	^ self atNewProperty: self class property put: aValue for: aNode
 ]
 
 { #category : #accessing }
-ASTCAbstractCheckVisitor >> visitMethodNode: aMethodNode [
+FAAbstractCheckVisitor >> visitMethodNode: aMethodNode [
 	"we remove the visit of pragmas"
 	self visitArgumentNodes: aMethodNode arguments.
 	self visitNode: aMethodNode body

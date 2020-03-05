@@ -2,8 +2,6 @@ Class {
 	#name : #MASlangCleaner,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
-		'program',
-		'inlinedSomething',
 		'selectorToRemove'
 	],
 	#category : #'MAngler-Slang-Analysis'

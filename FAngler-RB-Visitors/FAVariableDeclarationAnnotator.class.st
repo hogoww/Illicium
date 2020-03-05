@@ -26,7 +26,7 @@ t = 1;
 "
 Class {
 	#name : #FAVariableDeclarationAnnotator,
-	#superclass : #ASTCAbstractCheckVisitor,
+	#superclass : #FAAbstractCheckVisitor,
 	#category : #'FAngler-RB-Visitors-Declaration'
 }
 
