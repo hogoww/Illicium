@@ -330,9 +330,8 @@ MASlangReceiver >> cCoerce: aVariable to: aType [
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> cCoerceSimple: e to: er [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #cCoerceSimple:to: 
+MASlangReceiver >> cCoerceSimple: aVariable to: aType [
+	^ self cCoerce: aVariable to: aType
 ]
 
 { #category : #'reflective operations' }
