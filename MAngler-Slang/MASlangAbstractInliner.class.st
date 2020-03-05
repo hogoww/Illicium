@@ -104,11 +104,11 @@ MASlangAbstractInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoMessage: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
-	(self inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
-
+	(self inlineIfMultipleNodeIntoCascade: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].	
+	(self inlineIfMultipleNodeIntoSequence: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	
-	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline.
-	aMessageNode parent: nil
+	
+	inlinedSomething := false.
 ]
 
 { #category : #inlining }
@@ -159,6 +159,14 @@ MASlangAbstractInliner >> inlineIfMultipleNodeIntoReturn: nodesToInline insteadO
 
 	"replacing the whole assignment"
 	aMessageNode replaceWith: newBlock.
+	aMessageNode parent: nil.
+	^ true
+]
+
+{ #category : #inlining }
+MASlangInliner >> inlineIfMultipleNodeIntoSequence: nodesToInline insteadOf: aMessageNode [ 
+	aMessageNode parent isSequence ifFalse: [ ^ false ].
+	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline.
 	aMessageNode parent: nil.
 	^ true
 ]
