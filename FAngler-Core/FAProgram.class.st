@@ -9,11 +9,6 @@ Class {
 	#category : #'FAngler-Core-Translation'
 }
 
-{ #category : #properties }
-FAProgram class >> isAnnotatedProperty [
-	^ #isAnnotated
-]
-
 { #category : #accessing }
 FAProgram >> addClass: aClass [
 

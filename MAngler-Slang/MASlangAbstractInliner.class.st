@@ -183,9 +183,10 @@ MASlangAbstractInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessage
 
 { #category : #inlining }
 MASlangAbstractInliner >> inlineIfReceiverIsSuper: nodesToInline insteadOf: aMessageNode [
-	| newBlock newAssignment lastNode |
 	aMessageNode receiver isSuper ifFalse: [ ^ false ].
-	^ self halt.
+	self halt.
+	
+	aMessageNode propertyAt: MASlangSuperAnnotator propertyName. 
 ]
 
 { #category : #renaming }

@@ -51,7 +51,6 @@ FAClassTranslator >> annotateMethodAST: aMethodNode [
 	| visitors |
 	visitors := self preTranslationVisitors.
 	aMethodNode acceptMultipleVisitors: visitors.
-	aMethodNode propertyAt: FAProgram isAnnotatedProperty put: true.
 ]
 
 { #category : #configuration }

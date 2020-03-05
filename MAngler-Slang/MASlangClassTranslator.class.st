@@ -67,16 +67,15 @@ MASlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ {
 		MASlangCleaner new.
+		"MASlangSuperAnnotator new. ready, but does not seem necessary for now :)"
 		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
-		MASlangDeclarationAnnotator new
+		MASlangDeclarationAnnotator new "this is required to be after the typeAnnotator. see its documention"
 		}
 ]
 
 { #category : #'translation-api' }
 MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
-	inferer vmClass: StackInterpreterPrimitives.
-	aClass declareCVarsIn: inferer.
 
 	self annotateProgramWith: aClass.
 
