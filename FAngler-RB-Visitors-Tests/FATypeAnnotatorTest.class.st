@@ -4,7 +4,7 @@ I define basic tests for them.
 "
 Class {
 	#name : #FATypeAnnotatorTest,
-	#superclass : #ASTCVisitorTest,
+	#superclass : #FAVisitorTest,
 	#instVars : [
 		'iv'
 	],

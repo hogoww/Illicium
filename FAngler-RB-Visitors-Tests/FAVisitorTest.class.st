@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCVisitorTest,
+	#name : #FAVisitorTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'visitor',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #basic }
-ASTCVisitorTest >> assert: aNode propertyEquals: aBoolean [
+FAVisitorTest >> assert: aNode propertyEquals: aBoolean [
 	self assert: (aNode hasProperty: propertyName).
 	self assert: (aNode propertyAt: propertyName) equals: aBoolean
 ]

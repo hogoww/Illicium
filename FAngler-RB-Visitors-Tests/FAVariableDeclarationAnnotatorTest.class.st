@@ -3,7 +3,7 @@ An ASTCShouldItBeDeclaredTest is a test class for testing the behavior of ASTCSh
 "
 Class {
 	#name : #FAVariableDeclarationAnnotatorTest,
-	#superclass : #ASTCVisitorTest,
+	#superclass : #FAVisitorTest,
 	#instVars : [
 		'iv',
 		'ast'
