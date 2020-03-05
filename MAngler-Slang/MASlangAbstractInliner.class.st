@@ -164,11 +164,12 @@ MASlangAbstractInliner >> inlineIfMultipleNodeIntoReturn: nodesToInline insteadO
 ]
 
 { #category : #inlining }
-MASlangInliner >> inlineIfMultipleNodeIntoSequence: nodesToInline insteadOf: aMessageNode [ 
+MASlangAbstractInliner >> inlineIfMultipleNodeIntoSequence: nodesToInline insteadOf: aMessageNode [
 	aMessageNode parent isSequence ifFalse: [ ^ false ].
 	aMessageNode parent replaceNode: aMessageNode withNodes: nodesToInline.
 	aMessageNode parent: nil.
 	^ true
+
 ]
 
 { #category : #inlining }
@@ -300,8 +301,6 @@ MASlangAbstractInliner >> typeNewBlock: newBlock [
 
 { #category : #applying }
 MASlangAbstractInliner >> visitMessageNode: aMessageNode [
-	aMessageNode selector = #assert: ifTrue: [ ^ self ].
-	aMessageNode selector = #eassert: ifTrue: [ ^ self ].
 	
 	(self shouldInline: aMessageNode)
 		ifTrue:[ | methodToInline |
