@@ -29,7 +29,7 @@ FAMessageNodeTranslator >> translateNode: aMessageNode [
 		perform: aMessageNode selector
 		withArguments: aMessageNode arguments asArray).
 	
-	(res isKindOf: ASTCNode) not ifTrue: [self error].
+	(res isKindOf: ASTCNode) ifFalse: [self error].
 	res pharoNode: aMessageNode;
 		comment: aMessageNode commentOrNil;
 		yourself.
