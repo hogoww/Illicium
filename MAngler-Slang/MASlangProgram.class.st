@@ -16,7 +16,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self isFullyAnnotated ifTrue: [ ^ self ].
 	
 	inferer vmClass: self vmClass.
-	self classesDo: [ :each | 
+	self classesDo: [ :each |
 		each prepareToBeAddedToCodeGenerator: inferer.
 		inferer checkClassForNameConflicts: each.
 		inferer addClassVarsFor: each.
@@ -24,12 +24,13 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 		(each inheritsFrom: VMStructType) ifFalse:
 			[inferer globalsAsSet addAll: (inferer instVarNamesForClass: each)].
 		inferer retainMethods: (each requiredMethodNames: inferer options).
-		 each methods
-			select: [ :aMethod | aTranslator shouldITranslate: aMethod ]
-			thenDo: [ :method |
-			| copy |
-			copy := method ast copy.
-			self addMethod: copy.
+		((each allSelectorsBelow: VMClass) collect: [:aSelector| each lookupSelector: aSelector ])
+			select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
+			thenDo: [ :aMethod |
+			| copy needToBeRemovedFirst |
+			copy := aMethod ast copy.
+			needToBeRemovedFirst := self addMethod: copy.
+			needToBeRemovedFirst ifTrue: [ inferer removeMethodForSelector: aMethod selector ].
 			inferer addMethod: (copy asTranslationMethodOfClass: TMethod) ].
 		each declareCVarsIn: inferer ].
 	"self program methodsDo: [ :each | inferer addMethod: (each asTranslationMethodOfClass: TMethod)]."

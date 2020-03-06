@@ -22,10 +22,18 @@ FAProgram >> addClass: aClass [
 
 { #category : #accessing }
 FAProgram >> addMethod: aMethod [
-	"aMethod isSubclassResponsibility ifTrue: [ ^ self ]."
+	"this returns a boolean, which tells if the method should be removed from the cCodeGenerator before being added."
+	"It's not good, but idk what else to do for now."
+	
 	methods at: aMethod selector
-		ifPresent: [ :conflicting | self halt ]
-		ifAbsentPut: [ aMethod ]
+		ifPresent: [ :conflicting | "if the conflicting method is further down the hierarchy, we take it" 
+			(conflicting methodClass includesBehavior: aMethod methodClass)
+				ifTrue: [ methods at: aMethod selector put: conflicting ]
+				ifFalse: [ self halt. ]. "otherwise, two methods have the same name. Not sure what to do yet."
+				^ true
+			]
+		ifAbsentPut: [ aMethod ].
+	^ false 
 ]
 
 { #category : #enumeration }
