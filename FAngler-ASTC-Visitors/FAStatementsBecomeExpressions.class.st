@@ -44,10 +44,10 @@ FAStatementsBecomeExpressions >> visitBlock: aBlock [
 
 { #category : #'visiting-modifying' }
 FAStatementsBecomeExpressions >> visitExpressionStatement: anExpressionStatement [
-	self shouldBeExpression ifFalse: [ super visitExpressionStatement: anExpressionStatement ].
+	self shouldBeExpression ifFalse: [ ^ super visitExpressionStatement: anExpressionStatement ].
 	
 	anExpressionStatement becomeExpression.
-	^ anExpressionStatement acceptVisitor: self
+	anExpressionStatement acceptVisitor: self
 	
 ]
 

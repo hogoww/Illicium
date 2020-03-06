@@ -564,6 +564,17 @@ MASlangReceiver >> or: aBoolean [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> perform: aSelector with: arguments [
+	"Not used correctly in slang :')"
+	| args |
+	args := arguments isCollection ifTrue:[ arguments ] ifFalse: [ { arguments } ].
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #aSelector); yourself) ;
+		arguments: (args collect: [ :anArg | anArg acceptVisitor: methodTranslator ]);
+		yourself
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> printString [
 	^String streamContents:[:stream|
 		stream << (self class asString)
