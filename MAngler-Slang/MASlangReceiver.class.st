@@ -378,7 +378,7 @@ MASlangReceiver >> deny: something [
 MASlangReceiver >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand: ifTrue:[ Error signal: 'infiniteRecursion' ].
 	(self class slangReservedSelector includes: aMessage selector) 
-		ifTrue:[ UnsupportedFeature new feature: ('translation of Slang selector: #', aMessage selector) ; signal]. 
+		ifTrue:[ UnsupportedFeature new feature: ('translation of Slang selector: #', aMessage selector) ; signal ]. 
 	
 	^ (ASTCFunctionCall new 
 			id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: aMessage selector); yourself) ;
@@ -597,6 +597,22 @@ MASlangReceiver >> signedIntFromLong64 [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> signedIntToLong [
+	self flag:#missingCheck. 
+	"I'm assuming i'm always in 64 currently,
+	see generateSignedIntToLong: msgNode on: aStream indent: level"
+	^ (self translatedReceiver castTo: (self cTypeFor: #int)) castTo: (self cTypeFor: #usqInt)
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> signedIntToLong64 [
+	self flag:#missingCheck. 
+	"I'm assuming i'm always in 64 currently,
+	see generateSignedIntToLong: msgNode on: aStream indent: level"
+	^ self translatedReceiver castTo: (self cTypeFor: #usqInt)
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> subclassResponsibility [
 
 	^ ASTCFunctionCall new 
@@ -685,9 +701,22 @@ MASlangReceiver >> value: somethong value: bidule [
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> whileFalse: something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #whileFalse:
+MASlangReceiver >> whileFalse [
+	"a whileTrue is rewritten in slang to have an if using the latest statement of the block"
+	| whileStatement |
+	whileStatement := self whileTrue.
+	whileStatement condition: whileStatement condition not.
+	
+	^ whileStatement
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> whileFalse: aBlock [
+	| whileStatement |
+	whileStatement := self whileTrue: aBlock.
+	whileStatement condition: whileStatement condition not.
+	
+	^ whileStatement
 ]
 
 { #category : #'reflective operations' }
