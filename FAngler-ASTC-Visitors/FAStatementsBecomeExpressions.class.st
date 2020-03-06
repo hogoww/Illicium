@@ -29,13 +29,14 @@ FAStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator [
 FAStatementsBecomeExpressions >> visitBlock: aBlock [
 	self flag: #badFix. "empty block seem to happen when I use the aggressive cleanerm which remove assertions."
 	self shouldBeExpression ifTrue: [
-			aBlock statements size = 0 ifTrue: [ aBlock becomeExpressionList "we become an empty expression list. Not sure that's okay" ].
-			aBlock statements size = 1 ifTrue: [ 
-				aBlock declarations isEmpty ifFalse: [ self halt "I want to see the useCase" ].
-				aBlock becomeSingleStatement.
-				]
-				ifFalse:[ aBlock becomeExpressionList ].
-			
+			aBlock statements size = 0 ifTrue: [ aBlock becomeExpressionList "we become an empty expression list. Not sure that's okay" ]
+				ifFalse:[
+				aBlock statements size = 1 ifTrue: [ 
+					aBlock declarations isEmpty ifFalse: [ self halt "I want to see the useCase" ].
+					aBlock becomeSingleStatement.
+					]
+					ifFalse:[ aBlock becomeExpressionList ].
+				].
 			^ aBlock acceptVisitor: self
 		].
 	super visitBlock: aBlock
