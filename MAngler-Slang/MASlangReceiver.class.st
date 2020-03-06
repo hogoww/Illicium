@@ -569,7 +569,7 @@ MASlangReceiver >> perform: aSelector with: arguments [
 	| args |
 	args := arguments isCollection ifTrue:[ arguments ] ifFalse: [ { arguments } ].
 	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #aSelector); yourself) ;
+		id:(aSelector acceptVisitor: methodTranslator);
 		arguments: (args collect: [ :anArg | anArg acceptVisitor: methodTranslator ]);
 		yourself
 ]
