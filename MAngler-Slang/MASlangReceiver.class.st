@@ -762,7 +762,8 @@ MASlangReceiver >> ~= anotherObject [
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> ~~ something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #~~
+MASlangReceiver >> ~~ anOperand [
+	"duplicates the code of #==
+	funny thing, if we don't the message is not send, and we have a weird bug"
+	^ (self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator)) not
 ]
