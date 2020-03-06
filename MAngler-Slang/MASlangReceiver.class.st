@@ -230,9 +230,8 @@ MASlangReceiver >> bitAnd: anInteger [
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> bitClear: something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #bitClear:
+MASlangReceiver >> bitClear: aMask [
+	^ (self bitOr: aMask) - (aMask acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }
@@ -591,6 +590,14 @@ MASlangReceiver >> repeat [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> shouldNotImplement [ 
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: 'shouldNotImplement' };
+		yourself
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> signedIntFromLong64 [
 	
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
@@ -765,5 +772,5 @@ MASlangReceiver >> ~= anotherObject [
 MASlangReceiver >> ~~ anOperand [
 	"duplicates the code of #==
 	funny thing, if we don't the message is not send, and we have a weird bug"
-	^ (self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator)) not
+	^ self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator) not
 ]

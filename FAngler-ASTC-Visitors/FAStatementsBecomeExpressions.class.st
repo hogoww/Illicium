@@ -28,27 +28,27 @@ FAStatementsBecomeExpressions >> visitAssignmentOperator: anAssignmentOperator [
 { #category : #'visiting-modifying' }
 FAStatementsBecomeExpressions >> visitBlock: aBlock [
 	self flag: #badFix. "empty block seem to happen when I use the aggressive cleanerm which remove assertions."
-	self shouldBeExpression ifTrue: [
-			aBlock statements size = 0 ifTrue: [ aBlock becomeExpressionList "we become an empty expression list. Not sure that's okay" ]
-				ifFalse:[
-				aBlock statements size = 1 ifTrue: [ 
+	self shouldBeExpression ifFalse: [ ^ super visitBlock: aBlock ].
+	
+	aBlock statements size = 0 ifTrue: [ aBlock becomeExpressionList "we become an empty expression list. Not sure that's okay" ]
+		ifFalse:[
+			aBlock statements size = 1 ifTrue: [ 
 					aBlock declarations isEmpty ifFalse: [ self halt "I want to see the useCase" ].
 					aBlock becomeSingleStatement.
-					]
-					ifFalse:[ aBlock becomeExpressionList ].
-				].
-			^ aBlock acceptVisitor: self
-		].
-	super visitBlock: aBlock
+				]
+				ifFalse:[ aBlock becomeExpressionList ].
+			].
+	aBlock acceptVisitor: self
+	
 ]
 
 { #category : #'visiting-modifying' }
 FAStatementsBecomeExpressions >> visitExpressionStatement: anExpressionStatement [
-	self shouldBeExpression ifTrue: [ 
-			anExpressionStatement becomeExpression.
-			^ anExpressionStatement acceptVisitor: self
-		].
-	super visitExpressionStatement: anExpressionStatement
+	self shouldBeExpression ifFalse: [ super visitExpressionStatement: anExpressionStatement ].
+	
+	anExpressionStatement becomeExpression.
+	^ anExpressionStatement acceptVisitor: self
+	
 ]
 
 { #category : #visiting }
