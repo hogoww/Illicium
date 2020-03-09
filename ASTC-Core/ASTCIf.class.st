@@ -22,7 +22,7 @@ ASTCIf >> = anIf [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCIf >> acceptVisitor: aVisitor [
 	aVisitor visitIf: self
 ]

@@ -11,7 +11,7 @@ ASTCOrOperator >> = anOrOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCOrOperator >> acceptVisitor: aVisitor [
 	aVisitor visitOrOperator: self
 ]

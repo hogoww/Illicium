@@ -11,7 +11,7 @@ ASTCBreak >> = aBreak [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCBreak >> acceptVisitor: aVisitor [
 	aVisitor visitBreak: self
 ]

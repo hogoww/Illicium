@@ -11,7 +11,7 @@ ASTCStructAccessPointerOperator >> = aStructAccessPointerOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCStructAccessPointerOperator >> acceptVisitor: aVisitor [
 	aVisitor visitStructAccessPointerOperator: self
 ]

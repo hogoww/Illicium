@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCHierarchyWalkerVisitor,
 	#superclass : #ASTCWalkerVisitor,
-	#category : #'ASTC-Core-Visitors'
+	#category : #'ASTC-Core-visitors'
 }
 
 { #category : #visiting }
@@ -361,6 +361,18 @@ ASTCHierarchyWalkerVisitor >> visitStructureDefinition: aStructureDefinition [
 ASTCHierarchyWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
 	super visitSubtractionOperator: aSubtractionOperator.
 	^ self visitBinaryOperator: aSubtractionOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitSwitch: aSwitch [
+	super visitSwitch: aSwitch.
+	^ self visitStatement: aSwitch
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitSwitchCase: aSwitchCase [
+	super visitSwitchCase: aSwitchCase.
+	^ self visitStatement: aSwitchCase
 ]
 
 { #category : #visiting }

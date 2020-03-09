@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'errors'
 	],
-	#category : #'ASTC-Core-Visitors'
+	#category : #'ASTC-Core-visitors'
 }
 
 { #category : #accessing }
@@ -440,6 +440,20 @@ ASTCStructureValidatorVisitor >> visitStructureDefinition: aStructureDefinition 
 { #category : #visiting }
 ASTCStructureValidatorVisitor >> visitSubtractionOperator: aSubtractionOperator [
 	[ super visitSubtractionOperator: aSubtractionOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitSwitch: aSwitch [
+	[ super visitSwitch: aSwitch ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitSwitchCase: aSwitchCase [
+	[ super visitSwitchCase: aSwitchCase ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]

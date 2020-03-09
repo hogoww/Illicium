@@ -11,7 +11,7 @@ ASTCGreaterOperator >> = aGreaterOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCGreaterOperator >> acceptVisitor: aVisitor [
 	aVisitor visitGreaterOperator: self
 ]

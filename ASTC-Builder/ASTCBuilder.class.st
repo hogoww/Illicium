@@ -165,6 +165,8 @@ ASTCBuilder >> defineClasses [
 		declarationStatement := builder newClassNamed: #DeclarationStatement.
 		return := builder newClassNamed: #Return.
 		if := builder newClassNamed: #If.
+		switch := builder newClassNamed: #Switch.
+		switchCase := builder newClassNamed: #SwitchCase.
 		block := builder newClassNamed: #Block.
 		break := builder newClassNamed: #Break.
 		
@@ -226,6 +228,8 @@ ASTCBuilder >> defineHierarchy [
 			declarationStatement --|> statement.
 			return --|> statement.
 			if  --|> statement.
+			switch --|> statement.
+			switchCase --|> statement.
 			block --|> statement.
 			break --|> statement.
 				
@@ -419,9 +423,12 @@ ASTCBuilder >> defineRelations [
 	(if property: #condition) <>- (expression property: #conditionIf).
 	(if property: #then) <>- (statement property: #thenStatement).
 	(if property: #else) <>- (statement property: #elseStatement).
-	
+	(switch property: #expression) <>- (expression property: #switchExpression).
+	(switch property: #cases) <>-* (switchCase property: #switchCases).
+	(switch property: #default) <>- (switchCase property: #default).
+	(switchCase property: #expression) <>- (expression property: #switchCaseExpression).
+	(switchCase property: #body) <>- (statement property: #switchCaseBody).
 	(return property: #expression) <>- (expression property: #returnExp).
-
 	(expressionStatement property: #expression) <>- (expression property: #expStatement).
 	(declarationStatement property: #declaration) <>- (declaration property: #declStatement).	
 

@@ -16,7 +16,7 @@ ASTCStructureDefinition >> = aStructureDefinition [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCStructureDefinition >> acceptVisitor: aVisitor [
 	aVisitor visitStructureDefinition: self
 ]

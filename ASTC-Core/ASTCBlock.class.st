@@ -19,7 +19,7 @@ ASTCBlock >> = aBlock [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCBlock >> acceptVisitor: aVisitor [
 	aVisitor visitBlock: self
 ]

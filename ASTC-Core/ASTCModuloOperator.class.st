@@ -11,7 +11,7 @@ ASTCModuloOperator >> = aModuloOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCModuloOperator >> acceptVisitor: aVisitor [
 	aVisitor visitModuloOperator: self
 ]

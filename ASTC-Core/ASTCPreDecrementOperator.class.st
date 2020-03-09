@@ -11,7 +11,7 @@ ASTCPreDecrementOperator >> = aPreDecrementOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCPreDecrementOperator >> acceptVisitor: aVisitor [
 	aVisitor visitPreDecrementOperator: self
 ]

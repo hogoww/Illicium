@@ -275,11 +275,6 @@ ASTCWalkerVisitor >> visitNegationOperator: aNegationOperator [
 	super visitNegationOperator: aNegationOperator
 ]
 
-{ #category : #'as yet unclassified' }
-ASTCWalkerVisitor >> visitNode: aNode [
-	super visitNode: aNode.
-]
-
 { #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
 	super visitOperator: anOperator
@@ -370,6 +365,26 @@ ASTCWalkerVisitor >> visitStructureDefinition: aStructureDefinition [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
 	super visitSubtractionOperator: aSubtractionOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitSwitch: aSwitch [
+	super visitSwitch: aSwitch.
+	aSwitch cases
+		ifNotNil:
+			[ :cases | cases do: [ :aCases | aCases acceptVisitor: self ] ].
+	aSwitch expression
+		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ].
+	aSwitch default
+		ifNotNil: [ :aDefault | aDefault acceptVisitor: self ]
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitSwitchCase: aSwitchCase [
+	super visitSwitchCase: aSwitchCase.
+	aSwitchCase expression
+		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ].
+	aSwitchCase body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
 { #category : #visiting }

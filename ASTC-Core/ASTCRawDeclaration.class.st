@@ -19,7 +19,7 @@ ASTCRawDeclaration >> = aRawDeclaration [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCRawDeclaration >> acceptVisitor: aVisitor [
 	aVisitor visitRawDeclaration: self
 ]

@@ -11,7 +11,7 @@ ASTCBitwiseXorOperator >> = aBitwiseXorOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCBitwiseXorOperator >> acceptVisitor: aVisitor [
 	aVisitor visitBitwiseXorOperator: self
 ]

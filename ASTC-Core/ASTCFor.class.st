@@ -19,7 +19,7 @@ ASTCFor >> = aFor [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCFor >> acceptVisitor: aVisitor [
 	aVisitor visitFor: self
 ]

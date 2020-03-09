@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCVisitor,
 	#superclass : #Object,
-	#category : #'ASTC-Core-Visitors'
+	#category : #'ASTC-Core-visitors'
 }
 
 { #category : #visiting }
@@ -301,6 +301,16 @@ ASTCVisitor >> visitStructureDefinition: aStructureDefinition [
 
 { #category : #visiting }
 ASTCVisitor >> visitSubtractionOperator: aSubtractionOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitSwitch: aSwitch [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitSwitchCase: aSwitchCase [
 	
 ]
 

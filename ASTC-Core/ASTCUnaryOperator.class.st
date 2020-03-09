@@ -16,7 +16,7 @@ ASTCUnaryOperator >> = anUnaryOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCUnaryOperator >> acceptVisitor: aVisitor [
 	aVisitor visitUnaryOperator: self
 ]

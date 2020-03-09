@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCSuperclassVisitor,
 	#superclass : #ASTCVisitor,
-	#category : #'ASTC-Core-Visitors'
+	#category : #'ASTC-Core-visitors'
 }
 
 { #category : #visiting }
@@ -224,9 +224,9 @@ ASTCSuperclassVisitor >> visitNegationOperator: aNegationOperator [
 	^ self visitUnaryOperator: aNegationOperator
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitNode: aNode [
-	self error: 'if you visit till node, you probably forgot to add code somewhere.'
+	
 ]
 
 { #category : #visiting }
@@ -302,6 +302,16 @@ ASTCSuperclassVisitor >> visitStructureDefinition: aStructureDefinition [
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitSubtractionOperator: aSubtractionOperator [
 	^ self visitBinaryOperator: aSubtractionOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitSwitch: aSwitch [
+	^ self visitStatement: aSwitch
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitSwitchCase: aSwitchCase [
+	^ self visitStatement: aSwitchCase
 ]
 
 { #category : #visiting }

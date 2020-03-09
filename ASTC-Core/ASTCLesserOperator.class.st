@@ -11,7 +11,7 @@ ASTCLesserOperator >> = aLesserOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCLesserOperator >> acceptVisitor: aVisitor [
 	aVisitor visitLesserOperator: self
 ]

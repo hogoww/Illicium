@@ -5,7 +5,7 @@ Class {
 		'currentDepth',
 		'stream'
 	],
-	#category : #'ASTC-Core-Visitors'
+	#category : #'ASTC-Core-visitors'
 }
 
 { #category : #initialization }
@@ -655,18 +655,19 @@ ASTCPrinterVisitor >> visitNegationOperator: aNegationOperator [
 	stream << ')'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitNode: aNode [
-	"remove print of the comment, not relevant in the ast"
-  stream cr.
-  self printTabCount: currentDepth.
-  stream
-     << $(;
-     << 'aNode'.
-  currentDepth := currentDepth + 1.
-  super visitNode: aNode.
-  currentDepth := currentDepth - 1.
-  stream << ')'
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aNode';
+		space.
+	stream print: aNode comment.
+	currentDepth := currentDepth + 1.
+	super visitNode: aNode.
+	currentDepth := currentDepth - 1.
+	stream << ')'
 ]
 
 { #category : #visiting }
@@ -878,6 +879,34 @@ ASTCPrinterVisitor >> visitSubtractionOperator: aSubtractionOperator [
 		space.
 	currentDepth := currentDepth + 1.
 	super visitSubtractionOperator: aSubtractionOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitSwitch: aSwitch [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aSwitch';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitSwitch: aSwitch.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitSwitchCase: aSwitchCase [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aSwitchCase';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitSwitchCase: aSwitchCase.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]

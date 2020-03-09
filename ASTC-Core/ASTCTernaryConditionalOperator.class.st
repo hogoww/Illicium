@@ -22,7 +22,7 @@ ASTCTernaryConditionalOperator >> = aTernaryConditionalOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCTernaryConditionalOperator >> acceptVisitor: aVisitor [
 	aVisitor visitTernaryConditionalOperator: self
 ]

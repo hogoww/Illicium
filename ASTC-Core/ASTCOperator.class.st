@@ -11,7 +11,7 @@ ASTCOperator >> = anOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCOperator >> acceptVisitor: aVisitor [
 	aVisitor visitOperator: self
 ]

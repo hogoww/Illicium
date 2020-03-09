@@ -16,7 +16,7 @@ ASTCLiteral >> = aLiteral [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCLiteral >> acceptVisitor: aVisitor [
 	aVisitor visitLiteral: self
 ]

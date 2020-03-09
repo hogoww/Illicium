@@ -11,7 +11,7 @@ ASTCNegationOperator >> = aNegationOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCNegationOperator >> acceptVisitor: aVisitor [
 	aVisitor visitNegationOperator: self
 ]

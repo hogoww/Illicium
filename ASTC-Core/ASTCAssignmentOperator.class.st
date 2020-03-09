@@ -11,7 +11,7 @@ ASTCAssignmentOperator >> = anAssignmentOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCAssignmentOperator >> acceptVisitor: aVisitor [
 	aVisitor visitAssignmentOperator: self
 ]

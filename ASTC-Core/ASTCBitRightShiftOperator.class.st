@@ -11,7 +11,7 @@ ASTCBitRightShiftOperator >> = aBitRightShiftOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCBitRightShiftOperator >> acceptVisitor: aVisitor [
 	aVisitor visitBitRightShiftOperator: self
 ]

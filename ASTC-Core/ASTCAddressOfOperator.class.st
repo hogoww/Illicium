@@ -11,7 +11,7 @@ ASTCAddressOfOperator >> = anAddressOfOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCAddressOfOperator >> acceptVisitor: aVisitor [
 	aVisitor visitAddressOfOperator: self
 ]

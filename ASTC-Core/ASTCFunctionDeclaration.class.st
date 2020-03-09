@@ -22,7 +22,7 @@ ASTCFunctionDeclaration >> = aFunctionDeclaration [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCFunctionDeclaration >> acceptVisitor: aVisitor [
 	aVisitor visitFunctionDeclaration: self
 ]

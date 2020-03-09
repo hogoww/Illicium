@@ -16,7 +16,7 @@ ASTCIdentifier >> = anIdentifier [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCIdentifier >> acceptVisitor: aVisitor [
 	aVisitor visitIdentifier: self
 ]

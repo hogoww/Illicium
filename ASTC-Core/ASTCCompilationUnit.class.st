@@ -19,7 +19,7 @@ ASTCCompilationUnit >> = aCompilationUnit [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCCompilationUnit >> acceptVisitor: aVisitor [
 	aVisitor visitCompilationUnit: self
 ]

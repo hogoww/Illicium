@@ -11,7 +11,7 @@ ASTCMultiplicationOperator >> = aMultiplicationOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCMultiplicationOperator >> acceptVisitor: aVisitor [
 	aVisitor visitMultiplicationOperator: self
 ]

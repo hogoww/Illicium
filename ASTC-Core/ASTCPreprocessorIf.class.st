@@ -22,7 +22,7 @@ ASTCPreprocessorIf >> = aPreprocessorIf [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCPreprocessorIf >> acceptVisitor: aVisitor [
 	aVisitor visitPreprocessorIf: self
 ]

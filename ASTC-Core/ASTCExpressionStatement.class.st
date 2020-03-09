@@ -16,7 +16,7 @@ ASTCExpressionStatement >> = anExpressionStatement [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCExpressionStatement >> acceptVisitor: aVisitor [
 	aVisitor visitExpressionStatement: self
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCDebugStructureVisitor,
 	#superclass : #ASTCHierarchyWalkerVisitor,
-	#category : #'ASTC-Core-Visitors'
+	#category : #'ASTC-Core-visitors'
 }
 
 { #category : #visiting }
@@ -50,13 +50,11 @@ ASTCDebugStructureVisitor >> visitDeclaration: aDeclaration [
 	aDeclaration id ifNotNil: [ :anId | self assert: anId isIdentifier ]
 ]
 
-{ #category : #'as yet unclassified' }
-ASTCDebugStructureVisitor >> visitDeclarationStatement: anASTCDeclarationStatement [
-	self visitStatement: anASTCDeclarationStatement.
-
-	"anASTCDeclarationStatement declaration ifNotNil:[ self assert:anASTCDeclarationStatement declaration isDeclaration ]."
-
-	super visitDeclarationStatement: anASTCDeclarationStatement
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitDeclarationStatement: aDeclarationStatement [
+	super visitDeclarationStatement: aDeclarationStatement.
+	aDeclarationStatement declaration
+		ifNotNil: [ :aDeclaration | self assert: aDeclaration isDeclaration ]
 ]
 
 { #category : #visiting }
@@ -180,6 +178,27 @@ ASTCDebugStructureVisitor >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
+ASTCDebugStructureVisitor >> visitSwitch: aSwitch [
+	super visitSwitch: aSwitch.
+	aSwitch cases
+		ifNotNil:
+			[ :cases | cases do: [ :aCases | self assert: aCases isSwitchCase ] ].
+	aSwitch expression
+		ifNotNil: [ :anExpression | self assert: anExpression isExpression ].
+	aSwitch default
+		ifNotNil: [ :aDefault | self assert: aDefault isSwitchCase ]
+]
+
+{ #category : #visiting }
+ASTCDebugStructureVisitor >> visitSwitchCase: aSwitchCase [
+	super visitSwitchCase: aSwitchCase.
+	aSwitchCase expression
+		ifNotNil: [ :anExpression | self assert: anExpression isExpression ].
+	aSwitchCase body
+		ifNotNil: [ :aBody | self assert: aBody isStatement ]
+]
+
+{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
 	super visitTernaryConditionalOperator: aTernaryConditionalOperator.
 	aTernaryConditionalOperator condition
@@ -188,15 +207,6 @@ ASTCDebugStructureVisitor >> visitTernaryConditionalOperator: aTernaryConditiona
 		ifNotNil: [ :aThen | self assert: aThen isExpression ].
 	aTernaryConditionalOperator else
 		ifNotNil: [ :anElse | self assert: anElse isExpression ]
-]
-
-{ #category : #'as yet unclassified' }
-ASTCDebugStructureVisitor >> visitType: anASTCType [
-	self visitNode: anASTCType.
-
-	self assert: anASTCType type isTypeConstraint.
-
-	super visitType: anASTCType
 ]
 
 { #category : #visiting }

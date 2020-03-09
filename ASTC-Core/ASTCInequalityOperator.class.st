@@ -11,7 +11,7 @@ ASTCInequalityOperator >> = anInequalityOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCInequalityOperator >> acceptVisitor: aVisitor [
 	aVisitor visitInequalityOperator: self
 ]

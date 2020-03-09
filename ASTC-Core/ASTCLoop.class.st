@@ -19,7 +19,7 @@ ASTCLoop >> = aLoop [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCLoop >> acceptVisitor: aVisitor [
 	aVisitor visitLoop: self
 ]

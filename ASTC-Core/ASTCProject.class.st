@@ -16,7 +16,7 @@ ASTCProject >> = aProject [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCProject >> acceptVisitor: aVisitor [
 	aVisitor visitProject: self
 ]

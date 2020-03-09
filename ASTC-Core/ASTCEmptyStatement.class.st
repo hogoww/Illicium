@@ -11,7 +11,7 @@ ASTCEmptyStatement >> = anEmptyStatement [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCEmptyStatement >> acceptVisitor: aVisitor [
 	aVisitor visitEmptyStatement: self
 ]

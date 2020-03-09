@@ -19,7 +19,7 @@ ASTCBinaryOperator >> = aBinaryOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCBinaryOperator >> acceptVisitor: aVisitor [
 	aVisitor visitBinaryOperator: self
 ]

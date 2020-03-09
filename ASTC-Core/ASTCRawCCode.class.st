@@ -16,7 +16,7 @@ ASTCRawCCode >> = aRawCCode [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCRawCCode >> acceptVisitor: aVisitor [
 	aVisitor visitRawCCode: self
 ]

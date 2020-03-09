@@ -16,7 +16,7 @@ ASTCCastOperator >> = aCastOperator [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCCastOperator >> acceptVisitor: aVisitor [
 	aVisitor visitCastOperator: self
 ]

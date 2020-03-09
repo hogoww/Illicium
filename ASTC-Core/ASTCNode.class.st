@@ -9,7 +9,7 @@ Class {
 	#category : #'ASTC-Core-Nodes'
 }
 
-{ #category : #testing }
+{ #category : #visiting }
 ASTCNode >> acceptVisitor: aVisitor [
 	aVisitor visitNode: self
 ]
@@ -321,6 +321,16 @@ ASTCNode >> isStructureDefinition [
 
 { #category : #testing }
 ASTCNode >> isSubtractionOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isSwitch [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isSwitchCase [
 	^ false
 ]
 
