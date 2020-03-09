@@ -422,7 +422,6 @@ MASlangReceiver >> ifFalse: falseBlock ifTrue: trueBlock [
 
 { #category : #'translation-testing' }
 MASlangReceiver >> ifNil: aBlock [
-	self assert: aBlock isBlock.
 	^ ASTCIf new
 		condition: self translatedReceiver not;
 		then: (aBlock acceptVisitor: methodTranslator)
@@ -520,6 +519,11 @@ MASlangReceiver >> max: anInt [
 		else: translatedReceiver
 ]
 
+{ #category : #typing }
+MASlangReceiver >> maxSmallInteger [
+	^ ASTCIdentifier new id: #MaxSmallInteger ; yourself
+]
+
 { #category : #'reflective operations' }
 MASlangReceiver >> min: anInt [
 	| arg translatedReceiver |
@@ -528,6 +532,11 @@ MASlangReceiver >> min: anInt [
 	^ translatedReceiver < arg
 		then: translatedReceiver
 		else: arg
+]
+
+{ #category : #typing }
+MASlangReceiver >> minSmallInteger [
+	^ ASTCIdentifier new id: #MinSmallInteger ; yourself
 ]
 
 { #category : #'reflective operations' }
@@ -637,6 +646,14 @@ MASlangReceiver >> subclassResponsibility [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> timesRepeat: aBlock [
+	| stop |
+	stop := self receiverNode.
+	receiverNode := self literalNodeFor: 0.
+	^ self to: stop do: aBlock
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> to: stop by: step do: aBlock [
 	| node arg receiver | 
 	node := self to: stop  do: aBlock.
@@ -653,7 +670,7 @@ MASlangReceiver >> to: stop by: step do: aBlock [
 MASlangReceiver >> to: stop do: aBlock [
 	| iterID |
 	aBlock arguments size ~= 1
-		ifTrue: [ self error: 'Wrong number of arguments.' ]
+		ifTrue: [  iterID := ASTCIdentifier new id: #anIterator; yourself ]
 		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator ].
 	"type checking"
 
