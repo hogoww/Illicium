@@ -98,7 +98,6 @@ MASlangAbstractInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	nodesToInline last isReturn
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
 
-	(self inlineIfReceiverIsSuper: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 
 	(self inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
@@ -179,14 +178,6 @@ MASlangAbstractInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessage
 	aMessageNode replaceWith: nodesToInline first.
 	aMessageNode parent: nil.
 	^ true
-]
-
-{ #category : #inlining }
-MASlangAbstractInliner >> inlineIfReceiverIsSuper: nodesToInline insteadOf: aMessageNode [
-	aMessageNode receiver isSuper
-		ifFalse: [ ^ false ].
-	aMessageNode propertyAt: MASlangSuperAnnotator propertyName.
-	self error: 'super is to be done'
 ]
 
 { #category : #renaming }
@@ -306,7 +297,10 @@ MASlangAbstractInliner >> visitMessageNode: aMessageNode [
 	(self shouldInline: aMessageNode)
 		ifTrue:[ | methodToInline |
 			inlinedSomething := true.
-			methodToInline := (program methodNamed: aMessageNode selector) copy.
+			methodToInline := 
+				(aMessageNode receiver isSuper 
+					ifTrue:[ aMessageNode propertyAt: MASlangSuperAnnotator propertyName ]
+					ifFalse:[ program methodNamed: aMessageNode selector ]) copy .
 			self handleTemporariesFrom: methodToInline in: aMessageNode methodNode.
 			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.
