@@ -37,7 +37,7 @@ MASlangTypeAnnotator >> visitMessageNode: aMessageNode [
 	aMessageNode selector = #halt
 		ifTrue: [ ^ self visitNode: aMessageNode receiver ].
 
-	(#( caseOf: caseOf:otherwise:) includes: aMessageNode selector)
+	(#( caseOf: caseOf:otherwise: ) includes: aMessageNode selector)
 		ifTrue: [ 
 			self visitNode: aMessageNode receiver.
 			aMessageNode arguments first statements do: [ :aMessageCaseNode |

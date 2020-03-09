@@ -1,6 +1,9 @@
 Class {
 	#name : #MASlangSuperAnnotator,
 	#superclass : #FAAbstractCheckVisitor,
+	#instVars : [
+		'classTranslator'
+	],
 	#category : #'MAngler-Slang-Analysis'
 }
 
@@ -11,12 +14,22 @@ MASlangSuperAnnotator class >> propertyName [
 ]
 
 { #category : #visiting }
+MASlangSuperAnnotator >> classTranslator [
+	^ classTranslator
+]
+
+{ #category : #visiting }
+MASlangSuperAnnotator >> classTranslator: aClassTranslator [
+	classTranslator := aClassTranslator
+]
+
+{ #category : #visiting }
 MASlangSuperAnnotator >> visitMessageNode: aMessageNode [
 	aMessageNode receiver isSuper ifTrue: [
 		| superMethod |
 		superMethod := (aMessageNode methodNode methodClass superclass lookupSelector: aMessageNode selector) ast.
 		self atNewPropertyPut: superMethod for: aMessageNode.
-		superMethod acceptVisitor: self "we do this recursively"
+		classTranslator annotateMethodAST: superMethod
 		].
 	super visitMessageNode: aMessageNode.
 ]

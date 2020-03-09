@@ -6,7 +6,7 @@ Class {
 
 { #category : #basic }
 MASlangSuperAnnotatorTest >> setUp [
-	visitor := MASlangSuperAnnotator new.
+	visitor := MASlangSuperAnnotator new classTranslator: MASlangClassTranslatorMock new ; yourself.
 	super setUp.
 ]
 

@@ -1,7 +1,7 @@
 Class {
 	#name : #MAASuperClass,
 	#superclass : #MAASuperSuperClass,
-	#category : #'MAngler-Slang-Tests-AnalysisResources'
+	#category : #'MAngler-Slang-Tests-AnalysisSupport'
 }
 
 { #category : #support }
