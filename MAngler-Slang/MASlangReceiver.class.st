@@ -421,30 +421,35 @@ MASlangReceiver >> ifFalse: falseBlock ifTrue: trueBlock [
 ]
 
 { #category : #'translation-testing' }
-MASlangReceiver >> ifNil: aBlock [
-	^ ASTCIf new
-		condition: self translatedReceiver not;
-		then: (aBlock acceptVisitor: methodTranslator)
-		yourself
+MASlangReceiver >> ifNil: aNilBlock [
+	| ifNotNilNode |
+	ifNotNilNode := self ifNotNil: aNilBlock.
+	ifNotNilNode condition: ifNotNilNode condition not.
+	^ ifNotNilNode
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> ifNil: aNilBlock ifNotNil: aBlock [
-	self assert: aBlock isBlock.
+MASlangReceiver >> ifNil: aNilBlock ifNotNil: anIfNotNilBlock [
+	self assert: anIfNotNilBlock isBlock.
 	^ ASTCIf new
 		condition: self translatedReceiver not;
 		then: (aNilBlock acceptVisitor: methodTranslator);
-		else: (aBlock acceptVisitor: methodTranslator);
+		else: (anIfNotNilBlock acceptVisitor: methodTranslator);
+		yourself 
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> ifNotNil: anIfNotNilBlock [
+	self assert: anIfNotNilBlock isBlock.
+	^ ASTCIf new
+		condition: self translatedReceiver;
+		then: (anIfNotNilBlock acceptVisitor: methodTranslator)
 		yourself
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> ifNotNil: aBlock [
-	self assert: aBlock isBlock.
-	^ ASTCIf new
-		condition: self translatedReceiver;
-		then: (aBlock acceptVisitor: methodTranslator)
-		yourself
+MASlangReceiver >> ifNotNil: anIfNotNilBlock ifNil: aNilBlock [ 
+	^ self ifNil: aNilBlock ifNotNil: anIfNotNilBlock
 ]
 
 { #category : #'reflective operations' }
