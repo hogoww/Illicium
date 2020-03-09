@@ -125,6 +125,12 @@ MASlangReceiver >> >> aNumber [
 ]
 
 { #category : #accessing }
+MASlangReceiver >> >>> shiftAmount [
+	self flag: #badApprox. "see cCodeGenerator >> generateSignedShiftRight:on:indent: "
+	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
+]
+
+{ #category : #accessing }
 MASlangReceiver >> \\ anInteger [
 	"same as #% in slang"
 	^ self & anInteger
@@ -407,8 +413,8 @@ MASlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
 	| res |
 	res := ASTCPreprocessorIf new
 		condition: (aPredicate acceptVisitor: methodTranslator).
-	res then addAll: ((trueBlock acceptVisitor: methodTranslator) statements collect: [ :aStatement | aStatement expression ]).
-	falseBlock ifNotNil: [ res else addAll: ((falseBlock acceptVisitor: methodTranslator) statements collect: [ :aStatement | aStatement expression ])].
+	res then addAll: (trueBlock acceptVisitor: methodTranslator) statements.
+	falseBlock ifNotNil: [ res else addAll: (falseBlock acceptVisitor: methodTranslator) statements].
 	^ res
 ]
 
