@@ -10,6 +10,12 @@ MASlangDeclarationAnnotatorTest class >> isAbstract [
 ]
 
 { #category : #basic }
+MASlangDeclarationAnnotatorTest >> aMethodWithCCodeInSmalltalkAndATempInSecondArg [
+	self cCode: ''
+		inSmalltalk: [ | value | value ]
+]
+
+{ #category : #basic }
 MASlangDeclarationAnnotatorTest >> setUp [
 	visitor := MASlangDeclarationAnnotator new.
 	super setUp.
@@ -98,6 +104,18 @@ MASlangDeclarationAnnotatorTest >> testVisitInstanceVariableNode [
 	
 	"InstanceVariables should not be declared in functions. (plus, they are globals in Slang)"
 	self assert: (ast body statements at: 1) propertyEquals: false
+]
+
+{ #category : #basic }
+MASlangDeclarationAnnotatorTest >> testVisitSmalltalk [
+	| defaultCollection |
+	defaultCollection := FAVariableDeclarationAnnotator defaultCollection.
+	ast := (MASlangDeclarationAnnotatorTest >> #aMethodWithCCodeInSmalltalkAndATempInSecondArg) ast copy.
+	ast acceptVisitor: visitor.
+	
+	self assert: ast body temporaries isEmpty.
+	self assert: ast statements first arguments second temporaries isNotEmpty.
+	self assert: ast body propertyEquals: defaultCollection new
 ]
 
 { #category : #basic }
