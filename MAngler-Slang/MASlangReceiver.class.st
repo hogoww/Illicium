@@ -130,6 +130,34 @@ MASlangReceiver >> \\ anInteger [
 	^ self & anInteger
 ]
 
+{ #category : #accessing }
+MASlangReceiver >> abs [
+	| strippedType funcName |
+	"Duplicated code from slang."
+	strippedType := (type beginsWith: 'unsigned ')
+		ifTrue: [type allButFirst: 'unsigned ' size]
+		ifFalse: [(type beginsWith: 'u')
+			ifTrue: [type allButFirst: 1]
+			ifFalse: [type]].
+		
+	funcName := 
+		(#(	('long long' llabs) ('__int64' #llabs) ('int64_t' #llabs)
+			(sqInt SQABS)
+			(sqLong SQLABS)
+			(double fabs)
+			(float fabsf))
+				detect: [:tuple| strippedType beginsWith: tuple first]
+				ifNone: [])
+			ifNotNil: [:tuple| tuple last]
+			ifNil: [#abs].
+			
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: funcName ; yourself) ;
+		arguments: { self translatedReceiver };
+		yourself
+
+]
+
 { #category : #'reflective operations' }
 MASlangReceiver >> addressOf: anExpression [
 	^ (anExpression acceptVisitor: methodTranslator) asAddressOf
