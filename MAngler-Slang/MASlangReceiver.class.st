@@ -596,6 +596,11 @@ MASlangReceiver >> or: aBoolean [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> perform: aSelector [
+	^ self perform: aSelector with: { }
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> perform: aSelector with: arguments [
 	"Not used correctly in slang :')"
 	| args |
