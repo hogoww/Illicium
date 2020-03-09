@@ -474,7 +474,7 @@ MASlangReceiver >> ifTrue: trueBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	^ ASTCIf new
 		condition: self translatedReceiver;
-		then: (trueBlock acceptVisitor: self visitor);
+		then: (trueBlock acceptVisitor: methodTranslator);
 		yourself.
 ]
 
@@ -483,8 +483,8 @@ MASlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
  	^ ASTCIf new
 		condition: self translatedReceiver;
-		then: (trueBlock acceptVisitor: self visitor);
-		else: (falseBlock acceptVisitor: self visitor);
+		then: (trueBlock acceptVisitor: methodTranslator);
+		else: (falseBlock acceptVisitor: methodTranslator);
 		yourself
 ]
 

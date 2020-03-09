@@ -63,6 +63,16 @@ FAKernelClass >> messageToFunctionCall: aMessage [
 ]
 
 { #category : #accessing }
+FAKernelClass >> methodTranslator [
+	^ methodTranslator
+]
+
+{ #category : #accessing }
+FAKernelClass >> methodTranslator: aMethodTranslator [
+	methodTranslator := aMethodTranslator
+]
+
+{ #category : #accessing }
 FAKernelClass >> myType [
 	"in case of most, it doesn't
 	for UserTypes, it does."
@@ -110,7 +120,7 @@ FAKernelClass >> receiverNode: aNode [
 
 { #category : #evaluating }
 FAKernelClass >> translatedReceiver [
-	^ self receiverNode acceptVisitor: self visitor
+	^ self receiverNode acceptVisitor: methodTranslator
 ]
 
 { #category : #'message performing' }
@@ -123,15 +133,4 @@ FAKernelClass >> understandsForTranslation: aSelector [
 		class := class superclass.
 	] doWhileFalse: [ class = FAKernelClass ]."should not be an infinite loop because this class should not be referenced."
 	^ false
-]
-
-{ #category : #accessing }
-FAKernelClass >> visitor [ 
-	^methodTranslator
-]
-
-{ #category : #accessing }
-FAKernelClass >> visitor: aVisitor [
-	methodTranslator:= aVisitor.
-	^methodTranslator
 ]

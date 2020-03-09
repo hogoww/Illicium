@@ -10,7 +10,7 @@ FAMessageNodeTranslator >> forward: aMessage to: aType [
 	aReceiver := (methodTranslator
 		getReplacementType: aType) createInstance
 		receiverNode: aMessage receiver;
-		visitor: methodTranslator;
+		methodTranslator: methodTranslator;
 		yourself.
 	^ aReceiver
 		perform: aMessage selector
@@ -23,7 +23,7 @@ FAMessageNodeTranslator >> translateNode: aMessageNode [
 	receiver := (methodTranslator
 		getNodeTranslationType: aMessageNode receiver) createInstance
 		receiverNode: aMessageNode receiver;
-		visitor: methodTranslator;
+		methodTranslator: methodTranslator;
 		yourself.
 	res := (receiver
 		perform: aMessageNode selector
