@@ -6,8 +6,19 @@ Class {
 
 { #category : #accessing }
 MASlangProgram >> classes [
-
-	^ { VMClass. SpurMemoryManager . Spur64BitMemoryManager . StackInterpreter }
+	^ {VMClass.
+	CogClass.
+	SpurMemoryManager.
+	Spur64BitMemoryManager.
+	InterpreterPrimitives.
+	StackInterpreter.
+	StackInterpreterPrimitives.
+	SpurGenerationScavenger.
+	SpurSegmentManager.
+	SpurCompactor.
+	SpurPlanningCompactor.
+	CogStackPages.
+	InterpreterStackPages}
 ]
 
 { #category : #accessing }
