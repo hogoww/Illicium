@@ -74,10 +74,7 @@ FAProgram >> isFullyAnnotated: anObject [
 { #category : #accessing }
 FAProgram >> methodNamed: aSelector [
 
-	^ methods at: aSelector ifAbsent: [ 
-		classesToGenerate do: [ :each | 
-			(each lookupSelector: aSelector) ifNotNil: [ :found |
-				^ methods at: aSelector put: found ast copy ] ] ]
+	^ methods at: aSelector ifAbsent: [ self error: 'methodNotFound' ] 
 ]
 
 { #category : #accessing }
