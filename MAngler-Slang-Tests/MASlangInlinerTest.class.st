@@ -408,7 +408,7 @@ MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatement [
 
 { #category : #'test-multiples' }
 MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignments [
-	| resultingMethod firstInlinedStatement initialMethod assignment |
+	| resultingMethod initialMethod assignment |
 	program addMethod: (self class >> #methodWithTwoStatements) ast.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignment) ast.
 	methodToInline := initialMethod copy.
@@ -446,7 +446,7 @@ MASlangInlinerTest >> testNewNamesShouldBeDeclared [
 
 { #category : #'test-renaming' }
 MASlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
-	| resultingMethod  initialMethod declarationAnnotation declarationVisitor methodThatWillBeInlined |
+	| resultingMethod initialMethod declarationAnnotation declarationVisitor methodThatWillBeInlined |
 	methodThatWillBeInlined := (self class >> #methodWithATemp) ast.
 	program addMethod: methodThatWillBeInlined.
 	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
