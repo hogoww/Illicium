@@ -49,7 +49,7 @@ MASlangDeclarationAnnotator >> visitMessageNode: aMessageNode [
 			aMessageNode arguments first acceptVisitor: self.
 		] 
 		ifFalse: [ super visitMessageNode: aMessageNode ]	
-	
+
 ]
 
 { #category : #visit }

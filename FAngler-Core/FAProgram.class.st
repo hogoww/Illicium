@@ -27,8 +27,8 @@ FAProgram >> addMethod: aMethod [
 	
 	methods at: aMethod selector
 		ifPresent: [ :conflicting | "if the conflicting method is further down the hierarchy, we take it" 
-			(conflicting methodClass includesBehavior: aMethod methodClass)
-				ifTrue: [ methods at: aMethod selector put: conflicting ]
+			(aMethod methodClass includesBehavior: conflicting methodClass)
+				ifTrue: [ methods at: aMethod selector put: aMethod ]
 				ifFalse: [ self halt. ]. "otherwise, two methods have the same name. Not sure what to do yet."
 				^ true
 			]
