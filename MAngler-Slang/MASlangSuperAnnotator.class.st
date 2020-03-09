@@ -14,6 +14,14 @@ MASlangSuperAnnotator class >> propertyName [
 ]
 
 { #category : #visiting }
+MASlangSuperAnnotator >> annotateMethodAST: aMethodNode [
+	self flag: #hack."we annotate the method with the TMethod equivalent."
+	self flag: #implicit."i don't like it"
+	aMethodNode asTranslationMethodOfClass: TMethod.
+	classTranslator annotateMethodAST: aMethodNode.
+]
+
+{ #category : #visiting }
 MASlangSuperAnnotator >> classTranslator [
 	^ classTranslator
 ]
@@ -27,9 +35,9 @@ MASlangSuperAnnotator >> classTranslator: aClassTranslator [
 MASlangSuperAnnotator >> visitMessageNode: aMessageNode [
 	aMessageNode receiver isSuper ifTrue: [
 		| superMethod |
-		superMethod := (aMessageNode methodNode methodClass superclass lookupSelector: aMessageNode selector) ast.
+		superMethod := (aMessageNode methodNode methodClass superclass lookupSelector: aMessageNode selector) ast copy.
 		self atNewPropertyPut: superMethod for: aMessageNode.
-		classTranslator annotateMethodAST: superMethod
+		self annotateMethodAST: superMethod
 		].
 	super visitMessageNode: aMessageNode.
 ]

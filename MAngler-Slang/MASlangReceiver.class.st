@@ -676,7 +676,7 @@ MASlangReceiver >> subclassResponsibility [
 MASlangReceiver >> timesRepeat: aBlock [
 	| stop |
 	stop := self receiverNode.
-	receiverNode := self literalNodeFor: 0.
+	receiverNode := self literalNodeFor: 1.
 	^ self to: stop do: aBlock
 ]
 
