@@ -55,10 +55,9 @@ MASlangReceiver >> / anotherObject [
 ]
 
 { #category : #accessing }
-MASlangReceiver >> // anotherObject [
-	"should not work"
-	self flag:#notWorking.
-	^ self unsupportedFeature: #//
+MASlangReceiver >> // anInteger [
+	"same as #/ in slang"
+	^ self / anInteger
 ]
 
 { #category : #accessing }
@@ -125,10 +124,10 @@ MASlangReceiver >> >> aNumber [
 	^ (self translatedReceiver castTo: (self cTypeFor: #usqInt)) >> (aNumber acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
-MASlangReceiver >> \\ something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #\\
+{ #category : #accessing }
+MASlangReceiver >> \\ anInteger [
+	"same as #% in slang"
+	^ self & anInteger
 ]
 
 { #category : #'reflective operations' }
