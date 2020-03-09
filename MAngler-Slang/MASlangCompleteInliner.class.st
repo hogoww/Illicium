@@ -8,6 +8,12 @@ Class {
 MASlangCompleteInliner >> shouldInline: aMessageNode [
 	
 	| methodToInline |
+	(aMessageNode receiver isSuper
+		or: [ aMessageNode arguments anySatisfy: [ :anArg| anArg isBlock ] ]) 
+			ifTrue: [ ^ true ].
+	"A method with one of these caracteristic HAS to be inlined, as there is no C equivalent otherwise."
+	"The method to inline may not exist, we'll get an error quickly regardless if that is the case"
+			
 	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
 	
 	methodToInline := program methodNamed: aMessageNode selector.

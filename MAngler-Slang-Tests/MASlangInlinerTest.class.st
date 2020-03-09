@@ -86,6 +86,12 @@ MASlangInlinerTest >> methodWithSingleStatementToInline [
 ]
 
 { #category : #support }
+MASlangInlinerTest >> methodWithSuperStatement [
+	"super are inlined via type annotation, corresponding test should annotate first the correct method to pick"
+	super methodWithSingleStatement
+]
+
+{ #category : #support }
 MASlangInlinerTest >> methodWithTwoStatements [
 	1 even.
 	2 even
@@ -240,6 +246,24 @@ MASlangInlinerTest >> testInlineSingleStatementThatReturns [
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
+	self assert: inlinedStatement isMessage.
+	self assert: inlinedStatement receiver value equals: 1.
+	self assert: inlinedStatement selector equals: #even.
+]
+
+{ #category : #tests }
+MASlangInlinerTest >> testInlineSuperStatement [
+	| resultingMethod inlinedStatement initialMethod superMethod |
+	superMethod := (self class >> #methodWithSingleStatement) ast.
+	program addMethod: superMethod.
+	initialMethod := (self class >> #methodWithSuperStatement) ast.
+	methodToInline := initialMethod copy.
+	methodToInline statements first propertyAt: MASlangSuperAnnotator propertyName put: superMethod.
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	self deny: initialMethod equals: resultingMethod.
 	self assert: resultingMethod statements size equals: 1.

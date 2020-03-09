@@ -293,7 +293,6 @@ MASlangAbstractInliner >> typeNewBlock: newBlock [
 
 { #category : #applying }
 MASlangAbstractInliner >> visitMessageNode: aMessageNode [
-	
 	(self shouldInline: aMessageNode)
 		ifTrue:[ | methodToInline |
 			inlinedSomething := true.
