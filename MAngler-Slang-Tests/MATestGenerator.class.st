@@ -10,7 +10,15 @@ MATestGenerator class >> generateVMTests [
 	| generator |
 	self cleanUp.	
 	generator:= self new.	
-	^ {Spur64BitMemoryManager. StackInterpreter} do:[:aVMClass| generator generateTestForClass: aVMClass ]
+	^ {
+			SpurPlanningCompactor.
+			InterpreterStackPages.
+			SpurSegmentManager.
+			SpurGenerationScavenger.
+			StackInterpreterPrimitives.
+			Spur64BitMemoryManager
+		} 
+			do:[:aVMClass| generator generateTestForClass: aVMClass ]
 ]
 
 { #category : #generating }

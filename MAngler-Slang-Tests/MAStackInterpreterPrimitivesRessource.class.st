@@ -1,6 +1,6 @@
 Class {
 	#name : #MAStackInterpreterPrimitivesRessource,
-	#superclass : #MASlangPluginTestResource,
+	#superclass : #MASlangVMTestResource,
 	#category : #'MAngler-Slang-Tests-generatedResource'
 }
 
