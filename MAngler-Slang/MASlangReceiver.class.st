@@ -290,6 +290,24 @@ MASlangReceiver >> byteSwap64 [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> byteSwapped32IfBigEndian: anInteger [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: #SQ_SWAP_4_BYTES_IF_BIGENDIAN) ;
+		arguments: { anInteger acceptVisitor: methodTranslator };
+		yourself
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> byteSwapped64IfBigEndian: anInteger [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: #SQ_SWAP_8_BYTES_IF_BIGENDIAN) ;
+		arguments: { anInteger acceptVisitor: methodTranslator };
+		yourself
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> bytesPerOop [
 	"i think ?"
 	^ ASTCIdentifier id: #BytesPerOop
