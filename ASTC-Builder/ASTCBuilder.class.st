@@ -103,7 +103,9 @@ Class {
 		'bitwiseXorOperator',
 		'bitwiseOrOperator',
 		'negationOperator',
-		'expressionList'
+		'expressionList',
+		'switch',
+		'switchCase'
 	],
 	#category : #'ASTC-Builder'
 }

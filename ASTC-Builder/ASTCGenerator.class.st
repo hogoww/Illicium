@@ -72,7 +72,7 @@ ASTCGenerator >> addAcceptVisitorOf: aFMXClass [
 	visitClass := aFMXClass name asVisitClassSelector.
 	method := 'acceptVisitor:' asMethodWithBody: [:aVisitor| aVisitor visitClass: {self} ].
 
-	aFMXClass realClass compile: method asString classified: 'testing'
+	aFMXClass realClass compile: method asString classified: 'visiting'
 ]
 
 { #category : #'generation-testing' }
