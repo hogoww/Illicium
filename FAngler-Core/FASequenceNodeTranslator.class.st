@@ -26,7 +26,7 @@ FASequenceNodeTranslator >> translateTemporaryDeclaration: aSequenceNode into: a
 	| varToDeclare |
 	varToDeclare := aSequenceNode propertyAt: FAVariableDeclarationAnnotator propertyName.
 		 
-	varToDeclare do:[:aTempName| 
-		anASTCBlock addDeclaration: (methodTranslator visitTemporaryDeclarationNode: aTempName)
+	varToDeclare do:[:aTempNode| 
+		anASTCBlock addDeclaration: (methodTranslator visitTemporaryDeclarationNode: aTempNode)
 		].
 ]

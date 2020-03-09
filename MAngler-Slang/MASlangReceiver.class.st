@@ -362,8 +362,8 @@ MASlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
 	| res |
 	res := ASTCPreprocessorIf new
 		condition: (aPredicate acceptVisitor: methodTranslator).
-	res then addAll: ((trueBlock acceptVisitor: methodTranslator) statements collect: #expression).
-	falseBlock ifNotNil: [ res else addAll: ((falseBlock acceptVisitor: methodTranslator) statements collect: #expression) ].
+	res then addAll: ((trueBlock acceptVisitor: methodTranslator) statements collect: [ :aStatement | aStatement expression ]).
+	falseBlock ifNotNil: [ res else addAll: ((falseBlock acceptVisitor: methodTranslator) statements collect: [ :aStatement | aStatement expression ])].
 	^ res
 ]
 
@@ -624,9 +624,6 @@ MASlangReceiver >> signedIntToLong [
 
 { #category : #'reflective operations' }
 MASlangReceiver >> signedIntToLong64 [
-	self flag:#missingCheck. 
-	"I'm assuming i'm always in 64 currently,
-	see generateSignedIntToLong: msgNode on: aStream indent: level"
 	^ self translatedReceiver castTo: (self cTypeFor: #usqInt)
 ]
 
