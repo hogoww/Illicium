@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'keyword'
 	],
-	#category : #'ASTC-Core'
+	#category : #'ASTC-Core-Extensions-Errors'
 }
 
 { #category : #accessing }

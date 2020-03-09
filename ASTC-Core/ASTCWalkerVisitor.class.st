@@ -1,7 +1,7 @@
 Class {
 	#name : #ASTCWalkerVisitor,
 	#superclass : #ASTCVisitor,
-	#category : #'ASTC-Core-Visitors'
+	#category : #'ASTC-Core-visitors'
 }
 
 { #category : #visiting }
@@ -412,10 +412,4 @@ ASTCWalkerVisitor >> visitVariableDefinition: aVariableDefinition [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitWhile: aWhile [
 	super visitWhile: aWhile
-]
-
-{ #category : #'as yet unclassified' }
-ASTCWalkerVisitor >> walkASTCNodeParent:anASTCNode [
-	self flag:#badFix."avoid infinite recursivity when using the walker."
-	^self.
 ]
