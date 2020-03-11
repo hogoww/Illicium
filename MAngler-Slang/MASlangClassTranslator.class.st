@@ -67,6 +67,7 @@ MASlangClassTranslator >> preTranslationVisitors [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ {
 		MASlangCleaner new.
+		MASlangSuperAnnotator new classTranslator: self ; yourself.
 		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
 		MASlangDeclarationAnnotator new "this is required to be after the typeAnnotator. see its documention"
 		}
