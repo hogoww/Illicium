@@ -69,7 +69,7 @@ FAStatementsBecomeExpressions >> visitIf: anIf [
 	"if is kind of a particular case, because statements inside the condition should be expressions too. 
 	We therefore inline the visit code."
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
-	anIf condition ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	anIf condition acceptVisitor: self.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
 	
 	anIf then ifNotNil: [ :aThen | aThen acceptVisitor: self ].
@@ -92,4 +92,14 @@ FAStatementsBecomeExpressions >> visitReturn: aReturn [
 	super visitReturn: aReturn.
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
 	
+]
+
+{ #category : #visiting }
+FAStatementsBecomeExpressions >> visitSwitchCase: aSwitchCase [
+	"particular case, only the expression should be an esxpression :')"
+	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.	
+	aSwitchCase expression acceptVisitor: self .
+	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
+
+	aSwitchCase body acceptVisitor: self.
 ]

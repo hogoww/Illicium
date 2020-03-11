@@ -399,7 +399,6 @@ MASlangReceiver >> caseOf: anArrayNode [
 { #category : #accessing }
 MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 	| switchNode |
-	self halt.
 	switchNode := ASTCSwitch new.
 	
 	switchNode expression: self translatedReceiver.

@@ -136,3 +136,18 @@ FAStatementsBecomeExpressionsTest >> testStatementInIFConditionShouldBecomeExpre
 	self assert: else expression isLiteral.
 	self assert: else expression value equals: true.
 ]
+
+{ #category : #tests }
+FAStatementsBecomeExpressionsTest >> testStatementInsideSwitchCaseBecomesExpression [
+	| switchCaseNode |
+	switchCaseNode :=
+		ASTCSwitchCase new
+			expression: (ASTCIdentifier id: #a) asStatement;
+			body: ASTCBlock new ;
+			yourself.
+			
+	switchCaseNode acceptVisitor: visitor.
+	
+	self assert: switchCaseNode isSwitchCase.
+	self assert: switchCaseNode expression isIdentifier.
+]

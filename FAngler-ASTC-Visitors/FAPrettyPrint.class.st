@@ -341,7 +341,7 @@ FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 
 { #category : #visiting }
 FAPrettyPrint >> visitSwitch: aSwitchNode [
-	self spaces << 'switch ( ';
+	self << 'switch ( ';
 		print: aSwitchNode expression; << ' )'; cr;
 		spaces; << '{'; cr.
 	self enterBlock.
@@ -365,8 +365,7 @@ FAPrettyPrint >> visitSwitch: aSwitchNode [
 { #category : #visiting }
 FAPrettyPrint >> visitSwitchCase: aSwitchCase [
 	"assume that a switch case is always in a switch for now (i don't think there's other cases anyway)"
-	self spaces.
-	self << 'case ';
+	self spaces << 'case ';
 		print: aSwitchCase expression;
 		<< ' :';
 		cr.
