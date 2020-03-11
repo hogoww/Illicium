@@ -22,6 +22,8 @@ FAProgram >> addClass: aClass [
 
 { #category : #accessing }
 FAProgram >> addMethod: aMethod [
+	"This expects a copy as argument."
+	
 	"this returns a boolean, which tells if the method should be removed from the cCodeGenerator before being added."
 	"It's not good, but idk what else to do for now."
 	

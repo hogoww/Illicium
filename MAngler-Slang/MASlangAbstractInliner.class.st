@@ -72,6 +72,20 @@ MASlangAbstractInliner >> createNewBlockithStatements: nodesToInline [
 	^ newBlock
 ]
 
+{ #category : #applying }
+MASlangAbstractInliner >> getAnnotatedSuperMethodOf: aMessageNode [
+	"requires to get the method, COPY it, then annotate it."
+	| superMethod |
+	superMethod := (aMessageNode methodNode methodClass superclass lookupSelector: aMessageNode selector) ast copy.
+	superMethod asTranslationMethodOfClass: TMethod. "annotate with TNodeEquivalent..."
+	translator annotateMethodAST: superMethod.
+	self flag: #hackish."Slang sometimes add a return self. so we remove it."
+	(superMethod statements last isReturn 
+		and: [ superMethod statements last value isSelf ])
+			ifTrue:[ superMethod statements removeLast ].
+	^ superMethod
+]
+
 { #category : #renaming }
 MASlangAbstractInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 	| replacements |
@@ -114,7 +128,6 @@ MASlangAbstractInliner >> inline: aMethodNode insteadOf: aMessageNode [
 MASlangAbstractInliner >> inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode [
 	| newBlock newAssignment lastNode |
 	aMessageNode parent isAssignment ifFalse: [ ^ false ].
-	
 	"rearanging the parent and children of the assignment 
 	to put the assignment as the last statement of the collection"
 	lastNode := nodesToInline removeLast.
@@ -298,8 +311,8 @@ MASlangAbstractInliner >> visitMessageNode: aMessageNode [
 			inlinedSomething := true.
 			methodToInline := 
 				(aMessageNode receiver isSuper 
-					ifTrue:[ aMessageNode propertyAt: MASlangSuperAnnotator propertyName ]
-					ifFalse:[ program methodNamed: aMessageNode selector ]) copy .
+					ifTrue:[ self getAnnotatedSuperMethodOf: aMessageNode ]
+					ifFalse:[ (program methodNamed: aMessageNode selector) copy ]) .
 			self handleTemporariesFrom: methodToInline in: aMessageNode methodNode.
 			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.

@@ -6,6 +6,7 @@ Class {
 
 { #category : #support }
 MAASuperClass >> aMethodUsingSuper [
+	1 even
 ]
 
 { #category : #support }

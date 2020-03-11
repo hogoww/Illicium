@@ -155,7 +155,7 @@ MASlangInlinerTest >> setUp [
 { #category : #'test-renaming' }
 MASlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithATemp) ast.
+	program addMethod: (self class >> #methodWithATemp) ast copy.
 	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -173,7 +173,7 @@ MASlangInlinerTest >> testInlineExistingTempNameShouldHaveDifferentNames [
 { #category : #tests }
 MASlangInlinerTest >> testInlineMessageWithBlockParameter [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithBlockParameter:) ast. 
+	program addMethod: (self class >> #methodWithBlockParameter:) ast copy. 
 	initialMethod := (self class >> #methodWithBlockParameterToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -191,7 +191,7 @@ MASlangInlinerTest >> testInlineMessageWithBlockParameter [
 { #category : #tests }
 MASlangInlinerTest >> testInlineMessageWithCMacroShouldNotInline [
 	| resultingMethod initialMethod |
-	program addMethod: (self class >> #methodWithCMacro) ast. 
+	program addMethod: (self class >> #methodWithCMacro) ast copy. 
 	initialMethod := (self class >> #methodWithMacroToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -203,7 +203,7 @@ MASlangInlinerTest >> testInlineMessageWithCMacroShouldNotInline [
 { #category : #tests }
 MASlangInlinerTest >> testInlineSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithSingleStatement) ast.
+	program addMethod: (self class >> #methodWithSingleStatement) ast copy.
 	initialMethod := (self class >> #methodWithSingleStatementToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -220,7 +220,7 @@ MASlangInlinerTest >> testInlineSingleStatement [
 { #category : #tests }
 MASlangInlinerTest >> testInlineSingleStatementAndTemporary [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithSingleStatementAndSingleTemporary) ast.
+	program addMethod: (self class >> #methodWithSingleStatementAndSingleTemporary) ast copy.
 	initialMethod := (self class >> #methodWithSingleStatementAndSingleTemporaryToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -241,7 +241,7 @@ MASlangInlinerTest >> testInlineSingleStatementAndTemporary [
 { #category : #tests }
 MASlangInlinerTest >> testInlineSingleStatementThatReturns [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithSingleStatementThatReturns) ast.
+	program addMethod: (self class >> #methodWithSingleStatementThatReturns) ast copy.
 	initialMethod := (self class >> #methodWithSingleStatementThatReturnsToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -257,12 +257,12 @@ MASlangInlinerTest >> testInlineSingleStatementThatReturns [
 
 { #category : #tests }
 MASlangInlinerTest >> testInlineSuperStatement [
-	| resultingMethod inlinedStatement initialMethod superMethod |
-	superMethod := (self class >> #methodWithSingleStatement) ast.
-	program addMethod: superMethod.
-	initialMethod := (self class >> #methodWithSuperStatement) ast.
+	| resultingMethod inlinedStatement initialMethod |
+	initialMethod := (MAAClass >> #aMethodUsingSuper) ast.
 	methodToInline := initialMethod copy.
-	methodToInline statements first propertyAt: MASlangSuperAnnotator propertyName put: superMethod.
+	program addMethod: methodToInline. 
+	"required for the predicate of should inline. I don't like it.
+	The method's selector needs to be in the program to be inlined. "
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
 	
 	self deny: initialMethod equals: resultingMethod.
@@ -276,7 +276,7 @@ MASlangInlinerTest >> testInlineSuperStatement [
 { #category : #tests }
 MASlangInlinerTest >> testInlineTwoStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	program addMethod: (self class >> #methodWithTwoStatements) ast copy.
 	initialMethod := (self class >> #methodWithTwoStatementsToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -297,7 +297,7 @@ MASlangInlinerTest >> testInlineTwoStatement [
 { #category : #tests }
 MASlangInlinerTest >> testInlineTwoStatementIntoAssignment [
 	| resultingMethod initialMethod assignment block |
-	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	program addMethod: (self class >> #methodWithTwoStatements) ast copy.
 	initialMethod := (self class >> #methodWithTwoStatementsToInlineIntoAssignment) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -324,7 +324,7 @@ MASlangInlinerTest >> testInlineTwoStatementIntoAssignment [
 { #category : #tests }
 MASlangInlinerTest >> testInlineTwoStatementIntoReturn [
 	| resultingMethod initialMethod block secondMessage firstMessage |
-	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	program addMethod: (self class >> #methodWithTwoStatements) ast copy.
 	initialMethod := (self class >> #methodWithTwoStatementsToInlineIntoReturn) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -352,7 +352,7 @@ MASlangInlinerTest >> testInlineTwoStatementIntoReturn [
 MASlangInlinerTest >> testInlineTwoStatementThatReturns [
 	"same behavior as self class >> testInlineTwoStatement, because the return is discarded in the inlining"
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithTwoStatementsThatReturns) ast. 
+	program addMethod: (self class >> #methodWithTwoStatementsThatReturns) ast copy. 
 	initialMethod := (self class >> #methodWithTwoStatementsThatReturnsToInline) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -372,8 +372,8 @@ MASlangInlinerTest >> testInlineTwoStatementThatReturns [
 { #category : #'test-multiples' }
 MASlangInlinerTest >> testMethodInliningMethodInliningAStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithSingleStatementToInline) ast.
-	program addMethod: (self class >> #methodWithSingleStatement) ast.
+	program addMethod: (self class >> #methodWithSingleStatementToInline) ast copy.
+	program addMethod: (self class >> #methodWithSingleStatement) ast copy.
 	initialMethod := (self class >> #methodInliningAMethodInliningAStatement) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -389,7 +389,7 @@ MASlangInlinerTest >> testMethodInliningMethodInliningAStatement [
 { #category : #'test-multiples' }
 MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithSingleStatement) ast.
+	program addMethod: (self class >> #methodWithSingleStatement) ast copy.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineSingleStatements) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -408,7 +408,7 @@ MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineSingleStatement [
 { #category : #'test-multiples' }
 MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatement [
 	| resultingMethod firstInlinedStatement initialMethod secondInlinedStatement |
-	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	program addMethod: (self class >> #methodWithTwoStatements) ast copy.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatements) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -433,7 +433,7 @@ MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatement [
 { #category : #'test-multiples' }
 MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignments [
 	| resultingMethod initialMethod assignment |
-	program addMethod: (self class >> #methodWithTwoStatements) ast.
+	program addMethod: (self class >> #methodWithTwoStatements) ast copy.
 	initialMethod := (self class >> #methodWithTwoStatementsThatBothInlineTwoStatementsIntoAssignment) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -454,7 +454,7 @@ MASlangInlinerTest >> testMethodWithTwoStatementsThatBothInlineTwoStatementsInto
 { #category : #'test-renaming' }
 MASlangInlinerTest >> testNewNamesShouldBeDeclared [
 	| resultingMethod  initialMethod newTempNames |
-	program addMethod: (self class >> #methodWithATemp) ast.
+	program addMethod: (self class >> #methodWithATemp) ast copy.
 	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
@@ -471,7 +471,7 @@ MASlangInlinerTest >> testNewNamesShouldBeDeclared [
 { #category : #'test-renaming' }
 MASlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 	| resultingMethod initialMethod declarationAnnotation declarationVisitor methodThatWillBeInlined |
-	methodThatWillBeInlined := (self class >> #methodWithATemp) ast.
+	methodThatWillBeInlined := (self class >> #methodWithATemp) ast copy.
 	program addMethod: methodThatWillBeInlined.
 	initialMethod := (self class >> #methodWithATempInliningMethodWithSameTemp) ast.
 	methodToInline := initialMethod copy.
@@ -498,7 +498,7 @@ MASlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 { #category : #tests }
 MASlangInlinerTest >> testReturningInlinedSingleStatement [
 	| resultingMethod inlinedStatement initialMethod |
-	program addMethod: (self class >> #methodWithSingleStatement) ast. 
+	program addMethod: (self class >> #methodWithSingleStatement) ast copy. 
 	initialMethod := (self class >> #methodReturningInlinedSingleStatement) ast.
 	methodToInline := initialMethod copy.
 	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
