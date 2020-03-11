@@ -161,10 +161,18 @@ FAPrettyPrintTest >> testVisitSwitch [
 			
 	switch debugASTCStructure.
 	self assert: switch isSwitch.
-	self assert: (switch prettyPrintUsing: FAPrettyPrint new) equals: 'case 0 :
-  {
-    0;
-  }'.
+	self assert: (switch prettyPrintUsing: FAPrettyPrint new) equals: 
+'switch ( 0 )
+{
+  case 1 :
+    {
+      2;
+    }
+  default: 
+    {
+      3;
+    }
+}'.
 ]
 
 { #category : #tests }
@@ -177,7 +185,8 @@ FAPrettyPrintTest >> testVisitSwitchCase [
 		
 	switchCase debugASTCStructure.
 	self assert: switchCase isSwitchCase.
-	self assert: (switchCase prettyPrintUsing: FAPrettyPrint new) equals: 'case 0 :
+	self assert: (switchCase prettyPrintUsing: FAPrettyPrint new) equals: 
+'case 0 :
   {
     1;
   }'.

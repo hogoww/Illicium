@@ -425,11 +425,15 @@ ASTCBuilder >> defineRelations [
 	(if property: #else) <>- (statement property: #elseStatement).
 	(switch property: #expression) <>- (expression property: #switchExpression).
 	(switch property: #cases) <>-* (switchCase property: #switchCases).
-	(switch property: #default) <>- (switchCase property: #default).
+	(switch property: #default) <>- (statement property: #switchDefaultCase).
+	
 	(switchCase property: #expression) <>- (expression property: #switchCaseExpression).
 	(switchCase property: #body) <>- (statement property: #switchCaseBody).
+	
 	(return property: #expression) <>- (expression property: #returnExp).
+	
 	(expressionStatement property: #expression) <>- (expression property: #expStatement).
+	
 	(declarationStatement property: #declaration) <>- (declaration property: #declStatement).	
 
 	(unaryOperator property: #operand) <>- (expression property: #unaryOperand).

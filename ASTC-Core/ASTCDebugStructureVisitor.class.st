@@ -186,7 +186,7 @@ ASTCDebugStructureVisitor >> visitSwitch: aSwitch [
 	aSwitch expression
 		ifNotNil: [ :anExpression | self assert: anExpression isExpression ].
 	aSwitch default
-		ifNotNil: [ :aDefault | self assert: aDefault isSwitchCase ]
+		ifNotNil: [ :aDefault | self assert: aDefault isStatement ]
 ]
 
 { #category : #visiting }
