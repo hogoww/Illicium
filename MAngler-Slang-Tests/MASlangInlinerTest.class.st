@@ -257,9 +257,11 @@ MASlangInlinerTest >> testInlineSingleStatementThatReturns [
 
 { #category : #tests }
 MASlangInlinerTest >> testInlineSuperStatement [
-	| resultingMethod inlinedStatement initialMethod |
+	| resultingMethod inlinedStatement initialMethod superMethod |
 	initialMethod := (MAAClass >> #aMethodUsingSuper) ast.
+	superMethod := (MAASuperClass >> #aMethodUsingSuper) ast copy.
 	methodToInline := initialMethod copy.
+	methodToInline statements first propertyAt: MASlangSuperAnnotator propertyName put: superMethod.
 	program addMethod: methodToInline. 
 	"required for the predicate of should inline. I don't like it.
 	The method's selector needs to be in the program to be inlined. "
@@ -275,9 +277,15 @@ MASlangInlinerTest >> testInlineSuperStatement [
 
 { #category : #tests }
 MASlangInlinerTest >> testInlineSuperStatementTwice [
-	| resultingMethod inlinedStatement initialMethod |
+	| resultingMethod inlinedStatement initialMethod superMethod superSuperMethod |
 	initialMethod := (MAAClass >> #aMethodUsingSuperTwice) ast.
+	superMethod := (MAASuperClass >> #aMethodUsingSuperTwice) ast copy.
+	superSuperMethod := (MAASuperSuperClass >> #aMethodUsingSuperTwice) ast copy.
+	
 	methodToInline := initialMethod copy.
+	superMethod statements first propertyAt: MASlangSuperAnnotator propertyName put: superSuperMethod.
+	methodToInline statements first propertyAt: MASlangSuperAnnotator propertyName put: superMethod.
+	
 	program addMethod: methodToInline. 
 	"required for the predicate of should inline. I don't like it.
 	The method's selector needs to be in the program to be inlined. "

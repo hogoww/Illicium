@@ -14,14 +14,6 @@ MASlangSuperAnnotator class >> propertyName [
 ]
 
 { #category : #visiting }
-MASlangSuperAnnotator >> annotateMethodAST: aMethodNode [
-	self flag: #hack."we annotate the method with the TMethod equivalent."
-	self flag: #implicit."i don't like it"
-	aMethodNode asTranslationMethodOfClass: TMethod.
-	classTranslator annotateMethodAST: aMethodNode.
-]
-
-{ #category : #visiting }
 MASlangSuperAnnotator >> classTranslator [
 	^ classTranslator
 ]
@@ -31,13 +23,26 @@ MASlangSuperAnnotator >> classTranslator: aClassTranslator [
 	classTranslator := aClassTranslator
 ]
 
+{ #category : #applying }
+MASlangSuperAnnotator >> getAnnotatedSuperMethodOf: aMessageNode [
+	"requires to get the method, COPY it, then annotate it."
+	| superMethod |
+	superMethod := (aMessageNode methodNode methodClass superclass lookupSelector: aMessageNode selector) ast copy.
+	superMethod asTranslationMethodOfClass: TMethod. "annotate with TNodeEquivalent..."
+	classTranslator annotateMethodAST: superMethod.
+	self flag: #hackish."Slang sometimes add a return self. so we remove it."
+	(superMethod statements last isReturn
+		and: [ superMethod statements last value isSelf ])
+			ifTrue:[ superMethod statements removeLast ].
+	^ superMethod
+]
+
 { #category : #visiting }
 MASlangSuperAnnotator >> visitMessageNode: aMessageNode [
 	aMessageNode receiver isSuper ifTrue: [
 		| superMethod |
-		superMethod := (aMessageNode methodNode methodClass superclass lookupSelector: aMessageNode selector) ast copy.
+		superMethod := self getAnnotatedSuperMethodOf: aMessageNode.
 		self atNewPropertyPut: superMethod for: aMessageNode.
-		self annotateMethodAST: superMethod
 		].
 	super visitMessageNode: aMessageNode.
 ]
