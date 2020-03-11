@@ -6,4 +6,5 @@ Class {
 
 { #category : #support }
 MAASuperSuperClass >> aMethodUsingSuperTwice [
+	1 even
 ]
