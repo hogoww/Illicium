@@ -89,8 +89,8 @@ MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 MASlangClassTranslator >> transformations [
 	| transformations |
 	transformations := OrderedCollection new.
-	transformations add: (MASlangMinimalInliner translator: self).
 	transformations add: (MAGlobalStructureAccessTransformer translator: self).
+	transformations add: (MASlangMinimalInliner translator: self).
 	^ transformations
 ]
 

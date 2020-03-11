@@ -79,11 +79,11 @@ FAStatementsBecomeExpressionsTest >> testIfAndInnerIfBecomesTernaryInAssignment 
 			assign:
 				(ASTCIf new
 					condition:(ASTCLiteral value: true);
-					then: (ASTCLiteral value: true) ;
+					then: (ASTCLiteral value: true);
 					else: (ASTCIf new
 						condition:(ASTCLiteral value: true);
-						then: (ASTCLiteral value: true) ;
-						else: (ASTCLiteral value: true) ;
+						then: (ASTCLiteral value: true);
+						else: (ASTCLiteral value: true);
 						yourself);
 					yourself).
 	node acceptVisitor: visitor.
@@ -114,7 +114,7 @@ FAStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
 ]
 
 { #category : #tests }
-FAStatementsBecomeExpressionsTest >> testStatementInIFConditionShouldBecomeExpression [
+FAStatementsBecomeExpressionsTest >> testStatementInIfConditionShouldBecomeExpression [
 	| ifNode then else |
 	ifNode :=
 		(ASTCIdentifier id: #a) asStatement 
