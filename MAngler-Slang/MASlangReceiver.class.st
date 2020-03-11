@@ -392,15 +392,18 @@ MASlangReceiver >> cTypeFor: aSymbol [
 ]
 
 { #category : #accessing }
-MASlangReceiver >> caseOf: anArray [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #caseOf:
+MASlangReceiver >> caseOf: anArrayNode [
+	^ self caseOf: anArrayNode otherwise: nil
 ]
 
 { #category : #accessing }
 MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 	| switchNode |
+	self halt.
 	switchNode := ASTCSwitch new.
+	
+	switchNode expression: self translatedReceiver.
+	
 	anArrayNode statements collect:[ :aCase |  
 			| expression body |
 			expression := aCase receiver acceptVisitor: methodTranslator.
@@ -413,7 +416,9 @@ MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 				pharoNode: aCase;
 				yourself
 		] into: switchNode cases.
+	
 	switchNode default: (defaultCase ifNotNil: [ defaultCase acceptVisitor: methodTranslator ]).
+	
 	^ switchNode
 ]
 

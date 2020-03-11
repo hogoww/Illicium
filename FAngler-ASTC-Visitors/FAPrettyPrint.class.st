@@ -154,7 +154,6 @@ FAPrettyPrint >> visitBinaryOperator: anOperator [
 
 { #category : #indentation }
 FAPrettyPrint >> visitBlock: aBlock [
-	self spaces.
 	self << '{' << Character cr.
 	self enterBlock.
 	aBlock declarations
@@ -351,9 +350,10 @@ FAPrettyPrint >> visitSwitch: aSwitchNode [
 	aSwitchNode cases do: [ :aCase | self print: aCase; cr ].
 	
 	"default part"
-	aSwitchNode default ifNotNil: [.
+	aSwitchNode default ifNotNil: [
 			self spaces; << 'default: '; cr.
 			self enterBlock.
+			self spaces.
 			self print: aSwitchNode default; cr.
 			self leaveBlock
 		].
@@ -370,9 +370,10 @@ FAPrettyPrint >> visitSwitchCase: aSwitchCase [
 		print: aSwitchCase expression;
 		<< ' :';
 		cr.
+		
 	self enterBlock.
-	self
-		print: aSwitchCase body.
+	self spaces.
+	self print: aSwitchCase body.
 	self leaveBlock
 ]
 
