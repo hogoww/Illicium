@@ -146,6 +146,44 @@ FAPrettyPrintTest >> testVisitStructureDefinition [
 ]
 
 { #category : #tests }
+FAPrettyPrintTest >> testVisitSwitch [
+	| switch |
+	switch :=
+		ASTCSwitch new 
+			expression: (ASTCLiteral value: 0);
+			cases:
+			{ ASTCSwitchCase new
+				expression: (ASTCLiteral value: 1);
+				body: (ASTCBlock new addStatement: (ASTCLiteral value: 2) asStatement ; yourself);
+				yourself };
+			default: (ASTCBlock new addStatement: (ASTCLiteral value: 3) asStatement ; yourself);
+			yourself.
+			
+	switch debugASTCStructure.
+	self assert: switch isSwitch.
+	self assert: (switch prettyPrintUsing: FAPrettyPrint new) equals: 'case 0 :
+  {
+    0;
+  }'.
+]
+
+{ #category : #tests }
+FAPrettyPrintTest >> testVisitSwitchCase [
+	| switchCase |
+	switchCase := ASTCSwitchCase new
+		expression: (ASTCLiteral value: 0);
+		body: (ASTCBlock new addStatement: (ASTCLiteral value: 1) asStatement ; yourself); 
+		yourself.
+		
+	switchCase debugASTCStructure.
+	self assert: switchCase isSwitchCase.
+	self assert: (switchCase prettyPrintUsing: FAPrettyPrint new) equals: 'case 0 :
+  {
+    1;
+  }'.
+]
+
+{ #category : #tests }
 FAPrettyPrintTest >> testVisitTernaryOperatorTest [
 	| operator |
 	operator := ASTCTernaryConditionalOperator new 

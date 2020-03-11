@@ -272,12 +272,11 @@ ASTCNode >> preIncr [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> prettyPrint [
-	
 	^ self prettyPrintUsing: MASlangPrettyPrinter new
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCNode >> prettyPrintUsing: aPrettyPrinter [ 
+ASTCNode >> prettyPrintUsing: aPrettyPrinter [
 	self acceptVisitor: aPrettyPrinter.
 	^ aPrettyPrinter stream contents
 ]

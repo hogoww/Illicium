@@ -398,9 +398,23 @@ MASlangReceiver >> caseOf: anArray [
 ]
 
 { #category : #accessing }
-MASlangReceiver >> caseOf: anArray otherwise: something [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #caseOf:otherwise:
+MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
+	| switchNode |
+	switchNode := ASTCSwitch new.
+	anArrayNode statements collect:[ :aCase |  
+			| expression body |
+			expression := aCase receiver acceptVisitor: methodTranslator.
+			aCase arguments size = 1 
+				ifFalse: [ ArgumentsCountMismatch new calledArgumentsCount: aCase arguments size; expectedArgumentsCount: 1 ; yourself ].
+			body := aCase arguments first acceptVisitor: methodTranslator.
+			ASTCSwitchCase new 
+				expression: expression; 
+				body: body;
+				pharoNode: aCase;
+				yourself
+		] into: switchNode cases.
+	switchNode default: (defaultCase ifNotNil: [ defaultCase acceptVisitor: methodTranslator ]).
+	^ switchNode
 ]
 
 { #category : #'reflective operations' }

@@ -154,6 +154,7 @@ FAPrettyPrint >> visitBinaryOperator: anOperator [
 
 { #category : #indentation }
 FAPrettyPrint >> visitBlock: aBlock [
+	self spaces.
 	self << '{' << Character cr.
 	self enterBlock.
 	aBlock declarations
@@ -161,7 +162,7 @@ FAPrettyPrint >> visitBlock: aBlock [
 			self spaces.
 			each acceptVisitor: self.
 			self << Character cr ].
-	aBlock statements ifNotEmpty: [ self cr ].
+	aBlock declarations ifNotEmpty: [ self cr ].
 	aBlock statements
 		do: [ :each | 
 			self spaces.
@@ -337,6 +338,20 @@ FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 	self leaveBlock.
 	
 	self spaces; << '};'
+]
+
+{ #category : #visiting }
+FAPrettyPrint >> visitSwitchCase: aSwitchCase [
+	"assume that a switch case is always in a switch for now (i don't think there's other cases anyway)"
+	self spaces.
+	self << 'case ';
+		print: aSwitchCase expression;
+		<< ' :';
+		cr.
+	self enterBlock.
+	self
+		print: aSwitchCase body.
+	self leaveBlock
 ]
 
 { #category : #visiting }
