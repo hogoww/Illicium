@@ -409,6 +409,7 @@ MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 			aCase arguments size = 1 
 				ifFalse: [ ArgumentsCountMismatch new calledArgumentsCount: aCase arguments size; expectedArgumentsCount: 1 ; yourself ].
 			body := aCase arguments first acceptVisitor: methodTranslator.
+			body addStatement: ASTCBreak new.
 			ASTCSwitchCase new 
 				expression: expression; 
 				body: body;
