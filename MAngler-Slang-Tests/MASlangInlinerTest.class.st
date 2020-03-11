@@ -274,6 +274,24 @@ MASlangInlinerTest >> testInlineSuperStatement [
 ]
 
 { #category : #tests }
+MASlangInlinerTest >> testInlineSuperStatementTwice [
+	| resultingMethod inlinedStatement initialMethod |
+	initialMethod := (MAAClass >> #aMethodUsingSuperTwice) ast.
+	methodToInline := initialMethod copy.
+	program addMethod: methodToInline. 
+	"required for the predicate of should inline. I don't like it.
+	The method's selector needs to be in the program to be inlined. "
+	resultingMethod := inliner applyOnMethod: methodToInline ofProgram: program.
+	
+	self deny: initialMethod equals: resultingMethod.
+	self assert: resultingMethod statements size equals: 1.
+	inlinedStatement := resultingMethod statements first.
+	self assert: inlinedStatement isMessage.
+	self assert: inlinedStatement receiver value equals: 1.
+	self assert: inlinedStatement selector equals: #even.
+]
+
+{ #category : #tests }
 MASlangInlinerTest >> testInlineTwoStatement [
 	| resultingMethod inlinedStatement initialMethod |
 	program addMethod: (self class >> #methodWithTwoStatements) ast copy.
