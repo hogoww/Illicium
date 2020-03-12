@@ -307,7 +307,7 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	preDecrementOperator --|> unaryOperator. " --i "
 	logicalNotOperator --|> unaryOperator." ! b "
 	addressOfOperator --|> unaryOperator. " & a "
-	castOperator --|> binaryOperator. " (int) a "
+	castOperator --|> unaryOperator. " (int) a "
 	negationOperator --|> unaryOperator. " - a "
 	bitwiseNotOperator --|> unaryOperator. " ~ a "
 	
