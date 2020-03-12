@@ -50,6 +50,11 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self isFullyAnnotated: true
 ]
 
+{ #category : #removing }
+MASlangProgram >> removeMethod: aMethodNode [
+	methods removeKey: aMethodNode selector
+]
+
 { #category : #accessing }
 MASlangProgram >> vmClass [
 	
