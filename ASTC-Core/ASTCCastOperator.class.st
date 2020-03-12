@@ -1,6 +1,6 @@
 Class {
 	#name : #ASTCCastOperator,
-	#superclass : #ASTCBinaryOperator,
+	#superclass : #ASTCUnaryOperator,
 	#instVars : [
 		'type'
 	],

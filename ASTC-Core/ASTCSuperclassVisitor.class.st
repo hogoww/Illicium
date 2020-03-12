@@ -81,7 +81,7 @@ ASTCSuperclassVisitor >> visitBreak: aBreak [
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitCastOperator: aCastOperator [
-	^ self visitBinaryOperator: aCastOperator
+	^ self visitUnaryOperator: aCastOperator
 ]
 
 { #category : #visiting }

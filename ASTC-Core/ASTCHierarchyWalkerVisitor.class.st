@@ -97,7 +97,7 @@ ASTCHierarchyWalkerVisitor >> visitBreak: aBreak [
 { #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitCastOperator: aCastOperator [
 	super visitCastOperator: aCastOperator.
-	^ self visitBinaryOperator: aCastOperator
+	^ self visitUnaryOperator: aCastOperator
 ]
 
 { #category : #visiting }
