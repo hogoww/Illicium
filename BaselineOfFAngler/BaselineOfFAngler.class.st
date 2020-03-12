@@ -44,16 +44,17 @@ BaselineOfFAngler >> baseline: spec [
 
 { #category : #accessing }
 BaselineOfFAngler >> lastPlayground [
-
-ASTCGenerator generate.	
+ASTCGenerator generate.
 MAPluginTestGenerator generateVMMakerPluginsTests.
 MAPluginTestGenerator generateVMMakerInterpreterPrimitiveTests.
-MATestGenerator generateVMTests.
+MAVMTestGenerator generateVMTests.
+MAVMTestGenerator cleanUp.
 MAPluginTestGenerator cleanUp.
-MATestGenerator cleanUp.
 MASlangTestResource resetAll.
+MAFullVMCCodeGeneratorRessource reset.
 
-MASpur64BitMemoryManagerTranslationTest methods select:[:m| m hasPragmaNamed: #skip]
+MASpur64BitMemoryManagerTranslationTest new setUp testActiveAndDeferredScanStringComparison
+
 ]
 
 { #category : #accessing }
