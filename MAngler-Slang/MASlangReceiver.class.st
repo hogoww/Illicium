@@ -808,7 +808,7 @@ MASlangReceiver >> touch: something [
 { #category : #'reflective operations' }
 MASlangReceiver >> truncateTo: anInt [
 	self flag: #undone. "want to see how slang translates it first."
-	^ self translatedReceiver & ((anInt acceptVisitor: methodTranslator) - (self literalNodeFor: 1)) bitNot
+	^ self translatedReceiver & ((anInt acceptVisitor: methodTranslator) - (ASTCLiteral value: 1)) bitNot
 ]
 
 { #category : #'reflective operations' }
