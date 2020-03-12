@@ -1,5 +1,5 @@
 Class {
-	#name : #MASlangCleaner,
+	#name : #MASlangMethodCleaner,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'selectorToRemove'
@@ -8,17 +8,17 @@ Class {
 }
 
 { #category : #cleaning }
-MASlangCleaner >> initialize [
+MASlangMethodCleaner >> initialize [
 	selectorToRemove := #(flag flag: assert: eassert: deny:)
 ]
 
 { #category : #cleaning }
-MASlangCleaner >> selectorToRemove [
+MASlangMethodCleaner >> selectorToRemove [
 	^ selectorToRemove
 ]
 
 { #category : #cleaning }
-MASlangCleaner >> visitMessageNode: aMessageNode [
+MASlangMethodCleaner >> visitMessageNode: aMessageNode [
 	(selectorToRemove includes: aMessageNode selector)
 		ifFalse: [ ^ super visitMessageNode: aMessageNode ].
 	aMessageNode parent isSequence ifTrue:[ ^ aMessageNode parent replaceNode: aMessageNode withNodes: #() ].
