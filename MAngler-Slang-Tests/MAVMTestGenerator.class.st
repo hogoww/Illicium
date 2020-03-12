@@ -163,10 +163,10 @@ MAVMTestGenerator >> generateSmokeTestFor: aMethod inTestClass: aTestClass [
 	| methodSource methodToTestSelector |
 	methodToTestSelector := aMethod selector.
 	methodSource :=	 'test', methodToTestSelector onlyLetters capitalized , 'StringComparison' asMethodWithBody:[
-		| illiString illiAST |
+		| illiAST |
 		"In the case the method is pruned in the CCodeGenerator, we only test that this work all the way through"
 		illiAST := self generateIllicium: #methodToTestSelector.
-		illiString := self prettyPrintIllicium: illiAST.
+		self prettyPrintIllicium: illiAST.
 	].
 
 	aTestClass compile: methodSource asString classified: aMethod protocol.

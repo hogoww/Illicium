@@ -12,314 +12,314 @@ MASmokeSpurGenerationScavengerTranslationTest >> setUp [
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testAllFutureSpaceEntitiesDoStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #allFutureSpaceEntitiesDo:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testCoInterpreterStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #coInterpreter:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #scavenger }
 MASmokeSpurGenerationScavengerTranslationTest >> testComputeTenuringThresholdStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #computeTenuringThreshold.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #scavenger }
 MASmokeSpurGenerationScavengerTranslationTest >> testCopyToFutureSpacebytesStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #copyToFutureSpace:bytes:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testCorpseForCorpseOffsetStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #corpseForCorpseOffset:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testCorpseOffsetOfStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #corpseOffsetOf:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testEdenBytesStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #edenBytes.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #scavenger }
 MASmokeSpurGenerationScavengerTranslationTest >> testExchangeSurvivorSpacesStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #exchangeSurvivorSpaces.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testFireEphemeronsInRememberedSetStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #fireEphemeronsInRememberedSet.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testFireEphemeronsOnEphemeronListStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #fireEphemeronsOnEphemeronList.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'gc - global' }
 MASmokeSpurGenerationScavengerTranslationTest >> testFollowRememberedForwardersAndForgetFreeObjectsForPigCompactStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self
 		generateIllicium: #followRememberedForwardersAndForgetFreeObjectsForPigCompact.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'gc - global' }
 MASmokeSpurGenerationScavengerTranslationTest >> testFollowRememberedForwardersAndForgetFreeObjectsStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self
 		generateIllicium: #followRememberedForwardersAndForgetFreeObjects.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'gc - global' }
 MASmokeSpurGenerationScavengerTranslationTest >> testForgetObjectStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #forgetObject:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'gc - global' }
 MASmokeSpurGenerationScavengerTranslationTest >> testForgetUnmarkedRememberedObjectsStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #forgetUnmarkedRememberedObjects.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'debug support' }
 MASmokeSpurGenerationScavengerTranslationTest >> testFutureSpaceObjectsDoStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #futureSpaceObjectsDo:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testGetRawTenuringThresholdStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #getRawTenuringThreshold.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #initialization }
 MASmokeSpurGenerationScavengerTranslationTest >> testInitFutureSpaceStartStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #initFutureSpaceStart.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #initialization }
 MASmokeSpurGenerationScavengerTranslationTest >> testInitializeRememberedSetStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #initializeRememberedSet.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #logging }
 MASmokeSpurGenerationScavengerTranslationTest >> testLogEndScavengeStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #logEndScavenge.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #logging }
 MASmokeSpurGenerationScavengerTranslationTest >> testLogScavengeStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #logScavenge.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #logging }
 MASmokeSpurGenerationScavengerTranslationTest >> testLogStartScavengeStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #logStartScavenge.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #logging }
 MASmokeSpurGenerationScavengerTranslationTest >> testLogStreamStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #logStream.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #logging }
 MASmokeSpurGenerationScavengerTranslationTest >> testLogTenuringPolicyStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #logTenuringPolicy.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #initialization }
 MASmokeSpurGenerationScavengerTranslationTest >> testNewSpaceStartnewSpaceBytessurvivorBytesStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self
 		generateIllicium: #newSpaceStart:newSpaceBytes:survivorBytes:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testNextCorpseOffsetStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #nextCorpseOffset:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testNextCorpseOrNilStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #nextCorpseOrNil:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testPastSpaceBytesStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #pastSpaceBytes.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'debug support' }
 MASmokeSpurGenerationScavengerTranslationTest >> testPrintWeaklingListStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #printWeaklingList:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'remembered set' }
 MASmokeSpurGenerationScavengerTranslationTest >> testReferenceCountRememberedReferentsStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #referenceCountRememberedReferents:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'remembered set' }
 MASmokeSpurGenerationScavengerTranslationTest >> testRelocateRememberedSetStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #relocateRememberedSet.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'debug support' }
 MASmokeSpurGenerationScavengerTranslationTest >> testRememberedSetWithIndexDoStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #rememberedSetWithIndexDo:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #scavenger }
 MASmokeSpurGenerationScavengerTranslationTest >> testScavengeStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #scavenge:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testScavengeUnfiredEphemeronsInRememberedSetStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self
 		generateIllicium: #scavengeUnfiredEphemeronsInRememberedSet.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testScavengerTenuringThresholdStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #scavengerTenuringThreshold:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'weakness and ephemerality' }
 MASmokeSpurGenerationScavengerTranslationTest >> testSetCorpseOffsetOftoStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #setCorpseOffsetOf:to:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testSetRawTenuringThresholdStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #setRawTenuringThreshold:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'remembered set' }
 MASmokeSpurGenerationScavengerTranslationTest >> testSetRefCountToShrinkRTStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #setRefCountToShrinkRT:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'remembered set' }
 MASmokeSpurGenerationScavengerTranslationTest >> testSetRememberedSetRedZoneStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #setRememberedSetRedZone.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #scavenger }
 MASmokeSpurGenerationScavengerTranslationTest >> testShouldBeTenuredStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #shouldBeTenured:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #scavenger }
 MASmokeSpurGenerationScavengerTranslationTest >> testShouldMournerBeTenuredStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #shouldMournerBeTenured:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testStatSurvivorCountStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #statSurvivorCount.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testStatTenuresStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #statTenures:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'remembered set' }
 MASmokeSpurGenerationScavengerTranslationTest >> testStrategizeToLimitRememberedTableStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #strategizeToLimitRememberedTable.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testTenuringClassIndexStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #tenuringClassIndex:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }

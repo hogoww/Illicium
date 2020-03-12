@@ -12,59 +12,59 @@ MASmokeInterpreterStackPagesTranslationTest >> setUp [
 
 { #category : #assertions }
 MASmokeInterpreterStackPagesTranslationTest >> testCouldBeFramePointerStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #couldBeFramePointer:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #initialization }
 MASmokeInterpreterStackPagesTranslationTest >> testExtraStackBytesStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #extraStackBytes.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'page access' }
 MASmokeInterpreterStackPagesTranslationTest >> testMarkStackPageLeastMostRecentlyUsedStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self
 		generateIllicium: #markStackPageLeastMostRecentlyUsed:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'page access' }
 MASmokeInterpreterStackPagesTranslationTest >> testOverflowLimitStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #overflowLimit.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #statistics }
 MASmokeInterpreterStackPagesTranslationTest >> testRecordLivePagesOnMappingStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #recordLivePagesOnMapping:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #statistics }
 MASmokeInterpreterStackPagesTranslationTest >> testStatAverageLivePagesWhenMappingStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #statAverageLivePagesWhenMapping:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #statistics }
 MASmokeInterpreterStackPagesTranslationTest >> testStatMaxPageCountWhenMappingStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #statMaxPageCountWhenMapping:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #'debug printing' }
 MASmokeInterpreterStackPagesTranslationTest >> testWhereIsMaybeStackThingStringComparison [
-	| illiAST illiString |
+	| illiAST |
 	illiAST := self generateIllicium: #whereIsMaybeStackThing:.
-	illiString := self prettyPrintIllicium: illiAST
+	self prettyPrintIllicium: illiAST
 ]
 
 { #category : #accessing }
