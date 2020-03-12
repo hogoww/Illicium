@@ -155,6 +155,13 @@ ASTCNode >> astDump [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCNode >> bitNot [
+	^ ASTCBitwiseNotOperator new
+		operand: self;
+		yourself
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> bitXor: anExpression [
 	^ ASTCBitwiseXorOperator new
 		leftOperand: self;

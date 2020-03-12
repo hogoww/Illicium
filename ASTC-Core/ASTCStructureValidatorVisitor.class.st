@@ -94,6 +94,13 @@ ASTCStructureValidatorVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitBitwiseNotOperator: aBitwiseNotOperator [
+	[ super visitBitwiseNotOperator: aBitwiseNotOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitBitwiseOrOperator: aBitwiseOrOperator [
 	[ super visitBitwiseOrOperator: aBitwiseOrOperator ]
 		on: AssertionFailure

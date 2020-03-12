@@ -65,6 +65,12 @@ ASTCHierarchyWalkerVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitBitwiseNotOperator: aBitwiseNotOperator [
+	super visitBitwiseNotOperator: aBitwiseNotOperator.
+	^ self visitUnaryOperator: aBitwiseNotOperator
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitBitwiseOrOperator: aBitwiseOrOperator [
 	super visitBitwiseOrOperator: aBitwiseOrOperator.
 	^ self visitBinaryOperator: aBitwiseOrOperator
@@ -91,7 +97,7 @@ ASTCHierarchyWalkerVisitor >> visitBreak: aBreak [
 { #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitCastOperator: aCastOperator [
 	super visitCastOperator: aCastOperator.
-	^ self visitUnaryOperator: aCastOperator
+	^ self visitBinaryOperator: aCastOperator
 ]
 
 { #category : #visiting }

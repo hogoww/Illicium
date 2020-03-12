@@ -55,6 +55,11 @@ ASTCVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitBitwiseNotOperator: aBitwiseNotOperator [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitBitwiseOrOperator: aBitwiseOrOperator [
 	
 ]

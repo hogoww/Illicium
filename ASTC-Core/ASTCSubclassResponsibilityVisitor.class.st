@@ -55,6 +55,11 @@ ASTCSubclassResponsibilityVisitor >> visitBitwiseAndOperator: aBitwiseAndOperato
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitBitwiseNotOperator: aBitwiseNotOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitBitwiseOrOperator: aBitwiseOrOperator [
 	self subclassResponsibility
 ]

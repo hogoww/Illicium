@@ -75,6 +75,11 @@ ASTCNode >> isBitwiseAndOperator [
 ]
 
 { #category : #testing }
+ASTCNode >> isBitwiseNotOperator [
+	^ false
+]
+
+{ #category : #testing }
 ASTCNode >> isBitwiseOrOperator [
 	^ false
 ]

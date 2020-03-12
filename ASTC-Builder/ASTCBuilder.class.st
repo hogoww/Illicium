@@ -105,7 +105,8 @@ Class {
 		'negationOperator',
 		'expressionList',
 		'switch',
-		'switchCase'
+		'switchCase',
+		'bitwiseNotOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -282,7 +283,8 @@ ASTCBuilder >> defineOperatorClasses [
 	assignementAdditionOperator := builder newClassNamed: #AssignementAdditionOperator.
 	bitwiseXorOperator := builder newClassNamed: #BitwiseXorOperator.
 	bitwiseOrOperator := builder newClassNamed: #BitwiseOrOperator.
-	negationOperator := builder newClassNamed: #NegationOperator
+	bitwiseNotOperator := builder newClassNamed: #BitwiseNotOperator.
+	negationOperator := builder newClassNamed: #NegationOperator.
 	
 ]
 
@@ -305,8 +307,9 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	preDecrementOperator --|> unaryOperator. " --i "
 	logicalNotOperator --|> unaryOperator." ! b "
 	addressOfOperator --|> unaryOperator. " & a "
-	castOperator --|> unaryOperator. " (int) a "
+	castOperator --|> binaryOperator. " (int) a "
 	negationOperator --|> unaryOperator. " - a "
+	bitwiseNotOperator --|> unaryOperator. " ~ a "
 	
 	"priority 3, #left"
 	multiplicationOperator --|> binaryOperator." a * b "

@@ -177,6 +177,20 @@ ASTCPrinterVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitBitwiseNotOperator: aBitwiseNotOperator [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aBitwiseNotOperator';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitBitwiseNotOperator: aBitwiseNotOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitBitwiseOrOperator: aBitwiseOrOperator [
 	stream cr.
 	self printTabCount: currentDepth.

@@ -55,6 +55,11 @@ ASTCSuperclassVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitBitwiseNotOperator: aBitwiseNotOperator [
+	^ self visitUnaryOperator: aBitwiseNotOperator
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitBitwiseOrOperator: aBitwiseOrOperator [
 	^ self visitBinaryOperator: aBitwiseOrOperator
 ]
@@ -76,7 +81,7 @@ ASTCSuperclassVisitor >> visitBreak: aBreak [
 
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitCastOperator: aCastOperator [
-	^ self visitUnaryOperator: aCastOperator
+	^ self visitBinaryOperator: aCastOperator
 ]
 
 { #category : #visiting }
