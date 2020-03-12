@@ -19,6 +19,15 @@ MASlangAbstractInliner class >> includesSelectorTranslatedAsMacro: aSelector [
 	^ selectorMacros includes: aSelector
 ]
 
+{ #category : #renaming }
+MASlangAbstractInliner class >> renameVariablesOf: aMethodNode byArguments: arguments [
+	| replacement |
+	aMethodNode body nodesDo: [:aNode |  
+		(aNode isArgument and:[ aNode isBlockVar not ]) ifTrue: [
+			replacement := arguments at: (aMethodNode arguments indexOf: aNode).
+			aNode replaceWith: replacement ] ] 
+]
+
 { #category : #accessing }
 MASlangAbstractInliner class >> translator: aTranslator [
 
@@ -252,11 +261,7 @@ MASlangAbstractInliner >> renameVariablesIn: aMethodNode using: replacementNames
 
 { #category : #renaming }
 MASlangAbstractInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
-  | replacement |	
-	aMethodNode body nodesDo: [:aNode |  
-		(aNode isArgument and:[ aNode isBlockVar not ]) ifTrue: [
-			replacement := arguments at: (aMethodNode arguments indexOf: aNode).
-			aNode replaceWith: replacement ] ] 
+  self class renameVariablesOf: aMethodNode byArguments: arguments
 ]
 
 { #category : #inlining }

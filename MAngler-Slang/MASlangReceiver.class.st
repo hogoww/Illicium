@@ -126,7 +126,7 @@ MASlangReceiver >> >> aNumber [
 
 { #category : #accessing }
 MASlangReceiver >> >>> shiftAmount [
-	self flag: #badApprox. "see cCodeGenerator >> generateSignedShiftRight:on:indent: "
+	self flag: #badApprox. "see CCodeGenerator >> generateSignedShiftRight:on:indent: "
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
 ]
 
@@ -838,15 +838,19 @@ MASlangReceiver >> unsupportedFeature: aSelector [
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> value: somethong [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #value:
+MASlangReceiver >> value: anArg [
+	^ self valueWithArguments: { anArg }
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> value: somethong value: bidule [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #value:value:
+MASlangReceiver >> value: anArg value: aSecondArg [
+	^ self valueWithArguments: { anArg. aSecondArg }
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> valueWithArguments: anArrayOfArgs [
+	MASlangMinimalInliner renameVariablesOf: receiverNode byArguments: anArrayOfArgs.
+	^ self translatedReceiver
 ]
 
 { #category : #'reflective operations' }
