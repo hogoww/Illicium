@@ -269,8 +269,10 @@ MASlangReceiver >> bitClear: aMask [
 
 { #category : #'reflective operations' }
 MASlangReceiver >> bitInvert64 [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #bitInvert64
+	self flag:#missingCheck. 
+	"I'm assuming i'm always in 64 currently,
+	see generateBitInvert: msgNode on: aStream indent: level"
+	^ self translatedReceiver castTo: (self cTypeFor: #usqIntptr_t).
 ]
 
 { #category : #'reflective operations' }
@@ -664,6 +666,11 @@ MASlangReceiver >> perform: aSelector with: arguments [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> preIncrement [
+	^ self translatedReceiver preIncr
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> printString [
 	^String streamContents:[:stream|
 		stream << (self class asString)
@@ -690,11 +697,35 @@ MASlangReceiver >> repeat [
 ]
 
 { #category : #'reflective operations' }
+MASlangReceiver >> rounded [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #round); yourself) ;
+		arguments: { self translatedReceiver };
+		yourself
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> shouldBeImplemented [
+
+	^ ASTCFunctionCall new 
+		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
+		arguments: { ASTCLiteral value: #shouldBeImplemented };
+		yourself
+]
+
+{ #category : #'reflective operations' }
 MASlangReceiver >> shouldNotImplement [ 
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
 		arguments: { ASTCLiteral value: 'shouldNotImplement' };
 		yourself
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> signedBitShift: somethong [
+	self flag: #undone. "want to see how slang translates it first."
+	^ self unsupportedFeature: #signedBitShift:
 ]
 
 { #category : #'reflective operations' }
@@ -772,6 +803,12 @@ MASlangReceiver >> to: stop do: aBlock [
 MASlangReceiver >> touch: something [
 	"does not do appear in translation"
 	^ ASTCEmptyStatement new
+]
+
+{ #category : #'reflective operations' }
+MASlangReceiver >> truncateTo: anInt [
+	self flag: #undone. "want to see how slang translates it first."
+	^ self translatedReceiver & ((anInt acceptVisitor: methodTranslator) - (self literalNodeFor: 1)) bitNot
 ]
 
 { #category : #'reflective operations' }
