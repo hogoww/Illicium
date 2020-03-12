@@ -150,4 +150,5 @@ FAStatementsBecomeExpressionsTest >> testStatementInsideSwitchCaseBecomesExpress
 	
 	self assert: switchCaseNode isSwitchCase.
 	self assert: switchCaseNode expression isIdentifier.
+	self assert: switchCaseNode body isBlock.
 ]
