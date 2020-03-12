@@ -1,17 +1,17 @@
 Class {
-	#name : #MASpurGenerationScavengerTranslationTest,
+	#name : #MAStringCompSpurGenerationScavengerTranslationTest,
 	#superclass : #MAVMTranslationTests,
 	#category : #'MAngler-Slang-Tests-generatedTests'
 }
 
 { #category : #running }
-MASpurGenerationScavengerTranslationTest >> setUp [
+MAStringCompSpurGenerationScavengerTranslationTest >> setUp [
 	super setUp.
 	testedClass := SpurGenerationScavenger
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testAddToEphemeronListStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testAddToEphemeronListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addToEphemeronList:.
 	illiAST := self generateIllicium: #addToEphemeronList:.
@@ -19,8 +19,8 @@ MASpurGenerationScavengerTranslationTest >> testAddToEphemeronListStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testAddToWeakListStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testAddToWeakListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addToWeakList:.
 	illiAST := self generateIllicium: #addToWeakList:.
@@ -28,8 +28,8 @@ MASpurGenerationScavengerTranslationTest >> testAddToWeakListStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'remembered set-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testAllNewSpaceObjectsHaveZeroRTRefCountStringComparison [
+{ #category : #'remembered set' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testAllNewSpaceObjectsHaveZeroRTRefCountStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #allNewSpaceObjectsHaveZeroRTRefCount.
@@ -39,8 +39,8 @@ MASpurGenerationScavengerTranslationTest >> testAllNewSpaceObjectsHaveZeroRTRefC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testAllWeakSurvivorsOnWeakListStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testAllWeakSurvivorsOnWeakListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allWeakSurvivorsOnWeakList.
 	illiAST := self generateIllicium: #allWeakSurvivorsOnWeakList.
@@ -48,8 +48,8 @@ MASpurGenerationScavengerTranslationTest >> testAllWeakSurvivorsOnWeakListString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'remembered set-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testComputeRefCountToShrinkRTStringComparison [
+{ #category : #'remembered set' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testComputeRefCountToShrinkRTStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #computeRefCountToShrinkRT.
 	illiAST := self generateIllicium: #computeRefCountToShrinkRT.
@@ -57,8 +57,8 @@ MASpurGenerationScavengerTranslationTest >> testComputeRefCountToShrinkRTStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'scavenger-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testCopyAndForwardMournerStringComparison [
+{ #category : #scavenger }
+MAStringCompSpurGenerationScavengerTranslationTest >> testCopyAndForwardMournerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copyAndForwardMourner:.
 	illiAST := self generateIllicium: #copyAndForwardMourner:.
@@ -66,8 +66,8 @@ MASpurGenerationScavengerTranslationTest >> testCopyAndForwardMournerStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'scavenger-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testCopyAndForwardStringComparison [
+{ #category : #scavenger }
+MAStringCompSpurGenerationScavengerTranslationTest >> testCopyAndForwardStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copyAndForward:.
 	illiAST := self generateIllicium: #copyAndForward:.
@@ -75,8 +75,8 @@ MASpurGenerationScavengerTranslationTest >> testCopyAndForwardStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'scavenger-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testCopyToOldSpacebytesformatStringComparison [
+{ #category : #scavenger }
+MAStringCompSpurGenerationScavengerTranslationTest >> testCopyToOldSpacebytesformatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copyToOldSpace:bytes:format:.
 	illiAST := self generateIllicium: #copyToOldSpace:bytes:format:.
@@ -84,8 +84,8 @@ MASpurGenerationScavengerTranslationTest >> testCopyToOldSpacebytesformatStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testFirstCorpseStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testFirstCorpseStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstCorpse:.
 	illiAST := self generateIllicium: #firstCorpse:.
@@ -93,8 +93,8 @@ MASpurGenerationScavengerTranslationTest >> testFirstCorpseStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'remembered set-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testGrowRememberedSetStringComparison [
+{ #category : #'remembered set' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testGrowRememberedSetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #growRememberedSet.
 	illiAST := self generateIllicium: #growRememberedSet.
@@ -102,8 +102,8 @@ MASpurGenerationScavengerTranslationTest >> testGrowRememberedSetStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'store check-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testIsInRememberedSetStringComparison [
+{ #category : #'store check' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testIsInRememberedSetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInRememberedSet:.
 	illiAST := self generateIllicium: #isInRememberedSet:.
@@ -111,8 +111,8 @@ MASpurGenerationScavengerTranslationTest >> testIsInRememberedSetStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testIsMaybeOldScavengeSurvivorStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testIsMaybeOldScavengeSurvivorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isMaybeOldScavengeSurvivor:.
 	illiAST := self generateIllicium: #isMaybeOldScavengeSurvivor:.
@@ -120,8 +120,8 @@ MASpurGenerationScavengerTranslationTest >> testIsMaybeOldScavengeSurvivorString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testIsScavengeSurvivorStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testIsScavengeSurvivorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isScavengeSurvivor:.
 	illiAST := self generateIllicium: #isScavengeSurvivor:.
@@ -129,8 +129,8 @@ MASpurGenerationScavengerTranslationTest >> testIsScavengeSurvivorStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testIsonWeaklingListStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testIsonWeaklingListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #is:onWeaklingList:.
 	illiAST := self generateIllicium: #is:onWeaklingList:.
@@ -138,8 +138,8 @@ MASpurGenerationScavengerTranslationTest >> testIsonWeaklingListStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testNewSpaceCapacityStringComparison [
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testNewSpaceCapacityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #newSpaceCapacity.
 	illiAST := self generateIllicium: #newSpaceCapacity.
@@ -147,8 +147,8 @@ MASpurGenerationScavengerTranslationTest >> testNewSpaceCapacityStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testNoUnfiredEphemeronsAtEndOfRememberedSetStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testNoUnfiredEphemeronsAtEndOfRememberedSetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #noUnfiredEphemeronsAtEndOfRememberedSet.
@@ -158,8 +158,8 @@ MASpurGenerationScavengerTranslationTest >> testNoUnfiredEphemeronsAtEndOfRememb
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'logging-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testOpenScavengeLogStringComparison [
+{ #category : #logging }
+MAStringCompSpurGenerationScavengerTranslationTest >> testOpenScavengeLogStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #openScavengeLog.
 	illiAST := self generateIllicium: #openScavengeLog.
@@ -167,8 +167,8 @@ MASpurGenerationScavengerTranslationTest >> testOpenScavengeLogStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testPrintRememberedSetStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testPrintRememberedSetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printRememberedSet.
 	illiAST := self generateIllicium: #printRememberedSet.
@@ -176,8 +176,8 @@ MASpurGenerationScavengerTranslationTest >> testPrintRememberedSetStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testProcessEphemeronsStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testProcessEphemeronsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #processEphemerons.
 	illiAST := self generateIllicium: #processEphemerons.
@@ -185,8 +185,8 @@ MASpurGenerationScavengerTranslationTest >> testProcessEphemeronsStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testProcessWeakSurvivorStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testProcessWeakSurvivorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #processWeakSurvivor:.
 	illiAST := self generateIllicium: #processWeakSurvivor:.
@@ -194,8 +194,8 @@ MASpurGenerationScavengerTranslationTest >> testProcessWeakSurvivorStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testProcessWeaklingsStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testProcessWeaklingsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #processWeaklings.
 	illiAST := self generateIllicium: #processWeaklings.
@@ -203,8 +203,8 @@ MASpurGenerationScavengerTranslationTest >> testProcessWeaklingsStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'store check-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testRememberStringComparison [
+{ #category : #'store check' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testRememberStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #remember:.
 	illiAST := self generateIllicium: #remember:.
@@ -212,8 +212,8 @@ MASpurGenerationScavengerTranslationTest >> testRememberStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'scavenger-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testScavengeFutureSurvivorSpaceStartingAtStringComparison [
+{ #category : #scavenger }
+MAStringCompSpurGenerationScavengerTranslationTest >> testScavengeFutureSurvivorSpaceStartingAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #scavengeFutureSurvivorSpaceStartingAt:.
@@ -223,8 +223,8 @@ MASpurGenerationScavengerTranslationTest >> testScavengeFutureSurvivorSpaceStart
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'scavenger-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testScavengeLoopStringComparison [
+{ #category : #scavenger }
+MAStringCompSpurGenerationScavengerTranslationTest >> testScavengeLoopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #scavengeLoop.
 	illiAST := self generateIllicium: #scavengeLoop.
@@ -232,8 +232,8 @@ MASpurGenerationScavengerTranslationTest >> testScavengeLoopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'scavenger-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testScavengeReferentsOfStringComparison [
+{ #category : #scavenger }
+MAStringCompSpurGenerationScavengerTranslationTest >> testScavengeReferentsOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #scavengeReferentsOf:.
 	illiAST := self generateIllicium: #scavengeReferentsOf:.
@@ -241,8 +241,8 @@ MASpurGenerationScavengerTranslationTest >> testScavengeReferentsOfStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'scavenger-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testScavengeRememberedSetStartingAtStringComparison [
+{ #category : #scavenger }
+MAStringCompSpurGenerationScavengerTranslationTest >> testScavengeRememberedSetStartingAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #scavengeRememberedSetStartingAt:.
 	illiAST := self generateIllicium: #scavengeRememberedSetStartingAt:.
@@ -250,8 +250,8 @@ MASpurGenerationScavengerTranslationTest >> testScavengeRememberedSetStartingAtS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testScavengeUnfiredEphemeronsOnEphemeronListStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpurGenerationScavengerTranslationTest >> testScavengeUnfiredEphemeronsOnEphemeronListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #scavengeUnfiredEphemeronsOnEphemeronList.
@@ -261,8 +261,8 @@ MASpurGenerationScavengerTranslationTest >> testScavengeUnfiredEphemeronsOnEphem
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testScavengerTenuringThresholdStringComparison [
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testScavengerTenuringThresholdStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #scavengerTenuringThreshold.
 	illiAST := self generateIllicium: #scavengerTenuringThreshold.
@@ -270,11 +270,9 @@ MASpurGenerationScavengerTranslationTest >> testScavengerTenuringThresholdString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'logging-equaliy-test' }
-MASpurGenerationScavengerTranslationTest >> testWriteScavengeLogStringComparison [
+{ #category : #logging }
+MAStringCompSpurGenerationScavengerTranslationTest >> testWriteScavengeLogStringComparison [
 	| illiAST slangString illiString |
-	<skip>
-	self skip. "A super specific case of arraynode, no thanks."
 	slangString := self generateSlang: #writeScavengeLog.
 	illiAST := self generateIllicium: #writeScavengeLog.
 	illiString := self prettyPrintIllicium: illiAST.
@@ -282,6 +280,6 @@ MASpurGenerationScavengerTranslationTest >> testWriteScavengeLogStringComparison
 ]
 
 { #category : #accessing }
-MASpurGenerationScavengerTranslationTest >> translator [
+MAStringCompSpurGenerationScavengerTranslationTest >> translator [
 	^ MASpurGenerationScavengerRessource current translator
 ]

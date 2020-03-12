@@ -36,7 +36,7 @@ MAPluginTestGenerator class >> translatorClass [
 ]
 
 { #category : #picking }
-MAPluginTestGenerator >> methodToTest: aClass [
+MAPluginTestGenerator >> fillMethodsToTest: aClass [
 	^ aClass methodDict
 		select: [ :compiledMethod | 
 			(compiledMethod selector includesSubstring: 'primitive')

@@ -1,17 +1,17 @@
 Class {
-	#name : #MASpurPlanningCompactorTranslationTest,
+	#name : #MAStringCompSpurPlanningCompactorTranslationTest,
 	#superclass : #MAVMTranslationTests,
 	#category : #'MAngler-Slang-Tests-generatedTests'
 }
 
 { #category : #running }
-MASpurPlanningCompactorTranslationTest >> setUp [
+MAStringCompSpurPlanningCompactorTranslationTest >> setUp [
 	super setUp.
 	testedClass := SpurPlanningCompactor
 ]
 
-{ #category : #'compaction - api-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testCompactStringComparison [
+{ #category : #'compaction - api' }
+MAStringCompSpurPlanningCompactorTranslationTest >> testCompactStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #compact.
 	illiAST := self generateIllicium: #compact.
@@ -19,8 +19,8 @@ MASpurPlanningCompactorTranslationTest >> testCompactStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testCopyAndUnmarkMobileObjectsStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testCopyAndUnmarkMobileObjectsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copyAndUnmarkMobileObjects.
 	illiAST := self generateIllicium: #copyAndUnmarkMobileObjects.
@@ -28,8 +28,8 @@ MASpurPlanningCompactorTranslationTest >> testCopyAndUnmarkMobileObjectsStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testCopyAndUnmarkStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testCopyAndUnmarkStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copyAndUnmark:.
 	illiAST := self generateIllicium: #copyAndUnmark:.
@@ -37,8 +37,8 @@ MASpurPlanningCompactorTranslationTest >> testCopyAndUnmarkStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'private-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testFreeFromupTonextObjectStringComparison [
+{ #category : #private }
+MAStringCompSpurPlanningCompactorTranslationTest >> testFreeFromupTonextObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeFrom:upTo:nextObject:.
 	illiAST := self generateIllicium: #freeFrom:upTo:nextObject:.
@@ -46,8 +46,8 @@ MASpurPlanningCompactorTranslationTest >> testFreeFromupTonextObjectStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testInitializeScanCheckingForFullyCompactedHeapStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testInitializeScanCheckingForFullyCompactedHeapStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #initializeScanCheckingForFullyCompactedHeap.
@@ -57,8 +57,8 @@ MASpurPlanningCompactorTranslationTest >> testInitializeScanCheckingForFullyComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'private-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testIsMobileStringComparison [
+{ #category : #private }
+MAStringCompSpurPlanningCompactorTranslationTest >> testIsMobileStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isMobile:.
 	illiAST := self generateIllicium: #isMobile:.
@@ -66,8 +66,8 @@ MASpurPlanningCompactorTranslationTest >> testIsMobileStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'private-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testIsPostMobileStringComparison [
+{ #category : #private }
+MAStringCompSpurPlanningCompactorTranslationTest >> testIsPostMobileStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isPostMobile:.
 	illiAST := self generateIllicium: #isPostMobile:.
@@ -75,8 +75,8 @@ MASpurPlanningCompactorTranslationTest >> testIsPostMobileStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testPlanCompactSavingForwardersStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testPlanCompactSavingForwardersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #planCompactSavingForwarders.
 	illiAST := self generateIllicium: #planCompactSavingForwarders.
@@ -84,8 +84,8 @@ MASpurPlanningCompactorTranslationTest >> testPlanCompactSavingForwardersStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testReinitializeScanFromStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testReinitializeScanFromStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #reinitializeScanFrom:.
 	illiAST := self generateIllicium: #reinitializeScanFrom:.
@@ -93,8 +93,8 @@ MASpurPlanningCompactorTranslationTest >> testReinitializeScanFromStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenge/compact-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testRemapObjStringComparison [
+{ #category : #'gc - scavenge/compact' }
+MAStringCompSpurPlanningCompactorTranslationTest >> testRemapObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #remapObj:.
 	illiAST := self generateIllicium: #remapObj:.
@@ -102,8 +102,8 @@ MASpurPlanningCompactorTranslationTest >> testRemapObjStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'space management-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testSavedFirstFieldsSpaceWasAllocatedStringComparison [
+{ #category : #'space management' }
+MAStringCompSpurPlanningCompactorTranslationTest >> testSavedFirstFieldsSpaceWasAllocatedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #savedFirstFieldsSpaceWasAllocated.
 	illiAST := self generateIllicium: #savedFirstFieldsSpaceWasAllocated.
@@ -111,8 +111,8 @@ MASpurPlanningCompactorTranslationTest >> testSavedFirstFieldsSpaceWasAllocatedS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testScanForFirstFreeAndFirstMobileObjectFromStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testScanForFirstFreeAndFirstMobileObjectFromStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #scanForFirstFreeAndFirstMobileObjectFrom:.
@@ -122,8 +122,8 @@ MASpurPlanningCompactorTranslationTest >> testScanForFirstFreeAndFirstMobileObje
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenge/compact-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testShouldRemapObjStringComparison [
+{ #category : #'gc - scavenge/compact' }
+MAStringCompSpurPlanningCompactorTranslationTest >> testShouldRemapObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shouldRemapObj:.
 	illiAST := self generateIllicium: #shouldRemapObj:.
@@ -131,8 +131,8 @@ MASpurPlanningCompactorTranslationTest >> testShouldRemapObjStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testUnmarkObjectsFromFirstFreeObjectStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testUnmarkObjectsFromFirstFreeObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unmarkObjectsFromFirstFreeObject.
 	illiAST := self generateIllicium: #unmarkObjectsFromFirstFreeObject.
@@ -140,8 +140,8 @@ MASpurPlanningCompactorTranslationTest >> testUnmarkObjectsFromFirstFreeObjectSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testUpdatePointersInsavedFirstFieldPointerStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testUpdatePointersInsavedFirstFieldPointerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #updatePointersIn:savedFirstFieldPointer:.
@@ -151,8 +151,8 @@ MASpurPlanningCompactorTranslationTest >> testUpdatePointersInsavedFirstFieldPoi
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testUpdatePointersStringComparison [
+{ #category : #compaction }
+MAStringCompSpurPlanningCompactorTranslationTest >> testUpdatePointersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #updatePointers.
 	illiAST := self generateIllicium: #updatePointers.
@@ -160,8 +160,8 @@ MASpurPlanningCompactorTranslationTest >> testUpdatePointersStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'space management-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testUseSegmentForSavedFirstFieldsSpaceStringComparison [
+{ #category : #'space management' }
+MAStringCompSpurPlanningCompactorTranslationTest >> testUseSegmentForSavedFirstFieldsSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #useSegmentForSavedFirstFieldsSpace:.
@@ -171,8 +171,8 @@ MASpurPlanningCompactorTranslationTest >> testUseSegmentForSavedFirstFieldsSpace
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'private-equaliy-test' }
-MASpurPlanningCompactorTranslationTest >> testValidRelocationPlanInPassStringComparison [
+{ #category : #private }
+MAStringCompSpurPlanningCompactorTranslationTest >> testValidRelocationPlanInPassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validRelocationPlanInPass:.
 	illiAST := self generateIllicium: #validRelocationPlanInPass:.
@@ -181,6 +181,6 @@ MASpurPlanningCompactorTranslationTest >> testValidRelocationPlanInPassStringCom
 ]
 
 { #category : #accessing }
-MASpurPlanningCompactorTranslationTest >> translator [
+MAStringCompSpurPlanningCompactorTranslationTest >> translator [
 	^ MASpurPlanningCompactorRessource current translator
 ]

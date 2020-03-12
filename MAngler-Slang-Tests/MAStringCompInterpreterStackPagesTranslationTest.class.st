@@ -1,17 +1,17 @@
 Class {
-	#name : #MAInterpreterStackPagesTranslationTest,
+	#name : #MAStringCompInterpreterStackPagesTranslationTest,
 	#superclass : #MAVMTranslationTests,
 	#category : #'MAngler-Slang-Tests-generatedTests'
 }
 
 { #category : #running }
-MAInterpreterStackPagesTranslationTest >> setUp [
+MAStringCompInterpreterStackPagesTranslationTest >> setUp [
 	super setUp.
 	testedClass := InterpreterStackPages
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testFreeStackPageNoAssertStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testFreeStackPageNoAssertStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeStackPageNoAssert:.
 	illiAST := self generateIllicium: #freeStackPageNoAssert:.
@@ -19,8 +19,8 @@ MAInterpreterStackPagesTranslationTest >> testFreeStackPageNoAssertStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testFreeStackPageStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testFreeStackPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeStackPage:.
 	illiAST := self generateIllicium: #freeStackPage:.
@@ -28,8 +28,8 @@ MAInterpreterStackPagesTranslationTest >> testFreeStackPageStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testInitializeStacknumSlotspageSizeStringComparison [
+{ #category : #initialization }
+MAStringCompInterpreterStackPagesTranslationTest >> testInitializeStacknumSlotspageSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #initializeStack:numSlots:pageSize:.
@@ -38,8 +38,8 @@ MAInterpreterStackPagesTranslationTest >> testInitializeStacknumSlotspageSizeStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testMarkStackPageMostRecentlyUsedStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testMarkStackPageMostRecentlyUsedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markStackPageMostRecentlyUsed:.
 	illiAST := self generateIllicium: #markStackPageMostRecentlyUsed:.
@@ -47,8 +47,8 @@ MAInterpreterStackPagesTranslationTest >> testMarkStackPageMostRecentlyUsedStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testMarkStackPageNextMostRecentlyUsedStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testMarkStackPageNextMostRecentlyUsedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #markStackPageNextMostRecentlyUsed:.
@@ -57,8 +57,8 @@ MAInterpreterStackPagesTranslationTest >> testMarkStackPageNextMostRecentlyUsedS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testNewStackPageStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testNewStackPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #newStackPage.
 	illiAST := self generateIllicium: #newStackPage.
@@ -66,8 +66,8 @@ MAInterpreterStackPagesTranslationTest >> testNewStackPageStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testPageIndexForStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testPageIndexForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pageIndexFor:.
 	illiAST := self generateIllicium: #pageIndexFor:.
@@ -75,8 +75,8 @@ MAInterpreterStackPagesTranslationTest >> testPageIndexForStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'assertions-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testPageListIsWellFormedStringComparison [
+{ #category : #assertions }
+MAStringCompInterpreterStackPagesTranslationTest >> testPageListIsWellFormedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pageListIsWellFormed.
 	illiAST := self generateIllicium: #pageListIsWellFormed.
@@ -84,8 +84,8 @@ MAInterpreterStackPagesTranslationTest >> testPageListIsWellFormedStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testStackPageAtStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testStackPageAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackPageAt:.
 	illiAST := self generateIllicium: #stackPageAt:.
@@ -93,8 +93,8 @@ MAInterpreterStackPagesTranslationTest >> testStackPageAtStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'page access-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testStackPageForStringComparison [
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testStackPageForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackPageFor:.
 	illiAST := self generateIllicium: #stackPageFor:.
@@ -102,8 +102,8 @@ MAInterpreterStackPagesTranslationTest >> testStackPageForStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'statistics-equaliy-test' }
-MAInterpreterStackPagesTranslationTest >> testStatAverageLivePagesWhenMappingStringComparison [
+{ #category : #statistics }
+MAStringCompInterpreterStackPagesTranslationTest >> testStatAverageLivePagesWhenMappingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #statAverageLivePagesWhenMapping.
 	illiAST := self generateIllicium: #statAverageLivePagesWhenMapping.
@@ -112,6 +112,6 @@ MAInterpreterStackPagesTranslationTest >> testStatAverageLivePagesWhenMappingStr
 ]
 
 { #category : #accessing }
-MAInterpreterStackPagesTranslationTest >> translator [
+MAStringCompInterpreterStackPagesTranslationTest >> translator [
 	^ MAInterpreterStackPagesRessource current translator
 ]

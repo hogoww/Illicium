@@ -1,17 +1,17 @@
 Class {
-	#name : #MAStackInterpreterPrimitivesTranslationTest,
+	#name : #MAStringCompStackInterpreterPrimitivesTranslationTest,
 	#superclass : #MAVMTranslationTests,
 	#category : #'MAngler-Slang-Tests-generatedTests'
 }
 
 { #category : #running }
-MAStackInterpreterPrimitivesTranslationTest >> setUp [
+MAStringCompStackInterpreterPrimitivesTranslationTest >> setUp [
 	super setUp.
 	testedClass := StackInterpreterPrimitives
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testActiveProcessStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testActiveProcessStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #activeProcess.
 	illiAST := self generateIllicium: #activeProcess.
@@ -19,8 +19,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testActiveProcessStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAddIdleUsecsStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAddIdleUsecsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addIdleUsecs:.
 	illiAST := self generateIllicium: #addIdleUsecs:.
@@ -28,8 +28,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAddIdleUsecsStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAddLastLinktoListStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAddLastLinktoListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addLastLink:toList:.
 	illiAST := self generateIllicium: #addLastLink:toList:.
@@ -37,8 +37,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAddLastLinktoListStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'method lookup cache-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAddNewMethodToCacheStringComparison [
+{ #category : #'method lookup cache' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAddNewMethodToCacheStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addNewMethodToCache:.
 	illiAST := self generateIllicium: #addNewMethodToCache:.
@@ -46,8 +46,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAddNewMethodToCacheStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAddressCouldBeClassObjStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAddressCouldBeClassObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addressCouldBeClassObj:.
 	illiAST := self generateIllicium: #addressCouldBeClassObj:.
@@ -55,8 +55,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAddressCouldBeClassObjStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAllOnesAsCharStarStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAllOnesAsCharStarStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allOnesAsCharStar.
 	illiAST := self generateIllicium: #allOnesAsCharStar.
@@ -64,8 +64,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAllOnesAsCharStarStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfClosureStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfClosureStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #argumentCountOfClosure:.
 	illiAST := self generateIllicium: #argumentCountOfClosure:.
@@ -73,8 +73,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfClosureStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfMethodHeaderStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfMethodHeaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #argumentCountOfMethodHeader:.
 	illiAST := self generateIllicium: #argumentCountOfMethodHeader:.
@@ -82,8 +82,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfMethodHeaderSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #argumentCountOf:.
 	illiAST := self generateIllicium: #argumentCountOf:.
@@ -91,8 +91,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testArgumentCountOfStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testArrayValueOfStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testArrayValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #arrayValueOf:.
 	illiAST := self generateIllicium: #arrayValueOf:.
@@ -100,8 +100,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testArrayValueOfStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAsciiOfCharacterStringComparison [
+{ #category : #'indexing primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAsciiOfCharacterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #asciiOfCharacter:.
 	illiAST := self generateIllicium: #asciiOfCharacter:.
@@ -109,8 +109,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAsciiOfCharacterStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAssertValidExecutionPointersStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAssertValidExecutionPointersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #assertValidExecutionPointe:r:s:.
 	illiAST := self generateIllicium: #assertValidExecutionPointe:r:s:.
@@ -118,8 +118,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAssertValidExecutionPointersS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testAssertValidExecutionPointersimbarlineStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testAssertValidExecutionPointersimbarlineStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #assertValidExecutionPointe:r:s:imbar:line:.
@@ -129,8 +129,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testAssertValidExecutionPointersi
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testBooleanValueOfStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testBooleanValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #booleanValueOf:.
 	illiAST := self generateIllicium: #booleanValueOf:.
@@ -138,8 +138,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testBooleanValueOfStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCStringOrNullForStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCStringOrNullForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #cStringOrNullFor:.
 	illiAST := self generateIllicium: #cStringOrNullFor:.
@@ -147,8 +147,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCStringOrNullForStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'callback support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCallbackEnterStringComparison [
+{ #category : #'callback support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCallbackEnterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #callbackEnter:.
 	illiAST := self generateIllicium: #callbackEnter:.
@@ -156,8 +156,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCallbackEnterStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'callback support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCallbackLeaveStringComparison [
+{ #category : #'callback support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCallbackLeaveStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #callbackLeave:.
 	illiAST := self generateIllicium: #callbackLeave:.
@@ -165,8 +165,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCallbackLeaveStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCanBeImmutableStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCanBeImmutableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #canBeImmutable:.
 	illiAST := self generateIllicium: #canBeImmutable:.
@@ -174,8 +174,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCanBeImmutableStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCanContextSwitchIfActivatingheaderStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCanContextSwitchIfActivatingheaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #canContextSwitchIfActivating:header:.
@@ -185,8 +185,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCanContextSwitchIfActivatingh
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCharacterForAsciiStringComparison [
+{ #category : #'indexing primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCharacterForAsciiStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #characterForAscii:.
 	illiAST := self generateIllicium: #characterForAscii:.
@@ -194,8 +194,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCharacterForAsciiStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckAllAccessibleObjectsOkayStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckAllAccessibleObjectsOkayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkAllAccessibleObjectsOkay.
 	illiAST := self generateIllicium: #checkAllAccessibleObjectsOkay.
@@ -203,8 +203,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckAllAccessibleObjectsOkay
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckCodeIntegrityStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckCodeIntegrityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkCodeIntegrity:.
 	illiAST := self generateIllicium: #checkCodeIntegrity:.
@@ -212,8 +212,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckCodeIntegrityStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckDeliveryOfLongRunningPrimitiveSignalStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckDeliveryOfLongRunningPrimitiveSignalStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #checkDeliveryOfLongRunningPrimitiveSignal.
@@ -223,8 +223,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckDeliveryOfLongRunningPri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckForEventsMayContextSwitchStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckForEventsMayContextSwitchStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkForEventsMayContextSwitch:.
 	illiAST := self generateIllicium: #checkForEventsMayContextSwitch:.
@@ -232,8 +232,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckForEventsMayContextSwitc
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckImageVersionFromstartingAtStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckImageVersionFromstartingAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkImageVersionFrom:startingAt:.
 	illiAST := self generateIllicium: #checkImageVersionFrom:startingAt:.
@@ -241,8 +241,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckImageVersionFromstarting
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckInterpreterIntegrityStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckInterpreterIntegrityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkInterpreterIntegrity.
 	illiAST := self generateIllicium: #checkInterpreterIntegrity.
@@ -250,8 +250,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckInterpreterIntegrityStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckIsStillMarriedContextcurrentFPStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckIsStillMarriedContextcurrentFPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #checkIsStillMarriedContext:currentFP:.
@@ -261,8 +261,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckIsStillMarriedContextcur
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayFieldsStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckOkayFieldsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOkayFields:.
 	illiAST := self generateIllicium: #checkOkayFields:.
@@ -270,8 +270,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayFieldsStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayInterpreterObjectsStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckOkayInterpreterObjectsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOkayInterpreterObjects:.
 	illiAST := self generateIllicium: #checkOkayInterpreterObjects:.
@@ -279,8 +279,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayInterpreterObjectsSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayStackPageStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckOkayStackPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOkayStackPage:.
 	illiAST := self generateIllicium: #checkOkayStackPage:.
@@ -288,8 +288,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayStackPageStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayStackZoneStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckOkayStackZoneStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOkayStackZone:.
 	illiAST := self generateIllicium: #checkOkayStackZone:.
@@ -297,8 +297,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckOkayStackZoneStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckProfileTickStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckProfileTickStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkProfileTick:.
 	illiAST := self generateIllicium: #checkProfileTick:.
@@ -306,8 +306,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckProfileTickStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckStackIntegrityStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckStackIntegrityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkStackIntegrity.
 	illiAST := self generateIllicium: #checkStackIntegrity.
@@ -315,8 +315,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckStackIntegrityStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckStackPointerForMaybeMarriedContextStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckStackPointerForMaybeMarriedContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #checkStackPointerForMaybeMarriedContext:.
@@ -326,8 +326,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckStackPointerForMaybeMarr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckStackPointerIndexForFrameStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckStackPointerIndexForFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkStackPointerIndexForFrame:.
 	illiAST := self generateIllicium: #checkStackPointerIndexForFrame:.
@@ -335,8 +335,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckStackPointerIndexForFram
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCheckedIntegerValueOfStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCheckedIntegerValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkedIntegerValueOf:.
 	illiAST := self generateIllicium: #checkedIntegerValueOf:.
@@ -344,8 +344,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCheckedIntegerValueOfStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testClassNameOfIsStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testClassNameOfIsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classNameOf:Is:.
 	illiAST := self generateIllicium: #classNameOf:Is:.
@@ -353,8 +353,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testClassNameOfIsStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCloneContextStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCloneContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #cloneContext:.
 	illiAST := self generateIllicium: #cloneContext:.
@@ -362,8 +362,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCloneContextStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testContexthasSenderStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testContexthasSenderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #context:hasSender:.
 	illiAST := self generateIllicium: #context:hasSender:.
@@ -371,8 +371,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testContexthasSenderStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testContexthasValidInversePCMappingOfinStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testContexthasValidInversePCMappingOfinStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #context:hasValidInversePCMappingOf:in:.
@@ -382,8 +382,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testContexthasValidInversePCMappi
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCopiedValueCountOfClosureStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCopiedValueCountOfClosureStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copiedValueCountOfClosure:.
 	illiAST := self generateIllicium: #copiedValueCountOfClosure:.
@@ -391,8 +391,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCopiedValueCountOfClosureStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCopiedValueCountOfFullClosureStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCopiedValueCountOfFullClosureStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copiedValueCountOfFullClosure:.
 	illiAST := self generateIllicium: #copiedValueCountOfFullClosure:.
@@ -400,8 +400,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCopiedValueCountOfFullClosure
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'bitblt support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCopyBitsFromtoatStringComparison [
+{ #category : #'bitblt support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCopyBitsFromtoatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copyBitsFrom:to:at:.
 	illiAST := self generateIllicium: #copyBitsFrom:to:at:.
@@ -409,8 +409,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCopyBitsFromtoatStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'bitblt support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCopyBitsStringComparison [
+{ #category : #'bitblt support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCopyBitsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #copyBits.
 	illiAST := self generateIllicium: #copyBits.
@@ -418,8 +418,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCopyBitsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCouldBeProcessStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCouldBeProcessStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #couldBeProcess:.
 	illiAST := self generateIllicium: #couldBeProcess:.
@@ -427,8 +427,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCouldBeProcessStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCrStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCrStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #cr.
 	illiAST := self generateIllicium: #cr.
@@ -436,8 +436,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCrStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testCreateActualMessageToStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testCreateActualMessageToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #createActualMessageTo:.
 	illiAST := self generateIllicium: #createActualMessageTo:.
@@ -445,8 +445,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testCreateActualMessageToStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDefaultNumStackPagesStringComparison [
+{ #category : #initialization }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDefaultNumStackPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #defaultNumStackPages.
 	illiAST := self generateIllicium: #defaultNumStackPages.
@@ -454,8 +454,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDefaultNumStackPagesStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'vm scheduling-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDisownVMStringComparison [
+{ #category : #'vm scheduling' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDisownVMStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #disownVM:.
 	illiAST := self generateIllicium: #disownVM:.
@@ -463,8 +463,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDisownVMStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDivorceAllFramesStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDivorceAllFramesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #divorceAllFrames.
 	illiAST := self generateIllicium: #divorceAllFrames.
@@ -472,8 +472,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDivorceAllFramesStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDivorceFramesInStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDivorceFramesInStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #divorceFramesIn:.
 	illiAST := self generateIllicium: #divorceFramesIn:.
@@ -481,8 +481,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDivorceFramesInStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDoPrimitiveDivbyStringComparison [
+{ #category : #'arithmetic primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDoPrimitiveDivbyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #doPrimitiveDiv:by:.
 	illiAST := self generateIllicium: #doPrimitiveDiv:by:.
@@ -490,8 +490,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDoPrimitiveDivbyStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDoPrimitiveModbyStringComparison [
+{ #category : #'arithmetic primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDoPrimitiveModbyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #doPrimitiveMod:by:.
 	illiAST := self generateIllicium: #doPrimitiveMod:by:.
@@ -499,8 +499,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDoPrimitiveModbyStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDoSignalSemaphoreWithIndexStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDoSignalSemaphoreWithIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #doSignalSemaphoreWithIndex:.
 	illiAST := self generateIllicium: #doSignalSemaphoreWithIndex:.
@@ -508,8 +508,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDoSignalSemaphoreWithIndexStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDummyReferToProxyStringComparison [
+{ #category : #initialization }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDummyReferToProxyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #dummyReferToProxy.
 	illiAST := self generateIllicium: #dummyReferToProxy.
@@ -517,8 +517,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDummyReferToProxyStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testDumpPrimTraceLogStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testDumpPrimTraceLogStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #dumpPrimTraceLog.
 	illiAST := self generateIllicium: #dumpPrimTraceLog.
@@ -526,8 +526,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testDumpPrimTraceLogStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testEnsureCallerContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testEnsureCallerContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #ensureCallerContext:.
 	illiAST := self generateIllicium: #ensureCallerContext:.
@@ -535,8 +535,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testEnsureCallerContextStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testEnsureImageFormatIsUpToDateStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testEnsureImageFormatIsUpToDateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #ensureImageFormatIsUpToDate:.
 	illiAST := self generateIllicium: #ensureImageFormatIsUpToDate:.
@@ -544,8 +544,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testEnsureImageFormatIsUpToDateSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testEnterSmalltalkExecutiveImplementationStringComparison [
+{ #category : #initialization }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testEnterSmalltalkExecutiveImplementationStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #enterSmalltalkExecutiveImplementation.
@@ -555,8 +555,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testEnterSmalltalkExecutiveImplem
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testExternalDivorceFrameandContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testExternalDivorceFrameandContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #externalDivorceFrame:andContext:.
 	illiAST := self generateIllicium: #externalDivorceFrame:andContext:.
@@ -564,8 +564,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testExternalDivorceFrameandContex
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testExternalEnsureIsBaseFrameStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testExternalEnsureIsBaseFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #externalEnsureIsBaseFrame:.
 	illiAST := self generateIllicium: #externalEnsureIsBaseFrame:.
@@ -573,8 +573,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testExternalEnsureIsBaseFrameStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testExternalInstVarofContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testExternalInstVarofContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #externalInstVar:ofContext:.
 	illiAST := self generateIllicium: #externalInstVar:ofContext:.
@@ -582,8 +582,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testExternalInstVarofContextStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testExternalInstVarofContextputStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testExternalInstVarofContextputStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #externalInstVar:ofContext:put:.
 	illiAST := self generateIllicium: #externalInstVar:ofContext:put:.
@@ -591,8 +591,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testExternalInstVarofContextputSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testExternalQuickPrimitiveResponseStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testExternalQuickPrimitiveResponseStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #externalQuickPrimitiveResponse.
 	illiAST := self generateIllicium: #externalQuickPrimitiveResponse.
@@ -600,8 +600,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testExternalQuickPrimitiveRespons
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFailUnbalancedPrimitiveStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFailUnbalancedPrimitiveStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #failUnbalancedPrimitive.
 	illiAST := self generateIllicium: #failUnbalancedPrimitive.
@@ -609,8 +609,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFailUnbalancedPrimitiveString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFailedStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFailedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #failed.
 	illiAST := self generateIllicium: #failed.
@@ -618,8 +618,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFailedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFetchArrayofObjectStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFetchArrayofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchArray:ofObject:.
 	illiAST := self generateIllicium: #fetchArray:ofObject:.
@@ -627,8 +627,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFetchArrayofObjectStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFetchFloatofObjectStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFetchFloatofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchFloat:ofObject:.
 	illiAST := self generateIllicium: #fetchFloat:ofObject:.
@@ -636,8 +636,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFetchFloatofObjectStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFetchIntegerofObjectStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFetchIntegerofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchInteger:ofObject:.
 	illiAST := self generateIllicium: #fetchInteger:ofObject:.
@@ -645,8 +645,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFetchIntegerofObjectStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFetchPointerofMarriedContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFetchPointerofMarriedContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchPointer:ofMarriedContext:.
 	illiAST := self generateIllicium: #fetchPointer:ofMarriedContext:.
@@ -654,8 +654,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFetchPointerofMarriedContextS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFetchStackPointerOfStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFetchStackPointerOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchStackPointerOf:.
 	illiAST := self generateIllicium: #fetchStackPointerOf:.
@@ -663,8 +663,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFetchStackPointerOfStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFieldOrSenderFPofContextStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFieldOrSenderFPofContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fieldOrSenderFP:ofContext:.
 	illiAST := self generateIllicium: #fieldOrSenderFP:ofContext:.
@@ -672,8 +672,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFieldOrSenderFPofContextStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFieldofFrameStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFieldofFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #field:ofFrame:.
 	illiAST := self generateIllicium: #field:ofFrame:.
@@ -681,8 +681,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFieldofFrameStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindClassContainingMethodstartingAtStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindClassContainingMethodstartingAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #findClassContainingMethod:startingAt:.
@@ -692,8 +692,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindClassContainingMethodstar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindClassOfMethodforReceiverStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindClassOfMethodforReceiverStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findClassOfMethod:forReceiver:.
 	illiAST := self generateIllicium: #findClassOfMethod:forReceiver:.
@@ -701,8 +701,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindClassOfMethodforReceiverS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindFrameAboveinPageStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindFrameAboveinPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findFrameAbove:inPage:.
 	illiAST := self generateIllicium: #findFrameAbove:inPage:.
@@ -710,8 +710,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindFrameAboveinPageStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindHomeForContextStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindHomeForContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findHomeForContext:.
 	illiAST := self generateIllicium: #findHomeForContext:.
@@ -719,8 +719,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindHomeForContextStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'handler search-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindMethodWithPrimitiveFromContextUpToContextStringComparison [
+{ #category : #'handler search' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindMethodWithPrimitiveFromContextUpToContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #findMethodWithPrimitive:FromContext:UpToContext:.
@@ -730,8 +730,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindMethodWithPrimitiveFromCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindNewMethodInClassTagStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindNewMethodInClassTagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findNewMethodInClassTag:.
 	illiAST := self generateIllicium: #findNewMethodInClassTag:.
@@ -739,8 +739,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindNewMethodInClassTagString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindSPOfonStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindSPOfonStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findSPOf:on:.
 	illiAST := self generateIllicium: #findSPOf:on:.
@@ -748,8 +748,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindSPOfonStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFindSelectorOfMethodStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFindSelectorOfMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findSelectorOfMethod:.
 	illiAST := self generateIllicium: #findSelectorOfMethod:.
@@ -757,8 +757,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFindSelectorOfMethodStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFlushExternalPrimitiveOfStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFlushExternalPrimitiveOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #flushExternalPrimitiveOf:.
 	illiAST := self generateIllicium: #flushExternalPrimitiveOf:.
@@ -766,8 +766,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFlushExternalPrimitiveOfStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'lazy become-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFollowForwardedFrameContentsstackPointerStringComparison [
+{ #category : #'lazy become' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFollowForwardedFrameContentsstackPointerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #followForwardedFrameContents:stackPointer:.
@@ -777,8 +777,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFollowForwardedFrameContentss
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFollowForwardingPointersInStackZoneStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFollowForwardingPointersInStackZoneStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #followForwardingPointersInStackZone:.
@@ -788,8 +788,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFollowForwardingPointersInSta
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testForceInterruptCheckFromHeartbeatStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testForceInterruptCheckFromHeartbeatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #forceInterruptCheckFromHeartbeat.
 	illiAST := self generateIllicium: #forceInterruptCheckFromHeartbeat.
@@ -797,8 +797,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testForceInterruptCheckFromHeartb
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testForceInterruptCheckStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testForceInterruptCheckStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #forceInterruptCheck.
 	illiAST := self generateIllicium: #forceInterruptCheck.
@@ -806,8 +806,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testForceInterruptCheckStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameCallerContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameCallerContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameCallerContext:.
 	illiAST := self generateIllicium: #frameCallerContext:.
@@ -815,8 +815,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameCallerContextStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameContext:.
 	illiAST := self generateIllicium: #frameContext:.
@@ -824,8 +824,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameContextStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameHasContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameHasContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameHasContext:.
 	illiAST := self generateIllicium: #frameHasContext:.
@@ -833,8 +833,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameHasContextStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameIsBlockActivationStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameIsBlockActivationStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameIsBlockActivation:.
 	illiAST := self generateIllicium: #frameIsBlockActivation:.
@@ -842,8 +842,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameIsBlockActivationStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameMethodObjectStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameMethodObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameMethodObject:.
 	illiAST := self generateIllicium: #frameMethodObject:.
@@ -851,8 +851,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameMethodObjectStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameMethodStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameMethod:.
 	illiAST := self generateIllicium: #frameMethod:.
@@ -860,8 +860,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameMethodStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameNumArgsStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameNumArgsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameNumArgs:.
 	illiAST := self generateIllicium: #frameNumArgs:.
@@ -869,8 +869,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameNumArgsStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameOfMarriedContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameOfMarriedContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameOfMarriedContext:.
 	illiAST := self generateIllicium: #frameOfMarriedContext:.
@@ -878,8 +878,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameOfMarriedContextStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameReceiverStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameReceiverStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameReceiver:.
 	illiAST := self generateIllicium: #frameReceiver:.
@@ -887,8 +887,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameReceiverStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFrameStackedReceiverOffsetStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFrameStackedReceiverOffsetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #frameStackedReceiverOffset:.
 	illiAST := self generateIllicium: #frameStackedReceiverOffset:.
@@ -896,8 +896,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFrameStackedReceiverOffsetStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFreeUntracedStackPagesStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFreeUntracedStackPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeUntracedStackPages.
 	illiAST := self generateIllicium: #freeUntracedStackPages.
@@ -905,8 +905,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFreeUntracedStackPagesStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFullDisplayUpdateStringComparison [
+{ #category : #'I/O primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFullDisplayUpdateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fullDisplayUpdate.
 	illiAST := self generateIllicium: #fullDisplayUpdate.
@@ -914,8 +914,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFullDisplayUpdateStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'method lookup cache-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testFunctionPointerForinClassStringComparison [
+{ #category : #'method lookup cache' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testFunctionPointerForinClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #functionPointerFor:inClass:.
 	illiAST := self generateIllicium: #functionPointerFor:inClass:.
@@ -923,8 +923,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testFunctionPointerForinClassStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter shell-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetCurrentBytecodeStringComparison [
+{ #category : #'interpreter shell' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetCurrentBytecodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getCurrentBytecode.
 	illiAST := self generateIllicium: #getCurrentBytecode.
@@ -932,8 +932,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetCurrentBytecodeStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetDesiredCogCodeSizeStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetDesiredCogCodeSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getDesiredCogCodeSize.
 	illiAST := self generateIllicium: #getDesiredCogCodeSize.
@@ -941,8 +941,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetDesiredCogCodeSizeStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetErrorObjectFromPrimFailCodeStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetErrorObjectFromPrimFailCodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getErrorObjectFromPrimFailCode.
 	illiAST := self generateIllicium: #getErrorObjectFromPrimFailCode.
@@ -950,8 +950,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetErrorObjectFromPrimFailCod
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetFullScreenFlagStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetFullScreenFlagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getFullScreenFlag.
 	illiAST := self generateIllicium: #getFullScreenFlag.
@@ -959,8 +959,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetFullScreenFlagStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetInterruptKeycodeStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetInterruptKeycodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getInterruptKeycode.
 	illiAST := self generateIllicium: #getInterruptKeycode.
@@ -968,8 +968,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetInterruptKeycodeStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetInterruptPendingStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetInterruptPendingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getInterruptPending.
 	illiAST := self generateIllicium: #getInterruptPending.
@@ -977,8 +977,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetInterruptPendingStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetNextWakeupUsecsStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetNextWakeupUsecsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getNextWakeupUsecs.
 	illiAST := self generateIllicium: #getNextWakeupUsecs.
@@ -986,8 +986,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetNextWakeupUsecsStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetSavedWindowSizeStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetSavedWindowSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getSavedWindowSize.
 	illiAST := self generateIllicium: #getSavedWindowSize.
@@ -995,8 +995,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetSavedWindowSizeStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetSnapshotScreenSizeStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetSnapshotScreenSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getSnapshotScreenSize.
 	illiAST := self generateIllicium: #getSnapshotScreenSize.
@@ -1004,8 +1004,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetSnapshotScreenSizeStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetStackPointerStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetStackPointerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getStackPointer.
 	illiAST := self generateIllicium: #getStackPointer.
@@ -1013,8 +1013,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetStackPointerStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetThisSessionIDStringComparison [
+{ #category : #'plugin support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetThisSessionIDStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getThisSessionID.
 	illiAST := self generateIllicium: #getThisSessionID.
@@ -1022,8 +1022,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetThisSessionIDStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testGetWordFromFileswapStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testGetWordFromFileswapStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getWord32FromFile:swap:.
 	illiAST := self generateIllicium: #getWord32FromFile:swap:.
@@ -1031,8 +1031,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testGetWordFromFileswapStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testHandleForwardedSelectorFaultForStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testHandleForwardedSelectorFaultForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #handleForwardedSelectorFaultFor:.
 	illiAST := self generateIllicium: #handleForwardedSelectorFaultFor:.
@@ -1040,8 +1040,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testHandleForwardedSelectorFaultF
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testHandleForwardedSendFaultForTagStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testHandleForwardedSendFaultForTagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #handleForwardedSendFaultForTag:.
 	illiAST := self generateIllicium: #handleForwardedSendFaultForTag:.
@@ -1049,8 +1049,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testHandleForwardedSendFaultForTa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testHandleSpecialSelectorSendFaultForfpspStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testHandleSpecialSelectorSendFaultForfpspStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #handleSpecialSelectorSendFaultFor:fp:sp:.
@@ -1060,8 +1060,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testHandleSpecialSelectorSendFaul
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testHandleStackOverflowOrEventAllowContextSwitchStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testHandleStackOverflowOrEventAllowContextSwitchStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #handleStackOverflowOrEventAllowContextSwitch:.
@@ -1071,8 +1071,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testHandleStackOverflowOrEventAll
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testHandleStackOverflowStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testHandleStackOverflowStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #handleStackOverflow.
 	illiAST := self generateIllicium: #handleStackOverflow.
@@ -1080,8 +1080,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testHandleStackOverflowStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testHighBitStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testHighBitStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #highBit:.
 	illiAST := self generateIllicium: #highBit:.
@@ -1089,8 +1089,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testHighBitStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIfCurrentStackPageHasValidHeadPointersStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIfCurrentStackPageHasValidHeadPointersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #ifCurrentStackPageHasValidHeadPointers:.
@@ -1100,8 +1100,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIfCurrentStackPageHasValidHea
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIfValidWriteBackStackPointersSaveToStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIfValidWriteBackStackPointersSaveToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #ifValidWriteBackStack:Pointers:Save:To:.
@@ -1111,8 +1111,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIfValidWriteBackStackPointers
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIframeMethodStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIframeMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #iframeMethod:.
 	illiAST := self generateIllicium: #iframeMethod:.
@@ -1120,8 +1120,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIframeMethodStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIncludesBehaviorThatOfStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIncludesBehaviorThatOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #includesBehavior:ThatOf:.
 	illiAST := self generateIllicium: #includesBehavior:ThatOf:.
@@ -1129,8 +1129,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIncludesBehaviorThatOfStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testInstructionPointerForFramecurrentFPcurrentIPStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testInstructionPointerForFramecurrentFPcurrentIPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #instructionPointerForFrame:currentFP:currentIP:.
@@ -1140,8 +1140,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testInstructionPointerForFramecur
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter shell-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testInterpretStringComparison [
+{ #category : #'interpreter shell' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testInterpretStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #interpret.
 	illiAST := self generateIllicium: #interpret.
@@ -1149,8 +1149,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testInterpretStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testInterpreterAllocationReserveBytesStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testInterpreterAllocationReserveBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #interpreterAllocationReserveBytes.
 	illiAST := self generateIllicium: #interpreterAllocationReserveBytes.
@@ -1158,8 +1158,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testInterpreterAllocationReserveB
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIoFilenamefromStringofLengthresolveAliasesStringComparison [
+{ #category : #'plugin support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIoFilenamefromStringofLengthresolveAliasesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #ioFilename:fromString:ofLength:resolveAliases:.
@@ -1169,8 +1169,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIoFilenamefromStringofLengthr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsAppropriateForCopyObjectStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsAppropriateForCopyObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isAppropriateForCopyObject:.
 	illiAST := self generateIllicium: #isAppropriateForCopyObject:.
@@ -1178,8 +1178,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsAppropriateForCopyObjectStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsBaseFrameStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsBaseFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isBaseFrame:.
 	illiAST := self generateIllicium: #isBaseFrame:.
@@ -1187,8 +1187,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsBaseFrameStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsBooleanObjectStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsBooleanObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isBooleanObject:.
 	illiAST := self generateIllicium: #isBooleanObject:.
@@ -1196,8 +1196,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsBooleanObjectStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsFloatObjectStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsFloatObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isFloatObject:.
 	illiAST := self generateIllicium: #isFloatObject:.
@@ -1205,8 +1205,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsFloatObjectStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsFrameonPageStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsFrameonPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isFrame:onPage:.
 	illiAST := self generateIllicium: #isFrame:onPage:.
@@ -1214,8 +1214,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsFrameonPageStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsKindOfClassStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsKindOfClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #is:KindOfClass:.
 	illiAST := self generateIllicium: #is:KindOfClass:.
@@ -1223,8 +1223,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsKindOfClassStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsKindOfIntegerStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsKindOfIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isKindOfInteger:.
 	illiAST := self generateIllicium: #isKindOfInteger:.
@@ -1232,8 +1232,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsKindOfIntegerStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsKindOfStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsKindOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #is:KindOf:.
 	illiAST := self generateIllicium: #is:KindOf:.
@@ -1241,8 +1241,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsKindOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsLargeIntegerObjectStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsLargeIntegerObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isLargeIntegerObject:.
 	illiAST := self generateIllicium: #isLargeIntegerObject:.
@@ -1250,8 +1250,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsLargeIntegerObjectStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsLargeNegativeIntegerObjectStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsLargeNegativeIntegerObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isLargeNegativeIntegerObject:.
 	illiAST := self generateIllicium: #isLargeNegativeIntegerObject:.
@@ -1259,8 +1259,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsLargeNegativeIntegerObjectS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsLargePositiveIntegerObjectStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsLargePositiveIntegerObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isLargePositiveIntegerObject:.
 	illiAST := self generateIllicium: #isLargePositiveIntegerObject:.
@@ -1268,8 +1268,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsLargePositiveIntegerObjectS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsLiveContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsLiveContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isLiveContext:.
 	illiAST := self generateIllicium: #isLiveContext:.
@@ -1277,8 +1277,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsLiveContextStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsMarriedOrWidowedContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsMarriedOrWidowedContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isMarriedOrWidowedContext:.
 	illiAST := self generateIllicium: #isMarriedOrWidowedContext:.
@@ -1286,8 +1286,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsMarriedOrWidowedContextStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsMemberOfStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsMemberOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #is:MemberOf:.
 	illiAST := self generateIllicium: #is:MemberOf:.
@@ -1295,8 +1295,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsMemberOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsMetaPrimitiveIndexStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsMetaPrimitiveIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isMetaPrimitiveIndex:.
 	illiAST := self generateIllicium: #isMetaPrimitiveIndex:.
@@ -1304,8 +1304,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsMetaPrimitiveIndexStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsNegativeIntegerValueOfStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsNegativeIntegerValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isNegativeIntegerValueOf:.
 	illiAST := self generateIllicium: #isNegativeIntegerValueOf:.
@@ -1313,8 +1313,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsNegativeIntegerValueOfStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsPositiveMachineIntegerObjectStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsPositiveMachineIntegerObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isPositiveMachineIntegerObject:.
 	illiAST := self generateIllicium: #isPositiveMachineIntegerObject:.
@@ -1322,8 +1322,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsPositiveMachineIntegerObjec
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsPrimitiveFunctionPointerAnIndexStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsPrimitiveFunctionPointerAnIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isPrimitiveFunctionPointerAnIndex.
 	illiAST := self generateIllicium: #isPrimitiveFunctionPointerAnIndex.
@@ -1331,8 +1331,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsPrimitiveFunctionPointerAnI
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsQuickPrimitiveIndexStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsQuickPrimitiveIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isQuickPrimitiveIndex:.
 	illiAST := self generateIllicium: #isQuickPrimitiveIndex:.
@@ -1340,8 +1340,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsQuickPrimitiveIndexStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsReadMediatedContextInstVarIndexStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsReadMediatedContextInstVarIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #isReadMediatedContextInstVarIndex:.
@@ -1350,8 +1350,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsReadMediatedContextInstVarI
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsSingleContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsSingleContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isSingleContext:.
 	illiAST := self generateIllicium: #isSingleContext:.
@@ -1359,8 +1359,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsSingleContextStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsWidowedContextDuringGCStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsWidowedContextDuringGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isWidowedContextDuringGC:.
 	illiAST := self generateIllicium: #isWidowedContextDuringGC:.
@@ -1368,8 +1368,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsWidowedContextDuringGCStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsWidowedContextStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsWidowedContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isWidowedContext:.
 	illiAST := self generateIllicium: #isWidowedContext:.
@@ -1377,8 +1377,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsWidowedContextStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testIsWriteMediatedContextInstVarIndexStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testIsWriteMediatedContextInstVarIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #isWriteMediatedContextInstVarIndex:.
@@ -1388,8 +1388,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testIsWriteMediatedContextInstVar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLengthOfNameOfClassStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLengthOfNameOfClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lengthOfNameOfClass:.
 	illiAST := self generateIllicium: #lengthOfNameOfClass:.
@@ -1397,8 +1397,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLengthOfNameOfClassStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLiteralofMethodStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLiteralofMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #literal:ofMethod:.
 	illiAST := self generateIllicium: #literal:ofMethod:.
@@ -1406,8 +1406,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLiteralofMethodStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'bitblt support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLoadBitBltFromStringComparison [
+{ #category : #'bitblt support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLoadBitBltFromStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #loadBitBltFrom:.
 	illiAST := self generateIllicium: #loadBitBltFrom:.
@@ -1415,8 +1415,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLoadBitBltFromStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLoadInitialContextStringComparison [
+{ #category : #initialization }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLoadInitialContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #loadInitialContext.
 	illiAST := self generateIllicium: #loadInitialContext.
@@ -1424,8 +1424,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLoadInitialContextStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLongPrintOopStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLongPrintOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #longPrintOop:.
 	illiAST := self generateIllicium: #longPrintOop:.
@@ -1433,8 +1433,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLongPrintOopStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLongStoreBytecodeForHeaderStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLongStoreBytecodeForHeaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #longStoreBytecodeForHeader:.
 	illiAST := self generateIllicium: #longStoreBytecodeForHeader:.
@@ -1442,8 +1442,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLongStoreBytecodeForHeaderStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'method lookup cache-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLookupInMethodCacheSelclassTagStringComparison [
+{ #category : #'method lookup cache' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLookupInMethodCacheSelclassTagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lookupInMethodCacheSel:classTag:.
 	illiAST := self generateIllicium: #lookupInMethodCacheSel:classTag:.
@@ -1451,8 +1451,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLookupInMethodCacheSelclassTa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLookupMethodInClassStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLookupMethodInClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lookupMethodInClass:.
 	illiAST := self generateIllicium: #lookupMethodInClass:.
@@ -1460,8 +1460,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLookupMethodInClassStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLookupOrdinaryNoMNUEtcInClassStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLookupOrdinaryNoMNUEtcInClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lookupOrdinaryNoMNUEtcInClass:.
 	illiAST := self generateIllicium: #lookupOrdinaryNoMNUEtcInClass:.
@@ -1469,8 +1469,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLookupOrdinaryNoMNUEtcInClass
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testLookupSelectorinClassStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testLookupSelectorinClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lookupSelector:inClass:.
 	illiAST := self generateIllicium: #lookupSelector:inClass:.
@@ -1478,8 +1478,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testLookupSelectorinClassStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMagnitudeBitIntegerFornegStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMagnitudeBitIntegerFornegStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #magnitude64BitIntegerFor:neg:.
 	illiAST := self generateIllicium: #magnitude64BitIntegerFor:neg:.
@@ -1487,8 +1487,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMagnitudeBitIntegerFornegStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMagnitudeBitValueOfStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMagnitudeBitValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #magnitude64BitValueOf:.
 	illiAST := self generateIllicium: #magnitude64BitValueOf:.
@@ -1496,8 +1496,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMagnitudeBitValueOfStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMakeBaseFrameForStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMakeBaseFrameForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #makeBaseFrameFor:.
 	illiAST := self generateIllicium: #makeBaseFrameFor:.
@@ -1505,8 +1505,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMakeBaseFrameForStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMakeContextSnapshotSafeStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMakeContextSnapshotSafeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #makeContextSnapshotSafe:.
 	illiAST := self generateIllicium: #makeContextSnapshotSafe:.
@@ -1514,8 +1514,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMakeContextSnapshotSafeString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMakePointwithxValueyValueStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMakePointwithxValueyValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #makePointwithxValue:yValue:.
 	illiAST := self generateIllicium: #makePointwithxValue:yValue:.
@@ -1523,8 +1523,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMakePointwithxValueyValueStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMapInterpreterOopsStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMapInterpreterOopsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #mapInterpreterOops.
 	illiAST := self generateIllicium: #mapInterpreterOops.
@@ -1532,8 +1532,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMapInterpreterOopsStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMapStackPagesStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMapStackPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #mapStackPages.
 	illiAST := self generateIllicium: #mapStackPages.
@@ -1541,8 +1541,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMapStackPagesStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceStackPageStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceStackPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markAndTraceStackPage:.
 	illiAST := self generateIllicium: #markAndTraceStackPage:.
@@ -1550,8 +1550,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceStackPageStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceStackPagesStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceStackPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markAndTraceStackPages:.
 	illiAST := self generateIllicium: #markAndTraceStackPages:.
@@ -1559,8 +1559,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceStackPagesStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceUntracedReachableStackPagesStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceUntracedReachableStackPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #markAndTraceUntracedReachableStackPages.
@@ -1570,8 +1570,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMarkAndTraceUntracedReachable
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMarriedContextpointsTostackDeltaForCurrentFrameStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMarriedContextpointsTostackDeltaForCurrentFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #marriedContext:pointsTo:stackDeltaForCurrentFrame:.
@@ -1581,8 +1581,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMarriedContextpointsTostackDe
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMarryContextInNewStackPageAndInitializeInterpreterRegistersStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMarryContextInNewStackPageAndInitializeInterpreterRegistersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #marryContextInNewStackPageAndInitializeInterpreterRegisters:.
@@ -1592,8 +1592,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMarryContextInNewStackPageAnd
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMarryFrameSPStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMarryFrameSPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #marryFrame:SP:.
 	illiAST := self generateIllicium: #marryFrame:SP:.
@@ -1601,8 +1601,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMarryFrameSPStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMaybeLeakCheckExternalPrimCallStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMaybeLeakCheckExternalPrimCallStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #maybeLeakCheckExternalPrimCall:.
 	illiAST := self generateIllicium: #maybeLeakCheckExternalPrimCall:.
@@ -1610,8 +1610,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMaybeLeakCheckExternalPrimCal
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMaybeSelectorOfMethodStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMaybeSelectorOfMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #maybeSelectorOfMethod:.
 	illiAST := self generateIllicium: #maybeSelectorOfMethod:.
@@ -1619,8 +1619,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMaybeSelectorOfMethodStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodArgumentCountStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodArgumentCountStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodArgumentCount.
 	illiAST := self generateIllicium: #methodArgumentCount.
@@ -1628,8 +1628,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodArgumentCountStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodClassAssociationOfStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodClassAssociationOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodClassAssociationOf:.
 	illiAST := self generateIllicium: #methodClassAssociationOf:.
@@ -1637,8 +1637,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodClassAssociationOfStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodClassOfStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodClassOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodClassOf:.
 	illiAST := self generateIllicium: #methodClassOf:.
@@ -1646,8 +1646,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodClassOfStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodHeaderIndicatesLargeFrameStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodHeaderIndicatesLargeFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodHeaderIndicatesLargeFrame:.
 	illiAST := self generateIllicium: #methodHeaderIndicatesLargeFrame:.
@@ -1655,8 +1655,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodHeaderIndicatesLargeFra
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodPrimitiveIndexStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodPrimitiveIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodPrimitiveIndex.
 	illiAST := self generateIllicium: #methodPrimitiveIndex.
@@ -1664,8 +1664,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodPrimitiveIndexStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnBoolStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodReturnBoolStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodReturnBool:.
 	illiAST := self generateIllicium: #methodReturnBool:.
@@ -1673,8 +1673,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnBoolStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnFloatStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodReturnFloatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodReturnFloat:.
 	illiAST := self generateIllicium: #methodReturnFloat:.
@@ -1682,8 +1682,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnFloatStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnIntegerStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodReturnIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodReturnInteger:.
 	illiAST := self generateIllicium: #methodReturnInteger:.
@@ -1691,8 +1691,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnIntegerStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnReceiverStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodReturnReceiverStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodReturnReceiver.
 	illiAST := self generateIllicium: #methodReturnReceiver.
@@ -1700,8 +1700,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnReceiverStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnStringStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodReturnStringStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodReturnString:.
 	illiAST := self generateIllicium: #methodReturnString:.
@@ -1709,8 +1709,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnStringStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnValueStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodReturnValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodReturnValue:.
 	illiAST := self generateIllicium: #methodReturnValue:.
@@ -1718,8 +1718,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodReturnValueStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodUsesAlternateBytecodeSetStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodUsesAlternateBytecodeSetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodUsesAlternateBytecodeSet:.
 	illiAST := self generateIllicium: #methodUsesAlternateBytecodeSet:.
@@ -1727,8 +1727,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodUsesAlternateBytecodeSe
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMethodUsesPrimitiveErrorCodeStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMethodUsesPrimitiveErrorCodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodUsesPrimitiveErrorCode:.
 	illiAST := self generateIllicium: #methodUsesPrimitiveErrorCode:.
@@ -1736,8 +1736,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMethodUsesPrimitiveErrorCodeS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testModuleUnloadedStringComparison [
+{ #category : #initialization }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testModuleUnloadedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #moduleUnloaded:.
 	illiAST := self generateIllicium: #moduleUnloaded:.
@@ -1745,8 +1745,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testModuleUnloadedStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testMoveFramesInthroughtoPageStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testMoveFramesInthroughtoPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #moveFramesIn:through:toPage:.
 	illiAST := self generateIllicium: #moveFramesIn:through:toPage:.
@@ -1754,8 +1754,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testMoveFramesInthroughtoPageStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testNameOfClassStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testNameOfClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #nameOfClass:.
 	illiAST := self generateIllicium: #nameOfClass:.
@@ -1763,8 +1763,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testNameOfClassStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testNoInlineLoadFloatOrIntFromStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testNoInlineLoadFloatOrIntFromStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noInlineLoadFloatOrIntFrom:.
 	illiAST := self generateIllicium: #noInlineLoadFloatOrIntFrom:.
@@ -1772,8 +1772,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testNoInlineLoadFloatOrIntFromStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testNoInlineTemporaryinStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testNoInlineTemporaryinStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noInlineTemporary:in:.
 	illiAST := self generateIllicium: #noInlineTemporary:in:.
@@ -1781,8 +1781,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testNoInlineTemporaryinStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testNoInlineTemporaryinputStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testNoInlineTemporaryinputStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noInlineTemporary:in:put:.
 	illiAST := self generateIllicium: #noInlineTemporary:in:put:.
@@ -1790,8 +1790,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testNoInlineTemporaryinputStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testNoMarkedContextsOnPageStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testNoMarkedContextsOnPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noMarkedContextsOnPage:.
 	illiAST := self generateIllicium: #noMarkedContextsOnPage:.
@@ -1799,8 +1799,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testNoMarkedContextsOnPageStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testNumSlotsOfMarriedContextStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testNumSlotsOfMarriedContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numSlotsOfMarriedContext:.
 	illiAST := self generateIllicium: #numSlotsOfMarriedContext:.
@@ -1808,8 +1808,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testNumSlotsOfMarriedContextStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testNumStkPagesStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testNumStkPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numStkPages.
 	illiAST := self generateIllicium: #numStkPages.
@@ -1817,8 +1817,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testNumStkPagesStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testObjCouldBeClassObjStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testObjCouldBeClassObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #objCouldBeClassObj:.
 	illiAST := self generateIllicium: #objCouldBeClassObj:.
@@ -1826,8 +1826,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testObjCouldBeClassObjStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'vm scheduling-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testOwnVMStringComparison [
+{ #category : #'vm scheduling' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testOwnVMStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #ownVM:.
 	illiAST := self generateIllicium: #ownVM:.
@@ -1835,8 +1835,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testOwnVMStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPenultimateLiteralOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPenultimateLiteralOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #penultimateLiteralOf:.
 	illiAST := self generateIllicium: #penultimateLiteralOf:.
@@ -1844,8 +1844,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPenultimateLiteralOfStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPopStackStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPopStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #popStack.
 	illiAST := self generateIllicium: #popStack.
@@ -1853,8 +1853,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPopStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPopStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pop:.
 	illiAST := self generateIllicium: #pop:.
@@ -1862,8 +1862,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPopthenPushStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPopthenPushStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pop:thenPush:.
 	illiAST := self generateIllicium: #pop:thenPush:.
@@ -1871,8 +1871,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPopthenPushStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPositiveBitIntegerForStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPositiveBitIntegerForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #positive64BitIntegerFor:.
 	illiAST := self generateIllicium: #positive64BitIntegerFor:.
@@ -1880,8 +1880,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPositiveBitIntegerForStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPositiveBitValueOfStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPositiveBitValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #positive32BitValueOf:.
 	illiAST := self generateIllicium: #positive32BitValueOf:.
@@ -1889,8 +1889,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPositiveBitValueOfStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'callback support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPositiveMachineIntegerForStringComparison [
+{ #category : #'callback support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPositiveMachineIntegerForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #positiveMachineIntegerFor:.
 	illiAST := self generateIllicium: #positiveMachineIntegerFor:.
@@ -1898,8 +1898,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPositiveMachineIntegerForStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPositiveMachineIntegerValueOfStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPositiveMachineIntegerValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #positiveMachineIntegerValueOf:.
 	illiAST := self generateIllicium: #positiveMachineIntegerValueOf:.
@@ -1907,8 +1907,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPositiveMachineIntegerValueOf
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPostGCUpdateDisplayBitsStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPostGCUpdateDisplayBitsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #postGCUpdateDisplayBits.
 	illiAST := self generateIllicium: #postGCUpdateDisplayBits.
@@ -1916,8 +1916,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPostGCUpdateDisplayBitsString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAddLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAddLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAddLargeIntegers.
 	illiAST := self generateIllicium: #primitiveAddLargeIntegers.
@@ -1925,8 +1925,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAddLargeIntegersStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAddStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAddStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAdd.
 	illiAST := self generateIllicium: #primitiveAdd.
@@ -1934,8 +1934,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAddStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAdoptInstanceStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAdoptInstanceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAdoptInstance.
 	illiAST := self generateIllicium: #primitiveAdoptInstance.
@@ -1943,8 +1943,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAdoptInstanceStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllInstancesStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllInstancesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAllInstances.
 	illiAST := self generateIllicium: #primitiveAllInstances.
@@ -1952,8 +1952,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllInstancesStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllObjectsStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllObjectsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAllObjects.
 	illiAST := self generateIllicium: #primitiveAllObjects.
@@ -1961,8 +1961,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllObjectsStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllVMParametersStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllVMParametersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAllVMParameters:.
 	illiAST := self generateIllicium: #primitiveAllVMParameters:.
@@ -1970,8 +1970,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAllVMParametersStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArctanStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveArctanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveArctan.
 	illiAST := self generateIllicium: #primitiveArctan.
@@ -1979,8 +1979,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArctanStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayCopyHashStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayCopyHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveArrayBecomeOneWayCopyHash.
@@ -1989,8 +1989,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayCop
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayNoCopyHashStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayNoCopyHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveArrayBecomeOneWayNoCopyHash.
@@ -2000,8 +2000,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayNoC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveArrayBecomeOneWay.
 	illiAST := self generateIllicium: #primitiveArrayBecomeOneWay.
@@ -2009,8 +2009,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeOneWayStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveArrayBecome.
 	illiAST := self generateIllicium: #primitiveArrayBecome.
@@ -2018,8 +2018,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveArrayBecomeStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAsCharacterStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAsCharacterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAsCharacter.
 	illiAST := self generateIllicium: #primitiveAsCharacter.
@@ -2027,8 +2027,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAsCharacterStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAsFloatStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAsFloatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAsFloat.
 	illiAST := self generateIllicium: #primitiveAsFloat.
@@ -2036,8 +2036,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAsFloatStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAtPutStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAtPut.
 	illiAST := self generateIllicium: #primitiveAtPut.
@@ -2045,8 +2045,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAtPutStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAtStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveAt.
 	illiAST := self generateIllicium: #primitiveAt.
@@ -2054,8 +2054,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveAtStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeCursorStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeCursorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBeCursor.
 	illiAST := self generateIllicium: #primitiveBeCursor.
@@ -2063,8 +2063,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeCursorStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeDisplayStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeDisplayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBeDisplay.
 	illiAST := self generateIllicium: #primitiveBeDisplay.
@@ -2072,8 +2072,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeDisplayStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeepStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeepStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBeep.
 	illiAST := self generateIllicium: #primitiveBeep.
@@ -2081,8 +2081,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBeepStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBehaviorHashStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBehaviorHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBehaviorHash.
 	illiAST := self generateIllicium: #primitiveBehaviorHash.
@@ -2090,8 +2090,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBehaviorHashStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitAndLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitAndLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitAndLargeIntegers.
 	illiAST := self generateIllicium: #primitiveBitAndLargeIntegers.
@@ -2099,8 +2099,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitAndLargeIntegersS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitAndStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitAndStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitAnd.
 	illiAST := self generateIllicium: #primitiveBitAnd.
@@ -2108,8 +2108,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitAndStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitOrLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitOrLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitOrLargeIntegers.
 	illiAST := self generateIllicium: #primitiveBitOrLargeIntegers.
@@ -2117,8 +2117,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitOrLargeIntegersSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitOrStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitOrStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitOr.
 	illiAST := self generateIllicium: #primitiveBitOr.
@@ -2126,8 +2126,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitOrStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitShiftLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitShiftLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitShiftLargeIntegers.
 	illiAST := self generateIllicium: #primitiveBitShiftLargeIntegers.
@@ -2135,8 +2135,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitShiftLargeInteger
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitShiftStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitShiftStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitShift.
 	illiAST := self generateIllicium: #primitiveBitShift.
@@ -2144,8 +2144,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitShiftStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitXorLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitXorLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitXorLargeIntegers.
 	illiAST := self generateIllicium: #primitiveBitXorLargeIntegers.
@@ -2153,8 +2153,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitXorLargeIntegersS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitXorStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitXorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBitXor.
 	illiAST := self generateIllicium: #primitiveBitXor.
@@ -2162,8 +2162,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBitXorStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBytesLeftStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveBytesLeftStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveBytesLeft.
 	illiAST := self generateIllicium: #primitiveBytesLeft.
@@ -2171,8 +2171,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveBytesLeftStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCalloutToFFIStringComparison [
+{ #category : #'plugin primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCalloutToFFIStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveCalloutToFFI.
 	illiAST := self generateIllicium: #primitiveCalloutToFFI.
@@ -2180,8 +2180,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCalloutToFFIStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveChangeClassStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveChangeClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveChangeClass.
 	illiAST := self generateIllicium: #primitiveChangeClass.
@@ -2189,8 +2189,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveChangeClassStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClassStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveClass.
 	illiAST := self generateIllicium: #primitiveClass.
@@ -2198,8 +2198,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClassStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClearVMProfileStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClearVMProfileStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveClearVMProfile.
 	illiAST := self generateIllicium: #primitiveClearVMProfile.
@@ -2207,8 +2207,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClearVMProfileString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClipboardTextStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClipboardTextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveClipboardText.
 	illiAST := self generateIllicium: #primitiveClipboardText.
@@ -2216,8 +2216,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClipboardTextStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClockLogAddressesStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClockLogAddressesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveClockLogAddresses.
 	illiAST := self generateIllicium: #primitiveClockLogAddresses.
@@ -2225,8 +2225,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClockLogAddressesStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCloneStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCloneStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveClone.
 	illiAST := self generateIllicium: #primitiveClone.
@@ -2234,8 +2234,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCloneStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureCopyWithCopiedValuesStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureCopyWithCopiedValuesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveClosureCopyWithCopiedValues.
@@ -2245,8 +2245,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureCopyWithCopie
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueNoContextSwitchStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueNoContextSwitchStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveClosureValueNoContextSwitch.
@@ -2256,8 +2256,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueNoContex
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveClosureValue.
 	illiAST := self generateIllicium: #primitiveClosureValue.
@@ -2265,8 +2265,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueWithArgsStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueWithArgsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveClosureValueWithArgs.
 	illiAST := self generateIllicium: #primitiveClosureValueWithArgs.
@@ -2274,8 +2274,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveClosureValueWithArgs
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCoarseLocalMicrosecondClockStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCoarseLocalMicrosecondClockStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveCoarseLocalMicrosecondClock.
@@ -2285,8 +2285,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCoarseLocalMicroseco
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCoarseUTCMicrosecondClockStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCoarseUTCMicrosecondClockStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveCoarseUTCMicrosecondClock.
@@ -2295,8 +2295,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCoarseUTCMicrosecond
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCompareBytesStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCompareBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveCompareBytes.
 	illiAST := self generateIllicium: #primitiveCompareBytes.
@@ -2304,8 +2304,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCompareBytesStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'string primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCompareWithStringComparison [
+{ #category : #'string primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCompareWithStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveCompareWith.
 	illiAST := self generateIllicium: #primitiveCompareWith.
@@ -2313,8 +2313,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCompareWithStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'sound primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveConstantFillStringComparison [
+{ #category : #'sound primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveConstantFillStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveConstantFill.
 	illiAST := self generateIllicium: #primitiveConstantFill.
@@ -2322,8 +2322,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveConstantFillStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextAtPutStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveContextAtPut.
 	illiAST := self generateIllicium: #primitiveContextAtPut.
@@ -2331,8 +2331,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextAtPutStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextAtStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveContextAt.
 	illiAST := self generateIllicium: #primitiveContextAt.
@@ -2340,8 +2340,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextAtStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextSizeStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveContextSize.
 	illiAST := self generateIllicium: #primitiveContextSize.
@@ -2349,8 +2349,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextSizeStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextXrayStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextXrayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveContextXray.
 	illiAST := self generateIllicium: #primitiveContextXray.
@@ -2358,8 +2358,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveContextXrayStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveControlVMProfilingStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveControlVMProfilingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveControlVMProfiling.
 	illiAST := self generateIllicium: #primitiveControlVMProfiling.
@@ -2367,8 +2367,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveControlVMProfilingSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCopyObjectStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCopyObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveCopyObject.
 	illiAST := self generateIllicium: #primitiveCopyObject.
@@ -2376,8 +2376,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCopyObjectStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCrashVMStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveCrashVMStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveCrashVM.
 	illiAST := self generateIllicium: #primitiveCrashVM.
@@ -2385,8 +2385,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveCrashVMStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDeferDisplayUpdatesStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDeferDisplayUpdatesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDeferDisplayUpdates.
 	illiAST := self generateIllicium: #primitiveDeferDisplayUpdates.
@@ -2394,8 +2394,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDeferDisplayUpdatesS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDisablePowerManagerStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDisablePowerManagerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDisablePowerManager.
 	illiAST := self generateIllicium: #primitiveDisablePowerManager.
@@ -2403,8 +2403,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDisablePowerManagerS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDivLargeIntegers.
 	illiAST := self generateIllicium: #primitiveDivLargeIntegers.
@@ -2412,8 +2412,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivLargeIntegersStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDiv.
 	illiAST := self generateIllicium: #primitiveDiv.
@@ -2421,8 +2421,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivideLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivideLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDivideLargeIntegers.
 	illiAST := self generateIllicium: #primitiveDivideLargeIntegers.
@@ -2430,8 +2430,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivideLargeIntegersS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivideStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivideStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDivide.
 	illiAST := self generateIllicium: #primitiveDivide.
@@ -2439,8 +2439,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDivideStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDoNamedPrimitiveWithArgsStringComparison [
+{ #category : #'plugin primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDoNamedPrimitiveWithArgsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDoNamedPrimitiveWithArgs.
 	illiAST := self generateIllicium: #primitiveDoNamedPrimitiveWithArgs.
@@ -2448,8 +2448,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDoNamedPrimitiveWith
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDoPrimitiveWithArgsStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveDoPrimitiveWithArgsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveDoPrimitiveWithArgs.
 	illiAST := self generateIllicium: #primitiveDoPrimitiveWithArgs.
@@ -2457,8 +2457,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveDoPrimitiveWithArgsS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEnterCriticalSectionStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveEnterCriticalSectionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveEnterCriticalSection.
 	illiAST := self generateIllicium: #primitiveEnterCriticalSection.
@@ -2466,8 +2466,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEnterCriticalSection
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEqualLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveEqualLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveEqualLargeIntegers.
 	illiAST := self generateIllicium: #primitiveEqualLargeIntegers.
@@ -2475,8 +2475,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEqualLargeIntegersSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEqualStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveEqual.
 	illiAST := self generateIllicium: #primitiveEqual.
@@ -2484,8 +2484,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEqualStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEventProcessingControlStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveEventProcessingControlStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveEventProcessingControl.
 	illiAST := self generateIllicium: #primitiveEventProcessingControl.
@@ -2493,8 +2493,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveEventProcessingContr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExecuteMethodArgsArrayStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveExecuteMethodArgsArrayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveExecuteMethodArgsArray.
 	illiAST := self generateIllicium: #primitiveExecuteMethodArgsArray.
@@ -2502,8 +2502,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExecuteMethodArgsArr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExecuteMethodStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveExecuteMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveExecuteMethod.
 	illiAST := self generateIllicium: #primitiveExecuteMethod.
@@ -2511,8 +2511,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExecuteMethodStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExitCriticalSectionStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveExitCriticalSectionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveExitCriticalSection.
 	illiAST := self generateIllicium: #primitiveExitCriticalSection.
@@ -2520,8 +2520,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExitCriticalSectionS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExitToDebuggerStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveExitToDebuggerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveExitToDebugger.
 	illiAST := self generateIllicium: #primitiveExitToDebugger.
@@ -2529,8 +2529,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExitToDebuggerString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExpStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveExpStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveExp.
 	illiAST := self generateIllicium: #primitiveExp.
@@ -2538,8 +2538,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExpStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExponentStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveExponentStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveExponent.
 	illiAST := self generateIllicium: #primitiveExponent.
@@ -2547,8 +2547,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExponentStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExternalCallStringComparison [
+{ #category : #'plugin primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveExternalCallStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveExternalCall.
 	illiAST := self generateIllicium: #primitiveExternalCall.
@@ -2556,8 +2556,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveExternalCallStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForFFIExceptionatStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForFFIExceptionatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFailForFFIException:at:.
 	illiAST := self generateIllicium: #primitiveFailForFFIException:at:.
@@ -2565,8 +2565,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForFFIExceptiona
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForOSErrorStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForOSErrorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFailForOSError:.
 	illiAST := self generateIllicium: #primitiveFailForOSError:.
@@ -2574,8 +2574,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForOSErrorString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFailFor:.
 	illiAST := self generateIllicium: #primitiveFailFor:.
@@ -2583,8 +2583,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailForStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFail.
 	illiAST := self generateIllicium: #primitiveFail.
@@ -2592,8 +2592,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailureCodeStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailureCodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFailureCode.
 	illiAST := self generateIllicium: #primitiveFailureCode.
@@ -2601,8 +2601,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFailureCodeStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFetchNextMournerStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFetchNextMournerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFetchNextMourner.
 	illiAST := self generateIllicium: #primitiveFetchNextMourner.
@@ -2610,8 +2610,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFetchNextMournerStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFindHandlerContextStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFindHandlerContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFindHandlerContext.
 	illiAST := self generateIllicium: #primitiveFindHandlerContext.
@@ -2619,8 +2619,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFindHandlerContextSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFindNextUnwindContextStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFindNextUnwindContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFindNextUnwindContext.
 	illiAST := self generateIllicium: #primitiveFindNextUnwindContext.
@@ -2628,8 +2628,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFindNextUnwindContex
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAddStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAddStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatAdd.
 	illiAST := self generateIllicium: #primitiveFloatAdd.
@@ -2637,8 +2637,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAddStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAtPutStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatAtPut.
 	illiAST := self generateIllicium: #primitiveFloatAtPut.
@@ -2646,8 +2646,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAtPutStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAtStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatAt.
 	illiAST := self generateIllicium: #primitiveFloatAt.
@@ -2655,8 +2655,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatAtStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatDivideStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatDivideStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatDivide.
 	illiAST := self generateIllicium: #primitiveFloatDivide.
@@ -2664,8 +2664,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatDivideStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatEqual.
 	illiAST := self generateIllicium: #primitiveFloatEqual.
@@ -2673,8 +2673,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatEqualStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatGreaterOrEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatGreaterOrEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatGreaterOrEqual.
 	illiAST := self generateIllicium: #primitiveFloatGreaterOrEqual.
@@ -2682,8 +2682,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatGreaterOrEqualS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatGreaterThanStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatGreaterThanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatGreaterThan.
 	illiAST := self generateIllicium: #primitiveFloatGreaterThan.
@@ -2691,8 +2691,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatGreaterThanStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatLessOrEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatLessOrEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatLessOrEqual.
 	illiAST := self generateIllicium: #primitiveFloatLessOrEqual.
@@ -2700,8 +2700,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatLessOrEqualStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatLessThanStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatLessThanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatLessThan.
 	illiAST := self generateIllicium: #primitiveFloatLessThan.
@@ -2709,8 +2709,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatLessThanStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatMultiplyStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatMultiplyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatMultiply.
 	illiAST := self generateIllicium: #primitiveFloatMultiply.
@@ -2718,8 +2718,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatMultiplyStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatNotEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatNotEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatNotEqual.
 	illiAST := self generateIllicium: #primitiveFloatNotEqual.
@@ -2727,8 +2727,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatNotEqualStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatSubtractStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatSubtractStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFloatSubtract.
 	illiAST := self generateIllicium: #primitiveFloatSubtract.
@@ -2736,8 +2736,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFloatSubtractStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheByMethodStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheByMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFlushCacheByMethod.
 	illiAST := self generateIllicium: #primitiveFlushCacheByMethod.
@@ -2745,8 +2745,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheByMethodSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheBySelectorStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheBySelectorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFlushCacheBySelector.
 	illiAST := self generateIllicium: #primitiveFlushCacheBySelector.
@@ -2754,8 +2754,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheBySelector
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFlushCache.
 	illiAST := self generateIllicium: #primitiveFlushCache.
@@ -2763,8 +2763,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushCacheStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushExternalPrimitivesStringComparison [
+{ #category : #'plugin primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushExternalPrimitivesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFlushExternalPrimitives.
 	illiAST := self generateIllicium: #primitiveFlushExternalPrimitives.
@@ -2772,8 +2772,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFlushExternalPrimiti
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveForceDisplayUpdateStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveForceDisplayUpdateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveForceDisplayUpdate.
 	illiAST := self generateIllicium: #primitiveForceDisplayUpdate.
@@ -2781,8 +2781,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveForceDisplayUpdateSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFormPrintStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFormPrintStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFormPrint.
 	illiAST := self generateIllicium: #primitiveFormPrint.
@@ -2790,8 +2790,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFormPrintStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFractionalPartStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFractionalPartStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFractionalPart.
 	illiAST := self generateIllicium: #primitiveFractionalPart.
@@ -2799,8 +2799,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFractionalPartString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueNoContextSwitchStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueNoContextSwitchStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveFullClosureValueNoContextSwitch.
@@ -2810,8 +2810,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueNoCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFullClosureValue.
 	illiAST := self generateIllicium: #primitiveFullClosureValue.
@@ -2819,8 +2819,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueWithArgsStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueWithArgsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFullClosureValueWithArgs.
 	illiAST := self generateIllicium: #primitiveFullClosureValueWithArgs.
@@ -2828,8 +2828,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullClosureValueWith
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullGCStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveFullGC.
 	illiAST := self generateIllicium: #primitiveFullGC.
@@ -2837,8 +2837,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveFullGCStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetAttributeStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetAttributeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetAttribute.
 	illiAST := self generateIllicium: #primitiveGetAttribute.
@@ -2846,8 +2846,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetAttributeStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetImmutabilityStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetImmutabilityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetImmutability.
 	illiAST := self generateIllicium: #primitiveGetImmutability.
@@ -2855,8 +2855,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetImmutabilityStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetLogDirectoryStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetLogDirectoryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetLogDirectory.
 	illiAST := self generateIllicium: #primitiveGetLogDirectory.
@@ -2864,8 +2864,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetLogDirectoryStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetNextEventStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetNextEventStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetNextEvent.
 	illiAST := self generateIllicium: #primitiveGetNextEvent.
@@ -2873,8 +2873,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetNextEventStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetVMParameterStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetVMParameterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetVMParameter:.
 	illiAST := self generateIllicium: #primitiveGetVMParameter:.
@@ -2882,8 +2882,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetVMParameterString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetWindowLabelStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetWindowLabelStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetWindowLabel.
 	illiAST := self generateIllicium: #primitiveGetWindowLabel.
@@ -2891,8 +2891,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetWindowLabelString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetWindowSizeStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetWindowSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetWindowSize.
 	illiAST := self generateIllicium: #primitiveGetWindowSize.
@@ -2900,8 +2900,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetWindowSizeStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'other primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetenvStringComparison [
+{ #category : #'other primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetenvStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGetenv.
 	illiAST := self generateIllicium: #primitiveGetenv.
@@ -2909,8 +2909,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGetenvStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterOrEqualLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterOrEqualLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveGreaterOrEqualLargeIntegers.
@@ -2920,8 +2920,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterOrEqualLargeI
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterOrEqualStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterOrEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGreaterOrEqual.
 	illiAST := self generateIllicium: #primitiveGreaterOrEqual.
@@ -2929,8 +2929,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterOrEqualString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterThanLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterThanLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGreaterThanLargeIntegers.
 	illiAST := self generateIllicium: #primitiveGreaterThanLargeIntegers.
@@ -2938,8 +2938,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterThanLargeInte
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterThanStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterThanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGreaterThan.
 	illiAST := self generateIllicium: #primitiveGreaterThan.
@@ -2947,8 +2947,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGreaterThanStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGrowMemoryByAtLeastStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveGrowMemoryByAtLeastStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveGrowMemoryByAtLeast.
 	illiAST := self generateIllicium: #primitiveGrowMemoryByAtLeast.
@@ -2956,8 +2956,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveGrowMemoryByAtLeastS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveHashMultiplyStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveHashMultiplyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveHashMultiply.
 	illiAST := self generateIllicium: #primitiveHashMultiply.
@@ -2965,8 +2965,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveHashMultiplyStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveHeartbeatFrequencyStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveHeartbeatFrequencyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveHeartbeatFrequency.
 	illiAST := self generateIllicium: #primitiveHeartbeatFrequency.
@@ -2974,8 +2974,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveHeartbeatFrequencySt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveHighResClockStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveHighResClockStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveHighResClock.
 	illiAST := self generateIllicium: #primitiveHighResClock.
@@ -2983,8 +2983,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveHighResClockStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIdenticalStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIdenticalStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIdentical.
 	illiAST := self generateIllicium: #primitiveIdentical.
@@ -2992,8 +2992,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIdenticalStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIdentityHashStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIdentityHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIdentityHash.
 	illiAST := self generateIllicium: #primitiveIdentityHash.
@@ -3001,8 +3001,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIdentityHashStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'other primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveImageFormatVersionStringComparison [
+{ #category : #'other primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveImageFormatVersionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveImageFormatVersion.
 	illiAST := self generateIllicium: #primitiveImageFormatVersion.
@@ -3010,8 +3010,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveImageFormatVersionSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'other primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveImageNameStringComparison [
+{ #category : #'other primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveImageNameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveImageName.
 	illiAST := self generateIllicium: #primitiveImageName.
@@ -3019,8 +3019,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveImageNameStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveImmediateAsIntegerStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveImmediateAsIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveImmediateAsInteger.
 	illiAST := self generateIllicium: #primitiveImmediateAsInteger.
@@ -3028,8 +3028,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveImmediateAsIntegerSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIncrementalGCStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIncrementalGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIncrementalGC.
 	illiAST := self generateIllicium: #primitiveIncrementalGC.
@@ -3037,8 +3037,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIncrementalGCStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIndexOfMethodheaderStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIndexOfMethodheaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIndexOfMethod:header:.
 	illiAST := self generateIllicium: #primitiveIndexOfMethod:header:.
@@ -3046,8 +3046,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIndexOfMethodheaderS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIndexOfStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIndexOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIndexOf:.
 	illiAST := self generateIllicium: #primitiveIndexOf:.
@@ -3055,8 +3055,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIndexOfStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInputSemaphoreStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveInputSemaphoreStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveInputSemaphore.
 	illiAST := self generateIllicium: #primitiveInputSemaphore.
@@ -3064,8 +3064,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInputSemaphoreString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInputWordStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveInputWordStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveInputWord.
 	illiAST := self generateIllicium: #primitiveInputWord.
@@ -3073,8 +3073,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInputWordStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInstVarAtPutStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveInstVarAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveInstVarAtPut.
 	illiAST := self generateIllicium: #primitiveInstVarAtPut.
@@ -3082,8 +3082,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInstVarAtPutStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInstVarAtStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveInstVarAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveInstVarAt.
 	illiAST := self generateIllicium: #primitiveInstVarAt.
@@ -3091,8 +3091,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInstVarAtStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIntegerAtPutStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIntegerAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIntegerAtPut.
 	illiAST := self generateIllicium: #primitiveIntegerAtPut.
@@ -3100,8 +3100,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIntegerAtPutStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIntegerAtStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIntegerAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIntegerAt.
 	illiAST := self generateIllicium: #primitiveIntegerAt.
@@ -3109,8 +3109,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIntegerAtStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInterruptChecksPerMSecStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveInterruptChecksPerMSecStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveInterruptChecksPerMSec.
 	illiAST := self generateIllicium: #primitiveInterruptChecksPerMSec.
@@ -3118,8 +3118,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInterruptChecksPerMS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInterruptSemaphoreStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveInterruptSemaphoreStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveInterruptSemaphore.
 	illiAST := self generateIllicium: #primitiveInterruptSemaphore.
@@ -3127,8 +3127,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInterruptSemaphoreSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInvokeObjectAsMethodStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveInvokeObjectAsMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveInvokeObjectAsMethod.
 	illiAST := self generateIllicium: #primitiveInvokeObjectAsMethod.
@@ -3136,8 +3136,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveInvokeObjectAsMethod
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'other primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsBigEnderStringComparison [
+{ #category : #'other primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsBigEnderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIsBigEnder.
 	illiAST := self generateIllicium: #primitiveIsBigEnder.
@@ -3145,8 +3145,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsBigEnderStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsPinnedStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsPinnedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIsPinned.
 	illiAST := self generateIllicium: #primitiveIsPinned.
@@ -3154,8 +3154,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsPinnedStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsWindowObscuredStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsWindowObscuredStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveIsWindowObscured.
 	illiAST := self generateIllicium: #primitiveIsWindowObscured.
@@ -3163,8 +3163,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveIsWindowObscuredStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveKbdNextStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveKbdNextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveKbdNext.
 	illiAST := self generateIllicium: #primitiveKbdNext.
@@ -3172,8 +3172,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveKbdNextStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveKbdPeekStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveKbdPeekStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveKbdPeek.
 	illiAST := self generateIllicium: #primitiveKbdPeek.
@@ -3181,8 +3181,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveKbdPeekStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessOrEqualLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessOrEqualLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLessOrEqualLargeIntegers.
 	illiAST := self generateIllicium: #primitiveLessOrEqualLargeIntegers.
@@ -3190,8 +3190,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessOrEqualLargeInte
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessOrEqualStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessOrEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLessOrEqual.
 	illiAST := self generateIllicium: #primitiveLessOrEqual.
@@ -3199,8 +3199,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessOrEqualStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessThanLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessThanLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLessThanLargeIntegers.
 	illiAST := self generateIllicium: #primitiveLessThanLargeIntegers.
@@ -3208,8 +3208,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessThanLargeInteger
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessThanStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessThanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLessThan.
 	illiAST := self generateIllicium: #primitiveLessThan.
@@ -3217,8 +3217,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLessThanStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveListBuiltinModuleStringComparison [
+{ #category : #'plugin primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveListBuiltinModuleStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveListBuiltinModule.
 	illiAST := self generateIllicium: #primitiveListBuiltinModule.
@@ -3226,8 +3226,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveListBuiltinModuleStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveListExternalModuleStringComparison [
+{ #category : #'plugin primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveListExternalModuleStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveListExternalModule.
 	illiAST := self generateIllicium: #primitiveListExternalModule.
@@ -3235,8 +3235,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveListExternalModuleSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLoadImageSegmentStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLoadImageSegmentStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLoadImageSegment.
 	illiAST := self generateIllicium: #primitiveLoadImageSegment.
@@ -3244,8 +3244,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLoadImageSegmentStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLocalMicrosecondClockStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLocalMicrosecondClockStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLocalMicrosecondClock.
 	illiAST := self generateIllicium: #primitiveLocalMicrosecondClock.
@@ -3253,8 +3253,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLocalMicrosecondCloc
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLogNStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLogNStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLogN.
 	illiAST := self generateIllicium: #primitiveLogN.
@@ -3262,8 +3262,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLogNStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLongRunningPrimitiveSemaphoreStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLongRunningPrimitiveSemaphoreStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveLongRunningPrimitiveSemaphore.
@@ -3273,8 +3273,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLongRunningPrimitive
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLongRunningPrimitiveStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLongRunningPrimitiveStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLongRunningPrimitive.
 	illiAST := self generateIllicium: #primitiveLongRunningPrimitive.
@@ -3282,8 +3282,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLongRunningPrimitive
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLowSpaceSemaphoreStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveLowSpaceSemaphoreStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveLowSpaceSemaphore.
 	illiAST := self generateIllicium: #primitiveLowSpaceSemaphore.
@@ -3291,8 +3291,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveLowSpaceSemaphoreStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMakePointStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMakePointStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMakePoint.
 	illiAST := self generateIllicium: #primitiveMakePoint.
@@ -3300,8 +3300,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMakePointStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMaxIdentityHashStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMaxIdentityHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMaxIdentityHash.
 	illiAST := self generateIllicium: #primitiveMaxIdentityHash.
@@ -3309,8 +3309,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMaxIdentityHashStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMethodStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMethod.
 	illiAST := self generateIllicium: #primitiveMethod.
@@ -3318,8 +3318,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMethodStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMillisecondClockMaskStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMillisecondClockMaskStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMillisecondClockMask.
 	illiAST := self generateIllicium: #primitiveMillisecondClockMask.
@@ -3327,8 +3327,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMillisecondClockMask
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMillisecondClockStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMillisecondClockStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMillisecondClock.
 	illiAST := self generateIllicium: #primitiveMillisecondClock.
@@ -3336,8 +3336,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMillisecondClockStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveModLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveModLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveModLargeIntegers.
 	illiAST := self generateIllicium: #primitiveModLargeIntegers.
@@ -3345,8 +3345,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveModLargeIntegersStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveModStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveModStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMod.
 	illiAST := self generateIllicium: #primitiveMod.
@@ -3354,8 +3354,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveModStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMouseButtonsStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMouseButtonsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMouseButtons.
 	illiAST := self generateIllicium: #primitiveMouseButtons.
@@ -3363,8 +3363,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMouseButtonsStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMousePointStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMousePointStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMousePoint.
 	illiAST := self generateIllicium: #primitiveMousePoint.
@@ -3372,8 +3372,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMousePointStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMultiplyLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMultiplyLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMultiplyLargeIntegers.
 	illiAST := self generateIllicium: #primitiveMultiplyLargeIntegers.
@@ -3381,8 +3381,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMultiplyLargeInteger
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMultiplyStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveMultiplyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveMultiply.
 	illiAST := self generateIllicium: #primitiveMultiply.
@@ -3390,8 +3390,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveMultiplyStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewMethodStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNewMethod.
 	illiAST := self generateIllicium: #primitiveNewMethod.
@@ -3399,8 +3399,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewMethodStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNew.
 	illiAST := self generateIllicium: #primitiveNew.
@@ -3408,8 +3408,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewWithArgStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewWithArgStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNewWithArg.
 	illiAST := self generateIllicium: #primitiveNewWithArg.
@@ -3417,8 +3417,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNewWithArgStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNextInstanceStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNextInstanceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNextInstance.
 	illiAST := self generateIllicium: #primitiveNextInstance.
@@ -3426,8 +3426,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNextInstanceStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNextObjectStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNextObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNextObject.
 	illiAST := self generateIllicium: #primitiveNextObject.
@@ -3435,8 +3435,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNextObjectStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNoopStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNoopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNoop.
 	illiAST := self generateIllicium: #primitiveNoop.
@@ -3444,8 +3444,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNoopStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotEqualLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotEqualLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNotEqualLargeIntegers.
 	illiAST := self generateIllicium: #primitiveNotEqualLargeIntegers.
@@ -3453,8 +3453,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotEqualLargeInteger
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotEqualStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNotEqual.
 	illiAST := self generateIllicium: #primitiveNotEqual.
@@ -3462,8 +3462,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotEqualStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotIdenticalStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotIdenticalStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveNotIdentical.
 	illiAST := self generateIllicium: #primitiveNotIdentical.
@@ -3471,8 +3471,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveNotIdenticalStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectAtPutStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveObjectAtPut.
 	illiAST := self generateIllicium: #primitiveObjectAtPut.
@@ -3480,8 +3480,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectAtPutStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectAtStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveObjectAt.
 	illiAST := self generateIllicium: #primitiveObjectAt.
@@ -3489,8 +3489,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectAtStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectPointsToStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectPointsToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveObjectPointsTo.
 	illiAST := self generateIllicium: #primitiveObjectPointsTo.
@@ -3498,8 +3498,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveObjectPointsToString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'other primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePathToUsingStringComparison [
+{ #category : #'other primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitivePathToUsingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitivePathToUsing.
 	illiAST := self generateIllicium: #primitivePathToUsing.
@@ -3507,8 +3507,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePathToUsingStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformInSuperclassStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformInSuperclassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitivePerformInSuperclass.
 	illiAST := self generateIllicium: #primitivePerformInSuperclass.
@@ -3516,8 +3516,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformInSuperclassS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitivePerform.
 	illiAST := self generateIllicium: #primitivePerform.
@@ -3525,8 +3525,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformWithArgsStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformWithArgsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitivePerformWithArgs.
 	illiAST := self generateIllicium: #primitivePerformWithArgs.
@@ -3534,8 +3534,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePerformWithArgsStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePinStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitivePinStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitivePin.
 	illiAST := self generateIllicium: #primitivePin.
@@ -3543,8 +3543,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitivePinStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfilePrimitiveStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfilePrimitiveStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveProfilePrimitive.
 	illiAST := self generateIllicium: #primitiveProfilePrimitive.
@@ -3552,8 +3552,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfilePrimitiveStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileSampleStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileSampleStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveProfileSample.
 	illiAST := self generateIllicium: #primitiveProfileSample.
@@ -3561,8 +3561,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileSampleStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileSemaphoreStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileSemaphoreStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveProfileSemaphore.
 	illiAST := self generateIllicium: #primitiveProfileSemaphore.
@@ -3570,8 +3570,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileSemaphoreStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileStartStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileStartStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveProfileStart.
 	illiAST := self generateIllicium: #primitiveProfileStart.
@@ -3579,8 +3579,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveProfileStartStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuitStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuitStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveQuit.
 	illiAST := self generateIllicium: #primitiveQuit.
@@ -3588,8 +3588,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuitStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuoLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuoLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveQuoLargeIntegers.
 	illiAST := self generateIllicium: #primitiveQuoLargeIntegers.
@@ -3597,8 +3597,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuoLargeIntegersStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuoStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuoStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveQuo.
 	illiAST := self generateIllicium: #primitiveQuo.
@@ -3606,8 +3606,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveQuoStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveRelinquishProcessorStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveRelinquishProcessorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveRelinquishProcessor.
 	illiAST := self generateIllicium: #primitiveRelinquishProcessor.
@@ -3615,8 +3615,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveRelinquishProcessorS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveRemLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveRemLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveRemLargeIntegers.
 	illiAST := self generateIllicium: #primitiveRemLargeIntegers.
@@ -3624,8 +3624,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveRemLargeIntegersStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveResumeStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveResumeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveResume.
 	illiAST := self generateIllicium: #primitiveResume.
@@ -3633,8 +3633,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveResumeStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScanCharactersStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveScanCharactersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveScanCharacters.
 	illiAST := self generateIllicium: #primitiveScanCharacters.
@@ -3642,8 +3642,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScanCharactersString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenDepthStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenDepthStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveScreenDepth.
 	illiAST := self generateIllicium: #primitiveScreenDepth.
@@ -3651,8 +3651,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenDepthStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenScaleFactorStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenScaleFactorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveScreenScaleFactor.
 	illiAST := self generateIllicium: #primitiveScreenScaleFactor.
@@ -3660,8 +3660,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenScaleFactorStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenSizeStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveScreenSize.
 	illiAST := self generateIllicium: #primitiveScreenSize.
@@ -3669,8 +3669,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveScreenSizeStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSecondsClockStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSecondsClockStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSecondsClock.
 	illiAST := self generateIllicium: #primitiveSecondsClock.
@@ -3678,8 +3678,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSecondsClockStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetDisplayModeStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetDisplayModeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetDisplayMode.
 	illiAST := self generateIllicium: #primitiveSetDisplayMode.
@@ -3687,8 +3687,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetDisplayModeString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetFullScreenStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetFullScreenStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetFullScreen.
 	illiAST := self generateIllicium: #primitiveSetFullScreen.
@@ -3696,8 +3696,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetFullScreenStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetGCSemaphoreStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetGCSemaphoreStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetGCSemaphore.
 	illiAST := self generateIllicium: #primitiveSetGCSemaphore.
@@ -3705,8 +3705,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetGCSemaphoreString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetImmutabilityStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetImmutabilityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetImmutability.
 	illiAST := self generateIllicium: #primitiveSetImmutability.
@@ -3714,8 +3714,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetImmutabilityStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetInterruptKeyStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetInterruptKeyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetInterruptKey.
 	illiAST := self generateIllicium: #primitiveSetInterruptKey.
@@ -3723,8 +3723,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetInterruptKeyStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetLogDirectoryStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetLogDirectoryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetLogDirectory.
 	illiAST := self generateIllicium: #primitiveSetLogDirectory.
@@ -3732,8 +3732,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetLogDirectoryStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetOrHasIdentityHashStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetOrHasIdentityHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetOrHasIdentityHash.
 	illiAST := self generateIllicium: #primitiveSetOrHasIdentityHash.
@@ -3741,8 +3741,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetOrHasIdentityHash
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetWindowLabelStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetWindowLabelStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetWindowLabel.
 	illiAST := self generateIllicium: #primitiveSetWindowLabel.
@@ -3750,8 +3750,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetWindowLabelString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetWindowSizeStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetWindowSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSetWindowSize.
 	illiAST := self generateIllicium: #primitiveSetWindowSize.
@@ -3759,8 +3759,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSetWindowSizeStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'sound primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveShortAtPutStringComparison [
+{ #category : #'sound primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveShortAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveShortAtPut.
 	illiAST := self generateIllicium: #primitiveShortAtPut.
@@ -3768,8 +3768,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveShortAtPutStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'sound primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveShortAtStringComparison [
+{ #category : #'sound primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveShortAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveShortAt.
 	illiAST := self generateIllicium: #primitiveShortAt.
@@ -3777,8 +3777,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveShortAtStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveShowDisplayRectStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveShowDisplayRectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveShowDisplayRect.
 	illiAST := self generateIllicium: #primitiveShowDisplayRect.
@@ -3786,8 +3786,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveShowDisplayRectStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtBytesLeftStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtBytesLeftStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSignalAtBytesLeft.
 	illiAST := self generateIllicium: #primitiveSignalAtBytesLeft.
@@ -3795,8 +3795,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtBytesLeftStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtMillisecondsStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtMillisecondsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSignalAtMilliseconds.
 	illiAST := self generateIllicium: #primitiveSignalAtMilliseconds.
@@ -3804,8 +3804,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtMilliseconds
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtUTCMicrosecondsStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtUTCMicrosecondsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSignalAtUTCMicroseconds.
 	illiAST := self generateIllicium: #primitiveSignalAtUTCMicroseconds.
@@ -3813,8 +3813,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalAtUTCMicroseco
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSignal.
 	illiAST := self generateIllicium: #primitiveSignal.
@@ -3822,8 +3822,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSignalStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSineStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSineStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSine.
 	illiAST := self generateIllicium: #primitiveSine.
@@ -3831,8 +3831,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSineStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeInBytesOfInstanceStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeInBytesOfInstanceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSizeInBytesOfInstance.
 	illiAST := self generateIllicium: #primitiveSizeInBytesOfInstance.
@@ -3840,8 +3840,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeInBytesOfInstanc
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory space primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeInBytesStringComparison [
+{ #category : #'memory space primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeInBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSizeInBytes.
 	illiAST := self generateIllicium: #primitiveSizeInBytes.
@@ -3849,8 +3849,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeInBytesStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSize.
 	illiAST := self generateIllicium: #primitiveSize.
@@ -3858,8 +3858,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSizeStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSlotAtPutStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSlotAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSlotAtPut.
 	illiAST := self generateIllicium: #primitiveSlotAtPut.
@@ -3867,8 +3867,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSlotAtPutStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSlotAtStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSlotAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSlotAt.
 	illiAST := self generateIllicium: #primitiveSlotAt.
@@ -3876,8 +3876,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSlotAtStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatAddStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatAddStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatAdd.
 	illiAST := self generateIllicium: #primitiveSmallFloatAdd.
@@ -3885,8 +3885,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatAddStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatArctanStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatArctanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatArctan.
 	illiAST := self generateIllicium: #primitiveSmallFloatArctan.
@@ -3894,8 +3894,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatArctanStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatDivideStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatDivideStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatDivide.
 	illiAST := self generateIllicium: #primitiveSmallFloatDivide.
@@ -3903,8 +3903,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatDivideStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatEqual.
 	illiAST := self generateIllicium: #primitiveSmallFloatEqual.
@@ -3912,8 +3912,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatEqualStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatExpStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatExpStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatExp.
 	illiAST := self generateIllicium: #primitiveSmallFloatExp.
@@ -3921,8 +3921,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatExpStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatExponentStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatExponentStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatExponent.
 	illiAST := self generateIllicium: #primitiveSmallFloatExponent.
@@ -3930,8 +3930,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatExponentSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatFractionalPartStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatFractionalPartStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatFractionalPart.
 	illiAST := self generateIllicium: #primitiveSmallFloatFractionalPart.
@@ -3939,8 +3939,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatFractional
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatGreaterOrEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatGreaterOrEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatGreaterOrEqual.
 	illiAST := self generateIllicium: #primitiveSmallFloatGreaterOrEqual.
@@ -3948,8 +3948,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatGreaterOrE
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatGreaterThanStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatGreaterThanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatGreaterThan.
 	illiAST := self generateIllicium: #primitiveSmallFloatGreaterThan.
@@ -3957,8 +3957,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatGreaterTha
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLessOrEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLessOrEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatLessOrEqual.
 	illiAST := self generateIllicium: #primitiveSmallFloatLessOrEqual.
@@ -3966,8 +3966,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLessOrEqua
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLessThanStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLessThanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatLessThan.
 	illiAST := self generateIllicium: #primitiveSmallFloatLessThan.
@@ -3975,8 +3975,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLessThanSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLogNStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLogNStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatLogN.
 	illiAST := self generateIllicium: #primitiveSmallFloatLogN.
@@ -3984,8 +3984,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatLogNString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatMultiplyStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatMultiplyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatMultiply.
 	illiAST := self generateIllicium: #primitiveSmallFloatMultiply.
@@ -3993,8 +3993,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatMultiplySt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatNotEqualStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatNotEqualStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatNotEqual.
 	illiAST := self generateIllicium: #primitiveSmallFloatNotEqual.
@@ -4002,8 +4002,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatNotEqualSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSineStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSineStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatSine.
 	illiAST := self generateIllicium: #primitiveSmallFloatSine.
@@ -4011,8 +4011,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSineString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSquareRootStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSquareRootStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatSquareRoot.
 	illiAST := self generateIllicium: #primitiveSmallFloatSquareRoot.
@@ -4020,8 +4020,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSquareRoot
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSubtractStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSubtractStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatSubtract.
 	illiAST := self generateIllicium: #primitiveSmallFloatSubtract.
@@ -4029,8 +4029,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatSubtractSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatTimesTwoPowerStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatTimesTwoPowerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatTimesTwoPower.
 	illiAST := self generateIllicium: #primitiveSmallFloatTimesTwoPower.
@@ -4038,8 +4038,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatTimesTwoPo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatTruncatedStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatTruncatedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSmallFloatTruncated.
 	illiAST := self generateIllicium: #primitiveSmallFloatTruncated.
@@ -4047,8 +4047,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSmallFloatTruncatedS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSnapshotEmbeddedStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSnapshotEmbeddedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSnapshotEmbedded.
 	illiAST := self generateIllicium: #primitiveSnapshotEmbedded.
@@ -4056,8 +4056,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSnapshotEmbeddedStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSnapshotStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSnapshotStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSnapshot.
 	illiAST := self generateIllicium: #primitiveSnapshot.
@@ -4065,8 +4065,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSnapshotStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSomeInstanceStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSomeInstanceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSomeInstance.
 	illiAST := self generateIllicium: #primitiveSomeInstance.
@@ -4074,8 +4074,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSomeInstanceStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSomeObjectStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSomeObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSomeObject.
 	illiAST := self generateIllicium: #primitiveSomeObject.
@@ -4083,8 +4083,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSomeObjectStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSpecialObjectsOopStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSpecialObjectsOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSpecialObjectsOop.
 	illiAST := self generateIllicium: #primitiveSpecialObjectsOop.
@@ -4092,8 +4092,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSpecialObjectsOopStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSquareRootStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSquareRootStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSquareRoot.
 	illiAST := self generateIllicium: #primitiveSquareRoot.
@@ -4101,8 +4101,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSquareRootStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStoreImageSegmentStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveStoreImageSegmentStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveStoreImageSegment.
 	illiAST := self generateIllicium: #primitiveStoreImageSegment.
@@ -4110,8 +4110,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStoreImageSegmentStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStoreStackpStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveStoreStackpStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveStoreStackp.
 	illiAST := self generateIllicium: #primitiveStoreStackp.
@@ -4119,8 +4119,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStoreStackpStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringAtPutStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringAtPutStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveStringAtPut.
 	illiAST := self generateIllicium: #primitiveStringAtPut.
@@ -4128,8 +4128,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringAtPutStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringAtStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveStringAt.
 	illiAST := self generateIllicium: #primitiveStringAt.
@@ -4137,8 +4137,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringAtStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringReplaceStringComparison [
+{ #category : #'indexing primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringReplaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveStringReplace.
 	illiAST := self generateIllicium: #primitiveStringReplace.
@@ -4146,8 +4146,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveStringReplaceStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic largeint primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSubtractLargeIntegersStringComparison [
+{ #category : #'arithmetic largeint primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSubtractLargeIntegersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSubtractLargeIntegers.
 	illiAST := self generateIllicium: #primitiveSubtractLargeIntegers.
@@ -4155,8 +4155,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSubtractLargeInteger
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic integer primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSubtractStringComparison [
+{ #category : #'arithmetic integer primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSubtractStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSubtract.
 	illiAST := self generateIllicium: #primitiveSubtract.
@@ -4164,8 +4164,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSubtractStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSuspendStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveSuspendStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveSuspend.
 	illiAST := self generateIllicium: #primitiveSuspend.
@@ -4173,8 +4173,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveSuspendStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTerminateToStringComparison [
+{ #category : #'control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveTerminateToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveTerminateTo.
 	illiAST := self generateIllicium: #primitiveTerminateTo.
@@ -4182,8 +4182,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTerminateToStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTestAndSetOwnershipOfCriticalSectionStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveTestAndSetOwnershipOfCriticalSectionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #primitiveTestAndSetOwnershipOfCriticalSection.
@@ -4193,8 +4193,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTestAndSetOwnershipO
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTestDisplayDepthStringComparison [
+{ #category : #'I/O primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveTestDisplayDepthStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveTestDisplayDepth.
 	illiAST := self generateIllicium: #primitiveTestDisplayDepth.
@@ -4202,8 +4202,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTestDisplayDepthStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTimesTwoPowerStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveTimesTwoPowerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveTimesTwoPower.
 	illiAST := self generateIllicium: #primitiveTimesTwoPower.
@@ -4211,8 +4211,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTimesTwoPowerStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'arithmetic float primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTruncatedStringComparison [
+{ #category : #'arithmetic float primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveTruncatedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveTruncated.
 	illiAST := self generateIllicium: #primitiveTruncated.
@@ -4220,8 +4220,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveTruncatedStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUTCMicrosecondClockStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveUTCMicrosecondClockStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveUTCMicrosecondClock.
 	illiAST := self generateIllicium: #primitiveUTCMicrosecondClock.
@@ -4229,8 +4229,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUTCMicrosecondClockS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUnloadModuleStringComparison [
+{ #category : #'plugin primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveUnloadModuleStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveUnloadModule.
 	illiAST := self generateIllicium: #primitiveUnloadModule.
@@ -4238,8 +4238,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUnloadModuleStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUpdateTimezoneStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveUpdateTimezoneStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveUpdateTimezone.
 	illiAST := self generateIllicium: #primitiveUpdateTimezone.
@@ -4247,8 +4247,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUpdateTimezoneString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUtcAndTimezoneOffsetStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveUtcAndTimezoneOffsetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveUtcAndTimezoneOffset.
 	illiAST := self generateIllicium: #primitiveUtcAndTimezoneOffset.
@@ -4256,8 +4256,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUtcAndTimezoneOffset
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUtcWithOffsetStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveUtcWithOffsetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveUtcWithOffset.
 	illiAST := self generateIllicium: #primitiveUtcWithOffset.
@@ -4265,8 +4265,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveUtcWithOffsetStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMParameterStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMParameterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveVMParameter.
 	illiAST := self generateIllicium: #primitiveVMParameter.
@@ -4274,8 +4274,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMParameterStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMPathStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMPathStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveVMPath.
 	illiAST := self generateIllicium: #primitiveVMPath.
@@ -4283,8 +4283,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMPathStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMProfileSamplesIntoStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMProfileSamplesIntoStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveVMProfileSamplesInto.
 	illiAST := self generateIllicium: #primitiveVMProfileSamplesInto.
@@ -4292,8 +4292,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVMProfileSamplesInto
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVoidReceiverStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveVoidReceiverStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveVoidReceiver.
 	illiAST := self generateIllicium: #primitiveVoidReceiver.
@@ -4301,8 +4301,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVoidReceiverStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'system control primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVoidVMStateStringComparison [
+{ #category : #'system control primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveVoidVMStateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveVoidVMState.
 	illiAST := self generateIllicium: #primitiveVoidVMState.
@@ -4310,8 +4310,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveVoidVMStateStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveWaitStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveWaitStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveWait.
 	illiAST := self generateIllicium: #primitiveWait.
@@ -4319,8 +4319,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveWaitStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveYieldStringComparison [
+{ #category : #'process primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrimitiveYieldStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveYield.
 	illiAST := self generateIllicium: #primitiveYield.
@@ -4328,8 +4328,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrimitiveYieldStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintActivationNameForSelectorstartClassStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintActivationNameForSelectorstartClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #printActivationNameForSelector:startClass:.
@@ -4339,8 +4339,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintActivationNameForSelecto
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintActivationNameForreceiverisBlockfirstTemporaryStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintActivationNameForreceiverisBlockfirstTemporaryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #printActivationNameFor:receiver:isBlock:firstTemporary:.
@@ -4350,8 +4350,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintActivationNameForreceive
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintAllStacksStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintAllStacksStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printAllStacks.
 	illiAST := self generateIllicium: #printAllStacks.
@@ -4359,8 +4359,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintAllStacksStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackFPStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintCallStackFPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printCallStackFP:.
 	illiAST := self generateIllicium: #printCallStackFP:.
@@ -4368,8 +4368,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackFPStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintCallStackOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printCallStackOf:.
 	illiAST := self generateIllicium: #printCallStackOf:.
@@ -4377,8 +4377,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackOfStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackOfcurrentFPStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintCallStackOfcurrentFPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printCallStackOf:currentFP:.
 	illiAST := self generateIllicium: #printCallStackOf:currentFP:.
@@ -4386,8 +4386,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackOfcurrentFPStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintCallStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printCallStack.
 	illiAST := self generateIllicium: #printCallStack.
@@ -4395,8 +4395,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintCallStackStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintCharStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintCharStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printChar:.
 	illiAST := self generateIllicium: #printChar:.
@@ -4404,8 +4404,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintCharStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintContextCallStackOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintContextCallStackOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printContextCallStackOf:.
 	illiAST := self generateIllicium: #printContextCallStackOf:.
@@ -4413,8 +4413,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintContextCallStackOfString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintContextStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printContext:.
 	illiAST := self generateIllicium: #printContext:.
@@ -4422,8 +4422,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintContextStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintExternalHeadFrameStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintExternalHeadFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printExternalHeadFrame.
 	illiAST := self generateIllicium: #printExternalHeadFrame.
@@ -4431,8 +4431,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintExternalHeadFrameStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameAndCallersSPshortStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFrameAndCallersSPshortStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFrameAndCallers:SP:short:.
 	illiAST := self generateIllicium: #printFrameAndCallers:SP:short:.
@@ -4440,8 +4440,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameAndCallersSPshortSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameFlagsForFPStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFrameFlagsForFPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFrameFlagsForFP:.
 	illiAST := self generateIllicium: #printFrameFlagsForFP:.
@@ -4449,8 +4449,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameFlagsForFPStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameOopatStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFrameOopatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFrameOop:at:.
 	illiAST := self generateIllicium: #printFrameOop:at:.
@@ -4458,8 +4458,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameOopatStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFrame:.
 	illiAST := self generateIllicium: #printFrame:.
@@ -4467,8 +4467,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameThingandFrameatStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFrameThingandFrameatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFrameThing:andFrame:at:.
 	illiAST := self generateIllicium: #printFrameThing:andFrame:at:.
@@ -4476,8 +4476,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameThingandFrameatStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameThingatStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFrameThingatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFrameThing:at:.
 	illiAST := self generateIllicium: #printFrameThing:at:.
@@ -4485,8 +4485,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameThingatStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameWithSPStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFrameWithSPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFrame:WithSP:.
 	illiAST := self generateIllicium: #printFrame:WithSP:.
@@ -4494,8 +4494,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFrameWithSPStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFramesInPageStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFramesInPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFramesInPage:.
 	illiAST := self generateIllicium: #printFramesInPage:.
@@ -4503,8 +4503,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFramesInPageStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintFramesOnStackPageListInUseStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintFramesOnStackPageListInUseStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFramesOnStackPageListInUse.
 	illiAST := self generateIllicium: #printFramesOnStackPageListInUse.
@@ -4512,8 +4512,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintFramesOnStackPageListInU
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintHexStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintHexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printHex:.
 	illiAST := self generateIllicium: #printHex:.
@@ -4521,8 +4521,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintHexStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintHexnpStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintHexnpStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printHexnp:.
 	illiAST := self generateIllicium: #printHexnp:.
@@ -4530,8 +4530,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintHexnpStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintLikelyImplementorsOfSelectorStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintLikelyImplementorsOfSelectorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #printLikelyImplementorsOfSelector:.
@@ -4540,8 +4540,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintLikelyImplementorsOfSele
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodCacheForStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintMethodCacheForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printMethodCacheFor:.
 	illiAST := self generateIllicium: #printMethodCacheFor:.
@@ -4549,8 +4549,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodCacheForStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodCacheStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintMethodCacheStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printMethodCache.
 	illiAST := self generateIllicium: #printMethodCache.
@@ -4558,8 +4558,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodCacheStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodDictionaryOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintMethodDictionaryOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printMethodDictionaryOf:.
 	illiAST := self generateIllicium: #printMethodDictionaryOf:.
@@ -4567,8 +4567,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodDictionaryOfString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodDictionaryStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintMethodDictionaryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printMethodDictionary:.
 	illiAST := self generateIllicium: #printMethodDictionary:.
@@ -4576,8 +4576,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintMethodDictionaryStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintNameOfClasscountStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintNameOfClasscountStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printNameOfClass:count:.
 	illiAST := self generateIllicium: #printNameOfClass:count:.
@@ -4585,8 +4585,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintNameOfClasscountStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintNumStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintNumStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printNum:.
 	illiAST := self generateIllicium: #printNum:.
@@ -4594,8 +4594,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintNumStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintOopShortStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintOopShortStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printOopShort:.
 	illiAST := self generateIllicium: #printOopShort:.
@@ -4603,8 +4603,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintOopShortStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintOopStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printOop:.
 	illiAST := self generateIllicium: #printOop:.
@@ -4612,8 +4612,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintOopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintProcessStackStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintProcessStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printProcessStack:.
 	illiAST := self generateIllicium: #printProcessStack:.
@@ -4621,8 +4621,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintProcessStackStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintProcsOnListStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintProcsOnListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printProcsOnList:.
 	illiAST := self generateIllicium: #printProcsOnList:.
@@ -4630,8 +4630,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintProcsOnListStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStackCallStackOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStackCallStackOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStackCallStackOf:.
 	illiAST := self generateIllicium: #printStackCallStackOf:.
@@ -4639,8 +4639,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStackCallStackOfStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPageListInUseStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStackPageListInUseStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStackPageListInUse.
 	illiAST := self generateIllicium: #printStackPageListInUse.
@@ -4648,8 +4648,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPageListInUseString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPageListStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStackPageListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStackPageList.
 	illiAST := self generateIllicium: #printStackPageList.
@@ -4657,8 +4657,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPageListStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPagesInUseStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStackPagesInUseStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStackPagesInUse.
 	illiAST := self generateIllicium: #printStackPagesInUse.
@@ -4666,8 +4666,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPagesInUseStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPagesStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStackPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStackPages.
 	illiAST := self generateIllicium: #printStackPages.
@@ -4675,8 +4675,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPagesStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPageuseCountStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStackPageuseCountStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStackPage:useCount:.
 	illiAST := self generateIllicium: #printStackPage:useCount:.
@@ -4684,8 +4684,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStackPageuseCountStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStackReferencesToStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStackReferencesToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStackReferencesTo:.
 	illiAST := self generateIllicium: #printStackReferencesTo:.
@@ -4693,8 +4693,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStackReferencesToStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #print:.
 	illiAST := self generateIllicium: #print:.
@@ -4702,8 +4702,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPrintStringOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPrintStringOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printStringOf:.
 	illiAST := self generateIllicium: #printStringOf:.
@@ -4711,8 +4711,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPrintStringOfStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPruneStackstackpStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPruneStackstackpStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pruneStack:stackp:.
 	illiAST := self generateIllicium: #pruneStack:stackp:.
@@ -4720,8 +4720,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPruneStackstackpStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPushBoolStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPushBoolStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pushBool:.
 	illiAST := self generateIllicium: #pushBool:.
@@ -4729,8 +4729,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPushBoolStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPushFloatStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPushFloatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pushFloat:.
 	illiAST := self generateIllicium: #pushFloat:.
@@ -4738,8 +4738,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPushFloatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPushIntegerStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPushIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pushInteger:.
 	illiAST := self generateIllicium: #pushInteger:.
@@ -4747,8 +4747,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPushIntegerStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPushStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPushStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #push:.
 	illiAST := self generateIllicium: #push:.
@@ -4756,8 +4756,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPushStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPushedReceiverOrClosureOfFrameStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPushedReceiverOrClosureOfFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pushedReceiverOrClosureOfFrame:.
 	illiAST := self generateIllicium: #pushedReceiverOrClosureOfFrame:.
@@ -4765,8 +4765,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPushedReceiverOrClosureOfFram
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPutLongtoFileStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPutLongtoFileStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #putLong:toFile:.
 	illiAST := self generateIllicium: #putLong:toFile:.
@@ -4774,8 +4774,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPutLongtoFileStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPutShorttoFileStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPutShorttoFileStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #putShort:toFile:.
 	illiAST := self generateIllicium: #putShort:toFile:.
@@ -4783,8 +4783,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPutShorttoFileStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPutToSleepyieldingIfStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPutToSleepyieldingIfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #putToSleep:yieldingIf:.
 	illiAST := self generateIllicium: #putToSleep:yieldingIf:.
@@ -4792,8 +4792,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPutToSleepyieldingIfStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testPutWordtoFileStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testPutWordtoFileStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #putWord32:toFile:.
 	illiAST := self generateIllicium: #putWord32:toFile:.
@@ -4801,8 +4801,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testPutWordtoFileStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testQuickFetchIntegerofObjectStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testQuickFetchIntegerofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #quickFetchInteger:ofObject:.
 	illiAST := self generateIllicium: #quickFetchInteger:ofObject:.
@@ -4810,8 +4810,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testQuickFetchIntegerofObjectStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testReadImageFromFileHeapSizeStartingAtStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testReadImageFromFileHeapSizeStartingAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #readImageFromFile:HeapSize:StartingAt:.
@@ -4821,8 +4821,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testReadImageFromFileHeapSizeStar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testReadableFormatStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testReadableFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #readableFormat:.
 	illiAST := self generateIllicium: #readableFormat:.
@@ -4830,8 +4830,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testReadableFormatStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testReapAndResetErrorCodeToheaderStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testReapAndResetErrorCodeToheaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #reapAndResetErrorCodeTo:header:.
 	illiAST := self generateIllicium: #reapAndResetErrorCodeTo:header:.
@@ -4839,8 +4839,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testReapAndResetErrorCodeToheader
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'callback support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testReestablishContextPriorToCallbackStringComparison [
+{ #category : #'callback support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testReestablishContextPriorToCallbackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #reestablishContextPriorToCallback:.
@@ -4849,8 +4849,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testReestablishContextPriorToCall
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testRemoveFirstLinkOfListStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testRemoveFirstLinkOfListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #removeFirstLinkOfList:.
 	illiAST := self generateIllicium: #removeFirstLinkOfList:.
@@ -4858,8 +4858,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testRemoveFirstLinkOfListStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testResumepreemptedYieldingIfStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testResumepreemptedYieldingIfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #resume:preemptedYieldingIf:.
 	illiAST := self generateIllicium: #resume:preemptedYieldingIf:.
@@ -4867,8 +4867,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testResumepreemptedYieldingIfStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testRetryPrimitiveOnFailureStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testRetryPrimitiveOnFailureStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #retryPrimitiveOnFailure.
 	illiAST := self generateIllicium: #retryPrimitiveOnFailure.
@@ -4876,8 +4876,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testRetryPrimitiveOnFailureString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'callback support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testReturnAsThroughCallbackContextStringComparison [
+{ #category : #'callback support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testReturnAsThroughCallbackContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #returnAs:ThroughCallback:Context:.
 	illiAST := self generateIllicium: #returnAs:ThroughCallback:Context:.
@@ -4885,8 +4885,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testReturnAsThroughCallbackContex
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testReverseDisplayFromtoStringComparison [
+{ #category : #'I/O primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testReverseDisplayFromtoStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #reverseDisplayFrom:to:.
 	illiAST := self generateIllicium: #reverseDisplayFrom:to:.
@@ -4894,8 +4894,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testReverseDisplayFromtoStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'method lookup cache-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testRewriteMethodCacheEntryForExternalPrimitiveToFunctionStringComparison [
+{ #category : #'method lookup cache' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testRewriteMethodCacheEntryForExternalPrimitiveToFunctionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #rewriteMethodCacheEntryForExternalPrimitiveToFunction:.
@@ -4905,8 +4905,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testRewriteMethodCacheEntryForExt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testRoomToPushNArgsStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testRoomToPushNArgsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #roomToPushNArgs:.
 	illiAST := self generateIllicium: #roomToPushNArgs:.
@@ -4914,8 +4914,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testRoomToPushNArgsStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSafeMethodClassOfStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSafeMethodClassOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #safeMethodClassOf:.
 	illiAST := self generateIllicium: #safeMethodClassOf:.
@@ -4923,8 +4923,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSafeMethodClassOfStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSaneFunctionPointerForFailureOfPrimIndexStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSaneFunctionPointerForFailureOfPrimIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #saneFunctionPointerForFailureOfPrimIndex:.
@@ -4934,8 +4934,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSaneFunctionPointerForFailure
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'callback support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSendInvokeCallbackContextStringComparison [
+{ #category : #'callback support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSendInvokeCallbackContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #sendInvokeCallbackContext:.
 	illiAST := self generateIllicium: #sendInvokeCallbackContext:.
@@ -4943,8 +4943,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSendInvokeCallbackContextStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'callback support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSendInvokeCallbackStackRegistersJmpbufStringComparison [
+{ #category : #'callback support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSendInvokeCallbackStackRegistersJmpbufStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #sendInvokeCallback:Stack:Registers:Jmpbuf:.
@@ -4954,8 +4954,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSendInvokeCallbackStackRegist
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetBreakMNUSelectorStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetBreakMNUSelectorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setBreakMNUSelector:.
 	illiAST := self generateIllicium: #setBreakMNUSelector:.
@@ -4963,8 +4963,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetBreakMNUSelectorStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetBreakSelectorStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetBreakSelectorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setBreakSelector:.
 	illiAST := self generateIllicium: #setBreakSelector:.
@@ -4972,8 +4972,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetBreakSelectorStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetFullScreenFlagStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetFullScreenFlagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setFullScreenFlag:.
 	illiAST := self generateIllicium: #setFullScreenFlag:.
@@ -4981,8 +4981,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetFullScreenFlagStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetInterruptCheckChainStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetInterruptCheckChainStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setInterruptCheckChain:.
 	illiAST := self generateIllicium: #setInterruptCheckChain:.
@@ -4990,8 +4990,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetInterruptCheckChainStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetInterruptKeycodeStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetInterruptKeycodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setInterruptKeycode:.
 	illiAST := self generateIllicium: #setInterruptKeycode:.
@@ -4999,8 +4999,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetInterruptKeycodeStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetInterruptPendingStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetInterruptPendingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setInterruptPending:.
 	illiAST := self generateIllicium: #setInterruptPending:.
@@ -5008,8 +5008,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetInterruptPendingStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetNextWakeupUsecsStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetNextWakeupUsecsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setNextWakeupUsecs:.
 	illiAST := self generateIllicium: #setNextWakeupUsecs:.
@@ -5017,8 +5017,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetNextWakeupUsecsStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetSavedWindowSizeStringComparison [
+{ #category : #'plugin primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetSavedWindowSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #setSavedWindowSize:.
 	illiAST := self generateIllicium: #setSavedWindowSize:.
@@ -5026,8 +5026,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetSavedWindowSizeStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetSignalLowSpaceFlagAndSaveProcessStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetSignalLowSpaceFlagAndSaveProcessStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #setSignalLowSpaceFlagAndSaveProcess.
@@ -5037,8 +5037,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetSignalLowSpaceFlagAndSaveP
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSetTraceFlagOnContextsFramesPageIfNeededStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSetTraceFlagOnContextsFramesPageIfNeededStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #setTraceFlagOnContextsFramesPageIfNeeded:.
@@ -5048,8 +5048,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSetTraceFlagOnContextsFramesP
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortPrintContextStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortPrintContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortPrintContext:.
 	illiAST := self generateIllicium: #shortPrintContext:.
@@ -5057,8 +5057,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortPrintContextStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameAndCallersStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameAndCallersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortPrintFrameAndCallers:.
 	illiAST := self generateIllicium: #shortPrintFrameAndCallers:.
@@ -5066,8 +5066,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameAndCallersStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameAndNCallersStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameAndNCallersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortPrintFrame:AndNCallers:.
 	illiAST := self generateIllicium: #shortPrintFrame:AndNCallers:.
@@ -5075,8 +5075,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameAndNCallersStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortPrintFrame:.
 	illiAST := self generateIllicium: #shortPrintFrame:.
@@ -5084,8 +5084,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFrameStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFramesInPageStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortPrintFramesInPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortPrintFramesInPage:.
 	illiAST := self generateIllicium: #shortPrintFramesInPage:.
@@ -5093,8 +5093,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFramesInPageStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFramesOnStackPageListInUseStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortPrintFramesOnStackPageListInUseStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #shortPrintFramesOnStackPageListInUse.
@@ -5104,8 +5104,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortPrintFramesOnStackPageLi
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortPrintOopStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortPrintOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortPrintOop:.
 	illiAST := self generateIllicium: #shortPrintOop:.
@@ -5113,8 +5113,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortPrintOopStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShortReversePrintFrameAndCallersStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShortReversePrintFrameAndCallersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortReversePrintFrameAndCallers:.
 	illiAST := self generateIllicium: #shortReversePrintFrameAndCallers:.
@@ -5122,8 +5122,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShortReversePrintFrameAndCall
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testShowDisplayBitsLeftTopRightBottomStringComparison [
+{ #category : #'I/O primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testShowDisplayBitsLeftTopRightBottomStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #showDisplayBits:Left:Top:Right:Bottom:.
@@ -5133,8 +5133,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testShowDisplayBitsLeftTopRightBo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSignalExternalSemaphoresStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSignalExternalSemaphoresStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #signalExternalSemaphores.
 	illiAST := self generateIllicium: #signalExternalSemaphores.
@@ -5142,8 +5142,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSignalExternalSemaphoresStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSignalNoResumeStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSignalNoResumeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #signalNoResume:.
 	illiAST := self generateIllicium: #signalNoResume:.
@@ -5151,8 +5151,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSignalNoResumeStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSignedBitIntegerForStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSignedBitIntegerForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #signed32BitIntegerFor:.
 	illiAST := self generateIllicium: #signed32BitIntegerFor:.
@@ -5160,8 +5160,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSignedBitIntegerForStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSignedBitValueOfStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSignedBitValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #signed64BitValueOf:.
 	illiAST := self generateIllicium: #signed64BitValueOf:.
@@ -5169,8 +5169,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSignedBitValueOfStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSignedMachineIntegerValueOfStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSignedMachineIntegerValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #signedMachineIntegerValueOf:.
 	illiAST := self generateIllicium: #signedMachineIntegerValueOf:.
@@ -5178,8 +5178,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSignedMachineIntegerValueOfSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSizeOfAlienDataStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSizeOfAlienDataStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #sizeOfAlienData:.
 	illiAST := self generateIllicium: #sizeOfAlienData:.
@@ -5187,8 +5187,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSizeOfAlienDataStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSizeOfCallPrimitiveBytecodeStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSizeOfCallPrimitiveBytecodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #sizeOfCallPrimitiveBytecode:.
 	illiAST := self generateIllicium: #sizeOfCallPrimitiveBytecode:.
@@ -5196,8 +5196,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSizeOfCallPrimitiveBytecodeSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSizeOfLongStoreTempBytecodeStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSizeOfLongStoreTempBytecodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #sizeOfLongStoreTempBytecode:.
 	illiAST := self generateIllicium: #sizeOfLongStoreTempBytecode:.
@@ -5205,8 +5205,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSizeOfLongStoreTempBytecodeSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSizeOfSTArrayFromCPrimitiveStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSizeOfSTArrayFromCPrimitiveStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #sizeOfSTArrayFromCPrimitive:.
 	illiAST := self generateIllicium: #sizeOfSTArrayFromCPrimitive:.
@@ -5214,8 +5214,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSizeOfSTArrayFromCPrimitiveSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSnapshotStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSnapshotStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #snapshot:.
 	illiAST := self generateIllicium: #snapshot:.
@@ -5223,8 +5223,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSnapshotStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSpaceStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #space.
 	illiAST := self generateIllicium: #space.
@@ -5232,8 +5232,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSpaceStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSpecialSelectorStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSpecialSelectorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #specialSelector:.
 	illiAST := self generateIllicium: #specialSelector:.
@@ -5241,8 +5241,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSpecialSelectorStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object memory support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSpurPostBecomeActionStringComparison [
+{ #category : #'object memory support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSpurPostBecomeActionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #spurPostBecomeAction:.
 	illiAST := self generateIllicium: #spurPostBecomeAction:.
@@ -5250,8 +5250,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSpurPostBecomeActionStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStObjectatStringComparison [
+{ #category : #'indexing primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStObjectatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stObject:at:.
 	illiAST := self generateIllicium: #stObject:at:.
@@ -5259,8 +5259,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStObjectatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStObjectatputStringComparison [
+{ #category : #'indexing primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStObjectatputStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stObject:at:put:.
 	illiAST := self generateIllicium: #stObject:at:put:.
@@ -5268,8 +5268,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStObjectatputStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'indexing primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStSizeOfStringComparison [
+{ #category : #'indexing primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStSizeOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stSizeOf:.
 	illiAST := self generateIllicium: #stSizeOf:.
@@ -5277,8 +5277,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStSizeOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackFloatValueStringComparison [
+{ #category : #'stack access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackFloatValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackFloatValue:.
 	illiAST := self generateIllicium: #stackFloatValue:.
@@ -5286,8 +5286,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackFloatValueStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackIntegerValueStringComparison [
+{ #category : #'stack access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackIntegerValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackIntegerValue:.
 	illiAST := self generateIllicium: #stackIntegerValue:.
@@ -5295,8 +5295,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackIntegerValueStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackLimitBytesStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackLimitBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackLimitBytes.
 	illiAST := self generateIllicium: #stackLimitBytes.
@@ -5304,8 +5304,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackLimitBytesStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackLimitOffsetStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackLimitOffsetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackLimitOffset.
 	illiAST := self generateIllicium: #stackLimitOffset.
@@ -5313,8 +5313,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackLimitOffsetStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackObjectValueStringComparison [
+{ #category : #'stack access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackObjectValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackObjectValue:.
 	illiAST := self generateIllicium: #stackObjectValue:.
@@ -5322,8 +5322,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackObjectValueStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackPageByteSizeStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackPageByteSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackPageByteSize.
 	illiAST := self generateIllicium: #stackPageByteSize.
@@ -5331,8 +5331,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackPageByteSizeStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackPageHeadroomStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackPageHeadroomStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackPageHeadroom.
 	illiAST := self generateIllicium: #stackPageHeadroom.
@@ -5340,8 +5340,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackPageHeadroomStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'internal interpreter access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackPointerForMaybeMarriedContextStringComparison [
+{ #category : #'internal interpreter access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackPointerForMaybeMarriedContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #stackPointerForMaybeMarriedContext:.
@@ -5351,8 +5351,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackPointerForMaybeMarriedCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackPointerIndexForFrameStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackPointerIndexForFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackPointerIndexForFrame:.
 	illiAST := self generateIllicium: #stackPointerIndexForFrame:.
@@ -5360,8 +5360,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackPointerIndexForFrameStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackPositiveMachineIntegerValueStringComparison [
+{ #category : #'stack access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackPositiveMachineIntegerValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackPositiveMachineIntegerValue:.
 	illiAST := self generateIllicium: #stackPositiveMachineIntegerValue:.
@@ -5369,8 +5369,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackPositiveMachineIntegerVa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackSignedMachineIntegerValueStringComparison [
+{ #category : #'stack access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackSignedMachineIntegerValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackSignedMachineIntegerValue:.
 	illiAST := self generateIllicium: #stackSignedMachineIntegerValue:.
@@ -5378,8 +5378,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackSignedMachineIntegerValu
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackTopStringComparison [
+{ #category : #'stack access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackTopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackTop.
 	illiAST := self generateIllicium: #stackTop.
@@ -5387,8 +5387,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackTopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStackValueStringComparison [
+{ #category : #'stack access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStackValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackValue:.
 	illiAST := self generateIllicium: #stackValue:.
@@ -5396,8 +5396,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStackValueStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStartOfAlienDataStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStartOfAlienDataStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #startOfAlienData:.
 	illiAST := self generateIllicium: #startOfAlienData:.
@@ -5405,8 +5405,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStartOfAlienDataStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStartPCOfMethodStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStartPCOfMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #startPCOfMethod:.
 	illiAST := self generateIllicium: #startPCOfMethod:.
@@ -5414,8 +5414,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStartPCOfMethodStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'utilities-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStoreIntegerofObjectwithValueStringComparison [
+{ #category : #utilities }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStoreIntegerofObjectwithValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #storeInteger:ofObject:withValue:.
 	illiAST := self generateIllicium: #storeInteger:ofObject:withValue:.
@@ -5423,8 +5423,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStoreIntegerofObjectwithValue
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testStoreSenderOfFramewithValueStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testStoreSenderOfFramewithValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #storeSenderOfFrame:withValue:.
 	illiAST := self generateIllicium: #storeSenderOfFrame:withValue:.
@@ -5432,8 +5432,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testStoreSenderOfFramewithValueSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSuccessStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSuccessStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #success:.
 	illiAST := self generateIllicium: #success:.
@@ -5441,8 +5441,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSuccessStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'message sending-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSuperclassOfStringComparison [
+{ #category : #'message sending' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSuperclassOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #superclassOf:.
 	illiAST := self generateIllicium: #superclassOf:.
@@ -5450,8 +5450,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSuperclassOfStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testSynchronousSignalStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testSynchronousSignalStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #synchronousSignal:.
 	illiAST := self generateIllicium: #synchronousSignal:.
@@ -5459,8 +5459,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testSynchronousSignalStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testTempCountOfStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testTempCountOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #tempCountOf:.
 	illiAST := self generateIllicium: #tempCountOf:.
@@ -5468,8 +5468,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testTempCountOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testTemporaryCountOfMethodHeaderStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testTemporaryCountOfMethodHeaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #temporaryCountOfMethodHeader:.
 	illiAST := self generateIllicium: #temporaryCountOfMethodHeader:.
@@ -5477,8 +5477,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testTemporaryCountOfMethodHeaderS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testTransferToStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testTransferToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #transferTo:.
 	illiAST := self generateIllicium: #transferTo:.
@@ -5486,8 +5486,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testTransferToStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testUltimateLiteralOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testUltimateLiteralOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #ultimateLiteralOf:.
 	illiAST := self generateIllicium: #ultimateLiteralOf:.
@@ -5495,8 +5495,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testUltimateLiteralOfStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compiled methods-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testUnfollowatIndexStringComparison [
+{ #category : #'compiled methods' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testUnfollowatIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unfollow:atIndex:.
 	illiAST := self generateIllicium: #unfollow:atIndex:.
@@ -5504,8 +5504,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testUnfollowatIndexStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testUnmarkAfterPathToStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testUnmarkAfterPathToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unmarkAfterPathTo.
 	illiAST := self generateIllicium: #unmarkAfterPathTo.
@@ -5513,8 +5513,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testUnmarkAfterPathToStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access primitives-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testUnmarkAllFramesStringComparison [
+{ #category : #'object access primitives' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testUnmarkAllFramesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unmarkAllFrames.
 	illiAST := self generateIllicium: #unmarkAllFrames.
@@ -5522,8 +5522,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testUnmarkAllFramesStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'I/O primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testUpdateDisplayLeftTopRightBottomStringComparison [
+{ #category : #'I/O primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testUpdateDisplayLeftTopRightBottomStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #updateDisplayLeft:Top:Right:Bottom:.
@@ -5533,8 +5533,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testUpdateDisplayLeftTopRightBott
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testUpdateStateOfSpouseContextForFrameWithSPStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testUpdateStateOfSpouseContextForFrameWithSPStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #updateStateOfSpouseContextForFrame:WithSP:.
@@ -5544,8 +5544,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testUpdateStateOfSpouseContextFor
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testValidInstructionPointerinFrameStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testValidInstructionPointerinFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validInstructionPointer:inFrame:.
 	illiAST := self generateIllicium: #validInstructionPointer:inFrame:.
@@ -5553,8 +5553,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testValidInstructionPointerinFram
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testValidInstructionPointerinMethodframePointerStringComparison [
+{ #category : #'debug support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testValidInstructionPointerinMethodframePointerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #validInstructionPointer:inMethod:framePointer:.
@@ -5564,8 +5564,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testValidInstructionPointerinMeth
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testValidStackPageBaseFrameStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testValidStackPageBaseFrameStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validStackPageBaseFrame:.
 	illiAST := self generateIllicium: #validStackPageBaseFrame:.
@@ -5573,8 +5573,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testValidStackPageBaseFrameString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'stack pages-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testValidStackPageBaseFramesStringComparison [
+{ #category : #'stack pages' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testValidStackPageBaseFramesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validStackPageBaseFrames.
 	illiAST := self generateIllicium: #validStackPageBaseFrames.
@@ -5582,8 +5582,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testValidStackPageBaseFramesStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testVoidLongRunningPrimitiveStringComparison [
+{ #category : #'primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testVoidLongRunningPrimitiveStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #voidLongRunningPrimitive:.
 	illiAST := self generateIllicium: #voidLongRunningPrimitive:.
@@ -5591,8 +5591,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testVoidLongRunningPrimitiveStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'frame access-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testVoidVMStateForSnapshotFlushingExternalPrimitivesIfStringComparison [
+{ #category : #'frame access' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testVoidVMStateForSnapshotFlushingExternalPrimitivesIfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #voidVMStateForSnapshotFlushingExternalPrimitivesIf:.
@@ -5602,8 +5602,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testVoidVMStateForSnapshotFlushin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'process primitive support-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testWakeHighestPriorityStringComparison [
+{ #category : #'process primitive support' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testWakeHighestPriorityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #wakeHighestPriority.
 	illiAST := self generateIllicium: #wakeHighestPriority.
@@ -5611,8 +5611,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testWakeHighestPriorityStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testWhereIsStringComparison [
+{ #category : #'debug printing' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testWhereIsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #whereIs:.
 	illiAST := self generateIllicium: #whereIs:.
@@ -5620,8 +5620,8 @@ MAStackInterpreterPrimitivesTranslationTest >> testWhereIsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image save/restore-equaliy-test' }
-MAStackInterpreterPrimitivesTranslationTest >> testWriteImageFileIOStringComparison [
+{ #category : #'image save/restore' }
+MAStringCompStackInterpreterPrimitivesTranslationTest >> testWriteImageFileIOStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #writeImageFileIO.
 	illiAST := self generateIllicium: #writeImageFileIO.
@@ -5630,6 +5630,6 @@ MAStackInterpreterPrimitivesTranslationTest >> testWriteImageFileIOStringCompari
 ]
 
 { #category : #accessing }
-MAStackInterpreterPrimitivesTranslationTest >> translator [
+MAStringCompStackInterpreterPrimitivesTranslationTest >> translator [
 	^ MAStackInterpreterPrimitivesRessource current translator
 ]

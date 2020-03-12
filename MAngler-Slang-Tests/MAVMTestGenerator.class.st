@@ -17,12 +17,18 @@ IlliciumTestGenerator new
 Class {
 	#name : #MAVMTestGenerator,
 	#superclass : #Object,
+	#instVars : [
+		'methodsToStringCompare',
+		'methodsToSmokeTest',
+		'classToTest'
+	],
 	#category : #'MAngler-Slang-Tests-Generators'
 }
 
 { #category : #removing }
 MAVMTestGenerator class >> cleanUp [
 	<script>
+	MAFullVMCCodeGeneratorRessource reset.
 	self removeResources.
 	self removeTests.
 ]
@@ -31,7 +37,7 @@ MAVMTestGenerator class >> cleanUp [
 MAVMTestGenerator class >> generateVMTests [
 	<script>	
 	| generator |
-	self cleanUp.	
+	self cleanUp.
 	generator:= self new.	
 	^ {
 			SpurPlanningCompactor.
@@ -71,17 +77,34 @@ MAVMTestGenerator class >> translatorClass [
 	^ MASlangTranslator
 ]
 
+{ #category : #picking }
+MAVMTestGenerator >> fillMethodsToTest [
+	| methods |
+	"Basically, what we can compare to slang, we do. What we cannot, we only do a smoke test on them"
+	methods := (classToTest allSelectorsBelow: VMClass)	
+		collect:[ :aSelector | classToTest lookupSelector: aSelector ].
+	
+	methodsToStringCompare := methods select: [ :aCompiledMethod |
+			(MASlangVMClassTranslator shouldITranslate: aCompiledMethod)
+				and:[ (MAFullVMCCodeGeneratorRessource current codeGenerator 
+							methodNamed: aCompiledMethod selector) isNotNil ] ].
+	
+	methodsToSmokeTest := methods select:[:aCompiledMethod| 
+		(MASlangVMClassTranslator shouldITranslate: aCompiledMethod)
+			and:[ (MAFullVMCCodeGeneratorRessource current codeGenerator 
+							methodNamed: aCompiledMethod selector) isNil ]  ].
+]
+
 { #category : #formating }
 MAVMTestGenerator >> formatSelector: aSelector [
 	^ aSelector onlyLetters capitalized
 ]
 
 { #category : #'ressource-generation' }
-MAVMTestGenerator >> generateAccessorsTo: aResourceClass For: aTestedClass [ 
-	| method ressourceClassName |
-	ressourceClassName := aResourceClass name.
+MAVMTestGenerator >> generateAccessorsTo: aResourceClassName for: aTestedClass [ 
+	| method |
 	method := #translator asMethodWithBody: [
-		^ ressourceClassName current translator
+		^ aResourceClassName current translator
 	].
 	aTestedClass compile: method asString classified: #accessing.
 	
@@ -102,9 +125,9 @@ MAVMTestGenerator >> generateResourceAccessorsFor: aRessourceClass [
 ]
 
 { #category : #'ressource-generation' }
-MAVMTestGenerator >> generateResourceClassFor: aClass [
+MAVMTestGenerator >> generateResourceClass [
 	| ressourceClass |
-	ressourceClass := self class resourceBaseClass subclass: 'MA' , aClass name , 'Ressource'
+	ressourceClass := self class resourceBaseClass subclass: self ressourceClassName
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'MAngler-Slang-Tests'.
@@ -112,10 +135,21 @@ MAVMTestGenerator >> generateResourceClassFor: aClass [
 	^ ressourceClass
 ]
 
+{ #category : #'test-generation' }
+MAVMTestGenerator >> generateSetUpFor: aClass [
+	| method testedClass aTestedClassName |
+	aTestedClassName := classToTest name .
+	method := 'setUp' asMethodWithBody: [
+		super setUp.
+		testedClass := aTestedClassName.
+	].
+	aClass compile: method asString classified: #running.
+]
+
 { #category : #'ressource-generation' }
-MAVMTestGenerator >> generateSetUpFor: aClass forResource: aRessourceClass [
+MAVMTestGenerator >> generateSetUpForResource: aRessourceClass [
 	| testedClassName method |
-	testedClassName := aClass name.
+	testedClassName := classToTest name.
 	method := 'setUp' asMethodWithBody: [
 		super setUp.
 		self translator: (self newTranslatorWith: testedClassName)
@@ -124,20 +158,40 @@ MAVMTestGenerator >> generateSetUpFor: aClass forResource: aRessourceClass [
 ]
 
 { #category : #'test-generation' }
-MAVMTestGenerator >> generateSetUpFor: aClass forTestedClass: aTestedClass forTranslator: aTranslatorClass [
-	| method testedClass testedClassName |
-	testedClassName := aTestedClass name.
-	method := 'setUp' asMethodWithBody: [
-		super setUp.
-		testedClass := testedClassName.
+MAVMTestGenerator >> generateSmokeTestFor: aMethod inTestClass: aTestClass [
+
+	| methodSource methodToTestSelector |
+	methodToTestSelector := aMethod selector.
+	methodSource :=	 'test', methodToTestSelector onlyLetters capitalized , 'StringComparison' asMethodWithBody:[
+		| illiString illiAST |
+		"In the case the method is pruned in the CCodeGenerator, we only test that this work all the way through"
+		illiAST := self generateIllicium: #methodToTestSelector.
+		illiString := self prettyPrintIllicium: illiAST.
 	].
-	aClass compile: method asString classified: #running.
+
+	aTestClass compile: methodSource asString classified: aMethod protocol.
 ]
 
 { #category : #'test-generation' }
-MAVMTestGenerator >> generateTestClassFor: aClass [
+MAVMTestGenerator >> generateStringEqualityTestFor: aMethod inTestClass: aTestClass [
+	| methodSource methodToTestSelector |
+	methodToTestSelector := aMethod selector.
+	methodSource :=	 'test', methodToTestSelector onlyLetters capitalized , 'StringComparison' asMethodWithBody:[
+		| illiString slangString illiAST |
+		"Generate Slang first. Slang fails faster"
+		slangString := self generateSlang: #methodToTestSelector.
+		illiAST := self generateIllicium: #methodToTestSelector.
+		illiString := self prettyPrintIllicium: illiAST.
+		self assert: illiString equals: slangString.
+	].
+
+	aTestClass compile: methodSource asString classified: aMethod protocol.
+]
+
+{ #category : #'test-generation' }
+MAVMTestGenerator >> generateTestClassFor: aClassName [
 	| testClass |
-	testClass := self class testBaseClass subclass: 'MA' , aClass name , 'TranslationTest'
+	testClass := self class testBaseClass subclass: 'MA' , aClassName , 'TranslationTest'
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'MAngler-Slang-Tests'.
@@ -145,55 +199,51 @@ MAVMTestGenerator >> generateTestClassFor: aClass [
 	^ testClass
 ]
 
+{ #category : #'as yet unclassified' }
+MAVMTestGenerator >> generateTestClassFor: aTestClassName withMethods: aCollectionOfMethods using: aTestGenerationMethod [
+	| testClass |
+	testClass := self generateTestClassFor: aTestClassName.
+	
+	self generateSetUpFor: testClass.
+	
+	aCollectionOfMethods
+		do: [ :aMethod | aTestGenerationMethod valueWithReceiver: self arguments: { aMethod. testClass } ].
+		
+	self generateAccessorsTo: self ressourceClassName for: testClass.
+]
+
 { #category : #'test-generation' }
 MAVMTestGenerator >> generateTestForClass: aClass [
-	| testClass methodToTest resourceClass |
-	methodToTest := self methodToTest: aClass.
-		
-	methodToTest ifEmpty: [ ^self ].
+	| resourceClass |
 	
-	testClass := self generateTestClassFor: aClass.
+	classToTest := aClass.
+	self fillMethodsToTest.
 	
-	self
-		generateSetUpFor: testClass
-		forTestedClass: aClass
-		forTranslator: self class translatorClass name.
+	methodsToSmokeTest isEmpty | methodsToStringCompare isEmpty ifTrue:[ ^ self "nothing to generate" ].
 	
-	methodToTest
-		do: [ :aMethod | | protocol |
-			protocol := aMethod protocol ifNotEmpty: [ aMethod protocol , '-' ].
-			self generateTestMethodFor: aMethod selector inTestClass: testClass initialProtocol: protocol ].
-	
-	"ressource part"	
-	resourceClass := self generateResourceClassFor: aClass.
-	self generateSetUpFor: aClass forResource: resourceClass.
+	"ressource part"
+	resourceClass := self generateResourceClass.
+	self generateSetUpForResource: resourceClass.
 	self generateResourceAccessorsFor: resourceClass.
-	self generateAccessorsTo: resourceClass For: testClass 
+	
+	methodsToSmokeTest ifNotEmpty: [ 
+		self generateTestClassFor: #Smoke , aClass name 
+			withMethods: methodsToSmokeTest 
+			using: self class >> #generateSmokeTestFor:inTestClass:.
+		].
+	methodsToStringCompare ifNotEmpty: [ 
+		self generateTestClassFor: #StringComp , aClass name 
+			withMethods: methodsToStringCompare 
+			using: self class >> #generateStringEqualityTestFor:inTestClass:
+		].
+	
+	
+	
+	
+
 ]
 
-{ #category : #'test-generation' }
-MAVMTestGenerator >> generateTestMethodFor: aSelector inTestClass: aTestClass initialProtocol: aString [ 
-
-	| methodSource |
-	methodSource :=	 'test', aSelector onlyLetters capitalized , 'StringComparison' asMethodWithBody:[
-		| illiString slangString illiAST |
-		"Generate Slang first. Slang fails faster"
-		slangString := self generateSlang: #aSelector.
-		illiAST := self generateIllicium: #aSelector.
-		illiString := self prettyPrintIllicium: illiAST.
-		self assert: illiString equals: slangString.
-	].
-
-	aTestClass compile: methodSource asString classified: aString , #'equaliy-test'.
-]
-
-{ #category : #picking }
-MAVMTestGenerator >> methodToTest: aClass [
-	| methods |
-	methods := (aClass allSelectorsBelow: VMClass)	
-		collect:[ :aSelector | aClass lookupSelector: aSelector ]	
-		thenSelect: [ :aCompiledMethod |
-			(MASlangVMClassTranslator shouldITranslate: aCompiledMethod) ].
-	MAFullVMCCodeGeneratorRessource reset.
-	^ methods
+{ #category : #'as yet unclassified' }
+MAVMTestGenerator >> ressourceClassName [ 
+	^ 'MA' , classToTest name , 'Ressource'
 ]

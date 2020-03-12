@@ -1,17 +1,17 @@
 Class {
-	#name : #MASpur64BitMemoryManagerTranslationTest,
+	#name : #MAStringCompSpur64BitMemoryManagerTranslationTest,
 	#superclass : #MAVMTranslationTests,
 	#category : #'MAngler-Slang-Tests-generatedTests'
 }
 
 { #category : #running }
-MASpur64BitMemoryManagerTranslationTest >> setUp [
+MAStringCompSpur64BitMemoryManagerTranslationTest >> setUp [
 	super setUp.
 	testedClass := Spur64BitMemoryManager
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAccessibleObjectAfterStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAccessibleObjectAfterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #accessibleObjectAfter:.
 	illiAST := self generateIllicium: #accessibleObjectAfter:.
@@ -19,8 +19,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAccessibleObjectAfterStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testActiveAndDeferredScanStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testActiveAndDeferredScanStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #activeAndDeferredScan:.
 	illiAST := self generateIllicium: #activeAndDeferredScan:.
@@ -28,8 +28,8 @@ MASpur64BitMemoryManagerTranslationTest >> testActiveAndDeferredScanStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAddFreeSubTreeStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAddFreeSubTreeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addFreeSubTree:.
 	illiAST := self generateIllicium: #addFreeSubTree:.
@@ -37,8 +37,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAddFreeSubTreeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAddGCRootStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAddGCRootStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addGCRoot:.
 	illiAST := self generateIllicium: #addGCRoot:.
@@ -46,8 +46,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAddGCRootStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAddToFreeListbytesStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAddToFreeListbytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addToFreeList:bytes:.
 	illiAST := self generateIllicium: #addToFreeList:bytes:.
@@ -55,8 +55,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAddToFreeListbytesStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAddressAfterStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAddressAfterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addressAfter:.
 	illiAST := self generateIllicium: #addressAfter:.
@@ -64,8 +64,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAddressAfterStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAddressCouldBeObjStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAddressCouldBeObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addressCouldBeObj:.
 	illiAST := self generateIllicium: #addressCouldBeObj:.
@@ -73,8 +73,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAddressCouldBeObjStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAddressCouldBeOopStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAddressCouldBeOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #addressCouldBeOop:.
 	illiAST := self generateIllicium: #addressCouldBeOop:.
@@ -82,8 +82,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAddressCouldBeOopStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllInstancesOfStringComparison [
+{ #category : #'primitive support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllInstancesOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allInstancesOf:.
 	illiAST := self generateIllicium: #allInstancesOf:.
@@ -91,8 +91,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllInstancesOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllObjectsStringComparison [
+{ #category : #'primitive support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllObjectsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allObjects.
 	illiAST := self generateIllicium: #allObjects.
@@ -100,8 +100,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllObjectsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllObjectsUnmarkedStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllObjectsUnmarkedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allObjectsUnmarked.
 	illiAST := self generateIllicium: #allObjectsUnmarked.
@@ -109,8 +109,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllObjectsUnmarkedStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllOldMarkedWeakObjectsOnWeaklingStackStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllOldMarkedWeakObjectsOnWeaklingStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #allOldMarkedWeakObjectsOnWeaklingStack.
@@ -120,8 +120,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllOldMarkedWeakObjectsOnWeakling
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllStrongSlotsOfWeaklingAreMarkedStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllStrongSlotsOfWeaklingAreMarkedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #allStrongSlotsOfWeaklingAreMarked:.
@@ -130,8 +130,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllStrongSlotsOfWeaklingAreMarked
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allUnscannedEphemeronsAreActive.
 	illiAST := self generateIllicium: #allUnscannedEphemeronsAreActive.
@@ -139,8 +139,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllUnscannedEphemeronsAreActiveSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allocateLargestFreeChunk.
 	illiAST := self generateIllicium: #allocateLargestFreeChunk.
@@ -148,8 +148,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllocateLargestFreeChunkStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllocateNewSpaceSlotsformatclassIndexStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllocateNewSpaceSlotsformatclassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #allocateNewSpaceSlots:format:classIndex:.
@@ -159,8 +159,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllocateNewSpaceSlotsformatclassI
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllocateOldSpaceChunkOfBytesStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllocateOldSpaceChunkOfBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allocateOldSpaceChunkOfBytes:.
 	illiAST := self generateIllicium: #allocateOldSpaceChunkOfBytes:.
@@ -168,8 +168,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllocateOldSpaceChunkOfBytesStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'sista support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllocatePinnedSlotsStringComparison [
+{ #category : #'sista support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllocatePinnedSlotsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allocatePinnedSlots:.
 	illiAST := self generateIllicium: #allocatePinnedSlots:.
@@ -177,8 +177,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllocatePinnedSlotsStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllocateSlotsForPinningInOldSpacebytesformatclassIndexStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllocateSlotsForPinningInOldSpacebytesformatclassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #allocateSlotsForPinningInOldSpace:bytes:format:classIndex:.
@@ -188,8 +188,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllocateSlotsForPinningInOldSpace
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllocateSlotsInOldSpacebytesformatclassIndexStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllocateSlotsInOldSpacebytesformatclassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #allocateSlotsInOldSpace:bytes:format:classIndex:.
@@ -199,8 +199,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllocateSlotsInOldSpacebytesforma
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAllocationUnitStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAllocationUnitStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #allocationUnit.
 	illiAST := self generateIllicium: #allocationUnit.
@@ -208,8 +208,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAllocationUnitStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testArrayFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testArrayFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #arrayFormat.
 	illiAST := self generateIllicium: #arrayFormat.
@@ -217,8 +217,8 @@ MASpur64BitMemoryManagerTranslationTest >> testArrayFormatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testAssertInnerValidFreeObjectStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testAssertInnerValidFreeObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #assertInnerValidFreeObject:.
 	illiAST := self generateIllicium: #assertInnerValidFreeObject:.
@@ -226,8 +226,8 @@ MASpur64BitMemoryManagerTranslationTest >> testAssertInnerValidFreeObjectStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBaseHeaderSizeStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBaseHeaderSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #baseHeaderSize.
 	illiAST := self generateIllicium: #baseHeaderSize.
@@ -235,8 +235,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBaseHeaderSizeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'store check-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBeRootIfOldStringComparison [
+{ #category : #'store check' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBeRootIfOldStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #beRootIfOld:.
 	illiAST := self generateIllicium: #beRootIfOld:.
@@ -244,8 +244,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBeRootIfOldStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'become implementation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBecomeEffectFlagsForStringComparison [
+{ #category : #'become implementation' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBecomeEffectFlagsForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #becomeEffectFlagsFor:.
 	illiAST := self generateIllicium: #becomeEffectFlagsFor:.
@@ -253,8 +253,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBecomeEffectFlagsForStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBecomewithStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBecomewithStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #become:with:.
 	illiAST := self generateIllicium: #become:with:.
@@ -262,8 +262,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBecomewithStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'become api-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBecomewithtwoWaycopyHashStringComparison [
+{ #category : #'become api' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBecomewithtwoWaycopyHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #become:with:twoWay:copyHash:.
 	illiAST := self generateIllicium: #become:with:twoWay:copyHash:.
@@ -271,8 +271,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBecomewithtwoWaycopyHashStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBitsSetInFreeSpaceMaskForAllFreeListsStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBitsSetInFreeSpaceMaskForAllFreeListsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #bitsSetInFreeSpaceMaskForAllFreeLists.
@@ -282,8 +282,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBitsSetInFreeSpaceMaskForAllFreeL
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'segments-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBridgeSizeStringComparison [
+{ #category : #segments }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBridgeSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #bridgeSize.
 	illiAST := self generateIllicium: #bridgeSize.
@@ -291,8 +291,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBridgeSizeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testByteFormatMaskStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testByteFormatMaskStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #byteFormatMask.
 	illiAST := self generateIllicium: #byteFormatMask.
@@ -300,8 +300,8 @@ MASpur64BitMemoryManagerTranslationTest >> testByteFormatMaskStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testByteSizeOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testByteSizeOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #byteSizeOf:.
 	illiAST := self generateIllicium: #byteSizeOf:.
@@ -309,8 +309,8 @@ MASpur64BitMemoryManagerTranslationTest >> testByteSizeOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'snapshot-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testByteSwappedStringComparison [
+{ #category : #snapshot }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testByteSwappedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #byteSwapped:.
 	illiAST := self generateIllicium: #byteSwapped:.
@@ -318,8 +318,8 @@ MASpur64BitMemoryManagerTranslationTest >> testByteSwappedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBytesInObjectStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBytesInObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #bytesInObject:.
 	illiAST := self generateIllicium: #bytesInObject:.
@@ -327,8 +327,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBytesInObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testBytesPerOopStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testBytesPerOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #bytesPerOop.
 	illiAST := self generateIllicium: #bytesPerOop.
@@ -336,8 +336,8 @@ MASpur64BitMemoryManagerTranslationTest >> testBytesPerOopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testChangeClassOftoStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testChangeClassOftoStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #changeClassOf:to:.
 	illiAST := self generateIllicium: #changeClassOf:to:.
@@ -345,8 +345,8 @@ MASpur64BitMemoryManagerTranslationTest >> testChangeClassOftoStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCharacterObjectOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCharacterObjectOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #characterObjectOf:.
 	illiAST := self generateIllicium: #characterObjectOf:.
@@ -354,8 +354,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCharacterObjectOfStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCharacterTableStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCharacterTableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #characterTable.
 	illiAST := self generateIllicium: #characterTable.
@@ -363,8 +363,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCharacterTableStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'immediates-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCharacterValueOfStringComparison [
+{ #category : #immediates }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCharacterValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #characterValueOf:.
 	illiAST := self generateIllicium: #characterValueOf:.
@@ -372,8 +372,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCharacterValueOfStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCheckHeapFreeSpaceIntegrityStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCheckHeapFreeSpaceIntegrityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkHeapFreeSpaceIntegrity.
 	illiAST := self generateIllicium: #checkHeapFreeSpaceIntegrity.
@@ -381,8 +381,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCheckHeapFreeSpaceIntegrityString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCheckHeapIntegrityclassIndicesShouldBeValidStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCheckHeapIntegrityclassIndicesShouldBeValidStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #checkHeapIntegrity:classIndicesShouldBeValid:.
@@ -392,8 +392,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCheckHeapIntegrityclassIndicesSho
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCheckOkayOopStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCheckOkayOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOkayOop:.
 	illiAST := self generateIllicium: #checkOkayOop:.
@@ -401,8 +401,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCheckOkayOopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCheckOopHasOkayClassStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCheckOopHasOkayClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOopHasOkayClass:.
 	illiAST := self generateIllicium: #checkOopHasOkayClass:.
@@ -410,8 +410,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCheckOopHasOkayClassStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOopIntegrity:named:.
 	illiAST := self generateIllicium: #checkOopIntegrity:named:.
@@ -419,8 +419,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedindexStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedindexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkOopIntegrity:named:index:.
 	illiAST := self generateIllicium: #checkOopIntegrity:named:index:.
@@ -428,8 +428,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCheckOopIntegritynamedindexString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCheckedLongAtStringComparison [
+{ #category : #'memory access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCheckedLongAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #checkedLongAt:.
 	illiAST := self generateIllicium: #checkedLongAt:.
@@ -437,8 +437,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCheckedLongAtStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassAlienStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassAlienStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classAlien.
 	illiAST := self generateIllicium: #classAlien.
@@ -446,8 +446,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassAlienStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassArrayStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassArrayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classArray.
 	illiAST := self generateIllicium: #classArray.
@@ -455,8 +455,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassArrayStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassAtIndexStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassAtIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classAtIndex:.
 	illiAST := self generateIllicium: #classAtIndex:.
@@ -464,8 +464,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassAtIndexStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassAtIndexputStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassAtIndexputStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classAtIndex:put:.
 	illiAST := self generateIllicium: #classAtIndex:put:.
@@ -473,8 +473,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassAtIndexputStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassBitmapStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassBitmapStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classBitmap.
 	illiAST := self generateIllicium: #classBitmap.
@@ -482,8 +482,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassBitmapStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassByteArrayStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassByteArrayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classByteArray.
 	illiAST := self generateIllicium: #classByteArray.
@@ -491,8 +491,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassByteArrayStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassCharacterStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassCharacterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classCharacter.
 	illiAST := self generateIllicium: #classCharacter.
@@ -500,8 +500,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassCharacterStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassExternalAddressStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassExternalAddressStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classExternalAddress.
 	illiAST := self generateIllicium: #classExternalAddress.
@@ -509,8 +509,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassExternalAddressStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassExternalDataStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassExternalDataStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classExternalData.
 	illiAST := self generateIllicium: #classExternalData.
@@ -518,8 +518,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassExternalDataStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassExternalFunctionStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassExternalFunctionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classExternalFunction.
 	illiAST := self generateIllicium: #classExternalFunction.
@@ -527,8 +527,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassExternalFunctionStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassExternalLibraryStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassExternalLibraryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classExternalLibrary.
 	illiAST := self generateIllicium: #classExternalLibrary.
@@ -536,8 +536,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassExternalLibraryStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassExternalStructureStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassExternalStructureStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classExternalStructure.
 	illiAST := self generateIllicium: #classExternalStructure.
@@ -545,8 +545,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassExternalStructureStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassFloatStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassFloatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classFloat.
 	illiAST := self generateIllicium: #classFloat.
@@ -554,8 +554,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassFloatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassFormatForInstanceFormatStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassFormatForInstanceFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classFormatForInstanceFormat:.
 	illiAST := self generateIllicium: #classFormatForInstanceFormat:.
@@ -563,8 +563,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassFormatForInstanceFormatStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassIndexFieldWidthStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassIndexFieldWidthStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classIndexFieldWidth.
 	illiAST := self generateIllicium: #classIndexFieldWidth.
@@ -572,8 +572,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassIndexFieldWidthStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassIndexOfStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassIndexOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classIndexOf:.
 	illiAST := self generateIllicium: #classIndexOf:.
@@ -581,8 +581,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassIndexOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassLargeNegativeIntegerStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassLargeNegativeIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classLargeNegativeInteger.
 	illiAST := self generateIllicium: #classLargeNegativeInteger.
@@ -590,8 +590,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassLargeNegativeIntegerStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassLargePositiveIntegerStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassLargePositiveIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classLargePositiveInteger.
 	illiAST := self generateIllicium: #classLargePositiveInteger.
@@ -599,8 +599,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassLargePositiveIntegerStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassOrNilAtIndexStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassOrNilAtIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classOrNilAtIndex:.
 	illiAST := self generateIllicium: #classOrNilAtIndex:.
@@ -608,8 +608,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassOrNilAtIndexStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassPointStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassPointStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classPoint.
 	illiAST := self generateIllicium: #classPoint.
@@ -617,8 +617,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassPointStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassSemaphoreStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassSemaphoreStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classSemaphore.
 	illiAST := self generateIllicium: #classSemaphore.
@@ -626,8 +626,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassSemaphoreStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassSmallIntegerStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassSmallIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classSmallInteger.
 	illiAST := self generateIllicium: #classSmallInteger.
@@ -635,8 +635,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassSmallIntegerStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassStringStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassStringStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classString.
 	illiAST := self generateIllicium: #classString.
@@ -644,8 +644,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassStringStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassTableMinorIndexMaskStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassTableMinorIndexMaskStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classTableMinorIndexMask.
 	illiAST := self generateIllicium: #classTableMinorIndexMask.
@@ -653,8 +653,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassTableMinorIndexMaskStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassTablePageSizeStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassTablePageSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classTablePageSize.
 	illiAST := self generateIllicium: #classTablePageSize.
@@ -662,8 +662,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassTablePageSizeStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassTableRootObjStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassTableRootObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classTableRootObj.
 	illiAST := self generateIllicium: #classTableRootObj.
@@ -671,8 +671,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassTableRootObjStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassTableRootSlotsStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassTableRootSlotsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classTableRootSlots.
 	illiAST := self generateIllicium: #classTableRootSlots.
@@ -680,8 +680,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassTableRootSlotsStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassTagForClassStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassTagForClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classTagForClass:.
 	illiAST := self generateIllicium: #classTagForClass:.
@@ -689,8 +689,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassTagForClassStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClassUnsafeAlienStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClassUnsafeAlienStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classUnsafeAlien.
 	illiAST := self generateIllicium: #classUnsafeAlien.
@@ -698,8 +698,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClassUnsafeAlienStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleFreeSpaceStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleFreeSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #clearLeakMapAndMapAccessibleFreeSpace.
@@ -709,8 +709,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleFreeS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleObjectsStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleObjectsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #clearLeakMapAndMapAccessibleObjects.
@@ -720,8 +720,8 @@ MASpur64BitMemoryManagerTranslationTest >> testClearLeakMapAndMapAccessibleObjec
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCloneInOldSpaceforPinningStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCloneInOldSpaceforPinningStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #cloneInOldSpace:forPinning:.
 	illiAST := self generateIllicium: #cloneInOldSpace:forPinning:.
@@ -729,8 +729,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCloneInOldSpaceforPinningStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCloneStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCloneStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #clone:.
 	illiAST := self generateIllicium: #clone:.
@@ -738,8 +738,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCloneStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCompactClassIndexOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCompactClassIndexOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #compactClassIndexOf:.
 	illiAST := self generateIllicium: #compactClassIndexOf:.
@@ -747,8 +747,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCompactClassIndexOfStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCopyObjtoAddrstopAtsavedFirstFieldsindexStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCopyObjtoAddrstopAtsavedFirstFieldsindexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #copyObj:toAddr:stopAt:savedFirstFields:index:.
@@ -758,8 +758,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCopyObjtoAddrstopAtsavedFirstFiel
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCountMarkedAndUnmarkdObjectsStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCountMarkedAndUnmarkdObjectsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #countMarkedAndUnmarkdObjects:.
 	illiAST := self generateIllicium: #countMarkedAndUnmarkdObjects:.
@@ -767,8 +767,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCountMarkedAndUnmarkdObjectsStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation accounting-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testCurrentAllocatedBytesStringComparison [
+{ #category : #'allocation accounting' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testCurrentAllocatedBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #currentAllocatedBytes.
 	illiAST := self generateIllicium: #currentAllocatedBytes.
@@ -776,8 +776,8 @@ MASpur64BitMemoryManagerTranslationTest >> testCurrentAllocatedBytesStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testDbgFloatValueOfStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testDbgFloatValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #dbgFloatValueOf:.
 	illiAST := self generateIllicium: #dbgFloatValueOf:.
@@ -785,8 +785,8 @@ MASpur64BitMemoryManagerTranslationTest >> testDbgFloatValueOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'snapshot-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testDefaultEdenBytesStringComparison [
+{ #category : #snapshot }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testDefaultEdenBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #defaultEdenBytes.
 	illiAST := self generateIllicium: #defaultEdenBytes.
@@ -794,8 +794,8 @@ MASpur64BitMemoryManagerTranslationTest >> testDefaultEdenBytesStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testDisplayObjectStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testDisplayObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #displayObject.
 	illiAST := self generateIllicium: #displayObject.
@@ -803,8 +803,8 @@ MASpur64BitMemoryManagerTranslationTest >> testDisplayObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenging-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testDoScavengeStringComparison [
+{ #category : #'gc - scavenging' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testDoScavengeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #doScavenge:.
 	illiAST := self generateIllicium: #doScavenge:.
@@ -812,8 +812,8 @@ MASpur64BitMemoryManagerTranslationTest >> testDoScavengeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'instantiation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testEeInstantiateClassIndexformatnumSlotsStringComparison [
+{ #category : #instantiation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testEeInstantiateClassIndexformatnumSlotsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #eeInstantiateClassIndex:format:numSlots:.
@@ -823,8 +823,8 @@ MASpur64BitMemoryManagerTranslationTest >> testEeInstantiateClassIndexformatnumS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testEmptyObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testEmptyObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #emptyObjStack:.
 	illiAST := self generateIllicium: #emptyObjStack:.
@@ -832,8 +832,8 @@ MASpur64BitMemoryManagerTranslationTest >> testEmptyObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testEnsureRoomOnObjStackAtStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testEnsureRoomOnObjStackAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #ensureRoomOnObjStackAt:.
 	illiAST := self generateIllicium: #ensureRoomOnObjStackAt:.
@@ -841,8 +841,8 @@ MASpur64BitMemoryManagerTranslationTest >> testEnsureRoomOnObjStackAtStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testEnterIntoClassTableStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testEnterIntoClassTableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #enterIntoClassTable:.
 	illiAST := self generateIllicium: #enterIntoClassTable:.
@@ -850,8 +850,8 @@ MASpur64BitMemoryManagerTranslationTest >> testEnterIntoClassTableStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testEphemeronFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testEphemeronFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #ephemeronFormat.
 	illiAST := self generateIllicium: #ephemeronFormat.
@@ -859,8 +859,8 @@ MASpur64BitMemoryManagerTranslationTest >> testEphemeronFormatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testExistInstancesInNewSpaceOfStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testExistInstancesInNewSpaceOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #existInstancesInNewSpaceOf:.
 	illiAST := self generateIllicium: #existInstancesInNewSpaceOf:.
@@ -868,8 +868,8 @@ MASpur64BitMemoryManagerTranslationTest >> testExistInstancesInNewSpaceOfStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testExpungeFromClassTableStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testExpungeFromClassTableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #expungeFromClassTable:.
 	illiAST := self generateIllicium: #expungeFromClassTable:.
@@ -877,8 +877,8 @@ MASpur64BitMemoryManagerTranslationTest >> testExpungeFromClassTableStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFalseObjectStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFalseObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #falseObject.
 	illiAST := self generateIllicium: #falseObject.
@@ -886,8 +886,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFalseObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchByteofObjectStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchByteofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchByte:ofObject:.
 	illiAST := self generateIllicium: #fetchByte:ofObject:.
@@ -895,8 +895,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchByteofObjectStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchClassOfNonImmStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchClassOfNonImmStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchClassOfNonImm:.
 	illiAST := self generateIllicium: #fetchClassOfNonImm:.
@@ -904,8 +904,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchClassOfNonImmStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchClassOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchClassOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchClassOf:.
 	illiAST := self generateIllicium: #fetchClassOf:.
@@ -913,8 +913,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchClassOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchClassTagOfNonImmStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchClassTagOfNonImmStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchClassTagOfNonImm:.
 	illiAST := self generateIllicium: #fetchClassTagOfNonImm:.
@@ -922,8 +922,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchClassTagOfNonImmStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchClassTagOfStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchClassTagOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchClassTagOf:.
 	illiAST := self generateIllicium: #fetchClassTagOf:.
@@ -931,8 +931,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchClassTagOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchLongofFloatObjectStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchLongofFloatObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchLong32:ofFloatObject:.
 	illiAST := self generateIllicium: #fetchLong32:ofFloatObject:.
@@ -940,8 +940,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchLongofFloatObjectStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchLongofObjectStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchLongofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchLong32:ofObject:.
 	illiAST := self generateIllicium: #fetchLong32:ofObject:.
@@ -949,8 +949,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchLongofObjectStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'heap management-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchPointerofFreeChunkStringComparison [
+{ #category : #'heap management' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchPointerofFreeChunkStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchPointer:ofFreeChunk:.
 	illiAST := self generateIllicium: #fetchPointer:ofFreeChunk:.
@@ -958,8 +958,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchPointerofFreeChunkStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFetchPointerofObjectStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFetchPointerofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fetchPointer:ofObject:.
 	illiAST := self generateIllicium: #fetchPointer:ofObject:.
@@ -967,8 +967,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFetchPointerofObjectStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFindLargestFreeChunkStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFindLargestFreeChunkStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findLargestFreeChunk.
 	illiAST := self generateIllicium: #findLargestFreeChunk.
@@ -976,8 +976,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFindLargestFreeChunkStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFindStringBeginningWithStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFindStringBeginningWithStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findStringBeginningWith:.
 	illiAST := self generateIllicium: #findStringBeginningWith:.
@@ -985,8 +985,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFindStringBeginningWithStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFindStringStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFindStringStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #findString:.
 	illiAST := self generateIllicium: #findString:.
@@ -994,8 +994,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFindStringStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFirstAccessibleObjectStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFirstAccessibleObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstAccessibleObject.
 	illiAST := self generateIllicium: #firstAccessibleObject.
@@ -1003,8 +1003,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFirstAccessibleObjectStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFirstFixedFieldOfMaybeImmediateStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFirstFixedFieldOfMaybeImmediateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstFixedFieldOfMaybeImmediate:.
 	illiAST := self generateIllicium: #firstFixedFieldOfMaybeImmediate:.
@@ -1012,8 +1012,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFirstFixedFieldOfMaybeImmediateSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFirstFixedFieldStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFirstFixedFieldStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstFixedField:.
 	illiAST := self generateIllicium: #firstFixedField:.
@@ -1021,8 +1021,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFirstFixedFieldStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFirstIndexableFieldStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFirstIndexableFieldStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstIndexableField:.
 	illiAST := self generateIllicium: #firstIndexableField:.
@@ -1030,8 +1030,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFirstIndexableFieldStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFirstStringyFakeFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFirstStringyFakeFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstStringyFakeFormat.
 	illiAST := self generateIllicium: #firstStringyFakeFormat.
@@ -1039,8 +1039,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFirstStringyFakeFormatStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'forwarding-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFixFollowedFieldofObjectwithInitialValueStringComparison [
+{ #category : #forwarding }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFixFollowedFieldofObjectwithInitialValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #fixFollowedField:ofObject:withInitialValue:.
@@ -1050,8 +1050,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFixFollowedFieldofObjectwithIniti
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatMaskStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatMaskStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fixedFieldsOfClassFormatMask.
 	illiAST := self generateIllicium: #fixedFieldsOfClassFormatMask.
@@ -1059,8 +1059,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatMaskStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fixedFieldsOfClassFormat:.
 	illiAST := self generateIllicium: #fixedFieldsOfClassFormat:.
@@ -1068,8 +1068,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassFormatStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fixedFieldsOfClass:.
 	illiAST := self generateIllicium: #fixedFieldsOfClass:.
@@ -1077,8 +1077,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfClassStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfformatlengthStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfformatlengthStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fixedFieldsOf:format:length:.
 	illiAST := self generateIllicium: #fixedFieldsOf:format:length:.
@@ -1086,8 +1086,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFixedFieldsOfformatlengthStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFloatObjectOfStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFloatObjectOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #floatObjectOf:.
 	illiAST := self generateIllicium: #floatObjectOf:.
@@ -1095,8 +1095,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFloatObjectOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFloatValueOfStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFloatValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #floatValueOf:.
 	illiAST := self generateIllicium: #floatValueOf:.
@@ -1104,8 +1104,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFloatValueOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'forwarding-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFollowFieldofObjectStringComparison [
+{ #category : #forwarding }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFollowFieldofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #followField:ofObject:.
 	illiAST := self generateIllicium: #followField:ofObject:.
@@ -1113,8 +1113,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFollowFieldofObjectStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'forwarding-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFollowForwardedObjectFieldstoDepthStringComparison [
+{ #category : #forwarding }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFollowForwardedObjectFieldstoDepthStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #followForwardedObjectFields:toDepth:.
@@ -1124,8 +1124,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFollowForwardedObjectFieldstoDept
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'forwarding-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFollowForwardedStringComparison [
+{ #category : #forwarding }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFollowForwardedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #followForwarded:.
 	illiAST := self generateIllicium: #followForwarded:.
@@ -1133,8 +1133,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFollowForwardedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'forwarding-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFollowObjFieldofObjectStringComparison [
+{ #category : #forwarding }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFollowObjFieldofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #followObjField:ofObject:.
 	illiAST := self generateIllicium: #followObjField:ofObject:.
@@ -1142,8 +1142,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFollowObjFieldofObjectStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFormatOfClassStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFormatOfClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #formatOfClass:.
 	illiAST := self generateIllicium: #formatOfClass:.
@@ -1151,8 +1151,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFormatOfClassStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFormatOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFormatOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #formatOf:.
 	illiAST := self generateIllicium: #formatOf:.
@@ -1160,8 +1160,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFormatOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testForwardedFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testForwardedFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #forwardedFormat.
 	illiAST := self generateIllicium: #forwardedFormat.
@@ -1169,8 +1169,8 @@ MASpur64BitMemoryManagerTranslationTest >> testForwardedFormatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testForwardersInStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testForwardersInStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #forwardersIn:.
 	illiAST := self generateIllicium: #forwardersIn:.
@@ -1178,8 +1178,8 @@ MASpur64BitMemoryManagerTranslationTest >> testForwardersInStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFreeChunkNextIndexStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFreeChunkNextIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeChunkNextIndex.
 	illiAST := self generateIllicium: #freeChunkNextIndex.
@@ -1187,8 +1187,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFreeChunkNextIndexStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFreeChunkParentIndexStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFreeChunkParentIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeChunkParentIndex.
 	illiAST := self generateIllicium: #freeChunkParentIndex.
@@ -1196,8 +1196,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFreeChunkParentIndexStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFreeChunkPrevIndexStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFreeChunkPrevIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeChunkPrevIndex.
 	illiAST := self generateIllicium: #freeChunkPrevIndex.
@@ -1205,8 +1205,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFreeChunkPrevIndexStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFreeChunkWithBytesatStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFreeChunkWithBytesatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeChunkWithBytes:at:.
 	illiAST := self generateIllicium: #freeChunkWithBytes:at:.
@@ -1214,8 +1214,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFreeChunkWithBytesatStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFreeObjectStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFreeObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #freeObject:.
 	illiAST := self generateIllicium: #freeObject:.
@@ -1223,8 +1223,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFreeObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testFullGCStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testFullGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #fullGC.
 	illiAST := self generateIllicium: #fullGC.
@@ -1232,8 +1232,8 @@ MASpur64BitMemoryManagerTranslationTest >> testFullGCStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testGetHeapGrowthToSizeGCRatioStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testGetHeapGrowthToSizeGCRatioStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #getHeapGrowthToSizeGCRatio.
 	illiAST := self generateIllicium: #getHeapGrowthToSizeGCRatio.
@@ -1241,8 +1241,8 @@ MASpur64BitMemoryManagerTranslationTest >> testGetHeapGrowthToSizeGCRatioStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testGoodContextSizeStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testGoodContextSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #goodContextSize:.
 	illiAST := self generateIllicium: #goodContextSize:.
@@ -1250,8 +1250,8 @@ MASpur64BitMemoryManagerTranslationTest >> testGoodContextSizeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'growing/shrinking memory-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testGrowOldSpaceByAtLeastStringComparison [
+{ #category : #'growing/shrinking memory' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testGrowOldSpaceByAtLeastStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #growOldSpaceByAtLeast:.
 	illiAST := self generateIllicium: #growOldSpaceByAtLeast:.
@@ -1259,8 +1259,8 @@ MASpur64BitMemoryManagerTranslationTest >> testGrowOldSpaceByAtLeastStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testHeaderForSlotsformatclassIndexStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testHeaderForSlotsformatclassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #headerForSlots:format:classIndex:.
 	illiAST := self generateIllicium: #headerForSlots:format:classIndex:.
@@ -1268,8 +1268,8 @@ MASpur64BitMemoryManagerTranslationTest >> testHeaderForSlotsformatclassIndexStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testHeaderForSlotshashformatclassIndexStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testHeaderForSlotshashformatclassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #headerForSlots:hash:format:classIndex:.
@@ -1279,8 +1279,8 @@ MASpur64BitMemoryManagerTranslationTest >> testHeaderForSlotshashformatclassInde
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'method access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testHeaderIndicatesAlternateBytecodeSetStringComparison [
+{ #category : #'method access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testHeaderIndicatesAlternateBytecodeSetStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #headerIndicatesAlternateBytecodeSet:.
@@ -1290,8 +1290,8 @@ MASpur64BitMemoryManagerTranslationTest >> testHeaderIndicatesAlternateBytecodeS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testHiddenRootSlotsStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testHiddenRootSlotsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #hiddenRootSlots.
 	illiAST := self generateIllicium: #hiddenRootSlots.
@@ -1299,8 +1299,8 @@ MASpur64BitMemoryManagerTranslationTest >> testHiddenRootSlotsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testHiddenRootsObjectStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testHiddenRootsObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #hiddenRootsObject.
 	illiAST := self generateIllicium: #hiddenRootsObject.
@@ -1308,8 +1308,8 @@ MASpur64BitMemoryManagerTranslationTest >> testHiddenRootsObjectStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testImageSegmentVersionStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testImageSegmentVersionStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #imageSegmentVersion.
 	illiAST := self generateIllicium: #imageSegmentVersion.
@@ -1317,8 +1317,8 @@ MASpur64BitMemoryManagerTranslationTest >> testImageSegmentVersionStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testImmutableBitMaskStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testImmutableBitMaskStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #immutableBitMask.
 	illiAST := self generateIllicium: #immutableBitMask.
@@ -1326,8 +1326,8 @@ MASpur64BitMemoryManagerTranslationTest >> testImmutableBitMaskStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInFreeTreeReplacewithStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInFreeTreeReplacewithStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #inFreeTreeReplace:with:.
 	illiAST := self generateIllicium: #inFreeTreeReplace:with:.
@@ -1335,8 +1335,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInFreeTreeReplacewithStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInOrderPrintFreeTreeprintListStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInOrderPrintFreeTreeprintListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #inOrderPrintFreeTree:printList:.
 	illiAST := self generateIllicium: #inOrderPrintFreeTree:printList:.
@@ -1344,8 +1344,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInOrderPrintFreeTreeprintListStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'become implementation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInPlaceBecomeandcopyHashFlagStringComparison [
+{ #category : #'become implementation' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInPlaceBecomeandcopyHashFlagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #inPlaceBecome:and:copyHashFlag:.
 	illiAST := self generateIllicium: #inPlaceBecome:and:copyHashFlag:.
@@ -1353,8 +1353,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInPlaceBecomeandcopyHashFlagStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIncrementalGCStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIncrementalGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #incrementalGC.
 	illiAST := self generateIllicium: #incrementalGC.
@@ -1362,8 +1362,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIncrementalGCStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIndexOfinStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIndexOfinStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #indexOf:in:.
 	illiAST := self generateIllicium: #indexOf:in:.
@@ -1371,8 +1371,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIndexOfinStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInitFreeChunkWithBytesatStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInitFreeChunkWithBytesatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #initFreeChunkWithBytes:at:.
 	illiAST := self generateIllicium: #initFreeChunkWithBytes:at:.
@@ -1380,8 +1380,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInitFreeChunkWithBytesatStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'segments-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInitSegmentBridgeWithBytesatStringComparison [
+{ #category : #segments }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInitSegmentBridgeWithBytesatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #initSegmentBridgeWithBytes:at:.
 	illiAST := self generateIllicium: #initSegmentBridgeWithBytes:at:.
@@ -1389,8 +1389,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInitSegmentBridgeWithBytesatStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInitialInstanceOfStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInitialInstanceOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #initialInstanceOf:.
 	illiAST := self generateIllicium: #initialInstanceOf:.
@@ -1398,8 +1398,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInitialInstanceOfStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenging-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInitializeNewSpaceVariablesStringComparison [
+{ #category : #'gc - scavenging' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInitializeNewSpaceVariablesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #initializeNewSpaceVariables.
 	illiAST := self generateIllicium: #initializeNewSpaceVariables.
@@ -1407,8 +1407,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInitializeNewSpaceVariablesString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInitializeObjectMemoryStringComparison [
+{ #category : #initialization }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInitializeObjectMemoryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #initializeObjectMemory:.
 	illiAST := self generateIllicium: #initializeObjectMemory:.
@@ -1416,8 +1416,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInitializeObjectMemoryStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInstSpecOfClassFormatStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInstSpecOfClassFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #instSpecOfClassFormat:.
 	illiAST := self generateIllicium: #instSpecOfClassFormat:.
@@ -1425,8 +1425,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInstSpecOfClassFormatStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInstSpecOfClassStringComparison [
+{ #category : #'object format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInstSpecOfClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #instSpecOfClass:.
 	illiAST := self generateIllicium: #instSpecOfClass:.
@@ -1434,8 +1434,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInstSpecOfClassStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInstanceSizeOfStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInstanceSizeOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #instanceSizeOf:.
 	illiAST := self generateIllicium: #instanceSizeOf:.
@@ -1443,8 +1443,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInstanceSizeOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'instantiation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInstantiateClassStringComparison [
+{ #category : #instantiation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInstantiateClassStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #instantiateClass:.
 	illiAST := self generateIllicium: #instantiateClass:.
@@ -1452,8 +1452,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInstantiateClassStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'instantiation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testInstantiateClassindexableSizeStringComparison [
+{ #category : #instantiation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testInstantiateClassindexableSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #instantiateClass:indexableSize:.
 	illiAST := self generateIllicium: #instantiateClass:indexableSize:.
@@ -1461,8 +1461,8 @@ MASpur64BitMemoryManagerTranslationTest >> testInstantiateClassindexableSizeStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'immediates-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIntegerObjectOfStringComparison [
+{ #category : #immediates }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIntegerObjectOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #integerObjectOf:.
 	illiAST := self generateIllicium: #integerObjectOf:.
@@ -1470,8 +1470,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIntegerObjectOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'immediates-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIntegerValueOfStringComparison [
+{ #category : #immediates }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIntegerValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #integerValueOf:.
 	illiAST := self generateIllicium: #integerValueOf:.
@@ -1479,8 +1479,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIntegerValueOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsAnyPointerFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsAnyPointerFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isAnyPointerFormat:.
 	illiAST := self generateIllicium: #isAnyPointerFormat:.
@@ -1488,8 +1488,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsAnyPointerFormatStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsArrayNonImmStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsArrayNonImmStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isArrayNonImm:.
 	illiAST := self generateIllicium: #isArrayNonImm:.
@@ -1497,8 +1497,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsArrayNonImmStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsArrayStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsArrayStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isArray:.
 	illiAST := self generateIllicium: #isArray:.
@@ -1506,8 +1506,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsArrayStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsBytesStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isBytes:.
 	illiAST := self generateIllicium: #isBytes:.
@@ -1515,8 +1515,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsBytesStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'immediates-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsCharacterObjectStringComparison [
+{ #category : #immediates }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsCharacterObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isCharacterObject:.
 	illiAST := self generateIllicium: #isCharacterObject:.
@@ -1524,8 +1524,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsCharacterObjectStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'immediates-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsCharacterValueStringComparison [
+{ #category : #immediates }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsCharacterValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isCharacterValue:.
 	illiAST := self generateIllicium: #isCharacterValue:.
@@ -1533,8 +1533,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsCharacterValueStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsClassAtUniqueIndexStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsClassAtUniqueIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isClassAtUniqueIndex:.
 	illiAST := self generateIllicium: #isClassAtUniqueIndex:.
@@ -1542,8 +1542,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsClassAtUniqueIndexStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsCompiledMethodFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsCompiledMethodFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isCompiledMethodFormat:.
 	illiAST := self generateIllicium: #isCompiledMethodFormat:.
@@ -1551,8 +1551,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsCompiledMethodFormatStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsCompiledMethodStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsCompiledMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isCompiledMethod:.
 	illiAST := self generateIllicium: #isCompiledMethod:.
@@ -1560,8 +1560,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsCompiledMethodStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsContextHeaderStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsContextHeaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isContextHeader:.
 	illiAST := self generateIllicium: #isContextHeader:.
@@ -1569,8 +1569,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsContextHeaderStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsContextNonImmStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsContextNonImmStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isContextNonImm:.
 	illiAST := self generateIllicium: #isContextNonImm:.
@@ -1578,8 +1578,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsContextNonImmStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsContextStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsContextStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isContext:.
 	illiAST := self generateIllicium: #isContext:.
@@ -1587,8 +1587,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsContextStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsCopiedIntoSegmentStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsCopiedIntoSegmentStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isCopiedIntoSegment:.
 	illiAST := self generateIllicium: #isCopiedIntoSegment:.
@@ -1596,8 +1596,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsCopiedIntoSegmentStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsEmptyObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsEmptyObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isEmptyObjStack:.
 	illiAST := self generateIllicium: #isEmptyObjStack:.
@@ -1605,8 +1605,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsEmptyObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectNoAssertStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectNoAssertStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isEnumerableObjectNoAssert:.
 	illiAST := self generateIllicium: #isEnumerableObjectNoAssert:.
@@ -1614,8 +1614,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectNoAssertStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isEnumerableObject:.
 	illiAST := self generateIllicium: #isEnumerableObject:.
@@ -1623,8 +1623,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsEnumerableObjectStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsEphemeronFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsEphemeronFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isEphemeronFormat:.
 	illiAST := self generateIllicium: #isEphemeronFormat:.
@@ -1632,8 +1632,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsEphemeronFormatStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsEphemeronStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsEphemeronStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isEphemeron:.
 	illiAST := self generateIllicium: #isEphemeron:.
@@ -1641,8 +1641,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsEphemeronStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header format-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsFixedSizePointerFormatStringComparison [
+{ #category : #'header format' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsFixedSizePointerFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isFixedSizePointerFormat:.
 	illiAST := self generateIllicium: #isFixedSizePointerFormat:.
@@ -1650,8 +1650,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsFixedSizePointerFormatStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsForwardedClassTagStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsForwardedClassTagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isForwardedClassTag:.
 	illiAST := self generateIllicium: #isForwardedClassTag:.
@@ -1659,8 +1659,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsForwardedClassTagStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsForwardedStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsForwardedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isForwarded:.
 	illiAST := self generateIllicium: #isForwarded:.
@@ -1668,8 +1668,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsForwardedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsFreeObjectStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsFreeObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isFreeObject:.
 	illiAST := self generateIllicium: #isFreeObject:.
@@ -1677,8 +1677,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsFreeObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsFreeOopStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsFreeOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isFreeOop:.
 	illiAST := self generateIllicium: #isFreeOop:.
@@ -1686,8 +1686,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsFreeOopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsImmediateFloatStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsImmediateFloatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isImmediateFloat:.
 	illiAST := self generateIllicium: #isImmediateFloat:.
@@ -1695,8 +1695,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsImmediateFloatStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsImmediateStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsImmediateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isImmediate:.
 	illiAST := self generateIllicium: #isImmediate:.
@@ -1704,8 +1704,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsImmediateStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsInClassTableStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsInClassTableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInClassTable:.
 	illiAST := self generateIllicium: #isInClassTable:.
@@ -1713,8 +1713,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsInClassTableStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsInEdenStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsInEdenStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInEden:.
 	illiAST := self generateIllicium: #isInEden:.
@@ -1722,8 +1722,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsInEdenStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsInFutureSpaceStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsInFutureSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInFutureSpace:.
 	illiAST := self generateIllicium: #isInFutureSpace:.
@@ -1731,8 +1731,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsInFutureSpaceStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsInMemoryStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsInMemoryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInMemory:.
 	illiAST := self generateIllicium: #isInMemory:.
@@ -1740,8 +1740,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsInMemoryStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsInNewSpaceStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsInNewSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInNewSpace:.
 	illiAST := self generateIllicium: #isInNewSpace:.
@@ -1749,8 +1749,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsInNewSpaceStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsInOldSpaceStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsInOldSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInOldSpace:.
 	illiAST := self generateIllicium: #isInOldSpace:.
@@ -1758,8 +1758,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsInOldSpaceStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsInPastSpaceStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsInPastSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isInPastSpace:.
 	illiAST := self generateIllicium: #isInPastSpace:.
@@ -1767,8 +1767,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsInPastSpaceStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsIndexableStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsIndexableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isIndexable:.
 	illiAST := self generateIllicium: #isIndexable:.
@@ -1776,8 +1776,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsIndexableStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsIntegerObjectStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsIntegerObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isIntegerObject:.
 	illiAST := self generateIllicium: #isIntegerObject:.
@@ -1785,8 +1785,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsIntegerObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsIntegerValueStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsIntegerValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isIntegerValue:.
 	illiAST := self generateIllicium: #isIntegerValue:.
@@ -1794,8 +1794,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsIntegerValueStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsLargeFreeObjectStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsLargeFreeObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isLargeFreeObject:.
 	illiAST := self generateIllicium: #isLargeFreeObject:.
@@ -1803,8 +1803,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsLargeFreeObjectStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsLilliputianSizeStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsLilliputianSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isLilliputianSize:.
 	illiAST := self generateIllicium: #isLilliputianSize:.
@@ -1812,8 +1812,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsLilliputianSizeStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsMarkedStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsMarkedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isMarked:.
 	illiAST := self generateIllicium: #isMarked:.
@@ -1821,8 +1821,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsMarkedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isMaybeFiredEphemeron:.
 	illiAST := self generateIllicium: #isMaybeFiredEphemeron:.
@@ -1830,8 +1830,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsMaybeFiredEphemeronStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsNonImmediateStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsNonImmediateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isNonImmediate:.
 	illiAST := self generateIllicium: #isNonImmediate:.
@@ -1839,8 +1839,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsNonImmediateStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsObjEphemeronStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsObjEphemeronStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isObjEphemeron:.
 	illiAST := self generateIllicium: #isObjEphemeron:.
@@ -1848,8 +1848,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsObjEphemeronStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsObjImmutableStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsObjImmutableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isObjImmutable:.
 	illiAST := self generateIllicium: #isObjImmutable:.
@@ -1857,8 +1857,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsObjImmutableStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsOldObjectStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsOldObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isOldObject:.
 	illiAST := self generateIllicium: #isOldObject:.
@@ -1866,8 +1866,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsOldObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsOopCompiledMethodStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsOopCompiledMethodStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isOopCompiledMethod:.
 	illiAST := self generateIllicium: #isOopCompiledMethod:.
@@ -1875,8 +1875,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsOopCompiledMethodStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsOopForwardedStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsOopForwardedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isOopForwarded:.
 	illiAST := self generateIllicium: #isOopForwarded:.
@@ -1884,8 +1884,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsOopForwardedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsOopImmutableStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsOopImmutableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isOopImmutable:.
 	illiAST := self generateIllicium: #isOopImmutable:.
@@ -1893,8 +1893,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsOopImmutableStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsOopMutableStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsOopMutableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isOopMutable:.
 	illiAST := self generateIllicium: #isOopMutable:.
@@ -1902,8 +1902,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsOopMutableStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsPinnedStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsPinnedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isPinned:.
 	illiAST := self generateIllicium: #isPinned:.
@@ -1911,8 +1911,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsPinnedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsPointersStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsPointersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isPointers:.
 	illiAST := self generateIllicium: #isPointers:.
@@ -1920,8 +1920,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsPointersStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsPureBitsFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsPureBitsFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isPureBitsFormat:.
 	illiAST := self generateIllicium: #isPureBitsFormat:.
@@ -1929,8 +1929,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsPureBitsFormatStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsReallyYoungObjectStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsReallyYoungObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isReallyYoungObject:.
 	illiAST := self generateIllicium: #isReallyYoungObject:.
@@ -1938,8 +1938,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsReallyYoungObjectStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsReallyYoungStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsReallyYoungStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isReallyYoung:.
 	illiAST := self generateIllicium: #isReallyYoung:.
@@ -1947,8 +1947,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsReallyYoungStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsRememberedStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsRememberedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isRemembered:.
 	illiAST := self generateIllicium: #isRemembered:.
@@ -1956,8 +1956,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsRememberedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'segments-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsSegmentBridgeStringComparison [
+{ #category : #segments }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsSegmentBridgeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isSegmentBridge:.
 	illiAST := self generateIllicium: #isSegmentBridge:.
@@ -1965,8 +1965,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsSegmentBridgeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsSmallFloatValueStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsSmallFloatValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isSmallFloatValue:.
 	illiAST := self generateIllicium: #isSmallFloatValue:.
@@ -1974,8 +1974,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsSmallFloatValueStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsUnambiguouslyForwarderStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsUnambiguouslyForwarderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isUnambiguouslyForwarder:.
 	illiAST := self generateIllicium: #isUnambiguouslyForwarder:.
@@ -1983,8 +1983,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsUnambiguouslyForwarderStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsUnmarkedStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsUnmarkedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isUnmarked:.
 	illiAST := self generateIllicium: #isUnmarked:.
@@ -1992,8 +1992,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsUnmarkedStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsValidClassTagStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsValidClassTagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isValidClassTag:.
 	illiAST := self generateIllicium: #isValidClassTag:.
@@ -2001,8 +2001,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsValidClassTagStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackAtStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsValidObjStackAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isValidObjStackAt:.
 	illiAST := self generateIllicium: #isValidObjStackAt:.
@@ -2010,8 +2010,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackAtStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isValidObjStackPage:myIndex:.
 	illiAST := self generateIllicium: #isValidObjStackPage:myIndex:.
@@ -2019,8 +2019,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexfirstPageStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexfirstPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #isValidObjStackPage:myIndex:firstPage:.
@@ -2030,8 +2030,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackPagemyIndexfirstPa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsValidObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isValidObjStack:.
 	illiAST := self generateIllicium: #isValidObjStack:.
@@ -2039,8 +2039,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsValidObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsWeakFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsWeakFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isWeakFormat:.
 	illiAST := self generateIllicium: #isWeakFormat:.
@@ -2048,8 +2048,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsWeakFormatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsWeakNonImmStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsWeakNonImmStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isWeakNonImm:.
 	illiAST := self generateIllicium: #isWeakNonImm:.
@@ -2057,8 +2057,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsWeakNonImmStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsWeakStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsWeakStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isWeak:.
 	illiAST := self generateIllicium: #isWeak:.
@@ -2066,8 +2066,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsWeakStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isWordsOrBytes:.
 	illiAST := self generateIllicium: #isWordsOrBytes:.
@@ -2075,8 +2075,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsWordsOrBytesStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsWordsStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsWordsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isWords:.
 	illiAST := self generateIllicium: #isWords:.
@@ -2084,8 +2084,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsWordsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsYoungObjectStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsYoungObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isYoungObject:.
 	illiAST := self generateIllicium: #isYoungObject:.
@@ -2093,8 +2093,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsYoungObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsYoungStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsYoungStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isYoung:.
 	illiAST := self generateIllicium: #isYoung:.
@@ -2102,8 +2102,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsYoungStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsinstanceOfcompactClassIndexStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsinstanceOfcompactClassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #is:instanceOf:compactClassIndex:.
 	illiAST := self generateIllicium: #is:instanceOf:compactClassIndex:.
@@ -2111,8 +2111,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsinstanceOfcompactClassIndexStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testIsonObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testIsonObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #is:onObjStack:.
 	illiAST := self generateIllicium: #is:onObjStack:.
@@ -2120,8 +2120,8 @@ MASpur64BitMemoryManagerTranslationTest >> testIsonObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testKeyOfEphemeronStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testKeyOfEphemeronStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #keyOfEphemeron:.
 	illiAST := self generateIllicium: #keyOfEphemeron:.
@@ -2129,8 +2129,8 @@ MASpur64BitMemoryManagerTranslationTest >> testKeyOfEphemeronStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testKnownClassAtIndexStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testKnownClassAtIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #knownClassAtIndex:.
 	illiAST := self generateIllicium: #knownClassAtIndex:.
@@ -2138,8 +2138,8 @@ MASpur64BitMemoryManagerTranslationTest >> testKnownClassAtIndexStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLastPointerFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLastPointerFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lastPointerFormat.
 	illiAST := self generateIllicium: #lastPointerFormat.
@@ -2147,8 +2147,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLastPointerFormatStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLastPointerOfStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLastPointerOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lastPointerOf:.
 	illiAST := self generateIllicium: #lastPointerOf:.
@@ -2156,8 +2156,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLastPointerOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'snapshot-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLastPointerOfWhileSwizzlingStringComparison [
+{ #category : #snapshot }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLastPointerOfWhileSwizzlingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lastPointerOfWhileSwizzling:.
 	illiAST := self generateIllicium: #lastPointerOfWhileSwizzling:.
@@ -2165,8 +2165,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLastPointerOfWhileSwizzlingString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLeakCheckBecomeStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLeakCheckBecomeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #leakCheckBecome.
 	illiAST := self generateIllicium: #leakCheckBecome.
@@ -2174,8 +2174,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLeakCheckBecomeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLeakCheckFullGCStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLeakCheckFullGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #leakCheckFullGC.
 	illiAST := self generateIllicium: #leakCheckFullGC.
@@ -2183,8 +2183,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLeakCheckFullGCStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLeakCheckIncrementalStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLeakCheckIncrementalStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #leakCheckIncremental.
 	illiAST := self generateIllicium: #leakCheckIncremental.
@@ -2192,8 +2192,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLeakCheckIncrementalStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLeakCheckNewSpaceGCStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLeakCheckNewSpaceGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #leakCheckNewSpaceGC.
 	illiAST := self generateIllicium: #leakCheckNewSpaceGC.
@@ -2201,8 +2201,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLeakCheckNewSpaceGCStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLengthOfMaybeImmediateStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLengthOfMaybeImmediateStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lengthOfMaybeImmediate:.
 	illiAST := self generateIllicium: #lengthOfMaybeImmediate:.
@@ -2210,8 +2210,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLengthOfMaybeImmediateStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLengthOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLengthOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lengthOf:.
 	illiAST := self generateIllicium: #lengthOf:.
@@ -2219,8 +2219,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLengthOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLengthOfformatStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLengthOfformatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #lengthOf:format:.
 	illiAST := self generateIllicium: #lengthOf:format:.
@@ -2228,8 +2228,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLengthOfformatStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'method access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLiteralCountOfMethodHeaderStringComparison [
+{ #category : #'method access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLiteralCountOfMethodHeaderStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #literalCountOfMethodHeader:.
 	illiAST := self generateIllicium: #literalCountOfMethodHeader:.
@@ -2237,8 +2237,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLiteralCountOfMethodHeaderStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'method access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLiteralCountOfStringComparison [
+{ #category : #'method access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLiteralCountOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #literalCountOf:.
 	illiAST := self generateIllicium: #literalCountOf:.
@@ -2246,8 +2246,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLiteralCountOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLoadImageSegmentFromoutPointersStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLoadImageSegmentFromoutPointersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #loadImageSegmentFrom:outPointers:.
 	illiAST := self generateIllicium: #loadImageSegmentFrom:outPointers:.
@@ -2255,8 +2255,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLoadImageSegmentFromoutPointersSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLongPrintInstancesOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLongPrintInstancesOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #longPrintInstancesOf:.
 	illiAST := self generateIllicium: #longPrintInstancesOf:.
@@ -2264,8 +2264,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLongPrintInstancesOfStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLongPrintInstancesWithClassIndexStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLongPrintInstancesWithClassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #longPrintInstancesWithClassIndex:.
 	illiAST := self generateIllicium: #longPrintInstancesWithClassIndex:.
@@ -2273,8 +2273,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLongPrintInstancesWithClassIndexS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testLongPrintReferencesToStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testLongPrintReferencesToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #longPrintReferencesTo:.
 	illiAST := self generateIllicium: #longPrintReferencesTo:.
@@ -2282,8 +2282,8 @@ MASpur64BitMemoryManagerTranslationTest >> testLongPrintReferencesToStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMapExtraRootsStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMapExtraRootsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #mapExtraRoots.
 	illiAST := self generateIllicium: #mapExtraRoots.
@@ -2291,8 +2291,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMapExtraRootsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMapMournQueueStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMapMournQueueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #mapMournQueue.
 	illiAST := self generateIllicium: #mapMournQueue.
@@ -2300,8 +2300,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMapMournQueueStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMapOopsFromtooutPointersoutHashesStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMapOopsFromtooutPointersoutHashesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #mapOopsFrom:to:outPointers:outHashes:.
@@ -2311,8 +2311,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMapOopsFromtooutPointersoutHashes
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMarkAndTraceClassOfStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMarkAndTraceClassOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markAndTraceClassOf:.
 	illiAST := self generateIllicium: #markAndTraceClassOf:.
@@ -2320,8 +2320,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMarkAndTraceClassOfStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMarkAndTraceObjStackandContentsStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMarkAndTraceObjStackandContentsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markAndTraceObjStack:andContents:.
 	illiAST := self generateIllicium: #markAndTraceObjStack:andContents:.
@@ -2329,8 +2329,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMarkAndTraceObjStackandContentsSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMarkAndTraceStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMarkAndTraceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markAndTrace:.
 	illiAST := self generateIllicium: #markAndTrace:.
@@ -2338,8 +2338,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMarkAndTraceStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMarkInactiveEphemeronsStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMarkInactiveEphemeronsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markInactiveEphemerons.
 	illiAST := self generateIllicium: #markInactiveEphemerons.
@@ -2347,8 +2347,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMarkInactiveEphemeronsStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMarkObjectsStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMarkObjectsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #markObjects:.
 	illiAST := self generateIllicium: #markObjects:.
@@ -2356,8 +2356,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMarkObjectsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - global-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMarkWeaklingsAndMarkAndFireEphemeronsStringComparison [
+{ #category : #'gc - global' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMarkWeaklingsAndMarkAndFireEphemeronsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #markWeaklingsAndMarkAndFireEphemerons.
@@ -2367,8 +2367,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMarkWeaklingsAndMarkAndFireEpheme
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'instantiation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMaxSlotsForAllocStringComparison [
+{ #category : #instantiation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMaxSlotsForAllocStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #maxSlotsForAlloc.
 	illiAST := self generateIllicium: #maxSlotsForAlloc.
@@ -2376,8 +2376,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMaxSlotsForAllocStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMaxSmallIntegerStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMaxSmallIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #maxSmallInteger.
 	illiAST := self generateIllicium: #maxSmallInteger.
@@ -2385,8 +2385,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMaxSmallIntegerStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMaybeMethodClassOfseemsToBeInstantiatingStringComparison [
+{ #category : #'object testing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMaybeMethodClassOfseemsToBeInstantiatingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #maybeMethodClassOf:seemsToBeInstantiating:.
@@ -2396,8 +2396,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMaybeMethodClassOfseemsToBeInstan
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMaybeSplObjStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMaybeSplObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #maybeSplObj:.
 	illiAST := self generateIllicium: #maybeSplObj:.
@@ -2405,8 +2405,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMaybeSplObjStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMemoryActiveProcessStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMemoryActiveProcessStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #memoryActiveProcess.
 	illiAST := self generateIllicium: #memoryActiveProcess.
@@ -2414,8 +2414,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMemoryActiveProcessStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMethodHeaderOfStringComparison [
+{ #category : #'memory access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMethodHeaderOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #methodHeaderOf:.
 	illiAST := self generateIllicium: #methodHeaderOf:.
@@ -2423,8 +2423,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMethodHeaderOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMinSlotsForShorteningStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMinSlotsForShorteningStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #minSlotsForShortening.
 	illiAST := self generateIllicium: #minSlotsForShortening.
@@ -2432,8 +2432,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMinSlotsForShorteningStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testMinSmallIntegerStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testMinSmallIntegerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #minSmallInteger.
 	illiAST := self generateIllicium: #minSmallInteger.
@@ -2441,8 +2441,8 @@ MASpur64BitMemoryManagerTranslationTest >> testMinSmallIntegerStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNewObjectHashStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNewObjectHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #newObjectHash.
 	illiAST := self generateIllicium: #newObjectHash.
@@ -2450,8 +2450,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNewObjectHashStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenging-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNewSpaceIsEmptyStringComparison [
+{ #category : #'gc - scavenging' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNewSpaceIsEmptyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #newSpaceIsEmpty.
 	illiAST := self generateIllicium: #newSpaceIsEmpty.
@@ -2459,8 +2459,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNewSpaceIsEmptyStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNilObjectStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNilObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #nilObject.
 	illiAST := self generateIllicium: #nilObject.
@@ -2468,8 +2468,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNilObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNilUnmarkedWeaklingSlotsStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNilUnmarkedWeaklingSlotsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #nilUnmarkedWeaklingSlots.
 	illiAST := self generateIllicium: #nilUnmarkedWeaklingSlots.
@@ -2477,8 +2477,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNilUnmarkedWeaklingSlotsStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNoCheckClassAtIndexStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNoCheckClassAtIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noCheckClassAtIndex:.
 	illiAST := self generateIllicium: #noCheckClassAtIndex:.
@@ -2486,8 +2486,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNoCheckClassAtIndexStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNoCheckPushonObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNoCheckPushonObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noCheckPush:onObjStack:.
 	illiAST := self generateIllicium: #noCheckPush:onObjStack:.
@@ -2495,8 +2495,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNoCheckPushonObjStackStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'forwarding-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNoFixupFollowFieldofObjectStringComparison [
+{ #category : #forwarding }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNoFixupFollowFieldofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noFixupFollowField:ofObject:.
 	illiAST := self generateIllicium: #noFixupFollowField:ofObject:.
@@ -2504,8 +2504,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNoFixupFollowFieldofObjectStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNoInlineObjectAfterlimitStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNoInlineObjectAfterlimitStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noInlineObjectAfter:limit:.
 	illiAST := self generateIllicium: #noInlineObjectAfter:limit:.
@@ -2513,8 +2513,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNoInlineObjectAfterlimitStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNoUnscannedEphemeronsStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNoUnscannedEphemeronsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #noUnscannedEphemerons.
 	illiAST := self generateIllicium: #noUnscannedEphemerons.
@@ -2522,8 +2522,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNoUnscannedEphemeronsStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNonIndexablePointerFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNonIndexablePointerFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #nonIndexablePointerFormat.
 	illiAST := self generateIllicium: #nonIndexablePointerFormat.
@@ -2531,8 +2531,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNonIndexablePointerFormatStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumBytesOfBytesStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumBytesOfBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numBytesOfBytes:.
 	illiAST := self generateIllicium: #numBytesOfBytes:.
@@ -2540,8 +2540,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumBytesOfBytesStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumBytesOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumBytesOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numBytesOf:.
 	illiAST := self generateIllicium: #numBytesOf:.
@@ -2549,8 +2549,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumBytesOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumFreeListsStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumFreeListsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numFreeLists.
 	illiAST := self generateIllicium: #numFreeLists.
@@ -2558,8 +2558,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumFreeListsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumPointerSlotsOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumPointerSlotsOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numPointerSlotsOf:.
 	illiAST := self generateIllicium: #numPointerSlotsOf:.
@@ -2567,8 +2567,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumPointerSlotsOfStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumSlotsOfAnyStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumSlotsOfAnyStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numSlotsOfAny:.
 	illiAST := self generateIllicium: #numSlotsOfAny:.
@@ -2576,8 +2576,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumSlotsOfAnyStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumSlotsOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumSlotsOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numSlotsOf:.
 	illiAST := self generateIllicium: #numSlotsOf:.
@@ -2585,8 +2585,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumSlotsOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfInephemeralStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfInephemeralStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numStrongSlotsOfInephemeral:.
 	illiAST := self generateIllicium: #numStrongSlotsOfInephemeral:.
@@ -2594,8 +2594,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfInephemeralString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfWeaklingStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfWeaklingStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numStrongSlotsOfWeakling:.
 	illiAST := self generateIllicium: #numStrongSlotsOfWeakling:.
@@ -2603,8 +2603,8 @@ MASpur64BitMemoryManagerTranslationTest >> testNumStrongSlotsOfWeaklingStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testObjectAfterStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testObjectAfterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #objectAfter:.
 	illiAST := self generateIllicium: #objectAfter:.
@@ -2612,8 +2612,8 @@ MASpur64BitMemoryManagerTranslationTest >> testObjectAfterStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testObjectBeforeStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testObjectBeforeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #objectBefore:.
 	illiAST := self generateIllicium: #objectBefore:.
@@ -2621,8 +2621,8 @@ MASpur64BitMemoryManagerTranslationTest >> testObjectBeforeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testObjectStartingAtStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testObjectStartingAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #objectStartingAt:.
 	illiAST := self generateIllicium: #objectStartingAt:.
@@ -2630,8 +2630,8 @@ MASpur64BitMemoryManagerTranslationTest >> testObjectStartingAtStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testObjectsReachableFromRootsStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testObjectsReachableFromRootsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #objectsReachableFromRoots:.
 	illiAST := self generateIllicium: #objectsReachableFromRoots:.
@@ -2639,8 +2639,8 @@ MASpur64BitMemoryManagerTranslationTest >> testObjectsReachableFromRootsStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testObsoleteDontUseThisFetchWordofObjectStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testObsoleteDontUseThisFetchWordofObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #obsoleteDontUseThisFetchWord:ofObject:.
@@ -2650,8 +2650,8 @@ MASpur64BitMemoryManagerTranslationTest >> testObsoleteDontUseThisFetchWordofObj
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testOkayOopStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testOkayOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #okayOop:.
 	illiAST := self generateIllicium: #okayOop:.
@@ -2659,8 +2659,8 @@ MASpur64BitMemoryManagerTranslationTest >> testOkayOopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testOldSpaceObjectAfterStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testOldSpaceObjectAfterStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #oldSpaceObjectAfter:.
 	illiAST := self generateIllicium: #oldSpaceObjectAfter:.
@@ -2668,8 +2668,8 @@ MASpur64BitMemoryManagerTranslationTest >> testOldSpaceObjectAfterStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'become implementation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testOutOfPlaceBecomeandcopyHashFlagStringComparison [
+{ #category : #'become implementation' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testOutOfPlaceBecomeandcopyHashFlagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #outOfPlaceBecome:and:copyHashFlag:.
@@ -2678,8 +2678,8 @@ MASpur64BitMemoryManagerTranslationTest >> testOutOfPlaceBecomeandcopyHashFlagSt
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPinObjectStringComparison [
+{ #category : #'primitive support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPinObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pinObject:.
 	illiAST := self generateIllicium: #pinObject:.
@@ -2687,8 +2687,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPinObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPopObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPopObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #popObjStack:.
 	illiAST := self generateIllicium: #popObjStack:.
@@ -2696,8 +2696,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPopObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPopRemappableOopStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPopRemappableOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #popRemappableOop.
 	illiAST := self generateIllicium: #popRemappableOop.
@@ -2705,8 +2705,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPopRemappableOopStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'become implementation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPostBecomeScanClassTableStringComparison [
+{ #category : #'become implementation' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPostBecomeScanClassTableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #postBecomeScanClassTable:.
 	illiAST := self generateIllicium: #postBecomeScanClassTable:.
@@ -2714,8 +2714,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPostBecomeScanClassTableStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrimitiveErrorTableStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrimitiveErrorTableStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #primitiveErrorTable.
 	illiAST := self generateIllicium: #primitiveErrorTable.
@@ -2723,8 +2723,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrimitiveErrorTableStringComparis
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintActivationsOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintActivationsOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printActivationsOf:.
 	illiAST := self generateIllicium: #printActivationsOf:.
@@ -2732,8 +2732,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintActivationsOfStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintBogonsStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintBogonsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printBogons.
 	illiAST := self generateIllicium: #printBogons.
@@ -2741,8 +2741,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintBogonsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintContextReferencesToStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintContextReferencesToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printContextReferencesTo:.
 	illiAST := self generateIllicium: #printContextReferencesTo:.
@@ -2750,8 +2750,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintContextReferencesToStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintEntityStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintEntityStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printEntity:.
 	illiAST := self generateIllicium: #printEntity:.
@@ -2759,8 +2759,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintEntityStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintForwardersStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintForwardersStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printForwarders.
 	illiAST := self generateIllicium: #printForwarders.
@@ -2768,8 +2768,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintForwardersStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintFreeChunkStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintFreeChunkStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFreeChunk:.
 	illiAST := self generateIllicium: #printFreeChunk:.
@@ -2777,8 +2777,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintFreeChunkStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintFreeChunkprintAsTreeNodeStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintFreeChunkprintAsTreeNodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFreeChunk:printAsTreeNode:.
 	illiAST := self generateIllicium: #printFreeChunk:printAsTreeNode:.
@@ -2786,8 +2786,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintFreeChunkprintAsTreeNodeStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintFreeChunksStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintFreeChunksStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFreeChunks.
 	illiAST := self generateIllicium: #printFreeChunks.
@@ -2795,8 +2795,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintFreeChunksStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintFreeListHeadsStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintFreeListHeadsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFreeListHeads.
 	illiAST := self generateIllicium: #printFreeListHeads.
@@ -2804,8 +2804,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintFreeListHeadsStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintFreeListStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintFreeListStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFreeList:.
 	illiAST := self generateIllicium: #printFreeList:.
@@ -2813,8 +2813,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintFreeListStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintFreeTreeChunkStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintFreeTreeChunkStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFreeTreeChunk:.
 	illiAST := self generateIllicium: #printFreeTreeChunk:.
@@ -2822,8 +2822,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintFreeTreeChunkStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintFreeTreeStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintFreeTreeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printFreeTree.
 	illiAST := self generateIllicium: #printFreeTree.
@@ -2831,8 +2831,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintFreeTreeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintHeaderOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintHeaderOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printHeaderOf:.
 	illiAST := self generateIllicium: #printHeaderOf:.
@@ -2840,8 +2840,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintHeaderOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintHeaderTypeOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintHeaderTypeOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printHeaderTypeOf:.
 	illiAST := self generateIllicium: #printHeaderTypeOf:.
@@ -2849,8 +2849,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintHeaderTypeOfStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintInstancesOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintInstancesOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printInstancesOf:.
 	illiAST := self generateIllicium: #printInstancesOf:.
@@ -2858,8 +2858,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintInstancesOfStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintInstancesWithClassIndexStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintInstancesWithClassIndexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printInstancesWithClassIndex:.
 	illiAST := self generateIllicium: #printInstancesWithClassIndex:.
@@ -2867,8 +2867,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintInstancesWithClassIndexStrin
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintInvalidClassTableEntriesStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintInvalidClassTableEntriesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printInvalidClassTableEntries.
 	illiAST := self generateIllicium: #printInvalidClassTableEntries.
@@ -2876,8 +2876,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintInvalidClassTableEntriesStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintMarkedOopsStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintMarkedOopsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printMarkedOops.
 	illiAST := self generateIllicium: #printMarkedOops.
@@ -2885,8 +2885,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintMarkedOopsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintMethodImplementorsOfStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintMethodImplementorsOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printMethodImplementorsOf:.
 	illiAST := self generateIllicium: #printMethodImplementorsOf:.
@@ -2894,8 +2894,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintMethodImplementorsOfStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintMethodReferencesToStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintMethodReferencesToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printMethodReferencesTo:.
 	illiAST := self generateIllicium: #printMethodReferencesTo:.
@@ -2903,8 +2903,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintMethodReferencesToStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndexpageTypeStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndexpageTypeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #printObjStackPage:myIndex:pageType:.
@@ -2914,8 +2914,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndexpageTypeS
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndextagStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndextagStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printObjStackPage:myIndex:tag:.
 	illiAST := self generateIllicium: #printObjStackPage:myIndex:tag:.
@@ -2923,8 +2923,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintObjStackPagemyIndextagString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printObjStack:.
 	illiAST := self generateIllicium: #printObjStack:.
@@ -2932,8 +2932,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintObjectsFromtoStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintObjectsFromtoStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printObjectsFrom:to:.
 	illiAST := self generateIllicium: #printObjectsFrom:to:.
@@ -2941,8 +2941,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintObjectsFromtoStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintObjectsWithHashStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintObjectsWithHashStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printObjectsWithHash:.
 	illiAST := self generateIllicium: #printObjectsWithHash:.
@@ -2950,8 +2950,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintObjectsWithHashStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintOopsExceptStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintOopsExceptStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printOopsExcept:.
 	illiAST := self generateIllicium: #printOopsExcept:.
@@ -2959,8 +2959,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintOopsExceptStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintOopsFromtoStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintOopsFromtoStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printOopsFrom:to:.
 	illiAST := self generateIllicium: #printOopsFrom:to:.
@@ -2968,8 +2968,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintOopsFromtoStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintOopsSuchThatStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintOopsSuchThatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printOopsSuchThat:.
 	illiAST := self generateIllicium: #printOopsSuchThat:.
@@ -2977,8 +2977,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintOopsSuchThatStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintReferencesToStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintReferencesToStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printReferencesTo:.
 	illiAST := self generateIllicium: #printReferencesTo:.
@@ -2986,8 +2986,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintReferencesToStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPrintUnmarkedOopsStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPrintUnmarkedOopsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #printUnmarkedOops.
 	illiAST := self generateIllicium: #printUnmarkedOops.
@@ -2995,8 +2995,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPrintUnmarkedOopsStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPushOnUnscannedEphemeronsStackStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPushOnUnscannedEphemeronsStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pushOnUnscannedEphemeronsStack:.
 	illiAST := self generateIllicium: #pushOnUnscannedEphemeronsStack:.
@@ -3004,8 +3004,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPushOnUnscannedEphemeronsStackStr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testPushRemappableOopStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testPushRemappableOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pushRemappableOop:.
 	illiAST := self generateIllicium: #pushRemappableOop:.
@@ -3013,8 +3013,8 @@ MASpur64BitMemoryManagerTranslationTest >> testPushRemappableOopStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'weakness and ephemerality-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testQueueMournerStringComparison [
+{ #category : #'weakness and ephemerality' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testQueueMournerStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #queueMourner:.
 	illiAST := self generateIllicium: #queueMourner:.
@@ -3022,8 +3022,8 @@ MASpur64BitMemoryManagerTranslationTest >> testQueueMournerStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testRawHashBitsOfStringComparison [
+{ #category : #'header access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testRawHashBitsOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #rawHashBitsOf:.
 	illiAST := self generateIllicium: #rawHashBitsOf:.
@@ -3031,8 +3031,8 @@ MASpur64BitMemoryManagerTranslationTest >> testRawHashBitsOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'compaction-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testRelocateObjStackForPlanningCompactorStringComparison [
+{ #category : #compaction }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testRelocateObjStackForPlanningCompactorStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #relocateObjStackForPlanningCompactor:.
@@ -3042,8 +3042,8 @@ MASpur64BitMemoryManagerTranslationTest >> testRelocateObjStackForPlanningCompac
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testRemoveGCRootStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testRemoveGCRootStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #removeGCRoot:.
 	illiAST := self generateIllicium: #removeGCRoot:.
@@ -3051,8 +3051,8 @@ MASpur64BitMemoryManagerTranslationTest >> testRemoveGCRootStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInsavedFirstFieldsandsavedHashesStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInsavedFirstFieldsandsavedHashesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #return:restoringObjectsIn:savedFirstFields:and:savedHashes:.
@@ -3062,8 +3062,8 @@ MASpur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInsavedFirs
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInupTosavedFirstFieldsStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInupTosavedFirstFieldsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #return:restoringObjectsIn:upTo:savedFirstFields:.
@@ -3073,8 +3073,8 @@ MASpur64BitMemoryManagerTranslationTest >> testReturnrestoringObjectsInupTosaved
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testReverseBytesInBitWordsInStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testReverseBytesInBitWordsInStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #reverseBytesIn32BitWordsIn:.
 	illiAST := self generateIllicium: #reverseBytesIn32BitWordsIn:.
@@ -3082,8 +3082,8 @@ MASpur64BitMemoryManagerTranslationTest >> testReverseBytesInBitWordsInStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForFreeSpaceStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForFreeSpaceStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #runLeakCheckerForFreeSpace:.
 	illiAST := self generateIllicium: #runLeakCheckerForFreeSpace:.
@@ -3091,8 +3091,8 @@ MASpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForFreeSpaceStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #runLeakCheckerFor:.
 	illiAST := self generateIllicium: #runLeakCheckerFor:.
@@ -3100,8 +3100,8 @@ MASpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidStringComparison [
+{ #category : #'debug support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForexcludeUnmarkedObjsclassIndicesShouldBeValidStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #runLeakCheckerFor:excludeUnmarkedObjs:classIndicesShouldBeValid:.
@@ -3111,8 +3111,8 @@ MASpur64BitMemoryManagerTranslationTest >> testRunLeakCheckerForexcludeUnmarkedO
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenging-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testScavengingGCTenuringIfStringComparison [
+{ #category : #'gc - scavenging' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testScavengingGCTenuringIfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #scavengingGCTenuringIf:.
 	illiAST := self generateIllicium: #scavengingGCTenuringIf:.
@@ -3120,8 +3120,8 @@ MASpur64BitMemoryManagerTranslationTest >> testScavengingGCTenuringIfStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'snapshot-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSetHeapBasememoryLimitendOfMemoryStringComparison [
+{ #category : #snapshot }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSetHeapBasememoryLimitendOfMemoryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #setHeapBase:memoryLimit:endOfMemory:.
@@ -3131,8 +3131,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSetHeapBasememoryLimitendOfMemory
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'debug printing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testShortPrintObjectsFromtoStringComparison [
+{ #category : #'debug printing' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testShortPrintObjectsFromtoStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shortPrintObjectsFrom:to:.
 	illiAST := self generateIllicium: #shortPrintObjectsFrom:to:.
@@ -3140,8 +3140,8 @@ MASpur64BitMemoryManagerTranslationTest >> testShortPrintObjectsFromtoStringComp
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testShortentoIndexableSizeStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testShortentoIndexableSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shorten:toIndexableSize:.
 	illiAST := self generateIllicium: #shorten:toIndexableSize:.
@@ -3149,8 +3149,8 @@ MASpur64BitMemoryManagerTranslationTest >> testShortentoIndexableSizeStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenge/compact-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testShouldRemapOopStringComparison [
+{ #category : #'gc - scavenge/compact' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testShouldRemapOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shouldRemapOop:.
 	illiAST := self generateIllicium: #shouldRemapOop:.
@@ -3158,8 +3158,8 @@ MASpur64BitMemoryManagerTranslationTest >> testShouldRemapOopStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSizeOfObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSizeOfObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #sizeOfObjStack:.
 	illiAST := self generateIllicium: #sizeOfObjStack:.
@@ -3167,8 +3167,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSizeOfObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'testing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSlidingCompactionInProgressStringComparison [
+{ #category : #testing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSlidingCompactionInProgressStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #slidingCompactionInProgress.
 	illiAST := self generateIllicium: #slidingCompactionInProgress.
@@ -3176,8 +3176,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSlidingCompactionInProgressString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSlotSizeOfStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSlotSizeOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #slotSizeOf:.
 	illiAST := self generateIllicium: #slotSizeOf:.
@@ -3185,8 +3185,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSlotSizeOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSmallFloatValueOfStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSmallFloatValueOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #smallFloatValueOf:.
 	illiAST := self generateIllicium: #smallFloatValueOf:.
@@ -3194,8 +3194,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSmallFloatValueOfStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'allocation-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSmallObjectBytesForSlotsStringComparison [
+{ #category : #allocation }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSmallObjectBytesForSlotsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #smallObjectBytesForSlots:.
 	illiAST := self generateIllicium: #smallObjectBytesForSlots:.
@@ -3203,8 +3203,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSmallObjectBytesForSlotsStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSplObjStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSplObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #splObj:.
 	illiAST := self generateIllicium: #splObj:.
@@ -3212,8 +3212,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSplObjStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object enumeration-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testStartOfObjectStringComparison [
+{ #category : #'object enumeration' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testStartOfObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #startOfObject:.
 	illiAST := self generateIllicium: #startOfObject:.
@@ -3221,8 +3221,8 @@ MASpur64BitMemoryManagerTranslationTest >> testStartOfObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testStatNumGCsStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testStatNumGCsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #statNumGCs.
 	illiAST := self generateIllicium: #statNumGCs.
@@ -3230,8 +3230,8 @@ MASpur64BitMemoryManagerTranslationTest >> testStatNumGCsStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testStoreCheckBoundaryStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testStoreCheckBoundaryStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #storeCheckBoundary.
 	illiAST := self generateIllicium: #storeCheckBoundary.
@@ -3239,8 +3239,8 @@ MASpur64BitMemoryManagerTranslationTest >> testStoreCheckBoundaryStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'image segment in/out-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testStoreImageSegmentIntooutPointersrootsStringComparison [
+{ #category : #'image segment in/out' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testStoreImageSegmentIntooutPointersrootsStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #storeImageSegmentInto:outPointers:roots:.
@@ -3250,8 +3250,8 @@ MASpur64BitMemoryManagerTranslationTest >> testStoreImageSegmentIntooutPointersr
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testStorePointerUncheckedofObjectwithValueStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testStorePointerUncheckedofObjectwithValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self
 		generateSlang: #storePointerUnchecked:ofObject:withValue:.
@@ -3261,8 +3261,8 @@ MASpur64BitMemoryManagerTranslationTest >> testStorePointerUncheckedofObjectwith
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'object access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueStringComparison [
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #storePointer:ofObject:withValue:.
 	illiAST := self generateIllicium: #storePointer:ofObject:withValue:.
@@ -3270,8 +3270,8 @@ MASpur64BitMemoryManagerTranslationTest >> testStorePointerofObjectwithValueStri
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testStringForCStringStringComparison [
+{ #category : #'primitive support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testStringForCStringStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stringForCString:.
 	illiAST := self generateIllicium: #stringForCString:.
@@ -3279,8 +3279,8 @@ MASpur64BitMemoryManagerTranslationTest >> testStringForCStringStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'gc - scavenging-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSufficientSpaceAfterGCStringComparison [
+{ #category : #'gc - scavenging' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSufficientSpaceAfterGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #sufficientSpaceAfterGC:.
 	illiAST := self generateIllicium: #sufficientSpaceAfterGC:.
@@ -3288,8 +3288,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSufficientSpaceAfterGCStringCompa
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testSwizzleObjStackAtStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSwizzleObjStackAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #swizzleObjStackAt:.
 	illiAST := self generateIllicium: #swizzleObjStackAt:.
@@ -3297,8 +3297,8 @@ MASpur64BitMemoryManagerTranslationTest >> testSwizzleObjStackAtStringComparison
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'plugin support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testTenuringIncrementalGCStringComparison [
+{ #category : #'plugin support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testTenuringIncrementalGCStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #tenuringIncrementalGC.
 	illiAST := self generateIllicium: #tenuringIncrementalGC.
@@ -3306,8 +3306,8 @@ MASpur64BitMemoryManagerTranslationTest >> testTenuringIncrementalGCStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testTopOfObjStackStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testTopOfObjStackStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #topOfObjStack:.
 	illiAST := self generateIllicium: #topOfObjStack:.
@@ -3315,8 +3315,8 @@ MASpur64BitMemoryManagerTranslationTest >> testTopOfObjStackStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'interpreter access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testTopRemappableOopStringComparison [
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testTopRemappableOopStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #topRemappableOop.
 	illiAST := self generateIllicium: #topRemappableOop.
@@ -3324,8 +3324,8 @@ MASpur64BitMemoryManagerTranslationTest >> testTopRemappableOopStringComparison 
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testTotalFreeListBytesStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testTotalFreeListBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #totalFreeListBytes.
 	illiAST := self generateIllicium: #totalFreeListBytes.
@@ -3333,8 +3333,8 @@ MASpur64BitMemoryManagerTranslationTest >> testTotalFreeListBytesStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'accessing-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testTrueObjectStringComparison [
+{ #category : #accessing }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testTrueObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #trueObject.
 	illiAST := self generateIllicium: #trueObject.
@@ -3342,8 +3342,8 @@ MASpur64BitMemoryManagerTranslationTest >> testTrueObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkchunkBytesStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkchunkBytesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unlinkFreeChunk:chunkBytes:.
 	illiAST := self generateIllicium: #unlinkFreeChunk:chunkBytes:.
@@ -3351,8 +3351,8 @@ MASpur64BitMemoryManagerTranslationTest >> testUnlinkFreeChunkchunkBytesStringCo
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testUnlinkLilliputianChunkindexStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testUnlinkLilliputianChunkindexStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unlinkLilliputianChunk:index:.
 	illiAST := self generateIllicium: #unlinkLilliputianChunk:index:.
@@ -3360,8 +3360,8 @@ MASpur64BitMemoryManagerTranslationTest >> testUnlinkLilliputianChunkindexString
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testUnlinkSolitaryFreeTreeNodeStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testUnlinkSolitaryFreeTreeNodeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unlinkSolitaryFreeTreeNode:.
 	illiAST := self generateIllicium: #unlinkSolitaryFreeTreeNode:.
@@ -3369,8 +3369,8 @@ MASpur64BitMemoryManagerTranslationTest >> testUnlinkSolitaryFreeTreeNodeStringC
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'primitive support-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testUnpinObjectStringComparison [
+{ #category : #'primitive support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testUnpinObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #unpinObject:.
 	illiAST := self generateIllicium: #unpinObject:.
@@ -3378,8 +3378,8 @@ MASpur64BitMemoryManagerTranslationTest >> testUnpinObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'initialization-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testUpdateListStartingAtStringComparison [
+{ #category : #initialization }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testUpdateListStartingAtStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #updateListStartingAt:.
 	illiAST := self generateIllicium: #updateListStartingAt:.
@@ -3387,8 +3387,8 @@ MASpur64BitMemoryManagerTranslationTest >> testUpdateListStartingAtStringCompari
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testValidClassTableHashesStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testValidClassTableHashesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validClassTableHashes.
 	illiAST := self generateIllicium: #validClassTableHashes.
@@ -3396,8 +3396,8 @@ MASpur64BitMemoryManagerTranslationTest >> testValidClassTableHashesStringCompar
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'class table-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testValidClassTableRootPagesStringComparison [
+{ #category : #'class table' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testValidClassTableRootPagesStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validClassTableRootPages.
 	illiAST := self generateIllicium: #validClassTableRootPages.
@@ -3405,8 +3405,8 @@ MASpur64BitMemoryManagerTranslationTest >> testValidClassTableRootPagesStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validFreeTreeChunk:.
 	illiAST := self generateIllicium: #validFreeTreeChunk:.
@@ -3414,8 +3414,8 @@ MASpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkStringCompariso
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkparentStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkparentStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validFreeTreeChunk:parent:.
 	illiAST := self generateIllicium: #validFreeTreeChunk:parent:.
@@ -3423,8 +3423,8 @@ MASpur64BitMemoryManagerTranslationTest >> testValidFreeTreeChunkparentStringCom
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'free space-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testValidFreeTreeStringComparison [
+{ #category : #'free space' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testValidFreeTreeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validFreeTree.
 	illiAST := self generateIllicium: #validFreeTree.
@@ -3432,8 +3432,8 @@ MASpur64BitMemoryManagerTranslationTest >> testValidFreeTreeStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'obj stacks-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testValidObjStacksStringComparison [
+{ #category : #'obj stacks' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testValidObjStacksStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #validObjStacks.
 	illiAST := self generateIllicium: #validObjStacks.
@@ -3441,8 +3441,8 @@ MASpur64BitMemoryManagerTranslationTest >> testValidObjStacksStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'memory access-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testVmEndiannessStringComparison [
+{ #category : #'memory access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testVmEndiannessStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #vmEndianness.
 	illiAST := self generateIllicium: #vmEndianness.
@@ -3450,8 +3450,8 @@ MASpur64BitMemoryManagerTranslationTest >> testVmEndiannessStringComparison [
 	self assert: illiString equals: slangString
 ]
 
-{ #category : #'header formats-equaliy-test' }
-MASpur64BitMemoryManagerTranslationTest >> testWordIndexableFormatStringComparison [
+{ #category : #'header formats' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testWordIndexableFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #wordIndexableFormat.
 	illiAST := self generateIllicium: #wordIndexableFormat.
@@ -3460,6 +3460,6 @@ MASpur64BitMemoryManagerTranslationTest >> testWordIndexableFormatStringComparis
 ]
 
 { #category : #accessing }
-MASpur64BitMemoryManagerTranslationTest >> translator [
+MAStringCompSpur64BitMemoryManagerTranslationTest >> translator [
 	^ MASpur64BitMemoryManagerRessource current translator
 ]
