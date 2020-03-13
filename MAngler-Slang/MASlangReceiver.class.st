@@ -512,7 +512,6 @@ MASlangReceiver >> ifNil: aNilBlock ifNotNil: anIfNotNilBlock [
 
 { #category : #'reflective operations' }
 MASlangReceiver >> ifNotNil: anIfNotNilBlock [
-	self assert: anIfNotNilBlock isBlock.
 	^ ASTCIf new
 		condition: self translatedReceiver;
 		then: (anIfNotNilBlock acceptVisitor: methodTranslator)
