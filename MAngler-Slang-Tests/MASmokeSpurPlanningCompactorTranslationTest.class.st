@@ -90,13 +90,6 @@ MASmokeSpurPlanningCompactorTranslationTest >> testNumPointerSlotsWhileCompactin
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #api }
-MASmokeSpurPlanningCompactorTranslationTest >> testPostSwizzleActionStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #postSwizzleAction.
-	self prettyPrintIllicium: illiAST
-]
-
 { #category : #'debug support' }
 MASmokeSpurPlanningCompactorTranslationTest >> testPrintTheBogonsStringComparison [
 	| illiAST |

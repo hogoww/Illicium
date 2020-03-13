@@ -24,42 +24,6 @@ MASmokeInterpreterStackPagesTranslationTest >> testExtraStackBytesStringComparis
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'page access' }
-MASmokeInterpreterStackPagesTranslationTest >> testMarkStackPageLeastMostRecentlyUsedStringComparison [
-	| illiAST |
-	illiAST := self
-		generateIllicium: #markStackPageLeastMostRecentlyUsed:.
-	self prettyPrintIllicium: illiAST
-]
-
-{ #category : #'page access' }
-MASmokeInterpreterStackPagesTranslationTest >> testOverflowLimitStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #overflowLimit.
-	self prettyPrintIllicium: illiAST
-]
-
-{ #category : #statistics }
-MASmokeInterpreterStackPagesTranslationTest >> testRecordLivePagesOnMappingStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #recordLivePagesOnMapping:.
-	self prettyPrintIllicium: illiAST
-]
-
-{ #category : #statistics }
-MASmokeInterpreterStackPagesTranslationTest >> testStatAverageLivePagesWhenMappingStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #statAverageLivePagesWhenMapping:.
-	self prettyPrintIllicium: illiAST
-]
-
-{ #category : #statistics }
-MASmokeInterpreterStackPagesTranslationTest >> testStatMaxPageCountWhenMappingStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #statMaxPageCountWhenMapping:.
-	self prettyPrintIllicium: illiAST
-]
-
 { #category : #'debug printing' }
 MASmokeInterpreterStackPagesTranslationTest >> testWhereIsMaybeStackThingStringComparison [
 	| illiAST |

@@ -10,13 +10,6 @@ MASmokeSpurGenerationScavengerTranslationTest >> setUp [
 	testedClass := SpurGenerationScavenger
 ]
 
-{ #category : #'weakness and ephemerality' }
-MASmokeSpurGenerationScavengerTranslationTest >> testAllFutureSpaceEntitiesDoStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #allFutureSpaceEntitiesDo:.
-	self prettyPrintIllicium: illiAST
-]
-
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testCoInterpreterStringComparison [
 	| illiAST |
@@ -220,13 +213,6 @@ MASmokeSpurGenerationScavengerTranslationTest >> testReferenceCountRememberedRef
 MASmokeSpurGenerationScavengerTranslationTest >> testRelocateRememberedSetStringComparison [
 	| illiAST |
 	illiAST := self generateIllicium: #relocateRememberedSet.
-	self prettyPrintIllicium: illiAST
-]
-
-{ #category : #'debug support' }
-MASmokeSpurGenerationScavengerTranslationTest >> testRememberedSetWithIndexDoStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #rememberedSetWithIndexDo:.
 	self prettyPrintIllicium: illiAST
 ]
 
