@@ -34,7 +34,7 @@ MASlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: MASlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: MASlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: MASlangAssignmentNodeTranslator new.
-	program := FAProgram new.
+	program := MASlangProgram new.
 ]
 
 { #category : #testing }
@@ -68,6 +68,7 @@ MASlangClassTranslator >> preTranslationVisitors [
 	^ {
 		MASlangMethodCleaner new.
 		MASlangSuperAnnotator new classTranslator: self ; yourself.
+		MASlangRequiredInliningMethodTagger new program: program ; yourself.
 		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
 		MASlangDeclarationAnnotator new "this is required to be after the typeAnnotator. see its documention"
 		}

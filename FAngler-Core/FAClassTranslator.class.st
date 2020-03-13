@@ -78,6 +78,16 @@ FAClassTranslator >> getReplacementType: aType [
 	^ mainTranslator getReplacementType: aType 
 ]
 
+{ #category : #translation }
+FAClassTranslator >> inferer [
+	^ inferer
+]
+
+{ #category : #translation }
+FAClassTranslator >> inferer: anInferer [
+	inferer := anInferer
+]
+
 { #category : #initialization }
 FAClassTranslator >> initialize [
 	super initialize.
