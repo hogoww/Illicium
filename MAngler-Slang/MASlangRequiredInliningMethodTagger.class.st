@@ -46,9 +46,11 @@ MASlangRequiredInliningMethodTagger >> program: aProgram [
 { #category : #visiting }
 MASlangRequiredInliningMethodTagger >> visitMessageNode: aMessageNode [
 	aMessageNode arguments do:[ :anArg |
-		anArg isBlockNode ifTrue:[ | method |
-			method := program methodNamed: aMessageNode selector.
-			method propertyAt: self class propertyName put: true
+		(anArg isBlockNode
+			and:[ (MASlangReceiver slangReservedSelector , #(#-> #collect: ensure:) includes: aMessageNode selector) not ]) " seems to be enough "
+			ifTrue:[ | method |
+				method := program methodNamed: aMessageNode selector.
+				method propertyAt: self class propertyName put: true
 			] ].
 	super visitMessageNode: aMessageNode
 ]
