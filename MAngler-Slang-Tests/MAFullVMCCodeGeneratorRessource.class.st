@@ -17,7 +17,7 @@ MAFullVMCCodeGeneratorRessource class >> resetInstance [
 	self reset
 ]
 
-{ #category : #'generating machine code' }
+{ #category : #accessing }
 MAFullVMCCodeGeneratorRessource >> codeGenerator [
 	^ codeGenerator
 ]
@@ -27,7 +27,7 @@ MAFullVMCCodeGeneratorRessource >> codeGenerator: anObject [
 	codeGenerator := anObject
 ]
 
-{ #category : #'generating machine code' }
+{ #category : #initializing }
 MAFullVMCCodeGeneratorRessource >> newCodeGenerator [
 	^ (VMMaker
 		makerFor: StackInterpreter
@@ -46,7 +46,7 @@ MAFullVMCCodeGeneratorRessource >> newCodeGenerator [
 		
 ]
 
-{ #category : #'generating machine code' }
+{ #category : #running }
 MAFullVMCCodeGeneratorRessource >> setUp [
 	super setUp.
 	codeGenerator := self newCodeGenerator

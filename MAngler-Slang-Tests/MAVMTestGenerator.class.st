@@ -20,7 +20,8 @@ Class {
 	#instVars : [
 		'methodsToStringCompare',
 		'methodsToSmokeTest',
-		'classToTest'
+		'classToTest',
+		'program'
 	],
 	#category : #'MAngler-Slang-Tests-Generators'
 }
@@ -29,6 +30,7 @@ Class {
 MAVMTestGenerator class >> cleanUp [
 	<script>
 	MAFullVMCCodeGeneratorRessource reset.
+	MAFullVMAnglerProgramRessource reset.
 	self removeResources.
 	self removeTests.
 ]
@@ -80,10 +82,13 @@ MAVMTestGenerator class >> translatorClass [
 { #category : #picking }
 MAVMTestGenerator >> fillMethodsToTest [
 	| methods |
+
+	"So inefficient it makes my skin crawl but hey..."
+	methods := MAFullVMAnglerProgramRessource current program methods select: [ :aMethod | 
+		aMethod methodClass = classToTest 
+			and: [ (aMethod hasProperty: MASlangRequiredInliningMethodTagger propertyName) not ]].
+
 	"Basically, what we can compare to slang, we do. What we cannot, we only do a smoke test on them"
-	methods := (classToTest allSelectorsBelow: VMClass)	
-		collect:[ :aSelector | classToTest lookupSelector: aSelector ].
-	
 	methodsToStringCompare := methods select: [ :aCompiledMethod |
 			(MASlangVMClassTranslator shouldITranslate: aCompiledMethod)
 				and:[ (MAFullVMCCodeGeneratorRessource current codeGenerator 
