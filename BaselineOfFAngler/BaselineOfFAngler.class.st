@@ -15,7 +15,7 @@ BaselineOfFAngler >> baseline: spec [
 				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
 			spec
 				baseline: 'Phineas'
-				with: [ spec repository: 'gitlab://pharo-project/Phineas:master' ].
+				with: [ spec repository: 'gitlab://pharo-project/Phineas:ctypes' ].
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			spec
