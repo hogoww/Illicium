@@ -405,19 +405,20 @@ MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 	
 	switchNode expression: self translatedReceiver.
 	
-	anArrayNode statements collect:[ :aCase |  
+	anArrayNode statements do:[ :aCase |  
 			| expression body |
 			expression := aCase receiver acceptVisitor: methodTranslator.
 			aCase arguments size = 1 
 				ifFalse: [ ArgumentsCountMismatch new calledArgumentsCount: aCase arguments size; expectedArgumentsCount: 1 ; yourself ].
 			body := aCase arguments first acceptVisitor: methodTranslator.
 			body addStatement: ASTCBreak new.
-			ASTCSwitchCase new 
-				expression: expression; 
-				body: body;
-				pharoNode: aCase;
-				yourself
-		] into: switchNode cases.
+			switchNode addCase:
+				(ASTCSwitchCase new 
+					expression: expression; 
+					body: body;
+					pharoNode: aCase;
+					yourself).
+		].
 	
 	switchNode default: (defaultCase ifNotNil: [ defaultCase acceptVisitor: methodTranslator ]).
 	
