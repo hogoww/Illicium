@@ -3,25 +3,26 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'classTranslator',
-		'replacementClasses'
+		'program'
 	],
 	#category : #'FAngler-Core-Translation'
 }
 
-{ #category : #configuration }
+{ #category : #'translation-api' }
 FATranslator class >> classTranslatorClass [
-	^ IlliciumClassTranslator 
+	^ self subclassResponsibility
 ]
 
-{ #category : #configuration }
+{ #category : #'translation-api' }
 FATranslator class >> prettyPrinterClass [
-
-	^ FAPrettyPrint
+	^ self subclassResponsibility
 ]
 
 { #category : #'translation-api' }
 FATranslator class >> translateClass: aClass [
-	^ self new translateClass: aClass
+	^ self new
+		addClass: aClass ; 
+		translateProgram
 ]
 
 { #category : #'translation-api' }
@@ -30,23 +31,38 @@ FATranslator class >> translateExpression: anExpression [
 ]
 
 { #category : #'translation-api' }
-FATranslator class >> translateMethod: aCompiledMethod [ 
-	^ self new translateMethod: aCompiledMethod
+FATranslator class >> translateMethod: aCompiledMethod [
+	^ self translateMethod: aCompiledMethod ast fromClass: aCompiledMethod methodClass
 ]
 
 { #category : #'translation-api' }
-FATranslator class >> translateMethod: aSelector fromClass: aClass [
-	^ self new translateMethod: aSelector fromClass: aClass
+FATranslator class >> translateMethod: anAST fromClass: aClass [
+	^ self new 
+		addMethod: anAST fromClass: aClass;
+		translateProgram.
+]
+
+{ #category : #'translation-api' }
+FATranslator class >> translateProgram: aProgram [
+	^ self new
+		program: aProgram ; 
+		translateProgram
 ]
 
 { #category : #'program-configuration' }
 FATranslator >> addClass: aClass [
-	classTranslator addClass: aClass
+	program addClass: aClass
 ]
 
 { #category : #'program-configuration' }
 FATranslator >> addMethod: aCollection [
-	^ classTranslator addMethod: aCollection
+	program addMethod: aCollection
+]
+
+{ #category : #accessors }
+FATranslator >> addMethod: anAST fromClass: aClass [
+	self program addClass: aClass.
+	self program addMethod: anAST
 ]
 
 { #category : #accessors }
@@ -65,41 +81,19 @@ FATranslator >> classTranslator: aClassTranslator [
 	classTranslator := aClassTranslator
 ]
 
-{ #category : #initialization }
-FATranslator >> fillWithtranslatorSpecificTypes [
-	replacementClasses at: #InterpreterProxy put: IlliciumVirtualMachineProxy.
-	replacementClasses at: #IlliciumInterpreterProxy put: IlliciumVirtualMachineProxy.
-]
-
-{ #category : #initialization }
+{ #category : #accessors }
 FATranslator >> getReplacementType: aPharoType [
-	^ aPharoType performReplacementUsing: replacementClasses
+	"should return a class understanding new"
+	^ self subclassResponsibility
 
 ]
 
 { #category : #initialization }
 FATranslator >> initialize [
+	super initialize.
 	classTranslator := self class classTranslatorClass new
 		mainTranslator: self;
 		yourself.
-	"basic replacement classes"
-	self flag: #careful. " float and string are used... Not well !"
-	replacementClasses := Dictionary new
-		at: #Object put: IlliciumObject ;
-		at: #UndefinedObject put: IlliciumUndefinedObject ;
-		at: #SmallInteger put: IlliciumSmallInteger ;
-		at: #Boolean put: IlliciumBoolean ;
-		at: #Character put: IlliciumCharacter ;
-		at: #String put: IlliciumString ;
-		at: #ByteString put: IlliciumString ;
-		at: #ByteSymbol put: IlliciumString ;
-		at: #Float put: IlliciumFloat ; 
-		at: #SmallFloat64 put: IlliciumFloat ; 
-		at: #BoxedFloat64 put: IlliciumFloat ; 
-		at: #Array put: IlliciumArray ;
-		yourself.
-		
-	self fillWithtranslatorSpecificTypes 
 ]
 
 { #category : #'translation-api' }
@@ -117,18 +111,17 @@ FATranslator >> prettyPrinterClass [
 ]
 
 { #category : #accessors }
-FATranslator >> replacementClasses [
-	^ replacementClasses
+FATranslator >> program [
+	^ program
 ]
 
 { #category : #accessors }
-FATranslator >> replacementClasses: aDictionnary [
-	replacementClasses := aDictionnary
+FATranslator >> program: aProgram [
+	program := aProgram
 ]
 
 { #category : #'translation-api' }
 FATranslator >> translateClass: aClass [
-	replacementClasses at: aClass name put: IlliciumUserClass.
 	^ classTranslator translateClass: aClass
 ]
 
@@ -137,14 +130,22 @@ FATranslator >> translateExpression: anExpression [
 	^ classTranslator translateExpression: anExpression
 ]
 
-{ #category : #'translation-api' }
-FATranslator >> translateMethod: aCompiledMethod [
-	replacementClasses at: aCompiledMethod class name put: IlliciumUserClass.
-	^ classTranslator translateMethod: aCompiledMethod 
+{ #category : #accessors }
+FATranslator >> translateMethod: aSelector fromClass: aClass [
+	| method |
+	method := program methodNamed: aSelector.
+	self halt.
+	method 
+		ifNotNil: [ classTranslator translateMethod: method ]
+		ifNil: [ self halt. ].
 ]
 
 { #category : #'translation-api' }
-FATranslator >> translateMethod: aSelector fromClass: aClass [
-	replacementClasses at: aClass name put: IlliciumUserClass.
-	^ classTranslator translateMethod: aSelector fromClass: aClass
+FATranslator >> translateProgram [
+	| cu |
+	self prepareProgram.
+	
+	cu := ASTCCompilationUnit new.
+	program classesDo: [ :aClass | cu addCU: (self translateClass: aClass) ].
+	^ cu
 ]

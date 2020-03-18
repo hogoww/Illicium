@@ -27,5 +27,5 @@ FANodeTranslatorTest >> assertTypeOf: aNode is: aType [
 { #category : #tests }
 FANodeTranslatorTest >> setUp [
 	"we only need a reference to the method translator"
-	methodTranslator := FATranslator new classTranslator methodTranslator.
+	methodTranslator := MAIlliciumTranslator new classTranslator methodTranslator.
 ]

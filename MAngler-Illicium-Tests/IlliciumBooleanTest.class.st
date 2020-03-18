@@ -45,7 +45,7 @@ IlliciumBooleanTest >> testIfTrue [
 { #category : #tests }
 IlliciumBooleanTest >> testIfTrueIfFalse [
 	| astC expectedC |
-	astC := FATranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]'.
+	astC := MAIlliciumTranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]'.
 	
 	expectedC := ASTCIf new 
 		condition: (ASTCEqualityOperator new

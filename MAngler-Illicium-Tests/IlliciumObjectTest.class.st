@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 IlliciumObjectTest >> testEqual [
 	| astC expectedC|
-	astC := (FATranslator translateExpression: '1 = 6') statements at: 1.
+	astC := (MAIlliciumTranslator translateExpression: '1 = 6') statements at: 1.
 	
 	expectedC := ASTCEqualityOperator new
 		leftOperand: (ASTCLiteral value: 1);

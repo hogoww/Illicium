@@ -25,9 +25,3 @@ MASlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
 ]
-
-{ #category : #accessing }
-MASlangTranslator >> program: anANSlangProgram [ 
-	
-	classTranslator program: anANSlangProgram
-]
