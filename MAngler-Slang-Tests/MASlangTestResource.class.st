@@ -26,3 +26,13 @@ MASlangTestResource >> newTranslatorWith: aClass [
 		beStrict;
 		yourself
 ]
+
+{ #category : #accessing }
+MASlangTestResource >> translator [
+	^ translator
+]
+
+{ #category : #accessing }
+MASlangTestResource >> translator: aTranslator [
+	translator := aTranslator
+]

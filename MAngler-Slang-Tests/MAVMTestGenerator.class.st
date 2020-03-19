@@ -116,20 +116,6 @@ MAVMTestGenerator >> generateAccessorsTo: aResourceClassName for: aTestedClass [
 ]
 
 { #category : #'ressource-generation' }
-MAVMTestGenerator >> generateResourceAccessorsFor: aRessourceClass [
-	| translator method |
-	method := #translator asMethodWithBody: [
-		^ translator
-	].
-	aRessourceClass compile: method asString classified: #accessing.
-	
-	method := #translator: asMethodWithBody: [:aTranslator|
-		translator := aTranslator
-	].
-	aRessourceClass compile: method asString classified: #accessing.
-]
-
-{ #category : #'ressource-generation' }
 MAVMTestGenerator >> generateResourceClass [
 	| ressourceClass |
 	ressourceClass := self class resourceBaseClass subclass: self ressourceClassName
@@ -229,7 +215,6 @@ MAVMTestGenerator >> generateTestForClass: aClass [
 	"ressource part"
 	resourceClass := self generateResourceClass.
 	self generateSetUpForResource: resourceClass.
-	self generateResourceAccessorsFor: resourceClass.
 	
 	methodsToSmokeTest ifNotEmpty: [ 
 		self generateTestClassFor: #Smoke , aClass name 

@@ -9,13 +9,3 @@ MASpurSegmentManagerRessource >> setUp [
 	super setUp.
 	self translator: (self newTranslatorWith: SpurSegmentManager)
 ]
-
-{ #category : #accessing }
-MASpurSegmentManagerRessource >> translator [
-	^ translator
-]
-
-{ #category : #accessing }
-MASpurSegmentManagerRessource >> translator: aTranslator [
-	translator := aTranslator
-]

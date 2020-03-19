@@ -9,13 +9,3 @@ MASpurGenerationScavengerRessource >> setUp [
 	super setUp.
 	self translator: (self newTranslatorWith: SpurGenerationScavenger)
 ]
-
-{ #category : #accessing }
-MASpurGenerationScavengerRessource >> translator [
-	^ translator
-]
-
-{ #category : #accessing }
-MASpurGenerationScavengerRessource >> translator: aTranslator [
-	translator := aTranslator
-]

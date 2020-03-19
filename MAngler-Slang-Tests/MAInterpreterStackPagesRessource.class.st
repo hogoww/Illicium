@@ -9,13 +9,3 @@ MAInterpreterStackPagesRessource >> setUp [
 	super setUp.
 	self translator: (self newTranslatorWith: InterpreterStackPages)
 ]
-
-{ #category : #accessing }
-MAInterpreterStackPagesRessource >> translator [
-	^ translator
-]
-
-{ #category : #accessing }
-MAInterpreterStackPagesRessource >> translator: aTranslator [
-	translator := aTranslator
-]
