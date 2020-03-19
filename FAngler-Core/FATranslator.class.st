@@ -3,18 +3,30 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'classTranslator',
-		'program'
+		'program',
+		'inferer'
 	],
 	#category : #'FAngler-Core-Translation'
 }
 
-{ #category : #'translation-api' }
+{ #category : #'default-configuration' }
 FATranslator class >> classTranslatorClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'translation-api' }
+{ #category : #'default-configuration' }
 FATranslator class >> prettyPrinterClass [
+	^ self subclassResponsibility
+]
+
+{ #category : #'default-configuration' }
+FATranslator class >> programClass [
+	^ self subclassResponsibility 
+]
+
+{ #category : #'default-configuration' }
+FATranslator class >> shouldITranslate: aMethod [
+	"should return true if aMethod should be translated and false overwise."
 	^ self subclassResponsibility
 ]
 
@@ -65,6 +77,13 @@ FATranslator >> addMethod: anAST fromClass: aClass [
 	self program addMethod: anAST
 ]
 
+{ #category : #annotation }
+FATranslator >> annotateMethodAST: aMethodNode [ 
+	| visitors |
+	visitors := self preTranslationVisitors.
+	aMethodNode acceptMultipleVisitors: visitors.
+]
+
 { #category : #accessors }
 FATranslator >> beStrict [
  	classTranslator beStrict
@@ -91,9 +110,25 @@ FATranslator >> getReplacementType: aPharoType [
 { #category : #initialization }
 FATranslator >> initialize [
 	super initialize.
+	program := self class programClass new.
 	classTranslator := self class classTranslatorClass new
 		mainTranslator: self;
+		program: program;
 		yourself.
+
+]
+
+{ #category : #visiting }
+FATranslator >> preTranslationVisitors [
+	"should return a collection of visitors for RBAST which will annotate a method AST"
+	^ self subclassResponsibility 
+]
+
+{ #category : #'translation-api' }
+FATranslator >> prepareMethodsASTs: methodsASTs [
+	methodsASTs
+		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
+	^ methodsASTs
 ]
 
 { #category : #'translation-api' }
@@ -120,6 +155,11 @@ FATranslator >> program: aProgram [
 	program := aProgram
 ]
 
+{ #category : #testing }
+FATranslator >> shouldITranslate: aMethod [
+	^ self class shouldITranslate: aMethod
+]
+
 { #category : #'translation-api' }
 FATranslator >> translateClass: aClass [
 	^ classTranslator translateClass: aClass
@@ -133,10 +173,10 @@ FATranslator >> translateExpression: anExpression [
 { #category : #accessors }
 FATranslator >> translateMethod: aSelector fromClass: aClass [
 	| method |
+	program prepareWithInferer: inferer inTranslator: self.
 	method := program methodNamed: aSelector.
-	self halt.
 	method 
-		ifNotNil: [ classTranslator translateMethod: method ]
+		ifNotNil: [ ^ classTranslator translateMethod: method ]
 		ifNil: [ self halt. ].
 ]
 

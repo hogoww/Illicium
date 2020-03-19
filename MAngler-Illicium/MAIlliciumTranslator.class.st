@@ -7,15 +7,20 @@ Class {
 	#category : #'MAngler-Illicium-Translation'
 }
 
-{ #category : #configuration }
+{ #category : #'default-configuration' }
 MAIlliciumTranslator class >> classTranslatorClass [
 	^ IlliciumClassTranslator 
 ]
 
-{ #category : #configuration }
+{ #category : #'default-configuration' }
 MAIlliciumTranslator class >> prettyPrinterClass [
 
 	^ FAPrettyPrint
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> programClass [
+	^ FAProgram
 ]
 
 { #category : #initialization }
@@ -32,6 +37,7 @@ MAIlliciumTranslator >> getReplacementType: aPharoType [
 { #category : #initialization }
 MAIlliciumTranslator >> initialize [
 	super initialize.
+	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic; yourself. 
 	"basic replacement classes"
 	 " float and string are used... Not well !"
 	replacementClasses := Dictionary new
@@ -50,6 +56,15 @@ MAIlliciumTranslator >> initialize [
 		yourself.
 		
 	self fillWithtranslatorSpecificTypes 
+]
+
+{ #category : #visiting }
+MAIlliciumTranslator >> preTranslationVisitors [
+	"should return a collection of visitors for RBAST which will annotate a method AST"
+	^ { 
+		IlliciumDeclarationAnnotator new. 
+		IlliciumPhineasTypeAnnotator new inferer: self inferer ; yourself"always take the latest inferer"
+		}
 ]
 
 { #category : #accessors }

@@ -4,7 +4,7 @@ Class {
 	#category : #'MAngler-Slang-Translation'
 }
 
-{ #category : #configuration }
+{ #category : #'default-configuration' }
 MASlangPluginTranslator class >> classTranslatorClass [
 	^ MASlangPluginClassTranslator 
 ]

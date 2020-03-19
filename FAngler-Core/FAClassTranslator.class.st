@@ -4,19 +4,12 @@ Class {
 	#instVars : [
 		'methodTranslator',
 		'mainTranslator',
-		'inferer',
 		'stateTranslator',
 		'program',
 		'isStrict'
 	],
 	#category : #'FAngler-Core-Translation'
 }
-
-{ #category : #asserting }
-FAClassTranslator class >> shouldITranslate: aMethod [
-	"should return true if aMethod should be translated and false overwise."
-	^ self subclassResponsibility
-]
 
 { #category : #'as yet unclassified' }
 FAClassTranslator >> addClass: aClass [ 
@@ -46,26 +39,9 @@ FAClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilationU
 	^ aCompilationUnit
 ]
 
-{ #category : #annotation }
-FAClassTranslator >> annotateMethodAST: aMethodNode [ 
-	| visitors |
-	visitors := self preTranslationVisitors.
-	aMethodNode acceptMultipleVisitors: visitors.
-]
-
 { #category : #configuration }
 FAClassTranslator >> beStrict [
 	isStrict := true
-]
-
-{ #category : #typing }
-FAClassTranslator >> callgraphTypeStartingFrom: methodsAST [
-	methodsAST do: [:aMethodAST| inferer inferAST: aMethodAST ].
-]
-
-{ #category : #typing }
-FAClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
-	inferer inferExpression: anExpression 
 ]
 
 { #category : #accessing }
@@ -76,16 +52,6 @@ FAClassTranslator >> doNotGeneratePragma [
 { #category : #accessing }
 FAClassTranslator >> getReplacementType: aType [
 	^ mainTranslator getReplacementType: aType 
-]
-
-{ #category : #translation }
-FAClassTranslator >> inferer [
-	^ inferer
-]
-
-{ #category : #translation }
-FAClassTranslator >> inferer: anInferer [
-	inferer := anInferer
 ]
 
 { #category : #initialization }
@@ -131,17 +97,6 @@ FAClassTranslator >> methodTranslator: aMethodTranslator [
 	methodTranslator := aMethodTranslator
 ]
 
-{ #category : #translation }
-FAClassTranslator >> methodsToTranslateASTs: aClass [
-	 ^ inferer typeProvider methodTypes
-		select: [ :aMethod | 
-			(aClass methodDict keys includes: aMethod node selector)
-			and: [ aMethod receiver concreteClass= aClass  
-				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not 
-				and: [ aMethod node compiledMethod isFromTrait not ] ] ] ]
-		thenCollect: [:aMethod| aMethod node copy ].
-]
-
 { #category : #finishing }
 FAClassTranslator >> postTranslationVisitsFor: anASTCNode [ 
 	self postTranslationVisitors do: [ :aVisitor | anASTCNode acceptVisitor: aVisitor ].
@@ -151,12 +106,6 @@ FAClassTranslator >> postTranslationVisitsFor: anASTCNode [
 { #category : #'translation-api' }
 FAClassTranslator >> preTranslationConstraintCheck: aClass [
 	"empty hook"
-]
-
-{ #category : #visiting }
-FAClassTranslator >> preTranslationVisitors [
-	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ self subclassResponsibility 
 ]
 
 { #category : #typing }
@@ -170,13 +119,6 @@ FAClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aCl
 	self subclassResponsibility
 ]
 
-{ #category : #annotation }
-FAClassTranslator >> prepareMethodsASTs: methodsASTs [
-	methodsASTs
-		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
-	^ methodsASTs
-]
-
 { #category : #typing }
 FAClassTranslator >> program [
 	^ program
@@ -186,11 +128,6 @@ FAClassTranslator >> program [
 FAClassTranslator >> program: aProgram [
 
 	program := aProgram
-]
-
-{ #category : #testing }
-FAClassTranslator >> shouldITranslate: aMethod [
-	^ self class shouldITranslate: aMethod
 ]
 
 { #category : #'translation-state' }
@@ -251,16 +188,6 @@ FAClassTranslator >> translateClassState: aClass [
 	ifFalse:[ varDeclaration ].
 	
 
-]
-
-{ #category : #'translation-api' }
-FAClassTranslator >> translateExpression: anExpression [
-	| methodAST functionDefinitions |
-	self callgraphTypeStartingFromExpression: anExpression.
-	methodAST := self prepareMethodsASTs: (inferer typeProvider methodTypes at: 1) node copy.
-	
-	functionDefinitions := self translateMethodsASTs: methodAST.
-	^ functionDefinitions body
 ]
 
 { #category : #'translation-api' }

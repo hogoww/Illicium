@@ -12,7 +12,7 @@ MASlangClassTranslator >> addMethod: aCollection [
 { #category : #'program-configuration' }
 MASlangClassTranslator >> annotateProgramWith: aClass [
 
-	program prepareWithInferer: inferer inTranslator: self
+	program prepareWithInferer: self inferer inTranslator: self
 ]
 
 { #category : #transformations }
@@ -25,10 +25,14 @@ MASlangClassTranslator >> applyTransformationsOn: aMethodNode [
 	^ method
 ]
 
+{ #category : #translation }
+MASlangClassTranslator >> inferer [
+	^ mainTranslator inferer
+]
+
 { #category : #initialization }
 MASlangClassTranslator >> initialize [
 	super initialize.
-	inferer := CCodeGeneratorGlobalStructure new.
 	methodTranslator methodNodeTranslator: MASlangMethodNodeTranslator new.
 	methodTranslator literalValueNodeTranslator: MASlangLiteralValueNodeTranslator new.
 	methodTranslator returnNodeTranslator: MASlangReturnNodeTranslator new.
@@ -40,8 +44,8 @@ MASlangClassTranslator >> initialize [
 { #category : #testing }
 MASlangClassTranslator >> isGlobalInstanceVariable: aString [ 
 	
-	^ (inferer globalsAsSet includes: aString)
-		and: [ inferer placeInStructure: aString ]
+	^ (self inferer globalsAsSet includes: aString)
+		and: [ self inferer placeInStructure: aString ]
 ]
 
 { #category : #'special selectors' }
@@ -62,23 +66,9 @@ MASlangClassTranslator >> postTranslationVisitors [
 	}
 ]
 
-{ #category : #visiting }
-MASlangClassTranslator >> preTranslationVisitors [
-	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ {
-		MASlangMethodCleaner new.
-		MASlangSuperAnnotator new classTranslator: self ; yourself.
-		MASlangRequiredInliningMethodTagger new program: program ; yourself.
-		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
-		MASlangDeclarationAnnotator new "this is required to be after the typeAnnotator. see its documention"
-		}
-]
-
 { #category : #'translation-api' }
 MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
 	| method |
-
-	self annotateProgramWith: aClass.
 
 	method := program methodNamed: aSelector.
 	method := self applyTransformationsOn: method.
@@ -107,5 +97,5 @@ MASlangClassTranslator >> typeAnnotatorClass [
 
 { #category : #'translation-api' }
 MASlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
-	^ self getReplacementType: (inferer typeOfVariable: anIVName)
+	^ self getReplacementType: (self inferer typeOfVariable: anIVName)
 ]

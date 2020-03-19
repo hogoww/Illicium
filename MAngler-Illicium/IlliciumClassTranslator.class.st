@@ -4,12 +4,14 @@ Class {
 	#category : #'MAngler-Illicium-Translation'
 }
 
-{ #category : #initialization }
-IlliciumClassTranslator >> initialize [
-	super initialize.
-	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic; yourself. 
-	"we also manipulate vm stuff, so we need vm type inference"
+{ #category : #typing }
+IlliciumClassTranslator >> callgraphTypeStartingFrom: methodsAST [
+	methodsAST do: [:aMethodAST| self inferer inferAST: aMethodAST ].
+]
 
+{ #category : #typing }
+IlliciumClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
+	self inferer inferExpression: anExpression 
 ]
 
 { #category : #translation }
@@ -18,19 +20,21 @@ IlliciumClassTranslator >> isStatefulCode [
 ]
 
 { #category : #translation }
+IlliciumClassTranslator >> methodsToTranslateASTs: aClass [
+	 ^ self inferer typeProvider methodTypes
+		select: [ :aMethod | 
+			(aClass methodDict keys includes: aMethod node selector)
+			and: [ aMethod receiver concreteClass= aClass  
+				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not 
+				and: [ aMethod node compiledMethod isFromTrait not ] ] ] ]
+		thenCollect: [:aMethod| aMethod node copy ].
+]
+
+{ #category : #translation }
 IlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 	(aClass traitComposition
 		includesTrait: IlliciumVirtualMachineAPI)
 		ifFalse: [ self error: 'can only translate plugins for now. They need to use the ASTCVirtualMachineAPI trait.' ].
-]
-
-{ #category : #visiting }
-IlliciumClassTranslator >> preTranslationVisitors [
-	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { 
-		IlliciumDeclarationAnnotator new. 
-		IlliciumPhineasTypeAnnotator new inferer: inferer ; yourself"always take the latest inferer"
-		}
 ]
 
 { #category : #'translation-api' }
@@ -44,6 +48,16 @@ IlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector fromClas
 	^ methodsASTs
 ]
 
+{ #category : #'translation-api' }
+IlliciumClassTranslator >> translateExpression: anExpression [
+	| methodAST functionDefinitions |
+	self callgraphTypeStartingFromExpression: anExpression.
+	methodAST := self prepareMethodsASTs: (self inferer typeProvider methodTypes at: 1) node copy.
+	
+	functionDefinitions := self translateMethodsASTs: methodAST.
+	^ functionDefinitions body
+]
+
 { #category : #typing }
 IlliciumClassTranslator >> typeAnnotatorClass [
 	^ IlliciumPhineasTypeAnnotator
@@ -53,7 +67,7 @@ IlliciumClassTranslator >> typeAnnotatorClass [
 IlliciumClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
 	| phineasType type |
-	phineasType := 	phineasType := (inferer concreteTypesOfInstanceVariable: anIVName ofClass:aClass).
-	type := (IlliciumTypeChecker type: phineasType asPharoType using: inferer forVar: anIVName).
+	phineasType := 	phineasType := (self inferer concreteTypesOfInstanceVariable: anIVName ofClass:aClass).
+	type := (IlliciumTypeChecker type: phineasType asPharoType using: self inferer forVar: anIVName).
 	^ self getReplacementType: type
 ]
