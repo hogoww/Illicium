@@ -150,24 +150,6 @@ FAClassTranslator >> stateTranslator: aDictionary [
 	stateTranslator := aDictionary
 ]
 
-{ #category : #'translation-api' }
-FAClassTranslator >> translateClass: aClass [ 
-	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu stateStuff |
-	self preTypeInference: aClass.
-	entryPoints := self typeInferenceEntryPoints: aClass.
-	self callgraphTypeStartingFrom: entryPoints.
-	methodsToTranslate := self methodsToTranslateASTs: aClass.
-	methodsASTs := self prepareMethodsASTs: methodsToTranslate.
-	
-	cu := ASTCCompilationUnit new.	
-	stateStuff := self translateClassState: aClass.
-	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs fromClass: aClass.
-	self addState: stateStuff to: cu.
-	self addTranslatedMethods: functionDefinitionsASTs to: cu.
-	cu debugASTCStructure.
-	^ cu
-]
-
 { #category : #'translation-state' }
 FAClassTranslator >> translateClassState: aClass [
 	| varDeclaration struct |

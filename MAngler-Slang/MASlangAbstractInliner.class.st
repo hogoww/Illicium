@@ -22,8 +22,9 @@ MASlangAbstractInliner class >> includesSelectorTranslatedAsMacro: aSelector [
 { #category : #renaming }
 MASlangAbstractInliner class >> renameVariablesOf: aMethodNode byArguments: arguments [
 	| replacement |
+	aMethodNode isVariable ifTrue:[ ^ ASTCBlock new ].
 	aMethodNode body nodesDo: [:aNode |  
-		(aNode isArgument and:[ aNode isBlockVar not ]) ifTrue: [
+		(aNode isArgument and:[ (aNode whoDefines: aNode name) = aMethodNode ]) ifTrue: [
 			replacement := arguments at: (aMethodNode arguments indexOf: aNode).
 			aNode replaceWith: replacement ] ] 
 ]

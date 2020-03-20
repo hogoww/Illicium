@@ -49,6 +49,24 @@ IlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector fromClas
 ]
 
 { #category : #'translation-api' }
+IlliciumClassTranslator >> translateClass: aClass [ 
+	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu stateStuff |
+	self preTypeInference: aClass.
+	entryPoints := self typeInferenceEntryPoints: aClass.
+	self callgraphTypeStartingFrom: entryPoints.
+	methodsToTranslate := self methodsToTranslateASTs: aClass.
+	methodsASTs := self prepareMethodsASTs: methodsToTranslate.
+	
+	cu := ASTCCompilationUnit new.	
+	stateStuff := self translateClassState: aClass.
+	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs fromClass: aClass.
+	self addState: stateStuff to: cu.
+	self addTranslatedMethods: functionDefinitionsASTs to: cu.
+	cu debugASTCStructure.
+	^ cu
+]
+
+{ #category : #'translation-api' }
 IlliciumClassTranslator >> translateExpression: anExpression [
 	| methodAST functionDefinitions |
 	self callgraphTypeStartingFromExpression: anExpression.

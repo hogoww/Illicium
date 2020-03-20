@@ -173,8 +173,9 @@ FATranslator >> translateExpression: anExpression [
 { #category : #accessors }
 FATranslator >> translateMethod: aSelector fromClass: aClass [
 	| method |
-	program prepareWithInferer: inferer inTranslator: self.
+	self prepareProgram.
 	method := program methodNamed: aSelector.
+
 	method 
 		ifNotNil: [ ^ classTranslator translateMethod: method ]
 		ifNil: [ self halt. ].
@@ -186,6 +187,6 @@ FATranslator >> translateProgram [
 	self prepareProgram.
 	
 	cu := ASTCCompilationUnit new.
-	program classesDo: [ :aClass | cu addCU: (self translateClass: aClass) ].
+	program classes collect: [ :aClass | cu add: (self translateClass: aClass) ].
 	^ cu
 ]

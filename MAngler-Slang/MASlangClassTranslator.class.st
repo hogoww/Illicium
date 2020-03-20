@@ -86,8 +86,12 @@ MASlangClassTranslator >> transformations [
 ]
 
 { #category : #'translation-api' }
-MASlangClassTranslator >> translateClass: aClass [ 
-	self error: 'not adapted to refactor to use Slang yet'
+MASlangClassTranslator >> translateClass: aClass [
+	| cu methods |
+	cu := ASTCCompilationUnit new.
+	methods := program methodsFromClass: aClass.
+	methods do: [ :aMethod | cu add: (self translateMethod: aMethod) ].
+	^ cu
 ]
 
 { #category : #typing }

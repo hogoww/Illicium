@@ -21,6 +21,11 @@ MASlangProgram >> classes [
 	InterpreterStackPages}
 ]
 
+{ #category : #enumerating }
+MASlangProgram >> methodsFromClass: aClass [ 
+	 ^ methods select: [ :aMethod | aMethod methodClass = aClass ]
+]
+
 { #category : #accessing }
 MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 
@@ -35,10 +40,14 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 		(each inheritsFrom: VMStructType) ifFalse:
 			[inferer globalsAsSet addAll: (inferer instVarNamesForClass: each)].
 		inferer retainMethods: (each requiredMethodNames: inferer options).
-		((each allSelectorsBelow: VMClass) collect: [:aSelector| each lookupSelector: aSelector ])
+		((each allSelectorsBelow: VMClass) collect: 
+			[:aSelector| 
+			"self haltIf: aSelector = #containsOnlyValidBecomeObjects:and:twoWay:copyHash: ."
+			each lookupSelector: aSelector ])
 			select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
 			thenDo: [ :aMethod |
 			| copy needToBeRemovedFirst |
+			"self haltIf: aMethod selector = #containsOnlyValidBecomeObjects:and:twoWay:copyHash: ."
 			copy := aMethod ast copy.
 			needToBeRemovedFirst := self addMethod: copy.
 			needToBeRemovedFirst ifTrue: [ inferer removeMethodForSelector: aMethod selector ].

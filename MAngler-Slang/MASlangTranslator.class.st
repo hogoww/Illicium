@@ -60,8 +60,20 @@ MASlangTranslator >> preTranslationVisitors [
 		}
 ]
 
+{ #category : #preparation }
+MASlangTranslator >> prepareProgram [
+	
+	program prepareWithInferer: inferer inTranslator: self.
+]
+
 { #category : #'translation-api' }
 MASlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
+]
+
+{ #category : #'translation-api' }
+MASlangTranslator >> translateVM [
+	"Shortcut, since the VM is the base program for this translator"
+	^ self translateProgram
 ]
