@@ -15,10 +15,10 @@ MAFullVMAnglerProgramRessource class >> resetInstance [
 
 { #category : #initializing }
 MAFullVMAnglerProgramRessource >> newProgram [
-	| classTranslator |
-	classTranslator := MASlangVMClassTranslator new.
-	program := classTranslator program.
-	program prepareWithInferer: classTranslator inferer inTranslator: classTranslator.
+	| translator |
+	translator := MASlangTranslator new.
+	program := translator program.
+	program prepareWithInferer: translator inferer inTranslator: translator.
 	^ program
 ]
 

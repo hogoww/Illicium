@@ -1,7 +1,26 @@
 Extension { #name : #ASTCCompilationUnit }
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCCompilationUnit >> add: aDefinition [
+ASTCCompilationUnit >> add: aDefinitionOrCompilationUnit [
+	"convinience method for when adding both definition and declaration, from a definition"
+	aDefinitionOrCompilationUnit isCompilationUnit
+		ifTrue:[
+			self addCompilationUnit: aDefinitionOrCompilationUnit
+			]
+		ifFalse:[
+			self addDefinitionAndDeclaration: aDefinitionOrCompilationUnit
+			].
+
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
+	aCompilationUnit definitions do: [ :aDefinition | aCompilationUnit addDefinition: aDefinition ].
+	aCompilationUnit declarations do: [ :aDeclaration | aCompilationUnit addDeclaration: aDeclaration ].
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCCompilationUnit >> addDefinitionAndDeclaration: aDefinition [
 	"convinience method for when adding both definition and declaration, from a definition"
 	self addDefinition: aDefinition.
 	self addDeclaration: aDefinition declaration.

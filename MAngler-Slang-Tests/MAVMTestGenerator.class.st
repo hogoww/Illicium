@@ -41,14 +41,19 @@ MAVMTestGenerator class >> generateVMTests [
 	| generator |
 	self cleanUp.
 	generator:= self new.	
-	^ {
-			SpurPlanningCompactor.
-			InterpreterStackPages.
-			SpurSegmentManager.
-			SpurGenerationScavenger.
-			StackInterpreterPrimitives.
-			Spur64BitMemoryManager
-		} 
+	^ {VMClass.
+	CogClass.
+	SpurMemoryManager.
+	Spur64BitMemoryManager.
+	InterpreterPrimitives.
+	StackInterpreter.
+	StackInterpreterPrimitives.
+	SpurGenerationScavenger.
+	SpurSegmentManager.
+	SpurCompactor.
+	SpurPlanningCompactor.
+	CogStackPages.
+	InterpreterStackPages }
 			do:[:aVMClass| generator generateTestForClass: aVMClass ]
 ]
 
@@ -86,16 +91,19 @@ MAVMTestGenerator >> fillMethodsToTest [
 	"So inefficient it makes my skin crawl but hey..."
 	methods := MAFullVMAnglerProgramRessource current program methods select: [ :aMethod | 
 		aMethod methodClass = classToTest 
-			and: [ (aMethod hasProperty: MASlangRequiredInliningMethodTagger propertyName) not ]].
+			and: [ 
+				
+				self haltIf: aMethod selector = #ContainsOnlyValidBecomeObjectsAndTwoWayCopyHash:.
+				(aMethod hasProperty: MASlangRequiredInliningMethodTagger propertyName) not ]].
 
 	"Basically, what we can compare to slang, we do. What we cannot, we only do a smoke test on them"
 	methodsToStringCompare := methods select: [ :aCompiledMethod |
-			(MASlangVMClassTranslator shouldITranslate: aCompiledMethod)
+			(MASlangTranslator shouldITranslate: aCompiledMethod)
 				and:[ (MAFullVMCCodeGeneratorRessource current codeGenerator 
 							methodNamed: aCompiledMethod selector) isNotNil ] ].
 	
 	methodsToSmokeTest := methods select:[:aCompiledMethod| 
-		(MASlangVMClassTranslator shouldITranslate: aCompiledMethod)
+		(MASlangTranslator shouldITranslate: aCompiledMethod)
 			and:[ (MAFullVMCCodeGeneratorRessource current codeGenerator 
 							methodNamed: aCompiledMethod selector) isNil ]  ].
 ]

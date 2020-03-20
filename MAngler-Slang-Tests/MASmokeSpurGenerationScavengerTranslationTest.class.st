@@ -103,13 +103,6 @@ MASmokeSpurGenerationScavengerTranslationTest >> testForgetUnmarkedRememberedObj
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'debug support' }
-MASmokeSpurGenerationScavengerTranslationTest >> testFutureSpaceObjectsDoStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #futureSpaceObjectsDo:.
-	self prettyPrintIllicium: illiAST
-]
-
 { #category : #accessing }
 MASmokeSpurGenerationScavengerTranslationTest >> testGetRawTenuringThresholdStringComparison [
 	| illiAST |
