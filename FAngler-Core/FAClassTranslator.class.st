@@ -212,7 +212,7 @@ FAClassTranslator >> translateMethod: aSelector fromClass: aClass [
 FAClassTranslator >> translateMethodsASTs: methodsAST [
 	^ methodsAST
 		collect: [ :aMethodAST |
-			self preTranslationVisitors do:[:aVisitor| aMethodAST acceptVisitor: aVisitor ].
+			self preTranslationAnnotators do:[:aVisitor| aMethodAST acceptVisitor: aVisitor ].
 			methodTranslator translateMethodAST: aMethodAST ]
 		
 	

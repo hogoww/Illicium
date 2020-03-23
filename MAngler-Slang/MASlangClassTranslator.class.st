@@ -15,16 +15,6 @@ MASlangClassTranslator >> annotateProgramWith: aClass [
 	program prepareWithInferer: self inferer inTranslator: self
 ]
 
-{ #category : #transformations }
-MASlangClassTranslator >> applyTransformationsOn: aMethodNode [ 
-	| method |
-	method := aMethodNode copy.
-	self transformations do: [:aTransformation|
-		aTransformation applyOnMethod: method ofProgram: program.
-		].
-	^ method
-]
-
 { #category : #translation }
 MASlangClassTranslator >> inferer [
 	^ mainTranslator inferer
@@ -39,19 +29,6 @@ MASlangClassTranslator >> initialize [
 	methodTranslator temporaryDeclarationNodeTranslator: MASlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: MASlangAssignmentNodeTranslator new.
 	program := MASlangProgram new.
-]
-
-{ #category : #testing }
-MASlangClassTranslator >> isGlobalInstanceVariable: aString [ 
-	
-	^ (self inferer globalsAsSet includes: aString)
-		and: [ self inferer placeInStructure: aString ]
-]
-
-{ #category : #'special selectors' }
-MASlangClassTranslator >> isSpecialSelector: aString [ 
-	
-	^ MASlangReceiver slangReservedSelector includes: aString
 ]
 
 { #category : #initialization }
@@ -71,18 +48,8 @@ MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass
 	| method |
 
 	method := program methodNamed: aSelector.
-	method := self applyTransformationsOn: method.
 	
 	^ { method }
-]
-
-{ #category : #accessing }
-MASlangClassTranslator >> transformations [
-	| transformations |
-	transformations := OrderedCollection new.
-	transformations add: (MAGlobalStructureAccessTransformer translator: self).
-	transformations add: (MASlangMinimalInliner translator: self).
-	^ transformations
 ]
 
 { #category : #'translation-api' }

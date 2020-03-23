@@ -77,11 +77,19 @@ FATranslator >> addMethod: anAST fromClass: aClass [
 	self program addMethod: anAST
 ]
 
-{ #category : #annotation }
-FATranslator >> annotateMethodAST: aMethodNode [ 
-	| visitors |
-	visitors := self preTranslationVisitors.
-	aMethodNode acceptMultipleVisitors: visitors.
+{ #category : #'translation-api' }
+FATranslator >> annotateMethodAST: aMethodAST [
+	aMethodAST acceptMultipleVisitors: self preTranslationAnnotators 
+]
+
+{ #category : #transformations }
+FATranslator >> applyTransformationsOn: aMethodNode [ 
+	| method |
+	method := aMethodNode copy.
+	self preTranslationTransformations do: [:aTransformation|
+		aTransformation applyOnMethod: method ofProgram: program.
+		].
+	^ method
 ]
 
 { #category : #accessors }
@@ -119,16 +127,33 @@ FATranslator >> initialize [
 ]
 
 { #category : #visiting }
-FATranslator >> preTranslationVisitors [
+FATranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ self subclassResponsibility 
 ]
 
+{ #category : #visiting }
+FATranslator >> preTranslationTransformations [
+	"should return a collection of transformations to be applied on the methods of the program"
+	^ self subclassResponsibility
+]
+
+{ #category : #annotation }
+FATranslator >> prepareMethodAST: aMethodNode [ 
+	aMethodNode acceptMultipleVisitors: self preTranslationAnnotators.
+
+]
+
 { #category : #'translation-api' }
 FATranslator >> prepareMethodsASTs: methodsASTs [
-	methodsASTs
-		do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
+	methodsASTs do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
+	methodsASTs do: [ :aMethodAST | self applyTransformationsOn: aMethodAST ].
 	^ methodsASTs
+]
+
+{ #category : #accessors }
+FATranslator >> prepareProgram [
+	self subclassResponsibility
 ]
 
 { #category : #'translation-api' }
@@ -178,7 +203,7 @@ FATranslator >> translateMethod: aSelector fromClass: aClass [
 
 	method 
 		ifNotNil: [ ^ classTranslator translateMethod: method ]
-		ifNil: [ self halt. ].
+		ifNil: [ self error ].
 ]
 
 { #category : #'translation-api' }

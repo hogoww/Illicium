@@ -723,9 +723,9 @@ MASlangReceiver >> shouldNotImplement [
 ]
 
 { #category : #'reflective operations' }
-MASlangReceiver >> signedBitShift: somethong [
-	self flag: #undone. "want to see how slang translates it first."
-	^ self unsupportedFeature: #signedBitShift:
+MASlangReceiver >> signedBitShift: anInt [
+	self flag:#WRONG. "just so we can try to compile the VM"
+	^ self translatedReceiver >> (anInt acceptVisitor: methodTranslator)
 ]
 
 { #category : #'reflective operations' }

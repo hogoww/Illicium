@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #cleaning }
+MASlangMethodCleaner >> applyOnMethod: aMethod ofProgram: aProgram [
+	" aProgram is not used in this transformation"
+	aMethod acceptVisitor: self
+]
+
+{ #category : #cleaning }
 MASlangMethodCleaner >> initialize [
 	selectorToRemove := #(flag flag: assert: eassert: deny:)
 ]

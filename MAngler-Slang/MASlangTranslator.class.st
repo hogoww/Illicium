@@ -48,16 +48,37 @@ MASlangTranslator >> initialize [
 	inferer := CCodeGeneratorGlobalStructure new
 ]
 
+{ #category : #testing }
+MASlangTranslator >> isGlobalInstanceVariable: aString [ 
+	
+	^ (inferer globalsAsSet includes: aString)
+		and: [ inferer placeInStructure: aString ]
+]
+
+{ #category : #'special selectors' }
+MASlangTranslator >> isSpecialSelector: aString [ 
+	
+	^ MASlangReceiver slangReservedSelector includes: aString
+]
+
 { #category : #visiting }
-MASlangTranslator >> preTranslationVisitors [
+MASlangTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ {
-		MASlangMethodCleaner new.
+		MASlangMethodCleaner new. "not technically an annotator, but requires to be applied first currently. this will change when acceptMultipleVisitor: will be done properly"
 		MASlangSuperAnnotator new classTranslator: self ; yourself.
 		MASlangRequiredInliningMethodTagger new program: program ; yourself.
 		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
 		MASlangDeclarationAnnotator new "this is required to be after the typeAnnotator. see its documention"
 		}
+]
+
+{ #category : #accessing }
+MASlangTranslator >> preTranslationTransformations [
+	^ { 
+		MAGlobalStructureAccessTransformer translator: self.
+		MASlangMinimalInliner translator: self
+	}
 ]
 
 { #category : #preparation }
@@ -70,6 +91,15 @@ MASlangTranslator >> prepareProgram [
 MASlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
+]
+
+{ #category : #accessing }
+MASlangTranslator >> transformations [
+	^ { 
+		MASlangMethodCleaner new.
+		MAGlobalStructureAccessTransformer translator: self.
+		MASlangMinimalInliner translator: self
+	}
 ]
 
 { #category : #'translation-api' }
