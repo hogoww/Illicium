@@ -84,12 +84,9 @@ FATranslator >> annotateMethodAST: aMethodAST [
 
 { #category : #transformations }
 FATranslator >> applyTransformationsOn: aMethodNode [ 
-	| method |
-	method := aMethodNode copy.
 	self preTranslationTransformations do: [:aTransformation|
-		aTransformation applyOnMethod: method ofProgram: program.
+		aTransformation applyOnMethod: aMethodNode ofProgram: program.
 		].
-	^ method
 ]
 
 { #category : #accessors }
