@@ -107,8 +107,7 @@ MASlangAbstractInliner >> inline: aMethodNode insteadOf: aMessageNode [
 	nodesToInline := aMethodNode statements.
 	nodesToInline last isReturn
 		ifTrue: [ nodesToInline add: nodesToInline removeLast value ].
-
-
+ 
 	(self inlineIfOnlyOneNode: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoAssignment: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
 	(self inlineIfMultipleNodeIntoReturn: nodesToInline insteadOf: aMessageNode) ifTrue:[ ^ self ].
@@ -309,8 +308,7 @@ MASlangAbstractInliner >> visitMessageNode: aMessageNode [
 			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
 			self inline: methodToInline insteadOf: aMessageNode.
 			]
-		ifFalse: [ 
-				"we don't look further if the message is an assert."	
+		ifFalse: [
 				super visitMessageNode: aMessageNode
 			 ]
 	
