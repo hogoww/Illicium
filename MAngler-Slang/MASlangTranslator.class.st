@@ -9,6 +9,12 @@ MASlangTranslator class >> classTranslatorClass [
 	^ MASlangVMClassTranslator 
 ]
 
+{ #category : #'special selectors' }
+MASlangTranslator class >> isSpecialSelector: aString [ 
+	
+	^ MASlangReceiver slangReservedSelector includes: aString
+]
+
 { #category : #'default-configuration' }
 MASlangTranslator class >> prettyPrinterClass [
 
@@ -53,12 +59,6 @@ MASlangTranslator >> isGlobalInstanceVariable: aString [
 	
 	^ (inferer globalsAsSet includes: aString)
 		and: [ inferer placeInStructure: aString ]
-]
-
-{ #category : #'special selectors' }
-MASlangTranslator >> isSpecialSelector: aString [ 
-	
-	^ MASlangReceiver slangReservedSelector includes: aString
 ]
 
 { #category : #visiting }

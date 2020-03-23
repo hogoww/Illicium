@@ -22,7 +22,7 @@ MASlangCompleteInliner >> shouldInline: aMessageNode [
 	"A method with one of these caracteristic HAS to be inlined, as there is no C equivalent otherwise."
 	"The method to inline may not exist, we'll get an error quickly regardless if that is the case"
 	
-	^ (translator isSpecialSelector: aMessageNode selector) not
+	^ (translator class isSpecialSelector: aMessageNode selector) not
 		and: [ (methodToInline hasPragmaNamed: #cmacro) not
 			and: [ (methodToInline hasPragmaNamed: #cmacro:) not ] ]
 ]

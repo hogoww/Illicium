@@ -58,7 +58,7 @@ MASlangAbstractInliner >> applyOnMethodI: aMethodNode ofProgram: aProgram [
 			1halt.
 			((aNode isMessage
 				and: [ aProgram hasMethodNamed: aNode selector ])
-					and: [ (translator isSpecialSelector: aNode selector) ])	
+					and: [ (translator class isSpecialSelector: aNode selector) ])	
 				ifTrue:[ | methodToInline |	
 					inlinedSomething := true.
 					methodToInline := (aProgram methodNamed: aNode selector) copy.

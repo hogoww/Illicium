@@ -4,6 +4,11 @@ Class {
 	#category : #'MAngler-Slang-Translation'
 }
 
+{ #category : #testing }
+MASlangClassTranslator class >> isSpecialSelector: aSelector [
+	^ MASlangTranslator isSpecialSelector: aSelector
+]
+
 { #category : #'program-configuration' }
 MASlangClassTranslator >> addMethod: aCollection [
 	program addMethod: aCollection
