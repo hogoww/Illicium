@@ -33,6 +33,11 @@ MASlangConstantEvaluator >> visitGlobalNode: aRBGlobalNode [
 	^ nil
 ]
 
+{ #category : #'as yet unclassified' }
+MASlangConstantEvaluator >> visitInstanceVariableNode: aRBInstanceVariableNode [ 
+	^ nil
+]
+
 { #category : #visiting }
 MASlangConstantEvaluator >> visitLiteralValueNode: aRBLiteralValueNode [ 
 	
