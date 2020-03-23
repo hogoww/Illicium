@@ -15,8 +15,8 @@ ASTCCompilationUnit >> add: aDefinitionOrCompilationUnit [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
-	aCompilationUnit definitions do: [ :aDefinition | aCompilationUnit addDefinition: aDefinition ].
-	aCompilationUnit declarations do: [ :aDeclaration | aCompilationUnit addDeclaration: aDeclaration ].
+	aCompilationUnit definitions do: [ :aDefinition | self addDefinition: aDefinition ].
+	aCompilationUnit declarations do: [ :aDeclaration | self addDeclaration: aDeclaration ].
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
