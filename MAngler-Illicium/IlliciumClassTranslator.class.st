@@ -82,6 +82,17 @@ IlliciumClassTranslator >> typeAnnotatorClass [
 ]
 
 { #category : #typing }
+IlliciumClassTranslator >> typeInferenceEntryPoints: aClass [
+	| methods |
+	methods := OrderedCollection new.
+	aClass methodDict
+		do: [ :aMethod | 
+			(aMethod ast arguments isEmpty and: [(aMethod hasPragmaNamed: #doNotGenerate) not])
+				ifTrue: [ methods add: aMethod ast copy ] ].
+	^ methods
+]
+
+{ #category : #typing }
 IlliciumClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
 	| phineasType type |

@@ -11,7 +11,7 @@ Class {
 
 { #category : #configuration }
 FAPrettyPrint class >> defaultIndentation [
-	^ '  '
+	^ ' '
 ]
 
 { #category : #indentation }
@@ -131,6 +131,11 @@ FAPrettyPrint >> spaces [
 { #category : #accessing }
 FAPrettyPrint >> stream [
 	^ stream
+]
+
+{ #category : #accessing }
+FAPrettyPrint >> stream: aStream [
+	stream := aStream
 ]
 
 { #category : #printing }

@@ -296,8 +296,8 @@ MASlangPrettyPrinter >> visitFunctionCall: aFunctionCall [
 	self << '('.
 	self enterBlock.
 	aFunctionCall arguments do: [:each | each acceptVisitor:self ]
-		separatedBy: [ self << ', ' ].
-	stream peekLast = Character cr ifTrue: [ self spaces ].
+		separatedBy: [ self << ', ' ]."
+	stream peekLast = Character cr ifTrue: [ self spaces ]."
 	self leaveBlock.
 	self << ')'.
 ]
@@ -320,9 +320,8 @@ MASlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
 		self cr cr;
 			printMultilineComment: '	', aFunctionDefinition comment anyOne;
 			cr
-		]."
-	
-	self cr.
+		].
+	self cr."
 	
 	stream tab.
 	self printMultilineComment: ' ' , aFunctionDefinition pharoNode methodClass name , '>>' , aFunctionDefinition pharoNode selector printString.
@@ -428,6 +427,6 @@ MASlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 { #category : #visiting }
 MASlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
 	aVariableDeclaration type acceptVisitor:self.
-	stream peekLast = $* ifFalse: [ self << Character space ].
+	"stream peekLast = $* ifFalse: [ "self << Character space" ]".
 	aVariableDeclaration id acceptVisitor:self.
 ]
