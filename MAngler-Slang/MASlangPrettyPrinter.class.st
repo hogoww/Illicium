@@ -173,6 +173,11 @@ MASlangPrettyPrinter >> printNodeInMultilineComment: aNode [
 		<< ' */'
 ]
 
+{ #category : #accessor }
+MASlangPrettyPrinter >> stream: aStream [
+	stream := aStream
+]
+
 { #category : #visiting }
 MASlangPrettyPrinter >> visitAddressOfOperator: anAddressOfOperatorNode [
 	"systematique use of parenthesis"
