@@ -23,22 +23,6 @@ FAClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
 	^ aCompilationUnit
 ]
 
-{ #category : #translation }
-FAClassTranslator >> addTranslatedMethod: aFuncDef to: aCompilationUnit [
-	aCompilationUnit addDefinition: aFuncDef.
-	aCompilationUnit addDeclaration: aFuncDef declaration.
-	^ aCompilationUnit
-]
-
-{ #category : #translation }
-FAClassTranslator >> addTranslatedMethods: functionDefinitions to: aCompilationUnit [
-	functionDefinitions
-		do: [ :aFuncDef | 
-			self addTranslatedMethod: aFuncDef to: aCompilationUnit
-		].
-	^ aCompilationUnit
-]
-
 { #category : #configuration }
 FAClassTranslator >> beStrict [
 	isStrict := true
@@ -47,6 +31,11 @@ FAClassTranslator >> beStrict [
 { #category : #accessing }
 FAClassTranslator >> doNotGeneratePragma [
 	^ IlliciumVirtualMachineAPI doNotGeneratePragma
+]
+
+{ #category : #'translation-api' }
+FAClassTranslator >> getMethod: aSelector [
+	^ program methodNamed: aSelector
 ]
 
 { #category : #accessing }
@@ -173,21 +162,29 @@ FAClassTranslator >> translateClassState: aClass [
 ]
 
 { #category : #'translation-api' }
-FAClassTranslator >> translateMethod: aCompiledMethod [
-	^self translateMethod: aCompiledMethod selector fromClass: aCompiledMethod methodClass
+FAClassTranslator >> translateMethod: aMethodNode [
+	| cu functionDefinition |
+	cu := ASTCCompilationUnit new.
+	functionDefinition := self translateMethodNode: aMethodNode.
+	cu add: functionDefinition.
+	
+	
+	aMethodNode methodClass allInstVarNames ifEmpty:[ ^ cu ].
+	cu add: (self translateClassState: aMethodNode methodClass).
+	"	self postTranslationVisitsFor: cu. should be on the method translator."
+	^ cu
 ]
 
 { #category : #'translation-api' }
 FAClassTranslator >> translateMethod: aSelector fromClass: aClass [
-	| methodsASTs functionDefinitionsASTs  |
-	methodsASTs := self
-		prepareForTranslationFromSelector: aSelector
-		fromClass: aClass.
-	functionDefinitionsASTs := self
-		translateMethodsASTs: methodsASTs
-		fromClass: aClass.
-		
-	functionDefinitionsASTs size = 1 
+	| methodsNode functionDefinitionNode |
+	
+	self prepareProgram.
+	methodsNode := self getMethod: aSelector. "Only one selector occurence per program currently"
+	functionDefinitionNode := self translateMethodNode: methodsNode.
+	^ functionDefinitionNode
+	
+	"functionDefinitionsASTs size = 1 
 		ifTrue: [
 			aClass allInstVarNames 
 				ifEmpty:[ ^ functionDefinitionsASTs anyOne ]
@@ -197,7 +194,6 @@ FAClassTranslator >> translateMethod: aSelector fromClass: aClass [
 					self addState: stateStuff to: cu.
 					self addTranslatedMethods: functionDefinitionsASTs to: cu.
 					self postTranslationVisitsFor: cu.
-					cu debugASTCStructure.
 					^ cu
 					]
 			].
@@ -205,45 +201,16 @@ FAClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	self error: 'Not planned currently, please report it.'
 		 
 	
-	
+	"
 ]
 
-{ #category : #translation }
-FAClassTranslator >> translateMethodsASTs: methodsAST [
-	^ methodsAST
-		collect: [ :aMethodAST |
-			self preTranslationAnnotators do:[:aVisitor| aMethodAST acceptVisitor: aVisitor ].
-			methodTranslator translateMethodAST: aMethodAST ]
-		
-	
-]
-
-{ #category : #translation }
-FAClassTranslator >> translateMethodsASTs: methodsAST fromClass: aClass [
-	"overrides the previous one to remove the hook for pre translation. 
-	Should probably disapear, but that's work for another day"
-	| res |
-	res := methodsAST
-		collect: [ :aMethodAST |
-			
-			methodTranslator translateMethodAST: aMethodAST
-		].
-	^ res
+{ #category : #'translation-api' }
+FAClassTranslator >> translateMethodNode: aMethodNode [
+	^ methodTranslator translateMethod: aMethodNode
 ]
 
 { #category : #typing }
 FAClassTranslator >> typeAnnotatorClass [
 	" This should return the class used to annotate types on RB ASTs"
 	^ self subclassResponsibility 
-]
-
-{ #category : #typing }
-FAClassTranslator >> typeInferenceEntryPoints: aClass [
-	| methods |
-	methods := OrderedCollection new.
-	aClass methodDict
-		do: [ :aMethod | 
-			(aMethod ast arguments isEmpty and: [(aMethod hasPragmaNamed: #doNotGenerate) not])
-				ifTrue: [ methods add: aMethod ast copy ] ].
-	^ methods
 ]

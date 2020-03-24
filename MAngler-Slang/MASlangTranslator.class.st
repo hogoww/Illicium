@@ -38,6 +38,17 @@ MASlangTranslator class >> shouldITranslate: aMethod [
 							methodNamed: aMethod selector) isNotNil ]"]]]]
 ]
 
+{ #category : #'translation-api' }
+MASlangTranslator >> generateVM [
+	"Shortcut, since the VM is the base program for this translator"
+	^ FANewFilePrinter new
+		fileName: 'vm';
+		compilationUnit: self translateProgram;
+		prettyPrinter: self class prettyPrinterClass new;
+		printInFile;
+		yourself
+]
+
 { #category : #initialization }
 MASlangTranslator >> getReplacementType: aSymbol [
 	^ (MASlangReceiver new type: aSymbol) asConstraint
