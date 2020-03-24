@@ -41,7 +41,6 @@ IlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 IlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [
 	| methodsASTs methodsToTranslate |
 	self preTranslationConstraintCheck: aClass.
-	self preTypeInference: aClass.
 	self callgraphTypeStartingFrom: {(aClass >> aSelector) ast}.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.
 	methodsASTs := self prepareMethodsASTs: methodsToTranslate.
@@ -51,7 +50,6 @@ IlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector fromClas
 { #category : #'translation-api' }
 IlliciumClassTranslator >> translateClass: aClass [ 
 	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu stateStuff |
-	self preTypeInference: aClass.
 	entryPoints := self typeInferenceEntryPoints: aClass.
 	self callgraphTypeStartingFrom: entryPoints.
 	methodsToTranslate := self methodsToTranslateASTs: aClass.

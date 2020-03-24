@@ -118,6 +118,17 @@ FAMethodTranslator >> methodNodeTranslator: aMethodNodeTranslator [
 	 translators at: #methodNodeTranslator put: (aMethodNodeTranslator methodTranslator: self ; yourself).
 ]
 
+{ #category : #visiting }
+FAMethodTranslator >> postTranslationVisitors [
+	^ classTranslator postTranslationVisitors
+]
+
+{ #category : #visiting }
+FAMethodTranslator >> postTranslationVisitsFor: anASTCNode [ 
+	self postTranslationVisitors do: [ :aVisitor | anASTCNode acceptVisitor: aVisitor ].
+	^ anASTCNode
+]
+
 { #category : #accessing }
 FAMethodTranslator >> program [
 	
@@ -141,7 +152,17 @@ FAMethodTranslator >> temporaryDeclarationNodeTranslator: aTemporaryDeclarationN
 ]
 
 { #category : #visiting }
-FAMethodTranslator >> translateMethodAST: aMethodAST [
+FAMethodTranslator >> translateMethod: aMethodNode [
+	"Method there for readability only."
+	| functionDefinitionNode |
+	functionDefinitionNode := self translateMethodNode: aMethodNode.
+	self postTranslationVisitsFor: functionDefinitionNode.
+	^ functionDefinitionNode
+]
+
+{ #category : #visiting }
+FAMethodTranslator >> translateMethodNode: aMethodAST [
+	"Method there for readability only."
 	^ aMethodAST acceptVisitor: self
 	
 ]

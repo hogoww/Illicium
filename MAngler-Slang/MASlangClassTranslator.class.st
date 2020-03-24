@@ -9,17 +9,6 @@ MASlangClassTranslator class >> isSpecialSelector: aSelector [
 	^ MASlangTranslator isSpecialSelector: aSelector
 ]
 
-{ #category : #'program-configuration' }
-MASlangClassTranslator >> addMethod: aCollection [
-	program addMethod: aCollection
-]
-
-{ #category : #'program-configuration' }
-MASlangClassTranslator >> annotateProgramWith: aClass [
-
-	program prepareWithInferer: self inferer inTranslator: self
-]
-
 { #category : #translation }
 MASlangClassTranslator >> inferer [
 	^ mainTranslator inferer
@@ -33,7 +22,6 @@ MASlangClassTranslator >> initialize [
 	methodTranslator returnNodeTranslator: MASlangReturnNodeTranslator new.
 	methodTranslator temporaryDeclarationNodeTranslator: MASlangTemporaryDeclarationNodesTranslator new.
 	methodTranslator assignmentNodeTranslator: MASlangAssignmentNodeTranslator new.
-	program := MASlangProgram new.
 ]
 
 { #category : #initialization }
@@ -44,25 +32,22 @@ MASlangClassTranslator >> isStatefulCode [
 { #category : #configuration }
 MASlangClassTranslator >> postTranslationVisitors [
 	^ {
-		FAStatementsBecomeExpressions new
+		FAStatementsBecomeExpressions new.
+		"ASTCDebugStructureVisitor new" "currently disabled" 
+		 " debugStructure should be last, to check that everything's working :)"
 	}
-]
-
-{ #category : #'translation-api' }
-MASlangClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [ 
-	| method |
-
-	method := program methodNamed: aSelector.
-	
-	^ { method }
 ]
 
 { #category : #'translation-api' }
 MASlangClassTranslator >> translateClass: aClass [
 	| cu methods |
 	cu := ASTCCompilationUnit new.
-	methods := program methodsFromClass: aClass.
-	methods do: [ :aMethod | cu add: (self translateMethod: aMethod) ].
+
+	methods := self program methodsFromClass: aClass.
+	methods do: [ :aMethod | cu add: (self translateMethodNode: aMethod) ].
+
+	cu add: (self translateClassState: aClass ).
+
 	^ cu
 ]
 

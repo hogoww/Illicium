@@ -118,7 +118,6 @@ FATranslator >> initialize [
 	program := self class programClass new.
 	classTranslator := self class classTranslatorClass new
 		mainTranslator: self;
-		program: program;
 		yourself.
 
 ]

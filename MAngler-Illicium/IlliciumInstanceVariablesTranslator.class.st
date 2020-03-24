@@ -33,10 +33,12 @@ IlliciumInstanceVariablesTranslator >> translateInstanceVariable: anIVName of: a
 
 { #category : #translation }
 IlliciumInstanceVariablesTranslator >> translateInstanceVariablesOf: aClass [
-	| instVar |
+	| instVars cu |
 	self flag:#notGood.
-	instVar := aClass allInstVarNames select:[:aVarName| aVarName ~= #moduleName and:[ aVarName ~= #translatedMethodCache]].
+	instVars := aClass allInstVarNames select:[:aVarName| aVarName ~= #moduleName and:[ aVarName ~= #translatedMethodCache ]].
 	
-	^ instVar collect: [:aVarName|
-		self translateInstanceVariable: aVarName of: aClass ]
+	cu := ASTCCompilationUnit new.
+	instVars do: [:aVarName| cu add: (self translateInstanceVariable: aVarName of: aClass) ].
+	
+	^ cu
 ]

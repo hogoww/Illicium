@@ -11,12 +11,6 @@ Class {
 	#category : #'FAngler-Core-Translation'
 }
 
-{ #category : #'as yet unclassified' }
-FAClassTranslator >> addClass: aClass [ 
-
-	program addClass: aClass
-]
-
 { #category : #'translation-state' }
 FAClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
 	stateStuffStruct do:[:anElem| anElem addToCompilationUnit: aCompilationUnit ].
@@ -35,7 +29,7 @@ FAClassTranslator >> doNotGeneratePragma [
 
 { #category : #'translation-api' }
 FAClassTranslator >> getMethod: aSelector [
-	^ program methodNamed: aSelector
+	^ mainTranslator methodNamed: aSelector
 ]
 
 { #category : #accessing }
@@ -87,36 +81,14 @@ FAClassTranslator >> methodTranslator: aMethodTranslator [
 ]
 
 { #category : #finishing }
-FAClassTranslator >> postTranslationVisitsFor: anASTCNode [ 
-	self postTranslationVisitors do: [ :aVisitor | anASTCNode acceptVisitor: aVisitor ].
-	^ anASTCNode
-]
-
-{ #category : #'translation-api' }
-FAClassTranslator >> preTranslationConstraintCheck: aClass [
-	"empty hook"
-]
-
-{ #category : #typing }
-FAClassTranslator >> preTypeInference: aClass [
-	"empty hook"
-]
-
-{ #category : #'translation-api' }
-FAClassTranslator >> prepareForTranslationFromSelector: aSelector fromClass: aClass [
-	
-	self subclassResponsibility
+FAClassTranslator >> postTranslationVisitors [
+	"should return an array of visitors (that should not be run concurently, for now)"
+	^ self subclassResponsibility
 ]
 
 { #category : #typing }
 FAClassTranslator >> program [
-	^ program
-]
-
-{ #category : #typing }
-FAClassTranslator >> program: aProgram [
-
-	program := aProgram
+	^ mainTranslator program
 ]
 
 { #category : #'translation-state' }
@@ -141,22 +113,24 @@ FAClassTranslator >> stateTranslator: aDictionary [
 
 { #category : #'translation-state' }
 FAClassTranslator >> translateClassState: aClass [
-	| varDeclaration struct |
+	| varDeclaration struct cu stateDeclaration |
+	cu := ASTCCompilationUnit new.
+	aClass allInstVarNames ifEmpty:[ ^ cu ].
+	
 	varDeclaration := (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass.
 	
-	^ self isStatefulCode ifTrue:[ 
-		| stateDeclaration |
-		struct := ASTCStructureDefinition new.
-		varDeclaration do: [ :aVarDecl | struct addMember: aVarDecl ].
-		struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
-		
-		stateDeclaration := ASTCVariableDeclaration new 
-			type: (ASTCType new type: aClass; yourself) ; 
-			id: self stateId;
-			yourself.
-			{ struct. stateDeclaration }
-		]
-	ifFalse:[ varDeclaration ].
+	self isStatefulCode ifFalse:[ ^ varDeclaration ].
+	
+	struct := ASTCStructureDefinition new.
+	varDeclaration declarations do: [ :aVarDecl | struct addMember: aVarDecl ].
+	struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
+	stateDeclaration := ASTCVariableDeclaration new 
+		type: (ASTCType new type: aClass; yourself) ; 
+		id: self stateId;
+		yourself.
+
+	cu add: struct.
+	cu add: stateDeclaration.
 	
 
 ]
@@ -168,10 +142,8 @@ FAClassTranslator >> translateMethod: aMethodNode [
 	functionDefinition := self translateMethodNode: aMethodNode.
 	cu add: functionDefinition.
 	
-	
-	aMethodNode methodClass allInstVarNames ifEmpty:[ ^ cu ].
 	cu add: (self translateClassState: aMethodNode methodClass).
-	"	self postTranslationVisitsFor: cu. should be on the method translator."
+	
 	^ cu
 ]
 
@@ -179,6 +151,8 @@ FAClassTranslator >> translateMethod: aMethodNode [
 FAClassTranslator >> translateMethod: aSelector fromClass: aClass [
 	| methodsNode functionDefinitionNode |
 	
+	self halt. 
+	self deprecated: #translateMethod:. 
 	self prepareProgram.
 	methodsNode := self getMethod: aSelector. "Only one selector occurence per program currently"
 	functionDefinitionNode := self translateMethodNode: methodsNode.

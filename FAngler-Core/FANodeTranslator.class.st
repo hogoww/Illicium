@@ -24,5 +24,6 @@ FANodeTranslator >> stateName [
 
 { #category : #translate }
 FANodeTranslator >> translateNode: aNode [
-	self subclassResponsibility
+	self flag: #todo. "cornercase on a use of a particular printf use..."
+	^ ASTCLiteral value: #todoArrayNodeTranslation.
 ]

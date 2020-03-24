@@ -1,16 +1,14 @@
 Extension { #name : #ASTCCompilationUnit }
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCCompilationUnit >> add: aDefinitionOrCompilationUnit [
+ASTCCompilationUnit >> add: aNode [
 	"convinience method for when adding both definition and declaration, from a definition"
-	aDefinitionOrCompilationUnit isCompilationUnit
-		ifTrue:[
-			self addCompilationUnit: aDefinitionOrCompilationUnit
-			]
-		ifFalse:[
-			self addDefinitionAndDeclaration: aDefinitionOrCompilationUnit
-			].
-
+	aNode isCompilationUnit ifTrue:[ ^ self addCompilationUnit: aNode ].
+	aNode isDefinition ifTrue:[ ^ self addDefinitionAndDeclaration: aNode ].
+	aNode isDeclaration ifTrue:[ ^ self addDeclaration: aNode  ].
+	
+	"type error"
+	self error: 'I don''t know how to add other kind of elements to myself' .
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
