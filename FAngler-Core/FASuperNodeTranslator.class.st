@@ -6,5 +6,6 @@ Class {
 
 { #category : #translate }
 FASuperNodeTranslator >> translateNode: aNode [
-	self error: 'super is not supported'
+	"Currently, supers are inlined by default. Therefore this should never happen on VM translation."
+	^ UnsupportedFeature new feature: 'super is not supported to be translated'; signal.
 ]

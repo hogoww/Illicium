@@ -266,6 +266,7 @@ FAMethodTranslator >> visitSequenceNode: aSequenceNode [
 { #category : #visiting }
 FAMethodTranslator >> visitSuperNode: aSuperNode [
 	^ (translators at: #superNodeTranslator)
+		translateNode: aSuperNode
 ]
 
 { #category : #visiting }
