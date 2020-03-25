@@ -313,6 +313,16 @@ FAPrettyPrint >> visitLiteral: aLiteral [
 	aLiteral value isString ifTrue:[ self << '"' ].
 ]
 
+{ #category : #indentation }
+FAPrettyPrint >> visitPreProcessorDefine: aPreProcessorDefine [
+	self 	<< ##define;
+		space;
+		print: aPreProcessorDefine name;
+		space;
+		print: aPreProcessorDefine value.
+		 
+]
+
 { #category : #visiting }
 FAPrettyPrint >> visitReturn: aReturn [
 	self << 'return '.

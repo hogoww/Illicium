@@ -118,6 +118,19 @@ FAPrettyPrintTest >> testVisitInequalityOperator [
 ]
 
 { #category : #tests }
+FAPrettyPrintTest >> testVisitPreProcessorDefine [
+	| defineMacro |
+	defineMacro := ASTCPreProcessorDefine new
+		name: (ASTCIdentifier new id: #DRUSS; yourself);
+		value: (ASTCLiteral new value: 'awesome'; yourself);
+		yourself.
+
+	defineMacro debugASTCStructure.
+	self assert: defineMacro isPreProcessorDefine.
+	self assert: (defineMacro prettyPrintUsing: FAPrettyPrint new) equals: '#define DRUSS "awesome"'.
+]
+
+{ #category : #tests }
 FAPrettyPrintTest >> testVisitStructureDeclaration [
 	| structure |
 	structure := ASTCStructureDeclaration new id:(ASTCIdentifier new id: #a; yourself); yourself.
