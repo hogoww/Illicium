@@ -7,7 +7,7 @@ Class {
 	#category : #'FAngler-Core-StateTranslation'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #translation }
 FAAbstractSlotTranslator >> translateSlot: aSlot [
 	"this should return a C translation of the Slot"
 	^ self subclassResponsibility

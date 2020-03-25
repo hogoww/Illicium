@@ -7,7 +7,7 @@ Class {
 	#category : #'FAngler-Core-StateTranslation'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 FAClassStateTranslator >> initialize [
 	translators := Dictionary new: 2;
 		at: #instanceVariableSlotTranslator put: (FAInstanceVariableSlotTranslator new translator: self; yourself);
@@ -15,19 +15,19 @@ FAClassStateTranslator >> initialize [
 		yourself.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-slot' }
 FAClassStateTranslator >> translateClassVariableSlot: anClassVariableSlot [
 	^ (translators at: #classVariableSlotTranslator) 
 		translateSlot: anClassVariableSlot
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-slot' }
 FAClassStateTranslator >> translateInstanceVariableSlot: anInstanceVariableSlot [
 	^ (translators at: #instanceVariableSlotTranslator) 
 		translateSlot: anInstanceVariableSlot
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
 FAClassStateTranslator >> translateStateOf: aClass [
 	| cu |
 	"not sure SharedPoolVariables are are considered in slang"	

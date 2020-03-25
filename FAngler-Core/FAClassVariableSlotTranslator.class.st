@@ -4,7 +4,7 @@ Class {
 	#category : #'FAngler-Core-StateTranslation'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #translation }
 FAClassVariableSlotTranslator >> translateSlot: aSlot [
 	^ ASTCPreprocessorDefine new
 		name: aSlot name;
