@@ -1,5 +1,5 @@
 Class {
-	#name : #FANodeTranslator,
+	#name : #FAAbstarctNodeTranslator,
 	#superclass : #Object,
 	#instVars : [
 		'methodTranslator'
@@ -8,22 +8,22 @@ Class {
 }
 
 { #category : #translate }
-FANodeTranslator >> methodTranslator [
+FAAbstarctNodeTranslator >> methodTranslator [
 	^ methodTranslator
 ]
 
 { #category : #translate }
-FANodeTranslator >> methodTranslator: aMethodTranslator [
+FAAbstarctNodeTranslator >> methodTranslator: aMethodTranslator [
 	methodTranslator := aMethodTranslator
 ]
 
 { #category : #'as yet unclassified' }
-FANodeTranslator >> stateName [
+FAAbstarctNodeTranslator >> stateName [
 	^ methodTranslator stateName
 ]
 
 { #category : #translate }
-FANodeTranslator >> translateNode: aNode [
+FAAbstarctNodeTranslator >> translateNode: aNode [
 	self flag: #todo. "cornercase on a use of a particular printf use..."
 	^ ASTCLiteral value: #todoArrayNodeTranslation.
 ]
