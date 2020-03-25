@@ -312,7 +312,10 @@ MASlangPrettyPrinter >> visitFunctionDeclaration: aFunctionDeclaration [
   self printDeclarationQualifiers: aFunctionDeclaration qualifiers.
   self printDeclarationReturnType: aFunctionDeclaration type.
 
-  self << Character cr.
+  "Swith next two lines to match more slang stuff. But it's not great for declarations"
+ "self << Character cr. "
+  self space.
+
   aFunctionDeclaration id acceptVisitor: self.
   self << $(.
   aFunctionDeclaration parameters ifEmpty: [ stream << #void ] ifNotEmpty: [:params |  params do: [:each |  each acceptVisitor: self ] separatedBy: [ self << ', ' ] ].
