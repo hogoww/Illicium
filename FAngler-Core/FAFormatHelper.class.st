@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'classTranslator'
 	],
-	#category : #'FAngler-Core-State-translator'
+	#category : #'FAngler-Core-Utility'
 }
 
 { #category : #formatting }
