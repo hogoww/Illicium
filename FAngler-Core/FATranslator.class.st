@@ -208,6 +208,6 @@ FATranslator >> translateProgram [
 	self prepareProgram.
 	
 	cu := ASTCCompilationUnit new.
-	program classes do: [ :aClass | cu add: (self translateClass: aClass) ].
+	program classes collect: [ :aClass | self translateClass: aClass ] into: cu.
 	^ cu
 ]

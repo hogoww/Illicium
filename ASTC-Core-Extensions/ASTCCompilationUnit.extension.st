@@ -23,3 +23,10 @@ ASTCCompilationUnit >> addDefinitionAndDeclaration: aDefinition [
 	self addDefinition: aDefinition.
 	self addDeclaration: aDefinition declaration.
 ]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCCompilationUnit >> fillFrom: aCollection with: aBlock [
+	"same method as Collection >> #fillFrom:with:"
+	"enables the use of collect."
+	aCollection do: [ :each | self add: (aBlock value: each) ]
+]

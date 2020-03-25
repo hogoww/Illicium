@@ -127,7 +127,7 @@ FAClassTranslator >> translateClassMethods: aClass [
 	| cu methods |
 	cu := ASTCCompilationUnit new.
 	methods := self program methodsFromClass: aClass.
-	methods do: [ :aMethod | cu add: (self translateMethodNode: aMethod) ].
+	methods collect: [ :aMethod | self translateMethodNode: aMethod ] into: cu.
 	^ cu 
 ]
 
