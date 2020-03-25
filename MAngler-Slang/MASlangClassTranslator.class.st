@@ -38,19 +38,6 @@ MASlangClassTranslator >> postTranslationVisitors [
 	}
 ]
 
-{ #category : #'translation-api' }
-MASlangClassTranslator >> translateClass: aClass [
-	| cu methods |
-	cu := ASTCCompilationUnit new.
-
-	methods := self program methodsFromClass: aClass.
-	methods do: [ :aMethod | cu add: (self translateMethodNode: aMethod) ].
-
-	cu add: (self translateClassState: aClass ).
-
-	^ cu
-]
-
 { #category : #typing }
 MASlangClassTranslator >> typeAnnotatorClass [
 	^ MASlangTypeAnnotator

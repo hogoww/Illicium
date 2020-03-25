@@ -111,6 +111,26 @@ FAClassTranslator >> stateTranslator: aDictionary [
 	stateTranslator := aDictionary
 ]
 
+{ #category : #'translation-api' }
+FAClassTranslator >> translateClass: aClass [
+	| cu |
+	cu := ASTCCompilationUnit new.
+
+	cu add: (self translateClassMethods: aClass).
+	cu add: (self translateClassState: aClass ).
+
+	^ cu
+]
+
+{ #category : #'translation-api' }
+FAClassTranslator >> translateClassMethods: aClass [ 
+	| cu methods |
+	cu := ASTCCompilationUnit new.
+	methods := self program methodsFromClass: aClass.
+	methods do: [ :aMethod | cu add: (self translateMethodNode: aMethod) ].
+	^ cu 
+]
+
 { #category : #'translation-state' }
 FAClassTranslator >> translateClassState: aClass [
 	| varDeclaration struct cu stateDeclaration |
