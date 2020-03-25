@@ -1,5 +1,5 @@
 Class {
-	#name : #ASTCPreProcessorDefine,
+	#name : #ASTCPreprocessorDefine,
 	#superclass : #ASTCNode,
 	#instVars : [
 		'name',
@@ -9,44 +9,44 @@ Class {
 }
 
 { #category : #testing }
-ASTCPreProcessorDefine >> = aPreProcessorDefine [
-	super = aPreProcessorDefine
+ASTCPreprocessorDefine >> = aPreprocessorDefine [
+	super = aPreprocessorDefine
 		ifFalse: [ ^ false ].
-	name = aPreProcessorDefine name
+	name = aPreprocessorDefine name
 		ifFalse: [ ^ false ].
-	value = aPreProcessorDefine value
+	value = aPreprocessorDefine value
 		ifFalse: [ ^ false ].
 	^ true
 ]
 
 { #category : #visiting }
-ASTCPreProcessorDefine >> acceptVisitor: aVisitor [
-	aVisitor visitPreProcessorDefine: self
+ASTCPreprocessorDefine >> acceptVisitor: aVisitor [
+	aVisitor visitPreprocessorDefine: self
 ]
 
 { #category : #testing }
-ASTCPreProcessorDefine >> isPreProcessorDefine [
+ASTCPreprocessorDefine >> isPreprocessorDefine [
 	^ true
 ]
 
 { #category : #accessing }
-ASTCPreProcessorDefine >> name [
+ASTCPreprocessorDefine >> name [
 	^ name
 ]
 
 { #category : #accessing }
-ASTCPreProcessorDefine >> name: aName [
+ASTCPreprocessorDefine >> name: aName [
 	aName ifNotNil: [ aName parent: self ].
 	name := aName
 ]
 
 { #category : #accessing }
-ASTCPreProcessorDefine >> value [
+ASTCPreprocessorDefine >> value [
 	^ value
 ]
 
 { #category : #accessing }
-ASTCPreProcessorDefine >> value: aValue [
+ASTCPreprocessorDefine >> value: aValue [
 	aValue ifNotNil: [ aValue parent: self ].
 	value := aValue
 ]

@@ -373,8 +373,8 @@ ASTCStructureValidatorVisitor >> visitPreIncrementOperator: aPreIncrementOperato
 ]
 
 { #category : #visiting }
-ASTCStructureValidatorVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
-	[ super visitPreProcessorDefine: aPreProcessorDefine ]
+ASTCStructureValidatorVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
+	[ super visitPreprocessorDefine: aPreprocessorDefine ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]

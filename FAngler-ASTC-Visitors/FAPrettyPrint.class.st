@@ -314,13 +314,12 @@ FAPrettyPrint >> visitLiteral: aLiteral [
 ]
 
 { #category : #indentation }
-FAPrettyPrint >> visitPreProcessorDefine: aPreProcessorDefine [
-	self 	<< ##define;
+FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
+	self 	<< #'#define';
 		space;
 		print: aPreProcessorDefine name;
 		space;
 		print: aPreProcessorDefine value.
-		 
 ]
 
 { #category : #visiting }

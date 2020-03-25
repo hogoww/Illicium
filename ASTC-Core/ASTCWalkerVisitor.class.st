@@ -301,11 +301,11 @@ ASTCWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
-	super visitPreProcessorDefine: aPreProcessorDefine.
-	aPreProcessorDefine name
+ASTCWalkerVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
+	super visitPreprocessorDefine: aPreprocessorDefine.
+	aPreprocessorDefine name
 		ifNotNil: [ :aName | aName acceptVisitor: self ].
-	aPreProcessorDefine value
+	aPreprocessorDefine value
 		ifNotNil: [ :aValue | aValue acceptVisitor: self ]
 ]
 

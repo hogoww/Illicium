@@ -275,7 +275,7 @@ ASTCNode >> isPreIncrementOperator [
 ]
 
 { #category : #testing }
-ASTCNode >> isPreProcessorDefine [
+ASTCNode >> isPreprocessorDefine [
 	^ false
 ]
 

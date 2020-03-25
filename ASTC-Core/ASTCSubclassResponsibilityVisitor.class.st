@@ -255,7 +255,7 @@ ASTCSubclassResponsibilityVisitor >> visitPreIncrementOperator: aPreIncrementOpe
 ]
 
 { #category : #visiting }
-ASTCSubclassResponsibilityVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+ASTCSubclassResponsibilityVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
 	self subclassResponsibility
 ]
 

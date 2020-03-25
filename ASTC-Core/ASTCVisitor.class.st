@@ -255,7 +255,7 @@ ASTCVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+ASTCVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
 	
 ]
 

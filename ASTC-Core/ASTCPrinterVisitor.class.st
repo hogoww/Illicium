@@ -741,15 +741,15 @@ ASTCPrinterVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+ASTCPrinterVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream
 		<< $(;
-		<< 'aPreProcessorDefine';
+		<< 'aPreprocessorDefine';
 		space.
 	currentDepth := currentDepth + 1.
-	super visitPreProcessorDefine: aPreProcessorDefine.
+	super visitPreprocessorDefine: aPreprocessorDefine.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]

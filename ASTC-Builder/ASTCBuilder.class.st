@@ -184,7 +184,7 @@ ASTCBuilder >> defineClasses [
 
 		"preprocessor"
 		preprocessorIf := builder newClassNamed: #PreprocessorIf.
-		preprocessorDefine := builder newClassNamed: #PreProcessorDefine.
+		preprocessorDefine := builder newClassNamed: #PreprocessorDefine.
 ]
 
 { #category : #definition }
@@ -408,7 +408,7 @@ ASTCBuilder >> defineRelations [
 	(preprocessorIf property: #then) <>-* (node property: #preProssorIfThen).
 	(preprocessorIf property: #else) <>-* (node property: #preProssorIfElse).
 	
-	(preprocessorDefine property: #name) <>- (literal property: #preProcessorDefineName).
+	(preprocessorDefine property: #name) <>- (identifier property: #preProcessorDefineName).
 	(preprocessorDefine property: #value) <>- (literal property: #preProcessorDefineValue).
 
 	(declaration property: #id) <>-(identifier property: #id).

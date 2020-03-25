@@ -304,9 +304,9 @@ ASTCHierarchyWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
-ASTCHierarchyWalkerVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
-	super visitPreProcessorDefine: aPreProcessorDefine.
-	^ self visitNode: aPreProcessorDefine
+ASTCHierarchyWalkerVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
+	super visitPreprocessorDefine: aPreprocessorDefine.
+	^ self visitNode: aPreprocessorDefine
 ]
 
 { #category : #visiting }

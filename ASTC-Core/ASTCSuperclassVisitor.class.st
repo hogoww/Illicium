@@ -255,8 +255,8 @@ ASTCSuperclassVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 ]
 
 { #category : #visiting }
-ASTCSuperclassVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
-	^ self visitNode: aPreProcessorDefine
+ASTCSuperclassVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
+	^ self visitNode: aPreprocessorDefine
 ]
 
 { #category : #visiting }
