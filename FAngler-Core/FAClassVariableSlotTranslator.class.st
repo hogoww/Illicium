@@ -6,8 +6,8 @@ Class {
 
 { #category : #'as yet unclassified' }
 FAClassVariableSlotTranslator >> translateSlot: aSlot [
-	"^ ASTCMacroDefine new
+	^ ASTCPreprocessorDefine new
 		name: aSlot name;
 		value: aSlot value;
-		yourself"
+		yourself
 ]
