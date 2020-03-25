@@ -141,7 +141,7 @@ FAPrettyPrintTest >> testVisitStructureDefinition [
 	self assert: operator isStructureDefinition.
 	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 
 'struct heros{
-  int druss;
+ int druss;
 };'.
 ]
 
@@ -164,14 +164,14 @@ FAPrettyPrintTest >> testVisitSwitch [
 	self assert: (switch prettyPrintUsing: FAPrettyPrint new) equals: 
 'switch ( 0 )
 {
-  case 1 :
-    {
-      2;
-    }
-  default: 
-    {
-      3;
-    }
+ case 1 :
+  {
+   2;
+  }
+ default: 
+  {
+   3;
+  }
 }'.
 ]
 
@@ -187,9 +187,9 @@ FAPrettyPrintTest >> testVisitSwitchCase [
 	self assert: switchCase isSwitchCase.
 	self assert: (switchCase prettyPrintUsing: FAPrettyPrint new) equals: 
 'case 0 :
-  {
-    1;
-  }'.
+ {
+  1;
+ }'.
 ]
 
 { #category : #tests }
