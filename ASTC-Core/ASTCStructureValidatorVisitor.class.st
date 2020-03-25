@@ -51,9 +51,8 @@ ASTCStructureValidatorVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ASTCStructureValidatorVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
-	[ super
-		visitAssignementAdditionOperator: anAssignementAdditionOperator ]
+ASTCStructureValidatorVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
+	[ super visitAssignmentAdditionOperator: anAssignmentAdditionOperator ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]
@@ -369,6 +368,13 @@ ASTCStructureValidatorVisitor >> visitPreDecrementOperator: aPreDecrementOperato
 { #category : #visiting }
 ASTCStructureValidatorVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 	[ super visitPreIncrementOperator: aPreIncrementOperator ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
+ASTCStructureValidatorVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+	[ super visitPreProcessorDefine: aPreProcessorDefine ]
 		on: AssertionFailure
 		do: [ errors := errors + 1 ]
 ]

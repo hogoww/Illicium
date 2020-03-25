@@ -99,14 +99,15 @@ Class {
 		'rawDeclaration',
 		'bitLeftShiftOperator',
 		'bitRightShiftOperator',
-		'assignementAdditionOperator',
 		'bitwiseXorOperator',
 		'bitwiseOrOperator',
 		'negationOperator',
 		'expressionList',
 		'switch',
 		'switchCase',
-		'bitwiseNotOperator'
+		'bitwiseNotOperator',
+		'preprocessorDefine',
+		'assignmentAdditionOperator'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -180,8 +181,10 @@ ASTCBuilder >> defineClasses [
  
 		"DeclarationStatement Subclass"
 		rawDeclaration := builder newClassNamed: #RawDeclaration.
+
 		"preprocessor"
-		preprocessorIf := builder newClassNamed: #PreprocessorIf
+		preprocessorIf := builder newClassNamed: #PreprocessorIf.
+		preprocessorDefine := builder newClassNamed: #PreProcessorDefine.
 ]
 
 { #category : #definition }
@@ -194,6 +197,7 @@ ASTCBuilder >> defineHierarchy [
 	
 	"preprocessor"
 	preprocessorIf --|> expression "not sure about this..".
+	preprocessorDefine --|> node.
 
 		"Node Direct SubClasses"
 		functionDefinition  --|> node.
@@ -280,7 +284,7 @@ ASTCBuilder >> defineOperatorClasses [
 	addressOfOperator := builder newClassNamed: #AddressOfOperator.
 	bitLeftShiftOperator := builder newClassNamed: #BitLeftShiftOperator.
 	bitRightShiftOperator := builder newClassNamed: #BitRightShiftOperator.
-	assignementAdditionOperator := builder newClassNamed: #AssignementAdditionOperator.
+	assignmentAdditionOperator := builder newClassNamed: #AssignmentAdditionOperator.
 	bitwiseXorOperator := builder newClassNamed: #BitwiseXorOperator.
 	bitwiseOrOperator := builder newClassNamed: #BitwiseOrOperator.
 	bitwiseNotOperator := builder newClassNamed: #BitwiseNotOperator.
@@ -353,7 +357,7 @@ ASTCBuilder >> defineOperatorsHierarchy [
 	
 	"priority 14, #right"
 	assignementOperator --|> binaryOperator." a = b "
-	assignementAdditionOperator --|> binaryOperator." a += b"
+	assignmentAdditionOperator --|> binaryOperator." a += b"
 	
 ]
 
@@ -403,7 +407,9 @@ ASTCBuilder >> defineRelations [
 	(preprocessorIf property: #condition) <>- (expression property: #preProssorIfCond).
 	(preprocessorIf property: #then) <>-* (node property: #preProssorIfThen).
 	(preprocessorIf property: #else) <>-* (node property: #preProssorIfElse).
-
+	
+	(preprocessorDefine property: #name) <>- (literal property: #preProcessorDefineName).
+	(preprocessorDefine property: #value) <>- (literal property: #preProcessorDefineValue).
 
 	(declaration property: #id) <>-(identifier property: #id).
 	(definition property: #declaration) <>- (declaration property: #definition).

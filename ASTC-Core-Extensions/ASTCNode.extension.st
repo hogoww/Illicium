@@ -140,7 +140,7 @@ ASTCNode >> assign: anExpression [
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCNode >> assignAndAdd: anExpression [
-	^ ASTCAssignementAdditionOperator new
+	^ ASTCAssignmentAdditionOperator new
 		leftOperand: self;
 		rightOperand: anExpression;
 		yourself 

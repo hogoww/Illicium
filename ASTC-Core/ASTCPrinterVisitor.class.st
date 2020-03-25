@@ -93,15 +93,15 @@ ASTCPrinterVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ASTCPrinterVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+ASTCPrinterVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
 	stream cr.
 	self printTabCount: currentDepth.
 	stream
 		<< $(;
-		<< 'anAssignementAdditionOperator';
+		<< 'anAssignmentAdditionOperator';
 		space.
 	currentDepth := currentDepth + 1.
-	super visitAssignementAdditionOperator: anAssignementAdditionOperator.
+	super visitAssignmentAdditionOperator: anAssignmentAdditionOperator.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]
@@ -736,6 +736,20 @@ ASTCPrinterVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 		space.
 	currentDepth := currentDepth + 1.
 	super visitPreIncrementOperator: aPreIncrementOperator.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
+ASTCPrinterVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aPreProcessorDefine';
+		space.
+	currentDepth := currentDepth + 1.
+	super visitPreProcessorDefine: aPreProcessorDefine.
 	currentDepth := currentDepth - 1.
 	stream << ')'
 ]

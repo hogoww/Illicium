@@ -45,7 +45,7 @@ ASTCNode >> isAndOperator [
 ]
 
 { #category : #testing }
-ASTCNode >> isAssignementAdditionOperator [
+ASTCNode >> isAssignmentAdditionOperator [
 	^ false
 ]
 
@@ -271,6 +271,11 @@ ASTCNode >> isPreDecrementOperator [
 
 { #category : #testing }
 ASTCNode >> isPreIncrementOperator [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isPreProcessorDefine [
 	^ false
 ]
 

@@ -140,6 +140,15 @@ ASTCDebugStructureVisitor >> visitNode: aNode [
 ]
 
 { #category : #visiting }
+ASTCDebugStructureVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+	super visitPreProcessorDefine: aPreProcessorDefine.
+	aPreProcessorDefine name
+		ifNotNil: [ :aName | self assert: aName isLiteral ].
+	aPreProcessorDefine value
+		ifNotNil: [ :aValue | self assert: aValue isLiteral ]
+]
+
+{ #category : #visiting }
 ASTCDebugStructureVisitor >> visitPreprocessorIf: aPreprocessorIf [
 	super visitPreprocessorIf: aPreprocessorIf.
 	aPreprocessorIf then

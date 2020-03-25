@@ -25,7 +25,7 @@ ASTCSubclassResponsibilityVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ASTCSubclassResponsibilityVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+ASTCSubclassResponsibilityVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
 	self subclassResponsibility
 ]
 
@@ -251,6 +251,11 @@ ASTCSubclassResponsibilityVisitor >> visitPreDecrementOperator: aPreDecrementOpe
 
 { #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
 	self subclassResponsibility
 ]
 

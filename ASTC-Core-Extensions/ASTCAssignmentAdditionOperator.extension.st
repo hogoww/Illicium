@@ -1,7 +1,7 @@
-Extension { #name : #ASTCAssignementAdditionOperator }
+Extension { #name : #ASTCAssignmentAdditionOperator }
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCAssignementAdditionOperator class >> associativity [
+ASTCAssignmentAdditionOperator class >> associativity [
 	"protocol: meta-data"
 	
 	"returns #left or #right.
@@ -11,7 +11,7 @@ ASTCAssignementAdditionOperator class >> associativity [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCAssignementAdditionOperator class >> priority [
+ASTCAssignmentAdditionOperator class >> priority [
 	"protocol: meta-data"
 	
 	"returns a number between 1 and 15 based on the ranking on cppreferecence.
@@ -21,7 +21,7 @@ ASTCAssignementAdditionOperator class >> priority [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCAssignementAdditionOperator class >> symbol [
+ASTCAssignmentAdditionOperator class >> symbol [
 	"protocol: printing"
 	
 	^ #+=

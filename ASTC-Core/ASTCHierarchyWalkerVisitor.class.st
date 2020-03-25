@@ -29,9 +29,9 @@ ASTCHierarchyWalkerVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ASTCHierarchyWalkerVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
-	super visitAssignementAdditionOperator: anAssignementAdditionOperator.
-	^ self visitBinaryOperator: anAssignementAdditionOperator
+ASTCHierarchyWalkerVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
+	super visitAssignmentAdditionOperator: anAssignmentAdditionOperator.
+	^ self visitBinaryOperator: anAssignmentAdditionOperator
 ]
 
 { #category : #visiting }
@@ -301,6 +301,12 @@ ASTCHierarchyWalkerVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
 ASTCHierarchyWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 	super visitPreIncrementOperator: aPreIncrementOperator.
 	^ self visitUnaryOperator: aPreIncrementOperator
+]
+
+{ #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+	super visitPreProcessorDefine: aPreProcessorDefine.
+	^ self visitNode: aPreProcessorDefine
 ]
 
 { #category : #visiting }

@@ -25,8 +25,8 @@ ASTCWalkerVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ASTCWalkerVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
-	super visitAssignementAdditionOperator: anAssignementAdditionOperator
+ASTCWalkerVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
+	super visitAssignmentAdditionOperator: anAssignmentAdditionOperator
 ]
 
 { #category : #visiting }
@@ -298,6 +298,15 @@ ASTCWalkerVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 	super visitPreIncrementOperator: aPreIncrementOperator
+]
+
+{ #category : #visiting }
+ASTCWalkerVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+	super visitPreProcessorDefine: aPreProcessorDefine.
+	aPreProcessorDefine name
+		ifNotNil: [ :aName | aName acceptVisitor: self ].
+	aPreProcessorDefine value
+		ifNotNil: [ :aValue | aValue acceptVisitor: self ]
 ]
 
 { #category : #visiting }

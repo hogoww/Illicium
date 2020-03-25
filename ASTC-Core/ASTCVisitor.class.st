@@ -25,7 +25,7 @@ ASTCVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ASTCVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
+ASTCVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
 	
 ]
 
@@ -251,6 +251,11 @@ ASTCVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
 
 { #category : #visiting }
 ASTCVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
+	
+]
+
+{ #category : #visiting }
+ASTCVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
 	
 ]
 

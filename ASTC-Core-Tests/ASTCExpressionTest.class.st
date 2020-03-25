@@ -61,7 +61,7 @@ ASTCExpressionTest >> testAssignAndAdd [
 	operator := (ASTCIdentifier new id: #a) assignAndAdd: (ASTCIdentifier new id: #b).
 	
 	operator debugASTCStructure.
-	self assert: operator isAssignementAdditionOperator.
+	self assert: operator isAssignmentAdditionOperator.
 	
 	node := operator leftOperand.
 	self assert: node isIdentifier.

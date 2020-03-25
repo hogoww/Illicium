@@ -25,8 +25,8 @@ ASTCSuperclassVisitor >> visitAndOperator: anAndOperator [
 ]
 
 { #category : #visiting }
-ASTCSuperclassVisitor >> visitAssignementAdditionOperator: anAssignementAdditionOperator [
-	^ self visitBinaryOperator: anAssignementAdditionOperator
+ASTCSuperclassVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
+	^ self visitBinaryOperator: anAssignmentAdditionOperator
 ]
 
 { #category : #visiting }
@@ -252,6 +252,11 @@ ASTCSuperclassVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
 { #category : #visiting }
 ASTCSuperclassVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
 	^ self visitUnaryOperator: aPreIncrementOperator
+]
+
+{ #category : #visiting }
+ASTCSuperclassVisitor >> visitPreProcessorDefine: aPreProcessorDefine [
+	^ self visitNode: aPreProcessorDefine
 ]
 
 { #category : #visiting }
