@@ -6,7 +6,7 @@ ASTCCompilationUnit >> add: aNode [
 	aNode isCompilationUnit ifTrue:[ ^ self addCompilationUnit: aNode ].
 	aNode isDefinition ifTrue:[ ^ self addDefinitionAndDeclaration: aNode ].
 	aNode isDeclaration ifTrue:[ ^ self addDeclaration: aNode  ].
-	
+	aNode isPreprocessorDefine ifTrue:[ ^ self addPreprocessorMacro: aNode ].
 	"type error"
 	self error: 'I don''t know how to add other kind of elements to myself' .
 ]

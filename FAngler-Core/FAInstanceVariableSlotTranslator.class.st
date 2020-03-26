@@ -7,7 +7,7 @@ Class {
 { #category : #translation }
 FAInstanceVariableSlotTranslator >> translateSlot: aSlot [
 	| ivType |
-	ivType := classTranslator typeOfVariable: aSlot name ofClass: aSlot definingClass.
+	ivType := self typeOfSlot: aSlot.
 
 	^ ASTCVariableDeclaration new
 		id: (ASTCIdentifier new

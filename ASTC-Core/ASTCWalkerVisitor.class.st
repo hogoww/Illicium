@@ -105,7 +105,11 @@ ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
 	aCompilationUnit declarations
 		ifNotNil: [ :declarations | 
 			declarations
-				do: [ :aDeclarations | aDeclarations acceptVisitor: self ] ]
+				do: [ :aDeclarations | aDeclarations acceptVisitor: self ] ].
+	aCompilationUnit preprocessorMacro
+		ifNotNil: [ :preprocessorMacro | 
+			preprocessorMacro
+				do: [ :aPreprocessorMacro | aPreprocessorMacro acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }

@@ -44,9 +44,7 @@ FAClassTranslator >> initialize [
 	methodTranslator := FAMethodTranslator new
 		classTranslator: self;
 		yourself.
-	stateTranslator := Dictionary new
-		at: #instanceVariable put: (IlliciumInstanceVariablesTranslator new classTranslator: self; yourself);
-		yourself
+	stateTranslator := FAClassStateTranslator new classTranslator: self; yourself.
 ]
 
 { #category : #'translation-state' }
@@ -133,26 +131,7 @@ FAClassTranslator >> translateClassMethods: aClass [
 
 { #category : #'translation-state' }
 FAClassTranslator >> translateClassState: aClass [
-	| varDeclaration struct cu stateDeclaration |
-	cu := ASTCCompilationUnit new.
-	aClass allInstVarNames ifEmpty:[ ^ cu ].
-	
-	varDeclaration := (stateTranslator at: #instanceVariable) translateInstanceVariablesOf: aClass.
-	
-	self isStatefulCode ifFalse:[ ^ varDeclaration ].
-	
-	struct := ASTCStructureDefinition new.
-	varDeclaration declarations do: [ :aVarDecl | struct addMember: aVarDecl ].
-	struct declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier new id: aClass name)).
-	stateDeclaration := ASTCVariableDeclaration new 
-		type: (ASTCType new type: aClass; yourself) ; 
-		id: self stateId;
-		yourself.
-
-	cu add: struct.
-	cu add: stateDeclaration.
-	
-
+	^ stateTranslator translateStateOf: aClass
 ]
 
 { #category : #'translation-api' }
@@ -207,4 +186,11 @@ FAClassTranslator >> translateMethodNode: aMethodNode [
 FAClassTranslator >> typeAnnotatorClass [
 	" This should return the class used to annotate types on RB ASTs"
 	^ self subclassResponsibility 
+]
+
+{ #category : #accessing }
+FAClassTranslator >> typeOfSlot: aSlot [
+	"should return the type of aSlot, in the appropriate type format. See implementation for current examples"
+	^ self subclassResponsibility
+	
 ]

@@ -194,20 +194,19 @@ FAPrettyPrint >> visitCastOperator: aCastOperator [
 
 { #category : #visiting }
 FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
+	
+	
+	self << '/* Macros */'.
+	anASTCCompilationUnit preprocessorMacro
+		do:[ :aPreprocessorMacro | self print: aPreprocessorMacro ].
 
 	self << '/* Declarations */' ; cr.
-	anASTCCompilationUnit declarations
-		ifNotNil:[ :declarations | declarations
-			do:[ :aDeclaration | aDeclaration acceptVisitor:self.
-					self << ';' ; cr ]
-		].
+	anASTCCompilationUnit declarations 
+		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
 	
 	self cr ; << '/* Definitions */' ; cr.
 	anASTCCompilationUnit definitions
-		ifNotNil:[ :definitions | definitions
-			do:[ :aDefinition | aDefinition acceptVisitor:self.
-				self cr ; cr ]
-		].
+			do:[ :aDefinition | self print: aDefinition ; cr ; cr ].
 ]
 
 { #category : #visiting }
@@ -318,8 +317,9 @@ FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 	self 	<< #'#define';
 		space;
 		print: aPreProcessorDefine name;
-		space;
-		print: aPreProcessorDefine value.
+		space.
+		
+	aPreProcessorDefine value ifNotNil:[ self print: aPreProcessorDefine value ].
 ]
 
 { #category : #visiting }

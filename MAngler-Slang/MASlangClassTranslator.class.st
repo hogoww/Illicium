@@ -44,6 +44,12 @@ MASlangClassTranslator >> typeAnnotatorClass [
 ]
 
 { #category : #'translation-api' }
+MASlangClassTranslator >> typeOfSlot: aSlot [
+	^ self getReplacementType: (self inferer typeOfVariable: aSlot name)
+]
+
+{ #category : #'translation-api' }
 MASlangClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
+	self deprecated: #useTypeOfSlotInstead.
 	^ self getReplacementType: (self inferer typeOfVariable: anIVName)
 ]

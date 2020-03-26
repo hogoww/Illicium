@@ -7,7 +7,7 @@ Class {
 { #category : #translation }
 FAClassVariableSlotTranslator >> translateSlot: aSlot [
 	^ ASTCPreprocessorDefine new
-		name: aSlot name;
-		value: aSlot value;
+		name: (ASTCIdentifier id: aSlot name);
+		value: (aSlot value ifNotNil: [ ASTCLiteral new value: aSlot value; yourself ]);
 		yourself
 ]

@@ -94,6 +94,7 @@ IlliciumClassTranslator >> typeInferenceEntryPoints: aClass [
 IlliciumClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
 	| phineasType type |
+	self deprecated: #shouldBeImplementedAsTypeofSlot.
 	phineasType := 	phineasType := (self inferer concreteTypesOfInstanceVariable: anIVName ofClass:aClass).
 	type := (IlliciumTypeChecker type: phineasType asPharoType using: self inferer forVar: anIVName).
 	^ self getReplacementType: type

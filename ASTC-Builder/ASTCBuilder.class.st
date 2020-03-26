@@ -402,6 +402,7 @@ ASTCBuilder >> defineRelations [
 	(project property: #compilationUnits) <>-* (compilationUnit property: #project).
 	(compilationUnit property: #definitions) <>-* (definition property: #compilationUnit).
 	(compilationUnit property: #declarations) <>-* (declaration property: #compilationUnit).
+	(compilationUnit property: #preprocessorMacro) <>-* (preprocessorDefine property: #compilationUnit).
 
 	"preprocessor"
 	(preprocessorIf property: #condition) <>- (expression property: #preProssorIfCond).
