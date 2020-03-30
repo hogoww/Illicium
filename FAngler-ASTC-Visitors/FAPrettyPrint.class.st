@@ -195,10 +195,9 @@ FAPrettyPrint >> visitCastOperator: aCastOperator [
 { #category : #visiting }
 FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 	
-	
-	self << '/* Macros */'.
+	self << '/* Macros */' ; cr.
 	anASTCCompilationUnit preprocessorMacro
-		do:[ :aPreprocessorMacro | self print: aPreprocessorMacro ].
+		do:[ :aPreprocessorMacro | self print: aPreprocessorMacro ; cr  ].
 
 	self << '/* Declarations */' ; cr.
 	anASTCCompilationUnit declarations 
