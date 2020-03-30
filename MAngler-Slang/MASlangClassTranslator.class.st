@@ -1,6 +1,9 @@
 Class {
 	#name : #MASlangClassTranslator,
 	#superclass : #FAClassTranslator,
+	#instVars : [
+		'constantsToTranslate'
+	],
 	#category : #'MAngler-Slang-Translation'
 }
 
@@ -36,6 +39,12 @@ MASlangClassTranslator >> postTranslationVisitors [
 		"ASTCDebugStructureVisitor new" "currently disabled" 
 		 " debugStructure should be last, to check that everything's working :)"
 	}
+]
+
+{ #category : #typing }
+MASlangClassTranslator >> shouldTranslateVariable: aVariableNAme [
+	constantsToTranslate ifNil:[ constantsToTranslate := self inferer constantsToTranslate ].
+	^ constantsToTranslate includes: aVariableNAme
 ]
 
 { #category : #typing }

@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #translation }
+FAAbstractSlotTranslator >> shouldTranslateVariable: aVarName [
+	^ stateTranslator shouldTranslateVariable: aVarName
+]
+
+{ #category : #translation }
 FAAbstractSlotTranslator >> stateTranslator [
 	^ stateTranslator
 ]

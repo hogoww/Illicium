@@ -26,6 +26,11 @@ FAClassStateTranslator >> initialize [
 		yourself.
 ]
 
+{ #category : #asserting }
+FAClassStateTranslator >> shouldTranslateVariable: aVarName [
+	^ classTranslator shouldTranslateVariable: aVarName
+]
+
 { #category : #'translation-slot' }
 FAClassStateTranslator >> translateClassVariableSlot: anClassVariableSlot [
 	^ (translators at: #classVariableSlotTranslator) 
@@ -43,10 +48,11 @@ FAClassStateTranslator >> translateStateOf: aClass [
 	| cu |
 	"not sure SharedPoolVariables are are considered in slang"	
 	cu := ASTCCompilationUnit new.	
-
-	aClass allSlots collect: [:aSlot | aSlot acceptTranslator: self ] into: cu.
-	"aClass allClassVariables collect: [:aSlot | aSlot acceptTranslator: self ] into: cu."
-	"aClass allSharedPools collect: [:aSlot | aSlot acceptTranslator: self ] into: cu."
+	
+	"We only translate the current's class slots, since we're treating each class in the hierarchy, and there is no polymorphism. (besides VMclass, will see in time"
+	aClass slots collect: [:aSlot | aSlot acceptTranslator: self ] into: cu.
+	aClass classVariables collect: [:aSlot | aSlot acceptTranslator: self ] into: cu.
+	"aClass sharedPools collect: [:aSlot | aSlot acceptTranslator: self ] into: cu."
 	^ cu
 ]
 
