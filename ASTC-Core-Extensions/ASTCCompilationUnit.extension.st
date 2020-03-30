@@ -3,6 +3,8 @@ Extension { #name : #ASTCCompilationUnit }
 { #category : #'*ASTC-Core-Extensions' }
 ASTCCompilationUnit >> add: aNode [
 	"convinience method for when adding both definition and declaration, from a definition"
+	aNode isEmptyStatement ifTrue: [ ^ self ]. "slightly bad, but this is a way to express that something should not be added..."
+	
 	aNode isCompilationUnit ifTrue:[ ^ self addCompilationUnit: aNode ].
 	aNode isDefinition ifTrue:[ ^ self addDefinitionAndDeclaration: aNode ].
 	aNode isDeclaration ifTrue:[ ^ self addDeclaration: aNode  ].
@@ -15,6 +17,7 @@ ASTCCompilationUnit >> add: aNode [
 ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
 	aCompilationUnit definitions do: [ :aDefinition | self addDefinition: aDefinition ].
 	aCompilationUnit declarations do: [ :aDeclaration | self addDeclaration: aDeclaration ].
+	aCompilationUnit preprocessorMacro do: [ :aPreprocessorMacro | self addPreprocessorMacro: aPreprocessorMacro ]
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
