@@ -10,7 +10,7 @@ Class {
 { #category : #'interpret-function' }
 MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 	| currentByteCodeReferences numberOfDuplication selector replacedNodes mainCopy bytecodeTable |
-	self halt.
+
 	numberOfDuplication := 0.
 	selector := aMethodNode selector.
 	"the number of time a bytecode method should be generated is known in the 256 firsts"
@@ -30,7 +30,8 @@ MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 		aNode replaceWith: replacement.
 		replacement ]." we collect the references of the node we replace, because we will change the values in the next iteration"
 	
-	0 to: numberOfDuplication do: [ :number | "we update both references, although the TAST one does not matter currenlty"
+	
+	0 to: numberOfDuplication - 1 do: [ :number | "we update both references, although the TAST one does not matter currenlty"
 			| copy newName |
 			replacedNodes do: [ :aNode | 
 					aNode value: number.
@@ -42,7 +43,6 @@ MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 			self addMethod: copy withInferer: inferer.
 			bytecodeTable at: (bytecodeTable indexOf: selector) put: newName.
 		].
-	self halt.
 ]
 
 { #category : #adding }
