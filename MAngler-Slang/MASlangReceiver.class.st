@@ -33,7 +33,7 @@ MASlangReceiver >> & anOperand [
 	^ self translatedReceiver & (anOperand acceptVisitor: methodTranslator)
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> * aNumber [
 	"same code as ASTCNumber>>#*"
 	^ self translatedReceiver * (aNumber acceptVisitor: methodTranslator)
@@ -49,25 +49,25 @@ MASlangReceiver >> - anOperand [
 	^ self translatedReceiver - (anOperand acceptVisitor: methodTranslator)
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> / anotherObject [
 	^ self translatedReceiver / (anotherObject acceptVisitor: methodTranslator) 
 		
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> // anInteger [
 	"same as #/ in slang"
 	^ self / anInteger
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> < aNumber [
 	"same as ASTCSmallInteger>>#>"
 	^ self translatedReceiver < (aNumber acceptVisitor: methodTranslator)
 ]
 
-{ #category : #typing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> << aNumber [
 	"Equivalent to Slang's <<.
 	See CCodeGenerator >> #generateShiftLeft:on:indent: for original semantics."
@@ -88,13 +88,13 @@ MASlangReceiver >> << aNumber [
 				castTo: (self cTypeFor: self myType)
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> <= aNumber [
 	"same code as ASTCSmallInteger>>#<="
 	^ self translatedReceiver <= (aNumber acceptVisitor: methodTranslator)
 ]
 
-{ #category : #testing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> = anotherObject [
 	^ self 
 		ifTranslation:
@@ -103,41 +103,41 @@ MASlangReceiver >> = anotherObject [
 			[ ^ super = anotherObject and: [ type = anotherObject type ]]) ]
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-operators' }
 MASlangReceiver >> == anOperand [
 	^ self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator)
 ]
 
-{ #category : #typing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> > aNumber [
 	"same as ASTCSmallInteger>>#>"
 	^ self translatedReceiver > (aNumber acceptVisitor: methodTranslator)
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> >= aNumber [
 	"same as ASTCSmallInteger>>#>="
 	^ self translatedReceiver >= (aNumber acceptVisitor: methodTranslator)
 ]
 
-{ #category : #typing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> >> aNumber [
 	^ (self translatedReceiver castTo: (self cTypeFor: #usqInt)) >> (aNumber acceptVisitor: methodTranslator)
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> >>> shiftAmount [
 	self flag: #badApprox. "see CCodeGenerator >> generateSignedShiftRight:on:indent: "
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> \\ anInteger [
 	"same as #% in slang"
 	^ self & anInteger
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> abs [
 	| strippedType funcName |
 	"Duplicated code from slang."
@@ -165,36 +165,36 @@ MASlangReceiver >> abs [
 
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> addressOf: anExpression [
 	^ (anExpression acceptVisitor: methodTranslator) asAddressOf
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> addressOf: anExpression put: anAssignmentBlock [
 	"Ssecond argument is for simulation purpose, i assume.
 	Regardless, it's ignored during translation"
 	^ self addressOf: anExpression
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> allMask: anOperand [
 	| arg |
 	arg := anOperand acceptVisitor: methodTranslator.
 	^ self translatedReceiver & arg equals: arg
 ]
 
-{ #category : #typing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> and: aBoolean [
 	^ self translatedReceiver && (aBoolean acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> anyMask: anOperand [
 	^ self & anOperand
 ]
 
-{ #category : #accessing }
+{ #category : #typing }
 MASlangReceiver >> asCType [
 	<deprecated>
 	"not sure how this is declared"
@@ -208,47 +208,47 @@ MASlangReceiver >> asConstraint [
 	^ SingleType new type: self; yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> asFloat [
 	^ self translatedReceiver castTo: (self cTypeFor: #double)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> asInteger [
 	^ self translatedReceiver castTo: (self cTypeFor: #sqInt)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> asUnsignedInteger [
 	^ self translatedReceiver castTo: (self cTypeFor: #usqInt)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> asUnsignedIntegerPtr [
 	^ self translatedReceiver castTo: (self cTypeFor: #usqIntptr_t)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> asVoidPointer [
 	^ self translatedReceiver castTo: (self cTypeFor: #'void *')
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> at: anExpression [
 	^ self translatedReceiver indexAt: (anExpression acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> at: anExpression put: aValue [
 	^ (self at: anExpression) assign: (aValue acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> baseHeaderSize [
 	^ ASTCIdentifier new id: #BaseHeaderSize
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> between: min and: max [
 	| receiver minArg maxArg |
 	receiver := self translatedReceiver.
@@ -257,18 +257,18 @@ MASlangReceiver >> between: min and: max [
 	^ (receiver >= minArg) && (receiver <= maxArg)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bitAnd: anInteger [
 	"pretty sure it's an integer"
 	^ self translatedReceiver & (anInteger acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bitClear: aMask [
 	^ (self bitOr: aMask) - (aMask acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bitInvert64 [
 	self flag:#missingCheck. 
 	"I'm assuming i'm always in 64 currently,
@@ -276,13 +276,13 @@ MASlangReceiver >> bitInvert64 [
 	^ self translatedReceiver castTo: (self cTypeFor: #usqIntptr_t).
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bitOr: anInteger [
 	"pretty sure it's an integer"
 	^ self translatedReceiver | (anInteger acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bitShift: anIndex [
 	| translatedArg translatedReceiver |
 	translatedReceiver := self translatedReceiver.
@@ -301,13 +301,13 @@ MASlangReceiver >> bitShift: anIndex [
 		else: (translatedReceiver castTo: (self cTypeFor: #usqInt)) << translatedArg
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bitXor: anInteger [
 	"pretty sure it's an integer"
 	^ self translatedReceiver bitXor: (anInteger acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> byteSwap32 [
 
 	^ ASTCFunctionCall new 
@@ -316,7 +316,7 @@ MASlangReceiver >> byteSwap32 [
 		yourself.
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> byteSwap64 [
 
 	^ ASTCFunctionCall new 
@@ -325,7 +325,7 @@ MASlangReceiver >> byteSwap64 [
 		yourself.
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> byteSwapped32IfBigEndian: anInteger [
 
 	^ ASTCFunctionCall new 
@@ -334,7 +334,7 @@ MASlangReceiver >> byteSwapped32IfBigEndian: anInteger [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> byteSwapped64IfBigEndian: anInteger [
 
 	^ ASTCFunctionCall new 
@@ -343,19 +343,19 @@ MASlangReceiver >> byteSwapped64IfBigEndian: anInteger [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bytesPerOop [
 	"i think ?"
 	^ ASTCIdentifier id: #BytesPerOop
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> bytesPerWord [
 	"i think ?"
 	^ ASTCIdentifier id: #BytesPerWord
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> cCode: aStringOrBlock [
 
 	aStringOrBlock isBlock
@@ -370,7 +370,7 @@ MASlangReceiver >> cCode: aStringOrBlock [
 	"I don't know if there is sometimes other stuff"
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> cCode: aString inSmalltalk: ignoredBlock [
 	^ self cCode: aString
 ]
@@ -382,24 +382,24 @@ MASlangReceiver >> cCoerce: aVariable to: aType [
 		castTo: (self cTypeFor: aType)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> cCoerceSimple: aVariable to: aType [
 	^ self cCoerce: aVariable to: aType
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> cTypeFor: aSymbol [
 	^ ASTCType new 
 		type: (self class new type: aSymbol value ; yourself) asConstraint;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> caseOf: anArrayNode [
 	^ self caseOf: anArrayNode otherwise: nil
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 	| switchNode |
 	switchNode := ASTCSwitch new.
@@ -426,12 +426,12 @@ MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 	^ switchNode
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> cppIf: aPredicate ifTrue: trueBlock [
 	^ self cppIf: aPredicate ifTrue: trueBlock ifFalse: nil
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
 	| res |
 	res := ASTCPreprocessorIf new
@@ -441,24 +441,36 @@ MASlangReceiver >> cppIf: aPredicate ifTrue: trueBlock ifFalse: falseBlock [
 	^ res
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> deny: something [
 	self flag: #undone. "want to see how slang translates it first."
 	^ self unsupportedFeature: #deny:
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> dispatchOn: anExpression in: aGlobalNode [
 	| switchNode methods |
+	"translation tailor made for StackInterpreter >> interpret, may not fit other version/usages"
 	switchNode := ASTCSwitch new.
 	switchNode expression: (anExpression acceptVisitor: methodTranslator).
 	methods := aGlobalNode resolveBinding.
 	
-	
-	self halt. 
+	(1 to: 256) collect:[ :bytecodeNumber |
+			| body |
+			body := ASTCBlock new.
+			
+			body addStatement: (self asFunctionCall: (methods at: bytecodeNumber)) asStatement.
+			body addStatement: ASTCBreak new.
+			
+			ASTCSwitchCase new
+				expression: (ASTCLiteral new value: bytecodeNumber ; yourself);
+				body: body;
+				yourself.
+		] into: switchNode cases.
+	^ switchNode
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand: ifTrue:[ Error signal: 'infiniteRecursion' ].
 	(self class slangReservedSelector includes: aMessage selector) 
@@ -467,7 +479,7 @@ MASlangReceiver >> doesNotUnderstand: aMessage [
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> eassert: aBlock [
 	^	ASTCFunctionCall new
 		id: (ASTCIdentifier new id: #eassert);
@@ -475,7 +487,7 @@ MASlangReceiver >> eassert: aBlock [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> flag: anArgument [
 
 	^ ASTCFunctionCall new 
@@ -484,7 +496,7 @@ MASlangReceiver >> flag: anArgument [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	| ifNode |
@@ -493,7 +505,7 @@ MASlangReceiver >> ifFalse: falseBlock [
 	^ ifNode
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifFalse: falseBlock ifTrue: trueBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	| ifNode |
@@ -502,7 +514,7 @@ MASlangReceiver >> ifFalse: falseBlock ifTrue: trueBlock [
 	^ ifNode
 ]
 
-{ #category : #'translation-testing' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifNil: aNilBlock [
 	| ifNotNilNode |
 	ifNotNilNode := self ifNotNil: aNilBlock.
@@ -510,7 +522,7 @@ MASlangReceiver >> ifNil: aNilBlock [
 	^ ifNotNilNode
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifNil: aNilBlock ifNotNil: anIfNotNilBlock [
 	self assert: anIfNotNilBlock isBlock.
 	^ ASTCIf new
@@ -520,7 +532,7 @@ MASlangReceiver >> ifNil: aNilBlock ifNotNil: anIfNotNilBlock [
 		yourself 
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifNotNil: anIfNotNilBlock [
 	^ ASTCIf new
 		condition: self translatedReceiver;
@@ -528,12 +540,12 @@ MASlangReceiver >> ifNotNil: anIfNotNilBlock [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifNotNil: anIfNotNilBlock ifNil: aNilBlock [ 
 	^ self ifNil: aNilBlock ifNotNil: anIfNotNilBlock
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifTrue: trueBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	^ ASTCIf new
@@ -542,7 +554,7 @@ MASlangReceiver >> ifTrue: trueBlock [
 		yourself.
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 	"same code as ASTCBoolean>>#ifTrue:ifFalse:"
  	^ ASTCIf new
@@ -552,7 +564,7 @@ MASlangReceiver >> ifTrue: trueBlock ifFalse: falseBlock [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> integerObjectOf: anOop [
 	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
 	^ ASTCFunctionCall new 
@@ -561,13 +573,13 @@ MASlangReceiver >> integerObjectOf: anOop [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> integerValueOf: anOop [
 	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
 	^ (anOop acceptVisitor: methodTranslator) >> (ASTCLiteral value: 3)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> isIntegerObject: anOop [
 	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
 	^ ASTCFunctionCall new 
@@ -576,17 +588,17 @@ MASlangReceiver >> isIntegerObject: anOop [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> isNil [
 	^ self translatedReceiver equals: (ASTCLiteral value: #null)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> isStrict [
 	^ methodTranslator isStrict
 ]
 
-{ #category : #accessing }
+{ #category : #utility }
 MASlangReceiver >> literalNodeFor: aValue [ 
 	^ aValue asLiteralNode 
 		propertyAt: FATypeAnnotator propertyName 
@@ -595,7 +607,7 @@ MASlangReceiver >> literalNodeFor: aValue [
 	
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> max: anInt [
 	| arg translatedReceiver |
 	arg := anInt acceptVisitor: methodTranslator.
@@ -605,12 +617,12 @@ MASlangReceiver >> max: anInt [
 		else: translatedReceiver
 ]
 
-{ #category : #typing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> maxSmallInteger [
 	^ ASTCIdentifier new id: #MaxSmallInteger ; yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> min: anInt [
 	| arg translatedReceiver |
 	arg := anInt acceptVisitor: methodTranslator.
@@ -620,17 +632,17 @@ MASlangReceiver >> min: anInt [
 		else: arg
 ]
 
-{ #category : #typing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> minSmallInteger [
 	^ ASTCIdentifier new id: #MinSmallInteger ; yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> negated [
 	^ self translatedReceiver negated
 ]
 
-{ #category : #typing }
+{ #category : #utility }
 MASlangReceiver >> new [
 	"very hacky way to 'create' a 'new' instance of the recever... Should not stay that way."
 	self flag: #hack.
@@ -638,32 +650,32 @@ MASlangReceiver >> new [
 
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> noMask: anOperand [
 	^ (self translatedReceiver & (anOperand acceptVisitor: methodTranslator)) equals: (ASTCLiteral value: 0)
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> not [
 	^ self translatedReceiver not
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> notNil [
 	^ self translatedReceiver notEquals: (ASTCLiteral value: #null)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> or: aBoolean [
 	^ self translatedReceiver || (aBoolean acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> perform: aSelector [
 	^ self perform: aSelector with: { }
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> perform: aSelector with: arguments [
 	"Not used correctly in slang :')"
 	| args |
@@ -674,12 +686,12 @@ MASlangReceiver >> perform: aSelector with: arguments [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> preIncrement [
 	^ self translatedReceiver preIncr
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> printString [
 	^String streamContents:[:stream|
 		stream << (self class asString)
@@ -691,7 +703,7 @@ MASlangReceiver >> printString [
 		].
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> repeat [
 	"example available in Spur64BitMemoryManager>>accessibleObjectAfter:"
 	"basically, a while true without break"
@@ -705,7 +717,7 @@ MASlangReceiver >> repeat [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> rounded [
 
 	^ ASTCFunctionCall new 
@@ -714,7 +726,7 @@ MASlangReceiver >> rounded [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> shouldBeImplemented [
 
 	^ ASTCFunctionCall new 
@@ -723,7 +735,7 @@ MASlangReceiver >> shouldBeImplemented [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> shouldNotImplement [ 
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
@@ -731,19 +743,19 @@ MASlangReceiver >> shouldNotImplement [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> signedBitShift: anInt [
 	self flag:#WRONG. "just so we can try to compile the VM"
 	^ self translatedReceiver >> (anInt acceptVisitor: methodTranslator)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> signedIntFromLong64 [
 	
 	^ self translatedReceiver castTo: (self cTypeFor: #sqLong)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> signedIntToLong [
 	self flag:#missingCheck. 
 	"I'm assuming i'm always in 64 currently,
@@ -751,12 +763,12 @@ MASlangReceiver >> signedIntToLong [
 	^ (self translatedReceiver castTo: (self cTypeFor: #int)) castTo: (self cTypeFor: #usqInt)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> signedIntToLong64 [
 	^ self translatedReceiver castTo: (self cTypeFor: #usqInt)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> subclassResponsibility [
 
 	^ ASTCFunctionCall new 
@@ -765,7 +777,7 @@ MASlangReceiver >> subclassResponsibility [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> timesRepeat: aBlock [
 	| stop |
 	stop := self receiverNode.
@@ -773,7 +785,7 @@ MASlangReceiver >> timesRepeat: aBlock [
 	^ self to: stop do: aBlock
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> to: stop by: step do: aBlock [
 	| node arg receiver | 
 	node := self to: stop  do: aBlock.
@@ -786,7 +798,7 @@ MASlangReceiver >> to: stop by: step do: aBlock [
 	^ node
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> to: stop do: aBlock [
 	| iterID |
 	aBlock arguments size ~= 1
@@ -808,19 +820,19 @@ MASlangReceiver >> to: stop do: aBlock [
 		yourself
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> touch: something [
 	"does not do appear in translation"
 	^ ASTCEmptyStatement new
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> truncateTo: anInt [
 	self flag: #undone. "want to see how slang translates it first."
 	^ self translatedReceiver & ((anInt acceptVisitor: methodTranslator) - (ASTCLiteral value: 1)) bitNot
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> tryEvaluateLiteralExpression: anExpression [
 
 	^ MASlangConstantEvaluator new
@@ -839,30 +851,30 @@ MASlangReceiver >> type: aType [
 	type := aType
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> unsupportedFeature: aSelector [
 	self isStrict ifTrue: [ ^ UnsupportedFeature new feature: aSelector ; signal ].
 	
 	^ ASTCLiteral value: '''unsuportedFeature'''
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> value: anArg [
 	^ self valueWithArguments: { anArg }
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> value: anArg value: aSecondArg [
 	^ self valueWithArguments: { anArg. aSecondArg }
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> valueWithArguments: anArrayOfArgs [
 	MASlangMinimalInliner renameVariablesOf: receiverNode byArguments: anArrayOfArgs.
 	^ self translatedReceiver
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> whileFalse [
 	"a whileTrue is rewritten in slang to have an if using the latest statement of the block"
 	| whileStatement |
@@ -872,7 +884,7 @@ MASlangReceiver >> whileFalse [
 	^ whileStatement
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> whileFalse: aBlock [
 	| whileStatement |
 	whileStatement := self whileTrue: aBlock.
@@ -881,7 +893,7 @@ MASlangReceiver >> whileFalse: aBlock [
 	^ whileStatement
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> whileTrue [
 	"a whileTrue is rewritten in slang to have an if using the latest statement of the block"
 	| whileStatement |
@@ -896,7 +908,7 @@ MASlangReceiver >> whileTrue [
 	^ whileStatement
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> whileTrue: aBlock [
 	| whileStatement |
 	whileStatement := self whileTrue.
@@ -904,18 +916,18 @@ MASlangReceiver >> whileTrue: aBlock [
 	^ whileStatement
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-keyword' }
 MASlangReceiver >> wordSize [
 	^ self bytesPerWord
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> | aBool [
 	^ self translatedReceiver | (aBool acceptVisitor: methodTranslator) 
 		
 ]
 
-{ #category : #accessing }
+{ #category : #'translation-operators' }
 MASlangReceiver >> ~= anotherObject [
 	"if weird behavior, it's probably because it's not in the right context."
 	"this is only defined for translation, so if it's use for receiver equality, it won't work."
@@ -923,7 +935,7 @@ MASlangReceiver >> ~= anotherObject [
 		
 ]
 
-{ #category : #'reflective operations' }
+{ #category : #'translation-operators' }
 MASlangReceiver >> ~~ anOperand [
 	"duplicates the code of #==
 	funny thing, if we don't the message is not send, and we have a weird bug"
