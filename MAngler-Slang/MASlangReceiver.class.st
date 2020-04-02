@@ -464,10 +464,7 @@ MASlangReceiver >> doesNotUnderstand: aMessage [
 	(self class slangReservedSelector includes: aMessage selector) 
 		ifTrue:[ UnsupportedFeature new feature: ('translation of Slang selector: #', aMessage selector) ; signal ]. 
 	
-	^ (ASTCFunctionCall new 
-			id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: aMessage selector); yourself) ;
-			arguments: (aMessage arguments collect:[:each| each acceptVisitor: methodTranslator ]);
-			yourself)
+	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
 ]
 
 { #category : #'reflective operations' }

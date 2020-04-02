@@ -39,6 +39,19 @@ FAKernelClass >> = anotherObject [
 	^ self receiverNode = anotherObject receiverNode
 ]
 
+{ #category : #converting }
+FAKernelClass >> asFunctionCall: aSelector [
+	^ self asFunctionCall: aSelector withArguments: { }.
+]
+
+{ #category : #converting }
+FAKernelClass >> asFunctionCall: aSelector withArguments: aCollectionOfArguments [
+	^ ASTCFunctionCall new 
+			id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: aSelector); yourself);
+			arguments: (aCollectionOfArguments collect:[:each| each acceptVisitor: methodTranslator ]);
+			yourself
+]
+
 { #category : #'message performing' }
 FAKernelClass >> declare: aVar typed: aType [
 	^ ASTCVariableDeclaration new type: aType; variable: (ASTCIdentifier new id: aVar) ; yourself
