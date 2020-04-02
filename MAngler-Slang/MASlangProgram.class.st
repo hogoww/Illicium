@@ -1,6 +1,9 @@
 Class {
 	#name : #MASlangProgram,
 	#superclass : #FAProgram,
+	#classVars : [
+		'InitializationOptions'
+	],
 	#category : #'MAngler-Slang-Translation'
 }
 
@@ -70,6 +73,23 @@ MASlangProgram >> classes [
 	InterpreterStackPages}
 ]
 
+{ #category : #initialization }
+MASlangProgram >> initializeClassVariablesIn: inferer [
+	"This initializationsOptions were taken from running the StackInterpreter code generation
+	StackInterpreterClassSimulator class >> #initializeWithOptions:objectMemoryClass: before the call to #initializeOption"
+	InitializationOptions := Dictionary new
+		add: #Cogit -> #StackToRegisterMappingCogit;
+		add: #COGMTVM -> false;
+		add: #MULTIPLEBYTECODESETS -> true;
+		add: #ObjectMemory -> #Spur64BitMemoryManager;
+		add: #bytecodeTableInitializer
+				-> #initializeBytecodeTableForSqueakV3PlusClosuresSistaV1Hybrid;
+		yourself.
+	
+	ObjectMemory initializeWithOptions: InitializationOptions.
+	inferer vmClass initializeWithOptions: InitializationOptions
+]
+
 { #category : #enumerating }
 MASlangProgram >> methodsFromClass: aClass [ 
 	 ^ methods select: [ :aMethod | aMethod methodClass = aClass ]
@@ -80,7 +100,10 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 
 	self isFullyAnnotated ifTrue: [ ^ self ].
 	
+	"slang initialization"
 	inferer vmClass: self vmClass.
+	self initializeClassVariablesIn: inferer.
+	
 	self classesDo: [ :each |
 		each prepareToBeAddedToCodeGenerator: inferer.
 		inferer checkClassForNameConflicts: each.
