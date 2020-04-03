@@ -7,10 +7,9 @@ Class {
 	#category : #'MAngler-Slang-Translation'
 }
 
-{ #category : #'interpret-function' }
+{ #category : #'method-expansion' }
 MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
-	| currentByteCodeReferences numberOfDuplication selector replacedNodes mainCopy bytecodeTable |
-
+	| currentByteCodeReferences numberOfDuplication selector replacedNodes mainCopy bytecodeTable counter |
 	numberOfDuplication := 0.
 	selector := aMethodNode selector.
 	"the number of time a bytecode method should be generated is known in the 256 firsts"
@@ -24,16 +23,14 @@ MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 	currentByteCodeReferences := mainCopy allChildren select: [ :aNode | aNode isInstanceVariableNode and: [ aNode name = #currentBytecode ] ].
 	replacedNodes := currentByteCodeReferences collect: [ :aNode |
 		| replacement |
-		self flag: #missingTnodeEquivalent.
 		replacement := RBLiteralValueNode value: -1.
 		replacement propertyAt: #tNodeEquivalent put: (TConstantNode new setValue: -1).
 		aNode replaceWith: replacement.
 		replacement ]." we collect the references of the node we replace, because we will change the values in the next iteration"
 	
-	
-	0 to: numberOfDuplication - 1 do: [ :number | "we update both references, although the TAST one does not matter currenlty"
+	0 to: numberOfDuplication - 1 do: [ :number |
 			| copy newName |
-			replacedNodes do: [ :aNode | 
+			replacedNodes do: [ :aNode |
 					aNode value: number.
 					(aNode propertyAt: #tNodeEquivalent) setValue: number
 				].
@@ -42,6 +39,16 @@ MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 			copy selector: newName.
 			self addMethod: copy withInferer: inferer.
 			bytecodeTable at: (bytecodeTable indexOf: selector) put: newName.
+		].
+	
+	"when updating the secondary table, we assume that EACH selector appear MORE times in the first table. (which is bad)"
+	counter := 0.
+	256 to: bytecodeTable size do:[ :iterator | 
+		(bytecodeTable at: iterator) = selector 
+			ifTrue:[
+					bytecodeTable at: (bytecodeTable indexOf: selector) put: selector , counter asString..
+					counter := counter + 1.
+				]
 		].
 ]
 
@@ -71,6 +78,24 @@ MASlangProgram >> classes [
 	SpurPlanningCompactor.
 	CogStackPages.
 	InterpreterStackPages}
+]
+
+{ #category : #accessing }
+MASlangProgram >> formatBytecodeTable: anInterpretClass [
+	| bytecodeTable newBytecodeTable firstPart secondPart |
+	bytecodeTable := anInterpretClass bytecodeTable.
+	firstPart := (bytecodeTable first: 256) collect: #value into: Bag new.
+	secondPart := (bytecodeTable last: 256) collect: #value into: Bag new.
+	newBytecodeTable := Array new: 256.
+	(1 to: 256) collect: [ :iterator | 
+		| firstTableSelector secondTableSelector |
+		firstTableSelector := (bytecodeTable at: iterator).
+		secondTableSelector := (bytecodeTable at: iterator + 256).
+		firstTableSelector = secondTableSelector ifFalse:[ self halt ].
+		] into: newBytecodeTable.
+	
+	self halt.
+	
 ]
 
 { #category : #initialization }
@@ -131,7 +156,7 @@ MASlangProgram >> removeMethod: aMethodNode [
 	methods removeKey: aMethodNode selector
 ]
 
-{ #category : #preparation }
+{ #category : #'method-expansion' }
 MASlangProgram >> shouldExpandMethod: aCompiledMethod [
 	| ast |
 	" see why in addExpandedVersionsOf: "

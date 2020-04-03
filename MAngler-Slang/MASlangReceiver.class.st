@@ -455,7 +455,7 @@ MASlangReceiver >> dispatchOn: anExpression in: aGlobalNode [
 	switchNode expression: (anExpression acceptVisitor: methodTranslator).
 	methods := aGlobalNode resolveBinding.
 	
-	(1 to: 256) collect:[ :bytecodeNumber |
+	(1 to: methods size) collect:[ :bytecodeNumber |
 			| body |
 			body := ASTCBlock new.
 			
