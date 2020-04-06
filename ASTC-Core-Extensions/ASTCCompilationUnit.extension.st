@@ -9,8 +9,9 @@ ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCCompilationUnit >> addDefinitionAndDeclaration: aDefinition [
+ASTCCompilationUnit >> addFunctionDefinition: aFunctionDefinition [
 	"convinience method for when adding both definition and declaration, from a definition"
-	self addDefinition: aDefinition.
-	self addDeclaration: aDefinition declaration.
+	self addDefinition: aFunctionDefinition.
+	self addDeclaration: aFunctionDefinition declaration.
+	^ true
 ]

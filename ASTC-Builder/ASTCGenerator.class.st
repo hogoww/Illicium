@@ -149,8 +149,8 @@ ASTCGenerator >> addFillFromSupportTo: aRootClass [
 			| isClass addClass |
 			isClass := aClass name asTesterSelector.
 			addClass := aClass name asAddSelector.
-			body + [ :aNode | (aNode isClass and: [ self addClass: { aNode } ]) ifTrue: [ ^ self ] ].
-
+			body addFirst: [ :aNode | (aNode isClass and: [ self addClass: { aNode } ]) ifTrue: [ ^ self ] ].
+			
 			aRootClass realClass compile:
 				(addClass asMethodWithBody: [ :aNode | ^ false ]) asString 
 				classified: 'fillFram-support'
