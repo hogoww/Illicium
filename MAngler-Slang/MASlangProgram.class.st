@@ -80,24 +80,6 @@ MASlangProgram >> classes [
 	InterpreterStackPages}
 ]
 
-{ #category : #accessing }
-MASlangProgram >> formatBytecodeTable: anInterpretClass [
-	| bytecodeTable newBytecodeTable firstPart secondPart |
-	bytecodeTable := anInterpretClass bytecodeTable.
-	firstPart := (bytecodeTable first: 256) collect: #value into: Bag new.
-	secondPart := (bytecodeTable last: 256) collect: #value into: Bag new.
-	newBytecodeTable := Array new: 256.
-	(1 to: 256) collect: [ :iterator | 
-		| firstTableSelector secondTableSelector |
-		firstTableSelector := (bytecodeTable at: iterator).
-		secondTableSelector := (bytecodeTable at: iterator + 256).
-		firstTableSelector = secondTableSelector ifFalse:[ self halt ].
-		] into: newBytecodeTable.
-	
-	self halt.
-	
-]
-
 { #category : #initialization }
 MASlangProgram >> initializeClassVariablesIn: inferer [
 	"This initializationsOptions were taken from running the StackInterpreter code generation
