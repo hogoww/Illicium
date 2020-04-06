@@ -38,7 +38,7 @@ FAProgram >> addMethod: aMethod [
 	^ false 
 ]
 
-{ #category : #enumeration }
+{ #category : #accessing }
 FAProgram >> classes [
 
 	^ classesToGenerate
