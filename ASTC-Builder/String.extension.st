@@ -1,6 +1,15 @@
 Extension { #name : #String }
 
 { #category : #'*ASTC-Builder' }
+String >> asAddSelector [
+	^ String streamContents: [ :s | 
+			s << 'add'
+				<< self capitalized
+				<< ':'
+				]
+]
+
+{ #category : #'*ASTC-Builder' }
 String >> asAnInstance [
 	"returns a string (given as a String) with the following format to the classic arguments names: aClass, anObject [...]"
 
@@ -27,12 +36,10 @@ String >> asAnInstance: isPlural [
 
 { #category : #'*ASTC-Builder' }
 String >> asTesterSelector [
-	^ String
-		streamContents: [ :s | 
-			s
-				nextPutAll: 'is';
+	^ String streamContents: [ :s |
+			s nextPutAll: 'is';
 				nextPutAll: self capitalized
-				]
+			]
 ]
 
 { #category : #'*ASTC-Builder' }

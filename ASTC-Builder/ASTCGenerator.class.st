@@ -136,6 +136,32 @@ ASTCGenerator >> addComparisonOn: aFMXClass [
 	aFMXClass realClass compile: method asString classified: 'testing'
 ]
 
+{ #category : #'generation-fillFrom' }
+ASTCGenerator >> addFillFromSupportTo: aRootClass [
+	| body method |
+	"Methods adding to a collection should return true if they actually added a node to a collection.
+	return false by default.
+	This allows to generate a general add method, with overridable hooks that will allow #fill:from:, and therefore collect & co usage."
+	
+	body := [ :aNode | ] asPlainCodeBC.
+	
+	builder classes do: [ :aClass |
+			| isClass addClass |
+			isClass := aClass name asTesterSelector.
+			addClass := aClass name asAddSelector.
+			body + [ :aNode | (aNode isClass and: [ self addClass: { aNode } ]) ifTrue: [ ^ self ] ].
+
+			aRootClass realClass compile:
+				(addClass asMethodWithBody: [ :aNode | ^ false ]) asString 
+				classified: 'fillFram-support'
+		].
+	body + [ :aNode | TypeError new actualType: aNode class ].
+	
+	method := #add: asMethodWithBody: body.
+
+	aRootClass realClass compile: method asString classified: 'fillFram-support'
+]
+
 { #category : #'generation-state' }
 ASTCGenerator >> addInitializeTo: aFMXClass [
 	| collectionsToInitialize method |
@@ -192,8 +218,7 @@ ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aFMXClass [
 	
 	aFMXClass realClass compile: method asString classified: 'accessing'.
 
-	(aProperty isRelationSide and: [ aProperty isMany ])
-		ifFalse:[ ^self ].
+	(aProperty isRelationSide and: [ aProperty isMany ]) ifFalse:[ ^ self ].
 
 	self flag:#improvement. "Needs to be better to go from plural to singular"
 	anElement := ((propertyName first isVowel ifTrue:[ 'an' ] ifFalse:[ 'a' ]) , propertyName capitalized) removeSuffix:'s'. "aProperty from propertys (not a typo..)"
@@ -201,7 +226,8 @@ ASTCGenerator >> addInstanceVariableAccessors: aProperty to: aFMXClass [
 	method :=	 methodName asMethodWithBody: 
 		[:anElem| 
 		anElem parent: self.
-		propertyName add: anElem ] 
+		propertyName add: anElem.
+		^ true ] "see self class >> addFillFromSupportTo: for why we return true !"
 		withArguments: { #anElem -> anElement } asDictionary.
 	
 	aFMXClass realClass compile: method asString classified: 'accessing'
@@ -699,7 +725,8 @@ ASTCGenerator >> parentPropertyName: aString [
 ASTCGenerator >> postGen [
 	| rootClass |
 	rootClass := builder classes detect: [:aClass| aClass name = #Node ]."pretty bad, but it'll do for now."
-	self addAllClassTesterTo: rootClass .
+	self addAllClassTesterTo: rootClass.
+	self addFillFromSupportTo: rootClass
 ]
 
 { #category : #actions }
