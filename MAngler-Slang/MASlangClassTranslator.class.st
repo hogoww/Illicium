@@ -2,7 +2,8 @@ Class {
 	#name : #MASlangClassTranslator,
 	#superclass : #FAClassTranslator,
 	#instVars : [
-		'constantsToTranslate'
+		'constantsToTranslate',
+		'structStateTranslator'
 	],
 	#category : #'MAngler-Slang-Translation'
 }
@@ -20,6 +21,9 @@ MASlangClassTranslator >> inferer [
 { #category : #initialization }
 MASlangClassTranslator >> initialize [
 	super initialize.
+	structStateTranslator := FAStructStateTranslator new classTranslator: self; yourself.
+
+	"specialization of node transalators"
 	methodTranslator methodNodeTranslator: MASlangMethodNodeTranslator new.
 	methodTranslator literalValueNodeTranslator: MASlangLiteralValueNodeTranslator new.
 	methodTranslator returnNodeTranslator: MASlangReturnNodeTranslator new.
@@ -45,6 +49,13 @@ MASlangClassTranslator >> postTranslationVisitors [
 MASlangClassTranslator >> shouldTranslateVariable: aVariableNAme [
 	constantsToTranslate ifNil:[ constantsToTranslate := self inferer constantsToTranslate ].
 	^ constantsToTranslate includes: aVariableNAme
+]
+
+{ #category : #typing }
+MASlangClassTranslator >> translateClassState: aClass [
+	^ aClass shouldBeTranslatedAsStructure
+		ifTrue: [ stateTranslator translateStateOf: aClass ]
+		ifFalse: [ structStateTranslator translateStateOf: aClass  ].
 ]
 
 { #category : #typing }
