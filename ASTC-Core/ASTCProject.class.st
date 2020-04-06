@@ -24,7 +24,8 @@ ASTCProject >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCProject >> addCompilationUnit: aCompilationUnit [
 	aCompilationUnit parent: self.
-	compilationUnits add: aCompilationUnit
+	compilationUnits add: aCompilationUnit.
+	^ true
 ]
 
 { #category : #accessing }

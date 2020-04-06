@@ -27,7 +27,8 @@ ASTCFunctionCall >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCFunctionCall >> addArgument: anArgument [
 	anArgument parent: self.
-	arguments add: anArgument
+	arguments add: anArgument.
+	^ true
 ]
 
 { #category : #accessing }

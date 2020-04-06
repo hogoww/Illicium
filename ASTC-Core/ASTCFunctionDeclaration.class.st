@@ -30,7 +30,8 @@ ASTCFunctionDeclaration >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCFunctionDeclaration >> addParameter: aParameter [
 	aParameter parent: self.
-	parameters add: aParameter
+	parameters add: aParameter.
+	^ true
 ]
 
 { #category : #accessing }

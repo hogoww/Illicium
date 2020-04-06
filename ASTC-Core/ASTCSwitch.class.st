@@ -30,7 +30,8 @@ ASTCSwitch >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCSwitch >> addCase: aCase [
 	aCase parent: self.
-	cases add: aCase
+	cases add: aCase.
+	^ true
 ]
 
 { #category : #accessing }

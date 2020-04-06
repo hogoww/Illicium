@@ -24,7 +24,8 @@ ASTCStructureDefinition >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCStructureDefinition >> addMember: aMember [
 	aMember parent: self.
-	members add: aMember
+	members add: aMember.
+	^ true
 ]
 
 { #category : #accessing }

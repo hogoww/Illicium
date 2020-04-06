@@ -4,7 +4,8 @@ Extension { #name : #ASTCCompilationUnit }
 ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
 	aCompilationUnit definitions do: [ :aDefinition | self addDefinition: aDefinition ].
 	aCompilationUnit declarations do: [ :aDeclaration | self addDeclaration: aDeclaration ].
-	aCompilationUnit preprocessorMacro do: [ :aPreprocessorMacro | self addPreprocessorMacro: aPreprocessorMacro ]
+	aCompilationUnit preprocessorMacro do: [ :aPreprocessorMacro | self addPreprocessorMacro: aPreprocessorMacro ].
+	^ true
 ]
 
 { #category : #'*ASTC-Core-Extensions' }

@@ -30,19 +30,22 @@ ASTCCompilationUnit >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCCompilationUnit >> addDeclaration: aDeclaration [
 	aDeclaration parent: self.
-	declarations add: aDeclaration
+	declarations add: aDeclaration.
+	^ true
 ]
 
 { #category : #accessing }
 ASTCCompilationUnit >> addDefinition: aDefinition [
 	aDefinition parent: self.
-	definitions add: aDefinition
+	definitions add: aDefinition.
+	^ true
 ]
 
 { #category : #accessing }
 ASTCCompilationUnit >> addPreprocessorMacro: aPreprocessorMacro [
 	aPreprocessorMacro parent: self.
-	preprocessorMacro add: aPreprocessorMacro
+	preprocessorMacro add: aPreprocessorMacro.
+	^ true
 ]
 
 { #category : #accessing }

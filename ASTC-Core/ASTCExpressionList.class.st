@@ -24,7 +24,8 @@ ASTCExpressionList >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCExpressionList >> addExpression: anExpression [
 	anExpression parent: self.
-	expressions add: anExpression
+	expressions add: anExpression.
+	^ true
 ]
 
 { #category : #accessing }

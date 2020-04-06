@@ -27,7 +27,8 @@ ASTCBlock >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCBlock >> addDeclaration: aDeclaration [
 	aDeclaration parent: self.
-	declarations add: aDeclaration
+	declarations add: aDeclaration.
+	^ true
 ]
 
 { #category : #accessing }

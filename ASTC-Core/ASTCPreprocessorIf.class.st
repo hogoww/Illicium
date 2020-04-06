@@ -30,13 +30,15 @@ ASTCPreprocessorIf >> acceptVisitor: aVisitor [
 { #category : #accessing }
 ASTCPreprocessorIf >> addElse: anElse [
 	anElse parent: self.
-	else add: anElse
+	else add: anElse.
+	^ true
 ]
 
 { #category : #accessing }
 ASTCPreprocessorIf >> addThen: aThen [
 	aThen parent: self.
-	then add: aThen
+	then add: aThen.
+	^ true
 ]
 
 { #category : #accessing }
