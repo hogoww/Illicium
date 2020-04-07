@@ -10,6 +10,7 @@ Class {
 { #category : #'method-expansion' }
 MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 	| currentByteCodeReferences numberOfDuplication selector replacedNodes mainCopy bytecodeTable counter |
+	"see  self class >> #shouldExpand for documentation"
 	numberOfDuplication := 0.
 	selector := aMethodNode selector.
 	"the number of time a bytecode method should be generated is known in the 256 firsts"
@@ -140,8 +141,19 @@ MASlangProgram >> removeMethod: aMethodNode [
 
 { #category : #'method-expansion' }
 MASlangProgram >> shouldExpandMethod: aCompiledMethod [
-	| ast |
-	" see why in addExpandedVersionsOf: "
+	"In the Bytecode table, some selectors appears several times.
+	When this is the case, they may either stay as is, or be expanded in several constant cases for the different values of currentByteCode.
+	For example
+	case 0:
+	case 1:
+		currentBytecode;
+	will be expanded in:
+	case 0:
+		0;
+	case 1:
+		1;
+	"
+	
 	^ aCompiledMethod hasPragmaNamed: #expandCases 
 ]
 
