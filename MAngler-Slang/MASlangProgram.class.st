@@ -83,11 +83,13 @@ MASlangProgram >> classes [
 
 { #category : #accessing }
 MASlangProgram >> classesToTranslate [
-	^ ({ self interpreterClass. self interpreterClass objectMemoryClass } ,
-	(self interpreterClass allSuperclassesIncluding: VMClass),
-	(self interpreterClass objectMemoryClass allSuperclassesIncluding: VMClass),
+	"should return the superclasses first"
+	^ { VMClass },
+	((self interpreterClass allSuperclassesIncluding: InterpreterPrimitives) reverse,
+	{ self interpreterClass },
+	(self interpreterClass objectMemoryClass allSuperclassesIncluding: CogClass) reverse,
 	(self interpreterClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ]),
-	(self interpreterClass objectMemoryClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ])) asSet asArray.
+	(self interpreterClass objectMemoryClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ]))
 	
 ]
 
