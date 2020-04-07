@@ -108,6 +108,11 @@ MASlangProgram >> initializeClassVariablesIn: inferer [
 	inferer vmClass initializeWithOptions: InitializationOptions
 ]
 
+{ #category : #accessing }
+MASlangProgram >> interpreterClass [
+	^ StackInterpreterPrimitives
+]
+
 { #category : #enumerating }
 MASlangProgram >> methodsFromClass: aClass [ 
 	 ^ methods select: [ :aMethod | aMethod methodClass = aClass ]
