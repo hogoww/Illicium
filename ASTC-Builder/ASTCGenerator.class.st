@@ -95,7 +95,7 @@ ASTCGenerator >> addAddMethodOn: aRootClass [
 				(addClass asMethodWithBody: [ :aNode | ^ false ]) asString 
 				classified: 'fillFram-support'
 		].
-	body + [ :aNode | TypeError new actualType: aNode class ].
+	body + [ :aNode | TypeError new actualType: aNode class name; signal ].
 	
 	method := #add: asMethodWithBody: body.
 

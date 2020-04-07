@@ -183,7 +183,9 @@ ASTCNode >> add: aNode [
 		ifTrue: [ ^ self ].
 	(aNode isNode and: [ self addNode: aNode ])
 		ifTrue: [ ^ self ].
-	TypeError new actualType: aNode class
+	TypeError new
+		actualType: aNode class name;
+		signal
 ]
 
 { #category : #'fillFram-support' }
