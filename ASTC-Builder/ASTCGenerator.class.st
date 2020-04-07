@@ -75,6 +75,33 @@ ASTCGenerator >> addAcceptVisitorOf: aFMXClass [
 	aFMXClass realClass compile: method asString classified: 'visiting'
 ]
 
+{ #category : #'generation-fillFrom' }
+ASTCGenerator >> addAddMethodOn: aRootClass [
+	"Methods adding to a collection should return true if they actually added a node to a collection.
+	return false by default.
+	This allows to generate a general add method, with overridable hooks that will allow #fill:from:, and therefore collect & co usage."
+	| body method |
+	
+	body := [ :aNode | ] asPlainCodeBC.
+	
+	builder classes do: [ :aClass |
+			| isClass addClass |
+			isClass := aClass name asTesterSelector.
+			addClass := aClass name asAddSelector.
+			body addFirst: [ :aNode | (aNode isClass and: [ self addClass: { aNode } ]) ifTrue: [ ^ self ] ].
+			
+			"By default, we can't add anything to a node of the RootClass, therefore everything returns false"
+			aRootClass realClass compile:
+				(addClass asMethodWithBody: [ :aNode | ^ false ]) asString 
+				classified: 'fillFram-support'
+		].
+	body + [ :aNode | TypeError new actualType: aNode class ].
+	
+	method := #add: asMethodWithBody: body.
+
+	aRootClass realClass compile: method asString classified: 'fillFram-support'
+]
+
 { #category : #'generation-testing' }
 ASTCGenerator >> addAllClassTesterTo: aRootClass [
 	builder classes
@@ -137,29 +164,21 @@ ASTCGenerator >> addComparisonOn: aFMXClass [
 ]
 
 { #category : #'generation-fillFrom' }
-ASTCGenerator >> addFillFromSupportTo: aRootClass [
-	| body method |
-	"Methods adding to a collection should return true if they actually added a node to a collection.
-	return false by default.
-	This allows to generate a general add method, with overridable hooks that will allow #fill:from:, and therefore collect & co usage."
-	
-	body := [ :aNode | ] asPlainCodeBC.
-	
-	builder classes do: [ :aClass |
-			| isClass addClass |
-			isClass := aClass name asTesterSelector.
-			addClass := aClass name asAddSelector.
-			body addFirst: [ :aNode | (aNode isClass and: [ self addClass: { aNode } ]) ifTrue: [ ^ self ] ].
-			
-			aRootClass realClass compile:
-				(addClass asMethodWithBody: [ :aNode | ^ false ]) asString 
-				classified: 'fillFram-support'
-		].
-	body + [ :aNode | TypeError new actualType: aNode class ].
-	
-	method := #add: asMethodWithBody: body.
+ASTCGenerator >> addFillFromMethodTo: aRootClass [
+	| methodSTring |
+	"since we're using exactly the same, a string's enough. No replacement to do."
+	methodSTring := 'fillFrom: aCollection with: aBlock
+	"same method as Collection >> #fillFrom:with:"	
+	"enables the use of collect."	
+	aCollection do: [ :each | self add: (aBlock value: each) ]'.
 
-	aRootClass realClass compile: method asString classified: 'fillFram-support'
+	aRootClass realClass compile: methodSTring classified: 'enumerating'
+]
+
+{ #category : #'generation-fillFrom' }
+ASTCGenerator >> addFillFromSupportTo: aRootClass [
+	self addFillFromMethodTo: aRootClass.
+	self addAddMethodOn: aRootClass.
 ]
 
 { #category : #'generation-state' }
