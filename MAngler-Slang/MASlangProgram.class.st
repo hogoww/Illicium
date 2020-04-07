@@ -81,6 +81,16 @@ MASlangProgram >> classes [
 	InterpreterStackPages}
 ]
 
+{ #category : #accessing }
+MASlangProgram >> classesToTranslate [
+	^ ({ self interpreterClass. self interpreterClass objectMemoryClass } ,
+	(self interpreterClass allSuperclassesIncluding: VMClass),
+	(self interpreterClass objectMemoryClass allSuperclassesIncluding: VMClass),
+	(self interpreterClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ]),
+	(self interpreterClass objectMemoryClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ])) asSet asArray.
+	
+]
+
 { #category : #initialization }
 MASlangProgram >> initializeClassVariablesIn: inferer [
 	"This initializationsOptions were taken from running the StackInterpreter code generation
@@ -155,6 +165,12 @@ MASlangProgram >> shouldExpandMethod: aCompiledMethod [
 	"
 	
 	^ aCompiledMethod hasPragmaNamed: #expandCases 
+]
+
+{ #category : #enumerating }
+MASlangProgram >> structToTranslate [
+	^ (self interpreterClass ancilliaryClasses select: [ :aClass| aClass isStructClass ]),
+		(self interpreterClass objectMemoryClass ancilliaryClasses select: [ :aClass| aClass isStructClass ])
 ]
 
 { #category : #accessing }
