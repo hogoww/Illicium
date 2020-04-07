@@ -54,8 +54,8 @@ MASlangClassTranslator >> shouldTranslateVariable: aVariableNAme [
 { #category : #typing }
 MASlangClassTranslator >> translateClassState: aClass [
 	^ aClass isStructClass
-		ifTrue: [ stateTranslator translateStateOf: aClass ]
-		ifFalse: [ structStateTranslator translateStateOf: aClass  ].
+		ifFalse: [ stateTranslator translateStateOf: aClass ]
+		ifTrue: [ structStateTranslator translateStateOf: aClass  ].
 ]
 
 { #category : #typing }
