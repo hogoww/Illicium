@@ -828,7 +828,6 @@ MASlangReceiver >> touch: something [
 
 { #category : #'translation-keyword' }
 MASlangReceiver >> truncateTo: anInt [
-	self flag: #undone. "want to see how slang translates it first."
 	^ self translatedReceiver & ((anInt acceptVisitor: methodTranslator) - (ASTCLiteral value: 1)) bitNot
 ]
 
