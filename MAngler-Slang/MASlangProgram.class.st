@@ -106,7 +106,7 @@ MASlangProgram >> interpreterClass [
 
 { #category : #enumerating }
 MASlangProgram >> methodsFromClass: aClass [ 
-	 ^ methods select: [ :aMethod | aMethod methodClass = aClass ]
+	 ^ methods select: [ :aMethod | aClass includesBehavior: aMethod methodClass ]
 ]
 
 { #category : #accessing }
