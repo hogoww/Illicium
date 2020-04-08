@@ -117,6 +117,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	"slang initialization"
 	inferer vmClass: self vmClass.
 	self initializeClassVariablesIn: inferer.
+	self structToTranslate do:[ :aStructClass | aStructClass initialize ].
 	
 	self classesDo: [ :each |
 		each prepareToBeAddedToCodeGenerator: inferer.
