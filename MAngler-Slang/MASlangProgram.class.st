@@ -66,31 +66,20 @@ MASlangProgram >> addMethod: aMethod withInferer: inferer [
 
 { #category : #accessing }
 MASlangProgram >> classes [
-	^ {VMClass.
-	CogClass.
-	SpurMemoryManager.
-	Spur64BitMemoryManager.
-	InterpreterPrimitives.
-	StackInterpreter.
-	StackInterpreterPrimitives.
-	SpurGenerationScavenger.
-	SpurSegmentManager.
-	SpurCompactor.
-	SpurPlanningCompactor.
-	CogStackPages.
-	InterpreterStackPages}
+	"should return the superclasses first"
+	^ { self interpreterClass },
+	(self interpreterClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ]),
+	(self interpreterClass objectMemoryClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ])
+	
 ]
 
 { #category : #accessing }
-MASlangProgram >> classesToTranslate [
+MASlangProgram >> classesToPrepareSelectorsFor [
 	"should return the superclasses first"
-	^ { VMClass },
-	((self interpreterClass allSuperclassesIncluding: InterpreterPrimitives) reverse,
-	{ self interpreterClass },
+	^ 	{ VMClass },
+	(self interpreterClass allSuperclassesIncluding: InterpreterPrimitives) reverse,
 	(self interpreterClass objectMemoryClass allSuperclassesIncluding: CogClass) reverse,
-	(self interpreterClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ]),
-	(self interpreterClass objectMemoryClass ancilliaryClasses reject: [ :aClass| aClass isStructClass ]))
-	
+	self classes
 ]
 
 { #category : #initialization }

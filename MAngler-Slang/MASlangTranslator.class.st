@@ -114,6 +114,16 @@ MASlangTranslator >> transformations [
 ]
 
 { #category : #'translation-api' }
+MASlangTranslator >> translateProgram [
+	| cu |
+	cu := super translateProgram.
+
+	program structToTranslate collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
+
+	^ cu
+]
+
+{ #category : #'translation-api' }
 MASlangTranslator >> translateVM [
 	"Shortcut, since the VM is the base program for this translator"
 	^ self translateProgram
