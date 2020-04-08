@@ -28,12 +28,6 @@ ASTCStructureDefinition >> addMember: aMember [
 	^ true
 ]
 
-{ #category : #testing }
-ASTCStructureDefinition >> addVariableDeclaration: aVariableDeclaration [
-	self members add: aVariableDeclaration.
-	^ true
-]
-
 { #category : #accessing }
 ASTCStructureDefinition >> initialize [
 	members := OrderedCollection new
