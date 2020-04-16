@@ -91,10 +91,7 @@ MAVMTestGenerator >> fillMethodsToTest [
 	"So inefficient it makes my skin crawl but hey..."
 	methods := MAFullVMAnglerProgramRessource current program methods select: [ :aMethod | 
 		aMethod methodClass = classToTest 
-			and: [ 
-				
-				self haltIf: aMethod selector = #ContainsOnlyValidBecomeObjectsAndTwoWayCopyHash:.
-				(aMethod hasProperty: MASlangRequiredInliningMethodTagger propertyName) not ]].
+			and: [ (aMethod hasProperty: MASlangRequiredInliningMethodTagger propertyName) not ]].
 
 	"Basically, what we can compare to slang, we do. What we cannot, we only do a smoke test on them"
 	methodsToStringCompare := methods select: [ :aCompiledMethod |
