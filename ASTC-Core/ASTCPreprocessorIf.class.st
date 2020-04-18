@@ -24,7 +24,7 @@ ASTCPreprocessorIf >> = aPreprocessorIf [
 
 { #category : #visiting }
 ASTCPreprocessorIf >> acceptVisitor: aVisitor [
-	aVisitor visitPreprocessorIf: self
+	^ aVisitor visitPreprocessorIf: self
 ]
 
 { #category : #accessing }

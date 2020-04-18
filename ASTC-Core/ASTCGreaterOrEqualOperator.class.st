@@ -13,7 +13,7 @@ ASTCGreaterOrEqualOperator >> = aGreaterOrEqualOperator [
 
 { #category : #visiting }
 ASTCGreaterOrEqualOperator >> acceptVisitor: aVisitor [
-	aVisitor visitGreaterOrEqualOperator: self
+	^ aVisitor visitGreaterOrEqualOperator: self
 ]
 
 { #category : #testing }

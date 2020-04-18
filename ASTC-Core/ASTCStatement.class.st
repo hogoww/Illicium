@@ -13,7 +13,7 @@ ASTCStatement >> = aStatement [
 
 { #category : #visiting }
 ASTCStatement >> acceptVisitor: aVisitor [
-	aVisitor visitStatement: self
+	^ aVisitor visitStatement: self
 ]
 
 { #category : #testing }

@@ -13,7 +13,7 @@ ASTCEmptyStatement >> = anEmptyStatement [
 
 { #category : #visiting }
 ASTCEmptyStatement >> acceptVisitor: aVisitor [
-	aVisitor visitEmptyStatement: self
+	^ aVisitor visitEmptyStatement: self
 ]
 
 { #category : #testing }

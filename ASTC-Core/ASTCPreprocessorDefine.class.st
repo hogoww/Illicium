@@ -21,7 +21,7 @@ ASTCPreprocessorDefine >> = aPreprocessorDefine [
 
 { #category : #visiting }
 ASTCPreprocessorDefine >> acceptVisitor: aVisitor [
-	aVisitor visitPreprocessorDefine: self
+	^ aVisitor visitPreprocessorDefine: self
 ]
 
 { #category : #testing }

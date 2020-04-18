@@ -13,7 +13,7 @@ ASTCStructAccessStaticOperator >> = aStructAccessStaticOperator [
 
 { #category : #visiting }
 ASTCStructAccessStaticOperator >> acceptVisitor: aVisitor [
-	aVisitor visitStructAccessStaticOperator: self
+	^ aVisitor visitStructAccessStaticOperator: self
 ]
 
 { #category : #testing }

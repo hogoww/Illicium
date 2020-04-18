@@ -18,7 +18,7 @@ ASTCExpressionList >> = anExpressionList [
 
 { #category : #visiting }
 ASTCExpressionList >> acceptVisitor: aVisitor [
-	aVisitor visitExpressionList: self
+	^ aVisitor visitExpressionList: self
 ]
 
 { #category : #accessing }

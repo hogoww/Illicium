@@ -18,7 +18,7 @@ ASTCRawCCode >> = aRawCCode [
 
 { #category : #visiting }
 ASTCRawCCode >> acceptVisitor: aVisitor [
-	aVisitor visitRawCCode: self
+	^ aVisitor visitRawCCode: self
 ]
 
 { #category : #accessing }

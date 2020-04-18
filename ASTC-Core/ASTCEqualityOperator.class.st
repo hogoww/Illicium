@@ -13,7 +13,7 @@ ASTCEqualityOperator >> = anEqualityOperator [
 
 { #category : #visiting }
 ASTCEqualityOperator >> acceptVisitor: aVisitor [
-	aVisitor visitEqualityOperator: self
+	^ aVisitor visitEqualityOperator: self
 ]
 
 { #category : #testing }

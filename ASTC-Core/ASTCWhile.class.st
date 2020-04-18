@@ -13,7 +13,7 @@ ASTCWhile >> = aWhile [
 
 { #category : #visiting }
 ASTCWhile >> acceptVisitor: aVisitor [
-	aVisitor visitWhile: self
+	^ aVisitor visitWhile: self
 ]
 
 { #category : #testing }

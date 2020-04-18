@@ -18,7 +18,7 @@ ASTCVariableDefinition >> = aVariableDefinition [
 
 { #category : #visiting }
 ASTCVariableDefinition >> acceptVisitor: aVisitor [
-	aVisitor visitVariableDefinition: self
+	^ aVisitor visitVariableDefinition: self
 ]
 
 { #category : #accessing }

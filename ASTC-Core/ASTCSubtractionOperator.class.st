@@ -13,7 +13,7 @@ ASTCSubtractionOperator >> = aSubtractionOperator [
 
 { #category : #visiting }
 ASTCSubtractionOperator >> acceptVisitor: aVisitor [
-	aVisitor visitSubtractionOperator: self
+	^ aVisitor visitSubtractionOperator: self
 ]
 
 { #category : #testing }

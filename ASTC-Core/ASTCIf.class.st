@@ -24,7 +24,7 @@ ASTCIf >> = anIf [
 
 { #category : #visiting }
 ASTCIf >> acceptVisitor: aVisitor [
-	aVisitor visitIf: self
+	^ aVisitor visitIf: self
 ]
 
 { #category : #accessing }

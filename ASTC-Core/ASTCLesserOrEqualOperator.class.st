@@ -13,7 +13,7 @@ ASTCLesserOrEqualOperator >> = aLesserOrEqualOperator [
 
 { #category : #visiting }
 ASTCLesserOrEqualOperator >> acceptVisitor: aVisitor [
-	aVisitor visitLesserOrEqualOperator: self
+	^ aVisitor visitLesserOrEqualOperator: self
 ]
 
 { #category : #testing }

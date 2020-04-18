@@ -13,7 +13,7 @@ ASTCAndOperator >> = anAndOperator [
 
 { #category : #visiting }
 ASTCAndOperator >> acceptVisitor: aVisitor [
-	aVisitor visitAndOperator: self
+	^ aVisitor visitAndOperator: self
 ]
 
 { #category : #testing }

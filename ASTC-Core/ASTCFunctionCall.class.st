@@ -21,7 +21,7 @@ ASTCFunctionCall >> = aFunctionCall [
 
 { #category : #visiting }
 ASTCFunctionCall >> acceptVisitor: aVisitor [
-	aVisitor visitFunctionCall: self
+	^ aVisitor visitFunctionCall: self
 ]
 
 { #category : #accessing }

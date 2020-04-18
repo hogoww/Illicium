@@ -24,7 +24,7 @@ ASTCCompilationUnit >> = aCompilationUnit [
 
 { #category : #visiting }
 ASTCCompilationUnit >> acceptVisitor: aVisitor [
-	aVisitor visitCompilationUnit: self
+	^ aVisitor visitCompilationUnit: self
 ]
 
 { #category : #accessing }

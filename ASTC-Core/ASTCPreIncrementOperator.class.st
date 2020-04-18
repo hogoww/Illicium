@@ -13,7 +13,7 @@ ASTCPreIncrementOperator >> = aPreIncrementOperator [
 
 { #category : #visiting }
 ASTCPreIncrementOperator >> acceptVisitor: aVisitor [
-	aVisitor visitPreIncrementOperator: self
+	^ aVisitor visitPreIncrementOperator: self
 ]
 
 { #category : #testing }

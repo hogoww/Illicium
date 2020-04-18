@@ -21,7 +21,7 @@ ASTCSwitchCase >> = aSwitchCase [
 
 { #category : #visiting }
 ASTCSwitchCase >> acceptVisitor: aVisitor [
-	aVisitor visitSwitchCase: self
+	^ aVisitor visitSwitchCase: self
 ]
 
 { #category : #accessing }

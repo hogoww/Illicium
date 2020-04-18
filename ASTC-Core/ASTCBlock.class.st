@@ -21,7 +21,7 @@ ASTCBlock >> = aBlock [
 
 { #category : #visiting }
 ASTCBlock >> acceptVisitor: aVisitor [
-	aVisitor visitBlock: self
+	^ aVisitor visitBlock: self
 ]
 
 { #category : #accessing }

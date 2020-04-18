@@ -13,7 +13,7 @@ ASTCAdditionOperator >> = anAdditionOperator [
 
 { #category : #visiting }
 ASTCAdditionOperator >> acceptVisitor: aVisitor [
-	aVisitor visitAdditionOperator: self
+	^ aVisitor visitAdditionOperator: self
 ]
 
 { #category : #testing }

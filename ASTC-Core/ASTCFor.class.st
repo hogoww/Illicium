@@ -21,7 +21,7 @@ ASTCFor >> = aFor [
 
 { #category : #visiting }
 ASTCFor >> acceptVisitor: aVisitor [
-	aVisitor visitFor: self
+	^ aVisitor visitFor: self
 ]
 
 { #category : #testing }

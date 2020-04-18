@@ -18,7 +18,7 @@ ASTCFunctionDefinition >> = aFunctionDefinition [
 
 { #category : #visiting }
 ASTCFunctionDefinition >> acceptVisitor: aVisitor [
-	aVisitor visitFunctionDefinition: self
+	^ aVisitor visitFunctionDefinition: self
 ]
 
 { #category : #accessing }

@@ -18,7 +18,7 @@ ASTCDeclaration >> = aDeclaration [
 
 { #category : #visiting }
 ASTCDeclaration >> acceptVisitor: aVisitor [
-	aVisitor visitDeclaration: self
+	^ aVisitor visitDeclaration: self
 ]
 
 { #category : #accessing }

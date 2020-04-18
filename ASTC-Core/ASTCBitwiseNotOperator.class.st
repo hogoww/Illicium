@@ -13,7 +13,7 @@ ASTCBitwiseNotOperator >> = aBitwiseNotOperator [
 
 { #category : #visiting }
 ASTCBitwiseNotOperator >> acceptVisitor: aVisitor [
-	aVisitor visitBitwiseNotOperator: self
+	^ aVisitor visitBitwiseNotOperator: self
 ]
 
 { #category : #testing }

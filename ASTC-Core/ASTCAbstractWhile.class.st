@@ -13,7 +13,7 @@ ASTCAbstractWhile >> = anAbstractWhile [
 
 { #category : #visiting }
 ASTCAbstractWhile >> acceptVisitor: aVisitor [
-	aVisitor visitAbstractWhile: self
+	^ aVisitor visitAbstractWhile: self
 ]
 
 { #category : #testing }

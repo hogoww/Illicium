@@ -13,7 +13,7 @@ ASTCLogicalNotOperator >> = aLogicalNotOperator [
 
 { #category : #visiting }
 ASTCLogicalNotOperator >> acceptVisitor: aVisitor [
-	aVisitor visitLogicalNotOperator: self
+	^ aVisitor visitLogicalNotOperator: self
 ]
 
 { #category : #testing }

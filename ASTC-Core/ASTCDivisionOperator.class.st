@@ -13,7 +13,7 @@ ASTCDivisionOperator >> = aDivisionOperator [
 
 { #category : #visiting }
 ASTCDivisionOperator >> acceptVisitor: aVisitor [
-	aVisitor visitDivisionOperator: self
+	^ aVisitor visitDivisionOperator: self
 ]
 
 { #category : #testing }

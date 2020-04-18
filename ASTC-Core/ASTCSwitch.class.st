@@ -24,7 +24,7 @@ ASTCSwitch >> = aSwitch [
 
 { #category : #visiting }
 ASTCSwitch >> acceptVisitor: aVisitor [
-	aVisitor visitSwitch: self
+	^ aVisitor visitSwitch: self
 ]
 
 { #category : #accessing }

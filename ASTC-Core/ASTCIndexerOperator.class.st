@@ -13,7 +13,7 @@ ASTCIndexerOperator >> = anIndexerOperator [
 
 { #category : #visiting }
 ASTCIndexerOperator >> acceptVisitor: aVisitor [
-	aVisitor visitIndexerOperator: self
+	^ aVisitor visitIndexerOperator: self
 ]
 
 { #category : #testing }

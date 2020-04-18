@@ -18,7 +18,7 @@ ASTCProject >> = aProject [
 
 { #category : #visiting }
 ASTCProject >> acceptVisitor: aVisitor [
-	aVisitor visitProject: self
+	^ aVisitor visitProject: self
 ]
 
 { #category : #accessing }

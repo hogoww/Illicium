@@ -13,7 +13,7 @@ ASTCDoWhile >> = aDoWhile [
 
 { #category : #visiting }
 ASTCDoWhile >> acceptVisitor: aVisitor [
-	aVisitor visitDoWhile: self
+	^ aVisitor visitDoWhile: self
 ]
 
 { #category : #testing }

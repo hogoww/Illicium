@@ -11,7 +11,7 @@ Class {
 
 { #category : #visiting }
 ASTCNode >> acceptVisitor: aVisitor [
-	aVisitor visitNode: self
+	^ aVisitor visitNode: self
 ]
 
 { #category : #'fillFram-support' }

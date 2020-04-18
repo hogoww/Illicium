@@ -13,7 +13,7 @@ ASTCStructureDeclaration >> = aStructureDeclaration [
 
 { #category : #visiting }
 ASTCStructureDeclaration >> acceptVisitor: aVisitor [
-	aVisitor visitStructureDeclaration: self
+	^ aVisitor visitStructureDeclaration: self
 ]
 
 { #category : #testing }

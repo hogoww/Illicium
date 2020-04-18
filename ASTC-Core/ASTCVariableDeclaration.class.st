@@ -18,7 +18,7 @@ ASTCVariableDeclaration >> = aVariableDeclaration [
 
 { #category : #visiting }
 ASTCVariableDeclaration >> acceptVisitor: aVisitor [
-	aVisitor visitVariableDeclaration: self
+	^ aVisitor visitVariableDeclaration: self
 ]
 
 { #category : #testing }

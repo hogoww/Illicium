@@ -18,7 +18,7 @@ ASTCReturn >> = aReturn [
 
 { #category : #visiting }
 ASTCReturn >> acceptVisitor: aVisitor [
-	aVisitor visitReturn: self
+	^ aVisitor visitReturn: self
 ]
 
 { #category : #accessing }

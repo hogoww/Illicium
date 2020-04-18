@@ -13,7 +13,7 @@ ASTCExpression >> = anExpression [
 
 { #category : #visiting }
 ASTCExpression >> acceptVisitor: aVisitor [
-	aVisitor visitExpression: self
+	^ aVisitor visitExpression: self
 ]
 
 { #category : #testing }
