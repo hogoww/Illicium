@@ -114,6 +114,11 @@ FAMethodTranslator >> literalValueNodeTranslator: anILLiteralValueNodeTranslator
 ]
 
 { #category : #configuration }
+FAMethodTranslator >> messageNodeTranslator: aMASlangMessageNodeTranslator [ 
+	translators at: #messageNodeTranslator put: (aMASlangMessageNodeTranslator methodTranslator: self ; yourself).
+]
+
+{ #category : #configuration }
 FAMethodTranslator >> methodNodeTranslator: aMethodNodeTranslator [ 
 	 translators at: #methodNodeTranslator put: (aMethodNodeTranslator methodTranslator: self ; yourself).
 ]

@@ -117,7 +117,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	"slang initialization"
 	inferer vmClass: self vmClass.
 	self initializeClassVariablesIn: inferer.
-	self structToTranslate do:[ :aStructClass | aStructClass initialize ].
+	self structClasses do:[ :aStructClass | aStructClass initialize ].
 	
 	self classesDo: [ :each |
 		each prepareToBeAddedToCodeGenerator: inferer.
@@ -165,9 +165,14 @@ MASlangProgram >> shouldExpandMethod: aCompiledMethod [
 ]
 
 { #category : #enumerating }
-MASlangProgram >> structToTranslate [
+MASlangProgram >> structClasses [
 	^ (self interpreterClass ancilliaryClasses select: [ :aClass| aClass isStructClass ]),
 		(self interpreterClass objectMemoryClass ancilliaryClasses select: [ :aClass| aClass isStructClass ])
+]
+
+{ #category : #accessing }
+MASlangProgram >> structNamed: aStructName [
+	^ self structClasses detect: [ :aClass | aClass structTypeName = aStructName  ]
 ]
 
 { #category : #accessing }

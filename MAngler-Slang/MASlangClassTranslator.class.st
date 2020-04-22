@@ -65,5 +65,5 @@ MASlangClassTranslator >> typeAnnotatorClass [
 
 { #category : #'translation-api' }
 MASlangClassTranslator >> typeOfSlot: aSlot [
-	^ self getReplacementType: (self inferer typeOfVariable: aSlot name)
+	^ self getReplacementType: (CType createFrom: ((self inferer typeOfVariable: aSlot name) ifNil:'sqInt')).
 ]

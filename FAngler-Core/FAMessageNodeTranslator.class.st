@@ -18,6 +18,13 @@ FAMessageNodeTranslator >> forward: aMessage to: aType [
 ]
 
 { #category : #translate }
+FAMessageNodeTranslator >> perform: aMessageNode on: aReceiver [.
+	^ aReceiver
+		perform: aMessageNode selector
+		withArguments: aMessageNode arguments asArray.
+]
+
+{ #category : #translate }
 FAMessageNodeTranslator >> translateNode: aMessageNode [
 	| receiver res |
 	receiver := (methodTranslator
@@ -25,9 +32,8 @@ FAMessageNodeTranslator >> translateNode: aMessageNode [
 		receiverNode: aMessageNode receiver;
 		methodTranslator: methodTranslator;
 		yourself.
-	res := (receiver
-		perform: aMessageNode selector
-		withArguments: aMessageNode arguments asArray).
+		
+	res := self perform: aMessageNode on: receiver..
 	
 	(res isKindOf: ASTCNode) ifFalse: [self error].
 	res pharoNode: aMessageNode;

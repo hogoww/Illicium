@@ -1,9 +1,6 @@
 Class {
 	#name : #MASlangReceiver,
-	#superclass : #FAKernelClass,
-	#instVars : [
-		'type'
-	],
+	#superclass : #MAAbstractSlangReceiver,
 	#category : #'MAngler-Slang-Nodes-translators'
 }
 
@@ -37,11 +34,6 @@ MASlangReceiver >> & anOperand [
 MASlangReceiver >> * aNumber [
 	"same code as ASTCNumber>>#*"
 	^ self translatedReceiver * (aNumber acceptVisitor: methodTranslator)
-]
-
-{ #category : #'translation-operators' }
-MASlangReceiver >> + anOperand [
-	^ self translatedReceiver + (anOperand acceptVisitor: methodTranslator)
 ]
 
 { #category : #'translation-operators' }
@@ -85,27 +77,13 @@ MASlangReceiver >> << aNumber [
 	
 	^ ((self translatedReceiver castTo: (self cTypeFor: #usqInt))
 			<< (aNumber acceptVisitor: methodTranslator))
-				castTo: (self cTypeFor: self myType)
+				castTo: (self cTypeFor: self myType type)
 ]
 
 { #category : #'translation-operators' }
 MASlangReceiver >> <= aNumber [
 	"same code as ASTCSmallInteger>>#<="
 	^ self translatedReceiver <= (aNumber acceptVisitor: methodTranslator)
-]
-
-{ #category : #'translation-operators' }
-MASlangReceiver >> = anotherObject [
-	^ self 
-		ifTranslation:
-			[ self translatedReceiver equals: (anotherObject acceptVisitor: methodTranslator) ]
-		ifNot: [ (methodTranslator ifNil:
-			[ ^ super = anotherObject and: [ type = anotherObject type ]]) ]
-]
-
-{ #category : #'translation-operators' }
-MASlangReceiver >> == anOperand [
-	^ self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator)
 ]
 
 { #category : #'translation-operators' }
@@ -141,11 +119,7 @@ MASlangReceiver >> \\ anInteger [
 MASlangReceiver >> abs [
 	| strippedType funcName |
 	"Duplicated code from slang."
-	strippedType := (type beginsWith: 'unsigned ')
-		ifTrue: [type allButFirst: 'unsigned ' size]
-		ifFalse: [(type beginsWith: 'u')
-			ifTrue: [type allButFirst: 1]
-			ifFalse: [type]].
+	strippedType := type type.
 		
 	funcName := 
 		(#(	('long long' llabs) ('__int64' #llabs) ('int64_t' #llabs)
@@ -194,20 +168,6 @@ MASlangReceiver >> anyMask: anOperand [
 	^ self & anOperand
 ]
 
-{ #category : #typing }
-MASlangReceiver >> asCType [
-	<deprecated>
-	"not sure how this is declared"
-	self flag: #deprecated.
-	"for API concistency with the initial design. "
-	^ type ifNil: [ #sqInt ]
-]
-
-{ #category : #typing }
-MASlangReceiver >> asConstraint [
-	^ SingleType new type: self; yourself
-]
-
 { #category : #'translation-keyword' }
 MASlangReceiver >> asFloat [
 	^ self translatedReceiver castTo: (self cTypeFor: #double)
@@ -219,11 +179,6 @@ MASlangReceiver >> asInteger [
 ]
 
 { #category : #'translation-keyword' }
-MASlangReceiver >> asUnsignedInteger [
-	^ self translatedReceiver castTo: (self cTypeFor: #usqInt)
-]
-
-{ #category : #'translation-keyword' }
 MASlangReceiver >> asUnsignedIntegerPtr [
 	^ self translatedReceiver castTo: (self cTypeFor: #usqIntptr_t)
 ]
@@ -231,16 +186,6 @@ MASlangReceiver >> asUnsignedIntegerPtr [
 { #category : #'translation-keyword' }
 MASlangReceiver >> asVoidPointer [
 	^ self translatedReceiver castTo: (self cTypeFor: #'void *')
-]
-
-{ #category : #'translation-keyword' }
-MASlangReceiver >> at: anExpression [
-	^ self translatedReceiver indexAt: (anExpression acceptVisitor: methodTranslator)
-]
-
-{ #category : #'translation-keyword' }
-MASlangReceiver >> at: anExpression put: aValue [
-	^ (self at: anExpression) assign: (aValue acceptVisitor: methodTranslator)
 ]
 
 { #category : #'translation-keyword' }
@@ -388,13 +333,6 @@ MASlangReceiver >> cCoerceSimple: aVariable to: aType [
 ]
 
 { #category : #'translation-keyword' }
-MASlangReceiver >> cTypeFor: aSymbol [
-	^ ASTCType new 
-		type: (self class new type: aSymbol value ; yourself) asConstraint;
-		yourself
-]
-
-{ #category : #'translation-keyword' }
 MASlangReceiver >> caseOf: anArrayNode [
 	^ self caseOf: anArrayNode otherwise: nil
 ]
@@ -515,37 +453,6 @@ MASlangReceiver >> ifFalse: falseBlock ifTrue: trueBlock [
 ]
 
 { #category : #'translation-keyword' }
-MASlangReceiver >> ifNil: aNilBlock [
-	| ifNotNilNode |
-	ifNotNilNode := self ifNotNil: aNilBlock.
-	ifNotNilNode condition: ifNotNilNode condition not.
-	^ ifNotNilNode
-]
-
-{ #category : #'translation-keyword' }
-MASlangReceiver >> ifNil: aNilBlock ifNotNil: anIfNotNilBlock [
-	self assert: anIfNotNilBlock isBlock.
-	^ ASTCIf new
-		condition: self translatedReceiver not;
-		then: (aNilBlock acceptVisitor: methodTranslator);
-		else: (anIfNotNilBlock acceptVisitor: methodTranslator);
-		yourself 
-]
-
-{ #category : #'translation-keyword' }
-MASlangReceiver >> ifNotNil: anIfNotNilBlock [
-	^ ASTCIf new
-		condition: self translatedReceiver;
-		then: (anIfNotNilBlock acceptVisitor: methodTranslator)
-		yourself
-]
-
-{ #category : #'translation-keyword' }
-MASlangReceiver >> ifNotNil: anIfNotNilBlock ifNil: aNilBlock [ 
-	^ self ifNil: aNilBlock ifNotNil: anIfNotNilBlock
-]
-
-{ #category : #'translation-keyword' }
 MASlangReceiver >> ifTrue: trueBlock [
 	"same code as ASTCBoolean>>#ifFalse:"
  	^ ASTCIf new
@@ -586,11 +493,6 @@ MASlangReceiver >> isIntegerObject: anOop [
 		id: (ASTCIdentifier new id: #isIntegerObject ; yourself);
 		addArgument: (anOop acceptVisitor: methodTranslator);
 		yourself
-]
-
-{ #category : #'translation-keyword' }
-MASlangReceiver >> isNil [
-	^ self translatedReceiver equals: (ASTCLiteral value: #null)
 ]
 
 { #category : #'translation-keyword' }
@@ -642,14 +544,6 @@ MASlangReceiver >> negated [
 	^ self translatedReceiver negated
 ]
 
-{ #category : #utility }
-MASlangReceiver >> new [
-	"very hacky way to 'create' a 'new' instance of the recever... Should not stay that way."
-	self flag: #hack.
-	^ self
-
-]
-
 { #category : #'translation-keyword' }
 MASlangReceiver >> noMask: anOperand [
 	^ (self translatedReceiver & (anOperand acceptVisitor: methodTranslator)) equals: (ASTCLiteral value: 0)
@@ -658,11 +552,6 @@ MASlangReceiver >> noMask: anOperand [
 { #category : #'translation-keyword' }
 MASlangReceiver >> not [
 	^ self translatedReceiver not
-]
-
-{ #category : #'translation-keyword' }
-MASlangReceiver >> notNil [
-	^ self translatedReceiver notEquals: (ASTCLiteral value: #null)
 ]
 
 { #category : #'translation-keyword' }
@@ -840,16 +729,6 @@ MASlangReceiver >> tryEvaluateLiteralExpression: anExpression [
 		ifNonValueDo: [ nil ]
 ]
 
-{ #category : #accessing }
-MASlangReceiver >> type [
-	^ type
-]
-
-{ #category : #accessing }
-MASlangReceiver >> type: aType [
-	type := aType
-]
-
 { #category : #'translation-keyword' }
 MASlangReceiver >> unsupportedFeature: aSelector [
 	self isStrict ifTrue: [ ^ UnsupportedFeature new feature: aSelector ; signal ].
@@ -924,19 +803,4 @@ MASlangReceiver >> wordSize [
 MASlangReceiver >> | aBool [
 	^ self translatedReceiver | (aBool acceptVisitor: methodTranslator) 
 		
-]
-
-{ #category : #'translation-operators' }
-MASlangReceiver >> ~= anotherObject [
-	"if weird behavior, it's probably because it's not in the right context."
-	"this is only defined for translation, so if it's use for receiver equality, it won't work."
-	^ self translatedReceiver notEquals: (anotherObject acceptVisitor: methodTranslator) 
-		
-]
-
-{ #category : #'translation-operators' }
-MASlangReceiver >> ~~ anOperand [
-	"duplicates the code of #==
-	funny thing, if we don't the message is not send, and we have a weird bug"
-	^ self translatedReceiver equals: (anOperand acceptVisitor: methodTranslator) not
 ]

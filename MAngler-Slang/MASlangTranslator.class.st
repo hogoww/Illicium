@@ -50,8 +50,12 @@ MASlangTranslator >> generateVM [
 ]
 
 { #category : #initialization }
-MASlangTranslator >> getReplacementType: aSymbol [
-	^ (MASlangReceiver new type: aSymbol) asConstraint
+MASlangTranslator >> getReplacementType: aCType [
+	^ ((aCType isStruct
+		ifTrue:[ aCType pharoType: (program structNamed: aCType type).
+			MASlangStructsReceiver new ]
+		ifFalse:[ MASlangReceiver new ]) 
+			type: aCType ; yourself) asConstraint.
 ]
 
 { #category : #accesors }
@@ -118,7 +122,7 @@ MASlangTranslator >> translateProgram [
 	| cu |
 	cu := super translateProgram.
 
-	program structToTranslate collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
+	program structClasses collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
 	^ cu
 ]
