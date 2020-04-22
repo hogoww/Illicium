@@ -15,3 +15,11 @@ ASTCCompilationUnit >> addFunctionDefinition: aFunctionDefinition [
 	self addDeclaration: aFunctionDefinition declaration.
 	^ true
 ]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCCompilationUnit >> functionNamed: aFunctionName [
+	| function |
+	function := self definitions detect: [ :aDefinition |
+		aDefinition isFunctionDefinition and: [ aDefinition declaration id id = aFunctionName ] ].
+	^ function
+]
