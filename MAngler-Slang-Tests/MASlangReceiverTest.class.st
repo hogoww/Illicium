@@ -22,10 +22,10 @@ MASlangReceiverTest >> testIfNil [
 	| messageNode ifNode expectedC |
 	messageNode := RBParser parseExpression: '1 ifNil: [ 2 ]'.
 	"Manual typing"
-	self addType: #int to: messageNode.
-	self addType: #int to: messageNode receiver.
+	self addType: (CType createFrom: #int) to: messageNode.
+	self addType: (CType createFrom: #int) to: messageNode receiver.
 "	self addType: BlockClosure to: messageNode arguments first." "does not seem needed"
-	self addType: #int to: messageNode arguments first statements first.
+	self addType: (CType createFrom: #int) to: messageNode arguments first statements first.
 	
 	"Manual declaration"
 	self addDeclarationProperty: OrderedCollection new to: messageNode arguments first body.
@@ -62,9 +62,9 @@ MASlangReceiverTest >> testMoins [
 	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 - 2'.
 	"Manual typing"
-	self addType: #int to: messageNode.
-	self addType: #int to: messageNode receiver.
-	self addType: #int to: messageNode arguments first.
+	self addType: (CType createFrom: #int) to: messageNode.
+	self addType: (CType createFrom: #int) to: messageNode receiver.
+	self addType: (CType createFrom: #int) to: messageNode arguments first.
 	
 	operator := messageNode acceptVisitor: methodTranslator.
 	
@@ -87,9 +87,9 @@ MASlangReceiverTest >> testPlus [
 	| messageNode operator expectedC |
 	messageNode := RBParser parseExpression: '1 + 2'.
 	"Manual typing"
-	self addType: #int to: messageNode.
-	self addType: #int to: messageNode receiver.
-	self addType: #int to: messageNode arguments first.
+	self addType: (CType createFrom: #int) to: messageNode.
+	self addType: (CType createFrom: #int) to: messageNode receiver.
+	self addType: (CType createFrom: #int) to: messageNode arguments first.
 	
 	operator := messageNode acceptVisitor: methodTranslator.
 	
