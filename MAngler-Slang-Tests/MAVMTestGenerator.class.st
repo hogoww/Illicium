@@ -165,7 +165,7 @@ MAVMTestGenerator >> generateSmokeTestFor: aMethod inTestClass: aTestClass [
 		self prettyPrintIllicium: illiAST.
 	].
 
-	aTestClass compile: methodSource asString classified: aMethod protocol.
+	aTestClass compile: methodSource asString classified: (aMethod protocol ifNil: #'').
 ]
 
 { #category : #'test-generation' }
