@@ -54,6 +54,15 @@ MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 ]
 
 { #category : #adding }
+MASlangProgram >> addMacro: aMethod withInferer: inferer [
+	"we only add them in the inferer to have correct types currently. 
+	They will have to be translated correctly as well at some point"
+	self flag: #unfinished.
+	(inferer methodNamed: aMethod selector) ifNotNil: [ inferer removeMethodForSelector: aMethod selector].
+	inferer addMethod: (aMethod copy asTranslationMethodOfClass: TMethod)
+]
+
+{ #category : #adding }
 MASlangProgram >> addMethod: aMethod withInferer: inferer [ 
 	| copy needToBeRemovedFirst |
 	copy := aMethod copy.
@@ -132,12 +141,18 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 			each lookupSelector: aSelector ])
 			select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
 			thenDo: [ :aMethod |
-				(self shouldExpandMethod: aMethod)
-					ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]
-					ifFalse: [ self addMethod: aMethod ast withInferer: inferer ]].
+				(aTranslator isCMacro: aMethod)
+					ifTrue:[ self addMacro: aMethod ast withInferer: inferer ]
+					ifFalse: [ 
+						(self shouldExpandMethod: aMethod)
+							ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]
+							ifFalse: [ self addMethod: aMethod ast withInferer: inferer ]]].
 		each declareCVarsIn: inferer ].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
+	
+	self structClasses do:[ :aStructClass| inferer addStructClass: aStructClass ].
+	
 	self isFullyAnnotated: true
 ]
 

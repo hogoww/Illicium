@@ -9,6 +9,12 @@ MASlangTranslator class >> classTranslatorClass [
 	^ MASlangVMClassTranslator 
 ]
 
+{ #category : #testing }
+MASlangTranslator class >> isCMacro: aMethod [
+	^ (aMethod hasPragmaNamed: #cmacro)
+		or: [(aMethod hasPragmaNamed: #cmacro:) ].
+]
+
 { #category : #'special selectors' }
 MASlangTranslator class >> isSpecialSelector: aString [ 
 	
@@ -31,11 +37,10 @@ MASlangTranslator class >> shouldITranslate: aMethod [
 
 	^ aMethod isSubclassResponsibility not
 		and: [ (aMethod hasPragmaNamed: #doNotGenerate) not
-			and: [ (aMethod hasPragmaNamed: #cmacro) not
-				and: [ (aMethod hasPragmaNamed: #cmacro:) not
 					and: [ aMethod selector ~~ #initialize 
+						"and isMacro not. ->  they should be"
 						"and: [ (MAFullVMCCodeGeneratorRessource current codeGenerator 
-							methodNamed: aMethod selector) isNotNil ]"]]]]
+							methodNamed: aMethod selector) isNotNil ]"]]
 ]
 
 { #category : #'translation-api' }
@@ -67,6 +72,11 @@ MASlangTranslator >> inferer [
 MASlangTranslator >> initialize [
 	super initialize.
 	inferer := CCodeGeneratorGlobalStructure new
+]
+
+{ #category : #testing }
+MASlangTranslator >> isCMacro: aMethod [
+	^ self class isCMacro: aMethod
 ]
 
 { #category : #testing }
