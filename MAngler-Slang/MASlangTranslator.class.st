@@ -9,6 +9,13 @@ MASlangTranslator class >> classTranslatorClass [
 	^ MASlangVMClassTranslator 
 ]
 
+{ #category : #'default-configuration' }
+MASlangTranslator class >> generate: aClassName outputDirectory: aDirectory [
+	"prototype, stuff are currently hard coded."
+	self flag: #hack.
+	self new generateVM
+]
+
 { #category : #testing }
 MASlangTranslator class >> isCMacro: aMethod [
 	^ (aMethod hasPragmaNamed: #cmacro)
@@ -47,7 +54,8 @@ MASlangTranslator class >> shouldITranslate: aMethod [
 MASlangTranslator >> generateVM [
 	"Shortcut, since the VM is the base program for this translator"
 	^ FANewFilePrinter new
-		fileName: 'vm';
+		directory: './generated/vm/src/';
+		fileName: 'gcc3x-cointerp.c';
 		compilationUnit: self translateProgram;
 		prettyPrinter: self class prettyPrinterClass new;
 		printInFile;
