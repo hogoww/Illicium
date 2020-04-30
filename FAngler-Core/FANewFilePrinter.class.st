@@ -26,8 +26,8 @@ FANewFilePrinter >> directory [
 ]
 
 { #category : #accessing }
-FANewFilePrinter >> directory: anObject [
-	directory := anObject
+FANewFilePrinter >> directory: aString [
+	directory := (FileSystem workingDirectory / aString) ensureCreateDirectory.
 ]
 
 { #category : #accessing }
@@ -66,8 +66,9 @@ FANewFilePrinter >> printCodeInFileStream: aStream [
 { #category : #accessing }
 FANewFilePrinter >> printInFile [
 	| file |
+
 	directory ensureCreateDirectory.
-	file := directory / (fileName,'.c').
+	file := directory / fileName.
 	file exists ifTrue: [ file delete ].
 	file writeStreamDo: [ :stream |
 		self printCodeInFileStream: stream

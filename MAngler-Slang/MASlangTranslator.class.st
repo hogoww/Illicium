@@ -55,7 +55,7 @@ MASlangTranslator >> generateVM [
 	"Shortcut, since the VM is the base program for this translator"
 	^ FANewFilePrinter new
 		directory: './generated/vm/src/';
-		fileName: 'gcc3x-cointerp.c';
+		fileName: 'gcc3x-interp.c';
 		compilationUnit: self translateProgram;
 		prettyPrinter: self class prettyPrinterClass new;
 		printInFile;
