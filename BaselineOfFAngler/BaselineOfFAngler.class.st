@@ -15,7 +15,7 @@ BaselineOfFAngler >> baseline: spec [
 				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
 			spec
 				baseline: 'Phineas'
-				with: [ spec repository: 'gitlab://pharo-project/Phineas:ctypes' ].
+				with: [ spec repository: 'gitlab://pharo-project/Phineas:cTypeForSlang' ].
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			spec
@@ -44,6 +44,7 @@ BaselineOfFAngler >> baseline: spec [
 
 { #category : #accessing }
 BaselineOfFAngler >> lastPlayground [
+
 ASTCGenerator generate.
 MAPluginTestGenerator generateVMMakerPluginsTests.
 MAPluginTestGenerator generateVMMakerInterpreterPrimitiveTests.
@@ -52,9 +53,9 @@ MAVMTestGenerator cleanUp.
 MAPluginTestGenerator cleanUp.
 MASlangTestResource resetAll.
 MAFullVMCCodeGeneratorRessource reset.
-
-MASpur64BitMemoryManagerTranslationTest new setUp testActiveAndDeferredScanStringComparison
-
+"MASlangTranslator new translateVM."
+MASlangTranslator new generateVM.
+PharoVMMaker generate: #StackVM.
 ]
 
 { #category : #accessing }
