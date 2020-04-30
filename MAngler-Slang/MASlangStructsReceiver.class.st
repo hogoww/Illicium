@@ -26,7 +26,7 @@ MASlangStructsReceiver >> translateAsAccessor: aMessage [
 		ifTrue: [ self translatedReceiver -> (ASTCLiteral value: aMessage selector) ]
 		ifFalse:[ self translatedReceiver structStaticAccess: (ASTCLiteral value: aMessage selector) ].	
 	
-	aMessage last = $: ifFalse: [ ^ structMember ]."read accessor"
+	aMessage selector last = $: ifFalse: [ ^ structMember ]."read accessor"
 	"else write accessor"
 	^ structMember assign: (aMessage arguments first acceptVisitor: methodTranslator)
 ]
