@@ -74,3 +74,13 @@ FANewFilePrinter >> printInFile [
 		self printCodeInFileStream: stream
 	].
 ]
+
+{ #category : #accessing }
+FANewFilePrinter >> printStringInFile: aString [
+	| file |
+	
+	directory ensureCreateDirectory.
+	file := directory / fileName.
+	file exists ifTrue: [ file delete ].
+	file writeStreamDo: [ :stream | stream << aString ].
+]
