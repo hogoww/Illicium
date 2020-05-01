@@ -72,8 +72,8 @@ MASlangTranslator >> generateVMCCode [
 { #category : #'translation-api' }
 MASlangTranslator >> generateVMCallBackHeader [
 	^ FANewFilePrinter new
-		directory: './generated/vm/src/';
-		fileName: 'interp.h';
+		directory: './generated/vm/include/';
+		fileName: 'vmCallback.h';
 		printStringInFile: self vmCallbackHeader;
 		yourself
 ]
@@ -81,7 +81,7 @@ MASlangTranslator >> generateVMCallBackHeader [
 { #category : #'translation-api' }
 MASlangTranslator >> generateVMHeader [
 	^ FANewFilePrinter new
-		directory: './generated/vm/src/';
+		directory: './generated/vm/include/';
 		fileName: 'interp.h';
 		printStringInFile: self interpretHeader;
 		yourself
