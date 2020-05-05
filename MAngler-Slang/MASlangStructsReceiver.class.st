@@ -12,8 +12,8 @@ MASlangStructsReceiver >> doesNotUnderstand: aMessage [
 		"apparently there's quite a few, some of them surprising"
 		
 	(type pharoType isAccessor: aMessage selector) ifTrue: [ 
-		self translateAsAccessor: aMessage
-		  ].
+			self translateAsAccessor: aMessage
+		].
 	
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
 ]

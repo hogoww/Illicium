@@ -2,24 +2,14 @@ Class {
 	#name : #MASlangProgram,
 	#superclass : #FAProgram,
 	#instVars : [
-		'includes'
+		'includes',
+		'cMacros'
 	],
 	#classVars : [
 		'InitializationOptions'
 	],
 	#category : #'MAngler-Slang-Translation'
 }
-
-{ #category : #adding }
-MASlangProgram >> addCMacro: aMethod withInferer: inferer [
-	"add methods that are tagged to be translated as cMacro by a pragma"
-	
-	"we only add them in the inferer to have correct types currently. 
-	They will have to be translated correctly as well at some point"
-	self flag: #unfinished.
-	(inferer methodNamed: aMethod selector) ifNotNil: [ inferer removeMethodForSelector: aMethod selector].
-	inferer addMethod: (aMethod copy asTranslationMethodOfClass: TMethod)
-]
 
 { #category : #'method-expansion' }
 MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
@@ -152,12 +142,12 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 			each lookupSelector: aSelector ])
 			select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
 			thenDo: [ :aMethod |
-				(aTranslator isCMacro: aMethod)
+"				(aTranslator isCMacro: aMethod)
 					ifTrue:[ self addCMacro: aMethod ast withInferer: inferer ]
-					ifFalse: [ 
+					ifFalse: ["
 						(self shouldExpandMethod: aMethod)
 							ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]
-							ifFalse: [ self addMethod: aMethod ast withInferer: inferer ]]].
+							ifFalse: [ self addMethod: aMethod ast withInferer: inferer ]]"]".
 		].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").

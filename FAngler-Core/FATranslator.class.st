@@ -142,8 +142,13 @@ FATranslator >> prepareMethodAST: aMethodNode [
 
 { #category : #'translation-api' }
 FATranslator >> prepareMethodsASTs: methodsASTs [
-	methodsASTs do: [ :aMethodAST | self annotateMethodAST: aMethodAST ].
-	methodsASTs do: [ :aMethodAST | self applyTransformationsOn: aMethodAST ].
+	"we don't treat macros."
+	methodsASTs do: [ :aMethodAST | 
+		aMethodAST isCMacro ifFalse:[
+			self annotateMethodAST: aMethodAST ]].
+	methodsASTs do: [ :aMethodAST | 
+		aMethodAST isCMacro ifFalse:[
+			self applyTransformationsOn: aMethodAST ]].
 	^ methodsASTs
 ]
 

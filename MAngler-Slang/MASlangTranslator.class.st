@@ -16,12 +16,6 @@ MASlangTranslator class >> generate: aClassName outputDirectory: aDirectory [
 	self new generateVM
 ]
 
-{ #category : #testing }
-MASlangTranslator class >> isCMacro: aMethod [
-	^ (aMethod hasPragmaNamed: #cmacro)
-		or: [(aMethod hasPragmaNamed: #cmacro:) ].
-]
-
 { #category : #'special selectors' }
 MASlangTranslator class >> isSpecialSelector: aString [ 
 	
@@ -163,11 +157,6 @@ MASlangTranslator >> interpretHeader [
 #define DisownVMLockOutFullGC 8
 #define DisownVMForFFICall 16
 #define DisownVMForThreading 32'
-]
-
-{ #category : #testing }
-MASlangTranslator >> isCMacro: aMethod [
-	^ self class isCMacro: aMethod
 ]
 
 { #category : #testing }
