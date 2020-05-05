@@ -199,6 +199,15 @@ FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 	anASTCCompilationUnit includes
 		do:[ :anInclude | self print: anInclude ; cr ].
 
+	anASTCCompilationUnit preamble ifNotNil:[
+		self << '/* preamble */' ; cr ;
+			print: anASTCCompilationUnit preamble ; cr
+	].
+
+	self << '/* structTypes */' ; cr.
+	anASTCCompilationUnit structTypes
+		do:[ :aStructType | self print: aStructType ; cr ; cr ].
+
 	self << '/* Defines */' ; cr.
 	anASTCCompilationUnit defines
 		do:[ :aDefine | self print: aDefine ; cr ].

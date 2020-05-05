@@ -2,10 +2,12 @@ Class {
 	#name : #ASTCCompilationUnit,
 	#superclass : #ASTCNode,
 	#instVars : [
-		'definitions',
-		'declarations',
 		'includes',
-		'defines'
+		'preamble',
+		'defines',
+		'structTypes',
+		'definitions',
+		'declarations'
 	],
 	#category : #'ASTC-Core-Nodes'
 }
@@ -14,13 +16,17 @@ Class {
 ASTCCompilationUnit >> = aCompilationUnit [
 	super = aCompilationUnit
 		ifFalse: [ ^ false ].
+	includes = aCompilationUnit includes
+		ifFalse: [ ^ false ].
+	preamble = aCompilationUnit preamble
+		ifFalse: [ ^ false ].
+	defines = aCompilationUnit defines
+		ifFalse: [ ^ false ].
+	structTypes = aCompilationUnit structTypes
+		ifFalse: [ ^ false ].
 	definitions = aCompilationUnit definitions
 		ifFalse: [ ^ false ].
 	declarations = aCompilationUnit declarations
-		ifFalse: [ ^ false ].
-	includes = aCompilationUnit includes
-		ifFalse: [ ^ false ].
-	defines = aCompilationUnit defines
 		ifFalse: [ ^ false ].
 	^ true
 ]
@@ -55,6 +61,13 @@ ASTCCompilationUnit >> addDefinition: aDefinition [
 ASTCCompilationUnit >> addInclude: anInclude [
 	anInclude parent: self.
 	includes add: anInclude.
+	^ true
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> addStructType: aStructType [
+	aStructType parent: self.
+	structTypes add: aStructType.
 	^ true
 ]
 
@@ -104,13 +117,36 @@ ASTCCompilationUnit >> includes: somePreprocessorIncludes [
 
 { #category : #accessing }
 ASTCCompilationUnit >> initialize [
-	definitions := OrderedCollection new.
-	declarations := OrderedCollection new.
 	includes := OrderedCollection new.
-	defines := OrderedCollection new
+	defines := OrderedCollection new.
+	structTypes := OrderedCollection new.
+	definitions := OrderedCollection new.
+	declarations := OrderedCollection new
 ]
 
 { #category : #testing }
 ASTCCompilationUnit >> isCompilationUnit [
 	^ true
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> preamble [
+	^ preamble
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> preamble: aPreamble [
+	aPreamble ifNotNil: [ aPreamble parent: self ].
+	preamble := aPreamble
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> structTypes [
+	^ structTypes
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> structTypes: someStructureDefinitions [
+	someStructureDefinitions do: [ :each | each parent: self ].
+	structTypes := someStructureDefinitions
 ]

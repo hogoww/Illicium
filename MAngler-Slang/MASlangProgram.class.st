@@ -134,7 +134,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self isFullyAnnotated ifTrue: [ ^ self ].
 	
 	"slang initialization"
-	inferer vmClass: self vmClass.
+	inferer vmClass: self interpreterClass.
 	self initializeClassVariablesIn: inferer.
 	self structClasses do:[ :aStructClass | aStructClass initialize ].
 	
@@ -202,12 +202,6 @@ MASlangProgram >> structClasses [
 { #category : #accessing }
 MASlangProgram >> structNamed: aStructName [
 	^ self structClasses detect: [ :aClass | aClass structTypeName = aStructName  ]
-]
-
-{ #category : #accessing }
-MASlangProgram >> vmClass [
-	
-	^ StackInterpreter
 ]
 
 { #category : #accessing }

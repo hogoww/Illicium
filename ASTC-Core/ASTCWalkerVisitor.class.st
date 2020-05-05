@@ -99,6 +99,15 @@ ASTCWalkerVisitor >> visitCastOperator: aCastOperator [
 { #category : #visiting }
 ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
 	super visitCompilationUnit: aCompilationUnit.
+	aCompilationUnit includes
+		ifNotNil:
+			[ :includes | includes do: [ :anIncludes | anIncludes acceptVisitor: self ] ].
+	aCompilationUnit defines
+		ifNotNil:
+			[ :defines | defines do: [ :aDefines | aDefines acceptVisitor: self ] ].
+	aCompilationUnit structTypes
+		ifNotNil:
+			[ :structTypes | structTypes do: [ :aStructTypes | aStructTypes acceptVisitor: self ] ].
 	aCompilationUnit definitions
 		ifNotNil:
 			[ :definitions | definitions do: [ :aDefinitions | aDefinitions acceptVisitor: self ] ].
@@ -106,12 +115,8 @@ ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
 		ifNotNil: [ :declarations | 
 			declarations
 				do: [ :aDeclarations | aDeclarations acceptVisitor: self ] ].
-	aCompilationUnit includes
-		ifNotNil:
-			[ :includes | includes do: [ :anIncludes | anIncludes acceptVisitor: self ] ].
-	aCompilationUnit defines
-		ifNotNil:
-			[ :defines | defines do: [ :aDefines | aDefines acceptVisitor: self ] ]
+	aCompilationUnit preamble
+		ifNotNil: [ :aPreamble | aPreamble acceptVisitor: self ]
 ]
 
 { #category : #visiting }

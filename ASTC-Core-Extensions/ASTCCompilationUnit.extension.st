@@ -2,6 +2,8 @@ Extension { #name : #ASTCCompilationUnit }
 
 { #category : #'*ASTC-Core-Extensions' }
 ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
+	"Does not set the preamble, because I cannot decide here which should be kept if both are sets."
+	aCompilationUnit structTypes do: [ :aStructType | self addStructType: aStructType ].
 	aCompilationUnit definitions do: [ :aDefinition | self addDefinition: aDefinition ].
 	aCompilationUnit declarations do: [ :aDeclaration | self addDeclaration: aDeclaration ].
 	aCompilationUnit includes do: [ :anInclude | self addPreprocessorInclude: anInclude ].
@@ -27,6 +29,12 @@ ASTCCompilationUnit >> addPreprocessorDefine: aPreProcessorDefine [
 ASTCCompilationUnit >> addPreprocessorInclude: aPreProcessorInclude [
 	"shortcut, that is working with generated code"
 	^ self addInclude: aPreProcessorInclude
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCCompilationUnit >> addStructureDefinition: aPreProcessorDefine [
+	"shortcut, that is working with generated code"
+	^ self addStructType: aPreProcessorDefine
 ]
 
 { #category : #'*ASTC-Core-Extensions' }

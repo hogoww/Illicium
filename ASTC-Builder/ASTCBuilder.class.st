@@ -405,10 +405,12 @@ ASTCBuilder >> defineRelations [
 
 	"General nodes"
 	(project property: #compilationUnits) <>-* (compilationUnit property: #project).
+	(compilationUnit property: #includes) <>-* (preprocessorInclude property: #compilationUnit).
+	(compilationUnit property: #preamble) <>- (rawCCode property: #compilationUnit). "Slang uses it, so we have it."
+	(compilationUnit property: #defines) <>-* (preprocessorDefine property: #compilationUnit).
+	(compilationUnit property: #structTypes) <>-* (structureDefinition property: #compilationUnit).
 	(compilationUnit property: #definitions) <>-* (definition property: #compilationUnit).
 	(compilationUnit property: #declarations) <>-* (declaration property: #compilationUnit).
-	(compilationUnit property: #includes) <>-* (preprocessorInclude property: #compilationUnit).
-	(compilationUnit property: #defines) <>-* (preprocessorDefine property: #compilationUnit).
 
 	"preprocessor"
 	(preprocessorIf property: #condition) <>- (expression property: #preProssorIfCond).

@@ -221,7 +221,10 @@ MASlangTranslator >> transformations [
 { #category : #'translation-api' }
 MASlangTranslator >> translateProgram [
 	| cu |
+	
 	cu := super translateProgram.
+	cu preamble: (ASTCRawCCode new cCode: program interpreterClass preambleCCode).
+	
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
 	program structClasses collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
