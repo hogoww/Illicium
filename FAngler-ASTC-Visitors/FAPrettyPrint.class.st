@@ -348,7 +348,11 @@ FAPrettyPrint >> visitStructureDeclaration: aStructureDeclaration [
 
 { #category : #visiting }
 FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
-	self print: aStructureDefinition declaration;
+	
+	self << 'typedef';
+		space;
+		print: aStructureDefinition declaration;
+		space;
 		<< '{';
 		cr.
 		
@@ -360,7 +364,11 @@ FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 	].
 	self leaveBlock.
 	
-	self spaces; << '};'
+	self spaces; << '}';
+		space;
+		print: aStructureDefinition declaration id;
+		space;
+		<< ';'
 ]
 
 { #category : #visiting }

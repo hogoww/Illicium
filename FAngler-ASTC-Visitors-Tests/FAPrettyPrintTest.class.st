@@ -153,9 +153,9 @@ FAPrettyPrintTest >> testVisitStructureDefinition [
 	operator debugASTCStructure.
 	self assert: operator isStructureDefinition.
 	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 
-'struct heros{
+'typedef struct heros {
  int druss;
-};'.
+} heros ;'.
 ]
 
 { #category : #tests }
