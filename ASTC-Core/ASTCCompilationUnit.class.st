@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'definitions',
 		'declarations',
-		'preprocessorMacro'
+		'includes',
+		'defines'
 	],
 	#category : #'ASTC-Core-Nodes'
 }
@@ -17,7 +18,9 @@ ASTCCompilationUnit >> = aCompilationUnit [
 		ifFalse: [ ^ false ].
 	declarations = aCompilationUnit declarations
 		ifFalse: [ ^ false ].
-	preprocessorMacro = aCompilationUnit preprocessorMacro
+	includes = aCompilationUnit includes
+		ifFalse: [ ^ false ].
+	defines = aCompilationUnit defines
 		ifFalse: [ ^ false ].
 	^ true
 ]
@@ -35,6 +38,13 @@ ASTCCompilationUnit >> addDeclaration: aDeclaration [
 ]
 
 { #category : #accessing }
+ASTCCompilationUnit >> addDefine: aDefine [
+	aDefine parent: self.
+	defines add: aDefine.
+	^ true
+]
+
+{ #category : #accessing }
 ASTCCompilationUnit >> addDefinition: aDefinition [
 	aDefinition parent: self.
 	definitions add: aDefinition.
@@ -42,9 +52,9 @@ ASTCCompilationUnit >> addDefinition: aDefinition [
 ]
 
 { #category : #accessing }
-ASTCCompilationUnit >> addPreprocessorMacro: aPreprocessorMacro [
-	aPreprocessorMacro parent: self.
-	preprocessorMacro add: aPreprocessorMacro.
+ASTCCompilationUnit >> addInclude: anInclude [
+	anInclude parent: self.
+	includes add: anInclude.
 	^ true
 ]
 
@@ -60,6 +70,17 @@ ASTCCompilationUnit >> declarations: someDeclarations [
 ]
 
 { #category : #accessing }
+ASTCCompilationUnit >> defines [
+	^ defines
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> defines: somePreprocessorDefines [
+	somePreprocessorDefines do: [ :each | each parent: self ].
+	defines := somePreprocessorDefines
+]
+
+{ #category : #accessing }
 ASTCCompilationUnit >> definitions [
 	^ definitions
 ]
@@ -71,24 +92,25 @@ ASTCCompilationUnit >> definitions: someDefinitions [
 ]
 
 { #category : #accessing }
+ASTCCompilationUnit >> includes [
+	^ includes
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> includes: somePreprocessorIncludes [
+	somePreprocessorIncludes do: [ :each | each parent: self ].
+	includes := somePreprocessorIncludes
+]
+
+{ #category : #accessing }
 ASTCCompilationUnit >> initialize [
 	definitions := OrderedCollection new.
 	declarations := OrderedCollection new.
-	preprocessorMacro := OrderedCollection new
+	includes := OrderedCollection new.
+	defines := OrderedCollection new
 ]
 
 { #category : #testing }
 ASTCCompilationUnit >> isCompilationUnit [
 	^ true
-]
-
-{ #category : #accessing }
-ASTCCompilationUnit >> preprocessorMacro [
-	^ preprocessorMacro
-]
-
-{ #category : #accessing }
-ASTCCompilationUnit >> preprocessorMacro: somePreprocessorDefines [
-	somePreprocessorDefines do: [ :each | each parent: self ].
-	preprocessorMacro := somePreprocessorDefines
 ]

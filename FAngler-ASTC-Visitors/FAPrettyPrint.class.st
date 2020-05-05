@@ -195,9 +195,13 @@ FAPrettyPrint >> visitCastOperator: aCastOperator [
 { #category : #visiting }
 FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 	
-	self << '/* Macros */' ; cr.
-	anASTCCompilationUnit preprocessorMacro
-		do:[ :aPreprocessorMacro | self print: aPreprocessorMacro ; cr  ].
+	self << '/* includes */' ; cr.
+	anASTCCompilationUnit includes
+		do:[ :anInclude | self print: anInclude ; cr ].
+
+	self << '/* Defines */' ; cr.
+	anASTCCompilationUnit defines
+		do:[ :aDefine | self print: aDefine ; cr ].
 
 	self << '/* Declarations */' ; cr.
 	anASTCCompilationUnit declarations 
@@ -325,7 +329,7 @@ FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
 	self 	<< #'#include';
 		space;
-		print: aPreProcessorInclude name
+		<< aPreProcessorInclude name
 ]
 
 { #category : #visiting }

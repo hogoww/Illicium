@@ -42,10 +42,13 @@ ASTCDebugStructureVisitor >> visitCompilationUnit: aCompilationUnit [
 		ifNotNil: [ :declarations | 
 			declarations
 				do: [ :aDeclarations | self assert: aDeclarations isDeclaration ] ].
-	aCompilationUnit preprocessorMacro
-		ifNotNil: [ :preprocessorMacro | 
-			preprocessorMacro
-				do: [ :aPreprocessorMacro | self assert: aPreprocessorMacro isPreprocessorDefine ] ]
+	aCompilationUnit includes
+		ifNotNil: [ :includes | 
+			includes
+				do: [ :anIncludes | self assert: anIncludes isPreprocessorInclude ] ].
+	aCompilationUnit defines
+		ifNotNil:
+			[ :defines | defines do: [ :aDefines | self assert: aDefines isPreprocessorDefine ] ]
 ]
 
 { #category : #visiting }
