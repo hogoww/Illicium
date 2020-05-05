@@ -120,7 +120,7 @@ MASlangProgram >> initializeClassVariablesIn: inferer [
 
 { #category : #accessing }
 MASlangProgram >> interpreterClass [
-	^ StackInterpreter
+	^ StackInterpreterPrimitives
 ]
 
 { #category : #enumerating }
@@ -138,7 +138,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self initializeClassVariablesIn: inferer.
 	self structClasses do:[ :aStructClass | aStructClass initialize ].
 	
-	self classesDo: [ :each |
+	self classesToPrepareSelectorsFor do: [ :each |
 		each prepareToBeAddedToCodeGenerator: inferer.
 		inferer checkClassForNameConflicts: each.
 		each declareCVarsIn: inferer.
