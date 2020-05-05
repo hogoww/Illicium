@@ -265,6 +265,11 @@ ASTCVisitor >> visitPreprocessorIf: aPreprocessorIf [
 ]
 
 { #category : #visiting }
+ASTCVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
+	
+]
+
+{ #category : #visiting }
 ASTCVisitor >> visitProject: aProject [
 	
 ]

@@ -327,6 +327,11 @@ ASTCWalkerVisitor >> visitPreprocessorIf: aPreprocessorIf [
 ]
 
 { #category : #visiting }
+ASTCWalkerVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
+	super visitPreprocessorInclude: aPreprocessorInclude
+]
+
+{ #category : #visiting }
 ASTCWalkerVisitor >> visitProject: aProject [
 	super visitProject: aProject.
 	aProject compilationUnits

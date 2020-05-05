@@ -769,6 +769,21 @@ ASTCPrinterVisitor >> visitPreprocessorIf: aPreprocessorIf [
 ]
 
 { #category : #visiting }
+ASTCPrinterVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
+	stream cr.
+	self printTabCount: currentDepth.
+	stream
+		<< $(;
+		<< 'aPreprocessorInclude';
+		space.
+	stream print: aPreprocessorInclude name.
+	currentDepth := currentDepth + 1.
+	super visitPreprocessorInclude: aPreprocessorInclude.
+	currentDepth := currentDepth - 1.
+	stream << ')'
+]
+
+{ #category : #visiting }
 ASTCPrinterVisitor >> visitProject: aProject [
 	stream cr.
 	self printTabCount: currentDepth.

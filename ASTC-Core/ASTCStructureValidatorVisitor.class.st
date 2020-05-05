@@ -387,6 +387,13 @@ ASTCStructureValidatorVisitor >> visitPreprocessorIf: aPreprocessorIf [
 ]
 
 { #category : #visiting }
+ASTCStructureValidatorVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
+	[ super visitPreprocessorInclude: aPreprocessorInclude ]
+		on: AssertionFailure
+		do: [ errors := errors + 1 ]
+]
+
+{ #category : #visiting }
 ASTCStructureValidatorVisitor >> visitProject: aProject [
 	[ super visitProject: aProject ]
 		on: AssertionFailure

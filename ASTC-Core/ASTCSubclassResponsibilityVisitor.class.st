@@ -265,6 +265,11 @@ ASTCSubclassResponsibilityVisitor >> visitPreprocessorIf: aPreprocessorIf [
 ]
 
 { #category : #visiting }
+ASTCSubclassResponsibilityVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
+	self subclassResponsibility
+]
+
+{ #category : #visiting }
 ASTCSubclassResponsibilityVisitor >> visitProject: aProject [
 	self subclassResponsibility
 ]

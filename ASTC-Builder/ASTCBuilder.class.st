@@ -107,7 +107,8 @@ Class {
 		'switchCase',
 		'bitwiseNotOperator',
 		'preprocessorDefine',
-		'assignmentAdditionOperator'
+		'assignmentAdditionOperator',
+		'preprocessorInclude'
 	],
 	#category : #'ASTC-Builder'
 }
@@ -185,6 +186,7 @@ ASTCBuilder >> defineClasses [
 		"preprocessor"
 		preprocessorIf := builder newClassNamed: #PreprocessorIf.
 		preprocessorDefine := builder newClassNamed: #PreprocessorDefine.
+		preprocessorInclude := builder newClassNamed: #PreprocessorInclude.
 ]
 
 { #category : #definition }
@@ -198,6 +200,7 @@ ASTCBuilder >> defineHierarchy [
 	"preprocessor"
 	preprocessorIf --|> expression "not sure about this..".
 	preprocessorDefine --|> node.
+	preprocessorInclude --|> node.
 
 		"Node Direct SubClasses"
 		functionDefinition  --|> node.
@@ -383,6 +386,8 @@ ASTCBuilder >> defineProperties [
 	rawDeclaration property: #varName type: #String.
 
 	type property: #type type: #TypeConstraint.
+
+	preprocessorInclude property: #name type: #String.
 	
 ]
 

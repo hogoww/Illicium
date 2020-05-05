@@ -316,6 +316,12 @@ ASTCHierarchyWalkerVisitor >> visitPreprocessorIf: aPreprocessorIf [
 ]
 
 { #category : #visiting }
+ASTCHierarchyWalkerVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
+	super visitPreprocessorInclude: aPreprocessorInclude.
+	^ self visitNode: aPreprocessorInclude
+]
+
+{ #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitProject: aProject [
 	super visitProject: aProject.
 	^ self visitNode: aProject

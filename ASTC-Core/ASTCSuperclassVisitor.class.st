@@ -265,6 +265,11 @@ ASTCSuperclassVisitor >> visitPreprocessorIf: aPreprocessorIf [
 ]
 
 { #category : #visiting }
+ASTCSuperclassVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
+	^ self visitNode: aPreprocessorInclude
+]
+
+{ #category : #visiting }
 ASTCSuperclassVisitor >> visitProject: aProject [
 	^ self visitNode: aProject
 ]

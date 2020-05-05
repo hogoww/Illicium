@@ -1,6 +1,9 @@
 Class {
 	#name : #MASlangProgram,
 	#superclass : #FAProgram,
+	#instVars : [
+		'includes'
+	],
 	#classVars : [
 		'InitializationOptions'
 	],
@@ -91,6 +94,11 @@ MASlangProgram >> classesToPrepareSelectorsFor [
 	self classes
 ]
 
+{ #category : #'method-expansion' }
+MASlangProgram >> includes [
+	^ includes
+]
+
 { #category : #initialization }
 MASlangProgram >> initializeClassVariablesIn: inferer [
 	"This initializationsOptions were taken from running the StackInterpreter code generation
@@ -152,6 +160,8 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
 	
 	self structClasses do:[ :aStructClass| inferer addStructClass: aStructClass ].
+	includes := inferer headerFiles.
+	
 	
 	self isFullyAnnotated: true
 ]

@@ -16,6 +16,9 @@ ASTCNode >> acceptVisitor: aVisitor [
 
 { #category : #'fillFram-support' }
 ASTCNode >> add: aNode [
+	(aNode isPreprocessorInclude
+		and: [ self addPreprocessorInclude: aNode ])
+		ifTrue: [ ^ self ].
 	(aNode isPreprocessorDefine
 		and: [ self addPreprocessorDefine: aNode ])
 		ifTrue: [ ^ self ].
@@ -449,6 +452,11 @@ ASTCNode >> addPreprocessorIf: aNode [
 ]
 
 { #category : #'fillFram-support' }
+ASTCNode >> addPreprocessorInclude: aNode [
+	^ false
+]
+
+{ #category : #'fillFram-support' }
 ASTCNode >> addProject: aNode [
 	^ false
 ]
@@ -812,6 +820,11 @@ ASTCNode >> isPreprocessorDefine [
 
 { #category : #testing }
 ASTCNode >> isPreprocessorIf [
+	^ false
+]
+
+{ #category : #testing }
+ASTCNode >> isPreprocessorInclude [
 	^ false
 ]
 
