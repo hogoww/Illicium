@@ -10,6 +10,17 @@ Class {
 	#category : #'MAngler-Slang-Translation'
 }
 
+{ #category : #adding }
+MASlangProgram >> addCMacro: aMethod withInferer: inferer [
+	"add methods that are tagged to be translated as cMacro by a pragma"
+	
+	"we only add them in the inferer to have correct types currently. 
+	They will have to be translated correctly as well at some point"
+	self flag: #unfinished.
+	(inferer methodNamed: aMethod selector) ifNotNil: [ inferer removeMethodForSelector: aMethod selector].
+	inferer addMethod: (aMethod copy asTranslationMethodOfClass: TMethod)
+]
+
 { #category : #'method-expansion' }
 MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 	| currentByteCodeReferences numberOfDuplication selector replacedNodes mainCopy bytecodeTable counter |
@@ -54,15 +65,6 @@ MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 					counter := counter + 1.
 				]
 		].
-]
-
-{ #category : #adding }
-MASlangProgram >> addMacro: aMethod withInferer: inferer [
-	"we only add them in the inferer to have correct types currently. 
-	They will have to be translated correctly as well at some point"
-	self flag: #unfinished.
-	(inferer methodNamed: aMethod selector) ifNotNil: [ inferer removeMethodForSelector: aMethod selector].
-	inferer addMethod: (aMethod copy asTranslationMethodOfClass: TMethod)
 ]
 
 { #category : #adding }
@@ -151,7 +153,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 			select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
 			thenDo: [ :aMethod |
 				(aTranslator isCMacro: aMethod)
-					ifTrue:[ self addMacro: aMethod ast withInferer: inferer ]
+					ifTrue:[ self addCMacro: aMethod ast withInferer: inferer ]
 					ifFalse: [ 
 						(self shouldExpandMethod: aMethod)
 							ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]
