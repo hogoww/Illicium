@@ -162,7 +162,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	
 	self structClasses do:[ :aStructClass| inferer addStructClass: aStructClass ].
 
-	inferer addHeaderFile: 'sq.h'."added systematically"
+	inferer addHeaderFile: '"sq.h"'."added systematically"
 	includes := inferer headerFiles.
 	
 	self isFullyAnnotated: true
