@@ -118,7 +118,7 @@ MASlangProgram >> initializeClassVariablesIn: inferer [
 
 { #category : #accessing }
 MASlangProgram >> interpreterClass [
-	^ StackInterpreterPrimitives
+	^ StackInterpreter
 ]
 
 { #category : #enumerating }
@@ -139,6 +139,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self classesDo: [ :each |
 		each prepareToBeAddedToCodeGenerator: inferer.
 		inferer checkClassForNameConflicts: each.
+		each declareCVarsIn: inferer.
 		inferer addClassVarsFor: each.
 		inferer addPoolVarsFor: each.
 		(each inheritsFrom: VMStructType) ifFalse:
@@ -155,11 +156,12 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 						(self shouldExpandMethod: aMethod)
 							ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]
 							ifFalse: [ self addMethod: aMethod ast withInferer: inferer ]]].
-		each declareCVarsIn: inferer ].
+		].
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
 	
 	self structClasses do:[ :aStructClass| inferer addStructClass: aStructClass ].
+
 	includes := inferer headerFiles.
 	
 	

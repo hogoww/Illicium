@@ -269,6 +269,12 @@ MASlangPrettyPrinter >> visitCastOperator: aCastOperator [
 ]
 
 { #category : #visiting }
+MASlangPrettyPrinter >> visitCompilationUnit: aCompilationUnit [
+	self halt.
+	^ super visitCompilationUnit: aCompilationUnit
+]
+
+{ #category : #visiting }
 MASlangPrettyPrinter >> visitExpression: anExpression [
 
 	self

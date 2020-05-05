@@ -321,6 +321,13 @@ FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 	aPreProcessorDefine value ifNotNil:[ self print: aPreProcessorDefine value ].
 ]
 
+{ #category : #indentation }
+FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
+	self 	<< #'#include';
+		space;
+		print: aPreProcessorInclude name
+]
+
 { #category : #visiting }
 FAPrettyPrint >> visitReturn: aReturn [
 	self << 'return '.

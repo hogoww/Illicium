@@ -89,7 +89,8 @@ MASlangTranslator >> generateVMHeader [
 
 { #category : #initialization }
 MASlangTranslator >> getReplacementType: aCType [
-	^ ((aCType isStruct
+	self haltIf: (aCType type = #VirtualMachine).
+	^ (((aCType isStruct and: [ (aCType type = #VirtualMachine) not ])
 		ifTrue:[ aCType pharoType: (program structNamed: aCType type).
 			MASlangStructsReceiver new ]
 		ifFalse:[ MASlangReceiver new ]) 
@@ -221,7 +222,6 @@ MASlangTranslator >> transformations [
 MASlangTranslator >> translateProgram [
 	| cu |
 	cu := super translateProgram.
-
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
 	program structClasses collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
