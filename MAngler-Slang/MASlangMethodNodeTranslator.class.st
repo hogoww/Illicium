@@ -7,12 +7,11 @@ Class {
 { #category : #translation }
 MASlangMethodNodeTranslator >> translateMacro: aMethodNode [
 	^ ASTCPreprocessorDefine new 
-		name: ((RBLiteralNode value: aMethodNode selector) acceptVisitor: methodTranslator) ; 
-		value: (((aMethodNode hasPragmaNamed: #cmacro)
+		name: (ASTCIdentifier new id: (FAFormatHelper formatSelector: aMethodNode selector) ; yourself) ; 
+		value: ((aMethodNode hasPragmaNamed: #cmacro)
 			"heuristic, that all cmacro pragmas are value returned"
-			ifTrue: [ aMethodNode statements last value ]
-			ifFalse: [ (aMethodNode pragmaNamed: #cmacro:) arguments first ])
-				acceptVisitor: methodTranslator);
+			ifTrue: [ aMethodNode statements last value acceptVisitor: methodTranslator ]
+			ifFalse: [ ASTCRawCCode new cCode: (aMethodNode pragmaNamed: #cmacro:) arguments first value ]);
 		yourself
 ]
 

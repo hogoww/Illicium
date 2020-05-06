@@ -326,12 +326,22 @@ FAPrettyPrint >> visitLiteral: aLiteral [
 
 { #category : #indentation }
 FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
+	"When having a #define aSelector() something
+	the name is aSelector
+	the value is () something
+	meaning that we have to remove the space.
+	(problem inherited from how cmacros are done in Slang)
+	"
+
 	self 	<< #'#define';
 		space;
-		print: aPreProcessorDefine name;
-		space.
+		print: aPreProcessorDefine name.
 		
-	aPreProcessorDefine value ifNotNil:[ self print: aPreProcessorDefine value ].
+	aPreProcessorDefine value ifNotNil: [
+		(aPreProcessorDefine value isRawCCode 
+			and:[ aPreProcessorDefine value cCode first = $( ])
+				ifFalse:[ self space ].
+		 self print: aPreProcessorDefine value ].
 ]
 
 { #category : #indentation }
