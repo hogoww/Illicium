@@ -11,6 +11,32 @@ Class {
 	#category : #'MAngler-Slang-Translation'
 }
 
+{ #category : #adding }
+MASlangProgram >> addClass: aClass withInferer: inferer andTranslator: aTranslator [
+	aClass prepareToBeAddedToCodeGenerator: inferer.
+	inferer globalsAsSet addAll: (inferer instVarNamesForClass: aClass).
+
+	self addClassOrStruct: aClass withInferer: inferer andTranslator: aTranslator.
+]
+
+{ #category : #adding }
+MASlangProgram >> addClassOrStruct: aClass withInferer: inferer andTranslator: aTranslator [
+
+	aClass declareCVarsIn: inferer.
+	inferer addClassVarsFor: aClass.
+	inferer addPoolVarsFor: aClass.
+	inferer retainMethods: (aClass requiredMethodNames: inferer options).
+
+	((aClass allSelectorsBelow: VMClass) collect: 
+		[:aSelector| 
+		aClass lookupSelector: aSelector ])
+		select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
+		thenDo: [ :aMethod |
+			(self shouldExpandMethod: aMethod)
+						ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]
+						ifFalse: [ self addMethod: aMethod ast withInferer: inferer ]].
+]
+
 { #category : #'method-expansion' }
 MASlangProgram >> addExpandedVersionsOf: aMethodNode with: inferer [
 	| currentByteCodeReferences numberOfDuplication selector replacedNodes mainCopy bytecodeTable counter |
@@ -66,6 +92,13 @@ MASlangProgram >> addMethod: aMethod withInferer: inferer [
 	Therefore, when adding a specialisation of a method, we need to remove it first from the CCg"
 	needToBeRemovedFirst ifTrue: [ inferer removeMethodForSelector: aMethod selector ].
 	inferer addMethod: (copy asTranslationMethodOfClass: TMethod)
+]
+
+{ #category : #adding }
+MASlangProgram >> addStruct: aClass withInferer: inferer andTranslator: aTranslator [
+	aClass prepareToBeAddedToCodeGenerator: inferer.
+	self addClassOrStruct: aClass withInferer: inferer andTranslator: aTranslator.
+
 ]
 
 { #category : #accessing }
@@ -128,31 +161,13 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self initializeClassVariablesIn: inferer.
 	self structClasses do:[ :aStructClass | aStructClass initialize ].
 	
-	self classesToPrepareSelectorsFor do: [ :each |
-		each prepareToBeAddedToCodeGenerator: inferer.
-		inferer checkClassForNameConflicts: each.
-		each declareCVarsIn: inferer.
-		inferer addClassVarsFor: each.
-		inferer addPoolVarsFor: each.
-		(each inheritsFrom: VMStructType) ifFalse:
-			[inferer globalsAsSet addAll: (inferer instVarNamesForClass: each)].
-		inferer retainMethods: (each requiredMethodNames: inferer options).
-		((each allSelectorsBelow: VMClass) collect: 
-			[:aSelector| 
-			each lookupSelector: aSelector ])
-			select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
-			thenDo: [ :aMethod |
-"				(aTranslator isCMacro: aMethod)
-					ifTrue:[ self addCMacro: aMethod ast withInferer: inferer ]
-					ifFalse: ["
-						(self shouldExpandMethod: aMethod)
-							ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]
-							ifFalse: [ self addMethod: aMethod ast withInferer: inferer ]]"]".
-		].
+	self classesToPrepareSelectorsFor do: [ :aClass | 
+		self addClass: aClass withInferer: inferer andTranslator: aTranslator].
+	self structClasses do:[ :aStructClass| inferer addStructClass: aStructClass ].
+	
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
-	
-	self structClasses do:[ :aStructClass| inferer addStructClass: aStructClass ].
+		
 
 	inferer addHeaderFile: '"sq.h"'."added systematically"
 	includes := inferer headerFiles.

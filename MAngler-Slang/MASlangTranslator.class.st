@@ -35,13 +35,21 @@ MASlangTranslator class >> programClass [
 
 { #category : #asserting }
 MASlangTranslator class >> shouldITranslate: aMethod [ 
+	^ ((aMethod methodClass inheritsFrom: VMStructType) 
+		==> [	self shouldTranslateStructMethod: aMethod ])
+		and: [ aMethod isSubclassResponsibility not
+			and: [ (aMethod hasPragmaNamed: #doNotGenerate) not
+				and: [ aMethod selector ~~ #initialize ]]].
+			
+		
+	"and isMacro not. ->  they should be"
+	"and: [ (MAFullVMCCodeGeneratorRessource current codeGenerator"
 
-	^ aMethod isSubclassResponsibility not
-		and: [ (aMethod hasPragmaNamed: #doNotGenerate) not
-					and: [ aMethod selector ~~ #initialize 
-						"and isMacro not. ->  they should be"
-						"and: [ (MAFullVMCCodeGeneratorRessource current codeGenerator 
-							methodNamed: aMethod selector) isNotNil ]"]]
+]
+
+{ #category : #asserting }
+MASlangTranslator class >> shouldTranslateStructMethod: aMethod [
+	^ (aMethod methodClass isAccessor: aMethod selector) not
 ]
 
 { #category : #'translation-api' }
