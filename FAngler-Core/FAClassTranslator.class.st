@@ -41,9 +41,6 @@ FAClassTranslator >> getReplacementType: aType [
 FAClassTranslator >> initialize [
 	super initialize.
 	isStrict := false.
-	methodTranslator := FAMethodTranslator new
-		classTranslator: self;
-		yourself.
 	stateTranslator := FAClassStateTranslator new classTranslator: self; yourself.
 ]
 
