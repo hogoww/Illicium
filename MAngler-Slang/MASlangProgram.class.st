@@ -162,8 +162,9 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self structClasses do:[ :aStructClass | aStructClass initialize ].
 	
 	self classesToPrepareSelectorsFor do: [ :aClass | 
-		self addClass: aClass withInferer: inferer andTranslator: aTranslator].
-	self structClasses do:[ :aStructClass| inferer addStructClass: aStructClass ].
+		self addClass: aClass withInferer: inferer andTranslator: aTranslator ].
+	self structClasses do:[ :aStruct | 
+		self addStruct: aStruct withInferer: inferer andTranslator: aTranslator ].
 	
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
