@@ -5,22 +5,29 @@ Class {
 }
 
 { #category : #translate }
+FAArgumentNodeTranslator >> asCIdentifier: anArgumentNode [
+	^ ASTCIdentifier id: anArgumentNode name
+]
+
+{ #category : #translate }
+FAArgumentNodeTranslator >> translateArgumentUsage: anArgumentNode [
+	^ self asCIdentifier: anArgumentNode
+]
+
+{ #category : #translate }
 FAArgumentNodeTranslator >> translateNode: anArgumentNode [
-	| argIdentifier |
-	argIdentifier := ASTCIdentifier id: anArgumentNode name.
-	
 	^ anArgumentNode parent isMethod
-		ifTrue: [ 
-			ASTCVariableDeclaration new
-				pharoNode: anArgumentNode;
-				id: argIdentifier;
-				type:
-					(ASTCType new
-						type: (methodTranslator getNodeTranslationType: anArgumentNode);
-						yourself);
-				yourself.
-			]
-		ifFalse: [ 
-				argIdentifier
-			]
+		ifTrue: [ self translateParameterDeclaration: anArgumentNode ]
+		ifFalse: [ self translateArgumentUsage: anArgumentNode ]
+]
+
+{ #category : #translate }
+FAArgumentNodeTranslator >> translateParameterDeclaration: anArgumentNode [
+	^ ASTCVariableDeclaration new
+		pharoNode: anArgumentNode;
+		id: (self asCIdentifier: anArgumentNode);
+		type: (ASTCType new
+			type: (methodTranslator getNodeTranslationType: anArgumentNode);
+			yourself);
+		yourself
 ]
