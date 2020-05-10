@@ -60,6 +60,101 @@ FAMethodTranslator >> classTranslator: aClassTranslator [
 	^ classTranslator := aClassTranslator
 ]
 
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultArgumentNodeTranslator [
+	^ FAArgumentNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultArrayNodeTranslator [
+	^ FAArrayNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultBlockNodeTranslator [
+	^ FABlockNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultCascadeNodeTranslator [
+	^ FACascadeNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultGlobalNodeTranslator [
+	^ FAGlobalNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultInstanceVariableNodeTranslator [
+	^ FAInstanceVariableNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultLiteralArrayNodeTranslator [
+	^ FALiteralArrayNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultLiteralValueNodeTranslator [
+	^ FALiteralValueNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultMessageNodeTranslator [
+	^ FAMessageNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultMethodNodeTranslator [
+	^ FAMethodNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultPragmaNodeTranslator [
+	^ FAPragmaNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultReturnNodeTranslator [
+	^ FAReturnNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultSelfNodeTranslator [
+	^ FASelfNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultSequenceNodeTranslator [
+	^ FASequenceNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultSuperNodeTranslator [
+	^ FASuperNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultTemporaryDeclarationNodeTranslator [
+	^ FATemporaryDeclarationNodesTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultTemporaryNodeTranslator [
+	^ FATemporaryNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultThisContextNodeTranslator [
+	^ FAThisContextNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
+FAMethodTranslator >> defaultVariableNodeTranslator [
+	^ FAVariableNodeTranslator new
+]
+
 { #category : #utility }
 FAMethodTranslator >> forward: aMessage to: aType [
 	^ (translators at: #messageNodeTranslator) forward: aMessage to: aType asTypeReification
@@ -102,29 +197,32 @@ FAMethodTranslator >> includes: aCollectionOfString [
 
 { #category : #initialization }
 FAMethodTranslator >> initialize [
+	| t |
 	includes := Set new.
-	translators := (Dictionary new: 22)
-		at: #methodNodeTranslator put: (FAMethodNodeTranslator new methodTranslator: self ; yourself);
-		at: #pragmaNodeTranslator put: (FAPragmaNodeTranslator new methodTranslator: self ; yourself);
-		at: #returnNodeTranslator put: (FAReturnNodeTranslator new methodTranslator: self ; yourself);
-		at: #sequenceNodeTranslator put: (FASequenceNodeTranslator new methodTranslator: self ; yourself);
-		at: #arrayNodeTranslator put: (FAArrayNodeTranslator new methodTranslator: self ; yourself);
-		at: #assignmentNodeTranslator put: (FAAssignementNodeTranslator new methodTranslator: self ; yourself);
-		at: #blockNodeTranslator put: (FABlockNodeTranslator new methodTranslator: self ; yourself);
-		at: #cascadeNodeTranslator put: (FACascadeNodeTranslator new methodTranslator: self ; yourself);
-		at: #literalValueNodeTranslator put: (FALiteralValueNodeTranslator new methodTranslator: self ; yourself);
-		at: #literalArrayNodeTranslator put: (FALiteralArrayNodeTranslator new methodTranslator: self ; yourself);
-		at: #messageNodeTranslator put: (FAMessageNodeTranslator new methodTranslator: self ; yourself);
-		at: #argumentNodeTranslator put: (FAArgumentNodeTranslator new methodTranslator: self ; yourself);
-		at: #globalNodeTranslator put: (FAGlobalNodeTranslator new methodTranslator: self ; yourself);
-		at: #instanceVariableNodeTranslator put: (FAInstanceVariableNodeTranslator new methodTranslator: self ; yourself);
-		at: #selfNodeTranslator put: (FASelfNodeTranslator new methodTranslator: self ; yourself);
-		at: #superNodeTranslator put: (FASuperNodeTranslator new methodTranslator: self ; yourself);
-		at: #temporaryNodeTranslator put: (FATemporaryNodeTranslator new methodTranslator: self ; yourself);
-		at: #temporaryDeclarationNodeTranslator put: (FATemporaryDeclarationNodesTranslator new methodTranslator: self ; yourself);
-		at: #thisContextNodeTranslator put: (FAThisContextNodeTranslator new methodTranslator: self ; yourself);
-		at: #variableNodeTranslator put: (FAVariableNodeTranslator new methodTranslator: self ; yourself);
-		yourself.
+	t := translators.
+	translators := Dictionary new: 20.
+	self methodNodeTranslator: self defaultMethodNodeTranslator.
+	self assignmentNodeTranslator: self defaultAssignmentTranslator.
+	self pragmaNodeTranslator: self defaultPragmaNodeTranslator.
+	self returnNodeTranslator: self defaultReturnNodeTranslator.
+	self sequenceNodeTranslator: self defaultSequenceNodeTranslator.
+	self arrayNodeTranslator: self defaultArrayNodeTranslator.
+	self blockNodeTranslator: self defaultBlockNodeTranslator.
+	self cascadeNodeTranslator: self defaultCascadeNodeTranslator.
+	self literalValueNodeTranslator: self defaultLiteralValueNodeTranslator.
+	self literalArrayNodeTranslator: self defaultLiteralArrayNodeTranslator.
+	self messageNodeTranslator: self defaultMessageNodeTranslator.
+	self argumentNodeTranslator: self defaultArgumentNodeTranslator.
+	self globalNodeTranslator: self defaultGlobalNodeTranslator.
+	self instanceVariableNodeTranslator: self defaultInstanceVariableNodeTranslator.
+	self selfNodeTranslator: self defaultSelfNodeTranslator.
+	self superNodeTranslator: self defaultSuperNodeTranslator.
+	self temporaryNodeTranslator: self defaultTemporaryNodeTranslator.
+	self temporaryDeclarationNodeTranslator: self defaultTemporaryDeclarationNodeTranslator.
+	self thisContextNodeTranslator: self defaultThisContextNodeTranslator.
+	self variableNodeTranslator: self defaultVariableNodeTranslator.
+	self methodNodeTranslator: self defaultMethodNodeTranslator.
+	translators = t.
 ]
 
 { #category : #'configuration-nodes-translator' }
@@ -200,6 +298,12 @@ FAMethodTranslator >> returnNodeTranslator: anArrayNodeTranslator [
 FAMethodTranslator >> selfNodeTranslator: aSelfNodeTranslator [
 	translators at: #selfNodeTranslator put: 
 		(aSelfNodeTranslator methodTranslator: self ; yourself).
+]
+
+{ #category : #'configuration-nodes-translator' }
+FAMethodTranslator >> sequenceNodeTranslator: aSequenceNodeTranslator [
+	translators at: #sequenceNodeTranslator put: 
+		(aSequenceNodeTranslator methodTranslator: self ; yourself).
 ]
 
 { #category : #visiting }
