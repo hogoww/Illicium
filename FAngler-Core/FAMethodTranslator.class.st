@@ -71,6 +71,11 @@ FAMethodTranslator >> defaultArrayNodeTranslator [
 ]
 
 { #category : #'configuration-default' }
+FAMethodTranslator >> defaultAssignmentTranslator [
+	^ FAAssignementNodeTranslator new
+]
+
+{ #category : #'configuration-default' }
 FAMethodTranslator >> defaultBlockNodeTranslator [
 	^ FABlockNodeTranslator new
 ]
@@ -197,9 +202,7 @@ FAMethodTranslator >> includes: aCollectionOfString [
 
 { #category : #initialization }
 FAMethodTranslator >> initialize [
-	| t |
 	includes := Set new.
-	t := translators.
 	translators := Dictionary new: 20.
 	self methodNodeTranslator: self defaultMethodNodeTranslator.
 	self assignmentNodeTranslator: self defaultAssignmentTranslator.
@@ -222,7 +225,6 @@ FAMethodTranslator >> initialize [
 	self thisContextNodeTranslator: self defaultThisContextNodeTranslator.
 	self variableNodeTranslator: self defaultVariableNodeTranslator.
 	self methodNodeTranslator: self defaultMethodNodeTranslator.
-	translators = t.
 ]
 
 { #category : #'configuration-nodes-translator' }
