@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #translate }
+FAMethodNodeTranslator >> translateIdentifier: aMethodNode [
+	^ ASTCIdentifier new
+		id: (FAFormatHelper formatSelector: aMethodNode selector);
+		yourself
+]
+
+{ #category : #translate }
 FAMethodNodeTranslator >> translateNode: aMethodNode [
 
 	^ ASTCFunctionDefinition new
@@ -16,14 +23,16 @@ FAMethodNodeTranslator >> translateNode: aMethodNode [
 					(ASTCType new
 						type: (methodTranslator getNodeTranslationType: aMethodNode);
 						yourself);
-				id:
-					(ASTCIdentifier new
-						id: (FAFormatHelper formatSelector: aMethodNode selector);
-						yourself);
-				parameters: (aMethodNode arguments collect:[:each| each acceptVisitor: methodTranslator ]);
+				id: (self translateIdentifier: aMethodNode);
+				parameters: (self translateParameters: aMethodNode);
 				yourself);
 		body: (aMethodNode body acceptVisitor: methodTranslator);
 		comment: aMethodNode commentOrNil;
 		yourself
 
+]
+
+{ #category : #translate }
+FAMethodNodeTranslator >> translateParameters: aMethodNode [
+	^ aMethodNode arguments collect: [ :each | each acceptVisitor: methodTranslator ]
 ]
