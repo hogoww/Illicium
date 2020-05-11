@@ -14,13 +14,23 @@ FAMethodTranslator >> addInclude: aString [
 	includes add: aString
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> argumentNodeTranslator [
+	^ translators at: #argumentNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> argumentNodeTranslator: anArgumentNodeTranslator [
 	translators at: #argumentNodeTranslator put: 
 		(anArgumentNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> arrayNodeTranslator [
+	^ translators at: #arrayNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> arrayNodeTranslator: anArrayNodeTranslator [
 	translators at: #arrayNodeTranslator put: 
 		(anArrayNodeTranslator methodTranslator: self ; yourself).
@@ -32,19 +42,34 @@ FAMethodTranslator >> ask: aTranslatorKind to: aSelector with: arguments [
 	^ (translators at: aTranslatorKind) perform: aSelector with: arguments
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> assignmentNodeTranslator [
+	translators at: #assignmentNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> assignmentNodeTranslator: anAssignmentNodeTranslator [
 	translators at: #assignmentNodeTranslator put:
 		(anAssignmentNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> blockNodeTranslator [
+	^ translators at: #blockNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> blockNodeTranslator: aBlockNodeTranslator [
 	translators at: #blockNodeTranslator put: 
 		(aBlockNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> cascadeNodeTranslator [
+	^ translators at: #cascadeNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> cascadeNodeTranslator: aCascadeNodeTranslator [
 	translators at: #cascadeNodeTranslator put: 
 		(aCascadeNodeTranslator methodTranslator: self ; yourself).
@@ -184,7 +209,12 @@ FAMethodTranslator >> getReplacementType: aType [
 	^ classTranslator getReplacementType: aType
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> globalNodeTranslator [
+	^ translators at: #globalNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> globalNodeTranslator: aGlobalNodeTranslator [
 	translators at: #globalNodeTranslator put: 
 		(aGlobalNodeTranslator methodTranslator: self ; yourself).
@@ -227,7 +257,12 @@ FAMethodTranslator >> initialize [
 	self methodNodeTranslator: self defaultMethodNodeTranslator.
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> instanceVariableNodeTranslator [
+	^ translators at: #instanceVariableNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> instanceVariableNodeTranslator: anInstanceVariableNodeTranslator [
 	translators at: #instanceVariableNodeTranslator put: 
 		(anInstanceVariableNodeTranslator methodTranslator: self ; yourself).
@@ -243,25 +278,40 @@ FAMethodTranslator >> isStrict [
 	^ classTranslator isStrict
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> literalArrayNodeTranslator [
+	^ translators at: #literalArrayNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> literalArrayNodeTranslator: aLiteralArrayNodeTranslator [
 	translators at: #literalArrayNodeTranslator put: 
 		(aLiteralArrayNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> literalValueNodeTranslator [
+	^ translators at: #literalValueNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> literalValueNodeTranslator: aLiteralValueNodeTranslator [
 	translators at: #literalValueNodeTranslator put: 
 		(aLiteralValueNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
-FAMethodTranslator >> messageNodeTranslator: agMessageNodeTranslator [ 
-	translators at: #messageNodeTranslator put: 
-		(agMessageNodeTranslator methodTranslator: self ; yourself).
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> messageNodeTranslator [
+	^ translators at: #messageNodeTranslator
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> messageNodeTranslator: aMessageNodeTranslator [ 
+	translators at: #messageNodeTranslator put: 
+		(aMessageNodeTranslator methodTranslator: self ; yourself).
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> methodNodeTranslator: aMethodNodeTranslator [ 
 	translators at: #methodNodeTranslator put: 
 		(aMethodNodeTranslator methodTranslator: self ; yourself).
@@ -278,7 +328,12 @@ FAMethodTranslator >> postTranslationVisitsFor: anASTCNode [
 	^ anASTCNode
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> pragmaNodeTranslator [
+	^ translators at: #pragmaNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> pragmaNodeTranslator: aPragmaNodeTranslator [
 	translators at: #pragmaNodeTranslator put: 
 		(aPragmaNodeTranslator methodTranslator: self ; yourself).
@@ -290,19 +345,34 @@ FAMethodTranslator >> program [
 	^ classTranslator program
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> returnNodeTranslator [
+	^ translators at: #returnNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> returnNodeTranslator: anArrayNodeTranslator [
 	translators at: #returnNodeTranslator put: 
 		(anArrayNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> selfNodeTranslator [
+	^ translators at: #selfNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> selfNodeTranslator: aSelfNodeTranslator [
 	translators at: #selfNodeTranslator put: 
 		(aSelfNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> sequenceNodeTranslator [
+	^ translators at: #sequenceNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> sequenceNodeTranslator: aSequenceNodeTranslator [
 	translators at: #sequenceNodeTranslator put: 
 		(aSequenceNodeTranslator methodTranslator: self ; yourself).
@@ -313,25 +383,45 @@ FAMethodTranslator >> stateName [
 	^ classTranslator stateName
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> superNodeTranslator [
+	^ translators at: #superNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> superNodeTranslator: aSuperNodeTranslator [
 	translators at: #superNodeTranslator put: 
 		(aSuperNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> temporaryDeclarationNodeTranslator [
+	^ translators at: #temporaryDeclarationNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> temporaryDeclarationNodeTranslator: aTemporaryDeclarationNodeTranslator [
 	translators at: #temporaryDeclarationNodeTranslator put:
 		(aTemporaryDeclarationNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> temporaryNodeTranslator [
+	^ translators at: #temporaryNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> temporaryNodeTranslator: aTemporaryNodeTranslator [
 	translators at: #temporaryNodeTranslator put: 
 		(aTemporaryNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> thisContextNodeTranslator [
+	^ translators at: #thisContextNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> thisContextNodeTranslator: aThisContextNodeTranslator [
 	translators at: #thisContextNodeTranslator put: 
 		(aThisContextNodeTranslator methodTranslator: self ; yourself).
@@ -353,7 +443,12 @@ FAMethodTranslator >> translateMethodNode: aMethodAST [
 	
 ]
 
-{ #category : #'configuration-nodes-translator' }
+{ #category : #'accessors-nodes-translator' }
+FAMethodTranslator >> variableNodeTranslator [
+	^ translators at: #variableNodeTranslator
+]
+
+{ #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> variableNodeTranslator: aVariableNodeTranslator [
 	translators at: #variableNodeTranslator put: 
 		(aVariableNodeTranslator methodTranslator: self ; yourself).
