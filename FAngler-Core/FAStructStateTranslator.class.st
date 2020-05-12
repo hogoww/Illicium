@@ -9,7 +9,7 @@ FAStructStateTranslator >> translateStateOf: aClass [
 	| struct |
 	"not sure SharedPoolVariables are are considered in slang"	
 	struct := ASTCStructureDefinition new
-		declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier id: aClass name) ; yourself);
+		declaration: (ASTCStructureDeclaration new id: (ASTCIdentifier id: aClass structTypeName) ; yourself);
 		yourself.
 	
 	"We only translate the current's class slots, since we're treating each class in the hierarchy, and there is no polymorphism. (besides VMclass, will see in time"
