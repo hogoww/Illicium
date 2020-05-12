@@ -67,7 +67,7 @@ MASlangMethodNodeTranslator >> translateParameters: aMethodNode [
 		id: (ASTCIdentifier id: #__self__in_method__);
 		type: 
 		
-		(ASTCType new type: (MASlangStructsReceiver new type: (CType createFrom: aMethodNode methodClass name)) asConstraint; yourself);
+		(ASTCType new type: (MASlangStructsReceiver new type: (CType createFrom: aMethodNode methodClass name , '*')) asConstraint; yourself);
 		
 		yourself) } , parameters .
 ]
