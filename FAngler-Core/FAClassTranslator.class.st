@@ -41,7 +41,7 @@ FAClassTranslator >> getReplacementType: aType [
 FAClassTranslator >> initialize [
 	super initialize.
 
-	methodTranslator := MASlangMethodTranslator new
+	methodTranslator := FAMethodTranslator new
 		classTranslator: self;
 		yourself.
 
