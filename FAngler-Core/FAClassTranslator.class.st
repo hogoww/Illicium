@@ -40,6 +40,11 @@ FAClassTranslator >> getReplacementType: aType [
 { #category : #initialization }
 FAClassTranslator >> initialize [
 	super initialize.
+
+	methodTranslator := MASlangMethodTranslator new
+		classTranslator: self;
+		yourself.
+
 	isStrict := false.
 	stateTranslator := FAClassStateTranslator new classTranslator: self; yourself.
 ]

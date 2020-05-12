@@ -21,9 +21,6 @@ MASlangClassTranslator >> inferer [
 { #category : #initialization }
 MASlangClassTranslator >> initialize [
 	super initialize.
-	methodTranslator := MASlangMethodTranslator new
-		classTranslator: self;
-		yourself.
 
 	structStateTranslator := FAStructStateTranslator new classTranslator: self; yourself.
 
