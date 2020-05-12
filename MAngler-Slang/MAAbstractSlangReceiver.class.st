@@ -32,7 +32,7 @@ MAAbstractSlangReceiver >> asCType [
 	"not sure how this is declared"
 	self flag: #deprecated.
 	"for API concistency with the initial design. "
-	^ type type ifNil: [ #sqInt ]
+	^ type ifNil: [ CType createFrom: #sqInt ]
 ]
 
 { #category : #typing }

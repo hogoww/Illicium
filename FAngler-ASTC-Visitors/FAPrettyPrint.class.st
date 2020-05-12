@@ -442,7 +442,7 @@ FAPrettyPrint >> visitTernaryConditionalOperator: anOperator [
 
 { #category : #visiting }
 FAPrettyPrint >> visitType: aType [
-	self << aType type asCType.
+	aType type asCType printAsCTypeOn: self stream
 ]
 
 { #category : #visiting }
