@@ -29,6 +29,17 @@ MAStringCompInterpreterStackPagesTranslationTest >> testPageIndexForStringCompar
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'page access' }
+MAStringCompInterpreterStackPagesTranslationTest >> testPageIndexForstackMemorybytesPerPageStringComparison [
+	| illiAST slangString illiString |
+	slangString := self
+		generateSlang: #pageIndexFor:stackMemory:bytesPerPage:.
+	illiAST := self
+		generateIllicium: #pageIndexFor:stackMemory:bytesPerPage:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #accessing }
 MAStringCompInterpreterStackPagesTranslationTest >> translator [
 	^ MAInterpreterStackPagesRessource current translator

@@ -3920,13 +3920,6 @@ MASmokeStackInterpreterTranslationTest >> testPrintHexPtrnpStringComparison [
 ]
 
 { #category : #'debug printing' }
-MASmokeStackInterpreterTranslationTest >> testPrintHexnpnpStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #printHexnpnp:.
-	self prettyPrintIllicium: illiAST
-]
-
-{ #category : #'debug printing' }
 MASmokeStackInterpreterTranslationTest >> testPrintMethodFieldForPrintContextStringComparison [
 	| illiAST |
 	illiAST := self generateIllicium: #printMethodFieldForPrintContext:.
@@ -4062,10 +4055,10 @@ MASmokeStackInterpreterTranslationTest >> testPushFullClosureNumArgscopiedValues
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'stack bytecodes' }
+{ #category : #'as yet unclassified' }
 MASmokeStackInterpreterTranslationTest >> testPushLiteralConstantBytecodeStringComparison [
 	| illiAST |
-	illiAST := self generateIllicium: #pushLiteralConstantBytecode.
+	illiAST := self generateIllicium: #pushLiteralConstantBytecode26.
 	self prettyPrintIllicium: illiAST
 ]
 
@@ -4076,17 +4069,10 @@ MASmokeStackInterpreterTranslationTest >> testPushLiteralConstantStringCompariso
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'stack bytecodes' }
+{ #category : #'as yet unclassified' }
 MASmokeStackInterpreterTranslationTest >> testPushLiteralVariableBytecodeStringComparison [
 	| illiAST |
-	illiAST := self generateIllicium: #pushLiteralVariableBytecode.
-	self prettyPrintIllicium: illiAST
-]
-
-{ #category : #'stack bytecodes' }
-MASmokeStackInterpreterTranslationTest >> testPushLiteralVariableCasesBytecodeStringComparison [
-	| illiAST |
-	illiAST := self generateIllicium: #pushLiteralVariable16CasesBytecode.
+	illiAST := self generateIllicium: #pushLiteralVariableBytecode20.
 	self prettyPrintIllicium: illiAST
 ]
 
@@ -4125,10 +4111,10 @@ MASmokeStackInterpreterTranslationTest >> testPushReceiverBytecodeStringComparis
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'stack bytecodes' }
+{ #category : #'as yet unclassified' }
 MASmokeStackInterpreterTranslationTest >> testPushReceiverVariableBytecodeStringComparison [
 	| illiAST |
-	illiAST := self generateIllicium: #pushReceiverVariableBytecode.
+	illiAST := self generateIllicium: #pushReceiverVariableBytecode8.
 	self prettyPrintIllicium: illiAST
 ]
 
@@ -4153,10 +4139,10 @@ MASmokeStackInterpreterTranslationTest >> testPushRemoteTempinVectorAtStringComp
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'stack bytecodes' }
+{ #category : #'as yet unclassified' }
 MASmokeStackInterpreterTranslationTest >> testPushTemporaryVariableBytecodeStringComparison [
 	| illiAST |
-	illiAST := self generateIllicium: #pushTemporaryVariableBytecode.
+	illiAST := self generateIllicium: #pushTemporaryVariableBytecode6.
 	self prettyPrintIllicium: illiAST
 ]
 
@@ -4206,6 +4192,13 @@ MASmokeStackInterpreterTranslationTest >> testRemapCallbackStateStringComparison
 MASmokeStackInterpreterTranslationTest >> testRemoveProcessfromListStringComparison [
 	| illiAST |
 	illiAST := self generateIllicium: #removeProcess:fromList:.
+	self prettyPrintIllicium: illiAST
+]
+
+{ #category : #'debug printing' }
+MASmokeStackInterpreterTranslationTest >> testResetStackPrintedCountStringComparison [
+	| illiAST |
+	illiAST := self generateIllicium: #resetStackPrintedCount.
 	self prettyPrintIllicium: illiAST
 ]
 
@@ -4527,10 +4520,10 @@ MASmokeStackInterpreterTranslationTest >> testShortPrintFramesInCurrentPageStrin
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'jump bytecodes' }
+{ #category : #'as yet unclassified' }
 MASmokeStackInterpreterTranslationTest >> testShortUnconditionalJumpStringComparison [
 	| illiAST |
-	illiAST := self generateIllicium: #shortUnconditionalJump.
+	illiAST := self generateIllicium: #shortUnconditionalJump1.
 	self prettyPrintIllicium: illiAST
 ]
 
@@ -4655,11 +4648,11 @@ MASmokeStackInterpreterTranslationTest >> testStoreAndPopRemoteTempLongBytecodeS
 	self prettyPrintIllicium: illiAST
 ]
 
-{ #category : #'stack bytecodes' }
+{ #category : #'as yet unclassified' }
 MASmokeStackInterpreterTranslationTest >> testStoreAndPopTemporaryVariableBytecodeStringComparison [
 	| illiAST |
 	illiAST := self
-		generateIllicium: #storeAndPopTemporaryVariableBytecode.
+		generateIllicium: #storeAndPopTemporaryVariableBytecode6.
 	self prettyPrintIllicium: illiAST
 ]
 

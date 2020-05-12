@@ -84,11 +84,38 @@ MAStringCompSpurGenerationScavengerTranslationTest >> testCopyToOldSpacebytesfor
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testEdenStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #eden.
+	illiAST := self generateIllicium: #eden.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'weakness and ephemerality' }
 MAStringCompSpurGenerationScavengerTranslationTest >> testFirstCorpseStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstCorpse:.
 	illiAST := self generateIllicium: #firstCorpse:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testFutureSpaceStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #futureSpace.
+	illiAST := self generateIllicium: #futureSpace.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testFutureSurvivorStartStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #futureSurvivorStart.
+	illiAST := self generateIllicium: #futureSurvivorStart.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -167,6 +194,15 @@ MAStringCompSpurGenerationScavengerTranslationTest >> testOpenScavengeLogStringC
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testPastSpaceStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #pastSpace.
+	illiAST := self generateIllicium: #pastSpace.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'debug support' }
 MAStringCompSpurGenerationScavengerTranslationTest >> testPrintRememberedSetStringComparison [
 	| illiAST slangString illiString |
@@ -208,6 +244,24 @@ MAStringCompSpurGenerationScavengerTranslationTest >> testRememberStringComparis
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #remember:.
 	illiAST := self generateIllicium: #remember:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testRememberedSetLimitStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #rememberedSetLimit.
+	illiAST := self generateIllicium: #rememberedSetLimit.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurGenerationScavengerTranslationTest >> testRememberedSetSizeStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #rememberedSetSize.
+	illiAST := self generateIllicium: #rememberedSetSize.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]

@@ -48,6 +48,15 @@ MAStringCompCogStackPagesTranslationTest >> testMarkStackPageNextMostRecentlyUse
 ]
 
 { #category : #'page access' }
+MAStringCompCogStackPagesTranslationTest >> testMostRecentlyUsedPageStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #mostRecentlyUsedPage.
+	illiAST := self generateIllicium: #mostRecentlyUsedPage.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'page access' }
 MAStringCompCogStackPagesTranslationTest >> testNewStackPageStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #newStackPage.
@@ -75,6 +84,15 @@ MAStringCompCogStackPagesTranslationTest >> testStackPageAtStringComparison [
 ]
 
 { #category : #'page access' }
+MAStringCompCogStackPagesTranslationTest >> testStackPageAtpagesStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #stackPageAt:pages:.
+	illiAST := self generateIllicium: #stackPageAt:pages:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'page access' }
 MAStringCompCogStackPagesTranslationTest >> testStackPageForStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #stackPageFor:.
@@ -88,6 +106,15 @@ MAStringCompCogStackPagesTranslationTest >> testStatAverageLivePagesWhenMappingS
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #statAverageLivePagesWhenMapping.
 	illiAST := self generateIllicium: #statAverageLivePagesWhenMapping.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #statistics }
+MAStringCompCogStackPagesTranslationTest >> testStatMaxPageCountWhenMappingStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #statMaxPageCountWhenMapping.
+	illiAST := self generateIllicium: #statMaxPageCountWhenMapping.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]

@@ -177,6 +177,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testAllocationUnitStringComparis
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testArrayClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #arrayClassIndexPun.
+	illiAST := self generateIllicium: #arrayClassIndexPun.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'header formats' }
 MAStringCompSpurMemoryManagerTranslationTest >> testArrayFormatStringComparison [
 	| illiAST slangString illiString |
@@ -292,6 +301,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testCharacterTableStringComparis
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #characterTable.
 	illiAST := self generateIllicium: #characterTable.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'object access' }
+MAStringCompSpurMemoryManagerTranslationTest >> testCharacterTagStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #characterTag.
+	illiAST := self generateIllicium: #characterTag.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -505,11 +523,29 @@ MAStringCompSpurMemoryManagerTranslationTest >> testClassIndexFieldWidthStringCo
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testClassIndexMaskStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #classIndexMask.
+	illiAST := self generateIllicium: #classIndexMask.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'header access' }
 MAStringCompSpurMemoryManagerTranslationTest >> testClassIndexOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classIndexOf:.
 	illiAST := self generateIllicium: #classIndexOf:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testClassIsItselfClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #classIsItselfClassIndexPun.
+	illiAST := self generateIllicium: #classIsItselfClassIndexPun.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -573,6 +609,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testClassStringStringComparison 
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #classString.
 	illiAST := self generateIllicium: #classString.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testClassTableFirstPageStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #classTableFirstPage.
+	illiAST := self generateIllicium: #classTableFirstPage.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'class table' }
+MAStringCompSpurMemoryManagerTranslationTest >> testClassTableMajorIndexShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #classTableMajorIndexShift.
+	illiAST := self generateIllicium: #classTableMajorIndexShift.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -747,6 +801,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testEmptyObjStackStringCompariso
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testEndOfMemoryStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #endOfMemory.
+	illiAST := self generateIllicium: #endOfMemory.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'obj stacks' }
 MAStringCompSpurMemoryManagerTranslationTest >> testEnsureRoomOnObjStackAtStringComparison [
 	| illiAST slangString illiString |
@@ -900,6 +963,33 @@ MAStringCompSpurMemoryManagerTranslationTest >> testFirstAccessibleObjectStringC
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'header formats' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFirstByteFormatStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #firstByteFormat.
+	illiAST := self generateIllicium: #firstByteFormat.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFirstClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #firstClassIndexPun.
+	illiAST := self generateIllicium: #firstClassIndexPun.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header formats' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFirstCompiledMethodFormatStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #firstCompiledMethodFormat.
+	illiAST := self generateIllicium: #firstCompiledMethodFormat.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'debug support' }
 MAStringCompSpurMemoryManagerTranslationTest >> testFirstFixedFieldOfMaybeImmediateStringComparison [
 	| illiAST slangString illiString |
@@ -928,6 +1018,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testFirstIndexableFieldStringCom
 ]
 
 { #category : #'header formats' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFirstLongFormatStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #firstLongFormat.
+	illiAST := self generateIllicium: #firstLongFormat.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header formats' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFirstShortFormatStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #firstShortFormat.
+	illiAST := self generateIllicium: #firstShortFormat.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header formats' }
 MAStringCompSpurMemoryManagerTranslationTest >> testFirstStringyFakeFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #firstStringyFakeFormat.
@@ -943,6 +1051,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testFixFollowedFieldofObjectwith
 		generateSlang: #fixFollowedField:ofObject:withInitialValue:.
 	illiAST := self
 		generateIllicium: #fixFollowedField:ofObject:withInitialValue:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'object format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFixedFieldsFieldWidthStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #fixedFieldsFieldWidth.
+	illiAST := self generateIllicium: #fixedFieldsFieldWidth.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -1021,6 +1138,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testFollowObjFieldofObjectString
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFormatFieldWidthShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #formatFieldWidthShift.
+	illiAST := self generateIllicium: #formatFieldWidthShift.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFormatMaskStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #formatMask.
+	illiAST := self generateIllicium: #formatMask.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'object format' }
 MAStringCompSpurMemoryManagerTranslationTest >> testFormatOfClassStringComparison [
 	| illiAST slangString illiString |
@@ -1035,6 +1170,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testFormatOfStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #formatOf:.
 	illiAST := self generateIllicium: #formatOf:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testFormatShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #formatShift.
+	illiAST := self generateIllicium: #formatShift.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -1102,6 +1246,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testFreeObjectStringComparison [
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testFreeStartStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #freeStart.
+	illiAST := self generateIllicium: #freeStart.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'gc - global' }
 MAStringCompSpurMemoryManagerTranslationTest >> testFullGCStringComparison [
 	| illiAST slangString illiString |
@@ -1125,6 +1278,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testGoodContextSizeStringCompari
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #goodContextSize:.
 	illiAST := self generateIllicium: #goodContextSize:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testGreyBitShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #greyBitShift.
+	illiAST := self generateIllicium: #greyBitShift.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -1176,6 +1338,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testHiddenRootsObjectStringCompa
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'header access' }
+MAStringCompSpurMemoryManagerTranslationTest >> testIdentityHashFullWordShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #identityHashFullWordShift.
+	illiAST := self generateIllicium: #identityHashFullWordShift.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testIdentityHashHalfWordMaskStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #identityHashHalfWordMask.
+	illiAST := self generateIllicium: #identityHashHalfWordMask.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'image segment in/out' }
 MAStringCompSpurMemoryManagerTranslationTest >> testImageSegmentVersionStringComparison [
 	| illiAST slangString illiString |
@@ -1190,6 +1370,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testImmutableBitMaskStringCompar
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #immutableBitMask.
 	illiAST := self generateIllicium: #immutableBitMask.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testImmutableBitShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #immutableBitShift.
+	illiAST := self generateIllicium: #immutableBitShift.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -1235,6 +1424,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testIndexOfinStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #indexOf:in:.
 	illiAST := self generateIllicium: #indexOf:in:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header formats' }
+MAStringCompSpurMemoryManagerTranslationTest >> testIndexablePointersFormatStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #indexablePointersFormat.
+	illiAST := self generateIllicium: #indexablePointersFormat.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -1482,11 +1680,29 @@ MAStringCompSpurMemoryManagerTranslationTest >> testIsForwardedClassTagStringCom
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testIsForwardedObjectClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #isForwardedObjectClassIndexPun.
+	illiAST := self generateIllicium: #isForwardedObjectClassIndexPun.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'object testing' }
 MAStringCompSpurMemoryManagerTranslationTest >> testIsForwardedStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #isForwarded:.
 	illiAST := self generateIllicium: #isForwarded:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testIsFreeObjectClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #isFreeObjectClassIndexPun.
+	illiAST := self generateIllicium: #isFreeObjectClassIndexPun.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -1907,6 +2123,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testKnownClassAtIndexStringCompa
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testLastClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #lastClassIndexPun.
+	illiAST := self generateIllicium: #lastClassIndexPun.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'header formats' }
 MAStringCompSpurMemoryManagerTranslationTest >> testLastPointerFormatStringComparison [
 	| illiAST slangString illiString |
@@ -2127,6 +2352,33 @@ MAStringCompSpurMemoryManagerTranslationTest >> testMarkWeaklingsAndMarkAndFireE
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testMarkedBitFullShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #markedBitFullShift.
+	illiAST := self generateIllicium: #markedBitFullShift.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testMarkedBitHalfShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #markedBitHalfShift.
+	illiAST := self generateIllicium: #markedBitHalfShift.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testMaxOldSpaceSizeStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #maxOldSpaceSize.
+	illiAST := self generateIllicium: #maxOldSpaceSize.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'object testing' }
 MAStringCompSpurMemoryManagerTranslationTest >> testMaybeMethodClassOfseemsToBeInstantiatingStringComparison [
 	| illiAST slangString illiString |
@@ -2152,6 +2404,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testMemoryActiveProcessStringCom
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #memoryActiveProcess.
 	illiAST := self generateIllicium: #memoryActiveProcess.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testMemoryStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #memory.
+	illiAST := self generateIllicium: #memory.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -2188,6 +2449,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testNewSpaceIsEmptyStringCompari
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #newSpaceIsEmpty.
 	illiAST := self generateIllicium: #newSpaceIsEmpty.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testNewSpaceLimitStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #newSpaceLimit.
+	illiAST := self generateIllicium: #newSpaceLimit.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -2287,6 +2557,33 @@ MAStringCompSpurMemoryManagerTranslationTest >> testNumPointerSlotsOfStringCompa
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #numPointerSlotsOf:.
 	illiAST := self generateIllicium: #numPointerSlotsOf:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testNumSlotsFullShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #numSlotsFullShift.
+	illiAST := self generateIllicium: #numSlotsFullShift.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testNumSlotsHalfShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #numSlotsHalfShift.
+	illiAST := self generateIllicium: #numSlotsHalfShift.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testNumSlotsMaskStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #numSlotsMask.
+	illiAST := self generateIllicium: #numSlotsMask.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -2392,6 +2689,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testOldSpaceObjectAfterStringCom
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testOldSpaceStartStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #oldSpaceStart.
+	illiAST := self generateIllicium: #oldSpaceStart.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'become implementation' }
 MAStringCompSpurMemoryManagerTranslationTest >> testOutOfPlaceBecomeandcopyHashFlagStringComparison [
 	| illiAST slangString illiString |
@@ -2402,11 +2708,29 @@ MAStringCompSpurMemoryManagerTranslationTest >> testOutOfPlaceBecomeandcopyHashF
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testPastSpaceStartStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #pastSpaceStart.
+	illiAST := self generateIllicium: #pastSpaceStart.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'primitive support' }
 MAStringCompSpurMemoryManagerTranslationTest >> testPinObjectStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #pinObject:.
 	illiAST := self generateIllicium: #pinObject:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testPinnedBitShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #pinnedBitShift.
+	illiAST := self generateIllicium: #pinnedBitShift.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -2766,6 +3090,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testRelocateObjStackForPlanningC
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testRemapBufferCountStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #remapBufferCount.
+	illiAST := self generateIllicium: #remapBufferCount.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header format' }
+MAStringCompSpurMemoryManagerTranslationTest >> testRememberedBitShiftStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #rememberedBitShift.
+	illiAST := self generateIllicium: #rememberedBitShift.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'plugin support' }
 MAStringCompSpurMemoryManagerTranslationTest >> testRemoveGCRootStringComparison [
 	| illiAST slangString illiString |
@@ -2802,6 +3144,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testReverseBytesInBitWordsInStri
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #reverseBytesIn32BitWordsIn:.
 	illiAST := self generateIllicium: #reverseBytesIn32BitWordsIn:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #scavenger }
+MAStringCompSpurMemoryManagerTranslationTest >> testRootTableCapacityStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #rootTableCapacity.
+	illiAST := self generateIllicium: #rootTableCapacity.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testRootTableCountStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #rootTableCount.
+	illiAST := self generateIllicium: #rootTableCount.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -2844,6 +3204,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testScavengingGCTenuringIfString
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testSegmentBridgePunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #segmentBridgePun.
+	illiAST := self generateIllicium: #segmentBridgePun.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #snapshot }
 MAStringCompSpurMemoryManagerTranslationTest >> testSetHeapBasememoryLimitendOfMemoryStringComparison [
 	| illiAST slangString illiString |
@@ -2869,6 +3238,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testShouldRemapOopStringComparis
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shouldRemapOop:.
 	illiAST := self generateIllicium: #shouldRemapOop:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header formats' }
+MAStringCompSpurMemoryManagerTranslationTest >> testSixtyFourBitIndexableFormatStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #sixtyFourBitIndexableFormat.
+	illiAST := self generateIllicium: #sixtyFourBitIndexableFormat.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testSixtyFourBitLongsClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #sixtyFourBitLongsClassIndexPun.
+	illiAST := self generateIllicium: #sixtyFourBitLongsClassIndexPun.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -2900,11 +3287,29 @@ MAStringCompSpurMemoryManagerTranslationTest >> testSlotSizeOfStringComparison [
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'cog jit support' }
+MAStringCompSpurMemoryManagerTranslationTest >> testSmallIntegerTagStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #smallIntegerTag.
+	illiAST := self generateIllicium: #smallIntegerTag.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'interpreter access' }
 MAStringCompSpurMemoryManagerTranslationTest >> testSplObjStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #splObj:.
 	illiAST := self generateIllicium: #splObj:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurMemoryManagerTranslationTest >> testStartOfMemoryStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #startOfMemory.
+	illiAST := self generateIllicium: #startOfMemory.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -2999,6 +3404,15 @@ MAStringCompSpurMemoryManagerTranslationTest >> testTenuringIncrementalGCStringC
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #tenuringIncrementalGC.
 	illiAST := self generateIllicium: #tenuringIncrementalGC.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testThirtyTwoBitLongsClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #thirtyTwoBitLongsClassIndexPun.
+	illiAST := self generateIllicium: #thirtyTwoBitLongsClassIndexPun.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -3143,6 +3557,24 @@ MAStringCompSpurMemoryManagerTranslationTest >> testVmEndiannessStringComparison
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #vmEndianness.
 	illiAST := self generateIllicium: #vmEndianness.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'class table puns' }
+MAStringCompSpurMemoryManagerTranslationTest >> testWeakArrayClassIndexPunStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #weakArrayClassIndexPun.
+	illiAST := self generateIllicium: #weakArrayClassIndexPun.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'header formats' }
+MAStringCompSpurMemoryManagerTranslationTest >> testWeakArrayFormatStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #weakArrayFormat.
+	illiAST := self generateIllicium: #weakArrayFormat.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]

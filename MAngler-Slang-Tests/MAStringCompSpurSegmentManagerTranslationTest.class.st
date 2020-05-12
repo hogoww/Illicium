@@ -136,6 +136,15 @@ MAStringCompSpurSegmentManagerTranslationTest >> testNextNonEmptySegmentAfterStr
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #accessing }
+MAStringCompSpurSegmentManagerTranslationTest >> testNumSegmentsStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #numSegments.
+	illiAST := self generateIllicium: #numSegments.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #snapshot }
 MAStringCompSpurSegmentManagerTranslationTest >> testPostSnapshotStringComparison [
 	| illiAST slangString illiString |
@@ -177,6 +186,15 @@ MAStringCompSpurSegmentManagerTranslationTest >> testSegmentOverlapStringCompari
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #segmentOverlap.
 	illiAST := self generateIllicium: #segmentOverlap.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #accessing }
+MAStringCompSpurSegmentManagerTranslationTest >> testSegmentsStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #segments.
+	illiAST := self generateIllicium: #segments.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]

@@ -41,19 +41,8 @@ MAVMTestGenerator class >> generateVMTests [
 	| generator |
 	self cleanUp.
 	generator:= self new.	
-	^ {VMClass.
-	CogClass.
-	SpurMemoryManager.
-	Spur64BitMemoryManager.
-	InterpreterPrimitives.
-	StackInterpreter.
-	StackInterpreterPrimitives.
-	SpurGenerationScavenger.
-	SpurSegmentManager.
-	SpurCompactor.
-	SpurPlanningCompactor.
-	CogStackPages.
-	InterpreterStackPages }
+	^ MAFullVMAnglerProgramRessource current program classesToPrepareSelectorsFor
+		, MAFullVMAnglerProgramRessource current program structClasses 
 			do:[:aVMClass| generator generateTestForClass: aVMClass ]
 ]
 

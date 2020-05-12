@@ -286,11 +286,65 @@ MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumFreeListsStringCompa
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'object access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testNumTagBitsStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #numTagBits.
+	illiAST := self generateIllicium: #numTagBits.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'word size' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testShiftForWordStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #shiftForWord.
+	illiAST := self generateIllicium: #shiftForWord.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #allocation }
 MAStringCompSpur64BitMemoryManagerTranslationTest >> testShortentoIndexableSizeStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #shorten:toIndexableSize:.
 	illiAST := self generateIllicium: #shorten:toIndexableSize:.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSmallFloatExponentBitsStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #smallFloatExponentBits.
+	illiAST := self generateIllicium: #smallFloatExponentBits.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSmallFloatExponentOffsetStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #smallFloatExponentOffset.
+	illiAST := self generateIllicium: #smallFloatExponentOffset.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'interpreter access' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSmallFloatMantissaBitsStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #smallFloatMantissaBits.
+	illiAST := self generateIllicium: #smallFloatMantissaBits.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'cog jit support' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testSmallFloatTagStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #smallFloatTag.
+	illiAST := self generateIllicium: #smallFloatTag.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
@@ -313,11 +367,29 @@ MAStringCompSpur64BitMemoryManagerTranslationTest >> testSmallObjectBytesForSlot
 	self assert: illiString equals: slangString
 ]
 
+{ #category : #'word size' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testTagMaskStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #tagMask.
+	illiAST := self generateIllicium: #tagMask.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
 { #category : #'header formats' }
 MAStringCompSpur64BitMemoryManagerTranslationTest >> testWordIndexableFormatStringComparison [
 	| illiAST slangString illiString |
 	slangString := self generateSlang: #wordIndexableFormat.
 	illiAST := self generateIllicium: #wordIndexableFormat.
+	illiString := self prettyPrintIllicium: illiAST.
+	self assert: illiString equals: slangString
+]
+
+{ #category : #'word size' }
+MAStringCompSpur64BitMemoryManagerTranslationTest >> testWordSizeStringComparison [
+	| illiAST slangString illiString |
+	slangString := self generateSlang: #wordSize.
+	illiAST := self generateIllicium: #wordSize.
 	illiString := self prettyPrintIllicium: illiAST.
 	self assert: illiString equals: slangString
 ]
