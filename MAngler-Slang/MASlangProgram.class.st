@@ -147,8 +147,12 @@ MASlangProgram >> interpreterClass [
 ]
 
 { #category : #enumerating }
-MASlangProgram >> methodsFromClass: aClass [ 
-	 ^ methods select: [ :aMethod | aClass includesBehavior: aMethod methodClass ]
+MASlangProgram >> methodsFromClass: aClass [
+	"current heuristic, only VMClass's methods are shared accross vm component. They should not be translated"
+
+	^ methods select: [ :aMethod | 
+		aMethod methodClass ~= VMClass
+			and: [ aClass includesBehavior: aMethod methodClass ] ]
 ]
 
 { #category : #accessing }
