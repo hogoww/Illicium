@@ -219,6 +219,7 @@ MASlangTranslator >> transformations [
 MASlangTranslator >> translateProgram [
 	| cu |
 	
+	self prepareProgram.
 	cu := ASTCCompilationUnit new.
 	
 	cu preamble: (ASTCRawCCode new cCode: program interpreterClass preambleCCode).
