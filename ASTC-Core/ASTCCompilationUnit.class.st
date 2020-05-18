@@ -76,6 +76,8 @@ ASTCCompilationUnit >> addStructType: aStructType [
 
 { #category : #accessing }
 ASTCCompilationUnit >> addVariableDeclaration: aVariableDeclaration [
+	(variableDeclarations anySatisfy: [ :aVarDecl | aVarDecl id = aVariableDeclaration id ])
+		ifTrue: [ ^ true ]. "We don't add it, but we do as if we did."
 	aVariableDeclaration parent: self.
 	variableDeclarations add: aVariableDeclaration.
 	^ true

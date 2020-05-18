@@ -60,7 +60,8 @@ FAKernelClass >> declare: aVar typed: aType [
 { #category : #'message performing' }
 FAKernelClass >> ifTranslation: aTranslationBlock ifNot: aNotBlock [
 	self flag:#notPretty.
-	^ methodTranslator ifNotNil: [ aTranslationBlock value ]
+	^ methodTranslator 
+		ifNotNil: [ aTranslationBlock value ]
 		ifNil:[ aNotBlock value ].
 		
 	
