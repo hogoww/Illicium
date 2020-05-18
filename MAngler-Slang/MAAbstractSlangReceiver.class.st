@@ -17,8 +17,7 @@ MAAbstractSlangReceiver >> = anotherObject [
 	^ self 
 		ifTranslation:
 			[ self translatedReceiver equals: (anotherObject acceptVisitor: methodTranslator) ]
-		ifNot: [ (methodTranslator ifNil:
-			[ ^ super = anotherObject and: [ type = anotherObject type ]]) ]
+		ifNot: [ ^ super = anotherObject and: [ type = anotherObject type ] ]
 ]
 
 { #category : #'translation-operators' }
