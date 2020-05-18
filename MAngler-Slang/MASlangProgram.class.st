@@ -27,9 +27,7 @@ MASlangProgram >> addClassOrStruct: aClass withInferer: inferer andTranslator: a
 	inferer addPoolVarsFor: aClass.
 	inferer retainMethods: (aClass requiredMethodNames: inferer options).
 
-	((aClass allSelectorsBelow: VMClass) collect: 
-		[:aSelector| 
-		aClass lookupSelector: aSelector ])
+	aClass methodDict values
 		select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
 		thenDo: [ :aMethod |
 			(self shouldExpandMethod: aMethod)
