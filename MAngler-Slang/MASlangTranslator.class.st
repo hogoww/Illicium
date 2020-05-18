@@ -219,8 +219,8 @@ MASlangTranslator >> translateProgram [
 	program structClasses collect: [ :aClass | classTranslator translateClass: aClass  ] into: cu.
 
 	program classes collect: [ :aClass | classTranslator translateClassState: aClass ] into: cu.	
-	program methods collect: [ :aMethod | classTranslator translateMethod: aMethod ] into: cu.
-
+	program methods collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
+	
 	^ cu
 ]
 
