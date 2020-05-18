@@ -189,7 +189,7 @@ MASlangTranslator >> preTranslationAnnotators [
 { #category : #accessing }
 MASlangTranslator >> preTranslationTransformations [
 	^ { 
-		MAGlobalStructureAccessTransformer translator: self.
+		"MAGlobalStructureAccessTransformer translator: self."
 		MASlangMinimalInliner translator: self
 	}
 ]
@@ -204,15 +204,6 @@ MASlangTranslator >> prepareProgram [
 MASlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
-]
-
-{ #category : #accessing }
-MASlangTranslator >> transformations [
-	^ { 
-		MASlangMethodCleaner new.
-		MAGlobalStructureAccessTransformer translator: self.
-		MASlangMinimalInliner translator: self
-	}
 ]
 
 { #category : #'translation-api' }
