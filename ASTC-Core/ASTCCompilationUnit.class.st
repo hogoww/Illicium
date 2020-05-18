@@ -7,7 +7,8 @@ Class {
 		'defines',
 		'structTypes',
 		'definitions',
-		'declarations'
+		'variableDeclarations',
+		'functionDeclarations'
 	],
 	#category : #'ASTC-Core-Nodes'
 }
@@ -26,7 +27,9 @@ ASTCCompilationUnit >> = aCompilationUnit [
 		ifFalse: [ ^ false ].
 	definitions = aCompilationUnit definitions
 		ifFalse: [ ^ false ].
-	declarations = aCompilationUnit declarations
+	variableDeclarations = aCompilationUnit variableDeclarations
+		ifFalse: [ ^ false ].
+	functionDeclarations = aCompilationUnit functionDeclarations
 		ifFalse: [ ^ false ].
 	^ true
 ]
@@ -34,13 +37,6 @@ ASTCCompilationUnit >> = aCompilationUnit [
 { #category : #visiting }
 ASTCCompilationUnit >> acceptVisitor: aVisitor [
 	^ aVisitor visitCompilationUnit: self
-]
-
-{ #category : #accessing }
-ASTCCompilationUnit >> addDeclaration: aDeclaration [
-	aDeclaration parent: self.
-	declarations add: aDeclaration.
-	^ true
 ]
 
 { #category : #accessing }
@@ -54,6 +50,13 @@ ASTCCompilationUnit >> addDefine: aDefine [
 ASTCCompilationUnit >> addDefinition: aDefinition [
 	aDefinition parent: self.
 	definitions add: aDefinition.
+	^ true
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> addFunctionDeclaration: aFunctionDeclaration [
+	aFunctionDeclaration parent: self.
+	functionDeclarations add: aFunctionDeclaration.
 	^ true
 ]
 
@@ -72,14 +75,10 @@ ASTCCompilationUnit >> addStructType: aStructType [
 ]
 
 { #category : #accessing }
-ASTCCompilationUnit >> declarations [
-	^ declarations
-]
-
-{ #category : #accessing }
-ASTCCompilationUnit >> declarations: someDeclarations [
-	someDeclarations do: [ :each | each parent: self ].
-	declarations := someDeclarations
+ASTCCompilationUnit >> addVariableDeclaration: aVariableDeclaration [
+	aVariableDeclaration parent: self.
+	variableDeclarations add: aVariableDeclaration.
+	^ true
 ]
 
 { #category : #accessing }
@@ -105,6 +104,17 @@ ASTCCompilationUnit >> definitions: someDefinitions [
 ]
 
 { #category : #accessing }
+ASTCCompilationUnit >> functionDeclarations [
+	^ functionDeclarations
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> functionDeclarations: someFunctionDeclarations [
+	someFunctionDeclarations do: [ :each | each parent: self ].
+	functionDeclarations := someFunctionDeclarations
+]
+
+{ #category : #accessing }
 ASTCCompilationUnit >> includes [
 	^ includes
 ]
@@ -121,7 +131,8 @@ ASTCCompilationUnit >> initialize [
 	defines := OrderedCollection new.
 	structTypes := OrderedCollection new.
 	definitions := OrderedCollection new.
-	declarations := OrderedCollection new
+	variableDeclarations := OrderedCollection new.
+	functionDeclarations := OrderedCollection new
 ]
 
 { #category : #testing }
@@ -149,4 +160,15 @@ ASTCCompilationUnit >> structTypes [
 ASTCCompilationUnit >> structTypes: someStructureDefinitions [
 	someStructureDefinitions do: [ :each | each parent: self ].
 	structTypes := someStructureDefinitions
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> variableDeclarations [
+	^ variableDeclarations
+]
+
+{ #category : #accessing }
+ASTCCompilationUnit >> variableDeclarations: someVariableDeclarations [
+	someVariableDeclarations do: [ :each | each parent: self ].
+	variableDeclarations := someVariableDeclarations
 ]

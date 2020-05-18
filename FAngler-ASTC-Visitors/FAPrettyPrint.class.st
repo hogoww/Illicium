@@ -216,12 +216,18 @@ FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 		do:[ :aDefine | self print: aDefine ; cr ].
 	self cr.
 
-	anASTCCompilationUnit declarations sort: [ :e1 :e2 | e1 id id < e2 id id ].
-	self << '/* Declarations */' ; cr.
-	anASTCCompilationUnit declarations 
+	anASTCCompilationUnit variableDeclarations sort: [ :e1 :e2 | e1 id id < e2 id id ].
+	self << '/* Variables Declarations */' ; cr.
+	anASTCCompilationUnit variableDeclarations
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
 	self cr.
 	
+	anASTCCompilationUnit functionDeclarations sort: [ :e1 :e2 | e1 id id < e2 id id ].
+	self << '/* Function declarations */' ; cr.
+	anASTCCompilationUnit functionDeclarations
+		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
+	self cr.
+
 	self cr ; << '/* Definitions */' ; cr.
 	anASTCCompilationUnit definitions
 			do:[ :aDefinition | self print: aDefinition ; cr ; cr ].
