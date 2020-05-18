@@ -16,7 +16,7 @@ ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
 ASTCCompilationUnit >> addFunctionDefinition: aFunctionDefinition [
 	"convinience method for when adding both definition and declaration, from a definition"
 	self addDefinition: aFunctionDefinition.
-	self addDeclaration: aFunctionDefinition declaration.
+	self addFunctionDeclaration: aFunctionDefinition declaration.
 	^ true
 ]
 
