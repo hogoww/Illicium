@@ -122,6 +122,11 @@ FATranslator >> initialize [
 
 ]
 
+{ #category : #accessing }
+FATranslator >> methodFor: aSelector [
+	^ program methodFor: aSelector
+]
+
 { #category : #visiting }
 FATranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"

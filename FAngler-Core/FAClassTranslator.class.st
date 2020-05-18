@@ -5,7 +5,6 @@ Class {
 		'methodTranslator',
 		'mainTranslator',
 		'stateTranslator',
-		'program',
 		'isStrict'
 	],
 	#category : #'FAngler-Core-Translation'
@@ -68,6 +67,11 @@ FAClassTranslator >> mainTranslator [
 { #category : #accessing }
 FAClassTranslator >> mainTranslator: aMainTranslator [
 	mainTranslator := aMainTranslator
+]
+
+{ #category : #accessing }
+FAClassTranslator >> methodFor: aSelector [ 
+	^ mainTranslator methodFor: aSelector.
 ]
 
 { #category : #accessing }

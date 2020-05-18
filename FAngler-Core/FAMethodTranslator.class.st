@@ -311,6 +311,11 @@ FAMethodTranslator >> messageNodeTranslator: aMessageNodeTranslator [
 		(aMessageNodeTranslator methodTranslator: self ; yourself).
 ]
 
+{ #category : #accessing }
+FAMethodTranslator >> methodFor: aSelector [
+	^ classTranslator methodFor: aSelector
+]
+
 { #category : #'accessors-nodes-translator' }
 FAMethodTranslator >> methodNodeTranslator: aMethodNodeTranslator [ 
 	translators at: #methodNodeTranslator put: 

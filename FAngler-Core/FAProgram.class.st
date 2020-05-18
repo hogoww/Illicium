@@ -74,9 +74,19 @@ FAProgram >> isFullyAnnotated: anObject [
 ]
 
 { #category : #accessing }
-FAProgram >> methodNamed: aSelector [
+FAProgram >> methodFor: aSelector [
+	^ self methodNamed: aSelector ifAbsent: [ nil ]
+]
 
+{ #category : #accessing }
+FAProgram >> methodNamed: aSelector [
 	^ methods at: aSelector ifAbsent: [ self error: 'methodNotFound' ] 
+]
+
+{ #category : #accessing }
+FAProgram >> methodNamed: aSelector ifAbsent: anAbsentBlock [
+
+	^ methods at: aSelector ifAbsent: anAbsentBlock
 ]
 
 { #category : #accessing }
