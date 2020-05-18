@@ -415,7 +415,7 @@ MASlangReceiver >> doesNotUnderstand: aMessage [
 		ifTrue:[ UnsupportedFeature new feature: ('translation of Slang selector: #', aMessage selector) ; signal ]. 
 	
 	(methodTranslator methodFor: aMessage selector) 
-		ifNotNil: [ :aMethod | ^ ASTCIdentifier new id: aMessage selector ; yourself  ].
+		ifNotNil: [ :aMethod | aMethod isCMacroDefine ifTrue: [ ^ ASTCIdentifier new id: aMessage selector ; yourself ] ].
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
 ]
 
