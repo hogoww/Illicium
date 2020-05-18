@@ -7,8 +7,18 @@ RBMethodNode >> getDefiningBlockOrMethodNode [
 
 { #category : #'*FAngler-RB-Extensions' }
 RBMethodNode >> isCMacro [
-	^ (self hasPragmaNamed: #cmacro)
-		or: [(self hasPragmaNamed: #cmacro:) ]
+	^ self isCMacroDefine
+		or: [ self isCMacroFunction ]
+]
+
+{ #category : #'*FAngler-RB-Extensions' }
+RBMethodNode >> isCMacroDefine [
+	^ self hasPragmaNamed: #cmacro
+]
+
+{ #category : #'*FAngler-RB-Extensions' }
+RBMethodNode >> isCMacroFunction [
+	^ self hasPragmaNamed: #cmacro:
 ]
 
 { #category : #'*FAngler-RB-Extensions' }
