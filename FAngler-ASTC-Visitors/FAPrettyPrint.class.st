@@ -210,11 +210,13 @@ FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 		do:[ :aStructType | self print: aStructType ; cr ; cr ].
 	self cr.
 
+	anASTCCompilationUnit defines sort: [ :e1 :e2 | e1 name id < e2 name id ].
 	self << '/* Defines */' ; cr.
 	anASTCCompilationUnit defines
 		do:[ :aDefine | self print: aDefine ; cr ].
 	self cr.
 
+	anASTCCompilationUnit declarations sort: [ :e1 :e2 | e1 id id < e2 id id ].
 	self << '/* Declarations */' ; cr.
 	anASTCCompilationUnit declarations 
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].

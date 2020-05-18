@@ -226,9 +226,9 @@ MASlangTranslator >> translateProgram [
 	
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
 	program structClasses collect: [ :aClass | classTranslator translateClass: aClass  ] into: cu.
-	
+
+	program classes collect: [ :aClass | classTranslator translateClassState: aClass ] into: cu.	
 	program methods collect: [ :aMethod | classTranslator translateMethod: aMethod ] into: cu.
-	program classes collect: [ :aClass | classTranslator translateClassState: aClass ] into: cu.
 
 	^ cu
 ]
