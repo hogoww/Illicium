@@ -26,19 +26,7 @@ MASlangTypeAnnotator >> typeThatNode: aNode [
 
 { #category : #accessing }
 MASlangTypeAnnotator >> visitMessageNode: aMessageNode [
-	"add an exception for cCode:inSmalltalk:, because slang ignores the second argument"
-	aMessageNode selector = #cCode:inSmalltalk: 
-		ifTrue: [ 
-			self visitNode: aMessageNode receiver.
-			self visitNode: aMessageNode arguments first.
-			self typeThatNode: aMessageNode.
-			^aMessageNode
-			].
-		
-	aMessageNode selector = #halt
-		ifTrue: [ ^ self visitNode: aMessageNode receiver ].
-
-	(#( caseOf: caseOf:otherwise: ) includes: aMessageNode selector)
+	(#(caseOf: caseOf:otherwise: ) includes: aMessageNode selector)
 		ifTrue: [ 
 			self visitNode: aMessageNode receiver.
 			aMessageNode arguments first statements do: [ :aMessageCaseNode |
