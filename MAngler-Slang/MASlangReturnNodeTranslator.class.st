@@ -15,7 +15,7 @@ MASlangReturnNodeTranslator >> translateNode: aReturnNode [
 		ifTrue: [ 
 			ASTCBlock new
 				addStatement: returnedExpression;
-				addStatement: (ASTCReturn new expression: ASTCEmptyStatement new ; yourself);
+				addStatement: (ASTCReturn new expression: nil ; yourself);
 				yourself ]
 		ifFalse: [ 
 			ASTCReturn new
