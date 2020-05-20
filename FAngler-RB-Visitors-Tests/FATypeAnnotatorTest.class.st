@@ -140,9 +140,10 @@ FATypeAnnotatorTest >> testVisitBlockNode [
 
 { #category : #test }
 FATypeAnnotatorTest >> testVisitCascadeNodeGlobal [
-	| ast counterValueNode counterMessageNode |
+	| ast counterValueNode counterMessageNode counterCascade |
 	counterValueNode := 0.
 	counterMessageNode := 0.
+	counterCascade := 0.
 	
 	ast := self inferMethodSelector: #aMethodWithACascade from: FATypeAnnotatorTest.
 	
@@ -156,11 +157,17 @@ FATypeAnnotatorTest >> testVisitCascadeNodeGlobal [
 			ifTrue:[
 				counterMessageNode := counterMessageNode + 1.
 				self assert: (aNode hasProperty: propertyName).
-				]].
+			].
+		aNode isCascade 
+			ifTrue: [
+				counterCascade := counterCascade + 1.
+				self assert: (aNode hasProperty: propertyName)
+				].
+			].
 		
 	self assert: counterValueNode equals: 4. "We visit the receiver twice, and both of them must be typed"
 	self assert: counterMessageNode equals: 2.
-	
+	self assert: counterCascade equals: 1.
 ]
 
 { #category : #test }

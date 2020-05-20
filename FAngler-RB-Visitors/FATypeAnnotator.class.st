@@ -56,6 +56,14 @@ FATypeAnnotator >> visitBlockNode: aBlockNode [
 ]
 
 { #category : #visiting }
+FATypeAnnotator >> visitCascadeNode: aMessageNode [
+	"the type of a cascade node is the type of the last message, i guess."
+	super visitCascadeNode: aMessageNode.
+	self atNewPropertyPut: (aMessageNode messages last propertyAt: self class propertyName) for: aMessageNode.
+
+]
+
+{ #category : #visiting }
 FATypeAnnotator >> visitGlobalNode: aGlobalNode [
 	super visitGlobalNode: aGlobalNode.
 	self typeThatNode: aGlobalNode.
