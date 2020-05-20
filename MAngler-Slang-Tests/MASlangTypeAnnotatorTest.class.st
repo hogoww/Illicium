@@ -55,18 +55,6 @@ MASlangTypeAnnotatorTest >> setUp [
 ]
 
 { #category : #test }
-MASlangTypeAnnotatorTest >> testVisitCCodeInSmalltalk [
-	| ast message |
-	" Slang ignores inSmalltalk: part, so we have to as well"
-	ast := self
-		inferMethodSelector: #aMethodWithCCodeInSmalltalk
-		from: self class.
-	message := ast body statements first value.
-	self assert: (message arguments first hasProperty: propertyName).
-	self deny: (message arguments second hasProperty: propertyName).
-]
-
-{ #category : #test }
 MASlangTypeAnnotatorTest >> testVisitCaseOf [
 	"cases in caseOf: do not have TNodes equivalent"
 	| ast caseMessage caseArray case |

@@ -42,17 +42,6 @@ MASlangDeclarationAnnotator >> visitBlockNode: aBlockNode [
 ]
 
 { #category : #visit }
-MASlangDeclarationAnnotator >> visitMessageNode: aMessageNode [
-	#cCode:inSmalltalk: = aMessageNode selector 
-		ifTrue: [ 
-			aMessageNode receiver acceptVisitor: self.
-			aMessageNode arguments first acceptVisitor: self.
-		] 
-		ifFalse: [ super visitMessageNode: aMessageNode ]	
-
-]
-
-{ #category : #visit }
 MASlangDeclarationAnnotator >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
 	

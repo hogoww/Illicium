@@ -6,13 +6,22 @@ Class {
 
 { #category : #translate }
 MASlangReturnNodeTranslator >> translateNode: aReturnNode [
-	| returnExpression |
-	returnExpression := aReturnNode value isSelf
-		ifTrue: [ ^ ASTCEmptyStatement new ]
-		ifFalse: [ aReturnNode value acceptVisitor: methodTranslator ].
+	| 	returnedExpression |
 	
-	^ ASTCReturn new
-		pharoNode: aReturnNode ;
-		expression: returnExpression;
-		yourself
+	returnedExpression := (aReturnNode value acceptVisitor: methodTranslator) ifNil:[ ASTCEmptyStatement new ].
+	
+	^ (aReturnNode value isSelf or: [ (methodTranslator
+		getNodeTranslationType: aReturnNode value) type type type = #void ])
+		ifTrue: [ 
+			ASTCBlock new
+				addStatement: returnedExpression;
+				addStatement: (ASTCReturn new expression: ASTCEmptyStatement new ; yourself);
+				yourself ]
+		ifFalse: [ 
+			ASTCReturn new
+				pharoNode: aReturnNode ;
+				expression: returnedExpression;
+				yourself ].
+	
+
 ]
