@@ -21,7 +21,7 @@ MASlangTypeAnnotator >> typeThatNode: aNode [
 	| type cType |
 	type := aNode getSlangTypeUsing: inferer in: currentTMethod.
 	cType := CType createFrom: type .
-	self atNewPropertyPut: cType -> nil for: aNode
+	self atNewPropertyPut: cType for: aNode
 ]
 
 { #category : #accessing }

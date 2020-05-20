@@ -90,7 +90,7 @@ FAKernelClass >> methodTranslator: aMethodTranslator [
 FAKernelClass >> myType [
 	"in case of most, it doesn't
 	for UserTypes, it does."
-	^ (receiverNode propertyAt: FATypeAnnotator propertyName) key
+	^ receiverNode propertyAt: FATypeAnnotator propertyName
 ]
 
 { #category : #'message performing' }
