@@ -66,5 +66,19 @@ MASlangClassTranslator >> typeAnnotatorClass [
 
 { #category : #'translation-api' }
 MASlangClassTranslator >> typeOfSlot: aSlot [
-	^ self getReplacementType: (CType createFrom: ((self inferer typeOfVariable: aSlot name) ifNil:'sqInt')).
+	| owningClass cType |
+	owningClass := aSlot owningClass.
+	cType := "self getReplacementType: "
+		(CType createFrom: 
+			((aSlot owningClass isStructClass
+				"the information is not stored in the CCodeGenerator, and directly accesible in the class"
+				ifTrue: [ owningClass returnTypeForAccessor: aSlot name] 
+				"this is store in the CCodeGenerator"
+				ifFalse: [ self inferer typeOfVariable: aSlot name ]) ifNil: 'sqInt')).
+
+	(owningClass isStructClass and: [ cType type = owningClass name or: [ cType type = owningClass structTypeName ]]) ifTrue: [ cType explicitStruct: true ].
+	
+	^ self getReplacementType: cType
+	
+					
 ]
