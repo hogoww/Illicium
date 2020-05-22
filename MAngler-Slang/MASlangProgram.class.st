@@ -171,9 +171,8 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
 		
-
-	inferer addHeaderFile: '"sq.h"'."added systematically"
 	includes := inferer headerFiles.
+	includes addFirst: '"sq.h"'."added systematically, doesn't "
 	
 	self isFullyAnnotated: true
 ]
