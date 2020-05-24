@@ -15,10 +15,7 @@ FAAssignementNodeTranslator >> translateNode: anAssignmentNode [
 					(ASTCVariableDefinition new
 						declaration:
 							(ASTCVariableDeclaration new
-								type:
-									(ASTCType new
-										type: (methodTranslator getNodeTranslationType: anAssignmentNode variable);
-										yourself);
+								type: (methodTranslator getNodeConcreteType: anAssignmentNode variable) asCTypeNode;
 								id: (anAssignmentNode variable acceptVisitor: methodTranslator);
 								yourself);
 						init: (anAssignmentNode value acceptVisitor: methodTranslator);

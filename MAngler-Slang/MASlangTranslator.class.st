@@ -92,11 +92,11 @@ MASlangTranslator >> generateVMHeader [
 { #category : #initialization }
 MASlangTranslator >> getReplacementType: aCType [
 	"Virtual machine is a structure used exclusively in generated code, and has no Smalltalk equivalent (that I know of)"
-	^ (((aCType isStruct and: [ (aCType type = #VirtualMachine) not ])
+	^ ((aCType isStruct and: [ (aCType type = #VirtualMachine) not ])
 		ifTrue:[ aCType pharoType: (program structNamed: aCType type).
 			MASlangStructsReceiver new ]
 		ifFalse:[ MASlangReceiver new ]) 
-			type: aCType ; yourself) asConstraint.
+			type: aCType ; yourself.
 ]
 
 { #category : #accesors }

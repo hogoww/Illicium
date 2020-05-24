@@ -11,6 +11,7 @@ FATemporaryNodeTranslator >> translateNode: aNode [
 
 { #category : #translate }
 FATemporaryNodeTranslator >> visitTemporaryNodes: aTemporaryNode [
+	self halt.
 	1 halt.
 	^ ASTCDeclarationStatement new
 				pharoNode: aTemporaryNode;

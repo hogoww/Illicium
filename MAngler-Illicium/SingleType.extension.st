@@ -2,7 +2,7 @@ Extension { #name : #SingleType }
 
 { #category : #'*MAngler-Illicium' }
 SingleType >> asCType [
-	^ type asCType
+	^ type
 ]
 
 { #category : #'*MAngler-Illicium' }

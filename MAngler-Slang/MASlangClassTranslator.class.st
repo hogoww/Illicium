@@ -81,7 +81,6 @@ MASlangClassTranslator >> typeOfSlot: aSlot [
 			or: [ cType type = owningClass structTypeName ]]) 
 				ifTrue: [ cType explicitStruct: true ].
 	
-	^ self getReplacementType: cType
-	
+	^ SingleType new type: cType yourself	
 					
 ]
