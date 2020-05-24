@@ -16,7 +16,7 @@ ASTCCompilationUnitTest >> testAddCompilationUnitToCompilationUnit [
 	cu add: definition.
 	self assert: cu definitions size equals: 1.
 	self assert: cu definitions anyOne equals: definition.
-	self assert: cu declarations size equals: 0.
+	self assert: cu variableDeclarations size equals: 0.
 
 	
 	targetCu := ASTCCompilationUnit new.
@@ -24,7 +24,7 @@ ASTCCompilationUnitTest >> testAddCompilationUnitToCompilationUnit [
 	
 	self assert: targetCu definitions size equals: 1.
 	self assert: targetCu definitions anyOne equals: definition.
-	self assert: targetCu declarations size equals: 0.
+	self assert: targetCu variableDeclarations size equals: 0.
 	targetCu debugASTCStructure.
 ]
 
@@ -46,7 +46,7 @@ ASTCCompilationUnitTest >> testAddDefinitionToCompilationUnit [
 	cu add: definition.
 	self assert: cu definitions size equals: 1.
 	self assert: cu definitions anyOne equals: definition.
-	self assert: cu declarations size equals: 0.
+	self assert: cu variableDeclarations size equals: 0.
 	cu debugASTCStructure.
 ]
 
@@ -70,7 +70,7 @@ ASTCCompilationUnitTest >> testAddFunctionDefinitionToCompilationUnit [
 	cu add: definition.
 	self assert: cu definitions size equals: 1.
 	self assert: cu definitions anyOne equals: definition.
-	self assert: cu declarations size equals: 1.
-	self assert: cu declarations anyOne equals: definition declaration.
+	self assert: cu functionDeclarations size equals: 1.
+	self assert: cu functionDeclarations anyOne equals: definition declaration.
 	cu debugASTCStructure.
 ]

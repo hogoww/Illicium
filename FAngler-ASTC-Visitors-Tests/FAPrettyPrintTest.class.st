@@ -78,13 +78,13 @@ FAPrettyPrintTest >> testVisitBreak [
 FAPrettyPrintTest >> testVisitCastOperator [
 	| structure |
 	structure := ASTCCastOperator new 
-		type: (ASTCType new type: self class asConstraint ; yourself);
-		operand: (ASTCIdentifier new id: #a; yourself);
+		type: 'struct b' asCTypeNode;
+		operand: #a asCIdentifierNode;
 		yourself.
 	
 	structure debugASTCStructure.
 	self assert: structure isCastOperator.
-	self assert: (structure prettyPrintUsing: FAPrettyPrint new) equals: '(struct FAPrettyPrintTest) a'.
+	self assert: (structure prettyPrintUsing: FAPrettyPrint new) equals: '(struct b) a'.
 ]
 
 { #category : #tests }
@@ -146,8 +146,8 @@ FAPrettyPrintTest >> testVisitStructureDefinition [
 	operator := ASTCStructureDefinition new 
 		declaration: (ASTCStructureDeclaration new id:(ASTCIdentifier new id: #heros yourself));
 		addMember: (ASTCVariableDeclaration new 
-			type: (ASTCType new type: IlliciumSmallInteger asConstraint; yourself); 
-			id: (ASTCIdentifier new id: #druss; yourself));
+			type: #int asCTypeNode; 
+			id: #druss asCIdentifierNode);
 		yourself.
 	
 	operator debugASTCStructure.
