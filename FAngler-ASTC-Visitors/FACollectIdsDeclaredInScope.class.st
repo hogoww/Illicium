@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'declaredIDs',
 		'scope',
-		'declaredFunctions'
+		'declaredFunctionsIDS'
 	],
 	#category : #'FAngler-ASTC-Visitors-Analysis'
 }
@@ -12,6 +12,12 @@ Class {
 { #category : #'as yet unclassified' }
 FACollectIdsDeclaredInScope class >> collectFrom: aScope [
 	^ self new collectFrom: aScope
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> add: anId [
+	(declaredIDs at: anId id ifAbsentPut: [ OrderedCollection new])
+		add: anId.
 ]
 
 { #category : #'public api' }
@@ -23,11 +29,28 @@ FACollectIdsDeclaredInScope >> collectFrom: aScope [
 
 { #category : #initialization }
 FACollectIdsDeclaredInScope >> initialize [
-	declaredIDs := Bag new.
-	declaredFunctions := Set new.
+	declaredIDs := Dictionary new.
+	declaredFunctionsIDS := Set new.
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitFunctionDefinition: aFunctionDefinition [
+	"we only visit the body of the method if it is the current scope"
+	aFunctionDefinition = scope
+		ifTrue: [ super visitFunctionDefinition: aFunctionDefinition ]
+		ifFalse: [ aFunctionDefinition declaration acceptVisitor: self ]
+	
 ]
 
 { #category : #'public api' }
 FACollectIdsDeclaredInScope >> visitIdentifier: anIdentifier [
-	declaredIDs add: anIdentifier
+	self add: anIdentifier
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitStructureDefinition: aStructureDefinition [
+	"we only visit the struct if it is the current scope"
+	aStructureDefinition = scope
+		ifTrue: [ super visitStructureDefinition: aStructureDefinition ]
+		ifFalse: [ aStructureDefinition declaration acceptVisitor: self ].
 ]
