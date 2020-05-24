@@ -6,9 +6,7 @@ Class {
 
 { #category : #translate }
 FAMethodNodeTranslator >> translateIdentifier: aMethodNode [
-	^ ASTCIdentifier new
-		id: (FAFormatHelper formatSelector: aMethodNode selector);
-		yourself
+	^ (FAFormatHelper formatSelector: aMethodNode selector) asCIdentifierNode
 ]
 
 { #category : #translate }
@@ -19,10 +17,7 @@ FAMethodNodeTranslator >> translateNode: aMethodNode [
 		declaration:
 			(ASTCFunctionDeclaration new
 				qualifiers: OrderedCollection new;
-				type:
-					(ASTCType new
-						type: (methodTranslator getNodeTranslationType: aMethodNode);
-						yourself);
+				type: (methodTranslator getNodeConcreteType: aMethodNode) asCTypeNode;
 				id: (self translateIdentifier: aMethodNode);
 				parameters: (self translateParameters: aMethodNode);
 				yourself);

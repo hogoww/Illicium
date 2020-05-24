@@ -26,8 +26,6 @@ FAArgumentNodeTranslator >> translateParameterDeclaration: anArgumentNode [
 	^ ASTCVariableDeclaration new
 		pharoNode: anArgumentNode;
 		id: (self asCIdentifier: anArgumentNode);
-		type: (ASTCType new
-			type: (methodTranslator getNodeTranslationType: anArgumentNode);
-			yourself);
+		type: (methodTranslator getNodeConcreteType: anArgumentNode) asCTypeNode;
 		yourself
 ]

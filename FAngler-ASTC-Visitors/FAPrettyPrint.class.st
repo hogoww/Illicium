@@ -386,7 +386,7 @@ FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 		space;
 		<< '{';
 		cr.
-		
+
 	self enterBlock.
 	aStructureDefinition members do: [:aMember| 
 		self spaces. 

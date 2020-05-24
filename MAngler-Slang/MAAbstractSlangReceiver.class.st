@@ -26,17 +26,8 @@ MAAbstractSlangReceiver >> == anOperand [
 ]
 
 { #category : #typing }
-MAAbstractSlangReceiver >> asCType [
-	<deprecated>
-	"not sure how this is declared"
-	self flag: #deprecated.
-	"for API concistency with the initial design. "
-	^ type ifNil: [ CType createFrom: #sqInt ]
-]
-
-{ #category : #typing }
 MAAbstractSlangReceiver >> asConstraint [
-	^ SingleType new type: self; yourself
+	^ SingleType new type: type ; yourself
 ]
 
 { #category : #'translation-keyword' }
@@ -55,10 +46,14 @@ MAAbstractSlangReceiver >> at: anExpression put: aValue [
 ]
 
 { #category : #'translation-keyword' }
-MAAbstractSlangReceiver >> cTypeFor: aCType [
-	^ ASTCType new 
-		type: (self class new type: (CType createFrom: aCType value) ; yourself) asConstraint;
-		yourself
+MAAbstractSlangReceiver >> cTypeFor: aSymbol [
+	^ aSymbol asCTypeNode
+]
+
+{ #category : #'instance creation' }
+MAAbstractSlangReceiver >> createInstance [
+	self flag: #hack. " allows to work with the initial machinery, without using new."
+	^ self
 ]
 
 { #category : #'translation-keyword' }
@@ -95,14 +90,6 @@ MAAbstractSlangReceiver >> ifNotNil: anIfNotNilBlock ifNil: aNilBlock [
 { #category : #'translation-keyword' }
 MAAbstractSlangReceiver >> isNil [
 	^ self translatedReceiver equals: (ASTCLiteral value: #null)
-]
-
-{ #category : #utility }
-MAAbstractSlangReceiver >> new [
-	"very hacky way to 'create' a 'new' instance of the recever... Should not stay that way."
-	self flag: #hack.
-	^ self
-
 ]
 
 { #category : #'translation-keyword' }

@@ -11,7 +11,7 @@ MASlangReturnNodeTranslator >> translateNode: aReturnNode [
 	returnedExpression := (aReturnNode value acceptVisitor: methodTranslator) ifNil:[ ASTCEmptyStatement new ].
 	
 	^ (aReturnNode value isSelf 
-		or: [ (methodTranslator getNodeTranslationType: aReturnNode value) type type type = #void ])
+		or: [ (methodTranslator getNodeConcreteType: aReturnNode value) type = #void ])
 		ifTrue: [ 
 			ASTCBlock new
 				addStatement: returnedExpression;

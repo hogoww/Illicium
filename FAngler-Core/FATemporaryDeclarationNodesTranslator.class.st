@@ -10,10 +10,7 @@ FATemporaryDeclarationNodesTranslator >> translateNode: aTemporaryDeclarationNod
 		pharoNode: aTemporaryDeclarationNode;
 		declaration:
 			(ASTCVariableDeclaration new
-				type:
-					(ASTCType new
-						type: (methodTranslator getNodeTranslationType: aTemporaryDeclarationNode);
-						yourself);
+				type: (methodTranslator getNodeConcreteType: aTemporaryDeclarationNode) asCTypeNode;
 				id: (aTemporaryDeclarationNode acceptVisitor: methodTranslator);
 				yourself);
 		yourself
