@@ -13,10 +13,11 @@ FACollectIdsDeclaredInScopeTest >> assert: aScope containsAll: idsExpected [
 	idsFound := FACollectIdsDeclaredInScope collectFrom: aScope.
 
 	self assert: idsFound size equals: idsExpected size.
-	self assert: idsFound keys asSet equals: idsExpected asSet
+	self assert: idsFound keys asSet equals: idsExpected asSet.
+	idsFound do: [ :aCollection | self assert: aCollection size equals: 1 ].
 ]
 
-{ #category : #'tests-simple' }
+{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneEmptyStructDefinition [
 	| scope |
 	scope := ASTCCompilationUnit new.
@@ -27,7 +28,7 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneEmptyStructDefiniti
 	self assert: scope containsAll: #( druss )
 ]
 
-{ #category : #'tests-simple' }
+{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDeclaration [
 	| scope |
 	scope := ASTCCompilationUnit new.
@@ -39,12 +40,13 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDeclaration
 	self assert: scope containsAll: #( druss )
 ]
 
-{ #category : #'tests-simple' }
+{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDefinition [
 	| scope |
 	scope := ASTCCompilationUnit new.
 	scope add: (ASTCFunctionDefinition new
 		declaration: (ASTCFunctionDeclaration new
+			qualifiers: OrderedCollection new;
 			type: #int asCTypeNode;
 			id: #druss asCIdentifierNode;
 			yourself);
@@ -53,7 +55,37 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDefinition 
 	self assert: scope containsAll: #( druss )
 ]
 
-{ #category : #'tests-simple' }
+{ #category : #'tests-compilationUnit' }
+FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDefinitionWithAConflictingDeclarationInBody [
+	| scope |
+	scope := ASTCCompilationUnit new.
+	scope add: (ASTCFunctionDefinition new
+		declaration: (ASTCFunctionDeclaration new
+			type: #int asCTypeNode;
+			id: #druss asCIdentifierNode;
+			yourself);
+			addStatement: (ASTCVariableDeclaration new id: #druss asCIdentifierNode ; type: #int asCTypeNode yourself);
+		yourself)	.
+	
+	self assert: scope containsAll: #( druss )
+]
+
+{ #category : #'tests-compilationUnit' }
+FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDefinitionWithANonConflictingDeclarationInBody [
+	| scope |
+	scope := ASTCCompilationUnit new.
+	scope add: (ASTCFunctionDefinition new
+		declaration: (ASTCFunctionDeclaration new
+			type: #int asCTypeNode;
+			id: #druss asCIdentifierNode;
+			yourself);
+			addStatement: (ASTCVariableDeclaration new id: #snaga asCIdentifierNode ; type: #int asCTypeNode yourself);
+		yourself)	.
+	
+	self assert: scope containsAll: #( druss )
+]
+
+{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneStructDefinitionWithOneConflictingMember [
 	| scope |
 	scope := ASTCCompilationUnit new.
@@ -68,7 +100,7 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneStructDefinitionWit
 	self assert: scope containsAll: #( druss )
 ]
 
-{ #category : #'tests-simple' }
+{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneStructDefinitionWithOneNonConflictingMember [
 	| scope |
 	scope := ASTCCompilationUnit new.
@@ -83,7 +115,7 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneStructDefinitionWit
 	self assert: scope containsAll: #( druss )
 ]
 
-{ #category : #'tests-simple' }
+{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneVariableDeclaration [
 	| scope |
 	scope := ASTCCompilationUnit new.
@@ -95,7 +127,7 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneVariableDeclaration
 	self assert: scope containsAll: #( druss )
 ]
 
-{ #category : #'tests-simple' }
+{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testEmptyCompilationUnit [
 	| scope |
 	scope := ASTCCompilationUnit new.

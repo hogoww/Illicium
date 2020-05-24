@@ -24,6 +24,9 @@ FACollectIdsDeclaredInScope >> add: anId [
 FACollectIdsDeclaredInScope >> collectFrom: aScope [
 	scope := aScope.
 	aScope acceptVisitor: self.
+	declaredFunctionsIDS do: [ :aFuncDecl |
+		declaredIDs at: aFuncDecl id id ifAbsentPut: (OrderedCollection with: aFuncDecl) 
+		].
 	^ declaredIDs
 ]
 
@@ -31,6 +34,19 @@ FACollectIdsDeclaredInScope >> collectFrom: aScope [
 FACollectIdsDeclaredInScope >> initialize [
 	declaredIDs := Dictionary new.
 	declaredFunctionsIDS := Set new.
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitExpression: anExpression [
+	"Only Identifier (& preprocessor define ?) may have declarations in them. Othe expressions don't.
+	Therefore this is inhibiting the visit of subNodes"
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitFunctionDeclaration: aFunctionDeclaration [
+	"we only visit the body of the method if it is the current scope"
+	declaredFunctionsIDS add: aFunctionDeclaration
+	
 ]
 
 { #category : #'public api' }
