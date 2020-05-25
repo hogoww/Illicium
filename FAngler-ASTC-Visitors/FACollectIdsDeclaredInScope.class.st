@@ -37,30 +37,46 @@ FACollectIdsDeclaredInScope >> initialize [
 ]
 
 { #category : #'public api' }
-FACollectIdsDeclaredInScope >> visitExpression: anExpression [
-	"Only Identifier (& preprocessor define ?) may have declarations in them. Othe expressions don't.
-	Therefore this is inhibiting the visit of subNodes"
+FACollectIdsDeclaredInScope >> visitDeclaration: aDeclaration [
+	"if we visit the declaration, that means that we did not get through a definitions, therefore this was a direct declaration"
+	self add: aDeclaration
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitDefinition: aDefinition [
+	"we only visit the body/argument of the method if it is the current scope"
+	aDefinition = scope
+		ifTrue: [ super visitDefinition: aDefinition ]
+		ifFalse: [ self add: aDefinition declaration ]
 ]
 
 { #category : #'public api' }
 FACollectIdsDeclaredInScope >> visitFunctionDeclaration: aFunctionDeclaration [
-	"we only visit the body of the method if it is the current scope"
+	"we treat function declarations differntly as they might declare a method that is also defined"
 	declaredFunctionsIDS add: aFunctionDeclaration
-	
 ]
 
 { #category : #'public api' }
 FACollectIdsDeclaredInScope >> visitFunctionDefinition: aFunctionDefinition [
-	"we only visit the body of the method if it is the current scope"
-	aFunctionDefinition = scope
-		ifTrue: [ super visitFunctionDefinition: aFunctionDefinition ]
-		ifFalse: [ self add: aFunctionDefinition declaration ]
+	^ self visitDefinition: aFunctionDefinition
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitStructureDeclaration: aStructureDeclaration [
+	^ self visitDeclaration: aStructureDeclaration
 ]
 
 { #category : #'public api' }
 FACollectIdsDeclaredInScope >> visitStructureDefinition: aStructureDefinition [
-	"we only visit the struct if it is the current scope"
-	aStructureDefinition = scope
-		ifTrue: [ super visitStructureDefinition: aStructureDefinition ]
-		ifFalse: [ aStructureDefinition declaration acceptVisitor: self ].
+	^ self visitDefinition: aStructureDefinition
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitVariableDeclaration: aVariableDeclaration [
+	^ self visitDeclaration: aVariableDeclaration
+]
+
+{ #category : #'public api' }
+FACollectIdsDeclaredInScope >> visitVariableDefinition: aVariableDefinition [
+	^ self visitDefinition: aVariableDefinition
 ]

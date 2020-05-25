@@ -32,7 +32,7 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneEmptyStructDefiniti
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDeclaration [
 	| scope |
 	scope := ASTCCompilationUnit new.
-	scope add: (ASTCVariableDeclaration new
+	scope add: (ASTCFunctionDeclaration new
 			type: #int asCTypeNode;
 			id: #druss asCIdentifierNode;
 			yourself).
