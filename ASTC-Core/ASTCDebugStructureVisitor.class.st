@@ -53,10 +53,6 @@ ASTCDebugStructureVisitor >> visitCompilationUnit: aCompilationUnit [
 		ifNotNil: [ :variableDeclarations | 
 			variableDeclarations
 				do: [ :aVariableDeclarations | self assert: aVariableDeclarations isVariableDeclaration ] ].
-	aCompilationUnit functionDeclarations
-		ifNotNil: [ :functionDeclarations | 
-			functionDeclarations
-				do: [ :aFunctionDeclarations | self assert: aFunctionDeclarations isFunctionDeclaration ] ].
 	aCompilationUnit preamble
 		ifNotNil: [ :aPreamble | self assert: aPreamble isRawCCode ]
 ]

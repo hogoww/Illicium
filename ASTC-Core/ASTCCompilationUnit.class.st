@@ -7,8 +7,7 @@ Class {
 		'defines',
 		'structTypes',
 		'definitions',
-		'variableDeclarations',
-		'functionDeclarations'
+		'variableDeclarations'
 	],
 	#category : #'ASTC-Core-Nodes'
 }
@@ -28,8 +27,6 @@ ASTCCompilationUnit >> = aCompilationUnit [
 	definitions = aCompilationUnit definitions
 		ifFalse: [ ^ false ].
 	variableDeclarations = aCompilationUnit variableDeclarations
-		ifFalse: [ ^ false ].
-	functionDeclarations = aCompilationUnit functionDeclarations
 		ifFalse: [ ^ false ].
 	^ true
 ]
@@ -54,13 +51,6 @@ ASTCCompilationUnit >> addDefinition: aDefinition [
 ]
 
 { #category : #accessing }
-ASTCCompilationUnit >> addFunctionDeclaration: aFunctionDeclaration [
-	aFunctionDeclaration parent: self.
-	functionDeclarations add: aFunctionDeclaration.
-	^ true
-]
-
-{ #category : #accessing }
 ASTCCompilationUnit >> addInclude: anInclude [
 	anInclude parent: self.
 	includes add: anInclude.
@@ -76,8 +66,6 @@ ASTCCompilationUnit >> addStructType: aStructType [
 
 { #category : #accessing }
 ASTCCompilationUnit >> addVariableDeclaration: aVariableDeclaration [
-	(variableDeclarations anySatisfy: [ :aVarDecl | aVarDecl id = aVariableDeclaration id ])
-		ifTrue: [ ^ true ]. "We don't add it, but we do as if we did."
 	aVariableDeclaration parent: self.
 	variableDeclarations add: aVariableDeclaration.
 	^ true
@@ -106,17 +94,6 @@ ASTCCompilationUnit >> definitions: someDefinitions [
 ]
 
 { #category : #accessing }
-ASTCCompilationUnit >> functionDeclarations [
-	^ functionDeclarations
-]
-
-{ #category : #accessing }
-ASTCCompilationUnit >> functionDeclarations: someFunctionDeclarations [
-	someFunctionDeclarations do: [ :each | each parent: self ].
-	functionDeclarations := someFunctionDeclarations
-]
-
-{ #category : #accessing }
 ASTCCompilationUnit >> includes [
 	^ includes
 ]
@@ -133,8 +110,7 @@ ASTCCompilationUnit >> initialize [
 	defines := OrderedCollection new.
 	structTypes := OrderedCollection new.
 	definitions := OrderedCollection new.
-	variableDeclarations := OrderedCollection new.
-	functionDeclarations := OrderedCollection new
+	variableDeclarations := OrderedCollection new
 ]
 
 { #category : #testing }

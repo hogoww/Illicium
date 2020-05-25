@@ -411,8 +411,7 @@ ASTCBuilder >> defineRelations [
 	(compilationUnit property: #structTypes) <>-* (structureDefinition property: #compilationUnit).
 	(compilationUnit property: #definitions) <>-* (definition property: #compilationUnit).
 	(compilationUnit property: #variableDeclarations) <>-* (variableDeclaration property: #compilationUnit).
-	(compilationUnit property: #functionDeclarations) <>-* (functionDeclaration property: #compilationUnit).
-
+	
 	"preprocessor"
 	(preprocessorIf property: #condition) <>- (expression property: #preProssorIfCond).
 	(preprocessorIf property: #then) <>-* (node property: #preProssorIfThen).
