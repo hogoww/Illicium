@@ -15,9 +15,9 @@ FACollectIdsDeclaredInScope class >> collectFrom: aScope [
 ]
 
 { #category : #'public api' }
-FACollectIdsDeclaredInScope >> add: anId [
-	(declaredIDs at: anId id ifAbsentPut: [ OrderedCollection new])
-		add: anId.
+FACollectIdsDeclaredInScope >> add: aDeclaration [
+	(declaredIDs at: aDeclaration id id ifAbsentPut: [ OrderedCollection new])
+		add: aDeclaration.
 ]
 
 { #category : #'public api' }
@@ -54,13 +54,7 @@ FACollectIdsDeclaredInScope >> visitFunctionDefinition: aFunctionDefinition [
 	"we only visit the body of the method if it is the current scope"
 	aFunctionDefinition = scope
 		ifTrue: [ super visitFunctionDefinition: aFunctionDefinition ]
-		ifFalse: [ aFunctionDefinition declaration acceptVisitor: self ]
-	
-]
-
-{ #category : #'public api' }
-FACollectIdsDeclaredInScope >> visitIdentifier: anIdentifier [
-	self add: anIdentifier
+		ifFalse: [ self add: aFunctionDefinition declaration ]
 ]
 
 { #category : #'public api' }

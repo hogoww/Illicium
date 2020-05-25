@@ -62,10 +62,14 @@ MASlangTranslator >> generateVM [
 
 { #category : #'translation-api' }
 MASlangTranslator >> generateVMCCode [
+	| translation |
+	translation := self translateProgram.
+	(FACollectIdsDeclaredInScope collectFrom: translation) select: [ :a| a value size > 1 ].
+	self halt.	
 	^ FANewFilePrinter new
 		directory: './generated/vm/src/';
 		fileName: 'gcc3x-interp.c';
-		compilationUnit: self translateProgram;
+		compilationUnit: translation;
 		prettyPrinter: self class prettyPrinterClass new;
 		printInFile;
 		yourself
@@ -222,12 +226,6 @@ MASlangTranslator >> translateProgram [
 	program methods collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
 	
 	^ cu
-]
-
-{ #category : #'translation-api' }
-MASlangTranslator >> translateVM [
-	"Shortcut, since the VM is the base program for this translator"
-	^ self translateProgram
 ]
 
 { #category : #'translation-api' }
