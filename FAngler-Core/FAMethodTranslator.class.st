@@ -195,7 +195,7 @@ FAMethodTranslator >> getNodeConcreteType: aNode [
 	
 	^ aNode
 		propertyAt: classTranslator typeAnnotatorClass propertyName
-		ifPresent: [ :types | types key ]
+		ifPresent: [ :types | types ]
 		ifAbsent: [ UnannotatedNode new node: aNode ; signal ].
 ]
 
