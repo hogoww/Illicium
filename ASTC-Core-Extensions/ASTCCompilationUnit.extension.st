@@ -13,14 +13,6 @@ ASTCCompilationUnit >> addCompilationUnit: aCompilationUnit [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
-ASTCCompilationUnit >> addFunctionDefinition: aFunctionDefinition [
-	"convinience method for when adding both definition and declaration, from a definition"
-	self addDefinition: aFunctionDefinition.
-	self addFunctionDeclaration: aFunctionDefinition declaration.
-	^ true
-]
-
-{ #category : #'*ASTC-Core-Extensions' }
 ASTCCompilationUnit >> addPreprocessorDefine: aPreProcessorDefine [
 	"shortcut, that is working with generated code"
 	^ self addDefine: aPreProcessorDefine
