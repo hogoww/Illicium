@@ -17,16 +17,3 @@ MASlangStructsReceiver >> doesNotUnderstand: aMessage [
 	
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
 ]
-
-{ #category : #'reflective operations' }
-MASlangStructsReceiver >> translateAsAccessor: aMessage [
-	"precond : aMessage is an accessor"	
-	| structMember |
-	structMember := type isPointer 
-		ifTrue: [ self translatedReceiver -> (ASTCLiteral value: aMessage selector) ]
-		ifFalse:[ self translatedReceiver structStaticAccess: (ASTCLiteral value: aMessage selector) ].	
-	
-	aMessage selector last = $: ifFalse: [ ^ structMember ]."read accessor"
-	"else write accessor"
-	^ structMember assign: (aMessage arguments first acceptVisitor: methodTranslator)
-]

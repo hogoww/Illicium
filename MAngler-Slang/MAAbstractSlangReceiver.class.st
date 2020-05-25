@@ -97,6 +97,19 @@ MAAbstractSlangReceiver >> notNil [
 	^ self translatedReceiver notEquals: (ASTCLiteral value: #null)
 ]
 
+{ #category : #'reflective operations' }
+MAAbstractSlangReceiver >> translateAsAccessor: aMessage [
+	"precond : aMessage is an accessor"	
+	| structMember |
+	structMember := type isPointer 
+		ifTrue: [ self translatedReceiver -> (ASTCLiteral value: aMessage selector) ]
+		ifFalse:[ self translatedReceiver structStaticAccess: (ASTCLiteral value: aMessage selector) ].	
+	
+	aMessage selector last = $: ifFalse: [ ^ structMember ]."read accessor"
+	"else write accessor"
+	^ structMember assign: (aMessage arguments first acceptVisitor: methodTranslator)
+]
+
 { #category : #accessing }
 MAAbstractSlangReceiver >> type [
 	^ type
