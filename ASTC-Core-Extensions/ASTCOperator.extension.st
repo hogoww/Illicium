@@ -16,6 +16,11 @@ ASTCOperator >> associativity [
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
+ASTCOperator >> priority [
+	^ self class priority
+]
+
+{ #category : #'*ASTC-Core-Extensions' }
 ASTCOperator class >> priority [
 	"protocol: meta-data"
 	
@@ -23,11 +28,6 @@ ASTCOperator class >> priority [
 	lowest has more priority.
 	https://en.cppreference.com/w/c/language/operator_precedence"
 	^ self subclassResponsibility 
-]
-
-{ #category : #'*ASTC-Core-Extensions' }
-ASTCOperator >> priority [
-	^ self class priority
 ]
 
 { #category : #'*ASTC-Core-Extensions' }
