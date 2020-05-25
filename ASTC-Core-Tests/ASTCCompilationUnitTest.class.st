@@ -70,7 +70,5 @@ ASTCCompilationUnitTest >> testAddFunctionDefinitionToCompilationUnit [
 	cu add: definition.
 	self assert: cu definitions size equals: 1.
 	self assert: cu definitions anyOne equals: definition.
-	self assert: cu functionDeclarations size equals: 1.
-	self assert: cu functionDeclarations anyOne equals: definition declaration.
 	cu debugASTCStructure.
 ]

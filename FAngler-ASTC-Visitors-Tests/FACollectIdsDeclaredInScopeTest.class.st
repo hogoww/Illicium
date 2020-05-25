@@ -29,18 +29,6 @@ FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneEmptyStructDefiniti
 ]
 
 { #category : #'tests-compilationUnit' }
-FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDeclaration [
-	| scope |
-	scope := ASTCCompilationUnit new.
-	scope add: (ASTCFunctionDeclaration new
-			type: #int asCTypeNode;
-			id: #druss asCIdentifierNode;
-			yourself).
-	
-	self assert: scope containsAll: #( druss )
-]
-
-{ #category : #'tests-compilationUnit' }
 FACollectIdsDeclaredInScopeTest >> testCompilationUnitWithOneFunctionDefinition [
 	| scope |
 	scope := ASTCCompilationUnit new.

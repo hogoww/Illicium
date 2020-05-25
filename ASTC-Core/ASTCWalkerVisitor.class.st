@@ -115,10 +115,6 @@ ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
 		ifNotNil: [ :variableDeclarations | 
 			variableDeclarations
 				do: [ :aVariableDeclarations | aVariableDeclarations acceptVisitor: self ] ].
-	aCompilationUnit functionDeclarations
-		ifNotNil: [ :functionDeclarations | 
-			functionDeclarations
-				do: [ :aFunctionDeclarations | aFunctionDeclarations acceptVisitor: self ] ].
 	aCompilationUnit preamble
 		ifNotNil: [ :aPreamble | aPreamble acceptVisitor: self ]
 ]
