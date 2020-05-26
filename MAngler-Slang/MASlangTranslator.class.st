@@ -64,7 +64,9 @@ MASlangTranslator >> generateVM [
 MASlangTranslator >> generateVMCCode [
 	| translation |
 	translation := self translateProgram.
-	(FACollectIdsDeclaredInScope collectFrom: translation) select: [ :a| a value size > 1 ].
+	(FACollectIdsDeclaredInScope collectFrom: translation) 
+		select: [ :a| a value size > 1 
+			and: [ a value anySatisfy:[ :aNode | aNode isFunctionDeclaration ]]].
 	self halt.	
 	^ FANewFilePrinter new
 		directory: './generated/vm/src/';
@@ -220,9 +222,9 @@ MASlangTranslator >> translateProgram [
 	cu preamble: (ASTCRawCCode new cCode: program interpreterClass preambleCCode).
 	
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
-	program structClasses collect: [ :aClass | classTranslator translateClass: aClass  ] into: cu.
+	program structClasses collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
-	program classes collect: [ :aClass | classTranslator translateClassState: aClass ] into: cu.	
+	program slots collect: [ :aSlot | classTranslator translateSlot: aSlot ] into: cu.
 	(program methods 
 		reject: [ :aMethod | aMethod isAccessor ]) 
 			collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.

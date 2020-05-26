@@ -5,13 +5,19 @@ Class {
 }
 
 { #category : #'translation-api' }
+FAClassStateTranslator >> translateSlot: aSlot [
+	^ aSlot acceptTranslator: self
+
+]
+
+{ #category : #'translation-api' }
 FAClassStateTranslator >> translateStateOf: aClass [
 	| cu |
 	"not sure SharedPoolVariables are are considered in slang"	
 	cu := ASTCCompilationUnit new.	
 	
 	"We only translate the current's class slots, since we're treating each class in the hierarchy, and there is no polymorphism. (besides VMclass, will see in time"
-	(aClass allSlotsBelow: VMClass) collect: [:aSlot | aSlot acceptTranslator: self ] into: cu.
+	(aClass allSlotsBelow: VMClass) collect: [:aSlot | self translateSlot: aSlot ] into: cu.
 	"aClass classVariables collect: [:aSlot | aSlot acceptTranslator: self ] into: cu."
 	"aClass sharedPools collect: [:aSlot | aSlot acceptTranslator: self ] into: cu."
 	^ cu

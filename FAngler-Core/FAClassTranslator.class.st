@@ -188,6 +188,11 @@ FAClassTranslator >> translateMethodNode: aMethodNode [
 	^ methodTranslator translateMethod: aMethodNode
 ]
 
+{ #category : #'translation-api' }
+FAClassTranslator >> translateSlot: aSlot [ 
+	^ stateTranslator translateSlot: aSlot
+]
+
 { #category : #typing }
 FAClassTranslator >> typeAnnotatorClass [
 	" This should return the class used to annotate types on RB ASTs"

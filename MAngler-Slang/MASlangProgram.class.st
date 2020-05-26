@@ -3,7 +3,7 @@ Class {
 	#superclass : #FAProgram,
 	#instVars : [
 		'includes',
-		'cMacros'
+		'slots'
 	],
 	#classVars : [
 		'InitializationOptions'
@@ -15,6 +15,8 @@ Class {
 MASlangProgram >> addClass: aClass withInferer: inferer andTranslator: aTranslator [
 	aClass prepareToBeAddedToCodeGenerator: inferer.
 	inferer globalsAsSet addAll: (inferer instVarNamesForClass: aClass).
+	self flag:#todo. "missing check if it's already in there"
+	aClass slots do: [ :aSlot | slots at: aSlot name ifAbsentPut: aSlot ].
 
 	self addClassOrStruct: aClass withInferer: inferer andTranslator: aTranslator.
 ]
@@ -123,6 +125,12 @@ MASlangProgram >> includes [
 ]
 
 { #category : #initialization }
+MASlangProgram >> initialize [
+	super initialize.
+	slots := Dictionary new
+]
+
+{ #category : #initialization }
 MASlangProgram >> initializeClassVariablesIn: inferer [
 	"This initializationsOptions were taken from running the StackInterpreter code generation
 	StackInterpreterClassSimulator class >> #initializeWithOptions:objectMemoryClass: before the call to #initializeOption"
@@ -198,6 +206,11 @@ MASlangProgram >> shouldExpandMethod: aCompiledMethod [
 	"
 	
 	^ aCompiledMethod hasPragmaNamed: #expandCases 
+]
+
+{ #category : #accessing }
+MASlangProgram >> slots [
+	^ slots
 ]
 
 { #category : #enumerating }
