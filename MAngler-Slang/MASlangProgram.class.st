@@ -177,7 +177,9 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 		self addStruct: aStruct withInferer: inferer andTranslator: aTranslator ].
 	
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
-	aTranslator prepareMethodsASTs: (self methods "select: [:e| e methodClass ~~ StackInterpreter]").
+	aTranslator prepareMethodsASTs: self methods.
+	
+	self removeSlotsNotIn: inferer.
 		
 	includes := inferer headerFiles.
 	includes addFirst: '"sq.h"'."added systematically"
@@ -188,6 +190,11 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 { #category : #removing }
 MASlangProgram >> removeMethod: aMethodNode [
 	methods removeKey: aMethodNode selector
+]
+
+{ #category : #accessing }
+MASlangProgram >> removeSlotsNotIn: inferer [.
+	slots := slots select: [ :aSlot |inferer globalsAsSet includes: aSlot name ]
 ]
 
 { #category : #'method-expansion' }
