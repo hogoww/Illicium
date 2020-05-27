@@ -231,6 +231,12 @@ MASlangProgram >> structClasses [
 		(self interpreterClass objectMemoryClass ancilliaryClasses select: [ :aClass| aClass isStructClass ])
 ]
 
+{ #category : #enumerating }
+MASlangProgram >> structClassesToGenerate [
+	"same hack in the current vm, see VMClass >> #shouldGenerateTypedefFor:" 
+	^ self structClasses select: [ :aClass | aClass ~~ VMCallbackContext ]
+]
+
 { #category : #accessing }
 MASlangProgram >> structNamed: aStructName [
 	^ self structClasses detect: [ :aClass | aClass structTypeName = aStructName  ]

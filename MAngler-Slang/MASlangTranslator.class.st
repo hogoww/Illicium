@@ -223,7 +223,7 @@ MASlangTranslator >> translateProgram [
 	cu preamble: (ASTCRawCCode new cCode: program interpreterClass preambleCCode).
 	
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
-	program structClasses collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
+	program structClassesToGenerate collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
 	program slots collect: [ :aSlot | classTranslator translateSlot: aSlot ] into: cu.
 	(program methods 
