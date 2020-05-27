@@ -55,6 +55,18 @@ FAPrettyPrintTest >> testAssociativityDifferentPriority2 [
 ]
 
 { #category : #tests }
+FAPrettyPrintTest >> testReturnNil [
+	| return |
+	return := ASTCReturn new
+		expression: nil;
+		yourself.
+
+	return debugASTCStructure.
+	self assert: return isReturn.
+	self assert: (return prettyPrintUsing: FAPrettyPrint new) equals: 'return ;'.
+]
+
+{ #category : #tests }
 FAPrettyPrintTest >> testVisitAddressOfOperator [
 	| operator |
 	operator := (ASTCIdentifier new id: #a) asAddressOf.
