@@ -64,10 +64,11 @@ MASlangTranslator >> generateVM [
 MASlangTranslator >> generateVMCCode [
 	| translation |
 	translation := self translateProgram.
-	(FACollectIdsDeclaredInScope collectFrom: translation) 
+
+"	(FACollectIdsDeclaredInScope collectFrom: translation) 
 		select: [ :a| a value size > 1 
 			and: [ a value anySatisfy:[ :aNode | aNode isFunctionDeclaration ]]].
-	self halt.	
+"
 	^ FANewFilePrinter new
 		directory: './generated/vm/src/';
 		fileName: 'gcc3x-interp.c';

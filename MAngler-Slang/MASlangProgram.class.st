@@ -194,7 +194,12 @@ MASlangProgram >> removeMethod: aMethodNode [
 
 { #category : #accessing }
 MASlangProgram >> removeSlotsNotIn: inferer [.
-	slots := slots select: [ :aSlot |inferer globalsAsSet includes: aSlot name ]
+	"result seems a bit weird, so I deshactivate it for now
+	as long as there is no inlining in the inferer, variables should not be localized, and we should still have the right set of variables"
+	"having more variables declared **should** not change anything"
+
+	"slots := slots select: [ :aSlot | inferer globalsAsSet includes: aSlot name. ]"
+	self
 ]
 
 { #category : #'method-expansion' }
