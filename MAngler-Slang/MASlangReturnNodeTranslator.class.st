@@ -14,7 +14,7 @@ MASlangReturnNodeTranslator >> translateNode: aReturnNode [
 		or: [ (methodTranslator getNodeConcreteType: aReturnNode value) type = #void ])
 		ifTrue: [ 
 			ASTCBlock new
-				addStatement: returnedExpression;
+				addStatement: returnedExpression asStatement;
 				addStatement: (ASTCReturn new expression: nil ; yourself);
 				yourself ]
 		ifFalse: [ 
