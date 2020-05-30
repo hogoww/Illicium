@@ -41,7 +41,6 @@ MASlangClassTranslator >> isStatefulCode [
 MASlangClassTranslator >> postTranslationVisitors [
 	^ {
 		FAStatementsBecomeExpressions new.
-		FACCodeCleaner new.
 		"ASTCDebugStructureVisitor new" "currently disabled" 
 		 " debugStructure should be last, to check that everything's working :)"
 	}

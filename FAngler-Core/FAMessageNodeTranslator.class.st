@@ -32,10 +32,9 @@ FAMessageNodeTranslator >> translateNode: aMessageNode [
 		receiverNode: aMessageNode receiver;
 		methodTranslator: methodTranslator;
 		yourself.
-		
 	res := self perform: aMessageNode on: receiver.
 	
-	(res isKindOf: ASTCNode) ifFalse: [self error].
+	(res isKindOf: ASTCNode) ifFalse: [ self error ].
 	res pharoNode: aMessageNode;
 		comment: aMessageNode commentOrNil;
 		yourself.

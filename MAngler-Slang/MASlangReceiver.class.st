@@ -341,9 +341,9 @@ MASlangReceiver >> caseOf: anArrayNode otherwise: defaultCase [
 			| expression body |
 			expression := aCase receiver acceptVisitor: methodTranslator.
 			aCase arguments size = 1 
-				ifFalse: [ ArgumentsCountMismatch new calledArgumentsCount: aCase arguments size; expectedArgumentsCount: 1 ; yourself ].
+				ifFalse: [ ArgumentsCountMismatch new calledArgumentsCount: aCase arguments size; expectedArgumentsCount: 1 signal ].
 			body := aCase arguments first acceptVisitor: methodTranslator.
-			body addStatement: ASTCBreak new.
+			(body statements isEmpty or: [ body statements last isReturn ]) ifFalse: [ body addStatement: ASTCBreak new ].
 			switchNode addCase:
 				(ASTCSwitchCase new 
 					expression: expression; 
@@ -660,7 +660,7 @@ MASlangReceiver >> signedIntToLong64 [
 
 { #category : #'translation-keyword' }
 MASlangReceiver >> subclassResponsibility [
-
+	self flag: #unused. "It should be unused, as subclassResponsibility methods are filtered out when choosing methods to translate"
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
 		arguments: { ASTCLiteral value: #subclassResponsibility };
