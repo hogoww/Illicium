@@ -10,7 +10,7 @@ Class {
 	#category : #'FAngler-Core-Translation'
 }
 
-{ #category : #accessing }
+{ #category : #adding }
 FAProgram >> addClass: aClass [
 
 	classesToGenerate add: aClass.
@@ -26,11 +26,11 @@ FAProgram >> addDependency: aProgram [
 	aProgram methods keysDo: [ :aMethod | 
 		(self hasMethodNamed: aMethod)
 			ifTrue:[ MethodExistsInDependency new methodSelector: aMethod ; signal ]
-		].""
+		].
 	dependencies add: aProgram
 ]
 
-{ #category : #accessing }
+{ #category : #adding }
 FAProgram >> addMethod: aMethod [
 	"This expects a *copy* as argument."
 	
