@@ -23,8 +23,8 @@ FAProgram >> addClass: aClass [
 
 { #category : #adding }
 FAProgram >> addDependency: aProgram [
-	aProgram methods keysDo: [ :aMethod | 
-		(self hasMethodNamed: aMethod)
+	self methods keysDo: [ :aMethod | 
+		(aProgram hasMethodNamedAnywhere: aMethod)
 			ifTrue:[ MethodExistsInDependency new methodSelector: aMethod ; signal ]
 		].
 	dependencies add: aProgram
@@ -56,7 +56,7 @@ FAProgram >> addMethod: aMethod [
 FAProgram >> checkDependenciesFor: aSelector [
 	"We assume that a dependency is immutable"
 	(self dependenciesHaveMethodNamed: aSelector)
-		ifTrue:[ MethodWasAlreadyAdded new methodSelector: aSelector ; signal ].
+		ifTrue:[ MethodExistsInDependency new methodSelector: aSelector ; signal ].
 ]
 
 { #category : #accessing }
@@ -73,12 +73,18 @@ FAProgram >> classesDo: aBlockClosure [
 
 { #category : #testing }
 FAProgram >> dependenciesHaveMethodNamed: aSelector [
-	^ dependencies anySatisfy: [ :aProgram | aProgram hasMethodNamed: aSelector ]
+	^ dependencies anySatisfy: [ :aProgram | aProgram hasMethodNamedAnywhere: aSelector ]
 ]
 
 { #category : #testing }
 FAProgram >> hasMethodNamed: aSelector [
 	^ (methods includesKey: aSelector)
+]
+
+{ #category : #testing }
+FAProgram >> hasMethodNamedAnywhere: aSelector [
+	"we check everywhere in this one."
+	^ (self hasMethodNamed: aSelector)
 		or:[ self dependenciesHaveMethodNamed: aSelector]
 ]
 

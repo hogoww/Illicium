@@ -35,6 +35,21 @@ FAProgramTest >> testAddDependencyWithConflict [
 ]
 
 { #category : #addDependency }
+FAProgramTest >> testAddDependencyWithConflictInSubDependency [
+	| newDependency subDependency |
+	mainProgram addMethod: (self class >> #aMethod) ast.
+	newDependency := FAProgram new.
+	subDependency := FAProgram new.
+	subDependency addMethod: (self class >> #aMethod) ast.
+
+	newDependency addDependency: subDependency.
+
+
+	self should: [ mainProgram addDependency: newDependency ] raise: MethodExistsInDependency.
+	
+]
+
+{ #category : #addDependency }
 FAProgramTest >> testAddDependencyWithoutConflict [
 	| newDependency |
 	newDependency := FAProgram new.
@@ -61,6 +76,20 @@ FAProgramTest >> testAddEmptyDependency [
 ]
 
 { #category : #addMethod }
+FAProgramTest >> testAddMethodConflictingMethodWithSubDependency [
+	| newDependency subDependency |
+	newDependency := FAProgram new.
+	subDependency := FAProgram new.
+	subDependency addMethod: (self class >> #aMethod) ast.
+
+	newDependency addDependency: subDependency.
+	mainProgram addDependency: newDependency.
+
+	self should: [ 	mainProgram addMethod: (self class >> #aMethod) ast ] raise: MethodExistsInDependency.
+	
+]
+
+{ #category : #addMethod }
 FAProgramTest >> testAddMethodTwice [
 	self shouldnt: [ mainProgram addMethod: (self class >> #aMethod) ] raise: MethodWasAlreadyAdded.
 	self should: [ mainProgram addMethod: (self class >> #aMethod) ] raise: MethodWasAlreadyAdded.
@@ -71,7 +100,7 @@ FAProgramTest >> testAddMethodTwice [
 { #category : #addMethod }
 FAProgramTest >> testAddMethodWhichIsInDependency [
 	self shouldnt: [ dependencyProgram addMethod: (self class >> #aMethod) ] raise: MethodWasAlreadyAdded.
-	self should: [ mainProgram addMethod: (self class >> #aMethod) ] raise: MethodWasAlreadyAdded.
+	self should: [ mainProgram addMethod: (self class >> #aMethod) ] raise: MethodExistsInDependency.
 
 ]
 
