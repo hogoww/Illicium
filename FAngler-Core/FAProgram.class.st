@@ -125,6 +125,19 @@ FAProgram >> methodNamed: aSelector ifAbsent: anAbsentBlock [
 ]
 
 { #category : #accessing }
+FAProgram >> methodNamedAnywhere: aSelector [
+	^ methods at: aSelector ifAbsent: [ self methodNamedInDependency: aSelector ]
+]
+
+{ #category : #accessing }
+FAProgram >> methodNamedInDependency: aSelector [
+	dependencies do: [ :aProgram |
+		(aProgram methodNamedAnywhere: aSelector) 
+			ifNotNil: [ :aMethod | ^ aMethod ] ].
+	^ nil
+]
+
+{ #category : #accessing }
 FAProgram >> methods [
 	^ methods
 ]

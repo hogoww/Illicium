@@ -111,3 +111,29 @@ FAProgramTest >> testAddMethodWithEmptyDependency [
 	self assert: dependencyProgram methods size equals: 0.
 	self assert: mainProgram methods anyOne selector equals: #aMethod.
 ]
+
+{ #category : #methodSearch }
+FAProgramTest >> testSearchForMethodInDependency [
+	dependencyProgram addMethod: (self class >> #aMethod).
+	self assert: (mainProgram methodNamedAnywhere: #aMethod) isNotNil
+]
+
+{ #category : #methodSearch }
+FAProgramTest >> testSearchForMethodInMainProg [
+	mainProgram addMethod: (self class >> #aMethod).
+	self assert: (mainProgram methodNamedAnywhere: #aMethod) isNotNil
+]
+
+{ #category : #methodSearch }
+FAProgramTest >> testSearchForMethodInSubDependency [
+	| subDependency |
+	subDependency := FAProgram new.
+	subDependency addMethod: (self class >> #aMethod).
+	dependencyProgram addDependency: subDependency.
+	self assert: (mainProgram methodNamedAnywhere: #aMethod) isNotNil
+]
+
+{ #category : #methodSearch }
+FAProgramTest >> testSearchForMethodNotExisting [
+	self assert: (mainProgram methodNamedAnywhere: #aMethod) isNil
+]
