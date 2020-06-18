@@ -22,7 +22,7 @@ FAKernelClass class >> asCType [
 FAKernelClass class >> literalNodeFor: aValue [
 	^ aValue asLiteralNode 
 		propertyAt: FATypeAnnotator propertyName
-		put: self asPharoType;
+		put: self asConstraint;
 		yourself
 	
 ]

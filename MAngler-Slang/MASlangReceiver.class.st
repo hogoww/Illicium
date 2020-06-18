@@ -591,9 +591,9 @@ MASlangReceiver >> repeat [
 	| body |
 	body := ASTCBlock new.
 	receiverNode statements do: [:aStatement| body addStatement: (aStatement acceptVisitor: methodTranslator) asStatement ].
-	
+
 	^ ASTCWhile new
-		condition: ((self literalNodeFor: true) acceptVisitor: methodTranslator);
+		condition: ((self class literalNodeFor: true) acceptVisitor: methodTranslator);
 		body: body;
 		yourself
 ]
@@ -662,7 +662,7 @@ MASlangReceiver >> subclassResponsibility [
 MASlangReceiver >> timesRepeat: aBlock [
 	| stop |
 	stop := self receiverNode.
-	receiverNode := self literalNodeFor: 1.
+	receiverNode := self class literalNodeFor: 1.
 	^ self to: stop do: aBlock
 ]
 
