@@ -59,6 +59,13 @@ MAIlliciumTranslator >> preTranslationAnnotators [
 		}
 ]
 
+{ #category : #visiting }
+MAIlliciumTranslator >> prepareProgram [
+	program methods do: [ :aMethod | inferer infer: aMethod ].
+	program methods do:[ :aMethod | self annotateMethodAST: aMethod ].
+
+]
+
 { #category : #accessors }
 MAIlliciumTranslator >> replacementClasses [
 	^ replacementClasses
@@ -67,4 +74,13 @@ MAIlliciumTranslator >> replacementClasses [
 { #category : #accessors }
 MAIlliciumTranslator >> replacementClasses: aDictionnary [
 	replacementClasses := aDictionnary
+]
+
+{ #category : #visiting }
+MAIlliciumTranslator >> translateProgram [
+	| cu |
+	cu := ASTCCompilationUnit new.
+	program methods value
+		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
+	^ cu
 ]

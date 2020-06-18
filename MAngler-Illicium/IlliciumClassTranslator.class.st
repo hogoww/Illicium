@@ -31,6 +31,16 @@ IlliciumClassTranslator >> methodsToTranslateASTs: aClass [
 ]
 
 { #category : #translation }
+IlliciumClassTranslator >> postTranslationVisitors [
+	"Duplicate of slang's version for now"
+	^ {
+		FAStatementsBecomeExpressions new.
+		"ASTCDebugStructureVisitor new" "currently disabled" 
+		 " debugStructure should be last, to check that everything's working :)"
+	}
+]
+
+{ #category : #translation }
 IlliciumClassTranslator >> preTranslationConstraintCheck: aClass [
 	(aClass traitComposition
 		includesTrait: IlliciumVirtualMachineAPI)

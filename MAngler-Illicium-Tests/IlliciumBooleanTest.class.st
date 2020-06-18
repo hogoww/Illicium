@@ -45,21 +45,18 @@ IlliciumBooleanTest >> testIfTrue [
 { #category : #tests }
 IlliciumBooleanTest >> testIfTrueIfFalse [
 	| astC expectedC |
-	astC := MAIlliciumTranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]'.
-	
-	expectedC := ASTCIf new 
+	astC := (MAIlliciumTranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]')
+		body statements first expression.
+		
+	expectedC := ASTCTernaryConditionalOperator new 
 		condition: (ASTCEqualityOperator new
 			leftOperand: (ASTCLiteral value: 1);
 			rightOperand: (ASTCLiteral value: 2);
 			yourself);
-		then:(ASTCBlock new
-			addStatement: (ASTCLiteral value: 1) asStatement;
-			yourself);
-		else:(ASTCBlock new
-			addStatement: (ASTCLiteral value: 2) asStatement;
-			yourself);
+		then: (ASTCLiteral value: 1);
+		else: (ASTCLiteral value: 2);
 		yourself.	
 	
 	astC debugASTCStructure.
-	self assert: (astC statements at: 1) equals: expectedC.
+	self assert: astC equals: expectedC.
 ]
