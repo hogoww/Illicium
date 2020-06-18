@@ -11,7 +11,7 @@ IlliciumClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 
 { #category : #typing }
 IlliciumClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
-	self inferer inferExpression: anExpression 
+	mainTranslator inferer inferExpression: anExpression 
 ]
 
 { #category : #translation }

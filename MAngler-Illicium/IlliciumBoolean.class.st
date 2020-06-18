@@ -57,7 +57,7 @@ IlliciumBoolean >> ifTrue: trueBlock [
 	self ifTrueifFalseChecker: { trueBlock }.
  	^ ASTCIf new
 		condition: self translatedReceiver;
-		then: (trueBlock acceptVisitor: self visitor);
+		then: (trueBlock acceptVisitor: methodTranslator);
 		else: ASTCBlock new;
 		yourself
 ]

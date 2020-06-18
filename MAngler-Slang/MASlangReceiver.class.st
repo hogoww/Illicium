@@ -501,15 +501,6 @@ MASlangReceiver >> isStrict [
 	^ methodTranslator isStrict
 ]
 
-{ #category : #utility }
-MASlangReceiver >> literalNodeFor: aValue [ 
-	^ aValue asLiteralNode 
-		propertyAt: FATypeAnnotator propertyName 
-		put: (self asConstraint -> 'generated, no PhineasType');
-		yourself
-	
-]
-
 { #category : #'translation-keyword' }
 MASlangReceiver >> max: anInt [
 	| arg translatedReceiver |
