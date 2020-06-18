@@ -167,6 +167,16 @@ MASlangProgram >> methodsFromClass: aClass [
 			and: [ aClass includesBehavior: aMethod methodClass ] ]
 ]
 
+{ #category : #enumerating }
+MASlangProgram >> name [
+	^ 'StackVM'
+]
+
+{ #category : #enumerating }
+MASlangProgram >> name: aName [
+	^ self shouldNotImplement
+]
+
 { #category : #accessing }
 MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 

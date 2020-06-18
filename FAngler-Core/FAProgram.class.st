@@ -2,6 +2,7 @@ Class {
 	#name : #FAProgram,
 	#superclass : #Object,
 	#instVars : [
+		'name',
 		'methods',
 		'isFullyAnnotated',
 		'classesToGenerate',
@@ -61,7 +62,6 @@ FAProgram >> checkDependenciesFor: aSelector [
 
 { #category : #accessing }
 FAProgram >> classes [
-
 	^ classesToGenerate
 ]
 
@@ -133,6 +133,16 @@ FAProgram >> methods [
 FAProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
+]
+
+{ #category : #accessing }
+FAProgram >> name [
+	^ name
+]
+
+{ #category : #accessing }
+FAProgram >> name: aName [
+	name := aName
 ]
 
 { #category : #accessing }
