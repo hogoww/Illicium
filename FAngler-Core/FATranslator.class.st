@@ -49,9 +49,10 @@ FATranslator class >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 FATranslator class >> translateMethod: anAST fromClass: aClass [
-	^ self new 
+	^ (self new 
 		addMethod: anAST fromClass: aClass;
-		translateProgram.
+		translateProgram)
+		definitions anyOne
 ]
 
 { #category : #'translation-api' }

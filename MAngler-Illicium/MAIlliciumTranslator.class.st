@@ -79,6 +79,8 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 { #category : #visiting }
 MAIlliciumTranslator >> translateProgram [
 	| cu |
+	self prepareProgram.
+
 	cu := ASTCCompilationUnit new.
 	program methods value
 		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
