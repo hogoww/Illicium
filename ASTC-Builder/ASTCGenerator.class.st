@@ -432,27 +432,42 @@ ASTCGenerator >> generateDebugVisitOf: aFMXClass [
 
 { #category : #'generation-visit' }
 ASTCGenerator >> generateHierarchyWalkVisitOf: aFMXClass [
-	"add an empty behavior visit method"
+	| method body aClass visitClass collections singleElements |
+	aClass := aFMXClass name asAnInstance.
 
-	| method body aClass visitClass |
+	visitClass :=  aFMXClass name asVisitClassSelector.
+	body := self visitSuperClassBody: aFMXClass.
 	
-	aClass := aFMXClass name.
-	visitClass := aClass asVisitClassSelector.
+	collections := OrderedCollection new.
+	singleElements := OrderedCollection new.
+	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
+		ifTrue:[ aRelation side isMany 
+			ifTrue:[ collections add: aRelation side name ] 
+			ifFalse: [ singleElements add: aRelation side name ]]].
 	
-	body := [:anInstance| super visitClass:{anInstance} ].
-	body := body + (self visitSuperClassBody: aFMXClass).
-
+	collections do:[:propertyName|
+		body add: [:anInstance| anInstance propertyName
+			ifNotNil:[:aCollection| aCollection 
+				do:[:aMember| aMember acceptVisitor: self ]]]
+		withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ].
+	
+	singleElements do:[:propertyName|
+		body add: [:anInstance| anInstance propertyName 
+					ifNotNil:[:aPropertyName| aPropertyName acceptVisitor: self ] ] 
+			withArguments: {#aPropertyName -> propertyName asAnInstance } asDictionary ].
+		
+								
 	method := visitClass
 		asMethodWithBody: body
-		withArguments: {(#anInstance -> aClass asAnInstance )} asDictionary.
+		withArguments: {(#anInstance -> aClass )} asDictionary.
 
 	hierarchyWalkerVisitorClass compile: method asString classified: 'visiting'
 ]
 
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> generateHierarchyWalkerVisitorClass [
-	"HierarchyWalker --> Walker"
-	hierarchyWalkerVisitorClass := walkerVisitorClass subclass: (self fullNameOf: #HierarchyWalkerVisitor)
+	"HierarchyWalker --> Abstract"
+	hierarchyWalkerVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #HierarchyWalkerVisitor)
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: (self makePackageNameWith: #visitors)
@@ -539,7 +554,7 @@ ASTCGenerator >> generateSubclassResponsibilityVisitOf: aFMXClass [
 
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> generateSubclassResponsibilityVisitorClass [
-	"subclassResponsibility --> abstract"
+	"SubclassResponsibility --> Abstract"
 	subclassResponsibilityVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #SubclassResponsibilityVisitor)
 		instanceVariableNames: ''
 		classVariableNames: ''
@@ -601,9 +616,9 @@ ASTCGenerator >> generateVisitorsClasses [
 		self generateSuperclassVisitorClass.
 		self generateWalkerVisitorClass.
 			self generatePrinterVisitorClass.
-			self generateHierarchyWalkerVisitorClass.
-				self generateDebugStructureVisitorClass.
-					self generateStructureValidatorVisitorClass.
+		self generateHierarchyWalkerVisitorClass.
+			self generateDebugStructureVisitorClass.
+				self generateStructureValidatorVisitorClass.
 
 
 
@@ -631,21 +646,25 @@ ASTCGenerator >> generateWalkVisitOf: aFMXClass [
 	| method body aClass visitClass collections singleElements |
 	aClass := aFMXClass name asAnInstance.
 
-	visitClass :=  aFMXClass name asVisitClassSelector.
-	body := [ :anInstance | super visitClass: {aClass} ] asPlainCodeBC.
+	visitClass := aFMXClass name asVisitClassSelector.
+	body := [ :anInstance | ] asPlainCodeBC.
 	
 	collections := OrderedCollection new.
 	singleElements := OrderedCollection new.
-	aFMXClass relations do:[:aRelation| aRelation side otherSide isContainer 
-		ifTrue:[ aRelation side isMany 
+	aFMXClass allRelations do:[:aRelation| 
+		aRelation side otherSide isContainer 
+		ifTrue:[ aRelation side isMany
 			ifTrue:[ collections add: aRelation side name ] 
 			ifFalse: [ singleElements add: aRelation side name ]]].
 	
+	singleElements := singleElements reject:[ :aName | aName = #parent ]."we don't want to walk on parents !"
+
 	collections do:[:propertyName|
-		body add: [:anInstance| anInstance propertyName
-			ifNotNil:[:aCollection| aCollection 
-				do:[:aMember| aMember acceptVisitor: self ]]]
-		withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ].
+		body add: [:anInstance| 
+			anInstance propertyName
+				ifNotNil:[:aCollection| aCollection 
+					do:[:aMember| aMember acceptVisitor: self ]]]
+			withArguments: {#aCollection -> propertyName . #aMember -> propertyName asAnInstance } asDictionary ].
 	
 	singleElements do:[:propertyName|
 		body add: [:anInstance| anInstance propertyName 
@@ -662,7 +681,7 @@ ASTCGenerator >> generateWalkVisitOf: aFMXClass [
 
 { #category : #'generation-visitor-classes' }
 ASTCGenerator >> generateWalkerVisitorClass [
-	"Walker --> Superclass"
+	"Walker --> Abstract"
 	walkerVisitorClass := abstractVisitorClass subclass: (self fullNameOf: #WalkerVisitor)
 		instanceVariableNames: ''
 		classVariableNames: ''
