@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumBooleanTest,
 	#superclass : #FAMessageNodeTranslatorTest,
-	#category : #'MAngler-Illicium-Tests'
+	#category : #'MAngler-Illicium-Tests-NodesTests'
 }
 
 { #category : #accessing }
