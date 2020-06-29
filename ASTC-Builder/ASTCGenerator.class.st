@@ -455,13 +455,13 @@ ASTCGenerator >> generateHierarchyWalkVisitOf: aFMXClass [
 		body add: [:anInstance| anInstance propertyName 
 					ifNotNil:[:aPropertyName| aPropertyName acceptVisitor: self ] ] 
 			withArguments: {#aPropertyName -> propertyName asAnInstance } asDictionary ].
-								
+						
+	body add: (self visitSuperClassBody: aFMXClass).
+			
 	method := visitClass
 		asMethodWithBody: body
 		withArguments: {(#anInstance -> aClass )} asDictionary.
 	
-	body add: (self visitSuperClassBody: aFMXClass).
-
 	hierarchyWalkerVisitorClass compile: method asString classified: 'visiting'
 ]
 
