@@ -6,37 +6,51 @@ Class {
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitAbstractWhile: anAbstractWhile [
-	super visitAbstractWhile: anAbstractWhile
+	anAbstractWhile condition
+		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	anAbstractWhile body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitAdditionOperator: anAdditionOperator [
-	super visitAdditionOperator: anAdditionOperator
+	anAdditionOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anAdditionOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitAddressOfOperator: anAddressOfOperator [
-	super visitAddressOfOperator: anAddressOfOperator
+	anAddressOfOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitAndOperator: anAndOperator [
-	super visitAndOperator: anAndOperator
+	anAndOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anAndOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitAssignmentAdditionOperator: anAssignmentAdditionOperator [
-	super visitAssignmentAdditionOperator: anAssignmentAdditionOperator
+	anAssignmentAdditionOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anAssignmentAdditionOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitAssignmentOperator: anAssignmentOperator [
-	super visitAssignmentOperator: anAssignmentOperator
+	anAssignmentOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anAssignmentOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
-	super visitBinaryOperator: aBinaryOperator.
 	aBinaryOperator leftOperand
 		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
 	aBinaryOperator rightOperand
@@ -45,37 +59,52 @@ ASTCWalkerVisitor >> visitBinaryOperator: aBinaryOperator [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBitLeftShiftOperator: aBitLeftShiftOperator [
-	super visitBitLeftShiftOperator: aBitLeftShiftOperator
+	aBitLeftShiftOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aBitLeftShiftOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBitRightShiftOperator: aBitRightShiftOperator [
-	super visitBitRightShiftOperator: aBitRightShiftOperator
+	aBitRightShiftOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aBitRightShiftOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBitwiseAndOperator: aBitwiseAndOperator [
-	super visitBitwiseAndOperator: aBitwiseAndOperator
+	aBitwiseAndOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aBitwiseAndOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBitwiseNotOperator: aBitwiseNotOperator [
-	super visitBitwiseNotOperator: aBitwiseNotOperator
+	aBitwiseNotOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBitwiseOrOperator: aBitwiseOrOperator [
-	super visitBitwiseOrOperator: aBitwiseOrOperator
+	aBitwiseOrOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aBitwiseOrOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBitwiseXorOperator: aBitwiseXorOperator [
-	super visitBitwiseXorOperator: aBitwiseXorOperator
+	aBitwiseXorOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aBitwiseXorOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBlock: aBlock [
-	super visitBlock: aBlock.
 	aBlock statements
 		ifNotNil:
 			[ :statements | statements do: [ :aStatements | aStatements acceptVisitor: self ] ].
@@ -87,18 +116,18 @@ ASTCWalkerVisitor >> visitBlock: aBlock [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitBreak: aBreak [
-	super visitBreak: aBreak
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitCastOperator: aCastOperator [
-	super visitCastOperator: aCastOperator.
+	aCastOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ].
 	aCastOperator type ifNotNil: [ :aType | aType acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
-	super visitCompilationUnit: aCompilationUnit.
 	aCompilationUnit includes
 		ifNotNil:
 			[ :includes | includes do: [ :anIncludes | anIncludes acceptVisitor: self ] ].
@@ -121,52 +150,56 @@ ASTCWalkerVisitor >> visitCompilationUnit: aCompilationUnit [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDeclaration: aDeclaration [
-	super visitDeclaration: aDeclaration.
 	aDeclaration id ifNotNil: [ :anId | anId acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDeclarationStatement: aDeclarationStatement [
-	super visitDeclarationStatement: aDeclarationStatement.
 	aDeclarationStatement declaration
 		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDefinition: aDefinition [
-	super visitDefinition: aDefinition.
 	aDefinition declaration
 		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDivisionOperator: aDivisionOperator [
-	super visitDivisionOperator: aDivisionOperator
+	aDivisionOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aDivisionOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitDoWhile: aDoWhile [
-	super visitDoWhile: aDoWhile
+	aDoWhile condition
+		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	aDoWhile body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitEmptyStatement: anEmptyStatement [
-	super visitEmptyStatement: anEmptyStatement
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitEqualityOperator: anEqualityOperator [
-	super visitEqualityOperator: anEqualityOperator
+	anEqualityOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anEqualityOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitExpression: anExpression [
-	super visitExpression: anExpression
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitExpressionList: anExpressionList [
-	super visitExpressionList: anExpressionList.
 	anExpressionList expressions
 		ifNotNil:
 			[ :expressions | expressions do: [ :anExpressions | anExpressions acceptVisitor: self ] ]
@@ -174,14 +207,15 @@ ASTCWalkerVisitor >> visitExpressionList: anExpressionList [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitExpressionStatement: anExpressionStatement [
-	super visitExpressionStatement: anExpressionStatement.
 	anExpressionStatement expression
 		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFor: aFor [
-	super visitFor: aFor.
+	aFor condition
+		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	aFor body ifNotNil: [ :aBody | aBody acceptVisitor: self ].
 	aFor iteratorDefinition
 		ifNotNil: [ :anIteratorDefinition | anIteratorDefinition acceptVisitor: self ].
 	aFor iteratorModification
@@ -190,7 +224,6 @@ ASTCWalkerVisitor >> visitFor: aFor [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFunctionCall: aFunctionCall [
-	super visitFunctionCall: aFunctionCall.
 	aFunctionCall arguments
 		ifNotNil:
 			[ :arguments | arguments do: [ :anArguments | anArguments acceptVisitor: self ] ].
@@ -199,39 +232,46 @@ ASTCWalkerVisitor >> visitFunctionCall: aFunctionCall [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFunctionDeclaration: aFunctionDeclaration [
-	super visitFunctionDeclaration: aFunctionDeclaration.
 	aFunctionDeclaration parameters
 		ifNotNil:
 			[ :parameters | parameters do: [ :aParameters | aParameters acceptVisitor: self ] ].
+	aFunctionDeclaration id
+		ifNotNil: [ :anId | anId acceptVisitor: self ].
 	aFunctionDeclaration type
 		ifNotNil: [ :aType | aType acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitFunctionDefinition: aFunctionDefinition [
-	super visitFunctionDefinition: aFunctionDefinition.
+	aFunctionDefinition declaration
+		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ].
 	aFunctionDefinition body
 		ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitGreaterOperator: aGreaterOperator [
-	super visitGreaterOperator: aGreaterOperator
+	aGreaterOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aGreaterOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitGreaterOrEqualOperator: aGreaterOrEqualOperator [
-	super visitGreaterOrEqualOperator: aGreaterOrEqualOperator
+	aGreaterOrEqualOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aGreaterOrEqualOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitIdentifier: anIdentifier [
-	super visitIdentifier: anIdentifier
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitIf: anIf [
-	super visitIf: anIf.
 	anIf condition
 		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
 	anIf then ifNotNil: [ :aThen | aThen acceptVisitor: self ].
@@ -240,37 +280,49 @@ ASTCWalkerVisitor >> visitIf: anIf [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitIndexerOperator: anIndexerOperator [
-	super visitIndexerOperator: anIndexerOperator
+	anIndexerOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anIndexerOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitInequalityOperator: anInequalityOperator [
-	super visitInequalityOperator: anInequalityOperator
+	anInequalityOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anInequalityOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitLesserOperator: aLesserOperator [
-	super visitLesserOperator: aLesserOperator
+	aLesserOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aLesserOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitLesserOrEqualOperator: aLesserOrEqualOperator [
-	super visitLesserOrEqualOperator: aLesserOrEqualOperator
+	aLesserOrEqualOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aLesserOrEqualOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitLiteral: aLiteral [
-	super visitLiteral: aLiteral
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitLogicalNotOperator: aLogicalNotOperator [
-	super visitLogicalNotOperator: aLogicalNotOperator
+	aLogicalNotOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitLoop: aLoop [
-	super visitLoop: aLoop.
 	aLoop condition
 		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
 	aLoop body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
@@ -278,42 +330,53 @@ ASTCWalkerVisitor >> visitLoop: aLoop [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitModuloOperator: aModuloOperator [
-	super visitModuloOperator: aModuloOperator
+	aModuloOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aModuloOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitMultiplicationOperator: aMultiplicationOperator [
-	super visitMultiplicationOperator: aMultiplicationOperator
+	aMultiplicationOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aMultiplicationOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitNegationOperator: aNegationOperator [
-	super visitNegationOperator: aNegationOperator
+	aNegationOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitOperator: anOperator [
-	super visitOperator: anOperator
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitOrOperator: anOrOperator [
-	super visitOrOperator: anOrOperator
+	anOrOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	anOrOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitPreDecrementOperator: aPreDecrementOperator [
-	super visitPreDecrementOperator: aPreDecrementOperator
+	aPreDecrementOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitPreIncrementOperator: aPreIncrementOperator [
-	super visitPreIncrementOperator: aPreIncrementOperator
+	aPreIncrementOperator operand
+		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
-	super visitPreprocessorDefine: aPreprocessorDefine.
 	aPreprocessorDefine name
 		ifNotNil: [ :aName | aName acceptVisitor: self ].
 	aPreprocessorDefine value
@@ -322,7 +385,6 @@ ASTCWalkerVisitor >> visitPreprocessorDefine: aPreprocessorDefine [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitPreprocessorIf: aPreprocessorIf [
-	super visitPreprocessorIf: aPreprocessorIf.
 	aPreprocessorIf then
 		ifNotNil:
 			[ :then | then do: [ :aThen | aThen acceptVisitor: self ] ].
@@ -335,12 +397,11 @@ ASTCWalkerVisitor >> visitPreprocessorIf: aPreprocessorIf [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitPreprocessorInclude: aPreprocessorInclude [
-	super visitPreprocessorInclude: aPreprocessorInclude
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitProject: aProject [
-	super visitProject: aProject.
 	aProject compilationUnits
 		ifNotNil: [ :compilationUnits | 
 			compilationUnits
@@ -349,57 +410,67 @@ ASTCWalkerVisitor >> visitProject: aProject [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitRawCCode: aRawCCode [
-	super visitRawCCode: aRawCCode
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitRawDeclaration: aRawDeclaration [
-	super visitRawDeclaration: aRawDeclaration
+	aRawDeclaration declaration
+		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitReturn: aReturn [
-	super visitReturn: aReturn.
 	aReturn expression
 		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitStatement: aStatement [
-	super visitStatement: aStatement
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitStructAccessPointerOperator: aStructAccessPointerOperator [
-	super visitStructAccessPointerOperator: aStructAccessPointerOperator
+	aStructAccessPointerOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aStructAccessPointerOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitStructAccessStaticOperator: aStructAccessStaticOperator [
-	super visitStructAccessStaticOperator: aStructAccessStaticOperator
+	aStructAccessStaticOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aStructAccessStaticOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitStructureDeclaration: aStructureDeclaration [
-	super visitStructureDeclaration: aStructureDeclaration
+	aStructureDeclaration id
+		ifNotNil: [ :anId | anId acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitStructureDefinition: aStructureDefinition [
-	super visitStructureDefinition: aStructureDefinition.
 	aStructureDefinition members
 		ifNotNil:
-			[ :members | members do: [ :aMembers | aMembers acceptVisitor: self ] ]
+			[ :members | members do: [ :aMembers | aMembers acceptVisitor: self ] ].
+	aStructureDefinition declaration
+		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitSubtractionOperator: aSubtractionOperator [
-	super visitSubtractionOperator: aSubtractionOperator
+	aSubtractionOperator leftOperand
+		ifNotNil: [ :aLeftOperand | aLeftOperand acceptVisitor: self ].
+	aSubtractionOperator rightOperand
+		ifNotNil: [ :aRightOperand | aRightOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitSwitch: aSwitch [
-	super visitSwitch: aSwitch.
 	aSwitch cases
 		ifNotNil:
 			[ :cases | cases do: [ :aCases | aCases acceptVisitor: self ] ].
@@ -411,7 +482,6 @@ ASTCWalkerVisitor >> visitSwitch: aSwitch [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitSwitchCase: aSwitchCase [
-	super visitSwitchCase: aSwitchCase.
 	aSwitchCase expression
 		ifNotNil: [ :anExpression | anExpression acceptVisitor: self ].
 	aSwitchCase body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
@@ -419,7 +489,6 @@ ASTCWalkerVisitor >> visitSwitchCase: aSwitchCase [
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperator [
-	super visitTernaryConditionalOperator: aTernaryConditionalOperator.
 	aTernaryConditionalOperator condition
 		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
 	aTernaryConditionalOperator then
@@ -430,31 +499,34 @@ ASTCWalkerVisitor >> visitTernaryConditionalOperator: aTernaryConditionalOperato
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitType: aType [
-	super visitType: aType
+	
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitUnaryOperator: anUnaryOperator [
-	super visitUnaryOperator: anUnaryOperator.
 	anUnaryOperator operand
 		ifNotNil: [ :anOperand | anOperand acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitVariableDeclaration: aVariableDeclaration [
-	super visitVariableDeclaration: aVariableDeclaration.
+	aVariableDeclaration id
+		ifNotNil: [ :anId | anId acceptVisitor: self ].
 	aVariableDeclaration type
 		ifNotNil: [ :aType | aType acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitVariableDefinition: aVariableDefinition [
-	super visitVariableDefinition: aVariableDefinition.
+	aVariableDefinition declaration
+		ifNotNil: [ :aDeclaration | aDeclaration acceptVisitor: self ].
 	aVariableDefinition init
 		ifNotNil: [ :anInit | anInit acceptVisitor: self ]
 ]
 
 { #category : #visiting }
 ASTCWalkerVisitor >> visitWhile: aWhile [
-	super visitWhile: aWhile
+	aWhile condition
+		ifNotNil: [ :aCondition | aCondition acceptVisitor: self ].
+	aWhile body ifNotNil: [ :aBody | aBody acceptVisitor: self ]
 ]
