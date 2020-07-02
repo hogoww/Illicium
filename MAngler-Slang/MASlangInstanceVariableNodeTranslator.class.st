@@ -6,7 +6,7 @@ Class {
 
 { #category : #translate }
 MASlangInstanceVariableNodeTranslator >> translateNode: anInstanceVariableNode [
-	^ anInstanceVariableNode binding slot owningClass = anInstanceVariableNode methodNode methodClass
+	^ anInstanceVariableNode binding owningClass = anInstanceVariableNode methodNode methodClass
 		ifTrue: [ (ASTCIdentifier id: #__self__in_method__)
 			-> 
 			(ASTCIdentifier id: anInstanceVariableNode name) ]
