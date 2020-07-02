@@ -42,7 +42,8 @@ MASlangToCGeneratedTests >> newPrettyPrinter [
 
 { #category : #generating }
 MASlangToCGeneratedTests >> prettyPrintIllicium: anAST [
-
+	"Slang does not take into account cmacros annotation when printing that way, so we signal a test failure when that's the case."
+	anAST defines ifNotEmpty: [ TestFailure new signal ].
 	^ anAST definitions first prettyPrintUsing: self newPrettyPrinter
 ]
 

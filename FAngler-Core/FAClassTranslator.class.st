@@ -146,9 +146,7 @@ FAClassTranslator >> translateMethod: aMethodNode [
 	cu := ASTCCompilationUnit new.
 	functionDefinition := self translateMethodNode: aMethodNode.
 	cu add: functionDefinition.
-	
-	cu add: (self translateClassState: aMethodNode methodClass).
-	
+		
 	^ cu
 ]
 
