@@ -293,7 +293,7 @@ ASTCHierarchyWalkerVisitor >> visitNegationOperator: aNegationOperator [
 
 { #category : #visiting }
 ASTCHierarchyWalkerVisitor >> visitNode: aNode [
-	aNode parent ifNotNil: [ :aParent | aParent acceptVisitor: self ]
+	
 ]
 
 { #category : #visiting }

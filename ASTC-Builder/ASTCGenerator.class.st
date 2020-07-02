@@ -445,6 +445,8 @@ ASTCGenerator >> generateHierarchyWalkVisitOf: aFMXClass [
 			ifTrue:[ collections add: aRelation side name ] 
 			ifFalse: [ singleElements add: aRelation side name ]]].
 
+	singleElements := singleElements reject:[ :aName | aName = #parent ]."we don't want to walk on parents !"
+	
 	collections do:[:propertyName|
 		body add: [:anInstance| anInstance propertyName
 			ifNotNil:[:aCollection| aCollection 
