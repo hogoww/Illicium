@@ -9,6 +9,6 @@ MethodWasAlreadyAdded >> description [
 	^ String streamContents:[:s|
 		s << 'Method ';
 			print: methodSelector;
-			<< ' wes previously added inside the program.'
+			<< ' was previously added inside the program.'
 		].
 ]
