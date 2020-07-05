@@ -11,7 +11,7 @@ MAVMTranslationTests >> codeGenerator [
 
 { #category : #'generating machine code' }
 MAVMTranslationTests >> generateSlang: aSelector [
-	^ self codeGenerator cCodeForMethod: aSelector
+	^ self codeGenerator cCodeForMethod: (testedClass >> aSelector)
 	
 	
 ]
