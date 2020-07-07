@@ -49,9 +49,10 @@ FATranslator class >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 FATranslator class >> translateMethod: anAST fromClass: aClass [
-	^ self new 
+	^ (self new 
 		addMethod: anAST fromClass: aClass;
-		translateProgram.
+		translateProgram)
+		definitions anyOne
 ]
 
 { #category : #'translation-api' }
@@ -139,12 +140,6 @@ FATranslator >> preTranslationTransformations [
 	^ self subclassResponsibility
 ]
 
-{ #category : #annotation }
-FATranslator >> prepareMethodAST: aMethodNode [ 
-	aMethodNode acceptMultipleVisitors: self preTranslationAnnotators.
-
-]
-
 { #category : #'translation-api' }
 FATranslator >> prepareMethodsASTs: methodsASTs [
 	"we don't treat macros."
@@ -198,7 +193,11 @@ FATranslator >> translateClass: aClass [
 
 { #category : #'translation-api' }
 FATranslator >> translateExpression: anExpression [
-	^ classTranslator translateExpression: anExpression
+	| doIt |
+	doIt := OpalCompiler new noPattern: true ; compile: anExpression.
+	program addMethod: doIt ast."no need to send a copy, as it's not installed in the system"
+	self prepareProgram.
+	^ classTranslator methodTranslator translateMethod: doIt ast.
 ]
 
 { #category : #accessors }

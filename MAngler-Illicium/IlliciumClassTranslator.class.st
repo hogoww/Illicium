@@ -11,7 +11,7 @@ IlliciumClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 
 { #category : #typing }
 IlliciumClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
-	self inferer inferExpression: anExpression 
+	mainTranslator inferer inferExpression: anExpression 
 ]
 
 { #category : #translation }
@@ -28,6 +28,16 @@ IlliciumClassTranslator >> methodsToTranslateASTs: aClass [
 				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not 
 				and: [ aMethod node compiledMethod isFromTrait not ] ] ] ]
 		thenCollect: [:aMethod| aMethod node copy ].
+]
+
+{ #category : #translation }
+IlliciumClassTranslator >> postTranslationVisitors [
+	"Duplicate of slang's version for now"
+	^ {
+		FAStatementsBecomeExpressions new.
+		"ASTCDebugStructureVisitor new" "currently disabled" 
+		 " debugStructure should be last, to check that everything's working :)"
+	}
 ]
 
 { #category : #translation }

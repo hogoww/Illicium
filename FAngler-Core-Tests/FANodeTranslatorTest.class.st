@@ -16,12 +16,12 @@ FANodeTranslatorTest >> addDeclarationProperty: aBooleanOrCollection to: aNode [
 { #category : #'as yet unclassified' }
 FANodeTranslatorTest >> addType: aClass to: aNode [ 
 	aNode propertyAt: FATypeAnnotator propertyName
-		put: ( aClass asTypeReification -> 'Generated, no Phineas Type')
+		put: aClass asTypeReification 
 ]
 
 { #category : #'as yet unclassified' }
 FANodeTranslatorTest >> assertTypeOf: aNode is: aType [
-	self assert: (aNode propertyAt: FATypeAnnotator propertyName) key equals: aType asTypeReification
+	self assert: (aNode propertyAt: FATypeAnnotator propertyName) equals: aType asTypeReification
 ]
 
 { #category : #tests }

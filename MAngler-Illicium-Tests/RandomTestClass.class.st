@@ -8,7 +8,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'IlliciumVirtualMachineAPI',
 	#classTraits : 'IlliciumVirtualMachineAPI classTrait',
-	#category : #'MAngler-Illicium-Tests'
+	#category : #'MAngler-Illicium-Tests-Support'
 }
 
 { #category : #tests }

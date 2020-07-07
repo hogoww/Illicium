@@ -42,8 +42,14 @@ MASlangToCGeneratedTests >> newPrettyPrinter [
 
 { #category : #generating }
 MASlangToCGeneratedTests >> prettyPrintIllicium: anAST [
+	"If it's a macro, it's translated in a define
+	otherwise, it's a function call."
 
-	^ anAST definitions first prettyPrintUsing: self newPrettyPrinter
+	^(anAST defines 
+		ifEmpty: [ anAST definitions ]
+		ifNotEmpty: [ anAST defines ]) 
+			anyOne prettyPrintUsing: self newPrettyPrinter.
+
 ]
 
 { #category : #accessing }

@@ -2,14 +2,16 @@ Class {
 	#name : #FAProgram,
 	#superclass : #Object,
 	#instVars : [
+		'name',
 		'methods',
 		'isFullyAnnotated',
-		'classesToGenerate'
+		'classesToGenerate',
+		'dependencies'
 	],
 	#category : #'FAngler-Core-Translation'
 }
 
-{ #category : #accessing }
+{ #category : #adding }
 FAProgram >> addClass: aClass [
 
 	classesToGenerate add: aClass.
@@ -20,27 +22,46 @@ FAProgram >> addClass: aClass [
 			(self methodNeedAdding: aMethod) ifTrue: [ self addMethod: (aClass lookupSelector: aSelector) ]]."
 ]
 
-{ #category : #accessing }
+{ #category : #adding }
+FAProgram >> addDependency: aProgram [
+	self methods keysDo: [ :aMethod | 
+		(aProgram hasMethodNamedAnywhere: aMethod)
+			ifTrue:[ MethodExistsInDependency new methodSelector: aMethod ; signal ]
+		].
+	dependencies add: aProgram
+]
+
+{ #category : #adding }
 FAProgram >> addMethod: aMethod [
-	"This expects a copy as argument."
+	"This expects a *copy* as argument."
 	
-	"this returns a boolean, which tells if the method should be removed from the cCodeGenerator before being added."
-	"It's not good, but idk what else to do for now."
-	
+	"This returns a boolean, which means that the method overrode an existing method"
+	"see MASlangMethodTranslator >> #addMethod:withInferer:"
+
+	self checkDependenciesFor: aMethod selector.
+		
 	methods at: aMethod selector
 		ifPresent: [ :conflicting | "if the conflicting method is further down the hierarchy, we take it" 
-			(aMethod methodClass includesBehavior: conflicting methodClass)
-				ifTrue: [ methods at: aMethod selector put: aMethod ]
-				ifFalse: [ self halt. ]. "otherwise, two methods have the same name. Not sure what to do yet."
-				^ true
+			(self shouldOverride: conflicting with: aMethod)
+				ifTrue: [
+					methods at: aMethod selector put: aMethod.
+					^ true "method has overriden another one"
+					]
+				ifFalse: [ MethodWasAlreadyAdded new methodSelector: aMethod selector ; signal ]. "otherwise, two methods have the same name. Not sure what to do yet."
 			]
-		ifAbsentPut: [ aMethod ].
-	^ false 
+		ifAbsentPut: aMethod.
+	^ false "method was ignored"
+]
+
+{ #category : #dependencies }
+FAProgram >> checkDependenciesFor: aSelector [
+	"We assume that a dependency is immutable"
+	(self dependenciesHaveMethodNamed: aSelector)
+		ifTrue:[ MethodExistsInDependency new methodSelector: aSelector ; signal ].
 ]
 
 { #category : #accessing }
 FAProgram >> classes [
-
 	^ classesToGenerate
 ]
 
@@ -51,16 +72,30 @@ FAProgram >> classesDo: aBlockClosure [
 ]
 
 { #category : #testing }
+FAProgram >> dependenciesHaveMethodNamed: aSelector [
+	^ dependencies anySatisfy: [ :aProgram | aProgram hasMethodNamedAnywhere: aSelector ]
+]
+
+{ #category : #testing }
 FAProgram >> hasMethodNamed: aSelector [
-	^ methods includesKey: aSelector
+	^ (methods includesKey: aSelector)
+]
+
+{ #category : #testing }
+FAProgram >> hasMethodNamedAnywhere: aSelector [
+	"we check everywhere in this one."
+	^ (self hasMethodNamed: aSelector)
+		or:[ self dependenciesHaveMethodNamed: aSelector]
 ]
 
 { #category : #accessing }
 FAProgram >> initialize [
 	super initialize.
 	classesToGenerate := OrderedCollection new.
+	dependencies := OrderedCollection new.
 	methods := Dictionary new.
 	isFullyAnnotated := false.
+
 ]
 
 { #category : #accessing }
@@ -90,12 +125,41 @@ FAProgram >> methodNamed: aSelector ifAbsent: anAbsentBlock [
 ]
 
 { #category : #accessing }
+FAProgram >> methodNamedAnywhere: aSelector [
+	^ methods at: aSelector ifAbsent: [ self methodNamedInDependency: aSelector ]
+]
+
+{ #category : #accessing }
+FAProgram >> methodNamedInDependency: aSelector [
+	dependencies do: [ :aProgram |
+		(aProgram methodNamedAnywhere: aSelector) 
+			ifNotNil: [ :aMethod | ^ aMethod ] ].
+	^ nil
+]
+
+{ #category : #accessing }
 FAProgram >> methods [
-	^ methods values
+	^ methods
 ]
 
 { #category : #accessing }
 FAProgram >> methodsDo: aBlockClosure [ 
 	
 	methods do: aBlockClosure 
+]
+
+{ #category : #accessing }
+FAProgram >> name [
+	^ name
+]
+
+{ #category : #accessing }
+FAProgram >> name: aName [
+	name := aName
+]
+
+{ #category : #accessing }
+FAProgram >> shouldOverride: conflicting with: aReplacement [
+	"by default, we never override a method"
+	^ false
 ]

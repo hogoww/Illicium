@@ -3,7 +3,8 @@ Class {
 	#superclass : #FAProgram,
 	#instVars : [
 		'includes',
-		'slots'
+		'slots',
+		'constants'
 	],
 	#classVars : [
 		'InitializationOptions'
@@ -119,6 +120,11 @@ MASlangProgram >> classesToPrepareSelectorsFor [
 	self classes
 ]
 
+{ #category : #accessing }
+MASlangProgram >> constants [
+	^ constants
+]
+
 { #category : #'method-expansion' }
 MASlangProgram >> includes [
 	^ includes
@@ -161,6 +167,16 @@ MASlangProgram >> methodsFromClass: aClass [
 			and: [ aClass includesBehavior: aMethod methodClass ] ]
 ]
 
+{ #category : #enumerating }
+MASlangProgram >> name [
+	^ 'StackVM'
+]
+
+{ #category : #enumerating }
+MASlangProgram >> name: aName [
+	^ self shouldNotImplement
+]
+
 { #category : #accessing }
 MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 
@@ -177,10 +193,11 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 		self addStruct: aStruct withInferer: inferer andTranslator: aTranslator ].
 	
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
-	aTranslator prepareMethodsASTs: self methods.
+	aTranslator prepareMethodsASTs: methods values.
 	
-	self removeSlotsNotIn: inferer.
-		
+	"self removeSlotsNotIn: inferer."
+	constants := inferer constants.
+	
 	includes := inferer headerFiles.
 	includes addFirst: '"sq.h"'."added systematically"
 	
@@ -218,6 +235,11 @@ MASlangProgram >> shouldExpandMethod: aCompiledMethod [
 	"
 	
 	^ aCompiledMethod hasPragmaNamed: #expandCases 
+]
+
+{ #category : #accessing }
+MASlangProgram >> shouldOverride: aConflictingMethod with: aReplacementMethod [
+	^ aReplacementMethod methodClass includesBehavior: aConflictingMethod methodClass
 ]
 
 { #category : #accessing }

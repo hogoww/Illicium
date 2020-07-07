@@ -24,12 +24,6 @@ MAIlliciumTranslator class >> programClass [
 ]
 
 { #category : #initialization }
-MAIlliciumTranslator >> fillWithtranslatorSpecificTypes [
-	replacementClasses at: #InterpreterProxy put: IlliciumVirtualMachineProxy.
-	replacementClasses at: #IlliciumInterpreterProxy put: IlliciumVirtualMachineProxy.
-]
-
-{ #category : #initialization }
 MAIlliciumTranslator >> getReplacementType: aPharoType [
 	^ aPharoType performReplacementUsing: replacementClasses
 ]
@@ -53,9 +47,7 @@ MAIlliciumTranslator >> initialize [
 		at: #SmallFloat64 put: IlliciumFloat ; 
 		at: #BoxedFloat64 put: IlliciumFloat ; 
 		at: #Array put: IlliciumArray ;
-		yourself.
-		
-	self fillWithtranslatorSpecificTypes 
+		yourself
 ]
 
 { #category : #visiting }
@@ -63,8 +55,15 @@ MAIlliciumTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ { 
 		IlliciumDeclarationAnnotator new. 
-		IlliciumPhineasTypeAnnotator new inferer: self inferer ; yourself"always take the latest inferer"
+		IlliciumPhineasTypeAnnotator new inferer: inferer ; yourself "always take the latest inferer"
 		}
+]
+
+{ #category : #visiting }
+MAIlliciumTranslator >> prepareProgram [
+	program methods do: [ :aMethod | inferer infer: aMethod ].
+	program methods do:[ :aMethod | self annotateMethodAST: aMethod ].
+
 ]
 
 { #category : #accessors }
@@ -75,4 +74,15 @@ MAIlliciumTranslator >> replacementClasses [
 { #category : #accessors }
 MAIlliciumTranslator >> replacementClasses: aDictionnary [
 	replacementClasses := aDictionnary
+]
+
+{ #category : #visiting }
+MAIlliciumTranslator >> translateProgram [
+	| cu |
+	self prepareProgram.
+
+	cu := ASTCCompilationUnit new.
+	program methods value
+		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
+	^ cu
 ]

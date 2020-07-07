@@ -5,9 +5,8 @@ Class {
 }
 
 { #category : #tests }
-MASlangReceiverTest >> addType: aSymbol to: aNode [ 
-	aNode propertyAt: FATypeAnnotator propertyName
-		put: aSymbol -> 'Generaed, no Phineas Type'
+MASlangReceiverTest >> addType: aCType to: aNode [
+	aNode propertyAt: FATypeAnnotator propertyName put: aCType
 ]
 
 { #category : #tests }

@@ -226,7 +226,12 @@ MASlangTranslator >> translateProgram [
 	program structClassesToGenerate collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
 	program slots collect: [ :aSlot | classTranslator translateSlot: aSlot ] into: cu.
-	(program methods 
+	"program constants collect: [ :aConstant | 
+		ASTCPreprocessorDefine new
+			name: (ASTCIdentifier id: aConstant key);
+			value: (aConstant value ifNotNil: [ ASTCLiteral new value: aConstant value; yourself ]);
+			yourself ] into: cu."
+	(program methods values
 		reject: [ :aMethod | aMethod isAccessor ]) 
 			collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
 	

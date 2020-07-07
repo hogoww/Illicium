@@ -1,7 +1,7 @@
 Class {
 	#name : #IlliciumDeclarationAnnotatorTest,
 	#superclass : #FAVariableDeclarationAnnotatorTest,
-	#category : #'MAngler-Illicium-Tests'
+	#category : #'MAngler-Illicium-Tests-AnalysisTests'
 }
 
 { #category : #testing }

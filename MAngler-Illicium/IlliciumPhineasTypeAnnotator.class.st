@@ -25,7 +25,7 @@ IlliciumPhineasTypeAnnotator >> typeThatNode: aNode [
 
 	type := IlliciumTypeChecker checkThatType: phineasTypes asPharoType for: aNode using: inferer.
 	
-	self atNewPropertyPut: type -> phineasTypes for: aNode
+	self atNewPropertyPut: type for: aNode
 ]
 
 { #category : #visiting }
