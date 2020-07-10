@@ -12,5 +12,11 @@ SingleType >> createInstance [
 
 { #category : #'*MAngler-Illicium' }
 SingleType >> performReplacementUsing: bindings [
-	^ self class new type: (bindings at: type name ifAbsent:[ ReplacementTypeUnknown new type: type ; signal ]).
+	| abstractType |
+	self flag:#badFix.
+	(type includesBehavior: TestCase) 
+		ifTrue:[ abstractType := TestCase ]
+		ifFalse:[ abstractType := type ].
+		
+	^ self class new type: (bindings at: abstractType name ifAbsent:[ ReplacementTypeUnknown new type: type ; signal ]).
 ]

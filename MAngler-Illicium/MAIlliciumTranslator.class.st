@@ -36,6 +36,7 @@ MAIlliciumTranslator >> initialize [
 	 " float and string are used... Not well !"
 	replacementClasses := Dictionary new
 		at: #Object put: IlliciumObject ;
+		at: #TestCase put: IlliciumTestCase;
 		at: #UndefinedObject put: IlliciumUndefinedObject ;
 		at: #SmallInteger put: IlliciumSmallInteger ;
 		at: #Boolean put: IlliciumBoolean ;

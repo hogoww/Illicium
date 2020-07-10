@@ -16,7 +16,8 @@ FAArgumentNodeTranslator >> translateArgumentUsage: anArgumentNode [
 
 { #category : #translate }
 FAArgumentNodeTranslator >> translateNode: anArgumentNode [
-	^ anArgumentNode parent isMethod
+	"We create argumentNodes by hand"
+	^ (anArgumentNode parent ifNotNil: [ :aParent | aParent isMethod ] ifNil: false)
 		ifTrue: [ self translateParameterDeclaration: anArgumentNode ]
 		ifFalse: [ self translateArgumentUsage: anArgumentNode ]
 ]

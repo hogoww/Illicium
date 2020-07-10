@@ -25,6 +25,10 @@ IlliciumPhineasTypeAnnotator >> typeThatNode: aNode [
 
 	type := IlliciumTypeChecker checkThatType: phineasTypes asPharoType for: aNode using: inferer.
 	
+	self flag: #dirtyFix.
+	(aNode isMethod and: [ type type = aNode methodNode methodClass ])
+		ifTrue: [ type := EmptyType new ].
+	
 	self atNewPropertyPut: type for: aNode
 ]
 

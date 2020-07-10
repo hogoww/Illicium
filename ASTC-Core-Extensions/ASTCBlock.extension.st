@@ -45,3 +45,8 @@ ASTCBlock >> becomeSingleStatement [
 	self becomeForward: expression
 		
 ]
+
+{ #category : #'*ASTC-Core-Extensions' }
+ASTCBlock >> isEmpty [
+	^ declarations isEmpty & statements isEmpty
+]
