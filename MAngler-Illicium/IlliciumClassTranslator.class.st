@@ -14,7 +14,13 @@ IlliciumClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
 	mainTranslator inferer inferExpression: anExpression 
 ]
 
-{ #category : #translation }
+{ #category : #Initialization }
+IlliciumClassTranslator >> initialize [
+	super initialize.
+	methodTranslator methodNodeTranslator: ILMethodNodeTestTranslator new.
+]
+
+{ #category : #'translation-state' }
 IlliciumClassTranslator >> isStatefulCode [
 	^ false
 ]

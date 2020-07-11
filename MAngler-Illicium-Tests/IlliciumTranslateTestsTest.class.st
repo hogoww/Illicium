@@ -16,15 +16,20 @@ IlliciumTranslateTestsTest >> testEmptyTest [
 	function debugASTCStructure.
 	"Not sure what kind of assertion should be there.."
 	self assert: function declaration parameters size equals: 1.
-	self assert: function declaration parameters first type type equals: (CType createFrom: 'CuTest*').
+	self assert: function declaration parameters first type type type equals: (CType createFrom: 'CuTest*').
 	self assert: function body isEmpty.
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 IlliciumTranslateTestsTest >> testWithAssertTrueTest [
-	| function |
+	| function assertFuncCall |
 	function := MAIlliciumTranslator translateMethod: self classToTest >> #testWithAssertTrue.
 	function debugASTCStructure.
 	"Not sure what kind of assertion should be there.."
-	self assert: function body isEmpty.
+	self assert: function declaration parameters size equals: 1.
+	self assert: function declaration parameters first type type type equals: (CType createFrom: 'CuTest*').
+	self assert: function body statements size equals: 1.
+	assertFuncCall := function body statements anyOne expression.
+	self assert: assertFuncCall id id = #CuAssert.
+	self assert: assertFuncCall arguments size equals: 3.
 ]
