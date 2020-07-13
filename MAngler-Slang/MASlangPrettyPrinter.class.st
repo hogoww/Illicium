@@ -332,7 +332,9 @@ MASlangPrettyPrinter >> visitFunctionDefinition: aFunctionDefinition [
 	self cr."
 	
 	stream tab.
-	self printMultilineComment: ' ' , aFunctionDefinition pharoNode methodClass name , '>>' , aFunctionDefinition pharoNode selector printString.
+	aFunctionDefinition pharoNode ifNotNil:[
+			self printMultilineComment: ' ' , aFunctionDefinition pharoNode methodClass name , '>>' , aFunctionDefinition pharoNode selector printString.	
+		].
 	self cr.
 	aFunctionDefinition declaration acceptVisitor:self. 
 	self cr spaces."cr after a curly brace is inconsistent, so we cannot factorise this in visitBlock (see if)"

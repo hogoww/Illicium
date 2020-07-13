@@ -16,10 +16,9 @@ FAProgram >> addClass: aClass [
 
 	classesToGenerate add: aClass.
 
-	"(aClass allSelectorsBelow: VMClass) 
-		do: [:aSelector ||aMethod|
-			aMethod := (aClass lookupSelector: aSelector).
-			(self methodNeedAdding: aMethod) ifTrue: [ self addMethod: (aClass lookupSelector: aSelector) ]]."
+	(aClass includesBehavior: TestCase) ifTrue:[ ^ self addTestClass: aClass ].
+	
+	^ self addRegularClass: aClass
 ]
 
 { #category : #adding }
@@ -51,6 +50,11 @@ FAProgram >> addMethod: aMethod [
 			]
 		ifAbsentPut: aMethod.
 	^ false "method was ignored"
+]
+
+{ #category : #adding }
+FAProgram >> addTestClass: aClass [
+	(aClass allSelectorsBelow: TestCase) do: [ :aMethod | self addMethod: (aClass lookupSelector: aMethod) ast copy ]
 ]
 
 { #category : #dependencies }

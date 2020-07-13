@@ -74,7 +74,6 @@ FATranslator >> addMethod: aCollection [
 
 { #category : #accessors }
 FATranslator >> addMethod: anAST fromClass: aClass [
-	self program addClass: aClass.
 	self program addMethod: anAST
 ]
 

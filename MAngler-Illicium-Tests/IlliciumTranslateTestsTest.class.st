@@ -9,7 +9,7 @@ IlliciumTranslateTestsTest >> classToTest [
 	^ IlliciumTestClassToBeTranslated  
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 IlliciumTranslateTestsTest >> testEmptyTest [
 	| function |
 	function := MAIlliciumTranslator translateMethod: self classToTest >> #testEmpty.
@@ -17,6 +17,20 @@ IlliciumTranslateTestsTest >> testEmptyTest [
 	self assert: function declaration parameters size equals: 1.
 	self assert: function declaration parameters first type type type equals: (CType createFrom: 'CuTest*').
 	self assert: function body isEmpty.
+]
+
+{ #category : #testing }
+IlliciumTranslateTestsTest >> testTranslateTestClass [
+	| cu expectedNumberOfDeclaration suiteDeclarationFunction |
+	cu := MAIlliciumTranslator translateTestClass: self classToTest.
+	cu debugASTCStructure.
+
+	expectedNumberOfDeclaration := (self classToTest allSelectorsBelow: TestCase) 
+		count: [ :aSelector | (self classToTest lookupSelector: aSelector) ast isTest ].
+	self assert: cu definitions size equals: expectedNumberOfDeclaration + 1. "+1 for the declaration of the suite"
+	
+	suiteDeclarationFunction := cu functionNamed: self classToTest name , #GetSuite.
+	self assert: suiteDeclarationFunction body statements size equals: expectedNumberOfDeclaration + 1. "+ CuSuite Assignment (declaration is not a statement)"
 ]
 
 { #category : #testing }
