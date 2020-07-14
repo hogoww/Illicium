@@ -23,7 +23,7 @@ MAIlliciumTranslator class >> programClass [
 	^ FAProgram
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'translation-api' }
 MAIlliciumTranslator class >> translateTestClass: aClass [ 
 	| cu suiteDeclarationFunction body |
 	cu := self translateClass: aClass.
@@ -101,6 +101,11 @@ MAIlliciumTranslator >> preTranslationAnnotators [
 		IlliciumDeclarationAnnotator new. 
 		IlliciumPhineasTypeAnnotator new inferer: inferer ; yourself "always take the latest inferer"
 		}
+]
+
+{ #category : #accessing }
+MAIlliciumTranslator >> preTranslationTransformations [
+	^ self shouldBeImplemented
 ]
 
 { #category : #visiting }
