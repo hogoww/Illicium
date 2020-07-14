@@ -68,6 +68,11 @@ FATranslator >> addClass: aClass [
 ]
 
 { #category : #'program-configuration' }
+FATranslator >> addInclude: aString [
+	program addInclude: aString
+]
+
+{ #category : #'program-configuration' }
 FATranslator >> addMethod: aCollection [
 	program addMethod: aCollection
 ]

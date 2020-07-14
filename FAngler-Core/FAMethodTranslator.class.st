@@ -11,7 +11,7 @@ Class {
 
 { #category : #accessing }
 FAMethodTranslator >> addInclude: aString [
-	includes add: aString
+	classTranslator addInclude: aString
 ]
 
 { #category : #'accessors-nodes-translator' }

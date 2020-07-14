@@ -6,7 +6,7 @@ Class {
 
 { #category : #type }
 IlliciumBoolean class >> asCType [
-	^#bool
+	^ #bool
 ]
 
 { #category : #'translation-controlling' }

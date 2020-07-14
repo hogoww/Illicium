@@ -6,6 +6,8 @@ Class {
 
 { #category : #translate }
 FALiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOriginalNode: originalNode [
+	aValue = true | (aValue = false) ifTrue: [ self addBooleanInclude ].
+
 	^ ASTCLiteral new
 		pharoNode: originalNode;
 		value: aValue;

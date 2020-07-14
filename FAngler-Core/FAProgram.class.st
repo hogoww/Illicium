@@ -19,6 +19,7 @@ FAProgram >> addClass: aClass [
 
 	(aClass includesBehavior: TestCase) ifTrue:[ ^ self addTestClass: aClass ].
 	
+	self flag: #todo.
 	^ self addRegularClass: aClass
 ]
 
@@ -29,6 +30,11 @@ FAProgram >> addDependency: aProgram [
 			ifTrue:[ MethodExistsInDependency new methodSelector: aMethod ; signal ]
 		].
 	dependencies add: aProgram
+]
+
+{ #category : #adding }
+FAProgram >> addInclude: aString [
+	includes add: aString
 ]
 
 { #category : #adding }
@@ -55,7 +61,8 @@ FAProgram >> addMethod: aMethod [
 
 { #category : #adding }
 FAProgram >> addTestClass: aClass [
-	(aClass allSelectorsBelow: TestCase) do: [ :aMethod | self addMethod: (aClass lookupSelector: aMethod) ast copy ]
+	(aClass allSelectorsBelow: TestCase) 
+		do: [ :aMethod | self addMethod: (aClass lookupSelector: aMethod) ast copy ]
 ]
 
 { #category : #dependencies }
@@ -93,9 +100,15 @@ FAProgram >> hasMethodNamedAnywhere: aSelector [
 		or:[ self dependenciesHaveMethodNamed: aSelector]
 ]
 
-{ #category : #accessing }
+{ #category : #'method-expansion' }
+FAProgram >> includes [
+	^ includes
+]
+
+{ #category : #initialization }
 FAProgram >> initialize [
 	super initialize.
+	includes := Set new.
 	classesToGenerate := OrderedCollection new.
 	dependencies := OrderedCollection new.
 	methods := Dictionary new.

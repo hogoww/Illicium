@@ -37,3 +37,8 @@ IlliciumObject >> asString [
 	methodTranslator ifNil:[ ^ super asString ].
 	^ methodTranslator forward: (MessageSend receiver: self receiverNode selector: #castTo: argument: #'char*' asLiteralNode) to: InterpreterProxy
 ]
+
+{ #category : #'message performing' }
+IlliciumObject >> includeMyFile [
+	^ methodTranslator addInclude: self class includeFileName.
+]

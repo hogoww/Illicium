@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #'translation-state' }
+FAClassTranslator >> addInclude: aString [
+	mainTranslator addInclude: aString
+]
+
+{ #category : #'translation-state' }
 FAClassTranslator >> addState: stateStuffStruct to: aCompilationUnit [
 	stateStuffStruct do:[:anElem| anElem addToCompilationUnit: aCompilationUnit ].
 	^ aCompilationUnit

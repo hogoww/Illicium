@@ -187,9 +187,10 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 MAIlliciumTranslator >> translateProgram [
 	| cu |
 	self prepareProgram.
-
+	
 	cu := ASTCCompilationUnit new.
 	program methods value
 		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
+	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
 	^ cu
 ]

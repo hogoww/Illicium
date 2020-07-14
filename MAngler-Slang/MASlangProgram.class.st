@@ -124,11 +124,6 @@ MASlangProgram >> constants [
 	^ constants
 ]
 
-{ #category : #'method-expansion' }
-MASlangProgram >> includes [
-	^ includes
-]
-
 { #category : #initialization }
 MASlangProgram >> initialize [
 	super initialize.

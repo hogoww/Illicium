@@ -7,6 +7,11 @@ Class {
 	#category : #'FAngler-Core-Nodes-translators'
 }
 
+{ #category : #include }
+FAAbstarctNodeTranslator >> addBooleanInclude [
+	methodTranslator addInclude: #'<stdbool.h>'
+]
+
 { #category : #translate }
 FAAbstarctNodeTranslator >> methodTranslator [
 	^ methodTranslator
