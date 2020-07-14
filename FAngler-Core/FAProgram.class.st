@@ -6,7 +6,8 @@ Class {
 		'methods',
 		'isFullyAnnotated',
 		'classesToGenerate',
-		'dependencies'
+		'dependencies',
+		'includes'
 	],
 	#category : #'FAngler-Core-Translation'
 }

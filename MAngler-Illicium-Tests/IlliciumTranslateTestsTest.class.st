@@ -20,6 +20,14 @@ IlliciumTranslateTestsTest >> testEmptyTest [
 ]
 
 { #category : #testing }
+IlliciumTranslateTestsTest >> testGenerateTestClass [
+	"very weak test, not sure how to test the generation otherwise"
+	
+	MAIlliciumTranslator generateTestClass: self classToTest
+	
+]
+
+{ #category : #testing }
 IlliciumTranslateTestsTest >> testTranslateTestClass [
 	| cu expectedNumberOfDeclaration suiteDeclarationFunction |
 	cu := MAIlliciumTranslator translateTestClass: self classToTest.

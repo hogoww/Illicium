@@ -2,7 +2,6 @@ Class {
 	#name : #MASlangProgram,
 	#superclass : #FAProgram,
 	#instVars : [
-		'includes',
 		'slots',
 		'constants'
 	],

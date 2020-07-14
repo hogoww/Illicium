@@ -7,7 +7,7 @@ Class {
 { #category : #asserting }
 IlliciumTestCase >> assert: aBooleanCondition [
 	^ self asFunctionCall: #CuAssertTrue withArguments: {
-		RBArgumentNode named: #tc.
+		RBArgumentNode named: #testCase.
 		aBooleanCondition.
 		}
 ]

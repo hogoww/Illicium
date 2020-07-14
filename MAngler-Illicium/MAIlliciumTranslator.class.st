@@ -12,9 +12,67 @@ MAIlliciumTranslator class >> classTranslatorClass [
 	^ IlliciumClassTranslator 
 ]
 
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> generateMainForTestClasses: classes [
+	FANewFilePrinter new
+		directory: './generated/tests/';
+		fileName: 'AllTests.c';
+		printStringInFile: (self mainCCodeForTestClasses: classes)
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> generateTestClass: aClass [ 
+	| translation |
+	translation := self translateTestClass: aClass.
+	FANewFilePrinter new
+		directory: './generated/tests/';
+		fileName: aClass name , '.c';
+		compilationUnit: translation;
+		prettyPrinter: self prettyPrinterClass new;
+		printInFile.
+	self generateMainForTestClasses: { aClass }.
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> mainCCodeForTestClasses: classes [
+	^ String streamContents: [ :s |
+		s << '#include <stdio.h>' ; cr.
+		s << '#include "CuTest.h"' ; cr.
+	
+		classes do: [ :aClass |
+				s << 'CuSuite* ' << aClass name << 'GetSuite();' ; cr
+			].
+	
+		s cr cr.
+	
+		s << 'void RunAllTests(void)
+{
+	CuString* output = CuStringNew();
+	CuSuite* suite = CuSuiteNew();'.
+	
+		s cr.
+		"CuSuiteAddSuite(suite, CuGetSuite());
+		CuSuiteAddSuite(suite, CuStringGetSuite());"
+		classes do: [ :aClass |
+			s << 'CuSuiteAddSuite(suite,' << aClass name << 'GetSuite());' ; cr
+			].
+
+
+		s << 'CuSuiteRun(suite);
+	CuSuiteSummary(suite, output);
+	CuSuiteDetails(suite, output);
+	printf("%s\n", output->buffer);
+}
+
+int main(void)
+{
+	RunAllTests();
+}'
+	]
+]
+
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> prettyPrinterClass [
-
 	^ FAPrettyPrint
 ]
 
