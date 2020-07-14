@@ -1,6 +1,6 @@
 Extension { #name : #SingleType }
 
-{ #category : #'*ASTC-Core-Extensions' }
+{ #category : #'*FAngler-Core' }
 SingleType >> asCTypeNode [
 	^ ASTCType new type: self ; yourself
 ]
