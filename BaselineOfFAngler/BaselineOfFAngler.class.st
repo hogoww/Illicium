@@ -10,6 +10,9 @@ BaselineOfFAngler >> baseline: spec [
 	spec
 		for: #common
 		do: [
+			spec 
+				baseline: 'ASTC'
+				with: [ spec repository: 'github://hogoww/C-AST:master' ].
 			spec
 				baseline: 'TypedSlot'
 				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
@@ -18,8 +21,6 @@ BaselineOfFAngler >> baseline: spec [
 				with: [ spec repository: 'gitlab://pharo-project/Phineas:cTypeForSlang' ].
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
-			spec baseline: ''
-				with: [ spec repository: 'github://hogoww/C-AST:master' ].
 			
 			spec				
 				"ASTC packages"
