@@ -39,6 +39,8 @@ IlliciumTranslateTestsTest >> testTranslateTestClass [
 	
 	suiteDeclarationFunction := cu functionNamed: self classToTest name , #GetSuite.
 	self assert: suiteDeclarationFunction body statements size equals: expectedNumberOfDeclaration + 1. "+ CuSuite Assignment (declaration is not a statement)"
+	
+	self assert: cu includes size equals: 2.
 ]
 
 { #category : #testing }
