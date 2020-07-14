@@ -18,12 +18,10 @@ BaselineOfFAngler >> baseline: spec [
 				with: [ spec repository: 'gitlab://pharo-project/Phineas:cTypeForSlang' ].
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
-			spec
-				"ASTC"
-				package: 'ASTC-Core';
-				package: 'ASTC-Core-Extensions' with:[ spec requires:#('ASTC-Core') ];
-				package: 'ASTC-Core-Tests' with:[ spec requires:#('ASTC-Core-Extensions') ];
-				
+			spec baseline: ''
+				with: [ spec repository: 'github://hogoww/C-AST:master' ].
+			
+			spec				
 				"ASTC packages"
 				package: 'FAngler-RB-Extensions';
 				
