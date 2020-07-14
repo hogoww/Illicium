@@ -44,6 +44,33 @@ IlliciumTranslateTestsTest >> testTranslateTestClass [
 ]
 
 { #category : #testing }
+IlliciumTranslateTestsTest >> testWithAssertTrueOnePlusOneEqualsThree [
+	| function assertFuncCall |
+	"The tested test is a failing one"
+	function := MAIlliciumTranslator translateMethod: self classToTest >> #testWithAssertOnePlusOneEqualsThree.
+	function debugASTCStructure.
+	self assert: function declaration parameters size equals: 1.
+	self assert: function declaration parameters first type type type equals: (CType createFrom: 'CuTest*').
+	self assert: function body statements size equals: 1.
+	assertFuncCall := function body statements anyOne expression.
+	self assert: assertFuncCall id id equals: #CuAssertTrue.
+	self assert: assertFuncCall arguments size equals: 2.
+]
+
+{ #category : #testing }
+IlliciumTranslateTestsTest >> testWithAssertTrueOnePlusOneEqualsTwoTest [
+	| function assertFuncCall |
+	function := MAIlliciumTranslator translateMethod: self classToTest >> #testWithAssertOnePlusOneEqualsTwo.
+	function debugASTCStructure.
+	self assert: function declaration parameters size equals: 1.
+	self assert: function declaration parameters first type type type equals: (CType createFrom: 'CuTest*').
+	self assert: function body statements size equals: 1.
+	assertFuncCall := function body statements anyOne expression.
+	self assert: assertFuncCall id id equals: #CuAssertTrue.
+	self assert: assertFuncCall arguments size equals: 2.
+]
+
+{ #category : #testing }
 IlliciumTranslateTestsTest >> testWithAssertTrueTest [
 	| function assertFuncCall |
 	function := MAIlliciumTranslator translateMethod: self classToTest >> #testWithAssertTrue.

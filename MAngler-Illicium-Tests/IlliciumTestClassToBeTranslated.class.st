@@ -15,6 +15,17 @@ IlliciumTestClassToBeTranslated >> testEmpty [
 ]
 
 { #category : #tests }
+IlliciumTestClassToBeTranslated >> testWithAssertOnePlusOneEqualsThree [
+	"failing test on purpose"
+	self assert: 1 + 1 = 3
+]
+
+{ #category : #tests }
+IlliciumTestClassToBeTranslated >> testWithAssertOnePlusOneEqualsTwo [
+	self assert: 1 + 1 = 2
+]
+
+{ #category : #tests }
 IlliciumTestClassToBeTranslated >> testWithAssertTrue [
 	self assert: true
 ]
