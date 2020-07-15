@@ -23,15 +23,14 @@ BaselineOfFAngler >> baseline: spec [
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			
 			spec				
-				"ASTC packages"
 				package: 'FAngler-RB-Extensions';
 				
 				"FAngler"
-				package: 'FAngler-Core' with:[ spec requires:#('ASTC-Core' 'ASTC-Core-Extensions') ];
+				package: 'FAngler-Core';
 				package: 'FAngler-Core-Tests' with:[spec requires:#('FAngler-Core') ];	
-				package: 'FAngler-ASTC-Visitors' with:[ spec requires:#('ASTC-Core') ];
+				package: 'FAngler-ASTC-Visitors';
 				package: 'FAngler-ASTC-Visitors-Tests' with:[ spec requires:#('FAngler-ASTC-Visitors') ];
-				package: 'FAngler-RB-Visitors' with:[ spec requires:#('ASTC-Core') ];
+				package: 'FAngler-RB-Visitors';
 				package: 'FAngler-RB-Visitors-Tests' with:[ spec requires:#('FAngler-RB-Visitors') ];	
 					
 				package: 'MAngler-Illicium' with: [ #('FAngler-Core' 'FAngler-RB-Visitors' 'FAngler-ASTC-Visitors') ];
