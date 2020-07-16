@@ -114,6 +114,23 @@ FAStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
 ]
 
 { #category : #tests }
+FAStatementsBecomeExpressionsTest >> testStatementInFunctionCallBecomesExpression [
+	| funCall expression |
+	funCall :=
+		ASTCFunctionCall new 
+			id: #a asCIdentifierNode;
+			arguments: { (ASTCLiteral value: true) asStatement };
+			yourself.
+	funCall acceptVisitor: visitor.
+	
+	self assert: funCall isFunctionCall.
+	self assert: funCall arguments size equals: 1.
+	
+	expression := funCall arguments first.
+	self assert: expression isExpression.
+]
+
+{ #category : #tests }
 FAStatementsBecomeExpressionsTest >> testStatementInIfConditionShouldBecomeExpression [
 	| ifNode then else |
 	ifNode :=
