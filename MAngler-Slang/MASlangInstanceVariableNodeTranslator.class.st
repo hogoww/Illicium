@@ -6,7 +6,16 @@ Class {
 
 { #category : #translate }
 MASlangInstanceVariableNodeTranslator >> translateNode: anInstanceVariableNode [
-	^ anInstanceVariableNode binding owningClass = anInstanceVariableNode methodNode methodClass
+	| slot |
+	self flag:#badFix. "version disparity between p8 (vm is build using p8) and P9 (which I use to work)"
+	slot := (SmalltalkImage current version = 'Pharo8.0.0')
+		ifTrue: [ anInstanceVariableNode binding slot ]
+		ifFalse: [
+			(SmalltalkImage current version = 'Pharo9.0.0')
+				ifTrue:[ anInstanceVariableNode binding ]
+				ifFalse:[ self error: 'unknown version' ]].
+		
+	^ slot owningClass = anInstanceVariableNode methodNode methodClass
 		ifTrue: [ (ASTCIdentifier id: #__self__in_method__)
 			-> 
 			(ASTCIdentifier id: anInstanceVariableNode name) ]
