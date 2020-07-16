@@ -116,7 +116,7 @@ MAVMTestGenerator >> generateResourceClass [
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'MAngler-Slang-Tests'.
-	ressourceClass tagWith: 'generatedResource'.
+	ressourceClass tagWith: 'GeneratedResource'.
 	^ ressourceClass
 ]
 
@@ -180,7 +180,7 @@ MAVMTestGenerator >> generateTestClassFor: aClassName [
 		instanceVariableNames: ''
 		classVariableNames: ''
 		package: 'MAngler-Slang-Tests'.
-	testClass tagWith: 'generatedTests'.
+	testClass tagWith: 'GeneratedTests'.
 	^ testClass
 ]
 

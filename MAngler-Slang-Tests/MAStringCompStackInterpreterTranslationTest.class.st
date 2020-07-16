@@ -1,7 +1,7 @@
 Class {
 	#name : #MAStringCompStackInterpreterTranslationTest,
 	#superclass : #MAVMTranslationTests,
-	#category : #'MAngler-Slang-Tests-generatedTests'
+	#category : #'MAngler-Slang-Tests-GeneratedTests'
 }
 
 { #category : #running }

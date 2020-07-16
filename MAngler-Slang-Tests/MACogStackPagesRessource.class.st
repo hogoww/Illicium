@@ -1,7 +1,7 @@
 Class {
 	#name : #MACogStackPagesRessource,
 	#superclass : #MASlangVMTestResource,
-	#category : #'MAngler-Slang-Tests-generatedResource'
+	#category : #'MAngler-Slang-Tests-GeneratedResource'
 }
 
 { #category : #running }
