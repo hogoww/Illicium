@@ -1,5 +1,5 @@
 Class {
 	#name : #FAPragmaNodeTranslator,
-	#superclass : #FAAbstarctNodeTranslator,
+	#superclass : #FAAbstractNodeTranslator,
 	#category : #'FAngler-Core-Nodes-translators'
 }

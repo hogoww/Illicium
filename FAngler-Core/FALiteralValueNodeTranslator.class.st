@@ -1,6 +1,6 @@
 Class {
 	#name : #FALiteralValueNodeTranslator,
-	#superclass : #FAAbstarctNodeTranslator,
+	#superclass : #FAAbstractNodeTranslator,
 	#category : #'FAngler-Core-Nodes-translators'
 }
 
