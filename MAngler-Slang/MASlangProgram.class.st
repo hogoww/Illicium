@@ -195,12 +195,20 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	includes := inferer headerFiles.
 	includes addFirst: '"sq.h"'."added systematically"
 	
+	
+	self removeSlangWeirdSlots.
+	
 	self isFullyAnnotated: true
 ]
 
 { #category : #removing }
 MASlangProgram >> removeMethod: aMethodNode [
 	methods removeKey: aMethodNode selector
+]
+
+{ #category : #weird }
+MASlangProgram >> removeSlangWeirdSlots [
+	slots removeKey: #primitiveTable
 ]
 
 { #category : #accessing }

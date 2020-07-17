@@ -356,7 +356,9 @@ MASlangPrettyPrinter >> visitIf: anIf [
 
 { #category : #visiting }
 MASlangPrettyPrinter >> visitLiteral: aLiteral [
-
+	self flag: #badFix.
+	aLiteral value isArray ifTrue: [ 'Literal array unprinted' crTrace.^self << 1 ]." corner cases of the printing... (primitiveTable for exemple"
+	aLiteral value isDictionary ifTrue: [ 'Literal dictionnary unprinted' crTrace.^self << 1 ]." corner cases of the printing... (printing of options)."
 	self << (self cLiteralFor: aLiteral value)
 ]
 
