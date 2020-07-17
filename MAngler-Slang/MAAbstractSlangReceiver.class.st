@@ -101,8 +101,8 @@ MAAbstractSlangReceiver >> notNil [
 MAAbstractSlangReceiver >> translateAsAccessor: aMessage [
 	"precond : aMessage is an accessor"	
 	| structMember memberId |
-	memberId := ASTCIdentifier id: aMessage selector.
-	structMember := aMessage methodNode methodClass isStructClass
+	memberId := ASTCIdentifier id: aMessage selector.	
+	structMember := receiverNode methodNode methodClass isStructClass
 		ifTrue:[
 			type isPointer 
 				ifTrue: [ self translatedReceiver -> memberId ]
