@@ -157,7 +157,7 @@ FAPrettyPrint >> visitBinaryOperator: anOperator [
 	]
 ]
 
-{ #category : #indentation }
+{ #category : #visiting }
 FAPrettyPrint >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
@@ -338,7 +338,7 @@ FAPrettyPrint >> visitLiteral: aLiteral [
 	aLiteral value isString ifTrue:[ self << '"' ].
 ]
 
-{ #category : #indentation }
+{ #category : #visiting }
 FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 	"When having a #define aSelector() something
 	the name is aSelector
@@ -358,7 +358,7 @@ FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 		 self print: aPreProcessorDefine value ].
 ]
 
-{ #category : #indentation }
+{ #category : #visiting }
 FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
 	self 	<< #'#include';
 		space;
