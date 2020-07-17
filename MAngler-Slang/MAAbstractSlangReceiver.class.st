@@ -108,7 +108,13 @@ MAAbstractSlangReceiver >> translateAsAccessor: aMessage [
 				ifTrue: [ self translatedReceiver -> memberId ]
 				ifFalse:[ self translatedReceiver structStaticAccess: memberId ].	
 			]
-		ifFalse: [ memberId ].
+		ifFalse: [ 
+			self flag: #badFix."they are corner cases. Easyfix"
+			#(trueObject falseObject nilObject) 
+				detect: [ :e | e = aMessage selector ]
+				ifFound: [ :e | ASTCIdentifier id: e ]
+				ifNone: memberId.
+				].
 	
 	aMessage selector last = $: ifFalse: [ ^ structMember ]."read accessor"
 	"else write accessor"
