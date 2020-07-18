@@ -100,8 +100,9 @@ MAAbstractSlangReceiver >> notNil [
 { #category : #'reflective operations' }
 MAAbstractSlangReceiver >> translateAsAccessor: aMessage [
 	"precond : aMessage is an accessor"	
-	| structMember memberId |
-	memberId := ASTCIdentifier id: aMessage selector.	
+	| structMember memberId memberName |
+	memberName := aMessage selector last = $: ifTrue: [ aMessage selector allButLast ] ifFalse: aMessage selector.
+	memberId := ASTCIdentifier id: memberName.	
 	structMember := receiverNode methodNode methodClass isStructClass
 		ifTrue:[
 			type isPointer 
@@ -110,11 +111,9 @@ MAAbstractSlangReceiver >> translateAsAccessor: aMessage [
 			]
 		ifFalse: [ 
 			self flag: #badFix."they are corner cases. Easyfix"
-			#(trueObject falseObject nilObject) 
-				detect: [ :e | e = aMessage selector ]
-				ifFound: [ :e | ASTCIdentifier id: e ]
-				ifNone: memberId.
-				].
+			ASTCIdentifier id: ({#trueObject -> #trueObj. #falseObject -> #falseObj. #nilObject -> #nilObj} asDictionary
+				at: aMessage selector
+				ifAbsent: [ memberName ])].
 	
 	aMessage selector last = $: ifFalse: [ ^ structMember ]."read accessor"
 	"else write accessor"
