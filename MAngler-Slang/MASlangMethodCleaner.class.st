@@ -15,7 +15,8 @@ MASlangMethodCleaner >> applyOnMethod: aMethod ofProgram: aProgram [
 
 { #category : #cleaning }
 MASlangMethodCleaner >> initialize [
-	selectorToRemove := #(flag flag: assert: eassert: deny: halt cCode:inSmalltalk:)
+	selectorToRemove := #(cCode:inSmalltalk: halt flag flag: assert: deny: eassert: assert:l: asserta:l: asserta:).
+	"#(asserta: )"
 ]
 
 { #category : #cleaning }
@@ -27,6 +28,10 @@ MASlangMethodCleaner >> selectorToRemove [
 MASlangMethodCleaner >> visitMessageNode: aMessageNode [
 	(selectorToRemove includes: aMessageNode selector)
 		ifFalse: [ ^ super visitMessageNode: aMessageNode ].
+
+	"asserta: seems to be used like a condition with a if. we'll see"
+	(aMessageNode selector = #asserta:)
+		ifTrue: [ ^ aMessageNode parent replaceNode: aMessageNode withNode: aMessageNode arguments first ].
 
 	aMessageNode parent isSequence ifTrue:[ ^ aMessageNode parent replaceNode: aMessageNode withNodes: #() ].
 	"if it is not replaced in a sequence, this is waaaay more complex and should be handled with care"
@@ -41,5 +46,6 @@ MASlangMethodCleaner >> visitMessageNode: aMessageNode [
 	"special case for halt"
 	(aMessageNode selector = #halt and: [ aMessageNode parent isReturn ])
 		ifTrue: [ ^ aMessageNode parent replaceNode: aMessageNode withNode: aMessageNode receiver ].
+		
 	self halt.
 ]
