@@ -584,7 +584,7 @@ MASlangReceiver >> printString [
 			<<'('
 			print: receiverNode;
 			<< '-';
-			print: (type ifNil:[ self halt]);
+			print: (type ifNil:[ self error ]);
 			<<')'.
 		].
 ]

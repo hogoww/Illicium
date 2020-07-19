@@ -22,8 +22,6 @@ MASlangTestResource class >> translatorClass [
 { #category : #'instance creation' }
 MASlangTestResource >> newTranslatorWith: aClass [
 	^ self class translatorClass new
-		addClass: aClass;
-		beStrict;
 		yourself
 ]
 

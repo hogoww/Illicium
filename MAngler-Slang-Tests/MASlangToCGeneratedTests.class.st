@@ -30,8 +30,12 @@ MASlangToCGeneratedTests >> assert: actual equals: expected [
 
 { #category : #generating }
 MASlangToCGeneratedTests >> generateIllicium: aSelector [ 
-	
-	^ self translator translateMethod: aSelector fromClass: testedClass
+	| cu |
+	cu := self translator translateProgram.
+	^ ASTCCompilationUnit new add: 
+		(cu functionNamed: 
+			(FAFormatHelper formatSelector: aSelector)); 
+		yourself
 ]
 
 { #category : #generating }
