@@ -10,8 +10,9 @@ MASlangReceiver class >> slangReservedSelector [
 	
 	eassert:
 	caseOf: caseOf:otherwise: dispatchOn:in: "caseOf and co. is parsed in a specific way in TAST which we don't. It therefore has to be an exception"
-	highBit "not technically a keyword, but that's a useless corner case"
+	highBit sin "not technically a keyword, but that's a useless corner case"
 	) 
+	
 ]
 
 { #category : #'translation-operators' }
@@ -652,6 +653,11 @@ MASlangReceiver >> signedIntToLong [
 { #category : #'translation-keyword' }
 MASlangReceiver >> signedIntToLong64 [
 	^ self translatedReceiver castTo: (self cTypeFor: #usqInt)
+]
+
+{ #category : #'translation-keyword' }
+MASlangReceiver >> sin [
+	^ self asFunctionCall: #sin withArguments: { receiverNode }
 ]
 
 { #category : #'translation-keyword' }

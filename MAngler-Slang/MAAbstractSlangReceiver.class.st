@@ -87,6 +87,11 @@ MAAbstractSlangReceiver >> ifNotNil: anIfNotNilBlock ifNil: aNilBlock [
 	^ self ifNil: aNilBlock ifNotNil: anIfNotNilBlock
 ]
 
+{ #category : #'translation support' }
+MAAbstractSlangReceiver >> isAccessor: aMethod [
+	^ self subclassResponsibility
+]
+
 { #category : #'translation-keyword' }
 MAAbstractSlangReceiver >> isNil [
 	^ self translatedReceiver equals: (ASTCLiteral value: #null)
