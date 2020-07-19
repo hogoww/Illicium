@@ -135,7 +135,8 @@ MAAbstractSlangReceiver >> translateAsSpecialFunctionCall: aMessage [
 			(self isAccessor: aMethod)
 				ifTrue: [ ^ self translateAsAccessor: aMessage ].
 			aMethod methodClass isStructClass "otherwise it is a struct message that is *not* an accessor"
-				ifTrue: [ ^ self asFunctionCall: aMessage selector withArguments: { receiverNode } ]].
+				ifTrue: [ ^ self asFunctionCall: aMessage selector 
+					withArguments: { receiverNode } , aMessage arguments ]].
 
 	^ nil
 ]
