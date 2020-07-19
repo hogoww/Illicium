@@ -81,9 +81,21 @@ FAStatementsBecomeExpressions >> visitIf: anIf [
 { #category : #visiting }
 FAStatementsBecomeExpressions >> visitOperator: anOperator [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions + 1.
-	super visitOperator: anOperator.
+
+	anOperator isUnaryOperator
+		ifTrue: [ anOperator operand acceptVisitor: self ]
+		ifFalse: [ 
+			anOperator isBinaryOperator
+				ifTrue: [ 
+					anOperator rightOperand acceptVisitor: self.
+					anOperator leftOperand acceptVisitor: self ]
+				ifFalse: [ anOperator condition acceptVisitor: self ] ].
+
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
-	
+
+	anOperator isTernaryConditionalOperator ifFalse: [ ^ self ].
+	anOperator then acceptVisitor: self.
+	anOperator else acceptVisitor: self
 ]
 
 { #category : #visiting }

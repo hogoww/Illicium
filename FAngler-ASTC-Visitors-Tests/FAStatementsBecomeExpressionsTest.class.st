@@ -114,6 +114,22 @@ FAStatementsBecomeExpressionsTest >> testIfBecomesTernaryInAssignment [
 ]
 
 { #category : #tests }
+FAStatementsBecomeExpressionsTest >> testStatementInBinaryOperator [
+	| node |
+	node :=
+		(ASTCIdentifier id: #a) asStatement
+			&&
+				(ASTCLiteral value: true) asStatement.
+				
+	node acceptVisitor: visitor.
+	
+	self assert: node isAndOperator.
+	self assert: node leftOperand isExpression.
+	self assert: node rightOperand isExpression.
+	
+]
+
+{ #category : #tests }
 FAStatementsBecomeExpressionsTest >> testStatementInFunctionCallBecomesExpression [
 	| funCall expression |
 	funCall :=
@@ -152,6 +168,43 @@ FAStatementsBecomeExpressionsTest >> testStatementInIfConditionShouldBecomeExpre
 	self assert: else isExpressionStatement.
 	self assert: else expression isLiteral.
 	self assert: else expression value equals: true.
+]
+
+{ #category : #tests }
+FAStatementsBecomeExpressionsTest >> testStatementInTernaryOperatorCondition [
+	| node |
+	node := ASTCTernaryConditionalOperator new 
+		condition: (ASTCIdentifier new id: #a) asStatement;
+		then: (ASTCIdentifier new id: #b) asStatement;
+		else: (ASTCIdentifier new id: #c) asStatement;
+		yourself.	
+	
+	node acceptVisitor: visitor.
+	
+	self assert: node isTernaryConditionalOperator.
+	self assert: node condition isExpression.
+	self assert: node then isStatement.
+	self assert: node else isStatement.
+	
+]
+
+{ #category : #tests }
+FAStatementsBecomeExpressionsTest >> testStatementInUnaryOperator [
+	| node |
+	node :=
+		(ASTCIdentifier id: #a)
+			assign:
+				(ASTCIf new
+					condition:(ASTCLiteral value: true);
+					then: (ASTCLiteral value: true) ;
+					else: (ASTCLiteral value: true) ;
+					yourself).
+	node acceptVisitor: visitor.
+	
+	self assert: node isAssignmentOperator.
+	self assert: node leftOperand isIdentifier.
+	self assert: node rightOperand isTernaryConditionalOperator.
+	
 ]
 
 { #category : #tests }
