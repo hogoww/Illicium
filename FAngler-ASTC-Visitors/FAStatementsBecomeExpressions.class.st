@@ -94,8 +94,8 @@ FAStatementsBecomeExpressions >> visitOperator: anOperator [
 	subTreeShouldBeAllExpressions := subTreeShouldBeAllExpressions - 1.
 
 	anOperator isTernaryConditionalOperator ifFalse: [ ^ self ].
-	anOperator then acceptVisitor: self.
-	anOperator else acceptVisitor: self
+	anOperator then ifNotNil: [ anOperator then acceptVisitor: self ].
+	anOperator else ifNotNil: [ anOperator else acceptVisitor: self ].
 ]
 
 { #category : #visiting }
