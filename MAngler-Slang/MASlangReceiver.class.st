@@ -402,21 +402,13 @@ MASlangReceiver >> dispatchOn: anExpression in: aGlobalNode [
 	^ switchNode
 ]
 
-{ #category : #'translation-keyword' }
+{ #category : #'translation-support' }
 MASlangReceiver >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand: ifTrue:[ Error signal: 'infiniteRecursion' ].
 	(self class slangReservedSelector includes: aMessage selector) 
 		ifTrue:[ UnsupportedFeature new feature: ('translation of Slang selector: #', aMessage selector) ; signal ]. 
 	
-	
-	(methodTranslator methodFor: aMessage selector) 
-		ifNotNil: [ :aMethod | 
-			aMethod isCMacroDefine 
-				ifTrue: [ ^ ASTCIdentifier new id: aMessage selector ; yourself ].
-			aMethod isAccessor
-				ifTrue: [ ^ self translateAsAccessor: aMessage ].
-			aMethod methodClass isStructClass "otherwise it is a struct message that is *not* an accessor"
-				ifTrue: [ ^ self asFunctionCall: aMessage selector withArguments: { receiverNode } ]].
+	(self translateAsSpecialFunctionCall: aMessage) ifNotNil:[ :aCNode | ^ aCNode].
 			
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
 ]
@@ -493,6 +485,11 @@ MASlangReceiver >> integerObjectOf: anOop [
 MASlangReceiver >> integerValueOf: anOop [
 	"translated as a simple function call. To be perfectly honest i'm not sure why it's a special selector"
 	^ (anOop acceptVisitor: methodTranslator) >> (ASTCLiteral value: 3)
+]
+
+{ #category : #'translation-support' }
+MASlangReceiver >> isAccessor: aMethod [
+	^ aMethod isAccessor 
 ]
 
 { #category : #'translation-keyword' }

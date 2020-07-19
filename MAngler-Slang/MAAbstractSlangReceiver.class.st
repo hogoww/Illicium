@@ -120,6 +120,21 @@ MAAbstractSlangReceiver >> translateAsAccessor: aMessage [
 	^ structMember assign: (aMessage arguments first acceptVisitor: methodTranslator)
 ]
 
+{ #category : #'reflective operations' }
+MAAbstractSlangReceiver >> translateAsSpecialFunctionCall: aMessage [
+
+	(methodTranslator methodFor: aMessage selector) 
+		ifNotNil: [ :aMethod |
+			aMethod isCMacroDefine 
+				ifTrue: [ ^ ASTCIdentifier new id: aMessage selector ; yourself ].
+			(self isAccessor: aMethod)
+				ifTrue: [ ^ self translateAsAccessor: aMessage ].
+			aMethod methodClass isStructClass "otherwise it is a struct message that is *not* an accessor"
+				ifTrue: [ ^ self asFunctionCall: aMessage selector withArguments: { receiverNode } ]].
+
+	^ nil
+]
+
 { #category : #accessing }
 MAAbstractSlangReceiver >> type [
 	^ type

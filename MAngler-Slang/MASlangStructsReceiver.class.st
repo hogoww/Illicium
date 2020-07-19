@@ -14,6 +14,13 @@ MASlangStructsReceiver >> doesNotUnderstand: aMessage [
 	(type pharoType isAccessor: aMessage selector) ifTrue: [ 
 			self translateAsAccessor: aMessage
 		].
-	
+
+	(self translateAsSpecialFunctionCall: aMessage) ifNotNil:[ :aCNode | ^ aCNode].
+		
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
+]
+
+{ #category : #'reflective operations' }
+MASlangStructsReceiver >> isAccessor: aMethod [
+	^ (type pharoType isAccessor: aMethod selector)
 ]
