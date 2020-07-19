@@ -10,6 +10,7 @@ MASlangReceiver class >> slangReservedSelector [
 	
 	eassert:
 	caseOf: caseOf:otherwise: dispatchOn:in: "caseOf and co. is parsed in a specific way in TAST which we don't. It therefore has to be an exception"
+	highBit "not technically a keyword, but that's a useless corner case"
 	) 
 ]
 
@@ -413,7 +414,9 @@ MASlangReceiver >> doesNotUnderstand: aMessage [
 			aMethod isCMacroDefine 
 				ifTrue: [ ^ ASTCIdentifier new id: aMessage selector ; yourself ].
 			aMethod isAccessor
-				ifTrue: [ ^ self translateAsAccessor: aMessage ] ].
+				ifTrue: [ ^ self translateAsAccessor: aMessage ].
+			aMethod methodClass isStructClass "otherwise it is a struct message that is *not* an accessor"
+				ifTrue: [ ^ self asFunctionCall: aMessage selector withArguments: { receiverNode } ]].
 			
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
 ]
@@ -433,6 +436,11 @@ MASlangReceiver >> flag: anArgument [
 		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #flag); yourself) ;
 		arguments: {ASTCLiteral value: anArgument value asString};
 		yourself
+]
+
+{ #category : #'translation-keyword' }
+MASlangReceiver >> highBit [
+	^ self asFunctionCall: #highBit withArguments: { receiverNode }
 ]
 
 { #category : #'translation-keyword' }
