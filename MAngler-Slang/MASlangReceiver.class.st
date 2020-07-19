@@ -10,7 +10,7 @@ MASlangReceiver class >> slangReservedSelector [
 	
 	eassert:
 	caseOf: caseOf:otherwise: dispatchOn:in: "caseOf and co. is parsed in a specific way in TAST which we don't. It therefore has to be an exception"
-	highBit sin "not technically a keyword, but that's a useless corner case"
+	highBit sin exp atan log sqrt "not technically a keyword, but that's a useless corner case of using the receiver"
 	) 
 	
 ]
@@ -181,6 +181,11 @@ MASlangReceiver >> asUnsignedIntegerPtr [
 { #category : #'translation-keyword' }
 MASlangReceiver >> asVoidPointer [
 	^ self translatedReceiver castTo: (self cTypeFor: #'void *')
+]
+
+{ #category : #'translation keyword' }
+MASlangReceiver >> atan [
+	^ self asFunctionCall: #atan withArguments: { receiverNode }
 ]
 
 { #category : #'translation-keyword' }
@@ -423,6 +428,11 @@ MASlangReceiver >> eassert: aBlock [
 ]
 
 { #category : #'translation-keyword' }
+MASlangReceiver >> exp [
+	^ self asFunctionCall: #exp withArguments: { receiverNode }
+]
+
+{ #category : #'translation-keyword' }
 MASlangReceiver >> flag: anArgument [
 
 	^ ASTCFunctionCall new 
@@ -505,6 +515,11 @@ MASlangReceiver >> isIntegerObject: anOop [
 { #category : #'translation-keyword' }
 MASlangReceiver >> isStrict [
 	^ methodTranslator isStrict
+]
+
+{ #category : #'translation-keyword' }
+MASlangReceiver >> log [
+	^ self asFunctionCall: #log withArguments: { receiverNode }
 ]
 
 { #category : #'translation-keyword' }
@@ -658,6 +673,11 @@ MASlangReceiver >> signedIntToLong64 [
 { #category : #'translation-keyword' }
 MASlangReceiver >> sin [
 	^ self asFunctionCall: #sin withArguments: { receiverNode }
+]
+
+{ #category : #'translation-keywords' }
+MASlangReceiver >> sqrt [
+	^ self asFunctionCall: #sqrt withArguments: { receiverNode }
 ]
 
 { #category : #'translation-keyword' }
