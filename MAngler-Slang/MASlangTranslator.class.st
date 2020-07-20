@@ -222,6 +222,13 @@ MASlangTranslator >> translateProgram [
 	
 	cu preamble: (ASTCRawCCode new cCode: program interpreterClass preambleCCode).
 	
+	"as GIV is the only translation that works, it's used in macros... So we have to have a GIV macro"
+	cu add: (ASTCPreprocessorDefine new 
+		name: (ASTCIdentifier new id: (FAFormatHelper formatSelector: 'GIV') ; yourself) ; 
+		value: (ASTCRawCCode new cCode: '(aField) aField');
+		yourself).
+
+	
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
 	program structClassesToGenerate collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
