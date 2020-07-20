@@ -230,6 +230,7 @@ FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
 	self cr.
 
+	(anASTCCompilationUnit definitions sort: [ :e1 :e2 | e1 declaration id id < e2 declaration id id ]).
 	self cr ; << '/* Definitions */' ; cr.
 	anASTCCompilationUnit definitions
 			do:[ :aDefinition | self print: aDefinition ; cr ; cr ].
