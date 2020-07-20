@@ -229,7 +229,7 @@ MASlangTranslator >> translateProgram [
 	program constants collect: [ :aConstant | 
 		ASTCPreprocessorDefine new
 			name: (ASTCIdentifier id: aConstant name);
-			value: (aConstant value ifNotNil: [ ASTCLiteral new value: aConstant value; yourself ]);
+			value: (ASTCLiteral new value: aConstant value; yourself);
 			yourself ] into: cu.
 	(program methods values
 		reject: [ :aMethod | aMethod isAccessor ]) 
