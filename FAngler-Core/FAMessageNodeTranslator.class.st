@@ -27,7 +27,6 @@ FAMessageNodeTranslator >> perform: aMessageNode on: aReceiver [.
 { #category : #translate }
 FAMessageNodeTranslator >> translateNode: aMessageNode [
 	| receiver res |
-	self haltIf: aMessageNode selector = #scavengerTenuringThreshold.
 	receiver := (methodTranslator
 		getNodeTranslationType: aMessageNode receiver) createInstance
 		receiverNode: aMessageNode receiver;
