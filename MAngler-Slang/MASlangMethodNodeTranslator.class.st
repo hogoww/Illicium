@@ -50,7 +50,7 @@ MASlangMethodNodeTranslator >> translateNode: aMethodNode [
 	functionDefinition := self translateMethod: aMethodNode.
 	
 	(aMethodNode hasPragmaNamed: #api) ifFalse: [ 
-		functionDefinition declaration qualifiers add: #static 
+	"	functionDefinition declaration qualifiers add: #static "
 		].
 	
 	^ functionDefinition 
