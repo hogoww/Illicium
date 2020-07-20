@@ -23,6 +23,5 @@ FAFormatHelper class >> formatSelector: aSelector [
 	functionID reverseDo:[:aChar|
 		aChar = $_ 
 			ifTrue: [ counter := counter + 1 ]
-			ifFalse: [ ^ (functionID contents first: functionID size - counter) 
-				, (aSelector last = $: ifTrue: [ '_' ] ifFalse:[ '']) ]]
+			ifFalse: [ ^ (functionID contents first: functionID size - counter) ]]
 ]

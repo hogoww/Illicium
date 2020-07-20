@@ -208,7 +208,8 @@ MASlangProgram >> removeMethod: aMethodNode [
 
 { #category : #weird }
 MASlangProgram >> removeSlangWeirdSlots [
-	slots removeKey: #primitiveTable
+	slots removeKey: #primitiveTable.
+	slots removeKey: #PharoVM." apparently already defined"
 ]
 
 { #category : #accessing }

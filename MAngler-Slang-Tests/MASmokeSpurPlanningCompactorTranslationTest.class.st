@@ -13,7 +13,7 @@ MASmokeSpurPlanningCompactorTranslationTest >> setUp [
 { #category : #'compaction - api' }
 MASmokeSpurPlanningCompactorTranslationTest >> testBiasForGCStringComparison [
 	| illiAST |
-	illiAST := self generateIllicium: #biasForGC.
+	illiAST := self generateIllicium: #setBiasForGC.
 	self prettyPrintIllicium: illiAST
 ]
 
