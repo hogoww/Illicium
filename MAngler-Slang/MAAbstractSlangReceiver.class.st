@@ -108,7 +108,8 @@ MAAbstractSlangReceiver >> translateAsAccessor: aMessage [
 	| structMember memberId memberName |
 	memberName := aMessage selector last = $: ifTrue: [ aMessage selector allButLast ] ifFalse: aMessage selector.
 	memberId := ASTCIdentifier id: memberName.	
-	structMember := receiverNode methodNode methodClass isStructClass
+	structMember := 
+		(type pharoType ifNotNil: [ type pharoType isStructClass ] ifNil: [ false ])
 		ifTrue:[
 			type isPointer 
 				ifTrue: [ self translatedReceiver -> memberId ]
