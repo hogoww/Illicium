@@ -61,7 +61,10 @@ FAStatementsBecomeExpressions >> visitFunctionCall: aFunctionCall [
 
 { #category : #'visiting-modifying' }
 FAStatementsBecomeExpressions >> visitIf: anIf [
-	self shouldBeExpression ifTrue: [ 
+	self shouldBeExpression ifTrue: [
+			"it's becomming a ternary operator, it therefore require an Then & an Else.
+			Slang adds a 0 when there is not then."
+			anIf else ifNil: [ anIf else: (ASTCLiteral value: 0) ].
 			anIf becomeTernaryConditionalOperator.
 			^ anIf acceptVisitor: self
 		].

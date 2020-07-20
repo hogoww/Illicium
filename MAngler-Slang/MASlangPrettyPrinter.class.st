@@ -420,8 +420,8 @@ MASlangPrettyPrinter >> visitTernaryConditionalOperator: anOperator [
 	anOperator condition acceptVisitor: self.
 	self cr spaces << '? '.
 	anOperator then acceptVisitor: self.
-	self cr spaces << ': '.
-	anOperator else ifNotNil: [ :e | e acceptVisitor: self ].
+	self cr spaces << ' : '.
+	anOperator else  acceptVisitor: self .
 	self leaveBlock.
 	self << ')'.
 ]
