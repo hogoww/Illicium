@@ -143,7 +143,7 @@ MASlangProgram >> initializeClassVariablesIn: inferer [
 				-> #initializeBytecodeTableForSqueakV3PlusClosuresSistaV1Hybrid;
 		yourself.
 	
-	ObjectMemory initializeWithOptions: InitializationOptions.
+	Spur64BitMemoryManager initializeWithOptions: InitializationOptions.
 	inferer vmClass initializeWithOptions: InitializationOptions
 ]
 
