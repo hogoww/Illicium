@@ -33,17 +33,17 @@ MASlangTranslator class >> programClass [
 	^ MASlangProgram
 ]
 
-{ #category : #asserting }
-MASlangTranslator class >> shouldITranslate: aMethod [ 
+{ #category : #testing }
+MASlangTranslator class >> shouldITranslate: aMethod options: options [
+	(aMethod pragmaAt: #option:) ifNotNil:[ :aPragma | 
+		options at: aPragma arguments first ifAbsent: [ ^ false ]
+		 ].
+	
 	^ ((aMethod methodClass inheritsFrom: VMStructType) 
 		==> [	self shouldTranslateStructMethod: aMethod ])
 		and: [ aMethod isSubclassResponsibility not
 			and: [ (aMethod hasPragmaNamed: #doNotGenerate) not
 				and: [ aMethod selector ~~ #initialize ]]].
-			
-		
-	"and isMacro not. ->  they should be"
-	"and: [ (MAFullVMCCodeGeneratorRessource current codeGenerator"
 
 ]
 
@@ -211,6 +211,11 @@ MASlangTranslator >> prepareProgram [
 MASlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
+]
+
+{ #category : #testing }
+MASlangTranslator >> shouldITranslate: aMethod options: options [
+	^ self class shouldITranslate: aMethod options: options
 ]
 
 { #category : #'translation-api' }

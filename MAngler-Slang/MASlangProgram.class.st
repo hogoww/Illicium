@@ -30,7 +30,7 @@ MASlangProgram >> addClassOrStruct: aClass withInferer: inferer andTranslator: a
 	inferer retainMethods: (aClass requiredMethodNames: inferer options).
 
 	aClass methodDict values
-		select: [ :aMethod | (aTranslator shouldITranslate: aMethod) ]
+		select: [ :aMethod | aTranslator shouldITranslate: aMethod options: InitializationOptions ]
 		thenDo: [ :aMethod |
 			(self shouldExpandMethod: aMethod)
 						ifTrue: [ self addExpandedVersionsOf: aMethod ast with: inferer ]

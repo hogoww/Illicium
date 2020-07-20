@@ -24,12 +24,6 @@ FATranslator class >> programClass [
 	^ self subclassResponsibility 
 ]
 
-{ #category : #'default-configuration' }
-FATranslator class >> shouldITranslate: aMethod [
-	"should return true if aMethod should be translated and false overwise."
-	^ self subclassResponsibility
-]
-
 { #category : #'translation-api' }
 FATranslator class >> translateClass: aClass [
 	^ self new
@@ -183,11 +177,6 @@ FATranslator >> program [
 { #category : #accessors }
 FATranslator >> program: aProgram [
 	program := aProgram
-]
-
-{ #category : #testing }
-FATranslator >> shouldITranslate: aMethod [
-	^ self class shouldITranslate: aMethod
 ]
 
 { #category : #'translation-api' }
