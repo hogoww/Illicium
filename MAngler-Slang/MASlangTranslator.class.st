@@ -36,7 +36,8 @@ MASlangTranslator class >> programClass [
 { #category : #testing }
 MASlangTranslator class >> shouldITranslate: aMethod options: options [
 	(aMethod pragmaAt: #option:) ifNotNil:[ :aPragma | 
-		options at: aPragma arguments first ifAbsent: [ ^ false ]
+		(options at: aPragma arguments first ifAbsent: [ false ])
+			ifFalse: [ ^ false ]
 		 ].
 	
 	^ ((aMethod methodClass inheritsFrom: VMStructType) 
