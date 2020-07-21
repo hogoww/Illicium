@@ -717,22 +717,25 @@ MASlangReceiver >> to: stop by: step do: aBlock [
 
 { #category : #'translation-keyword' }
 MASlangReceiver >> to: stop do: aBlock [
-	| iterID |
+	| iterID iterDef |
 	aBlock arguments size ~= 1
-		ifTrue: [  iterID := ASTCIdentifier new id: #anIterator; yourself ]
-		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator ].
-	"type checking"
+		ifTrue: [ 
+			iterID := ASTCIdentifier id: #anIterator.
+			iterDef := ASTCVariableDefinition new declaration: (ASTCVariableDeclaration  new id: iterID ; type: CType int ; yourself) ; init: self translatedReceiver. ]
+		ifFalse: [ 
+			iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator.
+			iterDef := iterID assign: self translatedReceiver ].
 
+
+
+	"type checking"
 	"(((methodTranslator getNodeTranslationType: stop) = ASTCSmallInteger asTypeReification )
 		and:[ aBlock isBlock ])
     ifFalse:[ self error: 'An arguments has the wrong type' ]."
 	^ ASTCFor new
-		iteratorDefinition:
-			(iterID assign: self translatedReceiver);
-		condition:
-			(iterID <= (stop acceptVisitor: methodTranslator));
-		iteratorModification:
-			(iterID assignAndAdd: (ASTCLiteral value: 1));
+		iteratorDefinition: iterDef;
+		condition: (iterID <= (stop acceptVisitor: methodTranslator));
+		iteratorModification: (iterID assignAndAdd: (ASTCLiteral value: 1));
 		body: (aBlock acceptVisitor: methodTranslator);
 		yourself
 ]
