@@ -86,8 +86,8 @@ MASlangAbstractInliner >> createNewBlockithStatements: nodesToInline [
 MASlangAbstractInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
 	| replacements |
 	"we first get the names"
-	replacements := self newNamesForIntersectionOf: methodToInline temporaryNames
-		and: methodInlining temporaryNames.
+	replacements := self newNamesForIntersectionOf: methodToInline allLocalNames
+		and: methodInlining allLocalNames.
 		
 	"then replace the names of the nodes with the new ones"
 	replacements ifNotEmpty: [ "This avoids costy iteration over an ast"
