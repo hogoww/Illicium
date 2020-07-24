@@ -25,7 +25,7 @@ Class {
 MASlangLocalNamesVisitor >> addName: aLocalDeclarationNode [
 	aLocalDeclarationNode isDefinition ifFalse: [ ^ self ].
 	result at: aLocalDeclarationNode name
-		ifPresent: [ :aNode | "MASlangFoundSameNameTwice new conflictings: { aNode value. aLocalDeclarationNode } ; signal "]
+		ifPresent: [ :aNode | MASlangFoundSameNameTwice new conflictings: { aNode value. aLocalDeclarationNode } ; signal ]
 		ifAbsentPut: [ aLocalDeclarationNode name -> aLocalDeclarationNode ]
 
 ]
