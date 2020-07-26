@@ -14,7 +14,10 @@ MAEnsureIDAppearsOncePerMethod >> addNodeName: aNode [
 	or with crafted one.
 	This is easier for scope management"
 	allIds at: aNode name 
-		ifPresent: [ replacements at: aNode name put: #something ] 
+		ifPresent: [ 
+			replacements 
+				at: aNode name 
+				put: (MASlangVariableRenamer newNameForName: aNode name withExistingNames: allIds) ]
 		ifAbsent: [ 
 			replacements at: aNode name put: aNode name. "we replace it with the same name."
 			allIds add: aNode name -> nil ].
@@ -60,7 +63,8 @@ MAEnsureIDAppearsOncePerMethod >> visitBlockNode: aBlockNode [
 { #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> visitMethodNode: aMethodNode [
 	super visitMethodNode: aMethodNode.
-	self removeTempsOrAgs: aMethodNode arguments
+	self removeTempsOrAgs: aMethodNode arguments.
+	self haltIf: #ambiguousClass:allInstancesInto:limit:resultsInto: =aMethodNode selector.
 ]
 
 { #category : #visiting }

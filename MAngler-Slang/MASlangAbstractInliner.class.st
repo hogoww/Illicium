@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'program',
 		'inlinedSomething',
-		'translator'
+		'translator',
+		'renamer'
 	],
 	#classInstVars : [
 		'selectorMacros'
@@ -17,16 +18,6 @@ MASlangAbstractInliner class >> includesSelectorTranslatedAsMacro: aSelector [
 	"Caching the result" 
 	selectorMacros ifNil: [ selectorMacros := VMPluginCodeGenerator new selectorsThatMayBeGeneratedAsMacros ].
 	^ selectorMacros includes: aSelector
-]
-
-{ #category : #renaming }
-MASlangAbstractInliner class >> renameVariablesOf: aMethodNode byArguments: arguments [
-	| replacement |
-	aMethodNode isVariable ifTrue:[ ^ ASTCBlock new ].
-	aMethodNode body nodesDo: [:aNode |  
-		(aNode isArgument and:[ (aNode whoDefines: aNode name) = aMethodNode ]) ifTrue: [
-			replacement := arguments at: (aMethodNode arguments indexOf: aNode).
-			aNode replaceWith: replacement ] ] 
 ]
 
 { #category : #accessing }
@@ -82,20 +73,15 @@ MASlangAbstractInliner >> createNewBlockithStatements: nodesToInline [
 	^ newBlock
 ]
 
-{ #category : #renaming }
-MASlangAbstractInliner >> handleTemporariesFrom: methodToInline in: methodInlining [
-	| replacements |
-	"we first get the names"
-	replacements := self newNamesForIntersectionOf: methodToInline allLocalNames
-		and: methodInlining allLocalNames.
-		
-	"then replace the names of the nodes with the new ones"
-	replacements ifNotEmpty: [ "This avoids costy iteration over an ast"
-			self renameVariablesIn: methodToInline using: replacements.
-		].
-	
-	"finally we merge the name annotations. as well as the declaration annotation"
-	self mergeTemporariesOf: methodToInline into: methodInlining
+{ #category : #testing }
+MASlangAbstractInliner >> handleTemporariesFrom: methodToInline inMessage: aMessageNode [
+	renamer handleTemporariesFrom: methodToInline in: aMessageNode methodNode.
+	renamer renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
+]
+
+{ #category : #initialization }
+MASlangAbstractInliner >> initialize [
+	renamer := MASlangVariableRenamer new.
 ]
 
 { #category : #inlining }
@@ -188,43 +174,6 @@ MASlangAbstractInliner >> inlineIfOnlyOneNode: nodesToInline insteadOf: aMessage
 	^ true
 ]
 
-{ #category : #renaming }
-MASlangAbstractInliner >> mergeTemporariesOf: methodToInline into: methodInlining [
-	| declarationProperty |
-	declarationProperty := FAVariableDeclarationAnnotator propertyName.
-	"in case of testing environment, we don't check"
-	methodInlining body
-		temporaries: methodInlining temporaries , methodToInline body temporaries.
-		
-	((methodInlining body hasProperty: declarationProperty) 
-		and:[ methodToInline body hasProperty: declarationProperty ]) ifFalse:[ ^ self ].
-	
-	methodInlining body
-		propertyAt: declarationProperty
-		put: (methodInlining body propertyAt: declarationProperty)
-				, (methodToInline body propertyAt: declarationProperty).
-]
-
-{ #category : #renaming }
-MASlangAbstractInliner >> newNamesForIntersectionOf: tempNames1 and: tempNames2 [
-	| newTemporariesName intersection |
-	"We gather the names of the temporaries that appear in both method, and find a suitable new name for the ones that will be inlined."
-	newTemporariesName := Dictionary new.
-	intersection := tempNames1 intersection: tempNames2.
-	
-	"suitable new name being the same name, with a number at the end."
-	intersection do: [ :aTempName | 
-			| newName counter |
-			counter := 1.
-			[ 
-				newName := aTempName , counter asString.
-				intersection includes:  newName 
-			] whileTrue:[ counter := counter + 1 ].
-			newTemporariesName at: aTempName put: newName.
-		].
-	^ newTemporariesName
-]
-
 { #category : #accessing }
 MASlangAbstractInliner >> program [
 	^ program
@@ -235,33 +184,14 @@ MASlangAbstractInliner >> program: anObject [
 	program := anObject
 ]
 
-{ #category : #renaming }
-MASlangAbstractInliner >> renameVariablesIn: aMethodNode using: replacementNames [
-	| newProperties |
-	aMethodNode nodesDo: [ :aNode |
-		aNode isTemporaryNode
-			ifTrue:[
-				replacementNames at: aNode name
-					ifPresent:[ aNode name: (replacementNames at: aNode name) ]
-				]
-		].
-	
-	"Check in case we're in testing environment."
-	(aMethodNode body hasProperty: FAVariableDeclarationAnnotator propertyName) ifFalse: [ ^ self ].
-	
-	"properties are shallow copied. Since have references to TempDeclaration, we have to touch the copy, not the main node."
-	newProperties := (aMethodNode body propertyAt: FAVariableDeclarationAnnotator propertyName)
-		collect: [ :aTempDecl |
-			replacementNames at: aTempDecl name
-				ifPresent:[ aTempDecl copy name: (replacementNames at: aTempDecl name) ]
-				ifAbsent: [  aTempDecl copy ]
-			].
-	aMethodNode body propertyAt: FAVariableDeclarationAnnotator propertyName put: newProperties
+{ #category : #inlining }
+MASlangAbstractInliner >> renamer [
+	^ renamer
 ]
 
-{ #category : #renaming }
-MASlangAbstractInliner >> renameVariablesOf: aMethodNode byArguments: arguments [
-  self class renameVariablesOf: aMethodNode byArguments: arguments
+{ #category : #inlining }
+MASlangAbstractInliner >> renamer: aRenamer [
+	renamer := aRenamer
 ]
 
 { #category : #inlining }
@@ -304,8 +234,7 @@ MASlangAbstractInliner >> visitMessageNode: aMessageNode [
 				(aMessageNode receiver isSuper 
 					ifTrue:[ aMessageNode propertyAt: MASlangSuperAnnotator propertyName ]
 					ifFalse:[ (program methodNamed: aMessageNode selector) copy ]) .
-			self handleTemporariesFrom: methodToInline in: aMessageNode methodNode.
-			self renameVariablesOf: methodToInline byArguments: aMessageNode arguments.
+			self handleTemporariesFrom: methodToInline inMessage: aMessageNode.
 			self inline: methodToInline insteadOf: aMessageNode.
 			]
 		ifFalse: [

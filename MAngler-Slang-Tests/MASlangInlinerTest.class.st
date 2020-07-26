@@ -545,7 +545,7 @@ MASlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
 	tempNamesToInline := { #a }.
 	tempNamesInliningIn := { #a }.
 	
-	res := inliner newNamesForIntersectionOf: tempNamesToInline and: tempNamesInliningIn.
+	res := inliner renamer newNamesForIntersectionOf: tempNamesToInline and: tempNamesInliningIn.
 	self assert: res size equals: 1.
 	self assert: (res at: #a) equals: #a1.
 ]
@@ -556,6 +556,6 @@ MASlangInlinerTest >> testTempNameDifferentShouldNotChangeNames [
 	tempNamesToInline := { #a }.
 	tempNamesInliningIn := { #b }.
 	
-	res := inliner newNamesForIntersectionOf: tempNamesToInline and: tempNamesInliningIn.
+	res := inliner renamer newNamesForIntersectionOf: tempNamesToInline and: tempNamesInliningIn.
 	self assert: res size equals: 0.
 ]

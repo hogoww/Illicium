@@ -2,12 +2,12 @@ Class {
 	#name : #MASlangInlinerVariablesRenamerTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'inliner',
 		'methodWithPouet',
 		'methodWithTruc',
 		'methodWithPouet2',
 		'methodWithBlockTempPouet',
-		'methodWithBlockTempTruc'
+		'methodWithBlockTempTruc',
+		'renamer'
 	],
 	#classVars : [
 		'Property'
@@ -67,35 +67,33 @@ MASlangInlinerVariablesRenamerTest >> setUp [
 	methodWithBlockTempPouet acceptVisitor: MASlangDeclarationAnnotator new.
 	methodWithBlockTempTruc acceptVisitor: MASlangDeclarationAnnotator new.
 	
-	inliner := MASlangAbstractInliner new
-		translator: MASlangClassTranslator new;
-		yourself.
+	renamer := MASlangVariableRenamer new
 ]
 
 { #category : #tests }
 MASlangInlinerVariablesRenamerTest >> testMergeConflictingTempWithBlockTemp [
-	inliner handleTemporariesFrom: methodWithPouet in: methodWithBlockTempPouet.
+	renamer handleTemporariesFrom: methodWithPouet in: methodWithBlockTempPouet.
 
 	self assertMethod: methodWithBlockTempPouet hasDeclarationNames: #( #pouet #pouet1 )
 ]
 
 { #category : #tests }
 MASlangInlinerVariablesRenamerTest >> testMergeNonConflictingTempWithBlockTemp [
-	inliner handleTemporariesFrom: methodWithPouet in: methodWithBlockTempTruc.
+	renamer handleTemporariesFrom: methodWithPouet in: methodWithBlockTempTruc.
 
 	self assertMethod: methodWithBlockTempTruc hasDeclarationNames: #( #pouet #truc )
 ]
 
 { #category : #tests }
 MASlangInlinerVariablesRenamerTest >> testMergeTwoConflictingTemps [
-	inliner handleTemporariesFrom: methodWithPouet2 in: methodWithPouet.
+	renamer handleTemporariesFrom: methodWithPouet2 in: methodWithPouet.
 
 	self assertMethod: methodWithPouet hasDeclarationNames: #( #pouet #pouet1 )
 ]
 
 { #category : #tests }
 MASlangInlinerVariablesRenamerTest >> testMergeTwoNonConflictingTemps [
-	inliner handleTemporariesFrom: methodWithPouet in: methodWithTruc.
+	renamer handleTemporariesFrom: methodWithPouet in: methodWithTruc.
 
 	self assertMethod: methodWithTruc hasDeclarationNames: #( #pouet #truc )
 ]
