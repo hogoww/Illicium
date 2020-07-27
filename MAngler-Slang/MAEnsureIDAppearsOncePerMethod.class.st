@@ -3,7 +3,8 @@ Class {
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'replacements',
-		'allIds'
+		'allIds',
+		'stack'
 	],
 	#category : #'MAngler-Slang-Analysis'
 }
@@ -13,11 +14,14 @@ MAEnsureIDAppearsOncePerMethod >> addNodeName: aNode [
 	"we either replace the name with the same name (when there is no conflict)
 	or with crafted one.
 	This is easier for scope management"
+
 	allIds at: aNode name 
-		ifPresent: [ 
+		ifPresent: [ | newName |
+			newName := (MASlangVariableRenamer newNameForName: aNode name withExistingNames: allIds).
 			replacements 
 				at: aNode name 
-				put: (MASlangVariableRenamer newNameForName: aNode name withExistingNames: allIds) ]
+				put: newName.
+			allIds add: aNode name -> newName ]
 		ifAbsent: [ 
 			replacements at: aNode name put: aNode name. "we replace it with the same name."
 			allIds add: aNode name -> nil ].
@@ -27,7 +31,18 @@ MAEnsureIDAppearsOncePerMethod >> addNodeName: aNode [
 { #category : #initialization }
 MAEnsureIDAppearsOncePerMethod >> initialize [ 
 	allIds := Dictionary new.
-	replacements := Dictionary new
+	replacements := Dictionary new.
+	stack := Stack new
+]
+
+{ #category : #visiting }
+MAEnsureIDAppearsOncePerMethod >> popContext [
+	replacements := stack pop
+]
+
+{ #category : #visiting }
+MAEnsureIDAppearsOncePerMethod >> pushContext [
+	stack push: replacements copy
 ]
 
 { #category : #visiting }
@@ -72,8 +87,13 @@ MAEnsureIDAppearsOncePerMethod >> visitMethodOrBlockNode: aMethodOrBlock [
 
 { #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> visitSequenceNode: aSequenceNode [
-	super visitSequenceNode: aSequenceNode.
-	self removeTempsOrAgs: aSequenceNode temporaries
+
+	self visitTemporaryNodes: aSequenceNode temporaries.
+	self pushContext.
+
+	aSequenceNode statements do: [ :each | self visitNode: each ].
+	
+	self popContext.
 ]
 
 { #category : #visiting }

@@ -15,8 +15,10 @@ MAEnsureIDAppearsOncePerMethodTest >> aConflictIsUsedBeforeAndAfter [
 	^ RBParser parseMethod:
 'aMethod 
 	| aTemp | "<- method scope"
+	
 	[| aTemp | "<- block scope"
-		aTemp. ] "<- block scope"
+		aTemp. ]. "<- block scope"
+	
 	aTemp' "<- method scope"
 ]
 
@@ -118,7 +120,7 @@ MAEnsureIDAppearsOncePerMethodTest >> testConflictAppearBeforeAndAfter [
 	counterNormal := 0.
 	counterRenamed := 0.
 	method nodesDo: [ :aNode | 
-		aNode isTemporaryNode
+		aNode isVariableNode "Method is not semantically analysed, as it would be wrong. Therefore, no tempNodes."
 			ifTrue: [ 
 				aNode name = #aTemp ifTrue: [ counterNormal := counterNormal + 1 ].
 				aNode name = #aTemp1 ifTrue: [ counterRenamed := counterRenamed + 1 ].

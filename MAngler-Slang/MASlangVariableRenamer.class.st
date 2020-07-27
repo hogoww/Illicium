@@ -27,8 +27,14 @@ MASlangVariableRenamer class >> renameVariablesOf: aMethodNode byArguments: argu
 
 { #category : #renaming }
 MASlangVariableRenamer >> handleTemporariesFrom: methodToInline in: methodInlining [
-	| replacements |
+	| replacements copy |
 	"we first get the names"
+	methodToInline acceptVisitor: MAEnsureIDAppearsOncePerMethod new.
+	copy := methodInlining copy.
+	"
+	copy copy acceptVisitor: MAEnsureIDAppearsOncePerMethod new.
+	"
+	[ methodInlining acceptVisitor: MAEnsureIDAppearsOncePerMethod new ] on: Exception do: [ :e | e class = Halt ifTrue:[ e resume ] ifFalse:[. self halt ]].
 	replacements := self newNamesForIntersectionOf: methodToInline allLocalNames
 		and: methodInlining allLocalNames.
 		
