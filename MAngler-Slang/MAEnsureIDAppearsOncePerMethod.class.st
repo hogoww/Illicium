@@ -18,10 +18,9 @@ MAEnsureIDAppearsOncePerMethod >> addNodeName: aNode [
 	allIds at: aNode name 
 		ifPresent: [ | newName |
 			newName := (MASlangVariableRenamer newNameForName: aNode name withExistingNames: allIds).
-			replacements 
-				at: aNode name 
-				put: newName.
-			allIds add: aNode name -> newName ]
+			replacements at: aNode name put: newName.
+			aNode name: newName.
+			allIds add: newName -> nil ]
 		ifAbsent: [ 
 			replacements at: aNode name put: aNode name. "we replace it with the same name."
 			allIds add: aNode name -> nil ].
@@ -37,19 +36,13 @@ MAEnsureIDAppearsOncePerMethod >> initialize [
 
 { #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> popContext [
-	replacements := stack pop
+	replacements := stack top.
+	stack pop
 ]
 
 { #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> pushContext [
-	stack push: replacements copy
-]
-
-{ #category : #visiting }
-MAEnsureIDAppearsOncePerMethod >> removeTempsOrAgs: tempsOrArgs [
-	tempsOrArgs do: [ :aTempOrArg | 
-		aTempOrArg name: (replacements removeKey: aTempOrArg name) ].
-	
+	stack push: replacements copy.
 ]
 
 { #category : #visiting }
@@ -68,31 +61,14 @@ MAEnsureIDAppearsOncePerMethod >> visitArgumentNodes: arguments [
 ]
 
 { #category : #visiting }
-MAEnsureIDAppearsOncePerMethod >> visitBlockNode: aBlockNode [
-	super visitBlockNode: aBlockNode.
-	self removeTempsOrAgs: aBlockNode arguments
-]
-
-{ #category : #visiting }
-MAEnsureIDAppearsOncePerMethod >> visitMethodNode: aMethodNode [
-	super visitMethodNode: aMethodNode.
-	self removeTempsOrAgs: aMethodNode arguments.
-	self haltIf: #ambiguousClass:allInstancesInto:limit:resultsInto: =aMethodNode selector.
-]
-
-{ #category : #visiting }
-MAEnsureIDAppearsOncePerMethod >> visitMethodOrBlockNode: aMethodOrBlock [
-	aMethodOrBlock temporaries do: [ :aTemp | replacements removeKey: aTemp name ].
-]
-
-{ #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> visitSequenceNode: aSequenceNode [
 
-	self visitTemporaryNodes: aSequenceNode temporaries.
 	self pushContext.
+	
+	self visitTemporaryNodes: aSequenceNode temporaries.
 
 	aSequenceNode statements do: [ :each | self visitNode: each ].
-	
+
 	self popContext.
 ]
 
@@ -106,4 +82,14 @@ MAEnsureIDAppearsOncePerMethod >> visitTemporaryNode: aTempNode [
 	aTempNode isDefinition ifTrue: [ ^  self ].
 	
 	aTempNode name: (replacements at: aTempNode name).
+]
+
+{ #category : #visiting }
+MAEnsureIDAppearsOncePerMethod >> visitVariableNode: aVarNode [
+	aVarNode isDefinition ifTrue: [ ^  self ].
+	aVarNode isSuper | aVarNode isSelf ifTrue: [ ^ self ].
+	aVarNode isGlobalNode ifTrue:[ ^ self ].
+	aVarNode isInstanceVariableNode ifTrue: [ ^ self ].
+	
+	aVarNode name: (replacements at: aVarNode name).
 ]

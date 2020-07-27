@@ -779,7 +779,7 @@ MASlangReceiver >> value: anArg value: aSecondArg [
 
 { #category : #'translation-keyword' }
 MASlangReceiver >> valueWithArguments: anArrayOfArgs [
-	MASlangMinimalInliner renameVariablesOf: receiverNode byArguments: anArrayOfArgs.
+	MASlangVariableRenamer renameVariablesOf: receiverNode byArguments: anArrayOfArgs.
 	^ self translatedReceiver
 ]
 
