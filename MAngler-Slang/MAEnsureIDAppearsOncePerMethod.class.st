@@ -32,10 +32,8 @@ MAEnsureIDAppearsOncePerMethod >> initialize [
 
 { #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> removeTempsOrAgs: tempsOrArgs [
-	| newName |
 	tempsOrArgs do: [ :aTempOrArg | 
-		newName := replacements removeKey: aTempOrArg name.
-		aTempOrArg name: newName ].
+		aTempOrArg name: (replacements removeKey: aTempOrArg name) ].
 	
 ]
 

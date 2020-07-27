@@ -11,6 +11,16 @@ Class {
 }
 
 { #category : #support }
+MAEnsureIDAppearsOncePerMethodTest >> aConflictIsUsedBeforeAndAfter [
+	^ RBParser parseMethod:
+'aMethod 
+	| aTemp | "<- method scope"
+	[| aTemp | "<- block scope"
+		aTemp. ] "<- block scope"
+	aTemp' "<- method scope"
+]
+
+{ #category : #support }
 MAEnsureIDAppearsOncePerMethodTest >> aTempInTwoDifferentBlocks [
 	[| aTemp |
 	aTemp.
@@ -97,6 +107,24 @@ MAEnsureIDAppearsOncePerMethodTest >> testArgsWithRenaming [
 			] ].
 	self assert: counterNormal equals: 3.
 	self assert: counterRenamed equals: 3.
+]
+
+{ #category : #support }
+MAEnsureIDAppearsOncePerMethodTest >> testConflictAppearBeforeAndAfter [
+	| method counterNormal counterRenamed |
+	method := self aConflictIsUsedBeforeAndAfter.
+	method acceptVisitor: visitor.
+
+	counterNormal := 0.
+	counterRenamed := 0.
+	method nodesDo: [ :aNode | 
+		aNode isTemporaryNode
+			ifTrue: [ 
+				aNode name = #aTemp ifTrue: [ counterNormal := counterNormal + 1 ].
+				aNode name = #aTemp1 ifTrue: [ counterRenamed := counterRenamed + 1 ].
+			] ].
+	self assert: counterNormal equals: 2.
+	self assert: counterRenamed equals: 2.
 ]
 
 { #category : #support }
