@@ -182,6 +182,13 @@ MASlangTranslator >> isGlobalInstanceVariable: aString [
 		and: [ inferer placeInStructure: aString ]
 ]
 
+{ #category : #accessing }
+MASlangTranslator >> postInliningVisitors [
+	^ { 
+		MASlangDeclarationAnnotator new "this is required to be after the typeAnnotator. see its documention"
+	}
+]
+
 { #category : #visiting }
 MASlangTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
@@ -190,7 +197,6 @@ MASlangTranslator >> preTranslationAnnotators [
 		MASlangSuperAnnotator new classTranslator: self ; yourself.
 		MASlangRequiredInliningMethodTagger new program: program ; yourself.
 		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
-		MASlangDeclarationAnnotator new "this is required to be after the typeAnnotator. see its documention"
 		}
 ]
 
@@ -200,6 +206,17 @@ MASlangTranslator >> preTranslationTransformations [
 		"MAGlobalStructureAccessTransformer translator: self."
 		MASlangMinimalInliner translator: self
 	}
+]
+
+{ #category : #accessing }
+MASlangTranslator >> prepareMethodsASTs: methodsASTs [
+	"we don't treat macros."
+	super prepareMethodsASTs: methodsASTs.
+	methodsASTs do: [ :aMethodAST | 
+		aMethodAST isCMacro ifFalse:[
+			aMethodAST acceptMultipleVisitors: self postInliningVisitors] ].
+	^ methodsASTs
+
 ]
 
 { #category : #preparation }

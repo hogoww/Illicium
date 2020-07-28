@@ -27,23 +27,16 @@ MASlangVariableRenamer class >> renameVariablesOf: aMethodNode byArguments: argu
 
 { #category : #renaming }
 MASlangVariableRenamer >> handleTemporariesFrom: methodToInline in: methodInlining [
-	| replacements copy |
+	| renamer |
 	"we first get the names"
-	methodToInline acceptVisitor: MAEnsureIDAppearsOncePerMethod new.
-	copy := methodInlining copy.
-	"
-	copy copy acceptVisitor: MAEnsureIDAppearsOncePerMethod new.
-	"
-	[methodInlining acceptVisitor: MAEnsureIDAppearsOncePerMethod new] on: Exception do:[:e|
-	(e class = Halt) ifTrue:[ e resume ] ifFalse:[ self halt. ]].
-	replacements := self newNamesForIntersectionOf: methodToInline allLocalNames
-		and: methodInlining allLocalNames.
-		
-	"then replace the names of the nodes with the new ones"
-	replacements ifNotEmpty: [ "This avoids costy iteration over an ast"
-			self renameVariablesIn: methodToInline using: replacements.
-		].
+	renamer := MAEnsureIDAppearsOncePerMethod new.
+	methodInlining acceptVisitor: renamer.
+
+	"copy := methodInlining copy.
+	copy copy acceptVisitor: MAEnsureIDAppearsOncePerMethod new."
 	
+	methodToInline acceptVisitor: (MAEnsureIDAppearsOncePerMethod new startWithNamesInScope: renamer allIds ; yourself).
+		
 	"finally we merge the name annotations. as well as the declaration annotation"
 	self mergeTemporariesOf: methodToInline into: methodInlining
 ]
@@ -55,14 +48,14 @@ MASlangVariableRenamer >> mergeTemporariesOf: methodToInline into: methodInlinin
 	"in case of testing environment, we don't check"
 	methodInlining body
 		temporaries: methodInlining temporaries , methodToInline body temporaries.
-		
+	"	
 	((methodInlining body hasProperty: declarationProperty) 
 		and:[ methodToInline body hasProperty: declarationProperty ]) ifFalse:[ ^ self ].
 	
 	methodInlining body
 		propertyAt: declarationProperty
 		put: (methodInlining body propertyAt: declarationProperty)
-				, (methodToInline body propertyAt: declarationProperty).
+				, (methodToInline body propertyAt: declarationProperty)."
 ]
 
 { #category : #renaming }
@@ -84,30 +77,6 @@ MASlangVariableRenamer >> newNamesForIntersectionOf: tempNames1 and: tempNames2 
 				put: (self newNameForName: aTempName withExistingNames: intersection).
 		].
 	^ newTemporariesName
-]
-
-{ #category : #renaming }
-MASlangVariableRenamer >> renameVariablesIn: aMethodNode using: replacementNames [
-	| newProperties |
-	aMethodNode nodesDo: [ :aNode |
-		aNode isTemporaryNode
-			ifTrue:[
-				replacementNames at: aNode name
-					ifPresent:[ aNode name: (replacementNames at: aNode name) ]
-				]
-		].
-	
-	"Check in case we're in testing environment."
-	(aMethodNode body hasProperty: FAVariableDeclarationAnnotator propertyName) ifFalse: [ ^ self ].
-	
-	"properties are shallow copied. Since have references to TempDeclaration, we have to touch the copy, not the main node."
-	newProperties := (aMethodNode body propertyAt: FAVariableDeclarationAnnotator propertyName)
-		collect: [ :aTempDecl |
-			replacementNames at: aTempDecl name
-				ifPresent:[ aTempDecl copy name: (replacementNames at: aTempDecl name) ]
-				ifAbsent: [  aTempDecl copy ]
-			].
-	aMethodNode body propertyAt: FAVariableDeclarationAnnotator propertyName put: newProperties
 ]
 
 { #category : #renaming }

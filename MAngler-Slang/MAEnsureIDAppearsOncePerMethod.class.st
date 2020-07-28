@@ -15,21 +15,31 @@ MAEnsureIDAppearsOncePerMethod >> addNodeName: aNode [
 	or with crafted one.
 	This is easier for scope management"
 
-	allIds at: aNode name 
-		ifPresent: [ | newName |
+	(allIds includes: aNode name) 
+		ifTrue: [ | newName |
 			newName := (MASlangVariableRenamer newNameForName: aNode name withExistingNames: allIds).
 			replacements at: aNode name put: newName.
 			aNode name: newName.
-			allIds add: newName -> nil ]
-		ifAbsent: [ 
+			allIds add: newName ]
+		ifFalse: [ 
 			replacements at: aNode name put: aNode name. "we replace it with the same name."
-			allIds add: aNode name -> nil ].
+			allIds add: aNode name ].
 	
+]
+
+{ #category : #accessing }
+MAEnsureIDAppearsOncePerMethod >> allIds [
+	^ allIds
+]
+
+{ #category : #accessing }
+MAEnsureIDAppearsOncePerMethod >> allIds: anObject [
+	allIds := anObject
 ]
 
 { #category : #initialization }
 MAEnsureIDAppearsOncePerMethod >> initialize [ 
-	allIds := Dictionary new.
+	allIds := Set new.
 	replacements := Dictionary new.
 	stack := Stack new
 ]
@@ -43,6 +53,32 @@ MAEnsureIDAppearsOncePerMethod >> popContext [
 { #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> pushContext [
 	stack push: replacements copy.
+]
+
+{ #category : #accessing }
+MAEnsureIDAppearsOncePerMethod >> replacements [
+	^ replacements
+]
+
+{ #category : #accessing }
+MAEnsureIDAppearsOncePerMethod >> replacements: anObject [
+	replacements := anObject
+]
+
+{ #category : #accessing }
+MAEnsureIDAppearsOncePerMethod >> stack [
+	^ stack
+]
+
+{ #category : #accessing }
+MAEnsureIDAppearsOncePerMethod >> stack: anObject [
+	stack := anObject
+]
+
+{ #category : #initialization }
+MAEnsureIDAppearsOncePerMethod >> startWithNamesInScope: names [
+	allIds ifNotEmpty: [ self error: ' This should only be used before starting '].
+	allIds addAll: names
 ]
 
 { #category : #visiting }
