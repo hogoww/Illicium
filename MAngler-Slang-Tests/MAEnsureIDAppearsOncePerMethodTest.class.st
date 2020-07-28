@@ -11,6 +11,18 @@ Class {
 }
 
 { #category : #support }
+MAEnsureIDAppearsOncePerMethodTest >> aTempArgConflictIsUsedBeforeAndAfter [
+	^ RBParser parseMethod:
+'aMethod 
+	| aLocal | "<- method scope"
+	
+	[:aLocal | "<- block scope"
+		aLocal. ]. "<- block scope"
+	
+	aLocal' "<- method scope"
+]
+
+{ #category : #support }
 MAEnsureIDAppearsOncePerMethodTest >> aTempConflictIsUsedBeforeAndAfter [
 	^ RBParser parseMethod:
 'aMethod 
@@ -64,6 +76,17 @@ MAEnsureIDAppearsOncePerMethodTest >> anArgNoRenaming: anArg [
 	anArg ifTrue: [ anArg ]
 ]
 
+{ #category : #support }
+MAEnsureIDAppearsOncePerMethodTest >> anArgTempConflictIsUsedBeforeAndAfter [
+	^ RBParser parseMethod:
+'aMethod: aLocal "<- method scope"
+	
+	[ | aLocal | "<- block scope"
+		aLocal. ]. "<- block scope"
+	
+	aLocal' "<- method scope"
+]
+
 { #category : #running }
 MAEnsureIDAppearsOncePerMethodTest >> setUp [
 	super setUp.
@@ -72,7 +95,7 @@ MAEnsureIDAppearsOncePerMethodTest >> setUp [
 	visitor := MAEnsureIDAppearsOncePerMethod new
 ]
 
-{ #category : #support }
+{ #category : #test }
 MAEnsureIDAppearsOncePerMethodTest >> testATempNoRenaming [
 	| method counter |
 	method := (self class >> #aTempNoRenaming) ast copy.
@@ -88,7 +111,7 @@ MAEnsureIDAppearsOncePerMethodTest >> testATempNoRenaming [
 	self assert: counter equals: 4.
 ]
 
-{ #category : #support }
+{ #category : #test }
 MAEnsureIDAppearsOncePerMethodTest >> testAnArgNoRenaming [
 	| method counter |
 	method := (self class >> #anArgNoRenaming:) ast copy.
@@ -104,7 +127,7 @@ MAEnsureIDAppearsOncePerMethodTest >> testAnArgNoRenaming [
 	self assert: counter equals: 4.
 ]
 
-{ #category : #support }
+{ #category : #test }
 MAEnsureIDAppearsOncePerMethodTest >> testArgConflictAppearBeforeAndAfter [
 	| method counterNormal counterRenamed |
 	method := self anArgConflictIsUsedBeforeAndAfter.
@@ -122,7 +145,43 @@ MAEnsureIDAppearsOncePerMethodTest >> testArgConflictAppearBeforeAndAfter [
 	self assert: counterRenamed equals: 2.
 ]
 
-{ #category : #support }
+{ #category : #'test-withScope' }
+MAEnsureIDAppearsOncePerMethodTest >> testArgConflictWithScope [
+	| method counterRenamed |
+	method := (self class >> #anArgNoRenaming:) ast copy.
+	visitor startWithNamesInScope: { #anArg } . 
+	method acceptVisitor: visitor.
+
+	counterRenamed := 0.
+	method nodesDo: [ :aNode | 
+		aNode isVariableNode
+			ifTrue: [ 
+				aNode name = #anArg1 ifTrue: [ counterRenamed := counterRenamed + 1 ].
+			] ].
+	self assert: counterRenamed equals: 4.
+
+]
+
+{ #category : #test }
+MAEnsureIDAppearsOncePerMethodTest >> testArgTempConflictAppearBeforeAndAfter [
+	| method counterNormal counterRenamed |
+	method := self anArgTempConflictIsUsedBeforeAndAfter.
+	method acceptVisitor: visitor.
+
+	counterNormal := 0.
+	counterRenamed := 0.
+	method nodesDo: [ :aNode | 
+		aNode isVariableNode "Method is not semantically analysed, as it would be wrong. Therefore, no tempNodes."
+			ifTrue: [ 
+				aNode name = #aLocal ifTrue: [ counterNormal := counterNormal + 1 ].
+				aNode name = #aLocal1 ifTrue: [ counterRenamed := counterRenamed + 1 ].
+			] ].
+
+	self assert: counterNormal equals: 2.
+	self assert: counterRenamed equals: 2.
+]
+
+{ #category : #test }
 MAEnsureIDAppearsOncePerMethodTest >> testArgsWithRenaming [
 	| method counterNormal counterRenamed |
 	method := (self class >> #anArgInTwoDifferentBlocks) ast copy.
@@ -140,7 +199,26 @@ MAEnsureIDAppearsOncePerMethodTest >> testArgsWithRenaming [
 	self assert: counterRenamed equals: 3.
 ]
 
-{ #category : #support }
+{ #category : #test }
+MAEnsureIDAppearsOncePerMethodTest >> testTempArgConflictAppearBeforeAndAfter [
+	| method counterNormal counterRenamed |
+	method := self aTempArgConflictIsUsedBeforeAndAfter.
+	method acceptVisitor: visitor.
+
+	counterNormal := 0.
+	counterRenamed := 0.
+	method nodesDo: [ :aNode | 
+		aNode isVariableNode "Method is not semantically analysed, as it would be wrong. Therefore, no tempNodes."
+			ifTrue: [ 
+				aNode name = #aLocal ifTrue: [ counterNormal := counterNormal + 1 ].
+				aNode name = #aLocal1 ifTrue: [ counterRenamed := counterRenamed + 1 ].
+			] ].
+	
+	self assert: counterNormal equals: 2.
+	self assert: counterRenamed equals: 2.
+]
+
+{ #category : #test }
 MAEnsureIDAppearsOncePerMethodTest >> testTempConflictAppearBeforeAndAfter [
 	| method counterNormal counterRenamed |
 	method := self aTempConflictIsUsedBeforeAndAfter.
@@ -158,7 +236,7 @@ MAEnsureIDAppearsOncePerMethodTest >> testTempConflictAppearBeforeAndAfter [
 	self assert: counterRenamed equals: 2.
 ]
 
-{ #category : #support }
+{ #category : #test }
 MAEnsureIDAppearsOncePerMethodTest >> testTempsWithRenaming [
 	| method counterNormal counterRenamed |
 	method := (self class >> #aTempInTwoDifferentBlocks) ast copy.
@@ -174,4 +252,21 @@ MAEnsureIDAppearsOncePerMethodTest >> testTempsWithRenaming [
 			] ].
 	self assert: counterNormal equals: 4.
 	self assert: counterRenamed equals: 4.
+]
+
+{ #category : #'test-withScope' }
+MAEnsureIDAppearsOncePerMethodTest >> testTestConflictWithScope [
+	| method counterRenamed |
+	method := (self class >> #aTempNoRenaming) ast copy.
+	visitor startWithNamesInScope: { #aTemp } . 
+	method acceptVisitor: visitor.
+
+	counterRenamed := 0.
+	method nodesDo: [ :aNode | 
+		aNode isTemporaryNode
+			ifTrue: [ 
+				aNode name = #aTemp1 ifTrue: [ counterRenamed := counterRenamed + 1 ].
+			] ].
+	self assert: counterRenamed equals: 4.
+
 ]

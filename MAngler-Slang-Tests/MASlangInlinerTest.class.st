@@ -513,12 +513,12 @@ MASlangInlinerTest >> testNewNamesShouldHaveDeclarationAnnotation [
 	self assert: resultingMethod temporaries size equals: 2.
 	
 	"annotation for C declaration"
-	self assert: (resultingMethod body hasProperty: FAVariableDeclarationAnnotator propertyName).
+	"self assert: (resultingMethod body hasProperty: FAVariableDeclarationAnnotator propertyName).
 	declarationAnnotation := resultingMethod body propertyAt: FAVariableDeclarationAnnotator propertyName.
 	self assert: declarationAnnotation size = 2.
 	declarationAnnotation do:[ :aTempNode |
 		self assert: (#(t t1) includes: aTempNode name).
-		]
+		]"
 ]
 
 { #category : #tests }
