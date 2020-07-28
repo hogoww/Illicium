@@ -61,14 +61,24 @@ MAEnsureIDAppearsOncePerMethod >> visitArgumentNodes: arguments [
 ]
 
 { #category : #visiting }
-MAEnsureIDAppearsOncePerMethod >> visitSequenceNode: aSequenceNode [
+MAEnsureIDAppearsOncePerMethod >> visitBlockNode: 	aMethodNode [
+	self pushContext.	
+	super visitBlockNode: aMethodNode.
 
-	self pushContext.
+]
+
+{ #category : #visiting }
+MAEnsureIDAppearsOncePerMethod >> visitMethodNode: 	aMethodNode [
+	self pushContext.	
+	super visitMethodNode: aMethodNode.
+
+]
+
+{ #category : #visiting }
+MAEnsureIDAppearsOncePerMethod >> visitSequenceNode: aSequenceNode [
 	
 	self visitTemporaryNodes: aSequenceNode temporaries.
-
 	aSequenceNode statements do: [ :each | self visitNode: each ].
-
 	self popContext.
 ]
 

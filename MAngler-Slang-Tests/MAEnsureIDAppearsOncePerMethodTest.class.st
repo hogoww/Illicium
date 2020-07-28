@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #support }
-MAEnsureIDAppearsOncePerMethodTest >> aConflictIsUsedBeforeAndAfter [
+MAEnsureIDAppearsOncePerMethodTest >> aTempConflictIsUsedBeforeAndAfter [
 	^ RBParser parseMethod:
 'aMethod 
 	| aTemp | "<- method scope"
@@ -37,6 +37,17 @@ MAEnsureIDAppearsOncePerMethodTest >> aTempNoRenaming [
 	| aTemp |
 	aTemp.
 	aTemp ifTrue: [ aTemp ]
+]
+
+{ #category : #support }
+MAEnsureIDAppearsOncePerMethodTest >> anArgConflictIsUsedBeforeAndAfter [
+	^ RBParser parseMethod:
+'aMethod: anArg "<- method scope"
+	
+	[ :anArg |  "<- block scope"
+		anArg. ]. "<- block scope"
+	
+	anArg' "<- method scope"
 ]
 
 { #category : #support }
@@ -94,6 +105,24 @@ MAEnsureIDAppearsOncePerMethodTest >> testAnArgNoRenaming [
 ]
 
 { #category : #support }
+MAEnsureIDAppearsOncePerMethodTest >> testArgConflictAppearBeforeAndAfter [
+	| method counterNormal counterRenamed |
+	method := self anArgConflictIsUsedBeforeAndAfter.
+	method acceptVisitor: visitor.
+
+	counterNormal := 0.
+	counterRenamed := 0.
+	method nodesDo: [ :aNode | 
+		aNode isVariableNode "Method is not semantically analysed, as it would be wrong. Therefore, no tempNodes."
+			ifTrue: [ 
+				aNode name = #anArg ifTrue: [ counterNormal := counterNormal + 1 ].
+				aNode name = #anArg1 ifTrue: [ counterRenamed := counterRenamed + 1 ].
+			] ].
+	self assert: counterNormal equals: 2.
+	self assert: counterRenamed equals: 2.
+]
+
+{ #category : #support }
 MAEnsureIDAppearsOncePerMethodTest >> testArgsWithRenaming [
 	| method counterNormal counterRenamed |
 	method := (self class >> #anArgInTwoDifferentBlocks) ast copy.
@@ -112,9 +141,9 @@ MAEnsureIDAppearsOncePerMethodTest >> testArgsWithRenaming [
 ]
 
 { #category : #support }
-MAEnsureIDAppearsOncePerMethodTest >> testConflictAppearBeforeAndAfter [
+MAEnsureIDAppearsOncePerMethodTest >> testTempConflictAppearBeforeAndAfter [
 	| method counterNormal counterRenamed |
-	method := self aConflictIsUsedBeforeAndAfter.
+	method := self aTempConflictIsUsedBeforeAndAfter.
 	method acceptVisitor: visitor.
 
 	counterNormal := 0.
