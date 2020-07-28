@@ -538,24 +538,3 @@ MASlangInlinerTest >> testReturningInlinedSingleStatement [
 	self assert: inlinedStatement value receiver value equals: 1.
 	self assert: inlinedStatement value selector equals: #even.
 ]
-
-{ #category : #'test-renaming' }
-MASlangInlinerTest >> testTempNameAppearingTwiceShouldBeRenamed [
-	| tempNamesToInline tempNamesInliningIn res |
-	tempNamesToInline := { #a }.
-	tempNamesInliningIn := { #a }.
-	
-	res := inliner renamer newNamesForIntersectionOf: tempNamesToInline and: tempNamesInliningIn.
-	self assert: res size equals: 1.
-	self assert: (res at: #a) equals: #a1.
-]
-
-{ #category : #'test-renaming' }
-MASlangInlinerTest >> testTempNameDifferentShouldNotChangeNames [
-	| tempNamesToInline tempNamesInliningIn res |
-	tempNamesToInline := { #a }.
-	tempNamesInliningIn := { #b }.
-	
-	res := inliner renamer newNamesForIntersectionOf: tempNamesToInline and: tempNamesInliningIn.
-	self assert: res size equals: 0.
-]

@@ -31,31 +31,11 @@ MASlangVariableRenamer >> handleTemporariesFrom: methodToInline in: methodInlini
 	"we first get the names"
 	renamer := MAEnsureIDAppearsOncePerMethod new.
 	methodInlining acceptVisitor: renamer.
-
-	"copy := methodInlining copy.
-	copy copy acceptVisitor: MAEnsureIDAppearsOncePerMethod new."
-	
-	methodToInline acceptVisitor: (MAEnsureIDAppearsOncePerMethod new startWithNamesInScope: renamer allIds ; yourself).
+	methodToInline acceptVisitor: 
+		(MAEnsureIDAppearsOncePerMethod new startWithNamesInScope: renamer allIds ; yourself).
 		
 	"finally we merge the name annotations. as well as the declaration annotation"
-	self mergeTemporariesOf: methodToInline into: methodInlining
-]
-
-{ #category : #renaming }
-MASlangVariableRenamer >> mergeTemporariesOf: methodToInline into: methodInlining [
-	| declarationProperty |
-	declarationProperty := FAVariableDeclarationAnnotator propertyName.
-	"in case of testing environment, we don't check"
-	methodInlining body
-		temporaries: methodInlining temporaries , methodToInline body temporaries.
-	"	
-	((methodInlining body hasProperty: declarationProperty) 
-		and:[ methodToInline body hasProperty: declarationProperty ]) ifFalse:[ ^ self ].
-	
-	methodInlining body
-		propertyAt: declarationProperty
-		put: (methodInlining body propertyAt: declarationProperty)
-				, (methodToInline body propertyAt: declarationProperty)."
+	methodInlining body temporaries: methodInlining temporaries , methodToInline body temporaries.
 ]
 
 { #category : #renaming }
