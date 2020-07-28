@@ -34,7 +34,7 @@ MASlangVariableRenamer >> handleTemporariesFrom: methodToInline in: methodInlini
 	"
 	copy copy acceptVisitor: MAEnsureIDAppearsOncePerMethod new.
 	"
-	[ methodInlining acceptVisitor: MAEnsureIDAppearsOncePerMethod new ] on: Exception do: [ :e | e class = Halt ifTrue:[ e resume ] ifFalse:[. self halt ]].
+	methodInlining acceptVisitor: MAEnsureIDAppearsOncePerMethod new.
 	replacements := self newNamesForIntersectionOf: methodToInline allLocalNames
 		and: methodInlining allLocalNames.
 		
