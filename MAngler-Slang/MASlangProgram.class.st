@@ -266,6 +266,13 @@ MASlangProgram >> structNamed: aStructName [
 	^ self structClasses detect: [ :aClass | aClass structTypeName = aStructName  ]
 ]
 
+{ #category : #typing }
+MASlangProgram >> typeOfNode: aNode [
+	| method |
+	method := self methodNamed: aNode methodNode selector.
+	method nodesDo: [ :n | n == aNode ifTrue: [ ^ aNode propertyAt: MASlangTypeAnnotator propertyName ]]
+]
+
 { #category : #accessing }
 MASlangProgram >> wordSize [
 	

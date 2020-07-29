@@ -82,46 +82,8 @@ MAIlliciumTranslator class >> programClass [
 ]
 
 { #category : #'translation-api' }
-MAIlliciumTranslator class >> translateTestClass: aClass [ 
-	| cu suiteDeclarationFunction body |
-	cu := self translateClass: aClass.
-	
-	suiteDeclarationFunction := ASTCFunctionDefinition new 
-		body: ASTCBlock new ;
-		yourself.
-	suiteDeclarationFunction 
-		declaration: (ASTCFunctionDeclaration new 
-			type: #'CuSuite*' asCTypeNode;
-			id: (aClass name , 'GetSuite') asCIdentifierNode;
-			qualifiers: {} asOrderedCollection;
-			yourself).
-
-	body := suiteDeclarationFunction body.
-	
-	(aClass allSelectorsBelow: TestCase) do: [ :aSelector |
-		(aClass lookupSelector: aSelector) ast isTest
-			ifTrue:[
-					"SUITE_ADD_TEST(suite, TestCuStringNew);"
-					body addStatement: (ASTCFunctionCall new
-						id:  #SUITE_ADD_TEST asCIdentifierNode;
-						arguments: { #suite asCIdentifierNode. aSelector asCIdentifierNode } ;	
-						yourself) asStatement
-				].
-		 ].
-
-	body statements ifEmpty:	[ self error: 'I bluntly refuse to translate a test class without tests !' ].
-
-	"CuSuite* suite = CuSuiteNew();"
-	body statements addFirst: (#suite asCIdentifierNode assign: (ASTCFunctionCall new id: #CuSuiteNew asCIdentifierNode ; yourself)) asStatement.
-	body addDeclaration: (ASTCDeclarationStatement new
-		declaration: 
-			(ASTCVariableDeclaration new
-				type: #'CuSuite*' asCTypeNode;
-				id: #suite asCIdentifierNode;
-				yourself)).
-
-	cu add: suiteDeclarationFunction.
-	^ cu
+MAIlliciumTranslator class >> translateTestClass: aClass [
+	^ self new translateTestClass: aClass
 ]
 
 { #category : #initialization }
@@ -183,6 +145,12 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 	replacementClasses := aDictionnary
 ]
 
+{ #category : #'translation-api' }
+MAIlliciumTranslator >> translateClass: aClass [
+	self addClass: aClass.
+	^ self translateProgram
+]
+
 { #category : #visiting }
 MAIlliciumTranslator >> translateProgram [
 	| cu |
@@ -192,5 +160,48 @@ MAIlliciumTranslator >> translateProgram [
 	program methods value
 		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
+	^ cu
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator >> translateTestClass: aClass [ 
+	| cu suiteDeclarationFunction body |
+	cu := self translateClass: aClass.
+	
+	suiteDeclarationFunction := ASTCFunctionDefinition new 
+		body: ASTCBlock new ;
+		yourself.
+	suiteDeclarationFunction 
+		declaration: (ASTCFunctionDeclaration new 
+			type: #'CuSuite*' asCTypeNode;
+			id: (aClass name , 'GetSuite') asCIdentifierNode;
+			qualifiers: {} asOrderedCollection;
+			yourself).
+
+	body := suiteDeclarationFunction body.
+	
+	(aClass allSelectorsBelow: TestCase) do: [ :aSelector |
+		(aClass lookupSelector: aSelector) ast isTest
+			ifTrue:[
+					"SUITE_ADD_TEST(suite, TestCuStringNew);"
+					body addStatement: (ASTCFunctionCall new
+						id:  #SUITE_ADD_TEST asCIdentifierNode;
+						arguments: { #suite asCIdentifierNode. aSelector asCIdentifierNode } ;	
+						yourself) asStatement
+				].
+		 ].
+
+	body statements ifEmpty:	[ self error: 'I bluntly refuse to translate a test class without tests !' ].
+
+	"CuSuite* suite = CuSuiteNew();"
+	body statements addFirst: (#suite asCIdentifierNode assign: (ASTCFunctionCall new id: #CuSuiteNew asCIdentifierNode ; yourself)) asStatement.
+	body addDeclaration: (ASTCDeclarationStatement new
+		declaration: 
+			(ASTCVariableDeclaration new
+				type: #'CuSuite*' asCTypeNode;
+				id: #suite asCIdentifierNode;
+				yourself)).
+
+	cu add: suiteDeclarationFunction.
 	^ cu
 ]
