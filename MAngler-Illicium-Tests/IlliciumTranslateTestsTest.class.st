@@ -82,3 +82,16 @@ IlliciumTranslateTestsTest >> testWithAssertTrueTest [
 	self assert: assertFuncCall id id equals: #CuAssertTrue.
 	self assert: assertFuncCall arguments size equals: 2.
 ]
+
+{ #category : #testing }
+IlliciumTranslateTestsTest >> testWithInterPreterCall [
+	| function assertFuncCall |
+	function := MAIlliciumTranslator translateTestMethod: (self classToTest >> #testIsBaseFrame) ast.
+	function debugASTCStructure.
+	self assert: function declaration parameters size equals: 1.
+	self assert: function declaration parameters first type type type equals: (CType createFrom: 'CuTest*').
+	self assert: function body statements size equals: 1.
+	assertFuncCall := function body statements anyOne expression.
+	self assert: assertFuncCall id id equals: #CuAssertTrue.
+	self assert: assertFuncCall arguments size equals: 2.
+]

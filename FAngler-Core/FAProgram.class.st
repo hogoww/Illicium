@@ -89,7 +89,7 @@ FAProgram >> dependenciesHaveMethodNamed: aSelector [
 ]
 
 { #category : #testing }
-FAProgram >> hasMethodNamed: aSelector [
+FAProgram >> hasMethodNamed: aSelector [ 
 	^ (methods includesKey: aSelector)
 ]
 

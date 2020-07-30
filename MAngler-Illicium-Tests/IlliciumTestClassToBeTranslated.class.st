@@ -23,7 +23,7 @@ IlliciumTestClassToBeTranslated >> testEmpty [
 ]
 
 { #category : #tests }
-IlliciumTestClassToBeTranslated >> testStackInterpreterRandomMethod [
+IlliciumTestClassToBeTranslated >> testIsBaseFrame [
 	self assert: (interpreter isBaseFrame: 1) 
 ]
 

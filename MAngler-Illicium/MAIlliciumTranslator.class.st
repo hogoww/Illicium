@@ -86,6 +86,11 @@ MAIlliciumTranslator class >> translateTestClass: aClass [
 	^ self new translateTestClass: aClass
 ]
 
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> translateTestMethod: aMethod [
+	^ self new translateTestMethod: aMethod
+]
+
 { #category : #initialization }
 MAIlliciumTranslator >> getReplacementType: aPharoType [
 	^ aPharoType performReplacementUsing: replacementClasses
@@ -145,6 +150,15 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 	replacementClasses := aDictionnary
 ]
 
+{ #category : #testTranslation }
+MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
+	| vmProgram |
+	vmProgram := MASlangTranslator new prepareProgram; program.
+	inferer addDependency: vmProgram.
+	inferer inferAST: (aClass lookupSelector: #setUp) ast.
+	
+]
+
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateClass: aClass [
 	self addClass: aClass.
@@ -166,6 +180,7 @@ MAIlliciumTranslator >> translateProgram [
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateTestClass: aClass [ 
 	| cu suiteDeclarationFunction body |
+	self testTranslationPreludeFor: aClass.
 	cu := self translateClass: aClass.
 	
 	suiteDeclarationFunction := ASTCFunctionDefinition new 
@@ -204,4 +219,11 @@ MAIlliciumTranslator >> translateTestClass: aClass [
 
 	cu add: suiteDeclarationFunction.
 	^ cu
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator >> translateTestMethod: aMethodNode [ 
+	self testTranslationPreludeFor: aMethodNode methodClass.
+	self addMethod: aMethodNode fromClass: aMethodNode methodClass.
+	^ self translateMethod: aMethodNode selector fromClass: aMethodNode methodClass.
 ]

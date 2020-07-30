@@ -43,10 +43,7 @@ FATranslator class >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 FATranslator class >> translateMethod: anAST fromClass: aClass [
-	^ (self new 
-		addMethod: anAST fromClass: aClass;
-		translateProgram)
-		definitions anyOne
+	^ self new translateMethod: anAST fromClass: aClass
 ]
 
 { #category : #'translation-api' }
@@ -73,7 +70,7 @@ FATranslator >> addMethod: aCollection [
 
 { #category : #accessors }
 FATranslator >> addMethod: anAST fromClass: aClass [
-	self program addMethod: anAST
+	program addMethod: anAST
 ]
 
 { #category : #'translation-api' }
