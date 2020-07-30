@@ -197,7 +197,7 @@ FATranslator >> translateMethod: aSelector fromClass: aClass [
 	method := program methodNamed: aSelector.
 
 	method 
-		ifNotNil: [ ^ classTranslator translateMethod: method ]
+		ifNotNil: [ ^ (classTranslator translateMethod: method) definitions anyOne ]
 		ifNil: [ self error ].
 ]
 

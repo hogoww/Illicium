@@ -154,9 +154,9 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
 	| vmProgram |
 	vmProgram := MASlangTranslator new prepareProgram; program.
+	vmProgram classes do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
 	inferer addDependency: vmProgram.
 	inferer inferAST: (aClass lookupSelector: #setUp) ast.
-	
 ]
 
 { #category : #'translation-api' }

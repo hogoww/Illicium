@@ -15,7 +15,7 @@ IlliciumTestClassToBeTranslated class >> isAbstract [
 
 { #category : #tests }
 IlliciumTestClassToBeTranslated >> setUp [
-	interpreter := StackInterpreter new
+	interpreter := StackInterpreterPrimitives new
 ]
 
 { #category : #tests }
