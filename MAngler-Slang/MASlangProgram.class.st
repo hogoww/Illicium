@@ -188,6 +188,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	
 	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: methods values.
+	self removeUnusedMethods.
 	
 	"self removeSlotsNotIn: inferer."
 	constants := inferer constants.
@@ -219,6 +220,23 @@ MASlangProgram >> removeSlotsNotIn: inferer [.
 
 	"slots := slots select: [ :aSlot | inferer globalsAsSet includes: aSlot name. ]"
 	self
+]
+
+{ #category : #cleaning }
+MASlangProgram >> removeUnusedMethods [
+	"useful to remove problematic cases (newspeak..)"
+
+	| visitor removed |
+	visitor := MAMethodCallerCounterVisitor new program: self; yourself.
+	removed := true.
+	[ removed ] whileTrue: [ 
+		removed := false.
+		methods do: [ :aMethod | aMethod acceptVisitor: visitor ].
+		methods do: [ :aMethod | 
+			(aMethod propertyAt: MAMethodCallerCounterVisitor propertyName)
+				ifTrue: [
+					removed := true.
+					methods removeSelector: aMethod selector ] ] ]
 ]
 
 { #category : #'method-expansion' }
