@@ -191,6 +191,7 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	
 	"self removeSlotsNotIn: inferer."
 	constants := inferer constants.
+	constants add: (#CogStackPage -> (TDefineNode new name: #CogStackPage ; setValue: #StackPage ; yourself)).
 	
 	includes := inferer headerFiles.
 	includes addFirst: '"sq.h"'."added systematically"
