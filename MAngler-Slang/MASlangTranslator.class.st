@@ -238,7 +238,7 @@ MASlangTranslator >> shouldITranslate: aMethod options: options [
 
 { #category : #'translation-api' }
 MASlangTranslator >> translateProgram [
-	| cu |
+	| cu constants |
 	
 	self prepareProgram.
 	cu := ASTCCompilationUnit new.
@@ -256,7 +256,8 @@ MASlangTranslator >> translateProgram [
 	program structClassesToGenerate collect: [ :aClass | classTranslator translateClassState: aClass  ] into: cu.
 
 	program slots collect: [ :aSlot | classTranslator translateSlot: aSlot ] into: cu.
-	program constants collect: [ :aConstant | 
+	constants := program constants reject:[ :c | c class = TConstantNode ].
+	constants collect: [ :aConstant |
 		ASTCPreprocessorDefine new
 			name: (ASTCIdentifier id: aConstant name);
 			value: (ASTCLiteral new value: aConstant value; yourself);

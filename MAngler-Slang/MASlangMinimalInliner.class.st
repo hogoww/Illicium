@@ -9,8 +9,11 @@ MASlangMinimalInliner >> shouldInline: aMessageNode [
 	
 	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
 	"methodToInline := program methodNamed: aMessageNode selector."
-	
+
 	(translator class isSpecialSelector: aMessageNode selector) ifTrue: [ ^ false ].
+
+	self flag:#dirtyfix."translation relies on the fact that this is coded as a macro, don't know how to fix it better"
+	aMessageNode selector = #sendBreakpoint:receiver: ifTrue:[ ^ true ].
 	
 	"Requires to be last, or to have a discrimination list for system selectors (iftrue...)
 	This should therefore forget some inlines: mySpecialDoThatIsNotInAVMClass: aBlock"
