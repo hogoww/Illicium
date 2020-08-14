@@ -12,7 +12,7 @@ MASlangReturnNodeTranslator >> translateNode: aReturnNode [
 	
 	"special case for containsOnlyValidBecomeObjects: array1 and: array2 twoWay: isTwoWay copyHash: copyHash
 	Needs to break control flow in two methods, for smalltalk behavior "
-	returnedExpression isReturn ifTrue:[ ^ returnedExpression ].
+	(returnedExpression isBlock and: [ returnedExpression statements first isReturn ]) ifTrue:[ ^ returnedExpression ].
 	
 	
 	^ (aReturnNode value isSelf 
