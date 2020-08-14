@@ -103,7 +103,9 @@ MASlangPrettyPrinter >> cLiteralForUnsignedInteger: anInteger longlong: llBoolea
 
 { #category : #visiting }
 MASlangPrettyPrinter >> doesThisNeedParenthesis: aNode [
-
+	true ifTrue:[ super doesThisNeedParenthesis: aNode ].
+	
+	
 	aNode isLiteral ifTrue: [ ^ false ].
 	(aNode isBitLeftShiftOperator
 		and: [ aNode operand isCastOperator
