@@ -60,6 +60,15 @@ FAProgram >> addMethod: aMethod [
 ]
 
 { #category : #adding }
+FAProgram >> addRegularClass: aClass [ 
+    (aClass allSelectorsBelow: Object) 
+        do: [ :aSelector | | m |
+            m :=  (aClass lookupSelector: aSelector).
+            (m hasPragmaNamed: #doNotGenerate) 
+            ifFalse: [ self addMethod: m ast copy ] ]
+]
+
+{ #category : #adding }
 FAProgram >> addTestClass: aClass [
 	(aClass allSelectorsBelow: TestCase) 
 		do: [ :aMethod | self addMethod: (aClass lookupSelector: aMethod) ast copy ]
@@ -174,6 +183,11 @@ FAProgram >> name [
 { #category : #accessing }
 FAProgram >> name: aName [
 	name := aName
+]
+
+{ #category : #removing }
+FAProgram >> removeSelector: aSelector [
+	methods removeKey: aSelector 
 ]
 
 { #category : #accessing }

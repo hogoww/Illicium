@@ -39,6 +39,21 @@ IlliciumObject >> asString [
 ]
 
 { #category : #'message performing' }
+IlliciumObject >> cCode: aStringOrBlock [
+
+	aStringOrBlock isBlock
+		ifTrue: [ 
+			^ aStringOrBlock acceptVisitor: methodTranslator ].
+	aStringOrBlock isLiteralNode
+		ifTrue: [ 
+			^ aStringOrBlock value isEmpty 
+				ifTrue:[ ASTCEmptyStatement new ]
+				ifFalse: [ ASTCRawCCode new cCode: aStringOrBlock value; yourself ]].
+	self error
+	"I don't know if there is sometimes other stuff"
+]
+
+{ #category : #'message performing' }
 IlliciumObject >> includeMyFile [
 	^ methodTranslator addInclude: self class includeFileName.
 ]

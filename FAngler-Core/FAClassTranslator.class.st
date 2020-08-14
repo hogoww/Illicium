@@ -196,12 +196,6 @@ FAClassTranslator >> translateSlot: aSlot [
 	^ stateTranslator translateSlot: aSlot
 ]
 
-{ #category : #typing }
-FAClassTranslator >> typeAnnotatorClass [
-	" This should return the class used to annotate types on RB ASTs"
-	^ self subclassResponsibility 
-]
-
 { #category : #accessing }
 FAClassTranslator >> typeOfSlot: aSlot [
 	"should return the type of aSlot, in the appropriate type format. See implementation for current examples"

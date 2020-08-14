@@ -53,6 +53,11 @@ MASlangTranslator class >> shouldTranslateStructMethod: aMethod [
 	^ (aMethod methodClass isAccessor: aMethod selector) not
 ]
 
+{ #category : #testing }
+MASlangTranslator class >> typeAnnotatorClass [
+	^ MASlangTypeAnnotator
+]
+
 { #category : #'translation-api' }
 MASlangTranslator >> generateVM [
 	"Shortcut, since the VM is the base program for this translator"
@@ -193,11 +198,10 @@ MASlangTranslator >> postInliningVisitors [
 MASlangTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ {
-		MASlangMethodCleaner new. "not technically an annotator, but requires to be applied first currently. this will change when acceptMultipleVisitor: will be done properly"
+		MAMethodCleaner new. "not technically an annotator, but requires to be applied first currently. this will change when acceptMultipleVisitor: will be done properly"
 		MASlangSuperAnnotator new classTranslator: self ; yourself.
 		MASlangRequiredInliningMethodTagger new program: program ; yourself.
-		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
-		}
+		} , super preTranslationAnnotators 
 ]
 
 { #category : #accessing }

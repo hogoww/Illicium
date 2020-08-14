@@ -91,11 +91,6 @@ IlliciumClassTranslator >> translateExpression: anExpression [
 ]
 
 { #category : #typing }
-IlliciumClassTranslator >> typeAnnotatorClass [
-	^ IlliciumPhineasTypeAnnotator
-]
-
-{ #category : #typing }
 IlliciumClassTranslator >> typeInferenceEntryPoints: aClass [
 	| methods |
 	methods := OrderedCollection new.

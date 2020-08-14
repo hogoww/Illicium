@@ -315,11 +315,6 @@ MASlangReceiver >> cCode: aStringOrBlock [
 	"I don't know if there is sometimes other stuff"
 ]
 
-{ #category : #'translation-keyword' }
-MASlangReceiver >> cCode: aString inSmalltalk: ignoredBlock [
-	^ self cCode: aString
-]
-
 { #category : #typing }
 MASlangReceiver >> cCoerce: aVariable to: aType [
 	"a type is a string literal in slang case"

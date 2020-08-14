@@ -78,7 +78,7 @@ MAIlliciumTranslator class >> prettyPrinterClass [
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> programClass [
-	^ FAProgram
+	^ MAProgram
 ]
 
 { #category : #'translation-api' }
@@ -89,6 +89,11 @@ MAIlliciumTranslator class >> translateTestClass: aClass [
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> translateTestMethod: aMethod [
 	^ self new translateTestMethod: aMethod
+]
+
+{ #category : #configuring }
+MAIlliciumTranslator class >> typeAnnotatorClass [
+	^ IlliciumPhineasTypeAnnotator 
 ]
 
 { #category : #initialization }
@@ -122,10 +127,9 @@ MAIlliciumTranslator >> initialize [
 { #category : #visiting }
 MAIlliciumTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { 
-		IlliciumDeclarationAnnotator new. 
-		IlliciumPhineasTypeAnnotator new inferer: inferer ; yourself "always take the latest inferer"
-		}
+	^ { MAIlliciumMethodCleaner new } 
+	, super preTranslationAnnotators
+	, { IlliciumDeclarationAnnotator new }
 ]
 
 { #category : #accessing }
@@ -135,9 +139,7 @@ MAIlliciumTranslator >> preTranslationTransformations [
 
 { #category : #visiting }
 MAIlliciumTranslator >> prepareProgram [
-	program methods do: [ :aMethod | inferer infer: aMethod ].
-	program methods do:[ :aMethod | self annotateMethodAST: aMethod ].
-
+	program prepareWithInferer: inferer inTranslator: self
 ]
 
 { #category : #accessors }
@@ -152,10 +154,7 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 
 { #category : #testTranslation }
 MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
-	| vmProgram |
-	vmProgram := MASlangTranslator new prepareProgram; program.
-	vmProgram classes do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
-	inferer addDependency: vmProgram.
+	self vmDependentCode.
 	inferer inferAST: (aClass lookupSelector: #setUp) ast.
 ]
 
@@ -226,4 +225,12 @@ MAIlliciumTranslator >> translateTestMethod: aMethodNode [
 	self testTranslationPreludeFor: aMethodNode methodClass.
 	self addMethod: aMethodNode fromClass: aMethodNode methodClass.
 	^ self translateMethod: aMethodNode selector fromClass: aMethodNode methodClass.
+]
+
+{ #category : #dependencies }
+MAIlliciumTranslator >> vmDependentCode [
+    | vmProgram |
+    vmProgram := MASlangTranslator new prepareProgram; program.
+    vmProgram classes do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
+    inferer addDependency: vmProgram.
 ]
