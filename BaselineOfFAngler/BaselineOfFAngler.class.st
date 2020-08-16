@@ -18,7 +18,7 @@ BaselineOfFAngler >> baseline: spec [
 				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
 			spec
 				baseline: 'Phineas'
-				with: [ spec repository: 'gitlab://pharo-project/Phineas:cTypeForSlang' ].
+				with: [ spec repository: 'gitlab://pharo-project/Phineas:vmtests' ].
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			
@@ -51,9 +51,13 @@ MAVMTestGenerator cleanUp.
 MAPluginTestGenerator cleanUp.
 MASlangTestResource resetAll.
 MAFullVMCCodeGeneratorRessource reset.
+MAFullVMCCodeGeneratorRessource current.
 "MASlangTranslator new translateVM."
 MASlangTranslator new generateVM.
-PharoVMMaker generate: #StackVM.
+PharoVMMaker generate: #StackVM outputDirectory: FileSystem workingDirectory / 'vmmaker'. 
+MASlangTranslator new translateTestClass: VMByteCodesTest.
+
+MAIlliciumTranslator new vmDependentCode; translateClass: VMFrameBuilder.
 ]
 
 { #category : #accessing }
