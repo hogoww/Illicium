@@ -440,7 +440,11 @@ MASlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 
 { #category : #visiting }
 MASlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
-	aVariableDeclaration type acceptVisitor:self.
-	"stream peekLast = $* ifFalse: [ "self << Character space" ]".
-	aVariableDeclaration id acceptVisitor:self.
+	| type |
+	type := aVariableDeclaration type type type.
+	"super weird but sometimes isFunctionPointer is unset ... ._."
+	(type isFunctionPointer isNotNil and: [ type isFunctionPointer ])
+		ifFalse: [ ^ super visitVariableDeclaration: aVariableDeclaration ].
+	
+	stream << (type printFunctionPointerWithId: aVariableDeclaration id id)
 ]
