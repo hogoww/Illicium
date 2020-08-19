@@ -137,7 +137,7 @@ FAProgram >> isFullyAnnotated: anObject [
 
 { #category : #accessing }
 FAProgram >> methodFor: aSelector [
-	^ self methodNamed: aSelector ifAbsent: [ nil ]
+	^ self methodNamedAnywhere: aSelector
 ]
 
 { #category : #accessing }
