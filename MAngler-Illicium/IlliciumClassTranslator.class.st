@@ -18,6 +18,8 @@ IlliciumClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
 IlliciumClassTranslator >> initialize [
 	super initialize.
 	methodTranslator methodNodeTranslator: ILMethodNodeTestTranslator new.
+	
+	methodTranslator assignmentNodeTranslator: MAIlliciumAssignementTranslator new.
 ]
 
 { #category : #'translation-state' }

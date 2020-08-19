@@ -18,9 +18,13 @@ CollectionType >> createInstance [
 
 { #category : #'*MAngler-Illicium' }
 CollectionType >> performReplacementUsing: bindings [
-	^ self class new 
+	| newCollection |
+	newCollection :=  self class new 
 		collectionType: (collectionType performReplacementUsing: bindings);
-		elementType: (elementType performReplacementUsing: bindings);
 		properties: properties;
-		yourself
+		yourself.
+	elementType isEmptyType not ifTrue: [
+		newCollection elementType: (elementType performReplacementUsing: bindings)
+		].
+	^ newCollection
 ]

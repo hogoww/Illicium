@@ -98,7 +98,11 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 
 { #category : #initialization }
 MAIlliciumTranslator >> getReplacementType: aPharoType [
-	^ aPharoType performReplacementUsing: replacementClasses
+	| type |
+	type := aPharoType performReplacementUsing: replacementClasses.
+	self flag:#hack. "allows to continue with initial mechanisms, we remove the singleType & add the type to the translator"
+	(type isSingleType and: [ type type includesBehavior: MAAbstractSlangReceiver ]) ifTrue:[ type := type type new type: (CType new pharoType: aPharoType type) ].
+	^ type
 ]
 
 { #category : #initialization }
@@ -161,6 +165,7 @@ MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateClass: aClass [
 	self addClass: aClass.
+	replacementClasses at: aClass name put: IlliciumUserClass.	
 	^ self translateProgram
 ]
 
@@ -181,6 +186,7 @@ MAIlliciumTranslator >> translateTestClass: aClass [
 	| cu suiteDeclarationFunction body |
 	self testTranslationPreludeFor: aClass.
 	cu := self translateClass: aClass.
+	replacementClasses at: aClass name put: IlliciumUserClass.	
 	
 	suiteDeclarationFunction := ASTCFunctionDefinition new 
 		body: ASTCBlock new ;
@@ -229,8 +235,9 @@ MAIlliciumTranslator >> translateTestMethod: aMethodNode [
 
 { #category : #dependencies }
 MAIlliciumTranslator >> vmDependentCode [
-    | vmProgram |
-    vmProgram := MASlangTranslator new prepareProgram; program.
-    vmProgram classes do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
-    inferer addDependency: vmProgram.
+	| vmProgram |
+	vmProgram := MASlangTranslator new prepareProgram; program.
+	vmProgram classesToPrepareSelectorsFor do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
+	inferer addDependency: vmProgram.
+	program addDependency: vmProgram.
 ]
