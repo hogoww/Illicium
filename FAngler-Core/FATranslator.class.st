@@ -77,7 +77,7 @@ FATranslator >> addMethod: aCollection [
 
 { #category : #accessors }
 FATranslator >> addMethod: anAST fromClass: aClass [
-	program addMethod: anAST
+	program addMethod: anAST copy
 ]
 
 { #category : #'translation-api' }
