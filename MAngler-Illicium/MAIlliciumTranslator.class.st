@@ -104,7 +104,7 @@ MAIlliciumTranslator >> getReplacementType: aPharoType [
 { #category : #initialization }
 MAIlliciumTranslator >> initialize [
 	super initialize.
-	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic; yourself. 
+	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic new; yourself. 
 	"basic replacement classes"
 	 " float and string are used... Not well !"
 	replacementClasses := Dictionary new
