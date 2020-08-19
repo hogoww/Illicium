@@ -32,10 +32,9 @@ MAMethodCleaner >> halt [
 
 ]
 
-{ #category : #cleaning }
+{ #category : #initialization }
 MAMethodCleaner >> initialize [
 	selectorToRemove := #(cCode:inSmalltalk: halt flag flag: assert: deny: eassert: assert:l: asserta:l: asserta:).
-	"#(asserta: )"
 ]
 
 { #category : #cleaning }

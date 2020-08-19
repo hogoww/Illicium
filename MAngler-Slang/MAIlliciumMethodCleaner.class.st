@@ -19,3 +19,8 @@ MAIlliciumMethodCleaner >> cCode: something inSmalltalk: somethingElse [
 	messageNode arguments removeLast.
 	self cCode: something
 ]
+
+{ #category : #initialize }
+MAIlliciumMethodCleaner >> initialize [
+	selectorToRemove := #(cCode:inSmalltalk: halt flag flag:).
+]

@@ -36,7 +36,7 @@ FAMessageNodeTranslator >> translateNode: aMessageNode [
 	
 	(res isKindOf: ASTCNode) ifFalse: [ self error ].
 	res pharoNode: aMessageNode;
-		comment: aMessageNode commentOrNil;
-		yourself.
+		comment: aMessageNode commentOrNil.
+		
 	^ res
 ]
