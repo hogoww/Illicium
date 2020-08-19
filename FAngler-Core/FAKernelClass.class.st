@@ -46,9 +46,16 @@ FAKernelClass >> asFunctionCall: aSelector [
 
 { #category : #converting }
 FAKernelClass >> asFunctionCall: aSelector withArguments: aCollectionOfArguments [
+	^ self asFunctionCall: aSelector 
+		withTranslatedArguments: (aCollectionOfArguments collect:[:each| each acceptVisitor: methodTranslator ])
+
+]
+
+{ #category : #converting }
+FAKernelClass >> asFunctionCall: aSelector withTranslatedArguments: aCollectionOfArguments [
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: aSelector); yourself);
-		arguments: (aCollectionOfArguments collect:[:each| each acceptVisitor: methodTranslator ]);
+		arguments: aCollectionOfArguments;
 		yourself
 ]
 
