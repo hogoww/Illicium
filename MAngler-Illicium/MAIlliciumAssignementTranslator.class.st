@@ -1,7 +1,7 @@
 Class {
 	#name : #MAIlliciumAssignementTranslator,
 	#superclass : #FAAssignementNodeTranslator,
-	#category : #'FAngler-Core-Nodes-translators'
+	#category : #'MAngler-Illicium-NodesTranslator'
 }
 
 { #category : #translate }
