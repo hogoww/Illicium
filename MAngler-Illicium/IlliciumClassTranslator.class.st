@@ -104,6 +104,11 @@ IlliciumClassTranslator >> typeInferenceEntryPoints: aClass [
 ]
 
 { #category : #typing }
+IlliciumClassTranslator >> typeOfSlot: aSlot [
+	^ (mainTranslator inferer typeOfInstanceVariable: aSlot name ofClass: aSlot definingClass) asConstraint 
+]
+
+{ #category : #typing }
 IlliciumClassTranslator >> typeOfVariable: anIVName ofClass: aClass [
 	"should be pushed into phineas"
 	| phineasType type |

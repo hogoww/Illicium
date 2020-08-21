@@ -169,9 +169,14 @@ MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateClass: aClass [
+	| cu |
 	self addClass: aClass.
 	replacementClasses at: aClass name put: IlliciumUserClass.	
-	^ self translateProgram
+	cu := self translateProgram.
+	aClass slots do:[ :aSlot | 
+		(aClass slotsNamesToIgnore includes: aSlot name) 
+			ifFalse: [ cu add: (classTranslator translateSlot: aSlot) ]  ].
+	^ cu
 ]
 
 { #category : #visiting }
