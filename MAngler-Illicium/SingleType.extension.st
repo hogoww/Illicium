@@ -2,6 +2,11 @@ Extension { #name : #SingleType }
 
 { #category : #'*MAngler-Illicium' }
 SingleType >> asCType [
+	type class = CType ifTrue: [ ^ type ].
+	type = SmallInteger ifTrue: [ ^ CType createFrom: #int ].
+	type = Boolean ifTrue: [ ^ CType createFrom: #bool ].
+	type = VMClass ifTrue: [ ^ CType createFrom: #sqInt ].
+	self halt.
 	^ type
 ]
 

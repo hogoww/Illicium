@@ -437,14 +437,3 @@ MASlangPrettyPrinter >> visitUnaryOperator: anUnaryOperator [
 		print:[ anUnaryOperator operand acceptVisitor: self ]
 	]
 ]
-
-{ #category : #visiting }
-MASlangPrettyPrinter >> visitVariableDeclaration: aVariableDeclaration [
-	| type |
-	type := aVariableDeclaration type type type.
-	"super weird but sometimes isFunctionPointer is unset ... ._."
-	(type isFunctionPointer isNotNil and: [ type isFunctionPointer ])
-		ifFalse: [ ^ super visitVariableDeclaration: aVariableDeclaration ].
-	
-	stream << (type printFunctionPointerWithId: aVariableDeclaration id id)
-]

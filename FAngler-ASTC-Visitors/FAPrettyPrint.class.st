@@ -466,6 +466,13 @@ FAPrettyPrint >> visitUnaryOperator: anOperator [
 
 { #category : #visiting }
 FAPrettyPrint >> visitVariableDeclaration: aVariableDeclaration [
+	| type |
+	
+	self flag: #badFix."don't know how to do it any other way.."
+	type := aVariableDeclaration type type asCType.
+	type needsIdToPrint
+		ifTrue: [ ^ stream << (type printWithId: aVariableDeclaration id id) ].
+		
 	aVariableDeclaration type acceptVisitor:self.
 	self << Character space.
 	aVariableDeclaration id acceptVisitor:self.
