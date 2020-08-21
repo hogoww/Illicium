@@ -48,6 +48,8 @@ MASlangTypeAnnotator >> visitMessageNode: aMessageNode [
 MASlangTypeAnnotator >> visitMethodNode: aMethodNode [
 	"set the current tMethod, so we can give it to the CCodeGenerator, when asking for a node's type"
 	currentTMethod := inferer methodNamed: aMethodNode selector.
-	super visitMethodNode: aMethodNode.
+	aMethodNode isCMacro
+		ifFalse: [ super visitMethodNode: aMethodNode ]
+		ifTrue: [ self typeThatNode: aMethodNode ].
 	^ aMethodNode
 ]

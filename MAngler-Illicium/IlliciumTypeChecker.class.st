@@ -51,6 +51,7 @@ IlliciumTypeChecker >> check [
 		ifTrue: [ "use the next statement to look what stopped the execution, and type it by hand
 			inferer blockingStuff inspect.
 			"
+			node isBlock ifTrue:[ ^ EmptyType new ].
 			NoTypeFound new something: variableName ; signal ].
 	types isMultipleType
 		ifTrue: [ TypeAmbiguity new types: types ; signal ].

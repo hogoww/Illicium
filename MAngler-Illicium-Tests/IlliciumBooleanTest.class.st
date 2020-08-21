@@ -26,7 +26,7 @@ IlliciumBooleanTest >> testIfTrue [
 	astC := messageNode acceptVisitor: methodTranslator.
 	
 	expectedC := ASTCIf new 
-		condition: (ASTCLiteral value: true);
+		condition: (ASTCLiteral value: 1);
 		then: (ASTCBlock new
 			addStatement: (ASTCLiteral value: 1) asStatement;
 			yourself);

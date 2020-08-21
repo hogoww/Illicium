@@ -18,6 +18,8 @@ IlliciumClassTranslator >> callgraphTypeStartingFromExpression: anExpression [
 IlliciumClassTranslator >> initialize [
 	super initialize.
 	methodTranslator methodNodeTranslator: ILMethodNodeTestTranslator new.
+	
+	methodTranslator assignmentNodeTranslator: MAIlliciumAssignementTranslator new.
 ]
 
 { #category : #'translation-state' }
@@ -91,11 +93,6 @@ IlliciumClassTranslator >> translateExpression: anExpression [
 ]
 
 { #category : #typing }
-IlliciumClassTranslator >> typeAnnotatorClass [
-	^ IlliciumPhineasTypeAnnotator
-]
-
-{ #category : #typing }
 IlliciumClassTranslator >> typeInferenceEntryPoints: aClass [
 	| methods |
 	methods := OrderedCollection new.
@@ -104,6 +101,11 @@ IlliciumClassTranslator >> typeInferenceEntryPoints: aClass [
 			(aMethod ast arguments isEmpty and: [(aMethod hasPragmaNamed: #doNotGenerate) not])
 				ifTrue: [ methods add: aMethod ast copy ] ].
 	^ methods
+]
+
+{ #category : #typing }
+IlliciumClassTranslator >> typeOfSlot: aSlot [
+	^ (mainTranslator inferer typeOfInstanceVariable: aSlot name ofClass: aSlot definingClass) asConstraint 
 ]
 
 { #category : #typing }

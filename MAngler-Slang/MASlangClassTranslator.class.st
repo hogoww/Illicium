@@ -59,11 +59,6 @@ MASlangClassTranslator >> translateClassState: aClass [
 		ifTrue: [ structStateTranslator translateStateOf: aClass  ].
 ]
 
-{ #category : #typing }
-MASlangClassTranslator >> typeAnnotatorClass [
-	^ MASlangTypeAnnotator
-]
-
 { #category : #'translation-api' }
 MASlangClassTranslator >> typeOfSlot: aSlot [
 	| owningClass cType |

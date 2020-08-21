@@ -1,7 +1,7 @@
 Class {
 	#name : #ILMethodNodeTestTranslator,
 	#superclass : #FAMethodNodeTranslator,
-	#category : #'FAngler-Core-Nodes-translators'
+	#category : #'MAngler-Illicium-NodesTranslator'
 }
 
 { #category : #translate }

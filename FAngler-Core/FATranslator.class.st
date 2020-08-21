@@ -43,10 +43,9 @@ FATranslator class >> translateMethod: aCompiledMethod [
 
 { #category : #'translation-api' }
 FATranslator class >> translateMethod: anAST fromClass: aClass [
-	^ (self new 
-		addMethod: anAST fromClass: aClass;
-		translateProgram)
-		definitions anyOne
+	^ self new
+		addMethod: anAST;
+		translateMethod: anAST selector fromClass: aClass
 ]
 
 { #category : #'translation-api' }
@@ -54,6 +53,11 @@ FATranslator class >> translateProgram: aProgram [
 	^ self new
 		program: aProgram ; 
 		translateProgram
+]
+
+{ #category : #configuring }
+FATranslator class >> typeAnnotatorClass [
+	^ self subclassResponsibility
 ]
 
 { #category : #'program-configuration' }
@@ -73,7 +77,7 @@ FATranslator >> addMethod: aCollection [
 
 { #category : #accessors }
 FATranslator >> addMethod: anAST fromClass: aClass [
-	self program addMethod: anAST
+	program addMethod: anAST copy
 ]
 
 { #category : #'translation-api' }
@@ -129,7 +133,7 @@ FATranslator >> methodFor: aSelector [
 { #category : #visiting }
 FATranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ self subclassResponsibility 
+	^ { self class typeAnnotatorClass new inferer: inferer ; yourself }
 ]
 
 { #category : #visiting }
@@ -142,9 +146,10 @@ FATranslator >> preTranslationTransformations [
 FATranslator >> prepareMethodsASTs: methodsASTs [
 	"we don't treat macros."
 	methodsASTs do: [ :aMethodAST | 
-		aMethodAST isCMacro ifFalse:[
-			self annotateMethodAST: aMethodAST ]].
-	methodsASTs do: [ :aMethodAST | 
+		aMethodAST isCMacro 
+			ifFalse:[ self annotateMethodAST: aMethodAST ]
+			ifTrue:[ self typeMacroMethod: aMethodAST ] ].
+		methodsASTs do: [ :aMethodAST | 
 		aMethodAST isCMacro ifFalse:[
 			self applyTransformationsOn: aMethodAST ]].
 	^ methodsASTs
@@ -200,7 +205,7 @@ FATranslator >> translateMethod: aSelector fromClass: aClass [
 	method := program methodNamed: aSelector.
 
 	method 
-		ifNotNil: [ ^ classTranslator translateMethod: method ]
+		ifNotNil: [ ^ (classTranslator translateMethod: method) definitions anyOne ]
 		ifNil: [ self error ].
 ]
 
@@ -212,4 +217,9 @@ FATranslator >> translateProgram [
 	cu := ASTCCompilationUnit new.
 	program classes collect: [ :aClass | self translateClass: aClass ] into: cu.
 	^ cu
+]
+
+{ #category : #'translation-api' }
+FATranslator >> typeMacroMethod: aMethodAST [
+	aMethodAST acceptVisitor: (self class typeAnnotatorClass new inferer: inferer; yourself)
 ]

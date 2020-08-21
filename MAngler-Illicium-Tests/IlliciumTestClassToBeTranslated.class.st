@@ -1,6 +1,9 @@
 Class {
 	#name : #IlliciumTestClassToBeTranslated,
 	#superclass : #TestCase,
+	#instVars : [
+		'interpreter'
+	],
 	#category : #'MAngler-Illicium-Tests-Support'
 }
 
@@ -11,7 +14,17 @@ IlliciumTestClassToBeTranslated class >> isAbstract [
 ]
 
 { #category : #tests }
+IlliciumTestClassToBeTranslated >> setUp [
+	interpreter := StackInterpreterPrimitives new
+]
+
+{ #category : #tests }
 IlliciumTestClassToBeTranslated >> testEmpty [
+]
+
+{ #category : #tests }
+IlliciumTestClassToBeTranslated >> testIsBaseFrame [
+	self assert: (interpreter isBaseFrame: 1) 
 ]
 
 { #category : #tests }

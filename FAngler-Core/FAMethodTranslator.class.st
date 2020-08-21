@@ -192,9 +192,8 @@ FAMethodTranslator >> forward: aMessage to: aType [
 
 { #category : #typing }
 FAMethodTranslator >> getNodeConcreteType: aNode [
-	
 	^ aNode
-		propertyAt: classTranslator typeAnnotatorClass propertyName
+		propertyAt: FATypeAnnotator propertyName
 		ifPresent: [ :types | types ]
 		ifAbsent: [ UnannotatedNode new node: aNode ; signal ].
 ]

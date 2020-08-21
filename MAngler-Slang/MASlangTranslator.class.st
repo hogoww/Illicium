@@ -53,6 +53,11 @@ MASlangTranslator class >> shouldTranslateStructMethod: aMethod [
 	^ (aMethod methodClass isAccessor: aMethod selector) not
 ]
 
+{ #category : #testing }
+MASlangTranslator class >> typeAnnotatorClass [
+	^ MASlangTypeAnnotator
+]
+
 { #category : #'translation-api' }
 MASlangTranslator >> generateVM [
 	"Shortcut, since the VM is the base program for this translator"
@@ -99,12 +104,15 @@ MASlangTranslator >> generateVMHeader [
 
 { #category : #initialization }
 MASlangTranslator >> getReplacementType: aCType [
-	"Virtual machine is a structure used exclusively in generated code, and has no Smalltalk equivalent (that I know of)"
-	^ ((aCType isStruct and: [ (aCType type = #VirtualMachine) not ])
-		ifTrue:[ aCType pharoType: (program structNamed: aCType type).
-			MASlangStructsReceiver new ]
-		ifFalse:[ MASlangReceiver new ]) 
-			type: aCType ; yourself.
+	           "Virtual machine is a structure used exclusively in generated code, and has no Smalltalk equivalent (that I know of)"
+
+	           ^ ((aCType isStruct and: [ aCType type ~= #VirtualMachine ])
+		              ifTrue: [ 
+			              aCType pharoType: (program structNamed: aCType type).
+			              MASlangStructsReceiver new ]
+		              ifFalse: [ MASlangReceiver new ])
+		             type: aCType;
+		             yourself
 ]
 
 { #category : #accesors }
@@ -193,11 +201,10 @@ MASlangTranslator >> postInliningVisitors [
 MASlangTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
 	^ {
-		MASlangMethodCleaner new. "not technically an annotator, but requires to be applied first currently. this will change when acceptMultipleVisitor: will be done properly"
+		MAMethodCleaner new. "not technically an annotator, but requires to be applied first currently. this will change when acceptMultipleVisitor: will be done properly"
 		MASlangSuperAnnotator new classTranslator: self ; yourself.
 		MASlangRequiredInliningMethodTagger new program: program ; yourself.
-		MASlangTypeAnnotator new inferer: inferer ; yourself. "always take the latest inferer"
-		}
+		} , super preTranslationAnnotators 
 ]
 
 { #category : #accessing }

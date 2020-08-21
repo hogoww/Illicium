@@ -33,7 +33,7 @@ IlliciumArray >> do: aBlock [
 	aBlock isBlock ifFalse:[ BadArgument new expected: RBBlockNode; result: aBlock class; signal ].
 	aBlock arguments size = 1 ifFalse:[ ArgumentsCountMismatch signal ].
 	
-	size := [(receiverNode propertyAt: #type) key size] on: NotFound 
+	size := [ (methodTranslator getNodeConcreteType: receiverNode) size ] on: NotFound 
 		do:[ self error: '#do: is curently only usable if the IV using it defines a size property' ].
 	newBlock := aBlock copy.
 	newBlock arguments at: 1 put: ((RBArgumentNode named: #i) parent: newBlock).
@@ -46,11 +46,6 @@ IlliciumArray >> do: aBlock [
 	arg := (aBlock arguments at: 1) acceptVisitor: methodTranslator.
 	iterator := (newBlock arguments at: 1) acceptVisitor: methodTranslator.
 	receiver := self translatedReceiver.
-	
-	res body statements addFirst:
-		(ASTCIf new condition: (arg equals: (ASTCLiteral value: #null));
-			then: ASTCBreak new;
-			yourself).
 	
 	res body statements addFirst: 
 		(arg assign: (receiver indexAt: iterator))
@@ -67,4 +62,18 @@ IlliciumArray >> elementType [
 { #category : #accessing }
 IlliciumArray >> elementType: aType [
 	elementType := aType
+]
+
+{ #category : #creation }
+IlliciumArray >> new: aLiteral of: aType [
+	"it should be handled on the declaration part, as we currently want static arrays e.g., aType id[aSizeInteger]"
+	^ ASTCEmptyStatement new
+]
+
+{ #category : #accessing }
+IlliciumArray >> size [
+	| size |
+	size := (methodTranslator getNodeConcreteType: receiverNode) size.
+	size isInteger ifFalse: [ self error: 'I don''t know yet' ].
+	^ ASTCLiteral value: size
 ]

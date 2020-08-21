@@ -78,13 +78,126 @@ MAIlliciumTranslator class >> prettyPrinterClass [
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> programClass [
-	^ FAProgram
+	^ MAProgram
 ]
 
 { #category : #'translation-api' }
-MAIlliciumTranslator class >> translateTestClass: aClass [ 
+MAIlliciumTranslator class >> translateTestClass: aClass [
+	^ self new translateTestClass: aClass
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> translateTestMethod: aMethod [
+	^ self new translateTestMethod: aMethod
+]
+
+{ #category : #configuring }
+MAIlliciumTranslator class >> typeAnnotatorClass [
+	^ IlliciumPhineasTypeAnnotator 
+]
+
+{ #category : #initialization }
+MAIlliciumTranslator >> getReplacementType: aPharoType [
+	| type |
+	type := aPharoType performReplacementUsing: replacementClasses.
+	self flag:#hack. "allows to continue with initial mechanisms, we remove the singleType & add the type to the translator"
+	(type isSingleType and: [ type type includesBehavior: MAAbstractSlangReceiver ]) ifTrue:[ type := type type new type: (CType new pharoType: aPharoType type) ].
+	^ type
+]
+
+{ #category : #accessing }
+MAIlliciumTranslator >> inferer [
+	^ inferer
+]
+
+{ #category : #initialization }
+MAIlliciumTranslator >> initialize [
+	super initialize.
+	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic new; yourself. 
+	"basic replacement classes"
+	 " float and string are used... Not well !"
+	replacementClasses := Dictionary new
+		at: #Object put: IlliciumObject ;
+		at: #TestCase put: IlliciumTestCase;
+		at: #UndefinedObject put: IlliciumUndefinedObject ;
+		at: #SmallInteger put: IlliciumSmallInteger ;
+		at: #Boolean put: IlliciumBoolean ;
+		at: #Character put: IlliciumCharacter ;
+		at: #String put: IlliciumString ;
+		at: #ByteString put: IlliciumString ;
+		at: #ByteSymbol put: IlliciumString ;
+		at: #Float put: IlliciumFloat ; 
+		at: #SmallFloat64 put: IlliciumFloat ; 
+		at: #BoxedFloat64 put: IlliciumFloat ; 
+		at: #Array put: IlliciumArray ;
+		yourself
+]
+
+{ #category : #visiting }
+MAIlliciumTranslator >> preTranslationAnnotators [
+	"should return a collection of visitors for RBAST which will annotate a method AST"
+	^ { MAIlliciumMethodCleaner new } 
+	, super preTranslationAnnotators
+	, { IlliciumDeclarationAnnotator new }
+]
+
+{ #category : #accessing }
+MAIlliciumTranslator >> preTranslationTransformations [
+	^ self shouldBeImplemented
+]
+
+{ #category : #visiting }
+MAIlliciumTranslator >> prepareProgram [
+	program prepareWithInferer: inferer inTranslator: self
+]
+
+{ #category : #accessors }
+MAIlliciumTranslator >> replacementClasses [
+	^ replacementClasses
+]
+
+{ #category : #accessors }
+MAIlliciumTranslator >> replacementClasses: aDictionnary [
+	replacementClasses := aDictionnary
+]
+
+{ #category : #testTranslation }
+MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
+	self vmDependentCode.
+	inferer inferAST: (aClass lookupSelector: #setUp) ast.
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator >> translateClass: aClass [
+	| cu |
+	self addClass: aClass.
+	replacementClasses at: aClass name put: IlliciumUserClass.	
+	cu := self translateProgram.
+	aClass slots do:[ :aSlot | 
+		(aClass slotsNamesToIgnore includes: aSlot name) 
+			ifFalse: [ cu add: (classTranslator translateSlot: aSlot) ]  ].
+	^ cu
+]
+
+{ #category : #visiting }
+MAIlliciumTranslator >> translateProgram [
+	| cu |
+	self prepareProgram.
+	
+	cu := ASTCCompilationUnit new.
+	program methods value
+		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
+	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
+	
+	^ cu
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator >> translateTestClass: aClass [ 
 	| cu suiteDeclarationFunction body |
+	self testTranslationPreludeFor: aClass.
 	cu := self translateClass: aClass.
+	replacementClasses at: aClass name put: IlliciumUserClass.	
 	
 	suiteDeclarationFunction := ASTCFunctionDefinition new 
 		body: ASTCBlock new ;
@@ -124,73 +237,18 @@ MAIlliciumTranslator class >> translateTestClass: aClass [
 	^ cu
 ]
 
-{ #category : #initialization }
-MAIlliciumTranslator >> getReplacementType: aPharoType [
-	^ aPharoType performReplacementUsing: replacementClasses
+{ #category : #'translation-api' }
+MAIlliciumTranslator >> translateTestMethod: aMethodNode [ 
+	self testTranslationPreludeFor: aMethodNode methodClass.
+	self addMethod: aMethodNode fromClass: aMethodNode methodClass.
+	^ self translateMethod: aMethodNode selector fromClass: aMethodNode methodClass.
 ]
 
-{ #category : #initialization }
-MAIlliciumTranslator >> initialize [
-	super initialize.
-	inferer := PhineasInferer new explicitTypeHeuristic: PISlangTypesHeuristic; yourself. 
-	"basic replacement classes"
-	 " float and string are used... Not well !"
-	replacementClasses := Dictionary new
-		at: #Object put: IlliciumObject ;
-		at: #TestCase put: IlliciumTestCase;
-		at: #UndefinedObject put: IlliciumUndefinedObject ;
-		at: #SmallInteger put: IlliciumSmallInteger ;
-		at: #Boolean put: IlliciumBoolean ;
-		at: #Character put: IlliciumCharacter ;
-		at: #String put: IlliciumString ;
-		at: #ByteString put: IlliciumString ;
-		at: #ByteSymbol put: IlliciumString ;
-		at: #Float put: IlliciumFloat ; 
-		at: #SmallFloat64 put: IlliciumFloat ; 
-		at: #BoxedFloat64 put: IlliciumFloat ; 
-		at: #Array put: IlliciumArray ;
-		yourself
-]
-
-{ #category : #visiting }
-MAIlliciumTranslator >> preTranslationAnnotators [
-	"should return a collection of visitors for RBAST which will annotate a method AST"
-	^ { 
-		IlliciumDeclarationAnnotator new. 
-		IlliciumPhineasTypeAnnotator new inferer: inferer ; yourself "always take the latest inferer"
-		}
-]
-
-{ #category : #accessing }
-MAIlliciumTranslator >> preTranslationTransformations [
-	^ self shouldBeImplemented
-]
-
-{ #category : #visiting }
-MAIlliciumTranslator >> prepareProgram [
-	program methods do: [ :aMethod | inferer infer: aMethod ].
-	program methods do:[ :aMethod | self annotateMethodAST: aMethod ].
-
-]
-
-{ #category : #accessors }
-MAIlliciumTranslator >> replacementClasses [
-	^ replacementClasses
-]
-
-{ #category : #accessors }
-MAIlliciumTranslator >> replacementClasses: aDictionnary [
-	replacementClasses := aDictionnary
-]
-
-{ #category : #visiting }
-MAIlliciumTranslator >> translateProgram [
-	| cu |
-	self prepareProgram.
-	
-	cu := ASTCCompilationUnit new.
-	program methods value
-		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
-	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
-	^ cu
+{ #category : #dependencies }
+MAIlliciumTranslator >> vmDependentCode [
+	| vmProgram |
+	vmProgram := MASlangTranslator new prepareProgram; program.
+	vmProgram classesToPrepareSelectorsFor do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
+	inferer addDependency: vmProgram.
+	program addDependency: vmProgram.
 ]
