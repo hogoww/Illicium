@@ -17,7 +17,7 @@ IlliciumUserClass >> cCoerce: aVariable to: aType [
 { #category : #'reflective operations' }
 IlliciumUserClass >> doesNotUnderstand: aMessage [
 	self flag: #checks ."needs to check that the message exists in the original class"
-	aMessage selector = #doesnNotUnderstand: ifTrue:[ self error: 'infinite recursion'].
+	aMessage selector = #doesNotUnderstand: ifTrue:[ self error: 'infinite recursion'].
 	
 	^ self messageToFunctionCall: aMessage
 

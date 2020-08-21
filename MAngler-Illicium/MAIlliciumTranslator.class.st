@@ -105,6 +105,11 @@ MAIlliciumTranslator >> getReplacementType: aPharoType [
 	^ type
 ]
 
+{ #category : #accessing }
+MAIlliciumTranslator >> inferer [
+	^ inferer
+]
+
 { #category : #initialization }
 MAIlliciumTranslator >> initialize [
 	super initialize.
@@ -178,6 +183,7 @@ MAIlliciumTranslator >> translateProgram [
 	program methods value
 		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
 	program includes collect: [ :anInclude | ASTCPreprocessorInclude new name: anInclude; yourself ] into: cu.
+	
 	^ cu
 ]
 
