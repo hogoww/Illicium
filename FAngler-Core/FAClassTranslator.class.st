@@ -105,6 +105,11 @@ FAClassTranslator >> stateId [
 	^ ASTCIdentifier new id: self stateName ; yourself
 ]
 
+{ #category : #'translation-state' }
+FAClassTranslator >> stateIdFor: aClass [
+	^ ASTCIdentifier new id: aClass name ; yourself
+]
+
 { #category : #'translation-api' }
 FAClassTranslator >> stateName [
 	^ #pluginState

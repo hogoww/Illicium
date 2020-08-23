@@ -173,9 +173,7 @@ MAIlliciumTranslator >> translateClass: aClass [
 	self addClass: aClass.
 	replacementClasses at: aClass name put: IlliciumUserClass.	
 	cu := self translateProgram.
-	aClass slots do:[ :aSlot | 
-		(aClass slotsNamesToIgnore includes: aSlot name) 
-			ifFalse: [ cu add: (classTranslator translateSlot: aSlot) ]  ].
+	cu add: (classTranslator translateStateOf: aClass).
 	^ cu
 ]
 

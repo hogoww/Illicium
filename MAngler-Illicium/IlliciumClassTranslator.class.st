@@ -20,11 +20,12 @@ IlliciumClassTranslator >> initialize [
 	methodTranslator methodNodeTranslator: ILMethodNodeTestTranslator new.
 	
 	methodTranslator assignmentNodeTranslator: MAIlliciumAssignementTranslator new.
+	stateTranslator := FAClassStateAsStructTranslator new classTranslator: self; yourself
 ]
 
 { #category : #'translation-state' }
 IlliciumClassTranslator >> isStatefulCode [
-	^ false
+	^ true
 ]
 
 { #category : #translation }
@@ -90,6 +91,11 @@ IlliciumClassTranslator >> translateExpression: anExpression [
 	
 	functionDefinitions := self translateMethodsASTs: methodAST.
 	^ functionDefinitions body
+]
+
+{ #category : #'translating-state' }
+IlliciumClassTranslator >> translateStateOf: aClass [ 
+	^ stateTranslator translateStateOf: aClass
 ]
 
 { #category : #typing }

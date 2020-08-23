@@ -44,6 +44,12 @@ FAAbstractStateTranslator >> translateInstanceVariableSlot: anInstanceVariableSl
 ]
 
 { #category : #'translation-api' }
+FAAbstractStateTranslator >> translateSlot: aSlot [
+	^ aSlot acceptTranslator: self
+
+]
+
+{ #category : #'translation-api' }
 FAAbstractStateTranslator >> translateStateOf: aClassOrStruct [
 	"Should return a compilation unit containing the state of a class or a struct"
 	^ self subclassResponsibility 

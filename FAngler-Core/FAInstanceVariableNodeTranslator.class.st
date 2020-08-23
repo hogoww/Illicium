@@ -9,6 +9,6 @@ FAInstanceVariableNodeTranslator >> translateNode: aNode [
 	| expression |
 	expression := methodTranslator visitVariableNode: aNode.
 	methodTranslator isStatefulCode ifTrue:[
-		expression := (ASTCIdentifier new id: self stateName ; yourself) structStaticAccess: expression ].
+		expression := (ASTCIdentifier id: #self) structStaticAccess: expression ].
 	^ expression
 ]

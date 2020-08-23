@@ -1,11 +1,11 @@
 Class {
-	#name : #FAStructStateTranslator,
+	#name : #MASlangStructStateTranslator,
 	#superclass : #FAAbstractStateTranslator,
-	#category : #'FAngler-Core-StateTranslation'
+	#category : #'MAngler-Slang-StateTranslators'
 }
 
 { #category : #'translation-api' }
-FAStructStateTranslator >> translateStateOf: aClass [
+MASlangStructStateTranslator >> translateStateOf: aClass [
 	| struct |
 	"not sure SharedPoolVariables are are considered in slang"	
 	struct := ASTCStructureDefinition new

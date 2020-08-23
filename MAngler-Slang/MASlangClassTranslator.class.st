@@ -22,7 +22,7 @@ MASlangClassTranslator >> inferer [
 MASlangClassTranslator >> initialize [
 	super initialize.
 
-	structStateTranslator := FAStructStateTranslator new classTranslator: self; yourself.
+	structStateTranslator := MASlangStructStateTranslator new classTranslator: self; yourself.
 
 	"specialization of node transalators"
 	methodTranslator methodNodeTranslator: MASlangMethodNodeTranslator new.

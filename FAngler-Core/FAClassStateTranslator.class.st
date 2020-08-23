@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #'translation-api' }
-FAClassStateTranslator >> translateSlot: aSlot [
-	^ aSlot acceptTranslator: self
-
-]
-
-{ #category : #'translation-api' }
 FAClassStateTranslator >> translateStateOf: aClass [
 	| cu |
 	
