@@ -80,7 +80,7 @@ MASlangTranslator >> generateVMCCode [
 		fileName: 'gcc3x-interp.c';
 		compilationUnit: translation;
 		prettyPrinter: self class prettyPrinterClass new;
-		printInFile;
+		generateFiles;
 		yourself
 ]
 

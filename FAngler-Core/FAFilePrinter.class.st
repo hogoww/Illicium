@@ -4,11 +4,10 @@ Class {
 	#instVars : [
 		'fileName',
 		'compilationUnit',
-		'isPrimitive',
-		'virtualMachine',
-		'prettyPrinter',
 		'fileCompiler',
-		'pluginMover'
+		'pluginMover',
+		'implementationPrettyPrint',
+		'headerPrettyPrint'
 	],
 	#category : #'FAngler-Core-Installers'
 }
@@ -49,22 +48,60 @@ FAFilePrinter >> fileName: aString [
 ]
 
 { #category : #printing }
+FAFilePrinter >> generateFiles [
+	self generateHeaderFile.
+	self generateImplementationFile
+]
+
+{ #category : #printing }
+FAFilePrinter >> generateHeaderFile [
+	| file |
+	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
+	file:= file / (fileName,'.h').
+	file exists ifTrue:[file delete].
+	file writeStreamDo:[:stream |
+		self printOnStream: stream using: headerPrettyPrint.
+	].
+]
+
+{ #category : #printing }
+FAFilePrinter >> generateImplementationFile [
+	| file |
+	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
+	file:= file / (fileName,'.c').
+	file exists ifTrue:[file delete].
+	file writeStreamDo:[:stream |
+		self printOnStream: stream using: implementationPrettyPrint.
+	].
+]
+
+{ #category : #accessing }
+FAFilePrinter >> headerPrettyPrint [
+	^ headerPrettyPrint
+]
+
+{ #category : #accessing }
+FAFilePrinter >> headerPrettyPrint: anObject [
+	headerPrettyPrint := anObject
+]
+
+{ #category : #accessing }
+FAFilePrinter >> implementationPrettyPrint [
+	^ implementationPrettyPrint
+]
+
+{ #category : #accessing }
+FAFilePrinter >> implementationPrettyPrint: anObject [
+	implementationPrettyPrint := anObject
+]
+
+{ #category : #printing }
 FAFilePrinter >> initialize [ 
-	virtualMachine := VirtualMachine new.
-	prettyPrinter := FAPrettyPrint new.
+	headerPrettyPrint := FAHeaderPrettyPrint new.
+	implementationPrettyPrint := FAPrettyPrint new.
 	fileCompiler := FAFileCompiler new.
 	pluginMover := FAPluginMover new.
 	
-]
-
-{ #category : #accessing }
-FAFilePrinter >> isPrimitive [
-	^ isPrimitive
-]
-
-{ #category : #accessing }
-FAFilePrinter >> isPrimitive: aBoolean [
-	^isPrimitive := aBoolean
 ]
 
 { #category : #moving }
@@ -82,31 +119,9 @@ FAFilePrinter >> pluginMover: aPluginMover [
 	pluginMover := aPluginMover
 ]
 
-{ #category : #accessing }
-FAFilePrinter >> prettyPrinter [
-	^ prettyPrinter
-]
-
-{ #category : #accessing }
-FAFilePrinter >> prettyPrinter: aPrettyPrinter [
-	prettyPrinter := aPrettyPrinter
-]
-
 { #category : #printing }
-FAFilePrinter >> printInFile [
-	| file |
-	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
-	file:= file / (fileName,'.c').
-	file exists ifTrue:[file delete].
-	file writeStreamDo:[:stream |
-		self printOnStream: stream.
-	].
-]
-
-{ #category : #printing }
-FAFilePrinter >> printOnStream: aStream [	
-	isPrimitive ifTrue:[self printPrePluginStuff: aStream ].
-	aStream << (compilationUnit prettyPrintUsing: prettyPrinter)
+FAFilePrinter >> printOnStream: aStream using: aPrettyPrinter [
+	aStream << (compilationUnit prettyPrintUsing: aPrettyPrinter)
 ]
 
 { #category : #printing }
@@ -134,7 +149,7 @@ aStream <<'	{(void*)_m, "getModuleName", (void*)getModuleName},
 
 ]
 
-{ #category : #printing }
+{ #category : #old }
 FAFilePrinter >> printPrePluginStuff: aStream [
 	aStream << 
 '
@@ -164,11 +179,4 @@ const char* getModuleName(void)
 
 '
 
-]
-
-{ #category : #printing }
-FAFilePrinter >> printString [
-	
-	^ String streamContents: [ :stream |
-		self printOnStream: stream ]
 ]

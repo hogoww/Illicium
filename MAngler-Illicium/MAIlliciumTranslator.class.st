@@ -13,6 +13,19 @@ MAIlliciumTranslator class >> classTranslatorClass [
 ]
 
 { #category : #'translation-api' }
+MAIlliciumTranslator class >> generateClass: aClass [ 
+	| translation |
+	translation := self translateTestClass: aClass.
+	FANewFilePrinter new
+		directory: './generated/classes/';
+		fileName: aClass name , '.c';
+		compilationUnit: translation;
+		prettyPrinter: self prettyPrinterClass new;
+		generateFiles.
+	self generateMainForTestClasses: { aClass }.
+]
+
+{ #category : #'translation-api' }
 MAIlliciumTranslator class >> generateMainForTestClasses: classes [
 	FANewFilePrinter new
 		directory: './generated/tests/';
@@ -29,8 +42,18 @@ MAIlliciumTranslator class >> generateTestClass: aClass [
 		fileName: aClass name , '.c';
 		compilationUnit: translation;
 		prettyPrinter: self prettyPrinterClass new;
-		printInFile.
+		generateFiles.
 	self generateMainForTestClasses: { aClass }.
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> headerPrettyPrinterClass [
+	^ FAHeaderPrettyPrint
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> implementationPrettyPrinterClass [
+	^ FAPrettyPrint
 ]
 
 { #category : #'translation-api' }
@@ -72,11 +95,6 @@ int main(void)
 ]
 
 { #category : #'default-configuration' }
-MAIlliciumTranslator class >> prettyPrinterClass [
-	^ FAPrettyPrint
-]
-
-{ #category : #'default-configuration' }
 MAIlliciumTranslator class >> programClass [
 	^ MAProgram
 ]
@@ -91,9 +109,35 @@ MAIlliciumTranslator class >> translateTestMethod: aMethod [
 	^ self new translateTestMethod: aMethod
 ]
 
-{ #category : #configuring }
+{ #category : #'default-configuration' }
 MAIlliciumTranslator class >> typeAnnotatorClass [
 	^ IlliciumPhineasTypeAnnotator 
+]
+
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> generateClass: aClass [ 
+	| translation |
+	translation := self translateClass: aClass.
+	FANewFilePrinter new
+		directory: './generated/classes/';
+		fileName: aClass name;
+		compilationUnit: translation;
+		headerPrettyPrinter: self class headerPrettyPrinterClass new;
+		implementationPrettyPrinter: self class implementationPrettyPrinterClass new;
+		generateFiles
+]
+
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> generateTestClass: aClass [ 
+	| translation |
+	translation := self translateTestClass: aClass.
+	FANewFilePrinter new
+		directory: './generated/tests/';
+		fileName: aClass name , '.c';
+		compilationUnit: translation;
+		prettyPrinter: self prettyPrinterClass new;
+		generateFiles.
+	self class generateMainForTestClasses: { aClass }.
 ]
 
 { #category : #initialization }

@@ -5,7 +5,8 @@ Class {
 		'fileName',
 		'directory',
 		'compilationUnit',
-		'prettyPrinter'
+		'headerPrettyPrinter',
+		'implementationPrettyPrinter'
 	],
 	#category : #'FAngler-Core-Installers'
 }
@@ -41,6 +42,28 @@ FANewFilePrinter >> fileName: anObject [
 ]
 
 { #category : #accessing }
+FANewFilePrinter >> generateFiles [
+	| file |
+
+	directory ensureCreateDirectory.
+	file := directory / fileName.
+	file exists ifTrue: [ file delete ].
+	file writeStreamDo: [ :stream |
+		self printCodeInFileStream: stream
+	].
+]
+
+{ #category : #accessing }
+FANewFilePrinter >> headerPrettyPrinter: aPrettyPrinter [
+	headerPrettyPrinter := aPrettyPrinter
+]
+
+{ #category : #accessing }
+FANewFilePrinter >> implementationPrettyPrinter: aPrettyPrinter [
+	implementationPrettyPrinter := aPrettyPrinter
+]
+
+{ #category : #accessing }
 FANewFilePrinter >> initialize [
 	"default configuration, values should be replaced if needed."
 	fileName := 'generatedCode'.
@@ -61,18 +84,6 @@ FANewFilePrinter >> prettyPrinter: anObject [
 FANewFilePrinter >> printCodeInFileStream: aStream [
 	prettyPrinter stream: aStream.
 	compilationUnit acceptVisitor: prettyPrinter
-]
-
-{ #category : #accessing }
-FANewFilePrinter >> printInFile [
-	| file |
-
-	directory ensureCreateDirectory.
-	file := directory / fileName.
-	file exists ifTrue: [ file delete ].
-	file writeStreamDo: [ :stream |
-		self printCodeInFileStream: stream
-	].
 ]
 
 { #category : #accessing }
