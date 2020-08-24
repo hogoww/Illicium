@@ -27,8 +27,8 @@ FAFilePrinter >> directory [
 ]
 
 { #category : #accessing }
-FAFilePrinter >> directory: anObject [
-	directory := anObject
+FAFilePrinter >> directory: aString [
+	directory := (FileSystem workingDirectory / aString) ensureCreateDirectory.
 ]
 
 { #category : #accessing }

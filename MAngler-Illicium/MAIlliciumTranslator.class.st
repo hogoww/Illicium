@@ -97,8 +97,8 @@ MAIlliciumTranslator >> generateClass: aClass [
 		directory: './generated/classes/';
 		fileName: aClass name;
 		compilationUnit: translation;
-		headerPrettyPrinter: self class headerPrettyPrinterClass new;
-		implementationPrettyPrinter: self class implementationPrettyPrinterClass new;
+		headerPrettyPrint: self class headerPrettyPrinterClass new;
+		implementationPrettyPrint: self class implementationPrettyPrinterClass new;
 		generateFiles
 ]
 
