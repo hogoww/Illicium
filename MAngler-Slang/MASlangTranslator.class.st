@@ -75,7 +75,7 @@ MASlangTranslator >> generateVMCCode [
 		select: [ :a| a value size > 1 
 			and: [ a value anySatisfy:[ :aNode | aNode isFunctionDeclaration ]]].
 "
-	^ FANewFilePrinter new
+	^ FAFilePrinter new
 		directory: './generated/vm/src/';
 		fileName: 'gcc3x-interp.c';
 		compilationUnit: translation;
@@ -86,7 +86,7 @@ MASlangTranslator >> generateVMCCode [
 
 { #category : #'translation-api' }
 MASlangTranslator >> generateVMCallBackHeader [
-	^ FANewFilePrinter new
+	^ FAFilePrinter new
 		directory: './generated/vm/include/';
 		fileName: 'vmCallback.h';
 		printStringInFile: self vmCallbackHeader;
@@ -95,7 +95,7 @@ MASlangTranslator >> generateVMCallBackHeader [
 
 { #category : #'translation-api' }
 MASlangTranslator >> generateVMHeader [
-	^ FANewFilePrinter new
+	^ FAFilePrinter new
 		directory: './generated/vm/include/';
 		fileName: 'interp.h';
 		printStringInFile: self interpretHeader;

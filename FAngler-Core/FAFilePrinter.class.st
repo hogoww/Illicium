@@ -3,9 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'fileName',
+		'directory',
 		'compilationUnit',
-		'fileCompiler',
-		'pluginMover',
 		'implementationPrettyPrint',
 		'headerPrettyPrint'
 	],
@@ -22,19 +21,14 @@ FAFilePrinter >> compilationUnit: aCompilationUnit [
 	^compilationUnit:= aCompilationUnit
 ]
 
-{ #category : #printing }
-FAFilePrinter >> compileExternalPlugin [
-	fileCompiler compileExternalPluginNamed: fileName
+{ #category : #accessing }
+FAFilePrinter >> directory [
+	^ directory
 ]
 
 { #category : #accessing }
-FAFilePrinter >> fileCompiler [
-	^ fileCompiler
-]
-
-{ #category : #accessing }
-FAFilePrinter >> fileCompiler: aFileCompiler [
-	fileCompiler := aFileCompiler
+FAFilePrinter >> directory: anObject [
+	directory := anObject
 ]
 
 { #category : #accessing }
@@ -49,6 +43,7 @@ FAFilePrinter >> fileName: aString [
 
 { #category : #printing }
 FAFilePrinter >> generateFiles [
+	directory ensureCreateDirectory.
 	self generateHeaderFile.
 	self generateImplementationFile
 ]
@@ -58,9 +53,9 @@ FAFilePrinter >> generateHeaderFile [
 	| file |
 	" we only print the header when an explicit pretty printer is given"
 	headerPrettyPrint ifNil: [ ^ self ].
-	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
-	file:= file / (fileName,'.h').
-	file exists ifTrue:[file delete].
+
+	file := directory / (fileName , '.h').
+	file exists ifTrue: [ file delete ].
 	file writeStreamDo:[:stream |
 		self printOnStream: stream using: headerPrettyPrint.
 	].
@@ -69,11 +64,11 @@ FAFilePrinter >> generateHeaderFile [
 { #category : #printing }
 FAFilePrinter >> generateImplementationFile [
 	| file |
-	implementationPrettyPrint ifNil: [ self error: 'I require a pretty printer to print a C file of a compilation unit.' ].
+	implementationPrettyPrint 
+		ifNil: [ self error: 'I require a pretty printer to print a C file of a compilation unit.' ].
 	
-	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
-	file:= file / (fileName,'.c').
-	file exists ifTrue:[file delete].
+	file := directory / (fileName , '.c').
+	file exists ifTrue: [ file delete ].
 	file writeStreamDo:[:stream |
 		self printOnStream: stream using: implementationPrettyPrint.
 	].
@@ -97,28 +92,6 @@ FAFilePrinter >> implementationPrettyPrint [
 { #category : #accessing }
 FAFilePrinter >> implementationPrettyPrint: anObject [
 	implementationPrettyPrint := anObject
-]
-
-{ #category : #printing }
-FAFilePrinter >> initialize [ 
-	fileCompiler := FAFileCompiler new.
-	pluginMover := FAPluginMover new.
-	
-]
-
-{ #category : #moving }
-FAFilePrinter >> moveInVmDirectory [
-	pluginMover movePluginInVmDirectory: fileName
-]
-
-{ #category : #accessing }
-FAFilePrinter >> pluginMover [
-	^ pluginMover
-]
-
-{ #category : #accessing }
-FAFilePrinter >> pluginMover: aPluginMover [
-	pluginMover := aPluginMover
 ]
 
 { #category : #printing }

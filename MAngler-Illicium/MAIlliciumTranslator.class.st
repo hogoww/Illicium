@@ -14,9 +14,10 @@ MAIlliciumTranslator class >> classTranslatorClass [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> generateMainForTestClasses: classes [
-	FANewFilePrinter new
+	FAFilePrinter new
 		directory: './generated/tests/';
 		fileName: 'AllTests.c';
+		implementationPrettyPrint: self implementationPrettyPrint new;
 		printStringInFile: (self mainCCodeForTestClasses: classes)
 ]
 
@@ -92,7 +93,7 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 MAIlliciumTranslator >> generateClass: aClass [ 
 	| translation |
 	translation := self translateClass: aClass.
-	FANewFilePrinter new
+	FAFilePrinter new
 		directory: './generated/classes/';
 		fileName: aClass name;
 		compilationUnit: translation;
@@ -105,7 +106,7 @@ MAIlliciumTranslator >> generateClass: aClass [
 MAIlliciumTranslator >> generateTestClass: aClass [ 
 	| translation |
 	translation := self translateTestClass: aClass.
-	FANewFilePrinter new
+	FAFilePrinter new
 		directory: './generated/tests/';
 		fileName: aClass name , '.c';
 		compilationUnit: translation;
