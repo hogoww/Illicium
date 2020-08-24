@@ -56,6 +56,8 @@ FAFilePrinter >> generateFiles [
 { #category : #printing }
 FAFilePrinter >> generateHeaderFile [
 	| file |
+	" we only print the header when an explicit pretty printer is given"
+	headerPrettyPrint ifNil: [ ^ self ].
 	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
 	file:= file / (fileName,'.h').
 	file exists ifTrue:[file delete].
@@ -67,6 +69,8 @@ FAFilePrinter >> generateHeaderFile [
 { #category : #printing }
 FAFilePrinter >> generateImplementationFile [
 	| file |
+	implementationPrettyPrint ifNil: [ self error: 'I require a pretty printer to print a C file of a compilation unit.' ].
+	
 	file:=(FileSystem workingDirectory / 'generated') ensureCreateDirectory.
 	file:= file / (fileName,'.c').
 	file exists ifTrue:[file delete].
@@ -97,8 +101,6 @@ FAFilePrinter >> implementationPrettyPrint: anObject [
 
 { #category : #printing }
 FAFilePrinter >> initialize [ 
-	headerPrettyPrint := FAHeaderPrettyPrint new.
-	implementationPrettyPrint := FAPrettyPrint new.
 	fileCompiler := FAFileCompiler new.
 	pluginMover := FAPluginMover new.
 	

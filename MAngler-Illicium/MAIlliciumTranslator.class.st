@@ -13,37 +13,11 @@ MAIlliciumTranslator class >> classTranslatorClass [
 ]
 
 { #category : #'translation-api' }
-MAIlliciumTranslator class >> generateClass: aClass [ 
-	| translation |
-	translation := self translateTestClass: aClass.
-	FANewFilePrinter new
-		directory: './generated/classes/';
-		fileName: aClass name , '.c';
-		compilationUnit: translation;
-		prettyPrinter: self prettyPrinterClass new;
-		generateFiles.
-	self generateMainForTestClasses: { aClass }.
-]
-
-{ #category : #'translation-api' }
 MAIlliciumTranslator class >> generateMainForTestClasses: classes [
 	FANewFilePrinter new
 		directory: './generated/tests/';
 		fileName: 'AllTests.c';
 		printStringInFile: (self mainCCodeForTestClasses: classes)
-]
-
-{ #category : #'translation-api' }
-MAIlliciumTranslator class >> generateTestClass: aClass [ 
-	| translation |
-	translation := self translateTestClass: aClass.
-	FANewFilePrinter new
-		directory: './generated/tests/';
-		fileName: aClass name , '.c';
-		compilationUnit: translation;
-		prettyPrinter: self prettyPrinterClass new;
-		generateFiles.
-	self generateMainForTestClasses: { aClass }.
 ]
 
 { #category : #'default-configuration' }
@@ -135,7 +109,8 @@ MAIlliciumTranslator >> generateTestClass: aClass [
 		directory: './generated/tests/';
 		fileName: aClass name , '.c';
 		compilationUnit: translation;
-		prettyPrinter: self prettyPrinterClass new;
+		headerPrettyPrinter: self class headerPrettyPrinterClass new;
+		implementationPrettyPrinter: self class implementationPrettyPrinterClass new;
 		generateFiles.
 	self class generateMainForTestClasses: { aClass }.
 ]
