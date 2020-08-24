@@ -1,33 +1,8 @@
 Class {
 	#name : #FAPrettyPrint,
-	#superclass : #ASTCSuperclassVisitor,
-	#instVars : [
-		'stream',
-		'indentation',
-		'indentationString'
-	],
+	#superclass : #FAAbstractPrettyPrinter,
 	#category : #'FAngler-ASTC-Visitors-Prettyprint'
 }
-
-{ #category : #configuration }
-FAPrettyPrint class >> defaultIndentation [
-	^ ' '
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> << chars [
-	stream << chars
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> <<< chars [
-	stream << indentation << chars
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> cr [
-	stream cr
-]
 
 { #category : #visiting }
 FAPrettyPrint >> doesThisNeedParenthesis: aNode [
@@ -37,115 +12,10 @@ FAPrettyPrint >> doesThisNeedParenthesis: aNode [
 	^ aNode priority > parentPriority
 ]
 
-{ #category : #indentation }
-FAPrettyPrint >> enterBlock [
-	self indent
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> indent [
-	indentation:=indentation , (String streamContents:[:s|
-		self printSingleIndentationOn: s.
-	]).
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> indentationString [
-
-	^ indentationString
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> indentationString: aString [
-
-	indentationString := aString
-]
-
-{ #category : #initialization }
-FAPrettyPrint >> initialize [
-	stream := String new writeStream.
-	indentation := ''.
-	indentationString := self class defaultIndentation
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> leaveBlock [
-	self unindent
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> parenthesisFor: aNode print: aBlock [
-
-	self parenthesisIf: (self doesThisNeedParenthesis: aNode) 
-		print: aBlock.
-
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> parenthesisIf: aBool print: aBlock [
-	aBool ifTrue: [ self << '(' ].
-	aBlock value.
-	aBool ifTrue: [ self << ')' ].
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> print: anObject [
-	anObject acceptVisitor: self
-]
-
 { #category : #visiting }
 FAPrettyPrint >> printBinaryOperand: anOperand [
 	anOperand acceptVisitor: self
 
-]
-
-{ #category : #printing }
-FAPrettyPrint >> printOn: aStream [
-	super printOn: aStream.
-	aStream << Character cr.
-	aStream << self.
-	^aStream.
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> printSingleIndentationOn: aStream [
-
-	aStream << indentationString
-]
-
-{ #category : #printing }
-FAPrettyPrint >> printString [
-	^self stream contents
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> space [
-	stream space
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> spaces [
-	self <<< ''
-]
-
-{ #category : #accessing }
-FAPrettyPrint >> stream [
-	^ stream
-]
-
-{ #category : #accessing }
-FAPrettyPrint >> stream: aStream [
-	stream := aStream
-]
-
-{ #category : #printing }
-FAPrettyPrint >> toTranscript [
-	Transcript show:self ; cr.
-]
-
-{ #category : #indentation }
-FAPrettyPrint >> unindent [
-	indentation := indentation allButLast: (indentationString size).
 ]
 
 { #category : #visiting }

@@ -96,7 +96,8 @@ FAFilePrinter >> implementationPrettyPrint: anObject [
 
 { #category : #printing }
 FAFilePrinter >> printOnStream: aStream using: aPrettyPrinter [
-	aStream << (compilationUnit prettyPrintUsing: aPrettyPrinter)
+	aPrettyPrinter stream: aStream.
+	compilationUnit acceptVisitor: aPrettyPrinter
 ]
 
 { #category : #printing }

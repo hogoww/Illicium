@@ -1,10 +1,5 @@
 Class {
 	#name : #FAHeaderPrettyPrint,
-	#superclass : #ASTCSuperclassVisitor,
-	#instVars : [
-		'stream',
-		'indentation',
-		'indentationString'
-	],
+	#superclass : #FAAbstractPrettyPrinter,
 	#category : #'FAngler-ASTC-Visitors-Prettyprint'
 }
