@@ -171,7 +171,7 @@ FATranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
 { #category : #'translation-api' }
 FATranslator >> prettyPrinterClass [
 
-	^ FAPrettyPrint
+	^ FAFullPrettyPrint
 ]
 
 { #category : #accessors }

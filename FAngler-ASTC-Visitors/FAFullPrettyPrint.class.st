@@ -1,11 +1,11 @@
 Class {
-	#name : #FAPrettyPrint,
+	#name : #FAFullPrettyPrint,
 	#superclass : #FAAbstractPrettyPrinter,
 	#category : #'FAngler-ASTC-Visitors-Prettyprint'
 }
 
 { #category : #visiting }
-FAPrettyPrint >> doesThisNeedParenthesis: aNode [
+FAFullPrettyPrint >> doesThisNeedParenthesis: aNode [
 	| parentPriority |
 	"this should also take into account associativity"
 	parentPriority := aNode parent ifNotNil: [:p | p priority ] ifNil:[ 16 "minimal priority"].
@@ -13,13 +13,13 @@ FAPrettyPrint >> doesThisNeedParenthesis: aNode [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> printBinaryOperand: anOperand [
+FAFullPrettyPrint >> printBinaryOperand: anOperand [
 	anOperand acceptVisitor: self
 
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitBinaryOperator: anOperator [
+FAFullPrettyPrint >> visitBinaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
 		self printBinaryOperand: anOperator leftOperand.
 		self << ' ' << anOperator class symbol << ' '.
@@ -28,7 +28,7 @@ FAPrettyPrint >> visitBinaryOperator: anOperator [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitBlock: aBlock [
+FAFullPrettyPrint >> visitBlock: aBlock [
 	self << '{' << Character cr.
 	self enterBlock.
 	aBlock declarations
@@ -48,12 +48,12 @@ FAPrettyPrint >> visitBlock: aBlock [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitBreak: aBreak [
+FAFullPrettyPrint >> visitBreak: aBreak [
 	self << #'break;'
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitCastOperator: aCastOperator [
+FAFullPrettyPrint >> visitCastOperator: aCastOperator [
 	self parenthesisFor: aCastOperator print: [
 		self << '(';
 			print: aCastOperator type;
@@ -63,7 +63,7 @@ FAPrettyPrint >> visitCastOperator: aCastOperator [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
+FAFullPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 	
 	self << '/* includes */' ; cr.
 	anASTCCompilationUnit includes
@@ -107,13 +107,13 @@ FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitDeclarationStatement: aDeclaration [
+FAFullPrettyPrint >> visitDeclarationStatement: aDeclaration [
 	aDeclaration declaration acceptVisitor: self.
 	self << $;
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitDoWhile: aDoWhile [
+FAFullPrettyPrint >> visitDoWhile: aDoWhile [
 	self << 'do' << Character cr.
 	aDoWhile body acceptVisitor: self.
 	self << 'while('.
@@ -122,19 +122,19 @@ FAPrettyPrint >> visitDoWhile: aDoWhile [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitEmptyStatement: anEmptyStatemementNode [
+FAFullPrettyPrint >> visitEmptyStatement: anEmptyStatemementNode [
 	"Empty statements should not be added to the AST, and therefore not visited during pretty print"
 	self shouldNotImplement
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitExpressionStatement: anExpressionStatement [
+FAFullPrettyPrint >> visitExpressionStatement: anExpressionStatement [
 	anExpressionStatement expression acceptVisitor: self.
 	self << $;. 
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitFor: aFor [
+FAFullPrettyPrint >> visitFor: aFor [
 	self << 'for ('.
 	aFor iteratorDefinition ifNotNil:[:anIteratorDecl| anIteratorDecl acceptVisitor:self].
 	self << '; '.
@@ -146,7 +146,7 @@ FAPrettyPrint >> visitFor: aFor [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitFunctionCall: aFunctionCall [
+FAFullPrettyPrint >> visitFunctionCall: aFunctionCall [
 	
 	self parenthesisFor: aFunctionCall print: [
 		aFunctionCall id acceptVisitor: self.
@@ -160,7 +160,7 @@ FAPrettyPrint >> visitFunctionCall: aFunctionCall [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitFunctionDeclaration: aFunctionDeclaration [
+FAFullPrettyPrint >> visitFunctionDeclaration: aFunctionDeclaration [
 	aFunctionDeclaration type acceptVisitor: self.
 	self << Character space.
 	aFunctionDeclaration id acceptVisitor:self.
@@ -170,19 +170,19 @@ FAPrettyPrint >> visitFunctionDeclaration: aFunctionDeclaration [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitFunctionDefinition: aFunctionDefinition [
+FAFullPrettyPrint >> visitFunctionDefinition: aFunctionDefinition [
 	aFunctionDefinition declaration acceptVisitor:self.
 	aFunctionDefinition body acceptVisitor: self.
 	
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitIdentifier: anIdentifier [
+FAFullPrettyPrint >> visitIdentifier: anIdentifier [
 	self << anIdentifier id
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitIf: anIf [
+FAFullPrettyPrint >> visitIf: anIf [
 	self << 'if ('.
 	anIf condition acceptVisitor: self.
 	self << ') '.
@@ -194,7 +194,7 @@ FAPrettyPrint >> visitIf: anIf [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitIndexerOperator: anIndexerOperator [
+FAFullPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 	self parenthesisFor: anIndexerOperator print: [
 		self visitExpression: anIndexerOperator leftOperand.
 		self << '['.
@@ -203,14 +203,14 @@ FAPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitLiteral: aLiteral [
+FAFullPrettyPrint >> visitLiteral: aLiteral [
 	aLiteral value isString ifTrue:[ self << '"' ].
 	self << aLiteral value asString.
 	aLiteral value isString ifTrue:[ self << '"' ].
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
+FAFullPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 	"When having a #define aSelector() something
 	the name is aSelector
 	the value is () something
@@ -230,28 +230,28 @@ FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
+FAFullPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
 	self 	<< #'#include';
 		space;
 		<< aPreProcessorInclude name
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitReturn: aReturn [
+FAFullPrettyPrint >> visitReturn: aReturn [
 	self << 'return '.
 	aReturn expression ifNotNil:[:anExpression| anExpression acceptVisitor: self].
 	self << $;.
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitStructureDeclaration: aStructureDeclaration [
+FAFullPrettyPrint >> visitStructureDeclaration: aStructureDeclaration [
 	self << #struct;
 		space;
 		print: aStructureDeclaration id
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
+FAFullPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 	
 	self << 'typedef';
 		space;
@@ -276,7 +276,7 @@ FAPrettyPrint >> visitStructureDefinition: aStructureDefinition [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitSwitch: aSwitchNode [
+FAFullPrettyPrint >> visitSwitch: aSwitchNode [
 	self << 'switch ( ';
 		print: aSwitchNode expression; << ' )'; cr;
 		spaces; << '{'; cr.
@@ -299,7 +299,7 @@ FAPrettyPrint >> visitSwitch: aSwitchNode [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitSwitchCase: aSwitchCase [
+FAFullPrettyPrint >> visitSwitchCase: aSwitchCase [
 	"assume that a switch case is always in a switch for now (i don't think there's other cases anyway)"
 	self spaces << 'case ';
 		print: aSwitchCase expression;
@@ -313,7 +313,7 @@ FAPrettyPrint >> visitSwitchCase: aSwitchCase [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitTernaryConditionalOperator: anOperator [
+FAFullPrettyPrint >> visitTernaryConditionalOperator: anOperator [
 	anOperator condition acceptVisitor: self.
 	self << ' ' << '?' << ' '.
 	anOperator then acceptVisitor: self.
@@ -322,12 +322,12 @@ FAPrettyPrint >> visitTernaryConditionalOperator: anOperator [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitType: aType [
+FAFullPrettyPrint >> visitType: aType [
 	aType type asCType printAsCTypeOn: self stream
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitUnaryOperator: anOperator [
+FAFullPrettyPrint >> visitUnaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
 		self << anOperator class symbol.
 		anOperator operand acceptVisitor: self.
@@ -335,7 +335,7 @@ FAPrettyPrint >> visitUnaryOperator: anOperator [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitVariableDeclaration: aVariableDeclaration [
+FAFullPrettyPrint >> visitVariableDeclaration: aVariableDeclaration [
 	| type |
 	
 	self flag: #badFix."don't know how to do it any other way.."
@@ -349,7 +349,7 @@ FAPrettyPrint >> visitVariableDeclaration: aVariableDeclaration [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitVariableDefinition: aVariableDefinition [
+FAFullPrettyPrint >> visitVariableDefinition: aVariableDefinition [
 	aVariableDefinition declaration acceptVisitor: self.
 	aVariableDefinition init
 		ifNotNil: [ :init | 
@@ -358,7 +358,7 @@ FAPrettyPrint >> visitVariableDefinition: aVariableDefinition [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> visitWhile: aWhile [
+FAFullPrettyPrint >> visitWhile: aWhile [
 	self << 'while ('.
 	aWhile condition ifNotNil:[:aCondition| aCondition acceptVisitor: self].
 	self << ') '.

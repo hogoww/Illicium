@@ -28,7 +28,7 @@ MAIlliciumTranslator class >> headerPrettyPrinterClass [
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> implementationPrettyPrinterClass [
-	^ FAPrettyPrint
+	^ FAFullPrettyPrint
 ]
 
 { #category : #'translation-api' }
