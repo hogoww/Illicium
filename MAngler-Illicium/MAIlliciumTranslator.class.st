@@ -282,4 +282,5 @@ MAIlliciumTranslator >> vmDependentCode [
 	vmProgram classesToPrepareSelectorsFor do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
 	inferer addDependency: vmProgram.
 	program addDependency: vmProgram.
+	program addInclude: #'"interp.h"'
 ]
