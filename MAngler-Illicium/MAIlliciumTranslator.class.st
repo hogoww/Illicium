@@ -181,7 +181,7 @@ MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in
 { #category : #'generation-api' }
 MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withClassName: aClassName [
 	aCompilationUnit addDeclarationsOfDefinitions.
-	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName , '.c'
+	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName name , '.c'
 ]
 
 { #category : #accessors }
