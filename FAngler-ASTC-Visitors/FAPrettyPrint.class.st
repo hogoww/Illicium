@@ -94,9 +94,7 @@ FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 	
 	
 	self << '/* Function declarations */' ; cr.
-	((anASTCCompilationUnit definitions 
-		collect: [ :aDefinition | aDefinition declaration ]) 
-			sort: [ :e1 :e2 | e1 id id < e2 id id ])
+	anASTCCompilationUnit functionDeclarations
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
 	self cr.
 

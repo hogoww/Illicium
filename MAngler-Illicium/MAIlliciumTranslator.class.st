@@ -172,6 +172,7 @@ MAIlliciumTranslator >> printCompilationUnit: aCompilationUnit in: aDirectory wi
 MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in: aDirectory withClassName: aClassName [
 	| headerCompilationUnit |
 	headerCompilationUnit := aCompilationUnit removeHeaderAndPutItInNewCompilationUnit.
+	aCompilationUnit add: (ASTCPreprocessorInclude new name:  '''',aClassName , '.h''').
 	
 	self printCompilationUnit: headerCompilationUnit in: aDirectory withName: aClassName , '.h'.
 	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName , '.c'
@@ -179,6 +180,7 @@ MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in
 
 { #category : #'generation-api' }
 MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withClassName: aClassName [
+	aCompilationUnit addDeclarationsOfDefinitions.
 	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName , '.c'
 ]
 
