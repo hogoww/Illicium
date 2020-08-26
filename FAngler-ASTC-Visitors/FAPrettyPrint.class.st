@@ -65,41 +65,40 @@ FAPrettyPrint >> visitCastOperator: aCastOperator [
 { #category : #visiting }
 FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 	
-	self << '/* includes */' ; cr.
+	anASTCCompilationUnit includes ifNotEmpty: [ self << '/* includes */' ; cr ].
 	anASTCCompilationUnit includes
 		do:[ :anInclude | self print: anInclude ; cr ].
-	self cr.
+	anASTCCompilationUnit includes ifNotEmpty: [ self cr ].
 
 	anASTCCompilationUnit preamble ifNotNil:[
 		self << '/* preamble */' ; cr ;
-			print: anASTCCompilationUnit preamble ; cr ].
-	self cr.
+			print: anASTCCompilationUnit preamble ; cr ; cr ].
 
-	self << '/* structTypes */' ; cr.
+	anASTCCompilationUnit structTypes ifNotEmpty: [ self << '/* structTypes */' ; cr ].
 	anASTCCompilationUnit structTypes
 		do:[ :aStructType | self print: aStructType ; cr ; cr ].
-	self cr.
+	anASTCCompilationUnit structTypes ifNotEmpty: [ self cr ].
 
 	anASTCCompilationUnit defines sort: [ :e1 :e2 | e1 name id < e2 name id ].
-	self << '/* Defines */' ; cr.
+	anASTCCompilationUnit defines ifNotEmpty: [ self << '/* Defines */' ; cr ].
 	anASTCCompilationUnit defines
 		do:[ :aDefine | self print: aDefine ; cr ].
-	self cr.
+	anASTCCompilationUnit defines ifNotEmpty: [ self cr ].
 
 	anASTCCompilationUnit variableDeclarations sort: [ :e1 :e2 | e1 id id < e2 id id ].
-	self << '/* Variables Declarations */' ; cr.
+	anASTCCompilationUnit variableDeclarations ifNotEmpty: [ self << '/* Variables Declarations */' ; cr ].
 	anASTCCompilationUnit variableDeclarations
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
-	self cr.
+	anASTCCompilationUnit variableDeclarations ifNotEmpty: [ self cr].
 	
 	
-	self << '/* Function declarations */' ; cr.
+	anASTCCompilationUnit functionDeclarations ifNotEmpty: [ self << '/* Function declarations */' ; cr ].
 	anASTCCompilationUnit functionDeclarations
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
-	self cr.
+	anASTCCompilationUnit variableDeclarations ifNotEmpty: [ self cr ].
 
 	(anASTCCompilationUnit definitions sort: [ :e1 :e2 | e1 declaration id id < e2 declaration id id ]).
-	self cr ; << '/* Definitions */' ; cr.
+	anASTCCompilationUnit definitions ifNotEmpty: [ self cr ; << '/* Definitions */' ; cr ].
 	anASTCCompilationUnit definitions
 			do:[ :aDefinition | self print: aDefinition ; cr ; cr ].
 ]
