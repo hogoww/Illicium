@@ -54,11 +54,6 @@ FANewFilePrinter >> generateFiles [
 ]
 
 { #category : #accessing }
-FANewFilePrinter >> headerPrettyPrinter: aPrettyPrinter [
-	headerPrettyPrinter := aPrettyPrinter
-]
-
-{ #category : #accessing }
 FANewFilePrinter >> implementationPrettyPrinter: aPrettyPrinter [
 	implementationPrettyPrinter := aPrettyPrinter
 ]
@@ -84,14 +79,4 @@ FANewFilePrinter >> prettyPrinter: anObject [
 FANewFilePrinter >> printCodeInFileStream: aStream [
 	prettyPrinter stream: aStream.
 	compilationUnit acceptVisitor: prettyPrinter
-]
-
-{ #category : #accessing }
-FANewFilePrinter >> printStringInFile: aString [
-	| file |
-	
-	directory ensureCreateDirectory.
-	file := directory / fileName.
-	file exists ifTrue: [ file delete ].
-	file writeStreamDo: [ :stream | stream << aString ].
 ]

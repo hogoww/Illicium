@@ -168,10 +168,10 @@ FATranslator >> prettyPrintCodeForMethod: aSelector fromClass: aClass [
 	^ compilationUnit definitions anyOne prettyPrintUsing: self class prettyPrinterClass new
 ]
 
-{ #category : #'translation-api' }
+{ #category : #default }
 FATranslator >> prettyPrinterClass [
-
-	^ FAFullPrettyPrint
+	"should return the *class* used to pretty print by default"
+	^ self subclassResponsibility 
 ]
 
 { #category : #accessors }

@@ -5,8 +5,7 @@ Class {
 		'fileName',
 		'directory',
 		'compilationUnit',
-		'implementationPrettyPrint',
-		'headerPrettyPrint'
+		'prettyPrinter'
 	],
 	#category : #'FAngler-Core-Installers'
 }
@@ -43,55 +42,32 @@ FAFilePrinter >> fileName: aString [
 
 { #category : #printing }
 FAFilePrinter >> generateFiles [
-	directory ensureCreateDirectory.
-	self generateHeaderFile.
-	self generateImplementationFile
-]
-
-{ #category : #printing }
-FAFilePrinter >> generateHeaderFile [
 	| file |
-	" we only print the header when an explicit pretty printer is given"
-	headerPrettyPrint ifNil: [ ^ self ].
-
-	file := directory / (fileName , '.h').
+	directory ensureCreateDirectory.
+	prettyPrinter 
+		ifNil: [ self error: 'I require a pretty printer to print a C file of a compilation unit.' ].
+	
+	file := directory / fileName.
 	file exists ifTrue: [ file delete ].
 	file writeStreamDo:[:stream |
-		self printOnStream: stream using: headerPrettyPrint.
+		self printOnStream: stream using: prettyPrinter.
 	].
 ]
 
 { #category : #printing }
 FAFilePrinter >> generateImplementationFile [
 	| file |
-	implementationPrettyPrint 
-		ifNil: [ self error: 'I require a pretty printer to print a C file of a compilation unit.' ].
-	
-	file := directory / (fileName , '.c').
-	file exists ifTrue: [ file delete ].
-	file writeStreamDo:[:stream |
-		self printOnStream: stream using: implementationPrettyPrint.
-	].
+
 ]
 
 { #category : #accessing }
-FAFilePrinter >> headerPrettyPrint [
-	^ headerPrettyPrint
+FAFilePrinter >> prettyPrinter [
+	^ prettyPrinter
 ]
 
 { #category : #accessing }
-FAFilePrinter >> headerPrettyPrint: anObject [
-	headerPrettyPrint := anObject
-]
-
-{ #category : #accessing }
-FAFilePrinter >> implementationPrettyPrint [
-	^ implementationPrettyPrint
-]
-
-{ #category : #accessing }
-FAFilePrinter >> implementationPrettyPrint: anObject [
-	implementationPrettyPrint := anObject
+FAFilePrinter >> prettyPrinter: aPrettyPrinter [
+	prettyPrinter := aPrettyPrinter
 ]
 
 { #category : #printing }
@@ -155,4 +131,14 @@ const char* getModuleName(void)
 
 '
 
+]
+
+{ #category : #accessing }
+FAFilePrinter >> printStringInFile: aString [
+	| file |
+	
+	directory ensureCreateDirectory.
+	file := directory / fileName.
+	file exists ifTrue: [ file delete ].
+	file writeStreamDo: [ :stream | stream << aString ].
 ]

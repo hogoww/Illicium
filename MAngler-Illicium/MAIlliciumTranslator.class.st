@@ -17,18 +17,7 @@ MAIlliciumTranslator class >> generateMainForTestClasses: classes [
 	FAFilePrinter new
 		directory: './generated/tests/';
 		fileName: 'AllTests.c';
-		implementationPrettyPrint: self implementationPrettyPrint new;
 		printStringInFile: (self mainCCodeForTestClasses: classes)
-]
-
-{ #category : #'default-configuration' }
-MAIlliciumTranslator class >> headerPrettyPrinterClass [
-	^ FAHeaderPrettyPrint
-]
-
-{ #category : #'default-configuration' }
-MAIlliciumTranslator class >> implementationPrettyPrinterClass [
-	^ FAFullPrettyPrint
 ]
 
 { #category : #'translation-api' }
@@ -70,6 +59,11 @@ int main(void)
 ]
 
 { #category : #'default-configuration' }
+MAIlliciumTranslator class >> prettyPrinterClass [
+	^ FAPrettyPrint
+]
+
+{ #category : #'default-configuration' }
 MAIlliciumTranslator class >> programClass [
 	^ MAProgram
 ]
@@ -93,13 +87,7 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 MAIlliciumTranslator >> generateClass: aClass [ 
 	| translation |
 	translation := self translateClass: aClass.
-	FAFilePrinter new
-		directory: './generated/classes/';
-		fileName: aClass name;
-		compilationUnit: translation;
-		headerPrettyPrint: self class headerPrettyPrinterClass new;
-		implementationPrettyPrint: self class implementationPrettyPrinterClass new;
-		generateFiles
+	self printCompilationUnitInSeparateFiles: translation in: './generated/classes/' withClassName: aClass name
 ]
 
 { #category : #'generation-api' }
@@ -110,8 +98,7 @@ MAIlliciumTranslator >> generateTestClass: aClass [
 		directory: './generated/tests/';
 		fileName: aClass name , '.c';
 		compilationUnit: translation;
-		headerPrettyPrinter: self class headerPrettyPrinterClass new;
-		implementationPrettyPrinter: self class implementationPrettyPrinterClass new;
+		prettyPrinter: self class prettyPrinterClass new;	
 		generateFiles.
 	self class generateMainForTestClasses: { aClass }.
 ]
@@ -169,6 +156,30 @@ MAIlliciumTranslator >> preTranslationTransformations [
 { #category : #visiting }
 MAIlliciumTranslator >> prepareProgram [
 	program prepareWithInferer: inferer inTranslator: self
+]
+
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> printCompilationUnit: aCompilationUnit in: aDirectory withName: aFileName [
+	FAFilePrinter new
+		directory: aDirectory;
+		fileName: aFileName;
+		compilationUnit: aCompilationUnit;
+		prettyPrinter: self class prettyPrinterClass new;
+		generateFiles
+]
+
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in: aDirectory withClassName: aClassName [
+	| headerCompilationUnit |
+	headerCompilationUnit := aCompilationUnit removeHeaderAndPutItInNewCompilationUnit.
+	
+	self printCompilationUnit: headerCompilationUnit in: aDirectory withName: aClassName , '.h'.
+	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName , '.c'
+]
+
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withClassName: aClassName [
+	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName , '.c'
 ]
 
 { #category : #accessors }

@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangPrettyPrinter,
-	#superclass : #FAFullPrettyPrint,
+	#superclass : #FAPrettyPrint,
 	#category : #'MAngler-Slang-Prettyprint'
 }
 

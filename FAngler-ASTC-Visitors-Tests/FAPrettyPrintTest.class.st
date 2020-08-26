@@ -26,7 +26,7 @@ FAPrettyPrintTest >> testAssociativityDifferentPriority1 [
 	self assert: node isIdentifier.
 	self assert: node id equals: #c.
 	
-	self assert: (operator prettyPrintUsing: FAFullPrettyPrint new) equals: '(a + b) * c'.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: '(a + b) * c'.
 ]
 
 { #category : #tests }
@@ -51,7 +51,7 @@ FAPrettyPrintTest >> testAssociativityDifferentPriority2 [
 		self assert: node isIdentifier.
 		self assert: node id equals: #c.
 
-	self assert: (operator prettyPrintUsing: FAFullPrettyPrint new) equals: 'a + b * c'.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'a + b * c'.
 ]
 
 { #category : #tests }
@@ -63,7 +63,7 @@ FAPrettyPrintTest >> testReturnNil [
 
 	return debugASTCStructure.
 	self assert: return isReturn.
-	self assert: (return prettyPrintUsing: FAFullPrettyPrint new) equals: 'return ;'.
+	self assert: (return prettyPrintUsing: FAPrettyPrint new) equals: 'return ;'.
 ]
 
 { #category : #tests }
@@ -73,7 +73,7 @@ FAPrettyPrintTest >> testVisitAddressOfOperator [
 
 	operator debugASTCStructure.
 	self assert: operator isAddressOfOperator.
-	self assert: (operator prettyPrintUsing: FAFullPrettyPrint new) equals: '&a'.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: '&a'.
 ]
 
 { #category : #tests }
@@ -83,7 +83,7 @@ FAPrettyPrintTest >> testVisitBreak [
 	
 	breakStatement 	debugASTCStructure.
 	self assert: breakStatement isBreak.
-	self assert: (breakStatement prettyPrintUsing: FAFullPrettyPrint new) equals: 'break;'.
+	self assert: (breakStatement prettyPrintUsing: FAPrettyPrint new) equals: 'break;'.
 ]
 
 { #category : #test }
@@ -96,7 +96,7 @@ FAPrettyPrintTest >> testVisitCastOperator [
 	
 	structure debugASTCStructure.
 	self assert: structure isCastOperator.
-	self assert: (structure prettyPrintUsing: FAFullPrettyPrint new) equals: '(struct b) a'.
+	self assert: (structure prettyPrintUsing: FAPrettyPrint new) equals: '(struct b) a'.
 ]
 
 { #category : #tests }
@@ -106,7 +106,7 @@ FAPrettyPrintTest >> testVisitEmptyStatement [
 	
 	emptyStatement debugASTCStructure.
 	self assert: emptyStatement isEmptyStatement.
-	self should: [ emptyStatement prettyPrintUsing: FAFullPrettyPrint new ] raise: ShouldNotImplement
+	self should: [ emptyStatement prettyPrintUsing: FAPrettyPrint new ] raise: ShouldNotImplement
 ]
 
 { #category : #tests }
@@ -116,7 +116,7 @@ FAPrettyPrintTest >> testVisitEqualityOperator [
 
 	operator debugASTCStructure.
 	self assert: operator isEqualityOperator.
-	self assert: (operator prettyPrintUsing: FAFullPrettyPrint new) equals: 'a == b'.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'a == b'.
 ]
 
 { #category : #tests }
@@ -126,7 +126,7 @@ FAPrettyPrintTest >> testVisitInequalityOperator [
 
 	operator debugASTCStructure.
 	self assert: operator isInequalityOperator.
-	self assert: (operator prettyPrintUsing: FAFullPrettyPrint new) equals: 'a != b'.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'a != b'.
 ]
 
 { #category : #tests }
@@ -139,7 +139,7 @@ FAPrettyPrintTest >> testVisitPreProcessorDefine [
 
 	defineMacro debugASTCStructure.
 	self assert: defineMacro isPreprocessorDefine.
-	self assert: (defineMacro prettyPrintUsing: FAFullPrettyPrint new) equals: '#define DRUSS "awesome"'.
+	self assert: (defineMacro prettyPrintUsing: FAPrettyPrint new) equals: '#define DRUSS "awesome"'.
 ]
 
 { #category : #tests }
@@ -149,7 +149,7 @@ FAPrettyPrintTest >> testVisitStructureDeclaration [
 	
 	structure debugASTCStructure.
 	self assert: structure isStructureDeclaration.
-	self assert: (structure prettyPrintUsing: FAFullPrettyPrint new) equals: 'struct a'.
+	self assert: (structure prettyPrintUsing: FAPrettyPrint new) equals: 'struct a'.
 ]
 
 { #category : #tests }
@@ -164,7 +164,7 @@ FAPrettyPrintTest >> testVisitStructureDefinition [
 	
 	operator debugASTCStructure.
 	self assert: operator isStructureDefinition.
-	self assert: (operator prettyPrintUsing: FAFullPrettyPrint new) equals: 
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 
 'typedef struct heros {
  int druss;
 } heros ;'.
@@ -186,7 +186,7 @@ FAPrettyPrintTest >> testVisitSwitch [
 			
 	switch debugASTCStructure.
 	self assert: switch isSwitch.
-	self assert: (switch prettyPrintUsing: FAFullPrettyPrint new) equals: 
+	self assert: (switch prettyPrintUsing: FAPrettyPrint new) equals: 
 'switch ( 0 )
 {
  case 1 :
@@ -210,7 +210,7 @@ FAPrettyPrintTest >> testVisitSwitchCase [
 		
 	switchCase debugASTCStructure.
 	self assert: switchCase isSwitchCase.
-	self assert: (switchCase prettyPrintUsing: FAFullPrettyPrint new) equals: 
+	self assert: (switchCase prettyPrintUsing: FAPrettyPrint new) equals: 
 'case 0 :
  {
   1;
@@ -228,5 +228,5 @@ FAPrettyPrintTest >> testVisitTernaryOperatorTest [
 
 	operator debugASTCStructure.
 	self assert: operator isTernaryConditionalOperator.
-	self assert: (operator prettyPrintUsing: FAFullPrettyPrint new) equals: 'a ? b : c'.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'a ? b : c'.
 ]

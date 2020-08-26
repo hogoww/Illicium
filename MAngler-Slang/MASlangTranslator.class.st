@@ -232,7 +232,7 @@ MASlangTranslator >> prepareProgram [
 	program prepareWithInferer: inferer inTranslator: self.
 ]
 
-{ #category : #'translation-api' }
+{ #category : #default }
 MASlangTranslator >> prettyPrinterClass [
 
 	^ self classTranslator prettyPrinterClass
