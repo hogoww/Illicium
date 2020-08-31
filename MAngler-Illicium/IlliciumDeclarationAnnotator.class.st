@@ -3,7 +3,7 @@ Class {
 	#superclass : #FAVariableDeclarationAnnotator,
 	#instVars : [
 		'variableAppeareanceTracker',
-		'varNamesTodeclareAtStart'
+		'varNamesToDeclareAtStart'
 	],
 	#category : #'MAngler-Illicium-Analysis'
 }
@@ -11,7 +11,7 @@ Class {
 { #category : #visit }
 IlliciumDeclarationAnnotator >> initialize [ 
 	super initialize.
-	varNamesTodeclareAtStart := Set new.
+	varNamesToDeclareAtStart := Set new.
 	variableAppeareanceTracker:= Dictionary new.
 ]
 
@@ -29,7 +29,7 @@ IlliciumDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 	(association value and: [ anAssignmentNode parent ~= variable methodNode body ])
 		ifTrue:[
 			association value: false.
-			varNamesTodeclareAtStart add: variable name.
+			varNamesToDeclareAtStart add: variable name.
 			].
 	"Heuristic, if something is declared anywhere but the body of the method, we declare it in the body anyway.
 	a scope analysis slightly more complex would allow something better though."
@@ -60,8 +60,9 @@ IlliciumDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	
 	"This set should currently be empty except for the body of the method."
 	"The body of the method is currently set by the visit of the methodNode"
-	tempToDeclare := aSequenceNode temporaries select: [:aTemporaryDeclaration | 
-		(varNamesTodeclareAtStart includes: aTemporaryDeclaration name)].
+	tempToDeclare := aSequenceNode temporaries select: [ :aTemporaryDeclaration | 
+		(varNamesToDeclareAtStart includes: aTemporaryDeclaration name)].
+
 	self atNewPropertyPut: tempToDeclare for: aSequenceNode.
 ]
 
