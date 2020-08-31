@@ -50,7 +50,6 @@ IlliciumArray >> do: aBlock [
 	res body statements addFirst: 
 		(arg assign: (receiver indexAt: iterator))
 		asStatement.
-	self halt.
 	^ res
 ]
 

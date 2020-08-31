@@ -41,11 +41,6 @@ IlliciumDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 	anAssignmentNode value acceptVisitor: self
 ]
 
-{ #category : #accessing }
-IlliciumDeclarationAnnotator >> visitBlockNode: aBlockNode [
-	varNamesToDeclareAtStart addAll: aBlockNode arguments
-]
-
 { #category : #visit }
 IlliciumDeclarationAnnotator >> visitGlobalNode: aGlobalNode [
 	"they are already declared"
@@ -65,8 +60,12 @@ IlliciumDeclarationAnnotator >> visitSequenceNode: aSequenceNode [
 	
 	"This set should currently be empty except for the body of the method."
 	"The body of the method is currently set by the visit of the methodNode"
-	tempToDeclare := aSequenceNode temporaries select: [ :aTemporaryDeclaration | 
-		(varNamesToDeclareAtStart includes: aTemporaryDeclaration name)].
+	tempToDeclare := (aSequenceNode temporaries select: [ :aTemporaryDeclaration | 
+		(varNamesToDeclareAtStart includes: aTemporaryDeclaration name)]) asOrderedCollection.
+	
+	self flag: #hack. "kinda hackish. We declare all argumentsof blocks"
+	((aSequenceNode parent isBlock) 
+		ifTrue: [ tempToDeclare addAll: aSequenceNode parent arguments ]).
 
 	self atNewPropertyPut: tempToDeclare for: aSequenceNode.
 ]

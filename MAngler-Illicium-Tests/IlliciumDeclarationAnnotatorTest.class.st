@@ -42,11 +42,11 @@ IlliciumDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
 	"the assignment should become a C declaration"	
 	
 	"The argument should not be declared in its block"	
-	self assert: ast body statements first body propertyEquals: ast body statements first arguments asSet.
+	self assert: ast body statements first body propertyEquals: ast body statements first arguments.
 
 	"But at the start of the function"
 	self assert: ast body statements first arguments isNotEmpty.
-	self assert: ast body propertyEquals: #() .
+	self assert: ast body propertyEquals: #() asOrderedCollection.
 ]
 
 { #category : #basic }
@@ -86,7 +86,7 @@ IlliciumDeclarationAnnotatorTest >> testVisitTemporaryNodeInBlock [
 	"and therefore shouldn't be declared at the start"
 	self assert: ast body statements first temporaries isNotEmpty.
 	"Sometimes the temporaries are in an array, sometime in an OrderedCollection"
-	self assert: ast body propertyEquals: #().
+	self assert: ast body propertyEquals: OrderedCollection new.
 	self assert: ast body statements first body 
 		propertyEquals: ast body statements first temporaries.
 ]
