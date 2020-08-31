@@ -41,6 +41,11 @@ IlliciumDeclarationAnnotator >> visitAssignmentNode: anAssignmentNode [
 	anAssignmentNode value acceptVisitor: self
 ]
 
+{ #category : #accessing }
+IlliciumDeclarationAnnotator >> visitBlockNode: aBlockNode [
+	varNamesToDeclareAtStart addAll: aBlockNode arguments
+]
+
 { #category : #visit }
 IlliciumDeclarationAnnotator >> visitGlobalNode: aGlobalNode [
 	"they are already declared"
