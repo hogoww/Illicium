@@ -205,14 +205,6 @@ MASlangPrettyPrinter >> visitAssignementAdditionOperator: anAssignmentAdditionOp
 ]
 
 { #category : #visiting }
-MASlangPrettyPrinter >> visitAssignmentOperator: anAssignmentOperator [
-
-	self print: anAssignmentOperator leftOperand.
-	self << ' ' << anAssignmentOperator class symbol << ' '.
-	self print: anAssignmentOperator rightOperand
-]
-
-{ #category : #visiting }
 MASlangPrettyPrinter >> visitBinaryOperator: anOperator [
 
 	self printBinaryOperand: anOperator leftOperand.
