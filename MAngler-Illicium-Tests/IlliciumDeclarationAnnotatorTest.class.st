@@ -37,9 +37,16 @@ IlliciumDeclarationAnnotatorTest >> testAssignmentInDifferentSequence [
 
 { #category : #basic }
 IlliciumDeclarationAnnotatorTest >> testVisitArgumentNodeInABlock [
-	"not sure how I want it to be for Illicium"
-	<expectedFailure>
-	self assert: false.
+	super testVisitArgumentNodeInABlock. 
+	
+	"the assignment should become a C declaration"	
+	
+	"The argument should not be declared in its block"	
+	self assert: ast body statements first body propertyEquals: ast body statements first arguments asSet.
+
+	"But at the start of the function"
+	self assert: ast body statements first arguments isNotEmpty.
+	self assert: ast body propertyEquals: #() .
 ]
 
 { #category : #basic }

@@ -13,17 +13,11 @@ FAPrettyPrint >> doesThisNeedParenthesis: aNode [
 ]
 
 { #category : #visiting }
-FAPrettyPrint >> printBinaryOperand: anOperand [
-	anOperand acceptVisitor: self
-
-]
-
-{ #category : #visiting }
 FAPrettyPrint >> visitBinaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
-		self printBinaryOperand: anOperator leftOperand.
+		anOperator leftOperand acceptVisitor: self.
 		self << ' ' << anOperator class symbol << ' '.
-		self printBinaryOperand: anOperator rightOperand.
+		anOperator rightOperand acceptVisitor: self.
 	]
 ]
 
@@ -193,9 +187,9 @@ FAPrettyPrint >> visitIf: anIf [
 { #category : #visiting }
 FAPrettyPrint >> visitIndexerOperator: anIndexerOperator [
 	self parenthesisFor: anIndexerOperator print: [
-		self visitExpression: anIndexerOperator leftOperand.
+		anIndexerOperator leftOperand acceptVisitor: self.
 		self << '['.
-		self visitExpression: anIndexerOperator rightOperand.
+		anIndexerOperator rightOperand acceptVisitor: self.
 		self << ']' ]
 ]
 

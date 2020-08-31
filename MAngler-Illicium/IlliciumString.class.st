@@ -24,7 +24,7 @@ IlliciumString >> = anotherStringNode [
 	
 	(methodTranslator getNodeTranslationType: anotherStringNode) = self class ifFalse:[ self error: 'both nodes have to be explicitly typed as Strings' ].
 	
-	methodTranslator addInclude: 'string'.
+	methodTranslator addInclude: 'string.h'.
 	^ (ASTCFunctionCall new id: (ASTCIdentifier new id: #strcomp) ;
 			addArgument: self translatedReceiver;
 			addArgument: (anotherStringNode acceptVisitor: methodTranslator);
