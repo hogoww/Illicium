@@ -4,7 +4,7 @@ Class {
 	#category : #'FAngler-ASTC-Visitors-Tests-Validation'
 }
 
-{ #category : #tests }
+{ #category : #'tests-parenthesis' }
 FAPrettyPrintTest >> testAssociativityDifferentPriority1 [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) + (ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c).
@@ -29,7 +29,7 @@ FAPrettyPrintTest >> testAssociativityDifferentPriority1 [
 	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: '(a + b) * c'.
 ]
 
-{ #category : #tests }
+{ #category : #'tests-parenthesis' }
 FAPrettyPrintTest >> testAssociativityDifferentPriority2 [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) + ((ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c)).
@@ -55,6 +55,25 @@ FAPrettyPrintTest >> testAssociativityDifferentPriority2 [
 ]
 
 { #category : #tests }
+FAPrettyPrintTest >> testPrintBinaryOperatorWithBinaryOperatorAsOperands [
+	| operator |
+	operator := ((ASTCLiteral value: 1) + (ASTCLiteral value: 2)) + ((ASTCLiteral value: 3) + (ASTCLiteral value: 4)).
+	operator debugASTCStructure.
+	self assert: operator isAdditionOperator.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: '1 + 2 + 3 + 4'.
+]
+
+{ #category : #tests }
+FAPrettyPrintTest >> testPrintSimpleBinaryOperand [
+	| operator |
+	operator := (ASTCLiteral value: 1) + (ASTCLiteral value: 2).
+
+	operator debugASTCStructure.
+	self assert: operator isAdditionOperator.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: '1 + 2'.
+]
+
+{ #category : #tests }
 FAPrettyPrintTest >> testReturnNil [
 	| return |
 	return := ASTCReturn new
@@ -64,6 +83,16 @@ FAPrettyPrintTest >> testReturnNil [
 	return debugASTCStructure.
 	self assert: return isReturn.
 	self assert: (return prettyPrintUsing: FAPrettyPrint new) equals: 'return ;'.
+]
+
+{ #category : #'tests-parenthesis' }
+FAPrettyPrintTest >> testStructStaticAccessInIndexAtInAssign [
+	| operator |
+	"comes from a real bug, hence the specificity of the test."
+	operator := (('self' asCIdentifierNode structStaticAccess: 'temps' asCIdentifierNode) indexAt: 'i'asCIdentifierNode) assign: 'nilObj' asCIdentifierNode.
+	
+	operator debugASTCStructure.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'self . temps[i] = nilObj'.
 ]
 
 { #category : #tests }
@@ -86,7 +115,7 @@ FAPrettyPrintTest >> testVisitBreak [
 	self assert: (breakStatement prettyPrintUsing: FAPrettyPrint new) equals: 'break;'.
 ]
 
-{ #category : #test }
+{ #category : #tests }
 FAPrettyPrintTest >> testVisitCastOperator [
 	| structure |
 	structure := ASTCCastOperator new 

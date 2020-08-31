@@ -72,8 +72,8 @@ FAFilePrinter >> prettyPrinter: aPrettyPrinter [
 
 { #category : #printing }
 FAFilePrinter >> printOnStream: aStream using: aPrettyPrinter [
-	aPrettyPrinter stream: aStream.
-	compilationUnit acceptVisitor: aPrettyPrinter
+	aPrettyPrinter stream: aStream. "resets the current stream instance variable, other variables should be untouched."
+	compilationUnit acceptVisitor: aPrettyPrinter.
 ]
 
 { #category : #printing }
