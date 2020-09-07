@@ -137,6 +137,7 @@ MAIlliciumTranslator >> initialize [
 		at: #SmallFloat64 put: IlliciumFloat ; 
 		at: #BoxedFloat64 put: IlliciumFloat ; 
 		at: #Array put: IlliciumArray ;
+		at: #OrderedCollection put: IlliciumOrderedCollection ;
 		yourself
 ]
 

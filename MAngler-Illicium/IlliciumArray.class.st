@@ -1,9 +1,6 @@
 Class {
 	#name : #IlliciumArray,
-	#superclass : #IlliciumObject,
-	#instVars : [
-		'elementType'
-	],
+	#superclass : #IlliciumAbstratCollection,
 	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
@@ -15,9 +12,27 @@ IlliciumArray class >> asCType [
 ]
 
 { #category : #accessing }
+IlliciumArray >> asOrderedCollection [
+	| res |
+	receiverNode isDynamicArray
+		ifFalse: [ ^ UnsupportedFeature new feature: 'asOrderedCollection is only usable in a very trivial way, see comment' ; signal ].
+
+	" We only translate a literal array node currently : 
+	{ 2. selector }
+	addElement(addElement((newOrderedCollectionOfSize(2)) 2) selector)"
+	res := self asFunctionCall: #newOrderedCollectionOfSize
+		withTranslatedArguments: { receiverNode statements size asLiteralNode acceptVisitor: methodTranslator }.
+	
+	receiverNode statements do: [ :anElement | | message |
+		message := MessageSend receiver: res selector: #add: argument: anElement.
+		res := methodTranslator forward: message to: OrderedCollection
+		].
+	^ res
+]
+
+{ #category : #accessing }
 IlliciumArray >> at: anIndex [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
-	 self flag:#todo.
 	^ self translatedReceiver indexAt:(anIndex acceptVisitor: methodTranslator)
 ]
 
@@ -51,16 +66,6 @@ IlliciumArray >> do: aBlock [
 		(arg assign: (receiver indexAt: iterator))
 		asStatement.
 	^ res
-]
-
-{ #category : #accessing }
-IlliciumArray >> elementType [
-	^ elementType
-]
-
-{ #category : #accessing }
-IlliciumArray >> elementType: aType [
-	elementType := aType
 ]
 
 { #category : #creation }
