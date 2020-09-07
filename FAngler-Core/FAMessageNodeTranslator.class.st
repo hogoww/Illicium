@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #translate }
-FAMessageNodeTranslator >> forward: aMessage to: aType [
+FAMessageNodeTranslator >> forward: aMessageSend to: aType [
 	| aReceiver |
 	aReceiver := (methodTranslator
 		getReplacementType: aType) createInstance
-		receiverNode: aMessage receiver;
+		receiverNode: aMessageSend receiver;
 		methodTranslator: methodTranslator;
 		yourself.
 	^ aReceiver
-		perform: aMessage selector
-		withArguments: aMessage arguments asArray
+		perform: aMessageSend selector
+		withArguments: aMessageSend arguments asArray
 ]
 
 { #category : #translate }

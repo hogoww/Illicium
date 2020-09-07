@@ -186,8 +186,8 @@ FAMethodTranslator >> defaultVariableNodeTranslator [
 ]
 
 { #category : #utility }
-FAMethodTranslator >> forward: aMessage to: aType [
-	^ (translators at: #messageNodeTranslator) forward: aMessage to: aType asTypeReification
+FAMethodTranslator >> forward: aMessageSend to: aType [
+	^ (translators at: #messageNodeTranslator) forward: aMessageSend to: aType asTypeReification
 ]
 
 { #category : #typing }
