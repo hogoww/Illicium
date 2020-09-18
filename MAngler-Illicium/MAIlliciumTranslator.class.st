@@ -87,7 +87,8 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 MAIlliciumTranslator >> generateClass: aClass [ 
 	| translation |
 	translation := self translateClass: aClass.
-	self printCompilationUnitInSeparateFiles: translation in: './generated/classes/' withClassName: aClass name
+	self printCompilationUnitInSeparateFiles: translation in: './generated/classes/' withClassName: aClass name.
+	^ translation
 ]
 
 { #category : #'generation-api' }
@@ -101,6 +102,7 @@ MAIlliciumTranslator >> generateTestClass: aClass [
 		prettyPrinter: self class prettyPrinterClass new;	
 		generateFiles.
 	self class generateMainForTestClasses: { aClass }.
+	^ translation
 ]
 
 { #category : #initialization }
