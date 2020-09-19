@@ -20,8 +20,9 @@ ILMethodNodeTestTranslator >> translateParameters: aMethodNode [
 					yourself
 			 } , parameters ].
 	
-	methodTranslator isStatefulCode ifFalse: [ ^ parameters ].
-	
+	methodTranslator isStatefulCode ifFalse: [ ^ parameters ].	
+	aMethodNode methodClass = UndefinedObject ifTrue: [ ^ parameters ].
+
 	^ { 
 		ASTCVariableDeclaration new 
 			id: (ASTCIdentifier id: #self);

@@ -23,7 +23,7 @@ IlliciumTranslateTestsTest >> testEmptyTest [
 IlliciumTranslateTestsTest >> testGenerateTestClass [
 	"very weak test, not sure how to test the generation otherwise"
 	
-	MAIlliciumTranslator generateTestClass: self classToTest
+	MAIlliciumTranslator new vmDependentCode; generateTestClass: self classToTest
 	
 ]
 
@@ -44,7 +44,7 @@ IlliciumTranslateTestsTest >> testTranslateTestClass [
 	self assert: cu definitions size equals: expectedNumberOfDeclaration + 1. "+1 for the declaration of the suite"
 
 	
-	self assert: cu includes size equals: 2.
+	self assert: cu includes size equals: 3.
 ]
 
 { #category : #testing }
@@ -90,7 +90,7 @@ IlliciumTranslateTestsTest >> testWithAssertTrueTest [
 { #category : #testing }
 IlliciumTranslateTestsTest >> testWithInterPreterCall [
 	| function assertFuncCall |
-	function := MAIlliciumTranslator translateTestMethod: (self classToTest >> #testIsBaseFrame) ast.
+	function := MAIlliciumTranslator new vmDependentCode; translateTestMethod: (self classToTest >> #testIsBaseFrame) ast.
 	function debugASTCStructure.
 	self assert: function declaration parameters size equals: 1.
 	self assert: function declaration parameters first type type type equals: (CType createFrom: 'CuTest*').

@@ -13,6 +13,11 @@ IlliciumTestClassToBeTranslated class >> isAbstract [
 	^ true
 ]
 
+{ #category : #testing }
+IlliciumTestClassToBeTranslated class >> slotsNamesToIgnore [
+	^ #(testSelector expectedFails)
+]
+
 { #category : #tests }
 IlliciumTestClassToBeTranslated >> setUp [
 	interpreter := StackInterpreterPrimitives new

@@ -8,9 +8,8 @@ Class {
 FALiteralTranslatorTest >> testTranslationSmallIntegerLiteral [
 	| astC |
 	
-	astC := (MAIlliciumTranslator translateExpression: '5') statements at: 1.
+	astC := ((MAIlliciumTranslator translateExpression: '5') body statements at: 1).
 	
-	self assert: astC isExpressionStatement.
 	self assert: astC expression isLiteral.
 	self assert: astC expression value equals: 5.
 	self assert: astC expression equals: 

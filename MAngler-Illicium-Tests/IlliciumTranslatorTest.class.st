@@ -12,7 +12,7 @@ IlliciumTranslatorTest >> aMethod [
 { #category : #tests }
 IlliciumTranslatorTest >> testTranslateExpression [
 	| astC expectedC |
-	astC := (MAIlliciumTranslator translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]')
+	astC := (MAIlliciumTranslator new translateExpression: '1 = 2 ifTrue:[ 1 ] ifFalse:[ 2 ]')
 		body statements first expression.
 		
 	expectedC := ASTCTernaryConditionalOperator new 
