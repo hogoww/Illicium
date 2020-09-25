@@ -6,13 +6,13 @@ Class {
 
 { #category : #'translation-api' }
 FAClassStateAsStructTranslator >> translateStateOf: aClass [
-	| struct |
+	| struct topClass |
 	struct := ASTCStructureDefinition new
 		declaration: (ASTCStructureDeclaration new id: (classTranslator stateIdFor: aClass) ; yourself);
 		yourself.
-		
+	topClass := aClass topClassToConsider.
     "We only translate the current's class slots, since we're treating each class in the hierarchy, and there is no polymorphism. (besides VMclass, will see in time"
-    (aClass allSlotsBelow: Object) collect: [:aSlot | 
+    (aClass allSlotsBelow: topClass) collect: [:aSlot | 
 		(aClass slotsNamesToIgnore includes: aSlot name)
 			ifFalse: [ struct members add: (self translateSlot: aSlot) ] ].
     "aClass classVariables collect: [:aSlot | aSlot acceptTranslator: self ] into: cu."
