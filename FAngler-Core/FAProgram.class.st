@@ -71,11 +71,7 @@ FAProgram >> addRegularClass: aClass [
 { #category : #adding }
 FAProgram >> addTestClass: aClass [
 	| selectors |
-	self flag: #hackForQuickFeedback.
-	selectors := (aClass inheritsFrom: VMSpurMemoryManagerTest) ifTrue:[ aClass allSelectorsBelow: VMSpurMemoryManagerTest ].
-	selectors := selectors ifNil: [ (aClass inheritsFrom: ParametrizedTestCase) ifTrue:[ aClass allSelectorsBelow: ParametrizedTestCase ]].
-	selectors := selectors ifNil: [ (aClass inheritsFrom: TestCase) ifTrue:[ aClass allSelectorsBelow: TestCase ]].
-	selectors ifNil:  [ self error: 'not a known test class' ].
+	selectors := aClass allSelectorsBelow: aClass topClassToConsider.
 	selectors 
 		do: [ :aMethod | self addMethod: (aClass lookupSelector: aMethod) ast copy ]
 ]
