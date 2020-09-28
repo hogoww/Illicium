@@ -16,7 +16,7 @@ Class {
 FAProgram >> addClass: aClass [
 
 	classesToGenerate add: aClass.
-
+	
 	(aClass includesBehavior: TestCase) ifTrue:[ ^ self addTestClass: aClass ].
 	
 	self flag: #todo.
@@ -44,7 +44,7 @@ FAProgram >> addMethod: aMethod [
 	"This returns a boolean, which means that the method overrode an existing method"
 	"see MASlangMethodTranslator >> #addMethod:withInferer:"
 
-	self checkDependenciesFor: aMethod selector.
+	self checkDependenciesFor: aMethod.
 		
 	methods at: aMethod selector
 		ifPresent: [ :conflicting | "if the conflicting method is further down the hierarchy, we take it" 
@@ -70,15 +70,18 @@ FAProgram >> addRegularClass: aClass [
 
 { #category : #adding }
 FAProgram >> addTestClass: aClass [
-	(aClass allSelectorsBelow: TestCase) 
+	| selectors |
+	selectors := aClass allSelectorsBelow: aClass topClassToConsider.
+	selectors 
 		do: [ :aMethod | self addMethod: (aClass lookupSelector: aMethod) ast copy ]
 ]
 
 { #category : #dependencies }
-FAProgram >> checkDependenciesFor: aSelector [
+FAProgram >> checkDependenciesFor: aMethod [
 	"We assume that a dependency is immutable"
-	(self dependenciesHaveMethodNamed: aSelector)
-		ifTrue:[ MethodExistsInDependency new methodSelector: aSelector ; signal ].
+	(aMethod hasPragmaNamed: #notRealDuplicate) ifTrue:[ ^ self ].
+	(self dependenciesHaveMethodNamed: aMethod selector)
+		ifTrue:[ MethodExistsInDependency new methodSelector: aMethod selector ; signal ].
 ]
 
 { #category : #accessing }

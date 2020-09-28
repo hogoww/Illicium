@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 MAProgram >> prepareWithInferer: inferer inTranslator: translator [
-	methods do: [ :aMethod | inferer infer: aMethod ].
+	methods do: [ :aMethod | (aMethod hasPragmaNamed: #doNotInfer) ifFalse: [ inferer infer: aMethod ] ].
 	self removeMethods: [ :m | m protocol = #accessing ].
 	self removeMethods: [ :m | m hasPragmaNamed: #doNotGenerate ]. "<< we need them for type inference"
 	methods do:[ :aMethod | translator annotateMethodAST: aMethod ].
