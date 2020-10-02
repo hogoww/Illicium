@@ -10,12 +10,12 @@ BaselineOfFAngler >> baseline: spec [
 	spec
 		for: #common
 		do: [
-			spec 
-				baseline: 'ASTC'
-				with: [ spec repository: 'github://hogoww/C-AST:master' ].
 			spec
 				baseline: 'TypedSlot'
 				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
+			spec 
+				baseline: 'ASTC'
+				with: [ spec repository: 'github://hogoww/C-AST:master' ].
 			spec
 				baseline: 'Phineas'
 				with: [ spec repository: 'gitlab://pharo-project/Phineas:vmtests' ].
