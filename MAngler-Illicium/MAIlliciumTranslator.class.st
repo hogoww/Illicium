@@ -95,13 +95,7 @@ MAIlliciumTranslator >> generateClass: aClass [
 MAIlliciumTranslator >> generateTestClass: aClass [ 
 	| translation |
 	translation := self translateTestClass: aClass.
-	FAFilePrinter new
-		directory: './generated/tests/';
-		fileName: aClass name , '.c';
-		compilationUnit: translation;
-		prettyPrinter: self class prettyPrinterClass new;	
-		generateFiles.
-	self class generateMainForTestClasses: { aClass }.
+	self printCompilationUnitInSeparateFiles: translation in: './generated/tests/' withClassName: aClass name.
 	^ translation
 ]
 
