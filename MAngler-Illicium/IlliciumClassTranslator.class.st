@@ -44,7 +44,7 @@ IlliciumClassTranslator >> postTranslationVisitors [
 	"Duplicate of slang's version for now"
 	^ {
 		FAStatementsBecomeExpressions new.
-		"ASTCDebugStructureVisitor new" "currently disabled" 
+		ASTCDebugStructureVisitor new
 		 " debugStructure should be last, to check that everything's working :)"
 	}
 ]

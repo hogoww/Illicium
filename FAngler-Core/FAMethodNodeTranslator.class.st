@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #translate }
+FAMethodNodeTranslator >> translateBody: aMethodNode [
+	^ (aMethodNode body acceptVisitor: methodTranslator)
+]
+
+{ #category : #translate }
 FAMethodNodeTranslator >> translateIdentifier: aMethodNode [
 	^ (FAFormatHelper formatSelector: aMethodNode selector) asCIdentifierNode
 ]
@@ -21,7 +26,7 @@ FAMethodNodeTranslator >> translateNode: aMethodNode [
 				id: (self translateIdentifier: aMethodNode);
 				parameters: (self translateParameters: aMethodNode);
 				yourself);
-		body: (aMethodNode body acceptVisitor: methodTranslator);
+		body: (self translateBody: aMethodNode);
 		comment: aMethodNode commentOrNil;
 		yourself
 
