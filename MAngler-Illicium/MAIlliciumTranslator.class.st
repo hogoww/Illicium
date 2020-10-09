@@ -222,7 +222,7 @@ MAIlliciumTranslator >> translateProgram [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateTestClass: aClass [ 
-	| cu suiteDeclarationFunction body |
+	| cu suiteDeclarationFunction body testMethods |
 	self testTranslationPreludeFor: aClass.
 	cu := self translateClass: aClass.
 	replacementClasses at: aClass name put: IlliciumUserClass.	
@@ -239,18 +239,16 @@ MAIlliciumTranslator >> translateTestClass: aClass [
 
 	body := suiteDeclarationFunction body.
 	
-	(aClass allSelectorsBelow: TestCase) do: [ :aSelector |
-		(aClass lookupSelector: aSelector) ast isTest
-			ifTrue:[
+
+	testMethods := program methods select:[ :aMethod | aMethod isTest ].
+	testMethods ifEmpty: [ self error: 'I bluntly refuse to translate a test class without tests !' ].
+	testMethods do: [ :aMethod|
 					"SUITE_ADD_TEST(suite, TestCuStringNew);"
 					body addStatement: (ASTCFunctionCall new
 						id:  #SUITE_ADD_TEST asCIdentifierNode;
-						arguments: { #suite asCIdentifierNode. aSelector asCIdentifierNode } ;	
+						arguments: { #suite asCIdentifierNode. aMethod selector asCIdentifierNode } ;	
 						yourself) asStatement
 				].
-		 ].
-
-	body statements ifEmpty:	[ self error: 'I bluntly refuse to translate a test class without tests !' ].
 
 	"CuSuite* suite = CuSuiteNew();"
 	body statements addFirst: (#suite asCIdentifierNode assign: (ASTCFunctionCall new id: #CuSuiteNew asCIdentifierNode ; yourself)) asStatement.
