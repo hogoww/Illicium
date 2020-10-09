@@ -85,11 +85,11 @@ FAPrettyPrint >> visitCompilationUnit: anASTCCompilationUnit [
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
 	anASTCCompilationUnit variableDeclarations ifNotEmpty: [ self cr].
 	
-	
+	anASTCCompilationUnit functionDeclarations sort: [ :e1 :e2 | e1 id id < e2 id id ].
 	anASTCCompilationUnit functionDeclarations ifNotEmpty: [ self << '/* Function declarations */' ; cr ].
 	anASTCCompilationUnit functionDeclarations
 		do:[ :aDeclaration | self print: aDeclaration; << ';' ; cr ].
-	anASTCCompilationUnit variableDeclarations ifNotEmpty: [ self cr ].
+	anASTCCompilationUnit functionDeclarations ifNotEmpty: [ self cr ].
 
 	(anASTCCompilationUnit definitions sort: [ :e1 :e2 | e1 declaration id id < e2 declaration id id ]).
 	anASTCCompilationUnit definitions ifNotEmpty: [ self cr ; << '/* Definitions */' ; cr ].
