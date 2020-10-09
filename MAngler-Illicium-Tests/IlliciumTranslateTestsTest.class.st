@@ -1,6 +1,6 @@
 Class {
 	#name : #IlliciumTranslateTestsTest,
-	#superclass : #FAMessageNodeTranslatorTest,
+	#superclass : #TestCase,
 	#category : #'MAngler-Illicium-Tests-TranslatorTest'
 }
 
