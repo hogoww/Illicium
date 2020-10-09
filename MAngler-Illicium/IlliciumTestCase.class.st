@@ -17,3 +17,12 @@ IlliciumTestCase >> assert: aBooleanCondition [
 		aBooleanCondition.
 		}
 ]
+
+{ #category : #asserting }
+IlliciumTestCase >> assert: actual  equals: expected [ 
+	"this is transformed to self assert: actual = expected.
+	Easier from a typing point of view."
+	| fakeMessageNode |
+	fakeMessageNode := RBMessageNode receiver: actual selector: #= arguments: { expected }. 
+	^ self assert: fakeMessageNode
+]
