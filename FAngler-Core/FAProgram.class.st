@@ -39,6 +39,12 @@ FAProgram >> addInclude: aString [
 
 { #category : #adding }
 FAProgram >> addMethod: aMethod [
+	^ self addMethod: aMethod 
+		ifPresent: [ MethodWasAlreadyAdded new methodSelector: aMethod selector ; signal ]
+]
+
+{ #category : #adding }
+FAProgram >> addMethod: aMethod ifPresent: aBlock [
 	"This expects a *copy* as argument."
 	
 	"This returns a boolean, which means that the method overrode an existing method"
@@ -53,7 +59,7 @@ FAProgram >> addMethod: aMethod [
 					methods at: aMethod selector put: aMethod.
 					^ true "method has overriden another one"
 					]
-				ifFalse: [ MethodWasAlreadyAdded new methodSelector: aMethod selector ; signal ]. "otherwise, two methods have the same name. Not sure what to do yet."
+				ifFalse: [ aBlock value ]. "otherwise, two methods have the same name. Not sure what to do yet."
 			]
 		ifAbsentPut: aMethod.
 	^ false "method was ignored"
