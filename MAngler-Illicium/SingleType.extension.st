@@ -7,6 +7,7 @@ SingleType >> asCType [
 	type = Boolean ifTrue: [ ^ CType createFrom: #bool ].
 	(type = VMClass) ifTrue: [ ^ CType createFrom: #sqInt ].
 	(type inheritsFrom: VMClass) ifTrue: [ ^ CType createFrom: #sqInt ].
+	(type inheritsFrom: VMSpurMemoryManagerTest) ifTrue: [ ^ CType createFrom: type name ].
 	self halt.
 	^ type
 ]
