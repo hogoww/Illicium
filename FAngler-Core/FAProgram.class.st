@@ -67,7 +67,7 @@ FAProgram >> addMethod: aMethod ifPresent: aBlock [
 
 { #category : #adding }
 FAProgram >> addRegularClass: aClass [ 
-    (aClass allSelectorsBelow: Object) 
+    (aClass allSelectorsBelow: aClass topClassToConsider) 
         do: [ :aSelector | | m |
             m :=  (aClass lookupSelector: aSelector).
             (m hasPragmaNamed: #doNotGenerate) 
@@ -76,10 +76,18 @@ FAProgram >> addRegularClass: aClass [
 
 { #category : #adding }
 FAProgram >> addTestClass: aClass [
+	"we add only the setUp/tearDown/tests here, that will be our entry points.
+	We then calculate the methods required to run those using phineas.
+	see MAProgram >> #prepareWithInferer:inTranslator:"
+	
 	| selectors |
 	selectors := aClass allSelectorsBelow: aClass topClassToConsider.
-	selectors 
-		do: [ :aMethod | self addMethod: (aClass lookupSelector: aMethod) ast copy ]
+	selectors do: [ :aSelector | 
+		(aSelector first: 4) = #test
+			ifTrue:[ self addMethod: (aClass lookupSelector: aSelector) ast copy ]].
+	
+	self addMethod: (aClass lookupSelector: #setUp) ast copy.
+	self addMethod: (aClass lookupSelector: #tearDown) ast copy
 ]
 
 { #category : #dependencies }

@@ -104,9 +104,13 @@ FAKernelClass >> myType [
 FAKernelClass >> perform: aSelector withArguments: anArray [
 	" Cherry picking for unknown types are not great. Needs improvement.
 	Some stuff get translated by default for UserClasses, which are basically an unknown type."
-	^ (self understandsForTranslation: aSelector)
-	ifTrue:[ super perform: aSelector withArguments: anArray ] 
-	ifFalse:[	 self doesNotUnderstand: ((Message selector: aSelector arguments: anArray) lookupClass: self class ; yourself) ].
+	(self understandsForTranslation: aSelector)
+		ifTrue:[ ^ super perform: aSelector withArguments: anArray ].
+			
+	"if it exists, it's curently being translated, and therefore should be a simple call"
+	(methodTranslator methodFor: aSelector) ifNotNil: [ ^ self asFunctionCall: aSelector withArguments: anArray].
+		
+	^ self doesNotUnderstand: ((Message selector: aSelector arguments: anArray) lookupClass: self class ; yourself).
 	" 
 	self browse 
 	"

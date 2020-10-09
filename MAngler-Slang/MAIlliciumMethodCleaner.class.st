@@ -22,5 +22,5 @@ MAIlliciumMethodCleaner >> cCode: something inSmalltalk: somethingElse [
 
 { #category : #initialize }
 MAIlliciumMethodCleaner >> initialize [
-	selectorToRemove := #(cCode:inSmalltalk: halt flag flag:).
+	selectorToRemove := #(cCode:inSmalltalk: inSmalltalk: halt flag flag:).
 ]
