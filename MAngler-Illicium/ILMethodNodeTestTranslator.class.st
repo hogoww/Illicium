@@ -16,9 +16,9 @@ ILMethodNodeTestTranslator >> translateBody: aMethodNode [
 		(ASTCDeclarationStatement new declaration:
 			(ASTCVariableDeclaration new id: #self asCIdentifierNode ; type: className asCTypeNode ; yourself) ;
 			yourself) asStatement.
-		(ASTCFunctionCall new id: (#setUp , className) asCIdentifierNode ; arguments: { #self asCIdentifierNode } ; yourself) asStatement.
+		(ASTCFunctionCall new id: #setUp asCIdentifierNode ; arguments: { #self asCIdentifierNode } ; yourself) asStatement.
 	}.
-	body statements addLast: (ASTCFunctionCall new id: (#tearDown , className) asCIdentifierNode ; arguments: { #self asCIdentifierNode } ; yourself) asStatement.
+	body statements addLast: (ASTCFunctionCall new id: #tearDown asCIdentifierNode ; arguments: { #self asCIdentifierNode } ; yourself) asStatement.
 	
 	^ body
 ]
