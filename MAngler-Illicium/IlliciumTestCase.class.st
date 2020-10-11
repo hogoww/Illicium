@@ -1,6 +1,6 @@
 Class {
 	#name : #IlliciumTestCase,
-	#superclass : #IlliciumObject,
+	#superclass : #IlliciumUserClass,
 	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
