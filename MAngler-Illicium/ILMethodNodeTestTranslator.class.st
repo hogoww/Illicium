@@ -9,15 +9,17 @@ ILMethodNodeTestTranslator >> translateBody: aMethodNode [
 	| className body |
 	body := super translateBody: aMethodNode.
 	
-	((aMethodNode selector first: 4) = 'test') ifFalse: [ ^ body ]. 
+	aMethodNode isTest ifFalse: [ ^ body ]. 
 
 	className := aMethodNode methodClass name.
 	body statements addAllFirst: {
 		(ASTCDeclarationStatement new declaration:
 			(ASTCVariableDeclaration new id: #self asCIdentifierNode ; type: className asCTypeNode ; yourself) ;
-			yourself) asStatement.
+			yourself) asStatement.	
+
 		(ASTCFunctionCall new id: #setUp asCIdentifierNode ; arguments: { #self asCIdentifierNode } ; yourself) asStatement.
 	}.
+	
 	body statements addLast: (ASTCFunctionCall new id: #tearDown asCIdentifierNode ; arguments: { #self asCIdentifierNode } ; yourself) asStatement.
 	
 	^ body
