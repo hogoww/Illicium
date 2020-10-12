@@ -240,13 +240,13 @@ MAIlliciumTranslator >> translateTestClass: aClass [
 	body := suiteDeclarationFunction body.
 
 	"CuSuite* suite = CuSuiteNew();"
-	body add: (#suite asCIdentifierNode assign: (ASTCFunctionCall new id: #CuSuiteNew asCIdentifierNode ; yourself)) asStatement.
 	body add: (ASTCDeclarationStatement new
 		declaration: 
 			(ASTCVariableDeclaration new
 				type: #'CuSuite*' asCTypeNode;
 				id: #suite asCIdentifierNode;
 				yourself)).
+	body add: (#suite asCIdentifierNode assign: (ASTCFunctionCall new id: #CuSuiteNew asCIdentifierNode ; yourself)) asStatement.
 
 	testMethods := program methods select:[ :aMethod | aMethod isTest ].
 	testMethods ifEmpty: [ self error: 'I bluntly refuse to translate a test class without tests !' ].
