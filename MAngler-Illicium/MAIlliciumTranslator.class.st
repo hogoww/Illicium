@@ -97,15 +97,31 @@ MAIlliciumTranslator >> addCTypesFor: aClass [
 MAIlliciumTranslator >> generateClass: aClass [ 
 	| translation |
 	translation := self translateClass: aClass.
-	self printCompilationUnitInSeparateFiles: translation in: './generated/classes/' withClassName: aClass name.
+	self printCompilationUnitInSeparateFiles: translation in: './generated/classes/' withFileName: aClass name.
 	^ translation
 ]
 
 { #category : #'generation-api' }
 MAIlliciumTranslator >> generateTestClass: aClass [ 
-	| translation |
+	| translation testMethods supportName |
+	supportName := aClass name, #Support.
+	
 	translation := self translateTestClass: aClass.
-	self printCompilationUnitInSeparateFiles: translation in: './generated/tests/' withClassName: aClass name.
+	testMethods := translation definitions select: [: aFunction | aFunction isTest ].
+	translation definitions removeAllSuchThat: [ :aFunction | aFunction isTest ].
+	
+	testMethods do: [ :aFunction | | testMain mainFunction |
+		testMain := ASTCCompilationUnit new.
+		testMain add: aFunction.
+		testMain addInclude: ('"' , supportName ,'.h"') asCIncludeNode.
+		
+		mainFunction := self mainFunctionFor: aFunction selector forClass: aClass.
+		testMain add: mainFunction.
+		self printCompilationUnitInSingleFile: testMain in: './generated/tests/' withFileName: aClass name , '__' , aFunction selector.
+		].
+	
+	self printCompilationUnitInSeparateFiles: translation in: './generated/tests/' withFileName: supportName.
+	
 	^ translation
 ]
 
@@ -147,6 +163,30 @@ MAIlliciumTranslator >> initialize [
 		yourself
 ]
 
+{ #category : #testSupport }
+MAIlliciumTranslator >> mainFunctionFor: aSelector forClass: aClass [
+	| mainFunction body |
+
+	mainFunction := ASTCFunctionDefinition new
+		declaration:
+			(ASTCFunctionDeclaration new
+				qualifiers: OrderedCollection new;
+				type: #int asCTypeNode ;
+				id: #main asCIdentifierNode;
+				yourself);
+			body: ASTCBlock new;
+		yourself.
+
+	body := mainFunction body.
+	
+	body add: (ASTCVariableDeclaration new id: #self asCIdentifierNode ; type: aClass name asCTypeNode ; yourself) asStatement.
+	body add: (ASTCFunctionCall new id: #setUp asCIdentifierNode ; arguments: { #self asCIdentifierNode asAddressOf } ; yourself) asStatement.
+	body add: (ASTCFunctionCall new id: aSelector asCIdentifierNode ; arguments: { #self asCIdentifierNode asAddressOf } ; yourself) asStatement.
+	body add: (ASTCFunctionCall new id: #tearDown asCIdentifierNode ; arguments: { #self asCIdentifierNode asAddressOf } ; yourself) asStatement.
+
+	^ mainFunction
+]
+
 { #category : #visiting }
 MAIlliciumTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
@@ -176,7 +216,7 @@ MAIlliciumTranslator >> printCompilationUnit: aCompilationUnit in: aDirectory wi
 ]
 
 { #category : #'generation-api' }
-MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in: aDirectory withClassName: aClassName [
+MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in: aDirectory withFileName: aClassName [
 	| headerCompilationUnit |
 	headerCompilationUnit := aCompilationUnit removeHeaderAndPutItInNewCompilationUnit.
 	aCompilationUnit add: (ASTCPreprocessorInclude new name:  '"',aClassName , '.h"').
@@ -186,9 +226,9 @@ MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in
 ]
 
 { #category : #'generation-api' }
-MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withClassName: aClassName [
+MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withFileName: fileName [
 	aCompilationUnit addDeclarationsOfDefinitions.
-	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName name , '.c'
+	self printCompilationUnit: aCompilationUnit in: aDirectory withName: fileName , '.c'
 ]
 
 { #category : #accessors }
@@ -233,45 +273,10 @@ MAIlliciumTranslator >> translateProgram [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateTestClass: aClass [ 
-	| cu suiteDeclarationFunction body testMethods |
+	| cu |
 	self testTranslationPreludeFor: aClass.
 	cu := self translateClass: aClass.
 	replacementClasses at: aClass name put: IlliciumUserClass.	
-	
-	suiteDeclarationFunction := ASTCFunctionDefinition new 
-		body: ASTCBlock new ;
-		yourself.
-	suiteDeclarationFunction 
-		declaration: (ASTCFunctionDeclaration new 
-			type: #'CuSuite*' asCTypeNode;
-			id: (aClass name , 'GetSuite') asCIdentifierNode;
-			qualifiers: {} asOrderedCollection;
-			yourself).
-
-	body := suiteDeclarationFunction body.
-
-	"CuSuite* suite = CuSuiteNew();"
-	body add: (ASTCDeclarationStatement new
-		declaration: 
-			(ASTCVariableDeclaration new
-				type: #'CuSuite*' asCTypeNode;
-				id: #suite asCIdentifierNode;
-				yourself)).
-	body add: (#suite asCIdentifierNode assign: (ASTCFunctionCall new id: #CuSuiteNew asCIdentifierNode ; yourself)) asStatement.
-
-	testMethods := program methods select:[ :aMethod | aMethod isTest ].
-	testMethods ifEmpty: [ self error: 'I bluntly refuse to translate a test class without tests !' ].
-	testMethods do: [ :aMethod|
-					"SUITE_ADD_TEST(suite, TestCuStringNew);"
-					body addStatement: (ASTCFunctionCall new
-						id:  #SUITE_ADD_TEST asCIdentifierNode;
-						arguments: { #suite asCIdentifierNode. aMethod selector asCIdentifierNode } ;	
-						yourself) asStatement
-				].
-	
-	body add: (ASTCReturn new expression: #suite asCIdentifierNode ; yourself).
-
-	cu add: suiteDeclarationFunction.
 	^ cu
 ]
 
