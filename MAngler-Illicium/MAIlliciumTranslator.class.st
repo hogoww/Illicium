@@ -122,7 +122,56 @@ MAIlliciumTranslator >> generateTestClass: aClass [
 	
 	self printCompilationUnitInSeparateFiles: translation in: './generated/tests/' withFileName: supportName.
 	
+	self generateTestSupport.
+
 	^ translation
+]
+
+{ #category : #testTranslation }
+MAIlliciumTranslator >> generateTestSupport [
+	self generateTestSupportHeader.
+	self generateTestSupportImplementation.
+]
+
+{ #category : #testTranslation }
+MAIlliciumTranslator >> generateTestSupportHeader [
+	"Currently hardCoded for quick feedback"
+	self flag: #hardCode.
+	self printRawFile: '
+#include <stdio.h>
+#include <stdlib.h>
+
+void testPassed();
+void testFailed(int line);
+void assert(int line, int condition);'
+ in: 'generated/tests/' withName: 'cTestCase.h'.
+]
+
+{ #category : #testTranslation }
+MAIlliciumTranslator >> generateTestSupportImplementation [
+	"Currently hardCoded for quick feedback"
+	self flag: #hardCode.
+	self printRawFile: '
+#include <stdio.h>
+#include <stdlib.h>
+
+void testPassed(){
+  printf("Test succefully passed\n");
+  exit(EXIT_SUCCESS);
+}
+
+void testFailed(int line){
+  printf("Assertion line: %d Test failed\n", line);
+  exit(EXIT_FAILURE);
+}
+
+
+void assert(int line, int condition)
+{
+  if (condition) return;
+  testFailed();
+}'
+ in: 'generated/tests/' withName: 'cTestCase.c'.
 ]
 
 { #category : #initialization }
@@ -163,7 +212,7 @@ MAIlliciumTranslator >> initialize [
 		yourself
 ]
 
-{ #category : #testSupport }
+{ #category : #testTranslation }
 MAIlliciumTranslator >> mainFunctionFor: aSelector forClass: aClass [
 	| mainFunction body |
 
@@ -183,6 +232,7 @@ MAIlliciumTranslator >> mainFunctionFor: aSelector forClass: aClass [
 	body add: (ASTCFunctionCall new id: #setUp asCIdentifierNode ; arguments: { #self asCIdentifierNode asAddressOf } ; yourself) asStatement.
 	body add: (ASTCFunctionCall new id: aSelector asCIdentifierNode ; arguments: { #self asCIdentifierNode asAddressOf } ; yourself) asStatement.
 	body add: (ASTCFunctionCall new id: #tearDown asCIdentifierNode ; arguments: { #self asCIdentifierNode asAddressOf } ; yourself) asStatement.
+	body add: (ASTCFunctionCall new id: #testPassed asCIdentifierNode ; yourself) asStatement.
 
 	^ mainFunction
 ]
@@ -229,6 +279,14 @@ MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in
 MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withFileName: fileName [
 	aCompilationUnit addDeclarationsOfDefinitions.
 	self printCompilationUnit: aCompilationUnit in: aDirectory withName: fileName , '.c'
+]
+
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> printRawFile: rawCCode in: aDirectory withName: aFile [ 
+	| cu |
+	cu := ASTCCompilationUnit new.
+	cu preamble: (ASTCRawCCode new cCode: rawCCode; yourself).
+	self printCompilationUnit: cu in: aDirectory withName: aFile
 ]
 
 { #category : #accessors }
