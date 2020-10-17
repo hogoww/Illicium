@@ -228,6 +228,11 @@ FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
 ]
 
 { #category : #visiting }
+FAPrettyPrint >> visitRawCCode: aRawCCodeNode [
+	self << aRawCCodeNode cCode
+]
+
+{ #category : #visiting }
 FAPrettyPrint >> visitReturn: aReturn [
 	self << 'return '.
 	aReturn expression ifNotNil:[:anExpression| anExpression acceptVisitor: self].

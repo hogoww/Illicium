@@ -397,11 +397,6 @@ MASlangPrettyPrinter >> visitPreprocessorIf: aPreprocessorIfNode [
 ]
 
 { #category : #visiting }
-MASlangPrettyPrinter >> visitRawCCode: aRawCCodeNode [
-	self << aRawCCodeNode cCode
-]
-
-{ #category : #visiting }
 MASlangPrettyPrinter >> visitRawDeclaration: aRawDeclarationNode [
 	self << aRawDeclarationNode rawDeclaration << ';'
 ]
