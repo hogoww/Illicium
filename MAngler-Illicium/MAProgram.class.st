@@ -43,6 +43,8 @@ MAProgram >> prepareWithInferer: inferer inTranslator: translator [
 	"we first infer the methods that were added (should be the tests, setup & tearDown)
 	Calculate the call graph starting from them
 	Then infer all of the required method to run a test."
+	self registerCTypesForClassesToTranslate.
+	
 	self inferMethodsWith: inferer.
 	self addRequiredMethodUsing: inferer.
 	self inferMethodsWith: inferer.
@@ -50,6 +52,21 @@ MAProgram >> prepareWithInferer: inferer inTranslator: translator [
 	self removeAccessors.
 	self removeDoNotGenerate. "we need them for type inference"
 	methods do:[ :aMethod | translator annotateMethodAST: aMethod ].
+]
+
+{ #category : #preparation }
+MAProgram >> registerCType: aClass [
+	CType registerType: aClass name forClass: aClass.
+	(aClass allSuperclassesIncluding: aClass topClassToConsider)
+		do: [ :class | 
+			CType registerType: aClass name forClass: class.
+			]
+]
+
+{ #category : #preparation }
+MAProgram >> registerCTypesForClassesToTranslate [.
+	classesToGenerate do: [ :aClass | self registerCType: aClass ]
+
 ]
 
 { #category : #preparation }

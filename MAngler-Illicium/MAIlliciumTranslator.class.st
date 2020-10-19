@@ -83,16 +83,6 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 	^ IlliciumPhineasTypeAnnotator 
 ]
 
-{ #category : #typing }
-MAIlliciumTranslator >> addCTypesFor: aClass [ 
-	
-	CType registerType: aClass name forClass: aClass.
-	(aClass allSuperclassesIncluding: aClass topClassToConsider)
-		do: [ :class | 
-			CType registerType: aClass name forClass: class.
-			]
-]
-
 { #category : #'generation-api' }
 MAIlliciumTranslator >> generateClass: aClass [ 
 	| translation |
