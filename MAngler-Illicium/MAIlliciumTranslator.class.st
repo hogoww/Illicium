@@ -245,7 +245,7 @@ MAIlliciumTranslator >> prepareProgram [
 	program prepareWithInferer: inferer inTranslator: self
 ]
 
-{ #category : #'generation-api' }
+{ #category : #printing }
 MAIlliciumTranslator >> printCompilationUnit: aCompilationUnit in: aDirectory withName: aFileName [
 	FAFilePrinter new
 		directory: aDirectory;
@@ -255,7 +255,7 @@ MAIlliciumTranslator >> printCompilationUnit: aCompilationUnit in: aDirectory wi
 		generateFiles
 ]
 
-{ #category : #'generation-api' }
+{ #category : #printing }
 MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in: aDirectory withFileName: aClassName [
 	| headerCompilationUnit |
 	headerCompilationUnit := aCompilationUnit removeHeaderAndPutItInNewCompilationUnit.
@@ -265,13 +265,13 @@ MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in
 	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName , '.c'
 ]
 
-{ #category : #'generation-api' }
+{ #category : #printing }
 MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withFileName: fileName [
 	aCompilationUnit addDeclarationsOfDefinitions.
 	self printCompilationUnit: aCompilationUnit in: aDirectory withName: fileName , '.c'
 ]
 
-{ #category : #'generation-api' }
+{ #category : #printing }
 MAIlliciumTranslator >> printRawFile: rawCCode in: aDirectory withName: aFile [ 
 	| cu |
 	cu := ASTCCompilationUnit new.
