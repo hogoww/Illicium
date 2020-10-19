@@ -71,21 +71,10 @@ MAProgram >> registerCTypesForClassesToTranslate [.
 
 { #category : #preparation }
 MAProgram >> removeAccessors [.
-	self removeMethods: [ :m | m protocol = #accessing ].
+	methods removeAllSuchThat: [ :m | m protocol = #accessing ].
 ]
 
 { #category : #preparation }
 MAProgram >> removeDoNotGenerate [
-	self removeMethods: [ :m | m hasPragmaNamed: #doNotGenerate ].
-]
-
-{ #category : #'as yet unclassified' }
-MAProgram >> removeMethods: aBooleanBlock [
-	| removed |
-	removed := true.
-	[ removed ] whileTrue: [ removed := false.
-		methods 
-			do: [ :aMethod | 
-				(aBooleanBlock value: aMethod)
-					ifTrue: [ removed := true. self removeSelector: aMethod selector ] ] ].
+	methods removeAllSuchThat: [ :m | m hasPragmaNamed: #doNotGenerate ].
 ]
