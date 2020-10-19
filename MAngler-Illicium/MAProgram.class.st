@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #preparation }
+MAProgram >> addMethodAndClass: aMethod [
+	classesToGenerate add: aMethod methodClass.
+	self addMethod: aMethod.
+]
+
+{ #category : #preparation }
 MAProgram >> addRequiredMethodUsing: inferer [
 	| testMethods cgc |
 	cgc := PICallGraphCalculator new

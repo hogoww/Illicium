@@ -91,29 +91,49 @@ MAIlliciumTranslator >> generateClass: aClass [
 	^ translation
 ]
 
-{ #category : #'generation-api' }
-MAIlliciumTranslator >> generateTestClass: aClass [ 
-	| translation testMethods supportName |
-	supportName := aClass name, #Support.
-	
-	translation := self translateTestClass: aClass.
-	testMethods := translation definitions select: [: aFunction | aFunction isTest ].
-	translation definitions removeAllSuchThat: [ :aFunction | aFunction isTest ].
-	
-	testMethods do: [ :aFunction | | testMain mainFunction |
-		testMain := ASTCCompilationUnit new.
-		testMain add: aFunction.
-		testMain addInclude: ('"' , supportName ,'.h"') asCIncludeNode.
-		
-		mainFunction := self mainFunctionFor: aFunction selector forClass: aClass.
-		testMain add: mainFunction.
-		self printCompilationUnitInSingleFile: testMain in: './generated/tests/' withFileName: aClass name , '__' , aFunction selector.
-		].
-	
-	self printCompilationUnitInSeparateFiles: translation in: './generated/tests/' withFileName: supportName.
-	
-	self generateTestSupport.
+{ #category : #'generation-support' }
+MAIlliciumTranslator >> generateFileForTest: aFunction fromClass: aClass [
+	| testMain mainFunction |
+	testMain := ASTCCompilationUnit new.
+	testMain add: aFunction.
+	testMain addInclude: ('"' , aClass name , '.h"') asCIncludeNode.
+	mainFunction := self mainFunctionFor: aFunction selector forClass: aClass.
+	testMain add: mainFunction.
+	^ self printCompilationUnitInSingleFile: testMain
+		in: './generated/tests/'
+		withFileName: aClass name , '__' , aFunction selector
+]
 
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> generateTestClass: aClass [
+	| translation |
+	translation := self translateTestClass: aClass.
+
+	self generateTestCompilationUnit: translation forClass: aClass.
+	
+	^ translation
+]
+
+{ #category : #'generation-support' }
+MAIlliciumTranslator >> generateTestCompilationUnit: aCompilationUnit forClass: aClass [
+	"We generate a file per test, and a common file for the methods used in those tests."
+	| testMethods |	
+	testMethods := aCompilationUnit extractTestFunctions.
+	testMethods do: [ :aFunction | self generateFileForTest: aFunction fromClass: aClass ].
+
+		
+	self printCompilationUnitInSeparateFiles: aCompilationUnit 
+			in: './generated/tests/' 
+			withFileName: aClass name.
+	self generateTestSupport.
+	^ aCompilationUnit
+]
+
+{ #category : #'generation-api' }
+MAIlliciumTranslator >> generateTestMethod: aMethod [
+	| translation |
+	translation := self translateTestMethod: aMethod.
+	self generateTestCompilationUnit: translation forClass: aMethod methodClass.
 	^ translation
 ]
 
@@ -293,6 +313,7 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
 	self vmDependentCode.
 	inferer inferAST: (aClass lookupSelector: #setUp) ast.
+
 ]
 
 { #category : #'translation-api' }
@@ -300,17 +321,24 @@ MAIlliciumTranslator >> translateClass: aClass [
 	| cu |
 	self addClass: aClass.
 	replacementClasses at: aClass name put: IlliciumUserClass.
-	self addCTypesFor: aClass.
 	cu := self translateProgram.
-	cu add: (classTranslator translateStateOf: aClass).
 	^ cu
 ]
 
-{ #category : #visiting }
+{ #category : #'translation-support' }
 MAIlliciumTranslator >> translateProgram [
 	| cu |
 	self prepareProgram.
-	
+	cu := ASTCCompilationUnit new.
+	cu add: self translateProgramFunctions.
+	cu add: self translateProgramState.	
+	^ cu
+]
+
+{ #category : #'translation-support' }
+MAIlliciumTranslator >> translateProgramFunctions [
+	| cu |
+		
 	cu := ASTCCompilationUnit new.
 	program methods value
 		collect: [ :aMethod | classTranslator methodTranslator translateMethod: aMethod ] into: cu.
@@ -319,20 +347,28 @@ MAIlliciumTranslator >> translateProgram [
 	^ cu
 ]
 
+{ #category : #'translation-support' }
+MAIlliciumTranslator >> translateProgramState [
+	^ program classes collect: [ :aClass | classTranslator translateStateOf: aClass ] 
+		into: ASTCCompilationUnit new.
+]
+
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateTestClass: aClass [ 
 	| cu |
 	self testTranslationPreludeFor: aClass.
-	cu := self translateClass: aClass.
 	replacementClasses at: aClass name put: IlliciumUserClass.	
+	cu := self translateClass: aClass.
 	^ cu
 ]
 
 { #category : #'translation-api' }
 MAIlliciumTranslator >> translateTestMethod: aMethodNode [ 
 	self testTranslationPreludeFor: aMethodNode methodClass.
-	self addMethod: aMethodNode fromClass: aMethodNode methodClass.
-	^ self translateMethod: aMethodNode selector fromClass: aMethodNode methodClass.
+	replacementClasses at: aMethodNode methodClass put: IlliciumUserClass.	
+	program addMethodAndClass: aMethodNode copy.
+	
+	^ self translateProgram
 ]
 
 { #category : #dependencies }
