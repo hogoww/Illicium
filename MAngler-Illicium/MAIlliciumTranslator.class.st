@@ -309,6 +309,14 @@ MAIlliciumTranslator >> replacementClasses: aDictionnary [
 	replacementClasses := aDictionnary
 ]
 
+{ #category : #'generation-support' }
+MAIlliciumTranslator >> runTestInC: aTestMethodAST [
+	self generateTestMethod: aTestMethodAST.
+	
+
+	self halt.
+]
+
 { #category : #testTranslation }
 MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
 	self vmDependentCode.

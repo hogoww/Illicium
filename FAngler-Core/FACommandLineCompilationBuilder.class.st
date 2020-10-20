@@ -1,6 +1,6 @@
 Class {
 	#name : #FACommandLineCompilationBuilder,
-	#superclass : #Object,
+	#superclass : #FACommandLineBuilder,
 	#instVars : [
 		'compiler',
 		'flags',
@@ -10,21 +10,8 @@ Class {
 		'libraries',
 		'inputFiles'
 	],
-	#classVars : [
-		'VMLocation'
-	],
 	#category : #'FAngler-Core-Installers'
 }
-
-{ #category : #accessing }
-FACommandLineCompilationBuilder class >> VMLocation [
-	^ VMLocation
-]
-
-{ #category : #accessing }
-FACommandLineCompilationBuilder class >> VMLocation: aFilePath [
-	VMLocation := aFilePath
-]
 
 { #category : #adding }
 FACommandLineCompilationBuilder >> addFlag: aFlagString [
@@ -48,7 +35,7 @@ FACommandLineCompilationBuilder >> addSupportFile: aFileName [
 
 { #category : #building }
 FACommandLineCompilationBuilder >> buildCommandLine [
-	VMLocation ifNil: [ self error: 'please set the path of the CompileInHeader branch VM' ].
+	super buildCommandLine.
 	
 	^ String streamContents: [ :s |
 		s << compiler ; space.
