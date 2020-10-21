@@ -14,7 +14,7 @@ ILMethodNodeTestTranslator >> translateParameters: aMethodNode [
 
 	^ {
 		ASTCVariableDeclaration new 
-			id: (ASTCIdentifier id: #self);
+			id: (ASTCIdentifier id: #'self*');
 			type: aMethodNode methodClass name asCTypeNode;
 			yourself
 	 } , parameters
