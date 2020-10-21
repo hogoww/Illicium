@@ -6,16 +6,18 @@ Class {
 
 { #category : #translate }
 ILMethodNodeTestTranslator >> translateParameters: aMethodNode [
-	| 	parameters |
+	| 	parameters cType |
 	parameters := super translateParameters: aMethodNode.
 	
 	methodTranslator isStatefulCode ifFalse: [ ^ parameters ].	
 	aMethodNode methodClass = UndefinedObject ifTrue: [ ^ parameters ].
-
+	self flag: #hack.
+	cType := aMethodNode methodClass name asCTypeNode.
+	cType type type becomePointer.
 	^ {
 		ASTCVariableDeclaration new 
-			id: (ASTCIdentifier id: #'self*');
-			type: aMethodNode methodClass name asCTypeNode;
+			id: (ASTCIdentifier id: #'self');
+			type: cType;
 			yourself
 	 } , parameters
 ]
