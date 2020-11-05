@@ -131,8 +131,8 @@ MAAbstractSlangReceiver >> translateAsSpecialFunctionCall: aMessage [
 
 	(methodTranslator methodFor: aMessage selector) 
 		ifNotNil: [ :aMethod |
-			aMethod isCMacroDefine 
-				ifTrue: [ ^ self asFunctionCall: aMessage selector ].
+			aMethod isCMacroDefine
+				ifTrue: [ ^ aMessage selector asCIdentifierNode ].
 			(self isAccessor: aMethod)
 				ifTrue: [ ^ self translateAsAccessor: aMessage ].
 			aMethod methodClass isStructClass "otherwise it is a struct message that is *not* an accessor"
