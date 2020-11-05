@@ -71,17 +71,8 @@ MASlangTranslator >> generateVMCCode [
 	| translation |
 	translation := self translateProgram.
 
-"	(FACollectIdsDeclaredInScope collectFrom: translation) 
-		select: [ :a| a value size > 1 
-			and: [ a value anySatisfy:[ :aNode | aNode isFunctionDeclaration ]]].
-"
-	^ FAFilePrinter new
-		directory: './generated/vm/src/';
-		fileName: 'gcc3x-interp.c';
-		compilationUnit: translation;
-		prettyPrinter: self class prettyPrinterClass new;
-		generateFiles;
-		yourself
+	self printCompilationUnitInSingleFile: translation in: './generated/vm/src/' withFileName: 'gcc3x-interp'
+
 ]
 
 { #category : #'translation-api' }

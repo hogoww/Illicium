@@ -266,32 +266,6 @@ MAIlliciumTranslator >> prepareProgram [
 ]
 
 { #category : #printing }
-MAIlliciumTranslator >> printCompilationUnit: aCompilationUnit in: aDirectory withName: aFileName [
-	FAFilePrinter new
-		directory: aDirectory;
-		fileName: aFileName;
-		compilationUnit: aCompilationUnit;
-		prettyPrinter: self class prettyPrinterClass new;
-		generateFiles
-]
-
-{ #category : #printing }
-MAIlliciumTranslator >> printCompilationUnitInSeparateFiles: aCompilationUnit in: aDirectory withFileName: aClassName [
-	| headerCompilationUnit |
-	headerCompilationUnit := aCompilationUnit removeHeaderAndPutItInNewCompilationUnit.
-	aCompilationUnit add: (ASTCPreprocessorInclude new name:  '"',aClassName , '.h"').
-	
-	self printCompilationUnit: headerCompilationUnit in: aDirectory withName: aClassName , '.h'.
-	self printCompilationUnit: aCompilationUnit in: aDirectory withName: aClassName , '.c'
-]
-
-{ #category : #printing }
-MAIlliciumTranslator >> printCompilationUnitInSingleFile: aCompilationUnit in: aDirectory withFileName: fileName [
-	aCompilationUnit addDeclarationsOfDefinitions.
-	self printCompilationUnit: aCompilationUnit in: aDirectory withName: fileName , '.c'
-]
-
-{ #category : #printing }
 MAIlliciumTranslator >> printRawFile: rawCCode in: aDirectory withName: aFile [ 
 	| cu |
 	cu := ASTCCompilationUnit new.
