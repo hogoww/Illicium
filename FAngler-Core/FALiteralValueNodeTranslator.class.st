@@ -69,5 +69,6 @@ FALiteralValueNodeTranslator >> translateStringNode: aString [
 { #category : #translate }
 FALiteralValueNodeTranslator >> translateSymbolNode: aValue [
 	"symbols are identifiers in Slang"
+	(aValue includes: $:) ifFalse:[ ^ aValue ].
 	^ (FAFormatHelper formatSelector: aValue) asSymbol
 ]
