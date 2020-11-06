@@ -6,11 +6,12 @@ Class {
 
 { #category : #translate }
 FALiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOriginalNode: originalNode [
-	
-	^ ASTCLiteral new
-		pharoNode: originalNode;
-		value: aValue;
-		yourself
+	| node |
+	node := (aValue isSymbol
+		ifTrue: [ aValue asCIdentifierNode ]
+		ifFalse: [ aValue asCLiteralNode ]).
+	node pharoNode: originalNode.
+	^ node
 ]
 
 { #category : #translate }
@@ -68,5 +69,5 @@ FALiteralValueNodeTranslator >> translateStringNode: aString [
 { #category : #translate }
 FALiteralValueNodeTranslator >> translateSymbolNode: aValue [
 	"symbols are identifiers in Slang"
-	^ FAFormatHelper formatSelector: aValue
+	^ (FAFormatHelper formatSelector: aValue) asSymbol
 ]
