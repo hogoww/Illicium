@@ -78,9 +78,10 @@ FAKernelClass >> ifTranslation: aTranslationBlock [
 
 { #category : #'message performing' }
 FAKernelClass >> ifTranslation: aTranslationBlock ifNot: aNotBlock [
-	^ (methodTranslator isNotNil or: [ thisContext method selector = #DoItIn: ])
-		ifTrue: [ aTranslationBlock value ]
-		ifFalse: [ aNotBlock value ].
+	self flag: #needWork.
+	^ thisContext method selector = #DoItIn: 
+		ifFalse: [ aTranslationBlock value ]
+		ifTrue: [ aNotBlock value ].
 		
 	
 ]
