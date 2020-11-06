@@ -11,6 +11,10 @@ MASlangStructsReceiver >> doesNotUnderstand: aMessage [
 		ifTrue:[ self error: 'aSlang keyword should not be applied on a structure, as far as I know' ]. 
 		"apparently there's quite a few, some of them surprising"
 
+	(type pharoType isAccessor: aMessage selector) ifTrue: [ 	
+			^ self translateAsAccessor: aMessage	
+		].
+	
 	(self translateAsSpecialFunctionCall: aMessage) ifNotNil:[ :aCNode | ^ aCNode].
 	
 	^ self asFunctionCall: aMessage selector withArguments: aMessage arguments
