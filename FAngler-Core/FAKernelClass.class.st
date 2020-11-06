@@ -36,7 +36,7 @@ FAKernelClass class >> receiverNode: aValue [
 
 { #category : #'message performing' }
 FAKernelClass >> = anotherObject [
-	^ self receiverNode = anotherObject receiverNode
+	^ receiverNode = anotherObject receiverNode
 ]
 
 { #category : #converting }
@@ -78,7 +78,7 @@ FAKernelClass >> ifTranslation: aTranslationBlock [
 
 { #category : #'message performing' }
 FAKernelClass >> ifTranslation: aTranslationBlock ifNot: aNotBlock [
-	^ (methodTranslator isNil or: [ thisContext method selector = #DoItIn: ])
+	^ (methodTranslator isNotNil or: [ thisContext method selector = #DoItIn: ])
 		ifTrue: [ aTranslationBlock value ]
 		ifFalse: [ aNotBlock value ].
 		
