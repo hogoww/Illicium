@@ -59,6 +59,7 @@ MAAbstractSlangReceiver >> createInstance [
 { #category : #'translation-keyword' }
 MAAbstractSlangReceiver >> ifNil: aNilBlock [
 	| ifNotNilNode |
+	self ifNotTranslation: [ ^ false ].
 	ifNotNilNode := self ifNotNil: aNilBlock.
 	ifNotNilNode condition: ifNotNilNode condition not.
 	^ ifNotNilNode
@@ -66,6 +67,8 @@ MAAbstractSlangReceiver >> ifNil: aNilBlock [
 
 { #category : #'translation-keyword' }
 MAAbstractSlangReceiver >> ifNil: aNilBlock ifNotNil: anIfNotNilBlock [
+	self ifNotTranslation: [ ^ false ].
+	
 	self assert: anIfNotNilBlock isBlock.
 	^ ASTCIf new
 		condition: self translatedReceiver not;
@@ -76,6 +79,7 @@ MAAbstractSlangReceiver >> ifNil: aNilBlock ifNotNil: anIfNotNilBlock [
 
 { #category : #'translation-keyword' }
 MAAbstractSlangReceiver >> ifNotNil: anIfNotNilBlock [
+	self ifNotTranslation: [ ^ false ].
 	^ ASTCIf new
 		condition: self translatedReceiver;
 		then: (anIfNotNilBlock acceptVisitor: methodTranslator)
@@ -94,6 +98,7 @@ MAAbstractSlangReceiver >> isAccessor: aMethod [
 
 { #category : #'translation-keyword' }
 MAAbstractSlangReceiver >> isNil [
+	self ifNotTranslation: [ ^ false ].
 	^ self translatedReceiver equals: (ASTCLiteral value: #null)
 ]
 

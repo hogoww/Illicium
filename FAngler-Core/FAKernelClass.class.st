@@ -65,11 +65,22 @@ FAKernelClass >> declare: aVar typed: aType [
 ]
 
 { #category : #'message performing' }
+FAKernelClass >> ifNotTranslation: aNotBlock [
+	^ self ifTranslation: [ ] ifNot: aNotBlock.
+]
+
+{ #category : #'message performing' }
+FAKernelClass >> ifTranslation: aTranslationBlock [
+	^ self ifTranslation: aTranslationBlock ifNot: [ ]
+		
+	
+]
+
+{ #category : #'message performing' }
 FAKernelClass >> ifTranslation: aTranslationBlock ifNot: aNotBlock [
-	self flag:#notPretty.
-	^ methodTranslator 
-		ifNotNil: [ aTranslationBlock value ]
-		ifNil:[ aNotBlock value ].
+	^ (methodTranslator isNil or: [ thisContext method selector = #DoItIn: ])
+		ifTrue: [ aTranslationBlock value ]
+		ifFalse: [ aNotBlock value ].
 		
 	
 ]
