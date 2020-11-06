@@ -633,7 +633,7 @@ MASlangReceiver >> shouldBeImplemented [
 
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
-		arguments: { ASTCLiteral value: #shouldBeImplemented };
+		arguments: { ASTCLiteral value: 'shouldBeImplemented' };
 		yourself
 ]
 
@@ -685,7 +685,7 @@ MASlangReceiver >> subclassResponsibility [
 	self flag: #unused. "It should be unused, as subclassResponsibility methods are filtered out when choosing methods to translate"
 	^ ASTCFunctionCall new 
 		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: #error); yourself) ;
-		arguments: { ASTCLiteral value: #subclassResponsibility };
+		arguments: { ASTCLiteral value: 'subclassResponsibility' };
 		yourself
 ]
 
@@ -759,7 +759,7 @@ MASlangReceiver >> tryEvaluateLiteralExpression: anExpression [
 MASlangReceiver >> unsupportedFeature: aSelector [
 	self isStrict ifTrue: [ ^ UnsupportedFeature new feature: aSelector ; signal ].
 	
-	^ ASTCLiteral value: '''unsuportedFeature'''
+	^ ASTCLiteral value: 'unsuportedFeature'
 ]
 
 { #category : #'translation-keyword' }
