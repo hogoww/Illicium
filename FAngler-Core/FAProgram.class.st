@@ -86,8 +86,7 @@ FAProgram >> addTestClass: aClass [
 		(aSelector first: 4) = #test
 			ifTrue:[ self addMethod: (aClass lookupSelector: aSelector) ast copy ]].
 	
-	self addMethod: (aClass lookupSelector: #setUp) ast copy.
-	self addMethod: (aClass lookupSelector: #tearDown) ast copy
+	self addTestClassSetUpAndTeardownFor: aClass.	
 ]
 
 { #category : #dependencies }

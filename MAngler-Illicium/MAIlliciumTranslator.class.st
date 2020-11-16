@@ -349,6 +349,7 @@ MAIlliciumTranslator >> translateTestMethod: aMethodNode [
 	self testTranslationPreludeFor: aMethodNode methodClass.
 	replacementClasses at: aMethodNode methodClass put: IlliciumUserClass.	
 	program addMethodAndClass: aMethodNode copy.
+	program addTestClassSetUpAndTeardownFor: aMethodNode methodClass.
 	
 	^ self translateProgram
 ]

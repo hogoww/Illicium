@@ -37,6 +37,13 @@ MAProgram >> addRequiredMethodUsing: inferer [
 		requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ] ].
 ]
 
+{ #category : #'test-support' }
+MAProgram >> addTestClassSetUpAndTeardownFor: aClass [ 
+
+	self addMethod: (aClass lookupSelector: #setUp) ast copy.
+	self addMethod: (aClass lookupSelector: #tearDown) ast copy
+]
+
 { #category : #'type inference' }
 MAProgram >> inferMethodsWith: inferer [
 	methods do: [ :aMethod | 
