@@ -12,7 +12,11 @@ IlliciumTestCase class >> includeFileName [
 { #category : #asserting }
 IlliciumTestCase >> assert: aBooleanCondition [
 	self includeMyFile.
-	^ self asFunctionCall: #assert: withArguments: { aBooleanCondition }
+	^ self asFunctionCall: #cAssert withTranslatedArguments: 
+		{
+			#__LINE__ asCIdentifierNode.
+			aBooleanCondition acceptVisitor: methodTranslator 
+		}.
 ]
 
 { #category : #asserting }
