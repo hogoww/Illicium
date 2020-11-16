@@ -133,6 +133,7 @@ MAIlliciumTranslator >> generateTestCompilationUnit: aCompilationUnit forClass: 
 MAIlliciumTranslator >> generateTestMethod: aMethod [
 	| translation |
 	translation := self translateTestMethod: aMethod.
+
 	self generateTestCompilationUnit: translation forClass: aMethod methodClass.
 	^ translation
 ]

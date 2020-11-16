@@ -20,8 +20,7 @@ IlliciumUserClass >> doesNotUnderstand: aMessage [
 	aMessage selector = #doesNotUnderstand: ifTrue: [ self error: 'infinite recursion' ].
 	
 	(methodTranslator methodFor: aMessage selector) 
-		ifNotNil: [ 
-			self asFunctionCall: aMessage selector withArguments: aMessage arguments.
+		ifNotNil: [
 			functionCall := self messageToFunctionCall: aMessage.
 	
 			functionCall arguments: ({ 'self' asCIdentifierNode } , functionCall arguments).
