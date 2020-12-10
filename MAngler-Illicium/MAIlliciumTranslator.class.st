@@ -154,7 +154,7 @@ MAIlliciumTranslator >> generateTestSupportHeader [
 
 void testPassed();
 void testFailed(int line);
-void assert(int line, int condition);'
+void cAssert(int line, int condition);'
  in: 'generated/tests/' withName: 'cTestCase.h'.
 ]
 
@@ -177,10 +177,10 @@ void testFailed(int line){
 }
 
 
-void assert(int line, int condition)
+void cAssert(int line, int condition)
 {
   if (condition) return;
-  testFailed();
+  testFailed(line);
 }'
  in: 'generated/tests/' withName: 'cTestCase.c'.
 ]
