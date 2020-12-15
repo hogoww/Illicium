@@ -104,6 +104,20 @@ MAIlliciumTranslator >> generateFileForTest: aFunction fromClass: aClass [
 		withFileName: aClass name , '__' , aFunction selector
 ]
 
+{ #category : #'generation-support' }
+MAIlliciumTranslator >> generateMakefileForTests: testMethods forClass: aClass [
+	| makefile |
+	makefile := FAMakefileBuilder new
+		testClassFile: aClass name;
+		tests: testMethods;
+		buildMakefile.
+	
+	FAFilePrinter new
+		directory: 'generated/tests';
+		fileName: 'Makefile';
+		printStringInFile: makefile contents
+]
+
 { #category : #'generation-api' }
 MAIlliciumTranslator >> generateTestClass: aClass [
 	| translation |
@@ -120,8 +134,9 @@ MAIlliciumTranslator >> generateTestCompilationUnit: aCompilationUnit forClass: 
 	| testMethods |	
 	testMethods := aCompilationUnit extractTestFunctions.
 	testMethods do: [ :aFunction | self generateFileForTest: aFunction fromClass: aClass ].
+	
+	self generateMakefileForTests: testMethods forClass: aClass.
 
-		
 	self printCompilationUnitInSeparateFiles: aCompilationUnit 
 			in: './generated/tests/' 
 			withFileName: aClass name.
