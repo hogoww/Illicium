@@ -32,6 +32,6 @@ IlliciumTestCase >> assert: actual equals: expected [
 
 { #category : #virtualmachin }
 IlliciumTestCase >> loadPharoImage: aValueNode [ 
-	methodTranslator addInclude: '"pharovm/loadImage.h"'.
+	methodTranslator addInclude: '"loadImage.h"'.
 	^ self asFunctionCall: #loadPharoImage withArguments: { aValueNode }
 ]
