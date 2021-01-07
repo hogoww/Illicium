@@ -16,8 +16,13 @@ MAIlliciumTranslator class >> classTranslatorClass [
 MAIlliciumTranslator class >> compactResults: aDictionary [
 	| newResults |
 	newResults := Dictionary new.
-	aDictionary keysAndValuesDo: [ :aClass :someResults |
-		newResults at: aClass put: (someResults collect: [ :aTestResult | aTestResult key ] into: Bag new).
+	aDictionary keysAndValuesDo: [ :aClass :someResults | | resultDict |
+		resultDict := Dictionary new.
+		someResults do: [ :aTestResult | | col |
+			col := resultDict at: aTestResult key ifAbsentPut: [ OrderedCollection new ].
+			col add: aTestResult value
+			].
+		newResults at: aClass put: resultDict.
 		].
 	self halt
 ]
