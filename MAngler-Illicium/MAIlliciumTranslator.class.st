@@ -60,7 +60,9 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 		[
 			[ log add: (aMethod selector -> aMethod runInC) ] 
 				valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
-		] on: Error do:[ :e | | a | a := (aMethod selector -> ('infinite loop' -> 1)) . a crTrace . log add: a]].
+		] on: Error do:[ :e | 
+		"Not great but the initial selector gets lost at some point... Whatever for now"
+		log add: (aMethod selector -> ('infinite loop' -> aMethod selector)) ]].
 	^ aClass -> log
 
 ]
@@ -157,11 +159,20 @@ MAIlliciumTranslator class >> tryAllTests [
 	testClasses := VMSpurInitializedOldSpaceTest subclasses .
 	results := Dictionary new.
 	
-	testClasses do: [ :aClass | results add: (self generateAllTestsFor: aClass) ].
-	self compactResults: results.
+	UIManager default
+		displayProgress: 'Running tests in C'
+		from: 0
+		to: testClasses size
+		during:
+			[:bar |
+			 testClasses doWithIndex:
+				[ :aClass :i |
+				bar value: i.
+				results add: (self generateAllTestsFor: aClass)
+				]].
 	
 	self halt.
-	^ results
+	^ self compactResults: results.
 ]
 
 { #category : #'default-configuration' }
