@@ -138,7 +138,7 @@ MAIlliciumTranslator class >> resetGeneratedTestDirectories [
 MAIlliciumTranslator class >> runnedInC [
 	| res |
 	res := (FileSystem / 'home'/ 'ariale' / 'ovm' / 'testCompilation' / 'log.txt') contents.
-	res lines last = 'Test passed' ifTrue: [ ^ 'test passed' ->  'yey'].
+	res lines last = 'Test passed' ifTrue: [ ^ 'test passed' -> res lines first ].
 	
 	self halt.
 ]
