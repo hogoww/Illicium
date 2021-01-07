@@ -12,6 +12,54 @@ MAIlliciumTranslator class >> classTranslatorClass [
 	^ IlliciumClassTranslator 
 ]
 
+{ #category : #printing }
+MAIlliciumTranslator class >> compactResults: aDictionary [
+	| newResults |
+	newResults := Dictionary new.
+	aDictionary keysAndValuesDo: [ :aClass :someResults |
+		newResults at: aClass put: (someResults collect: [ :aTestResult | aTestResult key ] into: Bag new).
+		].
+	self halt
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> compileVMTests [
+	| res line |
+	res := LibC resultOfCommand: 'cd ~/ovm/testCompilation && make'. 
+	line := res lines last.
+	
+	(line last: 4) = 'done' ifTrue: [ ^ self runnedInC ].
+	(line last: 6) = 'failed' ifTrue: [ ^ self failedInC: res ].
+
+	self halt.
+
+	^ res
+]
+
+{ #category : #report }
+MAIlliciumTranslator class >> failedInC: aString [
+	aString lines third = 'something' ifFalse: [ ^ 'C compilation error' -> aString ].
+
+	self halt.
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> generateAllTestsFor: aClass [
+	| testMethods timeOutTime log |
+	testMethods := aClass methodDict select: [ :aMethod | aMethod ast isTest ].
+	
+	timeOutTime := Duration seconds: 10.
+	log := Dictionary new.
+	
+	testMethods do: [ :aMethod |
+		[
+			[ log add: (aMethod selector -> aMethod runInC) ] 
+				valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
+		] on: Error do:[ :e | | a | a := (aMethod selector -> ('infinite loop' -> 1)) . a crTrace . log add: a]].
+	^ aClass -> log
+
+]
+
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> generateMainForTestClasses: classes [
 	FAFilePrinter new
@@ -22,6 +70,7 @@ MAIlliciumTranslator class >> generateMainForTestClasses: classes [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> mainCCodeForTestClasses: classes [
+	self flag: #CuTest.
 	^ String streamContents: [ :s |
 		s << '#include <stdio.h>' ; cr.
 		s << '#include "CuTest.h"' ; cr.
@@ -59,6 +108,11 @@ int main(void)
 ]
 
 { #category : #'default-configuration' }
+MAIlliciumTranslator class >> moveFilesintoVMDirectory [
+	LibC resultOfCommand: 'cd ~/ovm && ./movestuff.sh ./testCompilation'.
+]
+
+{ #category : #'default-configuration' }
 MAIlliciumTranslator class >> prettyPrinterClass [
 	^ FAPrettyPrint
 ]
@@ -66,6 +120,20 @@ MAIlliciumTranslator class >> prettyPrinterClass [
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> programClass [
 	^ MAProgram
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> resetGeneratedTestDirectories [
+	LibC resultOfCommand: 'cd generated/tests && rm *'.
+]
+
+{ #category : #report }
+MAIlliciumTranslator class >> runnedInC [
+	| res |
+	res := (FileSystem / 'home'/ 'ariale' / 'ovm' / 'testCompilation' / 'log.txt') contents.
+	res lines last = 'Test passed' ifTrue: [ ^ 'test passed' ->  'yey'].
+	
+	self halt.
 ]
 
 { #category : #'translation-api' }
@@ -76,6 +144,19 @@ MAIlliciumTranslator class >> translateTestClass: aClass [
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> translateTestMethod: aMethod [
 	^ self new translateTestMethod: aMethod
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> tryAllTests [
+	| testClasses results |
+	testClasses := VMSpurInitializedOldSpaceTest subclasses .
+	results := Dictionary new.
+	
+	testClasses do: [ :aClass | results add: (self generateAllTestsFor: aClass) ].
+	self compactResults: results.
+	
+	self halt.
+	^ results
 ]
 
 { #category : #'default-configuration' }
