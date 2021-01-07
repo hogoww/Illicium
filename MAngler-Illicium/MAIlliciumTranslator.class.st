@@ -182,7 +182,7 @@ MAIlliciumTranslator >> generateTestSupportImplementation [
 #include <stdlib.h>
 
 void testPassed(){
-  printf("Test succefully passed\n");
+  printf("Test passed\n");
   exit(EXIT_SUCCESS);
 }
 
