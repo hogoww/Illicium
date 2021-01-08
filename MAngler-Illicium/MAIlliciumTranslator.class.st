@@ -53,16 +53,19 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 	| testMethods timeOutTime log |
 	testMethods := aClass methodDict select: [ :aMethod | aMethod ast isTest ].
 	
-	timeOutTime := Duration seconds: 10.
+	timeOutTime := Duration seconds: 20.
 	log := Dictionary new.
 	
 	testMethods do: [ :aMethod |
 		[
 			[ log add: (aMethod selector -> aMethod runInC) ] 
 				valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
-		] on: Error do:[ :e | 
-		"Not great but the initial selector gets lost at some point... Whatever for now"
-		log add: (aMethod selector -> ('infinite loop' -> aMethod selector)) ]].
+		] on: Exception do:[ :e |
+		e class = Notification ifTrue:[ e resume ].
+			"Not great but the initial selector gets lost at some point... Whatever for now"
+		e class = TimedOut 
+			ifTrue: [ log add: (aMethod selector -> ('TimedOut' -> aMethod selector))]
+			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e))) ]]].
 	^ aClass -> log
 
 ]
