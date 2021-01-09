@@ -303,9 +303,12 @@ void cAssert(int line, int condition)
 { #category : #initialization }
 MAIlliciumTranslator >> getReplacementType: aPharoType [
 	| type |
+	self flag: #hack. "*2 allows to continue with initial mechanisms, we remove the singleType & add the type to the translator"
+	aPharoType type class = CType ifTrue: [ ^ MASlangStructsReceiver new type: aPharoType type; yourself ].
+	
 	type := aPharoType performReplacementUsing: replacementClasses.
-	self flag:#hack. "allows to continue with initial mechanisms, we remove the singleType & add the type to the translator"
-	(type isSingleType and: [ type type includesBehavior: MAAbstractSlangReceiver ]) ifTrue:[ type := type type new type: (CType new pharoType: aPharoType type) ].
+	
+	(type isSingleType and: [ type type = MASlangReceiver ]) ifTrue:[ type := type type new type: (CType new pharoType: aPharoType type); yourself ].
 	^ type
 ]
 
@@ -474,7 +477,10 @@ MAIlliciumTranslator >> translateTestMethod: aMethodNode [
 MAIlliciumTranslator >> vmDependentCode [
 	| vmProgram |
 	vmProgram := MASlangTranslator new prepareProgram; program.
-	vmProgram classesToPrepareSelectorsFor do: [ :vmClass | replacementClasses at: vmClass name put: MASlangReceiver ].
+	vmProgram classesToPrepareSelectorsFor do: [ :vmClass | 
+		replacementClasses at: vmClass name put: MASlangReceiver ].
+	vmProgram structClasses , {VMStructType} do: [ :vmStruct | 
+		replacementClasses at: vmStruct name put: MASlangStructsReceiver ].
 	inferer addDependency: vmProgram.
 	program addDependency: vmProgram.
 	program addInclude: #'"theFullInterpreter.h"'
