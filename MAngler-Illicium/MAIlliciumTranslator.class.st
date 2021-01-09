@@ -65,7 +65,7 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 			"Not great but the initial selector gets lost at some point... Whatever for now"
 		e class = TimedOut 
 			ifTrue: [ log add: (aMethod selector -> ('TimedOut' -> aMethod selector))]
-			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e))) ]]].
+			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e description))) ]]].
 	^ aClass -> log
 
 ]
