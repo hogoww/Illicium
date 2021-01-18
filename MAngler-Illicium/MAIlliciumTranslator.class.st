@@ -198,6 +198,12 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 	^ IlliciumPhineasTypeAnnotator 
 ]
 
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> vmProgram [
+
+	^ VMProgram ifNil: [ VMProgram := MASlangTranslator new prepareProgram; program ]
+]
+
 { #category : #'generation-api' }
 MAIlliciumTranslator >> generateClass: aClass [ 
 	| translation |
@@ -491,7 +497,8 @@ MAIlliciumTranslator >> translateTestMethod: aMethodNode [
 { #category : #dependencies }
 MAIlliciumTranslator >> vmDependentCode [
 	| vmProgram |
-	vmProgram := MASlangTranslator new prepareProgram; program.
+	
+	vmProgram := self class vmProgram.
 	vmProgram classesToPrepareSelectorsFor do: [ :vmClass | 
 		replacementClasses at: vmClass name put: MASlangReceiver ].
 	vmProgram structClasses , {VMStructType} do: [ :vmStruct | 
