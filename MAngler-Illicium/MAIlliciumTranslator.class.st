@@ -27,7 +27,7 @@ MAIlliciumTranslator class >> compactResults: aDictionary [
 			].
 		newResults at: aClass put: resultDict.
 		].
-	self halt
+	^ newResults
 ]
 
 { #category : #'default-configuration' }
