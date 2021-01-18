@@ -6,7 +6,7 @@ Class {
 
 { #category : #inlining }
 MASlangMinimalInliner >> shouldInline: aMessageNode [
-	
+	"((program slots keys includes: aMessageNode selector) and: [ program hasMethodNamed: aMessageNode selector ]) ifTrue: [ ^ true ]."
 	(program hasMethodNamed: aMessageNode selector) ifFalse: [ ^ false ].
 	"methodToInline := program methodNamed: aMessageNode selector."
 

@@ -29,3 +29,9 @@ IlliciumTestCase >> assert: actual equals: expected [
 	fakeMessageNode := RBMessageNode receiver: actual selector: #= arguments: { expected }. 
 	^ self assert: fakeMessageNode
 ]
+
+{ #category : #virtualmachin }
+IlliciumTestCase >> loadPharoImage: aValueNode [ 
+	methodTranslator addInclude: '"loadImage.h"'.
+	^ self asFunctionCall: #loadPharoImage withArguments: { aValueNode }
+]

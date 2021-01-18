@@ -89,5 +89,6 @@ MAProgram >> removeAccessors [.
 
 { #category : #preparation }
 MAProgram >> removeDoNotGenerate [
-	methods removeAllSuchThat: [ :m | m hasPragmaNamed: #doNotGenerate ].
+	methods := methods select: [ :method | 
+		(method hasPragmaNamed: #doNotGenerate) not ].
 ]
