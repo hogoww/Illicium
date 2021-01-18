@@ -4,6 +4,9 @@ Class {
 	#instVars : [
 		'replacementClasses'
 	],
+	#classVars : [
+		'VMProgram'
+	],
 	#category : #'MAngler-Illicium-Translation'
 }
 
@@ -55,8 +58,18 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 	
 	timeOutTime := Duration seconds: 20.
 	log := Dictionary new.
-	
-	testMethods do: [ :aMethod |
+
+	UIManager default
+		displayProgress: 'Running tests for ' , aClass name
+		from: 0
+		to: testMethods size
+		during:
+			[:bar |
+			 testMethods doWithIndex:
+				[ :aMethod :i |
+				bar value: i.
+		"display ui, but don't want to reindent the code..."
+
 		[
 			[ log add: (aMethod selector -> aMethod runInC) ] 
 				valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
@@ -65,7 +78,9 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 			"Not great but the initial selector gets lost at some point... Whatever for now"
 		e class = TimedOut 
 			ifTrue: [ log add: (aMethod selector -> ('TimedOut' -> aMethod selector))]
-			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e description))) ]]].
+			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e description))) 
+				]]]].
+	
 	^ aClass -> log
 
 ]
