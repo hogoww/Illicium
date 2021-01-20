@@ -30,6 +30,16 @@ IlliciumTestCase >> assert: actual equals: expected [
 	^ self assert: fakeMessageNode
 ]
 
+{ #category : #asserting }
+IlliciumTestCase >> deny: aBooleanCondition [
+	| assert |
+	self includeMyFile.
+
+	assert := self assert: aBooleanCondition.
+	assert arguments at: 2 put: assert arguments second not.
+	^ assert
+]
+
 { #category : #virtualmachin }
 IlliciumTestCase >> loadPharoImage: aValueNode [ 
 	methodTranslator addInclude: '"loadImage.h"'.

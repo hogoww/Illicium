@@ -32,6 +32,28 @@ IlliciumSmallInteger >> even [
 ]
 
 { #category : #translation }
+IlliciumSmallInteger >> timesRepeat: aBlock [
+	| iterID |
+	iterID := #i asCIdentifierNode.
+	^ ASTCFor new
+		iteratorDefinition:
+			(ASTCVariableDefinition new
+				declaration:
+					(ASTCVariableDeclaration new
+						id: iterID;
+						type:
+							(ASTCType new
+								type: IlliciumSmallInteger asPharoType;
+								yourself);
+						yourself);
+				init: (ASTCLiteral value: 0);
+				yourself);
+		condition: iterID < self translatedReceiver;
+		iteratorModification: iterID preIncr;
+		body: (aBlock acceptVisitor: methodTranslator)
+]
+
+{ #category : #translation }
 IlliciumSmallInteger >> to: stop by: step do: aBlock [
 	| node arg receiver | 
 	node := self to: stop  do: aBlock.
