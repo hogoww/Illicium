@@ -33,9 +33,14 @@ MAIlliciumTranslator class >> compactResults: aDictionary [
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> compileVMTests [
 	| res line |
-	res := LibC resultOfCommand: 'cd ~/ovm/testCompilation && make'. 
+	OSSUnixSubprocess new
+		shellCommand: 'cd ~/ovm/testCompilation && make';
+		redirectStdout;
+		runAndWaitOnExitDo: [ :command :outString |
+			res := outString
+		].
 	line := res lines last.
-	
+
 	(line last: 4) = 'done' ifTrue: [ ^ self runnedInC ].
 	(line last: 6) = 'failed' ifTrue: [ ^ self failedInC: res ].
 
@@ -56,7 +61,7 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 	| testMethods timeOutTime log |
 	testMethods := aClass methodDict select: [ :aMethod | aMethod ast isTest ].
 	
-	timeOutTime := Duration seconds: 20.
+	timeOutTime := Duration seconds: 10.
 	log := Dictionary new.
 
 	UIManager default
@@ -76,9 +81,11 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 		] on: Exception do:[ :e |
 		e class = Notification ifTrue:[ e resume ].
 			"Not great but the initial selector gets lost at some point... Whatever for now"
+		e class = Halt ifTrue: [ e pass ].
 		e class = TimedOut 
 			ifTrue: [ log add: (aMethod selector -> ('TimedOut' -> aMethod selector))]
-			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e description))) 
+			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e description))).
+
 				]]]].
 	
 	^ aClass -> log
@@ -134,7 +141,12 @@ int main(void)
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> moveFilesintoVMDirectory [
-	LibC resultOfCommand: 'cd ~/ovm && ./movestuff.sh ./testCompilation'.
+	OSSUnixSubprocess new
+		shellCommand: 'cd ~/ovm && ./movestuff.sh ./testCompilation';
+		redirectStdout;
+		runAndWaitOnExitDo: [ :command :outString |
+			^ outString
+		].
 ]
 
 { #category : #'default-configuration' }
@@ -149,7 +161,12 @@ MAIlliciumTranslator class >> programClass [
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> resetGeneratedTestDirectories [
-	LibC resultOfCommand: 'cd generated/tests && rm *'.
+	OSSUnixSubprocess new
+		shellCommand: 'rm -rf generated/tests/*';
+		redirectStdout;
+		runAndWaitOnExitDo: [ :command :outString |
+			^ outString
+		].
 ]
 
 { #category : #report }
