@@ -198,6 +198,7 @@ MAIlliciumTranslator class >> tryAllTests [
 	| testClasses results |
 	testClasses := VMSpurInitializedOldSpaceTest subclasses .
 	results := Dictionary new.
+	self resetVMProgram. "reset it at least when we run everything.."
 	
 	UIManager default
 		displayProgress: 'Running tests in C'
