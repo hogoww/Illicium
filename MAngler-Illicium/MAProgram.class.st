@@ -17,6 +17,7 @@ MAProgram >> addRequiredMethodUsing: inferer [
 		inferer: inferer;
 		addDoNotInferCriterium: [ :aMethod | aMethod methodClass includesBehavior: VMClass ];
 		addDoNotInferCriterium: [ :aMethod | aMethod methodClass includesBehavior: Magnitude ];
+		addDoNotInferCriterium: [ :aMethod | aMethod methodClass includesBehavior: String ];
 		addDoNotInferCriterium: [ :aMethod | #(new new: basicNew: inSmalltalk:) includes: aMethod selector ];
 		yourself.
 	
