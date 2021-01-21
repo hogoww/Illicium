@@ -212,8 +212,7 @@ MAIlliciumTranslator class >> tryAllTests [
 				results add: (self generateAllTestsFor: aClass)
 				]].
 	
-	self halt.
-	^ self compactResults: results.
+	^ (self compactResults: results) inspect.
 ]
 
 { #category : #'default-configuration' }
