@@ -169,6 +169,11 @@ MAIlliciumTranslator class >> resetGeneratedTestDirectories [
 		].
 ]
 
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> resetVMProgram [
+	VMProgram := nil.
+]
+
 { #category : #report }
 MAIlliciumTranslator class >> runnedInC [
 	| res |
