@@ -513,6 +513,16 @@ MASlangReceiver >> isIntegerObject: anOop [
 ]
 
 { #category : #'translation-keyword' }
+MASlangReceiver >> isNil [
+	^ self translatedReceiver equals: #null asCIdentifierNode
+]
+
+{ #category : #'translation-keyword' }
+MASlangReceiver >> isNotNil [
+	^ self isNil not
+]
+
+{ #category : #'translation-keyword' }
 MASlangReceiver >> isStrict [
 	^ methodTranslator isStrict
 ]
