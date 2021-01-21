@@ -40,6 +40,16 @@ IlliciumTestCase >> deny: aBooleanCondition [
 	^ assert
 ]
 
+{ #category : #asserting }
+IlliciumTestCase >> deny: actual equals: expected [ 
+	"this is transformed to self deny: actual = expected."
+	| fakeMessageNode |
+	"should probably check that the types of both arguments are the same."
+	self flag: #missingCheck.
+	fakeMessageNode := RBMessageNode receiver: actual selector: #= arguments: { expected }. 
+	^ self deny: fakeMessageNode
+]
+
 { #category : #virtualmachin }
 IlliciumTestCase >> loadPharoImage: aValueNode [ 
 	methodTranslator addInclude: '"loadImage.h"'.

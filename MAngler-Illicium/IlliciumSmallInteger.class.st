@@ -19,6 +19,17 @@ IlliciumSmallInteger class >> defaultValue [
 	^0
 ]
 
+{ #category : #include }
+IlliciumSmallInteger class >> includeFileName [
+	^ #'"math.h"'
+]
+
+{ #category : #translation }
+IlliciumSmallInteger >> ** anExponent [
+	self includeMyFile.
+	^ self asFunctionCall: #pow withArguments: { receiverNode. anExponent }
+]
+
 { #category : #translation }
 IlliciumSmallInteger >> bitAnd: aSmallInteger [
 	self flag: #toCheck."UNSURE ABOUT THIS ONE"
