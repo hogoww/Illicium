@@ -10,7 +10,7 @@ BaselineOfFAngler >> baseline: spec [
 	spec
 		for: #common
 		do: [
-			spec baseline: 'OSSubProcess'
+			spec baseline: 'OSSubprocess'
 				with: [ spec repository: 'github://pharo-contributions/OSSubprocess:master' ].
 			spec
 				baseline: 'TypedSlot'
