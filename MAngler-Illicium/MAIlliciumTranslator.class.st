@@ -41,7 +41,7 @@ MAIlliciumTranslator class >> compileVMTests [
 		].
 	line := res lines last.
 
-	(line last: 4) = 'done' ifTrue: [ ^ self runnedInC ].
+	(line last: 4) = 'done' ifTrue: [ ^ self runnedInC: res ].
 	(line last: 6) = 'failed' ifTrue: [ ^ self failedInC: res ].
 
 	self halt.
@@ -51,6 +51,10 @@ MAIlliciumTranslator class >> compileVMTests [
 
 { #category : #report }
 MAIlliciumTranslator class >> failedInC: aString [
+
+	(aString lines anySatisfy: [ :aLine | aLine includesSubstring: 'Segmentation fault (core dumped)' ])
+		ifTrue: [ ^ 'Segmentation fault' -> aString ].
+
 	aString lines third = 'something' ifFalse: [ ^ 'C compilation error' -> aString ].
 
 	self halt.
@@ -175,12 +179,8 @@ MAIlliciumTranslator class >> resetVMProgram [
 ]
 
 { #category : #report }
-MAIlliciumTranslator class >> runnedInC [
-	| res |
-	res := (FileSystem / 'home'/ 'ariale' / 'ovm' / 'testCompilation' / 'log.txt') contents.
-	res lines last = 'Test passed' ifTrue: [ ^ 'test passed' -> res lines first ].
-	
-	self halt.
+MAIlliciumTranslator class >> runnedInC: aString [
+	^ 'test passed' -> aString
 ]
 
 { #category : #'translation-api' }

@@ -98,8 +98,7 @@ FAMakefileBuilder >> ruleCompileTest [
 	stream << '$(TESTS):' ; crlf.
 	stream tab ; << '@echo " compiling $@."' ; crlf.
 	stream tab ; << '@$(CC) -o $@ $@.c $(LIBRARIES_FLAGS) $(VM_LIBRARY_FLAG) $(VM_PATHS) $(VM_MACROS) $(COMPILER_FLAGS) $(SUPPORT_FILES) $(TEST_CLASS_FILE) 2>&1' ; crlf.
-	stream tab ; << '@echo "$@" >> log.txt' ; crlf.
-	stream tab ; << '@export LD_LIBRARY_PATH=. && ./$@ >> log.txt' ; crlf.
+	stream tab ; << '@export LD_LIBRARY_PATH=. && ./$@ 2>&1' ; crlf.
 	stream tab ; << '@rm $@' ; crlf.
 	
 	stream crlf crlf.
