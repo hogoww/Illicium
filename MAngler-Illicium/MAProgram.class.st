@@ -22,12 +22,16 @@ MAProgram >> addRequiredMethodUsing: inferer [
 		yourself.
 	
 	"add all the hierarchy to the scoping"
-	classesToGenerate do: [ :aClass | | class |
+	"classesToGenerate do: [ :aClass | | class |
 		class := aClass.
 		[ class == aClass topClassToConsider ] whileFalse: [
 			cgc addScopingClass: class.
 			class := class superclass.
-			]].
+			]]."
+	
+	"try another approach: any class in the package might be relevant"
+	(RPackageOrganizer default packageNamed: #VMMakerTests) 
+		classes do: [ :aClass | cgc addScopingClass: aClass ].
 		
 	testMethods := methods copy.
 	testMethods do:[ :aTestMethod | | requiredMethods |
