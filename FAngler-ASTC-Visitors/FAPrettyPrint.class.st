@@ -8,7 +8,11 @@ Class {
 FAPrettyPrint >> doesThisNeedParenthesis: aNode [
 	| parentPriority |
 	"this should also take into account associativity"
-	parentPriority := aNode parent ifNotNil: [:p | p priority ] ifNil:[ 16 "minimal priority"].
+	
+	aNode parent ifNil: [ ^ false ].
+	aNode parent isContainerOperator ifTrue: [ ^ false].
+	parentPriority := aNode parent priority.
+	
 	^ aNode priority > parentPriority
 ]
 

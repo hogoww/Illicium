@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #'tests-parenthesis' }
+FAPrettyPrintTest >> testArraySubscriptWithOneUnaryOperatorArg [
+	| operator |
+	"comes from a real bug, hence the specificity of the test."
+	operator := 'self' asCIdentifierNode indexAt: 'arg' asCIdentifierNode asAddressOf.
+	
+	operator debugASTCStructure.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'self[&arg]'.
+]
+
+{ #category : #'tests-parenthesis' }
 FAPrettyPrintTest >> testAssociativityDifferentPriority1 [
 	| operator node |
 	operator := (ASTCIdentifier new id: #a) + (ASTCIdentifier new id: #b) * (ASTCIdentifier new id: #c).
@@ -52,6 +62,32 @@ FAPrettyPrintTest >> testAssociativityDifferentPriority2 [
 		self assert: node id equals: #c.
 
 	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'a + b * c'.
+]
+
+{ #category : #'tests-parenthesis' }
+FAPrettyPrintTest >> testFunctionWithOneSimpleArg [
+	| operator |
+	"comes from a real bug, hence the specificity of the test."
+	operator := ASTCFunctionCall new 
+		id: 'function' asCIdentifierNode;
+		arguments: { 'arg' asCIdentifierNode };
+		yourself.
+	
+	operator debugASTCStructure.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'function(arg)'.
+]
+
+{ #category : #'tests-parenthesis' }
+FAPrettyPrintTest >> testFunctionWithOneUnaryOperatorArg [
+	| operator |
+	"comes from a real bug, hence the specificity of the test."
+	operator := ASTCFunctionCall new 
+		id: 'function' asCIdentifierNode;
+		arguments: { 'arg' asCIdentifierNode asAddressOf };
+		yourself.
+	
+	operator debugASTCStructure.
+	self assert: (operator prettyPrintUsing: FAPrettyPrint new) equals: 'function(&arg)'.
 ]
 
 { #category : #tests }

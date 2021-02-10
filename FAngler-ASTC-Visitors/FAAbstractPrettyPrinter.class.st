@@ -25,6 +25,11 @@ FAAbstractPrettyPrinter >> cr [
 ]
 
 { #category : #indentation }
+FAAbstractPrettyPrinter >> doesThisNeedParenthesis: aBlock [
+	^ self subclassResponsibility
+]
+
+{ #category : #indentation }
 FAAbstractPrettyPrinter >> enterBlock [
 	self indent
 ]
