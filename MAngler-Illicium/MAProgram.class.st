@@ -58,14 +58,10 @@ MAProgram >> inferMethodsWith: inferer [
 
 { #category : #preparation }
 MAProgram >> prepareWithInferer: inferer inTranslator: translator [
-	"we first infer the methods that were added (should be the tests, setup & tearDown)
-	Calculate the call graph starting from them
-	Then infer all of the required method to run a test."
 	self registerCTypesForClassesToTranslate.
 	
 	self inferMethodsWith: inferer.
 	self addRequiredMethodUsing: inferer.
-	self inferMethodsWith: inferer.
 	
 	self removeAccessors.
 	self removeDoNotGenerate. "we need them for type inference"
