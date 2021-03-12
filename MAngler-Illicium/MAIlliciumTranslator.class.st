@@ -250,15 +250,15 @@ MAIlliciumTranslator >> generateFileForTest: aFunction fromClass: aClass [
 { #category : #'generation-support' }
 MAIlliciumTranslator >> generateMakefileForTests: testMethods forClass: aClass [
 	| makefile |
-	makefile := FAMakefileBuilder new
+	makefile := FAMakefile new
 		testClassFile: aClass name;
 		tests: testMethods;
-		buildMakefile.
+		addTestRules.
 	
 	FAFilePrinter new
 		directory: 'generated/tests';
 		fileName: 'Makefile';
-		printStringInFile: makefile contents
+		printStringInFile: makefile printString
 ]
 
 { #category : #'generation-api' }
