@@ -11,6 +11,13 @@ FAAbstractCheckVisitor class >> propertyName [
 ]
 
 { #category : #accessing }
+FAAbstractCheckVisitor >> at: aProperty for: aNode [
+	"shortcut"
+
+	^ aNode propertyAt: aProperty
+]
+
+{ #category : #accessing }
 FAAbstractCheckVisitor >> atNewProperty: aProperty put: aValue for: aNode [
 	"similar to #at:put:, but check that this didn't exists previously"
 
@@ -28,6 +35,13 @@ FAAbstractCheckVisitor >> atNewPropertyPut: aValue for: aNode [
 	"shortcut"
 
 	^ self atNewProperty: self class propertyName put: aValue for: aNode
+]
+
+{ #category : #accessing }
+FAAbstractCheckVisitor >> atNodeProperty: aNode [
+	"shortcut"
+
+	^ self at: self class propertyName for: aNode
 ]
 
 { #category : #accessing }
