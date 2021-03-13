@@ -12,7 +12,7 @@ MAProgram >> addMethodAndClass: aMethod [
 
 { #category : #preparation }
 MAProgram >> addRequiredMethodUsing: inferer [
-	| testMethods cgc |
+	| testMethods cgc requiredMethods|
 	cgc := PICallGraphCalculator new
 		inferer: inferer;
 		addDoNotInferCriterium: [ :aMethod | aMethod methodClass includesBehavior: VMClass ];
@@ -32,14 +32,12 @@ MAProgram >> addRequiredMethodUsing: inferer [
 	"try another approach: any class in the package might be relevant"
 	(RPackageOrganizer default packageNamed: #VMMakerTests) 
 		classes do: [ :aClass | cgc addScopingClass: aClass ].
-		
+	
+	requiredMethods := Set new.
 	testMethods := methods copy.
-	testMethods do:[ :aTestMethod | | requiredMethods |
-		cgc resetMethodsInCallGraph.
-		requiredMethods := cgc calculateCallGraphFrom: aTestMethod.
-		"We add all of the methods found. 
-		They can be redoundancy, so we do not trigger an error if a method was already added"
-		requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ] ].
+	testMethods do: [ :aTestMethod | requiredMethods addAll: (cgc calculateCallGraphFrom: aTestMethod) ].
+
+	requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ]
 ]
 
 { #category : #'test-support' }
