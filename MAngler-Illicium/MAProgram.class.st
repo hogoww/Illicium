@@ -84,8 +84,8 @@ MAProgram >> registerCTypesForClassesToTranslate [.
 ]
 
 { #category : #preparation }
-MAProgram >> removeAccessors [.
-	methods removeAllSuchThat: [ :m | m protocol = #accessing ].
+MAProgram >> removeAccessors [
+	methods := methods select: [ :m | m protocol ~= #accessing ]
 ]
 
 { #category : #preparation }
