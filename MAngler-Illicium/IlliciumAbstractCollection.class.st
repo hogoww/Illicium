@@ -1,5 +1,5 @@
 Class {
-	#name : #IlliciumAbstratCollection,
+	#name : #IlliciumAbstractCollection,
 	#superclass : #IlliciumObject,
 	#instVars : [
 		'elementType'
@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #accessing }
-IlliciumAbstratCollection >> elementType [
+IlliciumAbstractCollection >> elementType [
 	^ elementType
 ]
 
 { #category : #accessing }
-IlliciumAbstratCollection >> elementType: aType [
+IlliciumAbstractCollection >> elementType: aType [
 	elementType := aType
 ]

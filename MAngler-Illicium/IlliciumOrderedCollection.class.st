@@ -1,6 +1,6 @@
 Class {
 	#name : #IlliciumOrderedCollection,
-	#superclass : #IlliciumAbstratCollection,
+	#superclass : #IlliciumAbstractCollection,
 	#category : #'MAngler-Illicium-MessagesTranslators'
 }
 
