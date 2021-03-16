@@ -89,18 +89,7 @@ IlliciumSmallInteger >> to: stop do: aBlock [
     ifFalse:[ self error: 'An arguments has the wrong type' ].
 
 	^ ASTCFor new
-		iteratorDefinition:
-			(ASTCVariableDefinition new
-				declaration:
-					(ASTCVariableDeclaration new
-						id: iterID ;
-						type:
-							(ASTCType new
-								type: IlliciumSmallInteger asPharoType;
-								yourself);
-						yourself);
-				init: self translatedReceiver;
-				yourself);
+		iteratorDefinition: (iterID equals: self translatedReceiver);
 		condition:
 			(iterID <= (stop acceptVisitor: methodTranslator));
 		iteratorModification:
