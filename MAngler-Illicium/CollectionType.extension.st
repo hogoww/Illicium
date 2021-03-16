@@ -6,6 +6,11 @@ CollectionType >> createInstance [
 ]
 
 { #category : #'*MAngler-Illicium' }
+CollectionType >> handleNewMessageSend [
+	^ collectionType type handleNewMessageSendFor: elementType
+]
+
+{ #category : #'*MAngler-Illicium' }
 CollectionType >> performReplacementUsing: bindings [
 	| newCollection |
 	newCollection :=  self class new 
