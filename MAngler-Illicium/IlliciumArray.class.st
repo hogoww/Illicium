@@ -48,8 +48,11 @@ IlliciumArray >> do: aBlock [
 	aBlock isBlock ifFalse:[ BadArgument new expected: RBBlockNode; result: aBlock class; signal ].
 	aBlock arguments size = 1 ifFalse:[ ArgumentsCountMismatch signal ].
 	
-	size := [ (methodTranslator getNodeConcreteType: receiverNode) size ] on: NotFound 
-		do:[ self error: '#do: is curently only usable if the IV using it defines a size property' ].
+	size := receiverNode isLiteralArray 
+		ifTrue:[ receiverNode contents size ]
+		ifFalse:[ 
+			[ (methodTranslator getNodeConcreteType: receiverNode) size ] on: NotFound 
+				do:[ self error: '#do: is curently only usable if the IV using it defines a size property' ]].
 	newBlock := aBlock copy.
 	newBlock arguments at: 1 put: ((RBArgumentNode named: #i) parent: newBlock).
 	res := methodTranslator forward: 
