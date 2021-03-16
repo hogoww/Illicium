@@ -60,7 +60,7 @@ FATypeAnnotatorTest >> aMethodWithAGlobalVariable [
 ]
 
 { #category : #support }
-FATypeAnnotatorTest >> aMethodWithALiteralNode [
+FATypeAnnotatorTest >> aMethodWithALiteralValueNode [
 	1
 ]
 
@@ -223,10 +223,10 @@ FATypeAnnotatorTest >> testVisitInstanceVariableNode [
 ]
 
 { #category : #test }
-FATypeAnnotatorTest >> testVisitLiteralNode [
+FATypeAnnotatorTest >> testVisitLiteralValueNode [
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithALiteralNode from: FATypeAnnotatorTest.
+	ast := self inferMethodSelector: #aMethodWithALiteralValueNode from: FATypeAnnotatorTest.
 	ast
 		nodesDo: [ :aNode | 
 			(aNode isLiteralNode and: [ aNode isValue ])

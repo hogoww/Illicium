@@ -78,8 +78,22 @@ FATypeAnnotator >> visitInstanceVariableNode: anInstanceVariableNode [
 ]
 
 { #category : #visiting }
+FATypeAnnotator >> visitLiteralArrayNode: aLiteralNode [
+	super visitLiteralArrayNode: aLiteralNode.
+	self typeThatNode: aLiteralNode.
+	^ aLiteralNode
+]
+
+{ #category : #visiting }
 FATypeAnnotator >> visitLiteralNode: aLiteralNode [
 	super visitLiteralNode: aLiteralNode.
+	self typeThatNode: aLiteralNode.
+	^ aLiteralNode
+]
+
+{ #category : #visiting }
+FATypeAnnotator >> visitLiteralValueNode: aLiteralNode [
+	super visitLiteralValueNode: aLiteralNode.
 	self typeThatNode: aLiteralNode.
 	^ aLiteralNode
 ]
