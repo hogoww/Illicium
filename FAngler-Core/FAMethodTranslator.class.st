@@ -502,7 +502,7 @@ FAMethodTranslator >> visitInstanceVariableNode: aInstanceVariableNode [
 
 { #category : #visiting }
 FAMethodTranslator >> visitLiteralArrayNode: aLiteralArrayNode [
-	^ (translators at: #literalArrayTranslator)
+	^ (translators at: #literalArrayNodeTranslator)
 		translateNode: aLiteralArrayNode
 ]
 
