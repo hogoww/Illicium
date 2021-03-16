@@ -21,9 +21,9 @@ SingleType >> createInstance [
 SingleType >> performReplacementUsing: bindings [
 	| abstractType |
 	self flag:#badFix.
-	(type includesBehavior: TestCase) 
-		ifTrue:[ abstractType := TestCase ]
-		ifFalse:[ abstractType := type ].
-		
+	(type includesBehavior: TestCase) ifTrue:[ abstractType := TestCase ].
+	(type includesBehavior: Class) ifTrue: [ abstractType := Class].
+	abstractType ifNil: [ abstractType := type ].
+
 	^ self class new type: (bindings at: abstractType name ifAbsent:[ ReplacementTypeUnknown new type: type ; signal ]).
 ]

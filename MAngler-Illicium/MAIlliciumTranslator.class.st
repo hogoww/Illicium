@@ -217,7 +217,7 @@ MAIlliciumTranslator class >> tryAllTests [
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> typeAnnotatorClass [
-	^ IlliciumPhineasTypeAnnotator 
+	^ IlliciumPhineasTypeAnnotatorNewHeusistic 
 ]
 
 { #category : #'default-configuration' }
@@ -368,6 +368,7 @@ MAIlliciumTranslator >> initialize [
 	 " float and string are used... Not well !"
 	replacementClasses := Dictionary new
 		at: #Object put: IlliciumObject ;
+		at: #Class put: IlliciumClass;
 		at: #TestCase put: IlliciumTestCase;
 		at: #UndefinedObject put: IlliciumUndefinedObject ;
 		at: #SmallInteger put: IlliciumSmallInteger ;
@@ -381,6 +382,7 @@ MAIlliciumTranslator >> initialize [
 		at: #BoxedFloat64 put: IlliciumFloat ; 
 		at: #Array put: IlliciumArray ;
 		at: #OrderedCollection put: IlliciumOrderedCollection ;
+		at: #Dictionary put: IlliciumDictionary ;
 		yourself
 ]
 
