@@ -11,5 +11,5 @@ IlliciumFloat class >> asCType [
 
 { #category : #default }
 IlliciumFloat class >> defaultValue [
-	^0.0
+	^ 0.0
 ]
