@@ -323,7 +323,7 @@ FAPrettyPrint >> visitTernaryConditionalOperator: anOperator [
 
 { #category : #visiting }
 FAPrettyPrint >> visitType: aType [
-	aType type asCType printAsCTypeOn: self stream
+	aType type asCType printAsCTypeOn: stream
 ]
 
 { #category : #visiting }
@@ -343,9 +343,9 @@ FAPrettyPrint >> visitVariableDeclaration: aVariableDeclaration [
 	type needsIdToPrint
 		ifTrue: [ ^ stream << (type printWithId: aVariableDeclaration id id) ].
 		
-	aVariableDeclaration type acceptVisitor:self.
+	aVariableDeclaration type acceptVisitor: self.
 	self << Character space.
-	aVariableDeclaration id acceptVisitor:self.
+	aVariableDeclaration id acceptVisitor: self.
 ]
 
 { #category : #visiting }
