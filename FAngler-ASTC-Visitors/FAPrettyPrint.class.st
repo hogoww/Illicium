@@ -17,6 +17,15 @@ FAPrettyPrint >> doesThisNeedParenthesis: aNode [
 ]
 
 { #category : #visiting }
+FAPrettyPrint >> visitArrayLiteral: anArrayLiteral [
+	self << '{ '.
+	anArrayLiteral literals 
+		do: [ :aLiteral | self print: aLiteral ] 
+		separatedBy: [ self << ', ' ].
+	self << ' }'
+]
+
+{ #category : #visiting }
 FAPrettyPrint >> visitBinaryOperator: anOperator [
 	self parenthesisFor: anOperator print: [
 		anOperator leftOperand acceptVisitor: self.
