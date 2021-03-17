@@ -89,7 +89,7 @@ IlliciumSmallInteger >> to: stop do: aBlock [
     ifFalse:[ self error: 'An arguments has the wrong type' ].
 
 	^ ASTCFor new
-		iteratorDefinition: (iterID equals: self translatedReceiver);
+		iteratorDefinition: (iterID assign: self translatedReceiver);
 		condition:
 			(iterID <= (stop acceptVisitor: methodTranslator));
 		iteratorModification:
