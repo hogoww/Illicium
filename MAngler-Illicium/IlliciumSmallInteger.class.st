@@ -91,7 +91,7 @@ IlliciumSmallInteger >> to: stop do: aBlock [
 	^ ASTCFor new
 		iteratorDefinition: (iterID assign: self translatedReceiver);
 		condition:
-			(iterID <= (stop acceptVisitor: methodTranslator));
+			(iterID < (stop acceptVisitor: methodTranslator));
 		iteratorModification:
 			(iterID preIncr);
 		body: (aBlock acceptVisitor: methodTranslator);
