@@ -33,7 +33,7 @@ IlliciumArray >> asOrderedCollection [
 { #category : #accessing }
 IlliciumArray >> at: anIndex [
 	"(methodTranslator getNodeTranslationType: anIndex = ASTCSmallInteger) ifFalse:[ self error: 'Only SmallInteger should be used as array index for now']."
-	^ self translatedReceiver indexAt:(anIndex acceptVisitor: methodTranslator)
+	^ self translatedReceiver indexAt: (anIndex acceptVisitor: methodTranslator) - (ASTCLiteral new value: 1; yourself)
 ]
 
 { #category : #accessing }
