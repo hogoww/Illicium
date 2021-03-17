@@ -2,7 +2,7 @@ Extension { #name : #AbstractTypeConstraint }
 
 { #category : #'*MAngler-Illicium' }
 AbstractTypeConstraint >> asCType [
-	^ self createCTypeIn: (CType new initialSymbol: #buildByAsCType ; yourself)
+	^ self subclassResponsibility
 ]
 
 { #category : #'*MAngler-Illicium' }
