@@ -97,6 +97,15 @@ FATypeAnnotatorTest >> inferMethodSelector: aSelector from: aClass [
 ]
 
 { #category : #test }
+FATypeAnnotatorTest >> testSharedPoolVariable [
+	| ast counter |
+	<expectedFailure>
+	self flag:#todo."waiting to have a better understanding"
+	self assert:false.
+	
+]
+
+{ #category : #test }
 FATypeAnnotatorTest >> testVisitArgumentNode [
 	| ast counter |
 	counter := 0.
@@ -171,12 +180,12 @@ FATypeAnnotatorTest >> testVisitCascadeNodeGlobal [
 ]
 
 { #category : #test }
-FATypeAnnotatorTest >> testVisitGlobalNodeClassVariable [
+FATypeAnnotatorTest >> testVisitClassVariableNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAClassVariable from: FATypeAnnotatorTest.
-	ast nodesDo: [ :aNode | 
-		aNode isGlobalNode
+	ast nodesDo: [ :aNode |
+		aNode isClassVariable
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName) 
@@ -196,15 +205,6 @@ FATypeAnnotatorTest >> testVisitGlobalNodeGlobal [
 				self assert: (aNode hasProperty: propertyName).
 			] ].
 	self assert: counter equals: 1
-	
-]
-
-{ #category : #test }
-FATypeAnnotatorTest >> testVisitGlobalNodeSharedPoolVariable [
-	| ast counter |
-	<expectedFailure>
-	self flag:#todo."waiting to have a better understanding"
-	self assert:false.
 	
 ]
 
