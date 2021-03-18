@@ -107,16 +107,17 @@ FATypeAnnotatorTest >> testSharedPoolVariable [
 
 { #category : #test }
 FATypeAnnotatorTest >> testVisitArgumentNode [
+
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnArgument: from: FATypeAnnotatorTest.
+	ast := self
+		       inferMethodSelector: #aMethodWithAnArgument:
+		       from: FATypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
-		aNode isArgument
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName).
-			] ].
-	self assert: counter equals: 2.
+		aNode isArgumentVariable ifTrue: [ 
+			counter := counter + 1.
+			self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 2
 ]
 
 { #category : #test }
@@ -266,28 +267,30 @@ FATypeAnnotatorTest >> testVisitMethodNode [
 
 { #category : #test }
 FATypeAnnotatorTest >> testVisitSelfNode [
+
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithSelf from: FATypeAnnotatorTest.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isSelf
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) 
-				] ].
+	ast := self
+		       inferMethodSelector: #aMethodWithSelf
+		       from: FATypeAnnotatorTest.
+	ast nodesDo: [ :aNode | 
+		aNode isSelfVariable ifTrue: [ 
+			counter := counter + 1.
+			self assert: (aNode hasProperty: propertyName) ] ].
 	self assert: counter equals: 1
 ]
 
 { #category : #test }
 FATypeAnnotatorTest >> testVisitTemporaryNode [
+
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithATemporaryVariable from: FATypeAnnotatorTest.
-	ast
-		nodesDo: [ :aNode | 
-			(aNode isSelf not and: [ aNode isTemporaryNode ])
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) 
-				] ].
+	ast := self
+		       inferMethodSelector: #aMethodWithATemporaryVariable
+		       from: FATypeAnnotatorTest.
+	ast nodesDo: [ :aNode | 
+		(aNode isSelfVariable not and: [ aNode isTemporaryNode ]) ifTrue: [ 
+			counter := counter + 1.
+			self assert: (aNode hasProperty: propertyName) ] ].
 	self assert: counter equals: 2
 ]

@@ -17,12 +17,14 @@ MASlangVariableRenamer class >> newNameForName: aTempName withExistingNames: nam
 
 { #category : #renaming }
 MASlangVariableRenamer class >> renameVariablesOf: aMethodNode byArguments: arguments [
+
 	| replacement |
-	aMethodNode isVariable ifTrue:[ ^ ASTCBlock new ].
-	aMethodNode body nodesDo: [:aNode |  
-		(aNode isArgument and:[ (aNode whoDefines: aNode name) = aMethodNode ]) ifTrue: [
+	aMethodNode isVariable ifTrue: [ ^ ASTCBlock new ].
+	aMethodNode body nodesDo: [ :aNode | 
+		(aNode isArgumentVariable and: [ 
+			 (aNode whoDefines: aNode name) = aMethodNode ]) ifTrue: [ 
 			replacement := arguments at: (aMethodNode arguments indexOf: aNode).
-			aNode replaceWith: replacement ] ] 
+			aNode replaceWith: replacement ] ]
 ]
 
 { #category : #renaming }

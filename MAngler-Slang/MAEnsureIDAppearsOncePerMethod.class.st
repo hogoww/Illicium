@@ -132,10 +132,11 @@ MAEnsureIDAppearsOncePerMethod >> visitTemporaryNode: aTempNode [
 
 { #category : #visiting }
 MAEnsureIDAppearsOncePerMethod >> visitVariableNode: aVarNode [
-	aVarNode isDefinition ifTrue: [ ^  self ].
-	aVarNode isSuper | aVarNode isSelf ifTrue: [ ^ self ].
-	aVarNode isGlobalNode ifTrue:[ ^ self ].
+
+	aVarNode isDefinition ifTrue: [ ^ self ].
+	aVarNode isSuperVariable | aVarNode isSelfVariable ifTrue: [ ^ self ].
+	aVarNode isGlobalNode ifTrue: [ ^ self ].
 	aVarNode isInstanceVariableNode ifTrue: [ ^ self ].
-	
-	aVarNode name: (replacements at: aVarNode name).
+
+	aVarNode name: (replacements at: aVarNode name)
 ]

@@ -8,28 +8,31 @@ RBVariableNode >> getSlangTypeUsing: aCodeGenerator in: aTMethod [
 { #category : #'*FAngler-RB-Extensions' }
 RBVariableNode >> isArgumentNode [
 
-	^self binding 
-		ifNil: [ false ]
-		ifNotNil: [ :binding | binding isArg ]
+	^ self binding
+		  ifNil: [ false ]
+		  ifNotNil: [ :binding | binding isArgumentVariable ]
 ]
 
 { #category : #'*FAngler-RB-Extensions' }
 RBVariableNode >> isGlobalNode [
-	^self binding 
-		ifNil:[ false ] 
-		ifNotNil: [ :binding | binding isGlobal ]
+
+	^ self binding
+		  ifNil: [ false ]
+		  ifNotNil: [ :binding | binding isGlobalVariable ]
 ]
 
 { #category : #'*FAngler-RB-Extensions' }
 RBVariableNode >> isInstanceVariableNode [
-	^self binding
-		ifNil:[ false ] 
-		ifNotNil: [ :binding | binding isInstance ]
+
+	^ self binding
+		  ifNil: [ false ]
+		  ifNotNil: [ :binding | binding isInstanceVariable ]
 ]
 
 { #category : #'*FAngler-RB-Extensions' }
 RBVariableNode >> isTemporaryNode [
-	^self binding 
-		ifNil: [ false ]
-		ifNotNil: [ :binding | binding isTemp]
+
+	^ self binding
+		  ifNil: [ false ]
+		  ifNotNil: [ :binding | binding isTempVariable ]
 ]

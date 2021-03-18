@@ -227,20 +227,21 @@ MASlangAbstractInliner >> typeNewBlock: newBlock [
 
 { #category : #applying }
 MASlangAbstractInliner >> visitMessageNode: aMessageNode [
+
 	(self shouldInline: aMessageNode)
-		ifTrue:[ | methodToInline |
+		ifTrue: [ 
+			| methodToInline |
 			inlinedSomething := true.
-			methodToInline := 
-				(aMessageNode receiver isSuper 
-					ifTrue:[ aMessageNode propertyAt: MASlangSuperAnnotator propertyName ]
-					ifFalse:[ (program methodNamed: aMessageNode selector) copy ]) .
+			methodToInline := aMessageNode receiver isSuperVariable
+				                  ifTrue: [ 
+				                  aMessageNode propertyAt:
+					                  MASlangSuperAnnotator propertyName ]
+				                  ifFalse: [ 
+				                  (program methodNamed: aMessageNode selector)
+					                  copy ].
 			self handleTemporariesFrom: methodToInline inMessage: aMessageNode.
-			self inline: methodToInline insteadOf: aMessageNode.
-			]
-		ifFalse: [
-				super visitMessageNode: aMessageNode
-			 ]
-	
+			self inline: methodToInline insteadOf: aMessageNode ]
+		ifFalse: [ super visitMessageNode: aMessageNode ]
 ]
 
 { #category : #accessing }
