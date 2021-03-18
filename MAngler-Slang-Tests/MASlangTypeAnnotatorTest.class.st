@@ -99,16 +99,16 @@ MASlangTypeAnnotatorTest >> testVisitCaseOfOtherwise [
 
 { #category : #test }
 MASlangTypeAnnotatorTest >> testVisitSelfNode [
+
 	| ast counter |
 	" Override because slang adds an explicit return self "
 	counter := 0.
 	ast := self
-		inferMethodSelector: #aMethodWithSelf
-		from: FATypeAnnotatorTest.
-	ast
-		nodesDo: [ :aNode | 
-			aNode isSelf
-				ifTrue: [ counter := counter + 1.
-					self assert: (aNode hasProperty: propertyName) ] ].
+		       inferMethodSelector: #aMethodWithSelf
+		       from: FATypeAnnotatorTest.
+	ast nodesDo: [ :aNode | 
+		aNode isSelfVariable ifTrue: [ 
+			counter := counter + 1.
+			self assert: (aNode hasProperty: propertyName) ] ].
 	self assert: counter equals: 2
 ]
