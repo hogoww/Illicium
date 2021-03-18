@@ -60,6 +60,17 @@ FAPrettyPrint >> visitBreak: aBreak [
 ]
 
 { #category : #visiting }
+FAPrettyPrint >> visitCFile: aCFile [
+	stream << 'Header file:' ; cr.
+	self print: aCFile header.
+
+	stream cr cr cr.	
+	stream << 'Implementation file:' ; cr.
+	self print: aCFile implementation.
+
+]
+
+{ #category : #visiting }
 FAPrettyPrint >> visitCastOperator: aCastOperator [
 	self parenthesisFor: aCastOperator print: [
 		self << '(';
@@ -238,6 +249,13 @@ FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
 	self 	<< #'#include';
 		space;
 		<< aPreProcessorInclude name
+]
+
+{ #category : #visiting }
+FAPrettyPrint >> visitProject: aProject [
+	^ aProject cFiles
+		do: [ :aCFile | stream << aCFile fileName ]
+		separatedBy: [ stream cr].
 ]
 
 { #category : #visiting }
