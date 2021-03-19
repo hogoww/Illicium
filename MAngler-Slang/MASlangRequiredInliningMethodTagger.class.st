@@ -21,7 +21,7 @@ I rely on MASlangProgramCleaner to remove the methods that I tag.
 "
 Class {
 	#name : #MASlangRequiredInliningMethodTagger,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeVisitorCompatibility,
 	#instVars : [
 		'program'
 	],

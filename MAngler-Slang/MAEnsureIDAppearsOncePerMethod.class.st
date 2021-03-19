@@ -1,6 +1,6 @@
 Class {
 	#name : #MAEnsureIDAppearsOncePerMethod,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeVisitorCompatibility,
 	#instVars : [
 		'replacements',
 		'allIds',

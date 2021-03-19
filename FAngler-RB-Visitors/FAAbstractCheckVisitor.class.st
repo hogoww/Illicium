@@ -1,6 +1,6 @@
 Class {
 	#name : #FAAbstractCheckVisitor,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeVisitorCompatibility,
 	#category : #'FAngler-RB-Visitors-AbstractVisitor'
 }
 

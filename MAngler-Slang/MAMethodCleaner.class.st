@@ -1,6 +1,6 @@
 Class {
 	#name : #MAMethodCleaner,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeVisitorCompatibility,
 	#instVars : [
 		'selectorToRemove',
 		'messageNode'

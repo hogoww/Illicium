@@ -1,6 +1,6 @@
 Class {
 	#name : #FAMethodTranslator,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeVisitorCompatibility,
 	#instVars : [
 		'translators',
 		'classTranslator',

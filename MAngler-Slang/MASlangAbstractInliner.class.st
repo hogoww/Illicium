@@ -1,6 +1,6 @@
 Class {
 	#name : #MASlangAbstractInliner,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeVisitorCompatibility,
 	#instVars : [
 		'program',
 		'inlinedSomething',
