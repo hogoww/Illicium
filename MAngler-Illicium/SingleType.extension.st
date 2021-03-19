@@ -13,6 +13,11 @@ SingleType >> asCType [
 ]
 
 { #category : #'*MAngler-Illicium' }
+SingleType >> asCTypeNode [
+	^ ASTCType new type: self ; yourself
+]
+
+{ #category : #'*MAngler-Illicium' }
 SingleType >> createInstance [
 	^ type new
 ]
