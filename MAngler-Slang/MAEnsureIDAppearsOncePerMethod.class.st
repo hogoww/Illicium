@@ -135,7 +135,8 @@ MAEnsureIDAppearsOncePerMethod >> visitVariableNode: aVarNode [
 
 	aVarNode isDefinition ifTrue: [ ^ self ].
 	aVarNode isSuperVariable | aVarNode isSelfVariable ifTrue: [ ^ self ].
-	aVarNode isGlobalNode ifTrue: [ ^ self ].
+	aVarNode isGlobalVariable ifTrue: [ ^ self ].
+	aVarNode isClassVariable ifTrue: [ ^ self ].
 	aVarNode isInstanceVariableNode ifTrue: [ ^ self ].
 
 	aVarNode name: (replacements at: aVarNode name)
