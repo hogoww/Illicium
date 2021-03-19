@@ -40,15 +40,19 @@ IlliciumPhineasTypeAnnotatorTest >> setUp [
 
 { #category : #test }
 IlliciumPhineasTypeAnnotatorTest >> testVisitArgumentNode [
+
 	" override of the test, because we need to use a block for phineas's inference of methods with arguments."
+
 	| ast counter |
 	counter := 0.
-	ast := self inferMethodSelector: #aMethodWithAnArgument: from: FATypeAnnotatorTest usingBlock:[ PINodeTypeVisitorTest new aMethodWithAnArgument:  3 ].
+	ast := self
+		       inferMethodSelector: #aMethodWithAnArgument:
+		       from: FATypeAnnotatorTest
+		       usingBlock: [ 
+		       PINodeTypeVisitorTest new aMethodWithAnArgument: 3 ].
 	ast nodesDo: [ :aNode | 
-		aNode isArgument
-			ifTrue: [ 
-				counter := counter + 1.
-				self assert: (aNode hasProperty: propertyName).
-			]. ].
-	self assert: counter equals:2.
+		aNode isArgumentVariable ifTrue: [ 
+			counter := counter + 1.
+			self assert: (aNode hasProperty: propertyName) ] ].
+	self assert: counter equals: 2
 ]
