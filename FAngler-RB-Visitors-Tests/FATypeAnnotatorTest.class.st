@@ -195,12 +195,12 @@ FATypeAnnotatorTest >> testVisitClassVariableNode [
 ]
 
 { #category : #test }
-FATypeAnnotatorTest >> testVisitGlobalNodeGlobal [
+FATypeAnnotatorTest >> testVisitGlobalNode [
 	| ast counter |
 	counter := 0.
 	ast := self inferMethodSelector: #aMethodWithAGlobalVariable from: FATypeAnnotatorTest.
 	ast nodesDo: [ :aNode | 
-		aNode isGlobalNode
+		aNode isGlobalVariable
 			ifTrue: [ 
 				counter := counter + 1.
 				self assert: (aNode hasProperty: propertyName).
