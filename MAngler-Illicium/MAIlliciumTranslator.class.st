@@ -242,9 +242,11 @@ MAIlliciumTranslator >> generateFileForTest: aFunction fromClass: aClass [
 	testMain addInclude: ('"' , aClass name , '.h"') asCIncludeNode.
 	mainFunction := self mainFunctionFor: aFunction selector forClass: aClass.
 	testMain add: mainFunction.
-	^ self printCompilationUnitInSingleFile: testMain
-		in: './generated/tests/'
-		withFileName: aClass name , '__' , aFunction selector
+	
+	^ ASTCCFile new 
+		fileName: aClass name , '__' , aFunction selector;
+		implementation: testMain;	
+		yourself
 ]
 
 { #category : #'generation-support' }
@@ -275,6 +277,7 @@ MAIlliciumTranslator >> generateTestClass: aClass [
 MAIlliciumTranslator >> generateTestCompilationUnit: aCompilationUnit forClass: aClass [
 	"We generate a file per test, and a common file for the methods used in those tests."
 	| testMethods |	
+		self halt.
 	testMethods := aCompilationUnit extractTestFunctions.
 	testMethods do: [ :aFunction | self generateFileForTest: aFunction fromClass: aClass ].
 	
@@ -289,11 +292,12 @@ MAIlliciumTranslator >> generateTestCompilationUnit: aCompilationUnit forClass: 
 
 { #category : #'generation-api' }
 MAIlliciumTranslator >> generateTestMethod: aMethod [
-	| translation |
-	translation := self translateTestMethod: aMethod.
-
-	self generateTestCompilationUnit: translation forClass: aMethod methodClass.
-	^ translation
+	| cProject testMainCFile |
+	cProject := self translateTestMethod: aMethod.
+	testMainCFile := self makeCTestFrom: cProject for: aMethod.
+	cProject add: testMainCFile.
+	cProject generateOnDisk.
+	^ cProject
 ]
 
 { #category : #testTranslation }
@@ -411,6 +415,22 @@ MAIlliciumTranslator >> mainFunctionFor: aSelector forClass: aClass [
 	^ mainFunction
 ]
 
+{ #category : #ctests }
+MAIlliciumTranslator >> makeCTestFrom: aProject for: aMethodNode [
+	| testFunction testMain mainFunction |
+	testFunction := aProject extractFunctionNamed: aMethodNode selector.
+	testMain := ASTCCompilationUnit new.
+	testMain add: testFunction. 
+	testMain add: (ASTCPreprocessorInclude new cFile: (aProject fileNamed: aMethodNode methodClass name)).
+	mainFunction := self mainFunctionFor: testFunction selector forClass: aMethodNode methodClass.
+	testMain add: mainFunction.
+
+	^ ASTCCFile new 
+		fileName: aMethodNode methodClass name , '__' , testFunction selector;
+		implementation: testMain;	
+		yourself
+]
+
 { #category : #visiting }
 MAIlliciumTranslator >> preTranslationAnnotators [
 	"should return a collection of visitors for RBAST which will annotate a method AST"
@@ -468,12 +488,14 @@ MAIlliciumTranslator >> translateClass: aClass [
 
 { #category : #'translation-support' }
 MAIlliciumTranslator >> translateProgram [
-	| cu |
+	| project |
 	self prepareProgram.
-	cu := ASTCCompilationUnit new.
-	cu add: self translateProgramFunctions.
-	cu add: self translateProgramState.	
-	^ cu
+
+	project := ASTCProject new.
+
+	program classes collect: [ :aClass | classTranslator translateClass: aClass withProgram: program ] into: project.
+
+	^ project
 ]
 
 { #category : #'translation-support' }

@@ -10,8 +10,8 @@ Class {
 		'compilerFlags',
 		'supportFiles',
 		'testClassFile',
-		'tests',
-		'rules'
+		'rules',
+		'mainFiles'
 	],
 	#category : #'FAngler-Core-Installers'
 }
@@ -20,10 +20,10 @@ Class {
 FAMakefile >> addCompileTestRule [
 	| rule  |
 	rule := FAMakefileRule new.
-	rule name: '$(TESTS)'.
+	rule name: '$(MAIN_FILES)'.
 
 	rule addBodyLine: '@echo " compiling $@."'.
-	rule addBodyLine: '@$(CC) -o $@ $@.c $(LIBRARIES_FLAGS) $(VM_LIBRARY_FLAG) $(VM_PATHS) $(VM_MACROS) $(COMPILER_FLAGS) $(SUPPORT_FILES) $(TEST_CLASS_FILE) 2>&1'.
+	rule addBodyLine: '@$(CC) -o $@ $@.c $(LIBRARIES_FLAGS) $(VM_LIBRARY_FLAG) $(VM_PATHS) $(VM_MACROS) $(COMPILER_FLAGS) $(SUPPORT_FILES) 2>&1'.
 	rule addBodyLine: '@export LD_LIBRARY_PATH=. && ./$@ 2>&1'.
 	rule addBodyLine: '@rm $@'.
 	
@@ -35,7 +35,7 @@ FAMakefile >> addConclusionRule [
 	| rule |
 	rule := FAMakefileRule new.
 	rule name: 'compileAllTests'.
-	rule dependencies: 'compilationPrelude $(TESTS)'.
+	rule dependencies: 'compilationPrelude $(MAIN_FILES)'.
 
 	rule addBodyLine: '@echo "done"'.
 
@@ -121,6 +121,18 @@ FAMakefile >> librariesFlags: anObject [
 	librariesFlags := anObject
 ]
 
+{ #category : #accessing }
+FAMakefile >> mainFiles [
+
+	^ mainFiles
+]
+
+{ #category : #accessing }
+FAMakefile >> mainFiles: aCollection [
+
+	mainFiles := aCollection
+]
+
 { #category : #printing }
 FAMakefile >> printOn: aStream [
 	self printVariablesOn: aStream.
@@ -143,12 +155,21 @@ FAMakefile >> printVariablesOn: aStream [
 	aStream << 'VM_PATHS=' ; << vmPaths ; crlf.
 	aStream << 'VM_MACROS=' ; << vmMacros ; crlf.
 	aStream << 'COMPILER_FLAGS=' ; << compilerFlags ; crlf.
-	aStream << 'SUPPORT_FILES=' ; << supportFiles ; crlf.
-	aStream << 'TEST_CLASS_FILE=' ; << testClassFile ; << '.c' ; crlf.
-	aStream << 'TESTS='.
-	tests do: [ :aTest | aStream << testClassFile << '__' << aTest declaration id id ] separatedBy: [ aStream << '\' ; crlf ].
+
+	aStream << 'SUPPORT_FILES='.
+	supportFiles do: [ :aFileName | aStream << aFileName ] separatedBy: [ aStream space ].
+	aStream crlf.
+
+	aStream << 'MAIN_FILES='.
+	mainFiles do: [ :aMainFileName | aStream << aMainFileName ] separatedBy: [ aStream << '\' ; crlf ].
 	
 	aStream crlf crlf.
+]
+
+{ #category : #accessing }
+FAMakefile >> rules [
+
+	^ rules
 ]
 
 { #category : #accessing }
@@ -157,8 +178,8 @@ FAMakefile >> supportFiles [
 ]
 
 { #category : #accessing }
-FAMakefile >> supportFiles: anObject [
-	supportFiles := anObject
+FAMakefile >> supportFiles: aCollection [
+	supportFiles := aCollection
 ]
 
 { #category : #accessing }
@@ -169,16 +190,6 @@ FAMakefile >> testClassFile [
 { #category : #accessing }
 FAMakefile >> testClassFile: anObject [
 	testClassFile := anObject
-]
-
-{ #category : #accessing }
-FAMakefile >> tests [
-	^ tests
-]
-
-{ #category : #accessing }
-FAMakefile >> tests: anObject [
-	tests := anObject
 ]
 
 { #category : #accessing }

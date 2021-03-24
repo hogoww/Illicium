@@ -64,7 +64,7 @@ IlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector fromClas
 
 { #category : #translating }
 IlliciumClassTranslator >> resetIncludes [
-	currentIncludes := OrderedCollection new
+	currentIncludes := Set new
 ]
 
 { #category : #translating }
@@ -77,12 +77,11 @@ IlliciumClassTranslator >> translateClass: aClass withProgram: aProgram [
 		(aMethod methodClass includesBehavior: aClass)
 			ifTrue: [ cu add: (self translateMethod: aMethod) ].
 		].
-	cu add: (self translateStateOf: aClass).
+	cu add: (stateTranslator translateStateOf: aClass).
 	self addIncludesTo: cu.
-	
-	
-	file header: cu removeHeaderAndPutItInNewCompilationUnit.
+
 	file implementation: cu.
+	file generateHeaderFromImplementation.
 	file fileName: aClass name.
 	
 	^ file
