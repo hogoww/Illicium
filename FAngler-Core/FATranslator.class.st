@@ -155,9 +155,10 @@ FATranslator >> prepareMethodsASTs: methodsASTs [
 	^ methodsASTs
 ]
 
-{ #category : #accessors }
+{ #category : #preparing }
 FATranslator >> prepareProgram [
-	self subclassResponsibility
+	"default implementation"
+	program prepareWithInferer: inferer inTranslator: self.
 ]
 
 { #category : #'translation-api' }

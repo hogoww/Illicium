@@ -217,12 +217,6 @@ MASlangTranslator >> prepareMethodsASTs: methodsASTs [
 
 ]
 
-{ #category : #preparation }
-MASlangTranslator >> prepareProgram [
-	
-	program prepareWithInferer: inferer inTranslator: self.
-]
-
 { #category : #default }
 MASlangTranslator >> prettyPrinterClass [
 

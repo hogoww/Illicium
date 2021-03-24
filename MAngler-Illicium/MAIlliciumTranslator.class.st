@@ -424,11 +424,6 @@ MAIlliciumTranslator >> preTranslationTransformations [
 	^ self shouldBeImplemented
 ]
 
-{ #category : #visiting }
-MAIlliciumTranslator >> prepareProgram [
-	program prepareWithInferer: inferer inTranslator: self
-]
-
 { #category : #printing }
 MAIlliciumTranslator >> printRawFile: rawCCode in: aDirectory withName: aFile [ 
 	| cu |
