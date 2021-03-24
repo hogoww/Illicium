@@ -250,7 +250,7 @@ FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
 	self 	<< #'#include';
 		space;
-		<< aPreProcessorInclude cFile headerName
+		<< aPreProcessorInclude cFile asIncludeName
 ]
 
 { #category : #visiting }
