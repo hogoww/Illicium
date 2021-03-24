@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #include }
-IlliciumTestCase class >> includeFileName [
-	^ #'"cTestCase.h"'
+IlliciumTestCase class >> includeCFile [
+	^ CFile ifNil: [ CFile := ASTCCFile new fileName: #cTestCase ; yourself ]
 ]
 
 { #category : #asserting }
@@ -51,7 +51,8 @@ IlliciumTestCase >> deny: actual equals: expected [
 ]
 
 { #category : #virtualmachin }
-IlliciumTestCase >> loadPharoImage: aValueNode [ 
-	methodTranslator addInclude: '"loadImage.h"'.
+IlliciumTestCase >> loadPharoImage: aValueNode [
+	methodTranslator addInclude: (ASTCCFile new fileName: 'loadImage' ; yourself).
+	
 	^ self asFunctionCall: #loadPharoImage withArguments: { aValueNode }
 ]

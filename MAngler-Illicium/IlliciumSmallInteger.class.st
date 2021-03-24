@@ -20,8 +20,8 @@ IlliciumSmallInteger class >> defaultValue [
 ]
 
 { #category : #include }
-IlliciumSmallInteger class >> includeFileName [
-	^ #'"math.h"'
+IlliciumSmallInteger class >> includeCFile [
+	^ CFile ifNil: [ CFile := ASTCCFile new fileName: #math ; yourself ]
 ]
 
 { #category : #translation }

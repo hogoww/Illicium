@@ -37,6 +37,7 @@ IlliciumClassTranslator >> isStatefulCode [
 
 { #category : #translation }
 IlliciumClassTranslator >> methodsToTranslateASTs: aClass [
+	self halt. "unused"
 	 ^ self inferer typeProvider methodTypes
 		select: [ :aMethod | 
 			(aClass methodDict keys includes: aMethod node selector)
@@ -73,21 +74,23 @@ IlliciumClassTranslator >> prepareForTranslationFromSelector: aSelector fromClas
 	^ methodsASTs
 ]
 
+{ #category : #translating }
+IlliciumClassTranslator >> resetIncludes [
+	currentIncludes := OrderedCollection new
+]
+
 { #category : #'translation-api' }
-IlliciumClassTranslator >> translateClass: aClass [ 
-	| methodsASTs functionDefinitionsASTs methodsToTranslate entryPoints cu stateStuff |
-	entryPoints := self typeInferenceEntryPoints: aClass.
-	self callgraphTypeStartingFrom: entryPoints.
-	methodsToTranslate := self methodsToTranslateASTs: aClass.
-	methodsASTs := self prepareMethodsASTs: methodsToTranslate.
-	
-	cu := ASTCCompilationUnit new.	
-	stateStuff := self translateClassState: aClass.
-	functionDefinitionsASTs := self translateMethodsASTs: methodsASTs fromClass: aClass.
-	self addState: stateStuff to: cu.
-	self addTranslatedMethods: functionDefinitionsASTs to: cu.
-	cu debugASTCStructure.
-	^ cu
+IlliciumClassTranslator >> translateClass: aClass [
+	| cu |
+	self halt.
+	cu := ASTCCompilationUnit new.
+	cu add: (self translateClassFunctionsOf: aClass).
+	cu add: (self translateStateOf: aClass).
+	self halt.
+	^ ASTCCFile new
+		header: cu removeHeaderAndPutItInNewCompilationUnit;  
+		implementation: cu;
+		yourself
 ]
 
 { #category : #translating }

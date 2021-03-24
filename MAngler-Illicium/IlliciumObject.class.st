@@ -55,5 +55,5 @@ IlliciumObject >> cCode: aStringOrBlock [
 
 { #category : #'message performing' }
 IlliciumObject >> includeMyFile [
-	^ methodTranslator addInclude: self class includeFileName.
+	^ methodTranslator addInclude: self class includeCFile.
 ]

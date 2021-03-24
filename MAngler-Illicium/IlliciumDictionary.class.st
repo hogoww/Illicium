@@ -14,8 +14,8 @@ IlliciumDictionary class >> handleNewMessageSendFor: anAssociationType [
 ]
 
 { #category : #include }
-IlliciumDictionary class >> includeFileName [
-	^ '"llDictionary.h"'
+IlliciumDictionary class >> includeCFile [
+	^ CFile ifNil: [ CFile := ASTCCFile new fileName: #llDictionary ; yourself ]
 ]
 
 { #category : #accessing }

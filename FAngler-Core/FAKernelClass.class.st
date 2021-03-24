@@ -5,6 +5,12 @@ Class {
 		'receiverNode',
 		'methodTranslator'
 	],
+	#classVars : [
+		'CFile'
+	],
+	#classInstVars : [
+		'CType'
+	],
 	#category : #'FAngler-Core-Nodes-translators'
 }
 
@@ -16,6 +22,12 @@ FAKernelClass class >> asASTCType [
 { #category : #type }
 FAKernelClass class >> asCType [
 	self subclassResponsibility 
+]
+
+{ #category : #accessing }
+FAKernelClass class >> includeCFile [
+	"if there is a C file to include, it should be returned here"
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }

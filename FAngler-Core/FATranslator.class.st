@@ -212,11 +212,6 @@ FATranslator >> program: aProgram [
 ]
 
 { #category : #'translation-api' }
-FATranslator >> translateClass: aClass [
-	^ classTranslator translateClass: aClass
-]
-
-{ #category : #'translation-api' }
 FATranslator >> translateExpression: anExpression [
 	| doIt |
 	doIt := OpalCompiler new noPattern: true ; compile: anExpression.
