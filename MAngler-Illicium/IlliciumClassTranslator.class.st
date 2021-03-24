@@ -4,6 +4,13 @@ Class {
 	#category : #'MAngler-Illicium-Translation'
 }
 
+{ #category : #translation }
+IlliciumClassTranslator >> addIncludesTo: aCompilationUnit [ 
+	currentIncludes 
+		collect: [ :cFile | ASTCPreprocessorInclude new cFile: cFile ; yourself ]
+		into: aCompilationUnit
+]
+
 { #category : #typing }
 IlliciumClassTranslator >> callgraphTypeStartingFrom: methodsAST [
 	methodsAST do: [:aMethodAST| self inferer inferAST: aMethodAST ].
@@ -81,6 +88,27 @@ IlliciumClassTranslator >> translateClass: aClass [
 	self addTranslatedMethods: functionDefinitionsASTs to: cu.
 	cu debugASTCStructure.
 	^ cu
+]
+
+{ #category : #translating }
+IlliciumClassTranslator >> translateClass: aClass withProgram: aProgram [ 
+	| file cu |
+	self resetIncludes.
+	file := ASTCCFile new.
+	cu := ASTCCompilationUnit new.
+	aProgram methods do:[ :aMethod |
+		(aMethod methodClass includesBehavior: aClass)
+			ifTrue: [ cu add: (self translateMethod: aMethod) ].
+		].
+	cu add: (self translateStateOf: aClass).
+	self addIncludesTo: cu.
+	
+	
+	file header: cu removeHeaderAndPutItInNewCompilationUnit.
+	file implementation: cu.
+	file fileName: aClass name.
+	
+	^ file
 ]
 
 { #category : #'translation-api' }

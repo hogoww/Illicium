@@ -5,14 +5,15 @@ Class {
 		'methodTranslator',
 		'mainTranslator',
 		'stateTranslator',
-		'isStrict'
+		'isStrict',
+		'currentIncludes'
 	],
 	#category : #'FAngler-Core-Translation'
 }
 
 { #category : #'translation-state' }
 FAClassTranslator >> addInclude: aString [
-	mainTranslator addInclude: aString
+	currentIncludes add: aString
 ]
 
 { #category : #'translation-state' }

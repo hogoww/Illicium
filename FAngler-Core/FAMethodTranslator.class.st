@@ -10,8 +10,8 @@ Class {
 }
 
 { #category : #accessing }
-FAMethodTranslator >> addInclude: aString [
-	classTranslator addInclude: aString
+FAMethodTranslator >> addInclude: aCFile [
+	classTranslator addInclude: aCFile
 ]
 
 { #category : #'accessors-nodes-translator' }
@@ -433,7 +433,6 @@ FAMethodTranslator >> thisContextNodeTranslator: aThisContextNodeTranslator [
 
 { #category : #visiting }
 FAMethodTranslator >> translateMethod: aMethodNode [
-	"Method there for readability only."
 	| functionDefinitionNode |
 	functionDefinitionNode := self translateMethodNode: aMethodNode.
 	self postTranslationVisitsFor: functionDefinitionNode.
