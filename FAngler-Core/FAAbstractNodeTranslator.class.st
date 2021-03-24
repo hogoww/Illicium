@@ -9,6 +9,7 @@ Class {
 
 { #category : #include }
 FAAbstractNodeTranslator >> addBooleanInclude [
+	self halt.
 	methodTranslator addInclude: #'<stdbool.h>'
 ]
 

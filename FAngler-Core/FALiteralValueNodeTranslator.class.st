@@ -16,7 +16,6 @@ FALiteralValueNodeTranslator >> createLiteralNodeWithValue: aValue fromOriginalN
 
 { #category : #translate }
 FALiteralValueNodeTranslator >> translateBooleanNode: aValue [
-	self addBooleanInclude.
 	^ aValue asBit 
 ]
 
