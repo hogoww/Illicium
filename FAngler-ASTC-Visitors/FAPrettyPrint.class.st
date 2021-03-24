@@ -61,10 +61,12 @@ FAPrettyPrint >> visitBreak: aBreak [
 
 { #category : #visiting }
 FAPrettyPrint >> visitCFile: aCFile [
-	stream << 'Header file:' ; cr.
-	self print: aCFile header.
-
-	stream cr cr cr.	
+	aCFile header ifNotNil: [ 
+		stream << 'Header file:' ; cr.
+		self print: aCFile header .
+		stream cr cr cr.	
+		].
+	
 	stream << 'Implementation file:' ; cr.
 	self print: aCFile implementation.
 
@@ -248,14 +250,15 @@ FAPrettyPrint >> visitPreprocessorDefine: aPreProcessorDefine [
 FAPrettyPrint >> visitPreprocessorInclude: aPreProcessorInclude [
 	self 	<< #'#include';
 		space;
-		<< aPreProcessorInclude name
+		<< aPreProcessorInclude cFile headerName
 ]
 
 { #category : #visiting }
 FAPrettyPrint >> visitProject: aProject [
+	stream << 'The project contains ' << aProject cFiles size printString << ' files:'.
+	
 	^ aProject cFiles
-		do: [ :aCFile | stream << aCFile fileName ]
-		separatedBy: [ stream cr].
+		do: [ :aCFile | stream cr tab << aCFile fileName printString ]
 ]
 
 { #category : #visiting }
