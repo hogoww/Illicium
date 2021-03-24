@@ -6,6 +6,11 @@ EmptyType >> asCType [
 ]
 
 { #category : #'*MAngler-Illicium' }
+EmptyType >> asCTypeNode [
+	^ #void asCTypeNode
+]
+
+{ #category : #'*MAngler-Illicium' }
 EmptyType >> createInstance [
 	^ NoTypeFound signal
 ]
