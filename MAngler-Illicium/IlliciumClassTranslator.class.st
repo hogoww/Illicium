@@ -79,6 +79,8 @@ IlliciumClassTranslator >> translateClass: aClass withProgram: aProgram [
 		].
 	cu add: (stateTranslator translateStateOf: aClass).
 	self addIncludesTo: cu.
+	self flag: #hack."Needed to use the VM stuff, hardcoded for now."
+	cu add: (ASTCPreprocessorInclude new cFile: (MASlangTranslator asCFileForInclude); yourself).
 
 	file implementation: cu.
 	file generateHeaderFromImplementation.
