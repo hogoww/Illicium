@@ -36,18 +36,6 @@ IlliciumClassTranslator >> isStatefulCode [
 ]
 
 { #category : #translation }
-IlliciumClassTranslator >> methodsToTranslateASTs: aClass [
-	self halt. "unused"
-	 ^ self inferer typeProvider methodTypes
-		select: [ :aMethod | 
-			(aClass methodDict keys includes: aMethod node selector)
-			and: [ aMethod receiver concreteClass= aClass  
-				and: [ (aMethod node hasPragmaNamed: #doNotGenerate) not 
-				and: [ aMethod node compiledMethod isFromTrait not ] ] ] ]
-		thenCollect: [:aMethod| aMethod node copy ].
-]
-
-{ #category : #translation }
 IlliciumClassTranslator >> postTranslationVisitors [
 	"Duplicate of slang's version for now"
 	^ {
@@ -79,20 +67,6 @@ IlliciumClassTranslator >> resetIncludes [
 	currentIncludes := OrderedCollection new
 ]
 
-{ #category : #'translation-api' }
-IlliciumClassTranslator >> translateClass: aClass [
-	| cu |
-	self halt.
-	cu := ASTCCompilationUnit new.
-	cu add: (self translateClassFunctionsOf: aClass).
-	cu add: (self translateStateOf: aClass).
-	self halt.
-	^ ASTCCFile new
-		header: cu removeHeaderAndPutItInNewCompilationUnit;  
-		implementation: cu;
-		yourself
-]
-
 { #category : #translating }
 IlliciumClassTranslator >> translateClass: aClass withProgram: aProgram [ 
 	| file cu |
@@ -122,11 +96,6 @@ IlliciumClassTranslator >> translateExpression: anExpression [
 	
 	functionDefinitions := self translateMethodsASTs: methodAST.
 	^ functionDefinitions body
-]
-
-{ #category : #'translating-state' }
-IlliciumClassTranslator >> translateStateOf: aClass [ 
-	^ stateTranslator translateStateOf: aClass
 ]
 
 { #category : #typing }
