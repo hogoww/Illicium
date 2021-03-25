@@ -3,8 +3,7 @@ Class {
 	#superclass : #RBProgramNodeVisitorCompatibility,
 	#instVars : [
 		'translators',
-		'classTranslator',
-		'includes'
+		'classTranslator'
 	],
 	#category : #'FAngler-Core-Translation'
 }
@@ -219,19 +218,8 @@ FAMethodTranslator >> globalNodeTranslator: aGlobalNodeTranslator [
 		(aGlobalNodeTranslator methodTranslator: self ; yourself).
 ]
 
-{ #category : #accessing }
-FAMethodTranslator >> includes [
-	^ includes
-]
-
-{ #category : #accessing }
-FAMethodTranslator >> includes: aCollectionOfString [
-	includes := aCollectionOfString
-]
-
 { #category : #initialization }
 FAMethodTranslator >> initialize [
-	includes := Set new.
 	translators := Dictionary new: 20.
 	self methodNodeTranslator: self defaultMethodNodeTranslator.
 	self assignmentNodeTranslator: self defaultAssignmentTranslator.
