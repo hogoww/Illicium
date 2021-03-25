@@ -74,9 +74,10 @@ IlliciumClassTranslator >> translateClass: aClass withProgram: aProgram [
 	file := ASTCCFile new.
 	cu := ASTCCompilationUnit new.
 	aProgram methods do:[ :aMethod |
-		(aMethod methodClass includesBehavior: aClass)
-			ifTrue: [ cu add: (self translateMethod: aMethod) ].
+		(aClass includesBehavior: aMethod methodClass)
+			ifTrue: [ cu add: (methodTranslator translateMethod: aMethod) ].
 		].
+
 	cu add: (stateTranslator translateStateOf: aClass).
 	self addIncludesTo: cu.
 	self flag: #hack."Needed to use the VM stuff, hardcoded for now."
