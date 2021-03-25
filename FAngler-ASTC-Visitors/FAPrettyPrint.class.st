@@ -63,8 +63,8 @@ FAPrettyPrint >> visitBreak: aBreak [
 FAPrettyPrint >> visitCFile: aCFile [
 	aCFile header ifNotNil: [ 
 		stream << 'Header file:' ; cr.
-		self print: aCFile header .
-		stream cr cr cr.	
+		self print: aCFile header.
+		stream cr cr cr.
 		].
 	
 	stream << 'Implementation file:' ; cr.
