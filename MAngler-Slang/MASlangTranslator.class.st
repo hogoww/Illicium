@@ -1,16 +1,8 @@
 Class {
 	#name : #MASlangTranslator,
 	#superclass : #FATranslator,
-	#classVars : [
-		'CFile'
-	],
 	#category : #'MAngler-Slang-Translation'
 }
-
-{ #category : #'special selectors' }
-MASlangTranslator class >> asCFileForInclude [
-	^ CFile ifNil: [ CFile := ASTCCFile new fileName: #'theFullInterpreter' ; yourself ]
-]
 
 { #category : #'default-configuration' }
 MASlangTranslator class >> classTranslatorClass [
