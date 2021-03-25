@@ -424,7 +424,7 @@ MAIlliciumTranslator >> makeCTestFrom: aProject for: aMethodNode [
 	testMain add: (ASTCPreprocessorInclude new cFile: (aProject fileNamed: aMethodNode methodClass name)).
 	mainFunction := self mainFunctionFor: testFunction selector forClass: aMethodNode methodClass.
 	testMain add: mainFunction.
-
+	testMain addDeclarationsOfDefinitions.
 	^ ASTCCFile new 
 		fileName: aMethodNode methodClass name , '__' , testFunction selector;
 		implementation: testMain;	
