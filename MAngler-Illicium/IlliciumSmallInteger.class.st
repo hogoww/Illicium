@@ -21,7 +21,7 @@ IlliciumSmallInteger class >> defaultValue [
 
 { #category : #include }
 IlliciumSmallInteger class >> includeCFile [
-	^ CFile ifNil: [ CFile := ASTCCFile new fileName: #math ; yourself ]
+	^ CFile ifNil: [ CFile := ASTCCFile new fileName: #math ; libraryName: #m ; yourself ]
 ]
 
 { #category : #translation }
