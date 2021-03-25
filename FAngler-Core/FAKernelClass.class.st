@@ -5,11 +5,9 @@ Class {
 		'receiverNode',
 		'methodTranslator'
 	],
-	#classVars : [
-		'CFile'
-	],
 	#classInstVars : [
-		'CType'
+		'CType',
+		'CFile'
 	],
 	#category : #'FAngler-Core-Nodes-translators'
 }
