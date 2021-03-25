@@ -11,7 +11,8 @@ Class {
 		'supportFiles',
 		'testClassFile',
 		'rules',
-		'mainFiles'
+		'mainFiles',
+		'libraryFlags'
 	],
 	#category : #'FAngler-Core-Installers'
 }
@@ -23,7 +24,7 @@ FAMakefile >> addCompileTestRule [
 	rule name: '$(MAIN_FILES)'.
 
 	rule addBodyLine: '@echo " compiling $@."'.
-	rule addBodyLine: '@$(CC) -o $@ $@.c $(LIBRARIES_FLAGS) $(VM_LIBRARY_FLAG) $(VM_PATHS) $(VM_MACROS) $(COMPILER_FLAGS) $(SUPPORT_FILES) 2>&1'.
+	rule addBodyLine: '@$(CC) -o $@ $@.c $(LIBRARIES_FLAGS) $(VM_PATHS) $(VM_MACROS) $(COMPILER_FLAGS) $(SUPPORT_FILES) 2>&1'.
 	rule addBodyLine: '@export LD_LIBRARY_PATH=. && ./$@ 2>&1'.
 	rule addBodyLine: '@rm $@'.
 	
@@ -102,13 +103,9 @@ FAMakefile >> initialize [
 { #category : #initialization }
 FAMakefile >> initializeToDefaultValues [
 	compiler := 'gcc'.
-	librariesFlags := '-lpthread -ldl -lm'.
-	vmLibraryFlag := '-lPharoVMCore'.
 	vmPaths := '-L. -I. -I../extracted/vm/include/common/ -I../include/pharovm/ -I../include/ -I../generated/include/ -I../extracted/vm/include/unix/ -I../build/include/pharovm/'.
 	vmMacros :='-DLSB_FIRST -DNDEBUG -DDEBUGVM=0 -DIMMUTABILITY=1 -DCOGMTVM=0 -DPharoVM=1 -DVM_LABEL\(foo\)=0'.
 	compilerFlags := '-fPIC -g'.
-	supportFiles := 'cTestCase.c loadImage.c'.
-
 ]
 
 { #category : #accessing }
@@ -150,8 +147,10 @@ FAMakefile >> printRulesOn: aStream [
 { #category : #printing }
 FAMakefile >> printVariablesOn: aStream [
 	aStream << 'CC=' ; << compiler ; crlf.
-	aStream << 'LIBRARIES_FLAGS=' ; << librariesFlags ; crlf.
-	aStream << 'VM_LIBRARY_FLAG=' ; << vmLibraryFlag ; crlf.
+	aStream << 'LIBRARIES_FLAGS='.
+	libraryFlags do: [ :aLibraryName | aStream << '-l' << aLibraryName ] separatedBy: [ aStream space ].
+	aStream crlf.
+
 	aStream << 'VM_PATHS=' ; << vmPaths ; crlf.
 	aStream << 'VM_MACROS=' ; << vmMacros ; crlf.
 	aStream << 'COMPILER_FLAGS=' ; << compilerFlags ; crlf.
@@ -170,6 +169,25 @@ FAMakefile >> printVariablesOn: aStream [
 FAMakefile >> rules [
 
 	^ rules
+]
+
+{ #category : #accessing }
+FAMakefile >> setSupportFiles: cFiles [
+	libraryFlags := Set new.
+	supportFiles := Set new.
+	self flag: #hardcoded.
+	libraryFlags add: 'pthread';
+		add: #dl;
+		add: #m.
+	cFiles do: [ :aCFile |
+		aCFile isLibrary ifTrue: [ libraryFlags add: aCFile libraryName ].
+		
+		(aCFile isStandard or: [ aCFile isLibrary ]) 
+			ifFalse: [ supportFiles add: aCFile implementationFileName ]
+		 ].
+	
+
+
 ]
 
 { #category : #accessing }

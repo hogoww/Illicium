@@ -6,10 +6,19 @@ Class {
 		'constants'
 	],
 	#classVars : [
+		'CFile',
 		'InitializationOptions'
 	],
 	#category : #'MAngler-Slang-Translation'
 }
+
+{ #category : #converting }
+MASlangProgram class >> asCFileForInclude [
+	^ CFile ifNil: [ 
+		CFile := ASTCCFile new fileName: #'theFullInterpreter';
+			libraryName: #PharoVMCore;
+			yourself ]
+]
 
 { #category : #adding }
 MASlangProgram >> addClass: aClass withInferer: inferer andTranslator: aTranslator [
