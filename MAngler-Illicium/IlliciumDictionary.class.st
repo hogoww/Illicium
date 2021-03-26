@@ -10,7 +10,7 @@ IlliciumDictionary class >> handleNewMessageSendFor: anAssociationType [
 	"should include myfile, but we do not have access to the method translator."
 	self flag: #incomplete.
 	self flag: #hardcoded.
-	^ self new asFunctionCall: 'ILNewDictionary'
+	^ FAMethodTranslator asFunctionCall: 'ILNewDictionary'
 ]
 
 { #category : #include }
