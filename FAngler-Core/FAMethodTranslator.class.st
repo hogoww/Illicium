@@ -8,6 +8,19 @@ Class {
 	#category : #'FAngler-Core-Translation'
 }
 
+{ #category : #converting }
+FAMethodTranslator class >> asFunctionCall: aSelector [
+	^ self asFunctionCall: aSelector withTranslatedArguments: { }
+]
+
+{ #category : #converting }
+FAMethodTranslator class >> asFunctionCall: aSelector withTranslatedArguments: aCollectionOfArguments [
+	^ ASTCFunctionCall new 
+		id: (FAFormatHelper formatSelector: aSelector) asCIdentifierNode;
+		arguments: aCollectionOfArguments;
+		yourself
+]
+
 { #category : #accessing }
 FAMethodTranslator >> addInclude: aCFile [
 	classTranslator addInclude: aCFile
@@ -33,6 +46,23 @@ FAMethodTranslator >> arrayNodeTranslator [
 FAMethodTranslator >> arrayNodeTranslator: anArrayNodeTranslator [
 	translators at: #arrayNodeTranslator put: 
 		(anArrayNodeTranslator methodTranslator: self ; yourself).
+]
+
+{ #category : #converting }
+FAMethodTranslator >> asFunctionCall: aSelector [
+	^ self asFunctionCall: aSelector withArguments: { }.
+]
+
+{ #category : #converting }
+FAMethodTranslator >> asFunctionCall: aSelector withArguments: aCollectionOfArguments [
+	^ self asFunctionCall: aSelector 
+		withTranslatedArguments: (aCollectionOfArguments collect:[ :each | each acceptVisitor: self ])
+
+]
+
+{ #category : #converting }
+FAMethodTranslator >> asFunctionCall: aSelector withTranslatedArguments: aCollectionOfArguments [
+	^ self class asFunctionCall: aSelector withTranslatedArguments: aCollectionOfArguments
 ]
 
 { #category : #utility }

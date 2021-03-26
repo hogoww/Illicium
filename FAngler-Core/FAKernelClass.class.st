@@ -49,24 +49,19 @@ FAKernelClass >> = anotherObject [
 	^ receiverNode = anotherObject receiverNode
 ]
 
-{ #category : #converting }
+{ #category : #'message performing' }
 FAKernelClass >> asFunctionCall: aSelector [
-	^ self asFunctionCall: aSelector withArguments: { }.
+	^ methodTranslator asFunctionCall: aSelector
 ]
 
-{ #category : #converting }
+{ #category : #'message performing' }
 FAKernelClass >> asFunctionCall: aSelector withArguments: aCollectionOfArguments [
-	^ self asFunctionCall: aSelector 
-		withTranslatedArguments: (aCollectionOfArguments collect:[:each| each acceptVisitor: methodTranslator ])
-
+	^ methodTranslator asFunctionCall: aSelector withArguments: aCollectionOfArguments
 ]
 
-{ #category : #converting }
+{ #category : #'message performing' }
 FAKernelClass >> asFunctionCall: aSelector withTranslatedArguments: aCollectionOfArguments [
-	^ ASTCFunctionCall new 
-		id: (ASTCIdentifier new id: (FAFormatHelper formatSelector: aSelector); yourself);
-		arguments: aCollectionOfArguments;
-		yourself
+	^ methodTranslator asFunctionCall: aSelector withTranslatedArguments: aCollectionOfArguments
 ]
 
 { #category : #'message performing' }
