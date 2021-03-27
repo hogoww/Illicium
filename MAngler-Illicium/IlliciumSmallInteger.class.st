@@ -79,7 +79,7 @@ IlliciumSmallInteger >> to: stop by: step do: aBlock [
 
 { #category : #translation }
 IlliciumSmallInteger >> to: stop do: aBlock [
-	| iterID |
+	| iterID iterDef body |
 	aBlock arguments size ~= 1
 		ifTrue: [ self error: 'Wrong number of arguments.' ]
 		ifFalse: [ iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator ].
@@ -87,13 +87,22 @@ IlliciumSmallInteger >> to: stop do: aBlock [
 	("((methodTranslator getNodeConcreteType: stop) = SmallInteger asTypeReification)
 		and:[" aBlock isBlock" ]")
     ifFalse:[ self error: 'An arguments has the wrong type' ].
-
+	
+	"We move the declaration of the of the iterator inside the for"
+	body := (aBlock acceptVisitor: methodTranslator).
+	body declarations: (body declarations reject: [ :aDeclaration | aDeclaration declaration id = iterID ]).
+	
+	iterDef := ASTCVariableDefinition new 
+		declaration: (ASTCVariableDeclaration  new 
+			id: iterID ; 
+			type: CType int ;
+			yourself) ; 
+		init: self translatedReceiver.
+	
 	^ ASTCFor new
-		iteratorDefinition: (iterID assign: self translatedReceiver);
-		condition:
-			(iterID < (stop acceptVisitor: methodTranslator));
-		iteratorModification:
-			(iterID preIncr);
-		body: (aBlock acceptVisitor: methodTranslator);
+		iteratorDefinition: iterDef ;
+		condition: (iterID <= (stop acceptVisitor: methodTranslator));
+		iteratorModification: (iterID preIncr);
+		body: body;
 		yourself
 ]

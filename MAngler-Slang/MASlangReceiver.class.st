@@ -725,7 +725,7 @@ MASlangReceiver >> to: stop do: aBlock [
 	| iterID iterDef |
 	aBlock arguments size ~= 1
 		ifTrue: [ 
-			iterID := ASTCIdentifier id: #anIterator.
+			iterID := #anIterator asCIdentifierNode.
 			iterDef := ASTCVariableDefinition new declaration: (ASTCVariableDeclaration  new id: iterID ; type: CType int ; yourself) ; init: self translatedReceiver. ]
 		ifFalse: [ 
 			iterID := (aBlock arguments at: 1) acceptVisitor: methodTranslator.

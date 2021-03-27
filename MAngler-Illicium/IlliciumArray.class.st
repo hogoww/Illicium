@@ -65,6 +65,7 @@ IlliciumArray >> do: aBlock [
 	iterator := (newBlock arguments at: 1) acceptVisitor: methodTranslator.
 	receiver := self translatedReceiver.
 
+	for condition: (for condition asLesserOperator).
 	for defineIteratorWithType: SmallInteger asConstraint.
 	for body statements addFirst: 
 		(arg assign: (receiver indexAt: iterator))
