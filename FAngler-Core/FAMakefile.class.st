@@ -2,16 +2,14 @@ Class {
 	#name : #FAMakefile,
 	#superclass : #Object,
 	#instVars : [
+		'rules',
 		'compiler',
-		'librariesFlags',
-		'vmLibraryFlag',
+		'compilerFlags',
 		'vmPaths',
 		'vmMacros',
-		'compilerFlags',
+		'mainFiles',
 		'supportFiles',
 		'testClassFile',
-		'rules',
-		'mainFiles',
 		'libraryFlags'
 	],
 	#category : #'FAngler-Core-Installers'
@@ -109,16 +107,6 @@ FAMakefile >> initializeToDefaultValues [
 ]
 
 { #category : #accessing }
-FAMakefile >> librariesFlags [
-	^ librariesFlags
-]
-
-{ #category : #accessing }
-FAMakefile >> librariesFlags: anObject [
-	librariesFlags := anObject
-]
-
-{ #category : #accessing }
 FAMakefile >> mainFiles [
 
 	^ mainFiles
@@ -208,16 +196,6 @@ FAMakefile >> testClassFile [
 { #category : #accessing }
 FAMakefile >> testClassFile: anObject [
 	testClassFile := anObject
-]
-
-{ #category : #accessing }
-FAMakefile >> vmLibraryFlag [
-	^ vmLibraryFlag
-]
-
-{ #category : #accessing }
-FAMakefile >> vmLibraryFlag: anObject [
-	vmLibraryFlag := anObject
 ]
 
 { #category : #accessing }
