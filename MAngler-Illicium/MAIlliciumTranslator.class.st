@@ -41,7 +41,7 @@ MAIlliciumTranslator class >> compileVMTests [
 		].
 	line := res lines last.
 
-	(line last: 4) = 'done' ifTrue: [ ^ self runnedInC: res ].
+	(line last: 4) = 'done' ifTrue: [ ^ self passedInC: res ].
 	(line last: 6) = 'failed' ifTrue: [ ^ self failedInC: res ].
 
 	self halt.
@@ -52,11 +52,14 @@ MAIlliciumTranslator class >> compileVMTests [
 { #category : #report }
 MAIlliciumTranslator class >> failedInC: aString [
 
-	(aString lines anySatisfy: [ :aLine | aLine includesSubstring: 'Segmentation fault (core dumped)' ])
+	(aString lines anySatisfy: [ :aLine | 
+		aLine includesSubstring: 'Segmentation fault (core dumped)' ])
 		ifTrue: [ ^ 'Segmentation fault' -> aString ].
 
+	(aString lines third last: 6) = 'failed' ifTrue: [ ^ self failedAssertionInC: aString ].
+	"default case."
 	aString lines third = 'something' ifFalse: [ ^ 'C compilation error' -> aString ].
-
+	"left here in case of unplanned case"
 	self halt.
 ]
 
@@ -176,11 +179,6 @@ MAIlliciumTranslator class >> resetGeneratedTestDirectories [
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> resetVMProgram [
 	VMProgram := nil.
-]
-
-{ #category : #report }
-MAIlliciumTranslator class >> runnedInC: aString [
-	^ 'test passed' -> aString
 ]
 
 { #category : #'translation-api' }
