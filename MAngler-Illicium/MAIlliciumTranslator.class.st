@@ -50,6 +50,11 @@ MAIlliciumTranslator class >> compileVMTests [
 ]
 
 { #category : #report }
+MAIlliciumTranslator class >> failedAssertionInC: aString [
+	^ 'Test failed' -> aString
+]
+
+{ #category : #report }
 MAIlliciumTranslator class >> failedInC: aString [
 
 	(aString lines anySatisfy: [ :aLine | 
@@ -154,6 +159,11 @@ MAIlliciumTranslator class >> moveFilesintoVMDirectory [
 		runAndWaitOnExitDo: [ :command :outString |
 			^ outString
 		].
+]
+
+{ #category : #report }
+MAIlliciumTranslator class >> passedInC: aString [
+	^ 'Test passed' -> aString
 ]
 
 { #category : #'default-configuration' }
