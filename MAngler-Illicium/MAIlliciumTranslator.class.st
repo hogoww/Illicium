@@ -480,7 +480,7 @@ MAIlliciumTranslator >> runTestInC: aTestMethodAST [
 { #category : #testTranslation }
 MAIlliciumTranslator >> testTranslationPreludeFor: aClass [
 	self vmDependentCode.
-	inferer inferAST: (aClass lookupSelector: #setUp) ast.
+	inferer inferAST: (aClass lookupSelector: #setUp) ast withReceiverType: aClass.
 
 ]
 
