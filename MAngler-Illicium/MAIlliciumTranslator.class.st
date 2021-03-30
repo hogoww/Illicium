@@ -204,7 +204,7 @@ MAIlliciumTranslator class >> translateTestMethod: aMethod [
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> tryAllTests [
 	| testClasses results |
-	testClasses := VMSpurInitializedOldSpaceTest subclasses .
+	testClasses := VMSpurInitializedOldSpaceTest allSubclasses.
 	results := Dictionary new.
 	self resetVMProgram. "reset it at least when we run everything.."
 	
@@ -219,7 +219,6 @@ MAIlliciumTranslator class >> tryAllTests [
 				bar value: i.
 				results add: (self generateAllTestsFor: aClass)
 				]].
-	
 	^ (self compactResults: results) inspect.
 ]
 
