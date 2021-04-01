@@ -45,6 +45,7 @@ BaselineOfFAngler >> baseline: spec [
 { #category : #accessing }
 BaselineOfFAngler >> lastPlayground [
 
+| analysis runInC res |
 ASTCGenerator generate.
 MAPluginTestGenerator generateVMMakerPluginsTests.
 MAPluginTestGenerator generateVMMakerInterpreterPrimitiveTests.
@@ -57,9 +58,57 @@ MAFullVMCCodeGeneratorRessource current.
 "MASlangTranslator new translateVM."
 MASlangTranslator new generateVM.
 PharoVMMaker generate: #StackVM outputDirectory: FileSystem workingDirectory / 'vmmaker'. 
-MASlangTranslator new translateTestClass: VMByteCodesTest.
+MAIlliciumTranslator new generateTestClass: VMPinnedObjectTest .
+VMSpurScavengeWeakTest.
+MAIlliciumTranslator new generateTestMethod: (VMSpurTreeAllocationWithBigNodesTest >> #test01LargeLeftoverSmallerThanRootShouldBeInsertedInSmaller) ast.
+MAIlliciumTranslator generateAllTestsFor: VMPinnedObjectTest.
 
-MAIlliciumTranslator new vmDependentCode; translateClass: VMFrameBuilder.
+MAIlliciumTranslator new generateTestClass: VMSpurScavengeEphemeronTest.
+
+LibC resultOfCommand: 'cd ~/ovm && ./movestuff.sh ./testCompilation'.
+LibC resultOfCommand: 'cd ~/ovm/testCompilation && make'.
+
+LibC resultOfCommand: 'cd generated/tests && rm *'.
+
+MAIlliciumTranslator resetVMProgram.
+(VMSpurTreeAllocationWithBigNodesTest >> #test01LargeLeftoverSmallerThanRootShouldBeInsertedInSmaller) runInC.
+MAIlliciumTranslator generateAllTestsFor: VMPinnedObjectTest.
+MAIlliciumTranslator tryAllTests.
+TimeProfiler onBlock:[ MAIlliciumTranslator tryAllTests. ].
+(RPackageOrganizer default packageNamed: #VMMakerTests) classes.  
+
+analysis := MutationTestingAnalysisInC
+    testCasesFrom: { VMSpurOldSpaceTest }
+    mutating: {VMSpurOldSpaceTest }
+	 using: { RemoveAnonymousMessageMutantOperator selector: #freeChunkWithBytes:at: }
+    with: SelectingFromCoverageMutantEvaluationStrategy new.
+analysis run.
+
+
+analysis := MutationTestingAnalysisInC
+    testCasesFrom: VMSpurInitializedOldSpaceTest subclasses
+    mutating: { VMSpurMemoryManagerTest }, VMSpurInitializedOldSpaceTest subclasses
+	 using: { ReplaceAssertEqualWithDenyEqual new }
+    with: SelectingFromCoverageMutantEvaluationStrategy new.
+analysis run.
+
+analysis := MutationTestingAnalysis
+    testCasesFrom: {UUIDPrimitivesTest}
+    mutating: {UUIDPrimitivesTest}
+    using: {ReplaceAssertEqualWithDenyEqual new}
+    with: SelectingFromCoverageMutantEvaluationStrategy new.
+analysis run.
+runInC.
+"to find good mutants"
+res := Bag new.
+{ VMSpurMemoryManagerTest }, VMSpurInitializedOldSpaceTest subclasses do:[ :aClass|
+	aClass methodsDo:[:aMethod|
+		aMethod ast nodesDo: [ :aNode | 
+			aNode isMessage ifTrue: [ res add: aNode selector] ]
+		]
+	].
+res.
+
 ]
 
 { #category : #accessing }
