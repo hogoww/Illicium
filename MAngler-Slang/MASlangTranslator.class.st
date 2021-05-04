@@ -229,6 +229,17 @@ MASlangTranslator >> shouldITranslate: aMethod options: options [
 ]
 
 { #category : #'translation-api' }
+MASlangTranslator >> translateMethod: aSelector [
+	| cu |
+	
+	self prepareProgram.
+	cu := ASTCCompilationUnit new.
+	cu add: (classTranslator methodTranslator translateMethod: (program methodNamed: aSelector)).
+	^ cu
+		
+]
+
+{ #category : #'translation-api' }
 MASlangTranslator >> translateProgram [
 	| cu constants |
 	
