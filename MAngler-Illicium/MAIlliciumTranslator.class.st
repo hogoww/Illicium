@@ -301,6 +301,7 @@ MAIlliciumTranslator >> generateTestCompilationUnit: aCompilationUnit forClass: 
 MAIlliciumTranslator >> generateTestMethod: aMethod [
 	| cProject testMainCFile |
 	cProject := self translateTestMethod: aMethod.
+	cProject add: TestCase missingMethod.
 	testMainCFile := self makeCTestFrom: cProject for: aMethod.
 	cProject add: testMainCFile.
 	cProject generateOnDisk.
