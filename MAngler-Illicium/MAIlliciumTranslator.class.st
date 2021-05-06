@@ -31,14 +31,38 @@ MAIlliciumTranslator class >> compactResults: aDictionary [
 ]
 
 { #category : #'default-configuration' }
+MAIlliciumTranslator class >> compileVMTest: aMethodNode [
+	| res line |
+	OSSUnixSubprocess new
+		shellCommand: 'cd ~/ovm/testCompilation && make -f ' , (FAFormatHelper testName: aMethodNode) , '.makefile';
+		redirectStdout;
+		redirectStderr;
+		runAndWaitOnExitDo: [ :command :outString |
+			res := outString
+		].
+	res = '' ifTrue: [ self weirdResultInC ].
+	line := res lines last.
+
+	(line last: 4) = 'done' ifTrue: [ ^ self passedInC: res ].
+	(line last: 6) = 'failed' ifTrue: [ ^ self failedInC: res ].
+
+	self halt.
+
+	^ res
+]
+
+{ #category : #'default-configuration' }
 MAIlliciumTranslator class >> compileVMTests [
 	| res line |
 	OSSUnixSubprocess new
 		shellCommand: 'cd ~/ovm/testCompilation && make';
 		redirectStdout;
+		redirectStderr;
 		runAndWaitOnExitDo: [ :command :outString |
+			self halt.
 			res := outString
 		].
+	res = '' ifTrue: [ self error: 'wtf' ].
 	line := res lines last.
 
 	(line last: 4) = 'done' ifTrue: [ ^ self passedInC: res ].
@@ -60,12 +84,11 @@ MAIlliciumTranslator class >> failedInC: aString [
 	(aString lines anySatisfy: [ :aLine | 
 		aLine includesSubstring: 'Segmentation fault (core dumped)' ])
 		ifTrue: [ ^ 'Segmentation fault' -> aString ].
-
-	(aString lines third last: 6) = 'failed' ifTrue: [ ^ self failedAssertionInC: aString ].
+	
+	(((aString lines second last: 6) = 'failed') or: [ (aString lines second last: 6) = 'failed' ])
+		ifTrue: [ ^ self failedAssertionInC: aString ].
 	"default case."
-	aString lines third = 'something' ifFalse: [ ^ 'C compilation error' -> aString ].
-	"left here in case of unplanned case"
-	self halt.
+	^ 'C compilation error' -> aString
 ]
 
 { #category : #'translation-api' }
@@ -76,8 +99,9 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 	timeOutTime := Duration seconds: 10.
 	log := Dictionary new.
 
+
 	UIManager default
-		displayProgress: 'Running tests for ' , aClass name
+		displayProgress: 'Generating tests for ' , aClass name
 		from: 0
 		to: testMethods size
 		during:
@@ -88,8 +112,7 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 		"display ui, but don't want to reindent the code..."
 
 		[
-			[ log add: (aMethod selector -> aMethod runInC) ] 
-				valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
+			[ log add: (aMethod selector -> aMethod runInC) ] valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
 		] on: Exception do:[ :e |
 		e class = Notification ifTrue:[ e resume ].
 			"Not great but the initial selector gets lost at some point... Whatever for now"
@@ -97,11 +120,31 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 		e class = TimedOut 
 			ifTrue: [ log add: (aMethod selector -> ('TimedOut' -> aMethod selector))]
 			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e description))).
-
 				]]]].
 	
 	^ aClass -> log
 
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> generateAllUnitTests [
+	| testClasses results |
+	testClasses := VMSpurInitializedOldSpaceTest allSubclasses.
+	results := Dictionary new.
+	self resetVMProgram. "reset it at least when we run everything.."
+	
+	UIManager default
+		displayProgress: 'Running tests in C'
+		from: 0
+		to: testClasses size
+		during:
+			[:bar |
+			 testClasses doWithIndex:
+				[ :aClass :i |
+				bar value: i.
+				results add: (self generateAllUnitTestsFor: aClass)
+				]].
+	^ (self compactResults: results) inspect.
 ]
 
 { #category : #'translation-api' }
@@ -110,6 +153,55 @@ MAIlliciumTranslator class >> generateMainForTestClasses: classes [
 		directory: './generated/tests/';
 		fileName: 'AllTests.c';
 		printStringInFile: (self mainCCodeForTestClasses: classes)
+]
+
+{ #category : #testTranslation }
+MAIlliciumTranslator class >> generateTestSupport [
+	self generateTestSupportHeader.
+	self generateTestSupportImplementation.
+]
+
+{ #category : #testTranslation }
+MAIlliciumTranslator class >> generateTestSupportHeader [
+	"Currently hardCoded for quick feedback"
+	self flag: #hardCode.
+	FAFilePrinter new
+		directory: 'generated/tests/';
+		fileName: 'cTestCase.h';
+		printStringInFile: '
+#include <stdio.h>
+#include <stdlib.h>
+
+void testPassed();
+void testFailed(int line);
+void cAssert(int line, int condition);'
+]
+
+{ #category : #testTranslation }
+MAIlliciumTranslator class >> generateTestSupportImplementation [
+	"Currently hardCoded for quick feedback"
+	FAFilePrinter new
+		directory: 'generated/tests/';
+		fileName: 'cTestCase.c';
+		printStringInFile: '#include <stdio.h>
+#include <stdlib.h>
+
+void testPassed(){
+  printf("Test passed\n");
+  exit(EXIT_SUCCESS);
+}
+
+void testFailed(int line){
+  printf("Assertion line: %d Test failed\n", line);
+  exit(EXIT_FAILURE);
+}
+
+
+void cAssert(int line, int condition)
+{
+  if (condition) return;
+  testFailed(line);
+}'
 ]
 
 { #category : #'translation-api' }
@@ -202,7 +294,7 @@ MAIlliciumTranslator class >> translateTestMethod: aMethod [
 ]
 
 { #category : #'translation-api' }
-MAIlliciumTranslator class >> tryAllTests [
+MAIlliciumTranslator class >> tryAllUnitTests [
 	| testClasses results |
 	testClasses := VMSpurInitializedOldSpaceTest allSubclasses.
 	results := Dictionary new.
@@ -231,6 +323,15 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 MAIlliciumTranslator class >> vmProgram [
 
 	^ VMProgram ifNil: [ VMProgram := MASlangTranslator new prepareProgram; program ]
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> weirdResultInC [
+	"result string is empty.. Why?"
+	self error: 'result string was empty'
+	"Possible reasons encountered so far:
+		1 Check if the image name is right in the moveStuff script
+		2 Check if you are indeed copying the implementation, header, and makefiles files."
 ]
 
 { #category : #'generation-api' }
@@ -272,12 +373,14 @@ MAIlliciumTranslator >> generateMakefileForTests: testMethods forClass: aClass [
 
 { #category : #'generation-api' }
 MAIlliciumTranslator >> generateTestClass: aClass [
-	| translation |
-	translation := self translateTestClass: aClass.
-
-	self generateTestCompilationUnit: translation forClass: aClass.
-	
-	^ translation
+	| cProject testMainCFile testsMethods |
+	cProject := self translateTestClass: aClass.
+	testsMethods := aClass methods select: [ :aMethod| aMethod ast isTest ].
+	testsMethods collect: [ :aMethod |
+		testMainCFile := self makeCTestFrom: cProject for: aMethod.
+		testMainCFile ] into: cProject.
+	cProject generateOnDisk.
+	^ cProject
 ]
 
 { #category : #'generation-support' }
@@ -305,53 +408,6 @@ MAIlliciumTranslator >> generateTestMethod: aMethod [
 	cProject add: testMainCFile.
 	cProject generateOnDisk.
 	^ cProject
-]
-
-{ #category : #testTranslation }
-MAIlliciumTranslator >> generateTestSupport [
-	self generateTestSupportHeader.
-	self generateTestSupportImplementation.
-]
-
-{ #category : #testTranslation }
-MAIlliciumTranslator >> generateTestSupportHeader [
-	"Currently hardCoded for quick feedback"
-	self flag: #hardCode.
-	self printRawFile: '
-#include <stdio.h>
-#include <stdlib.h>
-
-void testPassed();
-void testFailed(int line);
-void cAssert(int line, int condition);'
- in: 'generated/tests/' withName: 'cTestCase.h'.
-]
-
-{ #category : #testTranslation }
-MAIlliciumTranslator >> generateTestSupportImplementation [
-	"Currently hardCoded for quick feedback"
-	self flag: #hardCode.
-	self printRawFile: '
-#include <stdio.h>
-#include <stdlib.h>
-
-void testPassed(){
-  printf("Test passed\n");
-  exit(EXIT_SUCCESS);
-}
-
-void testFailed(int line){
-  printf("Assertion line: %d Test failed\n", line);
-  exit(EXIT_FAILURE);
-}
-
-
-void cAssert(int line, int condition)
-{
-  if (condition) return;
-  testFailed(line);
-}'
- in: 'generated/tests/' withName: 'cTestCase.c'.
 ]
 
 { #category : #initialization }
@@ -433,7 +489,7 @@ MAIlliciumTranslator >> makeCTestFrom: aProject for: aMethodNode [
 	testMain add: mainFunction.
 	testMain addDeclarationsOfDefinitions.
 	^ ASTCCFile new 
-		fileName: aMethodNode methodClass name , '__' , testFunction selector;
+		fileName: (FAFormatHelper testName: aMethodNode);
 		implementation: testMain;	
 		yourself
 ]
