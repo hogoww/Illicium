@@ -7,7 +7,7 @@ Class {
 { #category : #include }
 IlliciumTestCase class >> cHeader [
 	^ ASTCCompilationUnit new
-		add: (ASTCRawCCode new 
+		preamble: (ASTCRawCCode new 
 			cCode: '
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +22,7 @@ void cAssert(int line, int condition);';
 { #category : #include }
 IlliciumTestCase class >> cImplementation [
 	^ ASTCCompilationUnit new
-		add: (ASTCRawCCode new 
+		preamble: (ASTCRawCCode new 
 			cCode: '
 #include <stdio.h>
 #include <stdlib.h>
