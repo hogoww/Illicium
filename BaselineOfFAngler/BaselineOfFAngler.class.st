@@ -73,8 +73,8 @@ LibC resultOfCommand: 'cd generated/tests && rm *'.
 MAIlliciumTranslator resetVMProgram.
 (VMSpurTreeAllocationWithBigNodesTest >> #test01LargeLeftoverSmallerThanRootShouldBeInsertedInSmaller) runInC.
 MAIlliciumTranslator generateAllTestsFor: VMPinnedObjectTest.
-MAIlliciumTranslator tryAllTests.
-TimeProfiler onBlock:[ MAIlliciumTranslator tryAllTests. ].
+MAIlliciumTranslator tryAllUnitTests.
+TimeProfiler onBlock:[ MAIlliciumTranslator tryAllUnitTests. ].
 (RPackageOrganizer default packageNamed: #VMMakerTests) classes.  
 
 analysis := MutationTestingAnalysisInC

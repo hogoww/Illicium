@@ -25,3 +25,8 @@ FAFormatHelper class >> formatSelector: aSelector [
 			ifTrue: [ counter := counter + 1 ]
 			ifFalse: [ ^ (functionID contents first: functionID size - counter) ]]
 ]
+
+{ #category : #formatting }
+FAFormatHelper class >> testName: aMethodNode [
+	^ aMethodNode methodClass name , '__' , (self formatSelector: aMethodNode selector)
+]

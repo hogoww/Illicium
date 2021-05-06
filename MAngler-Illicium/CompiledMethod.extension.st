@@ -7,5 +7,5 @@ CompiledMethod >> runInC [
 	MAIlliciumTranslator resetGeneratedTestDirectories.
 	MAIlliciumTranslator new generateTestMethod: self ast.
 	MAIlliciumTranslator moveFilesintoVMDirectory.
-	^ MAIlliciumTranslator compileVMTests
+	^ MAIlliciumTranslator compileVMTest: self ast.
 ]
