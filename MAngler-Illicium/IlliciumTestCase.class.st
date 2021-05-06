@@ -5,8 +5,56 @@ Class {
 }
 
 { #category : #include }
+IlliciumTestCase class >> cHeader [
+	^ ASTCCompilationUnit new
+		add: (ASTCRawCCode new 
+			cCode: '
+#include <stdio.h>
+#include <stdlib.h>
+
+void testPassed();
+void testFailed(int line);
+void cAssert(int line, int condition);';
+			yourself);
+		yourself 
+]
+
+{ #category : #include }
+IlliciumTestCase class >> cImplementation [
+	^ ASTCCompilationUnit new
+		add: (ASTCRawCCode new 
+			cCode: '
+#include <stdio.h>
+#include <stdlib.h>
+
+void testPassed(){
+  printf("Test passed\n");
+  exit(EXIT_SUCCESS);
+}
+
+void testFailed(int line){
+  printf("Assertion line: %d Test failed\n", line);
+  exit(EXIT_FAILURE);
+}
+
+
+void cAssert(int line, int condition)
+{
+  if (condition) return;
+  testFailed(line);
+}';
+			yourself);
+		yourself 
+]
+
+{ #category : #include }
 IlliciumTestCase class >> includeCFile [
-	^ CFile ifNil: [ CFile := ASTCCFile new fileName: #cTestCase ; yourself ]
+	^ CFile ifNil: [
+		CFile := ASTCCFile new 
+			fileName: #cTestCase;
+			implementation: self cImplementation;
+			header: self cHeader;
+			yourself ]
 ]
 
 { #category : #asserting }
