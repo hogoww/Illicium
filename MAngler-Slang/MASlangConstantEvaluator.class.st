@@ -28,12 +28,18 @@ MASlangConstantEvaluator >> visitArgumentNode: aRBArgumentNode [
 ]
 
 { #category : #visiting }
+MASlangConstantEvaluator >> visitArgumentVariableNode: anArgument [
+	^ self visitArgumentNode: anArgument
+
+]
+
+{ #category : #visiting }
 MASlangConstantEvaluator >> visitGlobalNode: aRBGlobalNode [ 
 	
 	^ nil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 MASlangConstantEvaluator >> visitInstanceVariableNode: aRBInstanceVariableNode [ 
 	^ nil
 ]
