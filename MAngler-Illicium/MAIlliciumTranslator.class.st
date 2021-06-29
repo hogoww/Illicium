@@ -44,11 +44,7 @@ MAIlliciumTranslator class >> compileVMTest: aMethodNode [
 	line := res lines last.
 
 	(line last: 4) = 'done' ifTrue: [ ^ self passedInC: res ].
-	(line last: 6) = 'failed' ifTrue: [ ^ self failedInC: res ].
-
-	self halt.
-
-	^ res
+	^ self failedInC: res
 ]
 
 { #category : #'default-configuration' }
