@@ -37,14 +37,21 @@ IlliciumTypeChecker >> check [
 		ifTrue:[ [ types removeType: UndefinedObject asConstraint ] on: NotFound do: [ ] ].
 
 	(types isMultipleType)
-		ifTrue:[ [ types removeType: Object asConstraint ] on: NotFound do: [] ].
+		ifTrue:[ [ 
+				types removeType: Object asConstraint ] on: NotFound do: [].
+	
+				
+				(types types size = 2 
+					and: [ types types includesAll: { VMClass asTypeReification. SmallInteger asTypeReification} ])
+				ifTrue: [ types removeType: SmallInteger asTypeReification ] 
+			].
     
 	self nodeCheck.
 	
 	(types isMultipleType and: [ types types includesAll: {Float asTypeReification. BoxedFloat64 asTypeReification}]) ifTrue:[ types removeType: BoxedFloat64].
 	
 	(types isMultipleType)
-		ifTrue:[ [ types removeType: Object ] on: NotFound do: [ TypeAmbiguity new types: types ; signal ] ].
+			ifTrue:[ [ types removeType: Object ] on: NotFound do: [ TypeAmbiguity new types: types ; signal ] ].
 	
 	
 	types isEmptyType
