@@ -8,8 +8,10 @@ SingleType >> asCType [
 	(type = VMClass) ifTrue: [ ^ CType createFrom: #sqInt ].
 	(type inheritsFrom: VMClass) ifTrue: [ ^ CType createFrom: #sqInt ].
 	(type inheritsFrom: VMSpurMemoryManagerTest) ifTrue: [ ^ CType createFrom: type name ].
-	self halt.
-	^ type
+	"default"
+	^ (CType createFrom: type name , '*')
+		dimension: 1;
+		yourself
 ]
 
 { #category : #'*MAngler-Illicium' }
