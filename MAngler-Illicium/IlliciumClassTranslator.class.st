@@ -113,7 +113,14 @@ IlliciumClassTranslator >> typeInferenceEntryPoints: aClass [
 
 { #category : #typing }
 IlliciumClassTranslator >> typeOfSlot: aSlot [
-	^ (mainTranslator inferer typeOfInstanceVariable: aSlot name ofClass: aSlot definingClass) asConstraint 
+	| type fakeNode |
+	type := (mainTranslator inferer typeOfInstanceVariable: aSlot name ofClass: aSlot definingClass) asConstraint.
+	"stub, shouldn't affect anything, awaiting IlliciumTypeChecker update.."
+	fakeNode := (RBLiteralNode value: 1).
+
+	type := IlliciumTypeChecker checkThatType: type for: fakeNode using: mainTranslator inferer.
+	type isCollectionType ifTrue: [ IlliciumTypeChecker checkThatType: type elementType for: fakeNode using: mainTranslator inferer. ].
+	^ type
 ]
 
 { #category : #typing }
