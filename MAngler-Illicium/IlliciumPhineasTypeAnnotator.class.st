@@ -24,9 +24,10 @@ IlliciumPhineasTypeAnnotator >> typeThatNode: aNode [
 	phineasTypes := inferer phineasTypeOfNode: aNode.
 
 	[ 
-	type := IlliciumTypeChecker checkThatType: phineasTypes asPharoType for: aNode using: inferer. 
-	] on: TypeAmbiguity , NoTypeFound do:[:e | e halt ].
-	
+		type := IlliciumTypeChecker checkThatType: phineasTypes asPharoType for: aNode using: inferer.
+		type isCollectionType ifTrue: [ IlliciumTypeChecker checkThatType: type elementType for: aNode using: inferer. ]
+	] on: TypeAmbiguity , NoTypeFound do:[:e | e pass ].
+
 	self flag: #dirtyFix.
 	(aNode isMethod and: [ type type = aNode methodNode methodClass ])
 		ifTrue: [ type := EmptyType new ].
