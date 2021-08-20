@@ -16,7 +16,7 @@ IlliciumUserClass >> cCoerce: aVariable to: aType [
 
 { #category : #'reflective operations' }
 IlliciumUserClass >> doesNotUnderstand: aMessage [
-	| functionCall |
+	| functionCall type|
 	aMessage selector = #doesNotUnderstand: ifTrue: [ self error: 'infinite recursion' ].
 	
 	(methodTranslator methodFor: aMessage selector) 
@@ -27,5 +27,10 @@ IlliciumUserClass >> doesNotUnderstand: aMessage [
 			^ functionCall
 		 ].
 
+	type := receiverNode propertyAt: #type.
+	(type type lookupSelector: aMessage selector) ast isAccessor
+		ifTrue: [ ^ self translatedReceiver -> (ASTCIdentifier id: aMessage selector) ].
+	
 	super doesNotUnderstand: aMessage
+	
 ]
