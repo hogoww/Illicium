@@ -607,5 +607,8 @@ MAIlliciumTranslator >> vmDependentCode [
 		replacementClasses at: vmStruct name put: MASlangStructsReceiver ].
 	inferer addDependency: vmProgram.
 	program addDependency: vmProgram.
-	program addInclude: #'"theFullInterpreter.h"'
+	program addInclude: #'"theFullInterpreter.h"'.
+	
+	{ VMStackBuilder . VMMethodBuilder . VMFrameBuilder }
+		do: [ :aClass | replacementClasses at: aClass name put: IlliciumUserClass ]
 ]
