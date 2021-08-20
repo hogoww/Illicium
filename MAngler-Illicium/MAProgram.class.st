@@ -10,6 +10,16 @@ MAProgram >> addMethodAndClass: aMethod [
 	self addMethod: aMethod.
 ]
 
+{ #category : #adding }
+MAProgram >> addRequiredClasses [
+	| methodClasses |
+	methodClasses := (methods collect: #methodClass into: Bag new).
+	self flag: #dirty. "Needs a better heuristic.."
+	classesToGenerate := (methodClasses
+		select: [ :aClass | (classesToGenerate includes: aClass) or: [ { VMStackBuilder. VMFrameBuilder . VMMethodBuilder} includes: aClass  ] ]) 
+			asSet asOrderedCollection.
+]
+
 { #category : #preparation }
 MAProgram >> addRequiredMethodUsing: inferer [
 	| testMethods cgc requiredMethods|
@@ -18,7 +28,8 @@ MAProgram >> addRequiredMethodUsing: inferer [
 		addDoNotInferCriterium: [ :aMethod | aMethod methodClass includesBehavior: VMClass ];
 		addDoNotInferCriterium: [ :aMethod | aMethod methodClass includesBehavior: Magnitude ];
 		addDoNotInferCriterium: [ :aMethod | aMethod methodClass includesBehavior: String ];
-		addDoNotInferCriterium: [ :aMethod | #(new new: basicNew: inSmalltalk:) includes: aMethod selector ];
+		addDoNotInferCriterium: [ :aMethod | aMethod isPrimitive ];
+		addDoNotInferCriterium: [ :aMethod | #( "new" new: basicNew basicNew: inSmalltalk:) includes: aMethod selector ];
 		yourself.
 	
 	"add all the hierarchy to the scoping"
@@ -30,14 +41,15 @@ MAProgram >> addRequiredMethodUsing: inferer [
 			]]."
 	
 	"try another approach: any class in the package might be relevant"
-	(RPackageOrganizer default packageNamed: #VMMakerTests) 
-		classes do: [ :aClass | cgc addScopingClass: aClass ].
-	
+	"Behavior allows to use new"
+	(RPackageOrganizer default packageNamed: #VMMakerTests) classes , { Behavior }
+		do: [ :aClass | cgc addScopingClass: aClass; addScopingClass: aClass classSide ].
+
 	requiredMethods := Set new.
 	testMethods := methods copy.
 	testMethods do: [ :aTestMethod | requiredMethods addAll: (cgc calculateCallGraphFrom: aTestMethod) ].
-
-	requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ]
+	requiredMethods select: [:m |m methodClass = Behavior].
+	requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ].
 ]
 
 { #category : #'test-support' }
@@ -67,10 +79,12 @@ MAProgram >> inferMethodsWith: inferer [
 
 { #category : #preparation }
 MAProgram >> prepareWithInferer: inferer inTranslator: translator [
-	self registerCTypesForClassesToTranslate.
 	
 	self inferMethodsWith: inferer.
 	self addRequiredMethodUsing: inferer.
+	
+	self addRequiredClasses.
+	self registerCTypesForClassesToTranslate.
 	
 	self removeAccessors.
 	self removeDoNotGenerate. "we need them for type inference"
@@ -98,7 +112,7 @@ MAProgram >> registerCType: aClass [
 ]
 
 { #category : #preparation }
-MAProgram >> registerCTypesForClassesToTranslate [.
+MAProgram >> registerCTypesForClassesToTranslate [
 	classesToGenerate do: [ :aClass | self registerCType: aClass ]
 
 ]
