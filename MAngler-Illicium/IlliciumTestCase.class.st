@@ -74,7 +74,7 @@ IlliciumTestCase >> assert: actual equals: expected [
 	| fakeMessageNode |
 	"should probably check that the types of both arguments are the same."
 	self flag: #missingCheck.
-	fakeMessageNode := RBMessageNode receiver: actual selector: #= arguments: { expected }. 
+	fakeMessageNode := RBMessageNode receiver: actual selector: #= arguments: { expected }.
 	^ self assert: fakeMessageNode
 ]
 
