@@ -76,12 +76,11 @@ MAIlliciumTranslator class >> failedAssertionInC: aString [
 
 { #category : #report }
 MAIlliciumTranslator class >> failedInC: aString [
-
 	(aString lines anySatisfy: [ :aLine | 
-		aLine includesSubstring: 'Segmentation fault (core dumped)' ])
+		aLine includesSubstring: 'Segmentation fault' ])
 		ifTrue: [ ^ 'Segmentation fault' -> aString ].
 	
-	(((aString lines second last: 6) = 'failed') or: [ (aString lines second last: 6) = 'failed' ])
+	(((aString lines second last: 6) = 'failed') or: [ (aString lines second last: 6) = 'failed' or: [ (aString lines last last: 6) = 'failed' ]])
 		ifTrue: [ ^ self failedAssertionInC: aString ].
 	"default case."
 	^ 'C compilation error' -> aString
