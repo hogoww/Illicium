@@ -293,7 +293,7 @@ MAIlliciumTranslator class >> translateTestMethod: aMethod [
 MAIlliciumTranslator class >> tryAllUnitTests [
 	| testClasses results |
 	testClasses := VMSpurInitializedOldSpaceTest allSubclasses.
-	results := Dictionary new.
+	results := CTestResults new.
 	self resetVMProgram. "reset it at least when we run everything.."
 	
 	UIManager default
@@ -307,7 +307,8 @@ MAIlliciumTranslator class >> tryAllUnitTests [
 				bar value: i.
 				results add: (self generateAllTestsFor: aClass)
 				]].
-	^ (self compactResults: results) inspect.
+
+	^ results
 ]
 
 { #category : #'default-configuration' }
