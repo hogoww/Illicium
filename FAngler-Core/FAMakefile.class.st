@@ -23,7 +23,8 @@ FAMakefile >> addCompileTestRule [
 
 	rule addBodyLine: '@echo " compiling $@."'.
 	rule addBodyLine: '@$(CC) -o $@ $@.c $(LIBRARIES_FLAGS) $(VM_PATHS) $(VM_MACROS) $(COMPILER_FLAGS) $(SUPPORT_FILES) 2>&1'.
-	rule addBodyLine: '@export LD_LIBRARY_PATH=. && ./$@ 2>&1'.
+
+	rule addBodyLine: '@export ' , self libraryEnvironementVariable , '=. && ./$@ 2>&1'.
 	rule addBodyLine: '@rm $@'.
 	
 	rules add: rule
@@ -104,6 +105,15 @@ FAMakefile >> initializeToDefaultValues [
 	vmPaths := '-L. -I. -I../extracted/vm/include/common/ -I../include/pharovm/ -I../include/ -I../generated/include/ -I../extracted/vm/include/unix/ -I../build/include/pharovm/'.
 	vmMacros :='-DLSB_FIRST -DNDEBUG -DDEBUGVM=0 -DIMMUTABILITY=1 -DCOGMTVM=0 -DPharoVM=1 -DVM_LABEL\(foo\)=0'.
 	compilerFlags := '-fPIC -g'.
+]
+
+{ #category : #configuring }
+FAMakefile >> libraryEnvironementVariable [
+	| platform |
+	platform := OSPlatform current.
+	platform isMacOS ifTrue: [ ^ 'DYLD_LIBRARY_PATH' ].
+	platform isLinux ifTrue: [ ^ 'LD_LIBRARY_PATH' ].
+	self error: 'unsupported platform'
 ]
 
 { #category : #accessing }
