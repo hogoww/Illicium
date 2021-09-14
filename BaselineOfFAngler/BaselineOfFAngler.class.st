@@ -20,7 +20,7 @@ BaselineOfFAngler >> baseline: spec [
 				with: [ spec repository: 'github://hogoww/C-AST:master' ].
 			spec
 				baseline: 'Phineas'
-				with: [ spec repository: 'gitlab://pharo-project/Phineas:vmtests' ].
+				with: [ spec repository: 'gitlab://hogoww/Phineas:vmtests' ].
 			spec baseline: 'PlainPharoCode'
 				with:[ spec repository: 'github://hogoww/PlainPharoCode:master' ].
 			
