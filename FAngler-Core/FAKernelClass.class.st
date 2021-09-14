@@ -46,6 +46,7 @@ FAKernelClass class >> receiverNode: aValue [
 
 { #category : #'message performing' }
 FAKernelClass >> = anotherObject [
+	(self class isKindOf: anotherObject class) ifFalse: [ ^ false ].
 	^ receiverNode = anotherObject receiverNode
 ]
 
@@ -83,12 +84,23 @@ FAKernelClass >> ifTranslation: aTranslationBlock [
 
 { #category : #'message performing' }
 FAKernelClass >> ifTranslation: aTranslationBlock ifNot: aNotBlock [
-	self flag: #needWork.
-	^ thisContext method selector = #DoItIn: 
-		ifFalse: [ aTranslationBlock value ]
-		ifTrue: [ aNotBlock value ].
-		
+
+	| baseContext currentContext bottomContext isDoIt |
+	"everything send from the playground is a doit..."
+"	baseContext := thisContext.
+	currentContext := thisContext.
+	bottomContext := thisContext bottomContext.
+	isDoIt := false.
 	
+	[ isDoIt | (currentContext = bottomContext) ]
+		whileFalse: [
+			currentContext := currentContext sender.
+			currentContext method isDoIt ifTrue: [ isDoIt := true ]
+			].
+	self halt."
+	"isDoIt 
+		ifTrue: [ aNotBlock value ] 
+		ifFalse: [ "^ aTranslationBlock value
 ]
 
 { #category : #'message performing' }

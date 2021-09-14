@@ -74,6 +74,12 @@ IlliciumArray >> do: aBlock [
 	^ for
 ]
 
+{ #category : #iteration }
+IlliciumArray >> doWithIndex: aRBBlockNode [ 
+	self flag: #todo.
+	^ self asFunctionCall: #todo
+]
+
 { #category : #creation }
 IlliciumArray >> new: aLiteral of: aType [
 	"it should be handled on the declaration part, as we currently want static arrays e.g., aType id[aSizeInteger]"

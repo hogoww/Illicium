@@ -16,6 +16,15 @@ IlliciumBoolean >> and: aBoolean [
 	^ args first && args second
 ]
 
+{ #category : #converting }
+IlliciumBoolean >> asBit [
+	"Current heuristics in C are to are to use 1 for true and false for 0"
+	"so this does not need to do anything"
+	"Maybe adding a c macro for readability would be nice however, to keep the code as it is."
+	self flag: #macro.
+	^ self translatedReceiver
+]
+
 { #category : #checker }
 IlliciumBoolean >> binarySelectorArgs: aBoolean [
 	| firstOperand secondOperand |

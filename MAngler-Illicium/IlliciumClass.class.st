@@ -23,3 +23,9 @@ IlliciumClass >> new [
 
 	^ type handleNewMessageSend
 ]
+
+{ #category : #instantiations }
+IlliciumClass >> newOf: aRBVariableNode [ 
+	self flag: #todo.
+	^ self asFunctionCall: #doO
+]

@@ -36,6 +36,12 @@ IlliciumSmallInteger >> bitAnd: aSmallInteger [
 	^ self translatedReceiver & (aSmallInteger acceptVisitor: methodTranslator)
 ]
 
+{ #category : #'bit manipulation' }
+IlliciumSmallInteger >> bitShift: aRBLiteralValueNode [ 
+	self flag: #todo.
+	^ self asFunctionCall: #todo.
+]
+
 { #category : #translation }
 IlliciumSmallInteger >> even [
 	^ (self translatedReceiver % ((self class literalNodeFor: 2) acceptVisitor: methodTranslator)) 
