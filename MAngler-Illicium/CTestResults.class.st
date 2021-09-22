@@ -52,6 +52,11 @@ CTestResults >> allFaillingByClass [
 ]
 
 { #category : #initialization }
+CTestResults >> allOtherByClass [
+	^ self allByClass: 'Others'
+]
+
+{ #category : #initialization }
 CTestResults >> allPassing [
 	^ self all: 'Test passed'
 ]
@@ -61,7 +66,18 @@ CTestResults >> allPassingByClass [
 	^ self allByClass: 'Test passed'
 ]
 
+{ #category : #private }
+CTestResults >> allTestCases [
+	^ testResults flatCollect:[ :c | 
+		c keys flatCollect: [ :k | c at: k ] ]
+]
+
 { #category : #initialization }
 CTestResults >> initialize [
 	testResults := Dictionary new.
+]
+
+{ #category : #accessing }
+CTestResults >> testResults [
+	^ testResults
 ]

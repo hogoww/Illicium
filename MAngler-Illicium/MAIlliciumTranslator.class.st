@@ -291,7 +291,7 @@ MAIlliciumTranslator class >> translateTestMethod: aMethod [
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> tryAllUnitTests [
 	| testClasses results |
-	testClasses := VMSpurInitializedOldSpaceTest allSubclasses.
+	testClasses := VMSpurInitializedOldSpaceTest allSubclasses , {VMSpurNewSpaceStructureTest. VMSpurOldSpaceBootstrapTest . VMSpurOldSpaceStructureTest }.
 	results := CTestResults new.
 	self resetVMProgram. "reset it at least when we run everything.."
 	
