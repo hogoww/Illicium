@@ -5,7 +5,11 @@ Class {
 		'replacementClasses'
 	],
 	#classVars : [
+		'CurrentVMPath',
 		'VMProgram'
+	],
+	#classInstVars : [
+		'CurrentVMPath'
 	],
 	#category : #'MAngler-Illicium-Translation'
 }
@@ -34,7 +38,7 @@ MAIlliciumTranslator class >> compactResults: aDictionary [
 MAIlliciumTranslator class >> compileVMTest: aMethodNode [
 	| res line |
 	OSSUnixSubprocess new
-		shellCommand: 'cd ~/ovm/testCompilation && make -f ' , (FAFormatHelper testName: aMethodNode) , '.makefile';
+		shellCommand: 'cd ' , CurrentVMPath  , '/testCompilation && make -f ' , (FAFormatHelper testName: aMethodNode) , '.makefile';
 		redirectStdout;
 		redirectStderr;
 		runAndWaitOnExitDo: [ :command :outString |
@@ -67,6 +71,12 @@ MAIlliciumTranslator class >> compileVMTests [
 	self halt.
 
 	^ res
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> currentVMPath [
+	"default vm path"  
+	^ CurrentVMPath ifNil: [ CurrentVMPath :=  '~/ovm' ]
 ]
 
 { #category : #report }
@@ -241,7 +251,7 @@ int main(void)
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> moveFilesintoVMDirectory [
 	OSSUnixSubprocess new
-		shellCommand: 'cd ~/ovm && ./movestuff.sh ./testCompilation';
+		shellCommand: 'cd ' , CurrentVMPath ,' && ./movestuff.sh ./testCompilation';
 		redirectStdout;
 		runAndWaitOnExitDo: [ :command :outString |
 			^ outString
