@@ -99,7 +99,9 @@ MAIlliciumTranslator class >> failedInC: aString [
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 	| testMethods timeOutTime log |
-	testMethods := aClass methodDict select: [ :aMethod | aMethod ast isTest ].
+	testMethods := (aClass allSelectorsBelow: TestCase) 
+		select: [ :aMethod | (aClass lookupSelector: aMethod) ast isTest ] 
+		thenCollect: [ :aMethod | aClass lookupSelector: aMethod ].
 	
 	timeOutTime := Duration seconds: 10.
 	log := Dictionary new.
