@@ -38,7 +38,7 @@ MAIlliciumTranslator class >> compactResults: aDictionary [
 MAIlliciumTranslator class >> compileVMTest: aMethodNode [
 	| res line |
 	OSSUnixSubprocess new
-		shellCommand: 'cd ' , CurrentVMPath  , '/testCompilation && make -f ' , (FAFormatHelper testName: aMethodNode) , '.makefile';
+		shellCommand: 'cd ' , self currentVMPath  , '/testCompilation && make -f ' , (FAFormatHelper testName: aMethodNode) , '.makefile';
 		redirectStdout;
 		redirectStderr;
 		runAndWaitOnExitDo: [ :command :outString |
@@ -253,7 +253,7 @@ int main(void)
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> moveFilesintoVMDirectory [
 	OSSUnixSubprocess new
-		shellCommand: 'cd ' , CurrentVMPath ,' && ./movestuff.sh ./testCompilation';
+		shellCommand: 'cd ' , self currentVMPath ,' && ./movestuff.sh ./testCompilation';
 		redirectStdout;
 		runAndWaitOnExitDo: [ :command :outString |
 			^ outString
@@ -302,11 +302,17 @@ MAIlliciumTranslator class >> translateTestMethod: aMethod [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> tryAllUnitTests [
-	| testClasses results |
-	testClasses := VMSpurInitializedOldSpaceTest allSubclasses , {VMSpurNewSpaceStructureTest. VMSpurOldSpaceBootstrapTest . VMSpurOldSpaceStructureTest }.
-	results := CTestResults new.
+	| testClasses |
+	testClasses := VMSpurInitializedOldSpaceTest allSubclasses.
 	self resetVMProgram. "reset it at least when we run everything.."
+	^ self tryAllUnitTestsOf: testClasses
+]
+
+{ #category : #'translation-api' }
+MAIlliciumTranslator class >> tryAllUnitTestsOf: testClasses [
+	| results |
 	
+	results := CTestResults new.	
 	UIManager default
 		displayProgress: 'Running tests in C'
 		from: 0
@@ -329,7 +335,6 @@ MAIlliciumTranslator class >> typeAnnotatorClass [
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> vmProgram [
-
 	^ VMProgram ifNil: [ VMProgram := MASlangTranslator new prepareProgram; program ]
 ]
 

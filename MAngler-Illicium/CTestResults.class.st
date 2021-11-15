@@ -51,14 +51,14 @@ CTestResults >> allFaillingByClass [
 	^ self allByClass: 'Test failed'
 ]
 
-{ #category : #initialization }
-CTestResults >> allOtherByClass [
-	^ self allByClass: 'Others'
-]
-
 { #category : #query }
 CTestResults >> allOthers [
 	^ self all: 'Others'
+]
+
+{ #category : #initialization }
+CTestResults >> allOthersByClass [
+	^ self allByClass: 'Others'
 ]
 
 { #category : #initialization }

@@ -102,7 +102,7 @@ FAMakefile >> initialize [
 { #category : #initialization }
 FAMakefile >> initializeToDefaultValues [
 	compiler := 'gcc'.
-	vmPaths := '-L. -I. -I../extracted/vm/include/common/ -I../include/pharovm/ -I../include/ -I../generated/include/ -I../extracted/vm/include/unix/ -I../build/include/pharovm/'.
+	vmPaths := '-L. -I. -I../extracted/vm/include/common/ -I../include/pharovm/ -I../include/ -I../generated/include/ -I../extracted/vm/include/unix/ -I../build/build/include/pharovm/'.
 	vmMacros :='-DLSB_FIRST -DNDEBUG -DDEBUGVM=0 -DIMMUTABILITY=1 -DCOGMTVM=0 -DPharoVM=1 -DVM_LABEL\(foo\)=0'.
 	compilerFlags := '-fPIC -g'.
 ]

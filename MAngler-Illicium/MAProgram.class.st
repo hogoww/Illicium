@@ -28,16 +28,20 @@ MAProgram >> addRequiredMethodUsing: inferer [
 			cgc addScopingClass: class.
 			class := class superclass.
 			]]."
-	
-	"try another approach: any class in the package might be relevant"
-	(RPackageOrganizer default packageNamed: #VMMakerTests) 
-		classes do: [ :aClass | cgc addScopingClass: aClass ].
-	
+
 	requiredMethods := Set new.
-	testMethods := methods copy.
+	testMethods := methods copy.	
+	"try another approach: any class in the package might be relevant"
+	#VMMakerTests asPackage
+		classes do: [ :aClass | cgc addScopingClass: aClass ].
+	#VMMakerTestsOrganized asPackage
+		classes do: [ :aClass | cgc addScopingClass: aClass ].
+		
+		
 	testMethods do: [ :aTestMethod | requiredMethods addAll: (cgc calculateCallGraphFrom: aTestMethod) ].
 
-	requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ]
+	requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ].
+
 ]
 
 { #category : #'test-support' }

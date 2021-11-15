@@ -58,12 +58,12 @@ MAFullVMCCodeGeneratorRessource current.
 "MASlangTranslator new translateVM."
 MASlangTranslator new generateVM.
 PharoVMMaker generate: #StackVM outputDirectory: FileSystem workingDirectory / 'vmmaker'. 
-MAIlliciumTranslator new generateTestClass: VMPinnedObjectTest .
-VMSpurScavengeWeakTest.
+MAIlliciumTranslator new generateTestClass: VMOldGCUnmovableObjects .
+VMScavengeWeakTests.
 MAIlliciumTranslator new generateTestMethod: (VMSpurTreeAllocationWithBigNodesTest >> #test01LargeLeftoverSmallerThanRootShouldBeInsertedInSmaller) ast.
-MAIlliciumTranslator generateAllTestsFor: VMPinnedObjectTest.
+MAIlliciumTranslator generateAllTestsFor: VMOldGCUnmovableObjects.
 
-MAIlliciumTranslator new generateTestClass: VMSpurScavengeEphemeronTest.
+MAIlliciumTranslator new generateTestClass: VMScavengeEphemeronTests.
 
 LibC resultOfCommand: 'cd ~/ovm && ./movestuff.sh ./testCompilation'.
 LibC resultOfCommand: 'cd ~/ovm/testCompilation && make'.
@@ -72,7 +72,7 @@ LibC resultOfCommand: 'cd generated/tests && rm *'.
 
 MAIlliciumTranslator resetVMProgram.
 (VMSpurTreeAllocationWithBigNodesTest >> #test01LargeLeftoverSmallerThanRootShouldBeInsertedInSmaller) runInC.
-MAIlliciumTranslator generateAllTestsFor: VMPinnedObjectTest.
+MAIlliciumTranslator generateAllTestsFor: VMOldGCUnmovableObjects.
 MAIlliciumTranslator tryAllUnitTests.
 TimeProfiler onBlock:[ MAIlliciumTranslator tryAllUnitTests. ].
 (RPackageOrganizer default packageNamed: #VMMakerTests) classes.  
@@ -133,7 +133,7 @@ methodsToUse := methods select: [ :aMethod | aMethod methodClass = Spur64BitMemo
 
 "actual mutation"
 analysis := MutationTestingAnalysisInC
-    testCasesFrom: { VMSpurObjectAllocationTest.VMPinnedObjectTest. VMSpurOldSpaceTest. VMSpurScavengeEphemeronTest. VMSpurScavengeWeakTest. VMSpurScavengerTest }
+    testCasesFrom: { VMSpurObjectAllocationTest.VMOldGCUnmovableObjects. VMSpurOldSpaceTest. VMScavengeEphemeronTests. VMScavengeWeakTests. VMScavengeRegularObjectsTests }
     mutating: { SpurMemoryManager }
      using: { 
         AddAnonymousPragmaOperator new 
