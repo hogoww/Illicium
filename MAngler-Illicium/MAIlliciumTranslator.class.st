@@ -76,7 +76,7 @@ MAIlliciumTranslator class >> compileVMTests [
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> currentVMPath [
 	"default vm path"  
-	^ CurrentVMPath ifNil: [ CurrentVMPath :=  '~/ovm' ]
+	^ CurrentVMPath ifNil: [ CurrentVMPath :=  (FileLocator origin: #home path: 'ovm') resolve pathString ]
 ]
 
 { #category : #report }
