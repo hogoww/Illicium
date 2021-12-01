@@ -254,7 +254,7 @@ int main(void)
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> moveFilesintoVMDirectory [
 	OSSUnixSubprocess new
-		shellCommand: 'cd ' , self currentVMPath ,' && ./movestuff.sh ./testCompilation';
+		shellCommand: 'cd ' , self currentVMPath ,' && ./movestuff.sh ./testCompilation ' , ASTCProject new path ;
 		redirectStdout;
 		runAndWaitOnExitDo: [ :command :outString |
 			^ outString
