@@ -76,7 +76,8 @@ MAIlliciumTranslator class >> compileVMTests [
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> currentVMPath [
 	"default vm path"  
-	^ CurrentVMPath ifNil: [ CurrentVMPath :=  (FileLocator origin: #home path: 'ovm') resolve pathString ]
+	^ CurrentVMPath 
+		ifNil: [ CurrentVMPath :=  (FileLocator origin: #home path: 'ovm') resolve pathString ]
 ]
 
 { #category : #report }
@@ -253,7 +254,7 @@ int main(void)
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> moveFilesintoVMDirectory [
 	OSSUnixSubprocess new
-		shellCommand: 'cd ' , self currentVMPath ,' && ./movestuff.sh ./testCompilation';
+		shellCommand: 'cd ' , self currentVMPath ,' && ./movestuff.sh ./testCompilation ' , ASTCProject new path ;
 		redirectStdout;
 		runAndWaitOnExitDo: [ :command :outString |
 			^ outString
