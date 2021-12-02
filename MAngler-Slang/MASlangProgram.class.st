@@ -149,7 +149,7 @@ MASlangProgram >> initializeClassVariablesIn: inferer [
 		add: #MULTIPLEBYTECODESETS -> true;
 		add: #ObjectMemory -> #Spur64BitMemoryManager;
 		add: #bytecodeTableInitializer
-				-> #initializeBytecodeTableForSqueakV3PlusClosuresSistaV1Hybrid;
+				-> #initializeBytecodeTableForSistaV1;
 		yourself.
 	
 	Spur64BitMemoryManager initializeWithOptions: InitializationOptions.
@@ -187,6 +187,8 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	
 	"slang initialization"
 	inferer vmClass: self interpreterClass.
+	inferer vmMaker: VMMaker new.
+	inferer vmMaker vmmakerConfiguration: VMMakerConfiguration. 
 	self initializeClassVariablesIn: inferer.
 	self structClasses do:[ :aStructClass | aStructClass initialize ].
 	
@@ -195,11 +197,12 @@ MASlangProgram >> prepareWithInferer: inferer inTranslator: aTranslator [
 	self structClasses do:[ :aStruct | 
 		self addStruct: aStruct withInferer: inferer andTranslator: aTranslator ].
 	
-	inferer inferTypesForImplicitlyTypedVariablesAndMethods.
+	inferer prepareMethods.
+	(SlangTyper on: inferer) inferTypesForImplicitlyTypedVariablesAndMethods.
 	aTranslator prepareMethodsASTs: methods values.
 	
 	"self removeSlotsNotIn: inferer."
-	constants := inferer constants.
+	constants := inferer constants asOrderedCollection.
 	constants add: (#CogStackPage -> (TDefineNode new name: #CogStackPage ; setValue: #StackPage ; yourself)).
 	
 	includes := inferer headerFiles.
