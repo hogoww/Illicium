@@ -34,8 +34,6 @@ MAProgram >> addRequiredMethodUsing: inferer [
 	"try another approach: any class in the package might be relevant"
 	#VMMakerTests asPackage
 		classes do: [ :aClass | cgc addScopingClass: aClass ].
-	#VMMakerTestsOrganized asPackage
-		classes do: [ :aClass | cgc addScopingClass: aClass ].
 		
 		
 	testMethods do: [ :aTestMethod | requiredMethods addAll: (cgc calculateCallGraphFrom: aTestMethod) ].
