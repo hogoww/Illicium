@@ -5,10 +5,17 @@ Class {
 }
 
 { #category : #translation }
+FAInstanceVariableSlotTranslator >> errorEmptyTypeFor: aSlot [
+	EmptyTypeError new 
+		varName: aSlot name;
+		signal
+]
+
+{ #category : #translation }
 FAInstanceVariableSlotTranslator >> translateSlot: aSlot [
 	| ivType |
 	ivType := self typeOfSlot: aSlot.
-	self haltIf: ivType isEmptyType.
+	ivType isEmptyType ifTrue: [ self errorEmptyTypeFor: aSlot ].
 	^ ASTCVariableDeclaration new
 		id: (ASTCIdentifier new
 			id: aSlot name;
