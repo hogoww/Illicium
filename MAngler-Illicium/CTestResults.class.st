@@ -51,16 +51,6 @@ CTestResults >> allFaillingByClass [
 	^ self allByClass: 'Test failed'
 ]
 
-{ #category : #query }
-CTestResults >> allOthers [
-	^ self all: 'Others'
-]
-
-{ #category : #initialization }
-CTestResults >> allOthersByClass [
-	^ self allByClass: 'Others'
-]
-
 { #category : #initialization }
 CTestResults >> allPassing [
 	^ self all: 'Test passed'
@@ -69,6 +59,21 @@ CTestResults >> allPassing [
 { #category : #initialization }
 CTestResults >> allPassingByClass [
 	^ self allByClass: 'Test passed'
+]
+
+{ #category : #query }
+CTestResults >> allPharoErrors [
+	^ self all: 'PharoError'
+]
+
+{ #category : #initialization }
+CTestResults >> allPharoErrorsByClass [
+	^ self allByClass: 'PharoError'
+]
+
+{ #category : #initialization }
+CTestResults >> allPharoErrorsByDescription [
+	^ (self all: 'PharoError') collect: [ :a | a value ] into: Bag new
 ]
 
 { #category : #query }
@@ -97,7 +102,7 @@ CTestResults >> inspectionResults: aBuilder [
 		'Failing' -> self allFailling size.
 		'compilation error' -> self allCCompilationErrors size.
 		'Segmentation Faults' -> self allSegFaults size.
-		'Pharo errors' -> self allOthers size.
+		'Pharo errors' -> self allPharoErrors size.
 		} asOrderedCollection.
 
 	keysColumn := SpStringTableColumn title: #key evaluated: [ :anAssociation | anAssociation key ].

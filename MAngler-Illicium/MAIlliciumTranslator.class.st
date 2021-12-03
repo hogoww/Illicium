@@ -128,7 +128,7 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 		e class = Halt ifTrue: [ e pass ].
 		e class = TimedOut 
 			ifTrue: [ log add: (aMethod selector -> ('TimedOut' -> aMethod selector))]
-			ifFalse: [ log add: (aMethod selector -> ('Others' -> (aMethod selector -> e description))).
+			ifFalse: [ log add: (aMethod selector -> ('PharoError' -> (aMethod selector -> e description))).
 				]]]].
 	
 	^ aClass -> log
