@@ -122,7 +122,8 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 		[
 			[ log add: (aMethod selector -> aMethod runInC) ] valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
 		] on: Exception do:[ :e |
-		e class = Notification ifTrue:[ e resume ].
+		(e isKindOf: Notification) ifTrue:[ e resume ].
+		
 			"Not great but the initial selector gets lost at some point... Whatever for now"
 		e class = Halt ifTrue: [ e pass ].
 		e class = TimedOut 
