@@ -48,11 +48,6 @@ MAProgram >> addTestClassSetUpAndTeardownFor: aClass [
 	self addMethod: (aClass lookupSelector: #tearDown) ast copy
 ]
 
-{ #category : #infering }
-MAProgram >> inferMethod: aRBMethodNode [ 
-	self shouldBeImplemented.
-]
-
 { #category : #typing }
 MAProgram >> inferMethod: aMethod with: inferer [
 	| receiverClass |
