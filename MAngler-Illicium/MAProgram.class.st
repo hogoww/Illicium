@@ -22,12 +22,12 @@ MAProgram >> addRequiredMethodUsing: inferer [
 		yourself.
 	
 	"add all the hierarchy to the scoping"
-	"classesToGenerate do: [ :aClass | | class |
+	classesToGenerate do: [ :aClass | | class |
 		class := aClass.
 		[ class == aClass topClassToConsider ] whileFalse: [
 			cgc addScopingClass: class.
 			class := class superclass.
-			]]."
+			]].
 
 	requiredMethods := Set new.
 	testMethods := methods copy.	
@@ -37,7 +37,6 @@ MAProgram >> addRequiredMethodUsing: inferer [
 		
 		
 	testMethods do: [ :aTestMethod | requiredMethods addAll: (cgc calculateCallGraphFrom: aTestMethod) ].
-
 	requiredMethods do: [ :aRequiredMethod | self addMethod: aRequiredMethod copy ifPresent: [ ] ].
 
 ]
