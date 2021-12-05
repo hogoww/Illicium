@@ -38,46 +38,28 @@ MAIlliciumTranslator class >> compactResults: aDictionary [
 MAIlliciumTranslator class >> compileVMTest: aMethodNode [
 	| res line |
 	OSSUnixSubprocess new
-		shellCommand: 'cd ' , self currentVMPath  , '/testCompilation && make -f ' , (FAFormatHelper testName: aMethodNode) , '.makefile';
-		redirectStdout;
-		redirectStderr;
-		runAndWaitOnExitDo: [ :command :outString |
-			res := outString
-		].
+        command: 'make';
+        arguments: { '-f' . (FAFormatHelper testName: aMethodNode) , '.makefile' };
+        redirectStdout;
+        redirectStderr;
+        workingDirectory: (MAIlliciumTranslator currentVMPath / 'testCompilation') pathString;
+        runAndWaitOnExitDo: [ :command :outString |
+				command exitStatusInterpreter isSuccess not 
+					ifTrue: [ ^ self failedInC: outString ].
+             res := outString
+        ].
 	res = '' ifTrue: [ self weirdResultInC ].
 	line := res lines last.
 
 	(line last: 4) = 'done' ifTrue: [ ^ self passedInC: res ].
-	^ self failedInC: res
-]
-
-{ #category : #'default-configuration' }
-MAIlliciumTranslator class >> compileVMTests [
-	| res line |
-	OSSUnixSubprocess new
-		shellCommand: 'cd ~/ovm/testCompilation && make';
-		redirectStdout;
-		redirectStderr;
-		runAndWaitOnExitDo: [ :command :outString |
-			self halt.
-			res := outString
-		].
-	res = '' ifTrue: [ self error: 'wtf' ].
-	line := res lines last.
-
-	(line last: 4) = 'done' ifTrue: [ ^ self passedInC: res ].
-	(line last: 6) = 'failed' ifTrue: [ ^ self failedInC: res ].
-
-	self halt.
-
-	^ res
+	self error: 'shouldn''t be reached'
 ]
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> currentVMPath [
 	"default vm path"
 	^ CurrentVMPath
-		ifNil: [ CurrentVMPath :=  (FileLocator origin: #home path: 'ovm') resolve pathString ]
+		ifNil: [ CurrentVMPath :=  (FileLocator origin: #home path: 'ovm') resolve ]
 ]
 
 { #category : #report }
@@ -253,13 +235,27 @@ int main(void)
 ]
 
 { #category : #'default-configuration' }
-MAIlliciumTranslator class >> moveFilesintoVMDirectory [
-	OSSUnixSubprocess new
-		shellCommand: 'cd ' , self currentVMPath ,' && ./movestuff.sh ./testCompilation ' , ASTCProject new path ;
-		redirectStdout;
-		runAndWaitOnExitDo: [ :command :outString |
-			^ outString
-		].
+MAIlliciumTranslator class >> moveFilesForVMTesting: aString [
+
+	^ OSSUnixSubprocess new
+		  shellCommand: 'cp ' , ASTCProject new path ,  '/' , aString , ' ' , (self currentVMPath / 'testCompilation') pathString;
+		  redirectStdout;
+		  redirectStderr;
+		  runAndWaitOnExitDo: [ :command :outString :errString | 
+			  command exitStatusInterpreter isSuccess ifFalse: [ 
+					  self error: errString ].
+			  ^ outString ]
+]
+
+{ #category : #'default-configuration' }
+MAIlliciumTranslator class >> moveFilesintoVMDirectory: aMethodNode [
+	| fileName |
+	fileName := 	(FAFormatHelper testName: aMethodNode) asString.
+	self moveFilesForVMTesting: fileName , '.makefile' .
+	self moveFilesForVMTesting: fileName , '.c' .
+	
+	self moveFilesForVMTesting: aMethodNode methodClass name , '.h'.
+	self moveFilesForVMTesting: aMethodNode methodClass name , '.c'
 ]
 
 { #category : #report }

@@ -6,6 +6,6 @@ CompiledMethod >> runInC [
 	Return true if the deadline expired, false otherwise."
 	MAIlliciumTranslator resetGeneratedTestDirectories.
 	MAIlliciumTranslator new generateTestMethod: self ast.
-	MAIlliciumTranslator moveFilesintoVMDirectory.
+	MAIlliciumTranslator moveFilesintoVMDirectory: self ast.
 	^ MAIlliciumTranslator compileVMTest: self ast.
 ]
