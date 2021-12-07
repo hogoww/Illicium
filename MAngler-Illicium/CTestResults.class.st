@@ -73,7 +73,12 @@ CTestResults >> allPharoErrorsByClass [
 
 { #category : #initialization }
 CTestResults >> allPharoErrorsByDescription [
-	^ (self all: 'PharoError') collect: [ :a | a value ] into: Bag new
+	| res |
+	res := Dictionary new.
+	(self all: 'PharoError') do: [ :a | 
+		res at: a value ifAbsentPut: [ res at: a value put: OrderedCollection new ].
+		(res at: a value) add: a key ].
+	^ res
 ]
 
 { #category : #query }
