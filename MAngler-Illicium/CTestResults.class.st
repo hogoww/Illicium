@@ -77,7 +77,7 @@ CTestResults >> allPharoErrorsByDescription [
 	res := Dictionary new.
 	(self all: 'PharoError') do: [ :a | 
 		res at: a value ifAbsentPut: [ res at: a value put: OrderedCollection new ].
-		(res at: a value) add: a key ].
+		(res at: a value) add: a ].
 	^ res
 ]
 

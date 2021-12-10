@@ -9,3 +9,19 @@ CompiledMethod >> runInC [
 	MAIlliciumTranslator moveFilesintoVMDirectory: self ast.
 	^ MAIlliciumTranslator compileVMTest: self ast.
 ]
+
+{ #category : #'*MAngler-Illicium' }
+CompiledMethod >> runInCChecked [
+	
+	[
+		[ ^ self runInC ] 
+			valueWithin: (Duration seconds: 10) 
+			onTimeout: [ ^ 'TimedOut' -> 'TimeOut' ] ] 
+		on: Exception do: [ :e |
+			(e isKindOf: Notification) ifTrue:[ e resume ].
+		
+			e class = Halt ifTrue: [ e pass ].
+		
+			^ 'PharoError' -> e description
+		].
+]

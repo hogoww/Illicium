@@ -81,12 +81,11 @@ MAIlliciumTranslator class >> failedInC: aString [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> generateAllTestsFor: aClass [
-	| testMethods timeOutTime log |
+	| testMethods log |
 	testMethods := (aClass allSelectorsBelow: TestCase) 
 		select: [ :aMethod | (aClass lookupSelector: aMethod) ast isTest ] 
 		thenCollect: [ :aMethod | aClass lookupSelector: aMethod ].
-	
-	timeOutTime := Duration seconds: 10.
+
 	log := Dictionary new.
 
 
@@ -99,20 +98,8 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 			 testMethods doWithIndex:
 				[ :aMethod :i |
 				bar value: i.
-		"display ui, but don't want to reindent the code..."
+				log add: aMethod selector -> aMethod runInCChecked ]].
 
-		[
-			[ log add: (aMethod selector -> aMethod runInC) ] valueWithin: timeOutTime onTimeout: [ TimedOut signal ]
-		] on: Exception do:[ :e |
-		(e isKindOf: Notification) ifTrue:[ e resume ].
-		
-			"Not great but the initial selector gets lost at some point... Whatever for now"
-		e class = Halt ifTrue: [ e pass ].
-		e class = TimedOut 
-			ifTrue: [ log add: (aMethod selector -> ('TimedOut' -> aMethod selector))]
-			ifFalse: [ log add: (aMethod selector -> ('PharoError' -> (aMethod selector -> e description))).
-				]]]].
-	
 	^ aClass -> log
 
 ]
