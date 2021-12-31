@@ -45,70 +45,56 @@ BaselineOfFAngler >> baseline: spec [
 { #category : #accessing }
 BaselineOfFAngler >> lastPlayground [
 
-| analysis runInC res |
-ASTCGenerator generate.
-MAPluginTestGenerator generateVMMakerPluginsTests.
-MAPluginTestGenerator generateVMMakerInterpreterPrimitiveTests.
-MAVMTestGenerator generateVMTests.
-MAVMTestGenerator cleanUp.
-MAPluginTestGenerator cleanUp.
-MASlangTestResource resetAll.
-MAFullVMCCodeGeneratorRessource reset.
-MAFullVMCCodeGeneratorRessource current.
-"MASlangTranslator new translateVM."
-MASlangTranslator new generateVM.
-PharoVMMaker generate: #StackVM outputDirectory: FileSystem workingDirectory / 'vmmaker'. 
-MAIlliciumTranslator new generateTestClass: VMOldGCUnmovableObjects .
-VMScavengeWeakTests.
-MAIlliciumTranslator new generateTestMethod: (VMSpurTreeAllocationWithBigNodesTest >> #test01LargeLeftoverSmallerThanRootShouldBeInsertedInSmaller) ast.
-MAIlliciumTranslator generateAllTestsFor: VMOldGCUnmovableObjects.
-
-MAIlliciumTranslator new generateTestClass: VMScavengeEphemeronTests.
-
-LibC resultOfCommand: 'cd ~/ovm && ./movestuff.sh ./testCompilation'.
-LibC resultOfCommand: 'cd ~/ovm/testCompilation && make'.
-
-LibC resultOfCommand: 'cd generated/tests && rm *'.
-
-MAIlliciumTranslator resetVMProgram.
-(VMSpurTreeAllocationWithBigNodesTest >> #test01LargeLeftoverSmallerThanRootShouldBeInsertedInSmaller) runInC.
-MAIlliciumTranslator generateAllTestsFor: VMOldGCUnmovableObjects.
-MAIlliciumTranslator tryAllUnitTests.
-TimeProfiler onBlock:[ MAIlliciumTranslator tryAllUnitTests. ].
-(RPackageOrganizer default packageNamed: #VMMakerTests) classes.  
-
-analysis := MutationTestingAnalysisInC
-    testCasesFrom: { VMSpurOldSpaceTest }
-    mutating: {VMSpurOldSpaceTest }
-	 using: { RemoveAnonymousMessageMutantOperator selector: #freeChunkWithBytes:at: }
-    with: SelectingFromCoverageMutantEvaluationStrategy new.
-analysis run.
+	^ '(VMPinnedObjectTest >> #testAllocatingObjectAfterManyPinnedObjectShouldSlideAtStartOfOldSpace) runInC.
 
 
-analysis := MutationTestingAnalysisInC
-    testCasesFrom: VMSpurInitializedOldSpaceTest subclasses
-    mutating: { VMSpurMemoryManagerTest }, VMSpurInitializedOldSpaceTest subclasses
-	 using: { ReplaceAssertEqualWithDenyEqual new }
-    with: SelectingFromCoverageMutantEvaluationStrategy new.
-analysis run.
+repository := IceRepository repositories detect:[:r | r name = ''ovm'' ].
+mutator := MutationTestingAnalysisInC
+	testCasesFrom: {VMSpurOldSpaceStructureTest}
+	mutating: { SpurMemoryManager . Spur64BitMemoryManager }
+	using: MutantOperator contents
+	with: SelectingFromCoverageMutantEvaluationStrategy new
+	with: SelectingFromCoverageMutationsGenerationStrategy new.
+mutator maxMutationNumber: 1.
+mutator repository: repository.
+mutator run.
 
-analysis := MutationTestingAnalysis
-    testCasesFrom: {UUIDPrimitivesTest}
-    mutating: {UUIDPrimitivesTest}
-    using: {ReplaceAssertEqualWithDenyEqual new}
-    with: SelectingFromCoverageMutantEvaluationStrategy new.
-analysis run.
-runInC.
-"to find good mutants"
-res := Bag new.
-{ VMSpurMemoryManagerTest }, VMSpurInitializedOldSpaceTest subclasses do:[ :aClass|
-	aClass methodsDo:[:aMethod|
-		aMethod ast nodesDo: [ :aNode | 
-			aNode isMessage ifTrue: [ res add: aNode selector] ]
-		]
-	].
-res.
+repository := IceRepository repositories detect:[:r | r name = ''Phineas'' ].
 
+repository := IceRepository repositories detect:[:r | r name = ''ovm'' ].	
+repository ifNil: [ self halt ].
+mutator := MutationTestingAnalysisInC
+	testCasesFrom: VMSpurInitializedOldSpaceTest withAllSubclasses , { VMSpurNewSpaceStructureTest	. VMSpurOldSpaceBootstrapTest . VMSpurOldSpaceStructureTest }
+	mutating: { SpurMemoryManager . Spur64BitMemoryManager }
+	using: MutantOperator contents
+	with: SelectingFromCoverageMutantEvaluationStrategy new
+	with: SelectingFromCoverageMutationsGenerationStrategy new.
+mutator takeOnlyPassingTestCases.
+mutator generatePrecalculation.
+
+
+mutator := FLMaterializer materializeFromFileNamed: ''mutator''.
+repository := IceRepository repositories detect:[:r | r name = ''ovm'' ].
+mutator repository: repository.
+mutator continueRunningMutants.
+
+FLSerializer serialize: mutator toFileNamed: ''mutator''.
+mutator := FLMaterializer materializeFromFileNamed: ''mutator''.
+
+res := nil.
+res := Smalltalk allClasses
+	collect: [ :aClass | aClass -> aClass allInst ances ]
+	thenSelect: [ :assoc | assoc value size > 100 ].
+
+
+Smalltalk garbageCollect. SystemNavigation default allObjects select: [ :o | o isPinned ] thenCollect:[:o | o unpin. o]. Smalltalk garbageCollect. 
+MCSnapshot allInstances do:[ :i | i removeState  ]. Smalltalk garbageCollect.
+refs:=0.
+refs := ReferenceFinder findAllPathsTo: (MCMethodDefinition allInstances detect:[:o| o className = #SpurMemoryManager ]).
+refs := ReferenceFinder findAllPathsToInstanceOf: MCMethodDefinition.
+res asDictionary at: MCMethodDefinition .
+FakeDictionary.
+'
 ]
 
 { #category : #accessing }
