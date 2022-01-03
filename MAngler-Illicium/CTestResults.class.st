@@ -13,7 +13,7 @@ CTestResults >> add: aResult [
 	{ aResult } asDictionary keysAndValuesDo: [ :aClass :someResults | | resultDict |
 		resultDict := Dictionary new.
 		someResults do: [ :aTestResult | | col |
-			col := resultDict at: aTestResult key ifAbsentPut: [ OrderedCollection new ].
+			col := resultDict at: aTestResult class ifAbsentPut: [ OrderedCollection new ].
 			col add: aTestResult value
 			].
 		testResults at: aClass put: resultDict.
@@ -23,7 +23,7 @@ CTestResults >> add: aResult [
 
 { #category : #private }
 CTestResults >> all: testState [
-	^ testResults flatCollect:[ :c | c at: testState ifAbsent: [ #() ] ]
+	^ testResults flatCollect: [ :c | c at: testState ifAbsent: [ { } ] ]
 ]
 
 { #category : #private }
@@ -33,49 +33,49 @@ CTestResults >> allByClass: testState [
 
 { #category : #query }
 CTestResults >> allCCompilationErrors [
-	^ self all: 'C compilation error'
+	^ self all: CTestResultCCompilationError
 ]
 
 { #category : #query }
 CTestResults >> allCCompilationErrorsByClass [
-	^ self allByClass: 'C compilation error'
+	^ self allByClass: CTestResultCCompilationError
 ]
 
 { #category : #initialization }
 CTestResults >> allFailling [
-	^ self all: 'Test failed'
+	^ self all: CTestResultFail
 ]
 
 { #category : #initialization }
 CTestResults >> allFaillingByClass [
-	^ self allByClass: 'Test failed'
+	^ self allByClass: CTestResultFail
 ]
 
 { #category : #initialization }
 CTestResults >> allPassing [
-	^ self all: 'Test passed'
+	^ self all: CTestResultPassed
 ]
 
 { #category : #initialization }
 CTestResults >> allPassingByClass [
-	^ self allByClass: 'Test passed'
+	^ self allByClass: CTestResultPassed
 ]
 
 { #category : #query }
 CTestResults >> allPharoErrors [
-	^ self all: 'PharoError'
+	^ self all: CTestResultPharoError
 ]
 
 { #category : #initialization }
 CTestResults >> allPharoErrorsByClass [
-	^ self allByClass: 'PharoError'
+	^ self allByClass: CTestResultPharoError
 ]
 
 { #category : #initialization }
 CTestResults >> allPharoErrorsByDescription [
 	| res |
 	res := Dictionary new.
-	(self all: 'PharoError') do: [ :a | 
+	(self all: CTestResultPharoError) do: [ :a | 
 		res at: a value ifAbsentPut: [ res at: a value put: OrderedCollection new ].
 		(res at: a value) add: a ].
 	^ res
@@ -83,7 +83,7 @@ CTestResults >> allPharoErrorsByDescription [
 
 { #category : #query }
 CTestResults >> allSegFaults [
-	^ self all: 'Segmentation fault'
+	^ self all: CTestResultSegmentationFault
 ]
 
 { #category : #private }

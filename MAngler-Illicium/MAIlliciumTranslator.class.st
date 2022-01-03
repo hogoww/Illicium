@@ -36,7 +36,6 @@ MAIlliciumTranslator class >> compactResults: aDictionary [
 
 { #category : #'default-configuration' }
 MAIlliciumTranslator class >> compileVMTest: aMethodNode [
-	| res line |
 	OSSUnixSubprocess new
         command: 'make';
         arguments: { '-f' . (FAFormatHelper testName: aMethodNode) , '.makefile' };
@@ -44,15 +43,11 @@ MAIlliciumTranslator class >> compileVMTest: aMethodNode [
         redirectStderr;
         workingDirectory: (MAIlliciumTranslator currentVMPath / 'testCompilation') pathString;
         runAndWaitOnExitDo: [ :command :outString |
-				command exitStatusInterpreter isSuccess not 
-					ifTrue: [ ^ self failedInC: outString ].
-             res := outString
+				"command exitStatusInterpreter isSuccess not 
+					ifTrue: [ ^ self failedInC: outString ]."
+				^ CTestResult for: outString
         ].
-	res = '' ifTrue: [ self weirdResultInC ].
-	line := res lines last.
 
-	(line last: 4) = 'done' ifTrue: [ ^ self passedInC: res ].
-	self error: 'shouldn''t be reached'
 ]
 
 { #category : #'default-configuration' }
