@@ -6,6 +6,7 @@ Class {
 
 { #category : #testing }
 CTestResultUnexpected class >> canHandleResult: aTestResult [
+	aTestResult isString ifFalse:[ ^ false ].
 	^ aTestResult isEmpty
 ]
 

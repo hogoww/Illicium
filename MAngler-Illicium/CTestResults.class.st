@@ -1,35 +1,8 @@
 Class {
 	#name : #CTestResults,
-	#superclass : #Object,
-	#instVars : [
-		'testResults'
-	],
+	#superclass : #BaseTestResults,
 	#category : #'MAngler-Illicium-Results'
 }
-
-{ #category : #initialization }
-CTestResults >> add: aResult [
-
-	{ aResult } asDictionary keysAndValuesDo: [ :aClass :someResults | | resultDict |
-		resultDict := Dictionary new.
-		someResults do: [ :aTestResult | | col |
-			col := resultDict at: aTestResult class ifAbsentPut: [ OrderedCollection new ].
-			col add: aTestResult value
-			].
-		testResults at: aClass put: resultDict.
-		].
-	^ aResult
-]
-
-{ #category : #private }
-CTestResults >> all: testState [
-	^ testResults flatCollect: [ :c | c at: testState ifAbsent: [ { } ] ]
-]
-
-{ #category : #private }
-CTestResults >> allByClass: testState [
-	^ testResults collect: [ :c | c at: testState ifAbsent: #() ].
-]
 
 { #category : #query }
 CTestResults >> allCCompilationErrors [
@@ -88,13 +61,7 @@ CTestResults >> allSegFaults [
 
 { #category : #private }
 CTestResults >> allTestCases [
-	^ testResults flatCollect:[ :c | 
-		c keys flatCollect: [ :k | c at: k ] ]
-]
-
-{ #category : #initialization }
-CTestResults >> initialize [
-	testResults := Dictionary new.
+	^ testResults
 ]
 
 { #category : #private }

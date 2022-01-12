@@ -7,7 +7,7 @@ Class {
 { #category : #testing }
 CTestResultPharoError class >> canHandleResult: aTestResult [
 	"Done explicitly, it's not calculable from the resultString"
-	^ false
+	^ aTestResult class isKindOf: Exception.
 ]
 
 { #category : #testing }

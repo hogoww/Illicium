@@ -45,7 +45,7 @@ MAIlliciumTranslator class >> compileVMTest: aMethodNode [
         runAndWaitOnExitDo: [ :command :outString |
 				"command exitStatusInterpreter isSuccess not 
 					ifTrue: [ ^ self failedInC: outString ]."
-				^ CTestResult for: outString
+				^ CTestResult forMethod: aMethodNode withResult: outString
         ].
 
 ]
@@ -76,13 +76,12 @@ MAIlliciumTranslator class >> failedInC: aString [
 
 { #category : #'translation-api' }
 MAIlliciumTranslator class >> generateAllTestsFor: aClass [
-	| testMethods log |
+	| testMethods results |
 	testMethods := (aClass allSelectorsBelow: TestCase) 
 		select: [ :aMethod | (aClass lookupSelector: aMethod) ast isTest ] 
 		thenCollect: [ :aMethod | aClass lookupSelector: aMethod ].
 
-	log := Dictionary new.
-
+	results := CTestResults new.
 
 	UIManager default
 		displayProgress: 'Generating tests for ' , aClass name
@@ -93,10 +92,9 @@ MAIlliciumTranslator class >> generateAllTestsFor: aClass [
 			 testMethods doWithIndex:
 				[ :aMethod :i |
 				bar value: i.
-				log add: aMethod selector -> aMethod runInCChecked ]].
+				results addResult: aMethod runInCChecked ]].
 
-	^ aClass -> log
-
+	^ results
 ]
 
 { #category : #'translation-api' }
@@ -302,7 +300,7 @@ MAIlliciumTranslator class >> tryAllUnitTestsOf: testClasses [
 			 testClasses doWithIndex:
 				[ :aClass :i |
 				bar value: i.
-				results add: (self generateAllTestsFor: aClass)
+				results addAllResults: (self generateAllTestsFor: aClass)
 				]].
 
 	^ results

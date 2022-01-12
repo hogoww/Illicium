@@ -6,6 +6,7 @@ Class {
 
 { #category : #testing }
 CTestResultSegmentationFault class >> canHandleResult: aTestResult [
+	aTestResult isString ifFalse: [ ^ false ].
 	^ aTestResult lines anySatisfy: [ :aLine | aLine includesSubstring: 'Segmentation fault' ]
 ]
 

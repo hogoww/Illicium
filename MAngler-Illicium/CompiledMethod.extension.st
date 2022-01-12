@@ -16,12 +16,12 @@ CompiledMethod >> runInCChecked [
 	[
 		[ ^ self runInC ] 
 			valueWithin: (Duration seconds: 10) 
-			onTimeout: [ ^ CTestResultTimeOut newFor: 'TimeOut' ] ] 
+			onTimeout: [ ^ CTestResultTimeOut newForMethod: self ast withResult: 'TimeOut' ] ] 
 		on: Exception do: [ :e |
 			(e isKindOf: Notification) ifTrue:[ e resume ].
 		
 			e class = Halt ifTrue: [ e pass ].
 		
-			^ CTestResultPharoError newFor: e
+			^ CTestResultPharoError newForMethod: self ast withResult: e
 		].
 ]
