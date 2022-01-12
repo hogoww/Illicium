@@ -69,6 +69,7 @@ mutator := MutationTestingAnalysisInC
 	using: MutantOperator contents
 	with: SelectingFromCoverageMutantEvaluationStrategy new
 	with: SelectingFromCoverageMutationsGenerationStrategy new.
+mutator repository: repository.
 mutator takeOnlyPassingTestCases.
 mutator generatePrecalculation.
 
@@ -100,39 +101,4 @@ FakeDictionary.
 { #category : #accessing }
 BaselineOfFAngler >> projectClass [
 	^ MetacelloCypressBaselineProject
-]
-
-{ #category : #accessing }
-BaselineOfFAngler >> vmMutationPlayground [
-
-| t1 analysis rep t methods methodsToUse t2 res |
-t1 := Time now.
-analysis := nil.
-rep := (IceRepository registry detect: [ :r | r name = #ovm ]).
-rep checkoutBranch: #VMMutation.
-"Selection of methods"
-t := MASlangTranslator new.
-t prepareProgram.
-methods := t program methods values.
-methods := methods reject: [ :aMethod | ((aMethod pragmas collect: #selector) includesAny: #(doNotGenerate extern expandCases)) ].
-methodsToUse := methods select: [ :aMethod | aMethod methodClass = Spur64BitMemoryManager ].
-
-"actual mutation"
-analysis := MutationTestingAnalysisInC
-    testCasesFrom: { VMSpurObjectAllocationTest.VMOldGCUnmovableObjects. VMSpurOldSpaceTest. VMScavengeEphemeronTests. VMScavengeWeakTests. VMScavengeRegularObjectsTests }
-    mutating: { SpurMemoryManager }
-     using: { 
-        AddAnonymousPragmaOperator new 
-            selector: #extern ;
-            canMutateBlocks: 
-                    { [ :aMethod | methods includes: aMethod ]}
-            yourself. }
-    with: AllTestsMethodsRunningMutantEvaluationStrategy new.
-analysis repository: rep.
-analysis run.
-analysis.
-t2 := Time now.
-res := Duration seconds: (t2 asSeconds - t1 asSeconds).
-
-MAIlliciumTranslator tryAllUnitTests 
 ]
