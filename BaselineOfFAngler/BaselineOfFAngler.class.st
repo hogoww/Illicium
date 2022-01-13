@@ -82,10 +82,13 @@ mutator continueRunningMutants.
 FLSerializer serialize: mutator toFileNamed: ''mutator''.
 mutator := FLMaterializer materializeFromFileNamed: ''mutator''.
 
+"to help out with memory leaks"
 res := nil.
 res := Smalltalk allClasses
 	collect: [ :aClass | aClass -> aClass allInst ances ]
 	thenSelect: [ :assoc | assoc value size > 100 ].
+res sort: [ :i1 :i2 | i1 value size > i2 value size ].
+res collect: [ :a| a key -> a value size ].
 
 
 Smalltalk garbageCollect. SystemNavigation default allObjects select: [ :o | o isPinned ] thenCollect:[:o | o unpin. o]. Smalltalk garbageCollect. 
