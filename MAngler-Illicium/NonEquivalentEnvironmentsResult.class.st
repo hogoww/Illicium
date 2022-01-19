@@ -6,7 +6,7 @@ Class {
 
 { #category : #testing }
 NonEquivalentEnvironmentsResult class >> canHandle: aPharoResult and: aCResult [
-	^ (aPharoResult isPassed and: [ aCResult isPass not ])
+	^ (aPharoResult hasPassed and: [ aCResult isPass not ])
 		or: [ aPharoResult hasFailuresOrErrors and: [ aCResult isPass ] ]
 ]
 
