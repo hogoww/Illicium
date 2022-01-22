@@ -82,6 +82,14 @@ mutator continueRunningMutants.
 FLSerializer serialize: mutator toFileNamed: ''mutator''.
 mutator := FLMaterializer materializeFromFileNamed: ''mutator''.
 
+"To reorder the mutant, find out which ones are missing"
+newParticularResults := Array new: mutator particularResults last mutant mutantNumber.
+(mutator particularResults asOrderedCollection select: #notNil)
+ do: [ :m| newParticularResults at: m mutant mutantNumber put: m ].
+mutator particularResults: newParticularResults asOrderedCollection.
+mutator particularResults select:#isNotNil thenCollect: [ :m | m mutant mutantNumber].
+
+
 "to help out with memory leaks"
 res := nil.
 res := Smalltalk allClasses
