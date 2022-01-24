@@ -46,7 +46,7 @@ MAIlliciumTranslator class >> compileVMTest: aMethodNode [
 				"command exitStatusInterpreter isSuccess not 
 					ifTrue: [ ^ self failedInC: outString ]."
 				^ CTestResult forMethod: aMethodNode withResult: outString
-        ].
+        ] withTimeOut: 10 seconds.
 
 ]
 
@@ -224,7 +224,7 @@ MAIlliciumTranslator class >> moveFilesForVMTesting: aString [
 		  runAndWaitOnExitDo: [ :command :outString :errString | 
 			  command exitStatusInterpreter isSuccess ifFalse: [ 
 					  self error: errString ].
-			  ^ outString ]
+			  ^ outString ] withTimeOut: 3 seconds.
 ]
 
 { #category : #'default-configuration' }
@@ -260,7 +260,7 @@ MAIlliciumTranslator class >> resetGeneratedTestDirectories [
 		redirectStdout;
 		runAndWaitOnExitDo: [ :command :outString |
 			^ outString
-		].
+		] withTimeOut: 3 seconds.
 ]
 
 { #category : #'default-configuration' }
