@@ -11,7 +11,7 @@ BaselineOfFAngler >> baseline: spec [
 		for: #common
 		do: [
 			spec baseline: 'OSSubprocess'
-				with: [ spec repository: 'github://pharo-contributions/OSSubprocess:master' ].
+				with: [ spec repository: 'github://hogoww/OSSubprocess:master' ].
 			spec
 				baseline: 'TypedSlot'
 				with: [ spec repository: 'github://hogoww/TypedSlot:master' ].
@@ -59,7 +59,6 @@ mutator maxMutationNumber: 1.
 mutator repository: repository.
 mutator run.
 
-repository := IceRepository repositories detect:[:r | r name = ''Phineas'' ].
 
 repository := IceRepository repositories detect:[:r | r name = ''ovm'' ].	
 repository ifNil: [ self halt ].
@@ -74,13 +73,13 @@ mutator takeOnlyPassingTestCases.
 mutator generatePrecalculation.
 
 
-mutator := FLMaterializer materializeFromFileNamed: ''mutator''.
+mutator := FLMaterializer materializeFromFileNamed: ''../mutator.log''.
 repository := IceRepository repositories detect:[:r | r name = ''ovm'' ].
 mutator repository: repository.
 mutator continueRunningMutants.
 
-FLSerializer serialize: mutator toFileNamed: ''mutator''.
-mutator := FLMaterializer materializeFromFileNamed: ''mutator''.
+FLSerializer serialize: mutator toFileNamed: ''../mutator.log''.
+mutator := FLMaterializer materializeFromFileNamed: ''../mutator.log''.
 
 "To reorder the mutant, find out which ones are missing"
 newParticularResults := Array new: mutator particularResults last mutant mutantNumber.
