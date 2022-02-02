@@ -28,6 +28,16 @@ CDifferentialTestResult class >> handleTestCase: aTestCaseReference withPharoRes
 ]
 
 { #category : #accessing }
+CDifferentialTestResult >> bothFailing [
+	^  pharoTestResult hasFailuresOrErrors and: cTestResult isPass not
+]
+
+{ #category : #accessing }
+CDifferentialTestResult >> bothPassed [
+	^  pharoTestResult hasPassed and: [ cTestResult isPass ]
+]
+
+{ #category : #accessing }
 CDifferentialTestResult >> cTestResult [
 
 	^ cTestResult
