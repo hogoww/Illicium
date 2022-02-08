@@ -27,12 +27,12 @@ CDifferentialTestResult class >> handleTestCase: aTestCaseReference withPharoRes
 		cTestResult: aCResult
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 CDifferentialTestResult >> bothFailing [
-	^  pharoTestResult hasFailuresOrErrors and: cTestResult isPass not
+	^  pharoTestResult hasFailuresOrErrors and: [ cTestResult isPass not ]
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 CDifferentialTestResult >> bothPassed [
 	^  pharoTestResult hasPassed and: [ cTestResult isPass ]
 ]
@@ -49,14 +49,24 @@ CDifferentialTestResult >> cTestResult: anObject [
 	cTestResult := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 CDifferentialTestResult >> isEquivalent [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 CDifferentialTestResult >> isNonEquivalent [
 	^ false
+]
+
+{ #category : #testing }
+CDifferentialTestResult >> passedOnlyInC [
+	^  pharoTestResult hasFailuresOrErrors and: cTestResult isPass
+]
+
+{ #category : #testing }
+CDifferentialTestResult >> passedOnlyInSimulation [
+	^  pharoTestResult hasPassed and: cTestResult isPass not
 ]
 
 { #category : #accessing }
