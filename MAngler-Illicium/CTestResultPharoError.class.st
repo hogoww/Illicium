@@ -10,6 +10,11 @@ CTestResultPharoError class >> canHandleResult: aTestResult [
 	^ aTestResult class isKindOf: Exception.
 ]
 
+{ #category : #initialization }
+CTestResultPharoError >> description [
+	^ description
+]
+
 { #category : #testing }
 CTestResultPharoError >> isPharoError [
 	^ true

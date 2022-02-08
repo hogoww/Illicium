@@ -5,7 +5,9 @@ Class {
 		'testCase',
 		'pharoTestResult',
 		'cTestResult',
-		'result'
+		'result',
+		'pharoExecutionTime',
+		'cExecutionTime'
 	],
 	#category : #'MAngler-Illicium-Results'
 }
@@ -38,6 +40,18 @@ CDifferentialTestResult >> bothPassed [
 ]
 
 { #category : #accessing }
+CDifferentialTestResult >> cExecutionTime [
+
+	^ cExecutionTime
+]
+
+{ #category : #accessing }
+CDifferentialTestResult >> cExecutionTime: anObject [
+
+	cExecutionTime := anObject
+]
+
+{ #category : #accessing }
 CDifferentialTestResult >> cTestResult [
 
 	^ cTestResult
@@ -67,6 +81,18 @@ CDifferentialTestResult >> passedOnlyInC [
 { #category : #testing }
 CDifferentialTestResult >> passedOnlyInSimulation [
 	^  pharoTestResult hasPassed and: cTestResult isPass not
+]
+
+{ #category : #accessing }
+CDifferentialTestResult >> pharoExecutionTime [
+
+	^ pharoExecutionTime
+]
+
+{ #category : #accessing }
+CDifferentialTestResult >> pharoExecutionTime: anObject [
+
+	pharoExecutionTime := anObject
 ]
 
 { #category : #accessing }
