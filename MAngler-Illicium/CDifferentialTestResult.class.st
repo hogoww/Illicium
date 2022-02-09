@@ -75,12 +75,12 @@ CDifferentialTestResult >> isNonEquivalent [
 
 { #category : #testing }
 CDifferentialTestResult >> passedOnlyInC [
-	^  pharoTestResult hasFailuresOrErrors and: cTestResult isPass
+	^ false
 ]
 
 { #category : #testing }
 CDifferentialTestResult >> passedOnlyInSimulation [
-	^  pharoTestResult hasPassed and: cTestResult isPass not
+	^ true
 ]
 
 { #category : #accessing }

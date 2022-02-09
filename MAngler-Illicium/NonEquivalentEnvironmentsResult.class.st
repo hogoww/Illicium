@@ -14,3 +14,18 @@ NonEquivalentEnvironmentsResult class >> canHandle: aPharoResult and: aCResult [
 NonEquivalentEnvironmentsResult >> isNonEquivalent [
 	^ true
 ]
+
+{ #category : #testing }
+NonEquivalentEnvironmentsResult >> passedOnlyInC [
+	^  pharoTestResult hasFailuresOrErrors and: cTestResult isPass
+]
+
+{ #category : #testing }
+NonEquivalentEnvironmentsResult >> passedOnlyInSimulation [
+	^  pharoTestResult hasPassed and: cTestResult isPass not
+]
+
+{ #category : #testing }
+NonEquivalentEnvironmentsResult >> passesOnlyInOneEnvironemnet [
+	^ self passedOnlyInSimulation or: [ self passedOnlyInC  ]
+]
