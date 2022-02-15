@@ -6,8 +6,8 @@ Class {
 
 { #category : #testing }
 CTestResultCCompilationError class >> canHandleResult: aTestResult [
-	"idk"
-	^ false 
+	self flag: #wip.
+	^ (aTestResult lines last findString: 'error') > 0
 ]
 
 { #category : #testing }
