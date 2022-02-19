@@ -54,7 +54,7 @@ IlliciumArray >> do: aBlock [
 			[ (methodTranslator getNodeConcreteType: receiverNode) size ] on: NotFound 
 				do:[ self error: '#do: is curently only usable if the IV using it defines a size property' ]].
 	newBlock := aBlock copy.
-	newBlock arguments at: 1 put: ((RBArgumentNode named: #i) parent: newBlock).
+	newBlock arguments at: 1 put: ((RBVariableNode named: #i) parent: newBlock).
 	for := methodTranslator forward: 
 			(MessageSend receiver: (IlliciumSmallInteger literalNodeFor: 0) 
 				selector: #to:do: 
