@@ -25,9 +25,7 @@ BaseTestResults >> all: testState [
 
 { #category : #private }
 BaseTestResults >> allByClass: testState [
-	self shouldBeImplemented.
-	"todo"
-	^ testResults do: [ :c | c ].
+	^ (self all: testState) groupedBy: [ :c | c testMethod methodClass ].
 ]
 
 { #category : #initialization }
