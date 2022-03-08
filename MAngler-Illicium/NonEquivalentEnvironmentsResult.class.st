@@ -17,7 +17,7 @@ NonEquivalentEnvironmentsResult >> isNonEquivalent [
 
 { #category : #testing }
 NonEquivalentEnvironmentsResult >> passedOnlyInC [
-	^  pharoTestResult hasFailuresOrErrors and: cTestResult isPass
+	^ pharoTestResult hasFailuresOrErrors and: cTestResult isPass
 ]
 
 { #category : #testing }

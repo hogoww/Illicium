@@ -80,7 +80,7 @@ CDifferentialTestResult >> passedOnlyInC [
 
 { #category : #testing }
 CDifferentialTestResult >> passedOnlyInSimulation [
-	^ true
+	^ false
 ]
 
 { #category : #accessing }
