@@ -64,6 +64,16 @@ CDifferentialTestResult >> cTestResult: anObject [
 ]
 
 { #category : #testing }
+CDifferentialTestResult >> failedOnlyInC [
+	^ self passedOnlyInSimulation
+]
+
+{ #category : #testing }
+CDifferentialTestResult >> failsOnlyInSimulation [
+	^ self passedOnlyInC 
+]
+
+{ #category : #testing }
 CDifferentialTestResult >> isEquivalent [
 	^ false
 ]

@@ -22,7 +22,7 @@ NonEquivalentEnvironmentsResult >> passedOnlyInC [
 
 { #category : #testing }
 NonEquivalentEnvironmentsResult >> passedOnlyInSimulation [
-	^  pharoTestResult hasPassed and: cTestResult isPass not
+	^ pharoTestResult hasPassed and: cTestResult isPass not
 ]
 
 { #category : #testing }
