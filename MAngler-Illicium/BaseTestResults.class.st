@@ -33,6 +33,11 @@ BaseTestResults >> initialize [
 	testResults := OrderedCollection new
 ]
 
+{ #category : #accessing }
+BaseTestResults >> isVMCompilationError [
+	^ false
+]
+
 { #category : #initialization }
 BaseTestResults >> printOn: aStream [
 	"shortcircuit TestResult printOn:"

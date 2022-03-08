@@ -11,6 +11,11 @@ CTestResultVMCompilationError class >> canHandleResult: aTestResult [
 ]
 
 { #category : #initializing }
+CTestResultVMCompilationError >> isVMCompilationError [
+	^ true
+]
+
+{ #category : #initializing }
 CTestResultVMCompilationError >> setDescription: aDescription [
 	description := aDescription
 ]

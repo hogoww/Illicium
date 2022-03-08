@@ -68,6 +68,11 @@ CTestResult >> isUnexpected [
 	^ false
 ]
 
+{ #category : #testing }
+CTestResult >> isVMCompilationError [
+	^ false
+]
+
 { #category : #initializing }
 CTestResult >> setDescription: aDescription [
 	^ self subclassResponsibility
