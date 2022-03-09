@@ -69,6 +69,16 @@ CDifferentialTestResult >> failedOnlyInC [
 ]
 
 { #category : #testing }
+CDifferentialTestResult >> failsInGeneration [
+	^ cTestResult isPass not
+]
+
+{ #category : #testing }
+CDifferentialTestResult >> failsInSimulation [
+	^ pharoTestResult hasPassed not
+]
+
+{ #category : #testing }
 CDifferentialTestResult >> failsOnlyInSimulation [
 	^ self passedOnlyInC 
 ]
@@ -81,6 +91,16 @@ CDifferentialTestResult >> isEquivalent [
 { #category : #testing }
 CDifferentialTestResult >> isNonEquivalent [
 	^ false
+]
+
+{ #category : #testing }
+CDifferentialTestResult >> passedInGeneration [
+	^ cTestResult hasPassed
+]
+
+{ #category : #testing }
+CDifferentialTestResult >> passedInSimulation [
+	^  pharoTestResult hasPassed
 ]
 
 { #category : #testing }
