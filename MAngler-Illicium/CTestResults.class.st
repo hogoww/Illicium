@@ -86,8 +86,3 @@ CTestResults >> inspectionResults: aBuilder [
 		items: items;
 		yourself
 ]
-
-{ #category : #accessing }
-CTestResults >> testResults [
-	^ testResults
-]

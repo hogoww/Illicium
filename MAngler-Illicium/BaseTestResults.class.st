@@ -53,3 +53,8 @@ BaseTestResults >> runCount [
 BaseTestResults >> testResults [
 	^ testResults
 ]
+
+{ #category : #accessing }
+BaseTestResults >> testResults: aCollectionOfTestResult [
+	testResults := aCollectionOfTestResult
+]
