@@ -1,5 +1,20 @@
 # Illicium
 
+
+/!\ Everything in this repository is very outdated. I do not currently plan to work on it any further.
+This was the support to write my PHD thesis.
+
+Publication supported by Illicium:
+Illicium A modular transpilation toolchain from Pharo to C
+(IWST'19) https://hal.archives-ouvertes.fr/hal-02297860/
+
+Differential Testing of Simulation-Based Virtual Machine Generators
+(Short version SAC'22) https://dl.acm.org/doi/abs/10.1145/3477314.3507171
+(Long version ICSR'22) https://link.springer.com/chapter/10.1007/978-3-031-08129-3_7
+\!/
+
+
+
 This projects aims to translate a subset to be defined of Pharo to C, to develop the Pharo Virtual Machine.
 
 
